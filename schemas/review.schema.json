@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/review.json",
+  "title": "Scientific Review",
+  "description": "Validation of scientific claims or hypotheses",
+  
+  "type": "object",
+  "required": ["id", "target_id", "reviewer", "score"],
+  
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REVIEW-[0-9]{6}$",
+      "examples": ["REVIEW-000001"]
+    },
+    
+    "target_id": {
+      "type": "string",
+      "description": "ID of reviewed object (claim, hypothesis)"
+    },
+    
+    "reviewer": {
+      "type": "string",
+      "description": "Human or agent identifier"
+    },
+    
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Validation score"
+    },
+    
+    "comments": {
+      "type": "string",
+      "description": "Review comments"
+    },
+    
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ACTION-000002",
+  "question_id": "QUESTION-000001",
+  "description": "Combine biomarker trajectory analysis",
+  "inputs": ["CLAIM-000045", "CLAIM-000046"],
+  "outputs": ["HYPOTHESIS-000012"],
+  "executed_at": "2024-01-17T14:15:00Z",
+  "executed_by": "agent-synthesis-001",
+  "provenance": {
+    "model": "claude-3-opus",
+    "prompt": "Find temporal patterns in biomarker progression",
+    "tools": ["statistical-analyzer-v1"],
+    "code_version": "v0.1.0"
+  }
+}

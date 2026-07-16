@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/question.json",
+  "title": "Research Question",
+  "description": "Strategic direction for scientific inquiry",
+  
+  "type": "object",
+  "required": ["id", "text"],
+  
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^QUESTION-[0-9]{6}$",
+      "examples": ["QUESTION-000001"]
+    },
+    
+    "text": {
+      "type": "string",
+      "description": "The question being asked"
+    },
+    
+    "domain": {
+      "type": "string",
+      "description": "Research domain"
+    },
+    
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "REVIEW-000001",
+  "target_id": "HYPOTHESIS-000012",
+  "reviewer": "agent-reviewer-001",
+  "score": 0.78,
+  "comments": "Trajectory analysis shows good statistical support",
+  "created_at": "2024-01-18T09:00:00Z"
+}

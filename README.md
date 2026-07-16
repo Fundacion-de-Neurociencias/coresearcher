@@ -1,70 +1,82 @@
 # CoResearcher Protocol
 
-**Git for scientific coordination between humans and AI agents.**
-
-## Core Principle
-
-```text
-Public science gets observed automatically.
-Private science gets connected explicitly.
-```
+**An open protocol for coordinating scientific work between humans and AI agents.**
 
 ---
 
-## Observer Architecture
+## The Problem
 
-```text
-PUBLIC
-  ↓
-CoResearcher discovers project
-(no registration required)
+Scientific production is exploding.
 
-PRIVATE  
-  ↓
-Owner/agent connects project
-(choose visibility level)
-```
+Human researchers and AI agents generate papers, code, datasets, analyses and hypotheses faster than the scientific community can coordinate them.
+
+Existing tools (email, GitHub, Slack) don't track scientific lineage.
 
 ---
 
-## Visibility Levels
+## The Solution
 
-1. **PUBLIC** - Full ledger visible (public repos)
-2. **DISCOVERABLE** - Only project exists
-3. **CONNECTED** - Aggregates only (counts, not content)
-4. **PRIVATE** - Nothing visible externally
+CoResearcher creates a Scientific Activity Ledger that captures how research actually happens.
+
+```text
+Question
+    ↓
+Evidence (code, experiments, analysis)
+    ↓
+Review (agent or human validation)
+    ↓
+Artifact (paper, dataset, model, finding)
+```
+
+Not memorization. Coordination.
+
+---
+
+## How It Works
+
+**Public Science**: Automatically observed from GitHub, arXiv, Zenodo, OSF.
+
+**Private Science**: Explicitly connected via `coresearcher connect` command.
+
+Owner controls visibility level: public / discoverable / connected / private.
+
+---
+
+## Why Now
+
+- AI agents are doing real research
+- No way to coordinate agent/human collaboration
+- Scientific reproducibility demands better provenance
+- Teams waste hours understanding each other's work
 
 ---
 
 ## Quick Start
 
-### Public observation:
-Already happening. Check if your project appears.
-
-### Private connection:
 ```bash
-python -m observer /path/to/private-repo
-```
+# Check if your project appears
+# Visit coresearcher.org (coming soon)
 
-Generates private ledger. Choose what to publish.
+# Connect private repository
+python -m observer /path/to/your/repo
+
+# Choose visibility level
+visibility: connected
+```
 
 ---
 
 ## Objects
 
 - **Question** - Research direction
-- **Action** - Executable activity
-- **Review** - Validation
-- **Artifact** - Outcome
+- **Evidence** - Executable activity (not raw commits)
+- **Review** - Validation with provenance
+- **Artifact** - Published outcome
 
 ---
 
 ## Status
 
-Experimental. Building evidence of value.
+Experimental. Building the first Scientific Activity Ledgers.
 
-Not:
-> "Tenemos una teoría sobre cómo debería ser la ciencia"
-
-But:
-> "Aquí está la historia automáticamente reconstruida de proyectos reales"
+Join us in making agentic science coordination real.

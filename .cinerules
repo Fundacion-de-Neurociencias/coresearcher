@@ -54,6 +54,23 @@
 - Comunicación: MCP (Model Context Protocol)
 - Contenedores: Docker + Docker Compose
 
+## Language Policy
+
+8. **All public-facing content MUST be in English.**
+
+    - README files
+    - Documentation
+    - Issues
+    - Pull Requests
+    - Examples
+    - Schemas
+    - Commit messages (public)
+    - Generated ledgers
+    
+    Spanish may only be used in private discussions or local development notes.
+    
+    This ensures international adoption and agent compatibility.
+
 ## Convenciones de Código
 
 - TypeScript: strict mode, interfaces sobre types, exports nombrados

@@ -2,52 +2,69 @@
 
 **Git for scientific coordination between humans and AI agents.**
 
-## The Flow
-
-```
-Question
-    ↓
-Action
-    ↓
-Review
-    ↓
-Artifact
-```
-
-## Example
+## Core Principle
 
 ```text
-QUESTION-000001:
-Can plasma GFAP predict MCI-to-AD conversion?
-
-↓
-
-ACTION-000001:
-Literature extraction (agent)
-
-ACTION-000002:
-Trajectory analysis (agent)
-
-↓
-
-REVIEW-000001:
-Validation (human)
-
-↓
-
- artifact: Preprint with DOI
+Public science gets observed automatically.
+Private science gets connected explicitly.
 ```
 
-## Schemas
+---
 
-- `question.schema.json` - Research questions
-- `action.schema.json` - Executable scientific activities  
-- `review.schema.json` - Validation records
+## Observer Architecture
+
+```text
+PUBLIC
+  ↓
+CoResearcher discovers project
+(no registration required)
+
+PRIVATE  
+  ↓
+Owner/agent connects project
+(choose visibility level)
+```
+
+---
+
+## Visibility Levels
+
+1. **PUBLIC** - Full ledger visible (public repos)
+2. **DISCOVERABLE** - Only project exists
+3. **CONNECTED** - Aggregates only (counts, not content)
+4. **PRIVATE** - Nothing visible externally
+
+---
+
+## Quick Start
+
+### Public observation:
+Already happening. Check if your project appears.
+
+### Private connection:
+```bash
+python -m observer /path/to/private-repo
+```
+
+Generates private ledger. Choose what to publish.
+
+---
+
+## Objects
+
+- **Question** - Research direction
+- **Action** - Executable activity
+- **Review** - Validation
+- **Artifact** - Outcome
+
+---
 
 ## Status
 
-Experimental. Looking for 3 researchers to validate.
+Experimental. Building evidence of value.
 
-If you understand what QUESTION, ACTION, and REVIEW mean in 5 minutes, we're on the right track.
+Not:
+> "Tenemos una teoría sobre cómo debería ser la ciencia"
 
-If not, the protocol needs work.
+But:
+> "Aquí está la historia automáticamente reconstruida de proyectos reales"

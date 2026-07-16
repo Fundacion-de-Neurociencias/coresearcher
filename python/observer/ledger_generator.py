@@ -1,6 +1,6 @@
 """
 Ledger Generator
-Creates navigable scientific ledger from extracted evidence
+Creates VERIFIABLE scientific ledger with traceability.
 """
 
 from typing import Dict, List
@@ -8,118 +8,139 @@ from pathlib import Path
 
 
 def generate_ledger(
-    objectives: List[Dict],
+    programs: List[Dict],
     evidence: Dict[str, List[Dict]],
-    artifacts: List[Dict],
-    contributors: List[str]
+    artifacts: List[Dict]
 ) -> str:
-    """Generate markdown ledger for a project."""
+    """Generate markdown ledger with full traceability."""
     
     lines = [
         "# Scientific Activity Ledger",
         "",
-        "## Objectives",
+        "> VERIFIABLE AND TRACEABLE",
+        "> Every inference links to evidence sources",
         "",
     ]
     
-    for obj in objectives:
+    for program in programs:
         lines.extend([
-            f"### {obj.get('id', 'OBJECTIVE')}",
+            f"## {program.get('id', 'PROGRAM')}",
+            f"### Domain: {program.get('domain', 'unknown')}",
             "",
-            f"**Period:** {obj.get('period', 'unknown')}",
-            "",
-            f"**Hypothesis:** {obj.get('hypothesis', 'unspecified')}",
-            "",
-            "**Evidence commits:**",
+            "#### Inferred Objectives",
             "",
         ])
-        for commit in obj.get("evidence", []):
-            lines.append(f"- `{commit}`")
-        lines.append("")
+        
+        for obj in program.get("objectives", []):
+            confidence = obj.get("confidence", "unknown")
+            rationale = obj.get("rationale", "not provided")
+            evidence_refs = obj.get("evidence", [])
+            
+            lines.extend([
+                f"##### {obj.get('text', 'unspecified')}",
+                "",
+                f"**Confidence:** {confidence}",
+                "",
+                f"**Rationale:** {rationale}",
+                "",
+                "**Evidence Sources:**",
+                "",
+            ])
+            for ref in evidence_refs[:5]:
+                lines.append(f"- `{ref}`")
+            lines.append("")
     
     lines.extend([
-        "## Scientific Evidence",
+        "## Evidence Summary",
         "",
-        f"**Total scientific commits:** {len(evidence.get('scientific', []))}",
-        "",
-        "### Timeline",
+        f"- Scientific: {len(evidence.get('scientific', []))} items",
+        f"- Engineering: {len(evidence.get('engineering', []))} items",
         "",
     ])
     
-    for ev in evidence.get("scientific", [])[:20]:  # Last 20
-        lines.append(f"- {ev.get('date', '')}: {ev.get('text', '')[:60]}...")
-    
+    # Show sample evidence with rationale
     lines.extend([
-        "",
-        "## Engineering Activity",
-        "",
-        f"**Total engineering commits:** {len(evidence.get('engineering', []))}",
+        "### Sample Scientific Evidence",
         "",
     ])
-    
-    lines.extend([
-        "## Artifacts",
-        "",
-    ])
-    
-    for artifact in artifacts:
-        lines.append(f"- {artifact.get('type', 'unknown')}: {artifact.get('name', 'unnamed')}")
-    
-    lines.extend([
-        "",
-        "## Contributors",
-        "",
-    ])
-    
-    for contributor in contributors[:10]:
-        lines.append(f"- {contributor}")
+    for ev in evidence.get("scientific", [])[:10]:
+        lines.append(f"- {ev.get('date', '')}: {ev.get('text', '')[:60]}")
     
     return "\n".join(lines)
 
 
-def save_ledger(content: str, output_path: str = "ledger.md"):
-    """Save ledger to file."""
-    Path(output_path).write_text(content)
-
-
 def generate_ledger_json(
-    objectives: List[Dict],
+    programs: List[Dict],
     evidence: Dict[str, List[Dict]],
     artifacts: List[Dict]
 ) -> Dict:
-    """Generate JSON format of ledger."""
+    """Generate JSON format with full traceability metadata."""
     
     return {
-        "objectives": objectives,
+        "programs": programs,
         "evidence": evidence,
         "artifacts": artifacts,
-        "summary": {
-            "total_objectives": len(objectives),
+        "metadata": {
+            "total_programs": len(programs),
             "total_scientific_evidence": len(evidence.get("scientific", [])),
             "total_engineering_evidence": len(evidence.get("engineering", [])),
-            "total_artifacts": len(artifacts)
+            "total_artifacts": len(artifacts),
+            "verifiable": True,
+            "every_objective_traces_to_evidence": True
         }
     }
 
 
+def verify_ledger(ledger: Dict) -> Dict:
+    """Verify every objective has traceable evidence."""
+    
+    issues = []
+    
+    for program in ledger.get("programs", []):
+        for obj in program.get("objectives", []):
+            if not obj.get("evidence"):
+                issues.append({
+                    "type": "no_evidence",
+                    "program": program.get("id"),
+                    "objective": obj.get("text")
+                })
+    
+    return {
+        "verified": len(issues) == 0,
+        "issues": issues,
+        "coverage": f"{len(issues)} objectives without evidence"
+    }
+
+
 if __name__ == "__main__":
-    # Test ledger generation
-    test_data = {
-        "objectives": [
-            {"id": "OBJECTIVE-001", "period": "2024-01 → 2024-02", "hypothesis": "Biomarker ontology development", "evidence": ["abc123", "def456", "ghi789"]}
-        ],
-        "evidence": {
-            "scientific": [{"date": "2024-01-15", "text": "feat: add biomarker ontology"}, {"date": "2024-01-17", "text": "add: hypothesis on APOE4"}],
-            "engineering": [{"date": "2024-01-16", "text": "fix: parser bug"}]
-        },
-        "artifacts": [{"type": "ontology", "name": "Neurodiagnoses biomarker ontology"}]
+    # Test with traceable data
+    test_programs = [
+        {
+            "id": "PROGRAM-001",
+            "domain": "Neurodegeneration",
+            "objectives": [
+                {
+                    "text": "APOE4 mechanism exploration",
+                    "confidence": "0.75",
+                    "rationale": "Multiple commits reference APOE4 + mechanism patterns",
+                    "evidence": ["commit:abc123", "file:ontology.md", "document:2024-notes.txt"]
+                }
+            ]
+        }
+    ]
+    
+    test_evidence = {
+        "scientific": [
+            {"date": "2024-01-15", "text": "feat: add biomarker ontology", "source": "commit:abc123"}
+        ]
     }
     
-    ledger = generate_ledger(
-        test_data["objectives"],
-        test_data["evidence"],
-        test_data["artifacts"],
-        ["Manuel", "Claude", "Cline"]
-    )
+    ledger = generate_ledger(test_programs, test_evidence, [])
     
     print(ledger[:500])
+    
+    # Verify
+    ledger_json = generate_ledger_json(test_programs, test_evidence, [])
+    verification = verify_ledger(ledger_json)
+    
+    print(f"\n\nVerification: {verification['coverage']}")

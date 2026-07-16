@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/action.json",
+  "title": "Scientific Action",
+  "description": "Executable scientific activity with full provenance",
+  
+  "type": "object",
+  "required": ["id", "question_id", "executed_at", "provenance"],
+  
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ACTION-[0-9]{6}$",
+      "examples": ["ACTION-000042"]
+    },
+    
+    "question_id": {
+      "type": "string",
+      "pattern": "^QUESTION-[0-9]{6}$",
+      "description": "Source question this action addresses"
+    },
+    
+    "description": {
+      "type": "string",
+      "description": "What was done"
+    },
+    
+    "inputs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Input references"
+    },
+    
+    "outputs": {
+      "type": "array", 
+      "items": {"type": "string"},
+      "description": "Generated artifacts"
+    },
+    
+    "executed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    
+    "executed_by": {
+      "type": "string",
+      "description": "Agent or researcher ID"
+    },
+    
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "model": {"type": "string"},
+        "prompt": {"type": "string"},
+        "tools": {"type": "array", "items": {"type": "string"}},
+        "code_version": {"type": "string"},
+        "data_sources": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

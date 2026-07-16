@@ -1,0 +1,63 @@
+# CoResearcher OS - Reglas del Sistema
+
+## Principios Fundamentales
+
+1. **No reinventar componentes ya existentes.**
+   - Antes de escribir código, buscar si ya existe una solución open-source.
+   - Preferir forks, adaptaciones e integraciones sobre desarrollo desde cero.
+   - OpenScience es la plataforma base; extender, no reemplazar.
+
+2. **Separación Protocolo vs Discovery Suite (CRÍTICO).**
+   - CoResearcher Protocol: INFRAESTRUCTURA ABIERTA
+     - Objetos: QUESTION, ACTION, REVIEW, CLAIM, PROGRAM, PROVENANCE
+     - Sin IA obligatoria, sin dependencias propietarias
+     - Debe poder sobrevivir aunque Einstein desaparezca
+     - Ver: `docs/CORESEARCHER_PROTOCOL_VS_DISCOVERY_SUITE.md`
+   - Einstein Discovery Suite: INTELIGENCIA PROPIETARIA
+     - Componentes: NoveltyDetector, Hypothesis Generator, Prioritization Engine
+     - Es opcional, no parte del core del protocolo
+     - Analogy: Git (gratis) → GitHub Enterprise (pago)
+
+3. **ACTION es el activo fundamental.**
+   - El protocolo coordina interacciones humano-agente-agente.
+   - ACTION es la unidad verificable más pequeña.
+   - La adopción viene de resolver el trabajo del lunes por la mañana.
+   - Ver: `docs/AGENT_TO_AGENT_SCIENCE.md`
+
+4. **Priorizar integración sobre desarrollo propio.**
+   - Todo módulo debe exponerse mediante MCP (Model Context Protocol).
+   - Usar adaptadores y capas de abstracción para conectar sistemas externos.
+   - Mantener el núcleo de OpenScience intacto; las extensiones van encima.
+
+5. **Arquitectura model-agnostic.**
+   - Ningún componente debe depender de un modelo de IA específico.
+   - Los agentes deben funcionar con cualquier LLM (OpenAI, Anthropic, open-source).
+   - La configuración del modelo es un parámetro, no un acoplamiento.
+
+6. **Todo resultado debe ser reproducible y trazable.**
+   - Provenance Engine registra: modelo, prompts, herramientas, código, datasets, fuentes.
+   - Cada artifact tiene un hash de contenido y metadatos completos.
+   - Las ejecuciones son idempotentes y auditables.
+
+7. **Diseñar para agentes humanos e IA.**
+   - Las APIs y herramientas deben ser usables tanto por humanos como por agentes autónomos.
+   - La documentación es código; los schemas son contratos.
+   - Los errores deben ser informativos y accionables.
+
+## Stack Tecnológico
+
+- Frontend: OpenScience Workspace (reutilizado)
+- Backend: TypeScript + Node.js/Bun
+- Python: Agentes científicos y procesamiento NLP
+- Base de datos: PostgreSQL (relacional), Neo4j (knowledge graph)
+- Colas: Redis
+- Comunicación: MCP (Model Context Protocol)
+- Contenedores: Docker + Docker Compose
+
+## Convenciones de Código
+
+- TypeScript: strict mode, interfaces sobre types, exports nombrados
+- Python: type hints, docstrings Google style, black formatter
+- Tests: vitest para TS, pytest para Python
+- Commits: conventional commits (feat:, fix:, chore:, docs:)
+- Versiones: SemVer estricto

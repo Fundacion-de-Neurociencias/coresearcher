@@ -4,61 +4,70 @@
 
 Can CoResearcher reconstruct scientific history automatically?
 
-Not:
-> "We have a theory about agentic science"
-
-But:
-> "Here is Neurodiagnoses reconstructed automatically."
+Focus on verifiable reconstruction:
+> "Here is Neurodiagnoses automatically reconstructed."
 
 ---
 
-## Entity Resolution Priority
+## The Reconstruction Hierarchy
 
-The core competency: link related activity across sources.
+```text
+FACTS (high confidence)
+  ↓
+Artifacts
+Workstreams
+Timeline
+Contributors
+  ↓
+INFERENCES (medium confidence)
+Objectives
+Hypotheses
+Intentions
+```
 
-Questions to answer:
-- Does this paper belong to the same project as this repo?
-- Is this dataset connected to this ontology?
-- Are these 4 repos parts of Neurodiagnoses ecosystem?
-- Is this agent contributing to the same program?
+Validate from facts upward.
 
 ---
 
 ## Deliverables
 
-### 1. Entity Resolver (Básico)
+### 1. Artifact Reconstructor
 ```
 Input:
-- Repo paths
-- Paper references
-- Dataset mentions
-- File content
+- Commits
+- Files (papers, ontologies, datasets)
+- Releases
 
 Output:
-- Project ID
-- Relationship confidence
-- Evidence links
+- Detected artifacts with confidence
+- Manuscripts detected: X
+- Ontologies detected: Y
+- Datasets detected: Z
+- Software modules detected: W
 ```
 
-### 2. Visibility Filter
-Configurable per project:
-```yaml
-visibility:
-  - private      # Nothing external
-  - discoverable # Only existence
-  - connected    # Aggregates only
-  - public       # Full transparency
+### 2. Workstream Identifier
+```
+Input:
+- Temporal activity
+- Topic coherence
+
+Output:
+- Active workstreams
+- Dormant workstreams
+- Timeline segments
 ```
 
-### 3. Ledger Builder v2
-Structure:
-```
-PROGRAM
-├─ Objectives
-├─ Evidence (commits grouped)
-├─ Artifacts (auto-detected)
-├─ Contributors (inferred)
-└─ Timeline
+### 3. Evidence Metadata
+Every inference must include:
+```json
+{
+  "type": "objective_hypothesis",
+  "statement": "X",
+  "confidence": 0.75,
+  "evidence": ["commit:abc123", "file:ontology.md"],
+  "status": "unvalidated"
+}
 ```
 
 ---
@@ -66,56 +75,49 @@ PROGRAM
 ## Validation Tests
 
 ### Neurodiagnoses
-- Multiple repos
-- Multiple domains
-- Years of history
-
-Questions:
-- What are the 5 main scientific objectives?
-- What 20 artifacts have been produced?
-- Which workstreams are active vs dormant?
+Questions (verifiable):
+- What manuscripts exist?
+- What ontologies exist?
+- What datasets exist?
+- What workstreams are active?
+- What is the timeline?
 
 ### GeneForge
-- Different structure
-- Genetic focus
-
 Questions:
-- Does it correctly separate papers from infrastructure?
-- What are the key objectives?
+- What papers have been generated?
+- What software modules exist?
+- What is the genetic focus?
 
 ---
 
-## Success Metrics (Epistemological)
+## Success Metrics
 
-**Level 1**: Precision & Recall
-> How many inferred objectives are real vs hallucinated?
+**Level 1 - Facts**: Artifact reconstruction accuracy
+> 3 manuscripts detected, not "2-5"
 
-Test:
-```text
-Top 20 inferred objectives
-vs
-Manuel's actual mental model
-```
+**Level 2 - Workstreams**: Active/dormant identification
+> "Ontology workstream active 2025-01 to 2025-03"
 
-**Level 2**: Artifact Detection
-> Manuscritos, figuras, ontologías, datasets, protocolos
-
-**Level 3**: Active Workstream Identification
-> What work is alive vs abandoned?
+**Level 3 - Timeline**: Chronological accuracy
+> Events in correct sequence
 
 ---
 
-## The Key Test
-
-Apply observer to Neurodiagnoses and compare:
+## The Key Principle
 
 ```text
-Generated Output:
-1. Inference: "APOE4 mechanism exploration"
-2. Precision: Correct / Incorrect
-3. Evidence: Links to commits/artifacts
+Do NOT try to guess intentions.
+
+Reconstruct facts, then infer.
 ```
 
-If objective ≠ real objective → back to Entity Resolver.
+Validate the observer on what can be audited:
+- Files created
+- Papers generated
+- Datasets produced
+- Releases made
 
-No more constitutions until this works.
+Before attempting:
+- Research objectives
+- Scientific intentions
+- Mental models

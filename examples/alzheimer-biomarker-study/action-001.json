@@ -1,0 +1,15 @@
+{
+  "id": "ACTION-000001",
+  "question_id": "QUESTION-000001",
+  "description": "Literature extraction on plasma pTau217 for Alzheimer detection",
+  "inputs": ["pubmed://alzheimer-biomarkers-2024"],
+  "outputs": ["CLAIM-000045", "CLAIM-000046"],
+  "executed_at": "2024-01-16T10:30:00Z",
+  "executed_by": "agent-literature-001",
+  "provenance": {
+    "model": "gpt-4-turbo",
+    "prompt": "Extract biomarker claims with effect sizes and sample sizes",
+    "tools": ["pubmed-mcp-v1"],
+    "code_version": "v0.1.0"
+  }
+}

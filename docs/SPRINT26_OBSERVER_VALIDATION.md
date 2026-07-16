@@ -8,7 +8,7 @@ Not:
 > "We have a theory about agentic science"
 
 But:
-> "Here is Neurodiagnoses reconstructed automatically. Does it save time to understand?"
+> "Here is Neurodiagnoses reconstructed automatically."
 
 ---
 
@@ -32,6 +32,7 @@ Input:
 - Repo paths
 - Paper references
 - Dataset mentions
+- File content
 
 Output:
 - Project ID
@@ -70,27 +71,51 @@ PROGRAM
 - Years of history
 
 Questions:
-- How many programs inside?
-- Are objectives correctly identified?
-- Timeline legible?
+- What are the 5 main scientific objectives?
+- What 20 artifacts have been produced?
+- Which workstreams are active vs dormant?
 
 ### GeneForge
 - Different structure
 - Genetic focus
 
 Questions:
-- Can external researcher understand in 1h vs 20h?
-- Are scientific efforts separated from engineering?
+- Does it correctly separate papers from infrastructure?
+- What are the key objectives?
 
 ---
 
-## Success Metrics
+## Success Metrics (Epistemological)
 
-**Level 0**: Observer runs without errors
-**Level 1**: Reconstructs correct major artifacts
-**Level 2**: Identifies correct objectives
-**Level 3**: Saves comprehension time
+**Level 1**: Precision & Recall
+> How many inferred objectives are real vs hallucinated?
 
-If ledger doesn't save 19/20 hours → back to Entity Resolver.
+Test:
+```text
+Top 20 inferred objectives
+vs
+Manuel's actual mental model
+```
+
+**Level 2**: Artifact Detection
+> Manuscritos, figuras, ontologías, datasets, protocolos
+
+**Level 3**: Active Workstream Identification
+> What work is alive vs abandoned?
+
+---
+
+## The Key Test
+
+Apply observer to Neurodiagnoses and compare:
+
+```text
+Generated Output:
+1. Inference: "APOE4 mechanism exploration"
+2. Precision: Correct / Incorrect
+3. Evidence: Links to commits/artifacts
+```
+
+If objective ≠ real objective → back to Entity Resolver.
 
 No more constitutions until this works.

@@ -11,9 +11,9 @@ Trust must be built before adoption.
 
 ---
 
-## Three Visibility Levels
+## Four Visibility Levels
 
-### Level 0: PUBLIC
+### Level 1: PUBLIC
 **No permission required**
 
 What's visible:
@@ -31,43 +31,78 @@ Sources:
 
 ---
 
-### Level 1: VISIBLE_METADATA
+### Level 2: DISCOVERABLE
 **Owner permission required**
 
 What's visible:
 - Project exists
 - Domain/tags
-- Last activity date
-- Status: active/draft/completed
 
 What's private:
-- Questions
-- Actual research content
-- Contributors (unless opted-in)
-- Artifacts details
+- Everything else
 
 Example output:
 ```
-Program ID: ND-001
-
-Status: Active
+Program: ND-001
 
 Domain:
-- Neurodegeneration
-- Diagnostic Ontologies
+- Neurodegenerative diagnostics
 
-Activity:
-- Active in last 30 days
+Status:
+- Active
+
+Contact:
+- Available
+```
+
+No objectives. No artifacts. No activity. Only presence.
+
+---
+
+### Level 3: CONNECTED
+**Owner permission required - aggregated only**
+
+What's visible:
+- Questions count
+- Artifacts count
+- Contributors count (humans/agents)
+- Last activity date
+- Domains
+
+What's private:
+- Code
+- Manuscripts
+- Data
+- Prompts
+- Discussions
+
+Example output:
+```
+Program:
+Neurodiagnoses
+
+Questions:
+54
 
 Artifacts:
-- Private (32)
+12
 
-Contact: Available
+Contributors:
+4 humans
+9 agents
+
+Last activity:
+2 days ago
+
+Domains:
+- Neurodegeneration
+- Diagnostics
+- Biomarkers
 ```
 
 ---
 
-### Level 2: PRIVATE
+### Level 4: PRIVATE
 **Owner permission required**
 
 What's visible:
@@ -77,12 +112,6 @@ What happens internally:
 - Full ledger generated
 - Private activity tracked
 - Complete reconstruction available to owner
-
-Owner can selectively publish:
-- Specific objectives
-- Certain artifacts
-- Anonymized data
-- Existence only
 
 ---
 
@@ -102,34 +131,37 @@ Public CoResearcher Graph (filtered)
 
 ---
 
-## Trust Architecture
+## Visibility Filter Configuration
 
-Default behavior:
-```
-Private repo connected → Nothing leaves without explicit permission
+Each project has a configurable visibility level:
+
+```yaml
+visibility:
+  - private      # Nothing external
+  - discoverable # Only existence
+  - connected    # Aggregates only
+  - public       # Full transparency
 ```
 
-Owner controls:
-- What gets published
-- At what resolution
-- Under what visibility level
+Can change without modifying internal ledger.
 
 ---
 
-## Collaboration Discovery
+## Scientific Presence Protocol
 
-Value without exposing content:
+CoResearcher becomes:
+- Scientific DNS
+- Activity Directory
 
+Enables discovery:
+> "Is someone working on diagnostic ontologies for neurodegeneration?"
+
+Answer:
 ```
-Someone is working on:
-- Blood Biomarkers for Alzheimer's Disease
-
-Active programs in this domain: 3
-
-Contact available for collaboration
+Yes. 4 active programs in this domain.
 ```
 
-This enables discovery while preserving intellectual property.
+Without exposing IP.
 
 ---
 
@@ -140,4 +172,4 @@ Essential for adoption by:
 - Biotech startups
 - Competitive research teams
 
-They can connect repositories for internal tracking while only exposing presence-level metadata.
+Connect repositories for internal tracking while only exposing presence-level metadata.

@@ -2,30 +2,13 @@
 
 ## Línea temporal de falsaciones (Sprint 27 → Sprint 42)
 
-### Sprint 27
-- **Hipótesis:** GitHub Activity = Scientific Activity
-- **Resultado:** FALSADA
-- **Evidencia:** Actividad de código no corresponde necesariamente a actividad científica
-
-### Sprint 28
-- **Hipótesis:** Artifact Similarity = Program Membership
-- **Resultado:** FALSADA
-- **Evidencia:** Artefactos similares pueden pertenecer a programas diferentes
-
-### Sprint 29-31
-- **Hipótesis:** Network Similarity = Program Membership
-- **Resultado:** FALSADA
-- **Evidencia:** Redes de contribución no garantizan programas científicos comunes
-
-### Sprint 38
-- **Hipótesis:** Information Retrieval = Comprehension
-- **Resultado:** FALSADA
-- **Evidencia:** Recuperar información no implica comprender el razonamiento
-
-### Sprint 39
-- **Hipótesis:** Decisions = Total Coordination
-- **Resultado:** FALSADA
-- **Evidencia:** La coordinación incluye más que decisiones explícitas (presión, incertidumbre, alternativas)
+| Sprint | Falsación |
+|--------|-----------|
+| 27 | GitHub Activity ≠ Scientific Activity |
+| 30 | Artifact Similarity ≠ Program Membership |
+| 31 | Network Similarity ≠ Program Membership |
+| 39B | Information Retrieval ≠ Project Comprehension |
+| 40 | Decisions ≠ Total Coordination |
 
 ---
 
@@ -56,7 +39,7 @@
 - GitHub Activity = Scientific Activity ❌
 - Artifact Similarity = Program Membership ❌
 - Network Similarity = Program Membership ❌
-- Information Retrieval = Comprehension ❌
+- Information Retrieval = Project Comprehension ❌
 - Decisions = Total Coordination ❌
 
 ---
@@ -105,16 +88,12 @@
 
 ## Pregunta científica principal abierta
 
-`	ext
-¿Dos observadores independientes identifican las mismas:
-- restricciones
-- incertidumbres
-- alternativas descartadas
+```text
+¿Qué información necesita un agente para entender
+por qué un proyecto es como es?
+```
 
-a partir del mismo material fuente?
-`
-
-**Subpregunta:** Si la respuesta es no, ¿qué unidad observacional sí es estable?
+Todo lo demás —artefactos, workstreams, restricciones, incertidumbres, decisiones, revisiones, gobernanza— son candidatos a responder esa pregunta.
 
 ---
 

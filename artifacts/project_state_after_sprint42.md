@@ -73,7 +73,7 @@
 - sprint42d_reliability_scoring.md - Métricas definidas
 - sprint42d_threats_to_reliability.md - Amenazas identificadas
 - sprint42d_experiment_package.md - Paquete entregable
-- sprint42d_reproducibility_audit.md - Audición intra-procedimiento
+- sprint42d_reproducibility_audit.md - Audición intra-procedimiento (local only)
 
 ---
 

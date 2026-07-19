@@ -125,12 +125,80 @@ Para considerar Sprint 43 (modelado de comprensión):
 
 ## Estado actual del proyecto
 
-**READY_FOR_INTER_RATER_VALIDATION** (blocked)
+**RELIABILITY_VALIDATION_PENDING**
 
-El proyecto está en un estado metodológicamente sano:
+No **READY_FOR_INTER_RATER_VALIDATION**, porque:
 
-- Limitado a observación, no interpretación
-- Protocolos definidos pero no ejecutados
-- Vocabulario basado en evidencia observada
-- Falsaciones acumuladas documentadas
-- Cuello de botella identificado: independencia observacional
+- No existe un Observador B independiente disponible
+- La validación clásica de fiabilidad inter-observador no es ejecutable en este entorno
+- Lo que existe es una **reproducibilidad intra-procedimiento** parcialmente validada
+
+---
+
+## Riesgo de interpretación
+
+La expresión "READY_FOR_INTER_RATER_VALIDATION" es engañosa.
+
+La situación real es:
+
+1. **INTER_RATER_VALIDATION_NOT_EXECUTABLE** - no hay observador independiente genuino
+2. **RELIABILITY_VALIDATION_PENDING** - se necesita evidencia de fiabilidad observacional
+
+Esta distinción es crítica para evitar interpretaciones erróneas futuras.
+
+---
+
+## Hallazgo más importante de los Sprints 27–42
+
+No es el Ledger.
+No es Artifact Resolution.
+No es Workstream Resolution.
+
+Es esta afirmación:
+
+```text
+La comprensión de un proyecto
+no parece residir principalmente
+en los artefactos producidos.
+
+Parece residir en los procesos
+que explican por qué esos artefactos
+terminaron existiendo.
+```
+
+Esta hipótesis aún no está validada.
+
+Pero es la más interesante que ha sobrevivido a todas las falsaciones previas.
+
+---
+
+## Estado epistemológico real
+
+| Capa | Estado |
+|------|--------|
+| Evidence Collection | Validada |
+| Artifact Resolution | Validada |
+| Ledger Generation | Validada |
+| Scientific Activity Reconstruction | Parcialmente validada |
+| Project Comprehension | No validada |
+| Reasoning Reconstruction | Hipótesis |
+| Scientific Understanding Model | Hipótesis |
+
+---
+
+## Pregunta para la próxima sesión
+
+No empezaría con:
+
+- ¿Cómo mejoramos el ledger?
+- ¿Cómo ampliamos la muestra?
+
+Empezaría con:
+
+```text
+¿Qué evidencia observacional demostraría
+que comprender un proyecto consiste
+en reconstruir su razonamiento?
+```
+
+Porque esa es la hipótesis central que ahora mismo sostiene toda la dirección futura de CoResearcher.

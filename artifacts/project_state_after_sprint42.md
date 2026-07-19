@@ -77,12 +77,14 @@
 
 ---
 
-## Artefactos archivados
+## Artefactos localmente archivados (no tracked)
 
-| Archivo | Motivo de archivado |
-|---------|-------------------|
+| Archivo | Motivo |
+|---------|--------|
 | sprint42d_execution_blocked.md | No hay observador B independiente disponible |
 | sprint42e_blocked.md | Repositorio externo no disponible |
+
+Estos archivos están disponibles localmente pero excluidos del tracking para mantener el repositorio limpio.
 
 ---
 

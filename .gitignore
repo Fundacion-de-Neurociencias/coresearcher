@@ -1,0 +1,27 @@
+﻿# Private instructions - never committed
+.clinerules
+.clineinstructions
+
+# Private data
+docs/private/
+
+# Generated validation data
+data/validation/
+data/synthetic/
+
+# Experimental process artifacts (not core to understanding CoResearcher)
+artifacts/sprint*_blocked.md
+artifacts/sprint*_conclusion.md
+artifacts/sprint*_reliability.md
+
+# Node modules
+node_modules/
+npm-debug.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/

@@ -13,6 +13,7 @@ data/synthetic/
 artifacts/sprint*_blocked.md
 artifacts/sprint*_conclusion.md
 artifacts/sprint*_reliability.md
+artifacts/sprint42d_reproducibility_audit.md
 
 # Node modules
 node_modules/

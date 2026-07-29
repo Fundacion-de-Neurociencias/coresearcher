@@ -1,0 +1,103 @@
+# Clasificación en 3 Niveles de Identidades y Aislamiento de Radio de Impacto (NEUROOS IDENTITY TIERS)
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Blast Radius Containment & Identity Tiering Architecture"
+status: "Inviolable Canonical Reference"
+
+description: >
+  Especificación de la clasificación de identidades a 3 niveles (SOVEREIGN, OPERATIONAL, AUTOMATION) 
+  y la matriz de aislamiento de radio de impacto para NeuroOS.
+
+identity_tiers:
+
+  # Nivel 1: SOVEREIGN (Exclusivo de Manuel - Fuera de NeuroOS)
+  sovereign:
+    name: "Identidad Soberana (Root of Trust / Pasaporte Digital)"
+    owner: "Manuel (Persona Física)"
+    neuroos_access: false
+    accessible_by_manuel_runtime: false
+    accessible_by_antigravity: false
+    blast_radius: "INMUNE - Cero exposición ante cualquier fallo o brecha de NeuroOS"
+    assets:
+      - "manuelmenendez@gmail.com"
+      - "Google Authenticator / Root MFA"
+      - "YubiKey FIDO2 Hardware Keys"
+      - "Bitwarden Master Password Vault"
+      - "Certificados Digitales FNMT / DNIe"
+      - "Sistema Cl@ve / Identidad Fiscal AEAT"
+      - "GitHub Owner Recovery Account"
+
+  # Nivel 2: OPERATIONAL (Manejo Mediado por ManuEl)
+  operational:
+    name: "Identidades Operativas de Trabajo"
+    owner: "Manuel"
+    neuroos_access: true
+    accessible_by_manuel_runtime: true
+    accessible_by_antigravity: "Mediado (Vía Leases / Puertas de Aprobación)"
+    blast_radius: "LIMITADO - Daño acotado a cuentas de trabajo secundarias"
+    assets:
+      - "Correo Universidad de Oviedo (manuel.menendez@uniovi.es)"
+      - "Correo Fundación (fundacion@neurociencias.org)"
+      - "Correo ISPA / FINBA"
+      - "Correo HUCA Neurología Ops"
+      - "Cuentas de Subvenciones ERC"
+      - "Calendario Unificado de Trabajo"
+      - "Plataformas de Viajes (Booking / Transportes)"
+
+  # Nivel 3: AUTOMATION (Manejo Autónomo por Antigravity / Subagentes)
+  automation:
+    name: "Identidades de Automatización y Bots de Sistema"
+    owner: "NeuroOS System"
+    neuroos_access: true
+    accessible_by_manuel_runtime: true
+    accessible_by_antigravity: true
+    blast_radius: "EFÍMERO - Cuentas dedicadas exclusivamente a tareas automáticas"
+    assets:
+      - "neuroos-bot@domain.org"
+      - "automation@medicalia.org"
+      - "ci-cd-agent@domain.org"
+      - "github-actions-bot"
+
+# Matriz Resumen de Accesibilidad por Componente
+accessibility_matrix:
+  - asset: "Gmail Personal Principal (manuelmenendez@gmail.com)"
+    tier: "SOVEREIGN"
+    access_manuel_human: true
+    access_manuel_runtime: false
+    access_antigravity: false
+
+  - asset: "Bitwarden Master Password"
+    tier: "SOVEREIGN"
+    access_manuel_human: true
+    access_manuel_runtime: false
+    access_antigravity: false
+
+  - asset: "FNMT / Cl@ve / DNIe"
+    tier: "SOVEREIGN"
+    access_manuel_human: true
+    access_manuel_runtime: false
+    access_antigravity: false
+
+  - asset: "Email Universidad (Uniovi)"
+    tier: "OPERATIONAL"
+    access_manuel_human: true
+    access_manuel_runtime: true
+    access_antigravity: "Según tareas (Approval Gate)"
+
+  - asset: "Email Fundación"
+    tier: "OPERATIONAL"
+    access_manuel_human: true
+    access_manuel_runtime: true
+    access_antigravity: "Según tareas (Approval Gate)"
+
+  - asset: "Email HUCA"
+    tier: "OPERATIONAL"
+    access_manuel_human: true
+    access_manuel_runtime: true
+    access_antigravity: "Muy restringido / Sin modelado en nube"
+
+  - asset: "Repositorios de Proyectos (Medicalia, GeneForge, etc.)"
+    tier: "AUTOMATION"
+    access_manuel_human: true
+    access_manuel_runtime: true
+    access_antigravity: "Sí (Autónomo)"

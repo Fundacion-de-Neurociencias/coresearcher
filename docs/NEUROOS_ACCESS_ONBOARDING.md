@@ -1,8 +1,8 @@
 # Plan de Onboarding de Accesos e Inventario Físico Real (NEUROOS ACCESS ONBOARDING)
 
-**Versión:** 1.0.0  
-**Gobernanza:** Plan de Ejecución Físico y Delegación Gradual  
-**Estado:** Activo - Onboarding de Servicios Reales  
+**Versión:** 1.1.0  
+**Gobernanza:** Plan de Ejecución Físico y Censo de Accesos  
+**Estados Permitidos:** `NOT_DISCOVERED` | `DISCOVERED` | `INVENTORIED` | `MIGRATED` | `VALIDATED`  
 
 ---
 
@@ -37,42 +37,30 @@ Colecciones Físicas:
 - `Finance` (Exclusivo Manuel - Sin delegación)
 
 ### Fase 3 — Inventario Real de los 50 Primeros Servicios
-Priorizar la migración de los primeros 50 servicios reales en lugar de 500 teóricos.
+Priorizar la migración del censo de los primeros 50 servicios reales en lugar de 500 teóricos.
 
 ---
 
 ## 2. Matriz Física de Onboarding y Estado de Delegación
 
-| Servicio / Plataforma | Usuario / Identidad | Categoría | Nivel de Riesgo | MFA Activo | En Vault | Estado de Delegación |
-| :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **GitHub Operations** | `manuelmdezglez@gmail.com` | Desarrollo | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **Vercel Deployments** | `manuelmdezglez@gmail.com` | Hosting / Dev | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **Medicalia Repo** | `automation@medicalia.org` | Proyecto | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **CoResearcher Repo** | `github-bot@coresearcher` | Proyecto | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **GeneForge Repo** | `github-bot@geneforge` | Proyecto | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **Neurodiagnoses Repo** | `github-bot@neurodiagnoses` | Proyecto | `AUTOMATION` | Sí | Sí | **Grupo A (Completado)** |
-| **Universidad de Oviedo** | `manuel.menendez@uniovi.es` | Universidad | `OPERATIONAL` | Sí | Pendiente | **Grupo B (Pendiente)** |
-| **Fundación de Neurociencias** | `fundacion@neurociencias.org` | Fundación | `OPERATIONAL` | Sí | Pendiente | **Grupo B (Pendiente)** |
-| **ISPA / FINBA** | `ispa_researcher` | Investigación | `OPERATIONAL` | Sí | Pendiente | **Grupo B (Pendiente)** |
-| **Gmail Fundación** | `fundacion@neurociencias.org` | Correo Ops | `OPERATIONAL` | Sí | Pendiente | **Grupo C (Restringido)** |
-| **Gmail Uniovi** | `manuel.menendez@uniovi.es` | Correo Ops | `OPERATIONAL` | Sí | Pendiente | **Grupo C (Restringido)** |
-| **HUCA Neurología Ops** | `huca_clinical_ops` | Sanitario | `CRITICAL_OPERATIONAL` | Sí | No | **Grupo C (Sin LLM Nube)** |
-| **Gmail Personal Principal** | `manuelmenendez@gmail.com` | Soberano | `SOVEREIGN` | Sí | No | **Grupo D (NUNCA)** |
+| Servicio / Plataforma | Usuario / Identidad | Categoría | Nivel de Riesgo | MFA Activo | En Vault | Permisos (`discover`, `read`, `act`) | Estado Actual |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| **GitHub Operations** | `manuelmdezglez@gmail.com` | Desarrollo | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **MIGRATED** |
+| **Vercel Deployments** | `manuelmdezglez@gmail.com` | Hosting / Dev | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **MIGRATED** |
+| **Medicalia Repo** | `automation@medicalia.org` | Proyecto | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **INVENTORIED** |
+| **CoResearcher Repo** | `github-bot@coresearcher` | Proyecto | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **INVENTORIED** |
+| **GeneForge Repo** | `github-bot@geneforge` | Proyecto | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **INVENTORIED** |
+| **Neurodiagnoses Repo** | `github-bot@neurodiagnoses` | Proyecto | `AUTOMATION` | Sí | Sí | `discover: true, read: true, act: true` | **INVENTORIED** |
+| **Universidad de Oviedo** | `manuel.menendez@uniovi.es` | Universidad | `OPERATIONAL` | Sí | Pendiente | `discover: true, read: true, act: false` | **INVENTORIED** |
+| **Fundación de Neurociencias** | `fundacion@neurociencias.org` | Fundación | `OPERATIONAL` | Sí | Pendiente | `discover: true, read: true, act: false` | **INVENTORIED** |
+| **ISPA / FINBA** | `ispa_researcher` | Investigación | `OPERATIONAL` | Sí | Pendiente | `discover: true, read: true, act: false` | **DISCOVERED** |
+| **Gmail Fundación** | `fundacion@neurociencias.org` | Correo Ops | `OPERATIONAL` | Sí | Pendiente | `discover: true, read: true, act: false` | **INVENTORIED** |
+| **Gmail Uniovi** | `manuel.menendez@uniovi.es` | Correo Ops | `OPERATIONAL` | Sí | Pendiente | `discover: true, read: true, act: false` | **INVENTORIED** |
+| **HUCA Neurología Ops** | `huca_clinical_ops` | Sanitario | `CRITICAL_OPERATIONAL` | Sí | No | `discover: true, read: false, act: false` | **INVENTORIED** |
+| **Gmail Personal Principal** | `manuelmenendez@gmail.com` | Soberano | `SOVEREIGN` | Sí | No | `discover: false, read: false, act: false` | **INVENTORIED** |
 
 ---
 
-## 3. Fase 4 — Protocolo de Delegación Gradual por Grupos
-
-- **Grupo A (Impacto Bajo - Desarrollo y Código):** GitHub, Vercel, Medicalia, GeneForge, Neurodiagnoses. Delegación autónoma a Antigravity completada.
-- **Grupo B (Impacto Medio - Institucional y Proyectos):** Fundación, ISPA, Uniovi. Delegación mediante Leases y Puertas de Aprobación de ManuEl.
-- **Grupo C (Impacto Delicado - Correos Corporativos):** Gmail Fundación, Gmail Uniovi. Requiere aprobación humana expresa por cada mensaje externo redactado.
-- **Grupo D (NUNCA):** Identidad Soberana Personal. Acceso agencial strictly prohibido.
-
----
-
-## 4. Fase 5 — Descomposición en Cuentas Técnicas Específicas
-
-Para evitar convertir a `manuelmdezglez@gmail.com` en otro punto único de fallo, se derivan cuentas de servicio dedicadas:
-- `automation@medicalia.org` (Automatización de Medicalia)
-- `github-bot@coresearcher` (Bot de CI/CD de CoResearcher)
-- `neuroos-bot@domain.org` (Notificaciones del Runtime)
+## 3. Protocolo de Transición de Estados
+Cualquier activo de NeuroOS solo transiciona mediante validación física:
+$$\text{NOT\_DISCOVERED} \longrightarrow \text{DISCOVERED} \longrightarrow \text{INVENTORIED} \longrightarrow \text{MIGRATED} \longrightarrow \text{VALIDATED}$$

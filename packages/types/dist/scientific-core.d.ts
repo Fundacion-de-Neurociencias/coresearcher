@@ -1,0 +1,142 @@
+import { z } from 'zod';
+export declare const UniversalNodeLabel: z.ZodEnum<["Paper", "Author", "Institution", "Concept", "Entity", "Claim", "Evidence", "Hypothesis", "Experiment", "Dataset", "Method", "Tool", "Code", "Figure", "Table", "Result", "Analysis", "Manuscript"]>;
+export type UniversalNodeLabel = z.infer<typeof UniversalNodeLabel>;
+export declare const UniversalRelationshipType: z.ZodEnum<["PRODUCES", "MENTIONS", "SUPPORTED_BY", "CONTRADICTS", "DERIVES_FROM", "TESTS", "CITES", "REFERENCES", "BUILDS_UPON", "VALIDATES", "INVALIDATES", "RELATED_TO", "ASSOCIATED_WITH", "AUTHORED_BY", "AFFILIATED_WITH", "UPDATED_BY"]>;
+export type UniversalRelationshipType = z.infer<typeof UniversalRelationshipType>;
+export declare const EvidenceType: z.ZodEnum<["statistical", "experimental", "observational", "theoretical", "computational", "meta_analysis", "systematic_review", "clinical_trial", "animal_study", "in_vitro"]>;
+export type EvidenceType = z.infer<typeof EvidenceType>;
+export declare const EvidenceNode: z.ZodObject<{
+    id: z.ZodString;
+    value: z.ZodString;
+    evidenceType: z.ZodOptional<z.ZodEnum<["statistical", "experimental", "observational", "theoretical", "computational", "meta_analysis", "systematic_review", "clinical_trial", "animal_study", "in_vitro"]>>;
+    qualityScore: z.ZodDefault<z.ZodNumber>;
+    sampleSize: z.ZodOptional<z.ZodNumber>;
+    pValue: z.ZodOptional<z.ZodNumber>;
+    effectSize: z.ZodOptional<z.ZodNumber>;
+    followupMonths: z.ZodOptional<z.ZodNumber>;
+    hasStatisticalEvidence: z.ZodDefault<z.ZodBoolean>;
+    extractedFrom: z.ZodOptional<z.ZodString>;
+}, "strip", z.ZodTypeAny, {
+    id: string;
+    value: string;
+    qualityScore: number;
+    hasStatisticalEvidence: boolean;
+    evidenceType?: "statistical" | "experimental" | "observational" | "theoretical" | "computational" | "meta_analysis" | "systematic_review" | "clinical_trial" | "animal_study" | "in_vitro" | undefined;
+    sampleSize?: number | undefined;
+    pValue?: number | undefined;
+    effectSize?: number | undefined;
+    followupMonths?: number | undefined;
+    extractedFrom?: string | undefined;
+}, {
+    id: string;
+    value: string;
+    evidenceType?: "statistical" | "experimental" | "observational" | "theoretical" | "computational" | "meta_analysis" | "systematic_review" | "clinical_trial" | "animal_study" | "in_vitro" | undefined;
+    qualityScore?: number | undefined;
+    sampleSize?: number | undefined;
+    pValue?: number | undefined;
+    effectSize?: number | undefined;
+    followupMonths?: number | undefined;
+    hasStatisticalEvidence?: boolean | undefined;
+    extractedFrom?: string | undefined;
+}>;
+export type EvidenceNode = z.infer<typeof EvidenceNode>;
+export declare const EntityNode: z.ZodObject<{
+    id: z.ZodString;
+    name: z.ZodString;
+    canonicalName: z.ZodOptional<z.ZodString>;
+    entityType: z.ZodString;
+    aliases: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+    domain: z.ZodOptional<z.ZodString>;
+    confidence: z.ZodDefault<z.ZodNumber>;
+}, "strip", z.ZodTypeAny, {
+    id: string;
+    name: string;
+    entityType: string;
+    aliases: string[];
+    confidence: number;
+    canonicalName?: string | undefined;
+    domain?: string | undefined;
+}, {
+    id: string;
+    name: string;
+    entityType: string;
+    canonicalName?: string | undefined;
+    aliases?: string[] | undefined;
+    domain?: string | undefined;
+    confidence?: number | undefined;
+}>;
+export type EntityNode = z.infer<typeof EntityNode>;
+export declare const UniversalClaimNode: z.ZodObject<{
+    id: z.ZodString;
+    text: z.ZodString;
+    confidence: z.ZodDefault<z.ZodNumber>;
+    domain: z.ZodOptional<z.ZodString>;
+    claimType: z.ZodOptional<z.ZodString>;
+    createdAt: z.ZodString;
+    updatedAt: z.ZodOptional<z.ZodString>;
+    evidenceCount: z.ZodDefault<z.ZodNumber>;
+    supportCount: z.ZodDefault<z.ZodNumber>;
+    contradictionCount: z.ZodDefault<z.ZodNumber>;
+    extractedFrom: z.ZodOptional<z.ZodString>;
+    extractionMethod: z.ZodOptional<z.ZodString>;
+    tags: z.ZodDefault<z.ZodArray<z.ZodString, "many">>;
+}, "strip", z.ZodTypeAny, {
+    id: string;
+    confidence: number;
+    text: string;
+    createdAt: string;
+    evidenceCount: number;
+    supportCount: number;
+    contradictionCount: number;
+    tags: string[];
+    extractedFrom?: string | undefined;
+    domain?: string | undefined;
+    claimType?: string | undefined;
+    updatedAt?: string | undefined;
+    extractionMethod?: string | undefined;
+}, {
+    id: string;
+    text: string;
+    createdAt: string;
+    extractedFrom?: string | undefined;
+    domain?: string | undefined;
+    confidence?: number | undefined;
+    claimType?: string | undefined;
+    updatedAt?: string | undefined;
+    evidenceCount?: number | undefined;
+    supportCount?: number | undefined;
+    contradictionCount?: number | undefined;
+    extractionMethod?: string | undefined;
+    tags?: string[] | undefined;
+}>;
+export type UniversalClaimNode = z.infer<typeof UniversalClaimNode>;
+export declare const DomainPackManifest: z.ZodObject<{
+    id: z.ZodString;
+    name: z.ZodString;
+    version: z.ZodString;
+    nodeTypes: z.ZodArray<z.ZodString, "many">;
+    relationshipTypes: z.ZodArray<z.ZodString, "many">;
+    entityResolvers: z.ZodRecord<z.ZodString, z.ZodString>;
+    evidenceWeights: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodNumber>>;
+    queries: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+}, "strip", z.ZodTypeAny, {
+    id: string;
+    name: string;
+    version: string;
+    nodeTypes: string[];
+    relationshipTypes: string[];
+    entityResolvers: Record<string, string>;
+    evidenceWeights?: Record<string, number> | undefined;
+    queries?: string[] | undefined;
+}, {
+    id: string;
+    name: string;
+    version: string;
+    nodeTypes: string[];
+    relationshipTypes: string[];
+    entityResolvers: Record<string, string>;
+    evidenceWeights?: Record<string, number> | undefined;
+    queries?: string[] | undefined;
+}>;
+export type DomainPackManifest = z.infer<typeof DomainPackManifest>;
+//# sourceMappingURL=scientific-core.d.ts.map

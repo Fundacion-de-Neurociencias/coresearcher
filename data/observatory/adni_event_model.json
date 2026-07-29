@@ -1,0 +1,87 @@
+[
+  {
+    "event_id": "evt_001",
+    "event_type": "screening",
+    "description": "Initial eligibility assessment and consent"
+  },
+  {
+    "event_id": "evt_002",
+    "event_type": "baseline_visit",
+    "description": "Comprehensive baseline assessment including all modalities"
+  },
+  {
+    "event_id": "evt_003",
+    "event_type": "month6_visit",
+    "description": "6-month follow-up assessment for high-risk participants"
+  },
+  {
+    "event_id": "evt_004",
+    "event_type": "month12_visit",
+    "description": "Annual follow-up with full cognitive battery"
+  },
+  {
+    "event_id": "evt_005",
+    "event_type": "year2_visit",
+    "description": "Year 2 comprehensive assessment"
+  },
+  {
+    "event_id": "evt_006",
+    "event_type": "year3_visit",
+    "description": "Year 3 assessment with biomarker refresh"
+  },
+  {
+    "event_id": "evt_007",
+    "event_type": "year4_visit",
+    "description": "Year 4 follow-up visit"
+  },
+  {
+    "event_id": "evt_008",
+    "event_type": "year5_visit",
+    "description": "Year 5 final visit in standard protocol"
+  },
+  {
+    "event_id": "evt_009",
+    "event_type": "mri_acquisition",
+    "description": "Structural and functional MRI scan at scheduled visit"
+  },
+  {
+    "event_id": "evt_010",
+    "event_type": "pet_acquisition",
+    "description": "Amyloid, tau, or FDG PET scan at scheduled visit"
+  },
+  {
+    "event_id": "evt_011",
+    "event_type": "csf_collection",
+    "description": "Lumbar puncture for CSF biomarkers at baseline/subset visits"
+  },
+  {
+    "event_id": "evt_012",
+    "event_type": "blood_collection",
+    "description": "Plasma/serum collection for biomarker analysis"
+  },
+  {
+    "event_id": "evt_013",
+    "event_type": "diagnosis_update",
+    "description": "Clinical diagnosis reassessment based on cognitive testing"
+  },
+  {
+    "event_id": "evt_014",
+    "event_type": "medication_update",
+    "description": "Current medications and dementia treatments recorded"
+  },
+  {
+    "event_id": "evt_015",
+    "event_type": "death",
+    "description": "Participant death recorded with follow-up completed"
+  },
+  {
+    "event_id": "evt_016",
+    "event_type": "dropout",
+    "description": "Participant withdraws from study before completion"
+  },
+  {
+    "event_id": "evt_017",
+    "event_type": "brain_donation",
+    "description": "Post-mortem brain tissue donation for neuropathology"
+  }
+]

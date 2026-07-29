@@ -1,0 +1,95 @@
+{
+  "total_observations": 20,
+  "total_learnings": 10,
+  "total_evidence": 20,
+  "traceability": {
+    "learn_001": {
+      "derives_from": [
+        "obs_001",
+        "obs_016"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_002": {
+      "derives_from": [
+        "obs_003",
+        "obs_004"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_003": {
+      "derives_from": [
+        "obs_005",
+        "obs_019"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_004": {
+      "derives_from": [
+        "obs_006"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_005": {
+      "derives_from": [
+        "obs_007",
+        "obs_008"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_006": {
+      "derives_from": [
+        "obs_009",
+        "obs_020"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_007": {
+      "derives_from": [
+        "obs_002",
+        "obs_017"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_008": {
+      "derives_from": [
+        "obs_010",
+        "obs_011"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_009": {
+      "derives_from": [
+        "obs_012",
+        "obs_013",
+        "obs_014"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    },
+    "learn_010": {
+      "derives_from": [
+        "obs_015",
+        "obs_018"
+      ],
+      "all_sources_exist": true,
+      "reproducible": true
+    }
+  },
+  "evidence_strength_distribution": {
+    "foundational": 1,
+    "strong": 5,
+    "suggestive": 6,
+    "moderate": 7,
+    "preliminary": 1
+  },
+  "reproducibility_status": "partial"
+}

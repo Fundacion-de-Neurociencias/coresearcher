@@ -1,0 +1,29 @@
+{
+  "domain": "genetics",
+  "focus": "Rare Diseases - Undiagnosed Conditions",
+  "question": "How can we discover novel therapeutic targets for rare genetic disorders?",
+  "description": "Applying cross-disease mechanism discovery for orphan indications",
+  "entities": ["undetermined", "phenotypic similarity", "pathway convergence", "genetic modifier", "compensatory pathway"],
+  "key_contradictions": [
+    "Patients with same mutation have different severity",
+    "Why do some genetic defects show no phenotype?",
+    "Variable penetrance in familial rare diseases"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "The variable penetrance in rare genetic diseases is mediated by a threshold-dependent compensatory pathway that activates only when modifier gene expression falls below a critical level, explaining why identical mutations can have opposite outcomes in different individuals.",
+      "expected_type": "C",
+      "rationale": "Proposes threshold compensation model"
+    },
+    {
+      "statement": "What if the lack of phenotype in some genetic knockouts is not due to redundancy but to an adaptive rewiring that creates an emergent property only visible under stress conditions?",
+      "expected_type": "D",
+      "rationale": "Reframes redundancy as adaptive rewiring"
+    },
+    {
+      "statement": "Phenotypic similarity between disparate rare diseases connects through a hidden mediator - a master regulator of proteostasis that when perturbed creates convergent downstream effects despite different upstream causes.",
+      "expected_type": "C",
+      "rationale": "Cross-disease missing link hypothesis"
+    }
+  ]
+}

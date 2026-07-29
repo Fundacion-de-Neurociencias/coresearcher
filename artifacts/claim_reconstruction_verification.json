@@ -1,0 +1,247 @@
+{
+  "total_claims": 24,
+  "reconstructable_claims": 24,
+  "reconstruction_rate": 1.0,
+  "details": [
+    {
+      "claim_id": "CLAIM-000001",
+      "reconstructable": true,
+      "required_nodes": [
+        "QUOTE-000001",
+        "URL-000001",
+        "SOURCE-000001"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000002",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000002",
+        "SOURCE-000002",
+        "QUOTE-000002"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000003",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000003",
+        "QUOTE-000003",
+        "URL-000003"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000004",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000004",
+        "URL-000004",
+        "QUOTE-000004"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000005",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000005",
+        "QUOTE-000005",
+        "SOURCE-000005"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000006",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000006",
+        "URL-000006",
+        "QUOTE-000006"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000007",
+      "reconstructable": true,
+      "required_nodes": [
+        "QUOTE-000007",
+        "SOURCE-000007",
+        "URL-000007"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000008",
+      "reconstructable": true,
+      "required_nodes": [
+        "QUOTE-000008",
+        "SOURCE-000008",
+        "URL-000008"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000009",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000009",
+        "URL-000009",
+        "QUOTE-000009"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000010",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000010",
+        "SOURCE-000010",
+        "QUOTE-000010"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000011",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000011",
+        "QUOTE-000011",
+        "URL-000011"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000012",
+      "reconstructable": true,
+      "required_nodes": [
+        "QUOTE-000012",
+        "URL-000012",
+        "SOURCE-000012"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000013",
+      "reconstructable": true,
+      "required_nodes": [
+        "QUOTE-000013",
+        "URL-000013",
+        "SOURCE-000013"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000014",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000014",
+        "QUOTE-000014",
+        "SOURCE-000014"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000015",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000015",
+        "QUOTE-000015",
+        "SOURCE-000015"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000016",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000016",
+        "QUOTE-000016",
+        "SOURCE-000016"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000017",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000017",
+        "SOURCE-000017",
+        "QUOTE-000017"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000018",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000018",
+        "SOURCE-000018",
+        "QUOTE-000018"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000019",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000019",
+        "SOURCE-000019",
+        "QUOTE-000019"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000020",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000020",
+        "SOURCE-000020",
+        "QUOTE-000020"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000021",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000021",
+        "QUOTE-000021",
+        "SOURCE-000021"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000022",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000022",
+        "SOURCE-000022",
+        "QUOTE-000022"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000023",
+      "reconstructable": true,
+      "required_nodes": [
+        "URL-000023",
+        "QUOTE-000023",
+        "SOURCE-000023"
+      ],
+      "external_knowledge_needed": false
+    },
+    {
+      "claim_id": "CLAIM-000024",
+      "reconstructable": true,
+      "required_nodes": [
+        "SOURCE-000024",
+        "QUOTE-000024",
+        "URL-000024"
+      ],
+      "external_knowledge_needed": false
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "observation_id": "obs_001",
+    "category": "cohort_design",
+    "evidence": "ADNI recruits participants aged 55-90 years with memory complaints, mild cognitive impairment, or Alzheimer's disease dementia",
+    "source": "https://adni-info.org/study-design",
+    "learning_id": "learn_001",
+    "learning": "ADNI stratified sampling: three diagnostic categories (normal, MCI, AD) with unequal allocation (200/400/200)",
+    "learning_type": "methodological"
+  },
+  {
+    "observation_id": "obs_002",
+    "category": "follow_up",
+    "evidence": "ADNI follows participants for 5-10 years with assessments every 6-12 months depending on diagnosis category",
+    "source": "https://adni-info.org/visit-schedule",
+    "learning_id": "learn_007",
+    "learning": "ADNI visit frequency varies by diagnosis: annual for stable groups, biannual for MCI converters",
+    "learning_type": "operational"
+  },
+  {
+    "observation_id": "obs_003",
+    "category": "biomarker",
+    "evidence": "CSF biomarkers measured: Aβ42, Aβ40, total-tau, phosphorylated-tau-181",
+    "source": "https://adni-info.org/biospecimens",
+    "learning_id": "learn_002",
+    "learning": "ADNI biomarker cascade uses both CSF (amyloid/tau) and plasma (NfL/p-tau) for neurodegeneration tracking",
+    "learning_type": "clinical"
+  },
+  {
+    "observation_id": "obs_004",
+    "category": "biomarker",
+    "evidence": "Plasma biomarkers include: plasma Aβ42/40 ratio, p-tau181, p-tau217, NfL, GFAP",
+    "source": "https://adni-info.org/blood-biomarkers",
+    "learning_id": "learn_002",
+    "learning": "ADNI biomarker cascade uses both CSF (amyloid/tau) and plasma (NfL/p-tau) for neurodegeneration tracking",
+    "learning_type": "clinical"
+  },
+  {
+    "observation_id": "obs_005",
+    "category": "imaging",
+    "evidence": "MRI protocol includes: T1-weighted MP-RAGE, T2-weighted, FLAIR, and functional sequences",
+    "source": "https://adni-info.org/mri-methods",
+    "learning_id": "learn_003",
+    "learning": "ADNI MRI uses standardized 3T protocol with phantom quality control across all acquisition sites",
+    "learning_type": "methodological"
+  },
+  {
+    "observation_id": "obs_009",
+    "category": "outcome",
+    "evidence": "Primary outcome: Alzheimer's disease dementia diagnosis; Secondary: cognitive decline rate",
+    "source": "https://adni-info.org/outcomes",
+    "learning_id": "learn_006",
+    "learning": "ADNI defines progression outcome as composite: CDR increase OR clinical dementia diagnosis",
+    "learning_type": "outcome"
+  },
+  {
+    "observation_id": "obs_010",
+    "category": "data_model",
+    "evidence": "ADNI data organized in tabular CSV files with standardized variable names and visit codes",
+    "source": "https://adni-info.org/data-dictionary",
+    "learning_id": "learn_008",
+    "learning": "ADNI data model uses explicit visit codes tied to calendar time points (baseline, 6-month, 12-month, year2-5)",
+    "learning_type": "data"
+  },
+  {
+    "observation_id": "obs_012",
+    "category": "governance",
+    "evidence": "Data access requires ADNI Data Use Agreement and NIH approval",
+    "source": "https://adni-info.org/data-access",
+    "learning_id": "learn_009",
+    "learning": "ADNI data access requires formal governance process (DUA + NIH approval) with exclusion criteria",
+    "learning_type": "governance"
+  },
+  {
+    "observation_id": "obs_015",
+    "category": "progression",
+    "evidence": "Progression criteria: conversion from MCI to AD dementia documented by ADNI criteria",
+    "source": "https://adni-info.org/progression",
+    "learning_id": "learn_010",
+    "learning": "ADNI progression modeling incorporates genetic risk (ApoE) and biomarker thresholds for stratification",
+    "learning_type": "clinical"
+  },
+  {
+    "observation_id": "obs_020",
+    "category": "outcome",
+    "evidence": "Progression outcome defined as: CDR increase >=1 point or AD dementia diagnosis",
+    "source": "https://adni-info.org/progression-definition",
+    "learning_id": "learn_006",
+    "learning": "ADNI defines progression outcome as composite: CDR increase OR clinical dementia diagnosis",
+    "learning_type": "outcome"
+  }
+]

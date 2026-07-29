@@ -59,7 +59,7 @@ def extract_evidence(commits: List[Dict]) -> Dict[str, List[Dict]]:
     """Extract and classify evidence from commits."""
     
     evidence = {
-        "scienctific": [],
+        "scientific": [],
         "engineering": [],
         "unknown": []
     }

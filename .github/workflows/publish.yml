@@ -1,0 +1,133 @@
+name: Publish - DOI Publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Preprint title'
+        required: true
+      description:
+        description: 'Preprint description'
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Gather all artifacts
+        run: |
+          # Create preprint package
+          python -c "
+          import json
+          import os
+          from datetime import datetime
+          
+          # Gather all artifacts and actions
+          package = {
+            'metadata': {
+              'title': '${{ inputs.title }}',
+              'description': '${{ inputs.description }}',
+              'created_at': datetime.utcnow().isoformat(),
+              'authors': ['ORCID-0000-0002-1825-0097'],
+              'license': 'CC-BY-4.0'
+            },
+            'content': {
+              'questions': [],
+              'claims': [],
+              'reviews': [],
+              'actions': []
+            }
+          }
+          
+          # Load all actions
+          actions_dir = 'actions'
+          for filename in os.listdir(actions_dir):
+            if filename.endswith('.json'):
+              with open(os.path.join(actions_dir, filename)) as f:
+                package['content']['actions'].append(json.load(f))
+          
+          # Load all artifacts
+          artifacts_dir = 'artifacts'
+          for filename in os.listdir(artifacts_dir):
+            if filename.endswith('.json'):
+              with open(os.path.join(artifacts_dir, filename)) as f:
+                package['content'][filename.replace('.json', '')] = json.load(f)
+          
+          # Write preprint package
+          with open('artifacts/preprint-package.json', 'w') as f:
+            json.dump(package, f, indent=2)
+            
+          print('Preprint package created')
+          "
+
+      - name: Create release archive
+        run: |
+          zip -r artifacts.zip artifacts/ actions/ questions/ -x "*.DS_Store"
+          
+      - name: Create GitHub release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0-${{ github.run_number }}
+          release_name: Preprint - ${{ inputs.title }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./artifacts.zip
+          asset_name: research-package.zip
+          asset_content_type: application/zip
+
+      - name: Create Zenodo DOI (via integration)
+        run: |
+          # Note: This requires Zenodo integration
+          # For now, output the package that would be published
+          echo "Package ready for Zenodo publication"
+          echo "Contains: actions/, artifacts/, questions/"
+          echo "Metadata ready for DOI metadata deposit"
+          
+      - name: Generate action log
+        run: |
+          python -c "
+          import json
+          from datetime import datetime
+          
+          action = {
+            'action_id': 'ACTION-PUB-' + datetime.now().strftime('%Y%m%d%H%M%S'),
+            'type': 'PUBLISH_PREPRINT',
+            'actor': 'publish-workflow',
+            'target': 'repository',
+            'outcome': {
+              'release': 'v1.0.0',
+              'artifacts_zipped': True,
+              'ready_for_zenodo': True
+            },
+            'timestamp': datetime.utcnow().isoformat()
+          }
+          
+          with open('actions/${{ steps.generate_action.outputs.action_id }}.json', 'w') as f:
+            json.dump(action, f, indent=2)
+          "
+          
+      - name: Commit publication action
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add publication ACTION-PUB"
+          file_pattern: "actions/"

@@ -1,0 +1,38 @@
+{
+  "name": "coresearcher-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CoResearcher OS - Open Scientific Operating System",
+  "workspaces": [
+    "packages/*",
+    "agents/*",
+    "modules/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "start:mcp": "node packages/mcp-server/dist/index.js",
+    "start:reviewer": "node agents/reviewer/dist/index.js",
+    "start:provenance": "node packages/provenance/dist/index.js",
+    "start:neodiagnoses": "node agents/neurodiagnoses/dist/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "nodemon": "^3.1.0",
+    "esbuild": "^0.20.0",
+    "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.0",
+    "zod": "^3.22.0",
+    "uuid": "^9.0.0"
+  }
+}

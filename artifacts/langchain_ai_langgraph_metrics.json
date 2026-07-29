@@ -1,0 +1,12 @@
+{
+  "repo": "langchain-ai/langgraph",
+  "total_claims": 841,
+  "observable_claims": 241,
+  "derivable_claims": 350,
+  "inferred_claims": 0,
+  "unknown_claims": 250,
+  "auditability_score": 1.0,
+  "evidence_coverage": 0.7027,
+  "observable_ratio": 0.2866,
+  "total_gaps": 250
+}

@@ -1,0 +1,74 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "https://coresearcher.dev/schemas/decision_graph.yaml"
+title: "DecisionGraph Schema"
+description: "Estructura formal para el grafo de gobernanza y toma de decisiones que envuelve al EvidenceGraph."
+type: "object"
+required:
+  - graph_id
+  - nodes
+  - edges
+properties:
+  graph_id:
+    type: "string"
+    pattern: "^DG-[0-9]{6}$"
+  nodes:
+    type: "array"
+    items:
+      type: "object"
+      required:
+        - id
+        - type
+        - decider
+        - timestamp
+        - rationale
+      properties:
+        id:
+          type: "string"
+          pattern: "^DECISION-[0-9]{6}$"
+        type:
+          type: "string"
+          enum:
+            - RESEARCH_DIRECTION
+            - KNOWLEDGE_STRATEGY
+            - RESOURCE_ALLOCATION
+            - VALIDATION_PRIORITY
+            - ALGORITHMIC_INFERENCE
+        decider:
+          type: "string"
+          description: "ID del agente, humano o comité responsable."
+        timestamp:
+          type: "string"
+          format: "date-time"
+        rationale:
+          type: "string"
+          description: "La justificación semántica o algorítmica documentada de por qué se eligió este camino."
+        alternatives_discarded:
+          type: "array"
+          items:
+            type: "string"
+          description: "IDs de preguntas, recursos o aserciones que fueron evaluadas y descartadas en este punto de decisión."
+        resources_allocated:
+          type: "object"
+          description: "Métricas de recursos comprometidos por la decisión (ej. tokens, compute_hours, agentes)."
+  edges:
+    type: "array"
+    items:
+      type: "object"
+      required:
+        - from
+        - to
+        - type
+      properties:
+        from:
+          type: "string"
+          pattern: "^DECISION-[0-9]{6}$"
+        to:
+          type: "string"
+          description: "Puede ser un CLAIM-XXXXXX, EVID-XXXXXX, QUESTION-XXXXXX, o ACTION-XXXXXX."
+        type:
+          type: "string"
+          enum:
+            - based_on
+            - directed_towards
+            - spawned_action
+            - resolved_conflict

@@ -1,0 +1,29 @@
+{
+  "domain": "oncology",
+  "focus": "Cancer Metastasis",
+  "question": "What determines organotropic metastasis and why do dormancy patterns vary?",
+  "description": "Understanding the metastatic niche and dormancy mechanisms",
+  "entities": ["metastasis", "seed and soil", "dormancy", "exosome", "pre-metastatic niche", "immune editing"],
+  "key_contradictions": [
+    "Why do breast cancers preferentially metastasize to bone, brain, or lung?",
+    "Dormant cells survive decades then suddenly reactivate",
+    "Primary tumor and metastasis show different driver mutations"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Organotropic metastasis is mediated by a threshold-dependent educational program where disseminated tumor cells only colonize organs whose niche factors exceed a critical compatibility threshold relative to the primary tumor's secretome.",
+      "expected_type": "C",
+      "rationale": "Threshold + niche compatibility mechanism"
+    },
+    {
+      "statement": "What if tumor dormancy is not a passive state but an active equilibrium maintained by an unknown circadian-symbiotic relationship between disseminated cells and organ-specific microbiome that breaks down under periodic stress?",
+      "expected_type": "D",
+      "rationale": "Reframes dormancy through circadian-microbiome hypothesis"
+    },
+    {
+      "statement": "The different driver mutations between primary and metastasis are selected by a cross-species competition where the metastatic niche provides selective pressure through an unknown small RNA communication system.",
+      "expected_type": "C",
+      "rationale": "Cross-domain selection mechanism"
+    }
+  ]
+}

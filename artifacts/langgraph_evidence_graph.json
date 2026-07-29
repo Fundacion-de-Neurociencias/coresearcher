@@ -1,0 +1,1190 @@
+{
+  "nodes": [
+    {
+      "id": "CLAIM-000001",
+      "type": "Claim",
+      "text": "</li>",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000001",
+      "type": "Quote",
+      "text": "\"chore(deps): bump js-yaml from 4.2.0 to 4.3.0 in /libs/cli/js-monorepo-example: Bumps [js-yaml](https://github.com/nodeca/js-yaml) from 4.2.0 to 4.3.0.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000001",
+      "type": "Source",
+      "text": "issue #8438",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000001",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8438",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000002",
+      "type": "Claim",
+      "text": "## Why safe",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000002",
+      "type": "Quote",
+      "text": "\"fix(sdk-py): unblock subscribers on stream close: Fixes #8429",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000002",
+      "type": "Source",
+      "text": "issue #8436",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000002",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8436",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000003",
+      "type": "Claim",
+      "text": "com/pypa/setuptools/issues/5047\">#5047</a>)</li>",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000003",
+      "type": "Quote",
+      "text": "\"chore(deps): bump setuptools from 80.9.0 to 83.0.0 in /libs/langgraph: Bumps [setuptools](https://github.com/pypa/setuptools) from 80.9.0 to 83.0.0.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000003",
+      "type": "Source",
+      "text": "issue #8435",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000003",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8435",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000004",
+      "type": "Claim",
+      "text": "## Why safe",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000004",
+      "type": "Quote",
+      "text": "\"fix(sdk-py): unblock subscribers on stream close: Fixes #8429",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000004",
+      "type": "Source",
+      "text": "issue #8430",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000004",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8430",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000005",
+      "type": "Claim",
+      "text": "py -v -k \"counter or ordereddict or plain_dict_still\"",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000005",
+      "type": "Quote",
+      "text": "\"fix(checkpoint): preserve Counter and OrderedDict type through msgpack round-trip: Fixes #8184",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000005",
+      "type": "Source",
+      "text": "issue #8380",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000005",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8380",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000006",
+      "type": "Claim",
+      "text": "now()` unconditionally on every `put`, so upserts replaced the original creation timestamp",
+      "classification": "observable",
+      "confidence": 0.9
+    },
+    {
+      "id": "QUOTE-000006",
+      "type": "Quote",
+      "text": "\"fix(store): preserve created_at on upsert in InMemoryStore: ## Summary",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000006",
+      "type": "Source",
+      "text": "issue #8341",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000006",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8341",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000007",
+      "type": "Claim",
+      "text": "Under a lowest-direct install, that old version is selected and importing `langgraph",
+      "classification": "observable",
+      "confidence": 0.9
+    },
+    {
+      "id": "QUOTE-000007",
+      "type": "Quote",
+      "text": "\"fix(checkpoint): raise minimum langchain-core version: ## Summary",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000007",
+      "type": "Source",
+      "text": "issue #8266",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000007",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8266",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000008",
+      "type": "Claim",
+      "text": "4</h2>",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000008",
+      "type": "Quote",
+      "text": "\"chore(deps): bump the minor-and-patch group in /libs/cli/js-examples with 6 updates: Bumps the minor-and-patch group in /libs/cli/js-examples with 6 updates:",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000008",
+      "type": "Source",
+      "text": "issue #8246",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000008",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8246",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000009",
+      "type": "Claim",
+      "text": "4</h2>",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000009",
+      "type": "Quote",
+      "text": "\"chore(deps): bump the minor-and-patch group in /libs/cli/js-monorepo-example with 7 updates: Bumps the minor-and-patch group in /libs/cli/js-monorepo-example with 7 updates:",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000009",
+      "type": "Source",
+      "text": "issue #8245",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000009",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8245",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000010",
+      "type": "Claim",
+      "text": "I picked up this issue on #5029 (comment on 2026-05-18) with this same branch and am opening the PR so the change is reviewable",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000010",
+      "type": "Quote",
+      "text": "\"ci(checkpoint): add Windows runner for libs/checkpoint: Fixes #5029",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000010",
+      "type": "Source",
+      "text": "issue #8216",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000010",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8216",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000011",
+      "type": "Claim",
+      "text": "py -q -k \"test_task_before_interrupt_resume or test_multiple_tasks_before_interrupt_resume or test_node_before_interrupt_resume_graph_api or test_multiple_nodes_before_interrupt_resume_graph_api or te",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000011",
+      "type": "Quote",
+      "text": "\"ci: add codespell linting: Fixes #5021.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000011",
+      "type": "Source",
+      "text": "issue #8163",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000011",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8163",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000012",
+      "type": "Claim",
+      "text": "com/babel/babel/pull/17931\">#17931</a> fix(decorators): replace super within all removed static elements (<a href=\"https://github",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000012",
+      "type": "Quote",
+      "text": "\"chore(deps): bump @babel/core from 7.25.2 to 7.29.7 in /libs/cli/js-examples: Bumps [@babel/core](https://github.com/babel/babel/tree/HEAD/packages/babel-core) from 7.25.2 to 7.29.7.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000012",
+      "type": "Source",
+      "text": "issue #8144",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000012",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8144",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000013",
+      "type": "Claim",
+      "text": "8 has been removed",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000013",
+      "type": "Quote",
+      "text": "\"chore(deps): bump cryptography from 46.0.7 to 48.0.1 in /libs/langgraph: Bumps [cryptography](https://github.com/pyca/cryptography) from 46.0.7 to 48.0.1.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000013",
+      "type": "Source",
+      "text": "issue #8106",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000013",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8106",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000014",
+      "type": "Claim",
+      "text": "8 has been removed",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000014",
+      "type": "Quote",
+      "text": "\"chore(deps): bump cryptography from 46.0.7 to 48.0.1 in /libs/cli: Bumps [cryptography](https://github.com/pyca/cryptography) from 46.0.7 to 48.0.1.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000014",
+      "type": "Source",
+      "text": "issue #8103",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000014",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8103",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000015",
+      "type": "Claim",
+      "text": "py`: 1 URL replaced in the `RuntimeError` message body",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000015",
+      "type": "Quote",
+      "text": "\"fix(pregel): update broken docs URL in multiple-interrupt RuntimeError: ## Summary",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000015",
+      "type": "Source",
+      "text": "issue #8051",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000015",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8051",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000016",
+      "type": "Claim",
+      "text": "_bootstrap>\", line 241, in _call_with_frames_removed",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000016",
+      "type": "Quote",
+      "text": "\"run local server fil: ### Checked other resources",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000016",
+      "type": "Source",
+      "text": "issue #8047",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000016",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/issues/8047",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000017",
+      "type": "Claim",
+      "text": "py`/`func` for generic/ParamSpec limits; removed now-unused ignores in `delta",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000017",
+      "type": "Quote",
+      "text": "\"chore: adopt mypy 2.1.0 across Python libs: ## Summary",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000017",
+      "type": "Source",
+      "text": "issue #7999",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000017",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7999",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000018",
+      "type": "Claim",
+      "text": "## Verification",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000018",
+      "type": "Quote",
+      "text": "\"fix(sdk-py): join multi-line SSE data fields with newlines per spec: Fixes #7915",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000018",
+      "type": "Source",
+      "text": "issue #7947",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000018",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7947",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000019",
+      "type": "Claim",
+      "text": "That machinery is removed, and the companion langchain-core PR (#37721) is closed \u2014 no langchain-core change is needed",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000019",
+      "type": "Quote",
+      "text": "\"feat(langgraph): name tool-dispatched subagents via `lc_agent_name`: Resolves the labeling half of #7910.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000019",
+      "type": "Source",
+      "text": "issue #7928",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000019",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7928",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000020",
+      "type": "Claim",
+      "text": "No public types added or removed",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000020",
+      "type": "Quote",
+      "text": "\"fix(langgraph): merge instead of overwrite in `ensure_config` for callbacks, tags, metadata, configurable: ## Summary",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000020",
+      "type": "Source",
+      "text": "issue #7926",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000020",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7926",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000021",
+      "type": "Claim",
+      "text": "## Test plan",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000021",
+      "type": "Quote",
+      "text": "\"test(sdk-py): integration test harness for v3 streaming: ## Summary",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000021",
+      "type": "Source",
+      "text": "issue #7884",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000021",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7884",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000022",
+      "type": "Claim",
+      "text": "/etc/passwd` (or an absolute path) writes outside the destination the user selected \u2014 classic Zip Slip / CWE-22",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000022",
+      "type": "Quote",
+      "text": "\"fix(cli): refuse to extract zip entries that escape the destination (CWE-22 / Zip Slip): Resolves #7871.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000022",
+      "type": "Source",
+      "text": "issue #7873",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000022",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7873",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000023",
+      "type": "Claim",
+      "text": "/etc/passwd` (or an absolute path) writes outside the destination the user selected \u2014 classic Zip Slip / CWE-22",
+      "classification": "observable",
+      "confidence": 0.9
+    },
+    {
+      "id": "QUOTE-000023",
+      "type": "Quote",
+      "text": "\"fix(cli): refuse to extract zip entries that escape the destination (CWE-22 / Zip Slip): Resolves #7871.",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000023",
+      "type": "Source",
+      "text": "issue #7870",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000023",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7870",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "CLAIM-000024",
+      "type": "Claim",
+      "text": "com/vercel/turborepo/pull/12789\">vercel/turborepo#12789</a></li>",
+      "classification": "derivable",
+      "confidence": 0.7
+    },
+    {
+      "id": "QUOTE-000024",
+      "type": "Quote",
+      "text": "\"chore(deps): bump turbo from 2.9.7 to 2.9.14 in /libs/cli/js-monorepo-example: Bumps [turbo](https://github.com/vercel/turborepo) from 2.9.7 to 2.9.14.",
+      "classification": "derivable",
+      "confidence": 0.95
+    },
+    {
+      "id": "SOURCE-000024",
+      "type": "Source",
+      "text": "issue #7868",
+      "classification": "observable",
+      "confidence": 0.95
+    },
+    {
+      "id": "URL-000024",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/7868",
+      "classification": "observable",
+      "confidence": 0.95
+    }
+  ],
+  "edges": [
+    {
+      "from": "CLAIM-000001",
+      "to": "QUOTE-000001",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000001",
+      "to": "SOURCE-000001",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000001",
+      "to": "URL-000001",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000002",
+      "to": "QUOTE-000002",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000002",
+      "to": "SOURCE-000002",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000002",
+      "to": "URL-000002",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000003",
+      "to": "QUOTE-000003",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000003",
+      "to": "SOURCE-000003",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000003",
+      "to": "URL-000003",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000004",
+      "to": "QUOTE-000004",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000004",
+      "to": "SOURCE-000004",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000004",
+      "to": "URL-000004",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000005",
+      "to": "QUOTE-000005",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000005",
+      "to": "SOURCE-000005",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000005",
+      "to": "URL-000005",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000006",
+      "to": "QUOTE-000006",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000006",
+      "to": "SOURCE-000006",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000006",
+      "to": "URL-000006",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000007",
+      "to": "QUOTE-000007",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000007",
+      "to": "SOURCE-000007",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000007",
+      "to": "URL-000007",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000008",
+      "to": "QUOTE-000008",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000008",
+      "to": "SOURCE-000008",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000008",
+      "to": "URL-000008",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000009",
+      "to": "QUOTE-000009",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000009",
+      "to": "SOURCE-000009",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000009",
+      "to": "URL-000009",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000010",
+      "to": "QUOTE-000010",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000010",
+      "to": "SOURCE-000010",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000010",
+      "to": "URL-000010",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000011",
+      "to": "QUOTE-000011",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000011",
+      "to": "SOURCE-000011",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000011",
+      "to": "URL-000011",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000012",
+      "to": "QUOTE-000012",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000012",
+      "to": "SOURCE-000012",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000012",
+      "to": "URL-000012",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000013",
+      "to": "QUOTE-000013",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000013",
+      "to": "SOURCE-000013",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000013",
+      "to": "URL-000013",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000014",
+      "to": "QUOTE-000014",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000014",
+      "to": "SOURCE-000014",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000014",
+      "to": "URL-000014",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000015",
+      "to": "QUOTE-000015",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000015",
+      "to": "SOURCE-000015",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000015",
+      "to": "URL-000015",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000016",
+      "to": "QUOTE-000016",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000016",
+      "to": "SOURCE-000016",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000016",
+      "to": "URL-000016",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000017",
+      "to": "QUOTE-000017",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000017",
+      "to": "SOURCE-000017",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000017",
+      "to": "URL-000017",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000018",
+      "to": "QUOTE-000018",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000018",
+      "to": "SOURCE-000018",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000018",
+      "to": "URL-000018",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000019",
+      "to": "QUOTE-000019",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000019",
+      "to": "SOURCE-000019",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000019",
+      "to": "URL-000019",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000020",
+      "to": "QUOTE-000020",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000020",
+      "to": "SOURCE-000020",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000020",
+      "to": "URL-000020",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000021",
+      "to": "QUOTE-000021",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000021",
+      "to": "SOURCE-000021",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000021",
+      "to": "URL-000021",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000022",
+      "to": "QUOTE-000022",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000022",
+      "to": "SOURCE-000022",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000022",
+      "to": "URL-000022",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000023",
+      "to": "QUOTE-000023",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000023",
+      "to": "SOURCE-000023",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000023",
+      "to": "URL-000023",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000024",
+      "to": "QUOTE-000024",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "QUOTE-000024",
+      "to": "SOURCE-000024",
+      "type": "sourced_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000024",
+      "to": "URL-000024",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    }
+  ],
+  "summary": {
+    "total_claims": 24,
+    "total_nodes": 96,
+    "total_edges": 72,
+    "max_hops": 1,
+    "coverage": 1.0,
+    "metric_pass": true
+  }
+}

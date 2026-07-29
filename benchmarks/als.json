@@ -1,0 +1,29 @@
+{
+  "domain": "neurodegeneration",
+  "focus": "Amyotrophic Lateral Sclerosis",
+  "question": "What drives motor neuron degeneration in ALS and why is the disease heterogeneous?",
+  "description": "Exploring the complex relationship between TDP-43, C9orf72, and neuroinflammation",
+  "entities": ["TDP-43", "C9orf72", "SOD1", "neuroinflammation", "motor neuron", "muscle atrophy"],
+  "key_contradictions": [
+    "Why do C9orf72 expansions cause ALS in some patients but not others?",
+    "TDP-43 pathology without ALS symptoms in some cases",
+    "Why do anti-inflammatory approaches fail in sporadic ALS?"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "TDP-43 pathology is not the cause of ALS but a protective stress response where motor neurons attempt to sequester toxic RNA aggregates, creating the characteristic inclusions.",
+      "expected_type": "D",
+      "rationale": "Inverse causal framing - proteinopathy as protective mechanism"
+    },
+    {
+      "statement": "C9orf72 hexanucleotide expansions create a threshold-dependent toxicity that only manifests when combined with specific microglial activation states through a missing modifier gene.",
+      "expected_type": "C",
+      "rationale": "Threshold effect with missing link hypothesis"
+    },
+    {
+      "statement": "The heterogeneity of ALS is mediated by a compensatory feedback loop between motor neurons and surrounding glia that breaks down at different points depending on genetic background.",
+      "expected_type": "C",
+      "rationale": "Cross-cellular mediator hypothesis"
+    }
+  ]
+}

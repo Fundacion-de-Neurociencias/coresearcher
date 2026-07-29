@@ -1,0 +1,12 @@
+{
+  "observable_ratio_mean": 0.2742,
+  "observable_ratio_std": 0.0108,
+  "evidence_coverage_mean": 0.7524,
+  "evidence_coverage_std": 0.0571,
+  "auditability_score_mean": 1.0,
+  "auditability_score_std": 0.0,
+  "repositories_analyzed": 3,
+  "repository_resolution_rate": 0.75,
+  "inferred_claims_total": 0,
+  "note": "Stability analysis from 3 working repos. LlamaIndex excluded (404). Low std suggests possible extractor property, not domain property."
+}

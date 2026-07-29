@@ -1,0 +1,62 @@
+[
+  {
+    "learning_id": "learn_001",
+    "medicalia_component": "imaging_pipeline",
+    "impact_type": "protocol_standardization",
+    "proposed_change": "Implement ADNI MRI protocol (T1-weighted, FLAIR) as baseline imaging standard in Medicalia preprocessing pipeline"
+  },
+  {
+    "learning_id": "learn_002",
+    "medicalia_component": "diagnostic_algorithm",
+    "impact_type": "biomarker_protocol",
+    "proposed_change": "Add biomarker cascade (CSF p-tau/Aβ42, plasma NfL, PET amyloid) as three-stage progression tracking in Medicalia diagnostic workflow"
+  },
+  {
+    "learning_id": "learn_003",
+    "medicalia_component": "prediction_model",
+    "impact_type": "ml_approach",
+    "proposed_change": "Integrate pretrained ADNI MRI models via transfer learning for MCI-to-Alzheimer conversion prediction with 85% target accuracy"
+  },
+  {
+    "learning_id": "learn_004",
+    "medicalia_component": "assessment_tool",
+    "impact_type": "cognitive_screening",
+    "proposed_change": "Include Preclinical Alzheimer Cognitive Composite (PACC) items in Medicalia cognitive assessment battery for early detection"
+  },
+  {
+    "learning_id": "learn_005",
+    "medicalia_component": "data_engine",
+    "impact_type": "data_integration",
+    "proposed_change": "Build multi-modal fusion layer combining MRI, biomarker, and cognitive test data for improved prediction accuracy"
+  },
+  {
+    "learning_id": "learn_006",
+    "medicalia_component": "time_series_engine",
+    "impact_type": "temporal_modeling",
+    "proposed_change": "Structure Medicalia longitudinal tracking for 5-year progression modeling with minimum 1000 subject baseline"
+  },
+  {
+    "learning_id": "learn_007",
+    "medicalia_component": "risk_calculator",
+    "impact_type": "genetic_risk_modeling",
+    "proposed_change": "Add ApoE4 genotype stratification to Medicalia risk scoring for individualized biomarker trajectory prediction"
+  },
+  {
+    "learning_id": "learn_008",
+    "medicalia_component": "imaging_selector",
+    "impact_type": "modality_selection",
+    "proposed_change": "Implement modality selection logic: MRI-first with 15-20% PET upgrade option for amyloid-specific cases"
+  },
+  {
+    "learning_id": "learn_009",
+    "medicalia_component": "benchmark_reference",
+    "impact_type": "ml_baseline",
+    "proposed_change": "Use random forest 82% accuracy as benchmark baseline for MCI conversion prediction in Medicalia validation suite"
+  },
+  {
+    "learning_id": "learn_010",
+    "medicalia_component": "biomarker_panel",
+    "impact_type": "blood_biomarker",
+    "proposed_change": "Add plasma Neurofilament Light chain (NfL) to Medicalia blood biomarker panel for neurodegeneration tracking"
+  }
+]

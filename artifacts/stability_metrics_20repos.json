@@ -1,0 +1,37 @@
+{
+  "observable_ratio": {
+    "mean": 0.0421,
+    "median": 0.0,
+    "std": 0.103,
+    "min": 0.0,
+    "max": 0.2885
+  },
+  "evidence_coverage": {
+    "mean": 0.1129,
+    "median": 0.0,
+    "std": 0.2763,
+    "min": 0.0,
+    "max": 0.8168
+  },
+  "auditability_score": {
+    "mean": 0.15,
+    "median": 0.0,
+    "std": 0.3663,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "unknown_ratio": {
+    "mean": 0.0371,
+    "median": 0.0,
+    "std": 0.0927,
+    "min": 0.0,
+    "max": 0.2973
+  },
+  "claims": {
+    "mean": 122.45,
+    "median": 0.0,
+    "std": 303.0229,
+    "min": 0,
+    "max": 953
+  }
+}

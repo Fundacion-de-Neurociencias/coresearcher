@@ -1,0 +1,202 @@
+[
+  {
+    "observation_id": "obs_001",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: The Alzheimer's disease neuroimaging initiative (ADNI): MRI ...",
+    "evidence": "cited_by_count: 4412, concepts: Neuroimaging,Alzheimer's Disease Neuroimaging Initiative,Magnetic resonance imaging",
+    "source_url": "https://doi.org/10.1002/jmri.21049",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682445"
+  },
+  {
+    "observation_id": "obs_002",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Alzheimer's Disease Neuroimaging Initiative (ADNI)...",
+    "evidence": "cited_by_count: 2563, concepts: Neuroimaging,Dementia,Alzheimer's disease",
+    "source_url": "https://doi.org/10.1212/wnl.0b013e3181cb3e25",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682461"
+  },
+  {
+    "observation_id": "obs_003",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Transfer learning using freeze features for Alzheimer neurol...",
+    "evidence": "cited_by_count: 130, concepts: Transfer of learning,Cognitive impairment,Disease",
+    "source_url": "https://doi.org/10.1007/s00530-021-00797-3",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682467"
+  },
+  {
+    "observation_id": "obs_004",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: The Preclinical Alzheimer Cognitive Composite...",
+    "evidence": "cited_by_count: 873, concepts: Cognition,Observational study,Cognitive decline",
+    "source_url": "https://doi.org/10.1001/jamaneurol.2014.803",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682471"
+  },
+  {
+    "observation_id": "obs_005",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Plasma tau in Alzheimer disease...",
+    "evidence": "cited_by_count: 512, concepts: Alzheimer's Disease Neuroimaging Initiative,Dementia,Atrophy",
+    "source_url": "https://doi.org/10.1212/wnl.0000000000003246",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682474"
+  },
+  {
+    "observation_id": "obs_006",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Correlation of Alzheimer Disease Neuropathologic Changes Wit...",
+    "evidence": "cited_by_count: 2103, concepts: Cognition,Alzheimer's disease,Psychology",
+    "source_url": "https://doi.org/10.1097/nen.0b013e31825018f7",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682477"
+  },
+  {
+    "observation_id": "obs_007",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Blood-Based Protein Biomarkers for Diagnosis of Alzheimer Di...",
+    "evidence": "cited_by_count: 422, concepts: Biomarker,Cohort,Medicine",
+    "source_url": "https://doi.org/10.1001/archneurol.2012.1282",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682480"
+  },
+  {
+    "observation_id": "obs_008",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Genomic Copy Number Analysis in Alzheimer\u2032s Disease and Mild...",
+    "evidence": "cited_by_count: 67, concepts: Cognitive impairment,Medicine,Disease",
+    "source_url": "https://doi.org/10.4061/2011/729478",
+    "confidence": "medium",
+    "observed_at": "2026-07-18T15:38:15.682485"
+  },
+  {
+    "observation_id": "obs_009",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Brain Imaging in Alzheimer Disease...",
+    "evidence": "cited_by_count: 865, concepts: Positron emission tomography,Dementia,Neuroimaging",
+    "source_url": "https://doi.org/10.1101/cshperspect.a006213",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682488"
+  },
+  {
+    "observation_id": "obs_010",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: A Deep Learning Model to Predict a Diagnosis of Alzheimer Di...",
+    "evidence": "cited_by_count: 577, concepts: Medicine,Alzheimer's disease,Disease",
+    "source_url": "https://doi.org/10.1148/radiol.2018180958",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682491"
+  },
+  {
+    "observation_id": "obs_011",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Mild cognitive impairment due to Alzheimer disease in the co...",
+    "evidence": "cited_by_count: 265, concepts: Biomarker,Alzheimer's Disease Neuroimaging Initiative,Neuroimaging",
+    "source_url": "https://doi.org/10.1002/ana.23931",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682495"
+  },
+  {
+    "observation_id": "obs_012",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: The Alzheimer's Disease Neuroimaging Initiative: A review of...",
+    "evidence": "cited_by_count: 1010, concepts: Neuroimaging,Alzheimer's Disease Neuroimaging Initiative,Biomarker",
+    "source_url": "https://doi.org/10.1016/j.jalz.2013.05.1769",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682499"
+  },
+  {
+    "observation_id": "obs_013",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Baseline MRI Predictors of Conversion from MCI to Probable A...",
+    "evidence": "cited_by_count: 538, concepts: Alzheimer's Disease Neuroimaging Initiative,Neuroimaging,Temporal lobe",
+    "source_url": "https://doi.org/10.2174/156720509788929273",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682502"
+  },
+  {
+    "observation_id": "obs_014",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Inexpensive, non-invasive biomarkers predict Alzheimer trans...",
+    "evidence": "cited_by_count: 51, concepts: Neuroimaging,Random forest,Alzheimer's Disease Neuroimaging Initiative",
+    "source_url": "https://doi.org/10.1371/journal.pone.0235663",
+    "confidence": "medium",
+    "observed_at": "2026-07-18T15:38:15.682506"
+  },
+  {
+    "observation_id": "obs_015",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Genetic assessment of age-associated Alzheimer disease risk:...",
+    "evidence": "cited_by_count: 411, concepts: Disease,Medicine,Polygenic risk score",
+    "source_url": "https://doi.org/10.1371/journal.pmed.1002258",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682510"
+  },
+  {
+    "observation_id": "obs_016",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Plasma multianalyte profiling in mild cognitive impairment a...",
+    "evidence": "cited_by_count: 245, concepts: Dementia,Internal medicine,Apolipoprotein E",
+    "source_url": "https://doi.org/10.1212/wnl.0b013e318266fa70",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682513"
+  },
+  {
+    "observation_id": "obs_017",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Clinical epidemiology of Alzheimer&amp;rsquo;s disease: asse...",
+    "evidence": "cited_by_count: 1002, concepts: Dementia,Disease,Medicine",
+    "source_url": "https://doi.org/10.2147/clep.s37929",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682516"
+  },
+  {
+    "observation_id": "obs_018",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Brain and blood metabolite signatures of pathology and progr...",
+    "evidence": "cited_by_count: 504, concepts: Neuropathology,Medicine,Alzheimer's disease",
+    "source_url": "https://doi.org/10.1371/journal.pmed.1002482",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682519"
+  },
+  {
+    "observation_id": "obs_019",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Cerebrospinal fluid biomarker signature in Alzheimer's disea...",
+    "evidence": "cited_by_count: 2112, concepts: Biomarker,Cerebrospinal fluid,Cohort",
+    "source_url": "https://doi.org/10.1002/ana.21610",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682522"
+  },
+  {
+    "observation_id": "obs_020",
+    "asset": "ADNI",
+    "observation_type": "publication",
+    "signal": "ADNI publication: Association Between Longitudinal Plasma Neurofilament Light ...",
+    "evidence": "cited_by_count: 746, concepts: Dementia,Neurodegeneration,Medicine",
+    "source_url": "https://doi.org/10.1001/jamaneurol.2019.0765",
+    "confidence": "high",
+    "observed_at": "2026-07-18T15:38:15.682524"
+  }
+]

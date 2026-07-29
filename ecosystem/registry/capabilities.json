@@ -1,0 +1,47 @@
+{
+  "registrations": {
+    "reg_1": {
+      "id": "reg_1",
+      "capability": "KnowledgeRetrieval",
+      "pack_id": "connectors",
+      "workflow_ids": [
+        "multi_source_search"
+      ],
+      "agent_ids": [
+        "connectors"
+      ],
+      "priority": 50,
+      "config": {},
+      "registered_at": "2026-07-12T07:49:32.179001"
+    },
+    "reg_2": {
+      "id": "reg_2",
+      "capability": "KnowledgeRetrieval",
+      "pack_id": "connectors",
+      "workflow_ids": [
+        "multi_source_search"
+      ],
+      "agent_ids": [
+        "connectors"
+      ],
+      "priority": 50,
+      "config": {},
+      "registered_at": "2026-07-12T07:50:30.152766"
+    },
+    "reg_3": {
+      "id": "reg_3",
+      "capability": "KnowledgeRetrieval",
+      "pack_id": "connectors",
+      "workflow_ids": [
+        "multi_source_search"
+      ],
+      "agent_ids": [
+        "connectors"
+      ],
+      "priority": 50,
+      "config": {},
+      "registered_at": "2026-07-12T07:52:43.211298"
+    }
+  },
+  "next_id": 4
+}

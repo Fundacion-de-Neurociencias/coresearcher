@@ -1,146 +1,115 @@
 """
-Ledger Generator
-Creates VERIFIABLE scientific ledger with traceability.
+Ledger Generator - Sprint 33
+Generates Scientific Activity Ledger from artifacts and workstreams.
 """
 
-from typing import Dict, List
-from pathlib import Path
+from __future__ import annotations
+
+from datetime import datetime
+from typing import List, Dict, Optional
+
+from observer.scientific_artifact import ScientificArtifact
+from observer.scientific_ledger import ScientificLedger, LedgerWorkstream, LedgerContributor
+from observer.workstream_resolver import infer_workstreams
+from observer.intellectual_extractor import run_cheap_gate, GateVerdict, build_extraction_prompt
 
 
-def generate_ledger(
-    programs: List[Dict],
-    evidence: Dict[str, List[Dict]],
-    artifacts: List[Dict]
-) -> str:
-    """Generate markdown ledger with full traceability."""
-    
-    lines = [
-        "# Scientific Activity Ledger",
-        "",
-        "> VERIFIABLE AND TRACEABLE",
-        "> Every inference links to evidence sources",
-        "",
-    ]
-    
-    for program in programs:
-        lines.extend([
-            f"## {program.get('id', 'PROGRAM')}",
-            f"### Domain: {program.get('domain', 'unknown')}",
-            "",
-            "#### Inferred Objectives",
-            "",
-        ])
-        
-        for obj in program.get("objectives", []):
-            confidence = obj.get("confidence", "unknown")
-            rationale = obj.get("rationale", "not provided")
-            evidence_refs = obj.get("evidence", [])
-            
-            lines.extend([
-                f"##### {obj.get('text', 'unspecified')}",
-                "",
-                f"**Confidence:** {confidence}",
-                "",
-                f"**Rationale:** {rationale}",
-                "",
-                "**Evidence Sources:**",
-                "",
-            ])
-            for ref in evidence_refs[:5]:
-                lines.append(f"- `{ref}`")
-            lines.append("")
-    
-    lines.extend([
-        "## Evidence Summary",
-        "",
-        f"- Scientific: {len(evidence.get('scientific', []))} items",
-        f"- Engineering: {len(evidence.get('engineering', []))} items",
-        "",
-    ])
-    
-    # Show sample evidence with rationale
-    lines.extend([
-        "### Sample Scientific Evidence",
-        "",
-    ])
-    for ev in evidence.get("scientific", [])[:10]:
-        lines.append(f"- {ev.get('date', '')}: {ev.get('text', '')[:60]}")
-    
-    return "\n".join(lines)
+def build_ledger(artifacts: List[ScientificArtifact], ledger_id: str, name: str = "", description: str = "") -> ScientificLedger:
+    if not name:
+        name = ledger_id
+    if not description and artifacts:
+        description = artifacts[0].title or name
 
+    # Intellectual History Extraction Pipeline (Cheap Gate + LLM Prompt)
+    for a in artifacts:
+        gate = run_cheap_gate(
+            title=a.title or "",
+            body=a.body or "",
+            metadata={"comments": 0} # Simplified for now
+        )
+        if gate.verdict in (GateVerdict.LIKELY, GateVerdict.AMBIGUOUS):
+            a.metadata["intellectual_history_gate"] = gate.verdict.value
+            a.metadata["intellectual_history_prompt"] = build_extraction_prompt(
+                title=a.title or "",
+                body=a.body or "",
+                metadata={}
+            )
+            # Future: LLM Call goes here to populate a.metadata["intellectual_entities"]
 
-def generate_ledger_json(
-    programs: List[Dict],
-    evidence: Dict[str, List[Dict]],
-    artifacts: List[Dict]
-) -> Dict:
-    """Generate JSON format with full traceability metadata."""
-    
-    return {
-        "programs": programs,
-        "evidence": evidence,
-        "artifacts": artifacts,
-        "metadata": {
-            "total_programs": len(programs),
-            "total_scientific_evidence": len(evidence.get("scientific", [])),
-            "total_engineering_evidence": len(evidence.get("engineering", [])),
-            "total_artifacts": len(artifacts),
-            "verifiable": True,
-            "every_objective_traces_to_evidence": True
-        }
-    }
+    workstreams = infer_workstreams(artifacts)
+    ledger_workstreams = []
+    for ws in workstreams:
+        ledger_workstreams.append(LedgerWorkstream(
+            workstream_id=ws.workstream_id,
+            name=ws.name,
+            signals=ws.signals[:10],
+            related_artifact_count=len(ws.related_artifact_ids),
+            contributor_count=len(ws.contributors),
+        ))
 
-
-def verify_ledger(ledger: Dict) -> Dict:
-    """Verify every objective has traceable evidence."""
-    
-    issues = []
-    
-    for program in ledger.get("programs", []):
-        for obj in program.get("objectives", []):
-            if not obj.get("evidence"):
-                issues.append({
-                    "type": "no_evidence",
-                    "program": program.get("id"),
-                    "objective": obj.get("text")
-                })
-    
-    return {
-        "verified": len(issues) == 0,
-        "issues": issues,
-        "coverage": f"{len(issues)} objectives without evidence"
-    }
-
-
-if __name__ == "__main__":
-    # Test with traceable data
-    test_programs = [
-        {
-            "id": "PROGRAM-001",
-            "domain": "Neurodegeneration",
-            "objectives": [
-                {
-                    "text": "APOE4 mechanism exploration",
-                    "confidence": "0.75",
-                    "rationale": "Multiple commits reference APOE4 + mechanism patterns",
-                    "evidence": ["commit:abc123", "file:ontology.md", "document:2024-notes.txt"]
+    contributors_map = {}
+    for a in artifacts:
+        for c in a.contributors:
+            key = (c.name or "").strip().lower()
+            if not key:
+                continue
+            if key not in contributors_map:
+                contributors_map[key] = {
+                    "name": c.name.strip(),
+                    "github": c.github,
+                    "orcid": c.orcid,
+                    "affiliation": c.affiliation,
+                    "count": 0,
                 }
-            ]
-        }
-    ]
-    
-    test_evidence = {
-        "scientific": [
-            {"date": "2024-01-15", "text": "feat: add biomarker ontology", "source": "commit:abc123"}
-        ]
+            contributors_map[key]["count"] += 1
+
+    contributors = []
+    for key, data in sorted(contributors_map.items(), key=lambda x: x[1]["count"], reverse=True)[:100]:
+        contributors.append(LedgerContributor(
+            name=data["name"],
+            github=data["github"],
+            orcid=data["orcid"],
+            affiliation=data["affiliation"],
+            contribution_count=data["count"],
+        ))
+
+    start_year = None
+    latest_activity = ""
+    milestones = []
+    for a in artifacts:
+        if a.created_at:
+            try:
+                year = int(str(a.created_at)[:4])
+                if start_year is None or year < start_year:
+                    start_year = year
+                if not latest_activity or str(a.created_at) > latest_activity:
+                    latest_activity = str(a.created_at)
+            except Exception:
+                pass
+        if a.github_release and a.github_release not in milestones:
+            milestones.append(a.github_release)
+
+    timeline = {
+        "start_year": start_year or 0,
+        "latest_activity": latest_activity,
+        "milestones": milestones[:20],
     }
-    
-    ledger = generate_ledger(test_programs, test_evidence, [])
-    
-    print(ledger[:500])
-    
-    # Verify
-    ledger_json = generate_ledger_json(test_programs, test_evidence, [])
-    verification = verify_ledger(ledger_json)
-    
-    print(f"\n\nVerification: {verification['coverage']}")
+
+    summary = (
+        f"{name} is a scientific project with "
+        f"{len(artifacts)} artifacts, "
+        f"{len(ledger_workstreams)} workstreams, and "
+        f"{len(contributors)} contributors. "
+        f"Active since {start_year or 'unknown'}."
+    )
+
+    return ScientificLedger(
+        ledger_id=ledger_id,
+        name=name,
+        description=description,
+        timeline=timeline,
+        artifacts=[a.to_dict() for a in artifacts],
+        workstreams=ledger_workstreams,
+        contributors=contributors,
+        comprehension_summary=summary,
+    )

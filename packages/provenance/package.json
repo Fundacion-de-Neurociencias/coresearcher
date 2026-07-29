@@ -1,0 +1,39 @@
+{
+  "name": "@coresearcher/provenance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./engine": {
+      "import": "./dist/engine.js",
+      "types": "./dist/engine.d.ts"
+    },
+    "./storage": {
+      "import": "./dist/storage.js",
+      "types": "./dist/storage.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@coresearcher/types": "0.1.0",
+    "zod": "^3.22.0",
+    "uuid": "^9.0.0",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/uuid": "^9.0.0",
+    "@types/crypto-js": "^4.2.0",
+    "vitest": "^1.4.0"
+  }
+}

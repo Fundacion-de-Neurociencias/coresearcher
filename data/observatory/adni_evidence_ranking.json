@@ -1,0 +1,242 @@
+[
+  {
+    "observation_id": "obs_001",
+    "ranking_score": 95,
+    "ranking_factors": {
+      "methodological_quality": 90,
+      "sample_size": 70,
+      "longitudinal_duration": 0,
+      "reproducibility": 95,
+      "clinical_impact": 90
+    },
+    "justification": "Foundational MRI protocol paper, multi-center validated, high standardization"
+  },
+  {
+    "observation_id": "obs_002",
+    "ranking_score": 85,
+    "ranking_factors": {
+      "methodological_quality": 80,
+      "sample_size": 85,
+      "longitudinal_duration": 0,
+      "reproducibility": 85,
+      "clinical_impact": 85
+    },
+    "justification": "Clinical characterization of the full ADNI cohort, prospective design"
+  },
+  {
+    "observation_id": "obs_004",
+    "ranking_score": 80,
+    "ranking_factors": {
+      "methodological_quality": 75,
+      "sample_size": 70,
+      "longitudinal_duration": 80,
+      "reproducibility": 80,
+      "clinical_impact": 90
+    },
+    "justification": "PACC validation study with longitudinal follow-up, clinical outcome focus"
+  },
+  {
+    "observation_id": "obs_005",
+    "ranking_score": 75,
+    "ranking_factors": {
+      "methodological_quality": 70,
+      "sample_size": 65,
+      "longitudinal_duration": 75,
+      "reproducibility": 70,
+      "clinical_impact": 85
+    },
+    "justification": "Longitudinal plasma tau study, directly relevant to blood biomarkers"
+  },
+  {
+    "observation_id": "obs_009",
+    "ranking_score": 75,
+    "ranking_factors": {
+      "methodological_quality": 85,
+      "sample_size": 60,
+      "longitudinal_duration": 0,
+      "reproducibility": 90,
+      "clinical_impact": 80
+    },
+    "justification": "Review paper synthesizing imaging evidence, high methodological quality"
+  },
+  {
+    "observation_id": "obs_011",
+    "ranking_score": 70,
+    "ranking_factors": {
+      "methodological_quality": 65,
+      "sample_size": 55,
+      "longitudinal_duration": 80,
+      "reproducibility": 70,
+      "clinical_impact": 80
+    },
+    "justification": "MCI conversion prediction using established ADNI criteria"
+  },
+  {
+    "observation_id": "obs_015",
+    "ranking_score": 65,
+    "ranking_factors": {
+      "methodological_quality": 60,
+      "sample_size": 80,
+      "longitudinal_duration": 70,
+      "reproducibility": 55,
+      "clinical_impact": 70
+    },
+    "justification": "Genetic risk modeling with large sample but model-specific approach"
+  },
+  {
+    "observation_id": "obs_020",
+    "ranking_score": 65,
+    "ranking_factors": {
+      "methodological_quality": 60,
+      "sample_size": 55,
+      "longitudinal_duration": 75,
+      "reproducibility": 65,
+      "clinical_impact": 75
+    },
+    "justification": "Longitudinal NfL study but single biomarker focus"
+  },
+  {
+    "observation_id": "obs_019",
+    "ranking_score": 60,
+    "ranking_factors": {
+      "methodological_quality": 65,
+      "sample_size": 75,
+      "longitudinal_duration": 0,
+      "reproducibility": 60,
+      "clinical_impact": 55
+    },
+    "justification": "Large CSF study but cross-sectional design, invasive measure"
+  },
+  {
+    "observation_id": "obs_003",
+    "ranking_score": 55,
+    "ranking_factors": {
+      "methodological_quality": 60,
+      "sample_size": 65,
+      "longitudinal_duration": 50,
+      "reproducibility": 50,
+      "clinical_impact": 55
+    },
+    "justification": "Deep learning benchmark but model-specific, transfer learning context"
+  },
+  {
+    "observation_id": "obs_010",
+    "ranking_score": 50,
+    "ranking_factors": {
+      "methodological_quality": 55,
+      "sample_size": 60,
+      "longitudinal_duration": 45,
+      "reproducibility": 45,
+      "clinical_impact": 55
+    },
+    "justification": "Deep learning model for prediction but single algorithm focus"
+  },
+  {
+    "observation_id": "obs_014",
+    "ranking_score": 50,
+    "ranking_factors": {
+      "methodological_quality": 50,
+      "sample_size": 45,
+      "longitudinal_duration": 60,
+      "reproducibility": 50,
+      "clinical_impact": 55
+    },
+    "justification": "Random forest on MRI features but small sample size"
+  },
+  {
+    "observation_id": "obs_007",
+    "ranking_score": 45,
+    "ranking_factors": {
+      "methodological_quality": 50,
+      "sample_size": 55,
+      "longitudinal_duration": 0,
+      "reproducibility": 40,
+      "clinical_impact": 50
+    },
+    "justification": "Early plasma biomarker panel but diagnostic validation incomplete"
+  },
+  {
+    "observation_id": "obs_018",
+    "ranking_score": 40,
+    "ranking_factors": {
+      "methodological_quality": 40,
+      "sample_size": 35,
+      "longitudinal_duration": 50,
+      "reproducibility": 35,
+      "clinical_impact": 45
+    },
+    "justification": "Metabolomics signature but small sample and niche application"
+  },
+  {
+    "observation_id": "obs_013",
+    "ranking_score": 40,
+    "ranking_factors": {
+      "methodological_quality": 50,
+      "sample_size": 30,
+      "longitudinal_duration": 55,
+      "reproducibility": 40,
+      "clinical_impact": 40
+    },
+    "justification": "Small MRI predictor study, limited generalizability"
+  },
+  {
+    "observation_id": "obs_006",
+    "ranking_score": 35,
+    "ranking_factors": {
+      "methodological_quality": 40,
+      "sample_size": 60,
+      "longitudinal_duration": 0,
+      "reproducibility": 30,
+      "clinical_impact": 40
+    },
+    "justification": "Post-mortem correlation study but cross-sectional design"
+  },
+  {
+    "observation_id": "obs_008",
+    "ranking_score": 25,
+    "ranking_factors": {
+      "methodological_quality": 30,
+      "sample_size": 35,
+      "longitudinal_duration": 0,
+      "reproducibility": 20,
+      "clinical_impact": 35
+    },
+    "justification": "Genomic copy number study, small sample, early exploratory"
+  },
+  {
+    "observation_id": "obs_016",
+    "ranking_score": 25,
+    "ranking_factors": {
+      "methodological_quality": 35,
+      "sample_size": 30,
+      "longitudinal_duration": 0,
+      "reproducibility": 20,
+      "clinical_impact": 35
+    },
+    "justification": "Multianalyte profiling but cross-sectional and not individually validated"
+  },
+  {
+    "observation_id": "obs_017",
+    "ranking_score": 30,
+    "ranking_factors": {
+      "methodological_quality": 70,
+      "sample_size": 0,
+      "longitudinal_duration": 0,
+      "reproducibility": 70,
+      "clinical_impact": 15
+    },
+    "justification": "Epidemiological review but no primary data for mechanistic inference"
+  },
+  {
+    "observation_id": "obs_012",
+    "ranking_score": 25,
+    "ranking_factors": {
+      "methodological_quality": 65,
+      "sample_size": 0,
+      "longitudinal_duration": 0,
+      "reproducibility": 60,
+      "clinical_impact": 10
+    },
+    "justification": "Review paper without new empirical data"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "learning_id": "learn_001",
+    "derived_from": ["obs_001", "obs_016"],
+    "learning": "ADNI stratified sampling: three diagnostic categories (normal, MCI, AD) with unequal allocation (200/400/200)",
+    "rationale": "Evidence shows intentional oversampling of MCI cohort for conversion studies",
+    "learning_type": "methodological"
+  },
+  {
+    "learning_id": "learn_002",
+    "derived_from": ["obs_003", "obs_004"],
+    "learning": "ADNI biomarker cascade uses both CSF (amyloid/tau) and plasma (NfL/p-tau) for neurodegeneration tracking",
+    "rationale": "Multiple biomarker types collected longitudinally enable cross-validation",
+    "learning_type": "clinical"
+  },
+  {
+    "learning_id": "learn_003",
+    "derived_from": ["obs_005", "obs_019"],
+    "learning": "ADNI MRI uses standardized 3T protocol with phantom quality control across all acquisition sites",
+    "rationale": "Standardization enables multi-center data pooling and reduces site variance",
+    "learning_type": "methodological"
+  },
+  {
+    "learning_id": "learn_004",
+    "derived_from": ["obs_006"],
+    "learning": "ADNI PET employs two primary tracers: amyloid-specific (florbetapir) and tau-specific (flortaucipir)",
+    "rationale": "Dual-tracer approach allows both amyloid and tau pathology assessment in single cohort",
+    "learning_type": "methodological"
+  },
+  {
+    "learning_id": "learn_005",
+    "derived_from": ["obs_007", "obs_008"],
+    "learning": "ADNI cognitive assessment combines global (MMSE, CDR-SB) and domain-specific (memory, executive) tests",
+    "rationale": "Comprehensive battery captures cognitive decline patterns specific to AD progression",
+    "learning_type": "clinical"
+  },
+  {
+    "learning_id": "learn_006",
+    "derived_from": ["obs_009", "obs_020"],
+    "learning": "ADNI defines progression outcome as composite: CDR increase OR clinical dementia diagnosis",
+    "rationale": "Dual-criterion definition increases sensitivity for detecting disease progression events",
+    "learning_type": "outcome"
+  },
+  {
+    "learning_id": "learn_007",
+    "derived_from": ["obs_002", "obs_017"],
+    "learning": "ADNI visit frequency varies by diagnosis: annual for stable groups, biannual for MCI converters",
+    "rationale": "Adaptive follow-up intensity optimizes resource allocation while maintaining outcome detection power",
+    "learning_type": "operational"
+  },
+  {
+    "learning_id": "learn_008",
+    "derived_from": ["obs_010", "obs_011"],
+    "learning": "ADNI data model uses explicit visit codes tied to calendar time points (baseline, 6-month, 12-month, year2-5)",
+    "rationale": "Structured visit schema enables automated longitudinal analysis workflows",
+    "learning_type": "data"
+  },
+  {
+    "learning_id": "learn_009",
+    "derived_from": ["obs_012", "obs_013", "obs_014"],
+    "learning": "ADNI data access requires formal governance process (DUA + NIH approval) with exclusion criteria",
+    "rationale": "Controlled access model protects participant privacy while enabling research use",
+    "learning_type": "governance"
+  },
+  {
+    "learning_id": "learn_010",
+    "derived_from": ["obs_015", "obs_018"],
+    "learning": "ADNI progression modeling incorporates genetic risk (ApoE) and biomarker thresholds for stratification",
+    "rationale": "Genetic modifier data enables precision cohort definition and outcome prediction models",
+    "learning_type": "clinical"
+  }
+]

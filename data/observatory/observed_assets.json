@@ -1,0 +1,101 @@
+[
+  {
+    "asset_id": "adni",
+    "asset_type": "dataset",
+    "source": "nih",
+    "url": "https://adni-info.org",
+    "domain": "neurodegeneration",
+    "last_seen": "2024-12-01",
+    "activity_score": 95,
+    "impact_score": 98,
+    "tags": ["alzheimer", "mri", "pet", "csf", "longitudinal"]
+  },
+  {
+    "asset_id": "nacc",
+    "asset_type": "dataset",
+    "source": "nih",
+    "url": "https://naccdata.org",
+    "domain": "neurodegeneration",
+    "last_seen": "2024-11-15",
+    "activity_score": 92,
+    "impact_score": 95,
+    "tags": ["alzheimer", "dementia", "neuropathology", "longitudinal"]
+  },
+  {
+    "asset_id": "uk-biobank",
+    "asset_type": "dataset",
+    "source": "ukb",
+    "url": "https://www.ukbiobank.ac.uk",
+    "domain": "population_health",
+    "last_seen": "2024-06-01",
+    "activity_score": 100,
+    "impact_score": 100,
+    "tags": ["genetics", "imaging", "multimodal", "population"]
+  },
+  {
+    "asset_id": "openneuro",
+    "asset_type": "repository",
+    "source": "openneuro",
+    "url": "https://openneuro.org",
+    "domain": "neuroimaging",
+    "last_seen": "2024-12-15",
+    "activity_score": 85,
+    "impact_score": 88,
+    "tags": ["fmri", "eeg", "meg", "bids"]
+  },
+  {
+    "asset_id": "monai",
+    "asset_type": "software",
+    "source": "project-monai",
+    "url": "https://monai.io",
+    "domain": "medical_ai",
+    "last_seen": "2024-12-01",
+    "activity_score": 94,
+    "impact_score": 92,
+    "tags": ["deep_learning", "medical_imaging", "pytorch"]
+  },
+  {
+    "asset_id": "ohdsi",
+    "asset_type": "consortium",
+    "source": "ohdsi",
+    "url": "https://ohdsi.org",
+    "domain": "health_data",
+    "last_seen": "2024-10-01",
+    "activity_score": 88,
+    "impact_score": 90,
+    "tags": ["observational", "omop", "standardization", "cohort"]
+  },
+  {
+    "asset_id": "fhir",
+    "asset_type": "standard",
+    "source": "hl7",
+    "url": "https://hl7.org/fhir",
+    "domain": "health_data",
+    "last_seen": "2024-12-01",
+    "activity_score": 95,
+    "impact_score": 96,
+    "tags": ["interoperability", "ehr", "json", "rest"]
+  },
+  {
+    "asset_id": "snomed-ct",
+    "asset_type": "ontology",
+    "source": "ihii",
+    "url": "https://www.snomed.org",
+    "domain": "clinical_terminology",
+    "last_seen": "2024-07-01",
+    "activity_score": 98,
+    "impact_score": 99,
+    "tags": ["terminology", "clinical", "icd"]
+  },
+  {
+    "asset_id": "mimic-iv",
+    "asset_type": "dataset",
+    "source": "physionet",
+    "url": "https://mimic.mit.edu",
+    "domain": "critical_care",
+    "last_seen": "2024-05-01",
+    "activity_score": 89,
+    "impact_score": 91,
+    "tags": ["ehr", "icu", "physiological", "timeseries"]
+  }
+]

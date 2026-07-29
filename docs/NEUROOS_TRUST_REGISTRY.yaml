@@ -1,0 +1,182 @@
+# Registro de Confianza y Autorización de Activos de NeuroOS
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Asset-Based Risk Policy"
+status: "Canonical Reference"
+
+# Políticas Globales de Ejecución por Zona
+policies:
+  BLACK:
+    description: "Activos críticos totalmente prohibidos. Ni lectura ni escritura ni delegación."
+    read: false
+    write: false
+    delegate: false
+    execute: "none"
+    execution_engine: "none"
+
+  CRITICAL:
+    description: "Activos de alta sensibilidad económica, legal o médica. Lectura/Análisis permitido. Escritura/Ejecución prohibida a agentes (Solo ejecutable por humano directo)."
+    read: true
+    write: false
+    requires_human_approval: true
+    execute: "human_only"
+    execution_engine: "ManuEl + Local AI"
+
+  CONTROLLED:
+    description: "Activos operativos con impacto externo. Lectura y preparación de escrituras permitidas. Requiere aprobación humana previa antes de impactar el activo exterior."
+    read: true
+    write: true
+    requires_human_approval: true
+    execute: "human_approval_required"
+    execution_engine: "Antigravity -> ManuEl Approval -> Execution"
+
+  AUTONOMOUS:
+    description: "Activos de desarrollo, documentación y ciencia. Operación y ejecución 100% autónoma por agentes (CTO Distribuido)."
+    read: true
+    write: true
+    requires_human_approval: false
+    execute: "autonomous_allowed"
+    execution_engine: "Antigravity Autonomous"
+
+# Clasificación Formal de Activos por Zonas de Riesgo
+assets:
+  # ZONA BLACK (Lectura: NO, Escritura: NO, Delegación: NO)
+  UQG:
+    type: "repository"
+    zone: "BLACK"
+    reason: "Conocimiento estratégico confidencial inalcanzable para el ecosistema distribuido."
+
+  CertificadosDigitales:
+    type: "credentials"
+    zone: "BLACK"
+    reason: "Identidad legal física e irremplazable."
+
+  SeedPhrases:
+    type: "credentials"
+    zone: "BLACK"
+    reason: "Secretos criptográficos de custodia única."
+
+  PasswordVault:
+    type: "credentials"
+    zone: "BLACK"
+    reason: "Bóveda maestra de contraseñas de producción."
+
+  # ZONA CRITICAL (Lectura: SÍ, Escritura: NO / Solo Humano)
+  AgenciaTributaria:
+    type: "service"
+    zone: "CRITICAL"
+    reason: "Impacto tributario y fiscal directo."
+
+  SeguridadSocial:
+    type: "service"
+    zone: "CRITICAL"
+    reason: "Tramitación legal administrativa pública."
+
+  BancoSantander:
+    type: "service"
+    zone: "CRITICAL"
+    reason: "Cuentas bancarias y movimientos financieros."
+
+  BBVA:
+    type: "service"
+    zone: "CRITICAL"
+    reason: "Cuentas bancarias y movimientos financieros."
+
+  OpenBank:
+    type: "service"
+    zone: "CRITICAL"
+    reason: "Inversiones y saldos financieros."
+
+  HistoriaClinicaFamiliar:
+    type: "data"
+    zone: "CRITICAL"
+    reason: "Privacidad y confidencialidad médica directa."
+
+  TarjetasBancarias:
+    type: "credentials"
+    zone: "CRITICAL"
+    reason: "Medios de pago y ejecución de transacciones."
+
+  # ZONA CONTROLLED (Lectura: SÍ, Escritura: SÍ con Aprobación Humana)
+  FundacionNeurociencias:
+    type: "organization"
+    zone: "CONTROLLED"
+    reason: "Compromisos públicos, acuerdos e hitos institucionales."
+
+  Cliniko:
+    type: "service"
+    zone: "CONTROLLED"
+    reason: "Gestión de citas y pacientes clínicos."
+
+  GoogleCalendar:
+    type: "service"
+    zone: "CONTROLLED"
+    reason: "Modificación de la agenda y compromisos de tiempo."
+
+  Booking:
+    type: "service"
+    zone: "CONTROLLED"
+    reason: "Logística y reservas de viajes con costo económico."
+
+  EmailAccounts:
+    type: "service"
+    zone: "CONTROLLED"
+    reason: "Envíos de correo electrónico a terceros."
+
+  SubvencionesProyectos:
+    type: "data"
+    zone: "CONTROLLED"
+    reason: "Gestión de contratos y convocatorias públicas de financiación."
+
+  # ZONA AUTONOMOUS (Lectura: SÍ, Escritura: SÍ / 100% Autónomo)
+  Medicalia:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  CoResearcher:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  Editxt:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  GeneForge:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  GeneForgeLang:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  Neurodiagnoses:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  PharmaOracle:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  Vadimecum:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  BrainBridge:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  DataBrain:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  Neurotech:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  Documentation_Webs:
+    type: "repository"
+    zone: "AUTONOMOUS"
+
+  MCPs_Skills_CICD:
+    type: "infrastructure"
+    zone: "AUTONOMOUS"

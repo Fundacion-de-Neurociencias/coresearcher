@@ -1,0 +1,12 @@
+{
+  "repo": "deepset-ai/haystack",
+  "total_claims": 655,
+  "observable_claims": 189,
+  "derivable_claims": 346,
+  "inferred_claims": 0,
+  "unknown_claims": 120,
+  "auditability_score": 1.0,
+  "evidence_coverage": 0.8168,
+  "observable_ratio": 0.2885,
+  "total_gaps": 120
+}

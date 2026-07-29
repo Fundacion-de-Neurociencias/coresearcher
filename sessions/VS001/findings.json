@@ -1,0 +1,173 @@
+[
+  {
+    "id": "FIND-000019",
+    "subject": "Alzheimer",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "neurodegeneration",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000001"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.116748",
+    "updatedAt": "2026-07-11T20:30:55.116753",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000020",
+    "subject": "Tau217",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "neurodegeneration",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000002"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.117785",
+    "updatedAt": "2026-07-11T20:30:55.117789",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000021",
+    "subject": "unknown",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.6,
+    "derivedFrom": [
+      "CLAIM-000003"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.119132",
+    "updatedAt": "2026-07-11T20:30:55.119135",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000022",
+    "subject": "Plasma",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000004"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.120106",
+    "updatedAt": "2026-07-11T20:30:55.120109",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000023",
+    "subject": "One",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000005"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.121107",
+    "updatedAt": "2026-07-11T20:30:55.121110",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000024",
+    "subject": "pTau217",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "neurodegeneration",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000006"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.122211",
+    "updatedAt": "2026-07-11T20:30:55.122214",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000025",
+    "subject": "unknown",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.6,
+    "derivedFrom": [
+      "CLAIM-000007"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.123335",
+    "updatedAt": "2026-07-11T20:30:55.123338",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000026",
+    "subject": "Plasma",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000008"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.124484",
+    "updatedAt": "2026-07-11T20:30:55.124486",
+    "metadata": {}
+  },
+  {
+    "id": "FIND-000027",
+    "subject": "One",
+    "predicate": "predicts",
+    "object": "target",
+    "population": "general_biomedical",
+    "evidence_type": "observational",
+    "effect_size": null,
+    "p_value": null,
+    "sample_size": null,
+    "quality_score": 0.5,
+    "derivedFrom": [
+      "CLAIM-000009"
+    ],
+    "domain": null,
+    "createdAt": "2026-07-11T20:30:55.126104",
+    "updatedAt": "2026-07-11T20:30:55.126111",
+    "metadata": {}
+  }
+]

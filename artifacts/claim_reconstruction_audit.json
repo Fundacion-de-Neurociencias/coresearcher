@@ -1,0 +1,198 @@
+{
+  "total_claims": 24,
+  "audit_pass": true,
+  "details": [
+    {
+      "claim_id": "CLAIM-000001",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000002",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000003",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000004",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000005",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000006",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000007",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000008",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000009",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000010",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000011",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000012",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000013",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000014",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000015",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000016",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000017",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000018",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000019",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000020",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000021",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000022",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000023",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    },
+    {
+      "claim_id": "CLAIM-000024",
+      "structurally_valid": true,
+      "structural_errors": [],
+      "semantically_reconstructable": true,
+      "confidence": 0.92,
+      "semantic_message": "Simulación LLM: Conclusión reconstruida con éxito"
+    }
+  ]
+}

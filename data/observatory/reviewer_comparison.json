@@ -1,0 +1,92 @@
+{
+  "total_observations": 20,
+  "reviewer_1_clusters": 11,
+  "reviewer_2_clusters": 1,
+  "agreement_matrix": {
+    "cohort_design": {
+      "reviewer_1": 2,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 2,
+      "jaccard": 0.0
+    },
+    "outcome": {
+      "reviewer_1": 2,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 2,
+      "jaccard": 0.0
+    },
+    "": {
+      "reviewer_1": 0,
+      "reviewer_2": 20,
+      "intersection": 0,
+      "union": 20,
+      "jaccard": 0.0
+    },
+    "imaging": {
+      "reviewer_1": 3,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 3,
+      "jaccard": 0.0
+    },
+    "follow_up": {
+      "reviewer_1": 2,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 2,
+      "jaccard": 0.0
+    },
+    "inclusion": {
+      "reviewer_1": 1,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 1,
+      "jaccard": 0.0
+    },
+    "exclusion": {
+      "reviewer_1": 1,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 1,
+      "jaccard": 0.0
+    },
+    "progression": {
+      "reviewer_1": 1,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 1,
+      "jaccard": 0.0
+    },
+    "governance": {
+      "reviewer_1": 1,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 1,
+      "jaccard": 0.0
+    },
+    "biomarker": {
+      "reviewer_1": 3,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 3,
+      "jaccard": 0.0
+    },
+    "data_model": {
+      "reviewer_1": 2,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 2,
+      "jaccard": 0.0
+    },
+    "assessment": {
+      "reviewer_1": 2,
+      "reviewer_2": 0,
+      "intersection": 0,
+      "union": 2,
+      "jaccard": 0.0
+    }
+  },
+  "interpretation_risk": true
+}

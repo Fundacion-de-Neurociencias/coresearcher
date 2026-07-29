@@ -1,0 +1,29 @@
+{
+  "domain": "neuroscience",
+  "focus": "Neurodevelopmental Disorders",
+  "question": "What causes the emergence of neurodevelopmental disorders and why do they show pleiotropic effects?",
+  "description": "Understanding critical periods and developmental compensatory mechanisms",
+  "entities": ["autism", "schizophrenia", "synaptic pruning", "critical periods", "neural migration", "connectome"],
+  "key_contradictions": [
+    "Why do the same genetic variants cause both autism and schizophrenia in different families?",
+    "Prenatal stress increases risk for both disorders despite opposite phenotypes",
+    "Why do neurodevelopmental disorders often improve in adolescence?"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "The pleiotropic effects of neurodevelopmental risk genes are mediated by a hidden regulatory switch in critical period timing that determines whether synaptic overgrowth or undergrowth occurs through an unknown epigenetic oscillator.",
+      "expected_type": "C",
+      "rationale": "Hidden mediator with temporal control"
+    },
+    {
+      "statement": "What if adolescent improvement is not due to neural plasticity but to a previously unrecognized compensatory pruning wave that removes inappropriately connected synapses through a circadian-gated mechanism that only activates at puberty?",
+      "expected_type": "D",
+      "rationale": "Reframes improvement through discovery mechanism"
+    },
+    {
+      "statement": "Prenatal stress vulnerability is mediated by a threshold-dependent programming of the HPA axis that becomes pathological only when combined with specific maternal microbiome metabolites through an unknown placental signaling pathway.",
+      "expected_type": "C",
+      "rationale": "Cross-domain threshold mechanism"
+    }
+  ]
+}

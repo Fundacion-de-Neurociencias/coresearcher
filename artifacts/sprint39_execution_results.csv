@@ -1,0 +1,41 @@
+question_id,source,time_seconds,answer,correct
+Q001,raw,0.001403,"Speed up Info validation, picking, and copying",True
+Q001,ledger,2e-06,EEG/MEG analysis and source localization,True
+Q002,raw,2.6e-05,"visualizing, and analyzing human neurophysiological data such as MEG, EEG, sEEG,",True
+Q002,ledger,1e-06,MEG and EEG,True
+Q003,raw,1.7e-05,MNE-Python,True
+Q003,ledger,0.0,Python,True
+Q004,raw,7.2e-05,MNE-Python is licensed under the BSD-3-Clause license.,True
+Q004,ledger,0.0,BSD-3-Clause,True
+Q005,raw,0.000142,Not located,False
+Q005,ledger,0.0,10.1016/j.neuroimage.2013.10.001,True
+Q006,raw,2.8e-05,`issue tracker <https://github.com/mne-tools/mne-python/issues/new/choose>`__ of,True
+Q006,ledger,0.0,mne-tools,True
+Q007,raw,0.000134,Not located,False
+Q007,ledger,0.0,2013,True
+Q008,raw,0.000129,Not located,False
+Q008,ledger,0.0,1.8.0,True
+Q009,raw,0.000149,Not located,False
+Q009,ledger,0.0,Denis Engemann,True
+Q010,raw,0.000134,Not located,False
+Q010,ledger,0.0,MNE-CPP,True
+Q011,raw,0.000125,Not located,False
+Q011,ledger,0.0,100+,True
+Q012,raw,0.000125,Not located,False
+Q012,ledger,0.0,FIF,True
+Q013,raw,0.000152,"Speed up Info validation, picking, and copying",True
+Q013,ledger,0.0,filtering and artifact removal,True
+Q014,raw,0.000133,Not located,False
+Q014,ledger,0.0,Yes,True
+Q015,raw,0.000135,Not located,False
+Q015,ledger,1e-06,2013,True
+Q016,raw,0.000124,Not located,False
+Q016,ledger,0.0,2013,True
+Q017,raw,0.000125,Not located,False
+Q017,ledger,0.0,50+,True
+Q018,raw,0.000151,Not located,False
+Q018,ledger,0.0,University of Washington,True
+Q019,raw,0.00015,Not located,False
+Q019,ledger,0.0,"Linux, macOS, Windows",True
+Q020,raw,0.000131,Not located,False
+Q020,ledger,0.0,https://mne.tools/stable/,True

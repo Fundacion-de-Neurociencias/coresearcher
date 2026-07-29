@@ -1,0 +1,29 @@
+{
+  "domain": "neurodegeneration",
+  "focus": "Huntington's Disease",
+  "question": "Why does mutant huntingtin cause selective striatal vulnerability?",
+  "description": "Investigating selective neuronal vulnerability and the paradox of toxic gain vs loss of function",
+  "entities": ["huntingtin", "striatum", "cognitive decline", "chorea", "neuronal death", "protein aggregation"],
+  "key_contradictions": [
+    "Why do striatal neurons die before cortical neurons despite widespread mutant HTT expression?",
+    "Cognitive symptoms appear late despite early cortical pathology",
+    "Partial reduction of huntingtin improves symptoms in mice but not in human trials"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Striatal vulnerability in Huntington's is not due to mutant HTT toxicity but to a threshold-dependent metabolic stress response that only activates when striatal neurons' unique energy profile interacts with mutant protein aggregation.",
+      "expected_type": "C",
+      "rationale": "Threshold + cell-type specificity mechanism"
+    },
+    {
+      "statement": "What if the cognitive delay in Huntington's is not due to slower progression but to a compensatory prefrontal network that maintains function until it reaches collapse, explaining the sudden cognitive decline?",
+      "expected_type": "D",
+      "rationale": "Reframes cognitive trajectory through compensatory network"
+    },
+    {
+      "statement": "The disconnect between mouse models and human trials is mediated by a species-specific difference in microglial priming states that determines whether mutant huntingtin triggers neuroinflammation.",
+      "expected_type": "C",
+      "rationale": "Cross-species mediator hypothesis"
+    }
+  ]
+}

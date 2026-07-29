@@ -1,0 +1,116 @@
+{
+  "questions": {
+    "QUESTION-000001": {
+      "id": "QUESTION-000001",
+      "text": "What predicts Alzheimer's before PET positivity?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:20:11.946708",
+      "updatedAt": "2026-07-11T20:20:11.946775"
+    },
+    "QUESTION-000002": {
+      "id": "QUESTION-000002",
+      "text": "Can plasma biomarkers replace CSF analysis?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:20:11.948311",
+      "updatedAt": "2026-07-11T20:20:11.948319"
+    },
+    "QUESTION-000003": {
+      "id": "QUESTION-000003",
+      "text": "What mechanisms link APOE4 to tau pathology?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:20:11.948987",
+      "updatedAt": "2026-07-11T20:20:11.948991"
+    },
+    "QUESTION-000004": {
+      "id": "QUESTION-000004",
+      "text": "What predicts Alzheimer's before PET positivity?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:21:16.040155",
+      "updatedAt": "2026-07-11T20:21:16.040198"
+    },
+    "QUESTION-000005": {
+      "id": "QUESTION-000005",
+      "text": "Can plasma biomarkers replace CSF analysis?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:21:16.041606",
+      "updatedAt": "2026-07-11T20:21:16.041621"
+    },
+    "QUESTION-000006": {
+      "id": "QUESTION-000006",
+      "text": "What mechanisms link APOE4 to tau pathology?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:21:16.042750",
+      "updatedAt": "2026-07-11T20:21:16.042763"
+    },
+    "QUESTION-000007": {
+      "id": "QUESTION-000007",
+      "text": "What emerging blood biomarkers predict preclinical Alzheimer's disease?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:26:10.946212",
+      "updatedAt": "2026-07-11T20:26:10.946222"
+    },
+    "QUESTION-000008": {
+      "id": "QUESTION-000008",
+      "text": "What emerging blood biomarkers predict preclinical Alzheimer's disease?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [
+        "HYP-001",
+        "HYP-002",
+        "HYP-003",
+        "HYP-004",
+        "HYP-005"
+      ],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:29:27.353407",
+      "updatedAt": "2026-07-11T20:29:27.367979"
+    },
+    "QUESTION-000009": {
+      "id": "QUESTION-000009",
+      "text": "What emerging blood biomarkers predict preclinical Alzheimer's disease?",
+      "domain": "neurodegeneration",
+      "context": null,
+      "status": "active",
+      "generated_hypotheses": [
+        "HYP-001",
+        "HYP-002",
+        "HYP-003",
+        "HYP-004",
+        "HYP-005"
+      ],
+      "related_findings": [],
+      "createdAt": "2026-07-11T20:30:55.115020",
+      "updatedAt": "2026-07-11T20:30:55.131964"
+    }
+  },
+  "next_id": 10
+}

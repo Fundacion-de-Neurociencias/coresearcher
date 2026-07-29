@@ -1,0 +1,55 @@
+{
+  "graph_id": "EG-000201",
+  "request_id": "ER-000201",
+  "nodes": [
+    {
+      "id": "CLAIM-001",
+      "type": "Claim",
+      "text": "Los niveles plasmáticos de p-tau217 aumentan precozmente en la enfermedad de Alzheimer.",
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 1
+      }
+    },
+    {
+      "id": "ART-001",
+      "type": "Artifact",
+      "artifact_type": "quote",
+      "data": "Plasma p-tau217 levels increase significantly years before clinical onset of Alzheimer's disease."
+    },
+    {
+      "id": "SOURCE-001",
+      "type": "Source",
+      "text": "PMID:32722172 - Mattsson-Carlgren et al., 2020"
+    },
+    {
+      "id": "URL-001",
+      "type": "URL",
+      "text": "https://pubmed.ncbi.nlm.nih.gov/32722172/"
+    }
+  ],
+  "edges": [
+    {
+      "from": "CLAIM-001",
+      "to": "ART-001",
+      "type": "supported_by",
+      "hops": 1
+    },
+    {
+      "from": "ART-001",
+      "to": "SOURCE-001",
+      "type": "derived_from",
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-001",
+      "to": "URL-001",
+      "type": "resolves_to",
+      "hops": 1
+    }
+  ],
+  "provenance": {
+    "generated_by": "CoResearcher",
+    "timestamp": "2026-07-29T09:12:00Z"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "registrations": {
+    "conn_1": {
+      "id": "conn_1",
+      "source": "clinicaltrials",
+      "class": "ClinicalTrialsConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:45:41.692580"
+    },
+    "conn_2": {
+      "id": "conn_2",
+      "source": "opentargets",
+      "class": "OpenTargetsConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:45:41.693323"
+    },
+    "conn_3": {
+      "id": "conn_3",
+      "source": "chembl",
+      "class": "ChEMBLConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:45:41.693824"
+    },
+    "conn_5": {
+      "id": "conn_5",
+      "source": "clinicaltrials",
+      "class": "ClinicalTrialsConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:49:27.392954"
+    },
+    "conn_7": {
+      "id": "conn_7",
+      "source": "clinicaltrials",
+      "class": "ClinicalTrialsConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:50:22.442589"
+    },
+    "conn_9": {
+      "id": "conn_9",
+      "source": "clinicaltrials",
+      "class": "ClinicalTrialsConnector",
+      "config": {},
+      "registered_at": "2026-07-12T07:52:38.391819"
+    }
+  },
+  "next_id": 11
+}

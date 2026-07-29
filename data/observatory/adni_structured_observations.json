@@ -1,0 +1,142 @@
+[
+  {
+    "observation_id": "obs_001",
+    "category": "cohort_design",
+    "evidence": "ADNI recruits participants aged 55-90 years with memory complaints, mild cognitive impairment, or Alzheimer's disease dementia",
+    "source": "https://adni-info.org/study-design",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_002",
+    "category": "follow_up",
+    "evidence": "ADNI follows participants for 5-10 years with assessments every 6-12 months depending on diagnosis category",
+    "source": "https://adni-info.org/visit-schedule",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_003",
+    "category": "biomarker",
+    "evidence": "CSF biomarkers measured: Aβ42, Aβ40, total-tau, phosphorylated-tau-181",
+    "source": "https://adni-info.org/biospecimens",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_004",
+    "category": "biomarker",
+    "evidence": "Plasma biomarkers include: plasma Aβ42/40 ratio, p-tau181, p-tau217, NfL, GFAP",
+    "source": "https://adni-info.org/blood-biomarkers",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_005",
+    "category": "imaging",
+    "evidence": "MRI protocol includes: T1-weighted MP-RAGE, T2-weighted, FLAIR, and functional sequences",
+    "source": "https://adni-info.org/mri-methods",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_006",
+    "category": "imaging",
+    "evidence": "PET imaging uses florbetapir (amyloid), flortaucipir (tau), and FDG (metabolism) tracers",
+    "source": "https://adni-info.org/pet-methods",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_007",
+    "category": "assessment",
+    "evidence": "Cognitive batteries include: ADAS-Cog, MMSE, CDR-SB, and FAQ for functional assessment",
+    "source": "https://adni-info.org/cognitive-tests",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_008",
+    "category": "assessment",
+    "evidence": "Memory tests include: Rey Auditory Verbal Learning Test and Brief Visuospatial Memory Test",
+    "source": "https://adni-info.org/memory-tests",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_009",
+    "category": "outcome",
+    "evidence": "Primary outcome: Alzheimer's disease dementia diagnosis; Secondary: cognitive decline rate",
+    "source": "https://adni-info.org/outcomes",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_010",
+    "category": "data_model",
+    "evidence": "ADNI data organized in tabular CSV files with standardized variable names and visit codes",
+    "source": "https://adni-info.org/data-dictionary",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_011",
+    "category": "data_model",
+    "evidence": "Visit codes: baseline, month6, month12, year2, year3, year4, year5, etc.",
+    "source": "https://adni-info.org/visit-schedule",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_012",
+    "category": "governance",
+    "evidence": "Data access requires ADNI Data Use Agreement and NIH approval",
+    "source": "https://adni-info.org/data-access",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_013",
+    "category": "inclusion",
+    "evidence": "Inclusion requires: CDR 0-2, study partner, MRI-compatible, English speaking",
+    "source": "https://adni-info.org/inclusion-criteria",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_014",
+    "category": "exclusion",
+    "evidence": "Exclusion: other neurological conditions, significant medical illness, recent imaging",
+    "source": "https://adni-info.org/exclusion-criteria",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_015",
+    "category": "progression",
+    "evidence": "Progression criteria: conversion from MCI to AD dementia documented by ADNI criteria",
+    "source": "https://adni-info.org/progression",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_016",
+    "category": "cohort_design",
+    "evidence": "Three main cohorts: normal cognition (n~200), MCI (n~400), AD dementia (n~200) at baseline",
+    "source": "https://adni-info.org/cohort-description",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_017",
+    "category": "follow_up",
+    "evidence": "Annual visits for normal and AD dementia; biannual for MCI cohort",
+    "source": "https://adni-info.org/follow-up-schedule",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_018",
+    "category": "biomarker",
+    "evidence": "Genetic data collected: ApoE genotyping required for all participants",
+    "source": "https://adni-info.org/genetics",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_019",
+    "category": "imaging",
+    "evidence": "MRI sequences standardized across all sites: 3T scanners with phantom calibration",
+    "source": "https://adni-info.org/mri-standardization",
+    "confidence": "high"
+  },
+  {
+    "observation_id": "obs_020",
+    "category": "outcome",
+    "evidence": "Progression outcome defined as: CDR increase >=1 point or AD dementia diagnosis",
+    "source": "https://adni-info.org/progression-definition",
+    "confidence": "high"
+  }
+]

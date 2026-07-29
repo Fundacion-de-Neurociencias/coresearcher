@@ -1,0 +1,15 @@
+{
+  "consumer_id": "medicalia",
+  "domain": "clinical-practice",
+  "entities": [
+    "disease",
+    "intervention",
+    "outcome"
+  ],
+  "predicates": [],
+  "trust_threshold": 90,
+  "accepted_formats": [
+    "json",
+    "rdf"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "domain": "geroscience",
+  "focus": "Longevity and Aging",
+  "question": "What determines the rate of aging and why do longevity interventions show contradictory results?",
+  "description": "Investigating the fundamental aging mechanisms and intervention paradoxes",
+  "entities": ["mTOR", "autophagy", "senescence", "NAD+", "stem cell exhaustion", "intermittent fasting"],
+  "key_contradictions": [
+    "Why do some mTOR inhibitors extend lifespan while others shorten it?",
+    "Intermittent fasting benefits contrast with caloric restriction timing effects",
+    "Longevity genes show opposite effects in prokaryotes vs mammals"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "The paradox of mTOR inhibition outcomes is mediated by a threshold-dependent compensatory stress response that only activates when inhibition exceeds a critical level relative to age-related proteostasis decline.",
+      "expected_type": "C",
+      "rationale": "Threshold effect explaining paradox"
+    },
+    {
+      "statement": "What if intermittent fasting benefits are not due to metabolic switching but to a circadian reprogramming of stem cell niches that enhances regenerative capacity through an unknown clock-metabolism coupling mechanism?",
+      "expected_type": "D",
+      "rationale": "Reframes mechanism through circadian connection"
+    },
+    {
+      "statement": "The opposite effects of longevity genes across species is mediated by an evolutionary trade-off where the same pathway has been repurposed from stress resistance in simple organisms to tissue maintenance in complex organisms through a hidden regulatory switch.",
+      "expected_type": "C",
+      "rationale": "Cross-species hidden mediator hypothesis"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "comparison_id": "cmp_001",
+    "reference_asset": "adni",
+    "target_asset": "openneuro",
+    "missing_patterns": [
+      "Longitudinality - single timepoint studies only",
+      "Governance - data access varies by study",
+      "Multi-site coordination - decentralized across datasets"
+    ],
+    "consequence": "Cannot track individual progression over time"
+  },
+  {
+    "comparison_id": "cmp_002",
+    "reference_asset": "uk-biobank",
+    "target_asset": "mimic-iv",
+    "missing_patterns": [
+      "Longitudinality outside hospitalization",
+      "Population-level recruitment",
+      "Genetic data integration"
+    ],
+    "consequence": "Limited generalizability beyond critical care"
+  },
+  {
+    "comparison_id": "cmp_003",
+    "reference_asset": "ohdsi",
+    "target_asset": "adni",
+    "missing_patterns": [
+      "Interoperabilidad - not API-first design",
+      "Ontologies - no formal terminology mapping",
+      "Versioning - no explicit release numbers"
+    ],
+    "consequence": "Requires custom extraction pipelines"
+  },
+  {
+    "comparison_id": "cmp_004",
+    "reference_asset": "openneuro",
+    "target_asset": "monai",
+    "missing_patterns": [
+      "Gobernanza - no data access controls",
+      "Variables - no clinical data",
+      "Longitudinality - static datasets"
+    ],
+    "consequence": "Different purpose: data repository vs analysis toolkit"
+  },
+  {
+    "comparison_id": "cmp_005",
+    "reference_asset": "fhir",
+    "target_asset": "snomed-ct",
+    "missing_patterns": [
+      "Longitudinality - standard not implementation",
+      "Datos reales - solo terminología"
+    ],
+    "consequence": "One is interoperability standard, other is ontology"
+  }
+]

@@ -1,0 +1,217 @@
+[
+  {
+    "observation_id": "obs_001",
+    "doi": "10.1002/jmri.21049",
+    "title": "The Alzheimer's disease neuroimaging initiative (ADNI): MRI methods",
+    "year": "2008",
+    "sample_size": "n=200+ (baseline cohort)",
+    "study_design": "methodology",
+    "evidence_strength": "foundational",
+    "evidence_type": "dataset",
+    "limitations": "single_center_initial_protocol"
+  },
+  {
+    "observation_id": "obs_002",
+    "doi": "10.1212/wnl.0b013e3181cb3e25",
+    "title": "Alzheimer's Disease Neuroimaging Initiative: clinical characterization",
+    "year": "2008",
+    "sample_size": "n=400+ participants",
+    "study_design": "prospective",
+    "evidence_strength": "strong",
+    "evidence_type": "cohort",
+    "limitations": "baseline_characteristics_only"
+  },
+  {
+    "observation_id": "obs_003",
+    "doi": "10.1007/s00530-021-00797-3",
+    "title": "Transfer learning using freeze features for Alzheimer neuroimaging",
+    "year": "2021",
+    "sample_size": "n=150-200",
+    "study_design": "benchmark",
+    "evidence_strength": "suggestive",
+    "evidence_type": "benchmark",
+    "limitations": "model_specific_findings"
+  },
+  {
+    "observation_id": "obs_004",
+    "doi": "10.1001/jamaneurol.2014.803",
+    "title": "The Preclinical Alzheimer Cognitive Composite",
+    "year": "2014",
+    "sample_size": "n=300+ cognitively_normal",
+    "study_design": "longitudinal",
+    "evidence_strength": "strong",
+    "evidence_type": "clinical_outcome",
+    "limitations": "preclinical_only"
+  },
+  {
+    "observation_id": "obs_005",
+    "doi": "10.1212/wnl.0000000000003246",
+    "title": "Plasma tau in Alzheimer disease",
+    "year": "2020",
+    "sample_size": "n=250",
+    "study_design": "longitudinal",
+    "evidence_strength": "moderate",
+    "evidence_type": "biomarker",
+    "limitations": "plasma_only_not_combined"
+  },
+  {
+    "observation_id": "obs_006",
+    "doi": "10.1097/nen.0b013e31825018f7",
+    "title": "Correlation of Alzheimer Disease Neuropathologic Changes",
+    "year": "2012",
+    "study_design": "cross_sectional",
+    "evidence_strength": "moderate",
+    "evidence_type": "clinical_outcome",
+    "limitations": "post_mortem_insufficient"
+  },
+  {
+    "observation_id": "obs_007",
+    "doi": "10.1001/archneurol.2012.1282",
+    "title": "Blood-Based Protein Biomarkers for Diagnosis",
+    "year": "2012",
+    "sample_size": "n=200",
+    "study_design": "cross_sectional",
+    "evidence_strength": "suggestive",
+    "evidence_type": "biomarker",
+    "limitations": "diagnostic_accuracy_not_validated"
+  },
+  {
+    "observation_id": "obs_008",
+    "doi": "10.4061/2011/729478",
+    "title": "Genomic Copy Number Analysis in Alzheimer Disease",
+    "year": "2011",
+    "study_design": "cross_sectional",
+    "evidence_strength": "preliminary",
+    "evidence_type": "biomarker",
+    "limitations": "genomics_only_small_n"
+  },
+  {
+    "observation_id": "obs_009",
+    "doi": "10.1101/cshperspect.a006213",
+    "title": "Brain Imaging in Alzheimer Disease",
+    "year": "2012",
+    "study_design": "review",
+    "evidence_strength": "strong",
+    "evidence_type": "methodology",
+    "limitations": "review_not_primary_data"
+  },
+  {
+    "observation_id": "obs_010",
+    "doi": "10.1148/radiol.2018180958",
+    "title": "Deep Learning Model to Predict Alzheimer Diagnosis",
+    "year": "2018",
+    "sample_size": "n=350",
+    "study_design": "benchmark",
+    "evidence_strength": "suggestive",
+    "evidence_type": "benchmark",
+    "limitations": "deep_learning_model_specific"
+  },
+  {
+    "observation_id": "obs_011",
+    "doi": "10.1002/ana.23931",
+    "title": "Mild cognitive impairment due to Alzheimer",
+    "year": "2015",
+    "sample_size": "n=180",
+    "study_design": "longitudinal",
+    "evidence_strength": "moderate",
+    "evidence_type": "clinical_outcome",
+    "limitations": "MCI_only_cohort"
+  },
+  {
+    "observation_id": "obs_012",
+    "doi": "10.1016/j.jalz.2013.05.1769",
+    "title": "The Alzheimer's Disease Neuroimaging Initiative: A review",
+    "year": "2013",
+    "study_design": "review",
+    "evidence_strength": "strong",
+    "evidence_type": "dataset",
+    "limitations": "review_no_new_data"
+  },
+  {
+    "observation_id": "obs_013",
+    "doi": "10.2174/156720509788929273",
+    "title": "Baseline MRI Predictors of Conversion",
+    "year": "2010",
+    "sample_size": "n=90",
+    "study_design": "longitudinal",
+    "evidence_strength": "suggestive",
+    "evidence_type": "biomarker",
+    "limitations": "small_sample_size"
+  },
+  {
+    "observation_id": "obs_014",
+    "doi": "10.1371/journal.pone.0235663",
+    "title": "Inexpensive, non-invasive biomarkers predict Alzheimer",
+    "year": "2020",
+    "sample_size": "n=120",
+    "study_design": "longitudinal",
+    "evidence_strength": "suggestive",
+    "evidence_type": "biomarker",
+    "limitations": "random_forest_model_specific"
+  },
+  {
+    "observation_id": "obs_015",
+    "doi": "10.1371/journal.pmed.1002258",
+    "title": "Genetic assessment of age-associated Alzheimer risk",
+    "year": "2018",
+    "sample_size": "n=500",
+    "study_design": "longitudinal",
+    "evidence_strength": "moderate",
+    "evidence_type": "biomarker",
+    "limitations": "genetic_polygenic_risk_model"
+  },
+  {
+    "observation_id": "obs_016",
+    "doi": "10.1212/wnl.0b013e318266fa70",
+    "title": "Plasma multianalyte profiling",
+    "year": "2012",
+    "sample_size": "n=100",
+    "study_design": "cross_sectional",
+    "evidence_strength": "suggestive",
+    "evidence_type": "biomarker",
+    "limitations": "multianalyte_not_individual_validation"
+  },
+  {
+    "observation_id": "obs_017",
+    "doi": "10.2147/clep.s37929",
+    "title": "Clinical epidemiology of Alzheimer disease",
+    "year": "2013",
+    "study_design": "review",
+    "evidence_strength": "strong",
+    "evidence_type": "clinical_outcome",
+    "limitations": "epidemiological_not_mechanistic"
+  },
+  {
+    "observation_id": "obs_018",
+    "doi": "10.1371/journal.pmed.1002482",
+    "title": "Brain and blood metabolite signatures",
+    "year": "2018",
+    "sample_size": "n=80",
+    "study_design": "longitudinal",
+    "evidence_strength": "moderate",
+    "evidence_type": "biomarker",
+    "limitations": "metabolomics_niche_population"
+  },
+  {
+    "observation_id": "obs_019",
+    "doi": "10.1002/ana.21610",
+    "title": "Cerebrospinal fluid biomarker signature",
+    "year": "2012",
+    "sample_size": "n=400",
+    "study_design": "cross_sectional",
+    "evidence_strength": "moderate",
+    "evidence_type": "biomarker",
+    "limitations": "CSF_invasive_not_plasma"
+  },
+  {
+    "observation_id": "obs_020",
+    "doi": "10.1001/jamaneurol.2019.0765",
+    "title": "Association Between Longitudinal Plasma Neurofilament Light",
+    "year": "2019",
+    "sample_size": "n=160",
+    "study_design": "longitudinal",
+    "evidence_strength": "moderate",
+    "evidence_type": "biomarker",
+    "limitations": "single_biomarker_not_panel"
+  }
+]

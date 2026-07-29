@@ -1,0 +1,48 @@
+rules:
+  - id: ARQ-EG-001
+    name: "Claim Support Isolation"
+    description: "Un nodo Claim nunca debe derivar de otro nodo Claim. Solo debe derivar de Artifacts o Sources primarias."
+    severity: "CRITICAL"
+    condition: "no edge where from.type == 'Claim' and to.type == 'Claim'"
+    
+  - id: ARQ-EG-002
+    name: "Orphan Claim Prevention"
+    description: "Todo Claim debe estar soportado por al menos un Artifact o Source."
+    severity: "CRITICAL"
+    condition: "all Claim nodes have at least one outgoing 'supported_by' edge"
+    
+  - id: ARQ-EG-003
+    name: "Acyclic Evidence Graph"
+    description: "El Grafo de Evidencia debe ser 100% acíclico."
+    severity: "CRITICAL"
+    condition: "is_dag == True"
+
+  - id: ARQ-BD-001
+    name: "Boundary with EditXT (No Quality Metrics)"
+    description: "CoResearcher no emite Veredictos de Calidad ni Evaluaciones."
+    severity: "CRITICAL"
+    condition: "no node with type 'ReviewFinding', 'ReviewSeverity', or 'Recommendation' allowed in EvidenceGraph"
+    
+  - id: ARQ-BD-002
+    name: "Boundary with AI Scientists (No Generative Hypothesis)"
+    description: "CoResearcher no formula nuevas hipótesis."
+    severity: "CRITICAL"
+    condition: "no node with type 'Hypothesis', 'Experiment', or 'Discovery' allowed in EvidenceGraph"
+
+  - id: ARQ-BD-003
+    name: "Evidence Never Contains Intent (Mission Boundary)"
+    description: "El EvidenceGraph solo contiene conocimiento retrospectivo, nunca trabajo en curso ni misiones."
+    severity: "CRITICAL"
+    condition: "no node with type 'Mission', 'Brief', or 'Execution' allowed in EvidenceGraph"
+
+  - id: ARQ-BD-004
+    name: "Governance Boundary (Decision Isolation)"
+    description: "El EvidenceGraph no documenta las decisiones estratégicas de la gobernanza."
+    severity: "CRITICAL"
+    condition: "no node with type 'Decision' allowed in EvidenceGraph"
+
+  - id: ARQ-EG-004
+    name: "Max Hops Constraint"
+    description: "El path de un Claim a su Source no debe superar 3 hops."
+    severity: "HIGH"
+    condition: "max_path(Claim, Source) <= 3"

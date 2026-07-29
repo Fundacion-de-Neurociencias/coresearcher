@@ -1,0 +1,105 @@
+# Arquitectura de Identidades Raíz y Principio de Impacto de Compromiso (NEUROOS ROOT IDENTITIES)
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Compromise Impact Principle & Root Identity Inheritance"
+status: "Canonical Reference"
+
+description: >
+  Especificación de las Identidades Raíz soberanas (Gateways de Autoridad). 
+  Aplica el Principio de Impacto por Compromiso: si el compromiso de un activo 
+  permite la escalada lateral o recuperación de otros activos, este hereda 
+  automáticamente la clasificación más alta de todos los activos que puede controlar.
+
+compromise_impact_principle:
+  rule_id: "RULE-CIP-001"
+  name: "Lateral Escalation Protection"
+  statement: >
+    Si el compromiso de una cuenta o canal (ej. Gmail Personal o GitHub Owner) 
+    permite resetear contraseñas, recibir tokens de recuperación o autorizar accesos 
+    sobre otros activos, dicho canal hereda automáticamente la zona de riesgo máxima 
+    de los activos vulnerables.
+
+root_identities:
+
+  # 1. Google Personal (Gateway Principal de Recuperación y SSO)
+  Personal_Google_Root:
+    name: "Identidad Raíz Google Personal (Gmail / SSO / Account Recovery)"
+    owner: "Manuel"
+    zone: "CRITICAL"
+    allow_model_processing: false
+    reason: >
+      Gateway principal de recuperación de contraseñas, SSO de decenas de aplicaciones, 
+      notificaciones de pagos y confirmaciones de infraestructura. Su compromiso equivale a 
+      comprometer la mitad de la vida digital.
+    services_inherited:
+      - "gmail_personal_inbox"
+      - "google_drive_docs"
+      - "google_calendar_personal"
+      - "android_device_management"
+      - "chrome_saved_credentials"
+
+  # 2. GitHub Owner (Gateway de Código y Facturación)
+  GitHub_Owner_Root:
+    name: "Identidad Raíz GitHub Owner (Cuenta Manuel Propietario)"
+    owner: "Manuel"
+    zone: "CRITICAL"
+    allow_model_processing: false
+    reason: >
+      Cuenta propietaria con facultad de borrar repositorios, modificar miembros, 
+      cambiar facturación y emitir nuevos Personal Access Tokens.
+    services_inherited:
+      - "github_org_management"
+      - "github_billing"
+      - "github_master_pat_generation"
+
+  # 3. Universidad de Oviedo (SSO Académico)
+  Uniovi_Root:
+    name: "Identidad Raíz Universidad de Oviedo (SSO Académico)"
+    owner: "Manuel"
+    zone: "CRITICAL"
+    allow_model_processing: false
+    reason: >
+      SSO institucional que da acceso a expedientes, correo oficial y actas docentes.
+    services_inherited:
+      - "correo_uniovi"
+      - "intranet_uniovi"
+      - "campus_virtual_uniovi"
+
+  # 4. AEAT / Cl@ve / Identidad Ciudadana (Zona BLACK)
+  AEAT_Clave_Root:
+    name: "Identidad Raíz Ciudadana (AEAT / Cl@ve / FNMT)"
+    owner: "Manuel"
+    zone: "BLACK"
+    delegable: false
+    leaseable: false
+    allow_model_processing: false
+    reason: >
+      Gateway de personalidad legal y fiscal pública. Inalcanzable para cualquier agente.
+    services_inherited:
+      - "hacienda_aeat"
+      - "seguridad_social"
+      - "firmas_oficiales_fnmt"
+
+  # 5. HUCA Hospitalario (Zona BLACK)
+  HUCA_Hospital_Root:
+    name: "Identidad Raíz Hospitalaria HUCA - Neurología"
+    owner: "Manuel"
+    zone: "BLACK"
+    delegable: false
+    leaseable: false
+    allow_model_processing: false
+    reason: >
+      Red e intranet hospitalaria con historias clínicas de pacientes. Prohibido acceso agencial.
+    services_inherited:
+      - "intranet_huca_clinical"
+      - "historias_clinicas"
+
+  # 6. Fundación de Neurociencias
+  Fundacion_Root:
+    name: "Identidad Raíz Fundación de Neurociencias"
+    owner: "Manuel"
+    zone: "CONTROLLED_HIGH"
+    services_inherited:
+      - "gmail_fundacion"
+      - "web_fundacion"
+      - "stripe_donaciones"

@@ -1,0 +1,190 @@
+# Registro Canónico Real de Activos de Manuel (NEUROOS REAL ASSET REGISTRY)
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Directiva ANTIGRAVITY-005"
+status: "Canonical Reference"
+
+description: >
+  Inventario completo y real de los activos personales, profesionales, financieros, 
+  gubernamentales y técnicos que integran el ecosistema operativo de Manuel.
+
+asset_classes:
+
+  # 1. Comunicaciones
+  communications:
+    - id: "gmail_personal"
+      name: "Cuenta Gmail Personal"
+      zone: "CONTROLLED_HIGH"
+      description: "Correo personal del usuario."
+
+    - id: "gmail_huca"
+      name: "Cuenta Correo Institucional HUCA"
+      zone: "CONTROLLED_HIGH"
+      description: "Correo hospitalario y clínico del Servicio de Neurología HUCA."
+
+    - id: "gmail_fundacion"
+      name: "Cuenta Correo Fundación de Neurociencias"
+      zone: "CONTROLLED_HIGH"
+      description: "Correo de gestión institucional de la Fundación de Neurociencias."
+
+    - id: "gmail_uniovi"
+      name: "Cuenta Correo Universidad de Oviedo"
+      zone: "CONTROLLED_HIGH"
+      description: "Correo docente y académico universitario."
+
+  # 2. Agenda y Tiempo
+  calendar:
+    - id: "google_calendar_personal"
+      name: "Calendario Unificado de Manuel"
+      zone: "CONTROLLED_LOW"
+      description: "Agenda personal, médica y profesional."
+
+  # 3. Finanzas e Inversiones
+  finance:
+    - id: "santander"
+      name: "Cuenta Banco Santander"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+    - id: "bbva"
+      name: "Cuenta BBVA"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+    - id: "openbank"
+      name: "Cuenta OpenBank"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+    - id: "etoro"
+      name: "Cuenta de Inversiones eToro"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+  # 4. Servicios Gubernamentales y Administración Pública
+  government:
+    - id: "aeat"
+      name: "Agencia Tributaria (Hacienda)"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+    - id: "seguridad_social"
+      name: "Portal de la Seguridad Social"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+    - id: "clave"
+      name: "Sistema Cl@ve / Identidad Ciudadana"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+  # 5. Documentos Administrativos y Proyectos Institucionales
+  administrative_documents:
+    - id: "erc_grants"
+      name: "Subvenciones y Proyectos ERC"
+      zone: "CONTROLLED_HIGH"
+
+    - id: "uniovi_academic_docs"
+      name: "Material Docente y Actas Universidad de Oviedo"
+      zone: "CONTROLLED_LOW"
+
+    - id: "huca_clinical_docs"
+      name: "Protocolos Clínicos y Memoria Neurología HUCA"
+      zone: "CONTROLLED_HIGH"
+
+    - id: "fundacion_agreements"
+      name: "Contratos y Convenios Fundación de Neurociencias"
+      zone: "CONTROLLED_HIGH"
+
+  # 6. Logística y Viajes
+  travel_logistics:
+    - id: "booking_account"
+      name: "Cuenta Booking (Alojamientos)"
+      zone: "CONTROLLED_HIGH"
+
+    - id: "renfe_flight_accounts"
+      name: "Cuentas Transportes (Renfe / Aerolíneas)"
+      zone: "CONTROLLED_HIGH"
+
+  # 7. Datos Familiares y Personales
+  family:
+    - id: "historia_clinica_familiar"
+      name: "Historia Clínica y Datos Médicos Familiares"
+      zone: "CRITICAL"
+      allow_model_processing: false
+
+  # 8. Repositorios y Proyectos de Desarrollo (Zona AUTONOMOUS)
+  projects:
+    - id: "medicalia"
+      name: "Repositorio Medicalia"
+      zone: "AUTONOMOUS"
+
+    - id: "coresearcher"
+      name: "Repositorio CoResearcher"
+      zone: "AUTONOMOUS"
+
+    - id: "editxt"
+      name: "Repositorio EditXT"
+      zone: "AUTONOMOUS"
+
+    - id: "geneforge"
+      name: "Repositorio GeneForge / GeneForgeLang"
+      zone: "AUTONOMOUS"
+
+    - id: "neurodiagnoses"
+      name: "Repositorio Neurodiagnoses"
+      zone: "AUTONOMOUS"
+
+    - id: "pharmaoracle"
+      name: "Repositorio PharmaOracle"
+      zone: "AUTONOMOUS"
+
+    - id: "vadimecum"
+      name: "Repositorio Vadimecum"
+      zone: "AUTONOMOUS"
+
+    - id: "brainbridge"
+      name: "Repositorio BrainBridge"
+      zone: "AUTONOMOUS"
+
+    - id: "databrain"
+      name: "Repositorio DataBrain"
+      zone: "AUTONOMOUS"
+
+    - id: "neurotech"
+      name: "Repositorio Neurotech"
+      zone: "AUTONOMOUS"
+
+  # 9. Activos BLACK (Inalcanzables / Sin Delegación Agencial)
+  black_assets:
+    - id: "uqg"
+      name: "Repositorio UQG (Conocimiento Estratégico)"
+      zone: "BLACK"
+
+    - id: "certificados_digitales"
+      name: "Certificados Digitales de Firma FNMT/DNIe"
+      zone: "BLACK"
+
+    - id: "password_vault"
+      name: "Bóveda Maestra de Contraseñas"
+      zone: "BLACK"
+
+    - id: "seed_phrases"
+      name: "Frases Semilla Criptográficas"
+      zone: "BLACK"
+
+    - id: "api_keys_master"
+      name: "Claves API Maestras de Producción"
+      zone: "BLACK"
+
+    - id: "github_owner_credentials"
+      name: "Credenciales Owner de Cuentas GitHub"
+      zone: "BLACK"
+
+    - id: "stripe_master_account"
+      name: "Cuenta Maestra Stripe / Facturación"
+      zone: "BLACK"
+
+    - id: "openai_billing_account"
+      name: "Cuenta Facturación OpenAI / Google Cloud Admin"
+      zone: "BLACK"

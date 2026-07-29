@@ -1,0 +1,42 @@
+# Registro de la Identidad Operativa de NeuroOS (NEUROOS OPERATIONAL IDENTITY)
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Operational Account & Cross-Recovery Isolation"
+status: "Canonical Reference"
+
+description: >
+  Especificación de la cuenta operativa dedicada de NeuroOS (`manuelmdezglez@gmail.com`), 
+  utilizada por ManuEl y Antigravity para la coordinación operativa, automatización y desarrollo.
+
+operational_identity:
+  name: "ManuEl Operational Runtime Identity"
+  email: "manuelmdezglez@gmail.com"
+  tier: "OPERATIONAL"
+  owner: "Manuel (Persona Física)"
+  managed_by: "ManuEl (Sovereign Runtime)"
+  storage_location: "C:\\Users\\usuario\\NeuroOS\\.env (Gitignored)"
+
+  purpose:
+    - "Coordinación operativa de tareas y proyectos"
+    - "Automatización de notificaciones y flujos"
+    - "Identidad operativa de NeuroOS para servicios de terceros (Vercel, OpenRouter, GitHub Ops)"
+    - "Recuperación de cuentas de automatización de proyectos"
+
+  prohibited_uses:
+    - "Email de recuperación de Gmail Personal Soberano (manuelmenendez@gmail.com)"
+    - "Email de recuperación de Bitwarden Master Password Vault"
+    - "Email o canal asociado a Cl@ve, AEAT o Certificados FNMT"
+    - "Email de recuperación de la cuenta GitHub Owner principal"
+    - "Recuperación de identidades bancarias o familiares"
+
+  isolation_rules:
+    cross_recovery_blocked: true # Prohibida la recuperación cruzada entre Identidad Soberana y Operativa
+    mfa_isolation: true # Mecanismos MFA independientes
+    gitignored_secret_storage: true # Credenciales almacenadas únicamente en .env fuera de control de versiones
+
+services_assigned:
+  - "github_operations_token"
+  - "vercel_deployments_account"
+  - "openrouter_api_account"
+  - "medicalia_ops_notifications"
+  - "fundacion_ops_notifications"

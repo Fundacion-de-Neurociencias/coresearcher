@@ -1,0 +1,29 @@
+{
+  "domain": "neuroscience",
+  "focus": "Sleep and Memory Consolidation",
+  "question": "How does sleep enable memory consolidation and why do interventions show variable effects?",
+  "description": "Understanding the glymphatic system and synaptic homeostasis",
+  "entities": ["glymphatic", "memory consolidation", "slow wave sleep", "synaptic homeostasis", "noradrenaline", "microglial pruning"],
+  "key_contradictions": [
+    "Why do sleep deprivation effects vary dramatically between individuals?",
+    "Glymphatic clearance shows opposite patterns in young vs old",
+    "Memory consolidation requires both REM and slow wave sleep but through different mechanisms"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Individual variation in sleep deprivation effects is mediated by a threshold-dependent glymphatic reserve capacity that only becomes limiting when combined with specific circadian misalignment patterns through an unknown astrocyte-mediated buffering mechanism.",
+      "expected_type": "C",
+      "rationale": "Threshold + glymphatic reserve hypothesis"
+    },
+    {
+      "statement": "What if glymphatic reversal in aging is not due to vessel stiffening but to a compensatory immune response where microglia actively reverse fluid flow to concentrate protective factors around vulnerable neurons?",
+      "expected_type": "D",
+      "rationale": "Reframes aging effect through protective reversal"
+    },
+    {
+      "statement": "The different roles of REM and slow wave sleep in memory are mediated by a missed link - noradrenergic tone creates a bistable switch between synaptic strengthening and weakening through an unknown alpha2-adrenergic receptor dynamics.",
+      "expected_type": "C",
+      "rationale": "Bistable switch mechanism hypothesis"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "domain": "immunology",
+  "focus": "Autoimmune Diseases",
+  "question": "Why do autoimmune diseases target specific tissues and why do environmental triggers have variable effects?",
+  "description": "Understanding tissue-specific autoimmunity and gene-environment interactions",
+  "entities": ["HLA variants", "autoantibodies", "tissue specificity", "environmental trigger", "immune tolerance", "molecular mimicry"],
+  "key_contradictions": [
+    "Why do rheumatoid arthritis, lupus, and MS have completely different target tissues despite similar genetic risk?",
+    "Identical infections trigger autoimmunity in some people but not others",
+    "HLA variants show different tissue specificity across populations"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Tissue specificity in autoimmunity is not determined by HLA binding affinity alone but by a threshold-dependent process where tissue-specific self-antigens only become immunogenic when combined with specific stress-induced post-translational modifications in a hidden antigen presentation pathway.",
+      "expected_type": "C",
+      "rationale": "Threshold + hidden mediator mechanism"
+    },
+    {
+      "statement": "What if the variable response to environmental triggers is mediated by a previously unknown connection between microbiome-derived metabolites and thymic selection, where specific microbial compounds modulate central tolerance to particular self-antigens?",
+      "expected_type": "D",
+      "rationale": "Cross-domain connection - environment to thymic selection"
+    },
+    {
+      "statement": "The differential tissue targeting across autoimmune diseases is mediated by a missing link - a nodal regulatory protein that determines which tissue antigens escape tolerance through a stochastic expression pattern tied to circadian rhythms.",
+      "expected_type": "C",
+      "rationale": "Missing link hypothesis with circadian angle"
+    }
+  ]
+}

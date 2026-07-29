@@ -1,0 +1,33 @@
+{
+  "ledger_id": "adni_scientific_ledger_base_v1",
+  "version": "1.0.0",
+  "created_at": "2026-07-18T16:20:00Z",
+  "layer": "observation",
+  "asset": {
+    "id": "adni",
+    "type": "longitudinal_cohort",
+    "description": "Alzheimer's Disease Neuroimaging Initiative"
+  },
+  "observations": [
+    {"observation_id": "obs_001", "category": "cohort_design", "evidence": "ADNI recruits participants aged 55-90 years", "source": "protocol"},
+    {"observation_id": "obs_002", "category": "follow_up", "evidence": "5-10 year follow-up with 6-12 month assessments", "source": "protocol"},
+    {"observation_id": "obs_003", "category": "biomarker", "evidence": "CSF biomarkers: Aβ42, Aβ40, total-tau, p-tau181", "source": "dataset"},
+    {"observation_id": "obs_004", "category": "biomarker", "evidence": "Plasma biomarkers: Aβ42/40, p-tau181, p-tau217, NfL, GFAP", "source": "dataset"},
+    {"observation_id": "obs_005", "category": "imaging", "evidence": "MRI 3T with T1, T2, FLAIR sequences", "source": "protocol"},
+    {"observation_id": "obs_006", "category": "imaging", "evidence": "PET with amyloid (florbetapir), tau (flortaucipir), FDG", "source": "protocol"},
+    {"observation_id": "obs_007", "category": "assessment", "evidence": "Cognitive: ADAS-Cog, MMSE, CDR-SB, FAQ", "source": "protocol"},
+    {"observation_id": "obs_008", "category": "assessment", "evidence": "Memory: RAVLT, Brief Visuospatial Memory Test", "source": "protocol"},
+    {"observation_id": "obs_009", "category": "outcome", "evidence": "Primary: AD dementia; Secondary: cognitive decline", "source": "protocol"},
+    {"observation_id": "obs_010", "category": "data_model", "evidence": "Tabular CSV with standardized variables", "source": "dataset"}
+  ],
+  "evidence_links": [
+    {"observation_id": "obs_001", "evidence_type": "methodology", "source": "10.1002/jmri.21049"},
+    {"observation_id": "obs_002", "evidence_type": "cohort", "source": "10.1212/wnl.0b013e3181cb3e25"}
+  ],
+  "provenance": {
+    "method": "observatory_extraction",
+    "agent": "cline_observer",
+    "timestamp": "2026-07-18T16:20:00Z",
+    "checksum": "sha256:1d1a47ecb1d6b099"
+  }
+}

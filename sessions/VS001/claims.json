@@ -1,0 +1,212 @@
+[
+  {
+    "id": "CLAIM-000001",
+    "text": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "38940656"
+    ],
+    "contradictingPapers": [],
+    "domain": "neurodegeneration",
+    "entities": [
+      "Alzheimer",
+      "pTau217",
+      "Plasma"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T12:57:31.503484",
+    "updatedAt": "2026-07-11T12:57:31.503560",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "biomarker",
+      "extracted_evidence": [],
+      "source_title": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease."
+    }
+  },
+  {
+    "id": "CLAIM-000002",
+    "text": "This study investigated the potential of phosphorylated plasma Tau217 ratio (pTau217R) and plasma amyloid beta (A&#x3b2;) 42/A&#x3b2;40 in predicting brain amyloid levels measured by positron emission tomography (PET) Centiloid (CL) for Alzheimer's disease (AD) staging and screening.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "38940656"
+    ],
+    "contradictingPapers": [],
+    "domain": "neurodegeneration",
+    "entities": [
+      "Tau217",
+      "Alzheimer",
+      "x3b2",
+      "Centiloid"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T12:57:31.509051",
+    "updatedAt": "2026-07-11T12:57:31.509068",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "biomarker",
+      "extracted_evidence": [],
+      "source_title": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease."
+    }
+  },
+  {
+    "id": "CLAIM-000003",
+    "text": "These results contribute to clarification of the mechanism by which poly(GR) drives TDP-43 proteinopathy, confirm that G<sub>4</sub>C<sub>2</sub>-targeted therapeutics reduce TDP-43 pathology in vivo, and demonstrate that alterations in plasma NFL provide insight into the therapeutic efficacy of disease-modifying treatments.",
+    "evidenceScore": 0.6,
+    "supportingPapers": [
+      "32878979"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T12:57:34.609790",
+    "updatedAt": "2026-07-11T12:57:34.609810",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "mechanism",
+      "extracted_evidence": [],
+      "source_title": "C9orf72 poly(GR) aggregation induces TDP-43 proteinopathy."
+    }
+  },
+  {
+    "id": "CLAIM-000004",
+    "text": "Plasma NfL is associated with the APOE \u03b54 allele, brain imaging measurements of neurodegeneration, and lower recall memory scores in cognitively unimpaired late-middle-aged and older adults.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "37038190"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [
+      "Plasma"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T12:57:35.805122",
+    "updatedAt": "2026-07-11T12:57:35.805133",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "association",
+      "extracted_evidence": [],
+      "source_title": "Plasma NfL is associated with the APOE \u03b54 allele, brain imaging measurements of neurodegeneration, and lower recall memory scores in cognitively unimpaired late-middle-aged and older adults."
+    }
+  },
+  {
+    "id": "CLAIM-000005",
+    "text": "One promising candidate is the synaptic protein neurogranin that seems specific for AD and predicts future rate of cognitive deterioration.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "30051512"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [
+      "One"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T12:57:38.381147",
+    "updatedAt": "2026-07-11T12:57:38.381157",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "biomarker",
+      "extracted_evidence": [],
+      "source_title": "Biomarkers for Alzheimer's disease: current status and prospects for the future."
+    }
+  },
+  {
+    "id": "CLAIM-000006",
+    "text": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "38940656"
+    ],
+    "contradictingPapers": [],
+    "domain": "neurodegeneration",
+    "entities": [
+      "pTau217",
+      "Plasma",
+      "Alzheimer"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T13:21:11.036648",
+    "updatedAt": "2026-07-11T13:21:11.036668",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "biomarker",
+      "extracted_evidence": [],
+      "source_title": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease."
+    }
+  },
+  {
+    "id": "CLAIM-000007",
+    "text": "These results contribute to clarification of the mechanism by which poly(GR) drives TDP-43 proteinopathy, confirm that G<sub>4</sub>C<sub>2</sub>-targeted therapeutics reduce TDP-43 pathology in vivo, and demonstrate that alterations in plasma NFL provide insight into the therapeutic efficacy of disease-modifying treatments.",
+    "evidenceScore": 0.6,
+    "supportingPapers": [
+      "32878979"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T13:21:14.509289",
+    "updatedAt": "2026-07-11T13:21:14.509303",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "mechanism",
+      "extracted_evidence": [],
+      "source_title": "C9orf72 poly(GR) aggregation induces TDP-43 proteinopathy."
+    }
+  },
+  {
+    "id": "CLAIM-000008",
+    "text": "Plasma NfL is associated with the APOE \u03b54 allele, brain imaging measurements of neurodegeneration, and lower recall memory scores in cognitively unimpaired late-middle-aged and older adults.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "37038190"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [
+      "Plasma"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T13:21:16.256007",
+    "updatedAt": "2026-07-11T13:21:16.256013",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "association",
+      "extracted_evidence": [],
+      "source_title": "Plasma NfL is associated with the APOE \u03b54 allele, brain imaging measurements of neurodegeneration, and lower recall memory scores in cognitively unimpaired late-middle-aged and older adults."
+    }
+  },
+  {
+    "id": "CLAIM-000009",
+    "text": "One promising candidate is the synaptic protein neurogranin that seems specific for AD and predicts future rate of cognitive deterioration.",
+    "evidenceScore": 0.5,
+    "supportingPapers": [
+      "30051512"
+    ],
+    "contradictingPapers": [],
+    "domain": "general_biomedical",
+    "entities": [
+      "One"
+    ],
+    "status": "unvalidated",
+    "createdAt": "2026-07-11T13:21:18.425616",
+    "updatedAt": "2026-07-11T13:21:18.425628",
+    "derivedFrom": [],
+    "usedIn": [],
+    "metadata": {
+      "claim_type": "biomarker",
+      "extracted_evidence": [],
+      "source_title": "Biomarkers for Alzheimer's disease: current status and prospects for the future."
+    }
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "variable_id": "demo_001",
+    "category": "Demographics",
+    "variables": ["AGE", "PTGENDER", "PTETHCAT", "PTRACCAT", "EDUCATION"]
+  },
+  {
+    "variable_id": "clin_001",
+    "category": "Clinical",
+    "variables": ["CDR", "CDRSB", "MMSE", "FAQ", "ADAS11", "ADAS13"]
+  },
+  {
+    "variable_id": "neuro_001",
+    "category": "Neuropsychology",
+    "variables": ["RAVLT", "BVMT", "TRAILS", "Clock Drawing", "Digit Span"]
+  },
+  {
+    "variable_id": "mri_001",
+    "category": "MRI",
+    "variables": ["Hippocampal volume", "Whole brain volume", "Entorhinal cortex", "Ventricles", "Fazekas score"]
+  },
+  {
+    "variable_id": "pet_001",
+    "category": "PET",
+    "variables": ["Amyloid SUVR", "Tau SUVR", "FDG SUVR", "Centiloid scale"]
+  },
+  {
+    "variable_id": "csf_001",
+    "category": "CSF",
+    "variables": ["CSF Aβ42", "CSF Aβ40", "CSF total tau", "CSF p-tau181"]
+  },
+  {
+    "variable_id": "gene_001",
+    "category": "Genetics",
+    "variables": ["ApoE ε2/ε3/ε4", "APOE gene variants", "Polygenic risk scores"]
+  },
+  {
+    "variable_id": "blood_001",
+    "category": "Blood biomarkers",
+    "variables": ["Plasma Aβ42/40", "Plasma p-tau181", "Plasma p-tau217", "Plasma NfL", "Plasma GFAP"]
+  },
+  {
+    "variable_id": "outcome_001",
+    "category": "Outcome variables",
+    "variables": ["Conversion to AD dementia", "Cognitive decline rate", "Time to dementia diagnosis"]
+  }
+]

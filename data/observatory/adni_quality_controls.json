@@ -1,0 +1,52 @@
+[
+  {
+    "control_id": "qc_001",
+    "category": "protocol_standardization",
+    "description": "MRI protocols standardized across all 60+ sites with MP-RAGE, FLAIR, T2 sequences"
+  },
+  {
+    "control_id": "qc_002",
+    "category": "site_certification",
+    "description": "Sites must complete certification process before participating in ADNI data collection"
+  },
+  {
+    "control_id": "qc_003",
+    "category": "phantom_calibration",
+    "description": "Monthly phantom scanning at each site to monitor scanner stability"
+  },
+  {
+    "control_id": "qc_004",
+    "category": "data_validation",
+    "description": "Centralized quality control of all imaging data at LONI before release"
+  },
+  {
+    "control_id": "qc_005",
+    "category": "missing_data_management",
+    "description": "Systematic tracking of missing visits with reasons documented"
+  },
+  {
+    "control_id": "qc_006",
+    "category": "clinical_ratings",
+    "description": "Clinical raters trained and certified on CDR and cognitive assessment scales"
+  },
+  {
+    "control_id": "qc_007",
+    "category": "biomarker_assay_standardization",
+    "description": "CSF and plasma assays performed at standardized labs with QC samples"
+  },
+  {
+    "control_id": "qc_008",
+    "category": "central_review",
+    "description": "PET reads performed by certified readers using standardized protocols"
+  },
+  {
+    "control_id": "qc_009",
+    "category": "genetic_data_validation",
+    "description": "Genotyping quality controlled with call rate thresholds and replicate samples"
+  },
+  {
+    "control_id": "qc_010",
+    "category": "participant_tracking",
+    "description": "Study partner required for all participants to verify longitudinal compliance"
+  }
+]

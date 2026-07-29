@@ -1,0 +1,107 @@
+import { z } from 'zod';
+// === Core Artifact Types ===
+export const ArtifactType = z.enum([
+    'paper',
+    'experiment',
+    'dataset',
+    'model',
+    'code',
+    'analysis',
+    'claim',
+    'figure',
+    'table',
+    'note',
+    'hypothesis',
+    'execution',
+]);
+export const ProvenanceSource = z.object({
+    type: z.enum(['model', 'tool', 'code', 'dataset', 'prompt', 'citation', 'api']),
+    identifier: z.string(),
+    version: z.string().optional(),
+    uri: z.string().url().optional(),
+    hash: z.string().optional(),
+    metadata: z.record(z.unknown()).optional(),
+});
+export const Artifact = z.object({
+    id: z.string().uuid(),
+    type: ArtifactType,
+    name: z.string(),
+    description: z.string().optional(),
+    content: z.string(),
+    contentHash: z.string(),
+    createdAt: z.string().datetime(),
+    createdBy: z.string(),
+    sources: z.array(ProvenanceSource).default([]),
+    parentId: z.string().uuid().optional(),
+    tags: z.array(z.string()).default([]),
+    version: z.string().default('1.0.0'),
+});
+export const Execution = z.object({
+    id: z.string().uuid(),
+    agentId: z.string(),
+    action: z.string(),
+    input: z.record(z.unknown()),
+    output: z.record(z.unknown()),
+    modelUsed: z.string().optional(),
+    promptsUsed: z.array(z.string()).optional(),
+    toolsUsed: z.array(z.string()).optional(),
+    codeExecuted: z.array(z.string()).optional(),
+    datasetsUsed: z.array(z.string()).optional(),
+    sources: z.array(ProvenanceSource).optional(),
+    startedAt: z.string().datetime(),
+    completedAt: z.string().datetime().optional(),
+    duration: z.number().optional(),
+    status: z.enum(['pending', 'running', 'completed', 'failed', 'cancelled']),
+    error: z.string().optional(),
+    artifacts: z.array(z.string().uuid()).default([]),
+    tags: z.array(z.string()).default([]),
+});
+export const Experiment = z.object({
+    id: z.string().uuid(),
+    name: z.string(),
+    description: z.string(),
+    hypothesis: z.string().optional(),
+    design: z.record(z.unknown()),
+    variables: z.record(z.unknown()).optional(),
+    results: z.record(z.unknown()).optional(),
+    executions: z.array(z.string().uuid()).default([]),
+    artifacts: z.array(z.string().uuid()).default([]),
+    status: z.enum(['designed', 'running', 'completed', 'failed', 'archived']),
+    tags: z.array(z.string()).default([]),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+});
+export const Citation = z.object({
+    id: z.string().uuid(),
+    raw: z.string(),
+    doi: z.string().optional(),
+    pmid: z.string().optional(),
+    title: z.string().optional(),
+    authors: z.array(z.string()).optional(),
+    journal: z.string().optional(),
+    year: z.number().int().optional(),
+    validated: z.boolean().default(false),
+    validationScore: z.number().min(0).max(1).optional(),
+    validationSource: z.string().optional(),
+});
+export const ProvenanceRecord = z.object({
+    id: z.string().uuid(),
+    artifact: Artifact,
+    execution: Execution.optional(),
+    experimentId: z.string().uuid().optional(),
+    timestamp: z.string().datetime(),
+    lineage: z.array(z.string().uuid()).default([]),
+    metadata: z.record(z.unknown()).optional(),
+});
+// === Provenance Query ===
+export const ProvenanceQuery = z.object({
+    artifactId: z.string().uuid().optional(),
+    agentId: z.string().optional(),
+    type: ArtifactType.optional(),
+    fromDate: z.string().datetime().optional(),
+    toDate: z.string().datetime().optional(),
+    tags: z.array(z.string()).optional(),
+    limit: z.number().int().positive().default(50),
+    offset: z.number().int().min(0).default(0),
+});
+//# sourceMappingURL=provenance.js.map

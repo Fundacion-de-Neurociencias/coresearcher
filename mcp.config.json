@@ -1,0 +1,275 @@
+{
+  "name": "coresearcher-mcp",
+  "version": "0.1.0",
+  "transport": "sse",
+  "port": 3100,
+  "host": "0.0.0.0",
+  "agents": [
+    {
+      "id": "reviewer",
+      "name": "Scientific Reviewer",
+      "description": "Validates citations, DOIs, PMIDs, statistical results, and marks confidence levels",
+      "version": "0.1.0",
+      "capabilities": {
+        "tools": [
+          {
+            "name": "validate_doi",
+            "description": "Validate a Digital Object Identifier (DOI)",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "doi": { "type": "string", "description": "The DOI to validate" }
+              },
+              "required": ["doi"]
+            }
+          },
+          {
+            "name": "validate_pmid",
+            "description": "Validate a PubMed Identifier (PMID)",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "pmid": { "type": "string", "description": "The PMID to validate" }
+              },
+              "required": ["pmid"]
+            }
+          },
+          {
+            "name": "validate_citation",
+            "description": "Validate a scientific citation",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "citation": { "type": "string", "description": "The citation text" }
+              },
+              "required": ["citation"]
+            }
+          },
+          {
+            "name": "review_content",
+            "description": "Review scientific content for citation and statistical validity",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" },
+                "citations": { "type": "array", "items": { "type": "string" } },
+                "statisticalResults": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": { "type": "string" },
+                      "value": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "required": ["content", "citations"]
+            }
+          },
+          {
+            "name": "needs_review",
+            "description": "Check if content requires scientific review",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "content": { "type": "string" }
+              },
+              "required": ["content"]
+            }
+          }
+        ],
+        "resources": [],
+        "prompts": []
+      }
+    },
+    {
+      "id": "co-scientist",
+      "name": "AI Co-Scientist",
+      "description": "Generates hypotheses, designs experiments, and collaborates on scientific research",
+      "version": "0.1.0",
+      "capabilities": {
+        "tools": [
+          {
+            "name": "generate_hypothesis",
+            "description": "Generate a scientific hypothesis from a research question",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "researchQuestion": { "type": "string" },
+                "context": { "type": "string" },
+                "domain": { "type": "string" }
+              },
+              "required": ["researchQuestion"]
+            }
+          },
+          {
+            "name": "design_experiment",
+            "description": "Design an experiment to test a hypothesis",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "hypothesisId": { "type": "string" },
+                "approach": { "type": "string" },
+                "variables": { "type": "object" }
+              },
+              "required": ["hypothesisId"]
+            }
+          },
+          {
+            "name": "analyze_results",
+            "description": "Analyze experimental results against a hypothesis",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "experimentId": { "type": "string" },
+                "results": { "type": "object" },
+                "hypothesisId": { "type": "string" }
+              },
+              "required": ["experimentId", "results", "hypothesisId"]
+            }
+          },
+          {
+            "name": "research_status",
+            "description": "Get current research status and statistics",
+            "inputSchema": { "type": "object", "properties": {} }
+          }
+        ],
+        "resources": [],
+        "prompts": []
+      }
+    },
+    {
+      "id": "autoscientist",
+      "name": "AutoScientist",
+      "description": "Autonomous research agent with persistent memory and long-running investigation cycles",
+      "version": "0.1.0",
+      "capabilities": {
+        "tools": [
+          {
+            "name": "start_research_cycle",
+            "description": "Start an autonomous research cycle",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "goal": { "type": "string" },
+                "context": { "type": "string" },
+                "maxSteps": { "type": "number" }
+              },
+              "required": ["goal"]
+            }
+          },
+          {
+            "name": "store_knowledge",
+            "description": "Store knowledge in persistent memory",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "key": { "type": "string" },
+                "value": { "type": "object" },
+                "confidence": { "type": "number" }
+              },
+              "required": ["key", "value", "confidence"]
+            }
+          },
+          {
+            "name": "search_knowledge",
+            "description": "Search the knowledge base",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "query": { "type": "string" }
+              },
+              "required": ["query"]
+            }
+          }
+        ],
+        "resources": [],
+        "prompts": []
+      }
+    },
+    {
+      "id": "neurodiagnoses",
+      "name": "Neurodiagnoses Agent Pack",
+      "description": "Biomarker analysis, triaxial neurodiagnosis, clinical trial matching, and regulatory compliance",
+      "version": "0.1.0",
+      "capabilities": {
+        "tools": [
+          {
+            "name": "analyze_biomarkers",
+            "description": "Analyze neurological biomarkers",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "biomarkers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "value": { "type": "string" },
+                      "unit": { "type": "string" },
+                      "referenceRange": { "type": "string" }
+                    }
+                  }
+                }
+              },
+              "required": ["biomarkers"]
+            }
+          },
+          {
+            "name": "triaxial_diagnosis",
+            "description": "Perform triaxial neurodiagnosis",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "symptoms": { "type": "array", "items": { "type": "string" } },
+                "biomarkers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "value": { "type": "string" },
+                      "unit": { "type": "string" },
+                      "referenceRange": { "type": "string" }
+                    }
+                  }
+                },
+                "imaging": { "type": "array", "items": { "type": "string" } }
+              },
+              "required": ["symptoms"]
+            }
+          },
+          {
+            "name": "find_clinical_trials",
+            "description": "Find relevant clinical trials",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "diagnosis": { "type": "string" },
+                "biomarkers": { "type": "array", "items": { "type": "string" } },
+                "location": { "type": "string" }
+              },
+              "required": ["diagnosis"]
+            }
+          },
+          {
+            "name": "check_regulatory",
+            "description": "Check regulatory status for diagnostics",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "biomarker": { "type": "string" },
+                "region": { "type": "string", "enum": ["US", "EU", "UK", "JP"] }
+              },
+              "required": ["biomarker", "region"]
+            }
+          }
+        ],
+        "resources": [],
+        "prompts": []
+      }
+    }
+  ]
+}

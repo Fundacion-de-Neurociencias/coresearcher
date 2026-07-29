@@ -1,0 +1,12 @@
+{
+  "repo": "run-llama/LlamaIndex",
+  "total_claims": 0,
+  "observable_claims": 0,
+  "derivable_claims": 0,
+  "inferred_claims": 0,
+  "unknown_claims": 0,
+  "auditability_score": 0.0,
+  "evidence_coverage": 0.0,
+  "observable_ratio": 0.0,
+  "total_gaps": 0
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "pattern_id": "pat_001",
+    "pattern": "Longitudinality",
+    "present_in": ["adni", "uk-biobank", "mimic-iv"],
+    "absent_in": ["openneuro", "monai", "ohdsi", "fhir", "snomed-ct"],
+    "description": "Multiple timepoint follow-up of same participants"
+  },
+  {
+    "pattern_id": "pat_002",
+    "pattern": "Standardization",
+    "present_in": ["adni", "uk-biobank", "openneuro", "monai"],
+    "absent_in": ["nacc", "ohdsi", "fhir", "snomed-ct", "mimic-iv"],
+    "description": "Uniform protocols across collection sites or versions"
+  },
+  {
+    "pattern_id": "pat_003",
+    "pattern": "Governance",
+    "present_in": ["adni", "uk-biobank", "openneuro"],
+    "absent_in": ["nacc", "ohdsi", "fhir", "snomed-ct", "monai", "mimic-iv"],
+    "description": "Formal data access controls and ethics oversight"
+  },
+  {
+    "pattern_id": "pat_004",
+    "pattern": "Quality_control",
+    "present_in": ["adni", "uk-biobank", "openneuro", "monai"],
+    "absent_in": ["nacc", "ohdsi", "fhir", "snomed-ct", "mimic-iv"],
+    "description": "Systematic QC processes with phantom/replicate samples"
+  },
+  {
+    "pattern_id": "pat_005",
+    "pattern": "Versioning",
+    "present_in": ["openneuro", "monai", "ohdsi", "fhir"],
+    "absent_in": ["adni", "uk-biobank", "nacc", "snomed-ct", "mimic-iv"],
+    "description": "Explicit version numbers for datasets/software"
+  },
+  {
+    "pattern_id": "pat_006",
+    "pattern": "Ontologies",
+    "present_in": ["ohdsi", "fhir", "snomed-ct"],
+    "absent_in": ["adni", "uk-biobank", "openneuro", "monai", "nacc", "mimic-iv"],
+    "description": "Formal controlled vocabularies and concept mappings"
+  },
+  {
+    "pattern_id": "pat_007",
+    "pattern": "Interoperabilidad",
+    "present_in": ["ohdsi", "fhir"],
+    "absent_in": ["adni", "uk-biobank", "openneuro", "monai", "nacc", "snomed-ct", "mimic-iv"],
+    "description": "API-first design and cross-system compatibility"
+  },
+  {
+    "pattern_id": "pat_008",
+    "pattern": "Reproducibilidad",
+    "present_in": ["monai", "openneuro"],
+    "absent_in": ["adni", "uk-biobank", "ohdsi", "fhir", "snomed-ct", "nacc", "mimic-iv"],
+    "description": "Code/data availability with computational reproducibility"
+  }
+]

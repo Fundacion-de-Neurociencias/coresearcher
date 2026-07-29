@@ -1,0 +1,105 @@
+{
+  "models": {
+    "MODEL-000001": {
+      "id": "MODEL-000001",
+      "type": "diagnostic",
+      "name": "Diagnostic Model 000001",
+      "components": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "composite_effect": 0.627,
+      "evidence_score": 0.757,
+      "confidence_interval": [
+        0.46,
+        0.793
+      ],
+      "population": "preclinical_ad",
+      "entities": [
+        "nfl",
+        "apoe4",
+        "ptau217"
+      ],
+      "recommendation": "Combined ptau217, nfl improve prediction accuracy",
+      "createdAt": "2026-07-11T18:10:05.191103",
+      "updatedAt": "2026-07-11T18:10:05.191143"
+    },
+    "MODEL-000002": {
+      "id": "MODEL-000002",
+      "type": "diagnostic",
+      "name": "Alzheimer Multi-Modal Panel",
+      "components": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "composite_effect": 0.627,
+      "evidence_score": 0.757,
+      "confidence_interval": [
+        0.46,
+        0.793
+      ],
+      "population": "preclinical_ad",
+      "entities": [
+        "nfl",
+        "apoe4",
+        "ptau217"
+      ],
+      "recommendation": "Combined ptau217, nfl improve prediction accuracy",
+      "createdAt": "2026-07-11T18:10:05.203626",
+      "updatedAt": "2026-07-11T18:10:05.203631"
+    },
+    "MODEL-000003": {
+      "id": "MODEL-000003",
+      "type": "diagnostic",
+      "name": "Diagnostic Model 000003",
+      "components": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "composite_effect": 0.627,
+      "evidence_score": 0.757,
+      "confidence_interval": [
+        0.46,
+        0.793
+      ],
+      "population": "preclinical_ad",
+      "entities": [
+        "apoe4",
+        "ptau217",
+        "nfl"
+      ],
+      "recommendation": "Combined ptau217, nfl improve prediction accuracy",
+      "createdAt": "2026-07-11T18:11:46.878887",
+      "updatedAt": "2026-07-11T18:11:46.878931"
+    },
+    "MODEL-000004": {
+      "id": "MODEL-000004",
+      "type": "diagnostic",
+      "name": "Alzheimer Multi-Modal Panel",
+      "components": [
+        "FIND-001",
+        "FIND-002",
+        "FIND-003"
+      ],
+      "composite_effect": 0.627,
+      "evidence_score": 0.757,
+      "confidence_interval": [
+        0.46,
+        0.793
+      ],
+      "population": "preclinical_ad",
+      "entities": [
+        "apoe4",
+        "ptau217",
+        "nfl"
+      ],
+      "recommendation": "Combined ptau217, nfl improve prediction accuracy",
+      "createdAt": "2026-07-11T18:11:46.899997",
+      "updatedAt": "2026-07-11T18:11:46.900008"
+    }
+  },
+  "next_id": 5
+}

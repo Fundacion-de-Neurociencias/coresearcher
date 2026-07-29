@@ -1,0 +1,29 @@
+{
+  "domain": "translational",
+  "focus": "Drug Repurposing Discovery",
+  "question": "How can we systematically discover novel drug indications from existing compounds?",
+  "description": "Finding unexpected therapeutic connections through mechanism-based inference",
+  "entities": ["metformin", "rapamycin", "statins", "anti-inflammatory", "autophagy", "longevity pathway"],
+  "key_contradictions": [
+    "Metformin shows benefits in cancer, aging, and neurodegeneration despite different mechanisms",
+    "Statins have CNS effects despite poor blood-brain barrier penetration",
+    "Why do anti-inflammatory drugs work in some CNS diseases but not others?"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "The pleiotropic effects of metformin across aging, cancer, and neurodegeneration are mediated by a fundamental energy sensing mechanism that converges on mitochondrial stress response through an unknown mitohormetic signaling pathway.",
+      "expected_type": "C",
+      "rationale": "Proposes hidden convergence mechanism"
+    },
+    {
+      "statement": "What if the CNS effects of statins are not due to direct brain penetration but to a peripheral signaling cascade that crosses the blood-brain barrier through a transcytosis mechanism involving lipid rafts?",
+      "expected_type": "D",
+      "rationale": "Reframes drug action mechanism"
+    },
+    {
+      "statement": "Anti-inflammatory efficacy in CNS diseases is not determined by COX inhibition but by a threshold effect in microglial priming states that respond only when the intervention hits a specific nodal point in the neuroinflammatory network.",
+      "expected_type": "C",
+      "rationale": "Threshold mechanism with network hypothesis"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "hypotheses": [
+    {
+      "id": "HYP000001",
+      "statement": "APOE influences Tau hyperphosphorylation, leading to measurable effects on ",
+      "hypothesis_type": "causal_chain",
+      "entities_involved": [
+        "APOE",
+        "Tau hyperphosphorylation"
+      ],
+      "confidence": 0.3,
+      "source": "demo_question",
+      "generated_at": "2026-07-10T16:53:18.466731",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    },
+    {
+      "id": "HYP000002",
+      "statement": "APOE influences Amyloid aggregation, leading to measurable effects on ",
+      "hypothesis_type": "causal_chain",
+      "entities_involved": [
+        "APOE",
+        "Amyloid aggregation"
+      ],
+      "confidence": 0.3,
+      "source": "demo_question",
+      "generated_at": "2026-07-10T16:53:18.467267",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    },
+    {
+      "id": "HYP000003",
+      "statement": "APOE influences Tau hyperphosphorylation, leading to measurable effects on ",
+      "hypothesis_type": "causal_chain",
+      "entities_involved": [
+        "APOE",
+        "Tau hyperphosphorylation"
+      ],
+      "confidence": 0.3,
+      "source": "demo_question",
+      "generated_at": "2026-07-10T16:57:01.693616",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    },
+    {
+      "id": "HYP000004",
+      "statement": "APOE influences Amyloid aggregation, leading to measurable effects on ",
+      "hypothesis_type": "causal_chain",
+      "entities_involved": [
+        "APOE",
+        "Amyloid aggregation"
+      ],
+      "confidence": 0.3,
+      "source": "demo_question",
+      "generated_at": "2026-07-10T16:57:01.694708",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    }
+  ],
+  "experiments": [],
+  "failures": [],
+  "lessons": []
+}

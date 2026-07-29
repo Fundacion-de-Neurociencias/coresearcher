@@ -1,0 +1,908 @@
+{
+  "mne-tools/mne-python": [
+    {
+      "number": 2154,
+      "title": "ENH Concatenated epoch plot",
+      "state": "closed",
+      "comments": 303,
+      "created_at": "2015-05-27T12:17:24Z",
+      "closed_at": "2015-06-16T07:34:43Z",
+      "duration_days": 19.80369212962963,
+      "is_pr": true
+    },
+    {
+      "number": 4414,
+      "title": "MRG+4: Epochs metadata",
+      "state": "closed",
+      "comments": 209,
+      "created_at": "2017-07-21T19:07:03Z",
+      "closed_at": "2017-10-19T18:30:48Z",
+      "duration_days": 89.97482638888889,
+      "is_pr": true
+    },
+    {
+      "number": 3728,
+      "title": "[MRG+2] adding receptive field module",
+      "state": "closed",
+      "comments": 191,
+      "created_at": "2016-11-03T16:06:18Z",
+      "closed_at": "2017-03-29T02:21:27Z",
+      "duration_days": 145.4271875,
+      "is_pr": true
+    },
+    {
+      "number": 766,
+      "title": "Trans GUI",
+      "state": "closed",
+      "comments": 174,
+      "created_at": "2013-09-14T17:06:04Z",
+      "closed_at": "2013-11-25T20:41:44Z",
+      "duration_days": 72.14976851851851,
+      "is_pr": true
+    },
+    {
+      "number": 2676,
+      "title": "MRG eeglab .set reader",
+      "state": "closed",
+      "comments": 172,
+      "created_at": "2015-12-06T23:01:47Z",
+      "closed_at": "2015-12-23T13:30:20Z",
+      "duration_days": 16.603159722222223,
+      "is_pr": true
+    },
+    {
+      "number": 3205,
+      "title": "MRG+1: Elekta averager ",
+      "state": "closed",
+      "comments": 164,
+      "created_at": "2016-05-03T13:18:42Z",
+      "closed_at": "2016-09-24T20:05:33Z",
+      "duration_days": 144.2825347222222,
+      "is_pr": true
+    },
+    {
+      "number": 580,
+      "title": "WIP/ENH: add repeated measures twoway anova function",
+      "state": "closed",
+      "comments": 151,
+      "created_at": "2013-04-26T21:19:52Z",
+      "closed_at": "2013-05-14T00:12:29Z",
+      "duration_days": 17.119872685185186,
+      "is_pr": true
+    },
+    {
+      "number": 2710,
+      "title": "MRG: refactor PSD functions",
+      "state": "closed",
+      "comments": 148,
+      "created_at": "2015-12-15T20:58:30Z",
+      "closed_at": "2016-01-17T17:07:17Z",
+      "duration_days": 32.83943287037037,
+      "is_pr": true
+    },
+    {
+      "number": 776,
+      "title": "ENH: Forward solution in python",
+      "state": "closed",
+      "comments": 143,
+      "created_at": "2013-09-23T18:24:52Z",
+      "closed_at": "2013-10-21T19:30:46Z",
+      "duration_days": 28.04576388888889,
+      "is_pr": true
+    },
+    {
+      "number": 1261,
+      "title": "ENH: draft of mne report command",
+      "state": "closed",
+      "comments": 142,
+      "created_at": "2014-05-05T13:57:41Z",
+      "closed_at": "2014-07-19T12:18:50Z",
+      "duration_days": 74.93135416666667,
+      "is_pr": true
+    },
+    {
+      "number": 11152,
+      "title": "ENH: Read eyetracking data (Eyelink) (Fork of #10855 )",
+      "state": "closed",
+      "comments": 133,
+      "created_at": "2022-09-09T21:33:50Z",
+      "closed_at": "2023-03-27T17:31:37Z",
+      "duration_days": 198.83179398148147,
+      "is_pr": true
+    },
+    {
+      "number": 7758,
+      "title": "WIP: Prototype of notebook viz (screencast)",
+      "state": "closed",
+      "comments": 133,
+      "created_at": "2020-05-11T12:42:40Z",
+      "closed_at": "2020-06-17T01:51:59Z",
+      "duration_days": 36.54813657407407,
+      "is_pr": true
+    },
+    {
+      "number": 2206,
+      "title": "MRG Butterfly epoch",
+      "state": "closed",
+      "comments": 131,
+      "created_at": "2015-06-16T11:47:10Z",
+      "closed_at": "2015-06-24T11:23:38Z",
+      "duration_days": 7.983657407407407,
+      "is_pr": true
+    },
+    {
+      "number": 379,
+      "title": "WIP: MRI/Head Coregistration / Scaling FsAverage",
+      "state": "closed",
+      "comments": 130,
+      "created_at": "2013-01-13T22:51:33Z",
+      "closed_at": "2013-09-14T17:06:35Z",
+      "duration_days": 243.76043981481482,
+      "is_pr": true
+    },
+    {
+      "number": 1462,
+      "title": "ENH: Expanding functionality for mixed source spaces and source estimates",
+      "state": "closed",
+      "comments": 128,
+      "created_at": "2014-07-24T18:32:47Z",
+      "closed_at": "2014-08-14T17:37:02Z",
+      "duration_days": 20.96128472222222,
+      "is_pr": true
+    },
+    {
+      "number": 1629,
+      "title": "MRG: New time gen class",
+      "state": "closed",
+      "comments": 127,
+      "created_at": "2014-10-29T18:57:23Z",
+      "closed_at": "2015-03-11T20:13:20Z",
+      "duration_days": 133.05274305555557,
+      "is_pr": true
+    },
+    {
+      "number": 3310,
+      "title": "WIP: sklearn-style encoding / modularizing encoding pipelines",
+      "state": "closed",
+      "comments": 126,
+      "created_at": "2016-06-16T01:20:58Z",
+      "closed_at": "2016-10-31T18:26:45Z",
+      "duration_days": 137.71234953703703,
+      "is_pr": true
+    },
+    {
+      "number": 742,
+      "title": "WIP ENH 5D time-frequency beamformer",
+      "state": "closed",
+      "comments": 126,
+      "created_at": "2013-09-04T21:47:28Z",
+      "closed_at": "2013-10-07T19:59:00Z",
+      "duration_days": 32.924675925925925,
+      "is_pr": true
+    },
+    {
+      "number": 1762,
+      "title": "[WIP] Added first custom_layout code. ",
+      "state": "closed",
+      "comments": 123,
+      "created_at": "2015-01-25T22:09:49Z",
+      "closed_at": "2015-04-28T02:32:34Z",
+      "duration_days": 92.18246527777778,
+      "is_pr": true
+    },
+    {
+      "number": 7247,
+      "title": "MRG: Enable point picking in _TimeViewer",
+      "state": "closed",
+      "comments": 123,
+      "created_at": "2020-01-23T22:59:01Z",
+      "closed_at": "2020-02-27T16:05:22Z",
+      "duration_days": 34.712743055555556,
+      "is_pr": true
+    },
+    {
+      "number": 1403,
+      "title": "Mixed source space",
+      "state": "closed",
+      "comments": 121,
+      "created_at": "2014-07-07T21:32:20Z",
+      "closed_at": "2014-07-24T18:29:26Z",
+      "duration_days": 16.87298611111111,
+      "is_pr": true
+    },
+    {
+      "number": 4971,
+      "title": "MRG: Refactor coreg transformations and fits",
+      "state": "closed",
+      "comments": 118,
+      "created_at": "2018-02-26T21:22:39Z",
+      "closed_at": "2018-03-30T19:40:13Z",
+      "duration_days": 31.92886574074074,
+      "is_pr": true
+    },
+    {
+      "number": 10920,
+      "title": "[ENH] Add tutorial on time-frequency source estimation with STC viewer GUI",
+      "state": "closed",
+      "comments": 117,
+      "created_at": "2022-07-12T23:59:18Z",
+      "closed_at": "2022-12-02T01:32:16Z",
+      "duration_days": 142.06456018518517,
+      "is_pr": true
+    },
+    {
+      "number": 2306,
+      "title": "ENH: Add phase-amplitude coupling functions",
+      "state": "closed",
+      "comments": 115,
+      "created_at": "2015-07-16T16:41:10Z",
+      "closed_at": "2016-04-19T01:55:48Z",
+      "duration_days": 277.38516203703705,
+      "is_pr": true
+    },
+    {
+      "number": 7717,
+      "title": "MRG, ENH: import code for optical imaging data from BOXY, fNIRS and fast signal",
+      "state": "closed",
+      "comments": 114,
+      "created_at": "2020-05-03T22:25:43Z",
+      "closed_at": "2020-11-20T19:03:41Z",
+      "duration_days": 200.8596990740741,
+      "is_pr": true
+    },
+    {
+      "number": 8862,
+      "title": "MNT: Migrate VTK Widgets to GUI API",
+      "state": "closed",
+      "comments": 114,
+      "created_at": "2021-02-11T14:34:34Z",
+      "closed_at": "2021-03-01T17:37:31Z",
+      "duration_days": 18.12704861111111,
+      "is_pr": true
+    },
+    {
+      "number": 9687,
+      "title": "[ENH]: New pyqtgraph-backend for 2D-Data-Browser",
+      "state": "closed",
+      "comments": 111,
+      "created_at": "2021-08-22T19:19:41Z",
+      "closed_at": "2021-11-03T03:27:15Z",
+      "duration_days": 72.33858796296296,
+      "is_pr": true
+    },
+    {
+      "number": 3275,
+      "title": "[MRG] plot_ica_properties",
+      "state": "closed",
+      "comments": 109,
+      "created_at": "2016-06-01T23:51:06Z",
+      "closed_at": "2016-06-27T13:26:50Z",
+      "duration_days": 25.566481481481482,
+      "is_pr": true
+    },
+    {
+      "number": 487,
+      "title": "WIP/ENH: Evoked apply_projection method",
+      "state": "closed",
+      "comments": 108,
+      "created_at": "2013-02-25T13:21:21Z",
+      "closed_at": "2013-03-29T13:26:45Z",
+      "duration_days": 32.00375,
+      "is_pr": true
+    },
+    {
+      "number": 2680,
+      "title": "[MRG] Topo animation",
+      "state": "closed",
+      "comments": 102,
+      "created_at": "2015-12-08T10:58:09Z",
+      "closed_at": "2016-01-24T08:53:18Z",
+      "duration_days": 46.91329861111111,
+      "is_pr": true
+    }
+  ],
+  "nilearn/nilearn": [
+    {
+      "number": 2019,
+      "title": "[ENH] Initial visual reports",
+      "state": "closed",
+      "comments": 172,
+      "created_at": "2019-04-17T13:58:44Z",
+      "closed_at": "2019-10-02T10:49:46Z",
+      "duration_days": 167.86877314814814,
+      "is_pr": true
+    },
+    {
+      "number": 1766,
+      "title": "switch from papaya to brainsprite in plotting.view_stat_map",
+      "state": "closed",
+      "comments": 166,
+      "created_at": "2018-09-28T04:53:45Z",
+      "closed_at": "2018-11-10T07:22:56Z",
+      "duration_days": 43.103599537037034,
+      "is_pr": true
+    },
+    {
+      "number": 1016,
+      "title": "Enh/surface plotting2",
+      "state": "closed",
+      "comments": 111,
+      "created_at": "2016-02-25T19:32:11Z",
+      "closed_at": "2017-02-23T17:49:22Z",
+      "duration_days": 363.92859953703703,
+      "is_pr": true
+    },
+    {
+      "number": 2528,
+      "title": "Automate the Formatting stuff",
+      "state": "closed",
+      "comments": 81,
+      "created_at": "2020-06-24T22:15:26Z",
+      "closed_at": "2023-07-12T10:55:14Z",
+      "duration_days": 1112.527638888889,
+      "is_pr": false
+    },
+    {
+      "number": 1516,
+      "title": "[MRG] Cortex surface projections",
+      "state": "closed",
+      "comments": 79,
+      "created_at": "2017-09-28T12:05:23Z",
+      "closed_at": "2017-11-19T19:01:26Z",
+      "duration_days": 52.28892361111111,
+      "is_pr": true
+    },
+    {
+      "number": 219,
+      "title": "(WIP) Sparse models: S-LASSO and TV-l1",
+      "state": "closed",
+      "comments": 78,
+      "created_at": "2014-06-27T09:16:58Z",
+      "closed_at": "2015-07-14T07:45:53Z",
+      "duration_days": 381.9367476851852,
+      "is_pr": true
+    },
+    {
+      "number": 2738,
+      "title": "ENH: compute grey and white matter masks",
+      "state": "closed",
+      "comments": 77,
+      "created_at": "2021-03-20T00:13:55Z",
+      "closed_at": "2021-06-28T18:21:52Z",
+      "duration_days": 100.75552083333334,
+      "is_pr": true
+    },
+    {
+      "number": 2076,
+      "title": "[MRG] Switch from Nose to Pytest",
+      "state": "closed",
+      "comments": 76,
+      "created_at": "2019-06-20T14:41:06Z",
+      "closed_at": "2019-07-24T15:18:19Z",
+      "duration_days": 34.02584490740741,
+      "is_pr": true
+    },
+    {
+      "number": 2171,
+      "title": "improve support for surface data in nilearn?",
+      "state": "closed",
+      "comments": 71,
+      "created_at": "2019-10-11T10:07:33Z",
+      "closed_at": "2024-06-04T07:09:10Z",
+      "duration_days": 1697.8761226851852,
+      "is_pr": false
+    },
+    {
+      "number": 1182,
+      "title": "Add a Neurovault fetcher.",
+      "state": "closed",
+      "comments": 67,
+      "created_at": "2016-07-20T08:58:52Z",
+      "closed_at": "2017-04-20T14:58:53Z",
+      "duration_days": 274.25001157407405,
+      "is_pr": true
+    },
+    {
+      "number": 1691,
+      "title": "Replacing sklearn.cross_validation with sklearn.model_selection",
+      "state": "closed",
+      "comments": 65,
+      "created_at": "2018-07-13T14:53:43Z",
+      "closed_at": "2018-08-04T19:13:21Z",
+      "duration_days": 22.180300925925927,
+      "is_pr": true
+    },
+    {
+      "number": 245,
+      "title": "[MRG] Glass brain visualisation",
+      "state": "closed",
+      "comments": 64,
+      "created_at": "2014-09-26T09:57:48Z",
+      "closed_at": "2014-12-04T15:21:44Z",
+      "duration_days": 69.2249537037037,
+      "is_pr": true
+    },
+    {
+      "number": 2477,
+      "title": "Surface plots",
+      "state": "closed",
+      "comments": 62,
+      "created_at": "2020-05-21T18:01:38Z",
+      "closed_at": "2020-06-30T22:16:31Z",
+      "duration_days": 40.177002314814814,
+      "is_pr": true
+    },
+    {
+      "number": 2000,
+      "title": "[ENH] Continuation of  Decoder:Metaestimator",
+      "state": "closed",
+      "comments": 60,
+      "created_at": "2019-04-16T14:14:01Z",
+      "closed_at": "2020-02-26T15:12:40Z",
+      "duration_days": 316.04072916666667,
+      "is_pr": true
+    },
+    {
+      "number": 3173,
+      "title": "Allow not scaling background maps for surface plots",
+      "state": "closed",
+      "comments": 59,
+      "created_at": "2022-03-07T17:24:32Z",
+      "closed_at": "2023-03-08T17:18:41Z",
+      "duration_days": 365.9959375,
+      "is_pr": true
+    },
+    {
+      "number": 2097,
+      "title": "Brainomics fetcher",
+      "state": "closed",
+      "comments": 58,
+      "created_at": "2019-07-22T14:06:30Z",
+      "closed_at": "2019-10-09T09:54:46Z",
+      "duration_days": 78.82518518518519,
+      "is_pr": true
+    },
+    {
+      "number": 657,
+      "title": "SpaceNet (this PR succeeds PR #219)",
+      "state": "closed",
+      "comments": 54,
+      "created_at": "2015-07-14T07:56:20Z",
+      "closed_at": "2015-07-28T22:28:37Z",
+      "duration_days": 14.605752314814815,
+      "is_pr": true
+    },
+    {
+      "number": 2327,
+      "title": "[ENH, MRG] fREM ",
+      "state": "closed",
+      "comments": 52,
+      "created_at": "2020-03-05T18:00:27Z",
+      "closed_at": "2020-05-11T21:48:01Z",
+      "duration_days": 67.1580324074074,
+      "is_pr": true
+    },
+    {
+      "number": 693,
+      "title": "[MRG] Dictionary learning + nilearn.decomposition refactoring",
+      "state": "closed",
+      "comments": 51,
+      "created_at": "2015-07-16T15:36:20Z",
+      "closed_at": "2015-12-08T14:44:07Z",
+      "duration_days": 144.96373842592592,
+      "is_pr": true
+    },
+    {
+      "number": 430,
+      "title": "[MRG] Nifti spheres masker",
+      "state": "closed",
+      "comments": 48,
+      "created_at": "2015-02-15T17:59:01Z",
+      "closed_at": "2015-06-08T12:50:02Z",
+      "duration_days": 112.78542824074074,
+      "is_pr": true
+    },
+    {
+      "number": 3729,
+      "title": "[ENH] Add niivue as rendering engine for `view_surf`",
+      "state": "closed",
+      "comments": 47,
+      "created_at": "2023-04-27T16:29:04Z",
+      "closed_at": "2026-05-04T09:17:33Z",
+      "duration_days": 1102.7003356481482,
+      "is_pr": true
+    },
+    {
+      "number": 186,
+      "title": "VBM on Oasis cross-sectional dataset (> 400 subjects)",
+      "state": "closed",
+      "comments": 46,
+      "created_at": "2014-04-11T16:00:27Z",
+      "closed_at": "2014-04-26T12:55:46Z",
+      "duration_days": 14.871747685185186,
+      "is_pr": true
+    },
+    {
+      "number": 2723,
+      "title": "Add Juelich Atlas",
+      "state": "closed",
+      "comments": 45,
+      "created_at": "2021-03-09T00:17:53Z",
+      "closed_at": "2021-09-15T10:11:12Z",
+      "duration_days": 190.41202546296296,
+      "is_pr": true
+    },
+    {
+      "number": 1730,
+      "title": "[WIP] Add plot_surf_montage",
+      "state": "closed",
+      "comments": 45,
+      "created_at": "2018-08-08T14:50:02Z",
+      "closed_at": "2020-09-16T10:30:58Z",
+      "duration_days": 769.8200925925926,
+      "is_pr": true
+    },
+    {
+      "number": 2946,
+      "title": "[NF] migrate package `load_confounds` main function `load_confounds`",
+      "state": "closed",
+      "comments": 44,
+      "created_at": "2021-09-07T03:17:59Z",
+      "closed_at": "2021-10-12T08:03:32Z",
+      "duration_days": 35.19829861111111,
+      "is_pr": true
+    },
+    {
+      "number": 5863,
+      "title": "[ENH] allow feature selection to be done by specifying a number of features to select",
+      "state": "closed",
+      "comments": 43,
+      "created_at": "2025-11-24T10:50:51Z",
+      "closed_at": "2026-02-13T17:24:44Z",
+      "duration_days": 81.2735300925926,
+      "is_pr": true
+    },
+    {
+      "number": 175,
+      "title": "nilearn.image.resample_img given 4D affine but not target_shape behaviour to be changed",
+      "state": "closed",
+      "comments": 43,
+      "created_at": "2014-03-19T18:13:15Z",
+      "closed_at": "2014-04-22T09:39:26Z",
+      "duration_days": 33.64318287037037,
+      "is_pr": true
+    },
+    {
+      "number": 1236,
+      "title": "[MRG+1] Vectorize connectivity",
+      "state": "closed",
+      "comments": 42,
+      "created_at": "2016-08-11T09:08:27Z",
+      "closed_at": "2017-05-03T12:57:09Z",
+      "duration_days": 265.1588194444444,
+      "is_pr": true
+    },
+    {
+      "number": 2532,
+      "title": "WIP: Add higher order AR noise models to run_glm",
+      "state": "closed",
+      "comments": 42,
+      "created_at": "2020-07-01T07:51:01Z",
+      "closed_at": "2021-06-01T07:09:47Z",
+      "duration_days": 334.97136574074074,
+      "is_pr": true
+    },
+    {
+      "number": 441,
+      "title": "[MRG] Connectome plotting",
+      "state": "closed",
+      "comments": 41,
+      "created_at": "2015-02-18T15:00:30Z",
+      "closed_at": "2015-02-26T08:05:52Z",
+      "duration_days": 7.7120601851851855,
+      "is_pr": true
+    }
+  ],
+  "bids-standard/pybids": [
+    {
+      "number": 356,
+      "title": "ENH: Dynamically update convolution sampling rate for short duration events",
+      "state": "closed",
+      "comments": 54,
+      "created_at": "2019-01-25T17:04:32Z",
+      "closed_at": "2019-03-11T18:24:42Z",
+      "duration_days": 45.055671296296296,
+      "is_pr": true
+    },
+    {
+      "number": 451,
+      "title": "get_collections fails when meta-data includes lists",
+      "state": "closed",
+      "comments": 38,
+      "created_at": "2019-06-24T22:12:32Z",
+      "closed_at": "2019-09-12T01:51:24Z",
+      "duration_days": 79.15199074074074,
+      "is_pr": false
+    },
+    {
+      "number": 369,
+      "title": "REFACTOR: 0.8 [WIP]",
+      "state": "closed",
+      "comments": 36,
+      "created_at": "2019-01-29T23:56:16Z",
+      "closed_at": "2019-02-15T18:44:50Z",
+      "duration_days": 16.783726851851853,
+      "is_pr": true
+    },
+    {
+      "number": 395,
+      "title": "preparation for JOSS submission",
+      "state": "closed",
+      "comments": 32,
+      "created_at": "2019-02-21T21:58:10Z",
+      "closed_at": "2019-02-28T17:45:38Z",
+      "duration_days": 6.82462962962963,
+      "is_pr": true
+    },
+    {
+      "number": 36,
+      "title": "adds get_nearest() functionality via new grabbit version",
+      "state": "closed",
+      "comments": 30,
+      "created_at": "2017-03-31T20:06:10Z",
+      "closed_at": "2017-04-05T18:35:12Z",
+      "duration_days": 4.9368287037037035,
+      "is_pr": true
+    },
+    {
+      "number": 122,
+      "title": "WIP: Refactoring of analysis module",
+      "state": "closed",
+      "comments": 30,
+      "created_at": "2018-02-05T22:32:29Z",
+      "closed_at": "2018-02-10T22:08:03Z",
+      "duration_days": 4.983032407407407,
+      "is_pr": true
+    },
+    {
+      "number": 487,
+      "title": "Allow wildcard names for model variables",
+      "state": "closed",
+      "comments": 28,
+      "created_at": "2019-09-10T14:00:13Z",
+      "closed_at": "2019-11-13T20:18:59Z",
+      "duration_days": 64.26303240740741,
+      "is_pr": false
+    },
+    {
+      "number": 555,
+      "title": "Replace each nested list comprehension with a single DB query in BIDSLayout.__repr__",
+      "state": "closed",
+      "comments": 27,
+      "created_at": "2019-12-09T16:16:51Z",
+      "closed_at": "2020-01-12T03:23:25Z",
+      "duration_days": 33.46289351851852,
+      "is_pr": false
+    },
+    {
+      "number": 426,
+      "title": "Derivatives indexing fails silently for deriv directories that lack a `dataset_description.json` file",
+      "state": "closed",
+      "comments": 27,
+      "created_at": "2019-03-27T13:42:43Z",
+      "closed_at": "2019-03-28T19:15:17Z",
+      "duration_days": 1.230949074074074,
+      "is_pr": false
+    },
+    {
+      "number": 361,
+      "title": "resample: ValueError: x and y arrays must be equal in length along interpolation axis.",
+      "state": "closed",
+      "comments": 27,
+      "created_at": "2019-01-28T22:51:37Z",
+      "closed_at": "2020-01-08T23:07:25Z",
+      "duration_days": 345.0109722222222,
+      "is_pr": false
+    },
+    {
+      "number": 299,
+      "title": "FYI: I enabled integration for pybids on zenodo",
+      "state": "closed",
+      "comments": 26,
+      "created_at": "2018-11-26T15:39:33Z",
+      "closed_at": "2018-12-12T14:03:26Z",
+      "duration_days": 15.933252314814816,
+      "is_pr": false
+    },
+    {
+      "number": 954,
+      "title": "Refactor add derivatives",
+      "state": "closed",
+      "comments": 25,
+      "created_at": "2023-03-06T20:22:35Z",
+      "closed_at": "2023-03-13T17:22:19Z",
+      "duration_days": 6.8748148148148145,
+      "is_pr": true
+    },
+    {
+      "number": 489,
+      "title": "Renaming ce to contrast precludes the use of contrast in statistical derivatives",
+      "state": "closed",
+      "comments": 24,
+      "created_at": "2019-09-11T02:04:48Z",
+      "closed_at": "2019-09-14T19:35:59Z",
+      "duration_days": 3.7299884259259257,
+      "is_pr": false
+    },
+    {
+      "number": 285,
+      "title": "Improve  BIDSLayout performance on very large datasets",
+      "state": "closed",
+      "comments": 24,
+      "created_at": "2018-11-14T23:05:01Z",
+      "closed_at": "2019-02-15T18:44:50Z",
+      "duration_days": 92.81931712962962,
+      "is_pr": false
+    },
+    {
+      "number": 324,
+      "title": "Don't drop NAs by default in _load_time_variables and analysis.setup()",
+      "state": "closed",
+      "comments": 21,
+      "created_at": "2018-12-14T22:16:23Z",
+      "closed_at": "2018-12-18T01:42:48Z",
+      "duration_days": 3.1433449074074074,
+      "is_pr": false
+    },
+    {
+      "number": 99,
+      "title": "Possible module for generating data acquisition report",
+      "state": "closed",
+      "comments": 21,
+      "created_at": "2018-01-04T17:00:08Z",
+      "closed_at": "2018-03-09T14:34:56Z",
+      "duration_days": 63.899166666666666,
+      "is_pr": false
+    },
+    {
+      "number": 649,
+      "title": "Require aligned input for logical operations",
+      "state": "closed",
+      "comments": 20,
+      "created_at": "2020-08-19T23:57:04Z",
+      "closed_at": "2020-10-24T04:22:56Z",
+      "duration_days": 65.18462962962963,
+      "is_pr": true
+    },
+    {
+      "number": 918,
+      "title": "modeling: run report of whole graph / create HTML reports",
+      "state": "closed",
+      "comments": 20,
+      "created_at": "2022-11-10T15:24:11Z",
+      "closed_at": "2023-04-06T22:01:46Z",
+      "duration_days": 147.27609953703703,
+      "is_pr": true
+    },
+    {
+      "number": 378,
+      "title": "How to handle file exclusions and inclusions in 0.8?",
+      "state": "closed",
+      "comments": 20,
+      "created_at": "2019-02-05T19:26:45Z",
+      "closed_at": "2019-02-15T18:44:52Z",
+      "duration_days": 9.970914351851851,
+      "is_pr": false
+    },
+    {
+      "number": 411,
+      "title": "ENH: Improve convolution performance for Sparse variables",
+      "state": "closed",
+      "comments": 19,
+      "created_at": "2019-03-02T00:44:39Z",
+      "closed_at": "2019-03-07T21:13:29Z",
+      "duration_days": 5.853356481481481,
+      "is_pr": true
+    },
+    {
+      "number": 520,
+      "title": "[WP] FEMA contrasts",
+      "state": "closed",
+      "comments": 19,
+      "created_at": "2019-10-22T17:54:30Z",
+      "closed_at": "2019-11-12T18:12:28Z",
+      "duration_days": 21.01247685185185,
+      "is_pr": true
+    },
+    {
+      "number": 284,
+      "title": "Convolve transformation packs dense representation into sparse variable object",
+      "state": "closed",
+      "comments": 19,
+      "created_at": "2018-11-12T20:53:01Z",
+      "closed_at": "2018-11-30T18:56:22Z",
+      "duration_days": 17.918993055555557,
+      "is_pr": false
+    },
+    {
+      "number": 247,
+      "title": "[WIP] 0.7 release",
+      "state": "closed",
+      "comments": 18,
+      "created_at": "2018-09-12T16:09:55Z",
+      "closed_at": "2018-10-06T20:53:59Z",
+      "duration_days": 24.19726851851852,
+      "is_pr": true
+    },
+    {
+      "number": 432,
+      "title": "WIP: 0.9",
+      "state": "closed",
+      "comments": 18,
+      "created_at": "2019-04-10T18:42:23Z",
+      "closed_at": "2019-05-14T03:10:48Z",
+      "duration_days": 33.35306712962963,
+      "is_pr": true
+    },
+    {
+      "number": 272,
+      "title": "Support variable reference in BIDS models",
+      "state": "closed",
+      "comments": 18,
+      "created_at": "2018-10-22T22:24:19Z",
+      "closed_at": "2018-10-24T15:59:35Z",
+      "duration_days": 1.7328240740740741,
+      "is_pr": false
+    },
+    {
+      "number": 211,
+      "title": "Various fixes",
+      "state": "closed",
+      "comments": 17,
+      "created_at": "2018-07-23T20:37:42Z",
+      "closed_at": "2018-07-24T23:34:52Z",
+      "duration_days": 1.1230324074074074,
+      "is_pr": true
+    },
+    {
+      "number": 672,
+      "title": "[REF] Incremental variable loading in Step setup",
+      "state": "closed",
+      "comments": 17,
+      "created_at": "2020-10-20T18:29:31Z",
+      "closed_at": "2020-10-21T17:05:31Z",
+      "duration_days": 0.9416666666666667,
+      "is_pr": true
+    },
+    {
+      "number": 490,
+      "title": "layout.get doesn't find any entities when passed a numpy.int64 value for run",
+      "state": "closed",
+      "comments": 17,
+      "created_at": "2019-09-11T02:54:26Z",
+      "closed_at": "2019-09-11T21:22:39Z",
+      "duration_days": 0.7695949074074074,
+      "is_pr": false
+    },
+    {
+      "number": 1013,
+      "title": "ENH: Speed up indexing by bulk committing to database",
+      "state": "closed",
+      "comments": 16,
+      "created_at": "2023-08-03T01:10:09Z",
+      "closed_at": "2023-08-07T15:41:49Z",
+      "duration_days": 4.605324074074074,
+      "is_pr": true
+    },
+    {
+      "number": 548,
+      "title": "ENH: Model spec module and associated utilities",
+      "state": "closed",
+      "comments": 16,
+      "created_at": "2019-11-15T18:52:18Z",
+      "closed_at": "2020-04-28T16:29:42Z",
+      "duration_days": 164.9009722222222,
+      "is_pr": true
+    }
+  ]
+}

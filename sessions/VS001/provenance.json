@@ -1,0 +1,11 @@
+{
+  "question_id": "QUESTION-000009",
+  "timestamp": "2026-07-11T20:30:55.136877",
+  "components_used": [
+    "QuestionRegistry",
+    "ClaimRegistry",
+    "FindingRegistry",
+    "ResearchScout",
+    "HypothesisDiscovery"
+  ]
+}

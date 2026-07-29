@@ -1,0 +1,19 @@
+{
+  "consumer_id": "neurodiagnoses",
+  "domain": "neurodegeneration",
+  "entities": [
+    "ptau217",
+    "ptau181",
+    "nfl",
+    "csf",
+    "amyloid",
+    "tau",
+    "apoe"
+  ],
+  "predicates": [],
+  "trust_threshold": 75,
+  "accepted_formats": [
+    "json",
+    "rdf"
+  ]
+}

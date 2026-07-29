@@ -1,0 +1,29 @@
+{
+  "domain": "neuroscience",
+  "focus": "Neuroinflammation",
+  "question": "How does neuroinflammation drive neurodegeneration and why is it paradoxically protective?",
+  "description": "Understanding the dual role of microglial activation in brain disease",
+  "entities": ["microglia", "neuroinflammation", "complement", "TREM2", "synaptic pruning", "neurodegeneration"],
+  "key_contradictions": [
+    "Anti-inflammatory trials fail despite microglial activation in disease",
+    "TREM2 variants both increase and decrease AD risk depending on context",
+    "Complement-mediated pruning is essential for development but toxic in aging"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "The failure of anti-inflammatory approaches is not due to wrong target but to a threshold-dependent compensatory cascade where microglial inhibition triggers reactive astrocytosis through a hidden CNS communication pathway that amplifies damage.",
+      "expected_type": "C",
+      "rationale": "Threshold + compensatory mediator mechanism"
+    },
+    {
+      "statement": "What if TREM2's dual role is mediated by an unrecognized switch between homeostatic and inflammatory states that depends on cellular metabolism through an unknown glycolysis-synapse coupling mechanism?",
+      "expected_type": "D",
+      "rationale": "Reframes through metabolic switch hypothesis"
+    },
+    {
+      "statement": "Complement-mediated synaptic pruning becomes pathological when combined with a circadian disruption in microglial phagocytic rhythm that leads to inappropriate timing of synapse removal during memory consolidation windows.",
+      "expected_type": "C",
+      "rationale": "Cross-domain connection - circadian to pruning"
+    }
+  ]
+}

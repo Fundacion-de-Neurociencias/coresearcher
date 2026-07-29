@@ -1,0 +1,17 @@
+{
+  "id": "QUESTION-000009",
+  "text": "What emerging blood biomarkers predict preclinical Alzheimer's disease?",
+  "domain": "neurodegeneration",
+  "context": null,
+  "status": "active",
+  "generated_hypotheses": [
+    "HYP-001",
+    "HYP-002",
+    "HYP-003",
+    "HYP-004",
+    "HYP-005"
+  ],
+  "related_findings": [],
+  "createdAt": "2026-07-11T20:30:55.115020",
+  "updatedAt": "2026-07-11T20:30:55.131964"
+}

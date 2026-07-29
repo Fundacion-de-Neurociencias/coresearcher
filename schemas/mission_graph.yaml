@@ -1,0 +1,68 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "https://coresearcher.dev/schemas/mission_graph.yaml"
+title: "MissionGraph Schema"
+description: "Estructura formal para el grafo de ejecución distribuida (Mission -> Brief -> Execution)."
+type: "object"
+required:
+  - graph_id
+  - nodes
+  - edges
+properties:
+  graph_id:
+    type: "string"
+    pattern: "^MG-[0-9]{6}$"
+  nodes:
+    type: "array"
+    items:
+      type: "object"
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: "string"
+          pattern: "^(MISSION|BRIEF|EXEC)-[0-9]{6}$"
+        type:
+          type: "string"
+          enum:
+            - Mission
+            - Brief
+            - Execution
+        # Mission attributes
+        status:
+          type: "string"
+          enum: [PENDING, IN_PROGRESS, COMPLETED, FAILED]
+        # Brief attributes
+        context:
+          type: "string"
+        allowed_tools:
+          type: "array"
+          items:
+            type: "string"
+        success_criteria:
+          type: "string"
+        # Execution attributes
+        agent_id:
+          type: "string"
+        trace_log:
+          type: "string"
+  edges:
+    type: "array"
+    items:
+      type: "object"
+      required:
+        - from
+        - to
+        - type
+      properties:
+        from:
+          type: "string"
+        to:
+          type: "string"
+        type:
+          type: "string"
+          enum:
+            - spawns_brief      # Mission -> Brief
+            - assigned_to       # Brief -> Execution
+            - triggered_by      # Decision -> Mission (link con DecisionGraph)
+            - generated_evidence # Execution -> Claim/Artifact (link con EvidenceGraph)

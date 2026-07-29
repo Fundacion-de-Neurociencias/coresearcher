@@ -1,0 +1,178 @@
+{
+  "report": "artifacts/langgraph_trajectory_report_v0.md",
+  "total_elements": 33,
+  "counts": {
+    "observable": 0,
+    "derivable": 0,
+    "inferred": 33,
+    "unknown": 0
+  },
+  "precision_observable": 0.0,
+  "classified_elements": [
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "alternative",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "criterion",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "evidence",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "gap",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "gap",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    },
+    {
+      "type": "gap",
+      "text_preview": "",
+      "epistemic_status": "inferred"
+    }
+  ]
+}

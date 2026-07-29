@@ -1,0 +1,184 @@
+[
+  {
+    "case_id": "mne-tools/mne-python#4414",
+    "dimension_1_what_happened": "Se eliminó la función `regress` de Epochs metadata",
+    "dimension_2_motivation": "Conflictos con el enfoque pandas-query, complejidad de mantenimiento de tener dos métodos que hacen cosas similares",
+    "dimension_3_constraints": [
+      "backward compatibility con API existente",
+      "consistencia con enfoque pandas-query"
+    ],
+    "dimension_4_uncertainties": [
+      "impacto en usuarios existentes que usaban regress"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "mantener ambas funciones (regress y pandas-query) a costa de complejidad",
+      "modificar regress para que trabaje con pandas-query"
+    ]
+  },
+  {
+    "case_id": "mne-tools/mne-python#3728",
+    "dimension_1_what_happened": "Se añadió módulo receptive field como PR más pequeño en lugar de abordar el problema general de encoding model",
+    "dimension_2_motivation": "Simplificar el alcance para poder completar el trabajo, evitar un PR demasiado grande y arriesgado",
+    "dimension_3_constraints": [
+      "complejidad técnica del encoding model general",
+      "capacidad de revisión del PR (tamaño manejable)"
+    ],
+    "dimension_4_uncertainties": [
+      "si el enfoque general será adoptado en el futuro",
+      "si el módulo receptive field será suficiente a largo plazo"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "implementar encoding model completo en un solo PR",
+      "dividir en múltiples PRs parciales"
+    ]
+  },
+  {
+    "case_id": "nilearn/nilearn#2019",
+    "dimension_1_what_happened": "Se movió HTMLDocument y funcionalidad de reporting a subpaquete nilearn.reporting separado",
+    "dimension_2_motivation": "Mantener el núcleo de nilearn libre de dependencia matplotlib, separar concerns",
+    "dimension_3_constraints": [
+      "backward compatibility con usuarios existentes",
+      "dependencia de matplotlib en el núcleo"
+    ],
+    "dimension_4_uncertainties": [
+      "adopción de la nueva API de reporting",
+      "complejidad adicional de subpaquete separado"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "mantener HTMLDocument dentro de nilearn.plotting",
+      "eliminar funcionalidad de reporting completamente"
+    ]
+  },
+  {
+    "case_id": "nilearn/nilearn#1766",
+    "dimension_1_what_happened": "Se cambió de papaya a brainsprite para el visor 3D en plotting.view_stat_map",
+    "dimension_2_motivation": "Reducción drástica de uso de memoria (papaya ~2MB vs brainsprite ~15KB), notebooks más manejables",
+    "dimension_3_constraints": [
+      "tamaño de notebooks (12MB con papaya)",
+      "dependencias JavaScript de papaya"
+    ],
+    "dimension_4_uncertainties": [
+      "si brainsprite ofrecería todas las features de papaya",
+      "compatibilidad con diferentes navegadores"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "mantener papaya a costa de tamaño de notebooks",
+      "optimizar papaya internamente",
+      "usar otra alternativa diferente"
+    ]
+  },
+  {
+    "case_id": "bids-standard/pybids#356",
+    "dimension_1_what_happened": "Se ajustó dinámicamente la tasa de oversampling en Convolve basado en la duración más corta del evento",
+    "dimension_2_motivation": "Manejar eventos de corta duración sin exponer parámetros en la API del spec BIDS, mantener simplicidad",
+    "dimension_3_constraints": [
+      "cumplir con el estándar BIDS",
+      "no exponer parámetros complejos al usuario"
+    ],
+    "dimension_4_uncertainties": [
+      "si el ajuste automático cubriría todos los casos de uso",
+      "rendimiento con diferentes tasas de oversampling"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "usuario llama ToDense manualmente antes de Convolve",
+      "exponer el parámetro de oversampling en la API"
+    ]
+  },
+  {
+    "case_id": "bids-standard/pybids#369",
+    "dimension_1_what_happened": "Se eliminó la dependencia grabbit y se portó su funcionalidad directamente a pybids",
+    "dimension_2_motivation": "Simplificar el roadmap de pybids, dar a los mantenedores control total sobre el API de layout",
+    "dimension_3_constraints": [
+      "dependencia externa grabbit",
+      "compatibilidad con fitlins y neuroscout"
+    ],
+    "dimension_4_uncertainties": [
+      "esfuerzo requerido para portar toda la funcionalidad",
+      "mantenimiento a largo plazo de la funcionalidad portada"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "mantener grabbit como dependencia externa",
+      "actualizar grabbit en lugar de portar"
+    ]
+  },
+  {
+    "case_id": "mne-tools/mne-python#2154",
+    "dimension_1_what_happened": "Discusión iterativa sobre gráficos de epochs concatenados sin decisión explícita",
+    "dimension_2_motivation": "N/A - no hubo decisión explícita",
+    "dimension_3_constraints": [
+      "complejidad de implementación",
+      "consenso entre revisores"
+    ],
+    "dimension_4_uncertainties": [
+      "si la feature sería útil para suficientes usuarios",
+      "cómo manejar diferentes casos de uso"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "N/A - no se discutieron alternativas explícitas"
+    ]
+  },
+  {
+    "case_id": "mne-tools/mne-python#766",
+    "dimension_1_what_happened": "Discusión de implementación de GUI transcraniana sin decisión explícita",
+    "dimension_2_motivation": "N/A - no hubo decisión explícita",
+    "dimension_3_constraints": [
+      "recursos de desarrollo limitados",
+      "integración con arquitectura existente"
+    ],
+    "dimension_4_uncertainties": [
+      "demanda real de la feature",
+      "prioridad en el roadmap"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "N/A - no se discutieron alternativas explícitas"
+    ]
+  },
+  {
+    "case_id": "mne-tools/mne-python#2676",
+    "dimension_1_what_happened": "Discusión de implementación de lector EEGLAB sin decisión explícita",
+    "dimension_2_motivation": "N/A - no hubo decisión explícita",
+    "dimension_3_constraints": [
+      "formato EEGLAB complejo y variable",
+      "recursos de desarrollo"
+    ],
+    "dimension_4_uncertainties": [
+      "cobertura completa de formatos EEGLAB",
+      "mantenimiento futuro"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "N/A - no se discutieron alternativas explícitas"
+    ]
+  },
+  {
+    "case_id": "nilearn/nilearn#1016",
+    "dimension_1_what_happened": "Discusión técnica de surface plotting sin decisión explícita",
+    "dimension_2_motivation": "N/A - no hubo decisión explícita",
+    "dimension_3_constraints": [
+      "limitaciones de la librería de plotting 3D",
+      "compatibilidad con diferentes backends"
+    ],
+    "dimension_4_uncertainties": [
+      "mejor enfoque técnico para surface plotting",
+      "recursos disponibles"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "N/A - no se discutieron alternativas explícitas"
+    ]
+  },
+  {
+    "case_id": "bids-standard/pybids#451",
+    "dimension_1_what_happened": "Reporte y discusión de bug en list metadata sin decisión explícita",
+    "dimension_2_motivation": "N/A - no hubo decisión explícita",
+    "dimension_3_constraints": [
+      "comportamiento correcto según spec BIDS",
+      "compatibilidad con versiones anteriores"
+    ],
+    "dimension_4_uncertainties": [
+      "alcance del bug",
+      "impacto en usuarios"
+    ],
+    "dimension_5_rejected_alternatives": [
+      "N/A - no se discutieron alternativas explícitas"
+    ]
+  }
+]

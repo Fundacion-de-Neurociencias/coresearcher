@@ -1,0 +1,570 @@
+{
+  "findings": {
+    "FIND-000001": {
+      "id": "FIND-000001",
+      "subject": "ptau217",
+      "predicate": "predicts",
+      "object": "outcome",
+      "population": "preclinical",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.82,
+      "derivedFrom": [
+        "CLAIM-TEST"
+      ],
+      "domain": "neurodegeneration",
+      "createdAt": "2026-07-11T13:18:25.446992",
+      "updatedAt": "2026-07-11T13:18:25.447018",
+      "metadata": {
+        "original_text": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical Alzheimer's disease.",
+        "extracted_entities": [
+          "pTau217",
+          "Alzheimer"
+        ]
+      }
+    },
+    "FIND-000002": {
+      "id": "FIND-000002",
+      "subject": "alzheimer",
+      "predicate": "predicts",
+      "object": "outcome",
+      "population": "preclinical",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000001"
+      ],
+      "domain": "neurodegeneration",
+      "createdAt": "2026-07-11T13:19:05.145804",
+      "updatedAt": "2026-07-11T13:19:05.145861",
+      "metadata": {
+        "original_text": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease.",
+        "extracted_entities": [
+          "Alzheimer",
+          "pTau217",
+          "Plasma"
+        ]
+      }
+    },
+    "FIND-000003": {
+      "id": "FIND-000003",
+      "subject": "ptau217",
+      "predicate": "predicts",
+      "object": "unknown",
+      "population": "alzheimer",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000002"
+      ],
+      "domain": "neurodegeneration",
+      "createdAt": "2026-07-11T13:19:05.148657",
+      "updatedAt": "2026-07-11T13:19:05.148672",
+      "metadata": {
+        "original_text": "This study investigated the potential of phosphorylated plasma Tau217 ratio (pTau217R) and plasma amyloid beta (A&#x3b2;) 42/A&#x3b2;40 in predicting brain amyloid levels measured by positron emission",
+        "extracted_entities": [
+          "Tau217",
+          "Alzheimer",
+          "x3b2",
+          "Centiloid"
+        ]
+      }
+    },
+    "FIND-000004": {
+      "id": "FIND-000004",
+      "subject": "unknown",
+      "predicate": "decreases",
+      "object": "unknown",
+      "population": "general",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000003"
+      ],
+      "domain": "general_biomedical",
+      "createdAt": "2026-07-11T13:19:05.150625",
+      "updatedAt": "2026-07-11T13:19:05.150639",
+      "metadata": {
+        "original_text": "These results contribute to clarification of the mechanism by which poly(GR) drives TDP-43 proteinopathy, confirm that G<sub>4</sub>C<sub>2</sub>-targeted therapeutics reduce TDP-43 pathology in vivo,",
+        "extracted_entities": []
+      }
+    },
+    "FIND-000005": {
+      "id": "FIND-000005",
+      "subject": "alzheimer",
+      "predicate": "predicts",
+      "object": "outcome",
+      "population": "preclinical",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000001"
+      ],
+      "domain": "neurodegeneration",
+      "createdAt": "2026-07-11T13:20:01.562823",
+      "updatedAt": "2026-07-11T13:20:01.562851",
+      "metadata": {
+        "original_text": "Plasma pTau217 predicts continuous brain amyloid levels in preclinical and early Alzheimer's disease.",
+        "extracted_entities": [
+          "Alzheimer",
+          "pTau217",
+          "Plasma"
+        ]
+      }
+    },
+    "FIND-000006": {
+      "id": "FIND-000006",
+      "subject": "ptau217",
+      "predicate": "predicts",
+      "object": "unknown",
+      "population": "alzheimer",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000002"
+      ],
+      "domain": "neurodegeneration",
+      "createdAt": "2026-07-11T13:20:01.564182",
+      "updatedAt": "2026-07-11T13:20:01.564188",
+      "metadata": {
+        "original_text": "This study investigated the potential of phosphorylated plasma Tau217 ratio (pTau217R) and plasma amyloid beta (A&#x3b2;) 42/A&#x3b2;40 in predicting brain amyloid levels measured by positron emission",
+        "extracted_entities": [
+          "Tau217",
+          "Alzheimer",
+          "x3b2",
+          "Centiloid"
+        ]
+      }
+    },
+    "FIND-000007": {
+      "id": "FIND-000007",
+      "subject": "unknown",
+      "predicate": "decreases",
+      "object": "unknown",
+      "population": "general",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000003"
+      ],
+      "domain": "general_biomedical",
+      "createdAt": "2026-07-11T13:20:01.565125",
+      "updatedAt": "2026-07-11T13:20:01.565130",
+      "metadata": {
+        "original_text": "These results contribute to clarification of the mechanism by which poly(GR) drives TDP-43 proteinopathy, confirm that G<sub>4</sub>C<sub>2</sub>-targeted therapeutics reduce TDP-43 pathology in vivo,",
+        "extracted_entities": []
+      }
+    },
+    "FIND-000008": {
+      "id": "FIND-000008",
+      "subject": "plasma",
+      "predicate": "associated_with",
+      "object": "associated_variable",
+      "population": "cognitively unimpaired",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000004"
+      ],
+      "domain": "general_biomedical",
+      "createdAt": "2026-07-11T13:20:01.566314",
+      "updatedAt": "2026-07-11T13:20:01.566318",
+      "metadata": {
+        "original_text": "Plasma NfL is associated with the APOE \u03b54 allele, brain imaging measurements of neurodegeneration, and lower recall memory scores in cognitively unimpaired late-middle-aged and older adults.",
+        "extracted_entities": [
+          "Plasma"
+        ]
+      }
+    },
+    "FIND-000009": {
+      "id": "FIND-000009",
+      "subject": "one",
+      "predicate": "predicts",
+      "object": "outcome",
+      "population": "general",
+      "evidence_type": "extracted",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000005"
+      ],
+      "domain": "general_biomedical",
+      "createdAt": "2026-07-11T13:20:01.567160",
+      "updatedAt": "2026-07-11T13:20:01.567163",
+      "metadata": {
+        "original_text": "One promising candidate is the synaptic protein neurogranin that seems specific for AD and predicts future rate of cognitive deterioration.",
+        "extracted_entities": [
+          "One"
+        ]
+      }
+    },
+    "FIND-000010": {
+      "id": "FIND-000010",
+      "subject": "Alzheimer",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000001"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.355586",
+      "updatedAt": "2026-07-11T20:29:27.355591",
+      "metadata": {}
+    },
+    "FIND-000011": {
+      "id": "FIND-000011",
+      "subject": "Tau217",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000002"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.357056",
+      "updatedAt": "2026-07-11T20:29:27.357064",
+      "metadata": {}
+    },
+    "FIND-000012": {
+      "id": "FIND-000012",
+      "subject": "unknown",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000003"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.358187",
+      "updatedAt": "2026-07-11T20:29:27.358192",
+      "metadata": {}
+    },
+    "FIND-000013": {
+      "id": "FIND-000013",
+      "subject": "Plasma",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000004"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.359039",
+      "updatedAt": "2026-07-11T20:29:27.359042",
+      "metadata": {}
+    },
+    "FIND-000014": {
+      "id": "FIND-000014",
+      "subject": "One",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000005"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.359804",
+      "updatedAt": "2026-07-11T20:29:27.359806",
+      "metadata": {}
+    },
+    "FIND-000015": {
+      "id": "FIND-000015",
+      "subject": "pTau217",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000006"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.360562",
+      "updatedAt": "2026-07-11T20:29:27.360564",
+      "metadata": {}
+    },
+    "FIND-000016": {
+      "id": "FIND-000016",
+      "subject": "unknown",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000007"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.361323",
+      "updatedAt": "2026-07-11T20:29:27.361326",
+      "metadata": {}
+    },
+    "FIND-000017": {
+      "id": "FIND-000017",
+      "subject": "Plasma",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000008"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.362140",
+      "updatedAt": "2026-07-11T20:29:27.362143",
+      "metadata": {}
+    },
+    "FIND-000018": {
+      "id": "FIND-000018",
+      "subject": "One",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000009"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:29:27.362968",
+      "updatedAt": "2026-07-11T20:29:27.362970",
+      "metadata": {}
+    },
+    "FIND-000019": {
+      "id": "FIND-000019",
+      "subject": "Alzheimer",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000001"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.116748",
+      "updatedAt": "2026-07-11T20:30:55.116753",
+      "metadata": {}
+    },
+    "FIND-000020": {
+      "id": "FIND-000020",
+      "subject": "Tau217",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000002"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.117785",
+      "updatedAt": "2026-07-11T20:30:55.117789",
+      "metadata": {}
+    },
+    "FIND-000021": {
+      "id": "FIND-000021",
+      "subject": "unknown",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000003"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.119132",
+      "updatedAt": "2026-07-11T20:30:55.119135",
+      "metadata": {}
+    },
+    "FIND-000022": {
+      "id": "FIND-000022",
+      "subject": "Plasma",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000004"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.120106",
+      "updatedAt": "2026-07-11T20:30:55.120109",
+      "metadata": {}
+    },
+    "FIND-000023": {
+      "id": "FIND-000023",
+      "subject": "One",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000005"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.121107",
+      "updatedAt": "2026-07-11T20:30:55.121110",
+      "metadata": {}
+    },
+    "FIND-000024": {
+      "id": "FIND-000024",
+      "subject": "pTau217",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "neurodegeneration",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000006"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.122211",
+      "updatedAt": "2026-07-11T20:30:55.122214",
+      "metadata": {}
+    },
+    "FIND-000025": {
+      "id": "FIND-000025",
+      "subject": "unknown",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.6,
+      "derivedFrom": [
+        "CLAIM-000007"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.123335",
+      "updatedAt": "2026-07-11T20:30:55.123338",
+      "metadata": {}
+    },
+    "FIND-000026": {
+      "id": "FIND-000026",
+      "subject": "Plasma",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000008"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.124484",
+      "updatedAt": "2026-07-11T20:30:55.124486",
+      "metadata": {}
+    },
+    "FIND-000027": {
+      "id": "FIND-000027",
+      "subject": "One",
+      "predicate": "predicts",
+      "object": "target",
+      "population": "general_biomedical",
+      "evidence_type": "observational",
+      "effect_size": null,
+      "p_value": null,
+      "sample_size": null,
+      "quality_score": 0.5,
+      "derivedFrom": [
+        "CLAIM-000009"
+      ],
+      "domain": null,
+      "createdAt": "2026-07-11T20:30:55.126104",
+      "updatedAt": "2026-07-11T20:30:55.126111",
+      "metadata": {}
+    }
+  },
+  "next_id": 28
+}

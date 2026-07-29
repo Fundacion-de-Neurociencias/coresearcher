@@ -1,0 +1,12 @@
+{
+  "total_claims": 897,
+  "observable_claims": 245,
+  "derivable_claims": 402,
+  "inferred_claims": 0,
+  "unknown_claims": 250,
+  "observable_ratio": 0.2731,
+  "evidence_coverage": 0.7213,
+  "quote_coverage": 1.0,
+  "url_coverage": 1.0,
+  "auditability_score": 1.0
+}

@@ -1,0 +1,29 @@
+{
+  "domain": "oncology",
+  "focus": "Glioblastoma Multiforme",
+  "question": "What drives treatment resistance and recurrence in glioblastoma?",
+  "description": "Understanding the glioma stem cell niche and therapy escape mechanisms",
+  "entities": ["glioma stem cells", "EGFR", "PDGFR", "hypoxia", "blood-brain barrier", "tumor microenvironment"],
+  "key_contradictions": [
+    "Why do EGFR inhibitors fail despite target expression?",
+    "Glioma stem cells persist after radiotherapy - how?",
+    "Tumor heterogeneity increases after treatment rather than decreases"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Radiotherapy resistance in glioblastoma is not caused by enhanced DNA repair in glioma stem cells but by a threshold response in the tumor microenvironment that activates quiescent cells only when nutrient gradients are disrupted.",
+      "expected_type": "D",
+      "rationale": "Reframes resistance mechanism through environmental mediation"
+    },
+    {
+      "statement": "The blood-brain barrier dysfunction in glioblastoma creates a compensatory feedback loop that increases after each therapy cycle, leading to enhanced drug efflux through a previously unknown transporter pathway.",
+      "expected_type": "C",
+      "rationale": "Proposes novel feedback mechanism with hidden mediator"
+    },
+    {
+      "statement": "EGFR inhibitor resistance is mediated by a trans-differentiation program that converts bulk tumor cells into a stem-like state under hypoxic conditions through a HIF-EGFR crosstalk mechanism.",
+      "expected_type": "C",
+      "rationale": "Cross-domain connection with threshold effect"
+    }
+  ]
+}

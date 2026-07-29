@@ -1,0 +1,444 @@
+{
+  "total_claims": 33,
+  "counts": {
+    "observable": 0,
+    "derivable": 33,
+    "inferred": 0,
+    "unknown": 0
+  },
+  "observable_ratio": 0.0,
+  "evidence_coverage": 1.0,
+  "inference_ratio": 0.0,
+  "anchored_claims": [
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "alternative",
+      "section": "Alternatives",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "criterion",
+      "section": "Criteria",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "evidence",
+      "section": "Evidence",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "gap",
+      "section": "Observable",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "gap",
+      "section": "Inferible",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    },
+    {
+      "claim": "",
+      "type": "gap",
+      "section": "Desconocido",
+      "sources": {
+        "issue": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "pr": "#8450: fix(runtime): preserve explicitly falsy context and store in merge",
+        "commit": "Commit 30c4d58: chore(deps): bump jupyterlab from 4.5.9 to 4.5.10 in /libs/langgraph (#8440)\n\nbu",
+        "release": null,
+        "zenodo": null
+      },
+      "classification": "derivable"
+    }
+  ],
+  "unanchored_claims": []
+}

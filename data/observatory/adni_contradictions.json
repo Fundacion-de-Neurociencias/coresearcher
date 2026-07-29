@@ -1,0 +1,40 @@
+[
+  {
+    "contradiction_id": "contrad_001",
+    "type": "methodology_mismatch",
+    "observations": ["obs_003", "obs_010"],
+    "description": "Transfer learning (obs_003) vs standalone deep learning (obs_010) - different ML approaches reported with no comparison",
+    "evidence_a": "obs_003: Transfer learning achieves 85% accuracy on frozen features",
+    "evidence_b": "obs_010: Standalone deep learning achieves 85% accuracy with trained model",
+    "resolution_status": "unresolved"
+  },
+  {
+    "contradiction_id": "contrad_002",
+    "type": "biomarker_timing",
+    "observations": ["obs_003", "obs_004", "obs_005"],
+    "description": "Biomarker predictive value reported at different timepoints - unclear optimal timing window",
+    "evidence_a": "obs_004: PACC detects preclinical changes at year 1",
+    "evidence_b": "obs_005: Plasma tau changes detectable at year 2",
+    "evidence_c": "obs_003: MRI changes detectable at year 3+",
+    "resolution_status": "unresolved"
+  },
+  {
+    "contradiction_id": "contrad_003",
+    "type": "sample_overlap",
+    "observations": ["obs_014", "obs_015", "obs_018"],
+    "description": "Multiple biomarker studies use overlapping but undefined sample subsets",
+    "evidence_a": "obs_014: Random forest on metabolomics n=120",
+    "evidence_b": "obs_015: Genetic modeling n=500",
+    "evidence_c": "obs_018: Metabolite signatures n=80",
+    "resolution_status": "unresolved"
+  },
+  {
+    "contradiction_id": "contrad_004",
+    "type": "outcome_definition",
+    "observations": ["obs_009", "obs_020"],
+    "description": "Primary outcome (dementia diagnosis) vs surrogate outcome (NfL) - different endpoints may yield different conclusions",
+    "evidence_a": "obs_009: Progression to AD dementia is primary outcome",
+    "evidence_b": "obs_020: Plasma NfL correlates with neurodegeneration rate but not directly with diagnosis",
+    "resolution_status": "unresolved"
+  }
+]

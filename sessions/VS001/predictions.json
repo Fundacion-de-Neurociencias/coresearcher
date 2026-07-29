@@ -1,0 +1,27 @@
+[
+  {
+    "hypothesis_id": "HYP-001",
+    "prediction": "If Combined pTau217 and APOE4 improve predi..., then measurable effect in validation cohort",
+    "testable": true
+  },
+  {
+    "hypothesis_id": "HYP-002",
+    "prediction": "If Plasma NfL levels correlate with neurode..., then measurable effect in validation cohort",
+    "testable": true
+  },
+  {
+    "hypothesis_id": "HYP-003",
+    "prediction": "If Plasma pTau217 ratio normalizes after an..., then measurable effect in validation cohort",
+    "testable": true
+  },
+  {
+    "hypothesis_id": "HYP-004",
+    "prediction": "If Blood biomarker panels can stratify prec..., then measurable effect in validation cohort",
+    "testable": true
+  },
+  {
+    "hypothesis_id": "HYP-005",
+    "prediction": "If Serial pTau217 measurements predict cogn..., then measurable effect in validation cohort",
+    "testable": true
+  }
+]

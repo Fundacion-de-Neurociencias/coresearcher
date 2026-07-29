@@ -1,0 +1,91 @@
+repo,issue,decision_exists,decision_summary,evidence_types,alternatives,disagreement,recoverable,observation_note
+mne-tools/mne-python,2154,NO,,NONE,NONE,NONE,NONE,Read first 20 comments only. Iterative code review without explicit decision.
+mne-tools/mne-python,4414,YES,Remove the `regress` function from Epochs metadata. Decision was explicit in thread.,DATA;USER_REPORT,YES,YES,YES,Read first 20 comments. Body: lets decide whether we like it. Explicit removal decision.
+mne-tools/mne-python,3728,YES,Add receptive field module as smaller focused PR instead of tackling general encoding model.,LITERATURE;EXPERIMENT,YES,YES,YES,Read first 20 comments. Body explicitly states decision to simplify scope.
+mne-tools/mne-python,766,NO,,NONE,NONE,NONE,NONE,Read first 20 comments only. Implementation discussion without explicit decision.
+mne-tools/mne-python,2676,NO,,NONE,NONE,NONE,NONE,"Read first 20 comments only. Iterative implementation, no explicit decision."
+mne-tools/mne-python,3205,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,580,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,2710,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,776,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,1261,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,11152,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,7758,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,2206,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,379,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,1462,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,1629,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,3310,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,742,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,1762,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,7247,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,1403,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,4971,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,10920,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,2306,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,7717,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,8862,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,9687,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,3275,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,487,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+mne-tools/mne-python,2680,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2019,YES,Move HTMLDocument and reporting into nilearn.reporting subpackage. Keep core free of matplotlib.,USER_REPORT;EXPERT_OPINION,YES,YES,YES,Read first 20 comments. Explicit architectural decision.
+nilearn/nilearn,1766,YES,Switch from papaya to brainsprite for 3D viewer in plotting.view_stat_map.,DATA;USER_REPORT;LITERATURE,YES,YES,YES,Read first 20 comments. Explicit library switch decision.
+nilearn/nilearn,1016,NO,,NONE,NONE,NONE,NONE,Read first 20 comments only. Implementation discussion without explicit decision.
+nilearn/nilearn,2528,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,1516,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,219,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2738,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2076,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2171,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,1182,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,1691,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,245,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2477,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2000,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,3173,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2097,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,657,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2327,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,693,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,430,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,3729,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,186,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2723,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,1730,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2946,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,5863,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,175,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,1236,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,2532,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+nilearn/nilearn,441,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,356,YES,Dynamically adjust oversampling rate in Convolve based on shortest event duration.,DATA;EXPERIMENT,YES,YES,YES,Read first 20 comments. Three explicit alternatives debated.
+bids-standard/pybids,451,NO,,NONE,NONE,NONE,NONE,Read first 20 comments only. Bug fix discussion.
+bids-standard/pybids,369,YES,Drop grabbit dependency and port functionality directly into pybids.,USER_REPORT,YES,YES,YES,Read first 20 comments. Explicit decision to remove grabbit.
+bids-standard/pybids,395,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,36,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,122,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,487,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,555,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,426,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,361,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,299,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,954,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,489,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,285,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,324,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,99,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,649,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,918,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,378,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,411,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,520,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,284,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,247,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,432,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,272,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,211,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,672,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,490,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,1013,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.
+bids-standard/pybids,548,,,,,,,Human observation required — full discussion not read. Requires full-thread reading to classify Q1-Q6.

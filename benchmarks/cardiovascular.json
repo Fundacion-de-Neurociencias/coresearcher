@@ -1,0 +1,29 @@
+{
+  "domain": "cardiology",
+  "focus": "Cardiovascular Disease",
+  "question": "What explains the unexpected efficacy of PCSK9 inhibitors in patients with normal cholesterol?",
+  "description": "Investigating the pleiotropic effects beyond lipid metabolism",
+  "entities": ["PCSK9", "cholesterol", "inflammation", "endothelial function", "platelet activation", "cardiovascular events"],
+  "key_contradictions": [
+    "PCSK9 inhibitors reduce events beyond what LDL lowering predicts",
+    "Some patients with high LDL never develop cardiovascular disease",
+    "Statins show benefit in heart failure despite no atherosclerosis"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "What if PCSK9's cardiovascular benefit is not mediated through LDL cholesterol but through a novel immunomodulatory pathway that regulates vascular inflammation through an unknown interaction with TLR signaling?",
+      "expected_type": "D",
+      "rationale": "Reframes mechanism through novel immunomodulation"
+    },
+    {
+      "statement": "The protection in high-LDL non-progressors is mediated by a threshold-dependent compensatory mechanism involving HDL remodeling that only activates when cholesterol exceeds a specific level relative to ApoE genotype.",
+      "expected_type": "C",
+      "rationale": "Threshold effect with genetic modifier"
+    },
+    {
+      "statement": "Statin benefits in heart failure are not due to cholesterol reduction but to a fundamental modulation of mitochondrial function in cardiomyocytes that converges on autophagy through an HMGCR-independent pathway.",
+      "expected_type": "C",
+      "rationale": "Proposes hidden convergent mechanism"
+    }
+  ]
+}

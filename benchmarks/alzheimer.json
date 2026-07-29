@@ -1,0 +1,29 @@
+{
+  "domain": "neurodegeneration",
+  "focus": "Alzheimer's Disease",
+  "question": "What are the fundamental mechanisms driving Alzheimer's disease progression?",
+  "description": "Understanding the causal relationship between amyloid, tau, and neurodegeneration",
+  "entities": ["amyloid-beta", "tau", "apoe4", "ptau217", "nfl", "neurodegeneration"],
+  "key_contradictions": [
+    "Amyloid hypothesis vs. failure of amyloid-targeted therapies",
+    "Why do some APOE4 carriers not develop AD?",
+    "What explains the disconnect between amyloid burden and cognitive decline?"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Amyloid-beta deposition is not the primary cause but a protective response to early-stage neurodegeneration, attempting to sequester toxic oligomers.",
+      "expected_type": "D",
+      "rationale": "Inverse causal relationship - reframes amyloid as protective rather than pathological"
+    },
+    {
+      "statement": "APOE4 acts as an adaptation marker rather than a risk factor, indicating enhanced lipid transport capacity in early stages before becoming overwhelmed.",
+      "expected_type": "D",
+      "rationale": "Reframes risk factor as adaptive response"
+    },
+    {
+      "statement": "The relationship between amyloid and tau is mediated by a compensatory feedback mechanism that fails at a threshold effect determined by neuronal stress levels.",
+      "expected_type": "C",
+      "rationale": "Proposes novel mediator and threshold effect"
+    }
+  ]
+}

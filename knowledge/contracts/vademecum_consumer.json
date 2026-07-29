@@ -1,0 +1,15 @@
+{
+  "consumer_id": "vademecum",
+  "domain": "drug-reference",
+  "entities": [
+    "drug",
+    "target",
+    "indication"
+  ],
+  "predicates": [],
+  "trust_threshold": 80,
+  "accepted_formats": [
+    "json",
+    "rdf"
+  ]
+}

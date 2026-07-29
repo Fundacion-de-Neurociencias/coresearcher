@@ -1,0 +1,35 @@
+{
+  "asset_id": "adni",
+  "asset_type": "longitudinal_cohort",
+  "years_active": "2004-present",
+  "participants": "2000+ enrolled across multiple phases",
+  "sites": "60+ academic medical centers",
+  "countries": "United States",
+  "modalities": [
+    "structural_MRI",
+    "functional_MRI",
+    "PET_amylod",
+    "PET_tau",
+    "PET_FDG",
+    "clinical_assessment",
+    "neuropsychological_testing",
+    "CSF_biomarkers",
+    "plasma_biomarkers",
+    "genetics"
+  ],
+  "biomarkers": [
+    "CSF_Aβ42",
+    "CSF_Aβ40",
+    "CSF_total_tau",
+    "CSF_p-tau181",
+    "plasma_Aβ42/40",
+    "plasma_p-tau181",
+    "plasma_p-tau217",
+    "plasma_NfL",
+    "plasma_GFAP",
+    "ApoE_genotype"
+  ],
+  "followup_structure": "5-10 year prospective with variable frequency by diagnosis group",
+  "governance_model": "NIH-funded consortium with centralized IRB",
+  "data_access_model": "controlled access via LONI with Data Use Agreement required"
+}

@@ -1,0 +1,21 @@
+{
+  "doi_ready": true,
+  "checks": {
+    "provenance": {
+      "passed": true,
+      "issues": []
+    },
+    "reproducibility": {
+      "passed": true,
+      "issues": []
+    },
+    "privacy": {
+      "passed": true,
+      "issues": []
+    },
+    "scope": {
+      "passed": true,
+      "issues": []
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-001",
+      "novelty_score": 0.4,
+      "novelty_class": "B",
+      "supporting_claims": [],
+      "contradicting_claims": [],
+      "rationale": "Literature synthesis - combination of known elements"
+    },
+    {
+      "hypothesis_id": "HYP-002",
+      "novelty_score": 0.4,
+      "novelty_class": "B",
+      "supporting_claims": [],
+      "contradicting_claims": [],
+      "rationale": "Literature synthesis - combination of known elements"
+    },
+    {
+      "hypothesis_id": "HYP-003",
+      "novelty_score": 0.4,
+      "novelty_class": "B",
+      "supporting_claims": [],
+      "contradicting_claims": [],
+      "rationale": "Literature synthesis - combination of known elements"
+    },
+    {
+      "hypothesis_id": "HYP-004",
+      "novelty_score": 0.4,
+      "novelty_class": "B",
+      "supporting_claims": [],
+      "contradicting_claims": [],
+      "rationale": "Literature synthesis - combination of known elements"
+    },
+    {
+      "hypothesis_id": "HYP-005",
+      "novelty_score": 0.4,
+      "novelty_class": "B",
+      "supporting_claims": [],
+      "contradicting_claims": [],
+      "rationale": "Literature synthesis - combination of known elements"
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "type_a": 0,
+    "type_b": 5,
+    "type_c": 0,
+    "type_d": 0,
+    "avg_novelty": 0.4
+  }
+}

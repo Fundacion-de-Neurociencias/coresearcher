@@ -72,6 +72,39 @@ visibility: connected
 - **Evidence** - Executable activity (not raw commits)
 - **Review** - Validation with provenance
 - **Artifact** - Published outcome
+- **Scientific Activity Ledger** - Traceable, versioned, citable record of scientific activity
+
+---
+
+## Scientific Activity Ledger
+
+CoResearcher maintains a **Scientific Activity Ledger** that records:
+
+- evidence acquisition
+- artifact generation
+- provenance chains
+- contributor activity
+- scientific units (`scientific_unit`, `unit_rationale`)
+
+A ledger can be published to Zenodo and obtain its own DOI, making the research process itself a **first-class scientific object**:
+
+```text
+Question
+    ↓
+Evidence
+    ↓
+Artifacts
+    ↓
+Scientific Activity Ledger
+    ↓
+Zenodo deposit
+    ↓
+DOI
+    ↓
+Citable Scientific Object
+```
+
+This makes CoResearcher different from mere literature or commit scrapers: it does not just summarize science. It produces **verifiable, persistent, citable representations of scientific activity**.
 
 ---
 

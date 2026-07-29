@@ -1,0 +1,39 @@
+{
+  "hypotheses": [
+    {
+      "id": "HYP000001",
+      "statement": "APOE4 influences amyloid aggregation leading to tau pathology",
+      "hypothesis_type": "causal_chain",
+      "entities_involved": [
+        "APOE",
+        "Amyloid aggregation",
+        "Tau hyperphosphorylation"
+      ],
+      "confidence": 0.6,
+      "source": "reasoning_engine",
+      "generated_at": "2026-07-10T16:19:29.958882",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    },
+    {
+      "id": "HYP000002",
+      "statement": "Lipid dysregulation causes neuroinflammation in Alzheimer",
+      "hypothesis_type": "mechanistic",
+      "entities_involved": [
+        "Lipid dysregulation",
+        "Neuroinflammation",
+        "Alzheimer"
+      ],
+      "confidence": 0.4,
+      "source": "reasoning_engine",
+      "generated_at": "2026-07-10T16:19:29.960382",
+      "status": "proposed",
+      "version": 1,
+      "parent_hypothesis": null
+    }
+  ],
+  "experiments": [],
+  "failures": [],
+  "lessons": []
+}

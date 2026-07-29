@@ -1,0 +1,29 @@
+{
+  "domain": "neurodegeneration",
+  "focus": "Parkinson's Disease",
+  "question": "What initiates alpha-synuclein aggregation and why does it propagate?",
+  "description": "Investigating the prion-like spread and the role of dopaminergic vulnerability",
+  "entities": ["alpha-synuclein", "LRRK2", "GBA", "dopamine", "microglia", "autophagy"],
+  "key_contradictions": [
+    "Why do Lewy bodies correlate poorly with symptom severity?",
+    "LRRK2 mutations cause PD in some populations but not others",
+    "Why do anti-alpha-synuclein therapies show limited efficacy?"
+  ],
+  "benchmark_hypotheses": [
+    {
+      "statement": "Alpha-synuclein aggregates are not the cause of Parkinson's but an adaptive response to dopaminergic stress, sequestering misfolded proteins to prevent neuronal death.",
+      "expected_type": "D",
+      "rationale": "Reframes pathology as protective mechanism"
+    },
+    {
+      "statement": "The prion-like spread of alpha-synuclein is mediated by a trans-synaptic signaling cascade that originates from peripheral triggers, not from neuronal death.",
+      "expected_type": "C",
+      "rationale": "Missing link hypothesis - peripheral origin"
+    },
+    {
+      "statement": "LRRK2 kinase activity creates a threshold-dependent protective response in microglia that becomes pathological only when combined with specific environmental toxins.",
+      "expected_type": "C",
+      "rationale": "Threshold effect with cross-domain connection"
+    }
+  ]
+}

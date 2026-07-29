@@ -1,0 +1,48 @@
+{
+  "title": "Manual Hypothesis Audit Sample",
+  "purpose": "Expert validation of Type C/D classification",
+  "samples": [
+    {
+      "id": "SAMPLE-B-001",
+      "statement": "The effect of amyloid-beta on disease progression is mediated by an unrecognized threshold mechanism that connects to patient outcomes through a hidden feedback loop.",
+      "domain": "Alzheimer's"
+    },
+    {
+      "id": "SAMPLE-B-002",
+      "statement": "Contradiction detected: 'Why do striatal neurons die before cortical neurons'. This suggests a hidden mediator that resolves the paradox through a threshold-dependent mechanism.",
+      "domain": "Huntington's"
+    },
+    {
+      "id": "SAMPLE-B-003",
+      "statement": "The relationship between amyloid and tau pathology becomes pathological when combined with a circadian disruption in microglial phagocytic rhythm.",
+      "domain": "Neuroinflammation"
+    },
+    {
+      "id": "SAMPLE-C-001",
+      "statement": "The pleiotropic effects of neurodevelopmental risk genes are mediated by an unknown regulatory switch in critical period timing that determines whether synaptic overgrowth or undergrowth occurs.",
+      "domain": "Neurodevelopment"
+    },
+    {
+      "id": "SAMPLE-C-002",
+      "statement": "Tissue specificity in autoimmunity is not determined by HLA binding affinity alone but by a threshold-dependent process where self-antigens become immunogenic when combined with specific stress-induced modifications.",
+      "domain": "Autoimmune"
+    },
+    {
+      "id": "SAMPLE-D-001",
+      "statement": "What if amyloid-beta deposition is not the primary cause but a protective response to early-stage neurodegeneration, attempting to sequester toxic oligomers?",
+      "domain": "Alzheimer's"
+    },
+    {
+      "id": "SAMPLE-D-002",
+      "statement": "What if the lack of phenotype in some genetic knockouts is not due to redundancy but to an adaptive rewiring that creates an emergent property only visible under stress conditions?",
+      "domain": "Rare Diseases"
+    }
+  ],
+  "question": "Would an expert say 'No hab\u00eda pensado en esto' about this hypothesis?",
+  "instructions": [
+    "Rate each hypothesis on surprise factor (1-5)",
+    "Rate novelty of mechanism (1-5)",
+    "Rate testability (1-5)",
+    "Final classification: A/B/C/D"
+  ]
+}

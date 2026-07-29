@@ -1,0 +1,15 @@
+{
+  "consumer_id": "geneforge",
+  "domain": "genomics",
+  "entities": [
+    "gene",
+    "variant",
+    "pathway"
+  ],
+  "predicates": [],
+  "trust_threshold": 70,
+  "accepted_formats": [
+    "json",
+    "rdf"
+  ]
+}

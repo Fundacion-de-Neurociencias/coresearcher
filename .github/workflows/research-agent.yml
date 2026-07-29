@@ -1,0 +1,92 @@
+name: Research Agent - Literature Extraction
+
+on:
+  workflow_dispatch:
+    inputs:
+      question:
+        description: 'Research question'
+        required: true
+      query:
+        description: 'Search query terms'
+        required: true
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install requests biopython
+
+      - name: Execute literature extraction
+        id: extract
+        run: |
+          python -c "
+          import json
+          from datetime import datetime
+          
+          # Simulate extraction (replace with actual agent)
+          result = {
+            'action_id': 'ACTION-' + datetime.now().strftime('%Y%m%d%H%M%S'),
+            'type': 'EXTRACT_CLAIMS',
+            'actor': 'research-agent',
+            'target': '${{ inputs.question }}',
+            'method': {
+              'model': 'claude-3-opus',
+              'prompt': 'extract_claims_v1',
+              'tools_used': ['pubmed_search']
+            },
+            'confidence': 0.85,
+            'outcome': {
+              'claims': [
+                {'text': 'pTau217 predicts amyloid positivity', 'evidence': 'PMID-12345'},
+                {'text': 'NfL correlates with neurodegeneration', 'evidence': 'PMID-67890'}
+              ]
+            },
+            'timestamp': datetime.utcnow().isoformat()
+          }
+          
+          # Write to actions log
+          with open('actions/${{ steps.extract.outputs.action_id }}.json', 'w') as f:
+            json.dump(result, f, indent=2)
+          
+          print(f'::set-output name=action_id::{result[\"action_id\"]}')
+          "
+
+      - name: Update question activity
+        run: |
+          # Add action reference to question
+          echo "Actions: [${{ steps.extract.outputs.action_id }}]" >> questions/latest.md
+          
+      - name: Commit results
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Add ACTION-${{ steps.extract.outputs.action_id }} from literature extraction"
+          file_pattern: "actions/"
+
+      - name: Create artifact
+        run: |
+          # Generate claims artifact
+          python -c "
+          import json
+          claims = [
+            {'text': 'pTau217 predicts amyloid positivity', 'evidence': 'PMID-12345', 'score': 0.85},
+            {'text': 'NfL correlates with neurodegeneration', 'evidence': 'PMID-67890', 'score': 0.78}
+          ]
+          with open('artifacts/claims.json', 'w') as f:
+            json.dump(claims, f, indent=2)
+          "
+          
+      - name: Commit artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update claims artifact"
+          file_pattern: "artifacts/"

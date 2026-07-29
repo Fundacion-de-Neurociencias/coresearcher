@@ -1,100 +1,62 @@
 # Cadena de Autoridad y Jurisdicción de NeuroOS (CHAIN OF AUTHORITY)
 
-**Versión:** 1.0.0  
+**Versión:** 2.0.0  
 **Gobernanza:** Directiva Constitucional Canónica  
 **Estado:** Inviolable  
 
 ---
 
-## 1. Cadena de Autoridad y Jurisdicción
+## 1. Las Tres Cadenas Independientes
 
+Para evitar cuellos de botella operativos y duplicación de datos, NeuroOS diferencia explícitamente tres cadenas:
+
+### 1.1 Cadena de Autoridad (Inmutable)
+Responde a: *¿Quién puede autorizar, revocar o delegar?*
 ```text
-[ Nivel 0: Manuel (Persona Física) ]  ── Soberano Único / Fuente de Autoridad
-                 │
-                 ▼
-[ Nivel 1: ManuEl (Runtime Soberano) ] ── Jurisdicción / Policy Engine / Leases / Audit (Lenovo IA Local)
-                 │
-                 ▼
-[ Nivel 2: Antigravity (Orquestación) ]── Iniciativa / Planificación / Desarrollo (Mac Studio)
-                 │
-                 ▼
-[ Nivel 3: Subagentes Especializados ] ── Ejecución de Tareas Específicas
+Manuel (Nivel 0) ──> ManuEl (Nivel 1) ──> Antigravity (Nivel 2) ──> Subagentes (Nivel 3)
+```
+
+### 1.2 Cadena de Ejecución (Variable / Directa)
+Una vez que la autorización o lease es válida, la ejecución es directa sin intermediarios innecesarios.
+```text
+Subagente ───────> GitHub / Tool / File API (Directo)
+Antigravity ────> Gmail / Workspace API (Directo tras aprobación)
+ManuEl ─────────> Filesystem Local (Directo)
+```
+
+### 1.3 Cadena de Evidencia (Independiente)
+Toda acción ejecutada escribe su evento de forma directa e inmutable en la bitácora de auditoría.
+```text
+Ejecutor (Subagente / Antigravity / ManuEl) ──> Audit Trail (audit_trail.jsonl)
 ```
 
 ---
 
-## 2. Definición Estricta de Niveles y Competencias
+## 2. Axioma Fundamental de Separación de Funciones
 
-### Nivel 0 — Manuel (Persona Física)
-* **Rol:** Propietario y Soberano del Sistema.
-* **Competencias Exclusivas:**
-  - Modificar políticas y esquemas de confianza.
-  - Aprobar excepciones y cambios de zona de activos.
-  - Registrar o eliminar activos del `Trust Registry`.
-  - Autorizar delegaciones permanentes.
-  - Acceder a activos de zona `BLACK`.
-  - Resolver conflictos entre agentes y conceder autoridad a ManuEl.
+> **Manuel tiene la Autoridad.** (Soberano Único).  
+> **ManuEl tiene la Jurisdicción.** (Policy Engine / Leases / Audit en Lenovo).  
+> **Antigravity tiene la Iniciativa.** (Planificación / Orquestación / Desarrollo en Mac Studio).  
+> **Los Subagentes tienen la Ejecución.** (Tareas específicas).  
 
 ---
 
-### Nivel 1 — ManuEl (Runtime Soberano)
-* **Rol:** Runtime Soberano de NeuroOS (Host local Lenovo + IA Local).
-* **Competencias Exclusivas:**
-  - Ejecutar el `Policy Engine` y aplicar el `Trust Registry`.
-  - Emitir, denegar y revocar `leases` operativas.
-  - Mantener el `Audit Trail` inmutable.
-  - Solicitar aprobación humana a Manuel cuando proceda.
-  - Emitir veredictos de jurisdicción: `ALLOW`, `DENY`, `APPROVAL_REQUIRED`, `REVOKED`.
+## 3. Failure Modes and Jurisdiction Availability (Modo Degradado)
 
----
-
-### Nivel 2 — Antigravity (Orquestador)
-* **Rol:** Sistema de Iniciativa, Planificación y Desarrollo (Mac Studio).
-* **Competencias Exclusivas:**
-  - Planificación y programación de tareas.
-  - Gestión de repositorios, documentación y automatizaciones en Zona `AUTONOMOUS`.
-  - Coordinación de subagentes y preparación de borradores en Zona `CONTROLLED`.
-  - **Límite de Jurisdicción:** Antigravity no posee jurisdicción, no modifica políticas ni autoriza excepciones. **Antigravity solicita permisos a ManuEl.**
-
----
-
-### Nivel 3 — Subagentes Especializados
-* **Ejemplos:** `RepoAgent`, `TravelAgent`, `FinanceAgent`, `EmailAgent`, `DocumentationAgent`.
-* **Regla:** Operan bajo Antigravity. Ningún subagente puede comunicarse directamente con Manuel. Toda petición debe ascender jerárquicamente:
-  $$\text{Subagente} \longrightarrow \text{Antigravity} \longrightarrow \text{ManuEl} \longrightarrow \text{Manuel}$$
-
----
-
-## 3. Despliegue Físico de la Arquitectura
+### Paradoja de Disponibilidad
+Si el nodo local de Lenovo (ManuEl / IA Local) está apagado o no disponible, NeuroOS entra automáticamente en **Modo Degradado de Alta Disponibilidad** para evitar el bloqueo del desarrollo.
 
 ```text
-┌─────────────────────────────────────────────────┐
-│                 NODE 1: LENOVO                  │
-│  • ManuEl Runtime                               │
-│  • Policy Engine                                │
-│  • Audit Engine (audit_trail.jsonl)             │
-│  • Trust Registry (NEUROOS_POLICY_ENGINE.yaml)  │
-│  • IA Local (Jurisdicción)                      │
-└────────────────────────┬────────────────────────┘
-                         │
-                 Solicitud / Leases
-                         │
-┌────────────────────────▼────────────────────────┐
-│               NODE 2: MAC STUDIO                │
-│  • Antigravity (Orquestación e Iniciativa)      │
-│  • Repositorios de Código y Documentación       │
-│  • Automatizaciones y Pipelines CI/CD           │
-│  • Agentes Especializados                       │
-└─────────────────────────────────────────────────┘
+Lenovo / ManuEl ONLINE  ──> Policy Engine Normal (Zonas: BLACK, CRITICAL, CONTROLLED, AUTONOMOUS)
+Lenovo / ManuEl OFFLINE ──> Modo Degradado Activado (Solo Zonas AUTONOMOUS permitidas)
 ```
 
----
+### Matriz de Disponibilidad en Modo Degradado (Lenovo Offline)
 
-## 4. Axioma Fundamental
-
-> **Manuel tiene la Autoridad.**  
-> **ManuEl tiene la Jurisdicción.**  
-> **Antigravity tiene la Iniciativa.**  
-> **Los Subagentes tienen la Ejecución.**  
-
-Ningún componente inferior puede concederse permisos a sí mismo. Toda autorización procede de ManuEl; toda autoridad procede de Manuel.
+| Zona de Riesgo | Estado con ManuEl Offline | Razón y Comportamiento |
+| :--- | :---: | :--- |
+| **🟢 AUTONOMOUS** | **PERMITIDO** | Antigravity continúa trabajando de forma autónoma en repositorios de código, desarrollo, tests, CI/CD y documentación (`Medicalia`, `CoResearcher`, `Editxt`, `GeneForge`, `Neurodiagnoses`, etc.). |
+| **🟠 CONTROLLED_LOW** | **BLOQUEADO** | Requiere evaluación de jurisdicción; se suspende hasta recuperar conexión con ManuEl. |
+| **🟠 CONTROLLED_HIGH**| **BLOQUEADO** | Requiere aprobación explícita humana de Manuel/ManuEl. |
+| **🔴 CRITICAL** | **BLOQUEADO** | Requiere ejecución exclusiva en ManuEl + IA Local. |
+| **⚫ BLACK** | **BLOQUEADO** | Acceso inalcanzable. |

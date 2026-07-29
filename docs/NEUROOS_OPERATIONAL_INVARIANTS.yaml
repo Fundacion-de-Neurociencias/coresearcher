@@ -1,0 +1,31 @@
+# Invariantes Operativos de NeuroOS (NEUROOS OPERATIONAL INVARIANTS)
+$schema: "http://json-schema.org/draft-07/schema#"
+version: "1.0.0"
+governance: "Compliance & Invariant Enforcement"
+status: "Canonical Reference"
+
+invariants:
+  - id: "INV-001"
+    name: "Self-Sufficient Lease Validity"
+    description: "Un lease emitido por ManuEl sigue siendo válido para su ejecutor hasta que alcance su TTL de expiración o reciba una revocación explícita, independientemente de la disponibilidad del nodo central."
+    enforcement: "Leases store signed payload + expiration timestamp. Verification checks TTL locally without blocking on centralized network ping."
+
+  - id: "INV-002"
+    name: "Autonomous Action Resilience"
+    description: "Una acción en zona AUTONOMOUS no requiere jurisdicción online activa para ejecutarse."
+    enforcement: "Fallback Mode permits AUTONOMOUS actions when jurisdiction_online is False."
+
+  - id: "INV-003"
+    name: "Controlled/Critical High-Risk Boundary"
+    description: "Una acción en zonas CONTROLLED_HIGH, CONTROLLED_LOW, CRITICAL o BLACK nunca puede ejecutarse sin autorización online previa o un lease válido activo."
+    enforcement: "Policy engine denies non-AUTONOMOUS requests when jurisdiction is offline and no active lease is presented."
+
+  - id: "INV-004"
+    name: "Immutable Audit Generation"
+    description: "Toda decisión de autorización (ALLOW, APPROVAL_REQUIRED, DENY, REVOKED) produce una entrada inmutable de evidencia en el Audit Trail."
+    enforcement: "Policy Engine appends structured JSONL events to audit_trail.jsonl before returning verdict."
+
+  - id: "INV-005"
+    name: "Explicable Verdict Constraint"
+    description: "Todo veredicto DENY o REJECTED debe contener una razón explicable e inequívoca del activo, acción y regla que motivaron el rechazo."
+    enforcement: "Verdict payloads require a non-empty human-readable `reason` string."

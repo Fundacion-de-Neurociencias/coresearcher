@@ -1,0 +1,32 @@
+{
+  "repository": "langchain-ai/langgraph",
+  "pipeline_run_at": "2026-07-31T05:57:41.135146Z",
+  "steps": [
+    {
+      "name": "Extract Decisions",
+      "success": true,
+      "output": "data/trajectories/langchain_ai_langgraph/decisions_raw.jsonl"
+    },
+    {
+      "name": "Classify Decisions",
+      "success": true,
+      "output": "data/trajectories/langchain_ai_langgraph/decisions_classified.jsonl"
+    },
+    {
+      "name": "Link Decisions",
+      "success": true,
+      "output": "data/trajectories/langchain_ai_langgraph/edges.jsonl"
+    },
+    {
+      "name": "Reconstruct Trajectories",
+      "success": true,
+      "output": "data/trajectories/langchain_ai_langgraph/trajectory_graph.json"
+    },
+    {
+      "name": "Evaluate Extraction",
+      "success": true,
+      "output": "data/trajectories/langchain_ai_langgraph/evaluation_report.json"
+    }
+  ],
+  "success": true
+}

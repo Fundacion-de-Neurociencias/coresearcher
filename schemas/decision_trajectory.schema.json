@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/decision-trajectory.json",
+  "title": "Decision Trajectory",
+  "description": "Complete path of a research decision including alternatives, outcomes, and evidence",
+  
+  "type": "object",
+  "required": ["trajectory_id", "root_decision", "nodes", "edges", "provenance"],
+  
+  "properties": {
+    "trajectory_id": {
+      "type": "string",
+      "pattern": "^DT-[0-9]{6}$",
+      "examples": ["DT-000001"]
+    },
+    
+    "root_decision": {
+      "type": "string",
+      "pattern": "^DECISION-[0-9]{6}$",
+      "description": "The starting decision node ID"
+    },
+    
+    "question": {
+      "type": "string",
+      "description": "Original research question or objective"
+    },
+    
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/decision_node"},
+          {"$ref": "#/$defs/evidence_node"},
+          {"$ref": "#/$defs/outcome_node"}
+        ]
+      }
+    },
+    
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/trajectory_edge"}
+    },
+    
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "total_decisions": {"type": "integer"},
+        "abandoned_decisions": {"type": "integer"},
+        "successful_decisions": {"type": "integer"},
+        "backtracking_count": {"type": "integer"},
+        "max_depth": {"type": "integer"},
+        "evidence_strength_avg": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    
+    "provenance": {
+      "type": "object",
+      "required": ["generated_by", "timestamp"],
+      "properties": {
+        "generated_by": {"type": "string"},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "repository": {"type": "string"},
+        "reconstruction_method": {
+          "type": "string",
+          "enum": ["forward", "backward", "full"]
+        }
+      }
+    }
+  },
+  
+  "$defs": {
+    "decision_node": {
+      "type": "object",
+      "required": ["id", "type", "decision", "actor", "timestamp", "outcome"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DECISION-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "Decision"
+        },
+        "decision": {"type": "string"},
+        "actor": {"type": "string"},
+        "timestamp": {"type": "string", "format": "date-time"},
+        "rationale": {"type": "string"},
+        "outcome": {
+          "type": "string",
+          "enum": ["success", "failure", "abandoned", "superseded", "pending"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "hypothesis": {
+          "type": "string",
+          "description": "If this decision was testing a hypothesis"
+        },
+        "experiment_design": {
+          "type": "string",
+          "description": "How the decision was tested"
+        }
+      }
+    },
+    
+    "evidence_node": {
+      "type": "object",
+      "required": ["id", "type", "evidence_type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(ART|SOURCE|URL)-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Artifact", "Source", "URL"]
+        },
+        "evidence_type": {
+          "type": "string",
+          "enum": ["experiment_result", "observation", "literature", "simulation", "test_output"]
+        },
+        "description": {"type": "string"},
+        "supports_decision": {
+          "type": "string",
+          "pattern": "^DECISION-[0-9]{6}$"
+        },
+        "contradicts_decision": {
+          "type": "string",
+          "pattern": "^DECISION-[0-9]{6}$"
+        },
+        "strength": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    
+    "outcome_node": {
+      "type": "object",
+      "required": ["id", "type", "decision_id", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^OUTCOME-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "const": "Outcome"
+        },
+        "decision_id": {
+          "type": "string",
+          "pattern": "^DECISION-[0-9]{6}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["success", "failure", "inconclusive", "superseded"]
+        },
+        "metrics": {
+          "type": "object",
+          "description": "Quantitative results if applicable"
+        },
+        "conclusions": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "next_steps": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    
+    "trajectory_edge": {
+      "type": "object",
+      "required": ["from", "to", "type"],
+      "properties": {
+        "from": {"type": "string"},
+        "to": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": [
+            "led_to",
+            "abandoned_for",
+            "superseded_by",
+            "chosen_over",
+            "supported_by",
+            "contradicted_by",
+            "resulted_in"
+          ]
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

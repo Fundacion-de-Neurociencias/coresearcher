@@ -1,0 +1,175 @@
+
+
+{
+  "trajectory_id": "DT-000001",
+  "root_decision": "DECISION-000042",
+  "question": "How can we improve SSH access security for Windows Server infrastructure?",
+  
+  "nodes": [
+    {
+      "id": "DECISION-000042",
+      "type": "Decision",
+      "decision": "Enable Tailscale SSH for remote development",
+      "actor": "Antigravity",
+      "timestamp": "2026-07-30T09:00:00Z",
+      "rationale": "Need secure remote access without exposing port 22. Tailscale provides mesh VPN with zero-config SSH.",
+      "outcome": "failure",
+      "confidence": 0.8,
+      "hypothesis": "Tailscale will provide seamless SSH access without firewall changes",
+      "experiment_design": "Install Tailscale, configure SSH, test connection from external network"
+    },
+    {
+      "id": "ART-000042",
+      "type": "Artifact",
+      "artifact_type": "configuration",
+      "data": "tailscale_config_v1.yaml",
+      "classification": "derivable"
+    },
+    {
+      "id": "ART-000043",
+      "type": "Artifact",
+      "artifact_type": "log",
+      "data": "tailscale_install.log",
+      "classification": "observable"
+    },
+    {
+      "id": "CLAIM-000042",
+      "type": "Claim",
+      "text": "Tailscale installation succeeded but SSH connection timed out",
+      "classification": "observable",
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 1,
+        "artifact_count": 2
+      }
+    },
+    {
+      "id": "DECISION-000043",
+      "type": "Decision",
+      "decision": "Switch to OpenVPN with static IP allowlist",
+      "actor": "Antigravity",
+      "timestamp": "2026-07-30T11:00:00Z",
+      "rationale": "Tailscale requires continuous connectivity which is unreliable in our network. OpenVPN provides more control.",
+      "outcome": "success",
+      "confidence": 0.7,
+      "hypothesis": "OpenVPN with firewall rules will provide stable SSH tunnel"
+    },
+    {
+      "id": "ART-000044",
+      "type": "Artifact",
+      "artifact_type": "configuration",
+      "data": "openvpn_config.yaml",
+      "classification": "derivable"
+    },
+    {
+      "id": "ART-000045",
+      "type": "Artifact",
+      "artifact_type": "test_output",
+      "data": "ssh_connection_test_passed.txt",
+      "classification": "observable"
+    },
+    {
+      "id": "CLAIM-000043",
+      "type": "Claim",
+      "text": "OpenVPN SSH tunnel provides stable connection with <100ms latency",
+      "classification": "derivable",
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 1,
+        "artifact_count": 2
+      }
+    },
+    {
+      "id": "CLAIM-000044",
+      "type": "Claim",
+      "text": "Tailscale requires UDP 41641 which is blocked by corporate firewall",
+      "classification": "observable",
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 1,
+        "artifact_count": 1
+      }
+    }
+  ],
+  
+  "edges": [
+    {
+      "from": "DECISION-000042",
+      "to": "ART-000042",
+      "type": "led_to",
+      "weight": 0.9
+    },
+    {
+      "from": "DECISION-000042",
+      "to": "ART-000043",
+      "type": "led_to",
+      "weight": 0.9
+    },
+    {
+      "from": "ART-000043",
+      "to": "CLAIM-000042",
+      "type": "supported_by",
+      "weight": 0.95
+    },
+    {
+      "from": "ART-000043",
+      "to": "CLAIM-000044",
+      "type": "supported_by",
+      "weight": 0.95
+    },
+    {
+      "from": "DECISION-000042",
+      "to": "DECISION-000043",
+      "type": "abandoned_for",
+      "weight": 0.7,
+      "timestamp": "2026-07-30T11:30:00Z"
+    },
+    {
+      "from": "DECISION-000043",
+      "to": "DECISION-000042",
+      "type": "chosen_over",
+      "weight": 0.8,
+      "timestamp": "2026-07-30T11:30:00Z"
+    },
+    {
+      "from": "DECISION-000043",
+      "to": "ART-000044",
+      "type": "led_to",
+      "weight": 0.9
+    },
+    {
+      "from": "DECISION-000043",
+      "to": "ART-000045",
+      "type": "led_to",
+      "weight": 0.9
+    },
+    {
+      "from": "ART-000045",
+      "to": "CLAIM-000043",
+      "type": "supported_by",
+      "weight": 0.95
+    },
+    {
+      "from": "DECISION-000043",
+      "to": "CLAIM-000043",
+      "type": "led_to",
+      "weight": 0.85
+    }
+  ],
+  
+  "metrics": {
+    "total_decisions": 2,
+    "abandoned_decisions": 1,
+    "successful_decisions": 1,
+    "backtracking_count": 1,
+    "max_depth": 2,
+    "evidence_strength_avg": 0.9
+  },
+  
+  "provenance": {
+    "generated_by": "CoResearcher",
+    "timestamp": "2026-07-30T14:00:00Z",
+    "repository": "neuroos/infrastructure",
+    "reconstruction_method": "full"
+  }
+}

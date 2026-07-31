@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/evidence-graph.json",
+  "title": "Evidence Graph",
+  "description": "Directed Acyclic Graph for auditable scientific claim traceability",
+  
+  "type": "object",
+  "required": ["graph_id", "request_id", "nodes", "edges", "provenance"],
+  
+  "properties": {
+    "graph_id": {
+      "type": "string",
+      "pattern": "^EG-[0-9]{6}$",
+      "examples": ["EG-000001"]
+    },
+    
+    "request_id": {
+      "type": "string",
+      "pattern": "^ER-[0-9]{6}$",
+      "description": "Reference to the originating evidence request",
+      "examples": ["ER-000042"]
+    },
+    
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/claim_node"
+          },
+          {
+            "$ref": "#/$defs/artifact_node"
+          },
+          {
+            "$ref": "#/$defs/source_node"
+          },
+          {
+            "$ref": "#/$defs/url_node"
+          },
+          {
+            "$ref": "#/$defs/decision_node"
+          }
+        ]
+      }
+    },
+    
+    "edges": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    
+    "provenance": {
+      "type": "object",
+      "required": ["generated_by", "timestamp"],
+      "properties": {
+        "generated_by": {
+          "type": "string",
+          "description": "System or agent that generated this graph"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "corpus_version": {
+          "type": "string",
+          "description": "Version of the corpus/ledger used"
+        },
+        "processing_notes": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  },
+  
+  "$defs": {
+    "claim_node": {
+      "type": "object",
+      "required": ["id", "type", "text"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CLAIM-[0-9]{6}$",
+          "examples": ["CLAIM-000001"]
+        },
+        "type": {
+          "type": "string",
+          "const": "Claim"
+        },
+        "text": {
+          "type": "string",
+          "description": "The claim text"
+        },
+        "classification": {
+          "type": "string",
+          "enum": ["observable", "derivable", "inferred"],
+          "description": "Epistemic classification of the claim"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score from extraction/classification"
+        },
+        "evidence_descriptors": {
+          "type": "object",
+          "properties": {
+            "source_count": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Number of source nodes supporting this claim"
+            },
+            "support_depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3,
+              "description": "Maximum hop distance to supporting sources"
+            },
+            "artifact_count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    
+    "decision_node": {
+      "type": "object",
+      "required": ["id", "type", "decision", "actor", "timestamp"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DECISION-[0-9]{6}$",
+          "examples": ["DECISION-000001"]
+        },
+        "type": {
+          "type": "string",
+          "const": "Decision"
+        },
+        "decision": {
+          "type": "string",
+          "description": "The decision made"
+        },
+        "actor": {
+          "type": "string",
+          "description": "Agent or human who made the decision"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Why this decision was made"
+        },
+        "outcome": {
+          "type": "string",
+          "enum": ["success", "failure", "abandoned", "superseded"],
+          "description": "Result of the decision"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in the decision at the time"
+        }
+      }
+    },
+    
+    "artifact_node": {
+      "type": "object",
+      "required": ["id", "type", "artifact_type", "data"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ART-[0-9]{6}$",
+          "examples": ["ART-000001"]
+        },
+        "type": {
+          "type": "string",
+          "const": "Artifact"
+        },
+        "artifact_type": {
+          "type": "string",
+          "enum": ["quote", "image", "table", "matrix", "structure", "dataset", "graph"],
+          "description": "Type of scientific artifact"
+        },
+        "data": {
+          "type": "string",
+          "description": "Immutable content or reference to artifact"
+        },
+        "classification": {
+          "type": "string",
+          "enum": ["observable", "derivable", "inferred"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mime_type": {
+          "type": "string",
+          "description": "MIME type if applicable (e.g., text/plain, image/png)"
+        },
+        "encoding": {
+          "type": "string",
+          "enum": ["utf-8", "base64", "uri_reference"],
+          "default": "utf-8"
+        }
+      }
+    },
+    
+    "source_node": {
+      "type": "object",
+      "required": ["id", "type", "text"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SOURCE-[0-9]{6}$",
+          "examples": ["SOURCE-000001"]
+        },
+        "type": {
+          "type": "string",
+          "const": "Source"
+        },
+        "text": {
+          "type": "string",
+          "description": "Primary identifier (PMID, DOI, Issue URL, etc.)"
+        },
+        "classification": {
+          "type": "string",
+          "enum": ["observable", "derivable", "inferred"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source_type": {
+          "type": "string",
+          "enum": ["publication", "issue", "commit", "dataset", "protocol", "other"],
+          "description": "Category of source document"
+        }
+      }
+    },
+    
+    "url_node": {
+      "type": "object",
+      "required": ["id", "type", "text"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^URL-[0-9]{6}$",
+          "examples": ["URL-000001"]
+        },
+        "type": {
+          "type": "string",
+          "const": "URL"
+        },
+        "text": {
+          "type": "string",
+          "format": "uri",
+          "description": "Deterministic physical address"
+        },
+        "classification": {
+          "type": "string",
+          "enum": ["observable", "derivable", "inferred"]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.95
+        },
+        "access_method": {
+          "type": "string",
+          "enum": ["https", "doi", "ftp", "local", "other"],
+          "default": "https"
+        }
+      }
+    },
+    
+    "edge": {
+      "type": "object",
+      "required": ["from", "to", "type"],
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Source node ID"
+        },
+        "to": {
+          "type": "string",
+          "description": "Target node ID"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "supported_by",
+            "derived_from",
+            "resolves_to",
+            "chosen_over",
+            "led_to",
+            "abandoned_for",
+            "superseded_by"
+          ],
+          "description": "Semantic relationship type"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Strength of relationship"
+        },
+        "hops": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Hop count in evidence chain"
+        }
+      }
+    }
+  }
+}

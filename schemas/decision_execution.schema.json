@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/decision-execution.json",
+  "title": "Decision & Execution Registry",
+  "description": "Semantic traceability for agent actions and decisions. CONSTITUTIONAL CONSTRAINT: All fields must be Observable or Derivable. No inferred psychological states.",
+  
+  "type": "object",
+  "required": ["decision_id", "timestamp", "actor", "authorized_by", "objective", "jurisdiction", "status"],
+  
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "pattern": "^D-[0-9]{4}-[0-9]{4}$",
+      "examples": ["D-2026-0045"],
+      "description": "Decision identifier (must be traceable to evidence)"
+    },
+    
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    
+    "actor": {
+      "type": "object",
+      "required": ["agent", "type"],
+      "properties": {
+        "agent": {
+          "type": "string",
+          "description": "Agent or human identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["human", "agent"]
+        },
+        "orcid": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$",
+          "description": "ORCID iD if human"
+        }
+      }
+    },
+    
+    "authorized_by": {
+      "type": "object",
+      "required": ["agent", "role"],
+      "properties": {
+        "agent": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["owner", "approver", "reviewer"]
+        },
+        "approval_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    
+    "objective": {
+      "type": "string",
+      "description": "Clear statement of what was decided"
+    },
+    
+    "rationale": {
+      "type": "string",
+      "description": "Why this decision was made (must be observable or derivable from artifacts)"
+    },
+    
+    "jurisdiction": {
+      "type": "object",
+      "required": ["domain"],
+      "properties": {
+        "domain": {
+          "type": "string",
+          "enum": ["infrastructure", "research", "clinical", "genomics", "data_science", "general"]
+        },
+        "scope": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "authority_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      }
+    },
+    
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidence_reference"},
+      "description": "Constitutional requirement: DecisionNode must be traceable to evidence (Issue, PR, Commit, Document)"
+    },
+    
+    "policy_compliance": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/policy_check"}
+    },
+    
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "approved", "executing", "completed", "rejected", "superseded"]
+    },
+    
+    "superseded_by": {
+      "type": "string",
+      "pattern": "^D-[0-9]{4}-[0-9]{4}$"
+    },
+    
+    "related_decisions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    
+    "spawned_executions": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  
+  "$defs": {
+    "evidence_reference": {
+      "type": "object",
+      "required": ["type", "identifier", "source", "timestamp"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["commit", "ticket", "conversation", "document", "screenshot", "test_result", "log"]
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "checksum": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    
+    "policy_check": {
+      "type": "object",
+      "required": ["policy_id", "status"],
+      "properties": {
+        "policy_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["compliant", "violation", "waived"]
+        },
+        "verification": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

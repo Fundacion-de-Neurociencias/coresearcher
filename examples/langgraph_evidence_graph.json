@@ -1,0 +1,255 @@
+{
+  "graph_id": "EG-000001",
+  "request_id": "ER-000042",
+  "nodes": [
+    {
+      "id": "CLAIM-000001",
+      "type": "Claim",
+      "text": "</li>",
+      "classification": "derivable",
+      "confidence": 0.7,
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 2,
+        "artifact_count": 1
+      }
+    },
+    {
+      "id": "ART-000001",
+      "type": "Artifact",
+      "artifact_type": "quote",
+      "data": "\"chore(deps): bump js-yaml from 4.2.0 to 4.3.0 in /libs/cli/js-monorepo-example: Bumps [js-yaml](https://github.com/nodeca/js-yaml) from 4.2.0 to 4.3.0.",
+      "classification": "derivable",
+      "confidence": 0.95,
+      "mime_type": "text/plain",
+      "encoding": "utf-8"
+    },
+    {
+      "id": "SOURCE-000001",
+      "type": "Source",
+      "text": "issue #8438",
+      "classification": "observable",
+      "confidence": 0.95,
+      "source_type": "issue"
+    },
+    {
+      "id": "URL-000001",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8438",
+      "classification": "observable",
+      "confidence": 0.95,
+      "access_method": "https"
+    },
+    {
+      "id": "CLAIM-000002",
+      "type": "Claim",
+      "text": "## Why safe",
+      "classification": "derivable",
+      "confidence": 0.7,
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 2,
+        "artifact_count": 1
+      }
+    },
+    {
+      "id": "ART-000002",
+      "type": "Artifact",
+      "artifact_type": "quote",
+      "data": "\"fix(sdk-py): unblock subscribers on stream close: Fixes #8429",
+      "classification": "derivable",
+      "confidence": 0.95,
+      "mime_type": "text/plain",
+      "encoding": "utf-8"
+    },
+    {
+      "id": "SOURCE-000002",
+      "type": "Source",
+      "text": "issue #8436",
+      "classification": "observable",
+      "confidence": 0.95,
+      "source_type": "issue"
+    },
+    {
+      "id": "URL-000002",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8436",
+      "classification": "observable",
+      "confidence": 0.95,
+      "access_method": "https"
+    },
+    {
+      "id": "CLAIM-000003",
+      "type": "Claim",
+      "text": "com/pypa/setuptools/issues/5047\">#5047</a>)</li>",
+      "classification": "derivable",
+      "confidence": 0.7,
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 2,
+        "artifact_count": 1
+      }
+    },
+    {
+      "id": "ART-000003",
+      "type": "Artifact",
+      "artifact_type": "quote",
+      "data": "\"chore(deps): bump setuptools from 80.9.0 to 83.0.0 in /libs/langgraph: Bumps [setuptools](https://github.com/pypa/setuptools) from 80.9.0 to 83.0.0.",
+      "classification": "derivable",
+      "confidence": 0.95,
+      "mime_type": "text/plain",
+      "encoding": "utf-8"
+    },
+    {
+      "id": "SOURCE-000003",
+      "type": "Source",
+      "text": "issue #8435",
+      "classification": "observable",
+      "confidence": 0.95,
+      "source_type": "issue"
+    },
+    {
+      "id": "URL-000003",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8435",
+      "classification": "observable",
+      "confidence": 0.95,
+      "access_method": "https"
+    },
+    {
+      "id": "CLAIM-000012",
+      "type": "Claim",
+      "text": "com/babel/babel/pull/17931\">#17931</a> fix(decorators): replace super within all removed static elements (<a href=\"https://github",
+      "classification": "derivable",
+      "confidence": 0.7,
+      "evidence_descriptors": {
+        "source_count": 1,
+        "support_depth": 2,
+        "artifact_count": 1
+      }
+    },
+    {
+      "id": "ART-000012",
+      "type": "Artifact",
+      "artifact_type": "quote",
+      "data": "\"chore(deps): bump @babel/core from 7.25.2 to 7.29.7 in /libs/cli/js-examples: Bumps [@babel/core](https://github.com/babel/babel/tree/HEAD/packages/babel-core) from 7.25.2 to 7.29.7.",
+      "classification": "derivable",
+      "confidence": 0.95,
+      "mime_type": "text/plain",
+      "encoding": "utf-8"
+    },
+    {
+      "id": "SOURCE-000012",
+      "type": "Source",
+      "text": "issue #8144",
+      "classification": "observable",
+      "confidence": 0.95,
+      "source_type": "issue"
+    },
+    {
+      "id": "URL-000012",
+      "type": "URL",
+      "text": "https://github.com/langchain-ai/langgraph/pull/8144",
+      "classification": "observable",
+      "confidence": 0.95,
+      "access_method": "https"
+    }
+  ],
+  "edges": [
+    {
+      "from": "CLAIM-000001",
+      "to": "ART-000001",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "ART-000001",
+      "to": "SOURCE-000001",
+      "type": "derived_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000001",
+      "to": "URL-000001",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000002",
+      "to": "ART-000002",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "ART-000002",
+      "to": "SOURCE-000002",
+      "type": "derived_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000002",
+      "to": "URL-000002",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000003",
+      "to": "ART-000003",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "ART-000003",
+      "to": "SOURCE-000003",
+      "type": "derived_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000003",
+      "to": "URL-000003",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "CLAIM-000012",
+      "to": "ART-000012",
+      "type": "supported_by",
+      "weight": 0.9,
+      "hops": 1
+    },
+    {
+      "from": "ART-000012",
+      "to": "SOURCE-000012",
+      "type": "derived_from",
+      "weight": 0.95,
+      "hops": 1
+    },
+    {
+      "from": "SOURCE-000012",
+      "to": "URL-000012",
+      "type": "resolves_to",
+      "weight": 0.95,
+      "hops": 1
+    }
+  ],
+  "provenance": {
+    "generated_by": "CoResearcher",
+    "timestamp": "2026-07-30T18:48:00Z",
+    "corpus_version": "sprint60a",
+    "processing_notes": [
+      "Repository audit for langchain-ai/langgraph",
+      "Filtered to observable and derivable classifications",
+      "Minimum confidence threshold: 0.7",
+      "Date range: 2026-01-01 to 2026-07-30"
+    ]
+  }
+}

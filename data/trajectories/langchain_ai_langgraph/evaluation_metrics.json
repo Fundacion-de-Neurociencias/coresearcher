@@ -1,0 +1,12 @@
+{
+  "total_decisions": 301,
+  "successful_decisions": 122,
+  "abandoned_decisions": 129,
+  "superseded_decisions": 0,
+  "failed_decisions": 40,
+  "pending_decisions": 10,
+  "unique_actors": 106,
+  "edges": 426,
+  "explicit_ref_edges": 231,
+  "temporal_edges": 195
+}

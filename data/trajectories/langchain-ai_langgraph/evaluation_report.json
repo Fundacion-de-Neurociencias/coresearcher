@@ -1,0 +1,25 @@
+{
+  "total_decisions": 567,
+  "outcomes": {
+    "success": 75,
+    "abandoned": 6,
+    "superseded": 0,
+    "failure": 40,
+    "pending": 109,
+    "unknown": 337
+  },
+  "avg_confidence": 0.716,
+  "classifications": {
+    "observable": 0,
+    "derivable": 567,
+    "inferred": 0
+  },
+  "evidence_coverage": 1.0,
+  "artifact_types": {
+    "issue": 115,
+    "pr": 337,
+    "commit": 115
+  },
+  "edges_count": 0,
+  "nodes_count": 567
+}

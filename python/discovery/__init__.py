@@ -1,8 +1,400 @@
-
 # Security tier: PRIVATE — DO NOT MODIFY
 # See python/_tiers.py for classification
 SECURITY_TIER = "PRIVATE"
 
 from .manifold_detector import ManifoldDetector
+from .epistemic_gap_detector import (
+    EpistemicGapDetector,
+    EpistemicGap,
+    ParadigmResidue,
+    ConstraintHypothesis,
+    GapType,
+    GapCharacterization,
+    RestrictionType,
+    EpistemicStatus,
+    Severity,
+    determine_restriction_epistemic_status,
+)
+from .epistemic_trajectory import (
+    ExplanationLevel,
+    ConstraintType,
+    EpistemicConstraintStatus,
+    AlternativeStatus,
+    Representation,
+    RepresentationLedger,
+    Constraint,
+    BiologicalProgram,
+    DiscriminativePrediction,
+    RivalHypothesis,
+    DecomposedDiscoveryValue,
+    ScopeConditions,
+    PopperEngine,
+)
+from .scientific_logic import (
+    AuxiliaryAssumption,
+    FormalImplication,
+    CounterExample,
+    DeductionEngine,
+    ModusTollensResult,
+    AssumptionStatus,
+    ImplicationStrength,
+)
+from .state_space import StateSpaceAxis, StateSpaceOmega
+from .biological_programs_catalog import get_canonical_biological_programs
+from .marr_engine import MarrTranslationEngine
+from .trajectory_evolution import TrajectoryStep, TrajectoryEvolutionEngine
+from .auto_explicability import AutoExplicabilityEngine
+from .discovery_teams import (
+    ConstraintMinerAgent,
+    BiologicalProgramMapperAgent,
+    HypothesisGeneratorAgent,
+    AlternativeGeneratorAgent,
+    MarrClassifierAgent,
+    PredictionEngineAgent,
+    PopperAuditorAgent,
+    ScopeAuditorAgent,
+    DiscoveryValueAuditorAgent,
+    DiscoveryCampaign,
+    CampaignLedgerEntry,
+    LedgerEntryType,
+    DiscoveryTeamOrchestrator,
+)
+from .inference_time_scaling import EpistemicSearchNode, EpistemicTreeSearch
+from .lab_in_the_loop_adapter import LabProtocolRecipe, LabInTheLoopAdapter
+from .reliability_auditor import ExpertReviewReport, ReliabilityAuditor
+from .discovery_workbench import (
+    ResearchQuestion,
+    DiscoveryState,
+    DiscoveryWorkbench,
+    WorkbenchRunner,
+)
+from .constraint_discovery_engine import (
+    CohortDatasetSnapshot,
+    CrossCohortStressTestResult,
+    DiscoveredConstraintCandidate,
+    ConstraintDiscoveryEngine,
+)
+from .scientific_git_history import (
+    EpistemicDiff,
+    ScientificCommit,
+    EpistemicGitRepo,
+)
+from .constraint_court import (
+    LitigantConstraint,
+    CourtVerdict,
+    ConstraintCourt,
+)
+from .reality_contact_score import (
+    RealityContactLevel,
+    RealityContactEvidence,
+    RealityContactScoreReport,
+    RealityContactEvaluator,
+)
+from .grounded_search_sensor import (
+    StructuredSourceSnapshot,
+    GroundedSearchSensor,
+    ConstraintSourceBridge,
+)
+from .constraint_box import (
+    ConstraintTypeRule,
+    SyntheticConstraintRule,
+    SyntheticWorldOracle,
+    ConstraintBoxBenchmarkResult,
+    ConstraintBoxBenchmark,
+)
+from .reality_distance import (
+    SubstrateTier,
+    SubstrateValidationRecord,
+    RealityDistanceReport,
+    RealityDistanceEvaluator,
+)
+from .failure_engine import (
+    DuhemQuineBlameType,
+    FailureAutopsyReport,
+    ScientificFailureEngine,
+)
+from .anomaly_discovery_engine import (
+    EmpiricalResidualAnomaly,
+    AnomalyCluster,
+    AnomalyDiscoveryEngine,
+)
+from .defeated_hypotheses_graveyard import (
+    DefeatedHypothesisRecord,
+    HypothesisGraveyard,
+)
+from .real_cohort_campaign_runner import (
+    HeterogeneousCampaignOutcome,
+    RealCohortDiscoveryRunner,
+)
+from .real_cohort_empirical_pipeline import (
+    RealStatisticalModelResult,
+    RealPatientAnomalyRecord,
+    EmpiricalDiscoveryPipelineReport,
+    RealCohortEmpiricalPipeline,
+)
+from .universal_discovery_engine import (
+    UniversalDomainDataset,
+    DiscoveredDomainInvariant,
+    UniversalLatentDiscoveryEngine,
+)
+from .latent_factor_discovery import (
+    DiscoveredLatentAxis,
+    UnsupervisedLatentDecompositionResult,
+    LatentFactorDiscoveryEngine,
+)
+from .bayesian_surprise_engine import (
+    BayesianSurpriseEvaluation,
+    BayesianSurpriseEngine,
+)
+from .research_budget_engine import (
+    ResourceAllocationCost,
+    ResearchBudgetLedger,
+)
+from .long_horizon_campaign_engine import (
+    CampaignCycleRecord,
+    LongHorizonCampaignState,
+    LongHorizonCampaignEngine,
+)
+from .traces_epistemic_adapter import (
+    TracesDimensionAudit,
+    TracesEpistemicEvaluationReport,
+    TracesEpistemicAdapter,
+)
+from .adversarial_destruction_test import (
+    AdversarialTrapArchetype,
+    AdversarialCaseResult,
+    AdversarialDestructionReport,
+    AdversarialDestructionEngine,
+)
+from .unknown_mechanism_benchmark import (
+    HiddenLawArchetype,
+    BlindWorldDataset,
+    AbducedMechanismReport,
+    UnknownMechanismBenchmarkSummary,
+    BlindWorldGenerator,
+    AutonomousAbductionEngine,
+    UnknownMechanismBenchmark,
+)
+from .retrospective_time_split_benchmark import (
+    HistoricalFrontierCase,
+    RetrospectiveFrontierResult,
+    RetrospectiveTimeSplitBenchmarkReport,
+    RetrospectiveTimeSplitBenchmark,
+)
+from .discovery_forecast_registry import (
+    QuantitativePredictionWindow,
+    ProspectiveForecastEntry,
+    DiscoveryForecastRegistry,
+)
+from .physical_theorem_court import (
+    DeductionRule,
+    PhysicalConservationType,
+    CourtVerdict,
+    ProofLemmaNode,
+    ProofDependencyDAG,
+    PhysicalConservationConstraint,
+    PhysicalClaimSpec,
+    AdversarialSingularitySearchResult,
+    AdversarialSingularitySearchEngine,
+    PhysicalProofAuditReport,
+    PhysicalCoherenceCourt,
+)
+from .backward_execution_synthesizer import (
+    AnalyticalToolPrimitive,
+    ToolExecutionStep,
+    ExecutableAnalyticalTrajectory,
+    BackwardContractSynthesizer,
+    ReverseAdversarialFalsifier,
+)
+from .epistemic_pr_auditor import (
+    ScientificViolationCategory,
+    ReviewSeverity,
+    OverallRecommendation,
+    InlineEpistemicFinding,
+    FileDiffChunk,
+    PullRequestDiffSnapshot,
+    EpistemicReviewReport,
+    ScientificEpistemicPRAuditor,
+)
+from .categorical_epistemic_engine import (
+    MorphismType,
+    CategoryObject,
+    CategoryMorphism,
+    EpistemicCategory,
+    EpistemicFunctor,
+    CommutativeDiagramAuditor,
+    CategoricalAdjunction,
+)
 
-__all__ = ["ManifoldDetector"]
+__all__ = [
+
+
+
+
+    "ManifoldDetector",
+    "EpistemicGapDetector",
+    "EpistemicGap",
+    "ParadigmResidue",
+    "ConstraintHypothesis",
+    "GapType",
+    "GapCharacterization",
+    "RestrictionType",
+    "EpistemicStatus",
+    "Severity",
+    "determine_restriction_epistemic_status",
+    "ExplanationLevel",
+    "ConstraintType",
+    "EpistemicConstraintStatus",
+    "AlternativeStatus",
+    "Representation",
+    "RepresentationLedger",
+    "Constraint",
+    "BiologicalProgram",
+    "DiscriminativePrediction",
+    "RivalHypothesis",
+    "DecomposedDiscoveryValue",
+    "ScopeConditions",
+    "PopperEngine",
+    "AuxiliaryAssumption",
+    "FormalImplication",
+    "CounterExample",
+    "DeductionEngine",
+    "ModusTollensResult",
+    "AssumptionStatus",
+    "ImplicationStrength",
+    "StateSpaceAxis",
+    "StateSpaceOmega",
+    "get_canonical_biological_programs",
+    "MarrTranslationEngine",
+    "TrajectoryStep",
+    "TrajectoryEvolutionEngine",
+    "AutoExplicabilityEngine",
+    "ConstraintMinerAgent",
+    "BiologicalProgramMapperAgent",
+    "HypothesisGeneratorAgent",
+    "AlternativeGeneratorAgent",
+    "MarrClassifierAgent",
+    "PredictionEngineAgent",
+    "PopperAuditorAgent",
+    "ScopeAuditorAgent",
+    "DiscoveryValueAuditorAgent",
+    "DiscoveryCampaign",
+    "CampaignLedgerEntry",
+    "LedgerEntryType",
+    "DiscoveryTeamOrchestrator",
+    "EpistemicSearchNode",
+    "EpistemicTreeSearch",
+    "LabProtocolRecipe",
+    "LabInTheLoopAdapter",
+    "ExpertReviewReport",
+    "ReliabilityAuditor",
+    "ResearchQuestion",
+    "DiscoveryState",
+    "DiscoveryWorkbench",
+    "WorkbenchRunner",
+    "CohortDatasetSnapshot",
+    "CrossCohortStressTestResult",
+    "DiscoveredConstraintCandidate",
+    "ConstraintDiscoveryEngine",
+    "EpistemicDiff",
+    "ScientificCommit",
+    "EpistemicGitRepo",
+    "LitigantConstraint",
+    "CourtVerdict",
+    "ConstraintCourt",
+    "RealityContactLevel",
+    "RealityContactEvidence",
+    "RealityContactScoreReport",
+    "RealityContactEvaluator",
+    "StructuredSourceSnapshot",
+    "GroundedSearchSensor",
+    "ConstraintSourceBridge",
+    "ConstraintTypeRule",
+    "SyntheticConstraintRule",
+    "SyntheticWorldOracle",
+    "ConstraintBoxBenchmarkResult",
+    "ConstraintBoxBenchmark",
+    "SubstrateTier",
+    "SubstrateValidationRecord",
+    "RealityDistanceReport",
+    "RealityDistanceEvaluator",
+    "DuhemQuineBlameType",
+    "FailureAutopsyReport",
+    "ScientificFailureEngine",
+    "EmpiricalResidualAnomaly",
+    "AnomalyCluster",
+    "AnomalyDiscoveryEngine",
+    "DefeatedHypothesisRecord",
+    "HypothesisGraveyard",
+    "HeterogeneousCampaignOutcome",
+    "RealCohortDiscoveryRunner",
+    "RealStatisticalModelResult",
+    "RealPatientAnomalyRecord",
+    "EmpiricalDiscoveryPipelineReport",
+    "RealCohortEmpiricalPipeline",
+    "UniversalDomainDataset",
+    "DiscoveredDomainInvariant",
+    "UniversalLatentDiscoveryEngine",
+    "DiscoveredLatentAxis",
+    "UnsupervisedLatentDecompositionResult",
+    "LatentFactorDiscoveryEngine",
+    "BayesianSurpriseEvaluation",
+    "BayesianSurpriseEngine",
+    "ResourceAllocationCost",
+    "ResearchBudgetLedger",
+    "CampaignCycleRecord",
+    "LongHorizonCampaignState",
+    "LongHorizonCampaignEngine",
+    "TracesDimensionAudit",
+    "TracesEpistemicEvaluationReport",
+    "TracesEpistemicAdapter",
+    "AdversarialTrapArchetype",
+    "AdversarialCaseResult",
+    "AdversarialDestructionReport",
+    "AdversarialDestructionEngine",
+    "HiddenLawArchetype",
+    "BlindWorldDataset",
+    "AbducedMechanismReport",
+    "UnknownMechanismBenchmarkSummary",
+    "BlindWorldGenerator",
+    "AutonomousAbductionEngine",
+    "UnknownMechanismBenchmark",
+    "HistoricalFrontierCase",
+    "RetrospectiveFrontierResult",
+    "RetrospectiveTimeSplitBenchmarkReport",
+    "RetrospectiveTimeSplitBenchmark",
+    "QuantitativePredictionWindow",
+    "ProspectiveForecastEntry",
+    "DiscoveryForecastRegistry",
+    "DeductionRule",
+    "PhysicalConservationType",
+    "CourtVerdict",
+    "ProofLemmaNode",
+    "ProofDependencyDAG",
+    "PhysicalConservationConstraint",
+    "PhysicalClaimSpec",
+    "AdversarialSingularitySearchResult",
+    "AdversarialSingularitySearchEngine",
+    "PhysicalProofAuditReport",
+    "PhysicalCoherenceCourt",
+    "AnalyticalToolPrimitive",
+    "ToolExecutionStep",
+    "ExecutableAnalyticalTrajectory",
+    "BackwardContractSynthesizer",
+    "ReverseAdversarialFalsifier",
+    "ScientificViolationCategory",
+    "ReviewSeverity",
+    "OverallRecommendation",
+    "InlineEpistemicFinding",
+    "FileDiffChunk",
+    "PullRequestDiffSnapshot",
+    "EpistemicReviewReport",
+    "ScientificEpistemicPRAuditor",
+    "MorphismType",
+    "CategoryObject",
+    "CategoryMorphism",
+    "EpistemicCategory",
+    "EpistemicFunctor",
+    "CommutativeDiagramAuditor",
+    "CategoricalAdjunction"
+]

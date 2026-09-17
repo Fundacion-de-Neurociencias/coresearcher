@@ -91,7 +91,7 @@ Branch: `main` (canonical), feature branches for experiments
 # QUESTION-AD-BIOMARKERS
 
 ## Question
-¿Cuáles son los biomarcadores sanguíneos del Alzheimer?
+What are the blood biomarkers of Alzheimer's?
 
 ## Ontological Path
 Science/Medicine/Neurology/Alzheimer's Disease/Biomarkers
@@ -260,4 +260,4 @@ Value: Scientific Coordination Protocol
 
 ---
 
-*Esta constitución establece que CoResearcher es un Protocolo de Coordinación Científica que puede existir completamente sobre infraestructura gratuita existente. Sin esto, es solo una hipótesis de financiación.*
+*This constitution states that CoResearcher is a Scientific Coordination Protocol that can exist entirely on top of existing free infrastructure. Without this, it is just a financing hypothesis.*

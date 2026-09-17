@@ -1,43 +1,43 @@
 # Validation Plan: 5 Critical Questions Before Sprint 23
 
-> **Congelar arquitectura.**
-> **No más Registry/Protocol/Layer/Identifier.
-> Solo validación con usuarios reales.**
+> **Freeze architecture.**
+> **No more Registry/Protocol/Layer/Identifier.
+> Only validation with real users.**
 
 ---
 
-## Las 5 Preguntas de Validación
+## The 5 Validation Questions
 
-### Pregunta 1: Problema concreto
-**Si hoy existiera CoResearcher, ¿qué problema concreto te resolvería?**
+### Question 1: Specific problem
+**If CoResearcher existed today, what specific problem would it solve for you?**
 
-No qué les parece la visión. Qué usarían mañana.
-
----
-
-### Pregunta 2: Proceso vs Resultado  
-**Si Claude Research o Gemini Research generan una hipótesis, ¿te interesa conservar el proceso o solo el resultado?**
-
-Esto valida el valor del Activity Graph.
+Not what you think of the vision. What would they wear tomorrow?
 
 ---
 
-### Pregunta 3: Revisión Agentica
-**¿Aceptarías una revisión Agent → Agent si existe trazabilidad y responsabilidad ORCID detrás?**
+### Question 2: Process vs Result  
+**If Claude Research or Gemini Research generates a hypothesis, are you interested in preserving the process or just the result?**
 
-Si sí → oportunidad enorme en Verification Layer.
-Si no → replantear todo.
+This validates the value of the Activity Graph.
 
 ---
 
-### Pregunta 4: Valor principal
-**¿Qué les resulta más valioso?**
+### Question 3: Agent Review
+**Would you accept an Agent → Agent review if there is ORCID traceability and accountability behind it?**
+
+Yes yes → huge opportunity in Verification Layer.
+If not → rethink everything.
+
+---
+
+### Question 4: Primary value
+**What is most valuable to you?**
 
 ```
 Descubrir conocimiento
 ```
 
-o
+or
 
 ```
 Demostrar autoría y validación del conocimiento
@@ -45,75 +45,75 @@ Demostrar autoría y validación del conocimiento
 
 ---
 
-### Pregunta 5: Activo irreemplazable
-**Si mañana desapareciera PubMed, ¿qué echarían más de menos?**
+### Question 5: Irreplaceable asset
+**If PubMed disappeared tomorrow, what would you miss the most?**
 
 - Papers
-- Autores
-- Revisiones
-- Replicaciones
-- Historial de decisiones
+- Authors
+- Reviews
+- Replications
+- Decision history
 
 ---
 
-## Regla de oro
+## Golden rule
 
-> **Si una funcionalidad no pasa las 5 preguntas, no implementarla.**
+> **If a feature does not pass the 5 questions, do not implement it.**
 
 ---
 
-## Qué NO hacer ahora
+## What NOT to do now
 
-❌ No más Registry/Protocol/Layer/Identifier/Constitution
+❌ No more Registry/Protocol/Layer/Identifier/Constitution
 ❌ No Sprint 23A (Scientific Compiler)
-❌ No más identificadores
+❌ No more identifiers
 
 ---
 
-## Qué SÍ hacer ahora
+## What to do now
 
-✅ Congelar la arquitectura actual
-✅ Validar las 5 preguntas con 10 investigadores reales
-✅ Identificar el activo real (si es Activity Graph)
-✅ Decidir si Agent-First es viable
-✅ Determinar si detenerse o continuar
-
----
-
-## La hipótesis más peligrosa
-
-> La revisión científica va a convertirse en actividad predominante agentic, pero con responsabilidad humana.
-
-Si esto es cierto:
-- El sistema editorial tiene un problema gigantesco
-- Hay oportunidad estructural masiva
-- La Verification Layer es el foco principal
+✅ Freeze the current architecture
+✅ Validate the 5 questions with 10 real researchers
+✅ Identify the real asset (if it is Activity Graph)
+✅ Decide if Agent-First is viable
+✅ Determine whether to stop or continue
 
 ---
 
-## El mayor riesgo
+## The most dangerous hypothesis
 
-No es técnico.
+> Scientific review will become a predominant agentic activity, but with human responsibility.
 
-Es construir una arquitectura brillante alrededor de hipótesis equivocadas.
-
-Una arquitectura excelente sin uso real vale cero.
+If this is true:
+- The editorial system has a gigantic problem
+- There is massive structural opportunity
+- The Verification Layer is the main focus
 
 ---
 
-## Próximos pasos inmediatos
+## The biggest risk
 
-1. **Congelar arquitectura ahora mismo**
-2. **Contactar 10 investigadores reales**
-3. **Validar con ellos las 5 preguntas**
-4. **Solo entonces decidir si continuar**
+It's not technical.
 
-Git no ganó por la constitución de Linus.
+It is building a brilliant architecture around wrong hypotheses.
 
-Ganó porque resolvía un problema real.
+Excellent architecture with no real use is worth zero.
 
-ORCID ganó porque universidades lo exigieron.
+---
 
-La arquitectura debe ser simple.
+## Immediate next steps
 
-La adopción debe ser demostrada.
+1. **Freeze architecture right now**
+2. **Contact 10 real researchers**
+3. **Validate the 5 questions with them**
+4. **Only then decide whether to continue**
+
+Git didn't win because of Linus' constitution.
+
+It won because it solved a real problem.
+
+ORCID won because universities demanded it.
+
+The architecture should be simple.
+
+Adoption must be proven.

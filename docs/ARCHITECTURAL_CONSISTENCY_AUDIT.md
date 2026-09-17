@@ -1,31 +1,31 @@
-# Auditoría de Consistencia Arquitectónica (ARQ-001)
+# Architectural Consistency Audit (ARQ-001)
 
-Esta auditoría somete a estrés las fronteras definidas en la Constitución de CoResearcher, buscando de forma destructiva contradicciones, solapamientos de responsabilidad o ambigüedades entre los documentos canónicos.
+This audit stresses the boundaries defined in the CoResearcher Constitution, destructively searching for contradictions, overlaps of responsibility, or ambiguities between canonical documents.
 
-## Matriz de Consistencia
+## Consistency Matrix
 
-| Documento A | Documento B | ¿Conflicto? | Análisis / Justificación | Resolución / Veredicto |
+| Document A | Document B | Conflict? | Analysis / Justification | Resolution / Verdict |
 | ----------- | ----------- | ----------- | ------------------------ | ---------------------- |
-| `BOUNDARY_WITH_EDITXT` | `BOUNDARY_WITH_AI_SCIENTISTS` | **NO** | EditXT audita calidad sobre grafos existentes. AI Scientists generan nueva ciencia. Ambos respetan que CoResearcher se limita a trazar evidencia sin emitir juicios ni hipótesis. | **Consistente**. Las fronteras 1 y 2 son ortogonales y están bien delimitadas frente a la Capa 1 (CoResearcher). |
-| `BOUNDARY_WITH_EDITXT` | `HANDOFF_TRACEABILITY` | **PARCIAL** | `BOUNDARY_WITH_EDITXT` indica que EditXT consume EvidenceGraphs para crear ReviewGraphs. `HANDOFF_TRACEABILITY` especifica estrictamente que la comunicación es unidireccional y CoResearcher **no recibe** output evaluativo. | **Resuelto**. `HANDOFF_TRACEABILITY` blinda un posible vector de contaminación detallando explícitamente el Input/Output, pero ambos documentos están alineados en que no hay *feedback loop*. |
-| `ARCHITECTURE_MAP` | `BOUNDARY_WITH_AI_SCIENTISTS` | **NO** | `ARCHITECTURE_MAP` ubica a "AI Scientists" como *External Consumers* (Read-only access). La frontera coincide perfectamente en que CoResearcher no tiene integración bidireccional con generadores de hipótesis. | **Consistente**. El mapa refleja físicamente la prohibición de la frontera 3. |
-| `ARCHITECTURE_MAP` | `HANDOFF_TRACEABILITY` | **NO** | El mapa define `EditXT` como una *Ecossystem App* que consume `EvidenceGraph` y produce `ReviewGraph`. El documento de *Handoff* estandariza las cargas JSON (`EG-XXXXX`, `REVIEW-XXXXX`) exactas para ese flujo. | **Consistente**. Trazabilidad técnica 1:1. |
-| `BOUNDARY_WITH_EDITXT` | `ARCHITECTURE_MAP` | **POTENCIAL** | En `BOUNDARY_WITH_EDITXT` (L150) se menciona que *GitHub Issues → QUESTION-XXXXXX*, pero `ARCHITECTURE_MAP` solo menciona *ACTION-XXXXXX* y *OBS-XXXXXX* como salida del Semantic Compiler (L90). | **Requiere Ajuste Menor**. El Semantic Compiler en `ARCHITECTURE_MAP` debe documentar formalmente la emisión de `QUESTION-XXXXXX` para alinearse 100% con la topología de EditXT. *Acción: Documentado y aceptado como deuda técnica menor (no rompe el contrato).* |
+| `BOUNDARY_WITH_EDITXT` | `BOUNDARY_WITH_AI_SCIENTISTS` | **NO** | EditXT audits quality on existing graphs. AI Scientists generate new science. They both respect that CoResearcher simply plots evidence without making judgments or hypotheses. | **Consistent**. Boundaries 1 and 2 are orthogonal and well delineated in front of Layer 1 (CoResearcher). |
+| `BOUNDARY_WITH_EDITXT` | `HANDOFF_TRACEABILITY` | **PARTIAL** | `BOUNDARY_WITH_EDITXT` indicates that EditXT consumes EvidenceGraphs to create ReviewGraphs. `HANDOFF_TRACEABILITY` strictly specifies that communication is one-way and CoResearcher **does not receive** evaluative output. | **Resolved**. `HANDOFF_TRACEABILITY` shields a possible contamination vector by explicitly detailing the Input/Output, but both documents are aligned in that there is no *feedback loop*. |
+| `ARCHITECTURE_MAP` | `BOUNDARY_WITH_AI_SCIENTISTS` | **NO** | `ARCHITECTURE_MAP` places "AI Scientists" as *External Consumers* (Read-only access). The frontier agrees perfectly that CoResearcher does not have bidirectional integration with hypothesis generators. | **Consistent**. The map physically reflects the border ban 3. |
+| `ARCHITECTURE_MAP` | `HANDOFF_TRACEABILITY` | **NO** | The map defines `EditXT` as an *Ecossystem App* that consumes `EvidenceGraph` and produces `ReviewGraph`. The *Handoff* document standardizes the exact JSON payloads (`EG-XXXXX`, `REVIEW-XXXXX`) for that flow. | **Consistent**. 1:1 technical traceability. |
+| `BOUNDARY_WITH_EDITXT` | `ARCHITECTURE_MAP` | **POTENTIAL** | `BOUNDARY_WITH_EDITXT` (L150) mentions *GitHub Issues → QUESTION-XXXXXX*, but | **Minor Adjustment Required**. The Semantic Compiler in `ARCHITECTURE_MAP` must formally document the issuance of `QUESTION-XXXXXX` to align 100% with the EditXT topology. *Action: Documented and accepted as minor technical debt (does not break the contract).* |
 
-## Evaluación de Tipos de Grafos (EvidenceGraph vs ReviewGraph)
+## Evaluation of Graph Types (EvidenceGraph vs ReviewGraph)
 
-Existe un riesgo arquitectónico frecuente al confundir el grafo de evidencia con el grafo de revisión. La auditoría confirma que la segregación es absoluta:
+There is a common architectural risk in confusing the evidence graph with the review graph. The audit confirms that the segregation is absolute:
 
-1. **EvidenceGraph (Dominio CoResearcher)**
-   - Nodos permitidos: `Claim`, `Quote`, `Source`, `URL`.
-   - Aristas permitidas: `supported_by`, `sourced_from`, `resolves_to`.
-   - **Limitación estricta:** No contiene nodos de "Calidad", "Severidad" ni "Veredicto".
+1. **EvidenceGraph (CoResearcher Domain)**
+   - Allowed nodes: `Claim`, `Quote`, `Source`, `URL`.
+   - Allowed edges: `supported_by`, `sourced_from`, `resolves_to`.
+   - **Strict limitation:** Does not contain "Quality", "Severity" or "Verdict" nodes.
 
-2. **ReviewGraph (Dominio EditXT)**
-   - Nodos permitidos: `ReviewFinding`, `ReviewSeverity`, `ReviewRecommendation`.
-   - **Limitación estricta:** Consume un EvidenceGraph como ID foráneo (`input_evidence_graph`), pero nunca sobreescribe sus aristas.
+2. **ReviewGraph (EditXT Domain)**
+   - Allowed nodes: `ReviewFinding`, `ReviewSeverity`, `ReviewRecommendation`.
+   - **Strict limitation:** Consumes an EvidenceGraph as a foreign ID (`input_evidence_graph`), but never overwrites its edges.
 
-## Veredicto de la Auditoría
+## Audit Verdict
 
-**APROBADA.**  
-No existen contradicciones fatales. Las fronteras de CoResearcher como *Traceability Engine* puro están blindadas contra la contaminación editorial (EditXT) y la contaminación generativa (AI Scientists). La única deuda menor es la inclusión explícita del primitivo `QUESTION-XXXXXX` en los diagramas de I/O del `ARCHITECTURE_MAP`.
+**APPROVED.**  
+There are no fatal contradictions. CoResearcher's boundaries as a pure *Traceability Engine* are shielded against editorial contamination (EditXT) and generative contamination (AI Scientists). The only minor debt is the explicit inclusion of the `QUESTION-XXXXXX` primitive in the `ARCHITECTURE_MAP` I/O diagrams.

@@ -87,6 +87,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **100-World Unknown Mechanism**| `scripts/run_unknown_mechanism_benchmark.py` | Autonomous abduction across 100 blind worlds without biological priors. |
 | **Adversarial Destruction** | `scripts/run_adversarial_destruction_suite.py` | 50-case adversarial stress suite (Simpson's paradox, collider stratification, circular reasoning). |
 | **Universal Latent Invariants** | `scripts/run_universal_cross_domain_suite.py` | Cross-domain mathematical scaling across Neuroscience, Astrophysics, Economics, and Marine Ecology. |
+| **Paper2Agent MCP Federation** | `scripts/run_paper_agent_mcp_suite.py` | Virtual author discovery and real analytical tool execution with SHA-256 provenance (\(RCS=2\)). |
 
 ---
 
@@ -106,5 +107,5 @@ For complete, in-depth architectural and constitutional specifications, consult:
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.0.0** (4 Layers, Formal Engines, Mathematical Formulations, API Routes).
 - [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.0.0** (File-by-file directory inventory, data flows, external contracts).
-- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-021).
+- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-022).
 - [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).\n

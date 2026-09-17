@@ -1,0 +1,167 @@
+# AUDIT-AG-005 — Context Bottleneck Falsification
+
+**Fecha**: 2026-08-02
+**Status**: FROZEN — No further action without empirical trigger
+**Freeze Date**: 2026-08-02
+**Objetivo**: Intentar destruir la conclusión de AUDIT-AG-004. No mejorar. No construir.
+**Hipótesis bajo ataque**: `Context fragmentation → comportamiento deficiente`
+**Regla especial cumplida**: NO se creó Context Engine, Context Graph, Memory Layer ni Knowledge Layer.
+
+---
+
+## Freeze Classification
+
+### OBSERVED
+
+- Existen múltiples fuentes de contexto
+- Existe fragmentación documental
+- Puede compilarse un Context Pack
+- El Context Pack comprime ~73x
+
+### UNDETERMINED
+
+- La fragmentación causa el comportamiento observado
+- Un Context Pack mejora el cumplimiento
+- Un Context Pack reduce loops
+- Un Context Pack reduce drift
+
+---
+
+## 1. Resumen Ejecutivo
+
+AUDIT-AG-005 sometió la conclusión de AUDIT-AG-004 (Context Architecture como cuello de botella) al mismo tratamiento de falsación que recibió H7.
+
+**Resultado**: 🔴🟡 **YELLOW** — Evidencia insuficiente.
+
+La hipótesis `Context fragmentation → comportamiento deficiente` **NO colapsa** (RED) porque la fragmentación es una condición real del proyecto. Pero **NO sobrevive** como explicación suficiente (GREEN) porque:
+
+1. El caso histórico más relevante (Behavior-as-Text) se clasifica como **NO habría desaparecido** con Context Pack
+2. La compresión del Context Pack es **agregativa**: pierde detalles individuales
+3. Ningún test predictivo ha sido instrumentado
+
+---
+
+## 2. FASE 1 — Alternative Explanations
+
+Se generaron 5 hipótesis competidoras. La hipótesis E no recibió privilegios.
+
+| ID | Hipótesis | Evidencia | Estado |
+|----|-----------|-----------|--------|
+| A | Prompt dilution | UNKNOWN — no se dispone del prompt efectivo | CANDIDATE |
+| B | Policy conflict | OBSERVED — CHAIN_OF_AUTHORITY.md + ARCHITECTURE_FREEZE.md | CANDIDATE |
+| C | Tool-selection pathology | OBSERVED — 30+ scripts sin mapeo de uso | CANDIDATE |
+| D | Termination failure | UNKNOWN — referido en feedback, no documentado | CANDIDATE |
+| E | Context fragmentation | OBSERVED — 16 secciones compiladas desde 10+ fuentes | CANDIDATE |
+
+**Clasificación**: Todas son CANDIDATE. Ninguna es established.
+
+---
+
+## 3. FASE 2 — Counterfactual Replay
+
+Pregunta: ¿Habría desaparecido el fallo si el agente hubiese recibido el Context Pack completo?
+
+| Caso | Clasificación | Justificación |
+|------|---------------|---------------|
+| BA-001 — Blocked Loop | **UNKNOWN** | No hay evidencia para determinar si el Context Pack habría roto el bucle |
+| BA-002 — Behavior-as-Text | **NO** | El Context Pack cambia información, no cumplimiento. Si el agente lee reglas pero no las obedece, recibir más información no altera necesariamente el cumplimiento |
+| BA-003 — Termination Failure | **UNKNOWN** | No hay evidencia en el repo |
+
+**Resumen**: YES=0, NO=1, UNKNOWN=2
+
+**Resultado crítico**: El caso BA-002 (Behavior-as-Text) se clasifica como **NO habría desaparecido**. El Context Pack no es un mecanismo de cumplimiento.
+
+---
+
+## 4. FASE 3 — Minimal Context Experiment
+
+Tres configuraciones teóricas sin implementar:
+
+| Config | Información añadida | Redundancia | Conflictos | Riesgo |
+|--------|---------------------|-------------|------------|--------|
+| A — Minimal state | Mínima (objetivo único) | Baja | Bajos | El agente no sabe qué datos existen |
+| B — current_state.md | Alta (779 entradas de 11 fuentes) | Media | Potenciales (secciones solapadas) | **El Context Pack añade complejidad estructural: 16 secciones que el agente debe procesar** |
+| C — current_state.md + ETS | Máxima | Alta | **Altos: estado (datos) vs ETS (reglas) — ¿cuál gana?** | Re-introduce 'Behavior as Text' |
+
+**Observación crítica (DERIVED)**: El Context Pack reorganiza la información pero no reduce la carga cognitiva total — la mueve de 'buscar fuentes' a 'interpretar secciones'.
+
+---
+
+## 5. FASE 4 — Compression Audit
+
+Medición directa contra archivos existentes:
+
+```
+Total fuentes: 10,393 líneas (13 archivos)
+current_state.md: 142 líneas
+Compression ratio (MD): 0.0137 (~73x compresión)
+```
+
+**Qué se CONSERVA**:
+- Conteos (claims, findings, questions, models)
+- Distribuciones de calidad/estado
+- Identificadores de contratos/capabilities/connectors
+- Tablas resumen (survival, convergence, compression)
+- Hashes y mensajes de commits
+
+**Qué se PIERDE**:
+- Textos completos de claims
+- Descripciones de findings
+- Detalles individuales de questions/models
+- rationale/evidence de cada decisión
+- provenance completa (source URLs, timestamps)
+- Detalles de hypotheses/experiments
+
+**Veredicto (OBSERVED)**: La compresión es AGREGATIVA. El Context Pack es un **índice del estado**, no el estado operativo completo. Si el agente necesita detalles individuales, tendrá que buscar en las fuentes originales igualmente.
+
+**Pregunta crítica**: ¿Context Pack = Estado operativo? **NO.** Context Pack = índice agregado.
+
+---
+
+## 6. FASE 5 — Predictive Test
+
+Se definieron 3 predicciones observables:
+
+| ID | Predicción | Instrumentada |
+|----|------------|---------------|
+| P1 | Dos agentes idénticos con distinto contexto deberían divergir sistemáticamente | NO |
+| P2 | Un agente con Context Pack debería leer MENOS archivos | NO |
+| P3 | Si la hipótesis es falsa, agentes con Context Pack mostrarían el MISMO patrón de fallos | NO |
+
+**Estado**: UNDETERMINED — predicciones definidas pero ninguna instrumentada ni medida.
+
+---
+
+## 7. Veredicto Final
+
+### 🔴🟡 YELLOW — Evidencia insuficiente
+
+La hipótesis `Context fragmentation → comportamiento deficiente`:
+
+- **NO colapsa (RED)** porque la fragmentación es OBSERVED como condición real
+- **NO sobrevive (GREEN)** como explicación suficiente porque:
+  1. El caso Behavior-as-Text sugiere que el fallo persiste independientemente del contexto
+  2. La compresión agrega — pierde detalles que el agente necesitará buscar
+  3. Sin test predictivo instrumentado, la causa no está establecida
+
+**Nota epistémica**: YELLOW no significa "parece razonable". Significa que NO hay evidencia suficiente para declarar la hipótesis como causa principal, y tampoco la hay para descartarla.
+
+---
+
+## 8. Artefactos Generados
+
+| Artefacto | Tipo | Clasificación |
+|-----------|------|---------------|
+| `scripts/sprint72_audit_ag005_falsification.py` | Script de falsación | OBSERVED — ejecutado |
+| `artifacts/context_pack/audit_ag005_falsification.json` | Resultados completos | OBSERVED — datos medidos |
+| `docs/AUDIT_AG_005_CONTEXT_BOTTLENECK_FALSIFICATION.md` | Documento de auditoría | Este documento |
+
+---
+
+## 9. Consecuencia
+
+AUDIT-AG-004 estableció que la capa de contexto es **compilable y representable**.
+
+AUDIT-AG-005 establece que la hipótesis de que Context fragmentation ES la causa del comportamiento deficiente **permanece UNDETERMINED**.
+
+**Implicación**: No se debe construir un Context Engine, Context Graph, Memory Layer ni Knowledge Layer basados en la hipótesis no falsada. La observación del cuello de botella es válida; la causalidad no está establecida. La siguiente acción legítima sería instrumentar P1/P2/P3 (dos agentes con contexto distinto en la misma tarea), no construir infraestructura nueva.

@@ -1,4 +1,4 @@
-# Competitive Landscape
+#CompetitiveLandscape
 ## Institutional Infrastructure Mapping
 
 **Version 1.0.0** - Strategic Positioning Analysis  
@@ -6,11 +6,11 @@
 
 ---
 
-## The Core Question
+##The Core Question
 
-> **¿Qué espacio institucional sigue vacío?**
+> **What institutional space is still empty?**
 
-Antes de diseñar más arquitectura, debemos identificar con precisión qué necesidad real no está siendo atendida por sistemas existentes.
+Before designing further architecture, we must identify precisely what real need is not being served by existing systems.
 
 ---
 
@@ -26,7 +26,7 @@ Activity-centric
 Agent-centric (CoResearcher target)
 ```
 
-OSF está entre los dos primeros niveles. CoResearcher salta directamente al cuarto.
+OSF is between the first two levels. CoResearcher jumps right into the room.
 
 ---
 
@@ -49,28 +49,28 @@ OSF está entre los dos primeros niveles. CoResearcher salta directamente al cua
 
 ### 1. OSF (Open Science Framework)
 
-**Qué coordina:**
+**What coordinates:**
 - Preregistration
 - Data
-- Código
-- Materiales
+- Code
+- Materials
 - Preprints
-- Publicaciones
+- Publications
 
-**Unidad fundamental:** El "research object" / project container
+**Fundamental unit:** The "research object" / project container
 
-**Identificador principal:** Node ID + DOI para registros
+**Primary identifier:** Node ID + DOI for records
 
-**Efecto red:** Conecta artefactos dentro de un proyecto de investigación
+**Network effect:** Connect artifacts within a research project
 
-**Qué NO coordina:**
-- Actividad en tiempo real de agentes
-- Historial inmutable de decisiones
-- Trazabilidad de preguntas → investigación → revisión
-- Colaboración híbrida humano-agente
-- Consenso evolutivo visible
+**What does NOT coordinate:**
+- Real-time activity of agents
+- Immutable decision history
+- Question traceability → investigation → review
+- Hybrid human-agent collaboration
+- Visible evolutionary consensus
 
-**Modelo de grafo:**
+**Graph model:**
 ```
 Researcher
     ↓
@@ -81,191 +81,191 @@ Preprint
 Paper
 ```
 
-Grafo de **artefactos**, no de **actividad**.
+Graph of **artifacts**, not **activity**.
 
 ---
 
 ### 2. OpenAlex
 
-**Qué coordina:**
-- Metadata de literatura académica
-- Conceptualización de campos y subcampos
-- Citaciones y referencias
-- Autores y afiliaciones
+**What coordinates:**
+- Academic literature metadata
+- Conceptualization of fields and subfields
+- Citations and references
+- Authors and affiliations
 
-**Unidad fundamental:** Trabajo académico (paper)
+**Fundamental unit:** Academic work (paper)
 
-**Identificador principal:** OpenAlex ID
+**Primary identifier:** OpenAlex ID
 
-**Efecto red:** Grafo de conocimiento académico basado en citaciones
+**Network effect:** Academic knowledge graph based on citations
 
-**Qué NO coordina:**
-- Proceso de investigación
-- Hipótesis y preguntas
-- Acciones de agentes
-- Revisiones y validaciones intermedias
-- Actividad exploratoria no publicada
+**What does NOT coordinate:**
+- Research process
+- Hypotheses and questions
+- Agent actions
+- Intermediate reviews and validations
+- Unpublished exploratory activity
 
 ---
 
 ### 3. ORCID
 
-**Qué coordina:**
-- Identidad de investigadores
-- Afiliciones institucionales
-- Contribuciones y publicaciones
+**What coordinates:**
+- Identity of researchers
+- Institutional affiliations
+- Contributions and publications
 
-**Unidad fundamental:** Persona investigadora
+**Fundamental unit:** Research person
 
-**Identificador principal:** ORCID iD
+**Primary identifier:** ORCID iD
 
-**Efecto red:** Identidad verificable vinculada a publicaciones
+**Network effect:** Verifiable identity linked to publications
 
-**Qué NO coordina:**
-- Actividad científica misma
-- Preguntas y hipótesis
-- Revisiones de pares
-- Proceso de investigación
-- Colaboración activa
+**What does NOT coordinate:**
+- Scientific activity itself
+- Questions and hypotheses
+- Peer reviews
+- Research process
+- Active collaboration
 
 ---
 
 ### 4. Crossref
 
-**Qué coordina:**
-- Metadatos de publicación
-- Sistema de citas
-- Relaciones entre objetos
+**What coordinates:**
+- Post metadata
+- Appointment system
+- Relationships between objects
 
-**Unidad fundamental:** Publicación con DOI
+**Fundamental unit:** Publication with DOI
 
-**Identificador principal:** DOI
+**Primary identifier:** DOI
 
-**Efecto red:** Enlaces de citación entre publicaciones
+**Network effect:** Citation links between publications
 
-**Qué NO coordina:**
-- Proceso previo a la publicación
-- Datos y código asociados
-- Revisión y validación
-- Identidad de investigadores en detalle
-- Actividad científica exploratoria
+**What does NOT coordinate:**
+- Pre-publication process
+- Associated data and code
+- Review and validation
+- Identity of researchers in detail
+- Exploratory scientific activity
 
 ---
 
 ### 5. Zenodo
 
-**Qué coordina:**
-- Almacenamiento de artefactos de investigación
-- Versionado de datasets y software
-- Asignación de DOIs
+**What coordinates:**
+- Storage of research artifacts
+- Versioning of datasets and software
+- DOI assignment
 
-**Unidad fundamental:** Archivo/depósito
+**Fundamental unit:** Archive/repository
 
-**Identificador principal:** DOI (Zenodo)
+**Primary identifier:** DOI (Zenodo)
 
-**Efecto red:** Descubrimiento y citación de artefactos
+**Network effect:** Discovery and citation of artifacts
 
-**Qué NO coordina:**
-- Proceso de investigación
-- Revisiones y comentarios estructurados
-- Preguntas de investigación
-- Actividad de agentes
-- Consenso científico
+**What does NOT coordinate:**
+- Research process
+- Structured reviews and comments
+- Research questions
+- Agent activity
+- Scientific consensus
 
 ---
 
 ### 6. GitHub
 
-**Qué coordina:**
-- Desarrollo colaborativo de código
-- Issues y pull requests
-- Workflows automatizados
-- Versionado distribuido
+**What coordinates:**
+- Collaborative code development
+- Issues and pull requests
+- Automated workflows
+- Distributed versioning
 
-**Unidad fundamental:** Commit/Repository
+**Fundamental unit:** Commit/Repository
 
-**Identificador principal:** URL del repositorio
+**Primary identifier:** Repository URL
 
-**Efecto red:** Colaboración entre desarrolladores
+**Network effect:** Collaboration between developers
 
-**Qué NO coordina:**
-- Actividad científica (más allá del código)
-- Preguntas y hipótesis científicas
-- Revisiones de ciencia
-- Trazabilidad de experimentos
-- Integración con sistemas académicos
+**What does NOT coordinate:**
+- Scientific activity (beyond the code)
+- Scientific questions and hypotheses
+- Science Reviews
+- Experiment traceability
+- Integration with academic systems
 
 ---
 
 ### 7. Wikipedia
 
-**Qué coordina:**
-- Conocimiento humano estructurado
-- Edición colaborativa
-- Versionado de artículos
-- Consenso comunitario
+**What coordinates:**
+- Structured human knowledge
+- Collaborative editing
+- Versioning of articles
+- Community consensus
 
-**Unidad fundamental:** Artículo/wiki page
+**Fundamental unit:** Article/wiki page
 
-**Identificador principal:** Título + namespace
+**Primary identifier:** Title + namespace
 
-**Efecto red:** Consenso a través de edición abierta
+**Network effect:** Consensus through open editing
 
-**Qué NO coordina:**
-- Proceso de descubrimiento científico
-- Revisión por pares formal
-- Trazabilidad de evidencia
-- Actividad de agentes especializados
-- Ontología científica formal
+**What does NOT coordinate:**
+- Scientific discovery process
+- Formal peer review
+- Evidence traceability
+- Activity of specialized agents
+- Formal scientific ontology
 
 ---
 
 ### 8. OpenReview
 
-**Qué coordina:**
-- Revisión por pares transparente
-- Discusión de papers
-- Decisiones editoriales visibles
+**What coordinates:**
+- Transparent peer review
+- Discussion of papers
+- Visible editorial decisions
 
-**Unidad fundamental:** Submission/review
+**Fundamental unit:** Submission/review
 
-**Identificador principal:** Submission ID
+**Primary identifier:** Submission ID
 
-**Efecto red:** Calidad a través de revisión abierta
+**Network effect:** Quality through open review
 
-**Qué NO coordina:**
-- Ciclo de vida completo de investigación
-- Preguntas y planes de investigación
-- Actividad de agentes
-- Metadatos ontológicos
-- Integración con artefactos de datos/código
+**What does NOT coordinate:**
+- Complete research life cycle
+- Research questions and plans
+- Agent activity
+- Ontological metadata
+- Integration with data/code artifacts
 
 ---
 
 ## Synthesis: The Empty Space
 
-### Lo que está cubierto:
+### What's covered:
 
-| Necesidad | Plataforma(s) que la cubre |
+| Need | Platform(s) that covers it |
 |-----------|---------------------------|
-| ✅ Identidad investigadores | ORCID |
-| ✅ Permanencia artefactos | DOI/Crossref/Zenodo |
-| ✅ Gestión proyectos | OSF |
-| ✅ Desarrollo colaborativo | GitHub |
-| ✅ Metadatos académicos | OpenAlex |
-| ✅ Revisión transparente | OpenReview |
-| ✅ Almacenamiento datos | Zenodo |
+| ✅ Identity researchers | ORCID |
+| ✅ Permanence artifacts | DOI/Crossref/Zenodo |
+| ✅ Project management | OSF |
+| ✅ Collaborative development | GitHub |
+| ✅ Academic metadata | OpenAlex |
+| ✅ Transparent review | OpenReview |
+| ✅ Data storage | Zenodo |
 
-### Lo que NO está cubierto:
+### What is NOT covered:
 
-| Necesidad | Por qué está vacía | CoResearcher puede llenar |
-|-----------|-------------------|--------------------------|
-| ❌ Registro de actividad científica | Nadie registra el proceso completo | ✅ Scientific Activity Ledger |
-| ❌ Coordinación humano-agente | Sin infraestructura existente | ✅ Agent Actions + Reviews + Decisions |
-| ❌ Consenso evolutivo visible | Wikipedia abierta, OpenReview limitado | ✅ Snapshots + Trust scores |
-| ❌ Preguntas verificables | Sin identidad propia | ✅ QUESTION-XXXXXX como primitivo |
-| ❌ Trazabilidad de dirección cambiada | No existe | ✅ Evidence-driven redirection tracking |
-| ❌ Namespace canónico científico | Fragmentación masiva | ✅ Ontological anchoring |
+| Need | Why is it empty | CoResearcher can fill |
+|-----------|--------|--------------------------|
+| ❌ Scientific activity record | Nobody records the entire process | ✅ Scientific Activity Ledger |
+| ❌ Human-agent coordination | No existing infrastructure | ✅ Agent Actions + Reviews + Decisions |
+| ❌ Visible evolutionary consensus | Open Wikipedia, Limited OpenReview | ✅ Snapshots + Trust scores |
+| ❌ Verifiable questions | Without own identity | ✅ QUESTION-XXXXXX as primitive |
+| ❌ Changed address traceability | Does not exist | ✅ Evidence-driven redirection tracking |
+| ❌ Scientific canonical namespace | Mass fragmentation | ✅ Ontological anchoring |
 
 ---
 
@@ -275,24 +275,24 @@ Grafo de **artefactos**, no de **actividad**.
 COMPUTABLE SCIENTIFIC RECORD
 ```
 
-**No es:**
+**Not:**
 - Knowledge Graph
 - Artifact Repository
 - Project Management Tool
 - Identity Provider
 - Publication Platform
 
-**Es:**
-- Ledger de actividad científica verificable
-- Coordinación de investigación híbrida
-- Historial inmutable de decisiones
-- Consenso evolutivo computable
+**It is:**
+- Ledger of verifiable scientific activity
+- Hybrid research coordination
+- Immutable decision history
+- Computable evolutionary consensus
 
 ---
 
 ## Integration Strategy
 
-### Identificadores desde el día 1:
+### Identifiers from day 1:
 
 ```text
 ORCID    ↔ Researcher identity (RES-XXXXXX)
@@ -302,15 +302,15 @@ Zenodo   ↔ Dataset/software permanence
 GitHub   ↔ Development provenance
 ```
 
-### Federar, no inventar
+### Federate, not invent
 
-CoResearcher no necesita:
+CoResearcher does not need:
 - Identity management (ORCID)
 - Storage infrastructure (Zenodo/GitHub)
 - Publication pipeline (Crossref/DOI)
 - Metadata harvesting (OpenAlex)
 
-CoResearcher necesita:
+CoResearcher needs:
 - Activity coordination layer
 - Agent-native protocols
 - Scientific consensus machinery
@@ -320,18 +320,18 @@ CoResearcher necesita:
 
 ## The Real Competitive Advantage
 
-### No es técnico, es institucional
+### It's not technical, it's institutional
 
-El valor no está en:
-- Mejor LLM
-- Mejor UI
-- Mejor arquitectura
+The value is not in:
+- Best LLM
+- Better UI
+- Better architecture
 
-El valor está en:
-- **Network effect de actividad acumulada**
-- **Historia inmutable de producción científica**
-- **Consenso verificable evolutivo**
-- **Reputación trazable por contribución real**
+The value is in:
+- **Network effect of accumulated activity**
+- **Immutable history of scientific production**
+- **Evolutionary verifiable consensus**
+- **Reputation traceable by real contribution**
 
 ```text
 100K claims
@@ -351,25 +351,25 @@ Scientific Coordination Infrastructure
 
 ## Recommendation: Stop Designing, Start Integrating
 
-### No añadir más constituciones
+### Do not add more constitutions
 
-### Crear COMPETITIVE_LANDSCAPE.md ✅ (este documento)
+### Create COMPETITIVE_LANDSCAPE.md ✅ (this document)
 
-### Para cada plataforma identificar:
+### For each platform identify:
 
-1. Qué coordina
-2. Cuál es su unidad fundamental
-3. Cuál es su identificador principal
-4. Cuál es su efecto red
-5. Qué NO coordina
+1. What coordinates
+2. What is its fundamental unit
+3. What is your primary identifier
+4. What is its network effect
+5. What does NOT coordinate
 
-### Objetivo:
+### Objective:
 
-Identificar qué espacio institucional sigue realmente vacío.
+Identify which institutional space is still really empty.
 
-Porque ahora mismo el mayor peligro no es técnico.
+Because right now the greatest danger is not technical.
 
-Es estar reinventando parcialmente algo que sistemas existentes ya resuelven por separado sin haber identificado todavía **qué pieza del rompecabezas sigue realmente sin dueño**.
+It is partially reinventing something that existing systems already solve separately without having yet identified **which piece of the puzzle is really still without an owner**.
 
 ---
 
@@ -403,13 +403,13 @@ Adoption
 Impact
 ```
 
-La diferencia es enorme: un grafo de actividad vs un grafo de artefactos.
+The difference is enormous: an activity graph vs an artifact graph.
 
 ---
 
-## Próximos pasos
+## Next steps
 
-1. Validar que el "Scientific Activity Ledger" es el espacio único realmente vacío
-2. Priorizar integraciones con sistemas existentes
-3. Definir primitivos mínimos para ocupar ese espacio
-4. No construir nada que pueda consumirse de sistemas existentes
+1. Validate that the "Scientific Activity Ledger" is the only truly empty space
+2. Prioritize integrations with existing systems
+3. Define minimal primitives to occupy that space
+4. Don't build anything that can consume existing systems

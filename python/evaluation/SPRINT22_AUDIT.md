@@ -6,7 +6,7 @@ La auditoría confirma la alerta arquitectónica: **CoResearcher no está genera
 
 ### ACLARACIÓN IMPORTANTE
 
-Los números anteriores son del **BENCHMARK DE REFERENCIA** (hipótesis esperadas), NO del output del sistema actual.
+Los números anteriores son del **BENCHMARK DE REFERENCIA** (hypothesis esperadas), NO del output del sistema actual.
 
 El sistema actual (hipotéticamente) probablemente produce:
 - Type A: ~0%
@@ -95,10 +95,10 @@ Sprint 25 = Open Core Boundary
 
 ## Next Steps Críticos
 
-1. **Conectar Einstein Generator con Finding Graph** - El generador necesita leer de Hallazgos reales
+1. **Connect Einstein Generator with Finding Graph** - The generator needs to read from real findings
 2. **Mejorar Thought Experiment Generator** - Añadir más patrones de "what if" auténticos
 3. **Testear con datos reales** - No con hypotheses simuladas
-4. **Validar con expertos** - ¿Alguna hypothesis hace pensar "No había pensado en esto"?
+4. **Validar con expertos** - Alguna hypothesis hace pensar "No había pensado en esto"?
 
 ## Archivos Creados
 
@@ -133,7 +133,7 @@ La verdadera ventaja competitiva no es la infraestructura, sino:
 ```
 CLAIM validado/refutado
 FINDING replicado
-HIPÓTESIS propuesta/descartada
+HYPOTHESIS proposed/rejected
 PREDICCIÓN confirmada
 EXPERIMENTO ejecutado
 ```
@@ -178,7 +178,7 @@ El compiler traduce intenciones científicas en objetos computables:
 
 | Texto | Intención | Objeto |
 |-------|-----------|--------|
-| "¿Por qué...?" | QUESTION | QUESTION-XXXXXX |
+| "Por qué...?" | QUESTION | QUESTION-XXXXXX |
 | "Los datos muestran..." | CLAIM | CLAIM-XXXXXX |
 | "Esto contradice..." | CHALLENGE | CONTR-XXXXXX |
 | "Creo que..." | HYPOTHESIS | HYP-XXXXXX |
@@ -187,7 +187,7 @@ El compiler traduce intenciones científicas en objetos computables:
 ### API Objetivo
 
 ```python
-compiler.compile("¿Por qué APOE4 con amiloide no desarrolla deterioro?")
+compiler.compile("Por qué APOE4 con amiloide no desarrolla deterioro?")
 # → ScientificIntent(objects=[QUESTION, CONTRADICTION, MECHANISM_GAP])
 ```
 
@@ -209,15 +209,15 @@ Es la red donde cada intención humana se convierte en:
 - ACTION RECORDING
 - TRUST EVOLUTION
 
-Esto crea décadas de moat competitivo.
+This builds decades of competitive moat.
 
-## Conclusión
+## Conclusion
 
-**El bottleneck está en el Discovery Engine, no en la infraestructura.**
+**The bottleneck is in the Discovery Engine, not the infrastructure.**
 
-El sistema actual es un "Web of Science + Wikidata científico + grafo semántico" (tiene valor), pero **no es un "Scientific Discovery OS"** hasta que demuestre generar hypotheses Type C/D.
+The current system behaves as a "Web of Science + scientific Wikidata + semantic graph" (valuable in itself), but **it is not a "Scientific Discovery OS"** until it demonstrates generating Type C/D hypotheses.
 
-La Participation Layer es el activo acumulativo que hará difícil la substitución del estándar.
-Los hypotheses Type C/D validados manualmente serán el test definitivo.
+The Participation Layer is the cumulative asset that will make substituting the standard difficult.
+Manually validated Type C/D hypotheses will serve as the definitive test.
 
-El Mechanism Registry (Sprint 23) será donde la Discovery Layer puede encontrar su verdadero propósito.
+The Mechanism Registry (Sprint 23) is where the Discovery Layer will fulfill its true purpose.

@@ -168,4 +168,4 @@ This creates the **scientific moat**.
 
 ---
 
-*Esta constitución establece ACTION como la unidad verificable de trabajo científico. Donde la reputación se gana y se prueba.*
+*This constitution establishes ACTION as the verifiable unit of scientific work. Where reputation is earned and tested.*

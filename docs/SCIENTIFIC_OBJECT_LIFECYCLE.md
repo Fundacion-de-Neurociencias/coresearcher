@@ -1,7 +1,7 @@
-# Scientific Object Lifecycle
+#Scientific Object Lifecycle
 ## From Observation to Theory in CoResearcher
 
-## El Camino del Conocimiento
+## The Path of Knowledge
 
 ```
 Observation → Claim → Finding → Mechanism → Model → Theory
@@ -11,64 +11,64 @@ Observation → Claim → Finding → Mechanism → Model → Theory
 
 ---
 
-## 1. Observation (No registrada)
+## 1. Observation (Not registered)
 
-Dato crudo sin estructura:
-- Texto de paper
-- Resultado de experimento
-- Imagen médica
-- Señal genómica
+Unstructured raw data:
+- Paper text
+- Experiment result
+- Medical imaging
+- Genomic signal
 
 ---
 
 ## 2. Claim (CLAIM-XXXXXX)
 
-### Nacimiento
+### Birth
 ```
 Paper extraído → Claim identificado
 ```
 
-### Atributos
-- `text`: afirmación literal
-- `entities`: entidades involucradas
-- `evidenceScore`: confianza en la observación
+### Attributes
+- `text`: literal statement
+- `entities`: entities involved
+- `evidenceScore`: confidence in observation
 - `supportingPapers`: [PMID-XXXXXX, ...]
-- `domain`: área de conocimiento
+- `domain`: knowledge area
 
-### Operaciones
-- `SUPPORT` - reforzar la claim
-- `CHALLENGE` - cuestionar la claim
-- `RETRACT` - retirar la claim
+### Operations
+- `SUPPORT` - reinforce the claim
+- `CHALLENGE` - question the claim
+- `RETRACT` - remove the claim
 
-### Ciclo de vida
-Baja mutabilidad. Pasa a archived.
+### Life cycle
+Low mutability. Go to archived.
 
 ---
 
 ## 3. Finding (FIND-XXXXXX)
 
-### Nacimiento
+### Birth
 ```
 Claim + Claim + Claim → Finding distilado
 (o
 Paper → KnowledgeDistillationEngine → Finding)
 ```
 
-### Atributos
-- `subject`: entidad principal
-- `predicate`: relación (predicts, causes, associated)
-- `object`: entidad relacionada
-- `effect_size`: magnitud
-- `p_value`: significancia
+### Attributes
+- `subject`: main entity
+- `predicate`: relationship (predicts, causes, associated)
+- `object`: related entity
+- `effect_size`: magnitude
+- `p_value`: significance
 - `derivedFrom`: [CLAIM-XXXXXX, ...]
 - `quality_score`: 0.0-1.0
 
-### Operaciones
-- `CONFIRM` - evidencia adicional
-- `REJECT` - refutación empírica
-- `REPLICATE` - replicación independiente
+### Operations
+- `CONFIRM` - additional evidence
+- `REJECT` - empirical refutation
+- `REPLICATE` - independent replication
 
-### Ciclo de vida
+### Life cycle
 ```
 created → validated → replicated → challenged → merged → archived
 ```
@@ -77,33 +77,33 @@ created → validated → replicated → challenged → merged → archived
 
 ## 4. Mechanism (MECH-XXXXXX)
 
-### Nacimiento
+### Birth
 ```
 Anomaly + Finding → Mechanism proposito
 (o
 Finding + Finding → Mechanism inferido)
 ```
 
-### Atributos
-- `name`: nombre descriptivo
-- `description`: explicación detallada
-- `entities`: [entidad, ...]
-- `arrows`: path causal
+### Attributes
+- `name`: friendly name
+- `description`: detailed explanation
+- `entities`: [entity,...]
+- `arrows`: causal path
 - `type`: causal_chain/feedback/threshold/compensatory/emergent
 - `confidence`: 0.0-1.0
 - `derived_from`: [FIND-XXXXXX, CLAIM-XXXXXX]
 - `contradicts`: [MECH-XXXXXX, ...]
 - `supports`: [MECH-XXXXXX, ...]
 
-### Operaciones (Participation Layer)
-- `SUPPORT` - evidencia a favor
-- `CHALLENGE` - análisis crítico
-- `REPLICATE` - replicación mecanismo
-- `REJECT` - refutación
-- `FORK` - variante mecanismo
-- `MERGE` - combinación mecanismos
+### Operations (Participation Layer)
+- `SUPPORT` - evidence in favor
+- `CHALLENGE` - critical analysis
+- `REPLICATE` - replication mechanism
+- `REJECT` - rebuttal
+- `FORK` - mechanism variant
+- `MERGE` - combination mechanisms
 
-### Ciclo de vida crítico
+### Critical life cycle
 ```
 proposed (confidence=0.1)
     ↓
@@ -120,42 +120,42 @@ refuted OR remains dominant
 
 ## 5. Model (MODEL-XXXXXX)
 
-### Nacimiento
+### Birth
 ```
 Mechanism + Mechanism + Mechanism → Model integrador
 ```
 
-### Atributos
-- `name`: nombre del modelo
+### Attributes
+- `name`: model name
 - `mechanisms`: [MECH-XXXXXX, ...]
-- `boundaries`: scope del modelo
-- `assumptions`: supuestos clave
-- `predictions`: predicciones derivadas
+- `boundaries`: model scope
+- `assumptions`: key assumptions
+- `predictions`: derived predictions
 
-### Operaciones
-- `FIT_TEST` - qué tan bien explica datos
-- `CROSS_VALIDATE` - predicciones nuevas
-- `EXTEND` - ampliar scope
+### Operations
+- `FIT_TEST` - how well it explains data
+- `CROSS_VALIDATE` - new predictions
+- `EXTEND` - expand scope
 
 ---
 
 ## 6. Theory (THEORY-XXXXXX)
 
-### Nacimiento
+### Birth
 ```
 Model + Model + Model → Theory unificadora
 ```
 
-### Atributos
-- `name`: nombre de la teoría
+### Attributes
+- `name`: theory name
 - `models`: [MODEL-XXXXXX, ...]
-- `domain_coverage`: áreas cubiertas
+- `domain_coverage`: areas covered
 - `explanatory_power`: 0.0-1.0
-- `consilience`: grado de unificación
+- `consilience`: degree of unification
 
 ---
 
-## Relaciones de Confianza
+## Trusted Relationships
 
 ```
 CLAIM.trust = evidenceScore
@@ -169,30 +169,30 @@ THEORY.trust = models.trust_avg + consilience
 
 ## Participation Signals Matrix
 
-| Acción | Objeto | Efecto en Trust |
-|--------|---------|-----------------|
+| Action | Object | Effect on Trust |
+|--------|---------|------------------|
 | SUPPORT | CLAIM | +0.1 |
 | CHALLENGE | CLAIM | -0.1 |
 | REPLICATE | FINDING | +0.2 |
 | CONFIRM | MECHANISM | +0.3 |
 | REJECT | MECHANISM | -0.5 |
-| FORK | MECHANISM | +0.1 (variante) |
+| FORK | MECHANISM | +0.1 (variant) |
 
 ---
 
-## La Regla de Oro
+## The Golden Rule
 
-**Un objeto científico no existe para el descubrimiento hasta que puede ser refutado.**
+**A scientific object does not exist for discovery until it can be refuted.**
 
-- Claim: difícil de refutar (es observación)
-- Finding: refutable (predicción cuantitativa)
-- Mechanism: altamente refutable (predicciones específicas)
-- Model: refutable (restricciones predictivas)
-- Theory: más fácil de refutar (muchas predicciones)
+- Claim: difficult to refute (it is an observation)
+- Finding: refutable (quantitative prediction)
+- Mechanism: highly refutable (specific predictions)
+- Model: refutable (predictive constraints)
+- Theory: easier to refute (many predictions)
 
 ---
 
-## El Motor de Mejora
+## The Improvement Engine
 
 ```
 MECHANISM.trust_low
@@ -208,4 +208,4 @@ Trust evolves (up/down)
 Survives OR dies
 ```
 
-Este es el ciclo que hace que CoResearcher sea un OS de descubrimiento, no una base de datos.
+This is the loop that makes CoResearcher a discovery OS, not a database.

@@ -1,0 +1,104 @@
+{
+  "report_id": "CROSSREPO-20260801143408",
+  "generated_at": "2026-08-01T14:34:08.152215+00:00",
+  "phase": "FASE 3 + FASE 4 — Cross-repo generalization + Recurrent constraints",
+  "phase3_cross_repo": {
+    "status": "LIMITED",
+    "limitation": "Solo se dispone de trajectory_graph completo para langchain-ai/langgraph. Los otros repositorios (langchain, haystack, LlamaIndex) tienen métricas de auditabilidad pero no tienen decisiones extraídas ni trajectory_graph.",
+    "available_repos_with_metrics": [
+      "langchain-ai/langgraph",
+      "langchain-ai/langchain",
+      "deepset-ai/haystack",
+      "run-llama/LlamaIndex"
+    ],
+    "repos_with_trajectory_graph": [
+      "langchain-ai/langgraph"
+    ],
+    "generalization_status": "PENDIENTE: requiere ejecutar pipeline SPRINT 60C en mínimo 10 repositorios más (pandas, numpy, fastapi, django, scikit-learn, etc.)",
+    "epistemic_status": "UNDETERMINED — no se puede evaluar generalización con 1 repo"
+  },
+  "phase4_recurrent_constraints": {
+    "restriction_frequency": {
+      "historica": 3,
+      "tecnica": 5,
+      "conceptual": 3,
+      "matematica": 1
+    },
+    "principal_hypothesis_types": {
+      "historica": 1,
+      "conceptual": 3
+    },
+    "restriction_by_convergence": {
+      "CONV-000001": [
+        {
+          "hypothesis_id": "A",
+          "restriction_type": "historica",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "restriction_type": "tecnica",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "restriction_type": "tecnica",
+          "is_principal": false
+        }
+      ],
+      "CONV-000002": [
+        {
+          "hypothesis_id": "A",
+          "restriction_type": "conceptual",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "restriction_type": "tecnica",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "restriction_type": "historica",
+          "is_principal": false
+        }
+      ],
+      "CONV-000003": [
+        {
+          "hypothesis_id": "A",
+          "restriction_type": "conceptual",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "restriction_type": "tecnica",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "restriction_type": "tecnica",
+          "is_principal": false
+        }
+      ],
+      "CONV-000004": [
+        {
+          "hypothesis_id": "A",
+          "restriction_type": "conceptual",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "restriction_type": "matematica",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "restriction_type": "historica",
+          "is_principal": false
+        }
+      ]
+    },
+    "transversal_patterns": "Las restricciones conceptuales e históricas dominan como hipótesis principales. Las técnicas aparecen frecuentemente como competidoras. Las matemáticas y ontológicas son raras."
+  },
+  "epistemic_note": "FASE 3 está en estado UNDETERMINED: no se puede evaluar generalización con un solo repositorio. FASE 4 muestra patrones preliminares basados en 4 convergencias — insuficiente para conclusiones robustas."
+}

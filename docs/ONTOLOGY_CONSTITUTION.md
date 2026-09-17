@@ -51,7 +51,7 @@ Steward: ORCID-XXXX
 
 Cuando el nodo NO existe:
 ```
-Dr. X propone investigación nueva
+Dr. X proposes new research
 ↓
 Se crea INCUBATION-000123
 ↓
@@ -86,7 +86,7 @@ This is not a bug. This is a **feature**.
 
 La ciencia no solo avanza dentro de categorías conocidas. A veces crea categorías nuevas.
 
-Los **INCUBATION NODES** permiten exploración sin romper el namespace canónico.
+**INCUBATION NODES** allow exploration without breaking the canonical namespace.
 
 ```
 INCUBATION-000123
@@ -311,4 +311,4 @@ This creates **computational lock-in**.
 
 ---
 
-*Esta constitución establece la ontología como sistema de coordenadas universal. Donde la ciencia se clasifica, se descubre, y se gobierna.*
+*This constitution establishes ontology as a universal coordinate system. Where science is classified, discovered, and governed.*

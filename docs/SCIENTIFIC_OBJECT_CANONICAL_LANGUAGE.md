@@ -11,7 +11,7 @@
 All scientific objects in CoResearcher MUST be stored in English internally, regardless of user interface language.
 
 ```
-User asks: "¿Puede GFAP predecir Alzheimer preclínico?"
+User asks: "Can GFAP predict preclinical Alzheimer's?"
 ↓
 Internally stored: "Can plasma GFAP predict preclinical Alzheimer's disease?"
 ```
@@ -28,7 +28,7 @@ Internally stored: "Can plasma GFAP predict preclinical Alzheimer's disease?"
 ### 2. Semantic Deduplication Works Better
 Same question in different languages = duplicates:
 ```
-❌ "¿Puede GFAP predecir Alzheimer?" (Spanish)
+❌ "Can GFAP predict Alzheimer's?" (Spanish)
 ❌ "Puede GFAP predecir Alzheimer?" (Portuguese with tilde removed)
 ❌ "Can GFAP predict Alzheimer?" (English)
 ```
@@ -78,7 +78,7 @@ Every scientific object has:
 ```yaml
 id: QUESTION-001234
 canonical_text: "Can plasma GFAP predict preclinical Alzheimer's disease?"
-original_text: "¿Puede GFAP predecir Alzheimer preclínico?"
+original_text: "Can GFAP predict preclinical Alzheimer's?"
 language_ui: "es"
 language_original: "es"
 ```

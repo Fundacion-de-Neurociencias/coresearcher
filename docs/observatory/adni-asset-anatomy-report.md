@@ -1,10 +1,10 @@
 # ADNI Asset Anatomy Report - Sprint 38A.4
 
-**¿Por qué ADNI produce evidencia de alta calidad?**
+**Why does ADNI produce high-quality evidence?**
 
 ---
 
-## Asset Structure
+##Asset Structure
 
 ### Overview
 - **Active period**: 2004-present (20+ years)
@@ -16,7 +16,7 @@ Structural MRI, functional MRI, PET amyloid/tau/FDG, clinical assessment, neurop
 
 ---
 
-## Why Evidence Quality is High
+##Why Evidence Quality is High
 
 ### 4.1 Protocol Standardization
 MRI protocols are identical across all sites. Both phantom calibration and centralized QC ensure consistency. Cognitive raters complete certification before participation.
@@ -25,7 +25,7 @@ MRI protocols are identical across all sites. Both phantom calibration and centr
 Participants followed for 5-10 years. Visit frequency adapts to diagnosis group (annual for stable, biannual for MCI at risk).
 
 ### 4.3 Missing Data Management
-Incomplete visits systematically tracked with reasons coded. Study partner required for all participants to verify compliance.
+Incomplete visits systematically tracked with coded reasons. Study partner required for all participants to verify compliance.
 
 ### 4.4 Multi-modal Integration
 Same participants provide MRI, PET, CSF, plasma, cognition, and genetics. Biomarker timing synchronized to visit schedule.
@@ -35,27 +35,27 @@ NIH funding provides stable resources. Central IRB streamlines ethics. Data Use 
 
 ---
 
-## Evidence Generation Mechanism
+##Evidence Generation Mechanism
 
-El activo produce evidencia de alta calidad porque:
+The asset produces high-quality evidence because:
 
-1. Las variables están estandarizadas (mismo protocolo MRI en 60+ sitios)
-2. Los eventos están codificados (baseline, 6-month, yearly visits explícitos)
-3. Los controles de calidad son sistemáticos (phantom mensual, central QC, certificación de rater)
-4. Los datos están integrados (misma cohorte provee múltiples modales)
-5. El seguimiento es prospectivo (5-10 años con pérdida documentada)
+1. Variables are standardized (same MRI protocol at 60+ sites)
+2. Events are coded (baseline, 6-month, yearly visits explicit)
+3. Quality controls are systematic (monthly phantom, central QC, rater certification)
+4. Data are integrated (same cohort provides multiple modes)
+5. Follow-up is prospective (5-10 years with documented loss)
 
 ---
 
 ## What We Observed vs What We Inferred
 
-Observamos directamente:
-- La estructura del activo (perfil)
-- Las variables disponibles (inventario)
-- Los eventos definidos (modelo de eventos)
-- Los controles de calidad (inventario QC)
+We observe directly:
+- The structure of the asset (profile)
+- Available variables (inventory)
+- Defined events (event model)
+- Quality controls (QC inventory)
 
-Inferimos:
-- Por qué existen resultados consistentes entre estudios (standardización)
-- Por qué la evidencia es reutilizable (QC centralizado)
-- Por qué hay convergencia multimodal (cohorte alineada)
+We infer:
+- Why there are consistent results between studies (standardization)
+- Why evidence is reusable (centralized QC)
+- Why there is multimodal convergence (aligned cohort)

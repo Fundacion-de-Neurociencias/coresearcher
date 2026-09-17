@@ -1,246 +1,246 @@
-# Sprint 24: Assumption Killer
+#Sprint 24: Assumption Killer
 
-## Identificar las 10 hipótesis estratégicas cuya falsedad destruiría CoResearcher
+## Identify the 10 strategic hypotheses whose falsehood would destroy CoResearcher
 
 ---
 
-## Las 10 Hipótesis Críticas
+## The 10 Critical Hypotheses
 
-### H1: Investigadores aceptarán revisión Agent→Agent
+### H1: Researchers will accept Agent→Agent review
 
-**Descripción:**
-Los investigadores aceptarán revisión automática si tiene trazabilidad ORCID
+**Description:**
+Researchers will accept automatic review if it has ORCID traceability
 
-**Impacto si falsa:**
-Verification Layer sin adopción
+**Impact if false:**
+Verification Layer without adoption
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-Entrevista: "¿Aceptarías revisión Agent→Agent con ORCID responsable?"
+**Validation experiment:**
+Interview: "Would you accept Agent→Agent review with responsible ORCID?"
 
-**Coste de validación:**
-Bajo - entrevistas
+**Validation cost:**
+Low - interviews
 
-**Prioridad:**
-🔴 CRÍTICA
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-### H2: Investigadores querrán registrar actividad científica
+### H2: Researchers will want to record scientific activity
 
-**Descripción:**
-Los investigadores verán valor en registrar SUPPORT/CHALLENGE/REPLICATE
+**Description:**
+Researchers will see value in registering SUPPORT/CHALLENGE/REPLICATE
 
-**Impacto si falsa:**
-Scientific Activity Graph sin nodos
+**Impact if false:**
+Scientific Activity Graph without nodes
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-"¿Qué actividad científica registra hoy? ¿Por qué?"
+**Validation experiment:**
+"What scientific activity is recorded today? Why?"
 
-**Coste de validación:**
-Medio - observación
+**Validation cost:**
+Medium - observation
 
-**Prioridad:**
-🔴 CRÍTICA
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-### H3: ORCID aceptará coexistir con identidades de agentes
+### H3: ORCID will agree to coexist with agent identities
 
-**Descripción:**
-ORCID no bloqueará identidades de agentes con ORCID respaldando
+**Description:**
+ORCID will not block agent identities with ORCID supporting
 
-**Impacto si falsa:**
-Identidades fragmentadas, sin interoperabilidad
+**Impact if false:**
+Fragmented identities, without interoperability
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-Contacto con ORCID team
+**Validation experiment:**
+Contact with ORCID team
 
-**Coste de validación:**
-Medio
+**Validation cost:**
+Medium
 
-**Prioridad:**
-🔴 CRÍTICA
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-### H4: Agentes externos consumirán CoResearcher MCP
+### H4: External agents will consume CoResearcher MCP
 
-**Descripción:**
-Claude Research, Gemini Research, Codex adoptarán CoResearcher como fuente
+**Description:**
+Claude Research, Gemini Research, Codex will adopt CoResearcher as a source
 
-**Impacto si falsa:**
-Ecosistema sin agentes, solo humanos
+**Impact if false:**
+Ecosystem without agents, only humans
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-API test con agentes actuales
+**Validation experiment:**
+API test with current agents
 
-**Coste de validación:**
-Bajo
+**Validation cost:**
+Low
 
-**Prioridad:**
-🔴 CRÍTICA
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-### H5: La comunidad percibe valor en Scientific Actions
+### H5: The community perceives value in Scientific Actions
 
-**Descripción:**
-ACTION-XXXXXX tiene valor percibido como identificador
+**Description:**
+ACTION-XXXXXX has perceived value as an identifier
 
-**Impacto si falsa:**
-Identificadores irrelevantes, sin adopción
+**Impact if false:**
+Irrelevant identifiers, no adoption
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-"¿Qué importa más: tu paper o tu historia de contribución?"
+**Validation experiment:**
+"What matters more: your paper or your contribution story?"
 
-**Coste de validación:**
-Bajo
+**Validation cost:**
+Low
 
-**Prioridad:**
-🔴 CRÍTICA
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-### H6: Reputación basada en actividad importa
+### H6: Activity-based reputation matters
 
-**Descripción:**
-trust_score derivado de acciones supera al impact factor
+**Description:**
+stock-derived trust_score outperforms impact factor
 
-**Impacto si falsa:**
-Trust como feature decorativa
+**Impact if false:**
+Trust as a decorative feature
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-Comparar adopción vs sistemas tradicionales
+**Validation experiment:**
+Compare adoption vs traditional systems
 
-**Coste de validación:**
-Alto
+**Validation cost:**
+High
 
-**Prioridad:**
-🟡 ALTA
+**Priority:**
+🟡 HIGH
 
 ---
 
-### H7: Revisión híbrida reduce costes
+### H7: Hybrid revision reduces costs
 
-**Descripción:**
-Agent review + human escalation es más barato que review puro
+**Description:**
+Agent review + human escalation is cheaper than pure review
 
-**Impacto si falsa:**
-No hay ventaja económica
+**Impact if false:**
+There is no economic advantage
 
-**Evidencia actual:**
+**Current evidence:**
 ???
 
-**Experimento de validación:**
-Modelado de costes
+**Validation experiment:**
+Cost modeling
 
-**Coste de validación:**
-Medio
+**Validation cost:**
+Medium
 
-**Prioridad:**
-🟡 ALTA
-
----
-
-### H8: Coordinación > Descubrimiento
-
-**Descripción:**
-Coordinación científica es un problema más grande que descubrimiento
-
-**Impacto si falsa:**
-Enfoque incorrecto - debería ser Discovery Engine
-
-**Evidencia actual:**
-Bibliotecas de papers existen, coordinación no
-
-**Experimento de validación:**
-"¿Cuántas veces perdiste datos importantes por falta de coordinación?"
-
-**Coste de validación:**
-Bajo
-
-**Prioridad:**
-🟡 ALTA
+**Priority:**
+🟡 HIGH
 
 ---
 
-### H9: Equipos híbridos humano+agente serán dominante
+### H8: Coordination > Discovery
 
-**Descripción:**
-La unidad operativa será TEAM-XXXXXX (humano + múltiples agentes)
+**Description:**
+Scientific coordination is a bigger problem than discovery
 
-**Impacto si falsa:**
-Research Program como abstracción inútil
+**Impact if false:**
+Wrong approach - it should be Discovery Engine
 
-**Evidencia actual:**
-Investigadores ya usan múltiples herramientas IA
+**Current evidence:**
+Paper libraries exist, coordination does not
 
-**Experimento de validación:**
-Mapear "agent stack" de investigadores actuales
+**Validation experiment:**
+"How many times have you lost important data due to lack of coordination?"
 
-**Coste de validación:**
-Bajo
+**Validation cost:**
+Low
 
-**Prioridad:**
-🔴 CRÍTICA
-
----
-
-### H10: Actividad verificable genera network effects
-
-**Descripción:**
-500M acciones verificables > 10M papers sin historia
-
-**Impacto si falsa:**
-Knowledge Graph > Activity Graph como estrategia
-
-**Evidencia actual:**
-GitHub valió más por actividad que código
-
-**Experimento de validación:**
-Analogía con sistemas existentes
-
-**Coste de validación:**
-Bajo
-
-**Prioridad:**
-🟢 MEDIA
+**Priority:**
+🟡 HIGH
 
 ---
 
-## Prioridad de Validación
+### H9: Human+agent hybrid teams will be dominant
 
-### Inmediata (esta semana)
-- H1, H2, H4, H9: Entrevistas con investigadores y tests de agentes
+**Description:**
+The operational unit will be TEAM-XXXXXX (human + multiple agents)
 
-### Corto plazo (2 semanas)
-- H3, H5: Contacto con ORCID, tests de percepción
+**Impact if false:**
+Research Program as a useless abstraction
 
-### Mediano plazo (1 mes)
-- H6, H7, H8: Modelado y estudios de adopción
+**Current evidence:**
+Researchers already use multiple AI tools
+
+**Validation experiment:**
+Map agent stack of current researchers
+
+**Validation cost:**
+Low
+
+**Priority:**
+🔴 CRITICISM
 
 ---
 
-## Regla de oro
+### H10: Verifiable activity generates network effects
 
-> **Si la hipótesis está en 🔴 CRÍTICA y es falsa, NO implementar Sprint 23A.**
+**Description:**
+500M verifiable actions > 10M papers without history
 
-> **Detenerse antes de construir.**
+**Impact if false:**
+Knowledge Graph > Activity Graph as a strategy
+
+**Current evidence:**
+GitHub was worth more for activity than code
+
+**Validation experiment:**
+Analogy with existing systems
+
+**Validation cost:**
+Low
+
+**Priority:**
+🟢 MEDIUM
+
+---
+
+## Validation Priority
+
+### Immediate (this week)
+- H1, H2, H4, H9: Interviews with researchers and agent tests
+
+### Short term (2 weeks)
+- H3, H5: Contact with ORCID, perception tests
+
+### Medium term (1 month)
+- H6, H7, H8: Modeling and adoption studies
+
+---
+
+## Golden rule
+
+> **If the hypothesis is in 🔴 CRITICAL and is false, DO NOT implement Sprint 23A.**
+
+> **Stop before building.**

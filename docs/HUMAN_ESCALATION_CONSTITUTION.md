@@ -21,7 +21,7 @@ Today's bottlenecks:
 
 ### Section 2. The CoResearcher Principle
 
-> **Ninguna acción requerirá intervención humana si puede resolverse automáticamente con un nivel aceptable de confianza.**
+> **No action will require human intervention if it can be resolved automatically with an acceptable level of confidence.**
 
 Translation:
 ```
@@ -226,4 +226,4 @@ With this architecture:
 
 ---
 
-*Esta constitución establece que CoResearcher es una Agent Coordination Infrastructure, no una Human Governance Infrastructure. La escalabilidad viene de la autonomía de agentes, no de la supervisión humana.*
+*This constitution states that CoResearcher is an Agent Coordination Infrastructure, not a Human Governance Infrastructure. Scalability comes from agent autonomy, not human supervision.*

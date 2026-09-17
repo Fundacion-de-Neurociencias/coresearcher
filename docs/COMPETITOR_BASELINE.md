@@ -1,28 +1,28 @@
-# Comparativa Competitiva y Ventaja Diferencial (Competitor Baseline)
+# Competitive Comparison and Differential Advantage (Competitor Baseline)
 
-**Objetivo:** Comparar conceptual y empíricamente a CoResearcher frente a los paradigmas existentes de recuperación y gestión de conocimiento en agentes de IA, separando las ventajas **demostradas** de las **teóricas**.
+**Objective:** Conceptually and empirically compare CoResearcher against existing knowledge retrieval and management paradigms in AI agents, separating **demonstrated** advantages from **theoretical** ones.
 
 ---
 
-## 1. Matriz Comparativa
+## 1. Comparative Matrix
 
-| Enfoque | Trazabilidad Computable | Separación Ontológica (Conocimiento / Gobernanza / Ejecución) | Auditoría Constitucional Inmutable | Coste e Infraestructura | Ventaja Real Demostrada | Ventaja Teórica (No Proada) |
+| Focus | Computable Traceability | Ontological Separation (Knowledge / Governance / Execution) | Immutable Constitutional Audit | Cost and Infrastructure | Demonstrated Real Advantage | Theoretical Advantage (Non-Proada) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Traditional RAG** | ❌ No (Basado en similitud de embeddings, caja negra). | ❌ No (Mezcla fragmentos de texto con prompt context). | ❌ No. | Bajo (VectorDB). | Facilidad de implementación rápida. | Alta precisión en respuestas cortas. |
-| **Microsoft GraphRAG** | ⚠️ Parcial (Grafo de entidades y comunidades). | ❌ No (Mezcla conocimiento extraído con resúmenes LLM). | ❌ No. | Muy Alto (Múltiples pasadas LLM para construir resúmenes). | Excelente para resúmenes globales temáticos. | Robustez ante consultas complejas de nivel macro. |
-| **OpenAI / Google Deep Research** | ⚠️ Parcial (Citas textuales simples en formato markdown). | ❌ No (La trayectoria vive en la ventana de contexto del agente). | ❌ No. | Alto (Múltiples llamadas a APIs propietarias). | Gran capacidad de redacción y síntesis fluida. | Exhaustividad en la cobertura de búsqueda. |
-| **Claude Code / Codex Workflows** | ❌ No (Logs de herramientas y bash execution). | ❌ No (Tool calling directo). | ❌ No. | Medio (Ejecución local CLI). | Gran capacidad de refactorización y navegación de código. | Coordinación entre subagentes de desarrollo. |
-| **Evidence-based KGs (Hetionet, BioCypher)** | ---------------+ Alta (Estructura formal). | ⚠️ Parcial (Solo representa conocimiento estático). | ❌ No (Esquemas fijos, sin gobernanza ejecutiva). | Medio (Bases de datos de grafos como Neo4j). | Rigor absoluto en dominios biofarmacéuticos. | Escalabilidad a millones de relaciones curadas. |
-| **CoResearcher (ARQ-001→003)** | ✅ **100% Determinista (DAG)**. | ✅ **Sí (Tri-Grafo: Evidence, Decision, Mission)**. | ✅ **Sí (Constitution-as-Code & Chaos Tests)**. | **Muy Bajo (Zero-Infra, JSON/YAML)**. | **Garantía absoluta de no-evaluación y detección de violaciones fronterizas en tiempo real.** | **Inmunidad total a la deriva ontológica en tareas de investigación autónomas de >48h.** |
+| **Traditional RAG** ​​| ❌ No (Based on similarity of embeddings, black box). | ❌ No (Mix text fragments with prompt context). | ❌ No. | Low (VectorDB). | Ease of rapid implementation. | High precision in short answers. |
+| **Microsoft GraphRAG** ​​| ⚠️ Partial (Graph of entities and communities). | ❌ No (Mixes extracted knowledge with LLM summaries). | ❌ No. | Very High (Multiple LLM passes to build summaries). | Excellent for thematic global summaries. | Robustness to complex macro-level queries. |
+| **OpenAI / Google Deep Research** | ⚠️ Partial (Simple textual quotes in markdown format). | ❌ No (The trajectory lives in the agent's context window). | ❌ No. | High (Multiple calls to proprietary APIs). | Great writing and fluid synthesis skills. | Exhaustiveness in search coverage. |
+| **Claude Code / Codex Workflows** | ❌ No (Tool logs and bash execution). | ❌ No (direct Tool calling). | ❌ No. | Medium (CLI local execution). | Great ability to refactor and navigate code. | Coordination between development subagents. |
+| **Evidence-based KGs (Hetionet, BioCypher)** | ---------------+ High (Formal structure). | ⚠️ Partial (Only represents static knowledge). | ❌ No (Fixed schemes, without executive governance). | Medium (graph databases such as Neo4j). | Absolute rigor in biopharmaceutical domains. | Scalability to millions of curated relationships. |
+| **CoResearcher (ARQ-001→003)** | ✅ **100% Deterministic (DAG)**. | ✅ **Yes (Tri-Graph: Evidence, Decision, Mission)**. | ✅ **Yes (Constitution-as-Code & Chaos Tests)**. | **Very Low (Zero-Infra, JSON/YAML)**. | **Absolute guarantee of non-assessment and detection of border violations in real time.** | **Total immunity to ontological drift in autonomous research tasks of >48h.** |
 
 ---
 
-## 2. Ventajas Diferenciales Reales vs Teóricas
+## 2. Real vs Theoretical Differential Advantages
 
-### Ventajas Reales (Demostradas por Código y Chaos Tests)
-1. **Verificabilidad Constitucional Automática:** Ningún otro framework de agentes valida en tiempo real si el resultado viola leyes de frontera (ej. intentar emitir calidad o generar hipótesis sin permiso) mediante Chaos Testing determinista.
-2. **Ausencia de Puntuación Falsa (Sin Trust Scores ficticios):** A diferencia de RAG o GraphRAG que intentan calcular distancias de similitud o confianzas simuladas, CoResearcher ofrece solo *Evidence Descriptors* estructurales purios.
+### Real Advantages (Demonstrated by Code and Chaos Tests)
+1. **Automatic Constitutional Verifiability:** No other agent framework validates in real time if the result violates border laws (e.g. trying to issue quality or generate hypotheses without permission) through deterministic Chaos Testing.
+2. **No Fake Score (No Fictitious Trust Scores):** Unlike RAG or GraphRAG that attempt to calculate similarity distances or simulated trusts, CoResearcher offers only pure structural *Evidence Descriptors*.
 
-### Ventajas Teóricas (Pendientes de Validación Empírica)
-1. **Superioridad en Investigaciones Científicas Complejas:** Aún no se ha probado que un agente usando CoResearcher descubra o sintetice mejor evidencia científica que un flujo de Deep Research tradicional.
-2. **Escalabilidad de la Ejecución Distribuida:** La triada `Mission → Brief → Execution` promete que N agentes pueden trabajar asíncronamente sin desincronizarse, pero falta demostrarlo en un entorno de producción masivo.
+### Theoretical Advantages (Pending Empirical Validation)
+1. **Superiority in Complex Scientific Investigations:** It has not yet been proven that an agent using CoResearcher discovers or synthesizes better scientific evidence than a traditional Deep Research flow.
+2. **Scalability of Distributed Execution:** The `Mission → Brief → Execution` triad promises that N agents can work asynchronously without becoming desynchronized, but this remains to be demonstrated in a massive production environment.

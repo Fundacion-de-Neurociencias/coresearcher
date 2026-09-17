@@ -1,47 +1,47 @@
 # BRANCH & CONVERGENCE DETECTION FEASIBILITY
 **SPRINT 60D — Exploratory Analysis**  
-**Objetivo**: Determinar si GitHub y Zenodo contienen señal suficiente para reconstruir bifurcaciones y convergencias de trayectoria sin inferencias no auditables  
+**Goal**: Determine whether GitHub and Zenodo contain sufficient signal to reconstruct path branches and convergences without unauditable inferences  
 **Status**: Exploratory — No Implementation Yet  
-**Próximo Sprint**: Conditional on empirical results
+**Next Sprint**: Conditional on empirical results
 
 ---
 
-## 1. Contexto Estratégico
+## 1. Strategic Context
 
-CoResearcher actual reconstruye **trayectorias observadas**:
+Current CoResearcher reconstructs **observed trajectories**:
 
 ```text
 Decision A → Decision B → Decision C
 ```
 
-Surge una nueva pregunta:
+A new question arises:
 
 ```text
-¿Qué alternativas quedaron sin explorar?
-¿Existen convergencias entre trayectorias divergentes?
+What alternatives were left unexplored?
+Are there convergences between divergent trajectories?
 ```
 
-Esto sería:
+This would be:
 
 ```text
 Espacio de posibilidades
 ```
 
-no solo:
+not only:
 
 ```text
 Historia observada
 ```
 
-**Pero**: CoResearcher NO debe inferir senderos hipotéticos. Toda bifurcación/convergencia debe derivarse de evidencia pública.
+**But**: CoResearcher should NOT infer hypothetical trails. Any bifurcation/convergence must be derived from public evidence.
 
 ---
 
-## 2. Definiciones Operacionales
+## 2. Operational Definitions
 
-### 2.1 Branch (Bifurcación)
+### 2.1 Branch
 
-**Branch Observable**: Una alternativa que fue explícitamente iniciada pero no completada.
+**Branch Observable**: An alternative that was explicitly started but not completed.
 
 ```yaml
 Tipos:
@@ -52,7 +52,7 @@ Tipos:
 
 Campos obligatorios:
   - branch_id: BRANCH-XXXXXX
-  - source_decision: DECISION-XXXXXX (la decisión que originó la alternativa)
+- source_decision: DECISION-XXXXXX (the decision that originated the alternative)
   - evidence: [issue_number, pr_number, commit_hash, branch_name]
   - outcome: abandoned | rejected | superseded | merged_elsewhere
   - observable_signals: array de eventos GitHub verificables
@@ -71,7 +71,7 @@ Ejemplo válido:
     - "Issue #8415 closed as wontfix"
 ```
 
-**Branch Derivable**: Una alternativa inferida de patrones en la evidencia.
+**Branch Derivable**: An alternative inferred from patterns in the evidence.
 
 ```yaml
 Campos condicionales:
@@ -91,16 +91,16 @@ Ejemplo:
   outcome: abandoned
 ```
 
-**Restricción constitucional**:
-- Todo Branch debe tener ≥1 observable_signal
-- No se permiten branches sin evidencia GitHub/Git
-- Confidence ≤ 0.8 para derivable, =1.0 solo para observable
+**Constitutional restriction**:
+- Every Branch must have ≥1 observable_signal
+- Branches without GitHub/Git evidence are not allowed
+- Confidence ≤ 0.8 for differentiable, =1.0 only for observable
 
 ---
 
-### 2.2 Convergence (Convergencia)
+### 2.2 Convergence
 
-**Convergence Observable**: Dos trayectorias distintas que convergen en un mismo artifact o decisión, con evidencia explícita.
+**Convergence Observable**: Two different trajectories that converge on the same artifact or decision, with explicit evidence.
 
 ```yaml
 Tipos:
@@ -127,7 +127,7 @@ Ejemplo:
     - "Issue #8440: Unify database layer"
 ```
 
-**Convergence Derivable**: Patrón detectado por algoritmo sin declaración explícita.
+**Convergence Derivable**: Pattern detected by algorithm without explicit declaration.
 
 ```yaml
 Ejemplo:
@@ -142,25 +142,25 @@ Ejemplo:
     - "Final solution incorporates elements from both"
 ```
 
-**Restricción constitucional**:
-- Toda convergencia debe tener ≥2 branches con evidencia independiente
-- No se permiten convergencias inferidas de un solo artifact
-- Convergence point debe ser un artifact o decisión observable
+**Constitutional restriction**:
+- Every convergence must have ≥2 branches with independent evidence
+- Convergences inferred from a single artifact are not allowed
+- Convergence point must be an artifact or observable decision
 
 ---
 
-## 3. Hipótesis a Validar
+## 3. Hypotheses to Validate
 
 ### H7: Branch Detection
 
-> Las trayectorias públicas contienen suficiente información para identificar bifurcaciones reales de investigación.
+> Public trajectories contain enough information to identify real research forks.
 
-**Predicciones**:
-1. ≥30% de repositorios activos tienen ≥1 branch observable (PR cerrado sin merge)
-2. ≥50% de branches detectables tienen evidenciaIssue + PR + branch_name)
-3. ≥70% de decisiones de cambio de approach generan branches
+**Predictions**:
+1. ≥30% of active repositories have ≥1 observable branch (PR closed without merge)
+2. ≥50% of discoverable branches have evidence (Issue + PR + branch_name)
+3. ≥70% of approach change decisions generate branches
 
-**Operacionalización**:
+**Operationalization**:
 ```python
 branch_signals = [
   issue_closed_with_label("wontfix", "obsolete", "duplicate"),
@@ -174,14 +174,14 @@ branch_candidate = any(branch_signals)
 
 ### H8: Convergence Detection
 
-> Existen convergencias observables entre trayectorias inicialmente divergentes.
+> There are observable convergences between initially divergent trajectories.
 
-**Predicciones**:
-1. ≥20% de repositorios con ≥2 branches tienen ≥1 convergence
-2. ≥60% de convergencias son detectables por algoritmo (no requieren LLM)
-3. Convergence point es un artifact compartido (código, documento, dataset)
+**Predictions**:
+1. ≥20% of repositories with ≥2 branches have ≥1 convergence
+2. ≥60% of convergences are detectable by algorithm (do not require LLM)
+3. Convergence point is a shared artifact (code, document, dataset)
 
-**Operacionalización**:
+**Operationalization**:
 ```python
 convergence_signals = [
   same_issue_referenced_in_multiple_prs(),
@@ -195,18 +195,18 @@ convergence_candidate = any(convergence_signals)
 
 ---
 
-## 4. Metodología de Análisis
+## 4. Analysis Methodology
 
-### 4.1 Repositorios a Analizar
+### 4.1 Repositories to Analyze
 
-**Criterios**:
-- ≥1 año de historia
+**Criteria**:
+- ≥1 year of history
 - ≥100 commits
 - ≥50 issues
 - ≥20 PRs
-- ≥5 branches (actuales o eliminados)
+- ≥5 branches (current or deleted)
 
-**Muestra sugerida**:
+**Suggested sample**:
 ```
 1. langchain-ai/langgraph       (ya auditado)
 2. langchain-ai/langchain        (similar)
@@ -220,7 +220,7 @@ convergence_candidate = any(convergence_signals)
 10. jupyter/notebook           (data science)
 ```
 
-### 4.2 Señales a Buscar
+### 4.2 Signs to Look For
 
 **Branch Observable**:
 ```yaml
@@ -248,24 +248,24 @@ Git signals:
   - git log --all --merges
 ```
 
-### 4.3 Protocolo de Extracción
+### 4.3 Extraction Protocol
 
-**Fase 1: Identificar Branches** (días 1-3)
+**Phase 1: Identify Branches** (days 1-3)
 ```bash
 python scripts/identify_branches.py --repo langchain-ai/langgraph --output branches.jsonl
 ```
 
-**Fase 2: Identificar Convergencias** (días 4-6)
+**Phase 2: Identify Convergences** (days 4-6)
 ```bash
 python scripts/identify_convergences.py --repo langchain-ai/langgraph --branches branches.jsonl --output convergences.jsonl
 ```
 
-**Fase 3: Validación Manual** (días 7-10)
-- Muestra aleatoria de 20 branches
-- Muestra aleatoria de 10 convergencias
-- Verificación humana: ¿Son reales estas bifurcaciones/convergencias?
+**Phase 3: Manual Validation** (days 7-10)
+- Random sample of 20 branches
+- Random sample of 10 convergences
+- Human verification: Are these bifurcations/convergences real?
 
-**Fase 4: Métricas** (días 11-12)
+**Phase 4: Metrics** (days 11-12)
 ```yaml
 Branch metrics:
   - branches_detected / branches_total (estimado): ?
@@ -280,9 +280,9 @@ Convergence metrics:
 
 ---
 
-## 5. Criterios de Decisión
+## 5. Decision Criteria
 
-### 5.1 Green Light (Implementar en SPRINT 61)
+### 5.1 Green Light (Implement in SPRINT 61)
 
 ```yaml
 Condiciones:
@@ -299,7 +299,7 @@ Si se cumplen:
   → Añadir queries MCP: get_branches, get_convergences
 ```
 
-### 5.2 Yellow Light (Requiere más investigación)
+### 5.2 Yellow Light (Requires further investigation)
 
 ```yaml
 Condiciones:
@@ -313,7 +313,7 @@ Si se cumple:
   → Reevaluar en SPRINT 62
 ```
 
-### 5.3 Red Light (No implementar)
+### 5.3 Red Light (Do not implement)
 
 ```yaml
 Condiciones:
@@ -329,16 +329,16 @@ Si se cumple:
 
 ---
 
-## 6. Entregables
+## 6. Deliverables
 
-### 6.1 Documentos
+### 6.1 Documents
 
 ```markdown
 docs/BRANCH_DETECTION_FEASIBILITY.md     ← Este documento
 docs/SPRINT_60D_BRANCH_ANALYSIS.md       ← Resultados del análisis manual
 ```
 
-### 6.2 Datos
+### 6.2 Data
 
 ```
 data/branch_analysis/
@@ -348,7 +348,7 @@ data/branch_analysis/
 └── metrics.json                           # Métricas cuantitativas
 ```
 
-### 6.3 Scripts (exploratorios)
+### 6.3 Scripts (exploratory)
 
 ```bash
 scripts/exploratory/
@@ -358,29 +358,29 @@ scripts/exploratory/
 └── calculate_metrics.py                   # Calcular precision/recall
 ```
 
-**Nota**: Estos scripts NO se integran en el producto. Son herramientas de análisis.
+**Note**: These scripts are NOT integrated into the product. They are analysis tools.
 
 ---
 
-## 7. Limitaciones Constitucionales
+## 7. Constitutional Limitations
 
-### 7.1 Restricciones de CoResearcher
+### 7.1 CoResearcher Restrictions
 
-❌ **Prohibido**:
-- Inferir branches que no tienen evidencia GitHub/Git
-- Generar narrativas sobre "por qué se abandonó"
-- Detectar "oportunidades perdidas" (eso es evaluación, no trazabilidad)
-- Predecir "qué habría pasado si" (contrafactuales)
+❌ **Prohibited**:
+- Infer branches that have no GitHub/Git evidence
+- Generate narratives about "why it was abandoned"
+- Detect "missed opportunities" (that's evaluation, not traceability)
+- Predict "what would have happened if" (counterfactuals)
 
-✅ **Permitido**:
-- Registrar PRs cerrados sin merge
-- Registrar branches eliminadas
-- Detectar convergencias当 dos artifacts comparten commits o issues
-- Marcar como `inferred` cuando no hay declaración explícita
+✅ **Allowed**:
+- Register closed PRs without merge
+- Register deleted branches
+- Detect convergences where two artifacts share commits or issues
+- Mark as `inferred` when there is no explicit declaration
 
-### 7.2 Límites Epistemológicos
+### 7.2 Epistemological Limits
 
-CoResearcher puede demostrar:
+CoResearcher can demonstrate:
 
 ```text
 ✅ "PR #8420 fue cerrado sin merge"
@@ -389,7 +389,7 @@ CoResearcher puede demostrar:
 ✅ "Issue #8415 fue marcado como wontfix"
 ```
 
-CoResearcher NO puede demostrar:
+CoResearcher CANNOT prove:
 
 ```text
 ❌ "El equipo abandonó pydantic v1 porque era lento"
@@ -399,31 +399,31 @@ CoResearcher NO puede demostrar:
 
 ---
 
-## 8. Métricas de Éxito
+## 8. Success Metrics
 
-### 8.1 Cuantitativas
+### 8.1 Quantitative
 
-| Métrica | Target | Green Light | Yellow | Red |
+| Metric | Target | Green Light | Yellow | Network |
 |---------|--------|-------------|--------|-----|
 | Branch Precision | ≥70% | ≥70% | 60-70% | <60% |
 | Branch Recall | ≥50% | ≥50% | 40-50% | <40% |
 | Convergence Precision | ≥70% | ≥70% | 60-70% | <60% |
 | Convergence Recall | ≥40% | ≥40% | 30-40% | <30% |
-| Repos con branches | ≥5 | ≥5 | 3-5 | <3 |
-| Repos con convergencias | ≥3 | ≥3 | 1-3 | <1 |
+| Repos with branches | ≥5 | ≥5 | 3-5 | <3 |
+| Repos with convergences | ≥3 | ≥3 | 1-3 | <1 |
 
-### 8.2 Cualitativas
+### 8.2 Qualitative
 
 ```yaml
 Utilidad:
-  - ¿Las bifurcaciones detectadas cuentan una historia coherente?
-  - ¿Las convergencias son técnicamente significativas?
-  - ¿La evidencia soporta las detecciones?
+- Do the detected forks tell a coherent story?
+- Are the convergences technically significant?
+- Does the evidence support the detections?
 
 Viabilidad:
-  - ¿Se puede implementar con <3 meses de desarrollo?
-  - ¿Requiere LLM para detección confiable?
-  - ¿El mantenimiento es sostenible?
+- Can it be implemented with <3 months of development?
+- Requires LLM for reliable detection?
+- Is the maintenance sustainable?
 ```
 
 ---
@@ -435,45 +435,45 @@ Días 1-3: Identificación de branches en 10 repos
 Días 4-6: Identificación de convergencias
 Días 7-10: Validación manual (20 branches, 10 convergencias)
 Días 11-12: Cálculo de métricas
-Día 13: Decisión Green/Yellow/Red
+Day 13: Green/Yellow/Red Decision
 ```
 
-**Total**: 2 semanas máximo.
+**Total**: 2 weeks maximum.
 
 ---
 
-## 10. Riesgos
+## 10. Risks
 
-### 10.1 Falsos Positivos en Branches
+### 10.1 False Positives in Branches
 
-**Riesgo**: Issues cerrados como "duplicate" no son branches, son issues duplicados.
+**Risk**: Issues closed as "duplicate" are not branches, they are duplicate issues.
 
-**Mitigación**: 
-- Diferenciar "wontfix/obsolete" (branch) vs "duplicate" (no branch)
-- Validación humana en muestra
+**Mitigation**: 
+- Differentiate "wontfix/obsolete" (branch) vs "duplicate" (no branch)
+- Human validation in sample
 
-### 10.2 Convergencias Requieren LLM
+### 10.2 Convergences Require LLM
 
-**Riesgo**: Detectar convergencias semánticas requiere comprensión de código.
+**Risk**: Detecting semantic convergences requires code understanding.
 
-**Mitigación**:
-- Limitar a convergencias observables (mismo artifact, mismo issue, mismo commit)
-- No detectar convergencias semánticas (eso requiere evaluación)
+**Mitigation**:
+- Limit to observable convergences (same artifact, same issue, same commit)
+- Not detecting semantic convergences (that requires evaluation)
 
 ### 10.3 Scope Creep
 
-**Riesgo**: Branch Detection se convierte en Decision Quality Engine.
+**Risk**: Branch Detection becomes Decision Quality Engine.
 
-**Mitigación**:
-- Estricta separación: registrar ≠ evaluar
-- No añadir métricas de "éxito de branch"
-- No sugerir "qué habría pasado"
+**Mitigation**:
+- Strict separation: record ≠ evaluate
+- Do not add "branch success" metrics
+- Do not suggest "what would have happened"
 
 ---
 
-## 11. Ejemplo Esperado
+## 11. Expected Example
 
-### Branch Ejemplo
+### Branch Example
 
 ```json
 {
@@ -496,7 +496,7 @@ Día 13: Decisión Green/Yellow/Red
 }
 ```
 
-### Convergence Ejemplo
+### Convergence Example
 
 ```json
 {
@@ -520,39 +520,39 @@ Día 13: Decisión Green/Yellow/Red
 
 ---
 
-## 12. Decisión Post-Sprint
+## 12. Post-Sprint Decision
 
-Al final de SPRINT 60D:
+At the end of SPRINT 60D:
 
-**Si Green**:
-→ Incorporar Branch/Convergence a EvidenceGraph v1.2.0
-→ Implementar extractores en producción
-→ Añadir queries MCP
+**Yes Green**:
+→ Add Branch/Convergence to EvidenceGraph v1.2.0
+→ Deploy extractors in production
+→ Add MCP queries
 
-**Si Yellow**:
-→ Investigar dominios específicos (genomics, neuroimaging)
-→ Pro con enfoques alternativos
-→ Reevaluar en SPRINT 62
+**Yes Yellow**:
+→ Research specific domains (genomics, neuroimaging)
+→ Pro with alternative approaches
+→ Reevaluate in SPRINT 62
 
-**Si Red**:
-→ Cancelar Branch Detection permanentemente
-→ Mantener CoResearcher como trajectory reconstruction engine
-→ No desviar recursos de misión core
+**Yes Network**:
+→ Cancel Branch Detection permanently
+→ Maintain CoResearcher as trajectory reconstruction engine
+→ Do not divert core mission resources
 
 ---
 
 ## 13. Non-Goals
 
-❌ Detectar convergencias semánticas (requiere evaluar código)
-❌ Predecir éxito/fracaso de branches
-❌ Sugerir alternativas
-❌ Generar "oportunidades perdidas"
-❌ Implementar en producción sin validación empírica
+❌ Detect semantic convergences (requires evaluating code)
+❌ Predict success/failure of branches
+❌ Suggest alternatives
+❌ Generate "missed opportunities"
+❌ Deploy to production without empirical validation
 
-✅ SOLO determinar si la señal existe y es recuperable
-✅ SOLO validar contra datos reales
-✅ SOLO proceder si cumple criterios epistemológicos
+✅ ONLY determine if the signal exists and is recoverable
+✅ ONLY validate against real data
+✅ ONLY proceed if it meets epistemological criteria
 
 ---
 
-*Este documento define el alcance exploratorio para determinar si CoResearcher puede detectar bifurcaciones y convergencias de trayectoria sin violar sus principios constitucionales. No se implementará nada hasta completar este análisis.*
+*This document defines the exploratory scope to determine whether CoResearcher can detect trajectory bifurcations and convergences without violating its constitutional principles. Nothing will be implemented until this analysis is complete.*

@@ -29,10 +29,10 @@ trust_score, consensus_score
 
 | Acción | Texto de Input | Output | Registry |
 |------|---------------|--------|----------|
-| **QUESTION** | "¿Por qué...?" | QUESTION-XXXXXX | Question Registry |
+| **QUESTION** | "Because...?" | QUESTION-XXXXXX | Question Registry |
 | **OBSERVATION** | "Se observa que..." | OBS-XXXXXX | Observation Registry |
 | **PROPOSE** | "Propongo que..." | HYP-XXXXXX | Hypothesis Registry |
-| **MECHANIZE** | "El mecanismo podría ser..." | MECH-XXXXXX | Mechanism Registry |
+| **MECHANIZE** | "The mechanism could be..." | MECH-XXXXXX | Mechanism Registry |
 
 ---
 
@@ -85,7 +85,7 @@ ACTION_EXTEND.apply(object_id, extension) → OBJECT-EXT-XXXX
 ## Flujo Completo de Ejemplo
 
 ### Investigador escribe:
-> "No estoy de acuerdo con esta hipótesis. Los datos de nuestro laboratorio no muestran esa relación."
+> "I do not agree with this hypothesis. Our laboratory data do not show such a relationship."
 
 ### Scientific Semantic Compiler interpreta:
 ```json

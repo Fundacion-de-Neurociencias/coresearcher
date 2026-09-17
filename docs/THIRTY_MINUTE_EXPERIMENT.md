@@ -92,8 +92,8 @@ Agent 5: Draft assembly → preprint.md
 
 ### Friday (25 minutes)
 Researcher reviews:
-- Results (10 min) - "¿Esto es firmeable?"
-- Decisions (5 min) - "¿Qué incluir?"
+- Results (10 min) - "Is this firmable?"
+- Decisions (5 min) - "What to include?"
 - Publish (5 min) - One-click DOI
 - Credits (5 min) - Attribution checks
 

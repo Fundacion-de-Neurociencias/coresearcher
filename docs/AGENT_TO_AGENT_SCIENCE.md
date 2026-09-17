@@ -1,9 +1,9 @@
 # Agent-to-Agent Science
-## La oportunidad real detrás del protocolo
+## The real opportunity behind the protocol
 
 ---
 
-## El cuello de botellamiento actual
+## The current bottleneck
 
 ```text
 producción científica
@@ -11,14 +11,14 @@ producción científica
 capacidad de revisión
 ```
 
-Este diferencial crece anualmente.
+This differential grows annually.
 
-Millones de papers publicados.
-Decenas de miles de revisoras humanas disponibles.
+Millions of papers published.
+Tens of thousands of human reviewers available.
 
 ---
 
-## La disrupción potencial
+## The potential disruption
 
 ```text
 Autor humano
@@ -40,28 +40,28 @@ Coordinación verificable
 Aprendizaje colectivo acelerado
 ```
 
-Esta es la primera vez en la historia que:
+This is the first time in history that:
 
-1. La producción excede la revisión
-2. Existen agentes capaces de producir contenido científico
-3. La coordinación de millones de interacciones es posible
+1. Production exceeds review
+2. There are agents capable of producing scientific content
+3. Coordination of millions of interactions is possible
 
 ---
 
-## El activo fundamental
+## The fundamental asset
 
 Git: `commit`
 Bitcoin: `transaction`
 Linux: `patch`
 **CoResearcher: `ACTION`**
 
-Un ACTION es la unidad verificable más pequeña:
-- Ejecución realizada
-- Resultados generados
-- Proveniencia trazada
-- Validación posible
+An ACTION is the smallest verifiable unit:
+- Execution carried out
+- Results generated
+- Provenance traced
+- Validation possible
 
-### La hierarquía de objetos:
+### The object hierarchy:
 
 ```text
 ACTION (verificable, ejecutable)
@@ -77,9 +77,9 @@ PROGRAM (compromiso acumulativo)
 
 ---
 
-## El protocolo como coordinador universal
+## The protocol as a universal coordinator
 
-No debe saber que Einstein existe.
+He must not know that Einstein exists.
 
 ```text
 CoResearcher Protocol
@@ -93,46 +93,46 @@ CoResearcher Protocol
 └─────────────┴─────────────┴─────────────┘
 ```
 
-Cada suite consume el mismo protocolo.
-Ningún suite es obligatorio.
+Each suite consumes the same protocol.
+No suite is mandatory.
 
 ---
 
-## La tarea concreta del lunes por la mañana
+## The concrete task for Monday morning
 
-**No es:**
-
-```text
-"¿Qué hipótesis novedosa generamos hoy?"
-```
-
-**Es:**
+**Not:**
 
 ```text
-"¿Qué interacciones científicas necesito coordinar hoy?"
-
-"¿Qué resultados debo verificar?"
-
-"¿Qué actividades mi equipo completó?"
-
-"¿Qué evidencia apoya esta hipótesis?"
+"What novel hypothesis do we generate today?"
 ```
 
-El protocolo vence por resolver el trabajo diario, no por teoría.
+**It is:**
+
+```text
+"What scientific interactions do I need to coordinate today?"
+
+"What results should I check?"
+
+"What activities did my team complete?"
+
+"What evidence supports this hypothesis?"
+```
+
+The protocol wins by solving daily work, not by theory.
 
 ---
 
 ## Agent-to-Agent Science Network
 
-### Objetos del protocolo (abiertos):
+### Protocol objects (open):
 
-- **ACTION** - Ejecución verificable (unidad fundamental)
-- **REVIEW** - Validación externa
-- **CLAIM** - Observación atómica
-- **QUESTION** - Dirección estratégica
-- **PROGRAM** - Compromiso acumulativo
+- **ACTION** - Verifiable execution (fundamental unit)
+- **REVIEW** - External validation
+- **CLAIM** - Atomic observation
+- **QUESTION** - Strategic direction
+- **PROGRAM** - Cumulative commitment
 
-### Flujo típico:
+### Typical flow:
 
 ```text
 1. Investigador crea Question
@@ -146,37 +146,37 @@ El protocolo vence por resolver el trabajo diario, no por teoría.
 
 ---
 
-## La oportunidad de décadas
+## The opportunity of decades
 
-No es el motor de descubrimiento.
-Es la infraestructura que permite:
+It is not the engine of discovery.
+It is the infrastructure that allows:
 
-- **Trazabilidad total** de interacciones IA-humano
-- **Verificación no bloqueante** de actividades
-- **Escalado orgánico** de participación
-- **Aprendizaje colectivo** acelerado
+- **Full traceability** of AI-human interactions
+- **Non-blocking verification** of activities
+- **Organic scaling** of participation
+- **Collective learning** accelerated
 
-Esto es más cercano a una infraestructura como TCP/IP
-que a una aplicación de IA.
-
----
-
-## Consecuencias arquitectónicas
-
-1. **ACTION es primero** - El activo verificable
-2. **Sin dependencias propietarias** - El protocolo sobrevive por sí mismo
-3. **MCP es el interface** - Universalidad de integración
-4. **La novedad es opcional** - No parte del core
-5. **La coordinación es obligatoria** - La razón de ser del protocolo
+This is closer to an infrastructure like TCP/IP
+than to an AI application.
 
 ---
 
-## Instrucción constitucional adicional
+## Architectural consequences
 
-> **El protocolo debe resolver el trabajo científico del lunes por la mañana.**
+1. **ACTION comes first** - The verifiable asset
+2. **No proprietary dependencies** - The protocol survives on its own
+3. **MCP is the interface** - Universality of integration
+4. **The novelty is optional** - Not part of the core
+5. **Coordination is mandatory** - The reason for the protocol
+
+---
+
+## Additional constitutional instruction
+
+> **The protocol must resolve the scientific work on Monday morning.**
 >
-> **Si un investigador no puede usarlo para coordinar lo que ya hace,**
-> **nunca adoptará una herramienta para lo que podría hacer.**
+> **If a researcher can't use it to coordinate what they already do,**
+> **will never adopt a tool for what it could do.**
 
-El descubrimiento novedoso atrae atención.
-La coordinación diaria genera adopción.
+The novel discovery attracts attention.
+Daily coordination generates adoption.

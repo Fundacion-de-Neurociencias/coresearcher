@@ -1,0 +1,175 @@
+{
+  "report_id": "OPPATH-20260801152848",
+  "generated_at": "2026-08-01T15:28:48.430418+00:00",
+  "sprint": "SPRINT 65 — Operationalization Pathways",
+  "objective": "¿Qué transformaciones serían necesarias para convertir cada entidad UNOPERATIONALIZED en PARTIALLY_OPERATIONAL?",
+  "improvements_over_64r": {
+    "1_ontological_criteria": "Criterios explícitos y reproducibles para asignar ESTABLISHED / PLAUSIBLE / UNKNOWN / QUESTIONED",
+    "2_graded_fnr": "false_negative_risk ahora es métrica graduada: NONE / LOW / MEDIUM / HIGH / CRITICAL",
+    "3_pathways": "Para cada entidad UNOPERATIONALIZED, se define el pathway concreto hacia PARTIALLY_OPERATIONAL"
+  },
+  "ontological_criteria": {
+    "ESTABLISHED": {
+      "rule": "La entidad es aceptada como real por la comunidad científica relevante. Existen referencias canónicas (textbooks, Nobel prizes, consenso filosófico) que la tratan como objeto legítimo.",
+      "required_evidence": [
+        "Al menos una referencia canónica que la trata como real",
+        "Uso extendido en literatura científica revisada por pares",
+        "No existe debate activo sobre su existencia (solo sobre sus propiedades)"
+      ]
+    },
+    "PLAUSIBLE": {
+      "rule": "La entidad es argumentable pero debatida. Existen defensores y críticos. Su estatus ontológico no está resuelto.",
+      "required_evidence": [
+        "Al menos un argumento serio a favor de su existencia",
+        "Debate activo en la literatura",
+        "No hay consenso pero hay uso productivo"
+      ]
+    },
+    "UNKNOWN": {
+      "rule": "No sabemos si la entidad existe independientemente de nuestra capacidad de medirla. No hay evidencia suficiente ni a favor ni en contra.",
+      "required_evidence": [
+        "No hay referencias canónicas que la traten como real",
+        "No hay debate activo (porque no se ha planteado la pregunta)",
+        "Su existencia depende de supuestos no verificados"
+      ]
+    },
+    "QUESTIONED": {
+      "rule": "Evidencia sugiere que la entidad podría no existir como categoría natural. Ha sido falsada o abandonada.",
+      "required_evidence": [
+        "Evidencia de falsación o abandono",
+        "Referencias que cuestionan su existencia"
+      ]
+    }
+  },
+  "fnr_scale": {
+    "NONE": "Entidad OPERATIONAL con DIRECT observability",
+    "LOW": "Entidad PARTIALLY_OPERATIONAL",
+    "MEDIUM": "Entidad PLAUSIBLE/UNKNOWN con NOT_YET_OPERATIONAL + INDIRECT",
+    "HIGH": "Entidad PLAUSIBLE/ESTABLISHED con UNOPERATIONALIZED + NONE",
+    "CRITICAL": "Entidad ESTABLISHED con UNOPERATIONALIZED + NONE + contraejemplos históricos"
+  },
+  "pathways": [
+    {
+      "entity": "Hypothesis",
+      "current_status": "UNOPERATIONALIZED",
+      "ontological_status": "ESTABLISHED",
+      "fnr_level": "CRITICAL",
+      "fnr_rationale": "Las hipótesis son entidades metodológicas establecidas. Evaluarlas por observabilidad es un error categorial. Su función es generar predicciones falsables, no ser observables.",
+      "ontological_criteria_applied": "ESTABLISHED porque: (1) Popper, Lakatos, Kuhn tratan las hipótesis como entidades metodológicas reales. (2) Uso extendido en toda la literatura científica. (3) No hay debate sobre si las hipótesis 'existen' — solo sobre cuáles son correctas.",
+      "pathway_to_partially_operational": {
+        "step_1": "Definir firma observacional: ¿qué observaciones distinguirían una buena hipótesis de una mala?",
+        "step_2": "Definir métrica de falsabilidad: ¿qué proporción de predicciones son falsables?",
+        "step_3": "Definir métrica de novedad: ¿la hipótesis predice algo que no se sabía?",
+        "required_observables": [
+          "Predicciones generadas por la hipótesis",
+          "Evidencia que falsaría cada predicción",
+          "Evidencia que confirmaría cada predicción"
+        ],
+        "estimated_difficulty": "HIGH — requiere definir calidad de hipótesis de forma reproducible"
+      }
+    },
+    {
+      "entity": "Theory",
+      "current_status": "UNOPERATIONALIZED",
+      "ontological_status": "ESTABLISHED",
+      "fnr_level": "CRITICAL",
+      "fnr_rationale": "Las teorías científicas son entidades metodológicas establecidas. La teoría de la evolución no es observable. La teoría de la relatividad no es observable. Pero generan predicciones falsables.",
+      "ontological_criteria_applied": "ESTABLISHED porque: (1) Popper, Lakatos, Kuhn tratan las teorías como entidades metodológicas reales. (2) Toda la ciencia se basa en teorías. (3) No hay debate sobre si las teorías 'existen' — solo sobre cuáles son correctas.",
+      "pathway_to_partially_operational": {
+        "step_1": "Definir predicciones derivables: ¿qué predice la teoría?",
+        "step_2": "Definir coherencia interna: ¿las predicciones son lógicamente consistentes?",
+        "step_3": "Definir poder explicativo: ¿cuántos fenómenos explica?",
+        "required_observables": [
+          "Conjunto de predicciones derivadas de la teoría",
+          "Evidencia que falsaría cada predicción",
+          "Conteo de fenómenos explicados"
+        ],
+        "estimated_difficulty": "HIGH — requiere definir estructura teórica de forma reproducible"
+      }
+    },
+    {
+      "entity": "Explanation",
+      "current_status": "UNOPERATIONALIZED",
+      "ontological_status": "PLAUSIBLE",
+      "fnr_level": "HIGH",
+      "fnr_rationale": "Las explicaciones existen como construcciones cognitivas. La ciencia entera se basa en explicaciones. El problema es que CoResearcher no sabe medirlas, no que no existan.",
+      "ontological_criteria_applied": "PLAUSIBLE porque: (1) Salmon, Woodward argumentan que las explicaciones son entidades reales. (2) Uso extendido en ciencia. (3) Pero hay debate activo sobre qué constituye una explicación (DN model, causal, unification).",
+      "pathway_to_partially_operational": {
+        "step_1": "Definir estructura causal mínima: ¿qué componentes tiene una explicación?",
+        "step_2": "Definir métrica de completitud: ¿la explicación cubre todos los factores relevantes?",
+        "step_3": "Definir métrica de parsimonia: ¿la explicación es la más simple posible?",
+        "required_observables": [
+          "Componentes causales identificados en la explicación",
+          "Factores cubiertos vs no cubiertos",
+          "Complejidad de la explicación"
+        ],
+        "estimated_difficulty": "MEDIUM — requiere estructurar texto explicativo"
+      }
+    },
+    {
+      "entity": "Paradigm",
+      "current_status": "UNOPERATIONALIZED",
+      "ontological_status": "UNKNOWN",
+      "fnr_level": "HIGH",
+      "fnr_rationale": "Kuhn argumentó que los paradigmas existen como marcos compartidos. Pero su estatus ontológico es debatido.",
+      "ontological_criteria_applied": "UNKNOWN porque: (1) Kuhn argumenta su existencia pero no hay consenso. (2) Debate activo sobre si los paradigmas son reales o heurísticas. (3) No hay referencias canónicas fuera de Kuhn que los traten como reales.",
+      "pathway_to_partially_operational": {
+        "step_1": "Definir indicadores observables: ¿qué señales indicarían un paradigma?",
+        "step_2": "Definir métrica de shared assumptions: ¿cuántos supuestos comparten los actores?",
+        "step_3": "Definir métrica de estabilidad temporal: ¿el paradigma persiste en el tiempo?",
+        "required_observables": [
+          "Supuestos compartidos entre actores",
+          "Persistencia temporal de supuestos",
+          "Cambios de paradigma identificables"
+        ],
+        "estimated_difficulty": "VERY HIGH — requiere análisis semántico profundo"
+      }
+    },
+    {
+      "entity": "Restriction",
+      "current_status": "NOT_YET_OPERATIONAL",
+      "ontological_status": "UNKNOWN",
+      "fnr_level": "MEDIUM",
+      "fnr_rationale": "Podría existir como variable latente real, pero no ha sido observada directamente. Similar al gen en 1850.",
+      "ontological_criteria_applied": "UNKNOWN porque: (1) No hay referencias canónicas que traten 'restricción compartida' como entidad científica establecida. (2) Es un concepto introducido por CoResearcher. (3) Su existencia depende de que las convergencias reflejen barreras reales.",
+      "pathway_to_partially_operational": {
+        "step_1": "Mejorar detector de convergencias (FPR < 20%)",
+        "step_2": "Validar hipótesis de restricción contra código fuente",
+        "step_3": "Medir κ con revisores humanos reales (κ ≥ 0.4)",
+        "required_observables": [
+          "Convergencias validadas como reales (no sintéticas)",
+          "Restricciones verificadas contra código",
+          "Acuerdo interobservador ≥ 0.4"
+        ],
+        "estimated_difficulty": "MEDIUM — el detector existe, necesita refinamiento"
+      }
+    },
+    {
+      "entity": "Mechanism",
+      "current_status": "NOT_YET_OPERATIONAL",
+      "ontological_status": "PLAUSIBLE",
+      "fnr_level": "MEDIUM",
+      "fnr_rationale": "Los mecanismos causales son entidades centrales en filosofía de la ciencia (Salmon, Woodward).",
+      "ontological_criteria_applied": "PLAUSIBLE porque: (1) Salmon y Woodward argumentan que los mecanismos son reales. (2) Uso extendido en biología, medicina, ciencias sociales. (3) Pero hay debate sobre qué constituye un mecanismo.",
+      "pathway_to_partially_operational": {
+        "step_1": "Definir componentes del mecanismo: ¿qué partes lo componen?",
+        "step_2": "Definir conexiones causales: ¿cómo se relacionan las partes?",
+        "step_3": "Definir métrica de completitud: ¿el mecanismo explica todo el fenómeno?",
+        "required_observables": [
+          "Componentes identificados del mecanismo",
+          "Conexiones causales entre componentes",
+          "Cobertura del fenómeno explicado"
+        ],
+        "estimated_difficulty": "HIGH — requiere análisis causal profundo"
+      }
+    }
+  ],
+  "fnr_distribution": {
+    "CRITICAL": 2,
+    "HIGH": 2,
+    "MEDIUM": 2
+  },
+  "key_finding": "Las entidades CRITICAL (Hypothesis, Theory) no necesitan mejor observabilidad — necesitan mejor instrumentación metodológica. Su función no es ser observables sino ser falsables. El pathway correcto es definir firmas observacionales de sus predicciones, no intentar observarlas directamente.",
+  "paradigm_shift": "Antes: 'No lo puedo medir → No existe'. Ahora: 'No lo puedo medir → No sé si existe → ¿Qué instrumentación lo haría medible?'",
+  "epistemic_note": "Este sprint NO genera hipótesis. NO reactiva EHG. Solo define pathways de operacionalización. Cada pathway es un plan, no una implementación."
+}

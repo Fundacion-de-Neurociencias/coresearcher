@@ -1,32 +1,32 @@
-# ADR-EXE-001: Ejecución Distribuida Auditable (MissionGraph)
+#ADR-EXE-001: Auditable Distributed Execution (MissionGraph)
 
 **Version 1.0.0** - Architecture Decision Record  
-**Status**: Canonical Reference - Ejecución Distribuida
+**Status**: Canonical Reference - Distributed Execution
 
-## 1. Contexto
+## 1. Context
 
-La arquitectura ARQ-001 resolvió la trazabilidad retrospectiva (Qué sabemos) con el `EvidenceGraph`.
-La arquitectura ARQ-002 resolvió la gobernanza direccional (Por qué investigamos) con el `DecisionGraph`.
+The ARQ-001 architecture solved retrospective traceability (What do we know) with the `EvidenceGraph`.
+The ARQ-002 architecture solved directional governance (Why we investigated) with the `DecisionGraph`.
 
-Sin embargo, para cerrar el ciclo, carecíamos de una estructura formal para el "Cómo lo hacemos" en un entorno de orquestación multi-agente (NeuroOS). La ausencia de esta estructura forzaba al `EvidenceGraph` a intentar registrar el estado del "trabajo en curso", generando paradojas temporales (Claims huérfanos).
+However, to come full circle, we lacked a formal structure for “How we do it” in a multi-agent orchestration environment (NeuroOS). The absence of this structure forced `EvidenceGraph` to try to register the status of the "work in progress", generating temporal paradoxes (orphan claims).
 
-## 2. Decisión
+## 2. Decision
 
-Formalizamos la ontología de **Ejecución Distribuida Auditable** bajo el patrón `Mission → Brief → Execution`, consolidada en el **MissionGraph**.
+We formalize the **Auditable Distributed Execution** ontology under the `Mission → Brief → Execution` pattern, consolidated in the **MissionGraph**.
 
-1. **Mission (`MISSION-XXXXXX`)**: Un objetivo acotado y rastreable derivado directamente de una `DECISION`. Ejemplo: "Extraer claims de la literatura reciente sobre p-tau217".
-2. **Brief (`BRIEF-XXXXXX`)**: Un paquete contextual autocontenido, determinista e inmutable que se entrega al agente ejecutor. Especifica instrucciones, herramientas permitidas, y el criterio de éxito explícito. Esto permite que el agente opere de manera desconectada (stateless) respecto al orquestador central.
-3. **Execution (`EXEC-XXXXXX` o `ACTION-XXXXXX`)**: La traza física (logs, tool calls, retries) del agente intentando cumplir el Brief. Esta traza resultará en la creación de nuevos componentes del `EvidenceGraph` (como Claims y Artifacts) si es exitosa.
+1. **Mission (`MISSION-XXXXXX`)**: A bounded and trackable objective derived directly from an `DECISION`. Example: "Extract claims from recent literature on p-tau217".
+2. **Brief (`BRIEF-XXXXXX`)**: A self-contained, deterministic, immutable contextual package that is delivered to the executing agent. Specifies instructions, allowed tools, and explicit success criteria. This allows the agent to operate stateless from the central orchestrator.
+3. **Execution (`EXEC-XXXXXX` or `ACTION-XXXXXX`)**: The physical trace (logs, tool calls, retries) of the agent trying to fulfill the Brief. This trace will result in the creation of new `EvidenceGraph` components (such as Claims and Artifacts) if successful.
 
-## 3. Consecuencias
+## 3. Consequences
 
-### Positivas
-- **Desacoplamiento Estricto:** Protege al `EvidenceGraph` de cualquier estado incompleto, especulativo o en curso.
-- **Escalabilidad Masiva:** Permite encolar, distribuir y paralelizar miles de `Briefs` a través de múltiples agentes sin bloqueos, posibilitando una arquitectura asíncrona real.
-- **Trazabilidad de Ejecución:** Si un subagente falla, la falla se registra en el `Execution` node asociado al `Brief`, permitiendo una analítica de "Agent Reliability" sin afectar el conocimiento científico demostrado.
+### Positive
+- **Strict Decoupling:** Protects the `EvidenceGraph` from any incomplete, speculative or ongoing states.
+- **Massive Scalability:** Allows thousands of `Briefs` to be queued, distributed and parallelized across multiple agents without blocking, enabling a true asynchronous architecture.
+- **Execution Traceability:** If a subagent fails, the failure is recorded in the `Execution` node associated with the `Brief`, allowing an "Agent Reliability" analysis without affecting the demonstrated scientific knowledge.
 
-### Negativas
-- Añade una tercera capa ontológica al sistema (Evidence, Decision, Mission), aumentando la carga cognitiva para desarrolladores e integradores externos.
+### Negatives
+- Adds a third ontological layer to the system (Evidence, Decision, Mission), increasing the cognitive load for external developers and integrators.
 
-## 4. Implementación Referencial
-El modelo de datos y validaciones queda instanciado en el archivo `schemas/mission_graph.yaml`.
+## 4. Reference Implementation
+The data and validation model is instantiated in the file `schemas/mission_graph.yaml`.

@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResearchQuestionContract",
+  "description": "Canonical contract emitted by CoResearcher to be consumed by DataAILab Research Workspace (ARCH-002)",
+  "type": "object",
+  "required": [
+    "question_id",
+    "hypothesis_id",
+    "marr_explanation_level",
+    "target_population",
+    "exposure_variable",
+    "outcome_variable",
+    "timeframe_months",
+    "discriminative_predictions",
+    "scope_conditions"
+  ],
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "pattern": "^RQ-[0-9]{4}-[0-9]{4,}$"
+    },
+    "hypothesis_id": {
+      "type": "string",
+      "pattern": "^HYP-[A-Z0-9_-]+$"
+    },
+    "representation_id": {
+      "type": "string",
+      "description": "Referenced scientific representation (REP-XXXXXX)"
+    },
+    "biological_program_id": {
+      "type": "string",
+      "description": "Referenced transversal biological program (BP-XXXXXX)"
+    },
+    "marr_explanation_level": {
+      "type": "string",
+      "enum": ["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"]
+    },
+    "target_population": {
+      "type": "string",
+      "description": "Clinical or biological cohort inclusion criteria (e.g. MCI subjects with amyloid positivity)"
+    },
+    "exposure_variable": {
+      "type": "string",
+      "description": "Target biomarker, genetic variant, or perturbation"
+    },
+    "outcome_variable": {
+      "type": "string",
+      "description": "Target observable endpoint or clinical trajectory measure"
+    },
+    "timeframe_months": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "discriminative_predictions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["prediction_id", "statement", "falsification_threshold"],
+        "properties": {
+          "prediction_id": { "type": "string" },
+          "statement": { "type": "string" },
+          "falsification_threshold": { "type": "string" }
+        }
+      }
+    },
+    "scope_conditions": {
+      "type": "object",
+      "required": ["valid_domain", "boundary_conditions"],
+      "properties": {
+        "valid_domain": { "type": "array", "items": { "type": "string" } },
+        "boundary_conditions": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

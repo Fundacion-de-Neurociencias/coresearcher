@@ -5,7 +5,7 @@
 CoResearcher no es:
 - Un sistema de inferencia clínica
 - Un motor de toma de decisiones médicas
-- Una aplicación de IA para diagnóstico
+- An AI application for diagnosis
 
 CoResearcher es:
 - **Infraestructura de trazabilidad científica**
@@ -51,4 +51,4 @@ Scientific Interpretation Layer
 
 ## Próximo paso crítico
 
-Publicar el ledger_base.json con DOI para validar que la capa observable es ciertamente reproducible y versionable.
+Publish the ledger_base.json with DOI to validate that the observable layer is indeed reproducible and versionable.

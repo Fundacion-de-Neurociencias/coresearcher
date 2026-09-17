@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiscoveryCampaign",
+  "description": "Schema for Constraint-Led Multi-Agent Discovery Campaigns and persistent ledger (ADR-DISCOVERY-007)",
+  "type": "object",
+  "required": [
+    "campaign_id",
+    "question",
+    "target_domain",
+    "constraints",
+    "biological_programs",
+    "hypotheses",
+    "alternatives",
+    "predictions",
+    "discovery_value",
+    "ledger_entries"
+  ],
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "pattern": "^CAMP-[A-Z0-9_-]+$"
+    },
+    "question": {
+      "type": "string"
+    },
+    "target_domain": {
+      "type": "string"
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "constraint.schema.json#" }
+    },
+    "biological_programs": {
+      "type": "array",
+      "items": { "$ref": "biological_program.schema.json#" }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": { "$ref": "epistemic_trajectory.schema.json#" }
+    },
+    "alternatives": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "predictions": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "discovery_value": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "iteration_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "converged": {
+      "type": "boolean"
+    },
+    "ledger_entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["entry_id", "entry_type", "agent_role", "payload", "timestamp"],
+        "properties": {
+          "entry_id": { "type": "string" },
+          "entry_type": {
+            "type": "string",
+            "enum": ["DECISION", "REJECTED_ALTERNATIVE", "FAILED_PREDICTION", "CONSTRAINT_USED", "STATE_SPACE_REDUCTION"]
+          },
+          "agent_role": { "type": "string" },
+          "payload": { "type": "object" },
+          "timestamp": { "type": "string" }
+        }
+      }
+    }
+  }
+}

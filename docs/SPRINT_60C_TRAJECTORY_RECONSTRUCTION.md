@@ -1,60 +1,60 @@
 # SPRINT 60C: TRAJECTORY RECONSTRUCTION
-**Objetivo**: Validar empíricamente la reconstrucción de trayectorias de decisión desde repositorios reales de GitHub
+**Objective**: Empirically validate the reconstruction of decision trajectories from real GitHub repositories
 
 **Status**: Ready for Execution  
-**Próximo Sprint**: Sí - Arquitectura estabilizada, pasar a validación empírica
+**Next Sprint**: Yes - Stabilized architecture, move to empirical validation
 
 ---
 
-## 1. Hipótesis a Validar
+## 1. Hypotheses to Validate
 
-### Hipótesis Principal
+### Main Hypothesis
 
-> Podemos reconstruir decisiones de investigación con la misma precisión con la que reconstruimos claims, extrayendo señales inequívocas de:
-> - Issues abandonados
-> - PRs cerrados sin merge
-> - Branches eliminados
-> - Comits que revertieron cambios
-> - Experimentos documentados pero no productivos
+> We can reconstruct research decisions with the same precision with which we reconstruct claims, extracting unequivocal signals from:
+> - Abandoned issues
+> - PRs closed without merge
+> - Branches removed
+> - Committees that reverted changes
+> - Documented but non-productive experiments
 
-### Hipótesis Secundarias
+### Secondary Hypotheses
 
-1. **Hipótesis de Abandono**: Los abandonment signals (issues cerrados, PRs no mergeados) pueden clasificarse como `DECISION` con `outcome: abandoned` con >80% precisión.
+1. **Abandonment Hypothesis**: Abandonment signals (closed issues, unmerged PRs) can be classified as `DECISION` with `outcome: abandoned` with >80% accuracy.
 
-2. **Hipótesis de Éxito**: Los eventos que terminan en release/tag pueden clasificarse como `DECISION` con `outcome: success` con >80% precisión.
+2. **Success Hypothesis**: Events ending in release/tag can be classified as `DECISION` with `outcome: success` with >80% accuracy.
 
-3. **Hipótesis de Trajectory**: La secuencia `DECISION-A → abandoned_for → DECISION-B → success` es detectable automáticamente en >60% de los casos donde existe evidencia textual de "We tried X but switched to Y".
-
----
-
-## 2. Estado de la Evidencia (Pre-Sprint)
-
-| Hipótesis | Estado Actual | Evidencia |
-|-----------|---------------|-----------|
-| Claims reconstruibles | ✅ **DEMOSTRADO** | Sprint 27-59: 20 repos, reconstrucción validada |
-| EvidenceGraph útil | ✅ **PARCIALMENTE DEMOSTRADO** | langchain-ai/langgraph audit completada |
-| Decision trajectories reconstruibles | ⚠️ **MODELADO** | Schemas definidos, sin validación empírica |
-| Failure modes detectables | ⚠️ **HIPOTÉTICO** | Paper Princeton/Stanford/Berkeley proporciona marco teórico |
-| Aprendizaje entre proyectos | ❌ **NO DEMOSTRADO** | Sin ejecución |
-
-**Conclusión**: No más arquitectura. Necesitamos datos.
+3. **Trajectory Hypothesis**: The sequence `DECISION-A → abandoned_for → DECISION-B → success` is automatically detectable in >60% of cases where there is textual evidence of "We tried X but switched to Y".
 
 ---
 
-## 3. Metodología de Extracción
+## 2. Evidence Status (Pre-Sprint)
 
-### 3.1 Repositorios Objetivo
+| Hypothesis | Current Status | Evidence |
+|-----------|--------|-----------|
+| Reconstructable claims | ✅ **PROVEN** | Sprint 27-59: 20 repos, rebuild validated |
+| Useful EvidenceGraph | ✅ **PARTIALLY DEMONSTRATED** | langchain-ai/langgraph audit completed |
+| Decision reconstructable trajectories | ⚠️ **MODELING** | Defined schemes, without empirical validation |
+| Failure modes detectable | ⚠️ **HYPOTHETICAL** | Paper Princeton/Stanford/Berkeley provides theoretical framework |
+| Learning between projects | ❌ **NOT SHOWN** | No execution |
 
-Seleccionar 10-20 repositorios reales con:
+**Conclusion**: No more architecture. We need data.
 
-**Criterios de inclusión**:
-- Repositorios activos (>1 año de historia)
+---
+
+## 3. Extraction Methodology
+
+### 3.1 Target Repositories
+
+Select 10-20 real repositories with:
+
+**Inclusion criteria**:
+- Active repositories (>1 year history)
 - >100 commits
-- >50 issues cerrados
-- >20 PRs mezclados
-- Presencia de "research decisions" evidentes (cambios deapproach, abandonados, experimentos)
+- >50 issues closed
+- >20 mixed PRs
+- Presence of obvious "research decisions" (approach changes, abandoned, experiments)
 
-**Candidatos**:
+**Candidates**:
 ```
 1. langchain-ai/langgraph        (ya auditado en SPRINT 59)
 2. langchain-ai/langchain         (similar a langgraph)
@@ -68,9 +68,9 @@ Seleccionar 10-20 repositorios reales con:
 10. neuroforgede/medicalia        (if accessible)
 ```
 
-### 3.2 Señales de Decisión a Extraer
+### 3.2 Decision Signals to Extract
 
-**Explicit Decisions** (alta confianza):
+**Explicit Decisions** (high confidence):
 ```yaml
 Tipo: DECLARATION
 Señales:
@@ -81,7 +81,7 @@ Señales:
 Extracción: Regex + LLM classification
 ```
 
-**Implicit Decisions** (media confianza):
+**Implicit Decisions** (half confidence):
 ```yaml
 Tipo: INFERENCE
 Señales:
@@ -89,7 +89,7 @@ Señales:
   - PR rechazado con comentario específico → chosen_over
   - Branch deleted sinmerge → abandoned_for
   - Revert commit → superseded_by
-  - Issue reabierto con diferente título → abandoned_for + nueva decisión
+- Issue reopened with different title → abandoned_for + new decision
 Extracción: Heurísticas + patrones
 ```
 
@@ -117,9 +117,9 @@ superseded:
 
 ---
 
-## 4. Pipeline de Extracción
+## 4. Extraction Pipeline
 
-### 4.1 Fase 1: Recolección de Señales
+### 4.1 Phase 1: Signal Collection
 
 ```bash
 # Para cada repositorio
@@ -137,7 +137,7 @@ python scripts/extract_decisions.py \
 {"type": "revert_commit", "commit": "def456", "revert_of": "abc123"}
 ```
 
-### 4.2 Fase 2: Clasificación
+### 4.2 Phase 2: Classification
 
 ```python
 class DecisionClassifier:
@@ -171,7 +171,7 @@ class DecisionClassifier:
 }
 ```
 
-### 4.3 Fase 3: Vinculación (Linking)
+### 4.3 Phase 3: Linking
 
 ```python
 class DecisionLinker:
@@ -199,7 +199,7 @@ class DecisionLinker:
         return edges
 ```
 
-### 4.4 Fase 4: Reconstrucción de Trayectoria
+### 4.4 Phase 4: Trajectory Reconstruction
 
 ```python
 class TrajectoryReconstructor:
@@ -226,9 +226,9 @@ class TrajectoryReconstructor:
 
 ---
 
-## 5. Criterios de Éxito
+## 5. Success Criteria
 
-### 5.1 Métricas Cuantitativas
+### 5.1 Quantitative Metrics
 
 ```yaml
 Precisión de extracción:
@@ -245,7 +245,7 @@ Vinculación:
   - superseded_by accuracy: ≥80%
 ```
 
-### 5.2 Constitutional Validation: Decision Traceability Principle ⭐ **CRÍTICO**
+### 5.2 Constitutional Validation: Decision Traceability Principle ⭐ **CRITICAL**
 
 ```yaml
 Decision Traceability Compliance:
@@ -265,25 +265,25 @@ Evidence Anchoring:
   - 100% de artifacts son trazables a GitHub (issue, PR, commit)
 ```
 
-### 5.2 Métricas Cualitativas
+### 5.2 Qualitative Metrics
 
 ```yaml
 Utilidad:
-  - ¿La trayectoria reconstruida cuenta una historia coherente?
-  - ¿Se pueden identificar los puntos de divergencia clave?
-  - ¿La evidencia soporta las decisiones registradas?
+- Does the reconstructed trajectory tell a coherent story?
+- Can you identify key points of divergence?
+- Does the evidence support the recorded decisions?
 
 Insights:
-  - ¿Podemos detectar patrones de abandono?
-  - ¿Podemos identificar decisiones exitosas replicables?
-  - ¿La longitud de trayectoria correlaciona con éxito/fracaso?
+- Can we detect abandonment patterns?
+- Can we identify successful replicable decisions?
+- Does path length correlate with success/failure?
 ```
 
 ---
 
-## 6. Entregables
+## 6. Deliverables
 
-### 6.1 Scripts de Extracción
+### 6.1 Extraction Scripts
 
 ```bash
 scripts/
@@ -295,7 +295,7 @@ scripts/
 └── visualize_trajectory.py       # Graph visualization
 ```
 
-### 6.2 Datos Extraídos
+### 6.2 Extracted Data
 
 ```
 data/trajectories/
@@ -310,7 +310,7 @@ data/trajectories/
 └── ... (10-20 repos)
 ```
 
-### 6.3 Informe de Validación
+### 6.3 Validation Report
 
 ```markdown
 docs/SPRINT_60C_VALIDATION_REPORT.md
@@ -328,33 +328,33 @@ Secciones:
 
 ---
 
-## 7. Criterios de Parada
+## 7. Stopping Criteria
 
-| Condición | Acción |
+| Condition | Action |
 |-----------|--------|
-| Precisión <70% en explicit decisions | Revisar metodología de extracción |
-| Cobertura <50% | Ampliar ventana temporal o repositorios |
-| No se detectan patrones de abandono | Revisar criterios de implicit decision |
-| Tiempo >2 semanas | Reducir scope a 5 repositorios |
+| Accuracy <70% in explicit decisions | Review extraction methodology |
+| Coverage <50% | Expand temporary window or repositories |
+| No abandonment patterns detected | Review implicit decision criteria |
+| Time >2 weeks | Reduce scope to 5 repositories |
 
 ---
 
-## 8. Riesgos
+## 8. Risks
 
-### 8.1 Ruido en Señales Implícitas
+### 8.1 Noise in Implicit Signals
 
-**Riesgo**: Muchos falsos positivos en abandoned_for
+**Risk**: Many false positives in abandoned_for
 
-**Mitigación**: 
-- Usar múltiples señales (issue + PR + branch)
-- Establecer confidence thresholds
-- Validación humana en muestra de 20 casos
+**Mitigation**: 
+- Use multiple signals (issue + PR + branch)
+- Establish confidence thresholds
+- Human validation in a sample of 20 cases
 
-### 8.4 Violación del Principio de Decision Traceability ⭐ **CRÍTICO**
+### 8.4 Violation of the Decision Traceability Principle ⭐ **CRITICAL**
 
-**Riesgo**: Extraer campos que representan estados psicológicos inferidos
+**Risk**: Extracting fields that represent inferred psychological states
 
-**Ejemplo de violación**:
+**Example of violation**:
 ```json
 {
   "decision": "The team believed X was better",
@@ -363,29 +363,29 @@ Secciones:
 }
 ```
 
-**Mitigación**:
-- Implementar validator que rechaza campos como `belief`, `opinion`, `thought`, `assumption`, `felt`
-- Marcar como `inferred` cualquier rationale no directamente citado de artifacts
-- Establecer confidence=1.0 solo para texto literal, confidence=0.7-0.9 para inferido
-- Bloquear generación de DecisionNodes sin evidencia asociada
+**Mitigation**:
+- Implement validator that rejects fields like `belief`, `opinion`, `thought`, `assumption`, `felt`
+- Mark as `inferred` any rationale not directly cited from artifacts
+- Set confidence=1.0 for literal text only, confidence=0.7-0.9 for inferred
+- Block DecisionNodes generation without associated evidence
 
-### 8.2 Subjetividad en Rationale
+### 8.2 Subjectivity in Rationale
 
-**Riesgo**: Rationale extraído de texto no es la decisión real
+**Risk**: Rationale extracted from text is not the real decision
 
-**Mitigación**:
-- Marcar como `inferred` si no hay declaración explícita
-- Usar LLM para generar hipótesis de rationale
-- No usar rationale para evaluación, solo para contexto
+**Mitigation**:
+- Mark as `inferred` if no explicit declaration
+- Use LLM to generate rationale hypotheses
+- Do not use rationale for evaluation, only for context
 
-### 8.3 Sesgo de Supervivencia
+### 8.3 Survivorship Bias
 
-**Riesgo**: Solo vemos decisions exitosas (las que llegaron a código)
+**Risk**: We only see successful decisions (those that reached code)
 
-**Mitigación**:
-- Incluir explícitamente issues cerrados sin merge
-- Incluir branches eliminados
-- Incluir reverts
+**Mitigation**:
+- Explicitly include closed issues without merge
+- Include deleted branches
+- Include reverts
 
 ---
 
@@ -404,50 +404,50 @@ DecisionTrajectory (schemas/decision_trajectory.schema.json)
 NeuroOS Brain (futuro)
 ```
 
-**Critically**: Este sprint NO construye nada nuevo en arquitectura. Solo valida lo existente contra datos reales.
+**Critically**: This sprint does NOT build anything new in architecture. It only validates what exists against real data.
 
 ---
 
 ## 10. Success Looks Like
 
-Al final de SPRINT 60C, podemos decir:
+At the end of SPRINT 60C, we can say:
 
-✅ "Hemos extraído 247 decisiones de 15 repositorios con 78% precisión"
-✅ "Hemos reconstruido 23 trayectorias completas con éxito"
-✅ "Hemos detectado 89 abandonamientos con 72% recall"
-✅ "La trayectoria promedio tiene 4.2 decisiones, 1.3 abandonamientos"
+✅ "We have extracted 247 decisions from 15 repositories with 78% accuracy"
+✅ "We have successfully rebuilt 23 complete trajectories"
+✅ "We have detected 89 abandonments with 72% recall"
+✅ "The average trajectory has 4.2 decisions, 1.3 abandonments"
 
-Y más importante:
+And more importantly:
 
-✅ **Hemos demostrado que CoResearcher puede reconstruir trayectorias, no solo claims.**
+✅ **We have shown that CoResearcher can reconstruct trajectories, not just claims.**
 
 ---
 
 ## 11. Non-Goals (Scope Guard)
 
-❌ NO construir Decision Quality Engine (no evaluar decisiones)
-❌ NO construir motor de predicción (no predecir éxito/fracaso)
-❌ NO construir sistema de recomendación (no sugerir decisiones)
-❌ NO ampliar arquitectura (schemas están estables)
+❌ DO NOT build Decision Quality Engine (do not evaluate decisions)
+❌ DO NOT build prediction engine (do not predict success/failure)
+❌ DO NOT build recommendation system (do not suggest decisions)
+❌ DO NOT extend architecture (schemas are stable)
 
-✅ SOLO extraer, clasificar, y reconstruir trayectorias desde GitHub
-✅ SOLO validar si el modelo funciona contra datos reales
+✅ ONLY extract, classify, and rebuild trajectories from GitHub
+✅ ONLY validate if the model works against real data
 
 ---
 
 ## 12. Immediate Next Steps
 
-1. **Day 1**: Seleccionar 10 repositorios candidatos
-2. **Day 2**: Implementar `extract_decisions.py` (señales básicas: issues, PRs, commits)
-3. **Day 3**: Implementar `classify_decisions.py` (heurísticas + regex)
-4. **Day 4**: Implementar `link_decisions.py` (edges básicos)
-5. **Day 5**: Ejecutar pipeline en 1 repositorio piloto (langgraph)
-6. **Day 6**: Validación manual de muestra (20 decisiones)
-7. **Day 7**: Ajustar thresholds y parámetros
-8. **Day 8-14**: Ejecutar en 9-19 repositorios restantes
-9. **Day 15**: Generar `SPRINT_60C_VALIDATION_REPORT.md`
-10. **Day 16**: Presentar resultados y decidir SPRINT 61
+1. **Day 1**: Select 10 candidate repositories
+2. **Day 2**: Implement `extract_decisions.py` (basic signals: issues, PRs, commits)
+3. **Day 3**: Implement `classify_decisions.py` (heuristics + regex)
+4. **Day 4**: Implement `link_decisions.py` (basic edges)
+5. **Day 5**: Run pipeline in 1 pilot repository (langgraph)
+6. **Day 6**: Manual sample validation (20 decisions)
+7. **Day 7**: Adjust thresholds and parameters
+8. **Day 8-14**: Run on remaining 9-19 repositories
+9. **Day 15**: Generate `SPRINT_60C_VALIDATION_REPORT.md`
+10. **Day 16**: Present results and decide SPRINT 61
 
 ---
 
-*Este sprint es la validación empírica que necesita CoResearcher para demostrar que puede reconstruir trayectorias de investigación, no solo claims aislados.*
+*This sprint is the empirical validation that CoResearcher needs to demonstrate that it can reconstruct research trajectories, not just isolated claims.*

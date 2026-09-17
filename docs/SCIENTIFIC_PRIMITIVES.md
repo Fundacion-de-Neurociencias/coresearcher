@@ -1,137 +1,137 @@
 # Scientific Primitives Audit
-## Universalidad vs Especificidad
+## Universality vs Specificity
 
 ---
 
-## Regla de Oro
+## Golden Rule
 
-> "**Si no existe en física, química, biología, matemáticas, economía e ingeniería, NO es core.**"
+> "**If it does not exist in physics, chemistry, biology, mathematics, economics and engineering, it is NOT core.**"
 
-Cada primitiva debe pasar este filtro de universalidad.
+Every primitive must pass this universality filter.
 
 ---
 
-## Tabla de Primitivas - AUDITORÍA AGRESIVA
+## Table of Primitives - AGGRESSIVE AUDIT
 
-| Primitiva | Universal | Core Status | Justificación |
+| Primitive | Universal | Core Status | Justification |
 |-----------|-----------|-------------|---------------|
-| **Question** | ✅ Sí | ✅ CORE | ¿Por qué? existente en toda ciencia |
-| **Observation** | ✅ Sí | ✅ CORE | Observación directa es universal |
-| **Measurement** | ✅ Sí | ✅ CORE | Medición es actividad científica básica |
-| **Evidence** | ✅ Sí | ✅ CORE | Evidencia apoya afirmaciones |
-| **Claim** | ✅ Sí | ✅ CORE | Afirmación atómica: existente en toda ciencia |
-| **Finding** | ❌ No | 📦 DOMAIN PACK | En matemáticas/teórica no existe - es synthesis |
-| **Mechanism** | ✅ Sí | ✅ CORE | Explicación causal universal |
-| **Model** | ✅ Sí | ✅ CORE | Modelo integrador existente |
-| **Theory** | ✅ Sí | ✅ CORE | Marco explicativo universal |
-| **Researcher** | ✅ Sí | ✅ CORE | Científico/a investigador/a existe en todas partes |
-| **Biomarker** | ❌ No | 📦 DOMAIN PACK | Específico de biología/medicina |
-| **Gene** | ❌ No | 📦 DOMAIN PACK | Específico de genética |
-| **Drug** | ❌ No | 📦 DOMAIN PACK | Específico de farmacología |
-| **Patient** | ❌ No | 📦 DOMAIN PACK | Específico de medicina clínica |
-| **Trial** | ❌ No | 📦 DOMAIN PACK | Específico de investigación clínica |
+| **Question** | ✅ Yes | ✅ CORE | Because? existing in all science |
+| **Observation** | ✅ Yes | ✅ CORE | Direct observation is universal |
+| **Measurement** | ✅ Yes | ✅ CORE | Measurement is a basic scientific activity |
+| **Evidence** | ✅ Yes | ✅ CORE | Evidence supports claims |
+| **Claim** | ✅ Yes | ✅ CORE | Atomic affirmation: existing in all science |
+| **Finding** | ❌ No | 📦 DOMAIN PACK | In mathematics/theory it does not exist - it is synthesis |
+| **Mechanism** | ✅ Yes | ✅ CORE | Universal causal explanation |
+| **Model** | ✅ Yes | ✅ CORE | Existing integrative model |
+| **Theory** | ✅ Yes | ✅ CORE | Universal explanatory framework |
+| **Researcher** | ✅ Yes | ✅ CORE | Research scientist exists everywhere |
+| **Biomarker** | ❌ No | 📦 DOMAIN PACK | Biology/medicine specific |
+| **Gene** | ❌ No | 📦 DOMAIN PACK | Specific to genetics |
+| **Drug** | ❌ No | 📦 DOMAIN PACK | Specific to pharmacology |
+| **Patient** | ❌ No | 📦 DOMAIN PACK | Specific to clinical medicine |
+| **Trial** | ❌ No | 📦 DOMAIN PACK | Specific to clinical research |
 
 ---
 
-## Primitivas Core (Universales)
+## Core Primitives (Universal)
 
-### Question
-- Física: "¿Por qué la luz se curva?"
-- Química: "¿Por qué esta reacción es exotérmica?"
-- Biología: "¿Por qué APOE4 causa AD?"
-- Matemáticas: "¿Existe un patrón aquí?"
-- Economía: "¿Por qué la inflación sube?"
-- Ingeniería: "¿Por qué falló este material?"
+###Question
+- Physics: "Why does light bend?"
+- Chemistry: "Why is this reaction exothermic?"
+- Biology: "Why does APOE4 cause AD?"
+- Mathematics: "Is there a pattern here?"
+- Economy: "Why is inflation rising?"
+- Engineering: "Why did this material fail?"
 
 ### Observation
-- Física: "La luz se curva 1.75 en el eclipse"
-- Química: "El pH disminuyó a 3.2"
-- Biología: "APOE4 homocigóticos tienen más placas"
-- Matemáticas: "Esta serie converge a π"
-- Economía: "El desempleo subió a 8%"
-- Ingeniería: "La temperatura llegó a 150°C"
+- Physics: "Light bends 1.75 in the eclipse"
+- Chemistry: "The pH decreased to 3.2"
+- Biology: "APOE4 homozygotes have more plaques"
+- Mathematics: "This series converges to π"
+- Economy: "Unemployment rose to 8%"
+- Engineering: "The temperature reached 150°C"
 
 ### Measurement
-- Física: "masa = 9.11e-31 kg"
-- Química: "pH = 7.4"
-- Biología: "pTau217 = 23.5 pg/mL"
-- Matemáticas: "error < 0.05"
-- Economía: "PIB = 1.2 billones"
-- Ingeniería: "tensión = 250 MPa"
+- Physics: "mass = 9.11e-31 kg"
+- Chemistry: "pH = 7.4"
+- Biology: "pTau217 = 23.5 pg/mL"
+- Mathematics: "error < 0.05"
+- Economy: "GDP = 1.2 trillion"
+- Engineering: "stress = 250 MPa"
 
-### Evidence
-- Física: "3 experimentos independientes coinciden"
-- Química: "espectro muestra pico a 340nm"
-- Biología: "p < 0.001 en 5 cohortes"
-- Matemáticas: "teorema demostrado por 3 métodos"
-- Economía: "correlación r = -0.78"
-- Ingeniería: "fatiga confirmada en ciclo 10000"
+###Evidence
+- Physics: "3 independent experiments coincide"
+- Chemistry: "spectrum shows peak at 340nm"
+- Biology: "p < 0.001 in 5 cohorts"
+- Mathematics: "theorem proven by 3 methods"
+- Economics: "correlation r = -0.78"
+- Engineering: "fatigue confirmed in cycle 10,000"
 
 ### Claim
-- Física: "masa → curvatura espacio → órbita"
-- Química: "pH → velocidad reacción → producto"
-- Biología: "APOE4 → amiloide → deterioro"
-- Matemáticas: "n → serie → convergencia"
-- Economía: "tipos → capital → inversión"
-- Ingeniería: "temperatura → fatiga → fallo"
+- Physics: "mass → space curvature → orbit"
+- Chemistry: "pH → reaction rate → product"
+- Biology: "APOE4 → amyloid → deterioration"
+- Mathematics: "n → series → convergence"
+- Economy: "types → capital → investment"
+- Engineering: "temperature → fatigue → failure"
 
 ### Finding
-- Física: "relación masa-órbita (r²=0.99)"
-- Química: "relación pH-producto (k=0.45)"
-- Biología: "relación APOE4-placas (OR=3.2)"
-- Matemáticas: "serie converge a π/4"
-- Economía: "relación tipos-inversión (β=-0.3)"
-- Ingeniería: "relación temperatura-fallo (N=5000)"
+- Physics: "mass-orbit relationship (r²=0.99)"
+- Chemistry: "pH-product relationship (k=0.45)"
+- Biology: "APOE4-plate relationship (OR=3.2)"
+- Mathematics: "series converges to π/4"
+- Economy: "type-investment relationship (β=-0.3)"
+- Engineering: "temperature-failure relationship (N=5000)"
 
-**Nota**: Finding parece universal como "patrón distilado". Revisar con más ejemplos.
+**Note**: Finding seems universal as a "distilled pattern". Review with more examples.
 
-### Mechanism
-- Física: "masa → curvatura → trayectoria geodésica"
-- Química: "pH → concentración → velocidad"
-- Biología: "estrés → pTau217 → amiloide"
-- Matemáticas: "derivada → integral → función"
-- Economía: "tipos → capital → inversión → empleo"
-- Ingeniería: "temperatura → microfissuras → fallo"
+###Mechanism
+- Physics: "mass → curvature → geodesic path"
+- Chemistry: "pH → concentration → velocity"
+- Biology: "stress → pTau217 → amyloid"
+- Mathematics: "derivative → integral → function"
+- Economy: "types → capital → investment → employment"
+- Engineering: "temperature → microcracks → failure"
 
 ### Model
-- Física: "Modelo de relatividad + gravitación"
-- Química: "Modelo cinético + termodinámico"
-- Biología: "Modelo amiloide + neuroinflamación"
-- Matemáticas: "Modelo estadístico + serie"
-- Economía: "Modelo IS-LM + crecimiento"
-- Ingeniería: "Modelo de fatiga + fluencia"
+- Physics: "Relativity + gravitation model"
+- Chemistry: "Kinetic + thermodynamic model"
+- Biology: "Amyloid + neuroinflammation model"
+- Mathematics: "Statistical model + series"
+- Economy: "IS-LM model + growth"
+- Engineering: "Fatigue + creep model"
 
 ### Theory
-- Física: "Relatividad general + teoría de campos"
-- Química: "Química cuántica + cinética"
-- Biología: "Teoría proteostasis + neurodegeneración"
-- Matemáticas: "Teoría números + teoría grupos"
-- Economía: "Teoría macro + teoría micro"
-- Ingeniería: "Teoría materiales + teoría estructuras"
+- Physics: "General relativity + field theory"
+- Chemistry: "Quantum chemistry + kinetics"
+- Biology: "Proteostasis + neurodegeneration theory"
+- Mathematics: "Number theory + group theory"
+- Economics: "Macro theory + micro theory"
+- Engineering: "Materials theory + structure theory"
 
 ---
 
-## Primitivas Domain Pack (Específicas)
+## Domain Pack Primitives (Specific)
 
 ### Biomarker
-- Solo medicina/biología
-- Usa: Observation + Claim universal
+- Medicine/biology only
+- Use: Observation + Universal Claim
 
-### Gene
-- Solo genética
-- Usa: Entity + Claim universal
+###Gene
+- Genetics only
+- Use: Entity + Claim universal
 
-### Drug
-- Solo farmacología
-- Usa: Entity + Claim universal
+###Drug
+- Pharmacology only
+- Use: Entity + Claim universal
 
-### Patient
-- Solo medicina clínica
-- Usa: Entity + Observation
+###Patient
+- Clinical medicine only
+- Use: Entity + Observation
 
 ---
 
-## API Core (Simplificada) - Finding movido a Domain Pack
+## Core API (Simplified) - Finding moved to Domain Pack
 
 ```python
 # Universal scientific objects (CORE)
@@ -154,7 +154,7 @@ REJECT(object_id, researcher_id, counterevidence)
 FORK(object_id, variants)
 ```
 
-### Domain Pack API (específico)
+### Domain Pack API (specific)
 
 ```python
 # Para biología/medicina
@@ -165,25 +165,25 @@ Gene.link_to_phenotype(gene, phenotype)
 
 ---
 
-## Implementación Recomendada
+## Recommended Implementation
 
-1. **Sprint 23A**: Scientific Semantic Compiler (traduce lenguaje humano a objetos)
-2. **Sprint 23B**: Universal Object Registry (solo las primitivas core)
-3. **Sprint 24**: Domain Pack Framework (para biomarcadores, genes, fármacos)
-4. **Sprint 25**: Einstein v2 (opera sobre mechanisms reales)
+1. **Sprint 23A**: Scientific Semantic Compiler (translates human language into objects)
+2. **Sprint 23B**: Universal Object Registry (core primitives only)
+3. **Sprint 24**: Domain Pack Framework (for biomarkers, genes, drugs)
+4. **Sprint 25**: Einstein v2 (operates on real mechanisms)
 
 ---
 
-## La Identidad Final
+## The Final Identity
 
-CoResearcher no es:
-- Un motor de IA
-- Un sistema de papers
-- Un knowledge graph
+CoResearcher is not:
+- An AI engine
+- A paper system
+- A knowledge graph
 
-CoResearcher es:
-- **La Scientific Interaction Layer**
-- **El Scientific State Machine**
-- **El Global Scientific Ledger**
+CoResearcher is:
+- **The Scientific Interaction Layer**
+- **The Scientific State Machine**
+- **The Global Scientific Ledger**
 
-Donde el conocimiento científico vive con su historia de participación.
+Where scientific knowledge lives with its history of participation.

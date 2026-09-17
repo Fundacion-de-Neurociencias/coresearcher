@@ -306,4 +306,4 @@ def import_session(session_path):
 
 ---
 
-*CoResearcher como plataforma, no como producto. La capa de coordinación universal para investigación agentic.*
+*CoResearcher as a platform, not as a product. The universal coordination layer for agentic research.*

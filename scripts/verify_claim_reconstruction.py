@@ -60,7 +60,7 @@ def evaluate_claim_semantic(claim_id, claim_text, nodes, edges):
     Para esta prueba usamos un dry-run que valora si existe texto
     suficiente en las citas para reconstruir la aserción semánticamente.
     """
-    # Encontrar los quotes de los que depende
+    # Find quotes upon which it depends
     support_edges = [e for e in edges if e["from"] == claim_id and e.get("type") == "supported_by"]
     evidence_texts = []
     
@@ -73,9 +73,9 @@ def evaluate_claim_semantic(claim_id, claim_text, nodes, edges):
     if not evidence_texts:
         return False, 0.0, "Falta texto de evidencia para reconstrucción ciega"
         
-    # Aquí iría la llamada real a la API del LLM. 
-    # Para la auditoría, simulamos un match de confianza basado en cobertura heurística o placeholder.
-    # Si las comillas no son vacías, asumimos reconstruible en este mock de validación.
+    # Production LLM API call would be placed here. 
+    # For audit, simulate confidence match based on heuristic coverage.
+    # If quotes are non-empty, assume reconstructible in validation mock.
     reconstructable = len(evidence_texts) > 0 and len(" ".join(evidence_texts)) > 10
     confidence = 0.92 if reconstructable else 0.1
     

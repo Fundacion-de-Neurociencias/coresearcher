@@ -1,14 +1,14 @@
-# REP-001 — Representación y Observabilidad
+#REP-001 — Representation and Observability
 
 **Status**: CANDIDATE  
 **EpistemicStatus**: UNKNOWN  
-**Evidencia**: Observación arquitectónica  
+**Evidence**: Architectural observation  
 
 ---
 
-## Observación
+## Observation
 
-Los grandes avances científicos históricos parecen coincidir con cambios de representación.
+Great historical scientific advances seem to coincide with changes in representation.
 
 ```text
 Nueva representación
@@ -17,17 +17,17 @@ Nueva representación
 → nuevas preguntas falsables
 ```
 
-### Ejemplos históricos
+### Historical examples
 
-| Científico | Cambio de representación | Nuevo espacio observable |
+| Scientist | Change of representation | New observable space |
 |------------|--------------------------|-------------------------|
-| Euclides | Axiomática geométrica | Relaciones deducibles, teoremas imposibles de ver sin axiomas |
-| Euler-Lagrange | Física como optimización | Espacio de trayectorias, principio de mínima acción |
-| Einstein | Fuerza gravitatoria → geometría del espacio-tiempo | Curvatura, agujeros negros, ondas gravitacionales |
-| Schrödinger | Partículas → funciones de onda | Estados cuánticos, superposición, entrelazamiento |
-| Yang-Mills | Campos aislados → simetrías gauge | Interacciones gauge, bosones de gauge, confinamiento |
+| Euclid | Geometric axiomatics | Deducible relations, theorems impossible to see without axioms |
+| Euler-Lagrange | Physics as optimization | Trajectory space, principle of least action |
+| Einstein | Gravitational force → geometry of space-time | Curvature, black holes, gravitational waves |
+| Schrödinger | Particles → wave functions | Quantum states, superposition, entanglement |
+| Yang-Mills | Isolated fields → gauge symmetries | Gauge interactions, gauge bosons, confinement |
 
-**Lo común no es la ecuación. Lo común es:**
+**Common is not the equation. The common thing is:**
 
 ```text
 Nueva representación
@@ -38,103 +38,103 @@ Nueva representación
 
 ---
 
-## Pregunta abierta
+## Open question
 
-¿Qué observaciones permanecen invisibles porque la representación actual de CoResearcher no las hace visibles?
+What observations remain invisible because the current CoResearcher representation does not make them visible?
 
 ---
 
-## Inventario de visibilidad por artefacto
+## Visibility inventory per artifact
 
-Para cada artefacto actual, documentar qué hace visible y qué hace invisible.
+For each current artifact, document what it makes visible and what it makes invisible.
 
-**Resultado permitido:** `VISIBLE`, `INVISIBLE`, `UNKNOWN`
+**Allowed result:** `VISIBLE`, `INVISIBLE`, `UNKNOWN`
 
-### EvidenceGraph
+###EvidenceGraph
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Claims anclados a evidencia | VISIBLE | 591 claims anclados en artifacts |
-| Cadenas de evidencia | VISIBLE | 426 edges reconstruidos |
-| Confianzas | VISIBLE | trust scores por claim |
-| Discontinuidades | INVISIBLE | No representa saltos cualitativos entre paradigmas |
-| Restricciones subyacentes | INVISIBLE | No distingue entre convergencia por restricción real vs convergencia por ruido |
-| Estructura profunda | UNKNOWN | No se han analizado patrones ocultos en la topología del grafo |
+| Claims anchored to evidence | VISIBLE | 591 claims anchored in artifacts |
+| Chains of evidence | VISIBLE | 426 edges reconstructed |
+| Trusts | VISIBLE | trust scores by claim |
+| Discontinuities | INVISIBLE | It does not represent qualitative leaps between paradigms |
+| Underlying restrictions | INVISIBLE | Does not distinguish between convergence due to real constraint vs convergence due to noise |
+| Deep structure | UNKNOWN | Hidden patterns in the graph topology have not been analyzed |
 
 ### DecisionGraph / Trajectory
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Trayectorias reconstructibles | VISIBLE | 301 DecisionNodes reconstruidos |
-| Secuencias temporales | VISIBLE | DAG cronológico con edges tipados |
-| Convergencias | VISIBLE | 4 convergencias detectadas |
-| Gaps epistémicos | VISIBLE | 155 gaps detectados |
-| Contraejemplos | INVISIBLE | No se registran alternativas descartadas explícitamente |
-| Estructura de bifurcaciones | INVISIBLE | Ramas no exploradas no son representadas |
-| Direccionalidad profunda | UNKNOWN | No se ha medido la topología del espacio de decisiones |
+| Reconstructable trajectories | VISIBLE | 301 Rebuilt DecisionNodes |
+| Temporal sequences | VISIBLE | Chronological DAG with typed edges |
+| Convergences | VISIBLE | 4 convergences detected |
+| Epistemic gaps | VISIBLE | 155 gaps detected |
+| Counterexamples | INVISIBLE | No explicitly discarded alternatives are recorded |
+| Branch structure | INVISIBLE | Unexplored branches are not represented |
+| Deep directionality | UNKNOWN | The topology of the decision space has not been measured |
 
 ### Convergence
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Convergencias detectables | VISIBLE | 4 convergencias observadas |
-| Actores independientes | VISIBLE | ≥2 actores por convergencia |
-| Temas recurrentes | VISIBLE | Agrupación por Jaccard de títulos |
-| Restricciones compartidas | INVISIBLE | 0/4 convergencias tienen restricción identificada |
-| Éxito vs barrera | VISIBLE | 0/4 exitosas, 4/4 barrier convergences |
-| Mecanismos causales | INVISIBLE | No se explica por qué convergen |
+| Detectable convergences | VISIBLE | 4 convergences observed |
+| Independent actors | VISIBLE | ≥2 actors per convergence |
+| Recurring themes | VISIBLE | Jaccard grouping of titles |
+| Shared restrictions | INVISIBLE | 0/4 convergences have identified restriction |
+| Success vs barrier | VISIBLE | 0/4 successful, 4/4 barrier convergences |
+| Causal mechanisms | INVISIBLE | It is not explained why they converge |
 
 ### Gap
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Gaps detectables | VISIBLE | 155 gaps, gap_density=0.515 |
-| Severidad | VISIBLE | high/medium/low clasificados |
-| Tipo epistémico | VISIBLE | empirical/causal/mathematical |
-| Estado de exploración | VISIBLE | explored_abandoned/explored_partial/unknown |
-| Restricciones subyacentes | INVISIBLE | Gaps son síntomas, no causas |
-| Estructura del espacio ignorado | UNKNOWN | No se ha mapeado la topología de la ignorancia |
+| Detectable gaps | VISIBLE | 155 gaps, gap_density=0.515 |
+| Severity | VISIBLE | high/medium/low classifieds |
+| Epistemic type | VISIBLE | empirical/causal/mathematical |
+| Scan Status | VISIBLE | explored_abandoned/explored_partial/unknown |
+| Underlying restrictions | INVISIBLE | Gaps are symptoms, not causes |
+| Structure of ignored space | UNKNOWN | The topology of ignorance has not been mapped |
 
 ### Freezes
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Boundaries documentados | VISIBLE | BOUNDARY_WITH_EDITXT.md, BOUNDARY_WITH_AI_SCIENTISTS.md |
-| Operational Maxims | VISIBLE | 10 maxims documentados |
+| Documented boundaries | VISIBLE | BOUNDARY_WITH_EDITXT.md, BOUNDARY_WITH_AI_SCIENTISTS.md |
+| Operational Maxims | VISIBLE | 10 documented maxims |
 | Architecture Freeze | VISIBLE | ARCHITECTURE_FREEZE.md |
-| Lo que no está congelado | INVISIBLE | No se lista explícitamente qué queda abierto |
-| Tensión entre capas | UNKNOWN | No se han medido fricciones entre boundaries |
+| What is not frozen | INVISIBLE | What remains open is not explicitly listed |
+| Tension between layers | UNKNOWN | Frictions between boundaries have not been measured |
 
 ### Operational Maxims
 
-| Dimensión | Estado | Nota |
+| Dimension | State | Note |
 |-----------|--------|------|
-| Reglas documentadas | VISIBLE | 10 maxims en OPERATIONAL_MAXIMS.md |
-| Aplicación práctica | VISIBLE | Referenciadas en scripts y artefactos |
-| Excepciones | INVISIBLE | No se registran violaciones o excepciones |
-| Efectividad | UNKNOWN | No se ha medido impacto de cada maxim |
+| Documented rules | VISIBLE | 10 maxims in OPERATIONAL_MAXIMS.md |
+| Practical application | VISIBLE | Referenced in scripts and artifacts |
+| Exceptions | INVISIBLE | No violations or exceptions recorded |
+| Effectiveness | UNKNOWN | The impact of each maxim has not been measured |
 
 ---
 
-## Pregunta reformulada para el IDE
+## Question reformulated for the IDE
 
 ```text
-¿Qué observables están ausentes no por imposibilidad lógica,
+What observables are absent not because of logical impossibility,
 sino por elección de representación?
 ```
 
-**No pedir:** Nueva representación.  
-**No pedir:** Nuevo esquema.  
-**Solo pedir:** Inventario de lo invisible.
+**Do not ask for:** New representation.  
+**Do not order:** New scheme.  
+**Just ask for:** Inventory of the invisible.
 
 ---
 
-## Acción
+## Action
 
-Ninguna.  
-Estado CANDIDATE hasta que aparezcan múltiples casos donde distintas líneas de trabajo converjan sobre la misma observación de invisibilidad.
+None.  
+CANDIDATE status until multiple cases appear where different lines of work converge on the same invisibility observation.
 
 ---
 
-*Creado: 2026-08-06*  
-*Evidence: Ninguna (observación arquitectónica)*
+*Created: 2026-08-06*  
+*Evidence: None (architectural observation)*

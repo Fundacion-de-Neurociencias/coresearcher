@@ -1,11 +1,11 @@
-# Verification Layer
+#VerificationLayer
 ## Scientific Peer Review for the Agentic Era
 
 ---
 
-## El Problema con "Peer Review"
+## The Problem with "Peer Review"
 
-El modelo clásico:
+The classic model:
 ```
 Autor humano
 ↓
@@ -16,7 +16,7 @@ Paper
 Revista
 ```
 
-No describe la realidad emergente:
+It does not describe the emerging reality:
 
 ```
 Investigador
@@ -36,17 +36,17 @@ Validación
 
 ## AUTHOR INDEPENDENCE RULE
 
-**Un artefacto científico no puede ser aprobado por agentes controlados por los mismos ORCID que participaron en su producción.**
+**A scientific artifact cannot be approved by agents controlled by the same ORCID that participated in its production.**
 
-- Revisores pueden ser humanos o agentes
-- Todo agente revisor debe estar asociado a ORCID responsable
-- Las revisiones son objetos de primera clase
+- Reviewers can be humans or agents
+- All reviewing agents must be associated with the responsible ORCID
+- Reviews are first class objects
 
 ---
 
 ## REVIEW-XXXXXX Primitive
 
-Cada revisión es inmutable y trazable:
+Each revision is immutable and traceable:
 
 ```json
 {
@@ -73,7 +73,7 @@ Cada revisión es inmutable y trazable:
 
 ## REVIEWER-XXXXXX Primitive
 
-Revisor con identidad verificable:
+Reviewer with verifiable identity:
 
 ```json
 {
@@ -124,10 +124,10 @@ Revisor con identidad verificable:
 
 ## Living Validation vs Static Peer Review
 
-Hoy:
+Today:
 ```
 Reviewer: "The methodology is weak."
-¿Quién? ¿Cómo? ¿Cuándo?
+Who? As? When?
 ```
 
 CoResearcher:
@@ -173,7 +173,7 @@ Living Validation
 
 ## Multi-Agent Review Squads
 
-Un investigador puede tener:
+A researcher may have:
 
 ```
 Reviewer Agent: estadística
@@ -182,7 +182,7 @@ Reviewer Agent: literatura
 Reviewer Agent: reproducibilidad
 ```
 
-Cada uno especializado, pero todos con ORCID responsable.
+Each one specialized, but all with responsible ORCID.
 
 ---
 
@@ -214,7 +214,7 @@ Release
 
 ## Living Knowledge Validation
 
-El conocimiento sigue vivo después de publicar:
+The knowledge is still alive after publishing:
 
 ```
 CLAIM-004512
@@ -225,15 +225,15 @@ Refutations: 2
 Trust Score: 0.87
 ```
 
-Exactamente como un repositorio que sigue evolucionando.
+Exactly like a repository that continues to evolve.
 
 ---
 
-## The Verification Layer Value
+##The Verification Layer Value
 
-No es el preprint el activo.
+It is not the preprint that is active.
 
-Es el **historial de validación trazable**:
+It is the **traceable validation history**:
 
 ```
 10,000 ARTIFACT-XXXXXX
@@ -249,24 +249,24 @@ Scientific Verification Infrastructure
 
 ## Constitutive Decisions
 
-1. **REVIEW-XXXXXX es primitiva de primera clase**
-2. **REVIEWER-XXXXXX tiene ORCID responsable**
-3. **AUTOR INDEPENDENCE RULE es constitucional**
-4. **Living validation es permanente**
-5. **Checks automatizados son obligatorios**
+1. **REVIEW-XXXXXX is first class primitive**
+2. **REVIEWER-XXXXXX has ORCID responsible**
+3. **AUTHOR INDEPENDENCE RULE is constitutional**
+4. **Living validation is permanent**
+5. **Automated checks are mandatory**
 
 ---
 
 ## The Vision
 
-No estás construyendo un repositorio de papers.
+You are not building a repository of papers.
 
-Estás construyendo el equivalente científico de:
+You are building the scientific equivalent of:
 
 ```
 GitHub Actions + Pull Requests + CI + Code Review
 ```
 
-Pero aplicado a la generación y validación de conocimiento científico.
+But applied to the generation and validation of scientific knowledge.
 
-Este es el **Verification Layer** para la ciencia del futuro.
+This is the **Verification Layer** for the science of the future.

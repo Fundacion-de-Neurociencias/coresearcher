@@ -1,0 +1,373 @@
+{
+  "audit_protocol": {
+    "total_convergences": 4,
+    "classification_options": [
+      "real",
+      "linker_artifact",
+      "indeterminate"
+    ],
+    "instructions": "For each convergence, answer:\n  1. Are the actors truly independent?\n  2. Is the theme truly the same (not lexical coincidence)?\n  3. Is the outcome truly convergent?\n  4. Does this represent a real barrier or a linker pattern?\nClassify as:\n  real: Genuine convergence of independent trajectories\n  linker_artifact: Created by the linker, not real convergence\n  indeterminate: Cannot determine",
+    "ide_directive": {
+      "version": "1.6",
+      "principle": "Una teoría falsa es peor que admitir que todavía no tenemos teoría.",
+      "rules": [
+        "Toda restricción es variable latente (no observable)",
+        "Toda convergencia es observación (no explicación)",
+        "Prohibido promover restricción a hecho",
+        "Toda hipótesis de restricción debe tener competidora",
+        "Toda hipótesis debe tener definición operacional",
+        "Toda hipótesis debe tener criterio de falsación",
+        "Si dos hipótesis explican igualmente bien → UNDETERMINED",
+        "'No sabemos' es estado epistemológico legítimo"
+      ],
+      "epistemic_status_values": [
+        "observed",
+        "derived",
+        "hypothesized",
+        "falsified",
+        "undetermined"
+      ],
+      "wishful_mnemonic_prohibition": "Prohibido introducir términos ontológicamente cargados sin definición operacional y criterio de falsación. ❌ 'restricción detectada' → ✔ 'hipótesis de restricción que explica la convergencia observada'"
+    }
+  },
+  "items": [
+    {
+      "convergence_id": "CONV-000001",
+      "type": "barrier_convergence",
+      "theme": "fix(cli): require langgraph-api>=0.7.67 on Python 3.14",
+      "independent_actors": [
+        "adambell64",
+        "abdullahbilal64"
+      ],
+      "decisions": [
+        "DECISION-000038",
+        "DECISION-000039"
+      ],
+      "description": "2 independent trajectories hit the same barrier on 'fix(cli): require langgraph-api>=0.7.67 on Python 3.14'",
+      "related_gaps": [
+        {
+          "gap_id": "GAP-000028",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(cli): require langgraph-api>=0.7.67 on Python 3.14' was abandoned but no rationale was",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/8349"
+        },
+        {
+          "gap_id": "GAP-000029",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(cli): require langgraph-api>=0.7.67 on Python 3.14' was abandoned but no rationale was",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/8348"
+        }
+      ],
+      "epistemic_status": "observed",
+      "restriction_epistemic_status": "undetermined",
+      "audit_questions": [
+        "¿Los actores son realmente independientes (no es el mismo equipo/persona)?",
+        "¿El tema es realmente el mismo (no es coincidencia léxica)?",
+        "¿El outcome es realmente convergente (no es extracción errónea)?",
+        "¿Esta convergencia representa una barrera real o un patrón del linker?",
+        "¿Qué restricción compartida explica esta convergencia?",
+        "¿La restricción es técnica, conceptual, histórica, matemática u ontológica?",
+        "¿Los actores asumían implícitamente algo que limitaba sus opciones?",
+        "¿Cuál es la definición operacional de la restricción propuesta?",
+        "¿Qué observación falsaría esta hipótesis de restricción?",
+        "¿Existe al menos una hipótesis competidora que explique la misma convergencia?"
+      ],
+      "hypothetical_restriction": null,
+      "restriction_type": null,
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "falsification_criteria": [],
+      "audit_classification": null,
+      "audit_notes": "",
+      "wishful_mnemonic_warning": "Prohibido escribir 'restricción detectada'. Escribir 'hipótesis de restricción que explica la convergencia observada'. Toda restricción es variable latente hasta falsar las competidoras."
+    },
+    {
+      "convergence_id": "CONV-000002",
+      "type": "barrier_convergence",
+      "theme": "fix(langgraph): add missing stacklevel to warnings.warn() calls",
+      "independent_actors": [
+        "levgiorg",
+        "awesome-pro",
+        "mengqiuzhen",
+        "Jeel3011",
+        "EvanYao826"
+      ],
+      "decisions": [
+        "DECISION-000083",
+        "DECISION-000139",
+        "DECISION-000160",
+        "DECISION-000163",
+        "DECISION-000184"
+      ],
+      "description": "5 independent trajectories hit the same barrier on 'fix(langgraph): add missing stacklevel to warnings.warn() ca'",
+      "related_gaps": [
+        {
+          "gap_id": "GAP-000054",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): add missing stacklevel to warnings.warn() calls' was abandoned but no rati",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/8232"
+        },
+        {
+          "gap_id": "GAP-000088",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): add missing stacklevel to warnings.warn() calls' was abandoned but no rati",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7980"
+        },
+        {
+          "gap_id": "GAP-000093",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): add missing stacklevel=2 to warnings.warn() calls (fixes #7776)' was aband",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7912"
+        },
+        {
+          "gap_id": "GAP-000096",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): add missing stacklevel to warnings.warn() calls' was abandoned but no rati",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7897"
+        },
+        {
+          "gap_id": "GAP-000112",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): add missing stacklevel to warnings.warn() calls' was abandoned but no rati",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7807"
+        },
+        {
+          "gap_id": "GAP-000155",
+          "gap_type": "causal",
+          "description": "5 decisions on 'fix(langgraph): add missing stacklevel to warnings.warn() ca' were abandoned. No und",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/8232"
+        }
+      ],
+      "epistemic_status": "observed",
+      "restriction_epistemic_status": "undetermined",
+      "audit_questions": [
+        "¿Los actores son realmente independientes (no es el mismo equipo/persona)?",
+        "¿El tema es realmente el mismo (no es coincidencia léxica)?",
+        "¿El outcome es realmente convergente (no es extracción errónea)?",
+        "¿Esta convergencia representa una barrera real o un patrón del linker?",
+        "¿Qué restricción compartida explica esta convergencia?",
+        "¿La restricción es técnica, conceptual, histórica, matemática u ontológica?",
+        "¿Los actores asumían implícitamente algo que limitaba sus opciones?",
+        "¿Cuál es la definición operacional de la restricción propuesta?",
+        "¿Qué observación falsaría esta hipótesis de restricción?",
+        "¿Existe al menos una hipótesis competidora que explique la misma convergencia?"
+      ],
+      "hypothetical_restriction": null,
+      "restriction_type": null,
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "falsification_criteria": [],
+      "audit_classification": null,
+      "audit_notes": "",
+      "wishful_mnemonic_warning": "Prohibido escribir 'restricción detectada'. Escribir 'hipótesis de restricción que explica la convergencia observada'. Toda restricción es variable latente hasta falsar las competidoras."
+    },
+    {
+      "convergence_id": "CONV-000003",
+      "type": "barrier_convergence",
+      "theme": "fix(langgraph): copy mutable container in channel from_checkpoint",
+      "independent_actors": [
+        "OmkumarSolanki",
+        "vidigoat"
+      ],
+      "decisions": [
+        "DECISION-000092",
+        "DECISION-000137"
+      ],
+      "description": "2 independent trajectories hit the same barrier on 'fix(langgraph): copy mutable container in channel from_check'",
+      "related_gaps": [
+        {
+          "gap_id": "GAP-000060",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): copy mutable container in channel from_checkpoint' was abandoned but no ra",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/8180"
+        },
+        {
+          "gap_id": "GAP-000087",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): copy mutable containers in channel from_checkpoint' was abandoned but no r",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7993"
+        }
+      ],
+      "epistemic_status": "observed",
+      "restriction_epistemic_status": "undetermined",
+      "audit_questions": [
+        "¿Los actores son realmente independientes (no es el mismo equipo/persona)?",
+        "¿El tema es realmente el mismo (no es coincidencia léxica)?",
+        "¿El outcome es realmente convergente (no es extracción errónea)?",
+        "¿Esta convergencia representa una barrera real o un patrón del linker?",
+        "¿Qué restricción compartida explica esta convergencia?",
+        "¿La restricción es técnica, conceptual, histórica, matemática u ontológica?",
+        "¿Los actores asumían implícitamente algo que limitaba sus opciones?",
+        "¿Cuál es la definición operacional de la restricción propuesta?",
+        "¿Qué observación falsaría esta hipótesis de restricción?",
+        "¿Existe al menos una hipótesis competidora que explique la misma convergencia?"
+      ],
+      "hypothetical_restriction": null,
+      "restriction_type": null,
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "falsification_criteria": [],
+      "audit_classification": null,
+      "audit_notes": "",
+      "wishful_mnemonic_warning": "Prohibido escribir 'restricción detectada'. Escribir 'hipótesis de restricción que explica la convergencia observada'. Toda restricción es variable latente hasta falsar las competidoras."
+    },
+    {
+      "convergence_id": "CONV-000004",
+      "type": "barrier_convergence",
+      "theme": "fix(langgraph): cap retry sleep at max_interval after jitter",
+      "independent_actors": [
+        "pragnyanramtha",
+        "mengqiuzhen"
+      ],
+      "decisions": [
+        "DECISION-000164",
+        "DECISION-000180"
+      ],
+      "description": "2 independent trajectories hit the same barrier on 'fix(langgraph): cap retry sleep at max_interval after jitter'",
+      "related_gaps": [
+        {
+          "gap_id": "GAP-000097",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): cap retry sleep at max_interval after jitter' was abandoned but no rationa",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7896"
+        },
+        {
+          "gap_id": "GAP-000108",
+          "gap_type": "empirical",
+          "description": "Decision 'fix(langgraph): cap retry jitter by max_interval' was abandoned but no rationale was recor",
+          "evidence_anchor": "https://github.com/langchain-ai/langgraph/pull/7840"
+        }
+      ],
+      "epistemic_status": "observed",
+      "restriction_epistemic_status": "undetermined",
+      "audit_questions": [
+        "¿Los actores son realmente independientes (no es el mismo equipo/persona)?",
+        "¿El tema es realmente el mismo (no es coincidencia léxica)?",
+        "¿El outcome es realmente convergente (no es extracción errónea)?",
+        "¿Esta convergencia representa una barrera real o un patrón del linker?",
+        "¿Qué restricción compartida explica esta convergencia?",
+        "¿La restricción es técnica, conceptual, histórica, matemática u ontológica?",
+        "¿Los actores asumían implícitamente algo que limitaba sus opciones?",
+        "¿Cuál es la definición operacional de la restricción propuesta?",
+        "¿Qué observación falsaría esta hipótesis de restricción?",
+        "¿Existe al menos una hipótesis competidora que explique la misma convergencia?"
+      ],
+      "hypothetical_restriction": null,
+      "restriction_type": null,
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": null,
+          "restriction_type": null,
+          "operational_definition": null,
+          "falsification_criteria": null,
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "falsification_criteria": [],
+      "audit_classification": null,
+      "audit_notes": "",
+      "wishful_mnemonic_warning": "Prohibido escribir 'restricción detectada'. Escribir 'hipótesis de restricción que explica la convergencia observada'. Toda restricción es variable latente hasta falsar las competidoras."
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EpistemicTrajectory",
+  "description": "Schema for the canonical Epistemic Trajectory knowledge unit in CoResearcher (ADR-DISCOVERY-001 & ADR-MECH-001)",
+  "type": "object",
+  "required": [
+    "hypothesis_id",
+    "representation_id",
+    "marr_explanation_level",
+    "statement",
+    "originating_constraints",
+    "alternatives",
+    "predictions",
+    "scope_conditions",
+    "discovery_value",
+    "status"
+  ],
+  "properties": {
+    "hypothesis_id": {
+      "type": "string",
+      "pattern": "^HYP-[A-Z0-9_-]+$"
+    },
+    "representation_id": {
+      "type": "string",
+      "description": "The scientific representation framing this hypothesis (REP-XXXXXX)"
+    },
+    "biological_program_id": {
+      "type": "string",
+      "description": "Optional associated transversal biological program (BP-XXXXXX)"
+    },
+    "marr_explanation_level": {
+      "type": "string",
+      "enum": ["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"],
+      "description": "Marr level of analysis (ADR-MECH-001)"
+    },
+    "statement": {
+      "type": "string",
+      "description": "The precise formulation of the scientific hypothesis"
+    },
+    "originating_constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Physical, biological, or mathematical constraints from which this hypothesis emerges"
+    },
+    "alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["alternative_id", "statement", "type", "discriminative_prediction"],
+        "properties": {
+          "alternative_id": { "type": "string" },
+          "statement": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["null_hypothesis", "competing_mechanism", "orthogonal_explanation", "technical_artifact"]
+          },
+          "discriminative_prediction": {
+            "type": "string",
+            "description": "Prediction where this alternative diverges from the main hypothesis"
+          }
+        }
+      },
+      "description": "Explicit alternative rival hypotheses (ADR-DISCOVERY-003)"
+    },
+    "predictions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["prediction_id", "statement", "falsification_test", "outcome"],
+        "properties": {
+          "prediction_id": { "type": "string" },
+          "statement": { "type": "string" },
+          "falsification_test": { "type": "string" },
+          "outcome": {
+            "type": "string",
+            "enum": ["pending", "survived", "failed", "inconclusive"]
+          }
+        }
+      }
+    },
+    "failed_predictions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of prediction IDs that failed and triggered revisions"
+    },
+    "survived_predictions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of prediction IDs that withstood empirical falsification tests"
+    },
+    "revisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["revision_index", "previous_statement", "trigger_failed_prediction", "rational", "timestamp"],
+        "properties": {
+          "revision_index": { "type": "integer" },
+          "previous_statement": { "type": "string" },
+          "trigger_failed_prediction": { "type": "string" },
+          "rational": { "type": "string" },
+          "timestamp": { "type": "string" }
+        }
+      }
+    },
+    "supporting_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "modality", "summary", "data_reference"],
+        "properties": {
+          "source_id": { "type": "string" },
+          "modality": { "type": "string" },
+          "summary": { "type": "string" },
+          "data_reference": { "type": "string" }
+        }
+      }
+    },
+    "scope_conditions": {
+      "type": "object",
+      "required": ["valid_domain", "boundary_conditions"],
+      "properties": {
+        "valid_domain": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Contexts, cell types, disease stages, or conditions where the hypothesis holds"
+        },
+        "boundary_conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known limits, exceptions, or conditions where the mechanism collapses (ADR-DISCOVERY-004)"
+        }
+      }
+    },
+    "traces_ontology": {
+      "type": "object",
+      "properties": {
+        "tools": { "type": "array", "items": { "type": "string" } },
+        "repair_mechanisms": { "type": "array", "items": { "type": "string" } },
+        "alternatives_count": { "type": "integer" },
+        "coherence_index": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "empirical_evidence_count": { "type": "integer" },
+        "scope_boundary_defined": { "type": "boolean" }
+      }
+    },
+    "discovery_value": {
+      "type": "object",
+      "required": ["total_score", "constraint_discovery", "falsifiability_index", "compression_gain", "transferability_score"],
+      "properties": {
+        "total_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "constraint_discovery": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "falsifiability_index": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "compression_gain": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "transferability_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["formulating", "testing", "under_audit", "revised", "falsified", "corroborated"]
+    },
+    "auditor_signoff": {
+      "type": "object",
+      "properties": {
+        "auditor_agent_id": { "type": "string" },
+        "audit_timestamp": { "type": "string" },
+        "verdict": { "type": "string", "enum": ["approved", "rejected", "demands_refinement"] },
+        "falsification_attempts_summary": { "type": "string" }
+      }
+    }
+  }
+}

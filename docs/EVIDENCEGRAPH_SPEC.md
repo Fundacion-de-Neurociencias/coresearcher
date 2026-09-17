@@ -5,48 +5,48 @@
 
 ---
 
-## 1. Concepto Central
+## 1. Central Concept
 
-El `EvidenceGraph` es un Directed Acyclic Graph (DAG) diseñado exclusivamente para proveer trazabilidad auditable de aserciones científicas y trayectorias de decisión. No es un Knowledge Graph general. Está estrictamente limitado a demostrar de dónde proviene una afirmación y por qué se eligió un camino sobre otro.
+The `EvidenceGraph` is a Directed Acyclic Graph (DAG) designed exclusively to provide auditable traceability of scientific assertions and decision trajectories. It is not a general Knowledge Graph. It is strictly limited to demonstrating where a claim comes from and why one path was chosen over another.
 
 ---
 
-## 2. Tipología de Nodos
+## 2. Typology of Nodes
 
-### `Claim` (Aserción)
-- **Prefijo:** `CLAIM-XXXXXX`
-- **Definición:** Una unidad atómica de conocimiento extraída o formulada a partir del contexto observable.
-- **Atributos obligatorios:** `id`, `text`, `evidence_descriptors` (estructural, sin scoring de evaluación).
+### `Claim` (Assertion)
+- **Prefix:** `CLAIM-XXXXXX`
+- **Definition:** An atomic unit of knowledge extracted or formulated from observable context.
+- **Mandatory attributes:** `id`, `text`, `evidence_descriptors` (structural, without evaluation scoring).
 
-### `Artifact` (Artefacto Científico Multimodal)
-- **Prefijo:** `ART-XXXXXX`
-- **Definición:** Un fragmento inmutable extraído de una fuente documental primaria. Puede ser texto (quote), imagen, tabla, matriz (e.g. ChIP-seq), estructura (e.g. AlphaFold), dataset o grafo.
-- **Atributos obligatorios:** `id`, `artifact_type`, `data` (contenido o referencia inmutable).
+### `Artifact` (Multimodal Scientific Artifact)
+- **Prefix:** `ART-XXXXXX`
+- **Definition:** An immutable fragment extracted from a primary documentary source. It can be text (quote), image, table, matrix (e.g. ChIP-seq), structure (e.g. AlphaFold), dataset or graph.
+- **Required attributes:** `id`, `artifact_type`, `data` (immutable content or reference).
 
-### `Source` (Fuente Primaria)
-- **Prefijo:** `SOURCE-XXXXXX`
-- **Definición:** El identificador del contenedor documental que alberga la cita (ej. PMID, DOI, Issue de GitHub).
-- **Atributos obligatorios:** `id`, `text`.
+### `Source` (Primary Source)
+- **Prefix:** `SOURCE-XXXXXX`
+- **Definition:** The identifier of the document container that houses the citation (e.g. PMID, DOI, GitHub Issue).
+- **Required attributes:** `id`, `text`.
 
-### `URL` (Resolución)
-- **Prefijo:** `URL-XXXXXX`
-- **Definición:** La dirección web física y determinista donde reside la fuente.
-- **Atributos obligatorios:** `id`, `text`.
+### `URL` (Resolution)
+- **Prefix:** `URL-XXXXXX`
+- **Definition:** The physical and deterministic web address where the source resides.
+- **Required attributes:** `id`, `text`.
 
-### `Decision` (Nodo de Decisión) ⭐ **NUEVO v1.1.0**
-- **Prefijo:** `DECISION-XXXXXX`
-- **Definición:** Un punto de elección en la trayectoria de investigación. Representa una decisión tomada por un agente o humano, con su justificación, evidencia de apoyo, y resultado.
-- **Atributos obligatorios:** `id`, `decision`, `actor`, `timestamp`
-- **Atributos opcionales:** `rationale`, `outcome`, `confidence`
-- **Campos de decisión:**
-  - `decision`: Texto describiendo la decisión
-  - `actor`: Agente o humano que tomó la decisión
-  - `timestamp`: Cuándo se tomó
-  - `rationale`: Por qué se tomó
-  - `outcome`: Resultado (success, failure, abandoned, superseded)
-  - `confidence`: Confianza en el momento de la decisión
+### `Decision` (Decision Node) ⭐ **NEW v1.1.0**
+- **Prefix:** `DECISION-XXXXXX`
+- **Definition:** A point of choice in the research trajectory. It represents a decision made by an agent or human, with its justification, supporting evidence, and result.
+- **Required attributes:** `id`, `decision`, `actor`, `timestamp`
+- **Optional attributes:** `rationale`, `outcome`, `confidence`
+- **Decision fields:**
+  - `decision`: Text describing the decision
+  - `actor`: Agent or human who made the decision
+  - `timestamp`: When was it taken
+  - `rationale`: Why it was taken
+  - `outcome`: Result (success, failure, abandoned, superseded)
+  - `confidence`: Confidence at the time of decision
 
-**Ejemplo:**
+**Example:**
 ```json
 {
   "id": "DECISION-000001",
@@ -62,44 +62,44 @@ El `EvidenceGraph` es un Directed Acyclic Graph (DAG) diseñado exclusivamente p
 
 ---
 
-## 3. Topología de Aristas (Edges)
+## 3. Edges Topology
 
-Las aristas en el `EvidenceGraph` son estrictamente semánticas y limitadas.
+The edges in the `EvidenceGraph` are strictly semantic and limited.
 
-### 3.1 Aristas de Evidencia (Originales)
+### 3.1 Edges of Evidence (Original)
 
 1. **`supported_by`** (`Claim` → `Artifact`)
-   - Significado: "Esta aserción se fundamenta en este artefacto".
+   - Meaning: "This assertion is based on this artifact."
 
 2. **`derived_from`** (`Artifact` → `Source`)
-   - Significado: "Este artefacto se extrajo íntegramente de este documento".
+   - Meaning: "This artifact was extracted entirely from this document."
 
 3. **`resolves_to`** (`Source` → `URL`)
-   - Significado: "Este documento se localiza físicamente aquí".
+   - Meaning: "This document is physically located here."
 
-### 3.2 Aristas de Decisión ⭐ **NUEVO v1.1.0**
+### 3.2 Decision Edges ⭐ **NEW v1.1.0**
 
 4. **`chosen_over`** (`Decision` → `Decision`)
-   - Significado: "Esta decisión fue elegida en lugar de otra alternativa"
-   - Dirección: De la decisión ganadora a la decisión descartada
-   - Peso: 0.7 (incertidumbre en laalternativa)
+   - Meaning: "This decision was chosen instead of another alternative"
+   - Direction: From the winning decision to the discarded decision
+   - Weight: 0.7 (uncertainty in the alternative)
 
 5. **`led_to`** (`Decision` → `Claim` | `Artifact`)
-   - Significado: "Esta decisión condujo directamente a esta aserción/artefacto"
-   - Dirección: De la decisión a su consecuencia
-   - Peso: 0.9
+   - Meaning: "This decision led directly to this assertion/artifact"
+   - Direction: From the decision to its consequence
+   - Weight: 0.9
 
 6. **`abandoned_for`** (`Decision` → `Decision`)
-   - Significado: "Esta línea de investigación fue abandonada en favor de otra"
-   - Dirección: De la decisión abandonada a la decisión que la reemplazó
-   - Peso: 0.6
+   - Meaning: "This line of research was abandoned in favor of another"
+   - Direction: From the abandoned decision to the decision that replaced it
+   - Weight: 0.6
 
 7. **`superseded_by`** (`Decision` → `Decision`)
-   - Significado: "Esta decisión fue reemplazada por una versión mejorada"
-   - Dirección: De la decisión antigua a la nueva
-   - Peso: 0.8
+   - Meaning: "This decision was replaced by an improved version"
+   - Direction: From the old decision to the new
+   - Weight: 0.8
 
-**Ejemplo de trayectoria:**
+**Example of trajectory:**
 ```
 DECISION-000001 (Use Dataset A)
     ↓ led_to
@@ -120,44 +120,44 @@ DECISION-000002 (Try Dataset B)
 
 ---
 
-## 4. Restricciones y Reglas Estructurales
+## 4. Constraints and Structural Rules
 
-### 4.1 Restricciones Originales
+### 4.1 Original Restrictions
 
-1. **Aislamiento de Claims:** Un nodo `Claim` no puede tener una arista hacia otro nodo `Claim`.
-2. **Ciclos Prohibidos:** El grafo debe ser 100% acíclico.
-3. **Anclaje Obligatorio:** Todo nodo `Claim` debe tener al menos un path válido que lo conecte a un nodo `Source`.
-4. **Límite de Saltos (Hops):** La distancia máxima desde un `Claim` a un `Source` no debe superar los 3 hops.
+1. **Claims Isolation:** An `Claim` node cannot have an edge to another `Claim` node.
+2. **Prohibited Cycles:** The graph must be 100% acyclic.
+3. **Mandatory Anchoring:** Every `Claim` node must have at least one valid path that connects it to an `Source` node.
+4. **Limit Hops:** The maximum distance from an `Claim` to an `Source` must not exceed 3 hops.
 
-### 4.2 Nuevas Restricciones para Decisiones ⭐ **NUEVO v1.1.0**
+### 4.2 New Decision Constraints ⭐ **NEW v1.1.0**
 
-5. **Decision Aislamiento:** Un nodo `Decision` NO puede tener arista `supported_by` hacia un `Claim`. Las decisiones se apoyan en evidencia (Artifacts), no en aserciones.
-   - ✅ Válido: `Decision → Artifact` (led_to)
-   - ❌ Inválido: `Decision → Claim` (supported_by)
+5. **Decision Isolation:** A node `Decision` CANNOT have an edge `supported_by` towards an `Claim`. Decisions are based on evidence (Artifacts), not assertions.
+   - ✅ Valid: `Decision → Artifact` (led_to)
+   - ❌ Invalid: `Decision → Claim` (supported_by)
 
-6. **Decision Cycles:** Se permiten ciclos solo entre nodos `Decision` cuando el edge es `abandoned_for` o `superseded_by` en dirección opuesta.
-   - ✅ Válido: `DECISION-A → abandoned_for → DECISION-B` y `DECISION-B → chosen_over → DECISION-A`
-   - ❌ Inválido: Ciclos en edges de evidencia
+6. **Decision Cycles:** Cycles are allowed only between `Decision` nodes when the edge is `abandoned_for` or `superseded_by` in the opposite direction.
+   - ✅ Valid: `DECISION-A → abandoned_for → DECISION-B` and `DECISION-B → chosen_over → DECISION-A`
+   - ❌ Invalid: Cycles in evidence edges
 
-7. **Decision Anchoring:** Toda decisión debe tener al menos uno de:
-   - Un `Artifact` de evidencia que la soporte (via `led_to` en reversa)
-   - Un `rationale` documentado
-   - Una referencia a `authorized_by` en metadatos
+7. **Decision Anchoring:** Every decision must have at least one of:
+   - An `Artifact` of evidence that supports it (via `led_to` in reverse)
+   - A documented `rationale`
+   - A reference to `authorized_by` in metadata
 
-8. **Outcome Tracking:** Si una decisión tiene `outcome: abandoned` o `outcome: failure`, debe tener al menos una conexión a otra decisión (`abandoned_for` o `superseded_by`).
+8. **Outcome Tracking:** If a decision has `outcome: abandoned` or `outcome: failure`, it must have at least one connection to another decision (`abandoned_for` or `superseded_by`).
 
-### 4.3 Principio de Decision Traceability ⭐ **NUEVO v1.1.0 - CONSTITUCIONAL**
+### 4.3 Decision Traceability Principle ⭐ **NEW v1.1.0 - CONSTITUTIONAL**
 
-> **Todo DecisionNode debe ser Observable o Derivable. Nunca Inferido.**
+> **Every DecisionNode must be Observable or Derivable. Never Inferred.**
 
-Este principio es constitucional y no puede ser violado. Su propósito es evitar que CoResearcher se convierta en un motor de interpretación psicológica.
+This principle is constitutional and cannot be violated. Its purpose is to prevent CoResearcher from becoming a psychological interpretation engine.
 
-**Regla fundamental:**
-- ✅ **Observable**: "El equipo cerró el issue #142 sin merge" (evidencia directa)
-- ✅ **Derivable**: "El equipo descartó PR #142 después del benchmark X" (evidencia + razonamiento)
-- ❌ **Inferido**: "El equipo creía que..." (interpretación, no evidencia)
+**Fundamental rule:**
+- ✅ **Observable**: "The team closed issue #142 without merge" (direct evidence)
+- ✅ **Derivable**: "The team discarded PR #142 after benchmark X" (evidence + reasoning)
+- ❌ **Inferred**: "The team believed that..." (interpretation, not evidence)
 
-**Implementación:**
+**Implementation:**
 ```typescript
 interface DecisionNode {
   // Campos obligatorios (observables)
@@ -175,7 +175,7 @@ interface DecisionNode {
 }
 ```
 
-**Validación:**
+**Validation:**
 ```typescript
 interface DecisionValidation {
   isObservableOrDerivable: boolean  // true si todos los campos son observable/derivable
@@ -192,7 +192,7 @@ interface DecisionValidation {
 }
 ```
 
-**Ejemplos válidos:**
+**Valid examples:**
 ```json
 {
   "id": "DECISION-000001",
@@ -205,7 +205,7 @@ interface DecisionValidation {
 }
 ```
 
-**Ejemplos inválidos:**
+**Invalid examples:**
 ```json
 {
   "id": "DECISION-000002",
@@ -219,22 +219,22 @@ interface DecisionValidation {
 // VIOLACIÓN: "creía" es interpretación psicológica (inferido)
 ```
 
-**Consecuencias arquitectónicas:**
-1. DecisionNode NO puede contener campos como `belief`, `opinion`, `thought`, `assumption`
-2. Rationale debe ser siempre rastreable a un artifact (issue, PR, commit)
-3. Confidence debe reflejar evidencia disponible, no certeza subjetiva
-4. El sistema debe marcar como `inferred` cualquier campo que no sea directamente observable
+**Architectural consequences:**
+1. DecisionNode CANNOT contain fields such as `belief`, `opinion`, `thought`, `assumption`
+2. Rationale should always be traceable to an artifact (issue, PR, commit)
+3. Confidence should reflect available evidence, not subjective certainty
+4. The system must mark as `inferred` any field that is not directly observable
 
-**Relación con otros principios:**
-- Complementa: **Aislamiento de Claims** (no evaluar aserciones)
-- Complementa: **No Evaluación** (CoResearcher no juzga decisiones, solo las registra)
-- Refuerza: **Trazabilidad sin Juicio** (el "por qué" es evidencia, no interpretación)
+**Relationship with other principles:**
+- Complements: **Claims Isolation** (do not evaluate assertions)
+- Complements: **No Evaluation** (CoResearcher does not judge decisions, it only records them)
+- Reinforces: **Traceability without Judgment** (the "why" is evidence, not interpretation)
 
 ---
 
-## 5. Esquema JSON Canónico
+## 5. Canonical JSON Schema
 
-### 5.1 Grafo de Evidencia (Original)
+### 5.1 Evidence Graph (Original)
 ```json
 {
   "graph_id": "EG-000001",
@@ -257,7 +257,7 @@ interface DecisionValidation {
 }
 ```
 
-### 5.2 Grafo de Trayectoria de Decisión ⭐ **NUEVO v1.1.0**
+### 5.2 Decision Path Graph ⭐ **NEW v1.1.0**
 ```json
 {
   "graph_id": "EG-000002",
@@ -333,34 +333,34 @@ interface DecisionValidation {
 
 ## 6. Trajectory Reconstruction Pattern
 
-### 6.1 Caso de Uso: Hipótesis Descartada
+### 6.1 Use Case: Discarded Hypothesis
 
-**Objetivo:** Reconstruir la trayectoria completa de una hipótesis que fue abandonada.
+**Objective:** Reconstruct the complete trajectory of a hypothesis that was abandoned.
 
-**Entrada:** `DECISION-000042` (abandoned)
+**Entry:** `DECISION-000042` (abandoned)
 
-**Proceso:**
-1. Buscar todas las aristas `abandoned_for` desde esta decisión
-2. Buscar todas las aristas `chosen_over` hacia esta decisión
-3. Reconstruir la secuencia: `DECISION-A → abandoned_for → DECISION-B → chosen_over → DECISION-A`
-4. Adjuntar evidencia: artifacts, claims, outcomes
+**Process:**
+1. Find all `abandoned_for` edges from this decision
+2. Find all `chosen_over` edges towards this decision
+3. Rebuild the sequence: `DECISION-A → abandoned_for → DECISION-B → chosen_over → DECISION-A`
+4. Attach evidence: artifacts, claims, outcomes
 
-**Salida:** Subgrafo centrado en la decisión abandonada con todo su contexto.
+**Output:** Subgraph focused on the abandoned decision with all its context.
 
-### 6.2 Caso de Uso: Path de Éxito
+### 6.2 Use Case: Success Path
 
-**Objetivo:** Identificar qué decisiones llevaron a un resultado exitoso.
+**Objective:** Identify which decisions led to a successful outcome.
 
-**Entrada:** `DECISION-000045` (outcome: success)
+**Input:** `DECISION-000045` (outcome: success)
 
-**Proceso:**
-1. Retroceder por aristas `superseded_by` y `chosen_over`
-2. Reconstruir árbol de alternativas consideradas
-3. Identificar puntos de divergencia clave
+**Process:**
+1. Go back along edges `superseded_by` and `chosen_over`
+2. Rebuild tree of considered alternatives
+3. Identify key points of divergence
 
-**Salida:** Árbol de decisión con rutas exitosas y fallidas.
+**Output:** Decision tree with successful and failed paths.
 
-### 6.3 Métricas de Trayectoria
+### 6.3 Trajectory Metrics
 
 ```typescript
 interface TrajectoryMetrics {
@@ -375,7 +375,7 @@ interface TrajectoryMetrics {
 
 ---
 
-## 7. Integración con Decision Registry
+## 7. Integration with Decision Registry
 
 ### 7.1 Mapping
 
@@ -416,9 +416,9 @@ for (const node of decisionNodes) {
 
 ---
 
-## 8. Validación Extendida
+## 8. Extended Validation
 
-### 8.1 Phase 4: Decision Validation ⭐ **NUEVO v1.1.0**
+### 8.1 Phase 4: Decision Validation ⭐ **NEW v1.1.0**
 
 ```typescript
 interface DecisionValidation {
@@ -443,7 +443,7 @@ interface DecisionValidation {
 }
 ```
 
-### 8.2 Validación Tool
+### 8.2 Validation Tool
 
 ```bash
 # Validate including decision nodes
@@ -458,9 +458,9 @@ npx @coresearcher/cli analyze-decisions --outcome=success
 
 ---
 
-## 9. Ejemplos de Uso
+## 9. Examples of Use
 
-### 9.1 Ejemplo: Reconstruir Trayectoria de Hipótesis Descartada
+### 9.1 Example: Reconstruct Discarded Hypothesis Trajectory
 
 ```json
 {
@@ -530,26 +530,26 @@ npx @coresearcher/cli analyze-decisions --outcome=success
 
 ---
 
-## 10. Preguntas de Investigación Sostenidas
+## 10. Supported Research Questions
 
-Este grafo permite responder preguntas nuevas:
+This graph allows us to answer new questions:
 
-1. **¿Por qué se abandonó esta línea de investigación?**
-   - Buscar `DECISION` con `outcome: abandoned`
-   - Reconstruir su contexto completo
+1. **Why was this line of research abandoned?**
+   - Search `DECISION` with `outcome: abandoned`
+   - Rebuild your full context
 
-2. **¿Qué alternativas se consideraron?**
-   - Buscar aristas `chosen_over` y `abandoned_for`
+2. **What alternatives were considered?**
+   - Find edges `chosen_over` and `abandoned_for`
 
-3. **¿Qué tan persistente fue el equipo?**
-   - Métrica: `backtracking_frequency` = abandoned / total decisions
+3. **How persistent was the team?**
+   - Metric: `backtracking_frequency` = abandoned / total decisions
 
-4. **¿Qué decisiones condujeron a resultados exitosos?**
-   - Filtrar por `outcome: success` y reconstruir árbol
+4. **What decisions led to successful results?**
+   - Filter by `outcome: success` and rebuild tree
 
-5. **¿Hay patrones en las decisiones fallidas?**
-   - Analizar commonalities en `rationale` de decisiones con `outcome: failure`
+5. **Are there patterns in failed decisions?**
+   - Analyze commonalities in `rationale` making with `outcome: failure`
 
 ---
 
-*Esta versión 1.1.0 extiende EvidenceGraph para capturar trayectorias de decisión, respondiendo a la necesidad de trazabilidad semántica de por qué se eligió un camino científico sobre otros.*
+*This version 1.1.0 extends EvidenceGraph to capture decision trajectories, addressing the need for semantic traceability of why one scientific path was chosen over others.*

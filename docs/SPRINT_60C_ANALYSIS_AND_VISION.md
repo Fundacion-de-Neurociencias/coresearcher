@@ -1,13 +1,13 @@
-# SPRINT 60C: ANÁLISIS DE ESTADO Y VISIÓN SINÉRGICA
-**Fecha**: 2026-07-31  
-**Status**: Análisis Pre-Ejecución  
-**Contexto**: Arquitectura congelada, visión clarificada, listos para medir
+# SPRINT 60C: STATE ANALYSIS AND SYNERGIC VISION
+**Date**: 2026-07-31  
+**Status**: Pre-Execution Analysis  
+**Context**: Frozen architecture, clarified vision, ready to measure
 
 ---
 
-## 1. Estado Actual Confirmado
+## 1. Current Status Confirmed
 
-### Arquitectura Congelada ✅
+### Frozen Architecture ✅
 ```
 EvidenceGraph v1.1.0 (STABLE)
     ├── ClaimNode
@@ -21,87 +21,87 @@ Documentos: FROZEN
 Capas: FROZEN
 ```
 
-### Misión Clara ✅
-> Reconstruir la fracción auditablemente recuperable de la historia de un proyecto.
+### Clear Mission ✅
+> Reconstruct the auditably recoverable fraction of a project's history.
 
-**NO es**:
-- ❌ AI Scientist
-- ❌ Revisor científico
+**NOT**:
+- ❌AI Scientist
+- ❌ Scientific reviewer
 - ❌ Manuscript Assistant
 
-**SÍ es**:
-- ✅ Reconstrucción de evidencia
-- ✅ Reconstrucción de trayectorias auditables
-- ✅ Cartografía del conocimiento existente
+**YES it is**:
+- ✅ Evidence reconstruction
+- ✅ Reconstruction of auditable trajectories
+- ✅ Mapping existing knowledge
 
-### Hipótesis Activas
+### Active Hypotheses
 
-| ID | Hipótesis | Estado | Acción |
-|----|-----------|--------|--------|
-| H6 | Decision Reconstruction | PENDIENTE | **SPRINT 60C** |
-| H7 | Branch Detection | EXPLORADO | Post-H6 |
-| H8 | Convergence Detection | EXPLORATORIO | Post-H6+H7 |
-| H9 | Trajectory Value | HIPÓTESIS | Post-SPRINT 60C |
+| ID | Hypothesis | State | Action |
+|----|--------|--------|--------|
+| H6 | Decision Reconstruction | PENDING | **SPRINT 60C** |
+| H7 | Branch Detection | EXPLORED | Post-H6 |
+| H8 | Convergence Detection | EXPLORATORY | Post-H6+H7 |
+| H9 | Trajectory Value | HYPOTHESIS | Post-SPRINT 60C |
 
-### Experimento Diseñado ✅
-**SPRINT 60C**: Validar H6 con 20+ repositorios reales
+### Designed Experiment ✅
+**SPRINT 60C**: Validate H6 with 20+ real repositories
 
-**Objetivo**: Demostrar que podemos reconstruir decisiones de investigación con ≥70% precisión
+**Objective**: Demonstrate that we can reconstruct research decisions with ≥70% accuracy
 
-**Métricas**:
+**Metrics**:
 - decision_reconstruction_rate ≥ 70%
-- Identificación de fuentes primarias
-- Dataset público reproducible
+- Identification of primary sources
+- Public reproducible dataset
 
 ---
 
-## 2. Análisis del Código Existente
+## 2. Analysis of Existing Code
 
-### Componentes Disponibles
+### Available Components
 
-**Scripts SPRINT 60C**:
-- `scripts/extract_decisions.py` ← **EXISTENTE Y FUNCIONAL**
-  - Extrae issues, PRs, commits
-  - Detecta señales de decisión (explicit + implicit)
-  - Clasifica outcomes (success, abandoned, superseded)
-  - Calcula confidence scores
+**SPRINT 60C scripts**:
+- `scripts/extract_decisions.py` ← **EXISTING AND FUNCTIONAL**
+  - Extract issues, PRs, commits
+  - Detects decision signals (explicit + implicit)
+  - Classify outcomes (success, abandoned, superseded)
+  - Calculate confidence scores
   
 **Schemas**:
 - `schemas/evidence_graph.schema.json` ← **FROZEN**
-  - DecisionNode definido
+  - DecisionNode defined
   - Edge types: chosen_over, abandoned_for, superseded_by
   
-**Documentación**:
-- `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` ← Plan detallado
-- `docs/BRANCH_DETECTION_FEASIBILITY.md` ← Exploración H7/H8
-- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` ← Visión futura
+**Documentation**:
+- `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` ← Detailed plan
+- `docs/BRANCH_DETECTION_FEASIBILITY.md` ← H7/H8 Scan
+- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` ← Future vision
 
-### Estado de Implementación
+### Implementation Status
 
-**Ya tenemos**:
-✅ Extractores básicos (issues, PRs, commits)
-✅ Clasificación de decisiones
-✅ Detección de señales
-✅ Schema de DecisionNode
+**We already have**:
+✅ Basic extractors (issues, PRs, commits)
+✅ Ranking decisions
+✅ Signal detection
+✅ DecisionNode Schema
 
-**Falta para SPRINT 60C**:
-⚠️ Ejecutar en 20 repositorios
-⚠️ Validación manual de muestra
-⚠️ Métricas cuantitativas
-⚠️ Informe de validación
+**Missing for SPRINT 60C**:
+⚠️ Run on 20 repositories
+⚠️ Sample manual validation
+⚠️ Quantitative metrics
+⚠️ Validation report
 
 ---
 
-## 3. La Visión: Research Cartographer
+## 3. The Vision: Research Cartographer
 
-### Observación Clave
+### Key Observation
 
-La ciencia no es una línea:
+Science is not a line:
 ```
 Newton → Einstein → Relatividad  ❌ SIMPLIFICACIÓN
 ```
 
-La ciencia es un grafo:
+Science is a graph:
 ```
                 Éter
                /
@@ -116,12 +116,12 @@ Mercurio --------------
                           Geometría diferencial
 ```
 
-### Evolución del Concepto
+### Evolution of the Concept
 
-**Einstein Hypothesis Generator v1** (Descartado):
+**Einstein Hypothesis Generator v1** (Deprecated):
 ```
 Input: "Espacio-tiempo discreto"
-Output: Hipótesis sin contexto histórico
+Output: Hypotheses without historical context
 Problema: Demasiado libre, no conectado con evidencia real
 ```
 
@@ -130,13 +130,13 @@ Problema: Demasiado libre, no conectado con evidencia real
 Input: EvidenceGraph + DecisionGraph + BranchGraph
 Output: Hypothesis Candidate estructurado
 
-NO genera hipótesis desde cero
-RECONSTRUYE hipótesis potenciales desde bifurcaciones históricas
+DOES NOT generate hypotheses from scratch
+RECONSTRUCT potential hypotheses from historical forks
 
 Ejemplo:
   - Detecta: "Continuidad del espacio-tiempo" fue asumida en 1905
   - Detecta: "Discretización" fue explorada marginalmente
-  - Proyecta: "¿Qué pasaría si retomamos esa rama con conocimiento actual?"
+- Project: "What would happen if we returned to that branch with current knowledge?"
   
 Output:
   {
@@ -150,28 +150,28 @@ Output:
   }
 ```
 
-### Comparación Crítica
+### Critical Comparison
 
-| Aspecto | AI Scientist | Research Cartographer |
+| Appearance | AI Scientist | Research Cartographer |
 |---------|--------------|---------------------|
-| Pregunta | "¿Qué descubrir?" | "¿Qué senderos quedaron sin recorrer?" |
-| Método | Generación desde cero | Reconstrucción + proyección |
-| Evidencia | Puede ignorar historia | Requiere evidencia histórica |
-| Salida | Hipótesis nuevas | Hipótesis contextualizadas |
-| Trazabilidad | Baja (black box) | Alta (cada nodo tiene artifact) |
-| Riesgo | Alucinación científica | Bajo: todo anclado a evidencia real |
+| Question | "What to discover?" | "What paths were left untrodden?" |
+| Method | Generation from scratch | Reconstruction + projection |
+| Evidence | You can ignore history | Requires historical evidence |
+| Output | New hypotheses | Contextualized hypotheses |
+| Traceability | Low (black box) | High (each node has artifact) |
+| Risk | Scientific hallucination | Low: everything anchored to real evidence |
 
 ---
 
-## 4. Mapa Sinérgico: Visión → Arquitectura Congelada
+## 4. Synergistic Map: Vision → Frozen Architecture
 
-### Capas (Respetando Freeze)
+### Layers (Respecting Freeze)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │ SPRINT 60C (AHORA)                                      │
 │ - Ejecutar extracción en 20 repos                       │
-│ - Validar H6: ¿Las decisiones son reconstruibles?       │
+│ - Validate H6: Are decisions reconstructable?       │
 │ - Medir precisión, recall, coverage                     │
 └─────────────────────────────────────────────────────────┘
                         ↓
@@ -203,38 +203,38 @@ Output:
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Principios que se Preservan
+### Principles that are Preserved
 
-✅ **Observable**: Toda decisión debe tener artifact GitHub/Git  
-✅ **Derivable**: Los branches se derivan de patrones observables  
-✅ **Inferido (restringido)**: Solo para rationale no citado explícitamente  
-✅ **Trazabilidad**: Cada nodo tiene evidencia asociada
+✅ **Observable**: Every decision must have GitHub/Git artifact  
+✅ **Derivable**: Branches are derived from observable patterns  
+✅ **Inferred (restricted)**: Only for rationale not explicitly cited  
+✅ **Traceability**: Each node has associated evidence
 
-### Lo que NO cambia
+### What does NOT change
 
-❌ No new schemas (hasta SPRINT 61+)  
-❌ No new graphs (hasta SPRINT 62+)  
-❌ No new layers (hasta SPRINT 63+)  
+❌ No new schemas (up to SPRINT 61+)  
+❌ No new graphs (up to SPRINT 62+)  
+❌ No new layers (up to SPRINT 63+)  
 ❌ No architectural changes during freeze
 
 ---
 
-## 5. Conexión con Einstein: El Hito No Explorado
+## 5. Connection with Einstein: The Unexplored Milestone
 
-### El Concepto
+### The Concept
 
-Einstein hizo un cambio de paradigma:
-- ✅ Espacio-tiempo curvo (explorado extensamente)
-- ❌ Espacio-tiempo discreto (abandonado)
+Einstein made a paradigm shift:
+- ✅ Curved space-time (extensively explored)
+- ❌ Discrete space-time (abandoned)
 
-Ese abandono no fue por evidencia negativa.
-Fue por limitaciones tecnológicas:
-- Sin formalismos matemáticos en 1905
-- Sin datos experimentales a escala Planck
+That abandonment was not due to negative evidence.
+It was due to technological limitations:
+- Without mathematical formalisms in 1905
+- No Planck scale experimental data
 
-### Por qué importa para CoResearcher
+### Why it matters for CoResearcher
 
-Este es exactamente el tipo de bifurcación que EHG v2 detectaría:
+This is exactly the type of branch that EHG v2 would detect:
 
 ```yaml
 Branch: "Space-time discreto"
@@ -251,128 +251,128 @@ Branch: "Space-time discreto"
   Status: "Revisitable con tecnología actual"
 ```
 
-### El Valor de CoResearcher
+### The Value of CoResearcher
 
-No genera esta hipótesis desde cero.
+It does not generate this hypothesis from scratch.
 
-La detecta porque:
-1. Existe evidencia histórica de que fue considerada
-2. Existe evidencia de por qué fue abandonada
-3. Existe evidencia de que la tecnología ahora existe
-4. Todo está trazable a artifacts
+It detects it because:
+1. There is historical evidence that it was considered
+2. There is evidence of why it was abandoned
+3. There is evidence that the technology now exists
+4. Everything is traceable to artifacts
 
-**Esto es cartografía, no generación.**
-
----
-
-## 6. Implementación Sinérgica: SPRINT 60C Ahora
-
-### Objetivo Inmediato
-
-**Ejecutar SPRINT 60C sin desviaciones.**
-
-El cuello de botella es empírico, no conceptual.
-
-### Acciones Permitidas (During Freeze)
-
-✅ Ejecutar `extract_decisions.py` en 20 repositorios
-✅ Mejorar algoritmos de extracción (no cambiar schemas)
-✅ Corregir bugs en schemas existentes
-✅ Escribir scripts de validación
-✅ Escribir `SPRINT_60C_VALIDATION_REPORT.md`
-✅ Documentar hallazgos empíricos
-
-### Acciones Prohibidas (During Freeze)
-
-❌ Añadir nuevos nodos a EvidenceGraph
-❌ Añadir nuevos grafos (BranchGraph, PossibilityGraph)
-❌ Añadir nuevas capas arquitectónicas
-❌ Crear nuevos schemas
-❌ Escribir documentos de arquitectura teórica
-❌ Planificar SPRINT 61+ en profundidad
-
-### El Equilibrio
-
-**Sí podemos hacer**:
-- Capturar esta visión en documentos exploratorios (como este)
-- Preparar el terreno conceptualmente
-- Mantener la visibilidad de hacia dónde vamos
-
-**No podemos hacer**:
-- Implementar nada de esto hasta H6 validada
-- Cambiar arquitectura antes de tener datos
-- Desviar recursos de SPRINT 60C
+**This is mapping, not generation.**
 
 ---
 
-## 7. Próximos Pasos Concretos
+## 6. Synergistic Implementation: SPRINT 60C Now
 
-### Hoy (SPRINT 60C)
+### Immediate Objective
 
-1. **Ejecutar extracción** en 5 repositorios piloto
-   - langchain-ai/langgraph (ya auditado)
+**Run SPRINT 60C without deviations.**
+
+The bottleneck is empirical, not conceptual.
+
+### Allowed Actions (During Freeze)
+
+✅ Run `extract_decisions.py` on 20 repositories
+✅ Improve extraction algorithms (do not change schemas)
+✅ Correct bugs in existing schemas
+✅ Write validation scripts
+✅ Write `SPRINT_60C_VALIDATION_REPORT.md`
+✅ Document empirical findings
+
+### Prohibited Actions (During Freeze)
+
+❌ Add new nodes to EvidenceGraph
+❌ Add new graphs (BranchGraph, PossibilityGraph)
+❌ Add new architectural layers
+❌ Create new schemas
+❌ Write theoretical architecture documents
+❌ Plan SPRINT 61+ in depth
+
+### The Balance
+
+**Yes we can do**:
+- Capture this vision in exploratory documents (like this one)
+- Prepare the ground conceptually
+- Maintain visibility of where we are going
+
+**We cannot do**:
+- Implement none of this until H6 validated
+- Change architecture before having data
+- Divert resources from SPRINT 60C
+
+---
+
+## 7. Concrete Next Steps
+
+### Today (SPRINT 60C)
+
+1. **Run pull** on 5 pilot repositories
+   - langchain-ai/langgraph (already audited)
    - langchain-ai/langchain
    - tensorflow/tensorflow
    - pytorch/pytorch
    - scikit-learn/scikit-learn
 
-2. **Validar muestra** de 20 decisiones manualmente
+2. **Validate sample** of 20 decisions manually
 
-3. **Calcular métricas**:
-   - Precisión de extracción
-   - Recall de decisiones
-   - Coverage de fuentes
+3. **Calculate metrics**:
+   - Extraction precision
+   - Decision recall
+   - Font coverage
 
-4. **Ajustar** thresholds y parámetros
+4. **Adjust** thresholds and parameters
 
-### Mañana (Resultados)
+### Tomorrow (Results)
 
-La próxima conversación debe empezar con:
-- ✅ "Ejecutamos SPRINT 60C en 20 repositorios"
-- ✅ "H6 validada con X% precisión"
-- ✅ "DecisionGraph lista para SPRINT 61"
-- ❌ NO con nuevas ideas arquitectónicas
+The next conversation should start with:
+- ✅ "We run SPRINT 60C on 20 repositories"
+- ✅ "H6 validated with X% accuracy"
+- ✅ "DecisionGraph ready for SPRINT 61"
+- ❌ NOT with new architectural ideas
 
-### Futuro (Post-H6)
+### Future (Post-H6)
 
-Si H6 válida (≥70%):
+If H6 valid (≥70%):
 
 **SPRINT 61**:
-- Formalizar DecisionGraph como capa separada
-- Implementar linking completo de decisiones
-- Trajectory reconstruction robusto
+- Formalize DecisionGraph as a separate layer
+- Implement complete linking of decisions
+- Robust Trajectory reconstruction
 
 **SPRINT 62**:
 - Branch detection protocol
-- PossibilityGraph como read-only
-- Convergencia detection
+- PossibilityGraph as read-only
+- Convergence detection
 
 **SPRINT 63**:
 - Einstein Hypothesis Generator v2
-- Research Cartographer completo
+- Complete Research Cartographer
 - Latent Opportunity Detector
 
-Si H6 falla (<70%):
+If H6 fails (<70%):
 
-- Reenfocar en reconstrucción de claims (misión core)
-- NO ejecutar H7/H8
-- Postergar EHG v2 indefinidamente
+- Refocus on claims reconstruction (core mission)
+- DO NOT run H7/H8
+- Delay EHG v2 indefinitely
 
 ---
 
-## 8. La Diferencia Fundamental
+## 8. The Fundamental Difference
 
-### AI Scientists (Competencia)
+### AI Scientists (Competition)
 
 ```
 Motor: LLM potente
 Avión: Arquitectura genérica
 Terreno: No mapeado
-Objetivo: Generar hipótesis nuevas
+Objective: Generate new hypotheses
 Riesgo: Alucinación científica
 ```
 
-### CoResearcher (Nosotros)
+### CoResearcher (Us)
 
 ```
 Motor: LLM
@@ -382,90 +382,90 @@ Objetivo: H visible el espacio de conocimiento existente
 Riesgo: Bajo (todo anclado a evidencia)
 ```
 
-### La Ventaja Competitiva
+### The Competitive Advantage
 
-> "Un mapa mejor puede ser más valioso que un motor más potente."
+> "A better map can be more valuable than a more powerful engine."
 
-Los AI Scientists compiten en:
-- ¿Quién tiene el mejor LLM?
-- ¿Quién genera ideas más creativas?
+AI Scientists compete in:
+- Who has the best LLM?
+- Who generates more creative ideas?
 
-CoResearcher compite en:
-- ¿Quién tiene la mejor trazabilidad?
-- ¿Quién puede reconstruir trayectorias más completas?
-- ¿Quién puede detectar bifurcaciones históricas?
+CoResearcher competes in:
+- Who has the best traceability?
+- Who can reconstruct more complete trajectories?
+- Who can detect historical forks?
 
-**Esto es defendible.**  
-**Esto es unique.**  
-**Esto es coherente con nuestra misión.**
-
----
-
-## 9. Conclusión
-
-### Estado del Proyecto
-
-✅ Diseño terminado  
-✅ Arquitectura congelada  
-✅ Visión clarificada  
-✅ SPRINT 60C listo para ejecutar  
-✅ Scripts existentes funcionales
-
-### Cuello de Botella
-
-⚠️ Datos (no arquitectura)
-
-### Próxima Actividad
-
-🎯 Medir
-
-### El Camino Adelante
-
-1. **HOY**: Ejecutar SPRINT 60C sin desviaciones
-2. **MAÑANA**: Resultados de repositorios reales
-3. **FUTURO**: Si H6 válida, construir Research Cartographer capa por capa
-
-### Filosofía Final
-
-> "No te digo qué descubrir. Te muestro el mapa de lo que ya existía pero fue olvidado."
-
-Esto es:
-- Más humilde que "AI Scientist"
-- Más coherente con CoResearcher  
-- Más alineado con trazabilidad
-- Potencialmente más valioso
+**This is defensible.**  
+**This is unique.**  
+**This is consistent with our mission.**
 
 ---
 
-## 10. Referencias
+## 9. Conclusion
 
-- `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` - Plan de ejecución
-- `docs/ARCHITECTURE_FREEZE.md` - Restricciones arquitectónicas
-- `docs/BRANCH_DETECTION_FEASIBILITY.md` - Exploración H7/H8
-- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` - Visión futura
-- `schemas/evidence_graph.schema.json` - Schema actual
-- `scripts/extract_decisions.py` - Implementación actual
+### Project Status
+
+✅ Finished design  
+✅ Frozen architecture  
+✅ Clarified vision  
+✅ SPRINT 60C ready to run  
+✅ Functional existing scripts
+
+### Bottleneck
+
+⚠️ Data (not architecture)
+
+### Next Activity
+
+🎯 Measure
+
+### The Path Forward
+
+1. **TODAY**: Run SPRINT 60C without deviations
+2. **TOMORROW**: Results from real repositories
+3. **FUTURE**: If H6 is valid, build Research Cartographer layer by layer
+
+### Final Philosophy
+
+> "I'm not telling you what to discover. I'm showing you the map of what already existed but was forgotten."
+
+This is:
+- More humble than "AI Scientist"
+- More consistent with CoResearcher  
+- More aligned with traceability
+- Potentially more valuable
 
 ---
 
-## 11. Non-Goals (Reafirmados)
+## 10. References
 
-❌ NO ejecutar H7/H8 hasta H6 validada  
-❌ NO cambiar arquitectura durante freeze  
-❌ NO generar hipótesis sin evidencia  
-❌ NO crear nuevos schemas sin necesidad empírica  
-❌ NO desviar recursos de SPRINT 60C
-
-✅ SÍ ejecutar SPRINT 60C  
-✅ SÍ medir resultados  
-✅ SÍ validar H6 empíricamente  
-✅ SÍ mantener visión de futuro clara  
-✅ SÍ respetar arquitectura congelada
+- `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` - Execution plan
+- `docs/ARCHITECTURE_FREEZE.md` - Architectural constraints
+- `docs/BRANCH_DETECTION_FEASIBILITY.md` - H7/H8 scan
+- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` - Future vision
+- `schemas/evidence_graph.schema.json` - Current Schema
+- `scripts/extract_decisions.py` - Current implementation
 
 ---
 
-*CoResearcher no es un AI Scientist. Es un Research Cartographer que reconstruye trayectorias de investigación a partir de evidencia pública. El mapa es más valioso que el motor.*
+## 11. Non-Goals (Reaffirmed)
 
-*SPRINT 60C es el experimento que demuestra si podemos mapear.*
+❌ DO NOT execute H7/H8 until H6 validated  
+❌ DO NOT change architecture during freeze  
+❌ DO NOT generate hypotheses without evidence  
+❌ DO NOT create new schemas without empirical need  
+❌ DO NOT divert resources from SPRINT 60C
 
-*Siguiente conversación: Resultados de repositorios reales.*
+✅ YES run SPRINT 60C  
+✅ DO measure results  
+✅ YES validate H6 empirically  
+✅ DO maintain a clear vision of the future  
+✅ YES respect frozen architecture
+
+---
+
+*CoResearcher is not an AI Scientist. It is a Research Cartographer that reconstructs research trajectories from public evidence. The map is more valuable than the engine.*
+
+*SPRINT 60C is the experiment that shows if we can map.*
+
+*Next conversation: Results from real repositories.*

@@ -1,50 +1,50 @@
-# Sprint 38 - Independent Reviewer Validation
+#Sprint 38 – Independent Reviewer Validation
 
 **Question**: Can two independent reviewers reach the same learnings from the same observations?
 
 ---
 
-## Resultado crítico
+## Critical result
 
 ```text
 interpretation_risk: TRUE
 ```
 
-**Los revisores no están de acuerdo.**
+**Reviewers disagree.**
 
 ---
 
-## Comparación de revisores
+## Reviewer Comparison
 
-| Reviewer | Clusters generados |
-|----------|------------------|
-| Reviewer 1 (por categoría) | 11 |
-| Reviewer 2 (por tipo evidencia) | 1 |
+| Reviewer | Generated clusters |
+|----------|----|
+| Reviewer 1 (by category) | 11 |
+| Reviewer 2 (by type of evidence) | 1 |
 
 ---
 
 ## Jaccard similarity
 
-Todos los valores son 0.0.
+All values are 0.0.
 
-Esto significa que:
-1. **Reviewer 1** agrupa por categorías: cohort_design, outcome, imaging, etc.
-2. **Reviewer 2** agrupa por tipo de evidencia (todos en una sola categoría)
-3. **Sin intersección**: los métodos no se alinean
+This means that:
+1. **Reviewer 1** groups by categories: cohort_design, outcome, imaging, etc.
+2. **Reviewer 2** groups by type of evidence (all in a single category)
+3. **No intersection**: methods do not align
 
 ---
 
-## Implicación epistemológica
+## Epistemological implication
 
 ```text
 Observation
     ↓
-Learning (¿reproducible?)
+Learning (reproducible?)
 ```
 
-Los aprendizajes NO son objetos científicos reproducibles todavía.
+Learning is NOT reproducible scientific objects yet.
 
-Son **interpretaciones** que requieren:
+They are **interpretations** that require:
 
 ```text
 Evidence
@@ -58,27 +58,27 @@ Approval
 
 ---
 
-## Acción requerida
+## Action required
 
-Antes de publicar el ledger con DOI, debemos:
+Before publishing the ledger with DOI, we must:
 
-1. **Definir criterios de agregación explícitos**
-2. **Crear proceso de revisión independiente**
-3. **Validar que al menos 2 revisores coinciden en al menos 80% de los aprendizajes**
-
----
-
-## Archivo generado
-
-`data/observatory/reviewer_comparison.json` - comparación completa de Jaccard indices
+1. **Define explicit aggregation criteria**
+2. **Create independent review process**
+3. **Validate that at least 2 reviewers agree on at least 80% of the learnings**
 
 ---
 
-## Estado del proyecto
+## Generated file
+
+`data/observatory/reviewer_comparison.json` - complete comparison of Jaccard indices
+
+---
+
+## Project status
 
 | Pipeline | Status |
 |----------|--------|
 | Observation → Evidence | ✅ Observable |
-| Evidence → Learning | ⚠️ Interpretación (riesgo confirmado) |
-| Learning → Pattern | ⚠️ Requiere revisión |
-| Pattern → Contradiction | ⚠️ Requiere revisión |
+| Evidence → Learning | ⚠️ Interpretation (confirmed risk) |
+| Learning → Pattern | ⚠️ Requires review |
+| Pattern → Contradiction | ⚠️ Requires review |

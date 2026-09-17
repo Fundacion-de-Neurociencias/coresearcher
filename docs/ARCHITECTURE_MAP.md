@@ -61,7 +61,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `defeated_hypotheses_graveyard.py` | `HypothesisGraveyard` | Repository and registry of falsified hypotheses and autopsies | Prevention of redundant scientific dead-ends |
 | `reality_distance.py` | `RealityDistanceEvaluator` | Hierarchical reality distance evaluation (Dry \(\to\) Damp \(\to\) Wet) | Substrate distance metrics |
 | `reality_contact_score.py` | `RealityContactEvaluator` | Computes Reality Contact Score (\(RCS = 0 \dots 4\)) | Quantification of empirical grounding |
-| `grounded_search_sensor.py` | `GroundedSearchSensor` | Cryptographic evidence source lineage with SHA-256 fingerprinting | Anti-hallucination source verification |
+| `grounded_search_sensor.py` | `GroundedSearchSensor`, `PaperAgentMCPAdapter` | Cryptographic evidence source lineage with SHA-256 fingerprinting & Paper2Agent MCP client | Anti-hallucination source verification, virtual author discovery & analytical tool execution (\(RCS=2\)) |
 | `constraint_box.py` | `ConstraintBoxBenchmark` | Benchmark for unknown ground-truth discovery in synthetic worlds | Disentangling discovery from biological memory |
 | `constraint_court.py` | `ConstraintCourt` | Adversarial trial between Prosecutor and Defender agents | Invariant constraint promotion decisions |
 | `constraint_discovery_engine.py` | `ConstraintDiscoveryEngine` | Extracts statistical boundaries from cross-cohort data | Boundary generation and stress testing |

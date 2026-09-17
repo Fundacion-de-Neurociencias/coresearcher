@@ -32,7 +32,7 @@ VERIFIABLE SCIENTIFIC ACTIVITY LEDGER
 Nadie registra con detalle los pasos intermedios entre:
 
 - Pregunta
-- Hipótesis
+- Hypothesis
 - Experimento
 - Resultado
 - Publicación
@@ -199,7 +199,7 @@ All coordinated in one place with:
 
 ## The Institutional Question
 
-> **¿Qué sucede cuando un investigador desaparece?**
+> **What happens when a researcher disappears?**
 
 GitHub answer: Repo persists, but no scientific context.
 
@@ -211,4 +211,4 @@ The work continues regardless of individual continuity.
 
 ---
 
-*Este documento establece que CoResearcher ocupa el territorio único de Scientific Activity Ledger, integrando pero no replicando infraestructuras existentes.*
+*This document states that CoResearcher occupies the unique territory of Scientific Activity Ledger, integrating but not replicating existing infrastructures.*

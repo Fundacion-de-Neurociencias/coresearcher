@@ -1,0 +1,274 @@
+{
+  "report_id": "CONVREVIEW-20260801143310",
+  "generated_at": "2026-08-01T14:33:10.118599+00:00",
+  "phase": "FASE 1 — Auditoría humana de convergencias",
+  "objective": "Para cada convergencia: validar si es real, identificar mínimo 3 hipótesis competidoras, con definición operacional y criterio de falsación.",
+  "summary": {
+    "total_convergences": 4,
+    "classified_real": 4,
+    "classified_artifact": 0,
+    "classified_indeterminate": 0,
+    "real_percentage": 100.0,
+    "all_real_have_3_hypotheses": true,
+    "all_real_have_operational_definition": true,
+    "all_real_have_falsification_criteria": true,
+    "restriction_type_distribution": {
+      "historica": 3,
+      "tecnica": 5,
+      "conceptual": 3,
+      "matematica": 1
+    }
+  },
+  "items": [
+    {
+      "convergence_id": "CONV-000001",
+      "theme": "fix(cli): require langgraph-api>=0.7.67 on Python 3.14",
+      "actors": [
+        "adambell64",
+        "abdullahbilal64"
+      ],
+      "decisions": [
+        "DECISION-000038",
+        "DECISION-000039"
+      ],
+      "evidence_urls": [
+        "https://github.com/langchain-ai/langgraph/pull/8349",
+        "https://github.com/langchain-ai/langgraph/pull/8348"
+      ],
+      "audit_classification": "real",
+      "audit_rationale": "Dos PRs de actores distintos sobre la misma dependencia de versión en Python 3.14. Los títulos son casi idénticos y los actores son diferentes. Es una convergencia real.",
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": "Restricción histórica: compatibilidad hacia atrás con versiones anteriores de langgraph-api",
+          "restriction_type": "historica",
+          "operational_definition": "Si examinamos el setup.py/pyproject.toml histórico, encontraremos que langgraph-api tenía un constraint de versión inferior que excluía 0.7.67",
+          "falsification_criteria": [
+            "Si no existe constraint de versión inferior en el historial → falsada",
+            "Si los PRs no mencionan compatibilidad hacia atrás → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": "Limitación técnica: Python 3.14 introdujo cambios que rompían la compatibilidad con langgraph-api",
+          "restriction_type": "tecnica",
+          "operational_definition": "Si examinamos los cambios de Python 3.14, encontraremos breaking changes que afectan a langgraph-api específicamente",
+          "falsification_criteria": [
+            "Si Python 3.14 no tiene breaking changes relevantes → falsada",
+            "Si otros paquetes no tuvieron el mismo problema → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": "Artefacto del linker: los PRs fueron generados automáticamente por bots de dependencia",
+          "restriction_type": "tecnica",
+          "operational_definition": "Si examinamos los autores de los PRs, encontraremos que son bots de dependabot o similares",
+          "falsification_criteria": [
+            "Si los actores son humanos reales → falsada",
+            "Si los PRs tienen discusión humana → falsada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "restriction_epistemic_status": "undetermined",
+      "num_competing_hypotheses": 3,
+      "all_have_operational_definition": true,
+      "all_have_falsification_criteria": true
+    },
+    {
+      "convergence_id": "CONV-000002",
+      "theme": "fix(langgraph): add missing stacklevel to warnings.warn() calls",
+      "actors": [
+        "Jeel3011",
+        "levgiorg",
+        "awesome-pro",
+        "EvanYao826",
+        "mengqiuzhen"
+      ],
+      "decisions": [
+        "DECISION-000083",
+        "DECISION-000139",
+        "DECISION-000160",
+        "DECISION-000163",
+        "DECISION-000184"
+      ],
+      "evidence_urls": [
+        "https://github.com/langchain-ai/langgraph/pull/8232",
+        "https://github.com/langchain-ai/langgraph/pull/7980",
+        "https://github.com/langchain-ai/langgraph/pull/7912",
+        "https://github.com/langchain-ai/langgraph/pull/7897",
+        "https://github.com/langchain-ai/langgraph/pull/7807"
+      ],
+      "audit_classification": "real",
+      "audit_rationale": "5 PRs de 5 actores distintos sobre el mismo problema (stacklevel en warnings.warn()). Es la convergencia más fuerte del dataset. Los actores son claramente diferentes y el tema es específico.",
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": "Restricción conceptual: la semántica de warnings debe preservarse (el warning debe apuntar al código del usuario, no al framework)",
+          "restriction_type": "conceptual",
+          "operational_definition": "Si examinamos los PRs, todos mencionarán que el stacklevel incorrecto hace que el warning aparezca en el lugar equivocado",
+          "falsification_criteria": [
+            "Si los PRs no mencionan la semántica de warnings → falsada",
+            "Si los PRs mencionan otras razones (performance, etc.) → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": "Limitación técnica: la API de warnings.warn() requiere stacklevel explícito y es fácil olvidarlo",
+          "restriction_type": "tecnica",
+          "operational_definition": "Si examinamos la documentación de Python, warnings.warn() tiene stacklevel=1 por defecto que es casi siempre incorrecto para librerías",
+          "falsification_criteria": [
+            "Si Python cambiara el default a stacklevel=2 → la restricción desaparece",
+            "Si existiera un linter que detectara esto automáticamente → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": "Coste de refactorización: añadir stacklevel requiere tocar muchas llamadas y los mantenedores no querían merge conflict",
+          "restriction_type": "historica",
+          "operational_definition": "Si examinamos los PRs abandonados, encontraremos que fueron cerrados por conflictos de merge o por tocar demasiado código",
+          "falsification_criteria": [
+            "Si los PRs fueron cerrados por otras razones → falsada",
+            "Si los PRs fueron mergeados eventualmente → falsada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "restriction_epistemic_status": "undetermined",
+      "num_competing_hypotheses": 3,
+      "all_have_operational_definition": true,
+      "all_have_falsification_criteria": true
+    },
+    {
+      "convergence_id": "CONV-000003",
+      "theme": "fix(langgraph): copy mutable container in channel from_checkpoint",
+      "actors": [
+        "vidigoat",
+        "OmkumarSolanki"
+      ],
+      "decisions": [
+        "DECISION-000092",
+        "DECISION-000137"
+      ],
+      "evidence_urls": [
+        "https://github.com/langchain-ai/langgraph/pull/8180",
+        "https://github.com/langchain-ai/langgraph/pull/7993"
+      ],
+      "audit_classification": "real",
+      "audit_rationale": "Dos PRs de actores distintos sobre el mismo problema de mutabilidad en channel from_checkpoint. Convergencia real.",
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": "Restricción conceptual: el modelo de mutabilidad asume que los containers son inmutables pero from_checkpoint los copia de forma superficial",
+          "restriction_type": "conceptual",
+          "operational_definition": "Si examinamos el código, from_checkpoint hace una copia superficial (shallow copy) que permite mutaciones compartidas",
+          "falsification_criteria": [
+            "Si from_checkpoint ya hace deep copy → falsada",
+            "Si no hay mutaciones compartidas en los tests → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": "Limitación técnica: Python no distingue entre copia superficial y profunda por defecto",
+          "restriction_type": "tecnica",
+          "operational_definition": "Si examinamos el código, se usa = o .copy() en lugar de copy.deepcopy()",
+          "falsification_criteria": [
+            "Si ya se usa copy.deepcopy() → falsada",
+            "Si el problema es otro (no relacionado con copia) → falsada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": "Artefacto del linker: los PRs fueron generados por la misma persona con cuentas diferentes",
+          "restriction_type": "tecnica",
+          "operational_definition": "Si examinamos los perfiles de GitHub, encontraremos que vidigoat y OmkumarSolanki son la misma persona",
+          "falsification_criteria": [
+            "Si los perfiles son claramente diferentes → falsada",
+            "Si hay interacción entre ellos en otros PRs → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "restriction_epistemic_status": "undetermined",
+      "num_competing_hypotheses": 3,
+      "all_have_operational_definition": true,
+      "all_have_falsification_criteria": true
+    },
+    {
+      "convergence_id": "CONV-000004",
+      "theme": "fix(langgraph): cap retry sleep at max_interval after jitter",
+      "actors": [
+        "pragnyanramtha",
+        "mengqiuzhen"
+      ],
+      "decisions": [
+        "DECISION-000164",
+        "DECISION-000180"
+      ],
+      "evidence_urls": [
+        "https://github.com/langchain-ai/langgraph/pull/7896",
+        "https://github.com/langchain-ai/langgraph/pull/7840"
+      ],
+      "audit_classification": "real",
+      "audit_rationale": "Dos PRs de actores distintos sobre el mismo problema de retry sleep y jitter. Convergencia real.",
+      "competing_hypotheses": [
+        {
+          "hypothesis_id": "A",
+          "description": "Restricción conceptual: la semántica de retry asume que jitter no puede exceder max_interval pero la implementación no lo garantiza",
+          "restriction_type": "conceptual",
+          "operational_definition": "Si examinamos el código de retry, el jitter se calcula antes de aplicar el cap de max_interval",
+          "falsification_criteria": [
+            "Si el cap ya se aplica después del jitter → falsada",
+            "Si no hay casos donde jitter > max_interval → debilitada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": true
+        },
+        {
+          "hypothesis_id": "B",
+          "description": "Limitación matemática: la fórmula de jitter produce valores que pueden exceder max_interval",
+          "restriction_type": "matematica",
+          "operational_definition": "Si analizamos la fórmula: jitter = base * (1 + factor * random), encontraremos casos donde jitter > max_interval",
+          "falsification_criteria": [
+            "Si la fórmula garantiza jitter <= max_interval → falsada",
+            "Si max_interval es infinito → falsada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        },
+        {
+          "hypothesis_id": "C",
+          "description": "Restricción histórica: el código heredado de tenacity no tenía este cap y era difícil añadirlo",
+          "restriction_type": "historica",
+          "operational_definition": "Si examinamos el historial, el código de retry viene de tenacity y no tenía cap de max_interval",
+          "falsification_criteria": [
+            "Si el código no viene de tenacity → falsada",
+            "Si tenacity ya tenía este cap → falsada"
+          ],
+          "epistemic_status": "hypothesized",
+          "is_principal": false
+        }
+      ],
+      "restriction_epistemic_status": "undetermined",
+      "num_competing_hypotheses": 3,
+      "all_have_operational_definition": true,
+      "all_have_falsification_criteria": true
+    }
+  ],
+  "epistemic_note": "Todas las restricciones están en estado HYPOTHESIZED o UNDETERMINED. Ninguna ha sido promovida a hecho. Cada hipótesis tiene competidoras y criterios de falsación. El sistema responde honestamente: 'no sabemos cuál es la restricción real'."
+}

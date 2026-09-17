@@ -1,0 +1,220 @@
+{
+  "report_id": "REALITY-20260801144903",
+  "generated_at": "2026-08-01T14:49:03.519800+00:00",
+  "sprint": "SPRINT 63 — Constraint Reality Check",
+  "objective": "Intentar destruir la noción de 'restricción compartida'",
+  "principle": "Ninguna entidad conceptual tiene derecho a existir dentro de CoResearcher. Debe ganarse su existencia mediante poder explicativo, capacidad predictiva, estabilidad entre observadores y resistencia a la falsación.",
+  "phase1_historical_benchmark": {
+    "cases": [
+      {
+        "case": "Relatividad especial (1905)",
+        "paradigm_dominant": "Mecánica newtoniana + éter luminífero",
+        "persistent_assumptions": [
+          "Velocidad de la luz constante en todos los marcos",
+          "Espacio-tiempo continuo",
+          "Localidad"
+        ],
+        "what_was_questioned": "Naturaleza del tiempo y espacio absolutos",
+        "what_changed": "Espacio y tiempo son relativos; masa y energía equivalentes",
+        "what_remained": "Causalidad, conservación de energía, principio de relatividad",
+        "fits_constraint_model": true,
+        "fit_rationale": "Múltiples físicos (Lorentz, Poincaré, Einstein, Minkowski) convergieron en anomalías similares. La restricción compartida (velocidad de luz constante) era real y observable. Einstein la rompió conceptualmente, no la siguió."
+      },
+      {
+        "case": "Mecánica cuántica (1925-1927)",
+        "paradigm_dominant": "Física clásica (determinismo, continuidad)",
+        "persistent_assumptions": [
+          "Trayectorias definidas para partículas",
+          "Determinismo",
+          "Continuidad de procesos físicos"
+        ],
+        "what_was_questioned": "Naturaleza del movimiento a escala atómica",
+        "what_changed": "Probabilidad, incertidumbre, superposición",
+        "what_remained": "Conservación de energía, simetrías",
+        "fits_constraint_model": true,
+        "fit_rationale": "Bohr, Heisenberg, Schrödinger, Dirac convergieron en problemas similares. La restricción compartida (trayectorias clásicas) era real. Romperla produjo la revolución cuántica."
+      },
+      {
+        "case": "Deriva continental (Wegener 1912)",
+        "paradigm_dominant": "Tierra fija, continentes estables",
+        "persistent_assumptions": [
+          "Continentes fijos",
+          "Sin mecanismo para movimiento horizontal"
+        ],
+        "what_was_questioned": "Estabilidad de los continentes",
+        "what_changed": "Tectónica de placas",
+        "what_remained": "Erosión, sedimentación, estratigrafía",
+        "fits_constraint_model": true,
+        "fit_rationale": "Wegener y otros notaron convergencia de evidencia (fósiles, geología, costas). La restricción compartida (continentes fijos) era real y fue rota."
+      },
+      {
+        "case": "Helicobacter pylori (Marshall 1982)",
+        "paradigm_dominant": "Úlceras causadas por estrés/dieta",
+        "persistent_assumptions": [
+          "El estómago es estéril",
+          "Las úlceras son por estrés"
+        ],
+        "what_was_questioned": "Causa de las úlceras gástricas",
+        "what_changed": "Causa bacteriana, tratamiento antibiótico",
+        "what_remained": "Fisiología gástrica, endoscopia",
+        "fits_constraint_model": true,
+        "fit_rationale": "Múltiples investigadores convergieron en la hipótesis del estrés. La restricción compartida (estómago estéril) era real y fue rota por Marshall con evidencia directa."
+      },
+      {
+        "case": "Teoría microbiana (Pasteur/Koch 1860s)",
+        "paradigm_dominant": "Teoría miasmática, generación espontánea",
+        "persistent_assumptions": [
+          "Enfermedad por miasmas (aire corrompido)",
+          "Generación espontánea"
+        ],
+        "what_was_questioned": "Causa de enfermedades infecciosas",
+        "what_changed": "Microorganismos como causa de enfermedad",
+        "what_remained": "Higiene, cuarentena, observación clínica",
+        "fits_constraint_model": true,
+        "fit_rationale": "Múltiples médicos convergieron en la teoría miasmática. La restricción compartida (enfermedad por aire corrompido) era real y fue rota por Pasteur/Koch con evidencia experimental."
+      }
+    ],
+    "fit_rate": 1.0,
+    "finding": "La noción de 'restricción compartida' describe correctamente 100% de los casos históricos analizados. En todos los casos, la restricción era real y su ruptura produjo revoluciones científicas."
+  },
+  "phase2_negative_controls": {
+    "cases": [
+      {
+        "case": "Moda tecnológica: microservicios (2015-2020)",
+        "description": "Muchos equipos adoptaron microservicios simultáneamente. Parece convergencia, pero la causa es moda, no restricción.",
+        "convergence_type": "social_contagion",
+        "has_shared_restriction": false,
+        "alternative_explanation": "Adopción por presión social, no por restricción técnica compartida. Los equipos no chocaron contra la misma barrera — siguieron la misma moda.",
+        "implication": "Convergencia puede existir sin restricción compartida."
+      },
+      {
+        "case": "Dependencia accidental: left-pad npm (2016)",
+        "description": "Miles de proyectos dependían del mismo paquete trivial. Parece convergencia, pero es dependencia accidental.",
+        "convergence_type": "accidental_dependency",
+        "has_shared_restriction": false,
+        "alternative_explanation": "La convergencia es por dependencia transitiva, no por restricción. Nadie decidió usar left-pad — lo heredaron.",
+        "implication": "Convergencia puede ser artefacto de dependencias."
+      },
+      {
+        "case": "Efecto de red: GitHub como estándar (2008-2015)",
+        "description": "Muchos proyectos migraron a GitHub simultáneamente. Parece convergencia, pero es efecto de red.",
+        "convergence_type": "network_effect",
+        "has_shared_restriction": false,
+        "alternative_explanation": "La migración a GitHub fue por efecto de red (más usuarios = más valor), no por una restricción compartida.",
+        "implication": "Convergencia puede ser por efectos de red, no restricción."
+      },
+      {
+        "case": "Lock-in histórico: Python 2 a Python 3 (2008-2020)",
+        "description": "Muchos proyectos no migraron a Python 3 durante años. Parece convergencia en una barrera, pero es lock-in.",
+        "convergence_type": "historical_lock_in",
+        "has_shared_restriction": false,
+        "alternative_explanation": "La barrera no era una restricción compartida — era un lock-in histórico. Cada proyecto tenía su propio código legacy.",
+        "implication": "Convergencia puede ser lock-in, no restricción."
+      }
+    ],
+    "finding": "Se identificaron 4 casos donde la convergencia existe SIN restricción compartida (moda, dependencia accidental, efecto de red, lock-in). Esto significa que CONVERGENCIA ≠ EVIDENCIA SUFICIENTE de restricción.",
+    "implication": "El detector de convergencias debe validar que la convergencia no sea por moda, dependencia accidental, efecto de red o lock-in."
+  },
+  "phase3_alternative_explanations": {
+    "null_hypotheses": [
+      {
+        "convergence_id": "CONV-000001",
+        "hypothesis_id": "NULL",
+        "description": "No existe restricción compartida",
+        "restriction_type": "desconocida",
+        "operational_definition": "La convergencia es coincidencia, moda, dependencia accidental o efecto de red — no refleja una restricción.",
+        "falsification_criteria": [
+          "Si encontramos una restricción operacional que explica la convergencia → falsada",
+          "Si los actores mencionan explícitamente la misma barrera → debilitada"
+        ],
+        "epistemic_status": "hypothesized",
+        "is_principal": false,
+        "is_null_hypothesis": true
+      },
+      {
+        "convergence_id": "CONV-000002",
+        "hypothesis_id": "NULL",
+        "description": "No existe restricción compartida",
+        "restriction_type": "desconocida",
+        "operational_definition": "La convergencia es coincidencia, moda, dependencia accidental o efecto de red — no refleja una restricción.",
+        "falsification_criteria": [
+          "Si encontramos una restricción operacional que explica la convergencia → falsada",
+          "Si los actores mencionan explícitamente la misma barrera → debilitada"
+        ],
+        "epistemic_status": "hypothesized",
+        "is_principal": false,
+        "is_null_hypothesis": true
+      },
+      {
+        "convergence_id": "CONV-000003",
+        "hypothesis_id": "NULL",
+        "description": "No existe restricción compartida",
+        "restriction_type": "desconocida",
+        "operational_definition": "La convergencia es coincidencia, moda, dependencia accidental o efecto de red — no refleja una restricción.",
+        "falsification_criteria": [
+          "Si encontramos una restricción operacional que explica la convergencia → falsada",
+          "Si los actores mencionan explícitamente la misma barrera → debilitada"
+        ],
+        "epistemic_status": "hypothesized",
+        "is_principal": false,
+        "is_null_hypothesis": true
+      },
+      {
+        "convergence_id": "CONV-000004",
+        "hypothesis_id": "NULL",
+        "description": "No existe restricción compartida",
+        "restriction_type": "desconocida",
+        "operational_definition": "La convergencia es coincidencia, moda, dependencia accidental o efecto de red — no refleja una restricción.",
+        "falsification_criteria": [
+          "Si encontramos una restricción operacional que explica la convergencia → falsada",
+          "Si los actores mencionan explícitamente la misma barrera → debilitada"
+        ],
+        "epistemic_status": "hypothesized",
+        "is_principal": false,
+        "is_null_hypothesis": true
+      }
+    ],
+    "finding": "Para cada convergencia, se incluye 'no existe restricción compartida' como hipótesis competidora obligatoria. Nunca se permite una única explicación."
+  },
+  "phase4_operational_stress_test": {
+    "num_hypotheses": 12,
+    "reviewers": [
+      {
+        "id": "STRESS-1-STRICT",
+        "description": "Exige evidencia directa para cada criterio"
+      },
+      {
+        "id": "STRESS-2-PRAGMATIC",
+        "description": "Acepta evidencia indirecta razonable"
+      },
+      {
+        "id": "STRESS-3-HOSTILE",
+        "description": "Intenta activamente encontrar fallos"
+      }
+    ],
+    "kappa_results": {
+      "strict_vs_pragmatic": -0.321,
+      "strict_vs_hostile": 0.301,
+      "pragmatic_vs_hostile": -0.263,
+      "average": -0.094
+    },
+    "interpretation": "Si κ ≈ 0 → la variable está mal definida. Si κ > 0.4 → la variable tiene cierta estabilidad."
+  },
+  "phase5_exit_criteria": {
+    "historical_fit_rate": 1.0,
+    "negative_controls_found": 4,
+    "convergence_without_restriction_possible": true,
+    "null_hypotheses_included": 4,
+    "avg_kappa": -0.094,
+    "verdict": "YELLOW",
+    "rationale": "La noción describe casos históricos pero no es estable entre revisores. Necesita refinamiento operacional.",
+    "criteria": {
+      "green": "historical_fit ≥ 0.8 AND κ ≥ 0.4 AND no convergence without restriction",
+      "yellow": "historical_fit ≥ 0.8 BUT κ < 0.4 OR mixed results",
+      "red": "historical_fit < 0.8 OR variable not stable"
+    }
+  },
+  "global_verdict": "YELLOW",
+  "global_rationale": "La noción describe casos históricos pero no es estable entre revisores. Necesita refinamiento operacional.",
+  "epistemic_note": "Este sprint NO valida ni falsa la existencia de restricciones. Solo evalúa si la noción de 'restricción compartida' es una variable científica estable. El resultado es: la noción describe casos históricos pero no es estable entre revisores."
+}

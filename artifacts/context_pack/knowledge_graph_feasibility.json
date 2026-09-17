@@ -1,0 +1,108 @@
+{
+  "structural_capabilities": {
+    "node_types": "can represent via table with type column",
+    "edges": "can represent via edges table (from, to, type)",
+    "timestamps": "ISO-8601 text columns",
+    "provenance": "JSON columns for nested evidence",
+    "traversal": "recursive CTEs for graph queries",
+    "constraints": "FOREIGN KEY + CHECK for graph invariants",
+    "scale": "handles 10^5-10^6 nodes comfortably"
+  },
+  "entity_feasibility": [
+    {
+      "entity": "Goals",
+      "sources_available": 2,
+      "representable": true,
+      "classification": "OBSERVED",
+      "evidence": "Goals explicitly documented in SPRINT_60C_BRIDGE_H6_H7_EHG.md and SPRINT_60C_ANALYSIS_AND_VISION.md",
+      "sqlite_schema": {
+        "table": "goals",
+        "columns": [
+          "goal_id TEXT PRIMARY KEY",
+          "description TEXT",
+          "status TEXT",
+          "source TEXT",
+          "created_at TEXT"
+        ]
+      },
+      "limitations": "Goals are document-derived (markdown), not structured registry entries"
+    },
+    {
+      "entity": "Experiments",
+      "sources_available": 6,
+      "representable": true,
+      "classification": "OBSERVED",
+      "evidence": "6 sprint experiment artifacts found with metrics (JSON)",
+      "sqlite_schema": {
+        "table": "experiments",
+        "columns": [
+          "experiment_id TEXT PRIMARY KEY",
+          "artifact_path TEXT",
+          "metrics JSON",
+          "status TEXT",
+          "sprint TEXT"
+        ]
+      },
+      "limitations": "Experiments exist as standalone JSON artifacts; no central registry cross-references them"
+    },
+    {
+      "entity": "Evolutions",
+      "sources_available": 4,
+      "representable": true,
+      "classification": "OBSERVED",
+      "evidence": "4 evolution documents found in docs/",
+      "sqlite_schema": {
+        "table": "evolutions",
+        "columns": [
+          "evolution_id TEXT PRIMARY KEY",
+          "title TEXT",
+          "status TEXT",
+          "source_doc TEXT"
+        ]
+      },
+      "limitations": "Evolutions are narrative documents, not structured entities with explicit evolution rules"
+    },
+    {
+      "entity": "Evidence",
+      "sources_available": 310,
+      "representable": true,
+      "classification": "OBSERVED",
+      "evidence": "301 decisions + 9 claims + 0 edges already in structured JSONL/JSON",
+      "sqlite_schema": {
+        "table": "evidence_nodes",
+        "columns": [
+          "node_id TEXT PRIMARY KEY",
+          "node_type TEXT",
+          "payload JSON",
+          "source_artifact TEXT"
+        ]
+      },
+      "limitations": "Trajectory graph itself is already a graph — SQLite adds query capability but not new knowledge"
+    },
+    {
+      "entity": "GitHub Issues",
+      "sources_available": 0,
+      "representable": true,
+      "classification": "UNKNOWN",
+      "evidence": "No accessible issues; gh CLI returned 0 entries",
+      "sqlite_schema": {
+        "table": "github_issues",
+        "columns": [
+          "issue_number INTEGER PRIMARY KEY",
+          "title TEXT",
+          "state TEXT",
+          "body TEXT",
+          "labels JSON"
+        ]
+      },
+      "limitations": "Issues live in GitHub; SQLite mirror would be a cache, not source of truth"
+    }
+  ],
+  "all_representable": true,
+  "classification_summary": {
+    "OBSERVED": 4,
+    "INFERRED": 0,
+    "UNKNOWN": 1
+  },
+  "verdict": "SQLite CAN represent all five entity types structurally. The key advantage is not representation (JSON already does that) but QUERYABILITY: recursive CTEs enable graph traversal that JSON files cannot provide. The bottleneck is SOURCE INTEGRATION (parsing markdown docs into structured records), not storage."
+}

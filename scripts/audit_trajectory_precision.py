@@ -64,7 +64,7 @@ def audit_report(report_path):
     elements = []
 
     # Decision sections
-    for match in re.finditer(r'### Decisión \d+: (.+)', content):
+    for match in re.finditer(r'### Decision \d+: (.+)', content):
         elements.append({"type": "decision", "text": match.group(1), "context": "decision"})
 
     # Alternative sections

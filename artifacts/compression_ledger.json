@@ -1,0 +1,166 @@
+{
+  "report_id": "SPRINT71-LEDGER-1785678165",
+  "sprint": "SPRINT 71 — Search Space Compression Audit",
+  "phase": "FASE 1 — Compression Ledger",
+  "methodology": "Measure input_count, output_count, compression_ratio, information_loss for each transformation. No new entities introduced.",
+  "repository": "langchain-ai/langgraph",
+  "ledger": [
+    {
+      "transformation": "Raw Evidence → DecisionNode",
+      "input_count": 0,
+      "output_count": 301,
+      "compression_ratio": 0,
+      "information_loss": 10,
+      "information_loss_pct": 3.32,
+      "details": {
+        "node_outcomes": {
+          "pending": 10,
+          "abandoned": 129,
+          "success": 122,
+          "failure": 40
+        },
+        "unique_actors": 106,
+        "artifact_types": {
+          "issue": 10,
+          "pr": 176,
+          "commit": 115
+        }
+      },
+      "source_artifacts": [
+        "data/trajectories/langchain_ai_langgraph/decisions_raw.jsonl",
+        "data/trajectories/langchain_ai_langgraph/trajectory_graph.json"
+      ]
+    },
+    {
+      "transformation": "DecisionNode → Trajectory (edge reconstruction)",
+      "input_count": 301,
+      "output_count": 426,
+      "compression_ratio": 1.4153,
+      "information_loss": -143,
+      "information_loss_pct": -47.51,
+      "details": {
+        "edge_types": {
+          "supported_by": 231,
+          "led_to": 195
+        },
+        "isolated_nodes": -143,
+        "nodes_with_edges": 444
+      },
+      "source_artifacts": [
+        "data/trajectories/langchain_ai_langgraph/trajectory_graph.json"
+      ]
+    },
+    {
+      "transformation": "Trajectory → Convergence (clustering)",
+      "input_count": 301,
+      "output_count": 4,
+      "compression_ratio": 0.0133,
+      "information_loss": 290,
+      "information_loss_pct": 96.35,
+      "details": {
+        "convergence_themes": [
+          "fix(cli): require langgraph-api>=0.7.67 on Python 3.14",
+          "fix(langgraph): add missing stacklevel to warnings.warn() calls",
+          "fix(langgraph): copy mutable container in channel from_checkpoint",
+          "fix(langgraph): cap retry sleep at max_interval after jitter"
+        ],
+        "convergence_types": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "convergence_actors_per": [
+          2,
+          5,
+          2,
+          2
+        ],
+        "nodes_in_convergences": 11
+      },
+      "source_artifacts": [
+        "artifacts/convergence_review.json"
+      ]
+    },
+    {
+      "transformation": "Evidence → Gap (detection)",
+      "input_count": 301,
+      "output_count": 155,
+      "compression_ratio": 0.515,
+      "information_loss": 148,
+      "information_loss_pct": 49.17,
+      "details": {
+        "gap_by_type": {
+          "empirical": 113,
+          "mathematical": 0,
+          "causal": 42
+        },
+        "gap_by_severity": {
+          "low": 0,
+          "medium": 10,
+          "high": 145
+        },
+        "gap_by_characterization": {
+          "never_explored": 0,
+          "explored_abandoned": 143,
+          "explored_partial": 10,
+          "unknown_exploration": 2
+        },
+        "gap_density": 0.515,
+        "nodes_with_gaps": 153
+      },
+      "source_artifacts": [
+        "artifacts/epistemic_gap_report.json"
+      ]
+    }
+  ],
+  "cross_repo_compression": [
+    {
+      "repo": "langchain-ai/langgraph",
+      "total_claims": 841,
+      "anchored_claims": 591,
+      "unanchored_claims": 250,
+      "anchoring_ratio": 0.7027,
+      "observable_ratio": 0.2866,
+      "gaps": 250
+    },
+    {
+      "repo": "langchain-ai/langchain",
+      "total_claims": 953,
+      "anchored_claims": 703,
+      "unanchored_claims": 250,
+      "anchoring_ratio": 0.7377,
+      "observable_ratio": 0.2676,
+      "gaps": 250
+    },
+    {
+      "repo": "run-llama/LlamaIndex",
+      "total_claims": 0,
+      "anchored_claims": 0,
+      "unanchored_claims": 0,
+      "anchoring_ratio": 0,
+      "observable_ratio": 0.0,
+      "gaps": 0
+    },
+    {
+      "repo": "deepset-ai/haystack",
+      "total_claims": 655,
+      "anchored_claims": 535,
+      "unanchored_claims": 120,
+      "anchoring_ratio": 0.8168,
+      "observable_ratio": 0.2885,
+      "gaps": 120
+    }
+  ],
+  "pipeline_summary": {
+    "step_1": "Raw Evidence → DecisionNode",
+    "step_2": "DecisionNode → Trajectory",
+    "step_3": "Trajectory → Convergence",
+    "final_compression": {
+      "input_nodes": 301,
+      "output_convergences": 4,
+      "compression_ratio": 0.0133
+    }
+  },
+  "epistemic_note": "Compression is observable. Information loss is measurable. No interpretation introduced. All metrics trace to existing data artifacts."
+}

@@ -1,0 +1,192 @@
+{
+  "report_id": "REVIEWER-20260801143408",
+  "generated_at": "2026-08-01T14:34:08.122849+00:00",
+  "phase": "FASE 2 — Acuerdo entre revisores",
+  "objective": "Medir si dos científicos distintos reconstruyen la misma restricción. Cohen kappa entre 3 revisores con perspectivas distintas (conservador, liberal, escéptico).",
+  "methodology": {
+    "num_reviewers": 3,
+    "num_convergences": 4,
+    "reviewer_profiles": [
+      {
+        "id": "R1-CONSERVATIVE",
+        "description": "Exige evidencia fuerte para clasificar como real"
+      },
+      {
+        "id": "R2-LIBERAL",
+        "description": "Tiende a clasificar como real con evidencia moderada"
+      },
+      {
+        "id": "R3-SKEPTICAL",
+        "description": "Tiende a clasificar como artifact o indeterminate"
+      }
+    ],
+    "kappa_scale": "Landis & Koch (1977): <0.20 slight, 0.21-0.40 fair, 0.41-0.60 moderate, 0.61-0.80 substantial, >0.81 almost perfect"
+  },
+  "results": {
+    "is_real_kappa": {
+      "R1-CONSERVATIVE vs R2-LIBERAL": {
+        "kappa": 0.0,
+        "interpretation": "slight",
+        "r1_ratings": [
+          "real",
+          "real",
+          "indeterminate",
+          "real"
+        ],
+        "r2_ratings": [
+          "real",
+          "real",
+          "real",
+          "real"
+        ]
+      },
+      "R1-CONSERVATIVE vs R3-SKEPTICAL": {
+        "kappa": -0.091,
+        "interpretation": "poor (worse than chance)",
+        "r1_ratings": [
+          "real",
+          "real",
+          "indeterminate",
+          "real"
+        ],
+        "r2_ratings": [
+          "indeterminate",
+          "real",
+          "artifact",
+          "indeterminate"
+        ]
+      },
+      "R2-LIBERAL vs R3-SKEPTICAL": {
+        "kappa": 0.0,
+        "interpretation": "slight",
+        "r1_ratings": [
+          "real",
+          "real",
+          "real",
+          "real"
+        ],
+        "r2_ratings": [
+          "indeterminate",
+          "real",
+          "artifact",
+          "indeterminate"
+        ]
+      }
+    },
+    "hypothesis_kappa": {
+      "R1-CONSERVATIVE vs R2-LIBERAL": {
+        "kappa": 0.0,
+        "interpretation": "slight",
+        "r1_ratings": [
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        "r2_ratings": [
+          "A",
+          "A",
+          "A",
+          "B"
+        ]
+      },
+      "R1-CONSERVATIVE vs R3-SKEPTICAL": {
+        "kappa": 0.0,
+        "interpretation": "slight",
+        "r1_ratings": [
+          "A",
+          "A",
+          "A",
+          "A"
+        ],
+        "r2_ratings": [
+          "C",
+          "A",
+          "C",
+          "A"
+        ]
+      },
+      "R2-LIBERAL vs R3-SKEPTICAL": {
+        "kappa": -0.2,
+        "interpretation": "poor (worse than chance)",
+        "r1_ratings": [
+          "A",
+          "A",
+          "A",
+          "B"
+        ],
+        "r2_ratings": [
+          "C",
+          "A",
+          "C",
+          "A"
+        ]
+      }
+    },
+    "average_kappa_is_real": -0.03,
+    "average_kappa_hypothesis": -0.067
+  },
+  "verdict": "RED — poor agreement, strong reviewer dependence",
+  "criteria": {
+    "green": "κ ≥ 0.7 (substantial agreement)",
+    "yellow": "κ 0.4–0.7 (moderate agreement)",
+    "red": "κ < 0.4 (poor agreement, strong reviewer dependence)"
+  },
+  "epistemic_note": "NOTA: Estos 3 revisores son simulados con perfiles distintos. Para validación completa se necesitan revisores humanos reales. Este experimento mide la sensibilidad del protocolo a sesgos de clasificación.",
+  "raw_classifications": {
+    "R1-CONSERVATIVE": {
+      "CONV-000001": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000002": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000003": {
+        "is_real": "indeterminate",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000004": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      }
+    },
+    "R2-LIBERAL": {
+      "CONV-000001": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000002": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000003": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000004": {
+        "is_real": "real",
+        "principal_hypothesis": "B"
+      }
+    },
+    "R3-SKEPTICAL": {
+      "CONV-000001": {
+        "is_real": "indeterminate",
+        "principal_hypothesis": "C"
+      },
+      "CONV-000002": {
+        "is_real": "real",
+        "principal_hypothesis": "A"
+      },
+      "CONV-000003": {
+        "is_real": "artifact",
+        "principal_hypothesis": "C"
+      },
+      "CONV-000004": {
+        "is_real": "indeterminate",
+        "principal_hypothesis": "A"
+      }
+    }
+  }
+}

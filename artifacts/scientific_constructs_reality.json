@@ -1,0 +1,302 @@
+{
+  "report_id": "REALITY64-20260801150627",
+  "generated_at": "2026-08-01T15:06:27.708252+00:00",
+  "sprint": "SPRINT 64 — Reality of Scientific Constructs",
+  "objective": "Auditar la realidad epistemológica de cada concepto usado por CoResearcher. ¿Qué entidades existen realmente como variables observables y cuáles son construcciones explicativas?",
+  "central_question": "¿Qué entidades utilizadas por científicos existen realmente como variables observables y cuáles son simplemente construcciones explicativas útiles?",
+  "methodology": {
+    "dimensions": {
+      "A_observability": "¿Es directamente observable?",
+      "B_reproducibility": "¿Produce acuerdo interobservador?",
+      "C_falsifiability": "¿Genera predicciones falsables?",
+      "D_narrative_label": "¿Es etiqueta retrospectiva?"
+    },
+    "scoring": "Alta=3, Media=2, Baja=1, Muy baja=0. Narrative penalty: -2",
+    "classification": {
+      "REAL": "total ≥ 7 (observable, reproducible, falsable)",
+      "PARTIALLY_REAL": "total 4-6 (algunas dimensiones funcionan)",
+      "NARRATIVE": "total 1-3 (útil como etiqueta, no como variable)",
+      "METAPHOR": "total ≤ 0 (construcción sin base empírica)"
+    }
+  },
+  "entities": [
+    {
+      "entity": "DecisionNode",
+      "description": "Una decisión observable tomada por un actor",
+      "evidence": "301 decisiones extraídas de langgraph, auditadas",
+      "sprint_origin": "SPRINT 60C",
+      "dimensions": {
+        "observability": "Alta",
+        "reproducibility": "Alta",
+        "falsifiability": "Alta",
+        "narrative_label": false
+      },
+      "operational_definition": "Un evento con: actor, artifact_url, outcome, rationale. Verificable contra GitHub API.",
+      "empirical_evidence": "301 nodos extraídos. Métricas de precisión calculadas. Auditabilidad score = 1.0.",
+      "kappa_evidence": "No medido directamente, pero extracción es reproducible",
+      "status": "VALIDATED",
+      "scores": {
+        "observability_score": 3,
+        "reproducibility_score": 3,
+        "falsifiability_score": 3,
+        "narrative_penalty": 0,
+        "total_reality_score": 9
+      },
+      "reality_class": "OPERATIONAL — CoResearcher puede medirlo de forma robusta"
+    },
+    {
+      "entity": "Trajectory",
+      "description": "Secuencia de decisiones conectadas por edges",
+      "evidence": "426 edges reconstruidos (231 explícitos + 195 temporales)",
+      "sprint_origin": "SPRINT 60C",
+      "dimensions": {
+        "observability": "Media",
+        "reproducibility": "Media",
+        "falsifiability": "Media",
+        "narrative_label": false
+      },
+      "operational_definition": "Grafo dirigido de DecisionNodes conectados por edges tipados (chosen_over, abandoned_for, superseded_by, temporal).",
+      "empirical_evidence": "426 edges. 231 explícitos (con referencia). 195 temporales (inferidos por fecha).",
+      "kappa_evidence": "No medido. Los edges temporales son menos fiables.",
+      "status": "PROMISING",
+      "scores": {
+        "observability_score": 2,
+        "reproducibility_score": 2,
+        "falsifiability_score": 2,
+        "narrative_penalty": 0,
+        "total_reality_score": 6
+      },
+      "reality_class": "PARTIALLY_OPERATIONAL — algunas dimensiones funcionan"
+    },
+    {
+      "entity": "Convergence",
+      "description": "Múltiples trayectorias independientes que chocan contra la misma barrera",
+      "evidence": "4 convergencias detectadas en langgraph",
+      "sprint_origin": "SPRINT 60C (detector v1.1)",
+      "dimensions": {
+        "observability": "Media",
+        "reproducibility": "Baja",
+        "falsifiability": "Media",
+        "narrative_label": false
+      },
+      "operational_definition": "Cluster de ≥2 DecisionNodes con: actores distintos, tema similar (Jaccard ≥ 0.5), mismo outcome (abandoned/failure).",
+      "empirical_evidence": "4 barrier convergences. Pero FALSIFICATION EXPERIMENT (SPRINT 61) mostró 70% false positive rate en datos sintéticos.",
+      "kappa_evidence": "κ = -0.030 (SPRINT 61 FASE 2). Peor que azar.",
+      "status": "OBSERVED_BUT_UNRELIABLE",
+      "scores": {
+        "observability_score": 2,
+        "reproducibility_score": 1,
+        "falsifiability_score": 2,
+        "narrative_penalty": 0,
+        "total_reality_score": 5
+      },
+      "reality_class": "PARTIALLY_OPERATIONAL — algunas dimensiones funcionan"
+    },
+    {
+      "entity": "Restriction",
+      "description": "Supuesto implícito compartido que limita el espacio de posibilidades",
+      "evidence": "12 hipótesis generadas, 6 OPERATIONAL (SPRINT 62)",
+      "sprint_origin": "SPRINT 60C (concepto), SPRINT 62 (operacionalización)",
+      "dimensions": {
+        "observability": "Baja",
+        "reproducibility": "Baja",
+        "falsifiability": "Media",
+        "narrative_label": true
+      },
+      "operational_definition": "Una restricción existe si: (1) genera predicciones observables, (2) explica >1 trayectoria, (3) su eliminación cambia decisiones, (4) puede ser falsada.",
+      "empirical_evidence": "6/12 hipótesis cumplen 4 criterios (SPRINT 62). Pero κ = -0.094 en stress test (SPRINT 63). La variable es PARTIALLY_OPERATIONAL.",
+      "kappa_evidence": "κ = -0.094 (SPRINT 63 FASE 4). No estable.",
+      "status": "UNDETERMINED",
+      "scores": {
+        "observability_score": 1,
+        "reproducibility_score": 1,
+        "falsifiability_score": 2,
+        "narrative_penalty": 2,
+        "total_reality_score": 2
+      },
+      "reality_class": "NOT_YET_OPERATIONAL — requiere formalización antes de usar"
+    },
+    {
+      "entity": "Paradigm",
+      "description": "Marco conceptual dominante en una comunidad",
+      "evidence": "0 paradigm residues detectados (SPRINT 60C)",
+      "sprint_origin": "SPRINT 60C (concepto)",
+      "dimensions": {
+        "observability": "Muy baja",
+        "reproducibility": "Desconocida",
+        "falsifiability": "Baja",
+        "narrative_label": true
+      },
+      "operational_definition": "No definida operacionalmente. El detector de paradigm residues encontró 0 resultados. No hay criterios observables.",
+      "empirical_evidence": "0 paradigm residues. Limitación documentada: 'un paradigma no vive en commits. Vive en supuestos.'",
+      "kappa_evidence": "No medido. No hay datos suficientes.",
+      "status": "UNTESTED",
+      "scores": {
+        "observability_score": 0,
+        "reproducibility_score": 0,
+        "falsifiability_score": 1,
+        "narrative_penalty": 2,
+        "total_reality_score": -1
+      },
+      "reality_class": "UNOPERATIONALIZED — CoResearcher no sabe medirlo todavía"
+    },
+    {
+      "entity": "Hypothesis",
+      "description": "Propuesta explicativa generada desde gaps o restricciones",
+      "evidence": "EHG CONGELADO — 0 hipótesis generadas",
+      "sprint_origin": "SPRINT 42 (concepto), congelado en SPRINT 60C",
+      "dimensions": {
+        "observability": "Muy baja",
+        "reproducibility": "Muy baja",
+        "falsifiability": "Media",
+        "narrative_label": true
+      },
+      "operational_definition": "No definida operacionalmente. EHG congelado hasta que las restricciones sean validadas (precisión ≥80%).",
+      "empirical_evidence": "0 hipótesis generadas. EHG correctamente congelado.",
+      "kappa_evidence": "No medido. EHG congelado.",
+      "status": "FROZEN",
+      "scores": {
+        "observability_score": 0,
+        "reproducibility_score": 0,
+        "falsifiability_score": 2,
+        "narrative_penalty": 2,
+        "total_reality_score": 0
+      },
+      "reality_class": "UNOPERATIONALIZED — CoResearcher no sabe medirlo todavía"
+    },
+    {
+      "entity": "Epistemic Gap",
+      "description": "Región del espacio de conocimiento donde la ignorancia es clasificable",
+      "evidence": "155 gaps detectados y clasificados (A/B/C/D)",
+      "sprint_origin": "SPRINT 60C (detector v1.1)",
+      "dimensions": {
+        "observability": "Alta",
+        "reproducibility": "Media",
+        "falsifiability": "Alta",
+        "narrative_label": false
+      },
+      "operational_definition": "Gap detectado por señales heurísticas: pending sin edges, abandoned sin rationale, low confidence. Clasificado A/B/C/D.",
+      "empirical_evidence": "155 gaps. 113 empíricos, 42 causales, 0 matemáticos. Audit status: PENDING_AUDIT.",
+      "kappa_evidence": "No medido directamente. Pero detección es reproducible.",
+      "status": "OBSERVED",
+      "scores": {
+        "observability_score": 3,
+        "reproducibility_score": 2,
+        "falsifiability_score": 3,
+        "narrative_penalty": 0,
+        "total_reality_score": 8
+      },
+      "reality_class": "OPERATIONAL — CoResearcher puede medirlo de forma robusta"
+    },
+    {
+      "entity": "Explanation",
+      "description": "Narrativa que conecta observaciones con causas",
+      "evidence": "Usada implícitamente en auditorías pero nunca auditada",
+      "sprint_origin": "Implícita en todos los sprints",
+      "dimensions": {
+        "observability": "Muy baja",
+        "reproducibility": "Muy baja",
+        "falsifiability": "Baja",
+        "narrative_label": true
+      },
+      "operational_definition": "No definida operacionalmente. Las explicaciones aparecen en rationale fields pero nunca se auditan como entidades.",
+      "empirical_evidence": "Las explicaciones aparecen en rationale de DecisionNodes pero su calidad nunca se midió de forma reproducible.",
+      "kappa_evidence": "No medido.",
+      "status": "NARRATIVE",
+      "scores": {
+        "observability_score": 0,
+        "reproducibility_score": 0,
+        "falsifiability_score": 1,
+        "narrative_penalty": 2,
+        "total_reality_score": -1
+      },
+      "reality_class": "UNOPERATIONALIZED — CoResearcher no sabe medirlo todavía"
+    },
+    {
+      "entity": "Mechanism",
+      "description": "Proceso causal que produce un fenómeno observado",
+      "evidence": "Buscado en SPRINT 52 (Explanatory Mechanism Audit)",
+      "sprint_origin": "SPRINT 52",
+      "dimensions": {
+        "observability": "Baja",
+        "reproducibility": "Baja",
+        "falsifiability": "Media",
+        "narrative_label": true
+      },
+      "operational_definition": "No definida operacionalmente de forma reproducible. SPRINT 52 buscó mecanismos pero sin criterios formales.",
+      "empirical_evidence": "SPRINT 52 auditó mecanismos explicativos pero sin medir acuerdo interobservador.",
+      "kappa_evidence": "No medido.",
+      "status": "NARRATIVE",
+      "scores": {
+        "observability_score": 1,
+        "reproducibility_score": 1,
+        "falsifiability_score": 2,
+        "narrative_penalty": 2,
+        "total_reality_score": 2
+      },
+      "reality_class": "NOT_YET_OPERATIONAL — requiere formalización antes de usar"
+    },
+    {
+      "entity": "Theory",
+      "description": "Sistema coherente de explicaciones que genera predicciones",
+      "evidence": "No existe en CoResearcher — nunca se generó una teoría",
+      "sprint_origin": "N/A",
+      "dimensions": {
+        "observability": "Muy baja",
+        "reproducibility": "Desconocida",
+        "falsifiability": "Media",
+        "narrative_label": true
+      },
+      "operational_definition": "No definida. CoResearcher no genera teorías.",
+      "empirical_evidence": "0 teorías generadas.",
+      "kappa_evidence": "No medido.",
+      "status": "UNTESTED",
+      "scores": {
+        "observability_score": 0,
+        "reproducibility_score": 0,
+        "falsifiability_score": 2,
+        "narrative_penalty": 2,
+        "total_reality_score": 0
+      },
+      "reality_class": "UNOPERATIONALIZED — CoResearcher no sabe medirlo todavía"
+    }
+  ],
+  "summary": {
+    "total_entities": 10,
+    "real": 0,
+    "partially_real": 0,
+    "narrative": 0,
+    "metaphor": 0,
+    "categories": {
+      "OPERATIONAL": 2,
+      "PARTIALLY_OPERATIONAL": 2,
+      "NOT_YET_OPERATIONAL": 2,
+      "UNOPERATIONALIZED": 4
+    }
+  },
+  "verdict": "RED — most entities not yet operationalized by CoResearcher",
+  "key_finding": "Bajo el esquema actual de observabilidad, reproducibilidad y falsabilidad empleado por CoResearcher, los constructos más robustos son DecisionNode y Epistemic Gap. Otros constructos tradicionales de la práctica científica (hypothesis, theory, explanation, paradigm) muestran baja estabilidad operacional y requieren una formalización más rigurosa antes de poder utilizarse como unidades observacionales dentro del sistema.",
+  "critical_caveat": "IMPORTANTE: Una puntuación baja NO significa que la entidad no exista como objeto científico. Significa que CoResearcher aún no sabe operacionalizarla de forma reproducible. Contraejemplo: el 'gen' en 1850 tenía observabilidad = 0 pero era real. La observabilidad directa no determina ontología. Una hipótesis no es un objeto físico — es una entidad metodológica cuya función es generar predicciones falsables. Una teoría no es observable — es una estructura explicativa. Evaluarlas con criterios diseñados para objetos observables produce un falso negativo conceptual.",
+  "implication_for_EHG": "El EHG no puede revivir hasta que las entidades que usa (hypothesis, restriction, mechanism) alcancen estabilidad interobservador. Actualmente son NARRATIVE o UNTESTED.",
+  "implication_for_coresearcher": "CoResearcher está evolucionando de generador de hipótesis a auditor computacional de epistemología científica. Esa dirección produce resultados más sólidos que la búsqueda prematura de hipótesis.",
+  "parallel_with_LRM": {
+    "description": "El paralelismo con el artículo sobre LRM es brutal: Chain of Thought ↔ Restricción compartida. Ambas parecen explicar. Ambas no son observables directamente. Ambas tienen baja fidelidad/estabilidad. Ambas son fáciles de antropomorfizar/reificar.",
+    "table": {
+      "LRM": [
+        "Chain of Thought",
+        "Parece explicar",
+        "No observable",
+        "Baja fidelidad",
+        "Fácil antropomorfizar"
+      ],
+      "CoResearcher": [
+        "Restricción compartida",
+        "Parece explicar",
+        "No observable",
+        "Baja estabilidad",
+        "Fácil reificar"
+      ]
+    }
+  },
+  "epistemic_note": "Este sprint NO construye nada. Solo audita. La pregunta no es '¿cuál es la hipótesis correcta?' sino '¿puede CoResearcher operacionalizar la categoría hipótesis de forma reproducible?'. La respuesta actual es: no todavía. Eso no significa que las hipótesis no existan — significa que nuestro sistema necesita formalización adicional."
+}

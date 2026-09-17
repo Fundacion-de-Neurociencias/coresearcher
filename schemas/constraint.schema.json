@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Constraint",
+  "description": "Schema for scientific constraints as fundamental primitives of reality and knowledge (ADR-DISCOVERY-006)",
+  "type": "object",
+  "required": [
+    "constraint_id",
+    "statement",
+    "constraint_type",
+    "invariance_domain",
+    "falsification_conditions",
+    "epistemic_status"
+  ],
+  "properties": {
+    "constraint_id": {
+      "type": "string",
+      "pattern": "^CONST-[A-Z0-9_-]+$"
+    },
+    "statement": {
+      "type": "string",
+      "description": "Formal assertion of what is prohibited or invariant in the state space"
+    },
+    "constraint_type": {
+      "type": "string",
+      "enum": ["PHYSICAL", "BIOLOGICAL", "LOGICAL", "CONTEXTUAL", "STATISTICAL"]
+    },
+    "marr_level": {
+      "type": "string",
+      "enum": ["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"]
+    },
+    "invariance_domain": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Contexts, manifolds, or states where the constraint holds invariant"
+    },
+    "falsification_conditions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Explicit empirical observations that would demolish this constraint"
+    },
+    "necessary_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sufficient_conditions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "epistemic_status": {
+      "type": "string",
+      "enum": ["CONJECTURED", "SURVIVED", "CANONICAL", "FALSIFIED"]
+    },
+    "excluded_state_space_volume": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Fraction of configuration space rendered impossible by this constraint"
+    },
+    "falsification_attempts_count": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

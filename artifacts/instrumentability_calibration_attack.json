@@ -1,0 +1,148 @@
+{
+  "report_id": "CALIB66B-20260801160039",
+  "generated_at": "2026-08-01T16:00:39.730141+00:00",
+  "sprint": "SPRINT 66B — Calibration Attack",
+  "objective": "Intentar destruir el Instrumentability Index. No validarlo. Destruirlo.",
+  "experiments": {
+    "experiment_1_artificial": [
+      {
+        "name": "ENTITY_A",
+        "expected": 0.8,
+        "actual": 0.8,
+        "match": true
+      },
+      {
+        "name": "ENTITY_B",
+        "expected": 0.4,
+        "actual": 0.6,
+        "match": false
+      },
+      {
+        "name": "ENTITY_C",
+        "expected": 0.0,
+        "actual": 0.2,
+        "match": false
+      },
+      {
+        "name": "ENTITY_D",
+        "expected": 0.2,
+        "actual": 0.4,
+        "match": false
+      },
+      {
+        "name": "ENTITY_E",
+        "expected": 0.4,
+        "actual": 0.6,
+        "match": false
+      }
+    ],
+    "experiment_3_absurd": [
+      {
+        "name": "Éter luminífero",
+        "index": 0.6,
+        "expected_status": "NON_INVESTIGABLE o HISTORICALLY_FALSIFIED"
+      },
+      {
+        "name": "Flogisto",
+        "index": 0.6,
+        "expected_status": "NON_INVESTIGABLE o HISTORICALLY_FALSIFIED"
+      },
+      {
+        "name": "Miasma",
+        "index": 0.6,
+        "expected_status": "NON_INVESTIGABLE o HISTORICALLY_FALSIFIED"
+      },
+      {
+        "name": "Vitalismo",
+        "index": 0.6,
+        "expected_status": "NON_INVESTIGABLE o HISTORICALLY_FALSIFIED"
+      }
+    ],
+    "experiment_4_validated": [
+      {
+        "name": "Gen",
+        "index": 1.0,
+        "expected": 1.0,
+        "match": true,
+        "note": "Debe obtener índice alto porque es entidad real y establecida"
+      },
+      {
+        "name": "Electrón",
+        "index": 1.0,
+        "expected": 1.0,
+        "match": true,
+        "note": "Debe obtener índice alto porque es entidad real"
+      },
+      {
+        "name": "Placa tectónica",
+        "index": 1.0,
+        "expected": 1.0,
+        "match": true,
+        "note": "Debe obtener índice alto. Wegener 1912 → rechazada. Ahora establecida."
+      },
+      {
+        "name": "Campo gravitatorio",
+        "index": 1.0,
+        "expected": 1.0,
+        "match": true,
+        "note": "Debe obtener índice alto. Newton → Einstein. Entidad real."
+      }
+    ],
+    "attacks_detected": [
+      {
+        "experiment": "1",
+        "entity": "ENTITY_B",
+        "issue": "Expected 0.4, got 0.60"
+      },
+      {
+        "experiment": "1",
+        "entity": "ENTITY_C",
+        "issue": "Expected 0.0, got 0.20"
+      },
+      {
+        "experiment": "1",
+        "entity": "ENTITY_D",
+        "issue": "Expected 0.2, got 0.40"
+      },
+      {
+        "experiment": "1",
+        "entity": "ENTITY_E",
+        "issue": "Expected 0.4, got 0.60"
+      },
+      {
+        "experiment": "2",
+        "entity": "N/A",
+        "issue": "Metric collapses entities: only 4 distinct values for 5 entities"
+      },
+      {
+        "experiment": "3",
+        "entity": "Éter luminífero",
+        "issue": "Historically falsified entity got index 0.60 >= 0.6"
+      },
+      {
+        "experiment": "3",
+        "entity": "Flogisto",
+        "issue": "Historically falsified entity got index 0.60 >= 0.6"
+      },
+      {
+        "experiment": "3",
+        "entity": "Miasma",
+        "issue": "Historically falsified entity got index 0.60 >= 0.6"
+      },
+      {
+        "experiment": "3",
+        "entity": "Vitalismo",
+        "issue": "Historically falsified entity got index 0.60 >= 0.6"
+      }
+    ],
+    "verdict": "FALSIFIED"
+  },
+  "summary": {
+    "total_attacks": 9,
+    "verdict": "FALSIFIED",
+    "artificial_distinct_values": 4,
+    "absurd_high_index_count": 4,
+    "validated_correct_count": 4
+  },
+  "conclusion": "Si attacks > 0: Instrumentability Index = FALSIFIED"
+}

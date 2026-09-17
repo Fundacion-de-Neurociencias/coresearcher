@@ -3,11 +3,11 @@
 
 ---
 
-## El insight central
+## The central insight
 
-> **La creatividad emerge cuando el sistema NO memoriza exactamente la realidad.**
+> **Creativity emerges when the system DOES NOT exactly memorize reality.**
 
-Este insight de los diffusion models de Google aplica directamente a la epistemología del descubrimiento científico:
+This insight from Google's diffusion models applies directly to the epistemology of scientific discovery:
 
 ```text
 Datos observados
@@ -21,15 +21,15 @@ Interpolación
 Nuevas configuraciones plausibles
 ```
 
-**Creatividad = interpolación estructurada**
+**Creativity = structured interpolation**
 
-No magia. No inspiración. No conciencia.
+Not magic. Not inspiration. Not consciousness.
 
 ---
 
-## La analogía con CoResearcher
+## The analogy with CoResearcher
 
-### Sistema memorístico (actual en IA médica)
+### Memory system (current in medical AI)
 
 ```text
 Claim A: GFAP ↑
@@ -41,7 +41,7 @@ o
 NfL
 ```
 
-### Sistema interpolador (CoResearcher)
+### Interpolator system (CoResearcher)
 
 ```text
 Claim A: GFAP ↑
@@ -52,20 +52,20 @@ Interpolación estructurada:
 - GFAP + NfL combinados
 - ratio GFAP/NfL
 - trayectoria temporal combinada
-- mecanismo causal unificado
+- unified causal mechanism
 ```
 
-**No está en los datos. Pero tampoco sale de la nada.**
+**Not in the data. But it doesn't come out of nowhere either.**
 
 ---
 
-## El Scientific Manifold
+## The Scientific Manifold
 
-### La geometría subyacente del conocimiento
+### The underlying geometry of knowledge
 
-Google dice: *"Score smoothing facilitates manifold recovery"*
+Google says: *"Score smoothing facilitates manifold recovery"*
 
-Traducción científica:
+Scientific translation:
 
 ```text
 Datos científicos
@@ -77,34 +77,34 @@ Mechanisms (geometría)
 Scientific Manifold
 ```
 
-Los mecanismos son la geometría, no los biomarcadores (puntos).
+The mechanisms are geometry, not biomarkers (dots).
 
 ---
 
-## Interpolación vs. Cambio de Manifold
+## Interpolation vs. Manifold Change
 
-### La limitación fundamental
+### The fundamental limitation
 
-| Tipo | Descripción | Ejemplos históricos | Limitación |
+| Type | Description | Historical examples | Limitation |
 |------|-------------|-------------------|------------|
-| **Interpolación dentro del manifold** | Combinar conocimiento existente de formas nuevas | Hipótesis combinadas, fármacos repurposing | Bounded by current paradigm |
-| **Cambio de manifold** | Crear nuevos paradigmas conceptuales | CRISPR, PCR, Relatividad, Transformers | Requires manifold rupture |
+| **Interpolation within the manifold** | Combine existing knowledge in new ways | Combined hypotheses, repurposing drugs | Bounded by current paradigm |
+| **Manifold change** | Create new conceptual paradigms | CRISPR, PCR, Relativity, Transformers | Requires manifold rupture |
 
-### Tipos de discovery en la clasificación
+### Discovery types in classification
 
-| Métrica | Tipo A | Tipo B | Tipo C (Interpolación) | Tipo D (Manifold Change) |
-|---------|--------|--------|----------------------|------------------------|
+| Metric | Type A | Type B | Type C (Interpolation) | Type D (Manifold Change) |
+|---------|-----|--------|-------------|---------|
 | Surprise | 0% | 20% | 60% | 90% |
 | Explanatory Power | Low | Medium | High | Very High |
 | Manifold Change | None | None | Implicit | Explicit |
 
 ---
 
-## La primitiva INTERPOLATION
+## The INTERPOLATION primitive
 
-### Un nuevo objeto científico computable
+### A new computable scientific object
 
-Basado en el pipeline de descubrimiento:
+Based on the discovery pipeline:
 
 ```text
 Question
@@ -124,7 +124,7 @@ Hypothesis (reframing or novel connection)
 Prediction (testable consequences)
 ```
 
-### Definición formal
+### Formal definition
 
 ```yaml
 interpolation:
@@ -144,9 +144,9 @@ interpolation:
 
 ---
 
-## Conexión con Einstein Generator v2
+## Connection with Einstein Generator v2
 
-### Operando sobre mecanismos
+### Operating on mechanisms
 
 ```python
 # Antes (claims):
@@ -166,13 +166,13 @@ for mech_a in mechanisms:
 
 ---
 
-## Detección de manifold rupture
+## Manifold rupture detection
 
-### El problema constitucional
+### The constitutional problem
 
-> ¿La ciencia es principalmente interpolación dentro de un manifold conocido o creación de nuevos manifolds?
+> Is science primarily interpolation within a known manifold or creation of new manifolds?
 
-### Señales de salida del manifold
+### Manifold output signals
 
 ```text
 Manifold Change Indicators:
@@ -183,7 +183,7 @@ Manifold Change Indicators:
 └── Terminology not found in current vocabulary
 ```
 
-### Implementación propuesta
+### Proposed implementation
 
 ```python
 def detect_manifold_break(hypothesis):
@@ -198,12 +198,12 @@ def detect_manifold_break(hypothesis):
 
 ---
 
-## Conexión con Scientific Semantic Compiler
+## Connection with Scientific Semantic Compiler
 
-### El compiler detecta interpolaciones
+### The compiler detects interpolations
 
 ```python
-# Input: "¿Qué pasaría si combináramos los mecanismos de pruning sináptico y proteico?"
+# Input: "What would happen if we combined the synaptic and protein pruning mechanisms?"
 
 # Compiler infiere:
 ScientificIntent(
@@ -219,12 +219,12 @@ ScientificIntent(
 
 ---
 
-## La Scientific Interaction Graph mejorada
+## The improved Scientific Interaction Graph
 
-### Cada interpolación es ahora explícita
+### Each interpolation is now explicit
 
 ```text
-Investigador: "¿Y si combináramos X y Y?"
+Researcher: "What if we combined X and Y?"
     ↓
 Compiler: INTERPOLATION + MECHANISM_X + MECHANISM_Y
     ↓
@@ -239,60 +239,60 @@ Oportunidad: nueva área ontológica a explorar
 
 ---
 
-## Roadmap de integración
+## Integration roadmap
 
-### Sprint 24.5: Discovery Detection (IMPLEMENTADO ✓)
+### Sprint 24.5: Discovery Detection (IMPLEMENTED ✓)
 
-- [x] `INTERPOLATION` como primitiva en Scientific Semantic Compiler
-- [x] `manifold_distance()` función en python/discovery/
-- [x] Detección automática de manifold rupture
-- [x] Nuevas métricas de "surprise through interpolation"
+- [x] `INTERPOLATION` as primitive in Scientific Semantic Compiler
+- [x] `manifold_distance()` function in python/discovery/
+- [x] Automatic manifold rupture detection
+- [x] New "surprise through interpolation" metrics
 
 ### Sprint 25: Einstein v3
 
-- [ ] Operación de interpolación explícita entre mecanismos
-- [ ] Síntesis de mecanismos cruzados
+- [ ] Explicit interpolation operation between mechanisms
+- [ ] Synthesis of cross mechanisms
 
 ---
 
-## Auditoría de implementación
+## Implementation audit
 
-### Nivel 1: Metáfora útil ✅
+### Level 1: Useful metaphor ✅
 
-La analogía con diffusion models es válida como intuición de diseño:
+The analogy with diffusion models is valid as a design intuition:
 
 ```text
 Biomarcadores (puntos)
     ↓
 Mecanismos (estructura)
     ↓
-Manifold científico
+Scientific Manifold
     ↓
-Hipótesis en regiones poco exploradas
+Hypotheses in little explored regions
 ```
 
-### Nivel 2: Heurística computacional ⚠️
+### Level 2: Computational Heuristics ⚠️
 
-Implementado como `NoveltyDetector` - detecta anomalías respecto al conocimiento existente:
+Implemented as `NoveltyDetector` - detects anomalies with respect to existing knowledge:
 
-- **ontological_distance** - Qué tan lejos están las entidades de categorías conocidas
-- **bibliographic_distance** - Si los mecanismos han sido conectados antes en literatura
-- **mechanism_gap** - Qué mecanismos conocidos podrían estar faltando
+- **ontological_distance** - How far entities are from known categories
+- **bibliographic_distance** - Whether the mechanisms have been connected before in literature
+- **mechanism_gap** - What known mechanisms might be missing
 
-### Nivel 3: Teoría del descubrimiento científico ❓
+### Level 3: Theory of scientific discovery ❓
 
-La pregunta clave no es "¿es descubrimiento = interpolación?" sino:
+The key question is not "is discovery = interpolation?" but:
 
-> **¿Cómo detectamos cuando una hipótesis propone conexiones que nunca han sido exploradas?**
+> **How do we detect when a hypothesis proposes connections that have never been explored?**
 
-Esto es más defendible que detectar "rupturas de manifold" porque:
-- No asumimos que existe un manifold objetivo
-- Medimos distancia al conocimiento institucional existente
-- Identificamos oportunidades de interpolación estructurada
+This is more defensible than detecting "manifold ruptures" because:
+- We do not assume that a target manifold exists
+- We measure distance to existing institutional knowledge
+- We identify opportunities for structured interpolation
 
 ---
 
-## Implementación actual
+## Current implementation
 
 ```python
 # NoveltyDetector en python/discovery/novelty_detector.py
@@ -311,16 +311,16 @@ result = detector.assess_novelty({
 # - novelty_score: 0.0-1.0 (medida de unusualness, NO impacto)
 ```
 
-### La distinción crucial:
+### The crucial distinction:
 
-**Novelty ≠ Impacto potencial**
+**Novelty ≠ Potential Impact**
 
-Una hipótesis muy novedosa puede ser simplemente incorrecta.
-El impacto debe inferirse de la acumulación de evidencia, no de la unusualness inicial.
+A very novel hypothesis may simply be wrong.
+Impact should be inferred from the accumulation of evidence, not from initial unusualness.
 
 ---
 
-## Ciclo de descubrimiento con NoveltyDetector
+## Discovery cycle with NoveltyDetector
 
 ```text
 Question
@@ -336,21 +336,21 @@ Prioritization (basado en novelty + plausibility)
 Review
 ```
 
-Einstein Generator deja de ser solo un motor de creación.
-Se convierte en un motor de **exploración del espacio científico**.
+Einstein Generator is no longer just a creation engine.
+It becomes an engine for **scientific space exploration**.
 
 ---
 
-## Conclusión
+## Conclusion
 
-Esta integración refuerza la decisión arquitectónica central de CoResearcher:
+This integration reinforces the core architectural decision of CoResearcher:
 
-> **Mecanismos > Findings > Claims**
+> **Mechanisms > Findings > Claims**
 
-Porque los mecanismos son la estructura sobre la que puede operar un sistema de descubrimiento, mientras que los findings son solo puntos dispersos.
+Because mechanisms are the structure on which a discovery system can operate, while findings are just scattered points.
 
-La pregunta fundamentacional que queda:
+The fundamental question that remains:
 
-> **¿Qué tan lejos está esta hipótesis de las conexiones científicas establecidas?**
+> **How far is this hypothesis from established scientific connections?**
 
-Esta es una métrica mucho más útil que cualquier medida de "ruptura de manifold".
+This is a much more useful metric than any "manifold rupture" measurement.

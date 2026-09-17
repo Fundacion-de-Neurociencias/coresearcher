@@ -1,13 +1,49 @@
 # Foundation Constitution
 ## The Immutable Decisions for CoResearcher
 
+## Decision 0: The Fundamental Nature of CoResearcher (The Core Epistemic Maxim)
+
+> **CoResearcher is NOT an answer system.**  
+> **CoResearcher is NOT a bibliographic search engine.**  
+> **CoResearcher is NOT a hypothesis generator.**  
+> **CoResearcher IS a system for the progressive reduction of the possible scientific state space (\(\Omega\)) through empirical constraints, predictions, and auditable falsifications.**
+
+## Decision 0.1: The Principle of Earning Reality (Reality Contact Score - RCS)
+
+> **"Every hypothesis must earn reality."**
+> 
+> The difference between a system that merely analyzes science and a system that actually does science is the amount of reality it touches.
+> Every hypothesis or constraint must be classified according to its **Reality Contact Score (RCS)**:
+> 
+> * **RCS = 0**: Purely bibliographic conjecture or in-silico reasoning without external empirical contrast.
+> * **RCS = 1**: Prediction contrasted and retrospectively verified against independent external cohorts (\(C_1, C_2, \dots\)).
+> * **RCS = 2**: Prediction confirmed prospectively or on blinded holdout datasets.
+> * **RCS = 3**: Prediction translated into a physical wet-lab protocol that **modified or guided a real physical experiment** (microfluidics, imaging, reactors).
+> * **RCS = 4**: Prediction that yielded a **new invariant biological constraint formally inscribed into the ledger**, pruning the state space \(\Omega\).
+
+## Decision 0.2: The Principle of Hidden Constraint Discovery & Reality Distance (Dry → Damp → Wet)
+
+> **"The ultimate goal of artificial science is not to explain data or maximize prediction. It is to discover the hidden constraints that govern the system."**
+> 
+> To evaluate genuine discovery capability and decouple it from pretrained biological memory or knowledge:
+> 
+> 1. **ConstraintBox (Environments with Unknown Ground Truth)**:
+>    - Synthetic biological worlds and programs are generated with hidden invariant constraints (\(\mathcal{C}^*\): necessary, sufficient, and impossible).
+>    - The agent executes blind intervention rounds and must **reconstruct the exact constraint set** (\(\hat{\mathcal{C}}\)), measuring discovery precision, recall, and causal \(F_1\).
+> 
+> 2. **Reality Distance Hierarchy (\(\text{Dry} \to \text{Damp} \to \text{Wet}\))**:
+>    - **Dry (Synthetic)**: Artificial worlds of *ConstraintBox*, with exact ground truth known by the oracle and immediate computable evaluation.
+>    - **Damp (Surrogate)**: In-silico surrogate models and oracles trained on massive cohorts (ADNI, UK Biobank, AMP-AD, MPRA).
+>    - **Wet (Empirical Physical)**: Wet-lab assays, bioreactors, clinical cohorts, and real patients.
+>    - **Trans-Substrate Survival Rate**: Measures the epistemic robustness of a constraint by surviving intact through the migration \(\text{Dry} \to \text{Damp} \to \text{Wet}\).
+
 ---
 
-## Decision 1: Capa Semántica sobre GitHub
+## Decision 1: Semantic Layer on Top of GitHub
 
-**No construir ScientificHub como reemplazo de GitHub.**
+**Do not build ScientificHub as a replacement for GitHub.**
 
-CoResearcher es una **capa semántica** que da significado científico a la infraestructura existente.
+CoResearcher is a **semantic layer** that confers scientific meaning onto existing developer infrastructure.
 
 ```
 GitHub Issue → Semantic Compiler → QUESTION-XXXXXX
@@ -16,27 +52,27 @@ GitHub PR → Semantic Compiler → HYPOTHESIS FORK
 GitHub Commit → Semantic Compiler → SCIENTIFIC ACTION
 ```
 
-GitHub = infraestructura. CoResearcher = significado.
+GitHub = infrastructure. CoResearcher = meaning.
 
 ---
 
-## Decision 2: Identidades Externas de Primera Clase
+## Decision 2: First-Class External Federated Identities
 
-**ORCID y ROR son ciudadanos de primera clase desde el día 1.**
+**ORCID and ROR are first-class citizens from Day 1.**
 
-No opcionales. No extensiones. Identidades fundamentales.
+Not optional. Not plugins. Foundational identity primitives.
 
 ```json
 Researcher {
   "res_id": "RES-XXXXXX",
-  "orcid": "0000-0002-1825-0097",  // obligatorio
+  "orcid": "0000-0002-1825-0097",  // mandatory
   "name": "...",
   "reputation": "..."
 }
 
 Institution {
   "inst_id": "INST-XXXXXX",
-  "ror": "https://ror.org/...",  // obligatorio
+  "ror": "https://ror.org/...",  // mandatory
   "name": "...",
   "trust_history": [...]
 }
@@ -44,11 +80,11 @@ Institution {
 
 ---
 
-## Decision 3: ACTION-XXXXXX como Identificador Principal
+## Decision 3: ACTION-XXXXXX as Primary Identifier
 
-**El activo principal no es el conocimiento. Es la actividad.**
+**The core asset is not raw knowledge. It is activity.**
 
-ACTION es el identificador principal:
+`ACTION` is the primary identifier:
 
 ```
 ACTION-000001  // SUPPORT
@@ -59,35 +95,34 @@ ACTION-000005  // CONFIRM
 ACTION-000006  // REJECT
 ```
 
-Toda reputación, consenso y confianza deriva de acciones inmutables.
+All reputation, consensus, and epistemic trust derive from immutable actions.
 
 ---
 
-## Decision 4: Scientific Activity Graph es el Activo
+## Decision 4: Scientific Activity Graph is the Core Asset
 
-**No Knowledge Graph. Scientific Activity Graph.**
+**Not a Knowledge Graph. A Scientific Activity Graph.**
 
 ```
-Knowledge Graph:  qué sabemos
-Activity Graph:   quién propuso, quién apoyó, quién replicó, quién desafió
+Knowledge Graph:  what we know
+Activity Graph:   who proposed, who supported, who replicated, who challenged
 ```
 
-GitHub no vale miles de millones por repositorios.
-Valdrá miles de millones por la actividad acumulada.
+GitHub is not worth billions because of repositories; it is worth billions because of accumulated, auditable activity.
 
 ---
 
-## Decision 5: Agent First Principle
+## Decision 5: Agent-First Principle
 
-**Toda funcionalidad debe ser consumible por agente antes que por humano.**
+**Every feature must be consumable by AI agents before humans.**
 
-El 95% de las interacciones futuras serán:
+95% of future scientific interactions will be:
 
 ```
 Agent → MCP → CoResearcher → Knowledge
 ```
 
-No:
+Not:
 
 ```
 Human → UI → CoResearcher → Knowledge
@@ -109,19 +144,19 @@ Human → UI → CoResearcher → Knowledge
 }
 ```
 
-Los agentes aman IDs, URIs, schemas, graphs.
+Agents thrive on IDs, URIs, schemas, and structured graphs.
 
 ---
 
 ## Decision 6: AGENT-XXXXXX Identifier
 
-Reservar desde el día 1:
+Reserved from Day 1:
 
 ```
 AGENT-XXXXXX
 ```
 
-Para consumidores automáticos:
+For autonomous programmatic consumers:
 
 | Agent ID | Consumer |
 |----------|----------|
@@ -129,35 +164,31 @@ Para consumidores automáticos:
 | AGENT-000002 | Gemini Deep Research |
 | AGENT-000003 | OpenAI Research |
 
-Un claim usado por 50,000 agentes es tan importante como uno citado 300 veces.
+A scientific claim used and verified by 50,000 agents is as significant as one cited 300 times.
 
 ---
 
-## Decision 7: MCP First Over Web
+## Decision 7: MCP Protocol First Over Web UI
 
-**MCP/API/Protocol es más importante que UI.**
+**MCP/API/Protocol is more critical than a Web UI.**
 
-El moat verdadero:
+The authentic moat:
 
-> "La fuente de verdad científica más fácil de consumir por agentes"
-
----
-
-## Identificadores Fundamentales (Congelados)
+> "The scientific source of truth easiest for AI agents to consume."
 
 ---
 
-## Identificadores Fundamentales (Congelados)
+## Fundamental Identifiers (Frozen)
 
-### Ciudadanos de Primera Clase
+### First-Class Citizens
 ```
-RES-XXXXXX = Researcher (orcid obligatorio)
-INST-XXXXXX = Institution (ror obligatorio)
+RES-XXXXXX = Researcher (mandatory ORCID)
+INST-XXXXXX = Institution (mandatory ROR)
 REPO-XXXXXX = Scientific Repository
-ACTION-XXXXXX = Scientific Action (inmutable)
+ACTION-XXXXXX = Scientific Action (immutable)
 ```
 
-### Objetos Científicos
+### Scientific Objects
 ```
 QUESTION-XXXXXX
 OBSERVATION-XXXXXX
@@ -168,7 +199,7 @@ MODEL-XXXXXX
 THEORY-XXXXXX
 ```
 
-### Identificadores Externos Federados
+### Federated External Identifiers
 ```
 DOI → CLAIM provenance
 PMID → OBS provenance
@@ -182,7 +213,7 @@ ROR → INST identity
 ## Priority Implementation Order
 
 ### Sprint 23A: ACTION Foundation
-- ACTION-XXXXXX registry (inmutable)
+- ACTION-XXXXXX registry (immutable)
 - ORCID federation (RES-XXXXXX)
 - ROR federation (INST-XXXXXX)
 
@@ -197,58 +228,58 @@ ROR → INST identity
 
 ### Sprint 23D+: Growth
 - CLAIM/MECH/QUESTION registries
-- Trust scoring from actions
+- Trust scoring derived from actions
 - ScientificHub interface
 
 ---
 
-## Lo que NO se Debe Hacer
+## What NOT to Do
 
-❌ No construir otro GitHub desde cero  
-❌ No crear perfiles sin ORCID/ROR  
-❌ No hacer CLAIM sin ACTION trazabilidad  
-❌ No priorizar registries sobre actividad  
-❌ No retrasar Scientific Semantic Compiler  
-
----
-
-## Lo que SÍ se Debe Hacer
-
-✅ Resolver la coordinación científica como prioridad  
-✅ Federar con estándares externos desde el día 1  
-✅ Capturar toda actividad como ACTION inmutable  
-✅ Hacer visible el consenso evolutivo  
-✅ Trackear reputación por acciones verificables  
+❌ Do not build another GitHub from scratch  
+❌ Do not create profiles without ORCID/ROR  
+❌ Do not emit a CLAIM without ACTION traceability  
+❌ Do not prioritize passive registries over active activity  
+❌ Do not delay the Scientific Semantic Compiler  
 
 ---
 
-## La Historia Importa
+## What MUST Be Done
 
-Los datos de conocimiento pueden replicarse.
+✅ Resolve scientific coordination as the top priority  
+✅ Federate with external open standards from Day 1  
+✅ Capture all research activity as immutable ACTION records  
+✅ Render evolving scientific consensus transparent  
+✅ Track epistemic reputation via verifiable actions  
 
-La **actividad histórica verificable** no.
+---
+
+## History Matters
+
+Knowledge datasets can be copied or synthesized.
+
+**Verifiable historical activity** cannot.
 
 ```
-10 años de:
-- quién propuso
-- quién apoyó  
-- quién replicó
-- quién desafió
-- cómo evolucionó
+10 years of:
+- who proposed
+- who supported  
+- who replicated
+- who challenged
+- how the paradigm evolved
 ```
 
-Esto crea décadas de ventaja competitiva.
+This creates decades of unassailable competitive advantage.
 
 ---
 
 ## Scientific Coordination Infrastructure
 
-No es un producto.
+This is not merely a tool.
 
-Es una **infraestructura de coordinación científica**.
+It is an **open infrastructure for scientific coordination**.
 
-ORCID coordinó identidades.
-DOI coordinó artefactos.
-CoResearcher coordinará **actividad científica**.
+ORCID coordinated identities.  
+DOI coordinated artifacts.  
+CoResearcher coordinates **scientific activity**.
 
-Este es el estándar que permitirá coordinar la producción de conocimiento científico del futuro.
+This is the standard that enables the coordination of future scientific knowledge production.\n

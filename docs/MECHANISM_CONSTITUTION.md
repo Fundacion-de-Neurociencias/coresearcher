@@ -1,49 +1,49 @@
 # Mechanism Constitution
 ## CoResearcher Theory of Scientific Mechanisms
 
-## Pregunta 1: ¿Qué es un mecanismo?
+## Question 1: What is a mechanism?
 
-Un **mecanismo** es una secuencia explicativa causal que conecta observaciones con fenómenos, representando **cómo** algo ocurre, no solo **que** ocurre.
+A **mechanism** is a causal explanatory sequence that connects observations with phenomena, representing **how** something happens, not just **that** it happens.
 
-### Definición Formal
+### Formal Definition
 
 ```
-Un mecanismo es un conjunto estructurado de relaciones causales
+A mechanism is a structured set of causal relationships
 que explica el vínculo entre variables observables y fenómenos complejos,
 y que puede ser puesto a prueba mediante predicciones empíricas.
 ```
 
-### Propiedades Fundamentales
+### Fundamental Properties
 
-1. **Causalidad explícita** - Las relaciones son orientadas y explicativas
-2. **Testabilidad** - Genera predicciones verificables
-3. **Modularidad** - Puede combinarse con otros mecanismos
-4. **Evolución** - Puede modificarse con nueva evidencia
+1. **Explicit causality** - Relationships are oriented and explanatory
+2. **Testability** - Generates verifiable predictions
+3. **Modularity** - Can be combined with other mechanisms
+4. **Evolution** - Can be modified with new evidence
 
 ---
 
-## Pregunta 2: ¿Qué diferencia hay entre?
+## Question 2: What is the difference between?
 
 ### Claim vs Finding vs Mechanism vs Model vs Theory
 
-| Nivel | Qué | Ejemplo | Mutabilidad |
+| Level | What | Example | Mutability |
 |-------|-----|---------|-------------|
-| **Claim** | Observación atómica | "pTau217 predicts AD (r=0.78)" | Baja - es un hecho reportado |
-| **Finding** | Distilación estructurada | "pTau217 → amyloid pathway (effect=0.78)" | Media - puede re-evaluarse con nueva evidencia |
-| **Mechanism** | Explicación causal | "pTau217 mediates stress response that triggers amyloid aggregation via MECH-X" | Alta - se refinan con evidencia |
-| **Model** | Conjunto de mecanismos | "Amyloid cascade + Tau propagation + Inflammation" | Media - se reemplaza si falla |
-| **Theory** | Marco explicativo amplio | "Proteostasis failure in neurodegeneration" | Muy alta - paradigma científico |
+| **Claim** | Atomic observation | "pTau217 predicts AD (r=0.78)" | Low - it is a reported fact |
+| **Finding** | Structured distillation | "pTau217 → amyloid pathway (effect=0.78)" | Medium - can be re-evaluated with new evidence |
+| **Mechanism** | Causal explanation | "pTau217 mediates stress response that triggers amyloid aggregation via MECH-X" | High - are refined with evidence |
+| **Model** | Set of mechanisms | "Amyloid cascade + Tau propagation + Inflammation" | Medium - replaces if fails |
+| **Theory** | Broad explanatory framework | "Proteostasis failure in neurodegeneration" | Very high - scientific paradigm |
 
 ---
 
-## Pregunta 3: ¿Puede existir un mecanismo falso?
+## Question 3: Can there be a false mechanism?
 
-**Sí.** Un mecanismo puede ser:
-- Incorrecto (predicciones refutadas)
-- Incompleto (faltan pasos intermedios)
-- Superficial (el mecanismo real es diferente)
+**Yes.** A mechanism can be:
+- Incorrect (refuted predictions)
+- Incomplete (intermediate steps missing)
+- Superficial (the actual mechanism is different)
 
-### Atributos de Validación
+### Validation Attributes
 
 ```yaml
 mechanism:
@@ -64,9 +64,9 @@ mechanism:
 
 ---
 
-## Pregunta 4: ¿Cómo nace un mecanismo?
+## Question 4: How is a mechanism born?
 
-### Bottom-up (Inductivo)
+### Bottom-up (Inductive)
 
 ```
 Finding A    Finding B    Finding C
@@ -75,10 +75,10 @@ Finding A    Finding B    Finding C
          ↓
    "Hay una relación causal oculta"
          ↓
-      MECHANISM (hipótesis)
+MECHANISM (hypothesis)
 ```
 
-### Top-down (Deductivo)
+### Top-down (Deductive)
 
 ```
 Hypothesis: "pTau217 is protective response"
@@ -89,15 +89,15 @@ MECH-X: stress → pTau217 upregulation → amyloid sequestration
     ↓
 Predictions para test
     ↓
-Predicciones refutadas → mecanismo rechazado
-Predictions confirmadas → mecanismo reforzado
+Predictions refuted → mechanism rejected
+Predictions confirmed → reinforced mechanism
 ```
 
 ---
 
-## Pregunta 5: ¿Cómo muere un mecanismo?
+## Question 5: How does a mechanism die?
 
-Los mecanismos siguen un ciclo de vida científico:
+The mechanisms follow a scientific life cycle:
 
 ```
 NACIMIENTO (birth)
@@ -106,26 +106,26 @@ CREACIÓN → {support, confidence=0.1}
     ↓
 CRECIMIENTO (growth) → CONFIRMACIONES, REPLICACIONES
     ↓
-CONVERGENCIA → confianza alta, múltiples apoyos
+CONVERGENCE → high trust, multiple supports
     ↓
 REFUTACIÓN o degradación progresiva
     ↓
 MUERTE (death) → challenges > support, confidence → 0
 ```
 
-### Operaciones sobre Mecanismos
+### Operations on Mechanisms
 
-| Operación | Qué hace | Resultado |
+| Operation | What does it do | Result |
 |-----------|----------|-----------|
-| **CONFIRM** | Evidencia apoya el mecanismo | +confidence, +trust_score |
-| **REJECT** | Evidencia refuta el mecanismo | -confidence, -trust_score |
-| **FORK** | Crear variante del mecanismo | MECH-fork (nueva ruta) |
-| **MERGE** | Combinar dos mecanismos | MECH-combined (más general) |
-| **SPLIT** | Dividir mecanismo complejo | MECH-A, MECH-B (más específicos) |
+| **CONFIRM** | Evidence supports the mechanism | +confidence, +trust_score |
+| **REJECT** | Evidence refutes the mechanism | -confidence, -trust_score |
+| **FORK** | Create mechanism variant | MECH-fork (new route) |
+| **MERGE** | Combine two mechanisms | MECH-combined (more general) |
+| **SPLIT** | Split complex mechanism | MECH-A, MECH-B (more specific) |
 
 ---
 
-## Primitivas Participation para Mecanismos
+## Participation Primitives for Mechanisms
 
 ```
 MECH-000001
@@ -133,18 +133,18 @@ MECH-000001
 ├── contradict (CLAIM/FINDING que lo refutan)
 ├── replicate (evidencia de replicación)
 ├── challenge (análisis crítico)
-├── fork (mecanismo derivado)
+├── fork (derivative mechanism)
 └── merge_request (propuesta de combinación)
 ```
 
 ---
 
-## Conclusión
+## Conclusion
 
-Los mecanismos son el **núcleo del descubrimiento científico compartido**. 
+Mechanisms are the **core of shared scientific discovery**. 
 
-No los claims. No los papers. 
+Not the claims. Not the papers. 
 
-**Los mecanismos son las explicaciones que los científicos discuten, defienden, refutan y evolucionan colectivamente.**
+**Mechanisms are the explanations that scientists collectively discuss, defend, refute, and evolve.**
 
-Este es el activo que generará el verdadero moat de CoResearcher: una red acumulativa de mecanismos con su historia de participación científica.
+This is the asset that will generate the true moat of CoResearcher: a cumulative network of mechanisms with their history of scientific participation.

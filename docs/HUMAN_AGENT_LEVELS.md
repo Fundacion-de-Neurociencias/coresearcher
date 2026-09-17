@@ -3,49 +3,49 @@
 
 ---
 
-## La Transición ya está sucediendo
+## The Transition is already happening
 
-Hoy la IA en ciencia se plantea como:
+Today AI in science is presented as:
 
 ```
 Humano vs IA
 ```
 
-Pero el modelo real es:
+But the real model is:
 
 ```
 Humano + 3-5 agentes
 ```
 
-sin llamarlo así.
+without calling it that.
 
 ---
 
-## Los 3 Niveles de Interacción
+## The 3 Levels of Interaction
 
-### Nivel 1: Agent-in-the-loop
+### Level 1: Agent-in-the-loop
 ```
 Investigador trabaja
 ↓
 Agente ayuda
 ```
 
-Modelo actual.
+Current model.
 
 ---
 
-### Nivel 2: Human-in-the-loop
+### Level 2: Human-in-the-loop
 ```
 Agentes trabajan
 ↓
 Humano supervisa
 ```
 
-Modelo en transición.
+Model in transition.
 
 ---
 
-### Nivel 3: Human-on-the-loop
+### Level 3: Human-on-the-loop
 ```
 Agentes trabajan
 ↓
@@ -54,13 +54,13 @@ Humano recibe alertas
 Intervención selectiva
 ```
 
-Modelo futuro.
+Future model.
 
 ---
 
-## Alertas que Importan
+## Alerts that Matter
 
-Solo el humano interviene cuando:
+Only humans intervene when:
 
 ```
 High uncertainty detected
@@ -90,56 +90,56 @@ Research direction
 
 ---
 
-## Decision como Activo Principal
+## Decision as Main Asset
 
-Los agentes pueden generar miles de documentos.
+Agents can generate thousands of documents.
 
-Lo escaso son:
+What is scarce are:
 
 ```
 Decisiones humanas
 ```
 
-### Tipos de Decisiones
+### Types of Decisions
 - Approve publication
 - Reject publication
 - Request replication
 - Keep private
 - File patent
 - Escalate ethics review
-- Open collaboration
+-Open collaboration
 
 ---
 
-## Dos Perfiles de Usuario
+## Two User Profiles
 
-### Rider (Control Total)
+### Rider (Full Control)
 ```
 Investigador + Escuadrón de agentes
 ```
-- Control detallado
-- Intervención frecuente
-- Usuarios avanzados
+- Detailed control
+- Frequent intervention
+- Advanced users
 
-### Passenger (Piloto Automático)
+### Passenger (Autopilot)
 ```
 Investigador + Piloto automático
 ```
-- Solo interviene cuando necesario
-- Alertas automáticas
-- Mayoría de usuarios
+- Only intervenes when necessary
+- Automatic alerts
+- Majority of users
 
 ---
 
-## Trust como Proceso Continuo
+## Trust as a Continuous Process
 
-Hoy:
+Today:
 
 ```
 Preprint → Review → Publication
 ```
 
-Mañana:
+Tomorrow:
 
 ```
 Preprint
@@ -161,63 +161,63 @@ Replication review
 Living trust score
 ```
 
-Trust deja de ser binario.
+Trust is no longer binary.
 
-Existe:
+There is:
 
 ```
 Current confidence level
 ```
 
-que evoluciona con el tiempo.
+that evolves over time.
 
 ---
 
-## La Pregunta de Validación
+## The Validation Question
 
-No:
-
-```
-¿Les gusta la idea?
-```
-
-Sino:
+Not:
 
 ```
-¿La transición ya ha empezado?
+Do you like the idea?
+```
+
+Otherwise:
+
+```
+Has the transition already started?
 ```
 
 ---
 
-## Validación con 3 Grupos
+## Validation with 3 Groups
 
-### Grupo A: Académicos
-Universidades tradicionales
+### Group A: Academics
+Traditional universities
 
-### Grupo B: Industria
-Farmacéuticas, Biotech, Medtech
+### Group B: Industry
+Pharmaceuticals, Biotech, Medtech
 
-### Grupo C: Independientes
-Tendencias emergentes
+### Group C: Independents
+Emerging trends
 
 ---
 
-## La Pregunta Más Peligrosa
+## The Most Dangerous Question
 
 ```
-¿Qué parte de tu trabajo científico
+What part of your scientific work
 te gustaría no volver a hacer nunca más?
 ```
 
-Porque GitHub no ganó ofreciendo repositorios.
+Because GitHub didn't win by offering repositories.
 
-Ganó eliminando dolor.
+He won by eliminating pain.
 
 ---
 
-## Reino: Scientific Decision Protocol
+## Kingdom: Scientific Decision Protocol
 
-El equivalente de Git + GitHub Actions para ciencia:
+The equivalent of Git + GitHub Actions for science:
 
 ```
 Decision Point
@@ -235,46 +235,46 @@ Action
 
 ## Architecture Implication
 
-No debe coordinar solo agentes.
+You should not coordinate only agents.
 
-Debe decidir **cuándo no molestar al humano**.
+You must decide **when not to disturb the human**.
 
-Ese escalado inteligente:
-- Es más valioso que mecanismos
-- Es más valioso que discovery engines
-- Es la verdadera ventaja competitiva
+That smart scaling:
+- It is more valuable than mechanisms
+- It is more valuable than discovery engines
+- It is the true competitive advantage
 
 ---
 
-## El Activo Diferencial
+## The Differential Asset
 
-No es:
+It is not:
 
 ```
 Knowledge Graph
 ```
 
-No es:
+It is not:
 
 ```
 Mechanism Registry
 ```
 
-No es:
+It is not:
 
 ```
 Discovery Engine
 ```
 
-Es:
+It is:
 
 ```
 Scientific Decision Infrastructure
 ```
 
-Donde:
+Where:
 
-- Decisiones humanas son escasas
-- Alertas son inteligentes
-- Escalado es automático
-- Trazabilidad es completa
+- Human decisions are scarce
+- Alerts are smart
+- Scaling is automatic
+- Traceability is complete

@@ -61,10 +61,10 @@ REPO/alzheimer/
 | Action | Description | Creates |
 |--------|-------------|---------|
 | **PROPOSE_QUESTION** | Formula pregunta | QUESTION-XXXXXX |
-| **PROPOSE_CLAIM** | Formula afirmación | CLAIM-XXXXXX |
-| **PROPOSE_MECHANISM** | Propone mecanismo | MECH-XXXXXX |
+| **PROPOSE_CLAIM** | Formula affirmation | CLAIM-XXXXXX |
+| **PROPOSE_MECHANISM** | Proposes mechanism | MECH-XXXXXX |
 | **PROPOSE_MODEL** | Propone modelo | MODEL-XXXXXX |
-| **PROPOSE_THEORY** | Propone teoría | THEORY-XXXXXX |
+| **PROPOSE_THEORY** | Proposes theory | THEORY-XXXXXX |
 
 ### Participation Actions
 | Action | Description | Effect |
@@ -82,7 +82,7 @@ REPO/alzheimer/
 |--------|-------------|--------|
 | **FORK** | Variante de objeto | new_object + lineage |
 | **MERGE** | Integración de objetos | combined_object |
-| **BRANCH** | Nueva línea investigación | RESEARCH_BRANCH |
+| **BRANCH** | New line of research | RESEARCH_BRANCH |
 | **PROPOSE_CONSENSUS** | Solicitud consenso | CONSENSUS_REQUEST |
 | **ACCEPT_CONSENSUS** | Aceptación consenso | consensus_update |
 
@@ -150,7 +150,7 @@ Software → copiable (2-5 años)
 Standard → defensable (5-10 años)
 Institution → imbatible (décadas)
 
-El activo es la **red de actividad acumulada**:
+The asset is the **accumulated activity network**:
 
 ```
 100,000 claims
@@ -199,8 +199,8 @@ Ganó por coordinar desarrolladores.
 
 CoResearcher ganará por:
 - Coordinar investigadores
-- Versionar conocimiento científico
+- Version scientific knowledge
 - Hacer visible el consenso
 - Trackear reputación verificable
 
-Este es el **Scientific Coordination Infrastructure** de la próxima década.
+This is the **Scientific Coordination Infrastructure** of the next decade.

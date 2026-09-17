@@ -216,8 +216,19 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Unknown Mechanism Challenge**: `POST /api/discovery/unknown-mechanism/run-100-worlds-benchmark` (100 blind worlds).
 - **Retrospective Time-Split**: `POST /api/discovery/retrospective/run-time-split-benchmark` (Historical discovery frontier).
 - **TRACES Meta-Audit**: `POST /api/discovery/traces/evaluate-epistemic-rigor` (5-dimensional epistemic profile).
+- **Paper2Agent MCP Query**: `POST /api/discovery/paper-agent/query` (Queries external virtual author paper agents by topic).
+- **Paper2Agent MCP Execute**: `POST /api/discovery/paper-agent/execute` (Executes analytical methods on virtual author agents with cryptographic SOM hash and RCS = 2 promotion).
 
-### 2. Ecosystem Demarcation (The Scientific Trinity)
+### 2. Paper2Agent (Nature 2026) MCP Federation
+Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
+- **Live Tool Invocation**: Rather than treating published papers as inert PDF text, CoResearcher discovers papers exposing analytical tools (e.g. `compute_connectome_diffusion`, `score_genetic_perturbation`, `evaluate_metabolic_glycolytic_reserve`).
+- **Cryptographic Provenance**: Every tool execution produces a reproducible payload and an immutable SHA-256 SOM execution hash.
+- **Reality Contact Level**: Executing an external paper's verified analytical code on new data earns an empirical grounding level of \(RCS = 2\) (`EMPIRICAL_EXECUTION_GROUNDED`).
+- **Ecosystem Trinity Demarcation**:
+  - **EdiTXT**: Acts as the *Producer/Host* of the Paper Agent upon manuscript peer review and release.
+  - **CoResearcher**: Acts as the *Consumer/Auditor* that queries and executes Paper Agents during autonomous discovery and falsification campaigns.
+
+### 3. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

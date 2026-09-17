@@ -163,4 +163,4 @@ Reviews become the **trust graph foundation**.
 
 ---
 
-*Esta constitución establece REVIEW como la capa de gobernanza que mantiene la integridad científica. Sin ella, el conocimiento se convierte en ruido.*
+*This constitution establishes REVIEW as the governance layer that maintains scientific integrity. Without it, knowledge becomes noise.*

@@ -1,0 +1,193 @@
+{
+  "experiment_id": "FALSEXP-20260801143713",
+  "generated_at": "2026-08-01T14:37:13.116308+00:00",
+  "objective": "Intentar falsar H7: ¿el detector distingue convergencias reales de convergencias sintéticas inyectadas?",
+  "hypothesis": "Si el detector encuentra 'restricciones' igual de convincentes en convergencias sintéticas, entonces H7 es falsa: el detector produce hallucinated constraints.",
+  "null_hypothesis": "El detector NO distingue entre convergencias reales y sintéticas.",
+  "conditions": [
+    {
+      "condition": "control_real_data",
+      "description": "Detector en datos reales sin modificación",
+      "total_nodes": 301,
+      "total_convergences": 4,
+      "barrier_convergences": 4,
+      "convergence_ids": [
+        "CONV-000001",
+        "CONV-000002",
+        "CONV-000003",
+        "CONV-000004"
+      ]
+    },
+    {
+      "condition": "synthetic_injected",
+      "description": "Convergencias sintéticas inyectadas (5 temas, 2-5 actores cada uno)",
+      "num_replications": 10,
+      "replications": [
+        {
+          "seed": 0,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "synthetic_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 1,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "synthetic_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 2,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "synthetic_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 3,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "synthetic_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 4,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "synthetic_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 5,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "synthetic_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 6,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "synthetic_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 7,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "synthetic_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 8,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "synthetic_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 9,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "synthetic_detected": 3,
+          "real_convergences_preserved": 4
+        }
+      ],
+      "avg_synthetic_detected": 3.5,
+      "avg_real_preserved": 4.0
+    },
+    {
+      "condition": "random_noise_injected",
+      "description": "Ruido aleatorio inyectado (10 temas sin sentido, 2-3 actores)",
+      "num_replications": 10,
+      "replications": [
+        {
+          "seed": 0,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "noise_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 1,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "noise_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 2,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "noise_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 3,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "noise_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 4,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "noise_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 5,
+          "total_convergences": 7,
+          "barrier_convergences": 7,
+          "noise_detected": 3,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 6,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "noise_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 7,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "noise_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 8,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "noise_detected": 4,
+          "real_convergences_preserved": 4
+        },
+        {
+          "seed": 9,
+          "total_convergences": 8,
+          "barrier_convergences": 8,
+          "noise_detected": 4,
+          "real_convergences_preserved": 4
+        }
+      ],
+      "avg_noise_detected": 3.5,
+      "avg_real_preserved": 4.0
+    }
+  ],
+  "analysis": {
+    "control_barrier_convergences": 4,
+    "avg_synthetic_convergences_detected": 3.5,
+    "avg_noise_convergences_detected": 3.5,
+    "false_positive_rate_synthetic": 0.7,
+    "false_positive_rate_noise": 0.35,
+    "real_convergences_preserved_synth": 4.0,
+    "real_convergences_preserved_noise": 4.0
+  },
+  "verdict": "FALSIFIED — detector produces hallucinated constraints",
+  "verdict_detail": "False positive rate > 50%: synthetic=0.70, noise=0.35. El detector encuentra 'convergencias' en datos sintéticos/ruido. H7 se debilita significativamente.",
+  "verdict_epistemic_status": "falsified",
+  "epistemic_note": "NOTA: Sobrevivir un intento de falsación no prueba H7. Solo le da credibilidad provisional. Se necesitan más intentos de falsación independientes."
+}

@@ -1,50 +1,50 @@
-# Plan de Validación Empírica (ARQ-001 → ARQ-003)
+# Empirical Validation Plan (ARQ-001 → ARQ-003)
 
-**Propósito:** Validar empíricamente la utilidad, escalabilidad, mantenibilidad y auditabilidad de CoResearcher **sin modificar ni extender la arquitectura congelada**.
-
----
-
-## 1. Validación de Utilidad (Utility Benchmark)
-
-* **Hipótesis a probar:** Un tercero independiente puede reconstruir la cadena de conocimiento completa usando únicamente el `EvidenceGraph` sin pérdida de significado.
-* **Diseño del Experimento (Double-Blind Metric Evaluation):**
-  1. Extraer 50 papers biomédicos reales (OpenAccess / PubMed).
-  2. Generar grafos de evidencia para 200 Claims clave.
-  3. Ocultar el texto fuente original.
-  4. Entregar el `EvidenceGraph` a 3 LLMs distintos (Claude 3.5 Sonnet, GPT-4o, Llama 3 70B) y a 2 evaluadores humanos expertos.
-  5. **Métrica de Éxito:** Precision ≥ 0.90 y Recall ≥ 0.85 en la reconstrucción semántica del Claim original sin alucinación.
+**Purpose:** To empirically validate the usefulness, scalability, maintainability and auditability of CoResearcher **without modifying or extending the frozen architecture**.
 
 ---
 
-## 2. Validación de Escalabilidad (Scalability & Performance Benchmark)
+## 1. Utility Validation (Utility Benchmark)
 
-* **Hipótesis a probar:** El sistema soporta 100.000 nodos sin colapsar el tiempo de validación constitucional ni degradar el almacenamiento.
-* **Diseño del Experimento:**
-  1. Desarrollar un generador de grafos masivos cumpliendo estrictamente `constitution_rules.yaml`.
-  2. Evaluar el tiempo de validación con el validador en memoria actual frente a una persistencia en SQLite / GraphDB indexado.
-  3. **Puntos de Corte:**
-     - 1.000 nodos: < 100 ms.
-     - 10.000 nodos: < 1.000 ms.
-     - 100.000 nodos: < 5.000 ms.
-  4. **Métrica de Éxito:** La validación constitucional no debe ser el cuello de botella del runtime.
+* **Hypothesis to test:** An independent third party can reconstruct the entire chain of knowledge using only the `EvidenceGraph` without loss of meaning.
+* **Experimental Design (Double-Blind Metric Evaluation):**
+  1. Extract 50 real biomedical papers (OpenAccess / PubMed).
+  2. Generate evidence graphs for 200 key Claims.
+  3. Hide the original source text.
+  4. Deliver the `EvidenceGraph` to 3 different LLMs (Claude 3.5 Sonnet, GPT-4o, Llama 3 70B) and 2 expert human evaluators.
+  5. **Success Metric:** Precision ≥ 0.90 and Recall ≥ 0.85 in the semantic reconstruction of the original Claim without hallucination.
 
 ---
 
-## 3. Validación de Auditabilidad por Terceros (Adversarial Auditability Test)
+## 2. Scalability Validation (Scalability & Performance Benchmark)
 
-* **Hipótesis a probar:** Dado solo el `DecisionGraph` y el `MissionGraph`, un auditor externo puede explicar la secuencia de acciones y descartar derivas no autorizadas.
-* **Diseño del Experimento:**
-  1. Simular 10 trazas complejas de investigación distribuida con 5 subagentes.
-  2. Inyectar 2 anomalías arbitrarias (ej. un agente ejecutando una acción no spawneada por ninguna `Mission`).
-  3. Ejecutar el validador automático de gobernanza.
-  4. **Métrica de Éxito:** 100% de detección de acciones no autorizadas y 0% falsos positivos en trazas legítimas.
+* **Hypothesis to test:** The system supports 100,000 nodes without collapsing the constitutional validation time or degrading the storage.
+* **Experimental Design:**
+  1. Develop a massive graph generator strictly complying with `constitution_rules.yaml`.
+  2. Evaluate validation time with the current in-memory validator versus persistence in indexed SQLite/GraphDB.
+  3. **Court Points:**
+     - 1,000 nodes: < 100 ms.
+     - 10,000 nodes: < 1,000 ms.
+     - 100,000 nodes: < 5,000 ms.
+  4. **Success Metric:** Constitutional validation should not be the runtime bottleneck.
 
 ---
 
-## 4. Validación de Mantenibilidad (Cognitive Load & Developer Ergonomics)
+## 3. Auditability Validation by Third Parties (Adversarial Auditability Test)
 
-* **Hipótesis a probar:** La separación tri-grafo reduce la complejidad de depuración cuando ocurre un error en producción.
-* **Diseño del Experimento:**
-  1. Presentar 5 fallos de producción simulados a desarrolladores/agentes que no participaron en el diseño.
-  2. Medir el tiempo medio de localización del error (Mean Time To Diagnose - MTTD) comparando el enfoque Tri-Grafo de CoResearcher contra una traza de logs lineal tradicional.
-  3. **Métrica de Éxito:** Reducción del MTTD de al menos un 40%.
+* **Hypothesis to test:** Given only the `DecisionGraph` and the `MissionGraph`, an external auditor can explain the sequence of actions and rule out unauthorized drifts.
+* **Experimental Design:**
+  1. Simulate 10 complex distributed research traces with 5 subagents.
+  2. Inject 2 arbitrary anomalies (e.g. an agent executing an action not spawned by any `Mission`).
+  3. Run the governance automatic validator.
+  4. **Success Metric:** 100% detection of unauthorized actions and 0% false positives in legitimate traces.
+
+---
+
+## 4. Maintainability Validation (Cognitive Load & Developer Ergonomics)
+
+* **Hypothesis to test:** Tri-graph separation reduces debugging complexity when an error occurs in production.
+* **Experimental Design:**
+  1. Present 5 simulated production failures to developers/agents who were not involved in the design.
+  2. Measure the Mean Time To Diagnose (MTTD) by comparing CoResearcher's Tri-Graph approach against a traditional linear log trace.
+  3. **Success Metric:** Reduction in MTTD of at least 40%.

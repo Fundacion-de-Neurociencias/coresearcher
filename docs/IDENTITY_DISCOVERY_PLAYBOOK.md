@@ -1,12 +1,12 @@
-# Playbook Operativo de Descubrimiento Masivo de Identidades y Servicios (IDENTITY DISCOVERY PLAYBOOK)
+# Operational Playbook for Mass Discovery of Identities and Services (IDENTITY DISCOVERY PLAYBOOK)
 
-**Versión:** 1.0.0  
-**Gobernanza:** Descubrimiento Empírico y Censo Físico  
-**Regla de Oro:** *"Un activo solo pasa a MIGRATED cuando existe prueba verificable de login, credencial en bóveda, MFA y prueba exitosa."*  
+**Version:** 1.0.0  
+**Governance:** Empirical Discovery and Physical Census  
+**Golden Rule:** *"An asset only becomes MIGRATED when there is verifiable proof of login, credential in vault, MFA and successful proof."*  
 
 ---
 
-## 1. Procedimiento Operativo de Descubrimiento Físico (5 Fuentes)
+## 1. Physical Discovery Operational Procedure (5 Sources)
 
 ```text
 ┌────────────────────────┐    ┌────────────────────────┐    ┌────────────────────────┐
@@ -20,34 +20,34 @@
 └────────────────────────┘    └────────────────────────┘
 ```
 
-### Fuente 1 — Navegadores (Chrome & Edge)
-- **Acción:** Exportar e inspeccionar logins guardados en Chrome (`chrome://password-manager/settings`) y Microsoft Edge (`edge://wallet/passwords`).
-- **Objetivo:** Descubrir portales secundarios, dominios antiguos y plataformas docentes o de viajes.
+### Source 1 — Browsers (Chrome & Edge)
+- **Action:** Export and inspect logins saved in Chrome (`chrome://password-manager/settings`) and Microsoft Edge (`edge://wallet/passwords`).
+- **Objective:** Discover secondary portals, old domains and educational or travel platforms.
 
-### Fuente 2 — Filtros de Búsqueda en Gmail
-- **Filtros de Búsqueda:**
+### Source 2 — Search Filters in Gmail
+- **Search Filters:**
   ```text
   subject:(verify OR verification OR "welcome to" OR "confirm your account" OR "password reset" OR "security alert")
   ```
-- **Objetivo:** Revelar altas en servicios olvidados a lo largo de los años.
+- **Objective:** Reveal registrations in forgotten services over the years.
 
-### Fuente 3 — Gestores de Contraseñas
-- Exportar censo desde Chrome Password Manager o Bitwarden Vault.
+### Source 3 — Password Managers
+- Export census from Chrome Password Manager or Bitwarden Vault.
 
-### Fuente 4 — Autenticadores MFA (MFA Audit)
-- Auditar listas de cuentas en Google Authenticator, Microsoft Authenticator y YubiKeys FIDO2.
-- Revela activos de alta seguridad que no suelen figurar en navegadores.
+### Source 4 — MFA Authenticators (MFA Audit)
+- Audit account lists in Google Authenticator, Microsoft Authenticator and YubiKeys FIDO2.
+- Reveals high security assets that are not usually found in browsers.
 
-### Fuente 5 — Ecosistema GitHub
-- Auditar Organizaciones (`github.com/settings/organizations`), PATs activos (`github.com/settings/tokens`), y OAuth Apps autorizadas.
+### Source 5 — GitHub Ecosystem
+- Audit Organizations (`github.com/settings/organizations`), active PATs (`github.com/settings/tokens`), and authorized OAuth Apps.
 
 ---
 
-## 2. Criterios Estrictos de Transición de Estado
+## 2. Strict State Transition Criteria
 
 $$\text{INVENTORIED} \overset{\text{Demostración Físicamente Probada}}{\longrightarrow} \text{MIGRATED} \overset{\text{Auditoría de Invariantes Pass}}{\longrightarrow} \text{VALIDATED}$$
 
-1. **`DISCOVERED`:** Activo identificado en una fuente (ej. hallado en filtro Gmail).
-2. **`INVENTORIED`:** Registrado con ID, categoría y tier en `ACCESS_INVENTORY.csv`.
-3. **`MIGRATED`:** Requiere credencial en Bitwarden + MFA + login físico exitoso probado.
-4. **`VALIDATED`:** Demostración de lease efímero y traza auditada en `audit_trail.jsonl`.
+1. **`DISCOVERED`:** Asset identified in a source (e.g. found in Gmail filter).
+2. **`INVENTORIED`:** Registered with ID, category and tier in `ACCESS_INVENTORY.csv`.
+3. **`MIGRATED`:** Requires Bitwarden credential + MFA + proven successful physical login.
+4. **`VALIDATED`:** Demonstration of ephemeral lease and audited trace in `audit_trail.jsonl`.

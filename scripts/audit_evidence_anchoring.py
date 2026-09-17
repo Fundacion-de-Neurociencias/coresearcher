@@ -24,7 +24,7 @@ def extract_claims(report_path):
     claims = []
 
     # Extract Decision claims
-    for match in re.finditer(r'### Decisión \d+: (.+)', content):
+    for match in re.finditer(r'### Decision \d+: (.+)', content):
         claims.append({
             "claim": match.group(1),
             "type": "decision",

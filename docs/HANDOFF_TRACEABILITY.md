@@ -116,12 +116,12 @@ EditXT consume EvidenceGraph y produce:
 
 ### CoResearcher
 - Maximizar trazabilidad
-- Responder "¿Dónde está la evidencia?"
-- Nunca responder "¿Es cierto?" o "¿Es bueno?"
+- Reply "Where is the evidence?"
+- Never answer "Is it true?" or "Is it good?"
 
 ### EditXT
 - Maximizar auditabilidad científica
-- Responder "¿Qué problemas tiene este manuscrito/claim?"
+- Respond "What problems does this manuscript/claim have?"
 - Evaluar evidencia experimental, código, dataset, benchmark, reproducibilidad
 
 ---

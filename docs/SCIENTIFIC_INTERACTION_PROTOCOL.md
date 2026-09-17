@@ -3,11 +3,11 @@
 
 ---
 
-## El Protocolo Científico
+## The Scientific Protocol
 
 Como ORCID identifica investigadores y DOI identifica papers, el Scientific Interaction Protocol identifica:
 
-> **El conocimiento científico computable y las acciones que sobre él se realizan.**
+> **Computable scientific knowledge and the actions that are carried out on it.**
 
 ---
 
@@ -74,8 +74,8 @@ https://cso.coresearcher.org/hypothesis/HYP-000567
 |--------|---------------|-------------|
 | SIP_QUESTION | QUESTION-XXXXXX | Formula pregunta científica |
 | SIP_OBSERVE | OBS-XXXXXX | Registra observación |
-| SIP_PROPOSE | HYP-XXXXXX | Propone hipótesis |
-| SIP_MECHANIZE | MECH-XXXXXX | Propone mecanismo |
+| SIP_PROPOSE | HYP-XXXXXX | Proposes hypothesis |
+| SIP_MECHANIZE | MECH-XXXXXX | Proposes mechanism |
 
 ### Participación
 
@@ -201,12 +201,12 @@ DOI identificó los papers.
 
 CSO URI identificará:
 
-> **El conocimiento científico computable y su evolución a través del tiempo.**
+> **Computable scientific knowledge and its evolution over time.**
 
-Por primera vez, el conocimiento científico podrá tener:
+For the first time, scientific knowledge will be able to have:
 - Identidad única
 - Historial trazable
 - Reputación verificable
 - Participación medible
 
-Esto convierte a CoResearcher en la **capa de interacción científica de la próxima década**.
+This makes CoResearcher the **scientific interaction layer of the next decade**.

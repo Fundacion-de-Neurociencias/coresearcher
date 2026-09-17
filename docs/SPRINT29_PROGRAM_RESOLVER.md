@@ -56,10 +56,10 @@ Success criterion:
 Can a human expert understand the project in 20 minutes by reading the Program Resolver output?
 
 Metric:
-> ¿Cuánto tiempo de comprensión eliminamos?
+> How much understanding time do we eliminate?
 
 Not:
-> ¿Cuántos artefactos resolvimos?
+> How many artifacts did we solve?
 
 ---
 

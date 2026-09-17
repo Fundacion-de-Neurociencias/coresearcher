@@ -1,9 +1,9 @@
-# Scientific Semantic Compiler
+#Scientific Semantic Compiler
 ## The Sensor for the Scientific State Machine
 
-## El Problema
+## The Problem
 
-Los investigadores no piensan en JSON:
+Researchers don't think about JSON:
 
 ```json
 {
@@ -14,21 +14,21 @@ Los investigadores no piensan en JSON:
 }
 ```
 
-Piensan en lenguaje natural:
+They think in natural language:
 
-> "No termino de entender por qué algunos APOE4 siguen cognitivamente normales a pesar de tener mucho amiloide."
+> "I don't quite understand why some APOE4 people remain cognitively normal despite having a lot of amyloid."
 
-Esto contiene implícitamente:
+This implicitly contains:
 - QUESTION
 - OBSERVATION  
 - CONTRADICTION
 - MECHANISM_GAP
 
-todos mezclados.
+all mixed.
 
 ---
 
-## Arquitectura Propuesta
+## Proposed Architecture
 
 ```
 Human Language Layer
@@ -46,7 +46,7 @@ Scientific State Machine
 
 ---
 
-## API Principal
+## Main API
 
 ```python
 from semantic.scientific_compiler import ScientificCompiler
@@ -54,7 +54,7 @@ from semantic.scientific_compiler import ScientificCompiler
 compiler = ScientificCompiler()
 
 result = compiler.compile(
-    text="¿Por qué algunos APOE4 con amiloide elevado no desarrollan deterioro cognitivo?"
+text="Why do some APOE4 with elevated amyloid not develop cognitive impairment?"
 )
 
 # Output:
@@ -73,17 +73,17 @@ ScientificIntent(
 
 ---
 
-## Primitivas Compilables
+## Compilable Primitives
 
-### Preguntas (Implicitas o Explícitas)
+### Questions (Implicit or Explicit)
 
 ```text
-"¿Por qué...?" → QUESTION
+"Because...?" → QUESTION
 "Estaría bien saber..." → QUESTION
 "Será posible que...?" → HYPOTHESIS
 ```
 
-### Observaciones
+### Observations
 
 ```text
 "Los datos muestran..." → CLAIM/OBSERVATION
@@ -91,7 +91,7 @@ ScientificIntent(
 "Parece indicar..." → CLAIM
 ```
 
-### Contradicciones
+### Contradictions
 
 ```text
 "Esto contradice..." → CHALLENGE
@@ -99,7 +99,7 @@ ScientificIntent(
 "Debería ocurrir X pero vemos Y" → CONTRADICTION
 ```
 
-### Hipótesis
+### Hypothesis
 
 ```text
 "Creo que..." → HYPOTHESIS
@@ -107,7 +107,7 @@ ScientificIntent(
 "Sería interesante probar..." → HYPOTHESIS + PREDICTION
 ```
 
-### Participación
+### Participation
 
 ```text
 "Estoy de acuerdo con..." → SUPPORT
@@ -118,22 +118,22 @@ ScientificIntent(
 
 ---
 
-## Mapeo Texto → Objetos
+## Mapping Text → Objects
 
-| Patrón | Intención | Objeto |
-|--------|-----------|---------|
-| "¿[Qué/Por qué/Cómo]?" | QUESTION | QUESTION-XXXXXX |
-| "muestra que\|indica que\|aparece" | CLAIM | CLAIM-XXXXXX |
-| "contradice\|no encaja\|debería" | CONTRADICTION | CONTR-XXXXXX |
-| "creo\|podría\|sería" | HYPOTHESIS | HYP-XXXXXX |
-| "estoy de acuerdo\|confirmado" | SUPPORT | SUPPORT action |
-| "hemos replicado\|replicación" | REPLICATE | REPLICATE action |
+| Pattern | Intent | Object |
+|--------|------------|---------|
+| "[What/Why/How]?" | QUESTION | QUESTION-XXXXXX |
+| "shows that\|indicates that\|appears" | CLAIM | CLAIM-XXXXXX |
+| "contradicts\|doesn't fit\|should" | CONTRADICTION | CONTR-XXXXXX |
+| "I think\|could\|would be" | HYPOTHESIS | HYP-XXXXXX |
+| "I agree\|confirmed" | SUPPORT | SUPPORT action |
+| "we have replicated\|replication" | REPLICATE | REPLICATE action |
 
 ---
 
 ## Sprint 23A: Scientific Semantic Compiler
 
-### Entregables
+### Deliverables
 
 ```
 python/semantic/
@@ -143,15 +143,15 @@ python/semantic/
 └── test_compiler.py          # Validation tests
 ```
 
-### Objetivo
+### Objective
 
-Que investigadores e Einstein hablen el mismo lenguaje científico computable.
+That researchers and Einstein speak the same computable scientific language.
 
 ---
 
-## El Scientific Interaction Graph
+## The Scientific Interaction Graph
 
-Cada interacción humana se convierte en objetos computables:
+Every human interaction becomes computable objects:
 
 ```
 Investigador: "Creo que..."
@@ -171,54 +171,54 @@ Trust score ↑
 
 ---
 
-## El Verdadero Activo
+## The True Asset
 
-No es:
+It is not:
 - Claim Registry
-- Mechanism Registry
+-Mechanism Registry
 
-Sino:
+Otherwise:
 - **Scientific Interaction Graph**
 
-Una red donde cada intención humana se traduce en:
+A network where every human intention translates into:
 - OBJECT CREATION
 - ACTION RECORDING
 - TRUST EVOLUTION
 
 ---
 
-## Regla de Universalidad
+## Universality Rule
 
-> "**Si no funciona para física, no entra en el core.**"
+> "**If it doesn't work for physics, it doesn't enter the core.**"
 
-El Scientific Semantic Compiler debe reconocer:
+The Scientific Semantic Compiler must recognize:
 
-### Física
-> "La luz se curva al pasar cerca del sol"
+### Physics
+> "Light bends as it passes near the sun"
 
-→ CLAIM (masa → trayectoria)
+→ CLAIM (mass → trajectory)
 
-### Biología
-> "APOE4 aumenta riesgo de deterioro cognitivo"
+### Biology
+> "APOE4 increases the risk of cognitive impairment"
 
-→ CLAIM (APOE4 → cognición)
+→ CLAIM (APOE4 → cognition)
 
-### Economía
-> "Subir tipos reduce inversión empresarial"
+### Economy
+> "Raising rates reduces business investment"
 
-→ CLAIM (tipos → inversión)
+→ CLAIM (types → investment)
 
-Mismo esquema, diferentes entidades.
+Same scheme, different entities.
 
 ---
 
-## Conexión con Participation Layer
+## Connection with Participation Layer
 
-La Participation Layer deja de ser artificial cuando el compiler infiere automáticamente las intenciones:
+The Participation Layer is no longer artificial when the compiler automatically infers the intentions:
 
 ```text
 Antes: Formulario "Support this mechanism"
-Después: Investigador escribe "Confirmamos este mecanismo en nuestro laboratorio"
+After: Researcher writes "We confirm this mechanism in our laboratory"
          ↓
          Compiler: CONFIRM + REPLICATE + MECHANISM_ID
 ```
@@ -227,9 +227,9 @@ Después: Investigador escribe "Confirmamos este mecanismo en nuestro laboratori
 
 ## Sprint 23B: Integration
 
-Conectar el Scientific Semantic Compiler con:
-- Mechanism Registry
+Connect the Scientific Semantic Compiler with:
+-Mechanism Registry
 - Trust Layer
 - Participation Layer
 
-Para crear el primer **Scientific State Machine** operativo.
+To create the first operational **Scientific State Machine**.

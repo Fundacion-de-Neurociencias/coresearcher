@@ -1,64 +1,64 @@
 # SPRINT 60C VALIDATION REPORT
-**Objetivo**: Validar empíricamente la reconstrucción de trayectorias de decisión desde repositorios reales de GitHub  
-**Repositorio**: langchain-ai/langgraph  
-**Fecha**: 2026-07-31  
-**Modo**: Offline desde snapshot `data/langgraph_raw.json`  
+**Objective**: Empirically validate the reconstruction of decision trajectories from real GitHub repositories  
+**Repository**: langchain-ai/langgraph  
+**Date**: 2026-07-31  
+**Mode**: Offline from snapshot `data/langgraph_raw.json`  
 
-## 1. Metodología
+## 1. Methodology
 
-Se partió de `data/langgraph_raw.json`, snapshot de issues, PRs y commits.  
-Se aplicó extracción por señales léxicas, clasificación por outcome metadata, vinculación por referencias explícitas y secuencias temporales por autor.  
-No se utilizó API en vivo.
+It was started from `data/langgraph_raw.json`, snapshot of issues, PRs and commits.  
+Extraction was applied by lexical signals, classification by outcome metadata, linking by explicit references and temporal sequences by author.  
+No live API used.
 
-## 2. Repositorios analizados
+## 2. Repositories analyzed
 - langchain-ai/langgraph 
 
-## 3. Decisions extraídas
+## 3. Extracted decisions
 
-| Métrica | Valor |
+| Metric | Value |
 |---------|-------|
-| Total decisiones | 301 |
-| Exitosas | 122 |
-| Abandonadas | 129 |
-| Fallidas | 40 |
-| Pendientes | 10 |
-| Actores únicos | 106 |
+| Total decisions | 301 |
+| Successful | 122 |
+| Abandoned | 129 |
+| Failed | 40 |
+| Earrings | 10 |
+| Unique actors | 106 |
 
-## 4. Precisión / Cobertura
+## 4. Accuracy / Coverage
 
-| Indicador | Valor |
+| Indicator | Value |
 |-----------|-------|
-| Cobertura de extracción | 301 decisiones con señal |
-| Exactitud outcome (PR merged/closed) | Regla por metadata |
-| Vínculos explícitos | 231 |
-| Vínculos temporales | 426 |
+| Extraction coverage | 301 decisions with signal |
+| Accuracy outcome (PR merged/closed) | Rule by metadata |
+| Explicit links | 231 |
+| Temporary links | 426 |
 
-## 5. Casos relevantes
+## 5. Relevant cases
 
-### 5.1 Éxito
-- Reconstrucción completa desde snapshot sin API viva.
-- 426 edges generados: 231 por referencia explícita, 195 por secuencia temporal por autor.
+### 5.1 Success
+- Complete rebuild from snapshot without live API.
+- 426 edges generated: 231 by explicit reference, 195 by temporal sequence per author.
 
-### 5.2 Fracaso / Limitación
-- No se detectaron `superseded` en clasificación automática.
-- Vinculación puede sobregenerar `led_to` si un autor hace commits temáticos cercanos en temas distintos.
+### 5.2 Failure / Limitation
+- No `superseded` detected in automatic classification.
+- Linking can overgenerate `led_to` if an author makes close thematic commits on different topics.
 
-## 6. Limitaciones detectadas
-- Dependencia de keywords en texto público.
-- Ausencia de PRs merged explícitos en snapshot limita validación de ciertos edges.
-- No se realizó validación manual por muestra en esta ejecución.
+## 6. Detected limitations
+- Dependency on keywords in public text.
+- Absence of explicit merged PRs in snapshot limits validation of certain edges.
+- No manual per-sample validation was performed in this run.
 
-## 7. Recomendaciones para SPRINT 61
-- Muestreo manual de 20 decisiones para precisión.
-- Añadir `evaluate_extraction.py` con métricas por categoría.
-- Ampliar a 10-20 repos para generalizar resultados.
+## 7. Recommendations for SPRINT 61
+- Manual sampling of 20 decisions for precision.
+- Add `evaluate_extraction.py` with metrics by category.
+- Expand to 10-20 repos to generalize results.
 
-## 8. Entregables
+## 8. Deliverables
 - `data/trajectories/langchain_ai_langgraph/decisions_classified.jsonl`
-- `data/trajectories/langchain_ai_langgraph/trajectory_graph.json`
-- `data/trajectories/langchain_ai_langgraph/evaluation_metrics.json`
-- `scripts/offline_sprint60c_from_raw.py`
+-`data/trajectories/langchain_ai_langgraph/trajectory_graph.json`
+-`data/trajectories/langchain_ai_langgraph/evaluation_metrics.json`
+-`scripts/offline_sprint60c_from_raw.py`
 
-## 9. Conclusión
-SPRINT 60C produjo evidencia ejecutable: 301 decisiones y 426 edges desde langgraph.  
-Queda como baseline para SPRINT 61. No se abrieron nuevos frentes arquitectónicos.
+## 9. Conclusion
+SPRINT 60C produced executable evidence: 301 decisions and 426 edges from langgraph.  
+It remains as a baseline for SPRINT 61. No new architectural fronts were opened.

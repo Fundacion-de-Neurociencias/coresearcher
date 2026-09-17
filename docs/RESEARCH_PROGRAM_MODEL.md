@@ -1,25 +1,25 @@
 # Research Program Model
-## From Knowledge Storage to Knowledge Production
+##From Knowledge Storage to Knowledge Production
 
 ---
 
-## El Cambio de Paradigma
+## The Paradigm Shift
 
-### Antes: Knowledge Storage
+### Before: Knowledge Storage
 ```
 Researcher
 ↓
 Knowledge
 ```
 
-### Después: Knowledge Production
+### After: Knowledge Production
 ```
 Research Program
 ↓
 Knowledge
 ```
 
-Donde:
+Where:
 
 ```
 TEAM-XXXXXX
@@ -41,7 +41,7 @@ Activities:
 
 ## Research Program = TEAM + MISSION + ACTIVITY
 
-### Estructura del Research Program
+### Structure of the Research Program
 
 ```json
 {
@@ -59,7 +59,7 @@ Activities:
 
 ## Knowledge Strategy Lifecycle
 
-La pregunta no es solo "qué sabemos", sino "qué hacemos con el conocimiento".
+The question is not just "what do we know," but "what do we do with knowledge."
 
 ```
 Private
@@ -75,56 +75,56 @@ Published
 Consensus
 ```
 
-Esto es crucial porque:
+This is crucial because:
 
 ```
-Descubrimiento
+Discovery
 ↓
-¿Publicar o proteger?
+Publish or protect?
 ```
 
-La decisión estratégica importa tanto como el descubrimiento.
+The strategic decision matters as much as the discovery.
 
 ---
 
-## La Pregunta como Entidad Central
+## The Question as a Central Entity
 
-### Preguntas no Publicadas ≠ Preguntas Inútiles
+### Unpublished Questions ≠ Useless Questions
 
-Las preguntas guían la dirección científica:
-
-```text
-¿Qué problema merece perseguirse?
-```
-
-más que:
+Questions guide scientific direction:
 
 ```text
-¿Cómo resolverlo?
+What problem is worth pursuing?
 ```
 
-El Research Program se centra en:
-- **Juicio**: ¿Qué preguntas son importantes?
-- **Dirección**: ¿Qué camino tomar?
-- **Selección**: ¿Qué hipótesis priorizar?
-- **Priorización**: ¿Qué recursos asignar?
+more than:
+
+```text
+How to solve it?
+```
+
+The Research Program focuses on:
+- **Judgment**: What questions are important?
+- **Direction**: Which path to take?
+- **Selection**: Which hypothesis to prioritize?
+- **Prioritization**: What resources to assign?
 
 ---
 
-## Registro de Logros Reales
+## Record of Real Achievements
 
-Hoy:
+Today:
 
-- **ORCID**: Quién eres
-- **DOI**: Qué publicaste
+- **ORCID**: Who are you?
+- **DOI**: What did you publish
 
-Falta:
+Missing:
 
-- **Quién descubrió**
-- **Qué preguntas originaste**
-- **Qué programas dirigiste**
+- **Who discovered**
+- **What questions did you originate**
+- **What programs did you direct**
 
-CoResearcher puede registrar:
+CoResearcher can record:
 
 ```
 QUESTION-000123 → TEAM-000456
@@ -154,47 +154,47 @@ REPO/alzheimer-research/
 
 ---
 
-## La Regla de Evaluación
+## The Evaluation Rule
 
-Para cualquier decisión futura:
+For any future decisions:
 
-> ¿Esto ayuda a representar cómo se genera, valida, coordina y transfiere el conocimiento?
+> Does this help represent how knowledge is generated, validated, coordinated and transferred?
 
-### Sí → Core
+### Yes → Core
 - Scientific Semantic Compiler
 - ACTION-XXXXXX registry
 - TEAM-XXXXXX structure
 - Research Program workflows
 - Knowledge Strategy states
 
-### No → Periférico
-- Solo almacenamiento de claims
-- Solo graph de conocimiento
-- UI fancy
+### No → Peripheral
+- Claims storage only
+- Knowledge graph only
+- Fancy UI
 
 ---
 
-## La Visión Final
+## The Final Vision
 
-No es:
+It is not:
 
 ```text
 Knowledge Repository
 ```
 
-Es:
+It is:
 
 ```text
 Scientific Production Infrastructure
 ```
 
-Donde:
+Where:
 
-- El **Research Program** es el actor operativo
-- El **Team** es la unidad de trabajo híbrida
-- La **Question** es el norte estratégico
-- La **Action** es la evidencia verificable
-- La **Strategy** es el destino del conocimiento
+- The **Research Program** is the operational actor
+- The **Team** is the hybrid work unit
+- The **Question** is the strategic north
+- The **Action** is the verifiable evidence
+- **Strategy** is the destination of knowledge
 
 ---
 
@@ -204,27 +204,27 @@ Donde:
 2. **Knowledge Strategy States** - private/protected/published
 3. **Question-as-Hub** - Questions drive programs
 4. **Hybrid Team Activity** - Humans + Agents coordination
-5. **Production Tracking** - No solo conocimiento, proceso
+5. **Production Tracking** - Not just knowledge, process
 
 ---
 
-## El Activo Diferencial
+## The Differential Asset
 
-No es:
-- Millones de claims
-- Miles de mecanismos
-- Biblioteca de papers
+It is not:
+- Millions of claims
+- Thousands of mechanisms
+- Paper library
 
-Es:
-- **Historia de producción científica verificable**
-- **Decisiones estratégicas registradas**
-- **Equipos híbridos que generan conocimiento**
-- **Preguntas que guiaron la investigación**
+It is:
+- **Verifiable scientific production history**
+- **Registered strategic decisions**
+- **Hybrid teams that generate knowledge**
+- **Questions that guided the research**
 
-Esto es lo que ningún competidor tiene.
+This is what no competitor has.
 
-Y lo que ningún competidor podrá replicar fácilmente.
+And what no competitor will be able to easily replicate.
 
-**CoResearcher no almacena conocimiento.**
+**CoResearcher does not store knowledge.**
 
-**CoResearcher registra la producción de conocimiento.**
+**CoResearcher records knowledge production.**

@@ -1,41 +1,41 @@
-# ADR-DEC-001: Decision ≠ Action (El DecisionGraph)
+#ADR-DEC-001: Decision ≠ Action (The DecisionGraph)
 
 **Version 1.0.0** - Architecture Decision Record  
-**Status**: Canonical Reference - Gobernanza Ontológica
+**Status**: Canonical Reference - Ontological Governance
 
-## 1. Contexto
+## 1. Context
 
-Hasta la versión ARQ-001, CoResearcher operaba como un *Traceability Engine* puro. El sistema modelaba eficientemente el "Qué" (a través de `ACTION-XXXXXX`) y el "Dónde" (a través del `EvidenceGraph` y `CLAIM-XXXXXX`).
-Sin embargo, el sistema padecía de un vacío fundamental en su modelo de gobernanza: **era ciego a la intencionalidad**. 
+Until version ARQ-001, CoResearcher operated as a pure *Traceability Engine*. The system efficiently modeled the "What" (via `ACTION-XXXXXX`) and the "Where" (via `EvidenceGraph` and `CLAIM-XXXXXX`).
+However, the system suffered from a fundamental gap in its governance model: **it was blind to intentionality**. 
 
-Podíamos auditar que el agente X extrajo el claim Y de la fuente Z, pero no podíamos auditar por qué el agente X decidió investigar esa fuente Z descartando la fuente W. A medida que el sistema escala, esta omisión impide gobernar las estrategias de investigación y el retorno de inversión (ROI) de los recursos algorítmicos asignados.
+We could audit that agent X extracted claim Y from source Z, but we could not audit why agent
 
-## 2. Decisión
+## 2. Decision
 
-Formalizamos la **Decisión** como una primitiva ontológica de primer orden, estrictamente diferenciada de la **Acción**.
-- **Action (`ACTION-XXXXXX`)**: Es mecanicista. Es la ejecución física de una tarea (ej. leer un PDF, invocar una API, procesar un texto).
-- **Decision (`DECISION-XXXXXX`)**: Es teleológica y direccional. Es un acto de gobernanza que asigna recursos, descarta alternativas y provee una justificación racional basada en un estado de evidencia existente.
+We formalize **Decision** as a first-order ontological primitive, strictly differentiated from **Action**.
+- **Action (`ACTION-XXXXXX`)**: It is mechanistic. It is the physical execution of a task (e.g. reading a PDF, invoking an API, processing text).
+- **Decision (`DECISION-XXXXXX`)**: It is teleological and directional. It is an act of governance that allocates resources, rules out alternatives, and provides a rational justification based on an existing state of evidence.
 
-Para soportar esta primitiva, se introduce el **DecisionGraph**.
+To support this primitive, the **DecisionGraph** is introduced.
 
-## 3. Relación Estructural
+## 3. Structural Relationship
 
-El `DecisionGraph` no reemplaza al `EvidenceGraph`; lo envuelve.
+The `DecisionGraph` does not replace the `EvidenceGraph`; wraps it.
 
-1. Un nodo `DECISION` se ancla a un estado de evidencia en el tiempo (`based_on`: [EG-0001, EG-0002]).
-2. Un nodo `DECISION` produce directivas de investigación o prioridades, que desencadenan misiones (`directed_towards`: [CLAIM-XXXXXX]).
-3. Crucialmente, un nodo `DECISION` documenta permanentemente las ramas no exploradas (`alternatives_discarded`), habilitando la trazabilidad contrafactual.
+1. A node `DECISION` is anchored to an evidence state in time (`based_on`: [EG-0001, EG-0002]).
+2. An `DECISION` node produces research directives or priorities, which trigger quests (`directed_towards`: [CLAIM-XXXXXX]).
+3. Crucially, an `DECISION` node permanently documents unexplored branches (`alternatives_discarded`), enabling counterfactual traceability.
 
-## 4. Consecuencias
+## 4. Consequences
 
-### Positivas
-- CoResearcher transiciona exitosamente de ser un *traceability engine* a un *governance engine* maduro.
-- La responsabilidad algorítmica pasa a ser medible. Podemos auditar la calidad del "decididor" comparando el ratio de éxito de sus decisiones históricas.
-- Provee un *log* de entrenamiento de alto valor ("Decision History Value") para futuros modelos de toma de decisiones estratégicas.
+### Positive
+- CoResearcher successfully transitions from being a traceability engine to a mature governance engine.
+- Algorithmic responsibility becomes measurable. We can audit the quality of the "decider" by comparing the success rate of their historical decisions.
+- Provides a high value training *log* ("Decision History Value") for future strategic decision making models.
 
-### Negativas / Riesgos
-- Añade complejidad estructural a la capa de registro.
-- Requiere que los agentes ejecutores sean capaces de verbalizar su *rationale* antes de bifurcar flujos de ejecución costosos, lo que aumenta el consumo de tokens y la latencia en nodos de orquestación.
+### Negatives / Risks
+- Adds structural complexity to the registration layer.
+- Requires executing agents to be able to verbalize their *rationale* before forking expensive execution flows, which increases token consumption and latency on orchestration nodes.
 
-## 5. Implementación Referencial
-El esquema de datos que soporta esta decisión queda formalizado en `schemas/decision_graph.yaml`.
+## 5. Reference Implementation
+The data schema that supports this decision is formalized in `schemas/decision_graph.yaml`.

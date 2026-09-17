@@ -225,7 +225,7 @@ Cada transición puede ser un WORKFLOW disparado por ACTIONS.
 
 ---
 
-## El Valor de los Versionados Científicos
+## The Value of Scientific Versions
 
 ```
 ALZHEIMER-EARLY-BIOMARKERS
@@ -291,7 +291,7 @@ Trust/Consensus (Validation)
 Release/Artifact (Deployment)
 ```
 
-Este es el verdadero poder de la visión agentic-first.
+This is the true power of agentic-first vision.
 
 ---
 

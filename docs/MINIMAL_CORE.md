@@ -8,7 +8,7 @@
 
 ## The Single Question
 
-> **¿Qué objetos son irreductiblemente necesarios para que un investigador obtenga trazabilidad completa hoy?**
+> **What objects are irreducibly necessary for a researcher to obtain complete traceability today?**
 
 ---
 
@@ -66,7 +66,7 @@ La unidad operativa más simple que puede verificarse.
 - `OBTAIN_CONSENT` (ethical approval)
 - `STATISTICAL_ANALYSIS` (data analysis)
 
-**Why irreducible**: Sin acciones verificables, no hay trabajo científico trazable.
+**Why irreducible**: Without verifiable actions, there is no traceable scientific work.
 
 ---
 
@@ -178,10 +178,10 @@ Si un investigador puede pasar de:
 Pregunta → Agent work → Preprint publicado
 ```
 
-con trazabilidad completa en una semana, el modelo funciona.
+with complete traceability in a week, the model works.
 
 Si no puede, ninguna constitución salva el proyecto.
 
 ---
 
-*Este documento define el núcleo irreductible desde la perspectiva del investigador. Todo lo demás es implementación.*
+*This document defines the irreducible core from the researcher's perspective. Everything else is implementation.*

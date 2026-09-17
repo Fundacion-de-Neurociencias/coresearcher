@@ -1,33 +1,33 @@
 # Strategic Audit: CoResearcher Risks and Opportunities
 
-> **No se propone código. No se añaden módulos. No se crean registries.**
-> **La misión es identificar errores de primer principio.**
+> **No code is proposed. No modules are added. No registries are created.**
+> **The mission is to identify first principle errors.**
 
 ---
 
-## TAREA 1: Auditoría de inevitabilidad
+## TASK 1: Inevitability Audit
 
-### Si competidores quisieran destruir CoResearcher, ¿qué harían?
+### If competitors wanted to destroy CoResearcher, what would they do?
 
-| Componente | Clasificación | Vulnerabilidad |
+| Component | Classification | Vulnerability |
 |-----------|-------------|--------------|
-| Knowledge Graph | **Commodity** | Fácil de replicar con IA avanzada |
-| Scientific Activity Graph | **Advantage** | Requiere historial verificable (difícil de replicar) |
-| Trust Graph | **Moat** | Deriva del Activity Graph + identidades verificables |
-| Verification Layer | **Institutional Asset** | Requiere reputación y adopción comunidad |
-| Agent-First Protocol | **Moat** | Ventaja de ser primero, pero fácil de copiar una vez establecido |
-| ORCID/ROR federation | **Institutional Asset** | Ventaja de adopción temprana |
+| Knowledge Graph | **Commodity** | Easy to replicate with advanced AI |
+| Scientific Activity Graph | **Advantage** | Requires verifiable history (difficult to replicate) |
+| Trust Graph | **Moat** | Derived from the Activity Graph + verifiable identities |
+| Verification Layer | **Institutional Asset** | Requires reputation and community adoption |
+| Agent-First Protocol | **Moat** | First-mover advantage, but easy to copy once established |
+| ORCID/ROR federation | **Institutional Asset** | Early Adopter Advantage |
 
-### Puntos de captura críticos
-- La comunidad científica adopta DOI/ORCID
-- Si GitHub añade DOI-like para claims
-- Si Nature/Sage crea sistema similar
+### Critical Capture Points
+- The scientific community adopts DOI/ORCID
+- If GitHub adds DOI-like for claims
+- If Nature/Sage creates a similar system
 
 ---
 
-## TAREA 2: Auditoría Agent-First (95% agentes en 3 años)
+## TASK 2: Agent-First Audit (95% agents in 3 years)
 
-### ¿Qué seguiría siendo necesaria?
+### What would still be necessary?
 
 ```
 ACTION-XXXXXX - Sí (trazabilidad inmutable)
@@ -38,7 +38,7 @@ ORCID - Sí (identidad humana)
 AGENT-XXXXXX - Sí (proveniencia IA)
 ```
 
-### ¿Qué desaparecería?
+### What would disappear?
 
 ```
 UI compleja - ❌ (agentes consumen APIs)
@@ -48,60 +48,60 @@ Workflows "human-first" - ❌ (inversión inversa)
 
 ---
 
-## TAREA 3: Auditoría GitHub Inspiration
+## TASK 3: GitHub Inspiration Audit
 
-### Copia necesaria vs inspiración innecesaria
+### Necessary copy vs unnecessary inspiration
 
-| GitHub Element | Necesario? | Justificación |
-|-------------|-----------|--------------|
-| Repository | ✅ | REPO-XXXXXX es natural para Research Programs |
-| Issue | ✅ | QUESTION-XXXXXX es el motor de ciencia |
-| Pull Request | ✅ | CONSENSUS_REQUEST es workflow científico |
-| Review | ✅ | REVIEW-XXXXXX es verificación trazable |
-| Release | ✅ | RELEASE es snapshot citable de conocimiento |
-| Action | ✅ | WORKFLOW automatiza validación |
-| Fork | ✅ | FORK_HYPOTHESIS es variación científica |
-| Discussion | ❌ | No esencial, puede ser COMMENT-ACTION |
-| Commit | ✅ | ACTION-XXXXXX es commit inmutable |
-
----
-
-## TAREA 4: Auditoría de incentivos
-
-### ¿Por qué un investigador usaría CoResearcher?
-
-| Incentivo | Factor | Estrés |
-|-----------|---------|---------|
-| **Académico** | Preguntas dirigen carreras | ¿Cómo se citan preguntas? |
-| **Académico** | Reputación trazable | ¿Cómo importa ante tenure? |
-| **Industrial** | Validación acelerada | ¿Competencia con speed > rigor? |
-| **Regulatorio** | Transparencia regulatoria | ¿Adopción regulatoria lenta? |
-| **Económico** | Reducción costes publicación | ¿Modelo de negocio viable? |
-
-### ¿Por qué NO lo usaría?
-
-- **Riesgo reputacional** - ¿El sistema es predecible?
-- **Complejidad** - ¿Más complejo que pubmed/papers?
-- **Adopción comunidad** - ¿Círculos cerrados académicos?
-- **Credit assignment** - ¿Cómo se reparte el mérito?
+| GitHub Element | Necessary? | Justification |
+|-------------|--------|--------------|
+| Repository | ✅ | REPO-XXXXXX is a natural for Research Programs |
+| Issue | ✅ | QUESTION-XXXXXX is the science engine |
+| PullRequest | ✅ | CONSENSUS_REQUEST is scientific workflow |
+| Review | ✅ | REVIEW-XXXXXX is traceable verification |
+| Release | ✅ | RELEASE is citable snapshot of knowledge |
+| Action | ✅ | WORKFLOW automates validation |
+| Forks | ✅ | FORK_HYPOTHESIS is scientific variation |
+| Discussion | ❌ | Not essential, can be COMMENT-ACTION |
+| Commit | ✅ | ACTION-XXXXXX is immutable commit |
 
 ---
 
-## TAREA 5: Auditoría del activo real
+## TASK 4: Incentive Audit
 
-### ¿Cuál es el activo principal?
+### Why would a researcher use CoResearcher?
 
-**HIPÓTESIS ESTRATÉGICA:**
+| Incentive | Factor | Stress |
+|--------|---------|---------|
+| **Academic** | Questions lead careers | How are questions cited? |
+| **Academic** | Traceable reputation | How does it matter before tenure? |
+| **Industrial** | Accelerated validation | Competition with speed > rigor? |
+| **Regulatory** | Regulatory transparency | Slow regulatory adoption? |
+| **Economic** | Reduction of publication costs | Viable business model? |
+
+### Why would I NOT use it?
+
+- **Reputational risk** - Is the system predictable?
+- **Complexity** - More complex than pubmed/papers?
+- **Community adoption** - Closed academic circles?
+- **Credit assignment** - How is credit distributed?
+
+---
+
+## TASK 5: Real Asset Audit
+
+### What is the main asset?
+
+**STRATEGIC HYPOTHESIS:**
 
 ```
 Scientific Activity Graph podría ser el activo principal.
 ```
 
-**Pero todavía no está demostrado.**
+**But it is not proven yet.**
 
-### Prueba de irreversibilidad
+### Irreversibility test
 
-Si mañana desapareciera todo el software, ¿qué sería lo más difícil de reconstruir?
+If all your software disappeared tomorrow, what would be the hardest thing to rebuild?
 
 ```
 100 millones de CLAIMS - Reconstruible (LLMs + PubMed)
@@ -109,17 +109,17 @@ Si mañana desapareciera todo el software, ¿qué sería lo más difícil de rec
 500 millones de ACCIONES CIENTÍFICAS verificables - Probablemente irreconstruible
 ```
 
-### El equivalente científico de Git
+### The scientific equivalent of Git
 
-No pensar como aplicación (GitHub).
+Don't think as an application (GitHub).
 
-Pensar como protocolo (Git).
+Think like protocol (Git).
 
 ```
-¿Cuál es el protocolo abierto que permite versionar, ramificar, fusionar, verificar y transferir conocimiento científico?
+What is the open protocol that allows versioning, branching, merging, verifying and transferring scientific knowledge?
 ```
 
-Si encontramos eso, el resto son implementaciones.
+If we find that, the rest are implementations.
 ```
 
 ---
@@ -134,7 +134,7 @@ Si encontramos eso, el resto son implementaciones.
 - Canal: Conectores a OpenAlex, Semantic Scholar
 
 **Fase 2 (6-12 meses): 1,000 investigadores**
-- Focus: Programas de investigación que necesitan versionado
+- Focus: Research programs that need versioning
 - Hook: "Versiona tu Research Program como código"
 - Canal: GitHub integration, Jupyter notebooks
 
@@ -152,55 +152,55 @@ Si encontramos eso, el resto son implementaciones.
 
 ## TAREA 7: Pregunta final
 
-### ¿Qué debe existir dentro de 10 años?
+### What should exist in 10 years?
 
 Para ser institución científica:
 
 ```text
-1. Standard de identificación de claims científicos
-2. Historial de actividad verificable + confiable
-3. Reputación científica basada en contribución
+1. Standard for identification of scientific claims
+2. Verifiable + reliable activity history
+3. Scientific reputation based on contribution
 4. Adoption by funding bodies/grant agencies
 5. Integration with publishing pipelines
 6. Regulatory recognition (FDA, EMA, etc.)
 ```
 
-**No puede ser solo una aplicación.**
+**It cannot be just an application.**
 
-**Debe ser el estándar para:**
-- Identificar claims científicos
-- Trazar su validación
-- Medir su aceptación comunidad
-- Versionar el conocimiento
-
----
-
-## Conclusiones: Errores de primer principio
-
-### Riesgo #1: Sobre-ingeniería
-> Demasiados registries/IDéntifiers pueden confundir
-
-### Riesgo #2: Agent-First confuso
-> Los agentes consumen APIs, pero los humanos deciden
-
-### Riesgo #3: GitHub como metáfora
-> La ciencia no es desarrollo de software
-
-### Riesgo #4: Identidad vs actividad
-> Preguntas/Claims son menos importantes que acciones/verificación
+**Should be the standard for:**
+- Identify scientific claims
+- Trace your validation
+- Measure your community acceptance
+- Version knowledge
 
 ---
 
-## Próximos pasos: NO código
+## Conclusions: Errors of first principle
 
-1. **Seleccionar UN activo principal** (Activity Graph)
-2. **Eliminar elementos no esenciales** (Discussion, algunos workflows)
-3. **Simplificar identificadores** (foco en ACTION, REVIEW)
-4. **Validar con 10 investigadores reales** (no arquitectos)
-5. **Enfocar en API primero, UI después**
+### Risk #1: Over-engineering
+> Too many registries/IDéntifiers can confuse
+
+### Risk #2: Confused Agent-First
+> Agents consume APIs, but humans decide
+
+### Risk #3: GitHub as a metaphor
+> Science is not software development
+
+### Risk #4: Identity vs activity
+> Questions/Claims are less important than actions/verification
 
 ---
 
-## Regla de oro
+## Next steps: NO code
 
-> **Si no puedes explicar por qué un competidor no podría replicarlo en 12 meses, no añades más código.**
+1. **Select ONE main asset** (Activity Graph)
+2. **Delete non-essential elements** (Discussion, some workflows)
+3. **Simplify identifiers** (focus on ACTION, REVIEW)
+4. **Validate with 10 real researchers** (not architects)
+5. **Focus on API first, UI later**
+
+---
+
+## Golden rule
+
+> **If you can't explain why a competitor couldn't replicate it in 12 months, you don't add more code.**

@@ -1,0 +1,84 @@
+{
+  "report_id": "OBS67-20260801190511",
+  "generated_at": "2026-08-01T19:05:11.767913+00:00",
+  "sprint": "SPRINT 67 — Observational Signature Discovery",
+  "objective": "Buscar unicamente patrones observables antes de convergencias. Sin explicacion. Sin teoria. Sin interpretacion.",
+  "methodology": {
+    "prohibited_words": [
+      "restriccion",
+      "paradigma",
+      "mecanismo",
+      "causa"
+    ],
+    "features_extracted": [
+      "num_actors",
+      "num_nodes",
+      "num_prior_decisions",
+      "num_failed_attempts",
+      "num_abandonments",
+      "num_branches",
+      "duration_days",
+      "distinct_repositories",
+      "has_explicit_reference",
+      "avg_prior_confidence",
+      "common_keywords",
+      "theme"
+    ],
+    "classification_method": "Rule-based scoring using only observable features"
+  },
+  "signatures": [
+    {
+      "convergence_id": "CONV-DEMO-001",
+      "features": {
+        "convergence_id": "CONV-DEMO-001",
+        "num_actors": 3,
+        "num_nodes": 3,
+        "num_prior_decisions": 0,
+        "num_failed_attempts": 3,
+        "num_abandonments": 0,
+        "num_branches": 0,
+        "duration_days": 0,
+        "distinct_repositories": 1,
+        "has_explicit_reference": false,
+        "avg_prior_confidence": 0.0,
+        "common_keywords": [
+          "issue"
+        ],
+        "theme": "api"
+      },
+      "classification": "synthetic"
+    },
+    {
+      "convergence_id": "CONV-DEMO-002",
+      "features": {
+        "convergence_id": "CONV-DEMO-002",
+        "num_actors": 2,
+        "num_nodes": 2,
+        "num_prior_decisions": 0,
+        "num_failed_attempts": 0,
+        "num_abandonments": 2,
+        "num_branches": 0,
+        "duration_days": 0,
+        "distinct_repositories": 1,
+        "has_explicit_reference": false,
+        "avg_prior_confidence": 0.0,
+        "common_keywords": [
+          "memory"
+        ],
+        "theme": "memory"
+      },
+      "classification": "synthetic"
+    }
+  ],
+  "summary": {
+    "total_convergences": 2,
+    "real_classified": 0,
+    "synthetic_classified": 2
+  },
+  "attack_result": {
+    "method": "Rule-based classification without hypotheses",
+    "fpr_estimate": "Not directly measurable without ground truth labels",
+    "note": "Classification uses only observable features. No constraints, no paradigms, no mechanisms."
+  },
+  "epistemic_note": "Este sprint NO genera explicaciones. NO infiere restricciones. Solo extrae firmas observables. Cualquier intento de explicar las firmas debe detenerse inmediatamente."
+}

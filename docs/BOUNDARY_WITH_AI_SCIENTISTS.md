@@ -1,4 +1,4 @@
-# Boundary with AI Scientists
+#Boundary with AI Scientists
 ## Constitutional Directive Against Scope Expansion
 
 **Version 1.0.0** - Boundary Definition  
@@ -6,165 +6,165 @@
 
 ---
 
-## DIRECTIVA: NO CONSTRUIR UN AI SCIENTIST
+## DIRECTIVE: DO NOT BUILD AN AI SCIENTIST
 
-CoResearcher no:
+CoResearcher does not:
 
-- Genera hipótesis científicas
-- Propone descubrimientos
-- Diseña experimentos
-- Optimiza pipelines de investigación
-- Redacta contribuciones científicas originales
-- Evalúa si una afirmación es correcta
-- Asigna severidad o calidad científica
-- Genera recomendaciones editoriales
+- Generate scientific hypotheses
+- Proposes discoveries
+- Design experiments
+- Optimize research pipelines
+- Write original scientific contributions
+- Evaluate whether a statement is correct
+- Assigns severity or scientific quality
+- Generate editorial recommendations
 
-CoResearcher audita la trazabilidad de artefactos ya existentes.
+CoResearcher audits the traceability of existing artifacts.
 
-Pregunta permitida:
-"¿Cómo llegamos aquí?"
+Allowed question:
+"How did we get here?"
 
-Pregunta prohibida:
-"¿Qué deberíamos descubrir después?"
+Prohibited question:
+"What should we find out next?"
 
 ---
 
-## Contexto Estratégico
+## Strategic Context
 
-Existen tres tendencias distintas en el ecosistema de IA científica:
+There are three distinct trends in the scientific AI ecosystem:
 
 ### 1. Scientific Traceability (CoResearcher)
-**Función**: Reconstruir y auditar la historia científica con trazabilidad completa.
+**Function**: Reconstruct and audit scientific history with complete traceability.
 
-**Pregunta que responde**:
-"¿Dónde está la evidencia?"
+**Question answered**:
+"Where is the evidence?"
 
-**Método**:
-- Escanear repositorios, issues, PRs, commits
-- Extraer ACTION-XXXXXX, CLAIM-XXXXXX, EVID-XXXXXX
-- Construir provenance chains
-- Generar EvidenceGraphs
+**Method**:
+- Scan repositories, issues, PRs, commits
+- Extract ACTION-XXXXXX, CLAIM-XXXXXX, EVID-XXXXXX
+- Build provenance chains
+- Generate EvidenceGraphs
 
-**Output**: Grafo de trazabilidad, no evaluaciones de contenido.
+**Output**: Traceability graph, not content evaluations.
 
 ---
 
 ### 2. Scientific Review (PAT, Google)
-**Función**: Evaluar calidad de papers, reproducibilidad, metodología.
+**Function**: Evaluate quality of papers, reproducibility, methodology.
 
-**Pregunta que responde**:
-"¿Es bueno este paper?"
+**Question answered**:
+"Is this paper good?"
 
-**Método**:
-- Analizar estructura del paper
-- Verificar citas
-- Evaluar metodología
-- Probar reproducibilidad
+**Method**:
+- Analyze paper structure
+- Check appointments
+- Evaluate methodology
+- Test reproducibility
 
 **Output**: Quality scores, recommendations, severity classifications.
 
-**Frontera**: No construir en CoResearcher. Esta es la extensión natural para EditXT.
+**Border**: Do not build in CoResearcher. This is the natural extension for EditXT.
 
 ---
 
 ### 3. Scientific Discovery (AI Scientist, FutureHouse, OpenAI)
-**Función**: Generar nuevas hipótesis, diseñar experimentos, proponer descubrimientos.
+**Function**: Generate new hypotheses, design experiments, propose discoveries.
 
-**Pregunta que responde**:
-"¿Qué deberíamos descubrir?"
+**Question answered**:
+"What should we find out?"
 
-**Método**:
-- Generar hipótesis via LLM
-- Diseñar protocolos experimentales
-- Optimizar pipelines
-- Proponer nuevas líneas de investigación
+**Method**:
+- Generate hypotheses via LLM
+- Design experimental protocols
+- Optimize pipelines
+- Propose new lines of research
 
-**Output**: Nuevas afirmaciones científicas, experimentos propuestos.
+**Output**: New scientific claims, proposed experiments.
 
-**Frontera**: NO construir en CoResearcher. Esto destruiría la ventaja competitiva.
-
----
-
-## Frontera 3: AI Scientist
-
-### Pregunta de Frontera
-
-¿Qué deberíamos descubrir?
-
-### Respuesta de CoResearcher
-
-Esa pregunta está fuera de mi alcance.
-
-Mi alcance es:
-"¿Dónde está la evidencia para lo que ya afirmamos?"
-
-### Si se cruza la frontera
-
-Si CoResearcher comienza a generar hipótesis, está abandonando su posición como Traceability Engine para convertirse en otro AI Scientist genérico.
-
-**Consecuencias**:
-- Pierde trazabilidad (la generación es menos trazable que la observación)
-- Pierde auditabilidad (no hay provenance en generación LLM)
-- Pierde ventaja competitiva (Google y FutureHouse ya hacen esto mejor)
-- Pierde identidad (se convierte en commodity)
+**Border**: DO NOT build in CoResearcher. This would destroy competitive advantage.
 
 ---
 
-## Non-Negotiables (Frontera 3)
+## Frontier 3: AI Scientist
 
-1. **No generación de hipótesis**: CoResearcher no crea CLAIM-XXXXXX sin fuente observable
-2. **No diseño de experimentos**: CoResearcher no genera EXPERIMENT-XXXXXX
-3. **No propuesta de descubrimientos**: CoResearcher no sugiere nuevas líneas de investigación
-4. **No optimización de pipelines**: CoResearcher no diseña workflows de investigación
-5. **No redacción científica**: CoResearcher no genera texto científico original
-6. **No evaluación de corrección**: CoResearcher no determina si una afirmación es verdadera
+### Border Question
+
+What should we discover?
+
+### Response from CoResearcher
+
+That question is beyond my reach.
+
+My scope is:
+"Where is the evidence for what we already claim?"
+
+### If the border is crossed
+
+If CoResearcher starts generating hypotheses, it is abandoning its position as a Traceability Engine to become another generic AI Scientist.
+
+**Consequences**:
+- Loses traceability (generation is less traceable than observation)
+- Loses auditability (there is no provenance in LLM generation)
+- Lose competitive advantage (Google and FutureHouse already do this better)
+- Loses identity (becomes a commodity)
 
 ---
 
-## Validación Empírica > Arquitectura Conceptual
+## Non-Negotiables (Border 3)
 
-El riesgo actual no es conceptual.
-
-La arquitectura está estabilizada desde Sprint 55-59C.
-
-El riesgo es que `observable_ratio ≈ 0.27` sea una propiedad accidental observada en 3 repositorios.
-
-**No resolverán más documentos estratégicos.**
-
-Resolverán más datos.
+1. **No hypothesis generation**: CoResearcher does not create CLAIM-XXXXXX without observable source
+2. **No design of experiments**: CoResearcher does not generate EXPERIMENT-XXXXXX
+3. **No discovery proposal**: CoResearcher does not suggest new lines of research
+4. **No pipeline optimization**: CoResearcher does not design research workflows
+5. **No scientific writing**: CoResearcher does not generate original scientific text
+6. **No correctness evaluation**: CoResearcher does not determine if a statement is true
 
 ---
 
-## Implicación Práctica Inmediata
+## Empirical Validation > Conceptual Architecture
 
-### SPRINT 59D: Corregir LlamaIndex
+The current risk is not conceptual.
 
-Objetivo:
+The architecture is stabilized from Sprint 55-59C.
+
+The risk is that `observable_ratio ≈ 0.27` is an accidental property observed in 3 repositories.
+
+**No more strategic documents will be resolved.**
+
+They will resolve more data.
+
+---
+
+## Immediate Practical Implication
+
+### SPRINT 59D: Correct LlamaIndex
+
+Objective:
 ```
 repository_resolution_rate = 1.0
 ```
 
-Entregable:
+Deliverable:
 ```
 artifacts/llamaindex_retry_metrics.json
 ```
 
 ---
 
-### SPRINT 59E: Benchmark con 20 Repositorios
+### SPRINT 59E: Benchmark with 20 Repositories
 
-Objetivo:
+Objective:
 ```
 20 repositorios reales procesados
 ```
 
-Entregables:
+Deliverables:
 ```
 artifacts/cross_repo_20_complete.csv
 artifacts/stability_metrics_20repos.json
 ```
 
-Criterio:
+Criterion:
 ```
 >= 18 repos procesados
 ```
@@ -183,43 +183,43 @@ Output:
 EvidenceGraph
 ```
 
-Nodos mínimos:
+Minimum nodes:
 - Claim
-- Quote
-- Source
+-Quote
+-Source
 - URL
-- Classification
+-Classification
 - Confidence
 
-Entregable:
+Deliverable:
 ```
 artifacts/langgraph_evidence_graph.json
 ```
 
 ---
 
-## Resumen de Fronteras
+## Border Summary
 
 ```
 Frontera 1: EditXT
   │
-  └── Pregunta: "¿Qué problemas tiene este manuscrito?"
+  └── Question: "What problems does this manuscript have?"
   └── Output: ReviewGraph, Recommendations, Severity
   └── Dirección: EditXT consume EvidenceGraph de CoResearcher
 
 Frontera 2: AI Scientists (Google, FutureHouse, OpenAI, Anthropic)
   │
-  └── Pregunta: "¿Qué deberíamos descubrir?"
-  └── Output: Nuevas hipótesis, experimentos, descubrimientos
+  └── Question: "What should we discover?"
+  └── Output: New hypotheses, experiments, discoveries
   └── Dirección: No construir en CoResearcher
 
 Frontera 1.5 (CoResearcher)
   │
-  └── Pregunta: "¿Cómo llegamos aquí?"
+  └── Question: "How did we get here?"
   └── Output: EvidenceGraph, Trajectory Report, Failure Taxonomy
   └── Dirección: Auditabilidad pura, sin evaluación de contenido
 ```
 
 ---
 
-*Esta directiva constitucional protege a CoResearcher de la expansión de alcance que ha eliminado durante decenas de sprints. No construir un AI Scientist no es limitación. Es la definición de la ventaja competitiva.*
+*This constitutional directive protects CoResearcher from the scope expansion it has eliminated for dozens of sprints. Not building an AI Scientist is not a limitation. It is the definition of competitive advantage.*

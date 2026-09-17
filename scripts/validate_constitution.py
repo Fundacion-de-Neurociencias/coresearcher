@@ -39,7 +39,7 @@ def has_cycle(nodes, edges):
     return False
 
 def max_path_length_from_claims(nodes, edges):
-    # Calcula la profundidad maxima desde un Claim a un Source
+    # Computes maximum depth from Claim to Source
     adj = defaultdict(list)
     for e in edges:
         adj[e['from']].append(e)

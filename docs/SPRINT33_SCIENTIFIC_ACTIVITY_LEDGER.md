@@ -57,7 +57,7 @@ Those are inference beyond evidence.
 Can a newcomer understand a scientific project in 20 minutes by reading the Ledger?
 
 Metric:
-> ¿Cuánto tiempo de comprensión eliminamos?
+> How much understanding time do we eliminate?
 
 Not:
 > How many programs did we infer?

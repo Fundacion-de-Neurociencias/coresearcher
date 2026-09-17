@@ -1,14 +1,14 @@
-# Auditoría de Brechas de Evidencia (Architecture Proof Gaps)
+# Evidence Gap Audit (Architecture Proof Gaps)
 
-**Estado:** Congelamiento de Arquitectura (ARQ-001 → ARQ-003)  
-**Objetivo:** Identificar qué afirmaciones de CoResearcher siguen siendo hipótesis no demostradas empíricamente.
+**Status:** Architecture Freeze (ARQ-001 → ARQ-003)  
+**Objective:** Identify which CoResearcher claims remain empirically unproven hypotheses.
 
-| Afirmación | Evidencia Existente | Evidencia Faltante |
+| Affirmation | Existing Evidence | Missing Evidence |
 | :--- | :--- | :--- |
-| **"EvidenceGraph es autosuficiente para reconstruir Claims"** | Reconstrucción ciega simulada con un script determinista que valida Precision/Recall sobre datos de prueba sintéticos. | Validación empírica con evaluadores humanos doble ciego y múltiples modelos LLM independientes (Claude 3.5, Llama 3) sin acceso a frases precocinadas. |
-| **"DecisionGraph mejora la gobernanza y evita derivas"** | Definición del esquema `decision_graph.yaml` y registro del ADR-DEC-001. | Prueba con agentes autónomos reales tomando decisiones secuenciales en un entorno de investigación continuo durante >48h sin supervisión humana. |
-| **"MissionGraph evita la contaminación ontológica"** | Reglas constitucionales en YAML y 7 casos de prueba de caos (Chaos Tests) ejecutados localmente en memoria. | Ejecución asíncrona real distribuida con fallos de red, reinicios de demonios y agentes externos fallando y reintentando sin corromper el estado. |
-| **"La Constitución detecta todas las violaciones relevantes"** | 7 tests sintéticos de caos que pasan determinísticamente (100% de éxito en los 7 casos prefijados). | Fuzzing probabilístico masivo generando miles de grafos sintéticos aleatorios con permutaciones no previstas manualmente. |
-| **"El supertipo Artifact sustituye a Quote sin pérdida de precisión"** | Actualización de la especificación `EVIDENCEGRAPH_SPEC.md` a v1.1.0 aceptando tipos multimodales. | Parsers de ingestión y validadores reales para matrices de expresión, imágenes histológicas y archivos PDB de AlphaFold. |
-| **"CoResearcher es agnóstico al modelo LLM"** | Ninguna (las pruebas actuales corren con scripts de prueba Python y simulaciones estáticas). | Benchmark comparativo multiplataforma ejecutando las mismas misiones con OpenAI Codex, Claude Code, Gemini y Llama local. |
-| **"La separación tri-grafo no degrada la mantenibilidad"** | Tres esquemas YAML independientes (`constitution_rules`, `decision_graph`, `mission_graph`). | Medición del tiempo y esfuerzo cognitivo de un desarrollador externo para implementar un nuevo flujo sin violar fronteras. |
+| **"EvidenceGraph is self-sufficient to reconstruct Claims"** | Simulated blind reconstruction with a deterministic script that validates Precision/Recall on synthetic test data. | Empirical validation with double-blind human evaluators and multiple independent LLM models (Claude 3.5, Llama 3) without access to pre-prepared phrases. |
+| **"DecisionGraph improves governance and prevents drift"** | Definition of the `decision_graph.yaml` scheme and registration of ADR-DEC-001. | Test real autonomous agents making sequential decisions in a continuous research environment for >48h without human supervision. |
+| **"MissionGraph avoids ontological contamination"** | Constitutional rules in YAML and 7 chaos test cases executed locally in memory. | Real distributed asynchronous execution with network failures, daemon restarts, and external agents failing and retrying without corrupting state. |
+| **"The Constitution detects all relevant violations"** | 7 synthetic chaos tests that pass deterministically (100% success in the 7 predetermined cases). | Massive probabilistic fuzzing generating thousands of random synthetic graphs with permutations not manually foreseen. |
+| **"The Artifact supertype replaces Quote without loss of precision"** | Updated `EVIDENCEGRAPH_SPEC.md` specification to v1.1.0 accepting multimodal types. | Ingestion parsers and real validators for expression matrices, histology images, and AlphaFold PDB files. |
+| **"CoResearcher is agnostic to the LLM model"** | None (current tests run with Python test scripts and static simulations). | Cross-platform comparative benchmark running the same missions with OpenAI Codex, Claude Code, Gemini and Local Llama. |
+| **"Tri-graph separation does not degrade maintainability"** | Three independent YAML schemas (`constitution_rules`, `decision_graph`, `mission_graph`). | Measurement of the time and cognitive effort of an external developer to implement a new flow without violating boundaries. |

@@ -1,38 +1,38 @@
 # EINSTEIN HYPOTHESIS GENERATOR V2: RESEARCH CARTOGRAPHER
 **Status**: VISION DOCUMENT — Post-SPRINT 60C Roadmap  
-**Constraint**: No implementation until H6 validated  
-**Relationship**: Evolución natural del EHG v1, alineada con CoResearcher mission
+**Constraint**: No until implementation H6 validated  
+**Relationship**: Natural evolution of EHG v1, aligned with CoResearcher mission
 
 ---
 
-## 1. Contexto: Por qué no es momento de implementar
+## 1. Context: Why it is not time to implement
 
-### Arquitectura Congelada
-- **H6**: Decision reconstruction — PENDIENTE DE VALIDACIÓN EMPÍRICA
-- **H7**: Branch detection — EXPLORADO, NO EJECUTADO (depende de H6)
-- **H8**: Convergence detection — EXPLORATORIO (depende de H6 + H7)
+### Frozen Architecture
+- **H6**: Decision reconstruction — PENDING EMPIRICAL VALIDATION
+- **H7**: Branch detection — EXPLORED, NOT EXECUTED (depends on H6)
+- **H8**: Convergence detection — EXPLORATORY (depends on H6 + H7)
 
-### Riesgo Actual
-> "El mayor riesgo no es quedarse corto. Es seguir diseñando cuando ya existe un experimento capaz de responder la pregunta importante."
+### Current Risk
+> "The biggest risk is not falling short. It is continuing to design when there is already an experiment capable of answering the important question."
 
-**Verdadero cuello de botella**: Datos.
+**True bottleneck**: Data.
 
-### Conclusión
-Esta documentación es **exploración estratégica**, no plan de implementación. Sirve para:
-1. Capturar la visión antes de que se pierda
-2. Preparar el terreno para SPRINT 61+ si H6 se valida
-3. Evitar reinvención cuando llegue el momento
+### Conclusion
+This documentation is **strategic exploration**, not an implementation plan. Serves for:
+1. Capture the vision before it is lost
+2. Prepare the ground for SPRINT 61+ if H6 is validated
+3. Avoid reinvention when the time comes
 
 ---
 
-## 2. Observación Clave: La Ciencia es un Grafo
+## 2. Key Observation: Science is a Graph
 
-### Historia Oficial (Incorrecta)
+### Official History (Incorrect)
 ```
 Newton → Einstein → Relatividad
 ```
 
-### Historia Real
+### True Story
 ```
                 Éter
                /
@@ -47,58 +47,58 @@ Mercurio --------------
                           Geometría diferencial
 ```
 
-**Patrón**: La ciencia es un árbol de decisiones, no una línea.
+**Pattern**: Science is a decision tree, not a line.
 
-Cada "paradigma" es:
-- Una bifurcación elegida
-- Múltiples bifurcaciones abandonadas
-- Conexiones entre ramas separadas
+Each "paradigm" is:
+- A chosen branch
+- Multiple abandoned forks
+- Connections between separate branches
 
 ---
 
-## 3. Limitación del EHG v1
+## 3. Limitation of EHG v1
 
-### Problema Original
-El Einstein Hypothesis Generator v1 operaba en el vacío:
+### Original Problem
+The Einstein Hypothesis Generator v1 operated in a vacuum:
 
 ```
 Input: "Espacio-tiempo discreto"
-Output: Hipótesis sin contexto histórico
+Output: Hypotheses without historical context
 ```
 
-**Crítica**: Podía generar:
-- "Tiempo discreto"
-- "Gravedad emergente"
+**Criticism**: Could generate:
+- "Discreet time"
+- "Emerging gravity"
 
-Sin evidencia de que esas rutas hubieran sido consideradas históricamente.
+No evidence that those routes had been considered historically.
 
-**Demasiado libre. No conectado con evidencia real.**
+**Too free. Not connected to real evidence.**
 
 ---
 
-## 4. Nueva Formulación: Research Cartographer
+## 4. New Formulation: Research Cartographer
 
-### Cambio de Pregunta
+### Question Change
 
 **EHG v1** (AI Scientist approach):
-> "¿Qué deberíamos descubrir?"
+> "What should we find out?"
 
 **EHG v2** (CoResearcher approach):
-> "¿Qué senderos plausibles quedaron sin recorrer, qué sabemos hoy que entonces no sabíamos, y cómo cambiarían esos senderos si los retomáramos ahora?"
+> "What plausible paths were left untrodden, what do we know today that we didn't know then, and how would those paths change if we took them up now?"
 
-### Principio Fundamental
-> **No inventa. Navega.**
+### Fundamental Principle
+> **Does not invent. Browse.**
 
-Un LLM es el motor, pero la arquitectura es el avión, y el **terreno** es el espacio de conocimiento.
+An LLM is the engine, but the architecture is the plane, and the **terrain** is the knowledge space.
 
-Los AI Scientists actuales intentan: motor más potente.  
-CoResearcher puede hacer: **mapa mejor**.
+Today's AI Scientists try: more powerful engine.  
+CoResearcher can make: **map better**.
 
 ---
 
-## 5. Arquitectura Propuesta (Post-H6)
+## 5. Proposed Architecture (Post-H6)
 
-### Capas
+### Layers
 
 ```
 EvidenceGraph (v1.1.0 — STABLE)
@@ -112,11 +112,11 @@ Einstein Hypothesis Generator v2
 Candidate Hypothesis
 ```
 
-### Componente Nuevo: PossibilityGraph
+### New Component: PossibilityGraph
 
-**No es DecisionGraph. No es EvidenceGraph.**
+**Not DecisionGraph. Not EvidenceGraph.**
 
-Es un grafo de **bifurcaciones epistémicas**:
+It is a graph of **epistemic bifurcations**:
 
 ```yaml
 PossibilityGraph:
@@ -135,7 +135,7 @@ PossibilityGraph:
     - reopens_via
 ```
 
-### Ejemplo Concreto: Espacio-Tiempo
+### Concrete Example: Space-Time
 
 ```
 1905
@@ -152,13 +152,13 @@ PossibilityGraph:
 +-- gravedad = fuerza cuántica ✗ (exploración: 2%)
 ```
 
-**Nodo "espacio-tiempo discreto" no es falso. Es poco explorado.**
+**Node "discrete space-time" is not false. It is little explored.**
 
 ---
 
-## 6. Proceso EHG v2
+## 6. EHG v2 process
 
-### Paso 1: Detectar Bifurcación
+### Step 1: Detect Fork
 ```yaml
 Input: DecisionGraph, EvidenceGraph
 Output: BranchNode
@@ -167,7 +167,7 @@ Output: BranchNode
   abandoned_path: "Discreto → ?"
 ```
 
-### Paso 2: Analizar Contexto Histórico
+### Step 2: Analyze Historical Context
 ```yaml
 abandonment_signals:
   - "Sin evidencia experimental disponible"
@@ -180,13 +180,13 @@ exploration_barriers:
   - Conceptual: "Paradigma dominante no lo permitía"
 ```
 
-### Paso 3: Buscar Conocimiento Posterior
+### Step 3: Seek Further Knowledge
 ```yaml
 modern_knowledge:
-  - Teoría cuántica de campos
+- Quantum field theory
   - Computación cuántica
   - Información física
-  - Teoría de redes
+- Network theory
   
 relevant_connections:
   - "Loop Quantum Gravity retoma discretización"
@@ -194,16 +194,16 @@ relevant_connections:
   - "Holographic Principle sugiere emergencia"
 ```
 
-### Paso 4: Generar Hipótesis Estructurada
+### Step 4: Generate Structured Hypotheses
 
-**NO genera:**
+**DOES NOT generate:**
 ```json
 {
   "hypothesis": "Espacio-tiempo discreto"
 }
 ```
 
-**GENERA:**
+**GENERATES:**
 ```json
 {
   "hypothesis": "El espacio-tiempo podría emerger de una red discreta de información",
@@ -245,7 +245,7 @@ relevant_connections:
 
 ---
 
-## 7. Output Estructurado: Hypothesis Candidate
+## 7. Structured Output: Hypothesis Candidate
 
 ```yaml
 HypothesisCandidate:
@@ -286,9 +286,9 @@ HypothesisCandidate:
 
 ---
 
-## 8. Aplicaciones
+## 8. Applications
 
-### 8.1 Detección de Bifurcaciones Históricas
+### 8.1 Detection of Historical Bifurcations
 ```python
 # No implementar hasta H7 validado
 branches = PossibilityGraph.detect_bifurcations(
@@ -300,7 +300,7 @@ branches = PossibilityGraph.detect_bifurcations(
 )
 ```
 
-### 8.2 Detección de Oportunidades Latentes
+### 8.2 Detection of Latent Opportunities
 ```python
 # Futuro
 opportunities = PossibilityGraph.find_latent_opportunities(
@@ -322,7 +322,7 @@ Current status: "LQG and Causal Sets provide formalism"
 Opportunity score: HIGH
 ```
 
-### 8.3 Detección de Convergencias Futuras
+### 8.3 Detection of Future Convergences
 ```python
 # Futuro
 convergence_candidates = PossibilityGraph.predict_convergence(
@@ -331,44 +331,44 @@ convergence_candidates = PossibilityGraph.predict_convergence(
 )
 ```
 
-**Ejemplo real**:
+**Real example**:
 ```
-Branch A: Neurociencia + IA → NeuroAI (convergencia reciente)
-Branch B: Termodinámica + Información → Landauer (convergencia años 60)
-Branch C: Genética + Evolución → Síntesis Moderna (convergencia años 40)
+Branch A: Neuroscience + AI → NeuroAI (recent convergence)
+Branch B: Thermodynamics + Information → Landauer (convergence 60s)
+Branch C: Genetics + Evolution → Modern Synthesis (1940s convergence)
 ```
 
 ---
 
-## 9. Comparación: AI Scientist vs Research Cartographer
+## 9. Comparison: AI Scientist vs Research Cartographer
 
-| Aspecto | AI Scientist | Research Cartographer |
+| Appearance | AI Scientist | Research Cartographer |
 |---------|--------------|----------------------|
-| Pregunta | "¿Qué descubrir?" | "¿Qué senderos quedaron sin recorrer?" |
-| Método | Generación desde cero | Reconstrucción + proyección |
-| Evidencia | Puede ignorar historia | Requiere evidencia histórica |
-| Salida | Hipótesis nuevas | Hipótesis contextualizadas |
-| Trazabilidad | Baja (black box) | Alta (cada nodo tiene artifact) |
-| Riesgo | Alucinación científica | Bajo: todo está anclado a evidencia real |
+| Question | "What to discover?" | "What paths were left untrodden?" |
+| Method | Generation from scratch | Reconstruction + projection |
+| Evidence | You can ignore history | Requires historical evidence |
+| Output | New hypotheses | Contextualized hypotheses |
+| Traceability | Low (black box) | High (each node has artifact) |
+| Risk | Scientific hallucination | Low: everything is anchored to real evidence |
 
 ---
 
-## 10. Reconciliación con Filosofía CoResearcher
+## 10. Reconciliation with CoResearcher Philosophy
 
-### Evidencia, Trazabilidad, Reconstrucción
+### Evidence, Traceability, Reconstruction
 
-✓ **Evidencia**: Cada bifurcación tiene artifacts (issues, PRs, commits)  
-✓ **Trazabilidad**: Cada hipótesis rastrea a decisiones históricas observables  
-✓ **Reconstrucción**: No inventa, recupera lo que existió
+✓ **Evidence**: Each fork has artifacts (issues, PRs, commits)  
+✓ **Traceability**: Each hypothesis tracks observable historical decisions  
+✓ **Reconstruction**: Do not invent, recover what existed
 
-### No es un AI Scientist
-- No genera conocimiento desde cero
-- No hace afirmaciones sin evidencia
-- No predice el futuro, solo mapea el espacio epistémico
+### Not an AI Scientist
+- Does not generate knowledge from scratch
+-Does not make claims without evidence
+- It does not predict the future, it only maps the epistemic space
 
-### Es un Mapa del Territorio Científico
+### It is a Map of the Scientific Territory
 ```
-Territorio: Conocimiento científico (existente + posible)
+Territory: Scientific knowledge (existing + possible)
 Mapa: PossibilityGraph
 Cartógrafo: EHG v2
 Usuario: Investigador humano (decision final)
@@ -376,91 +376,91 @@ Usuario: Investigador humano (decision final)
 
 ---
 
-## 11. Relación con Einstein en la Conversación Original
+## 11. Relationship with Einstein in the Original Conversation
 
-### Interpretación Original (Rechazada)
+### Original Interpretation (Rejected)
 ```
-Observaciones → Abducción → Nueva hipótesis
+Observations → Abduction → New hypothesis
 Einstein como generador de ideas
 ```
 
-### Interpretación Nueva (Adoptada)
+### New Interpretation (Adopted)
 ```
 Trajectory Graph → Detectar bifurcaciones → Detectar regiones poco exploradas → Priorizar exploración
 Einstein como explorador del espacio de trayectorias
 ```
 
-### Preguntas Correctas
+### Correct Questions
 
-1. **¿Por qué Einstein encontró la relatividad?**
-   → Porque transitó una región concreta del grafo.
+1. **Why did Einstein find relativity?**
+   → Because it transited a specific region of the graph.
 
-2. **¿Qué otros caminos estaban disponibles en 1905?**
-   → Espacio-tiempo curvo + discreto (abandonado)
+2. **What other roads were available in 1905?**
+   → Curved + discrete space-time (abandoned)
 
-3. **¿Qué caminos descartados podrían ser fértiles hoy?**
-   → Discretización del espacio-tiempo (revisitado por LQG/Causal Sets)
+3. **What discarded paths could be fertile today?**
+   → Discretization of space-time (revisited by LQG/Causal Sets)
 
-4. **¿Qué caminos separados podrían converger más adelante?**
-   → Neurociencia + IA → NeuroAI
-   → Termodinámica + Información → Landauer
-
----
-
-## 12. Integración con Visión Original del Usuario
-
-> "Einstein podría convertirse en algo como: Exploration Engine que pregunte: ¿Cuáles son las ramas con alta evidencia histórica y baja exploración posterior?"
-
-**Respuesta**: Sí, exactamente. Esto es el **Latent Opportunity Detector**.
-
-> "¿Qué hipótesis fueron abandonadas por limitaciones tecnológicas y no por evidencia negativa?"
-
-**Respuesta**: Esto es el **filtro principal** del Opportunity Detector.
-
-> "Un mapa mejor puede ser más valioso que un motor más potente."
-
-**Respuesta**: Esta es la diferencia fundamental entre:
-- Competidores: "AI Scientists" (motores más potentes)
-- CoResearcher: "Research Cartographer" (mapas mejores)
+4. **What separate paths might converge later?**
+   → Neuroscience + AI → NeuroAI
+   → Thermodynamics + Information → Landauer
 
 ---
 
-## 13. Próximos Pasos (Condicionales)
+## 12. Integration with Original User Vision
 
-### Si H6 se valida (≥70% reconstrucción):
-1. **Inmediato**: Documentar DecisionGraph como capa separada
-2. **SPRINT 61**: Diseñar Branch Detection protocol (H7)
-3. **SPRINT 62**: Prototipar PossibilityGraph con 2-3 repositorios
-4. **SPRINT 63**: Implementar EHG v2 como módulo experimental
+> "Einstein could become something like: Exploration Engine that asks: What are the branches with high historical evidence and low subsequent exploration?"
 
-### Si H6 falla (<70% reconstrucción):
-1. Reenfocar en reconstrucción de claims (misión core)
-2. NO ejecutar H7/H8
-3. Postergar EHG v2 indefinidamente
+**Answer**: Yes, exactly. This is the **Latent Opportunity Detector**.
+
+> "Which hypotheses were abandoned because of technological limitations and not because of negative evidence?"
+
+**Answer**: This is the **main filter** of the Opportunity Detector.
+
+> "A better map can be more valuable than a more powerful engine."
+
+**Answer**: This is the fundamental difference between:
+- Competitors: "AI Scientists" (more powerful engines)
+- CoResearcher: "Research Cartographer" (better maps)
+
+---
+
+## 13. Next Steps (Conditional)
+
+### If H6 is validated (≥70% reconstruction):
+1. **Immediate**: Document DecisionGraph as a separate layer
+2. **SPRINT 61**: Design Branch Detection protocol (H7)
+3. **SPRINT 62**: Prototype PossibilityGraph with 2-3 repositories
+4. **SPRINT 63**: Implement EHG v2 as an experimental module
+
+### If H6 fails (<70% rebuild):
+1. Refocus on claims reconstruction (core mission)
+2. DO NOT run H7/H8
+3. Delay EHG v2 indefinitely
 
 ---
 
 ## 14. Non-Goals (Scope Guard)
 
-❌ NO generar hipótesis científicas nuevas sin anclaje histórico  
-❌ NO predecir qué rama will be successful  
-❌ NO reemplazar juicio humano  
-❌ NO ejecutar hasta H6 validada  
-❌ NO agregar schemas nuevos hasta SPRINT 61+
+❌ DO NOT generate new scientific hypotheses without historical anchoring  
+❌ DO NOT predict which branch will be successful  
+❌ DO NOT replace human judgment  
+❌ DO NOT execute until H6 validated  
+❌ DO NOT add new schemas until SPRINT 61+
 
-✅ Únicamente mapear territorio epistémico existente  
-✅ Únicamente detectar oportunidades latentes  
-✅ Únicamente proporcionar trazabilidad completa  
+✅ Only map existing epistemic territory  
+✅ Only detect latent opportunities  
+✅ Only provide full traceability  
 
 ---
 
-## 15. Caso de Uso Concreto
+## 15. Concrete Use Case
 
-### Escenario
-Un investigador en computación cuántica quiere saber:
-> "¿Qué enfoques para computación cuántica fueron abandonados antes de 1990 y podrían ser revisitados hoy?"
+### Scenario
+A quantum computing researcher wants to know:
+> "What approaches to quantum computing were abandoned before 1990 and could be revisited today?"
 
-### Lo que EHG v2 Proporciona
+### What EHG v2 Provides
 ```json
 {
   "query": "Quantum computing approaches abandoned before 1990",
@@ -494,55 +494,55 @@ Un investigador en computación cuántica quiere saber:
 }
 ```
 
-### Lo que NO Proporciona
-- "Deberías investigar células cuánticas"
-- "Esta aproximación will be successful"
-- Cualquier afirmación sin evidencia
+### What it DOES NOT Provide
+- "You should investigate quantum cells"
+- "This approach will be successful"
+- Any claim without evidence
 
 ---
 
-## 16. Conclusión
+## 16. Conclusion
 
-EHG v2 no es un generador de hipótesis.
+EHG v2 is not a hypothesis generator.
 
-Es un **Research Cartographer** que:
+It is a **Research Cartographer** who:
 
-1. Reconstruye bifurcaciones históricas (Evidence → Decision → Branch)
-2. Identifica caminos abandonados con razones específicas
-3. Evalúa relevancia moderna con conocimiento actual
-4. Proyecta posibilidades sin afirmar certezas
+1. Reconstruct historical branches (Evidence → Decision → Branch)
+2. Identify abandoned roads with specific reasons
+3. Evaluate modern relevance with current knowledge
+4. Project possibilities without stating certainties
 
-**Filosofía**:
-> "No te digo qué descubrir. Te muestro el mapa de lo que ya existía pero fue olvidado."
+**Philosophy**:
+> "I'm not telling you what to discover. I'm showing you the map of what already existed but was forgotten."
 
-Esto es:
-- Más humilde que "AI Scientist"
-- Más coherente con CoResearcher
-- Más alineado con trazabilidad
-- Potencialmente más valioso: **un mapa mejor > motor más potente**
-
----
-
-## 17. Estado Actual
-
-**Hoy**: SPRINT 60C en ejecución  
-**Mañana**: Resultados de repositorios reales  
-**Futuro**: Si H6 valida, esta visión se convierte en SPRINT 61+
-
-**Siguiente conversación debe empezar con**:
-- "Ejecutamos SPRINT 60C en 20 repositorios"
-- "H6 validada con 78% precisión"
-- "Proceder a H7: Branch Detection"
-
-**NO con**:
-- Nuevas ideas arquitectónicas
-- Nuevos grafos
-- Nuevos schemas
+This is:
+- More humble than "AI Scientist"
+- More consistent with CoResearcher
+- More aligned with traceability
+- Potentially more valuable: **better map > more powerful engine**
 
 ---
 
-*Esta es una máquina del tiempo de trayectorias. Pero en cada bifurcación hemos de dejar plantado un hito: Einstein asumió que el tiempo y el espacio no eran lineales sino que se podían curvar. También asumió que el tiempo y el espacio eran continuos. Hizo un cambio de paradigma frente al status del conocimiento previo respecto al espacio-tiempo lineal, pero mantuvo otro frente: la continuidad.*
+## 17. Current Status
 
-*El camino "espacio-tiempo curvo pero discreto" quedó sin explorar.*
+**Today**: SPRINT 60C running  
+**Tomorrow**: Results from real repositories  
+**Future**: If H6 validates, this vision becomes SPRINT 61+
 
-*Ese hito no explorado es exactamente lo que EHG v2 detectaría.*
+**Next conversation should start with**:
+- "We run SPRINT 60C on 20 repositories"
+- "H6 validated with 78% accuracy"
+- "Proceed to H7: Branch Detection"
+
+**NOT with**:
+- New architectural ideas
+- New graphs
+- New schemas
+
+---
+
+*This is a trajectory time machine. But at each fork we must leave a milestone: Einstein assumed that time and space were not linear but could be curved. He also assumed that time and space were continuous. He made a paradigm shift regarding the status of prior knowledge regarding linear space-time, but maintained another front: continuity.*
+
+*The "curved but discrete space-time" path was left unexplored.*
+
+*That unexplored landmark is exactly what EHG v2 would detect.*

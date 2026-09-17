@@ -13,7 +13,7 @@
 A **Scientific Question** is a formal, persistent inquiry that guides research direction and organizes scientific activity.
 
 It is NOT:
-- ❌ A casual query ("¿Qué es...?" sin seguimiento)
+- ❌ A casual query ("What is...?" without follow-up)
 - ❌ A search string (palabras clave para buscar papers)
 - ❌ A subtask (paso en un workflow)
 - ❌ An open-ended prompt (pregunta sin constraints)
@@ -145,10 +145,10 @@ The original remains queryable but inactive.
 
 | Level | Example | Characteristic |
 |-------|---------|--------------|
-| **Macro** | "¿Qué factores predicen Alzheimer?" | Múltiples dominios, alta ambigüedad |
-| **Meso** | "¿Cuáles son los biomarcadores sanguíneos del Alzheimer?" | Dentro de un PROGRAM, enfoque específico |
-| **Micro** | "¿Puede la GFAP predecir Alzheimer precoz?" | Hipótesis con formulación precisa |
-| **Nano** | "¿GFAP > 200 pg/mL predice APOE4 positivo?" | Claim testeable directamente |
+| **Macro** | "What factors predict Alzheimer's?" | Multiple domains, high ambiguity |
+| **Meso** | "What are the blood biomarkers of Alzheimer's?" | Within a PROGRAM, specific focus |
+| **Micro** | "Can GFAP predict early Alzheimer's?" | Hypothesis with precise formulation |
+| **Nano** | "GFAP > 200 pg/mL predicts positive APOE4?" | Claim directly testable |
 
 Regla de oro:
 - **Macro**: Usualmente demasiado amplio para convertirse en QUESTION
@@ -160,9 +160,9 @@ Regla de oro:
 
 Cuando dos Questions parecen duplicadas:
 
-1. **Ontological placement analysis** - ¿Mismo path en CSO?
-2. **Investigation overlap** - ¿Evidence sets overlap >50%?
-3. **Researcher consensus** - ¿Qué comunidad activa existe?
+1. **Ontological placement analysis** - Same path in CSO?
+2. **Investigation overlap** - Evidence sets overlap >50%?
+3. **Researcher consensus** - What active community exists?
 4. **Steward decision** - Merge, split, or maintain separation
 
 ---
@@ -260,11 +260,11 @@ Managed by PROGRAM Lead with steward oversight.
 
 This constitution defines the question as institutional primitive. Changes require:
 
-1. **Scientific impact assessment** - ¿Mejora la claridad o introduce ambigüedad?
-2. **Ontological consistency check** - ¿Mantiene el namespace canónico?
-3. **Steward council review** - ¿Implica nuevas reglas de autoridad?
-4. **Community consultation (7 days)** - ¿Aceptación de la comunidad?
+1. **Scientific impact assessment** - Does it improve clarity or introduce ambiguity?
+2. **Ontological consistency check** - Does it maintain the canonical namespace?
+3. **Steward council review** - Does it imply new authority rules?
+4. **Community consultation (7 days)** - Community acceptance?
 
 ---
 
-*Esta constitución establece QUESTION como la unidad económica del trabajo científico. Mientras que PROGRAM es el territorio, QUESTION es la energía que lo impulsa.*
+*This constitution establishes QUESTION as the economic unit of scientific work. While PROGRAM is the territory, QUESTION is the energy that drives it.*

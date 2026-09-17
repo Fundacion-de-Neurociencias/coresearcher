@@ -1,0 +1,125 @@
+{
+  "report_id": "OED67A-20260801190627",
+  "generated_at": "2026-08-01T19:06:27.207413+00:00",
+  "sprint": "SPRINT 67A — Observation-Explanation Differential",
+  "hypothesis": "Existe una relación monotónica entre distancia observacional y fragilidad epistemológica.",
+  "claims_table": [
+    {
+      "claim": "DecisionNode fully investigable",
+      "epistemic_status": "OBSERVED",
+      "sprint_origen": "SPRINT 60C",
+      "estado_actual": "SURVIVED",
+      "evidence": "301 nodos extraídos, κ ≥ 0.8 esperado"
+    },
+    {
+      "claim": "Trajectory inferible desde DecisionNodes",
+      "epistemic_status": "OBSERVED",
+      "sprint_origen": "SPRINT 60C",
+      "estado_actual": "SURVIVED",
+      "evidence": "426 edges reconstruidos (231 explícitos + 195 temporales)"
+    },
+    {
+      "claim": "Convergence detectable",
+      "epistemic_status": "OBSERVED",
+      "sprint_origen": "SPRINT 60C",
+      "estado_actual": "SURVIVED",
+      "evidence": "4 convergencias detectadas"
+    },
+    {
+      "claim": "Constraint detector (v1) válido",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 61",
+      "estado_actual": "FALSIFIED",
+      "evidence": "FPR alto, no distingue restricciones reales de espurias"
+    },
+    {
+      "claim": "Convergencia replicable (κ ≥ 0.4)",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 61",
+      "estado_actual": "FALSIFIED",
+      "evidence": "κ = -0.094 medido en SPRINT 63"
+    },
+    {
+      "claim": "Trajectory replicable (edges explícitos κ ≥ 0.8)",
+      "epistemic_status": "DERIVED",
+      "sprint_origen": "SPRINT 62",
+      "estado_actual": "SURVIVED",
+      "evidence": "Métricas de extracción validadas"
+    },
+    {
+      "claim": "Convergencia real vs sintética distinguible",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 63",
+      "estado_actual": "FALSIFIED",
+      "evidence": "70% FPR en sintéticos"
+    },
+    {
+      "claim": "EpistemicStatus como clasificación operacional",
+      "epistemic_status": "DERIVED",
+      "sprint_origen": "SPRINT 64R",
+      "estado_actual": "SURVIVED",
+      "evidence": "Usado consistentemente en auditorías posteriores"
+    },
+    {
+      "claim": "Restriction instrumentable por manipulación",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 65",
+      "estado_actual": "FALSIFIED",
+      "evidence": "No hay métrica publicada, argumento metodológico"
+    },
+    {
+      "claim": "Theory instrumentable por predicciones",
+      "epistemic_status": "DERIVED",
+      "sprint_origen": "SPRINT 66",
+      "estado_actual": "SURVIVED",
+      "evidence": "Historia de la ciencia: evolución, relatividad"
+    },
+    {
+      "claim": "Paradigm instrumentable por supuestos compartidos",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 66",
+      "estado_actual": "FALSIFIED",
+      "evidence": "No hay métrica publicada"
+    },
+    {
+      "claim": "Instrumentability Index calibrado",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 66B",
+      "estado_actual": "FALSIFIED",
+      "evidence": "9 attacks detectados, colapsa entidades distintas"
+    },
+    {
+      "claim": "Instrumentability Index como métrica útil",
+      "epistemic_status": "HYPOTHESIZED",
+      "sprint_origen": "SPRINT 66C",
+      "estado_actual": "FALSIFIED",
+      "evidence": "No separa grupos históricos, no predice nada"
+    }
+  ],
+  "survival_rates": {
+    "OBSERVED": {
+      "total": 3,
+      "survived": 3,
+      "falsified": 0,
+      "survival_rate": 1.0,
+      "falsification_rate": 0.0
+    },
+    "HYPOTHESIZED": {
+      "total": 7,
+      "survived": 0,
+      "falsified": 7,
+      "survival_rate": 0.0,
+      "falsification_rate": 1.0
+    },
+    "DERIVED": {
+      "total": 3,
+      "survived": 3,
+      "falsified": 0,
+      "survival_rate": 1.0,
+      "falsification_rate": 0.0
+    }
+  },
+  "counterexamples": [],
+  "case": "CASE_A",
+  "conclusion": "Caso A: máxima gana credibilidad."
+}

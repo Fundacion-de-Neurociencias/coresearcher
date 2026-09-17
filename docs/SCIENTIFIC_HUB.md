@@ -1,38 +1,38 @@
-# ScientificHub
+#ScientificHub
 ## GitHub for Scientific Knowledge
 
 ---
 
-## No es Git. Es GitHub.
+##It is not Git. It's GitHub.
 
-Git resolvió control de versiones.
-GitHub resolvió coordinación humana.
+Git solved version control.
+GitHub solved human coordination.
 
-CoResearcher debe resolver coordinación científica.
-
----
-
-## Paralelismos Fundamentales
-
-| Git/GitHub | Ciencia | Implementación |
-|------------|---------|---------------|
-| **Repository** | Scientific Repository | Mecanismos/Hipótesis en un dominio |
-| **Commit** | Scientific Action | Acción inmutable verificable |
-| **Branch** | Research Branch | Línea de investigación independiente |
-| **Merge** | Scientific Merge | Integración de mecanismos/teorías |
-| **Fork** | Scientific Fork | Hipótesis/modelo con variante |
-| **Pull Request** | Consensus Request | Solicitud de incorporación al consenso |
-| **Issue** | Open Scientific Question | Pregunta sin resolver |
-| **Discussion** | Scientific Debate | Debate sin claim formal |
-| **Review** | Peer Review | Revisión científica |
-| **Maintainer** | Scientific Curator | Mantiene calidad del repositorio |
-| **Release** | Consensus Snapshot | Estado versionado del consenso |
+CoResearcher must solve scientific coordination.
 
 ---
 
-## Scientific Action = Commit Inmutable
+## Fundamental Parallelisms
 
-Cada acción científica es inmutable y verificable:
+| Git/GitHub | Science | Implementation |
+|---------|---------|---------------|
+| **Repository** | Scientific Repository | Mechanisms/Hypotheses in a domain |
+| **Commit** | Scientific Action | Verifiable Immutable Action |
+| **Branch** | Research Branch | Independent research line |
+| **Merge** | Scientific Merge | Integration of mechanisms/theories |
+| **Fork** | Scientific Fork | Hypothesis/model with variant |
+| **Pull Request** | Consensus Request | Request to join the consensus |
+| **Issue** | Open Scientific Question | Unsolved question |
+| **Discussion** | Scientific Debate | Debate without formal claim |
+| **Review** | Peer Review | Scientific review |
+| **Maintainer** | Scientific Curator | Maintains repository quality |
+| **Release** | Consensus Snapshot | Consensus versioned status |
+
+---
+
+## Scientific Action = Commit Immutable
+
+Every scientific action is immutable and verifiable:
 
 ```
 ACTION-000001
@@ -44,11 +44,11 @@ ACTION-000001
 └── evidence: "replicated in our lab"
 ```
 
-Exactamente como commits en Git.
+Exactly like commits in Git.
 
 ---
 
-## Research Branch = Línea de Investigación
+## Research Branch = Research Line
 
 ```
 Alzheimer Repository
@@ -58,13 +58,13 @@ Alzheimer Repository
 └── vascular branch
 ```
 
-Cada rama evoluciona independientemente.
+Each branch evolves independently.
 
 ---
 
-## Scientific Merge = Integración de Mecanismos
+## Scientific Merge = Mechanism Integration
 
-Cuando dos ramas convergen:
+When two branches converge:
 
 ```
 Amyloid hypothesis
@@ -78,7 +78,7 @@ Integrated Mechanism (MECH-00123-MERGED)
 
 ---
 
-## Consensus Request = Pull Request Científico
+## Consensus Request = Scientific Pull Request
 
 ```
 Researcher:
@@ -131,7 +131,7 @@ Related: HYP-001, MECH-002
 
 ## Scientific Debate = Discussion
 
-No todo debe convertirse en claim inmediatamente.
+Not everything should become a claim immediately.
 
 ```
 DISCUSSION-001
@@ -159,43 +159,43 @@ acumulado en un momento dado.
 
 ## Scientific Curator = Maintainer
 
-No decide verdad.
+It doesn't decide truth.
 
-Mantiene calidad del repositorio científico:
-- Verifica acciones
-- Gestiona merges
-- Curación de contenido
+Maintains quality of the scientific repository:
+- Check actions
+- Manage merges
+- Content curation
 
 ---
 
-## La Interfaz Natural
+## The Natural Interface
 
-Investigadores actualmente usan:
+Researchers currently use:
 - Papers
 - Emails
-- Conferencias
-- Revistas
-- Twitter/X
+- Conferences
+- Magazines
+-Twitter/X
 
-Necesitan una interfaz donde:
-- Preguntar
-- Proponer
-- Debatir
-- Validar
-- Versionar conocimiento
+They need an interface where:
+- Ask
+- Propose
+- Discuss
+- Validate
+- Version knowledge
 
-ScientificHub es esa interfaz.
+ScientificHub is that interface.
 
 ---
 
-## El Flujo de Trabajo
+## The Workflow
 
 ```
 Researcher escribe pregunta
     ↓
 Compiler: Open Question (ISSUE/Q)
     ↓
-Researcher propone hipótesis
+Researcher proposes hypothesis
     ↓
 Compiler: Hypothesis (HYP)
     ↓
@@ -222,57 +222,57 @@ Merged → nuevo snapshot
 
 ---
 
-## El Activo
+## The Asset
 
-No es:
-- Conjunto de mecanismos
-- Conjunto de claims
-- Conjunto de hipótesis
+It is not:
+- Set of mechanisms
+- Set of claims
+- Set of hypotheses
 
-Es:
-- **Historial de acciones inmutables**
-- **Red de soporte/refutación**
-- **Identidad de investigadores**
-- **Versiones de consenso**
+It is:
+- **Immutable action history**
+- **Support/rebuttal network**
+- **Identity of researchers**
+- **Consensus versions**
 
-Esto es el **Scientific Activity Graph** - el Git commit graph equivalente.
+This is the **Scientific Activity Graph** - the Git commit graph equivalent.
 
 ---
 
-## La Visión Institucional
+## The Institutional Vision
 
-GitHub no ganó por mejor software.
+GitHub did not win for best software.
 
-Ganó por:
-- Reducción de fricción
-- Comunidad activa
-- Estándares abiertos
-- Efectos de red acumulativos
+Won for:
+- Friction reduction
+- Active community
+- Open standards
+- Cumulative network effects
 
-ScientificHub puede ganar igual:
-- Investigadores interactúan naturalmente
-- Conocimiento evoluciona versionado
-- Consenso es visible y verificable
-- Reputación es trazable
+ScientificHub can still earn:
+- Researchers interact naturally
+- Knowledge evolves versioned
+- Consensus is visible and verifiable
+- Reputation is traceable
 
 ---
 
 ## Sprint 24+: ScientificHub Interface
 
-Una vez tengamos:
+Once we have:
 - Scientific Semantic Compiler
 - Scientific Interaction Protocol  
-- Trust Engine
+-TrustEngine
 - Scientific Repository
 
-La interfaz natural aparece como el punto de convergencia:
+The natural interface appears as the point of convergence:
 - Web interface
 - API
 - MCP
-- SDK
+-SDK
 
-Donde la comunidad científica puede:
-- Preguntar
-- Proponer
-- Validar
-- Versionar conocimiento
+Where the scientific community can:
+- Ask
+- Propose
+- Validate
+- Version knowledge

@@ -10,11 +10,11 @@
 
 ### Section 1. The Fundamental Inquiry
 
-> **¿Cuál es la unidad mínima de ejecución científica?**
+> **What is the minimum unit of scientific execution?**
 
 No es el paper.
 No es el claim.
-No es la decisión.
+It's not the decision.
 
 ---
 
@@ -33,7 +33,7 @@ La pregunta es la unidad estratégica porque:
 - **Genera** actividad continua
 
 ```
-QUESTION-000123: "¿Cuáles son los biomarcadores sanguíneos del Alzheimer?"
+QUESTION-000123: "What are the blood biomarkers of Alzheimer's?"
 ├── 2020-2023: Claims sobre pTau217, NfL, GFAP
 ├── 2024-2025: Reviews validando eficacia
 ├── 2025-2026: Decisiones comerciales
@@ -76,7 +76,7 @@ Es el **ledger histórico completo de ejecución científica**.
 Scientific Execution Ledger
 ```
 
-Equivalente al historial de commits de Linux, pero para ciencia.
+Equivalent to Linux commit history, but for science.
 
 ### Section 2. Ledger Structure
 
@@ -251,4 +251,4 @@ This architecture scales because:
 
 ---
 
-*Esta constitución establece que CoResearcher es un Scientific Execution Ledger donde cada operación científica verificable queda registrada permanentemente, anclada a preguntas estratégicas, y coordinada por agentes con intervención humana selectiva.*
+*This constitution establishes that CoResearcher is a Scientific Execution Ledger where each verifiable scientific operation is permanently recorded, anchored to strategic questions, and coordinated by agents with selective human intervention.*

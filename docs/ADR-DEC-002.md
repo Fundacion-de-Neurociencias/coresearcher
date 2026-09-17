@@ -1,30 +1,30 @@
-# ADR-DEC-002: Evidence Never Contains Intent
+#ADR-DEC-002: Evidence Never Contains Intent
 
 **Version 1.0.0** - Architecture Decision Record  
-**Status**: Canonical Reference - Gobernanza Ontológica
+**Status**: Canonical Reference - Ontological Governance
 
-## 1. Contexto
+## 1. Context
 
-Durante la revisión adversarial de la fase ARQ-002, se detectó una vulnerabilidad semántica grave al enlazar el `DecisionGraph` con el `EvidenceGraph`. Al permitir que las decisiones ruteen la investigación futura hacia aserciones potenciales, existía el riesgo de que el `EvidenceGraph` comenzara a absorber metadatos de intención (e.g., `selected_because`, `priority`, `target`).
+During the adversarial review of phase ARQ-002, a serious semantic vulnerability was detected when linking `DecisionGraph` to `EvidenceGraph`. By allowing decisions to route future investigation toward potential assertions, there was a risk that `EvidenceGraph` would begin to absorb intent metadata (e.g., `selected_because`, `priority`,
 
-El `EvidenceGraph` fue diseñado estrictamente como un registro inmutable retrospectivo (lo que se sabe empíricamente y su procedencia). Mezclar trabajo en curso (intención) con conocimiento demostrado (evidencia) erosiona la pureza ontológica del sistema y lo degrada a un simple gestor de tareas.
+The `EvidenceGraph` was designed strictly as a retrospective immutable record (what is known empirically and where it came from). Mixing work in progress (intention) with demonstrated knowledge (evidence) erodes the ontological purity of the system and degrades it to a simple task manager.
 
-## 2. Decisión
+## 2. Decision
 
-Formalizamos la regla constitucional fundamental: **La evidencia nunca contiene intención.**
+We formalize the fundamental constitutional rule: **Evidence never contains intent.**
 
-1. Un nodo `Claim` o `Artifact` dentro del `EvidenceGraph` existe única y exclusivamente para describir el estado del conocimiento y su anclaje empírico.
-2. Queda estrictamente prohibido incluir campos como `priority`, `intent`, `hypothesis`, `selected_because`, o `target_date` dentro de cualquier nodo del `EvidenceGraph`.
-3. Cualquier representación de trabajo futuro, intención direccional, o gobernanza residirá exclusivamente en el `DecisionGraph` o en el `MissionGraph`.
+1. A node `Claim` or `Artifact` within the `EvidenceGraph` exists solely and exclusively to describe the state of knowledge and its empirical anchoring.
+2. It is strictly prohibited to include fields such as `priority`, `intent`, `hypothesis`, `selected_because`, or
+3. Any representation of future work, directional intent, or governance will reside exclusively in the `DecisionGraph` or the `MissionGraph`.
 
-## 3. Consecuencias
+## 3. Consequences
 
-### Positivas
-- Preserva la inmutabilidad y la pureza del `EvidenceGraph` como una estructura de datos apta para auditoría científica pura.
-- Evita la fuga semántica donde la "urgencia" o la "dirección estratégica" de un programa de investigación corrompe la interpretación algorítmica de la evidencia misma.
+### Positive
+- Preserves the immutability and purity of `EvidenceGraph` as a data structure suitable for pure scientific auditing.
+- Avoids semantic leakage where the "urgency" or "strategic direction" of a research program corrupts the algorithmic interpretation of the evidence itself.
 
-### Negativas / Restricciones
-- Aumenta la complejidad del motor de consultas. Para responder a la pregunta *"¿Qué evidencia validamos la semana pasada a causa de la decisión estratégica X?"*, el sistema de base de datos deberá realizar un *join* transversal entre el `DecisionGraph` y el `EvidenceGraph`, en lugar de simplemente filtrar atributos directamente sobre los claims.
+### Negatives / Restrictions
+- Increases the complexity of the query engine. To answer the question *"What evidence did we validate last week because of strategic decision
 
-## 4. Implementación Referencial
-La regla queda enlazada a las políticas constitucionales a través de `schemas/constitution_rules.yaml`. Cualquier grafo de evidencia que contenga campos de intención será automáticamente rechazado.
+## 4. Reference Implementation
+The rule is linked to constitutional policies through `schemas/constitution_rules.yaml`. Any evidence graph containing intent fields will be automatically rejected.

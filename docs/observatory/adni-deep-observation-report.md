@@ -81,9 +81,9 @@
 
 ## Open Questions
 
-1. Quants los falsos positivos en conversión MCI-AD detectados con solo p-tau181 vs combinado con Aβ42/40?
-2. Com queda la correlació entre NfL plasmàtic i atrofia cerebral en els primers 12 mesos?
-3. Quina és la variabilitat inter-sit de les mesures de PET entre centres amb calibrat diferent?
+1. How many false positives in MCI-AD conversion detected with p-tau181 alone vs combined with Aβ42/40?
+2. How is the correlation between plasma NfL and brain atrophy in the first 12 months?
+3. What is the inter-site variability of PET measurements between centers with different calibrations?
 4. Com es correlaciona el CDR-SB amb les proves de memòria específiques (RAVLT vs BVMT)?
 5. Quins són els criteris exactes d'exclusió per "altres condicions neurodegeneratives"?
 

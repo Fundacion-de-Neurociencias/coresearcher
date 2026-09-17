@@ -1,50 +1,50 @@
-# Registro de Deuda Técnica (Technical Debt Register)
+# Technical Debt Register
 
-**Estado:** Congelamiento de Arquitectura (ARQ-001 → ARQ-003)  
-**Objetivo:** Consolidar y priorizar por riesgo todas las advertencias, limitaciones e ineficiencias identificadas en el sistema.
-
----
-
-## Prioridad 1: Riesgo Crítico (Impacta Escalabilidad y Producción)
-
-### `DEBT-001`: Validación Lenta en Memoria para Grafos Grandes
-- **Descripción:** El validador `validate_constitution.py` procesa listas JSON en memoria mediante iteración secuencial. En pruebas sintéticas, 10.000 nodos requirieron ~53 segundos. A 100.000 nodos el proceso falla por timeout/memoria.
-- **Riesgo:** Cuello de botella severo que impide el uso del sistema a escala industrial.
-- **Mitigación Planificada:** Migrar la ejecución de validación a un motor indexado (SQLite / DuckDB / Graph engine) sin cambiar las reglas del esquema.
+**Status:** Architecture Freeze (ARQ-001 → ARQ-003)  
+**Objective:** Consolidate and prioritize by risk all warnings, limitations and inefficiencies identified in the system.
 
 ---
 
-## Prioridad 2: Riesgo Alto (Impacta Rigor y Fidelidad)
+## Priority 1: Critical Risk (Impacts Scalability and Production)
 
-### `DEBT-002`: Reconstrucción Ciega Basada en Simulaciones Deterministas
-- **Descripción:** Las pruebas de `advanced_claim_reconstruction.py` utilizan prompts simulados y frases estáticas prefijadas para validar Precision/Recall.
-- **Riesgo:** Falso sentido de seguridad. No se ha probado si un LLM real no determinista alucina cuando recibe el grafo aislado de texto.
-- **Mitigación Planificada:** Reemplazar el mock del script por llamadas reales en modo ciego a APIs de LLM en la suite de validación empírica.
-
-### `DEBT-003`: Multimodalidad de `Artifact` No Implementada en Parsers
-- **Descripción:** Aunque `EVIDENCEGRAPH_SPEC.md` v1.1.0 define el supertipo `Artifact` para soportar imágenes, tablas y estructuras 3D (PDB), actualmente no existen parsers ni convertidores reales de este tipo de objetos en el código.
-- **Riesgo:** El soporte multimodal es solo teórico en la especificación y fallará si se ingesta un binario real.
-- **Mitigación Planificada:** Construir parsers de prueba para artefactos biomédicos (e.g. archivos PDB de AlphaFold).
+### `DEBT-001`: Slow In-Memory Validation for Large Graphs
+- **Description:** The `validate_constitution.py` validator processes JSON lists in memory using sequential iteration. In synthetic tests, 10,000 nodes required ~53 seconds. At 100,000 nodes the process fails due to timeout/memory.
+- **Risk:** Severe bottleneck that prevents the use of the system on an industrial scale.
+- **Planned Mitigation:** Migrate the validation execution to an indexed engine (SQLite / DuckDB / Graph engine) without changing the schema rules.
 
 ---
 
-## Prioridad 3: Riesgo Medio (Impacta Cobertura y Ergonómia)
+## Priority 2: High Risk (Impacts Rigor and Fidelity)
 
-### `DEBT-004`: Fuzzing Constitucional Inexistente
-- **Descripción:** Los Chaos Tests constan de 7 casos de prueba estáticos escritos manualmente.
-- **Riesgo:** Un caso borde no anticipado (e.g., combinación de ciclos con nodos no estándar) podría eludir la validación constitucional.
-- **Mitigación Planificada:** Implementar un generador estocástico de grafos (fuzzer) para someter el validador a 10.000 permutaciones aleatorias.
+### `DEBT-002`: Blind Reconstruction Based on Deterministic Simulations
+- **Description:** `advanced_claim_reconstruction.py` tests use simulated prompts and prefixed static phrases to validate Precision/Recall.
+- **Risk:** False sense of security. It has not been tested whether a real non-deterministic LLM hallucinates when receiving the isolated text graph.
+- **Planned Mitigation:** Replace the script mock with real calls in blind mode to LLM APIs in the empirical validation suite.
 
-### `DEBT-005`: Inexistencia de Cola de Persistencia para `MissionGraph`
-- **Descripción:** El `MissionGraph` está especificado conceptualmente y en esquema YAML (`mission_graph.yaml`), pero no existe una cola de tareas persistente (ej. SQLite / Redis / Daemon) que gestione el ciclo de vida de los *Briefs*.
-- **Riesgo:** Si el orquestador se reinicia, las misiones en curso se pierden.
-- **Mitigación Planificada:** Implementar un almacenamiento de estado liviano para la capa de ejecución.
+### `DEBT-003`: Multimodality of `Artifact` Not Implemented in Parsers
+- **Description:** Although `EVIDENCEGRAPH_SPEC.md` v1.1.0 defines the `Artifact` supertype to support images, tables and 3D structures (PDBs), there are currently no actual parsers or converters for these types of objects in the code.
+- **Risk:** Multimodal support is only theoretical in the specification and will fail if a real binary is ingested.
+- **Planned Mitigation:** Build test parsers for biomedical artifacts (e.g. AlphaFold PDB files).
 
 ---
 
-## Prioridad 4: Riesgo Bajo (Higiene y Compatibilidad)
+## Priority 3: Medium Risk (Impacts Coverage and Ergonomics)
 
-### `DEBT-006`: Dependencia de Codificación `cp1252` en Windows
-- **Descripción:** Scripts que imprimen por consola (como el benchmark de escalabilidad o el CLI de `skillspector`) fallan al renderizar caracteres UTF-8/emojis si no se fuerza `$env:PYTHONUTF8=1`.
-- **Riesgo:** Errores molestos en la ejecución CLI en entornos Windows sin UTF-8 por defecto.
-- **Mitigación Planificada:** Forzar el manejo explícito de codificación `utf-8` en todas las salidas por stream/console.
+### `DEBT-004`: Non-existent Constitutional Fuzzing
+- **Description:** Chaos Tests consist of 7 manually written static test cases.
+- **Risk:** An unanticipated edge case (e.g., combination of cycles with non-standard nodes) could bypass constitutional validation.
+- **Planned Mitigation:** Implement a stochastic graph generator (fuzzer) to subject the validator to 10,000 random permutations.
+
+### `DEBT-005`: No Persistence Queue for `MissionGraph`
+- **Description:** The
+- **Risk:** If the orchestrator restarts, missions in progress are lost.
+- **Planned Mitigation:** Implement lightweight state storage for the execution layer.
+
+---
+
+## Priority 4: Low Risk (Hygiene and Compatibility)
+
+### `DEBT-006`: `cp1252` Encoding Dependency on Windows
+- **Description:** Scripts that print to the console (such as the scalability benchmark or the `skillspector` CLI) fail to render UTF-8 characters/emojis if `$env:PYTHONUTF8=1` is not forced.
+- **Risk:** Annoying errors in CLI execution in Windows environments without UTF-8 by default.
+- **Planned Mitigation:** Force explicit handling of `utf-8` encoding on all stream/console outputs.

@@ -5,7 +5,7 @@
 
 ---
 
-## Directive
+##Directive
 
 **STOP adding architecture.**
 
@@ -16,7 +16,7 @@ All schemas, documents, and layer definitions produced during SPRINT PLATFORM-01
 No new schemas.
 No new documents.
 No new layers.
-No new graphs.
+Not new graphs.
 
 ---
 
@@ -25,11 +25,11 @@ No new graphs.
 ### Constitutional Principles
 - Observable
 - Derivable  
-- Inferido (restricted)
-- Desconocido
+- Inferred (restricted)
+- Unknown
 
 ### Mission
-> Reconstruir la fracción auditablemente recuperable de la historia de un proyecto.
+> Reconstruct the auditably recoverable fraction of a project's history.
 
 ### Boundaries
 - CoResearcher ≠ AI Scientist
@@ -40,58 +40,58 @@ No new graphs.
 - EvidenceGraph (v1.1.0)
 
 ### Approved Extension
-- DecisionNode (with Decision Traceability Principle: Observable or Derivable, never Inferido)
+- DecisionNode (with Decision Traceability Principle: Observable or Derivable, never Inferred)
 
 ---
 
 ## What is NOT Stabilized (Requires Empirical Validation)
 
 ### H6: Decision Reconstruction
-> Las decisiones son reconstruibles.
+> Decisions are reconstructable.
 
-**Status**: Modelado, no demostrado  
-**Action**: SPRINT 60C — Validar con 20+ repositorios reales
+**Status**: Modeled, not demonstrated  
+**Action**: SPRINT 60C — Validate with 20+ real repositories
 
 ### H7: Branch Detection  
-> Las bifurcaciones son reconstruibles.
+> The branches are rebuildable.
 
-**Status**: Exploratorio (SPRINT 60D documentado, no ejecutado)  
-**Action**: Depende de H6. No ejecutar hasta validar H6.
+**Status**: Exploratory (SPRINT 60D documented, not executed)  
+**Action**: Depends on H6. Do not execute until H6 is validated.
 
 ### H8: Convergence Detection
-> Las convergencias son reconstruibles.
+> The convergences are reconstructable.
 
-**Status**: Exploratorio  
-**Action**: Depende de H6 y H7. No ejecutar hasta validar H6 y H7.
+**Status**: Exploratory  
+**Action**: Depends on H6 and H7. Do not execute until H6 and H7 are validated.
 
 ### H9: Trajectory Value
-> La trayectoria aporta más valor que la evidencia simple.
+> The track record provides more value than simple evidence.
 
-**Status**: Hipótesis  
-**Action**: Evaluar después de SPRINT 60C
+**Status**: Hypothesis  
+**Action**: Evaluate after SPRINT 60C
 
 ---
 
-## Active Sprint: SPRINT 60C
+##Activate Sprint: SPRINT 60C
 
-### Objective
-Falsar o validar H6 mediante análisis de repositorios reales.
+###Objective
+False or validate H6 through analysis of real repositories.
 
-### Targets
-- Mínimo 20 repositorios
-- Extraer DecisionNodes observables
-- Medir: decision_reconstruction_rate, decision_source_distribution, trajectory_completeness
+###Targets
+- Minimum 20 repositories
+- Extract observable DecisionNodes
+- Measure: decision_reconstruction_rate, decision_source_distribution, trajectory_completeness
 
 ### Questions to Answer
-1. ¿Cuántas decisiones observables aparecen?
-2. ¿Cuántas decisiones pueden reconstruirse?
-3. ¿Dónde aparecen? (Issue, PR, Commit, Release, Discussion, Zenodo)
-4. ¿Qué porcentaje queda desconocido?
+1. How many observable decisions appear?
+2. How many decisions can be reconstructed?
+3. Where do they appear? (Issue, PR, Commit, Release, Discussion, Zenodo)
+4. What percentage remains unknown?
 
 ### Success Criteria
 - decision_reconstruction_rate ≥ 70%
-- Identificación de fuentes primarias (issues vs PRs vs commits)
-- Dataset público reproducible para futuros sprints
+- Identification of primary sources (issues vs PRs vs commits)
+- Public reproducible dataset for future sprints
 
 ---
 
@@ -113,48 +113,48 @@ Si H6 falla (<70% reconstrucción):
 
 ## Prohibited Activities (During Freeze)
 
-❌ Añadir nuevos nodos a EvidenceGraph  
-❌ Añadir nuevos grafos  
-❌ Añadir nuevas capas arquitectónicas  
-❌ Crear nuevos schemas  
-❌ Modificar schemas existentes sin bug fix explícito  
-❌ Escribir documentos de arquitectura teórica  
-❌ Planificar sprints beyond SPRINT 61  
-❌ Ejecutar SPRINT 60D (Branch Detection)
+❌ Add new nodes to EvidenceGraph  
+❌ Add new graphs  
+❌ Add new architectural layers  
+❌ Create new schemas  
+❌ Modify existing schemas without explicit bug fix  
+❌ Write theoretical architecture documents  
+❌ Plan sprints beyond SPRINT 61  
+❌ Run SPRINT 60D (Branch Detection)
 
 ---
 
 ## Permitted Activities
 
-✅ Ejecutar SPRINT 60C (análisis empírico)  
-✅ Escribir scripts de extracción  
-✅ Escribir scripts de validación  
-✅ Escribir informes de resultados  
-✅ Corregir bugs en schemas existentes  
-✅ Mejorar algoritmos de extracción (no cambiar schemas)  
-✅ Documentar hallazgos empíricos
+✅ Run SPRINT 60C (empirical analysis)  
+✅ Write extraction scripts  
+✅ Write validation scripts  
+✅ Write results reports  
+✅ Correct bugs in existing schemas  
+✅ Improve extraction algorithms (do not change schemas)  
+✅ Document empirical findings
 
 ---
 
 ## Exit Conditions from Freeze
 
-El freeze se levanta cuando:
+The freeze is lifted when:
 
-1. **SPRINT 60C completado** con métricas cuantitativas
-2. **H6 validada o falsada** empíricamente
-3. **Decisión tomada** sobre continuar con DecisionGraph o mantener DecisionNode como extensión
+1. **SPRINT 60C completed** with quantitative metrics
+2. **H6 validated or falsified** empirically
+3. **Decision made** whether to continue with DecisionGraph or keep DecisionNode as an extension
 
-Solo después de esas 3 condiciones, se puede reconsiderar arquitectura.
+Only after those 3 conditions, architecture can be reconsidered.
 
 ---
 
-## Motivation
+##Motivation
 
-El objetivo de CoResearcher no es construir el grafo más elegante.
+The goal of CoResearcher is not to build the most elegant graph.
 
-Es demostrar empíricamente que puede reconstruir trayectorias de investigación a partir de evidencia pública.
+It is to empirically demonstrate that you can reconstruct research trajectories based on public evidence.
 
-Hasta que eso no se demuestre, cualquier capa adicional es premature optimization.
+Until that is proven, any additional layer is premature optimization.
 
 ---
 

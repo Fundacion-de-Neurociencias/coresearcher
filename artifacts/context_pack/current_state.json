@@ -1,0 +1,417 @@
+{
+  "generated_at": "2026-08-02T15:06:57.678791+00:00",
+  "compiled_by": "sprint72_context_pack_compiler.py",
+  "classification_legend": {
+    "OBSERVED": "Direct, verifiable data from project artifacts",
+    "DERIVED": "Logically inferred from observed data",
+    "INFERRED": "Hypothesis beyond current evidence — explicitly marked",
+    "UNKNOWN": "Cannot be determined from available data"
+  },
+  "active_goals": [
+    {
+      "id": "H6",
+      "text": "Decision Reconstruction — validate ≥70% reconstruction rate on real GitHub repos via authenticated pipeline",
+      "source": "docs/SPRINT_60C_BRIDGE_H6_H7_EHG.md",
+      "status": "pending_validated"
+    }
+  ],
+  "knowledge_registry": {
+    "total_claims": 9,
+    "claims_by_status": {
+      "unvalidated": 9
+    },
+    "claims_by_type": {
+      "biomarker": 5,
+      "mechanism": 2,
+      "association": 2
+    },
+    "total_findings": 27,
+    "findings_by_quality": {
+      "high (>=0.7)": 1,
+      "medium (0.4-0.7)": 26
+    },
+    "total_questions": 9,
+    "active_questions": 9,
+    "total_models": 4,
+    "total_hypotheses": 4,
+    "total_experiments": 0,
+    "total_failures": 0,
+    "total_lessons": 0
+  },
+  "ecosystem": {
+    "consumer_contracts": [
+      {
+        "file": "geneforge_consumer.json",
+        "consumer_id": "geneforge",
+        "domain": "genomics"
+      },
+      {
+        "file": "medicalia_consumer.json",
+        "consumer_id": "medicalia",
+        "domain": "clinical-practice"
+      },
+      {
+        "file": "neurodiagnoses_consumer.json",
+        "consumer_id": "neurodiagnoses",
+        "domain": "neurodegeneration"
+      },
+      {
+        "file": "vademecum_consumer.json",
+        "consumer_id": "vademecum",
+        "domain": "drug-reference"
+      }
+    ],
+    "total_capability_registrations": 3,
+    "connector_sources": {
+      "clinicaltrials": 4,
+      "opentargets": 1,
+      "chembl": 1
+    }
+  },
+  "session_vs001": {
+    "files": {
+      "claims.json": 7675,
+      "findings.json": 4392,
+      "hypotheses.json": 616,
+      "predictions.json": 903,
+      "provenance.json": 236,
+      "question.json": 427,
+      "report.md": 2096,
+      "trust_scores.json": 210
+    }
+  },
+  "trajectory_data": {
+    "repository": "langchain-ai/langgraph",
+    "nodes": 301,
+    "edges": 426,
+    "metrics": {
+      "total_decisions": 301,
+      "successful_decisions": 122,
+      "abandoned_decisions": 129,
+      "superseded_decisions": 0,
+      "failed_decisions": 40,
+      "pending_decisions": 10,
+      "unique_actors": 106,
+      "edges": 426,
+      "explicit_ref_edges": 231,
+      "temporal_edges": 195
+    }
+  },
+  "cross_repo_metrics": [
+    {
+      "repo": "langchain-ai/langgraph",
+      "total_claims": 841,
+      "observable_claims": 241,
+      "derivable_claims": 350,
+      "inferred_claims": 0,
+      "unknown_claims": 250,
+      "auditability_score": 1.0,
+      "evidence_coverage": 0.7027,
+      "observable_ratio": 0.2866,
+      "total_gaps": 250
+    },
+    {
+      "repo": "langchain-ai/langchain",
+      "total_claims": 953,
+      "observable_claims": 255,
+      "derivable_claims": 448,
+      "inferred_claims": 0,
+      "unknown_claims": 250,
+      "auditability_score": 1.0,
+      "evidence_coverage": 0.7377,
+      "observable_ratio": 0.2676,
+      "total_gaps": 250
+    },
+    {
+      "repo": "run-llama/LlamaIndex",
+      "total_claims": 0,
+      "observable_claims": 0,
+      "derivable_claims": 0,
+      "inferred_claims": 0,
+      "unknown_claims": 0,
+      "auditability_score": 0.0,
+      "evidence_coverage": 0.0,
+      "observable_ratio": 0.0,
+      "total_gaps": 0
+    },
+    {
+      "repo": "deepset-ai/haystack",
+      "total_claims": 655,
+      "observable_claims": 189,
+      "derivable_claims": 346,
+      "inferred_claims": 0,
+      "unknown_claims": 120,
+      "auditability_score": 1.0,
+      "evidence_coverage": 0.8168,
+      "observable_ratio": 0.2885,
+      "total_gaps": 120
+    }
+  ],
+  "survival_table_summary": {
+    "total_claims": 14,
+    "survived": 7,
+    "falsified": 7,
+    "survival_rates": {
+      "OBSERVED": {
+        "total": 3,
+        "survived": 3,
+        "falsified": 0,
+        "survival_rate": 1.0,
+        "falsification_rate": 0.0
+      },
+      "DERIVED": {
+        "total": 3,
+        "survived": 3,
+        "falsified": 0,
+        "survival_rate": 1.0,
+        "falsification_rate": 0.0
+      },
+      "HYPOTHESIZED": {
+        "total": 9,
+        "survived": 0,
+        "falsified": 9,
+        "survival_rate": 0.0,
+        "falsification_rate": 1.0
+      }
+    }
+  },
+  "convergence_review_summary": {
+    "total_convergences": 0,
+    "classified_real": 4,
+    "all_have_3_hypotheses": true
+  },
+  "compression_ledger": [
+    {
+      "transformation": "Raw Evidence → DecisionNode",
+      "input_count": 0,
+      "output_count": 301,
+      "compression_ratio": 0,
+      "information_loss": 10,
+      "information_loss_pct": 3.32,
+      "details": {
+        "node_outcomes": {
+          "pending": 10,
+          "abandoned": 129,
+          "success": 122,
+          "failure": 40
+        },
+        "unique_actors": 106,
+        "artifact_types": {
+          "issue": 10,
+          "pr": 176,
+          "commit": 115
+        }
+      },
+      "source_artifacts": [
+        "data/trajectories/langchain_ai_langgraph/decisions_raw.jsonl",
+        "data/trajectories/langchain_ai_langgraph/trajectory_graph.json"
+      ]
+    },
+    {
+      "transformation": "DecisionNode → Trajectory (edge reconstruction)",
+      "input_count": 301,
+      "output_count": 426,
+      "compression_ratio": 1.4153,
+      "information_loss": -143,
+      "information_loss_pct": -47.51,
+      "details": {
+        "edge_types": {
+          "supported_by": 231,
+          "led_to": 195
+        },
+        "isolated_nodes": -143,
+        "nodes_with_edges": 444
+      },
+      "source_artifacts": [
+        "data/trajectories/langchain_ai_langgraph/trajectory_graph.json"
+      ]
+    },
+    {
+      "transformation": "Trajectory → Convergence (clustering)",
+      "input_count": 301,
+      "output_count": 4,
+      "compression_ratio": 0.0133,
+      "information_loss": 290,
+      "information_loss_pct": 96.35,
+      "details": {
+        "convergence_themes": [
+          "fix(cli): require langgraph-api>=0.7.67 on Python 3.14",
+          "fix(langgraph): add missing stacklevel to warnings.warn() calls",
+          "fix(langgraph): copy mutable container in channel from_checkpoint",
+          "fix(langgraph): cap retry sleep at max_interval after jitter"
+        ],
+        "convergence_types": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "convergence_actors_per": [
+          2,
+          5,
+          2,
+          2
+        ],
+        "nodes_in_convergences": 11
+      },
+      "source_artifacts": [
+        "artifacts/convergence_review.json"
+      ]
+    },
+    {
+      "transformation": "Evidence → Gap (detection)",
+      "input_count": 301,
+      "output_count": 155,
+      "compression_ratio": 0.515,
+      "information_loss": 148,
+      "information_loss_pct": 49.17,
+      "details": {
+        "gap_by_type": {
+          "empirical": 113,
+          "mathematical": 0,
+          "causal": 42
+        },
+        "gap_by_severity": {
+          "low": 0,
+          "medium": 10,
+          "high": 145
+        },
+        "gap_by_characterization": {
+          "never_explored": 0,
+          "explored_abandoned": 143,
+          "explored_partial": 10,
+          "unknown_exploration": 2
+        },
+        "gap_density": 0.515,
+        "nodes_with_gaps": 153
+      },
+      "source_artifacts": [
+        "artifacts/epistemic_gap_report.json"
+      ]
+    }
+  ],
+  "git_recent_commits": [
+    {
+      "hash": "95c1afc",
+      "message": "feat: SPRINT 60C trajectory reconstruction pipeline, schemas, and bridge docs"
+    },
+    {
+      "hash": "3745833",
+      "message": "security(coresearcher): purge personal and operational NeuroOS inventory/policy docs"
+    },
+    {
+      "hash": "15c51cd",
+      "message": "docs(coresearcher): sync IDENTITY_DISCOVERY_PLAYBOOK"
+    },
+    {
+      "hash": "883f91b",
+      "message": "docs(coresearcher): sync physical ACCESS_INVENTORY, MFA_STATUS, RECOVERY_DEPENDENCIES CSVs and VAULT_MIGRATION_PLAN"
+    },
+    {
+      "hash": "9f2e77c",
+      "message": "docs(coresearcher): sync NEUROOS_ACCESS_ONBOARDING"
+    },
+    {
+      "hash": "21f5882",
+      "message": "docs(coresearcher): sync NEUROOS_OPERATIONAL_IDENTITY"
+    },
+    {
+      "hash": "99429f4",
+      "message": "docs(coresearcher): sync NEUROOS_IDENTITY_DEPENDENCY_GRAPH"
+    },
+    {
+      "hash": "1506d88",
+      "message": "docs(coresearcher): sync 3-Tier Identity Classification"
+    },
+    {
+      "hash": "55edda9",
+      "message": "docs(coresearcher): sync Sovereign Identity isolation spec"
+    },
+    {
+      "hash": "ca245b6",
+      "message": "docs(coresearcher): sync NEUROOS_ROOT_IDENTITIES"
+    }
+  ],
+  "recent_artifacts": [
+    {
+      "file": "compression_ledger.json",
+      "size": 4846
+    },
+    {
+      "file": "sprint70_survival_table.json",
+      "size": 10303
+    },
+    {
+      "file": "observation_explanation_differential.json",
+      "size": 4176
+    },
+    {
+      "file": "observable_signature.json",
+      "size": 2626
+    },
+    {
+      "file": "meta_measurement_audit.json",
+      "size": 3138
+    },
+    {
+      "file": "instrumentability_calibration_attack.json",
+      "size": 3964
+    },
+    {
+      "file": "scientific_instrumentability_matrix.json",
+      "size": 12515
+    },
+    {
+      "file": "operationalization_pathways.json",
+      "size": 10856
+    },
+    {
+      "file": "operationalization_framework.json",
+      "size": 13636
+    },
+    {
+      "file": "scientific_constructs_reality.json",
+      "size": 14926
+    },
+    {
+      "file": "scientific_instrumentability_matrix.md",
+      "size": 3781
+    },
+    {
+      "file": "operationalization_counterexamples.md",
+      "size": 3549
+    },
+    {
+      "file": "operationalization_framework.md",
+      "size": 3325
+    },
+    {
+      "file": "constraint_stability_report.md",
+      "size": 5564
+    },
+    {
+      "file": "epistemic_gap_report.md",
+      "size": 8339
+    },
+    {
+      "file": "failure_taxonomy_real.md",
+      "size": 5002
+    },
+    {
+      "file": "sprint59a_repository_failure_audit.md",
+      "size": 1703
+    },
+    {
+      "file": "cross_repo_comparison.md",
+      "size": 673
+    },
+    {
+      "file": "langgraph_trajectory_report_v1.md",
+      "size": 448183
+    },
+    {
+      "file": "sprint58a_evidence_audit.md",
+      "size": 11650
+    }
+  ]
+}

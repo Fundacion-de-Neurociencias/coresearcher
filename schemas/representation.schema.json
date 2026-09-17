@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Representation",
+  "description": "Schema for scientific representations that define the observable space and conceptual language (ADR-DISCOVERY-001)",
+  "type": "object",
+  "required": [
+    "representation_id",
+    "name",
+    "marr_explanation_level",
+    "observables_space",
+    "invisible_space",
+    "invariant_principles"
+  ],
+  "properties": {
+    "representation_id": {
+      "type": "string",
+      "pattern": "^REP-[A-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "marr_explanation_level": {
+      "type": "string",
+      "enum": ["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "observables_space": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Observable entities, coordinates, and patterns made visible by this representation"
+    },
+    "invisible_space": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Phenomena or degrees of freedom that this representation deliberately compresses or leaves invisible"
+    },
+    "invariant_principles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Physical, biological, or mathematical invariants preserved across transformations"
+    },
+    "compression_power": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Kolmogorov / Minimum Description Length compression efficiency"
+    }
+  }
+}

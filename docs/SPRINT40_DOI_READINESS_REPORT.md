@@ -57,4 +57,4 @@ DOI Assignment
 Public Scientific Artifact
 ```
 
-Este primer DOI será un ejemplo fundacional: observación pura sin interpretación.
+This first DOI will be a foundational example: pure observation without interpretation.

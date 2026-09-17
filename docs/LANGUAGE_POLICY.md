@@ -64,22 +64,17 @@ All function in English.
 
 ## Practical Application
 
-### Current Content
-Existing Spanish documents should be:
-- ✅ Kept as-is for now (they capture thinking)
-- ✅ New documentation written in English
-- ✅ User-facing content bilingual when possible
-
-### Future Content
-All new contributions MUST follow the English-first rule.
+### Zero Tolerance for Non-English
+All documentation, source code, docstrings, inline comments, commit messages, and constitutional artifacts MUST be written exclusively in English.
+- ❌ No legacy grandfathering: All existing Spanish files must be translated to English.
+- ❌ No bilingual mixed text: Avoid mixing Spanish and English in schemas, tests, or docs.
+- ✅ All new and existing documentation MUST be 100% English.
 
 ---
 
-## Translation Clause
+## Translation & Enforcement Clause
 
-Contributions containing non-English documentation, comments, prompts, or repository metadata should be translated before merging.
-
-However: **scientific content (claims, mechanisms, evidence)** may remain in original language with English metadata.
+All non-English text across the repository (code, comments, markdown, and commit messages) must be fully translated. An automated enforcement check (`scripts/enforce_english_policy.py`) runs in CI to verify that no non-English tokens or comments are introduced into the codebase.
 
 ---
 
@@ -88,13 +83,13 @@ However: **scientific content (claims, mechanisms, evidence)** may remain in ori
 ### Correct Workflow Descriptions:
 ```yaml
 name: Research Agent - Literature Extraction
-# NOT: Agente de investigación - Extracción de literatura
+#NOT: Research Agent - Literature Extraction
 ```
 
 ### Correct Variable Names:
 ```python
 research_question = "What biomarkers predict Alzheimer?"
-# NOT: pregunta_investigacion = "¿Qué biomarcadores predicen Alzheimer?"
+# NOT: research_question = "What biomarkers predict Alzheimer's?"
 ```
 
 ### Correct Commit Messages:

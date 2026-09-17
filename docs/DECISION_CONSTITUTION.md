@@ -15,8 +15,8 @@ A **DECISION** is a recorded choice in the scientific process that directs resou
 It is NOT:
 - ❌ A casual preference (opinión personal)
 - ❌ A workflow step (paso automático)
-- ❌ A publication outcome (derivado de decisión)
-- ❌ A funding choice (económico, no científico)
+- ❌ A publication outcome (decision derivative)
+- ❌ A funding choice (economic, not scientific)
 
 It IS:
 - ✅ A deliberate scientific choice with documented rationale
@@ -260,4 +260,4 @@ Predict:
 
 ---
 
-*Esta constitución establece DECISION como la unidad de gobernanza científica. Donde la reputación se demuestra no solo por el trabajo realizado, sino por las elecciones correctas que impulsan ese trabajo.*
+*This constitution establishes DECISION as the unit of scientific governance. Where reputation is demonstrated not only by the work done, but by the right choices that drive that work.*

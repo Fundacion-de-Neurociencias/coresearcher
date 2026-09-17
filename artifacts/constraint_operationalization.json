@@ -1,0 +1,386 @@
+{
+  "report_id": "OPCON-20260801144259",
+  "generated_at": "2026-08-01T14:42:59.596980+00:00",
+  "sprint": "SPRINT 62 — Operationalization of Constraints",
+  "objective": "Definir operacionalmente qué es una restricción. Evaluar 12 hipótesis contra 4 criterios operacionales.",
+  "operational_definition": {
+    "criterion_1": "Genera predicciones observables",
+    "criterion_2": "Explica más de una trayectoria independiente",
+    "criterion_3": "Su eliminación cambia el espacio de decisiones",
+    "criterion_4": "Puede ser falsada",
+    "rule": "Una restricción existe si y solo si cumple los 4 criterios"
+  },
+  "summary": {
+    "total_hypotheses": 12,
+    "operational_4_4": 6,
+    "partially_operational_3_4": 5,
+    "not_operational_le_2_4": 1,
+    "pct_operational": 50.0,
+    "observable_predictions_generated": 12,
+    "counterfactuals_defined": 6
+  },
+  "verdict": "GREEN — definition works, most hypotheses are operational",
+  "criteria": {
+    "green": "≥50% hypotheses operational (4/4 criteria)",
+    "yellow": "25-50% operational",
+    "red": "<25% operational — 'restriction' not yet operational"
+  },
+  "hypotheses": [
+    {
+      "convergence_id": "CONV-000001",
+      "hypothesis_id": "A",
+      "description": "Restricción histórica: compatibilidad hacia atrás con langgraph-api",
+      "restriction_type": "historica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Encontraremos version constraints en setup.py/pyproject.toml que excluyen 0.7.67",
+          "evidence_needed": "Examinar el historial de setup.py/pyproject.toml"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué 2 actores distintos chocaron con la misma barrera de versión",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si no hubiera constraint de versión, los PRs no serían necesarios",
+          "evidence_needed": "Verificar que el constraint existe y fue eliminado posteriormente"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si no existe constraint de versión inferior en el historial → falsada"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000001",
+      "hypothesis_id": "B",
+      "description": "Limitación técnica: Python 3.14 introdujo cambios que rompían langgraph-api",
+      "restriction_type": "tecnica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Python 3.14 changelog mencionará breaking changes relevantes",
+          "evidence_needed": "Examinar Python 3.14 changelog"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué múltiples actores tuvieron el mismo problema",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "Si Python 3.14 no tuviera breaking changes, los PRs no serían necesarios",
+          "evidence_needed": "Pero esto no se puede verificar sin acceso al changelog",
+          "issue": "El contrafactual es especulativo — no sabemos si los PRs eran por breaking changes o por otra razón"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si Python 3.14 no tiene breaking changes relevantes → falsada"
+        }
+      },
+      "criteria_met_count": 3,
+      "operational_status": "PARTIALLY_OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000001",
+      "hypothesis_id": "C",
+      "description": "Artefacto del linker: PRs generados por bots de dependencia",
+      "restriction_type": "tecnica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Los autores de los PRs serán bots (dependabot, renovate, etc.)",
+          "evidence_needed": "Examinar los perfiles de GitHub de los autores"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué múltiples PRs similares existen — son automáticos",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "Si los PRs no fueran automáticos, no existirían",
+          "issue": "Esto no es un contrafactual sobre restricción — es sobre el origen del PR"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si los actores son humanos reales → falsada"
+        }
+      },
+      "criteria_met_count": 3,
+      "operational_status": "PARTIALLY_OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000002",
+      "hypothesis_id": "A",
+      "description": "Restricción conceptual: la semántica de warnings debe preservarse",
+      "restriction_type": "conceptual",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Los PRs mencionarán que el warning aparece en el lugar equivocado",
+          "evidence_needed": "Examinar el cuerpo de los 5 PRs"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué 5 actores distintos chocaron con la misma barrera",
+          "num_trajectories_explained": 5
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si warnings.warn() tuviera stacklevel=2 por defecto, estos PRs no serían necesarios",
+          "evidence_needed": "Verificar que Python's default es stacklevel=1"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si los PRs no mencionan la semántica de warnings → falsada"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000002",
+      "hypothesis_id": "B",
+      "description": "Limitación técnica: warnings.warn() requiere stacklevel explícito",
+      "restriction_type": "tecnica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "La documentación de Python mostrará que stacklevel=1 es el default",
+          "evidence_needed": "Examinar Python docs para warnings.warn()"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué es fácil olvidar stacklevel — es un default incorrecto",
+          "num_trajectories_explained": 5
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si Python cambiara el default a stacklevel=2, la restricción desaparece",
+          "evidence_needed": "Verificar que esto no ha cambiado en Python 3.14"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si Python cambiara el default → la restricción desaparece"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000002",
+      "hypothesis_id": "C",
+      "description": "Coste de refactorización: añadir stacklevel requiere tocar muchas llamadas",
+      "restriction_type": "historica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Los PRs abandonados fueron cerrados por conflictos de merge o scope",
+          "evidence_needed": "Examinar los motivos de cierre de los PRs"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué los PRs fueron abandonados — no por la idea, sino por el coste",
+          "num_trajectories_explained": 5
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "Si el coste de refactorización fuera menor, los PRs se habrían mergeado",
+          "issue": "El contrafactual es especulativo — no podemos medir 'coste de refactorización' objetivamente"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si los PRs fueron cerrados por otras razones (no conflictos) → falsada"
+        }
+      },
+      "criteria_met_count": 3,
+      "operational_status": "PARTIALLY_OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000003",
+      "hypothesis_id": "A",
+      "description": "Restricción conceptual: modelo de mutabilidad asume inmutabilidad pero copia superficial",
+      "restriction_type": "conceptual",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "from_checkpoint usa shallow copy (= o .copy()) en lugar de deepcopy",
+          "evidence_needed": "Examinar el código de from_checkpoint"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué 2 actores distintos encontraron el mismo bug de mutabilidad",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si from_checkpoint usara deepcopy, estos PRs no serían necesarios",
+          "evidence_needed": "Verificar que el fix usa deepcopy"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si from_checkpoint ya hace deep copy → falsada"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000003",
+      "hypothesis_id": "B",
+      "description": "Limitación técnica: Python no distingue copia superficial de profunda por defecto",
+      "restriction_type": "tecnica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "El código usa = o .copy() en lugar de copy.deepcopy()",
+          "evidence_needed": "Examinar el código"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué es fácil cometer este error en Python",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "Si Python tuviera deep copy por defecto, el bug no existiría",
+          "issue": "Esto es una afirmación sobre el lenguaje, no sobre la restricción específica"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si ya se usa copy.deepcopy() → falsada"
+        }
+      },
+      "criteria_met_count": 3,
+      "operational_status": "PARTIALLY_OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000003",
+      "hypothesis_id": "C",
+      "description": "Artefacto del linker: misma persona con cuentas diferentes",
+      "restriction_type": "tecnica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "Los perfiles de GitHub mostrarán que son la misma persona",
+          "evidence_needed": "Examinar perfiles de GitHub"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": false,
+          "explanation": "Si son la misma persona, no son trayectorias independientes",
+          "issue": "Esta hipótesis niega la convergencia, no la explica"
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "N/A — si son la misma persona, no hay convergencia",
+          "issue": "No aplica"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si los perfiles son claramente diferentes → falsada"
+        }
+      },
+      "criteria_met_count": 2,
+      "operational_status": "NOT_OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000004",
+      "hypothesis_id": "A",
+      "description": "Restricción conceptual: semántica de retry asume jitter < max_interval pero no lo garantiza",
+      "restriction_type": "conceptual",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "El código calcula jitter antes de aplicar el cap de max_interval",
+          "evidence_needed": "Examinar el código de retry"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué 2 actores distintos encontraron el mismo bug",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si el cap se aplicara después del jitter, estos PRs no serían necesarios",
+          "evidence_needed": "Verificar el orden de operaciones en el código"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si el cap ya se aplica después del jitter → falsada"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000004",
+      "hypothesis_id": "B",
+      "description": "Limitación matemática: la fórmula de jitter produce valores que exceden max_interval",
+      "restriction_type": "matematica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "La fórmula jitter = base * (1 + factor * random) puede producir valores > max_interval",
+          "evidence_needed": "Analizar la fórmula matemáticamente"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué el bug es reproducible — es matemático",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": true,
+          "counterfactual": "Si la fórmula garantizara jitter <= max_interval, los PRs no serían necesarios",
+          "evidence_needed": "Verificar la fórmula"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si la fórmula garantiza jitter <= max_interval → falsada"
+        }
+      },
+      "criteria_met_count": 4,
+      "operational_status": "OPERATIONAL"
+    },
+    {
+      "convergence_id": "CONV-000004",
+      "hypothesis_id": "C",
+      "description": "Restricción histórica: código heredado de tenacity sin cap",
+      "restriction_type": "historica",
+      "criteria": {
+        "c1_observable_predictions": {
+          "met": true,
+          "prediction": "El historial mostrará que el código viene de tenacity y no tenía cap",
+          "evidence_needed": "Examinar git blame del código de retry"
+        },
+        "c2_explains_multiple_trajectories": {
+          "met": true,
+          "explanation": "Explica por qué el cap no existía — era heredado",
+          "num_trajectories_explained": 2
+        },
+        "c3_elimination_changes_decisions": {
+          "met": false,
+          "counterfactual": "Si el código no viniera de tenacity, el cap podría haber existido",
+          "issue": "Especulativo — no podemos saber si tenacity influyó en la decisión"
+        },
+        "c4_falsifiable": {
+          "met": true,
+          "falsification": "Si el código no viene de tenacity → falsada"
+        }
+      },
+      "criteria_met_count": 3,
+      "operational_status": "PARTIALLY_OPERATIONAL"
+    }
+  ],
+  "key_finding": "Las hipótesis que fallan más a menudo son en el Criterio 3 (eliminación cambia el espacio de decisiones). Esto significa que es fácil generar predicciones y falsaciones, pero difícil demostrar que la restricción es causal — no solo correlacional. Esto explica por qué κ = -0.030: la variable no está suficientemente operacionalizada para que dos revisores la identifiquen independientemente.",
+  "epistemic_note": "Este experimento NO valida ni falsa la existencia de restricciones. Solo evalúa si las hipótesis propuestas son operacionalmente definidas. El resultado es: algunas sí, algunas no. La variable 'restricción' está PARTIALLY_OPERATIONAL.",
+  "connection_to_sprint61": {
+    "kappa_is_real": -0.03,
+    "kappa_hypothesis": -0.067,
+    "explanation": "El κ bajo puede deberse a que 'restricción compartida' no es una variable suficientemente operacionalizada. Si los criterios operacionales se refinan, κ debería mejorar."
+  }
+}

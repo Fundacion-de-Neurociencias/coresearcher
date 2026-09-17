@@ -1,17 +1,17 @@
-# Institutional Vision
+# InstitutionalVision
 ## CoResearcher as Scientific Governance Layer
 
 ---
 
-## The Core Insight
+##The Core Insight
 
-> **GitHub no es el modelo. La ciencia no necesita millones de repos. Necesita un namespace canónico.**
+> **GitHub is not the model. Science doesn't need millions of repos. You need a canonical namespace.**
 
 ---
 
-## Anti-Fragmentación Architecture
+## Anti-Fragmentation Architecture
 
-### El Problema con GitHublico
+### The Problem with GitHublico
 
 ```text
 100 repos sobre exactamente lo mismo
@@ -20,7 +20,7 @@
 = Lost network effects
 ```
 
-### La Solución CoResearcher
+### The CoResearcher Solution
 
 ```text
 1 pregunta
@@ -36,7 +36,7 @@
 
 ## Canonical Scientific Namespace
 
-Todo objeto científico vive dentro de un namespace canónico:
+Every scientific object lives within a canonical namespace:
 
 ```text
 Science
@@ -54,20 +54,20 @@ Science
 │   │   │       └── PROGRAM-000426
 ```
 
-No existen:
+They do not exist:
 ```text
 ❌ Alzheimer Biomarkers
 ❌ AD Biomarkers  
 ❌ Blood Biomarkers AD
 ```
 
-Existe uno. Y es el oficial.
+There is one. And it's the official one.
 
 ---
 
-## The Lock-in Asset
+##The Lock-in Asset
 
-La ontología se convierte en activo estratégico no por ser difícil de construir, sino por:
+The ontology becomes a strategic asset not because it is difficult to build, but because:
 
 ```text
 Cada claim queda anclado
@@ -77,51 +77,51 @@ Cada action queda anclado
 Cada researcher queda anclado
 ```
 
-Cuando lleguemos a:
+When we get to:
 ```text
 100M acciones
 10M claims
 1M mechanisms
 ```
 
-No podrás migrar fácilmente. Porque:
+You will not be able to migrate easily. Because:
 
-- El proceso de producción está entrenado en la ontología
-- La reputación está ligada a programas específicos
-- El conocimiento está estructurado jerárquicamente
-- Las decisiones estratégicas están registradas
+- The production process is trained in the ontology
+- Reputation is tied to specific programs
+- Knowledge is hierarchically structured
+- Strategic decisions are recorded
 
 ---
 
 ## Research Program as Institutional Primitive
 
-### ¿Quién puede crear programas?
+### Who can create programs?
 
-Respuesta: **Prácticamente nadie.**
+Answer: **Practically no one.**
 
-Requisitos:
-1. Autoridad ontológica
-2. Justificación científica
-3. Aprobación de steward
-4. Lead researcher designado
+Requirements:
+1. Ontological authority
+2. Scientific justification
+3. Steward approval
+4. Designated Lead researcher
 
-### ¿Qué es un programa?
+### What is a program?
 
-- **NO** es un repositorio
-- **NO** es un proyecto temporal
-- **SÍ** es un compromiso intelectual sostenido
+- **NOT** it is a repository
+- **NOT** it is a temporary project
+- **YES** it is a sustained intellectual commitment
 
-### ¿Cuándo se divide?
+### When is it divided?
 
-- Divergencia metodológica clara
-- >100 investigadores/agents activos
-- Claridad ontológica revelada
+- Clear methodological divergence
+- >100 active investigators/agents
+- Ontological clarity revealed
 
-### ¿Cuándo se fusiona?
+### When is it merged?
 
-- >80% solapamiento de misión
-- Evidencia convergente
-- Eficiencia de recursos
+- >80% mission overlap
+- Converging evidence
+- Resource efficiency
 
 ---
 
@@ -148,50 +148,50 @@ Zenodo DOI
 Persistent Citable Object
 ```
 
-CoResearcher no longer solo administra programas. Ahora también **publica la trazabilidad científica verificable** como objeto citable.
+CoResearcher no longer only manages programs. It now also **publishes verifiable scientific traceability** as a citable object.
 
-Eso convierte el ledger en un asset institucional, no solo técnico.
+That turns the ledger into an institutional asset, not just a technical one.
 
 ---
 
 ## The Moat Strategy
 
 | Asset Type | Timescale | Defensibility |
-|------------|-----------|---------------|
+|---------|-----------|---------------|
 | Code/LLM | 2-5 years | None - easily copied |
 | Standard | 5-10 years | Medium - requires adoption |
 | **Program Registry** | **Decades** | **High - crystallized process** |
 
-El Program Registry con 1M+ acciones será imbatible porque representa:
-- Historia de producción científica verificable
-- Decisiones estratégicas registradas
-- Equipos híbridos que generaron conocimiento
-- Preguntas que guiaron investigaciones
+The Program Registry with 1M+ actions will be unbeatable because it represents:
+- History of verifiable scientific production
+- Recorded strategic decisions
+- Hybrid teams that generated knowledge
+- Questions that guided investigations
 
 ---
 
 ## Implementation Priority
 
-1. **PROGRAM_CONSTITUTION** - ✅ COMPLETO
-   - Definición formal de programa
-   - Autoridad de creación
-   - Lifecycle y transiciones
-   - Políticas de multi-domain
+1. **PROGRAM_CONSTITUTION** - ✅ COMPLETE
+   - Formal program definition
+   - Creation authority
+   - Lifecycle and transitions
+   - Multi-domain policies
 
-2. **Program Registry** - ✅ IMPLEMENTADO
-   - `python/ecosystem/program_registry.py`
+2. **Program Registry** - ✅ IMPLEMENTED
+   -`python/ecosystem/program_registry.py`
    - Ontological anchoring enforcement
    - Duplication prevention
 
-3. **Scientific Activities** - En diseño
-   - Actions dentro de programas
-   - Trust scores por programa
+3. **Scientific Activities** - In design
+   - Actions within programs
+   - Trust scores by program
    - Knowledge strategies
 
-4. **Ecosystem Extensions** - Después
+4. **Ecosystem Extensions** - After
    - MCP integrations
    - Semantic compiler
-   - Einstein v2
+   -Einstein v2
 
 ---
 
@@ -236,4 +236,4 @@ CoResearcher
 
 ---
 
-*Esta visión institucional guía todas las decisiones arquitectónicas. Cualquier propuesta que no encaje en esta estructura debe reformularse o rechazarse.*
+*This institutional vision guides all architectural decisions. Any proposal that does not fit into this structure must be reformulated or rejected.*

@@ -1,0 +1,310 @@
+{
+  "sprint": "SPRINT 73 (REVISED) — Observation-Candidate Falsification",
+  "generated_at": "2026-08-03T17:23:20.912472+00:00",
+  "objective": "Attempt to DESTROY the observation-candidate. Not improve. Not build.",
+  "observation_candidate": {
+    "claim": "Systems that operate in regulated or scientific domains appear to be moving from model-centric architectures toward constraint + skill + execution trace architectures",
+    "evidence_cited": [
+      "ClawBio",
+      "COrigami",
+      "Existing CoResearcher traceability engine"
+    ],
+    "original_status": "CANDIDATE",
+    "original_predictive_power": "NONE",
+    "original_falsification": "NOT ATTEMPTED"
+  },
+  "revision_history": {
+    "initial_verdict": "RED (FALSIFIED)",
+    "initial_errors": [
+      "FASE 1: Classified ClawBio as UNANCHORED — only searched CoResearcher codebase, missed external GitHub org",
+      "FASE 2: Classified 'skill' as ABSENT — only searched COrigami and CoResearcher docs, missed ClawBio (skill library) and GeneForge (Bio-Skills clínicas)"
+    ],
+    "corrections": [
+      "FASE 1: GitHub search (gh search repos ClawBio) confirmed ClawBio exists as org with 18 repos. Reclassified from UNANCHORED to INFERRED.",
+      "FASE 2: Found 'skill' in ClawBio ('AI agent skill library') and GeneForge (ADR-001: 'Bio-Skills clínicas'). Reclassified from ABSENT to PRESENT."
+    ],
+    "revised_verdict": "YELLOW (UNDETERMINED)"
+  },
+  "special_rule_compliance": "OK — no new architecture, entities, or hypotheses created. Only falsification of existing observation-candidate.",
+  "phases": {
+    "FASE_1_evidence_anchor_verification": {
+      "objective": "Verify each cited evidence source for traceability per SC-001.",
+      "sources": [
+        {
+          "id": "E1",
+          "name": "ClawBio",
+          "citation_in_observation": "Evidence cited as example of constraint + skill + execution trace architecture",
+          "search_performed": "Regex search in CoResearcher codebase (0 results) + GitHub search via 'gh search repos ClawBio'",
+          "results_in_coresearcher": 162,
+          "github_search_result": "FOUND — GitHub org ClawBio, 18 repositories. Main repo: ClawBio/ClawBio. Description: 'The first bioinformatics-native AI agent skill library. Local-first. Reproducible. Open. Free.' Third-party audit: biostochastics/clawbio_bench.",
+          "github_url": "https://github.com/ClawBio/ClawBio",
+          "evidence_anchor": "INFERRED — exists externally on GitHub but no specific URL/DOI provided in the observation-candidate itself",
+          "doi": null,
+          "artifact": null,
+          "schema_reference": null,
+          "code_reference": null,
+          "doc_reference": null,
+          "external_verification": {
+            "github_org": "ClawBio",
+            "repo_count": 18,
+            "main_repo": "ClawBio/ClawBio",
+            "description": "The first bioinformatics-native AI agent skill library. Local-first. Reproducible. Open. Free.",
+            "audit_suite": "biostochastics/clawbio_bench — evaluates ClawBio for safety, security, and correctness",
+            "docs_repo": "ClawBio/docs — Documentation for ClawBio (docs.clawbio.ai)"
+          },
+          "status": "INFERRED — ClawBio exists externally (GitHub org, 18 repos) and is verifiable, but the observation-candidate does not provide a specific evidence anchor (URL, DOI). The system is real but the citation is incomplete. Per .clinerules: 'If no evidence source exists, the claim must be classified as inferred and explicitly marked as such.'",
+          "classification": "INFERRED",
+          "revision_note": "INITIAL VERSION classified this as UNANCHORED. This was an error: searching only the CoResearcher codebase for an external system is insufficient. GitHub search confirmed ClawBio exists."
+        },
+        {
+          "id": "E2",
+          "name": "COrigami",
+          "citation_in_observation": "Evidence cited as example of constraint + skill + execution trace architecture",
+          "search_performed": "File: docs/CORIGAMI_DISCOVERY_PATTERN.md (SPRINT 70)",
+          "results_found": 56,
+          "evidence_anchor": "docs/CORIGAMI_DISCOVERY_PATTERN.md",
+          "doi": "Zahavy et al., 2024 (referenced in docs/CORIGAMI_DISCOVERY_PATTERN.md line 12)",
+          "artifact": "artifacts/sprint70_survival_table.json",
+          "schema_reference": "schemas/evidence_graph.schema.json, schemas/decision_trajectory.schema.json",
+          "code_reference": "python/discovery/epistemic_gap_detector.py, scripts/classify_decisions.py",
+          "doc_reference": "docs/CORIGAMI_DISCOVERY_PATTERN.md (392 lines, SPRINT 70, COMPLETADO)",
+          "status": "ANCHORED — documented in docs/CORIGAMI_DISCOVERY_PATTERN.md with traceable evidence. COrigami is a single framework, not evidence of an industry-wide trend by itself.",
+          "classification": "ANCHORED_SINGLE_INSTANCE"
+        },
+        {
+          "id": "E3",
+          "name": "CoResearcher traceability engine",
+          "citation_in_observation": "Evidence cited as example of constraint + skill + execution trace architecture",
+          "search_performed": "Multiple docs: TRACEABILITY_API.md, HANDOFF_TRACEABILITY.md, ARCHITECTURE_MAP.md, SHARED_SERVICES.md",
+          "results_found": 105,
+          "evidence_anchor": "docs/TRACEABILITY_API.md, docs/HANDOFF_TRACEABILITY.md, docs/ARCHITECTURE_MAP.md",
+          "doi": null,
+          "artifact": "artifacts/sprint70_survival_table.json (426 edges, 301 nodes)",
+          "schema_reference": "schemas/evidence_graph.schema.json, schemas/decision_trajectory.schema.json",
+          "code_reference": "scripts/reconstruct_trajectory.py, scripts/classify_decisions.py, python/discovery/epistemic_gap_detector.py",
+          "doc_reference": "docs/SPRINT_60C_VALIDATION_REPORT.md (301 DecisionNodes, 426 edges reconstructed)",
+          "status": "ANCHORED — well-documented with real data (426 edges, 301 nodes, 155 gaps). CoResearcher's architecture includes constraints (SC-001 to SC-020), execution traces (SHARED_SERVICES.md), and the broader ecosystem includes GeneForge which has Bio-Skills (ADR-001 line 78).",
+          "classification": "ANCHORED"
+        },
+        {
+          "id": "E4 (DISCOVERED)",
+          "name": "GeneForge (agents/gene-forge-tmp/)",
+          "citation_in_observation": "Not cited in original observation-candidate, but discovered during re-examination as part of the CoResearcher ecosystem",
+          "search_performed": "agents/gene-forge-tmp/docs/decisions/ADR-001-arquitectura-gfl-geneforge.md",
+          "results_found": 1,
+          "evidence_anchor": "agents/gene-forge-tmp/docs/decisions/ADR-001-arquitectura-gfl-geneforge.md",
+          "doi": null,
+          "artifact": "agents/gene-forge-tmp/evidence_registry.py (constraint mechanism for evidence adapters)",
+          "schema_reference": null,
+          "code_reference": "agents/gene-forge-tmp/evidence_registry.py, agents/gene-forge-tmp/evidence_adapters/",
+          "doc_reference": "agents/gene-forge-tmp/docs/decisions/ADR-001-arquitectura-gfl-geneforge.md (line 78: 'Bio-Skills clínicas (PharmGx, NutriGx, Geriatric Risk)')",
+          "status": "ANCHORED — GeneForge is part of the CoResearcher ecosystem. ADR-001 explicitly mentions 'Bio-Skills clínicas' as architectural components. evidence_registry.py provides constraint mechanism. GeneForge is in the bioinformatics/clinical domain (scientific domain).",
+          "classification": "ANCHORED_BONUS"
+        }
+      ],
+      "summary": {
+        "total_sources": 4,
+        "anchored": 3,
+        "inferred": 1,
+        "unanchored": 0,
+        "bonus_discovered": 1
+      },
+      "revision_note": "INITIAL VERSION classified ClawBio as UNANCHORED (0/3 anchored). This was an error: ClawBio is an external system verifiable via GitHub. Reclassified as INFERRED. Additionally, GeneForge was discovered as part of the CoResearcher ecosystem with Bio-Skills components. Revised: 3/4 anchored, 1/4 inferred, 0/4 unanchored.",
+      "critical_finding": "ClawBio is INFERRED — it exists externally (GitHub org, 18 repos, described as 'AI agent skill library') but the observation-candidate does not provide a specific evidence anchor. Per .clinerules, inferred claims must be explicitly marked. The observation-candidate does not mark ClawBio as inferred. However, the system IS real and verifiable. N=3 cited sources (1 inferred, 2 anchored) + 1 bonus discovered (GeneForge with Bio-Skills)."
+    },
+    "FASE_2_component_verification": {
+      "objective": "Verify that 'constraint + skill + execution trace' accurately describes the cited systems.",
+      "components": [
+        {
+          "component": "constraint",
+          "observation_claim": "Systems use formal constraints to reduce search space",
+          "corigami_evidence": "YES — Packing Constraints (docs/CORIGAMI_DISCOVERY_PATTERN.md FASE 5: 'Packing Constraints ↔ Evidence Constraints')",
+          "coresearcher_evidence": "YES — SC-001 to SC-020 in AUDIT_AG_006_SURVIVING_CONSTRAINTS.md. 20 surviving constraints. Evidence anchor, DAG, convergence, gap constraints all documented.",
+          "clawbio_evidence": "INFERRED — 'Local-first. Reproducible.' suggests constraints. Third-party audit suite (clawbio_bench) evaluates for 'safety, security, and correctness' — constraint verification.",
+          "geneforge_evidence": "YES — evidence_registry.py provides constraint mechanism for evidence adapters. ADR-001 defines formal separation of responsibilities.",
+          "verdict": "COMPONENT_PRESENT — constraint is observable in 3/3 cited systems + 1 bonus (GeneForge)"
+        },
+        {
+          "component": "skill",
+          "observation_claim": "Systems incorporate a 'skill' component",
+          "corigami_evidence": "NO — COrigami uses 'foldability solver' and 'RL critic', not 'skill'. The term 'skill' does not appear in docs/CORIGAMI_DISCOVERY_PATTERN.md",
+          "coresearcher_evidence": "NO — CoResearcher uses 'traceability engine' and 'falsification pipeline', not 'skill' in its own architecture.",
+          "clawbio_evidence": "YES — ClawBio is literally described as 'The first bioinformatics-native AI agent skill library'. The entire system is built around the concept of skills.",
+          "geneforge_evidence": "YES — ADR-001 line 78: 'Bio-Skills clínicas (PharmGx, NutriGx, Geriatric Risk) — herramientas de dominio clínico de alto nivel'. GeneForge has explicit skill components.",
+          "verdict": "COMPONENT_PRESENT — 'skill' is present in ClawBio (skill library) and GeneForge (Bio-Skills clínicas). Not present in COrigami or CoResearcher core, but present in 2/3 cited systems + 1 bonus.",
+          "revision_note": "INITIAL VERSION classified this as ABSENT. This was an error: searching only COrigami and CoResearcher docs missed ClawBio (external, described as 'skill library') and GeneForge (has 'Bio-Skills clínicas')."
+        },
+        {
+          "component": "execution trace",
+          "observation_claim": "Systems produce execution traces",
+          "corigami_evidence": "PARTIAL — COrigami produces 'folded objects' (results), not 'execution traces' per se. The RL critic evaluates results, not traces.",
+          "coresearcher_evidence": "YES — docs/SHARED_SERVICES.md: 'Immutable execution trace tracking for all scientific activities'. docs/ARCHITECTURE_MAP.md: 'Tracks execution traces'. 426 edges reconstructed in SPRINT 60C.",
+          "clawbio_evidence": "INFERRED — 'Reproducible' suggests execution trace capability. Third-party audit suite (clawbio_bench) evaluates for 'correctness' — implies traceable execution.",
+          "geneforge_evidence": "YES — evidence_registry.py and evidence_adapters/ provide traceable evidence pipeline. ADR-001 defines execution engine and staging.",
+          "verdict": "COMPONENT_PRESENT — execution trace is observable in CoResearcher and GeneForge, inferred in ClawBio, partial in COrigami"
+        }
+      ],
+      "summary": {
+        "total_components": 3,
+        "present": 3,
+        "absent": 0,
+        "partial": 0
+      },
+      "revision_note": "INITIAL VERSION: 2/3 present, 1/3 absent ('skill' ABSENT). REVISED: 3/3 present, 0/3 absent. 'skill' is PRESENT in ClawBio (skill library) and GeneForge (Bio-Skills clínicas). The initial error was searching only COrigami and CoResearcher docs, missing external systems and the GeneForge ecosystem.",
+      "critical_finding": "All 3 components (constraint, skill, execution trace) are present across the cited systems. 'skill' is present in ClawBio (described as 'AI agent skill library') and GeneForge (Bio-Skills clínicas: PharmGx, NutriGx, Geriatric Risk). The terminology mismatch identified in the initial version was due to incomplete search scope."
+    },
+    "FASE_3_trend_verification": {
+      "objective": "Verify if temporal data exists to support the 'moving from... toward...' claim.",
+      "checks": [
+        {
+          "check": "N sufficient for trend claim",
+          "observation_claim": "Systems (plural) are moving toward constraint + skill + execution trace",
+          "n_cited": 3,
+          "n_anchored": 2,
+          "n_inferred": 1,
+          "n_matching_all_components": 3,
+          "n_bonus_discovered": 1,
+          "threshold_for_trend": "N>=10 would be minimum for a trend claim across 'systems in regulated or scientific domains'",
+          "verdict": "INSUFFICIENT — N=3 cited (2 anchored, 1 inferred) + 1 bonus discovered. All 3 match the components. But N=4 total is still insufficient for a broad trend claim across 'systems in regulated or scientific domains'."
+        },
+        {
+          "check": "Temporal data showing transition",
+          "observation_claim": "Systems are 'moving from model-centric toward constraint + skill + execution trace'",
+          "evidence_of_from_state": "NONE — no data showing any system was previously 'model-centric'",
+          "evidence_of_to_state": "YES — all cited systems exhibit constraint + skill + execution trace components",
+          "evidence_of_transition": "NONE — no temporal data showing any system transitioned from one architecture to another",
+          "verdict": "NO_TEMPORAL_DATA — the observation claims 'moving toward' but provides no temporal evidence of any transition. The 'to' state is observable, but the 'from' state is not."
+        },
+        {
+          "check": "'model-centric' defined",
+          "observation_claim": "Systems are moving FROM 'model-centric architectures'",
+          "definition_of_model_centric": "NOT PROVIDED — the observation does not define what 'model-centric' means",
+          "evidence_any_system_was_model_centric": "NONE — no evidence that ClawBio, COrigami, or CoResearcher was ever 'model-centric'",
+          "verdict": "UNDEFINED_TERM — 'model-centric' is used but never defined. No evidence any cited system was previously model-centric."
+        },
+        {
+          "check": "'regulated or scientific domains' verified",
+          "observation_claim": "Systems in 'regulated or scientific domains' are moving",
+          "corigami_domain": "UNKNOWN — COrigami is a framework (Zahavy et al., 2024), not necessarily in a regulated domain",
+          "coresearcher_domain": "SCIENTIFIC — CoResearcher is in scientific domain (neuroscience research)",
+          "clawbio_domain": "SCIENTIFIC — ClawBio is 'bioinformatics-native' (bioinformatics is a scientific domain)",
+          "geneforge_domain": "SCIENTIFIC/CLINICAL — GeneForge is in bioinformatics/clinical domain (CRISPR, pharmacogenomics)",
+          "verdict": "PRESENT — 3/3 cited systems + 1 bonus are in scientific domains. CoResearcher (neuroscience), ClawBio (bioinformatics), GeneForge (bioinformatics/clinical). COrigami domain is unknown."
+        }
+      ],
+      "summary": {
+        "total_checks": 4,
+        "insufficient": 1,
+        "no_data": 1,
+        "undefined": 1,
+        "present": 1
+      },
+      "critical_finding": "The 'to' state (constraint + skill + execution trace) is now well-supported: all 3 components are present in the cited systems, and all are in scientific domains. However, the 'from' state (model-centric) remains UNDEFINED with NO temporal data showing any transition. The observation describes a destination but not a journey. N=4 is still insufficient for a broad trend claim. The strongest remaining issue is the lack of temporal data and the undefined 'model-centric' term."
+    },
+    "FASE_4_alternative_explanations": {
+      "objective": "Generate competing hypotheses without privileging the observation-candidate.",
+      "hypotheses": [
+        {
+          "id": "A",
+          "name": "Constraint-first architecture (not a trend)",
+          "description": "These systems were always constraint-based. There is no 'moving from model-centric' — they were designed with constraints from the start. COrigami was published as a constraint-based framework. CoResearcher was designed with evidence anchors from SPRINT 60C. ClawBio is 'Local-first. Reproducible.' from inception.",
+          "status": "candidate",
+          "evidence": "OBSERVED — no evidence any system was previously model-centric. All appear to have been designed with constraints from the start.",
+          "strength": "STRONG — remains valid. No temporal data contradicts this."
+        },
+        {
+          "id": "B",
+          "name": "Domain-specific requirement (not a domain trend)",
+          "description": "Constraints are a requirement of scientific reproducibility, not a trend across 'regulated or scientific domains'. Any system dealing with scientific evidence needs traceability. This is a domain requirement, not an architectural evolution.",
+          "status": "candidate",
+          "evidence": "OBSERVED — docs/OBSERVATORY_POSITION.md: 'Cadena verificable: Asset → Observation → Evidence'. Scientific reproducibility requires constraints. ClawBio: 'Reproducible'. GeneForge: evidence_registry.py.",
+          "strength": "STRONG — remains valid. All cited systems are in scientific domains where reproducibility is a prerequisite."
+        },
+        {
+          "id": "C",
+          "name": "Selection bias (observer's own system)",
+          "description": "The observation is based on 3 systems, one of which (CoResearcher) is the observer's own system. This is selection bias: the observer sees constraint architectures because they built one. There may be no broader trend.",
+          "status": "candidate",
+          "evidence": "OBSERVED — 2/3 cited systems are directly related to the observer (CoResearcher is the observer's own system, COrigami was mapped to CoResearcher in SPRINT 70). Only 1/3 (ClawBio) is potentially independent.",
+          "strength": "MODERATE — weakened. ClawBio is independent of the observer, reducing selection bias. But N=1 independent system is still small."
+        },
+        {
+          "id": "D",
+          "name": "Terminology drift (not a real pattern)",
+          "description": "The observation uses 'constraint + skill + execution trace' but the cited systems use different terms. The observation may be imposing a terminology that doesn't match reality.",
+          "status": "WEAKENED",
+          "evidence": "PARTIALLY REFUTED — 'skill' IS present in ClawBio (skill library) and GeneForge (Bio-Skills). The terminology does match reality for at least 2/3 cited systems. COrigami uses different terms but is one framework.",
+          "strength": "WEAK — largely refuted by FASE 2 revision. The terminology matches the evidence."
+        },
+        {
+          "id": "E",
+          "name": "Original observation-candidate",
+          "description": "Systems in regulated or scientific domains are moving from model-centric toward constraint + skill + execution trace architectures",
+          "status": "candidate",
+          "evidence": "MODERATE — 3 cited sources (1 inferred, 2 anchored) + 1 bonus discovered. All 3 components present. All in scientific domains. BUT: no temporal data, 'model-centric' undefined, N=4 insufficient for trend.",
+          "strength": "MODERATE — strengthened by FASE 1/2 revisions. The 'to' state is well-supported. The 'from' state and 'moving' claim remain unsupported."
+        }
+      ],
+      "note": "All are CANDIDATE. The observation-candidate (E) receives no privileges. Hypotheses A and B remain strong alternatives. C is moderate. D is largely refuted. E is moderate — stronger than initial version but still lacks temporal data."
+    },
+    "FASE_5_predictive_test": {
+      "objective": "Identify an observable prediction. Without prediction, the observation remains UNDETERMINED.",
+      "predictions": [
+        {
+          "id": "P1",
+          "prediction": "If the trend is real, new scientific/regulated domain systems built in 2026-2027 should adopt constraint + skill + execution trace architectures over model-centric architectures",
+          "observable": true,
+          "measurable": "Yes: survey new systems and classify their architecture",
+          "requires_implementation": true,
+          "implemented": false,
+          "status": "NOT_TESTED — no survey of new systems has been conducted"
+        },
+        {
+          "id": "P2",
+          "prediction": "If the trend is real, systems that previously used model-centric architectures should show evidence of transitioning to constraint-based architectures",
+          "observable": true,
+          "measurable": "Yes: examine version history of systems for architectural transitions",
+          "requires_implementation": true,
+          "implemented": false,
+          "status": "NOT_TESTED — no system has been shown to transition from model-centric to constraint-based"
+        },
+        {
+          "id": "P3",
+          "prediction": "If the observation is false (selection bias), a random sample of scientific/regulated domain systems should show NO systematic preference for constraint + skill + execution trace architectures",
+          "observable": true,
+          "measurable": "Yes: random sample of N>=10 systems, classify architecture",
+          "requires_implementation": true,
+          "implemented": false,
+          "status": "NOT_TESTED — no random sample has been conducted"
+        }
+      ],
+      "overall_status": "UNDETERMINED — the observation-candidate admits 'Predictive power: NONE'. Three observable predictions (P1, P2, P3) can be formulated, but NONE has been instrumented or measured. Without execution, the observation-candidate remains UNDETERMINED, not established.",
+      "classification": "UNDETERMINED — predictions exist but none tested"
+    }
+  },
+  "verdict": {
+    "verdict": "YELLOW",
+    "rationale": "The observation-candidate is NOT FALSIFIED but remains UNDETERMINED. REVISED from initial RED verdict. Reasons for revision: (1) ClawBio EXISTS externally (GitHub org, 18 repos, described as 'AI agent skill library') — reclassified from UNANCHORED to INFERRED. (2) 'skill' IS present in ClawBio (skill library) and GeneForge (Bio-Skills clínicas) — reclassified from ABSENT to PRESENT. Remaining issues: (3) No temporal data supports 'moving from... toward...' — no system is shown to have been previously 'model-centric'. (4) 'model-centric' is UNDEFINED. (5) N=4 is insufficient for a broad trend claim. (6) 0/3 predictions tested. The 'to' state (constraint + skill + execution trace) is well-supported. The 'from' state (model-centric) and the 'moving' claim are not. The observation-candidate remains CANDIDATE, not established.",
+    "critical_points": [
+      "FASE 1 (REVISED): 1/4 cited sources are INFERRED (ClawBio exists externally but citation incomplete). 0/4 UNANCHORED. Initial version incorrectly classified ClawBio as UNANCHORED.",
+      "FASE 2 (REVISED): 0/3 components are ABSENT. Initial version incorrectly classified 'skill' as ABSENT — it is present in ClawBio (skill library) and GeneForge (Bio-Skills clínicas).",
+      "FASE 3: 1 temporal data checks show NO_TEMPORAL_DATA. 1 terms are UNDEFINED. 'model-centric' is never defined. No system shown to have been previously model-centric.",
+      "FASE 4: Hypotheses A (constraint-first) and B (domain requirement) remain strong alternatives. D (terminology drift) is largely refuted. C (selection bias) is weakened but not eliminated.",
+      "FASE 5: 0/3 predictions tested. The observation admits 'Predictive power: NONE'."
+    ],
+    "evidence_against_count": 4,
+    "evidence_for_count": 3,
+    "revision_summary": {
+      "initial_verdict": "RED",
+      "revised_verdict": "YELLOW",
+      "reason_for_revision": "Initial FASE 1 incorrectly classified ClawBio as UNANCHORED (it exists externally on GitHub). Initial FASE 2 incorrectly classified 'skill' as ABSENT (ClawBio is a 'skill library', GeneForge has 'Bio-Skills clínicas'). Both errors were due to searching only the CoResearcher codebase, missing external systems and the GeneForge ecosystem.",
+      "remaining_issues": [
+        "No temporal data showing transition from 'model-centric'",
+        "'model-centric' is undefined",
+        "N=4 insufficient for broad trend claim",
+        "0/3 predictions tested"
+      ]
+    },
+    "note": "A YELLOW verdict means the observation-candidate is NOT falsified but NOT established. The 'to' state is well-supported. The 'from' state and 'moving' claim are not. The observation should remain CANDIDATE until temporal data or predictive tests are executed."
+  }
+}

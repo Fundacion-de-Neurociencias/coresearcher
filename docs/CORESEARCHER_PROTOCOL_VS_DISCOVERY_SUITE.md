@@ -1,39 +1,39 @@
-# CoResearcher Protocol vs Einstein Discovery Suite
+#CoResearcher Protocol vs Einstein Discovery Suite
 
-## La separación constitucional
+## Constitutional separation
 
-> **CoResearcher coordina actividad científica.**
-> **Einstein genera inteligencia científica.**
+> **CoResearcher coordinates scientific activity.**
+> **Einstein generates scientific intelligence.**
 
 ---
 
-## Capa 1: CoResearcher Protocol (gratuito)
+## Layer 1: CoResearcher Protocol (free)
 
-Equivalente a Git, GitHub, ORCID, DOI, OpenAlex, OSF.
+Equivalent to Git, GitHub, ORCID, DOI, OpenAlex, OSF.
 
-**Función:** Coordinar actividad científica verificable.
+**Function:** Coordinate verifiable scientific activity.
 
-### Objetos abiertos:
+### Open objects:
 
-| Objeto | Descripción | Uso en protocolo |
+| Object | Description | Use in protocol |
 |--------|-------------|------------------|
-| **QUESTION** | Norte estratégico | Orientación de investigación |
-| **ACTION** | Ejecución verificable | Actividad registrada |
-| **REVIEW** | Validación externa | Calidad y confianza |
-| **CLAIM** | Observación atómica | Producción verificable |
-| **PROGRAM** | Compromiso intelectual | Organización acumulativa |
-| **PROVENANCE** | Trazabilidad total | Reproducibilidad |
+| **QUESTION** | Strategic North | Research orientation |
+| **ACTION** | Verifiable execution | Registered activity |
+| **REVIEW** | External validation | Quality and trust |
+| **CLAIM** | Atomic observation | Verifiable production |
+| **PROGRAM** | Intellectual commitment | Cumulative organization |
+| **PROVENANCE** | Full traceability | Reproducibility |
 
-### Características:
+### Features:
 
-- **Open** - Estructura pública sin restricciones
-- **GitHub-based** - Repositorios estándar
-- **MCP-first** - Protocolo abierto para agentes
-- **Agent-compatible** - Integración con herramientas externas
-- **Coste cero** - Sin dependencias propietarias
-- **Sin IA obligatoria** - Operación sin LLMs
+- **Open** - Public structure without restrictions
+- **GitHub-based** - Standard repositories
+- **MCP-first** - Open protocol for agents
+- **Agent-compatible** - Integration with external tools
+- **Zero cost** - No proprietary dependencies
+- **No mandatory AI** - Operation without LLMs
 
-### Valor del protocolo:
+### Protocol value:
 
 ```text
 Coordinar
@@ -47,58 +47,58 @@ Trazar
 Transferir
 ```
 
-**No incluye:** Descubrimiento, generación de hipótesis, razonamiento científico avanzado.
+**Does not include:** Discovery, hypothesis generation, advanced scientific reasoning.
 
 ---
 
-## Capa 2: Einstein Discovery Suite (de pago)
+## Layer 2: Einstein Discovery Suite (paid)
 
-**Función:** Generar inteligencia científica.
+**Function:** Generate scientific intelligence.
 
-### Componentes propietarios:
+### Proprietary components:
 
-| Componente | Descripción | Valor económico |
-|------------|-------------|-----------------|
-| **Mechanism Graph** | Base de conocimiento estructurado | IP acumulativa |
-| **NoveltyDetector** | Detección de unusualness | Diferenciación |
-| **Hypothesis Generator** | Generación de hipótesis | Sorpresa controlada |
-| **Prioritization Engine** | Priorización de investigración | Ahorro de recursos |
-| **Benchmark Suite** | Evaluación de descubrimientos | Calidad garantizada |
-| **Discovery Evaluation** | Métricas de impacto | Decisión informada |
+| Component | Description | Economic value |
+|------------|-------------|--------------|
+| **Mechanism Graph** | Structured knowledge base | Cumulative IP |
+| **NoveltyDetector** | Unusualness detection | Differentiation |
+| **Hypothesis Generator** | Hypothesis generation | Controlled surprise |
+| **Prioritization Engine** | Research prioritization | Saving resources |
+| **Benchmark Suite** | Discovery evaluation | Guaranteed quality |
+| **Discovery Evaluation** | Impact metrics | Informed decision |
 
-### Producto SaaS:
+### SaaS Product:
 
 ```text
-"¿Qué hipótesis debería investigar?"
+"What hypothesis should I investigate?"
 
-"¿Qué papers contradicen este mecanismo?"
+"What papers contradict this mechanism?"
 
-"¿Qué experimentos tienen mayor valor esperado?"
+"Which experiments have the highest expected value?"
 
-"¿Qué claim es más novedoso?"
+"Which claim is more innovative?"
 
-"¿Qué programa merece financiación?"
+"Which program deserves funding?"
 ```
 
 ---
 
-## La analogía correcta
+## The correct analogy
 
-| Infraestructura | Producto comercial |
+| Infrastructure | Commercial product |
 |-----------------|-------------------|
 | Git | GitHub Enterprise |
 | Linux | Red Hat |
 | Web | Google |
 | **CoResearcher Protocol** | **Einstein Discovery Suite** |
 
-El protocolo debe poder sobrevivir aunque Einstein desaparezca.
-Einstein debe poder operar aunque existan otros protocolos.
+The protocol must be able to survive even if Einstein disappears.
+Einstein must be able to operate even if other protocols exist.
 
 ---
 
-## Separación estructural
+## Structural separation
 
-### CoResearcher Protocol (infraestructura)
+### CoResearcher Protocol (infrastructure)
 
 ```text
 python/ontology/
@@ -109,13 +109,13 @@ python/provenance/
 python/mcp/
 ```
 
-### Einstein Discovery Suite (inteligencia)
+### Einstein Discovery Suite (intelligence)
 
 ```text
 discovery/
 ├── novelty_detector.py      # Detección de unusualness
 ├── mechanism_engine.py        # Motor de mecanismos
-├── hypothesis_generator.py    # Generación de hipótesis
+├── hypothesis_generator.py # Hypothesis generation
 ├── prioritization_engine.py   # Priorización de investigración
 ├── benchmark_suite.py         # Evaluación de descubrimientos
 └── discovery_evaluation.py    # Métricas especializadas
@@ -123,9 +123,9 @@ discovery/
 
 ---
 
-## Dependencias arquitectónicas
+## Architectural dependencies
 
-### Protocolo (independiente)
+### Protocol (independent)
 
 ```
 QUESTION ──┐
@@ -135,7 +135,7 @@ REVIEW  ──┤
 PROGRAM ──┘
 ```
 
-### Discovery Suite (opcional)
+### Discovery Suite (optional)
 
 ```
 Protocol Objects ──> Discovery Suite ──> Intelligence Layer
@@ -143,56 +143,56 @@ Protocol Objects ──> Discovery Suite ──> Intelligence Layer
               MCP Integration
 ```
 
-**Ningún componente de descubrimiento es dependencia obligatoria del protocolo.**
+**No discovery component is a mandatory protocol dependency.**
 
 ---
 
-## Consecuencias estratégicas
+## Strategic consequences
 
-### Si se separa correctamente:
+### If separated correctly:
 
-✓ Protocolo abierto con adopción masiva posible
-✓ Suite de descubrimiento como diferenciador premium
-✓ Competidores pueden usar el protocolo sin usar Einstein
-✓ Innovación en discovery stack sin romper el protocolo
-✓ Comunidad puede contribuir sin complejidad comercial
+✓ Open protocol with mass adoption possible
+✓ Discovery suite as a premium differentiator
+✓ Competitors can use the protocol without using Einstein
+✓ Innovation in discovery stack without breaking the protocol
+✓ Community can contribute without commercial complexity
 
-### Si se mezcla:
+### If mixed:
 
-✗ Nadie adopta el protocolo (siente "funnel comercial")
-✗ Dificultad para contribuir al código abierto
-✗ Bloqueo de innovación externa
-✗ Confusión sobre qué es gratuito vs propietario
-✗ Riesgo de fragmentación prematura
-
----
-
-## Instrucción constitucional
-
-> **CoResearcher Protocol coordina actividad científica verificable.**
->
-> **Einstein Discovery Suite genera inteligencia científica.**
->
-> **El protocolo debe poder sobrevivir aunque Einstein desaparezca.**
->
-> **Einstein debe poder operar aunque existan otros protocolos.**
->
-> **Ningún componente de descubrimiento será dependencia obligatoria del protocolo.**
+✗ Nobody adopts the protocol (feels "commercial funnel")
+✗ Difficulty contributing to open source
+✗ Blocking external innovation
+✗ Confusion about what is free vs. proprietary
+✗ Risk of premature fragmentation
 
 ---
 
-## Roadmap evolutivo
+## Constitutional instruction
 
-### Sprint 24-25: Consolidación del Protocolo
+> **CoResearcher Protocol coordinates verifiable scientific activity.**
+>
+> **Einstein Discovery Suite generates scientific intelligence.**
+>
+> **The protocol must be able to survive even if Einstein disappears.**
+>
+> **Einstein must be able to operate even if other protocols exist.**
+>
+> **No discovery component will be a mandatory dependency of the protocol.**
 
-- [ ] Documentar interfaces públicas estables
-- [ ] Separar discovery/ del core
-- [ ] Crear MCP independiente de discovery
-- [ ] Validar con investigadores reales
+---
+
+## Evolutionary roadmap
+
+### Sprint 24-25: Protocol Consolidation
+
+- [ ] Document stable public interfaces
+- [ ] Separate discovery/ from core
+- [ ] Create MCP independent of discovery
+- [ ] Validate with real researchers
 
 ### Sprint 26+: Einstein Discovery Suite
 
-- [ ] Commercializar NoveltyDetector
-- [ ] Monetizar priorización de hipótesis
-- [ ] Integrar con servicios de pago (PubMed, Semantic Scholar)
-- [ ] Construir benchmarks propietarios
+- [ ] Commercialize NoveltyDetector
+- [ ] Monetize hypothesis prioritization
+- [ ] Integrate with payment services (PubMed, Semantic Scholar)
+- [ ] Build proprietary benchmarks

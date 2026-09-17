@@ -1,0 +1,241 @@
+{
+  "report_id": "OPFRAME-20260801151001",
+  "generated_at": "2026-08-01T15:10:01.332822+00:00",
+  "sprint": "SPRINT 64R — Operationalization Framework",
+  "objective": "Formalizar la distinción entre ontología, operacionalización, observabilidad y medición para evitar errores ontológicos.",
+  "scientific_question": "¿Estamos midiendo la realidad de los constructos? o ¿estamos midiendo únicamente nuestra capacidad actual para operacionalizarlos?",
+  "answer": "Estamos midiendo nuestra capacidad actual para operacionalizarlos. La realidad ontológica de los constructos es una pregunta separada que no puede responderse solo desde la operacionalización.",
+  "tasks": {
+    "task1_framework": "artifacts\\operationalization_framework.md",
+    "task2_matrix": "4-dimensional evaluation (no single score)",
+    "task3_false_negative_risk": "6 entities at risk",
+    "task4_counterexamples": "artifacts\\operationalization_counterexamples.md"
+  },
+  "matrix": [
+    {
+      "entity": "DecisionNode",
+      "ontological_status": "ESTABLISHED",
+      "ontological_rationale": "Eventos verificables contra GitHub API. Existencia independiente de CoResearcher.",
+      "operational_status": "OPERATIONAL",
+      "operational_rationale": "301 nodos extraídos, auditabilidad 1.0",
+      "observability": "DIRECT",
+      "observability_rationale": "Visible en GitHub issues/PRs",
+      "measurement": "YES",
+      "measurement_rationale": "Métricas de precisión calculadas",
+      "false_negative_risk": false
+    },
+    {
+      "entity": "Trajectory",
+      "ontological_status": "PLAUSIBLE",
+      "ontological_rationale": "Secuencias de decisiones existen como historial de cambios",
+      "operational_status": "PARTIALLY_OPERATIONAL",
+      "operational_rationale": "426 edges, pero 195 temporales son inferidos",
+      "observability": "INDIRECT",
+      "observability_rationale": "Edges explícitos son directos; temporales son inferidos",
+      "measurement": "PARTIAL",
+      "measurement_rationale": "Métricas parciales; edges temporales no validados",
+      "false_negative_risk": false
+    },
+    {
+      "entity": "Convergence",
+      "ontological_status": "PLAUSIBLE",
+      "ontological_rationale": "Múltiples actores chocando contra la misma barrera es un fenómeno real",
+      "operational_status": "PARTIALLY_OPERATIONAL",
+      "operational_rationale": "4 detectadas, pero 70% FPR en sintéticos",
+      "observability": "INDIRECT",
+      "observability_rationale": "Inferida desde clustering de títulos, no observada directamente",
+      "measurement": "PARTIAL",
+      "measurement_rationale": "Detector funciona pero no distingue real de sintético",
+      "false_negative_risk": false
+    },
+    {
+      "entity": "Restriction",
+      "ontological_status": "UNKNOWN",
+      "ontological_rationale": "Podría existir como variable latente real, pero no ha sido observada directamente. Similar al gen en 1850.",
+      "operational_status": "NOT_YET_OPERATIONAL",
+      "operational_rationale": "6/12 hipótesis operational, κ = -0.094",
+      "observability": "NONE",
+      "observability_rationale": "Solo observamos manifestaciones (convergencias), no la restricción",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica reproducible",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "Descartar 'restriction' por baja observabilidad sería como descartar 'gen' en 1850. La restricción puede ser real pero no observable con las herramientas actuales."
+    },
+    {
+      "entity": "Paradigm",
+      "ontological_status": "UNKNOWN",
+      "ontological_rationale": "Kuhn argumentó que los paradigmas existen como marcos compartidos. Pero su estatus ontológico es debatido.",
+      "operational_status": "UNOPERATIONALIZED",
+      "operational_rationale": "0 paradigm residues detectados. Sin criterios observables.",
+      "observability": "NONE",
+      "observability_rationale": "No observable desde commits o PRs",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "Descartar 'paradigm' por baja observabilidad ignora que Kuhn, Lakatos y Feyerabend argumentaron su existencia como marcos reales."
+    },
+    {
+      "entity": "Hypothesis",
+      "ontological_status": "ESTABLISHED",
+      "ontological_rationale": "Las hipótesis son entidades metodológicas establecidas. Su función es generar predicciones falsables, no ser observables.",
+      "operational_status": "UNOPERATIONALIZED",
+      "operational_rationale": "EHG congelado. 0 hipótesis generadas.",
+      "observability": "NONE",
+      "observability_rationale": "Una hipótesis no es un objeto observable — es una propuesta metodológica",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica de calidad de hipótesis",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "CRÍTICO: Evaluar 'hypothesis' por observabilidad es un error categorial. Una hipótesis no pretende ser observable. Pretende ser falsable. Descartarla por baja observabilidad es como descartar una ecuación por no tener color."
+    },
+    {
+      "entity": "Epistemic Gap",
+      "ontological_status": "ESTABLISHED",
+      "ontological_rationale": "Regiones de ignorancia clasificable son entidades metodológicas válidas",
+      "operational_status": "OPERATIONAL",
+      "operational_rationale": "155 gaps detectados y clasificados A/B/C/D",
+      "observability": "DIRECT",
+      "observability_rationale": "Detectable desde señales heurísticas en datos",
+      "measurement": "YES",
+      "measurement_rationale": "Gap density, by_type, by_characterization",
+      "false_negative_risk": false
+    },
+    {
+      "entity": "Explanation",
+      "ontological_status": "PLAUSIBLE",
+      "ontological_rationale": "Las explicaciones existen como construcciones cognitivas. Su estatus ontológico es debatido pero plausible.",
+      "operational_status": "UNOPERATIONALIZED",
+      "operational_rationale": "Aparecen en rationale fields pero nunca auditadas",
+      "observability": "INDIRECT",
+      "observability_rationale": "Visible en texto de rationale pero no estructurada",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica de calidad explicativa",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "Descartar 'explanation' por baja medición ignora que la ciencia entera se basa en explicaciones. El problema es que CoResearcher no sabe medirlas, no que no existan."
+    },
+    {
+      "entity": "Mechanism",
+      "ontological_status": "PLAUSIBLE",
+      "ontological_rationale": "Los mecanismos causales son entidades centrales en filosofía de la ciencia (Salmon, Woodward)",
+      "operational_status": "NOT_YET_OPERATIONAL",
+      "operational_rationale": "SPRINT 52 buscó mecanismos sin criterios formales",
+      "observability": "INDIRECT",
+      "observability_rationale": "Inferido desde patrones, no observado directamente",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica reproducible",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "Descartar 'mechanism' por baja observabilidad ignora décadas de filosofía de la ciencia sobre mecanismos causales."
+    },
+    {
+      "entity": "Theory",
+      "ontological_status": "ESTABLISHED",
+      "ontological_rationale": "Las teorías científicas son entidades metodológicas establecidas. Popper, Lakatos, Kuhn las tratan como reales.",
+      "operational_status": "UNOPERATIONALIZED",
+      "operational_rationale": "CoResearcher no genera teorías",
+      "observability": "NONE",
+      "observability_rationale": "Una teoría no es observable — es una estructura explicativa",
+      "measurement": "NO",
+      "measurement_rationale": "No hay métrica",
+      "false_negative_risk": true,
+      "false_negative_risk_rationale": "CRÍTICO: Evaluar 'theory' por observabilidad es un error categorial. La teoría de la evolución no es observable. La teoría de la relatividad no es observable. Pero generan predicciones falsables. Descartarlas por baja observabilidad eliminaría gran parte de la ciencia."
+    }
+  ],
+  "false_negative_risks": [
+    {
+      "entity": "Restriction",
+      "ontological_status": "UNKNOWN",
+      "operational_status": "NOT_YET_OPERATIONAL",
+      "rationale": "Descartar 'restriction' por baja observabilidad sería como descartar 'gen' en 1850. La restricción puede ser real pero no observable con las herramientas actuales."
+    },
+    {
+      "entity": "Paradigm",
+      "ontological_status": "UNKNOWN",
+      "operational_status": "UNOPERATIONALIZED",
+      "rationale": "Descartar 'paradigm' por baja observabilidad ignora que Kuhn, Lakatos y Feyerabend argumentaron su existencia como marcos reales."
+    },
+    {
+      "entity": "Hypothesis",
+      "ontological_status": "ESTABLISHED",
+      "operational_status": "UNOPERATIONALIZED",
+      "rationale": "CRÍTICO: Evaluar 'hypothesis' por observabilidad es un error categorial. Una hipótesis no pretende ser observable. Pretende ser falsable. Descartarla por baja observabilidad es como descartar una ecuación por no tener color."
+    },
+    {
+      "entity": "Explanation",
+      "ontological_status": "PLAUSIBLE",
+      "operational_status": "UNOPERATIONALIZED",
+      "rationale": "Descartar 'explanation' por baja medición ignora que la ciencia entera se basa en explicaciones. El problema es que CoResearcher no sabe medirlas, no que no existan."
+    },
+    {
+      "entity": "Mechanism",
+      "ontological_status": "PLAUSIBLE",
+      "operational_status": "NOT_YET_OPERATIONAL",
+      "rationale": "Descartar 'mechanism' por baja observabilidad ignora décadas de filosofía de la ciencia sobre mecanismos causales."
+    },
+    {
+      "entity": "Theory",
+      "ontological_status": "ESTABLISHED",
+      "operational_status": "UNOPERATIONALIZED",
+      "rationale": "CRÍTICO: Evaluar 'theory' por observabilidad es un error categorial. La teoría de la evolución no es observable. La teoría de la relatividad no es observable. Pero generan predicciones falsables. Descartarlas por baja observabilidad eliminaría gran parte de la ciencia."
+    }
+  ],
+  "counterexamples": [
+    {
+      "entity": "Gen",
+      "year": 1865,
+      "scientist": "Mendel",
+      "observability_at_time": "NONE",
+      "operational_status_at_time": "UNOPERATIONALIZED",
+      "current_status": "ESTABLISHED — observable via DNA sequencing",
+      "lesson": "Una entidad con observabilidad = 0 puede ser real. La observabilidad depende de la tecnología disponible, no de la ontología."
+    },
+    {
+      "entity": "Microbio",
+      "year": 1670,
+      "scientist": "Leeuwenhoek",
+      "observability_at_time": "NONE (pre-microscopio)",
+      "operational_status_at_time": "UNOPERATIONALIZED",
+      "current_status": "ESTABLISHED — observable via microscopio",
+      "lesson": "La falta de observabilidad era una limitación tecnológica, no ontológica. Los microbios existían antes de que los pudiéramos ver."
+    },
+    {
+      "entity": "Tectónica de placas",
+      "year": 1912,
+      "scientist": "Wegener",
+      "observability_at_time": "INDIRECT (fósiles, costas)",
+      "operational_status_at_time": "NOT_YET_OPERATIONAL",
+      "current_status": "ESTABLISHED — observable via GPS y sismología",
+      "lesson": "La deriva continental fue rechazada por falta de mecanismo observable. El mecanismo existía pero no podíamos medirlo."
+    },
+    {
+      "entity": "Ondas gravitacionales",
+      "year": 1916,
+      "scientist": "Einstein",
+      "observability_at_time": "NONE",
+      "operational_status_at_time": "UNOPERATIONALIZED",
+      "current_status": "ESTABLISHED — observadas en 2015 (LIGO)",
+      "lesson": "100 años entre predicción y observación. La entidad era real durante todo ese tiempo. La observabilidad era una limitación tecnológica."
+    },
+    {
+      "entity": "Neutrino",
+      "year": 1930,
+      "scientist": "Pauli",
+      "observability_at_time": "NONE",
+      "operational_status_at_time": "UNOPERATIONALIZED",
+      "current_status": "ESTABLISHED — detectado en 1956 (Cowan-Reines)",
+      "lesson": "Pauli propuso el neutrino para explicar la conservación de energía. No era observable. Era real. 26 años hasta detección."
+    },
+    {
+      "entity": "Campo magnético",
+      "year": 1600,
+      "scientist": "Gilbert",
+      "observability_at_time": "INDIRECT (brújula)",
+      "operational_status_at_time": "PARTIALLY_OPERATIONAL",
+      "current_status": "ESTABLISHED — observable y medible",
+      "lesson": "El campo magnético no es visible pero es real. Su observabilidad mejoró con la tecnología."
+    }
+  ],
+  "key_rule": "NUNCA inferir inexistencia ontológica desde baja operacionalización. NUNCA inferir inexistencia ontológica desde baja observabilidad. NUNCA inferir inexistencia ontológica desde falta de medición.",
+  "critical_entities": {
+    "hypothesis": "CRÍTICO: Evaluar 'hypothesis' por observabilidad es un error categorial. Una hipótesis no pretende ser observable. Pretende ser falsable.",
+    "theory": "CRÍTICO: La teoría de la evolución no es observable. La teoría de la relatividad no es observable. Pero generan predicciones falsables."
+  }
+}

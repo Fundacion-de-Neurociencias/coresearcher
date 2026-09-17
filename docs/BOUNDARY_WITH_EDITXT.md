@@ -6,28 +6,28 @@
 
 ---
 
-## Principio Fundamental
+## Fundamental Principle
 
-CoResearcher no revisa manuscritos.
+CoResearcher does not review manuscripts.
 
-CoResearcher no genera recomendaciones editoriales.
+CoResearcher does not generate editorial recommendations.
 
-CoResearcher no asigna severidad.
+CoResearcher does not assign severity.
 
-CoResearcher responde exclusivamente a EvidenceRequests.
+CoResearcher responds exclusively to EvidenceRequests.
 
 ---
 
-## Arquitectura de Tres Capas
+## Three Layer Architecture
 
-### Capa 1 (Núcleo): Traceability Engine
-**Esta es CoResearcher.**
+### Layer 1 (Core): Traceability Engine
+**This is CoResearcher.**
 
 Input:
 - GitHub (Issues, PRs, Commits, Releases)
 - Zenodo (deposits, DOIs)
 - Papers (PubMed, CrossRef, OpenAlex)
-- Observaciones estructuradas
+- Structured observations
 
 Output:
 - Trajectory Report
@@ -37,112 +37,112 @@ Output:
 - CLAIM-XXXXXX registry
 - Provenance chains
 
-Objetivo:
-Reconstruir la fracción auditablemente recuperable de la historia científica.
+Objective:
+Reconstruct the auditably recoverable fraction of scientific history.
 
-**Esta capa es completamente independiente de cualquier generación de texto o evaluación de contenido.**
+**This layer is completely independent of any text generation or content evaluation.**
 
-Responsabilidad única:
-Maximizar trazabilidad y auditabilidad.
+Sole responsibility:
+Maximize traceability and auditability.
 
-Pregunta que responde:
-"¿Dónde está la evidencia?"
+Question answered:
+"Where is the evidence?"
 
-NO responde:
-"¿Es cierto?"
-"¿Es bueno?"
-"¿Es correcto?"
+DOES NOT answer:
+"Is it true?"
+"It's good?"
+"It's right?"
 
 ---
 
-### Capa 2: Scientific Audit Module
-**Esta es la extensión natural para EditXT.**
+### Layer 2: Scientific Audit Module
+**This is the natural extension for EditXT.**
 
 Evidence-Based Scientific Auditor.
 
-Para un paper o claim:
-- Observable: El paper afirma X
-- Verificación estructurada:
-  - ¿Existe evidencia experimental?
-  - ¿Existe código?
-  - ¿Existe dataset?
-  - ¿Existe benchmark?
-  - ¿Existe reproducibilidad?
-- Resultado: Claim → Supporting Evidence → Audit Result
+For a paper or claim:
+- Observable: The paper states X
+- Structured verification:
+  - Is there experimental evidence?
+  - Is there a code?
+  - Is there a dataset?
+  - Is there a benchmark?
+  - Is there reproducibility?
+- Result: Claim → Supporting Evidence → Audit Result
 
-No genera ciencia.
-Audita ciencia.
+It does not generate science.
+Audit science.
 
-Esa diferencia es fundamental.
-
----
-
-### Capa 3: PROHIBIDA para CoResearcher
-
-❌ Evaluación de corrección de afirmaciones
-❌ Revisión científica (peer review)
-❌ Opiniones sobre calidad científica
-❌ Clasificación de errores o severidad
-❌ Recomendaciones editoriales
-❌ Generación de texto evaluativo
+That difference is fundamental.
 
 ---
 
-## Contracto de Interfaz CoResearcher
+### Layer 3: PROHIBITED for CoResearcher
+
+❌ Assertion correction evaluation
+❌ Scientific review (peer review)
+❌ Opinions on scientific quality
+❌ Error classification or severity
+❌ Editorial recommendations
+❌ Generation of evaluative text
+
+---
+
+## CoResearcher Interface Contract
 
 ```
 Input:  EvidenceRequest
 Output: EvidenceGraph
 ```
 
-### EvidenceRequest
+###EvidenceRequest
 
-Solicitud estructurada de evidencia científica. Debe incluir:
+Structured request for scientific evidence. Must include:
 
-- **target_claim**: CLAIM-XXXXXX o identificador canónico
-- **evidence_scope**: Tipo de evidencia requerida (supporting, contradicting, methodological)
-- **minimum_confidence**: Umbral mínimo de confianza (0.0 - 1.0)
-- **provenance_required**: Booleano - si se requiere trazabilidad completa
+- **target_claim**: CLAIM-XXXXXX or canonical identifier
+- **evidence_scope**: Type of evidence required (supporting, contradicting, methodological)
+- **minimum_confidence**: Minimum confidence threshold (0.0 - 1.0)
+- **provenance_required**: Boolean - if full traceability is required
 
-### EvidenceGraph
+###EvidenceGraph
 
-Grafo de evidencia con trazabilidad completa. Debe incluir:
+Evidence graph with complete traceability. Must include:
 
-- **nodes**: EVID-XXXXXX, CLAIM-XXXXXX, OBS-XXXXXX vinculados
-- **edges**: Relaciones de soporte/contradicción con pesos
-- **provenance_trail**: Cadena completa de fuentes (DOI, PMID, ACTION-XXXXXX)
-- **confidence_distribution**: Distribución de scores por nodo
-- **gaps_identified**: Evidencia faltante o contradictoria
-
----
-
-## Responsabilidad CoResearcher
-
-**Maximizar trazabilidad y auditabilidad.**
-
-Esto significa:
-
-1. Todo nodo en EvidenceGraph tiene al menos un source verificable
-2. Todo edge tiene justificación documentada
-3. Todo confidence score tiene metodología explícita
-4. Todo gap es reportado, no ocultado
-5. Provenance se rastrea desde CLAIM/EVID hasta fuente original
+- **nodes**: linked EVID-XXXXXX, CLAIM-XXXXXX, OBS-XXXXXX
+- **edges**: Support/contradiction relations with weights
+- **provenance_trail**: Full source chain (DOI, PMID, ACTION-XXXXXX)
+- **confidence_distribution**: Distribution of scores per node
+- **gaps_identified**: Missing or contradictory evidence
 
 ---
 
-## Non-Negotiables
+## CoResearcher Responsibility
 
-1. **Sin manuscritos**: CoResearcher nunca recibe texto completo como input
-2. **Sin recomendaciones editoriales**: Output es estructurado, no narrativo
-3. **Sin severidad**: No hay clasificación de errores, solo trazabilidad de evidencia
-4. **Sin evaluación de corrección**: CoResearcher no evalúa si una afirmación es cierta
-5. **Solo EvidenceRequests**: Cualquier otro tipo de request se rechaza o se mapea a EvidenceRequest
+**Maximize traceability and auditability.**
+
+This means:
+
+1. Every node in EvidenceGraph has at least one verifiable source
+2. Every edge has documented justification
+3. Every confidence score has an explicit methodology
+4. Every gap is reported, not hidden
+5. Provenance is traced from CLAIM/EVID to original source
 
 ---
 
-## Implicaciones Arquitectónicas
+## Non-Negotiable
 
-EditXT y CoResearcher coexisten como aplicaciones separadas sobre el mismo núcleo:
+1. **No manuscripts**: CoResearcher never receives full text as input
+2. **No editorial recommendations**: Output is structured, not narrative
+3. **No severity**: No error classification, only evidence traceability
+4. **No correctness evaluation**: CoResearcher does not evaluate whether a statement is true
+5. **EvidenceRequests only**: Any other type of request is rejected or mapped to EvidenceRequest
+
+---
+
+## Architectural Implications
+
+EditXT and CoResearcher coexist as separate applications on the same core:
 
 ```
 Capa 1: Traceability Engine (CoResearcher)
@@ -163,35 +163,35 @@ Capa 3: NUEVA CIENCIA (Prohibida para CoResearcher)
     └── (No aplica)
 ```
 
-**Nunca se mezclan.** EditXT consume EvidenceGraphs como input para su proceso de auditoría científica, pero CoResearcher nunca recibe output editorial o evaluativo de EditXT.
+**They are never mixed.** EditXT consumes EvidenceGraphs as input to its scientific audit process, but CoResearcher never receives editorial or evaluative output from EditXT.
 
 ---
 
 ## Sprint EDX-01 (EditXT)
 
-Objetivo: Diseñar ReviewGraph v0 para EditXT.
+Objective: Design ReviewGraph v0 for EditXT.
 
-Entregables:
+Deliverables:
 1. docs/REVIEW_GRAPH_ARCHITECTURE.md
 2. schemas/review_graph.schema.json
 3. examples/alzheimer_review_graph.json
 
-Restricciones:
-- No implementar agentes
-- No integrar LLMs
-- No integrar PubMed
-- No integrar Paperpile
-- Solo modelado
+Restrictions:
+- Do not deploy agents
+- Do not integrate LLMs
+- Do not integrate PubMed
+- Do not integrate Paperpile
+- Modeling only
 
-Criterio de éxito:
-Representar estructuradamente un hallazgo de revisión, su evidencia, su severidad y su recomendación.
+Success Criterion:
+Structuredly represent a review finding, its evidence, its severity and its recommendation.
 
-Fuera de alcance:
-- generación de manuscritos
-- revisión automática
+Out of reach:
+- manuscript generation
+- automatic review
 - peer review AI
-- asistentes conversacionales
+- conversational assistants
 
 ---
 
-*Esta boundaries garantiza que CoResearcher mantenga su posición como Traceability Engine del ecosistema científico, no como servicio editorial ni como evaluador de corrección científica.*
+*This boundary ensures that CoResearcher maintains its position as the Traceability Engine of the scientific ecosystem, not as an editorial service or as an evaluator of scientific correctness.*

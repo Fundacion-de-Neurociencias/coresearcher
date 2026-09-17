@@ -1,32 +1,32 @@
 # CoResearcher: Scientific Ecosystem Operating System
 
-## ¿Qué es CoResearcher?
+## What is CoResearcher?
 
-**CoResearcher es el Scientific Ecosystem Operating System** - una plataforma modular donde múltiples aplicaciones científicas comparten un núcleo común de conocimiento, workflows y trazabilidad.
+**CoResearcher is the Scientific Ecosystem Operating System** - a modular platform where multiple scientific applications share a common core of knowledge, workflows and traceability.
 
-No es un gestor bibliográfico. No es un chatbot científico. No es un LIMS ni un ELN. Es un **sistema operativo para la investigación científica asistida por IA**.
+It is not a bibliographic manager. It is not a scientific chatbot. It is not a LIMS or an ELN. It is an **operating system for AI-assisted scientific research**.
 
-## ¿Por qué existe?
+## Why does it exist?
 
-La investigación científica necesita tres cosas que los LLMs genéricos no pueden proporcionar:
+Scientific research needs three things that generic LLMs cannot provide:
 
-1. **Trazabilidad completa**: Cada claim, evidencia y hipótesis debe poder rastrear su origen
-2. **Razonamiento estructurado**: No búsqueda de información, sino inferencia sobre conocimiento estructurado
-3. **Ecosistema compartido**: GeneForge, Medicalia, Neurodiagnoses, Vademecum, EditXT necesitan el mismo núcleo
+1. **Complete traceability**: Each claim, evidence and hypothesis must be able to trace its origin
+2. **Structured reasoning**: Not information search, but inference about structured knowledge
+3. **Shared ecosystem**: GeneForge, Medicalia, Neurodiagnoses, Vademecum, EditXT need the same core
 
-## Usuario principal
+## Primary user
 
-**Biotech startup en fase preclínica**
+**Biotech startup in preclinical phase**
 
-Equipo pequeño (2-10 investigadores) que necesita:
-- Identificar targets emergentes basados en biomarcadores
-- Generar hipótesis con evidencia trazada
-- Diseñar experimentos sin reinventar la rueda
-- Exportar propuestas con provenance completa
+Small team (2-10 researchers) you need:
+- Identify emerging targets based on biomarkers
+- Generate hypotheses with traced evidence
+- Design experiments without reinventing the wheel
+- Export proposals with full provenance
 
-Este usuario no tiene acceso a Claude Enterprise ni Google Co-Scientist. Necesita algo más flexible y auditable.
+This user does not have access to Claude Enterprise or Google Co-Scientist. You need something more flexible and auditable.
 
-## Workflow estrella
+## Star Workflow
 
 ```text
 Pregunta científica
@@ -37,11 +37,11 @@ Extracción estructurada de Claims y Evidence
     ↓
 Detección de knowledge gaps y contradicciones
     ↓
-Generación de hipótesis con confianza cuantificada
+Hypothesis generation with quantified confidence
     ↓
 Crítica automática (novedad, suficiencia, alternativas)
     ↓
-Ranking Elo de hipótesis
+Hypothesis Elo Ranking
     ↓
 Validación por científicos (SUPPORTS/CHALLENGES/REPLICATES)
     ↓
@@ -54,27 +54,27 @@ Propuesta de proyecto (Specific Aims + Approach)
 Paquete de provenance exportable
 ```
 
-## Ventaja competitiva
+## Competitive advantage
 
-### Opción C: Scientific Ecosystem OS
+### Option C: Scientific Ecosystem OS
 
-Google no tiene ecosistema. Anthropic tampoco.
+Google has no ecosystem. Neither does Anthropic.
 
-CoResearcher permite que **GeneForge, Medicalia, Neurodiagnoses, Vademecum y EditXT coexistan sobre el mismo núcleo**, compartiendo:
+CoResearcher allows **GeneForge, Medicalia, Neurodiagnoses, Vademecum and EditXT to coexist on the same core**, sharing:
 - Knowledge graph
 - Provenance engine
-- Routing de modelos
-- Workflows reutilizables
+- Model routing
+- Reusable workflows
 
-Esto significa:
-- Menos duplicación de código
-- Más coherencia en los resultados
-- Mejor mantenibilidad
-- Efecto de red interno
+This means:
+- Less code duplication
+- More consistency in results
+- Better maintainability
+- Internal network effect
 
-## Arquitectura
+## Architecture
 
-### Core (Compartido por todas las aplicaciones)
+### Core (Shared by all applications)
 
 ```
 Scientific Core
@@ -115,25 +115,25 @@ Zenodo DOI
 Citable Scientific Object
 ```
 
-Esto significa que el proceso científico itself —no solo sus outputs— puede ser:
-- citado
-- versionado
-- auditado
-- reproducido mecánicamente
+This means that the scientific process itself—not just its outputs—can be:
+- cited
+- versioned
+- audited
+- mechanically reproduced
 
-El ledger es el primer objeto científico de CoResearcher con DOI propio.
+The ledger is the first CoResearcher scientific object with its own DOI.
 
 ---
 
-## Sprint 8-11: Activos de legitimidad
+## Sprint 8-11: Legitimacy Assets
 
 ### Sprint 8: Product Crystallization
-- Documento PRODUCT.md ✅
-- Workflow estrella definido ✅
-- Usuario principal definido ✅
+- PRODUCT.md document ✅
+- Defined star workflow ✅
+- Main user defined ✅
 
 ### Sprint 9: Evidence Network
-Creación de activos acumulativos con IDs persistentes:
+Creating cumulative assets with persistent IDs:
 ```
 CLAIM-000001: "Plasma pTau217 predicts amyloid positivity..."
 HYP-000001: "Tau propagation precedes measurable neurodegeneration..."
@@ -141,7 +141,7 @@ EVID-000001: "pTau217 correlates (r=0.78)"
 ```
 
 ### Sprint 10: Claim Trust Framework
-Trust scores tipo PageRank:
+Trust scores type PageRank:
 - Support Score (30% weight)
 - Contradiction Score (20% - inverse)
 - Recency Score (15%)
@@ -162,9 +162,9 @@ Trust Index: 94/100
 Consensus Level: Moderate Consensus
 ```
 
-## Roadmap: El activo científico
+## Roadmap: The scientific asset
 
-El verdadero valor no es el software. Es el activo acumulativo:
+The real value is not the software. It is the cumulative asset:
 
 ```
 Claims registrados (CLAIM-XXXX)
@@ -174,22 +174,22 @@ Trust scores calculados
 Niveles de consenso
 ```
 
-Objetivo 2029:
-- 10,000,000 claims registrados
-- 500,000 researchers con contributions
-- 20,000 institutiones afiliadas
-- 100,000,000 validaciones
-- Ontology CSO referenciada por la comunidad científica
+Goal 2029:
+- 10,000,000 registered claims
+- 500,000 researchers with contributions
+- 20,000 affiliated institutions
+- 100,000,000 validations
+- CSO Ontology referenced by the scientific community
 
-## La visión 2030
+## Vision 2030
 
-Cuando Claude Science, Google Co-Scientist o cualquier agente científico pregunten:
+When Claude Science, Google Co-Scientist or any scientific agent asks:
 
-> "¿Cuál es la evidencia para pTau217 en Alzheimer preclínico?"
+> "What is the evidence for pTau217 in preclinical Alzheimer's?"
 
-No buscarán papers. Consultarán CoResearcher.
+They will not look for papers. They will consult CoResearcher.
 
-Recibirán:
+You will receive:
 
 ```json
 {
@@ -206,7 +206,7 @@ Recibirán:
 }
 ```
 
-O también consultarán el **Scientific Activity Ledger** de esa investigación, que incluye:
+Or they will also consult the **Scientific Activity Ledger** of that research, which includes:
 
 ```json
 {
@@ -220,13 +220,13 @@ O también consultarán el **Scientific Activity Ledger** de esa investigación,
 }
 ```
 
-**Ese ID citado y referenciado es el verdadero activo.**
+**That cited and referenced ID is the true asset.**
 
 ## Next Strategic Phase: Atlas + Interoperability
 
-### Proyecto Atlas (Foco: Claims validados, no extracción masiva)
+### Atlas Project (Focus: Validated claims, not mass extraction)
 
-Objetivo: **10,000 claims de alta calidad en neurodegeneración**
+Goal: **10,000 high-quality claims in neurodegeneration**
 
 Pipeline:
 ```
@@ -245,9 +245,9 @@ Replications (registro)
 Consensus (Strong/Moderate/Emerging)
 ```
 
-### Scientific Interoperability Network (80% esfuerzo)
+### Scientific Interoperability Network (80% effort)
 
-El activo más difícil de copiar:
+The most difficult asset to copy:
 
 ```
 MEAS-XXXXXX (mediciones normalizadas)
@@ -256,7 +256,7 @@ CONV-XXXXXX (conversiones verificadas)
 CONCEPT-XXXXXX (conceptos canónicos)
 ```
 
-Funciones:
+Features:
 - pg/mL ↔ fg/mL
 - SUVR ↔ Centiloid
 - MMSE ↔ CDR
@@ -264,9 +264,9 @@ Funciones:
 
 ### CSO v1.0 Public Release
 
-Documentos críticos:
-- **CSO.md** - Ontología pública
-- **CSO_CONSTITUTION.md** - Epistemología formal
-- URIs públicas: `https://cso.coresearcher.org/`
+Critical documents:
+- **CSO.md** - Public Ontology
+- **CSO_CONSTITUTION.md** - Formal epistemology
+- Public URIs: `https://cso.coresearcher.org/`
 
-**El activo no es el software. Es la infraestructura científica reconocida por la comunidad.**
+**The asset is not the software. It is the scientific infrastructure recognized by the community.**

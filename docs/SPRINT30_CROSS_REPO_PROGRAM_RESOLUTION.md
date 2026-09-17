@@ -46,7 +46,7 @@ Success criterion:
 Can CoResearcher discover that artifacts from different repositories, DOIs, and organizations belong to the same scientific program?
 
 Question:
-> ¿Puede CoResearcher descubrir que estos artefactos pertenecen al mismo programa sin que nadie se lo diga?
+> Can CoResearcher discover that these artifacts belong to the same program without anyone telling it?
 
 ---
 

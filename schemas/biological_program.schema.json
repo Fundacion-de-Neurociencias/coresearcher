@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BiologicalProgram",
+  "description": "Transversal schema for Biological Programs and reusable mechanisms across GeneForge, Neurodiagnoses, CoResearcher, and Medicalia (ADR-MECH-001)",
+  "type": "object",
+  "required": [
+    "program_id",
+    "name",
+    "explanation_level",
+    "computational_objective",
+    "key_entities",
+    "causal_chain",
+    "target_diseases",
+    "transferability_score"
+  ],
+  "properties": {
+    "program_id": {
+      "type": "string",
+      "pattern": "^BP-[A-Z0-9_-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "explanation_level": {
+      "type": "string",
+      "enum": ["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"],
+      "description": "Marr level of analysis"
+    },
+    "computational_objective": {
+      "type": "string",
+      "description": "The functional purpose, homeostatic invariant, or biological computation"
+    },
+    "key_entities": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Genes, proteins, complexes, pathways, or anatomical nodes involved"
+    },
+    "causal_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "description"],
+        "properties": {
+          "step": { "type": "integer" },
+          "description": { "type": "string" },
+          "mechanism_ref": { "type": "string" }
+        }
+      }
+    },
+    "target_diseases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Diseases where this biological program operates or becomes decompensated"
+    },
+    "transferability_score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Cross-disease / cross-domain applicability index"
+    },
+    "marr_links": {
+      "type": "object",
+      "properties": {
+        "computational_parent": { "type": "string" },
+        "algorithmic_parent": { "type": "string" },
+        "implementational_children": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

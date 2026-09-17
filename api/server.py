@@ -80,6 +80,10 @@ from python.discovery import (
     StructuredSourceSnapshot,
     GroundedSearchSensor,
     ConstraintSourceBridge,
+    PaperAgentTool,
+    PaperAgentInvocationResult,
+    VirtualAuthorProfile,
+    PaperAgentMCPAdapter,
     ConstraintBoxBenchmark,
     RealityDistanceEvaluator,
     SubstrateTier,
@@ -272,6 +276,14 @@ class EvaluateRealityDistanceRequest(BaseModel):
 class GroundedSearchRequest(BaseModel):
     query_topic: str
     target_disease: Optional[str] = "ALZHEIMER_DISEASE"
+
+class PaperAgentQueryRequest(BaseModel):
+    topic: str
+
+class PaperAgentExecuteRequest(BaseModel):
+    agent_id: str
+    tool_name: str
+    arguments: Optional[Dict[str, Any]] = None
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -553,6 +565,35 @@ def ingest_grounded_search(req: GroundedSearchRequest):
         "sources": [s.to_dict() for s in sources],
         "bridge_result": bridge_result
     }
+
+@app.post("/api/discovery/paper-agent/query")
+def query_paper_agents_endpoint(req: PaperAgentQueryRequest):
+    """
+    Paper2Agent (Nature 2026) MCP Adapter:
+    Queries connected external virtual author paper agents matching a research topic.
+    """
+    agents = GroundedSearchSensor.query_paper_agents(topic=req.topic)
+    return {
+        "query_topic": req.topic,
+        "matched_agents_count": len(agents),
+        "agents": [a.to_dict() for a in agents]
+    }
+
+@app.post("/api/discovery/paper-agent/execute")
+def execute_paper_agent_endpoint(req: PaperAgentExecuteRequest):
+    """
+    Paper2Agent (Nature 2026) MCP Adapter:
+    Executes an analytical method exposed by a virtual author paper agent.
+    """
+    try:
+        result = GroundedSearchSensor.execute_paper_agent_method(
+            agent_id=req.agent_id,
+            tool_name=req.tool_name,
+            arguments=req.arguments or {}
+        )
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 # -----------------------------------------------------------------------------
 # 10. Reality Contact Score (RCS) Endpoints

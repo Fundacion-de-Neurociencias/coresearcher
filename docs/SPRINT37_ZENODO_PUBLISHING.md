@@ -139,7 +139,7 @@ publisher.publish(meta['id'])
 
 Publishing to Zenodo is solved. The harder question is:
 
-> ¿Qué representa científicamente un Scientific Activity Ledger?
+> What does a Scientific Activity Ledger represent scientifically?
 
 Options:
 
@@ -147,7 +147,7 @@ Options:
    - Pro: Stable identifier for the whole project.
    - Con: Projects are fuzzy boundaries.
 
-2. **1 investigación = 1 ledger**
+2. **1 investigation = 1 ledger**
    - Pro: Tighter scope; closer to a paper's unit of knowledge.
    - Con: Requires explicit "investigation" boundaries that may not exist in code.
 

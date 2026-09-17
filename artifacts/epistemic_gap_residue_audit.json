@@ -1,0 +1,24 @@
+{
+  "total_nodes": 301,
+  "total_edges": 426,
+  "superseded_by_edges": 0,
+  "abandoned_for_edges": 0,
+  "comparable_edges": 0,
+  "valid_pairs": 0,
+  "invalid_pairs": 0,
+  "concept_overlap_count": 0,
+  "no_overlap_count": 0,
+  "sample_comparisons": [],
+  "diagnosis": {
+    "explanation_1_no_edges": true,
+    "explanation_2_invalid_refs": false,
+    "explanation_3_no_concept_overlap": false,
+    "most_likely": "explanation_1_no_edges"
+  },
+  "supervisor_analysis": {
+    "option_1_superficial_extraction": "La extracción ve cambios de fichero/función/configuración, no supuestos persistentes. Los residuos paradigmáticos son supuestos que nadie cuestiona, no cambios explícitos.",
+    "option_2_implicit_residues": "El algoritmo busca residuos explícitos. Pero los residuos casi nunca son explícitos. Precisamente porque son lo que nadie cuestiona.",
+    "option_3_wrong_analysis_unit": "El concepto es correcto pero la unidad de análisis es demasiado pequeña. Los residuos aparecen entre trayectorias, no entre commits consecutivos. Einstein no cuestionó la continuidad entre dos commits. La cuestionó después de siglos de física continua."
+  },
+  "conclusion": "Los 0 paradigm residues probablemente indican que la detección actual opera a nivel de commit/PR (demasiado granular), no a nivel de trayectoria paradigmática. Los residuos reales requieren identificar supuestos persistentes a lo largo de múltiples decisiones, no comparar títulos de commits consecutivos. Esto es una limitación conocida que requiere H7 (Branch Detection) y análisis a nivel de trayectoria, no de commit individual."
+}

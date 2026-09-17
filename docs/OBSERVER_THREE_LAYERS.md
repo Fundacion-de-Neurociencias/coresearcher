@@ -73,10 +73,10 @@ Agent Session 2
 ## Success Metric
 
 Not:
-> ¿Cuántos objetivos detectó?
+>How many targets did you detect?
 
 But:
-> ¿Cuántas horas ahorra un investigador entendiendo el proyecto?
+> How many hours does a researcher save understanding the project?
 
 Baseline: 20 hours reading repositories
 Target: 1 hour with ledger
@@ -89,7 +89,7 @@ The observer should say:
 > "Estos 143 commits parecen pertenecer al mismo esfuerzo intelectual."
 
 Not:
-> "Este es el objetivo científico."
+> "This is the scientific objective."
 
 Hypotheses are validated by humans/agents, not asserted.
 

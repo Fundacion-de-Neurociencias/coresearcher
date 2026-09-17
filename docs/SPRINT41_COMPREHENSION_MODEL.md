@@ -1,105 +1,105 @@
-# Sprint 41 — Conceptual Research: Comprehension Model
+#Sprint 41 — Conceptual Research: Comprehension Model
 
-## Objective
+##Objective
 
-Define operacionalmente qué significa "comprender un proyecto científico" basado en evidencia acumulada desde Sprint 27 hasta Sprint 40.
+Operationally defines what it means to "understand a scientific project" based on evidence accumulated from Sprint 27 to Sprint 40.
 
 ---
 
-## Evidence Base
+##EvidenceBase
 
 ### Sprint 27 — Public Observatory Validation
-- Artifacts pueden ser localizados vía repositorios, DOIs, APIs
-- Pero: Artifact Similarity ≠ Program Membership
-- Limitación: Metadata enriquecido requiere trabajo manual
+- Artifacts can be located via repositories, DOIs, APIs
+- But: Artifact Similarity ≠ Program Membership
+- Limitation: Rich metadata requires manual work
 
-### Sprint 30 — Artifact Resolver
-- Entity Resolution con DOI funciona para papers
-- Pero: Artifact Similarity ≠ Program Membership
-- Limitación: Los artefactos no indican relación causal entre proyectos
+### Sprint 30 — Artifact Resolve
+- Entity Resolution with DOI works for papers
+- But: Artifact Similarity ≠ Program Membership
+- Limitation: Artifacts do not indicate a causal relationship between projects
 
 ### Sprint 31 — Network Resolution
 - Network Similarity ≠ Program Membership
-- Limitación: Los enlaces no capturan relación intencional
+- Limitation: Links do not capture intentional relationship
 
 ### Sprint 39B — Scientific Activity Ledger
-- Time-to-comprehension measurado para Q&A sobre MNE-Python
-- Ledger acelera búsqueda de información
-- Pero: Information Retrieval ≠ Comprehension
-- Limitación: La comprensión sigue requiriendo más que localizar artefactos
+- Measured time-to-comprehension for Q&A on MNE-Python
+- Ledger speeds up information search
+- But: Information Retrieval ≠ Comprehension
+- Limitation: Understanding still requires more than locating artifacts
 
 ### Sprint 40 — Decision Observatory
-- Trade-offs resueltos son una unidad observable (6/11 casos)
-- Otros patrones de coordinación son igualmente observables (5/11 casos):
+- Resolved trade-offs are an observable unit (6/11 cases)
+- Other coordination patterns are equally observable (5/11 cases):
   - Iterative Implementation Discussion
   - Technical Q&A / Knowledge Exchange
   - Bug Investigation Coordination
-  - Status / Progress Update
+  - Status/Progress Update
   - Implementation Detail Negotiation
 
 ---
 
 ## Comprehension Dimensions
 
-### 1. Qué produce el proyecto
+### 1. What the project produces
 
-**Componentes observables:**
-- Artifacts (código, papers, datasets)
-- Workstreams (roadmap implícito)
-- Contributors (actores)
+**Observable components:**
+- Artifacts (code, papers, datasets)
+- Workstreams (implicit roadmap)
+- Contributors (actors)
 
-**Evidencia:** Alta disponibilidad en repositorios, Zenodo, APIs
+**Evidence:** High availability in repositories, Zenodo, APIs
 
-**Reconstructibilidad:** HIGH
+**Reconstructibility:** HIGH
 
-**Contribución a comprensión:** PARCIAL — conoce output pero no proceso
-
----
-
-### 2. Por qué existe el proyecto
-
-**Componentes observables:**
-- Issues iniciales
-- README / documentación de motivación
-- Discussions iniciales
-
-**Evidencia:** Media disponibilidad
-
-**Reconstructibilidad:** MEDIA
-
-**Contribución a comprensión:** MODERADA — conoce intención pero no evolución
+**Contribution to understanding:** PARTIAL — knows output but not process
 
 ---
 
-### 3. Cómo funciona el proyecto
+### 2. Why does the project exist?
 
-**Componentes observables:**
-- Codebase estructura
+**Observable components:**
+- Initial issues
+- README/motivation documentation
+- Initial discussions
+
+**Evidence:** Half availability
+
+**Reconstructibility:** MEDIUM
+
+**Contribution to understanding:** MODERATE — knows intention but not evolution
+
+---
+
+### 3. How the project works
+
+**Observable components:**
+- Codebase structure
 - API design
-- Ejemplos / tutorials
+- Examples/tutorials
 - Tests
 
-**Evidencia:** Alta disponibilidad
+**Evidence:** High availability
 
-**Reconstructibilidad:** HIGH
+**Reconstructibility:** HIGH
 
-**Contribución a comprensión:** PARCIAL — conoce mecanismo pero no razonamiento
+**Contribution to understanding:** PARTIAL — knows mechanism but not reasoning
 
 ---
 
-### 4. Por qué tomó ciertas decisiones
+### 4. Why he made certain decisions
 
-**Componentes observables:**
-- Trade-offs resueltos (6 casos observados)
-- Failures / pivots (evidencia de previos intentos)
-- Reviews de código
-- Discusiones críticas
+**Observable components:**
+- Trade-offs resolved (6 cases observed)
+- Failures / pivots (evidence of previous attempts)
+- Code reviews
+- Critical discussions
 
-**Evidencia:** Baja disponibilidad — requiere lectura de hilos
+**Evidence:** Low availability — requires thread reading
 
-**Reconstructibilidad:** BAJA — fragmentaria
+**Reconstructibility:** LOW — fragmentary
 
-**Contribución a comprensión:** ALTA — expone razonamiento intencional
+**Contribution to understanding:** HIGH — exposes intentional reasoning
 
 ---
 
@@ -109,37 +109,37 @@ Define operacionalmente qué significa "comprender un proyecto científico" basa
 Comprehension = f(
     What: Artefactos + Workstreams + Contributors
     Why_Exist: Motivation + Intención inicial  
-    How_Works: Mecanismo + API + Estructura
+How_Works: Mechanism + API + Structure
     Why_Decided: Trade-offs + Failures + Reviews
 )
 ```
 
-### Prioridad de observación (basada en Sprint 40)
+### Observation Priority (based on Sprint 40)
 
-1. **Trade-offs resueltos** (55% de observados) — Razonamiento explícito
-2. **Knowledge exchange** (Q&A técnico) — Contexto implícito
-3. **Investigation coordination** (bugs) — Contexto limitado
-4. **Status updates** — Contexto mínimo
-5. **Implementation negotiation** — Detalles técnicos
+1. **Trade-offs resolved** (55% observed) — Explicit reasoning
+2. **Knowledge exchange** (technical Q&A) — Implicit context
+3. **Investigation coordination** (bugs) — Limited context
+4. **Status updates** — Minimum context
+5. **Implementation negotiation** — Technical details
 
 ---
 
 ## Operational Definition
 
-**Comprender un proyecto científico** implica poder responder:
+**Understanding a scientific project** implies being able to answer:
 
-1. **¿Qué hace?** — Artefactos + Funcionalidad
-2. **¿Por qué existe?** — Motivación + Problema abordado
-3. **¿Cómo funciona?** — Mecanismo + Uso
-4. **¿Por qué se diseñó así?** — Trade-offs considerados + Decisiones
+1. **What does it do?** — Artifacts + Functionality
+2. **Why does it exist?** — Motivation + Problem addressed
+3. **How does it work?** — Mechanism + Use
+4. **Why was it designed this way?** — Trade-offs considered + Decisions
 
-Esta definición es operativa porque cada dimensión puede ser verificada con evidencia observable.
+This definition is operational because each dimension can be verified with observable evidence.
 
 ---
 
 ## Sprint 40 Key Finding
 
-Los trade-offs resueltos son una **unidad observable** pero no necesariamente la **única** contribuyente a comprensión. La coordinación científica es multiparadigma:
+Resolved trade-offs are an **observable unit** but not necessarily the **only** contributor to understanding. Scientific coordination is multi-paradigm:
 
 ```
 Coordination Patterns:
@@ -154,10 +154,10 @@ Coordination Patterns:
 
 ## Recommendation Before Next Architecture Layer
 
-Antes de construir infraestructura adicional, CoResearcher debe:
+Before building additional infrastructure, CoResearcher must:
 
-1. **Especificar** qué componentes del modelo de comprensión serán reconstruidos
-2. **Validar** que cada componente es observable y reconstructible
-3. **Priorizar** según contribución a comprensión real
+1. **Specify** which components of the understanding model will be reconstructed
+2. **Validate** that each component is observable and reconstructable
+3. **Prioritize** according to contribution to real understanding
 
-Sin esta especificación, cualquier nueva capa arquitectónica corre el riesgo de sobreajuste a un modelo incompleto.
+Without this specification, any new architectural layer risks overfitting to an incomplete model.

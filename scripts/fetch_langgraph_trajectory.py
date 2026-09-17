@@ -365,12 +365,12 @@ def generate_report(repo, timeline, decisions, alternatives, criteria, evidence,
     # 3. Key Decisions
     lines.append("## 3. Key Decisions")
     lines.append("")
-    lines.append("Decisiones identificables desde evidencia pública. Cada decisión incluye evidencia, fecha y artefactos relacionados.")
+    lines.append("Decisiones identificables desde evidencia pública. Cada decision incluye evidencia, fecha y artefactos relacionados.")
     lines.append("")
     if decisions:
         for i, d in enumerate(decisions, 1):
             date = d.get("date", "").split("T")[0] if d.get("date") else "N/A"
-            lines.append(f"### Decisión {i}: {d.get('title', '')[:80]}")
+            lines.append(f"### Decision {i}: {d.get('title', '')[:80]}")
             lines.append("")
             lines.append(f"- **Fuente**: {d.get('source', '')} #{d.get('number', '')}")
             lines.append(f"- **Fecha**: {date}")

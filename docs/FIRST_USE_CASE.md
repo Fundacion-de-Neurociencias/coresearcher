@@ -64,7 +64,7 @@ Weekend:
 ```
 Monday:
 ├── Creates GitHub Issue #123 in science/alzheimer-biomarkers
-│   ├── Title: "¿Cuáles son los biomarcadores sanguíneos del Alzheimer precoz?"
+│   ├── Title: "What are the blood biomarkers of early Alzheimer's?"
 │   ├── Labels: question-type::meso, domain::neurology
 │   └── Assigns: self
 
@@ -132,7 +132,7 @@ status: "active"
 created_by: "ORCID-0000-0002-1825-0097"
 ---
 
-# ¿Cuáles son los biomarcadores sanguíneos del Alzheimer precoz?
+# What are the blood biomarkers of early Alzheimer's?
 
 **Ontological anchor**: Science/Medicine/Neurology/Alzheimer's Disease/Biomarkers
 
@@ -210,4 +210,4 @@ Contains:
 
 ---
 
-*Este caso de uso demuestra que CoResearcher resuelve un problema real INMEDIATO: coordinación y trazabilidad para investigación agentic. No requiere institucionalización masiva. Solo requiere 600 líneas de workflows que trabajan hoy mismo.*
+*This use case demonstrates that CoResearcher solves a real IMMEDIATE problem: coordination and traceability for agentic research. It does not require massive institutionalization. It only requires 600 lines of workflows that work today.*

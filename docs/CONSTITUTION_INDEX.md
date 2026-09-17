@@ -1,97 +1,100 @@
-# Índice Constitucional de CoResearcher (CONSTITUTION_INDEX)
+# Constitutional Index of CoResearcher (CONSTITUTION_INDEX)
 
-Este índice actúa como la **Carta Magna** del ecosistema CoResearcher. Agrupa todas las directivas arquitectónicas, decisiones de diseño (ADRs) y motores fundacionales en un mapa unificado, garantizando que el diseño y la evolución del sistema mantengan la alineación original.
+This index acts as the **Magna Carta** of the CoResearcher ecosystem. It unifies all architectural directives, design decisions (ADRs), and foundational engines into a single map, ensuring that the system's design and evolution preserve its original alignment.
 
 ---
 
-### 🏛️ La Declaración Constitucional Máxima
+### 🏛️ The Supreme Constitutional Declaration
 
-> **CoResearcher NO es un sistema de respuesta.**  
-> **CoResearcher NO es un buscador bibliográfico.**  
-> **CoResearcher NO es un generador de hipótesis.**  
-> **CoResearcher ES un sistema de reducción progresiva del espacio de estados científicos posibles (\(\Omega\)) mediante restricciones, predicciones y falsaciones auditables.**
+> **CoResearcher is NOT an answer system.**  
+> **CoResearcher is NOT a bibliographic search engine.**  
+> **CoResearcher is NOT a hypothesis generator.**  
+> **CoResearcher IS an auditable system for the progressive reduction of the possible scientific state space (\(\Omega\)) through empirical constraints, predictions, and falsifications.**
 
 > **Principio de Ganarse la Realidad (Reality Contact Score - RCS)**:  
-> *"Every hypothesis must earn reality."* Toda hipótesis debe ascender desde el razonamiento bibliográfico (RCS=0) hasta la replicación en cohortes (RCS=1), la validación prospectiva (RCS=2), la modificación de experimentos físicos reales (RCS=3) y la inscripción de restricciones invariantes en el ledger (RCS=4).
+> *"Every hypothesis must earn reality."* Every hypothesis must ascend from bibliographic reasoning (RCS=0) to cohort replication (RCS=1), prospective blind validation (RCS=2), perturbation of physical experiments (RCS=3), and inscription of invariant constraints into the ledger (RCS=4).
 
-> **Principio de Descubrimiento de Restricciones Ocultas y Distancia a la Realidad (ConstraintBox & Dry → Damp → Wet)**:  
-> *"El objetivo último no es explicar los datos ni maximizar la predicción, sino descubrir las restricciones ocultas que gobiernan el sistema."* Evaluación pura de descubrimiento desacoplada de la memoria biológica mediante mundos sintéticos ciegos y validación multi-sustrato.
+> **Principle of Hidden Constraint Discovery & Reality Distance (ConstraintBox & Dry → Damp → Wet)**:  
+> *"The ultimate goal is not to explain data or maximize prediction, but to discover the hidden constraints that govern the system."* Pure discovery evaluation decoupled from biological memory via blind synthetic worlds and multi-substrate validation.
 
-> **Mandato de Autodocumentación Continua Obligatoria**:  
-> *"Ningún desarrollo sustancial se considerará completado (DoD) sin su inmediata, exhaustiva y rigurosa incorporación a los documentos canónicos de arquitectura (`ARCHITECTURE.md`, `ARCHITECTURE_MAP.md`, `CONSTITUTION_INDEX.md`, `README.md`)."*
-
----
-
-## 1. Fundamentos y Principios
-- [FOUNDATION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/FOUNDATION_CONSTITUTION.md) - Principios base sobre la naturaleza asíncrona, trazable e independiente de la investigación en CoResearcher.
-- [ZERO_INFRASTRUCTURE_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ZERO_INFRASTRUCTURE_CONSTITUTION.md) - Ley fundamental: La arquitectura no debe depender de bases de datos complejas ni infraestructuras pesadas; los archivos locales son la fuente de verdad.
-- [ECOSYSTEM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ECOSYSTEM_CONSTITUTION.md) - Directivas sobre cómo CoResearcher interactúa como una pieza modular dentro del ecosistema más grande.
-- [ECOSYSTEM_BOUNDARIES.md](file:///c:/Users/usuario/coresearcher/docs/ECOSYSTEM_BOUNDARIES.md) - La Trinidad Científica Computable: Demarcación de territorio, roles y handshakes entre CoResearcher, DataAILab y EdiTXT.
-- [ARCH-002_CORESEARCHER_DATAAILAB_INTEGRATION.md](file:///c:/Users/usuario/coresearcher/docs/ARCH-002_CORESEARCHER_DATAAILAB_INTEGRATION.md) - Demarcación territorial y contrato de integración entre CoResearcher (Epistemic Engine / Verifier) y DataAILab (Empirical OS / Solver).
-- [ARCH-003_ECOSYSTEM_FULL_INTEGRATION_AND_EDITXT_FRONTEND.md](file:///c:/Users/usuario/coresearcher/docs/ARCH-003_ECOSYSTEM_FULL_INTEGRATION_AND_EDITXT_FRONTEND.md) - Especificación del Frontend Computable de EdiTXT, Claim Binding, Stale Figure Detection y Zenodo DOI Release.
-- [BOUNDARY_WITH_EDITXT.md](file:///c:/Users/usuario/coresearcher/docs/BOUNDARY_WITH_EDITXT.md) - Límites constitucionales con el servicio editorial y peer review de EdiTXT.
-- [ARCHITECTURE.md](file:///c:/Users/usuario/coresearcher/docs/ARCHITECTURE.md) - **Especificación Maestra de Arquitectura v4.0.0**: 4 capas completas, motores matemáticos y APIs.
-- [ARCHITECTURE_MAP.md](file:///c:/Users/usuario/coresearcher/docs/ARCHITECTURE_MAP.md) - **Mapa Topológico del Sistema v4.0.0**: Componentes de `observer`, `discovery`, `api` y contratos.
+> **Mandatory Continuous Self-Documentation Mandate**:  
+> *"No substantial development shall be deemed complete (Definition of Done) without its immediate, exhaustive, and rigorous incorporation into the canonical architectural documents (`ARCHITECTURE.md`, `ARCHITECTURE_MAP.md`, `CONSTITUTION_INDEX.md`, `README.md`)."*
 
 ---
 
-## 2. Dominio Científico, ADRs y Descubrimiento Epistémico
-
-### 2.1 ADRs Fundacionales (Fase 1 & 2)
-- [ADR-DISCOVERY-001_EPISTEMIC_TRAJECTORY_FRAMEWORK.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-001_EPISTEMIC_TRAJECTORY_FRAMEWORK.md) - Epistemic Trajectory Framework y primitiva de primer nivel `Representation`.
-- [ADR-DISCOVERY-002_GENERATOR_VERIFIER_SEPARATION.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-002_GENERATOR_VERIFIER_SEPARATION.md) - Separación estricta Generador ≠ Verificador (Solver / Verifier).
-- [ADR-DISCOVERY-003_HYPOTHESIS_ALTERNATIVES_MANDATE.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-003_HYPOTHESIS_ALTERNATIVES_MANDATE.md) - Obligatoriedad de formular hipótesis alternativas rivales y predicciones discriminativas.
-- [ADR-DISCOVERY-004_SCOPE_CONDITIONS_REGISTRATION.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-004_SCOPE_CONDITIONS_REGISTRATION.md) - Registro obligatorio de condiciones de alcance y fronteras de ruptura.
-- [ADR-DISCOVERY-005_DISCOVERY_VALUE_METRIC.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-005_DISCOVERY_VALUE_METRIC.md) - Métrica objetiva de Discovery Value (\(DV\)) basada en restricciones, falsabilidad, compresión de Kolmogorov y transferibilidad.
-- [ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md) - Epistemología centrada en Restricciones y Motor de Lógica Popperiana Computable (Modus Tollens, Implicaciones, Condiciones Necesarias/Suficientes).
-- [ADR-DISCOVERY-007_CONSTRAINT_LED_DISCOVERY_TEAMS.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-007_CONSTRAINT_LED_DISCOVERY_TEAMS.md) - Equipos Multi-Agente guiados por Restricciones, los 9 Agentes Epistémicos Canónicos y Campañas de Descubrimiento (`DiscoveryCampaign`).
-- [ADR-DISCOVERY-008_CLOSED_LOOP_REAL_WORLD_GROUNDING_AND_TEST_TIME_SCALING.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-008_CLOSED_LOOP_REAL_WORLD_GROUNDING_AND_TEST_TIME_SCALING.md) - Aterrizaje en el Mundo Real de Bucle Cerrado (Lab-in-the-Loop) y Búsqueda en Árbol Epistémico por Escalado en Tiempo de Inferencia.
-- [ADR-DISCOVERY-009_DISCOVERY_WORKBENCH.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-009_DISCOVERY_WORKBENCH.md) - Discovery Workbench (El Objeto Unificador de la Pregunta al Descubrimiento) y Protocolo de Congelación de Arquitectura.
-- [ADR-MECH-001_MECHANISM_LAYER_AND_BIOLOGICAL_PROGRAMS.md](file:///c:/Users/usuario/coresearcher/docs/ADR-MECH-001_MECHANISM_LAYER_AND_BIOLOGICAL_PROGRAMS.md) - Capa de Mecanismos y `BiologicalProgram` transversal con jerarquía tri-nivel de Marr.
-
-### 2.2 Motores Avanzados y Nuevas Decisiones Arquitectónicas (Fase 3 & 4)
-- **ADR-DISCOVERY-010: Reality Contact Score (RCS) & Sensor Criptográfico**:
-  Implementado en [`reality_contact_score.py`](file:///c:/Users/usuario/coresearcher/python/discovery/reality_contact_score.py) y [`grounded_search_sensor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/grounded_search_sensor.py). Escala objetiva de contacto empírico (RCS 0 a 4) y huella criptográfica SHA-256 de fuentes.
-- **ADR-DISCOVERY-011: Jerarquía de Sustratos (Dry → Damp → Wet) & ConstraintBox**:
-  Implementado en [`reality_distance.py`](file:///c:/Users/usuario/coresearcher/python/discovery/reality_distance.py) y [`constraint_box.py`](file:///c:/Users/usuario/coresearcher/python/discovery/constraint_box.py). Evaluación de descubrimiento puro desacoplada de la memoria en mundos sintéticos ciegos.
-- **ADR-DISCOVERY-012: Motor de Falsación Duhem-Quine & Cementerio de Hipótesis**:
-  Implementado en [`failure_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/failure_engine.py) y [`defeated_hypotheses_graveyard.py`](file:///c:/Users/usuario/coresearcher/python/discovery/defeated_hypotheses_graveyard.py). Atribución rigurosa de culpas ante anomalías empíricas y registro de autopsias científicas.
-- **ADR-DISCOVERY-013: Pipeline Empírico de Cohortes Reales (Directiva Zero Mocking)**:
-  Implementado en [`real_cohort_empirical_pipeline.py`](file:///c:/Users/usuario/coresearcher/python/discovery/real_cohort_empirical_pipeline.py) y [`real_cohort_campaign_runner.py`](file:///c:/Users/usuario/coresearcher/python/discovery/real_cohort_campaign_runner.py). Conexión física a pacientes en disco (`metaboad_atn_processed.csv`, N=66) sin stubs simulados.
-- **ADR-DISCOVERY-014: Descubrimiento Universal de Invariantes Latentes (4 Dominios)**:
-  Implementado en [`universal_discovery_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/universal_discovery_engine.py) y [`latent_factor_discovery.py`](file:///c:/Users/usuario/coresearcher/python/discovery/latent_factor_discovery.py). Validación cruzada en Neurociencia, Astrofísica, Macroeconomía y Ecología Marina.
-- **ADR-DISCOVERY-015: Campañas de Largo Horizonte, Sorpresa Bayesiana y Libro de Presupuesto**:
-  Implementado en [`long_horizon_campaign_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/long_horizon_campaign_engine.py), [`bayesian_surprise_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/bayesian_surprise_engine.py) y [`research_budget_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/research_budget_engine.py).
-- **ADR-DISCOVERY-016: Suite de Destrucción Adversarial y Abducción a Ciegas (100 Mundos)**:
-  Implementado en [`adversarial_destruction_test.py`](file:///c:/Users/usuario/coresearcher/python/discovery/adversarial_destruction_test.py), [`unknown_mechanism_benchmark.py`](file:///c:/Users/usuario/coresearcher/python/discovery/unknown_mechanism_benchmark.py) y [`retrospective_time_split_benchmark.py`](file:///c:/Users/usuario/coresearcher/python/discovery/retrospective_time_split_benchmark.py).
-- **ADR-DISCOVERY-017: Tribunal de Teoremas Físicos y DAGs de Conservación**:
-  Implementado en [`physical_theorem_court.py`](file:///c:/Users/usuario/coresearcher/python/discovery/physical_theorem_court.py). Auditoría de leyes físicas (masa-energía, entropía termodinámica, disipación de Navier-Stokes y singularidades unphysical).
-- **ADR-DISCOVERY-018: Sintetizador Analítico Retrógrado ToolGrad e Inversión de Trayectorias**:
-  Implementado en [`backward_execution_synthesizer.py`](file:///c:/Users/usuario/coresearcher/python/discovery/backward_execution_synthesizer.py). Inversión de datos físicos empíricos en contratos analíticos ejecutables y verificables.
-- **ADR-DISCOVERY-019: Auditor Epistémico de Pull Requests Científicos (CI Webhook)**:
-  Implementado en [`epistemic_pr_auditor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/epistemic_pr_auditor.py) y [`api/server.py`](file:///c:/Users/usuario/coresearcher/api/server.py). Auditoría automatizada de GitHub para data leakage, violaciones físicas y p-hacking.
-- **ADR-DISCOVERY-020: Motor Epistémico Categórico (Álgebra del Pensamiento Científico)**:
-  Implementado en [`categorical_epistemic_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/categorical_epistemic_engine.py). Teoría de categorías, funtores de abducción y deducción, conmutatividad de diagramas, cálculo del defecto de holonomía y adjunciones \(\mathcal{F} \dashv \mathcal{G}\).
-- **ADR-DISCOVERY-021: Mandato de Autodocumentación Continua Obligatoria**:
-  Gobernanza operacional que prohíbe dar por concluida cualquier funcionalidad sustancial sin actualizar proactivamente la documentación de arquitectura.
+## 1. Foundations and Principles
+- [FOUNDATION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/FOUNDATION_CONSTITUTION.md) - Core principles on the asynchronous, traceable, and independent nature of research in CoResearcher.
+- [ZERO_INFRASTRUCTURE_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ZERO_INFRASTRUCTURE_CONSTITUTION.md) - Fundamental law: Architecture must not rely on complex databases or heavy infrastructures; local files are the source of truth.
+- [ECOSYSTEM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ECOSYSTEM_CONSTITUTION.md) - Directives on how CoResearcher interacts as a modular component within the broader ecosystem.
+- [ECOSYSTEM_BOUNDARIES.md](file:///c:/Users/usuario/coresearcher/docs/ECOSYSTEM_BOUNDARIES.md) - The Computable Scientific Trinity: Territorial demarcation, roles, and handshakes between CoResearcher, DataAILab, and EdiTXT.
+- [ARCH-002_CORESEARCHER_DATAAILAB_INTEGRATION.md](file:///c:/Users/usuario/coresearcher/docs/ARCH-002_CORESEARCHER_DATAAILAB_INTEGRATION.md) - Territorial demarcation and integration contract between CoResearcher (Epistemic Engine / Verifier) and DataAILab (Empirical OS / Solver).
+- [ARCH-003_ECOSYSTEM_FULL_INTEGRATION_AND_EDITXT_FRONTEND.md](file:///c:/Users/usuario/coresearcher/docs/ARCH-003_ECOSYSTEM_FULL_INTEGRATION_AND_EDITXT_FRONTEND.md) - EdiTXT Computable Frontend specification, Claim Binding, Stale Figure Detection, and Zenodo DOI Release.
+- [BOUNDARY_WITH_EDITXT.md](file:///c:/Users/usuario/coresearcher/docs/BOUNDARY_WITH_EDITXT.md) - Constitutional boundaries with EdiTXT editorial and peer-review services.
+- [ARCHITECTURE.md](file:///c:/Users/usuario/coresearcher/docs/ARCHITECTURE.md) - **Master Architecture Specification v4.0.0**: 4 full layers, mathematical engines, and REST APIs.
+- [ARCHITECTURE_MAP.md](file:///c:/Users/usuario/coresearcher/docs/ARCHITECTURE_MAP.md) - **System Topology Map v4.0.0**: Inventory of `observer`, `discovery`, `api`, and interface contracts.
+- [LANGUAGE_POLICY.md](file:///c:/Users/usuario/coresearcher/docs/LANGUAGE_POLICY.md) - **English as Canonical Protocol Language**: 100% strict enforcement with zero tolerance for non-English content.
 
 ---
 
-## 3. Ontología, Preguntas y Programas
-- [ONTOLOGY_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ONTOLOGY_CONSTITUTION.md) - Definición del léxico y los modelos de datos que representan el conocimiento (Claims, Evidencia).
-- [QUESTION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/QUESTION_CONSTITUTION.md) - Cómo se formulan, descomponen y atacan las preguntas científicas.
-- [PROGRAM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/PROGRAM_CONSTITUTION.md) - Directrices para la creación y gestión de programas de investigación.
-- [REVIEW_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/REVIEW_CONSTITUTION.md) - Normas para la validación inter-pares, escrutinio de Claims y ReviewGraphs.
+## 2. Scientific Domain, ADRs, and Epistemic Discovery
+
+### 2.1 Foundational ADRs (Phase 1 & 2)
+- [ADR-DISCOVERY-001_EPISTEMIC_TRAJECTORY_FRAMEWORK.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-001_EPISTEMIC_TRAJECTORY_FRAMEWORK.md) - Epistemic Trajectory Framework and first-class primitive `Representation`.
+- [ADR-DISCOVERY-002_GENERATOR_VERIFIER_SEPARATION.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-002_GENERATOR_VERIFIER_SEPARATION.md) - Strict Generator ≠ Verifier separation (Solver / Verifier).
+- [ADR-DISCOVERY-003_HYPOTHESIS_ALTERNATIVES_MANDATE.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-003_HYPOTHESIS_ALTERNATIVES_MANDATE.md) - Mandatory formulation of competing rival hypotheses and discriminative predictions.
+- [ADR-DISCOVERY-004_SCOPE_CONDITIONS_REGISTRATION.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-004_SCOPE_CONDITIONS_REGISTRATION.md) - Mandatory registration of scope conditions and rupture boundaries.
+- [ADR-DISCOVERY-005_DISCOVERY_VALUE_METRIC.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-005_DISCOVERY_VALUE_METRIC.md) - Objective Discovery Value (\(DV\)) metric based on constraints, falsifiability, Kolmogorov compression, and transferability.
+- [ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md) - Constraint-centered epistemology and Computable Popperian Logic Engine (Modus Tollens, Implications, Necessary/Sufficient Conditions).
+- [ADR-DISCOVERY-007_CONSTRAINT_LED_DISCOVERY_TEAMS.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-007_CONSTRAINT_LED_DISCOVERY_TEAMS.md) - Constraint-Led Multi-Agent Discovery Teams, the 9 Canonical Epistemic Agents, and Discovery Campaigns (`DiscoveryCampaign`).
+- [ADR-DISCOVERY-008_CLOSED_LOOP_REAL_WORLD_GROUNDING_AND_TEST_TIME_SCALING.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-008_CLOSED_LOOP_REAL_WORLD_GROUNDING_AND_TEST_TIME_SCALING.md) - Closed-Loop Real-World Grounding (Lab-in-the-Loop) and Epistemic Tree Search by Inference-Time Scaling.
+- [ADR-DISCOVERY-009_DISCOVERY_WORKBENCH.md](file:///c:/Users/usuario/coresearcher/docs/ADR-DISCOVERY-009_DISCOVERY_WORKBENCH.md) - Discovery Workbench (The Unifying Object from Question to Discovery) and Architecture Freeze Protocol.
+- [ADR-MECH-001_MECHANISM_LAYER_AND_BIOLOGICAL_PROGRAMS.md](file:///c:/Users/usuario/coresearcher/docs/ADR-MECH-001_MECHANISM_LAYER_AND_BIOLOGICAL_PROGRAMS.md) - Mechanism Layer and cross-cutting `BiologicalProgram` with Marr's tri-level hierarchy.
+
+### 2.2 Advanced Engines and New Architectural Decisions (Phase 3 & 4)
+- **ADR-DISCOVERY-010: Reality Contact Score (RCS) & Cryptographic Sensor**:
+  Implemented in [`reality_contact_score.py`](file:///c:/Users/usuario/coresearcher/python/discovery/reality_contact_score.py) and [`grounded_search_sensor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/grounded_search_sensor.py). Objective empirical contact scale (RCS 0 to 4) and SHA-256 cryptographic source fingerprinting.
+- **ADR-DISCOVERY-011: Substrate Hierarchy (Dry → Damp → Wet) & ConstraintBox**:
+  Implemented in [`reality_distance.py`](file:///c:/Users/usuario/coresearcher/python/discovery/reality_distance.py) and [`constraint_box.py`](file:///c:/Users/usuario/coresearcher/python/discovery/constraint_box.py). Pure discovery evaluation decoupled from biological memory in blind synthetic worlds.
+- **ADR-DISCOVERY-012: Duhem-Quine Failure Engine & Hypotheses Graveyard**:
+  Implemented in [`failure_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/failure_engine.py) and [`defeated_hypotheses_graveyard.py`](file:///c:/Users/usuario/coresearcher/python/discovery/defeated_hypotheses_graveyard.py). Rigorous blame attribution upon empirical anomalies and scientific autopsy registry.
+- **ADR-DISCOVERY-013: 100% Empirical Real-Cohort Pipeline (Zero Mocking Mandate)**:
+  Implemented in [`real_cohort_empirical_pipeline.py`](file:///c:/Users/usuario/coresearcher/python/discovery/real_cohort_empirical_pipeline.py) and [`real_cohort_campaign_runner.py`](file:///c:/Users/usuario/coresearcher/python/discovery/real_cohort_campaign_runner.py). Physical connection to patient datasets on disk (`metaboad_atn_processed.csv`, N=66) with zero simulated stubs.
+- **ADR-DISCOVERY-014: Universal Latent Invariant Discovery (4 Regimes)**:
+  Implemented in [`universal_discovery_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/universal_discovery_engine.py) and [`latent_factor_discovery.py`](file:///c:/Users/usuario/coresearcher/python/discovery/latent_factor_discovery.py). Cross-domain validation across Neuroscience, Astrophysics, Macroeconomics, and Marine Ecology.
+- **ADR-DISCOVERY-015: Long-Horizon Campaigns, Bayesian Surprise & Resource Budget Ledger**:
+  Implemented in [`long_horizon_campaign_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/long_horizon_campaign_engine.py), [`bayesian_surprise_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/bayesian_surprise_engine.py), and [`research_budget_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/research_budget_engine.py).
+- **ADR-DISCOVERY-016: Adversarial Destruction Suite & Blind World Abduction (100 Worlds)**:
+  Implemented in [`adversarial_destruction_test.py`](file:///c:/Users/usuario/coresearcher/python/discovery/adversarial_destruction_test.py), [`unknown_mechanism_benchmark.py`](file:///c:/Users/usuario/coresearcher/python/discovery/unknown_mechanism_benchmark.py), and [`retrospective_time_split_benchmark.py`](file:///c:/Users/usuario/coresearcher/python/discovery/retrospective_time_split_benchmark.py).
+- **ADR-DISCOVERY-017: Physical Theorem Court & Conservation Proof DAGs**:
+  Implemented in [`physical_theorem_court.py`](file:///c:/Users/usuario/coresearcher/python/discovery/physical_theorem_court.py). Physical law audits (Mass-Energy, Thermodynamic Entropy, Navier-Stokes Leray-Hopf dissipation, and unphysical singularities).
+- **ADR-DISCOVERY-018: ToolGrad Backward Analytical Synthesizer & Reverse Inversion**:
+  Implemented in [`backward_execution_synthesizer.py`](file:///c:/Users/usuario/coresearcher/python/discovery/backward_execution_synthesizer.py). Inversion of empirical datasets into executable, cryptographically verified analytical contracts.
+- **ADR-DISCOVERY-019: Scientific Epistemic PR Auditor (CI Webhook Gateway)**:
+  Implemented in [`epistemic_pr_auditor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/epistemic_pr_auditor.py) and [`api/server.py`](file:///c:/Users/usuario/coresearcher/api/server.py). Automated GitHub code review for data leakage, physical conservation breaches, and p-hacking.
+- **ADR-DISCOVERY-020: Categorical Epistemic Engine (The Mathematical Algebra of Thought)**:
+  Implemented in [`categorical_epistemic_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/categorical_epistemic_engine.py). Category theory, abduction and deduction functors, diagram commutativity, holonomy defect calculation, and adjunctions \(\mathcal{F} \dashv \mathcal{G}\).
+- **ADR-DISCOVERY-021: Mandatory Continuous Self-Documentation Mandate**:
+  Operational governance rule forbidding the completion of any substantial feature without proactive updates to architectural documentation.
+- **ADR-DISCOVERY-022: Paper2Agent (Nature 2026) MCP Federation**:
+  Implemented in [`grounded_search_sensor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/grounded_search_sensor.py) and [`api/server.py`](file:///c:/Users/usuario/coresearcher/api/server.py). Transforms external published papers into live virtual authors exposing MCP analytical tools (`compute_connectome_diffusion`, `score_genetic_perturbation`, `evaluate_metabolic_glycolytic_reserve`). Executed methods earn cryptographic SOM-SHA256 hashes and empirical grounding \(RCS = 2\).
 
 ---
 
-## 4. Agentes, Roles y Ejecución
-- [CSO_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/CSO_CONSTITUTION.md) - Rol del Chief Scientific Officer algorítmico y sus límites.
-- [OBSERVER_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/OBSERVER_CONSTITUTION.md) - Gobernanza sobre el rol pasivo del Observador (Coresearcher Observer).
-- [HUMAN_ESCALATION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/HUMAN_ESCALATION_CONSTITUTION.md) - Protocolos para decidir cuándo y cómo un agente debe interrumpir su autonomía para solicitar intervención humana.
-- [ACTION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ACTION_CONSTITUTION.md) - Reglas sobre cómo se ejecutan físicamente las acciones y herramientas.
-- [DECISION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/DECISION_CONSTITUTION.md) - Ruteo y trazabilidad de las decisiones autónomas tomadas por el agente.
-- [MECHANISM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/MECHANISM_CONSTITUTION.md) - Patrones mecánicos y universales para flujos de trabajo asíncronos y robustos.
+## 3. Ontology, Questions, and Programs
+- [ONTOLOGY_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ONTOLOGY_CONSTITUTION.md) - Definition of the lexicon and data models representing knowledge (Claims, Evidence).
+- [QUESTION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/QUESTION_CONSTITUTION.md) - How scientific questions are formulated, decomposed, and attacked.
+- [PROGRAM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/PROGRAM_CONSTITUTION.md) - Directives for the creation and management of research programs.
+- [REVIEW_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/REVIEW_CONSTITUTION.md) - Standards for peer validation, claim scrutiny, and ReviewGraphs.
 
 ---
-*Nota: Este índice debe ser actualizado de forma obligatoria e inmediata cada vez que se implemente un nuevo módulo, motor, benchmark o directiva en CoResearcher.*\n
+
+## 4. Agents, Roles, and Execution
+- [CSO_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/CSO_CONSTITUTION.md) - Role and boundaries of the algorithmic Chief Scientific Officer.
+- [OBSERVER_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/OBSERVER_CONSTITUTION.md) - Governance over the passive role of the Observer (Coresearcher Observer).
+- [HUMAN_ESCALATION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/HUMAN_ESCALATION_CONSTITUTION.md) - Protocols determining when and how an agent must pause autonomy to request human intervention.
+- [ACTION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/ACTION_CONSTITUTION.md) - Rules governing the physical execution of actions and tools.
+- [DECISION_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/DECISION_CONSTITUTION.md) - Routing and traceability of autonomous decisions made by agents.
+- [MECHANISM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/MECHANISM_CONSTITUTION.md) - Mechanical and universal patterns for asynchronous, robust workflows.
+
+---
+*Note: This index must be updated immediately and mandatorily whenever a new module, engine, benchmark, or directive is implemented in CoResearcher.*\n

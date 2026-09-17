@@ -94,6 +94,10 @@ from .grounded_search_sensor import (
     StructuredSourceSnapshot,
     GroundedSearchSensor,
     ConstraintSourceBridge,
+    PaperAgentTool,
+    PaperAgentInvocationResult,
+    VirtualAuthorProfile,
+    PaperAgentMCPAdapter,
 )
 from .constraint_box import (
     ConstraintTypeRule,
@@ -309,6 +313,10 @@ __all__ = [
     "StructuredSourceSnapshot",
     "GroundedSearchSensor",
     "ConstraintSourceBridge",
+    "PaperAgentTool",
+    "PaperAgentInvocationResult",
+    "VirtualAuthorProfile",
+    "PaperAgentMCPAdapter",
     "ConstraintTypeRule",
     "SyntheticConstraintRule",
     "SyntheticWorldOracle",

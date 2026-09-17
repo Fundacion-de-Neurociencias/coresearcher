@@ -1,18 +1,18 @@
 # Mechanism Universality Test
 ## Validating MECH-XXXXXX as a Universal Scientific Primitive
 
-## La Prueba de Fuego
+## The Trial by Fire
 
-Si `MECH-XXXXXX` es una primitiva universal, debe funcionar igual para:
-- Biología
-- Física
-- Economía
-- Ingeniería
-- Ciencias Sociales
+If `MECH-XXXXXX` is a universal primitive, it should work the same for:
+- Biology
+- Physics
+- Economy
+- Engineering
+- Social Sciences
 
 ---
 
-## Mecanismo 1: Biología (Neurodegeneración)
+## Mechanism 1: Biology (Neurodegeneration)
 
 ```
 APOE4
@@ -24,13 +24,13 @@ tau hyperfosforilación
 deterioro cognitivo
 ```
 
-**Tipo**: threshold
-**Entidades**: ["APOE4", "microglía", "tau", "neuronas"]
-**Predicción**: "APOE4 homocigóticos mostrarán inflamación + tau antes de síntomas"
+**Type**: threshold
+**Entities**: ["APOE4", "microglia", "tau", "neurons"]
+**Prediction**: "APOE4 homozygotes will show inflammation + tau before symptoms"
 
 ---
 
-## Mecanismo 2: Física (Relatividad)
+## Mechanism 2: Physics (Relativity)
 
 ```
 masa
@@ -42,13 +42,13 @@ trayectoria geodésica
 órbita hacia el sol
 ```
 
-**Tipo**: causal_chain
-**Entidades**: ["masa", "espacio-tiempo", "órbita"]
-**Predicción**: "La luz se desviará 1.75" en eclipses solares
+**Type**: causal_chain
+**Entities**: ["mass", "space-time", "orbit"]
+**Prediction**: "Light will deviate 1.75" in solar eclipses
 
 ---
 
-## Mecanismo 3: Economía (Política Monetaria)
+## Mechanism 3: Economy (Monetary Policy)
 
 ```
 tipos de interés
@@ -60,13 +60,13 @@ inversión empresarial
 empleo
 ```
 
-**Tipo**: causal_chain
-**Entidades**: ["tipos", "capital", "inversión", "empleo"]
-**Predicción**: "Incremento de 100pb en tipos reduce inversión en 2-3%"
+**Type**: causal_chain
+**Entities**: ["types", "capital", "investment", "employment"]
+**Prediction**: "100bp increase in rates reduces investment by 2-3%"
 
 ---
 
-## Mecanismo 4: Ingeniería (Fatiga de Materiales)
+## Mechanism 4: Engineering (Materials Fatigue)
 
 ```
 temperatura cíclica
@@ -78,13 +78,13 @@ microfissuras
 fallo estructural
 ```
 
-**Tipo**: threshold
-**Entidades**: ["temperatura", "material", "fissura", "fallo"]
-**Predicción**: "Después de N ciclos termicos, fallo en carga X"
+**Type**: threshold
+**Entities**: ["temperature", "material", "crack", "fault"]
+**Prediction**: "After N thermal cycles, failure at load X"
 
 ---
 
-## Mecanismo 5: Ciencias Sociales (Adopción de Tecnología)
+## Mechanism 5: Social Sciences (Technology Adoption)
 
 ```
 precio accesible
@@ -96,37 +96,37 @@ red de efecto
 difusión masiva
 ```
 
-**Tipo**: feedback
-**Entidades**: ["precio", "adopción", "red", "difusión"]
-**Predicción**: "Cuando adopción > 15%, crecimiento exponencial"
+**Type**: feedback
+**Entities**: ["price", "adoption", "network", "diffusion"]
+**Prediction**: "When adoption > 15%, exponential growth"
 
 ---
 
-## Patrón Universal Detectado
+## Universal Pattern Detected
 
 ```
 ENTITY-A (estímulo)
   ↓
-PROCESS-X (mecanismo)
+PROCESS-X (mechanism)
   ↓
 ENTITY-B (resultado intermedio)
   ↓
 ENTITY-C (resultado final)
 ```
 
-### Atributos universales:
+### Universal attributes:
 
-| Atributo | Función |
+| Attribute | Function |
 |----------|---------|
-| `entities` | Qué objetos están involucrados |
-| `type` | Qué clase de relación causal |
-| `arrows` | Secuencia de la causalidad |
-| `confidence` | Cuán seguros estamos |
-| `trust_score` | Participación científica |
+| `entities` | What objects are involved |
+| `type` | What kind of causal relationship |
+| `arrows` | Sequence of causality |
+| `confidence` | How safe are we |
+| `trust_score` | Scientific participation |
 
 ---
 
-## Estructura MECH-XXXXXX Universal
+## MECH-XXXXXX Universal Structure
 
 ```json
 {
@@ -143,76 +143,76 @@ ENTITY-C (resultado final)
 }
 ```
 
-**Esto es idéntico para todas las disciplinas.**
+**This is identical for all disciplines.**
 
 ---
 
-## Validación Cross-Domain
+## Cross-Domain Validation
 
-### Biología
+### Biology
 - mechanism_type: threshold
-- **¿threshold?** Sí - APOE4 solo patológico bajo estrés
+- **threshold?** Yes - APOE4 only pathological under stress
 
-### Física
+### Physics
 - mechanism_type: causal_chain
-- **¿causal_chain?** Sí - masa → curvatura → trayectoria
+- **causal_chain?** Yes - mass → curvature → trajectory
 
-### Economía
+### Economy
 - mechanism_type: causal_chain
-- **¿causal_chain?** Sí - tipos → capital → inversión
+- **causal_chain?** Yes - types → capital → investment
 
-### Ingeniería
+### Engineering
 - mechanism_type: threshold
-- **¿threshold?** Sí - fatiga acumulativa lleva a fallo
+- **threshold?** Yes - cumulative fatigue leads to failure
 
-### Social
+###Social
 - mechanism_type: feedback
-- **¿feedback?** Sí - adopción genera más adopción
+- **feedback?** Yes - adoption generates more adoption
 
 ---
 
-## Conclusión
+## Conclusion
 
-**MECH-XXXXXX es una primitiva universal.**
+**MECH-XXXXXX is a universal primitive.**
 
-La misma estructura concebía sea válida para:
-- 5 disciplinas distintas
-- 5 tipos de mecanismos
-- 5 predicciones verificables
+The same structure was conceived to be valid for:
+- 5 different disciplines
+- 5 types of mechanisms
+- 5 verifiable predictions
 
-Esto confirma que el **Scientific State Machine** puede existir como un núcleo común.
+This confirms that the **Scientific State Machine** can exist as a common core.
 
 ---
 
-## Implicación Estratégica
+## Strategic Implication
 
-Todo lo específico de:
+Everything specific to:
 - Neurodiagnoses
 - GeneForge
-- Medicina
+- Medicine
 
-Va a **Domain Packs**.
+Goes to **Domain Packs**.
 
-El core es:
+The core is:
 - CLAIM/FINDING/MECH/QUESTION/RESEARCHER
 - Participation Layer
 - Trust Layer
 
-Con esta regla:
-> "**Si no funciona para física, no entra en el core.**"
+With this rule:
+> "**If it doesn't work for physics, it doesn't enter the core.**"
 
 ---
 
-## Sprint 23B: La Validación Real
+## Sprint 23B: The Real Validation
 
-No escribiendo código.
+Not writing code.
 
-Es demostrando que el mismo objeto MECH-XXXXXX puede:
+It is by demonstrating that the same MECH-XXXXXX object can:
 
-1. Representar mecanismos en 5 disciplinas
-2. Generar predicciones testables
-3. Recibir participation signals
-4. Evolucionar trust_score
+1. Represent mechanisms in 5 disciplines
+2. Generate testable predictions
+3. Receive participation signals
+4. Evolve trust_score
 
-Si funciona → Core universal.
-Si no funciona → Back to the drawing board.
+If it works → Universal Core.
+If it doesn't work → Back to the drawing board.

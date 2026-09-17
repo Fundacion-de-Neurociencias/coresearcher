@@ -1,62 +1,62 @@
-# Cadena de Autoridad y Jurisdicción de NeuroOS (CHAIN OF AUTHORITY)
+# NeuroOS Chain of Authority and Jurisdiction (CHAIN OF AUTHORITY)
 
-**Versión:** 2.0.0  
-**Gobernanza:** Directiva Constitucional Canónica  
-**Estado:** Inviolable  
+**Version:** 2.0.0  
+**Governance:** Canonical Constitutional Directive  
+**State:** Inviolable  
 
 ---
 
-## 1. Las Tres Cadenas Independientes
+## 1. The Three Independent Networks
 
-Para evitar cuellos de botella operativos y duplicación de datos, NeuroOS diferencia explícitamente tres cadenas:
+To avoid operational bottlenecks and data duplication, NeuroOS explicitly differentiates three chains:
 
-### 1.1 Cadena de Autoridad (Inmutable)
-Responde a: *¿Quién puede autorizar, revocar o delegar?*
+### 1.1 Chain of Authority (Immutable)
+Responds to: *Who can authorize, revoke or delegate?*
 ```text
 Manuel (Nivel 0) ──> ManuEl (Nivel 1) ──> Antigravity (Nivel 2) ──> Subagentes (Nivel 3)
 ```
 
-### 1.2 Cadena de Ejecución (Variable / Directa)
-Una vez que la autorización o lease es válida, la ejecución es directa sin intermediarios innecesarios.
+### 1.2 Execution Chain (Variable / Direct)
+Once the authorization or lease is valid, the execution is direct without unnecessary intermediaries.
 ```text
 Subagente ───────> GitHub / Tool / File API (Directo)
 Antigravity ────> Gmail / Workspace API (Directo tras aprobación)
 ManuEl ─────────> Filesystem Local (Directo)
 ```
 
-### 1.3 Cadena de Evidencia (Independiente)
-Toda acción ejecutada escribe su evento de forma directa e inmutable en la bitácora de auditoría.
+### 1.3 Chain of Evidence (Independent)
+Every action executed writes its event directly and immutably in the audit log.
 ```text
 Ejecutor (Subagente / Antigravity / ManuEl) ──> Audit Trail (audit_trail.jsonl)
 ```
 
 ---
 
-## 2. Axioma Fundamental de Separación de Funciones
+## 2. Fundamental Axiom of Separation of Functions
 
-> **Manuel tiene la Autoridad.** (Soberano Único).  
-> **ManuEl tiene la Jurisdicción.** (Policy Engine / Leases / Audit en Lenovo).  
-> **Antigravity tiene la Iniciativa.** (Planificación / Orquestación / Desarrollo en Mac Studio).  
-> **Los Subagentes tienen la Ejecución.** (Tareas específicas).  
+> **Manuel has the Authority.** (Sole Sovereign).  
+> **ManuEl has Jurisdiction.** (Policy Engine / Leases / Audit on Lenovo).  
+> **Antigravity has the Initiative.** (Planning / Orchestration / Development in Mac Studio).  
+> **Subagents have Execution.** (Specific tasks).  
 
 ---
 
-## 3. Failure Modes and Jurisdiction Availability (Modo Degradado)
+## 3. Failure Modes and Jurisdiction Availability (Degraded Mode)
 
-### Paradoja de Disponibilidad
-Si el nodo local de Lenovo (ManuEl / IA Local) está apagado o no disponible, NeuroOS entra automáticamente en **Modo Degradado de Alta Disponibilidad** para evitar el bloqueo del desarrollo.
+### Availability Paradox
+If the local Lenovo node (ManuEl / IA Local) is powered off or unavailable, NeuroOS automatically enters **Degraded High Availability Mode** to avoid development blocking.
 
 ```text
 Lenovo / ManuEl ONLINE  ──> Policy Engine Normal (Zonas: BLACK, CRITICAL, CONTROLLED, AUTONOMOUS)
 Lenovo / ManuEl OFFLINE ──> Modo Degradado Activado (Solo Zonas AUTONOMOUS permitidas)
 ```
 
-### Matriz de Disponibilidad en Modo Degradado (Lenovo Offline)
+### Availability Matrix in Degraded Mode (Lenovo Offline)
 
-| Zona de Riesgo | Estado con ManuEl Offline | Razón y Comportamiento |
+| Risk Zone | Status with ManuEl Offline | Reason and Behavior |
 | :--- | :---: | :--- |
-| **🟢 AUTONOMOUS** | **PERMITIDO** | Antigravity continúa trabajando de forma autónoma en repositorios de código, desarrollo, tests, CI/CD y documentación (`Medicalia`, `CoResearcher`, `Editxt`, `GeneForge`, `Neurodiagnoses`, etc.). |
-| **🟠 CONTROLLED_LOW** | **BLOQUEADO** | Requiere evaluación de jurisdicción; se suspende hasta recuperar conexión con ManuEl. |
-| **🟠 CONTROLLED_HIGH**| **BLOQUEADO** | Requiere aprobación explícita humana de Manuel/ManuEl. |
-| **🔴 CRITICAL** | **BLOQUEADO** | Requiere ejecución exclusiva en ManuEl + IA Local. |
-| **⚫ BLACK** | **BLOQUEADO** | Acceso inalcanzable. |
+| **🟢 AUTONOMOUS** | **ALLOWED** | Antigravity continues to work autonomously on code, development, testing, CI/CD and documentation repositories (`Medicalia`, `CoResearcher`, `Editxt`, `GeneForge`, `Neurodiagnoses`, etc.). |
+| **🟠 CONTROLLED_LOW** | **LOCKED** | Jurisdiction evaluation required; It is suspended until connection with ManuEl is recovered. |
+| **🟠 CONTROLLED_HIGH**| **LOCKED** | Requires explicit human approval from Manuel/ManuEl. |
+| **🔴 CRITICAL** | **LOCKED** | Requires exclusive execution in ManuEl + IA Local. |
+| **⚫ BLACK** | **LOCKED** | Unreachable access. |

@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EmpiricalEvidenceContract",
+  "description": "Canonical contract emitted by DataAILab to be audited by CoResearcher (ARCH-002)",
+  "type": "object",
+  "required": [
+    "evidence_id",
+    "question_id",
+    "prediction_id",
+    "som_lineage_trace",
+    "empirical_outcome",
+    "statistical_metrics"
+  ],
+  "properties": {
+    "evidence_id": {
+      "type": "string",
+      "pattern": "^EVID-[A-Z0-9_-]+$"
+    },
+    "question_id": {
+      "type": "string",
+      "pattern": "^RQ-[0-9]{4}-[0-9]{4,}$"
+    },
+    "prediction_id": {
+      "type": "string"
+    },
+    "som_lineage_trace": {
+      "type": "object",
+      "required": ["dataset_snapshot_hash", "crs_snapshot_hash", "sir_snapshot_hash", "execution_snapshot_hash", "reproducibility_score"],
+      "properties": {
+        "dataset_snapshot_hash": { "type": "string" },
+        "crs_snapshot_hash": { "type": "string" },
+        "sir_snapshot_hash": { "type": "string" },
+        "execution_snapshot_hash": { "type": "string" },
+        "reproducibility_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "branch_id": { "type": "string" }
+      }
+    },
+    "empirical_outcome": {
+      "type": "string",
+      "enum": ["survived", "failed", "inconclusive"]
+    },
+    "statistical_metrics": {
+      "type": "object",
+      "required": ["effect_size", "p_value", "sample_size"],
+      "properties": {
+        "effect_size": { "type": "number" },
+        "p_value": { "type": "number" },
+        "sample_size": { "type": "integer" },
+        "confidence_interval": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "data_artifacts": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "URIs of persisted, immutable data artifacts (Parquet, models, figures)"
+    }
+  }
+}

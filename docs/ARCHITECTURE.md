@@ -218,6 +218,10 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **TRACES Meta-Audit**: `POST /api/discovery/traces/evaluate-epistemic-rigor` (5-dimensional epistemic profile).
 - **Paper2Agent MCP Query**: `POST /api/discovery/paper-agent/query` (Queries external virtual author paper agents by topic).
 - **Paper2Agent MCP Execute**: `POST /api/discovery/paper-agent/execute` (Executes analytical methods on virtual author agents with cryptographic SOM hash and RCS = 2 promotion).
+- **Agora Open Branches Index**: `GET /api/discovery/git/open-branches` (Inspects active parallel research frontiers).
+- **Agora Verified Claims Index**: `GET /api/discovery/git/verified-claims` (Lists verified invariants available for cross-branch synthesis).
+- **Agora Branch Creation**: `POST /api/discovery/git/branch/create` (Initializes an explicit branch rooted at an existing verified commit).
+- **Agora Epistemic Cherry-Pick**: `POST /api/discovery/git/branch/cherry-pick` (Adopts verified claims across branches with parent DAG lineage).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -228,7 +232,13 @@ Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapt
   - **EdiTXT**: Acts as the *Producer/Host* of the Paper Agent upon manuscript peer review and release.
   - **CoResearcher**: Acts as the *Consumer/Auditor* that queries and executes Paper Agents during autonomous discovery and falsification campaigns.
 
-### 3. Ecosystem Demarcation (The Scientific Trinity)
+### 3. Agora Shared Memory & Epistemic Git Federation (ADR-DISCOVERY-023)
+Inspired by NVIDIA Agora (2026), `python/discovery/scientific_git_history.py` (`AgoraSharedIndex`, `EpistemicGitRepo`) equips decentralized multi-agent teams with shared persistent memory over git commits:
+- **Open-Branches Index**: Tracks all open hypothesis branches and exploration frontiers in real time, preventing concurrent workers from repeating identical or overlapping investigations.
+- **Verified-Claims Index**: Catalogs all surviving empirical findings and invariant boundary conditions (\(RCS \ge 2\)), allowing new agents to inherit verified parents immediately.
+- **Cross-Branch Epistemic Cherry-Picking**: Enables an agent exploring one physiological axis (e.g. vascular clearance) to cherry-pick an invariant constraint discovered by another agent on an orthogonal axis (e.g. microglial phagocytosis) and forge a unified hybrid model without re-running base experiments.
+
+### 4. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

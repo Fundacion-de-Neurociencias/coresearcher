@@ -78,6 +78,10 @@ from .scientific_git_history import (
     EpistemicDiff,
     ScientificCommit,
     EpistemicGitRepo,
+    BranchStatus,
+    OpenBranchEntry,
+    VerifiedClaimEntry,
+    AgoraSharedIndex,
 )
 from .constraint_court import (
     LitigantConstraint,
@@ -303,6 +307,10 @@ __all__ = [
     "EpistemicDiff",
     "ScientificCommit",
     "EpistemicGitRepo",
+    "BranchStatus",
+    "OpenBranchEntry",
+    "VerifiedClaimEntry",
+    "AgoraSharedIndex",
     "LitigantConstraint",
     "CourtVerdict",
     "ConstraintCourt",

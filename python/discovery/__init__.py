@@ -233,6 +233,11 @@ from .categorical_epistemic_engine import (
     CommutativeDiagramAuditor,
     CategoricalAdjunction,
 )
+from .fast_system_one_classifier import (
+    ClassificationDomain,
+    TypedClassificationResult,
+    FastSystemOneClassifier,
+)
 
 __all__ = [
 
@@ -412,5 +417,8 @@ __all__ = [
     "EpistemicCategory",
     "EpistemicFunctor",
     "CommutativeDiagramAuditor",
-    "CategoricalAdjunction"
+    "CategoricalAdjunction",
+    "ClassificationDomain",
+    "TypedClassificationResult",
+    "FastSystemOneClassifier",
 ]

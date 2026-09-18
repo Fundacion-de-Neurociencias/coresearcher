@@ -72,6 +72,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `lab_in_the_loop_adapter.py` | `LabInTheLoopAdapter` | Generates wet-lab experimental protocols and audits physical feasibility | Closed-loop wet-lab integration |
 | `reliability_auditor.py` | `ReliabilityAuditor` | Evaluates reliability, consensus, and replicability across runs | Confidence and consensus scoring |
 | `marr_engine.py` | `MarrTranslationEngine` | Tri-level translation (Computational, Algorithmic, Implementational) | Prevention of category errors in biological theories |
+| `fast_system_one_classifier.py` | `FastSystemOneClassifier` | High-speed, zero-cost System 1 typed decision engine (Jev architecture) | Sub-millisecond Marr classification, PR guardrail triage, and Agora branch routing |
 | `biological_programs_catalog.py` | `BiologicalProgram` | Library of reusable canonical biological programs | Standardized mechanistic building blocks |
 | `scientific_logic.py` | `PopperEngine`, `DeductionEngine` | Modus Tollens deductive logic and implication matrices | Rigorous deductive falsification |
 | `state_space.py` | `StateSpaceOmega` | Combinatorial hypothesis space with explicit volume pruning | Mathematical definition of scientific search volume |

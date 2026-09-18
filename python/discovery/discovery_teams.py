@@ -175,6 +175,13 @@ class MarrClassifierAgent:
     role: str = "Marr Classifier"
 
     @staticmethod
+    def fast_classify(statement: str) -> Dict[str, Any]:
+        """
+        Instant System 1 classification using FastSystemOneClassifier (<5ms, zero token cost).
+        """
+        return MarrTranslationEngine.fast_classify_statement(statement)
+
+    @staticmethod
     def audit_classification(
         hypothesis: RivalHypothesis,
         biomarkers: List[str]

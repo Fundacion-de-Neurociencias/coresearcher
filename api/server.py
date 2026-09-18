@@ -110,6 +110,7 @@ from python.discovery import (
     CommutativeDiagramAuditor,
     CategoricalAdjunction,
     MorphismType,
+    FastSystemOneClassifier,
 )
 
 
@@ -298,6 +299,13 @@ class CherryPickClaimRequest(BaseModel):
     target_branch_id: str
     source_claim_id: str
     author_role: Optional[str] = "Autonomous Worker"
+
+class SystemOneClassifyRequest(BaseModel):
+    statement_or_prompt: str
+    domain: Optional[str] = "MARR_LEVEL"
+
+class FastMarrRequest(BaseModel):
+    statement: str
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -728,6 +736,26 @@ def cherry_pick_agora_claim(req: CherryPickClaimRequest):
         return commit.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+# -----------------------------------------------------------------------------
+# 13b. Fast System One Typed Decision Endpoints (Jev Harness - ADR-DISCOVERY-024)
+# -----------------------------------------------------------------------------
+
+@app.post("/api/discovery/system-one/classify-marr")
+def classify_marr_system_one(req: FastMarrRequest):
+    """
+    Fast System 1 classification of a hypothesis into Marr tri-level hierarchy (<5ms, zero token cost).
+    """
+    res = FastSystemOneClassifier.classify_marr_level(req.statement)
+    return res.to_dict()
+
+@app.post("/api/discovery/system-one/triage-pr")
+def triage_pr_system_one(diff_text: str):
+    """
+    Fast System 1 guardrail triage for scientific code diffs (<1ms).
+    """
+    res = FastSystemOneClassifier.classify_pr_risk(diff_text)
+    return res.to_dict()
 
 # -----------------------------------------------------------------------------
 # 14. Discovery Workbench & Legacy Endpoints

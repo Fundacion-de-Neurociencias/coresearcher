@@ -285,6 +285,20 @@ class PaperAgentExecuteRequest(BaseModel):
     tool_name: str
     arguments: Optional[Dict[str, Any]] = None
 
+class CreateBranchRequest(BaseModel):
+    branch_id: str
+    start_commit_sha: str
+    entity_id: str
+    entity_type: str = "HYPOTHESIS"
+    research_topic: str
+    author_role: Optional[str] = "Autonomous Worker"
+    tags: Optional[List[str]] = []
+
+class CherryPickClaimRequest(BaseModel):
+    target_branch_id: str
+    source_claim_id: str
+    author_role: Optional[str] = "Autonomous Worker"
+
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
     literature_citations_count: Optional[int] = 0
@@ -645,6 +659,75 @@ def adjudicate_constraint_court():
 def get_scientific_commit_history(entity_id: Optional[str] = "HYP-TAU-CONNECTOME"):
     history = epistemic_git_repo.get_entity_history(entity_id or "HYP-TAU-CONNECTOME")
     return [c.to_dict() for c in history]
+
+@app.get("/api/discovery/git/open-branches")
+def get_agora_open_branches():
+    """
+    Agora Shared Memory: Returns active open exploration branches across all autonomous agents.
+    Prevents parallel agents from repeating existing research directions.
+    """
+    branches = epistemic_git_repo.agora_index.get_open_branches()
+    return {
+        "open_branches_count": len(branches),
+        "branches": [b.to_dict() for b in branches]
+    }
+
+@app.get("/api/discovery/git/verified-claims")
+def get_agora_verified_claims():
+    """
+    Agora Shared Memory: Returns verified claims and invariant constraints (RCS >= 2).
+    Allows agents to build upon solid verified foundations without repeating base experiments.
+    """
+    claims = epistemic_git_repo.agora_index.get_verified_claims()
+    return {
+        "verified_claims_count": len(claims),
+        "claims": [c.to_dict() for c in claims]
+    }
+
+@app.get("/api/discovery/git/dead-ends")
+def get_agora_dead_ends():
+    """
+    Agora Shared Memory: Returns falsified hypotheses and dead-end boundary conditions.
+    """
+    dead_ends = epistemic_git_repo.agora_index.get_dead_ends()
+    return {
+        "dead_ends_count": len(dead_ends),
+        "dead_ends": dead_ends
+    }
+
+@app.post("/api/discovery/git/branch/create")
+def create_agora_branch(req: CreateBranchRequest):
+    """
+    Agora Shared Memory: Creates an explicit exploration branch rooted at an existing commit.
+    """
+    try:
+        branch = epistemic_git_repo.create_branch(
+            branch_id=req.branch_id,
+            start_commit_sha=req.start_commit_sha,
+            entity_id=req.entity_id,
+            entity_type=req.entity_type,
+            research_topic=req.research_topic,
+            author_role=req.author_role or "Autonomous Worker",
+            tags=req.tags or []
+        )
+        return branch.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/api/discovery/git/branch/cherry-pick")
+def cherry_pick_agora_claim(req: CherryPickClaimRequest):
+    """
+    Agora Shared Memory: Adopts a verified claim from another branch as a parent edge in the target branch.
+    """
+    try:
+        commit = epistemic_git_repo.cherry_pick_claim(
+            target_branch_id=req.target_branch_id,
+            source_claim_id=req.source_claim_id,
+            author_role=req.author_role or "Autonomous Worker"
+        )
+        return commit.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 # -----------------------------------------------------------------------------
 # 14. Discovery Workbench & Legacy Endpoints

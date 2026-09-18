@@ -17,6 +17,15 @@ class MarrTranslationEngine:
     """
 
     @staticmethod
+    def fast_classify_statement(statement: str) -> Dict[str, Any]:
+        """
+        System 1 fast classification of an arbitrary scientific statement into Marr levels.
+        """
+        from python.discovery.fast_system_one_classifier import FastSystemOneClassifier
+        res = FastSystemOneClassifier.classify_marr_level(statement)
+        return res.to_dict()
+
+    @staticmethod
     def audit_tri_level_alignment(
         computational_goal: str,
         algorithmic_mechanism: str,

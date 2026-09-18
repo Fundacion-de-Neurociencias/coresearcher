@@ -65,7 +65,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `constraint_box.py` | `ConstraintBoxBenchmark` | Benchmark for unknown ground-truth discovery in synthetic worlds | Disentangling discovery from biological memory |
 | `constraint_court.py` | `ConstraintCourt` | Adversarial trial between Prosecutor and Defender agents | Invariant constraint promotion decisions |
 | `constraint_discovery_engine.py` | `ConstraintDiscoveryEngine` | Extracts statistical boundaries from cross-cohort data | Boundary generation and stress testing |
-| `scientific_git_history.py` | `EpistemicGitRepo` | Epistemic version control tracking scientific state mutations | Commits of hypotheses, evidence, and constraints |
+| `scientific_git_history.py` | `EpistemicGitRepo`, `AgoraSharedIndex` | Epistemic version control & Agora distributed shared memory for decentralized agent teams | Commits of hypotheses/constraints, open branches index, verified claims index (\(RCS \ge 2\)), cross-branch cherry-picking |
 | `discovery_workbench.py` | `DiscoveryWorkbench`, `WorkbenchRunner` | Unified object orchestrating a discovery from question to finding | End-to-end execution of discovery workflows |
 | `discovery_teams.py` | 9 Canonical Discovery Agents | Constraint-led multi-agent collaboration team | Full cycle: Miner \(\to\) Popper \(\to\) Auditor |
 | `inference_time_scaling.py` | `EpistemicTreeSearch` | Monte Carlo Tree Search over reasoning and experimental paths | Inference-time computational scaling for science |

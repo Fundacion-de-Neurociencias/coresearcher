@@ -77,6 +77,8 @@ This index acts as the **Magna Carta** of the CoResearcher ecosystem. It unifies
   Operational governance rule forbidding the completion of any substantial feature without proactive updates to architectural documentation.
 - **ADR-DISCOVERY-022: Paper2Agent (Nature 2026) MCP Federation**:
   Implemented in [`grounded_search_sensor.py`](file:///c:/Users/usuario/coresearcher/python/discovery/grounded_search_sensor.py) and [`api/server.py`](file:///c:/Users/usuario/coresearcher/api/server.py). Transforms external published papers into live virtual authors exposing MCP analytical tools (`compute_connectome_diffusion`, `score_genetic_perturbation`, `evaluate_metabolic_glycolytic_reserve`). Executed methods earn cryptographic SOM-SHA256 hashes and empirical grounding \(RCS = 2\).
+- **ADR-DISCOVERY-023: Agora Shared Distributed Memory Index for Epistemic Git**:
+  Implemented in [`scientific_git_history.py`](file:///c:/Users/usuario/coresearcher/python/discovery/scientific_git_history.py) and [`api/server.py`](file:///c:/Users/usuario/coresearcher/api/server.py). Eliminates redundant explorations across autonomous agent swarms by tracking live open branches (`OpenBranchEntry`), indexing verified claims (`VerifiedClaimEntry`, \(RCS \ge 2\)), and supporting cross-branch epistemic cherry-picking.
 
 ---
 

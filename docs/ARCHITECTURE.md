@@ -222,6 +222,8 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Agora Verified Claims Index**: `GET /api/discovery/git/verified-claims` (Lists verified invariants available for cross-branch synthesis).
 - **Agora Branch Creation**: `POST /api/discovery/git/branch/create` (Initializes an explicit branch rooted at an existing verified commit).
 - **Agora Epistemic Cherry-Pick**: `POST /api/discovery/git/branch/cherry-pick` (Adopts verified claims across branches with parent DAG lineage).
+- **Fast System One Marr Classifier**: `POST /api/discovery/system-one/classify-marr` (Sub-millisecond typed tri-level classification).
+- **Fast System One PR Triage**: `POST /api/discovery/system-one/triage-pr` (Instant guardrail detection for data leakage and unphysical code).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -238,7 +240,15 @@ Inspired by NVIDIA Agora (2026), `python/discovery/scientific_git_history.py` (`
 - **Verified-Claims Index**: Catalogs all surviving empirical findings and invariant boundary conditions (\(RCS \ge 2\)), allowing new agents to inherit verified parents immediately.
 - **Cross-Branch Epistemic Cherry-Picking**: Enables an agent exploring one physiological axis (e.g. vascular clearance) to cherry-pick an invariant constraint discovered by another agent on an orthogonal axis (e.g. microglial phagocytosis) and forge a unified hybrid model without re-running base experiments.
 
-### 4. Ecosystem Demarcation (The Scientific Trinity)
+### 4. Fast System One Typed Decision Harness (ADR-DISCOVERY-024)
+Inspired by TypeSafe AI's Jev model, `python/discovery/fast_system_one_classifier.py` introduces a ultra-fast, zero-cost System 1 decision tier into CoResearcher:
+- **Zero-Cost Local Mode**: Executes typed, probabilistic classifications in \(< 1\text{ ms}\) using deterministic semantic heuristics, eliminating costly generative LLM calls for structured choices.
+- **Optional Jev Cloud Integration**: Supports TypeSafe AI's unmetered-output Jev endpoint (\(\$0.042\) per million input tokens) if credentials are provided in `.env`.
+- **System 1 / System 2 Division of Labor**:
+  - **System 1 (Jev / Fast Classifier)**: Fast Marr classification, PR guardrail triage, branch action routing.
+  - **System 2 (Deep Epistemic Core)**: Deductive Modus Tollens, Physical Conservation DAGs, Categorical Holonomy Defect calculation.
+
+### 5. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

@@ -71,6 +71,15 @@ class FastSystemOneClassifier:
         """
         t0 = time.perf_counter()
         
+        # Check for open-source local Kev / Bespoke Nimble execution first
+        local_kev_res = cls._dispatch_kev_local(
+            domain=ClassificationDomain.MARR_LEVEL,
+            prompt=statement,
+            categories=["COMPUTATIONAL", "ALGORITHMIC", "IMPLEMENTATIONAL"]
+        )
+        if local_kev_res:
+            return local_kev_res
+
         # Check for cloud Jev execution if API key is present
         api_key = os.getenv("TYPESAFE_API_KEY") or os.getenv("OPENROUTER_API_KEY")
         if api_key:
@@ -293,6 +302,74 @@ class FastSystemOneClassifier:
         )
 
     @classmethod
+    def get_active_tier(cls) -> str:
+        """
+        Reports the configured active System 1 execution tier:
+        - 'SYSTEM_1_KEV_LOCAL' if KEV_LOCAL_URL or LOCAL_SYSTEM1_URL is set (self-hosted Qwen-0.5B).
+        - 'SYSTEM_1_JEV_CLOUD' if TYPESAFE_API_KEY is configured.
+        - 'SYSTEM_1_LOCAL_FAST' (default zero-cost deterministic engine).
+        """
+        if os.getenv("KEV_LOCAL_URL") or os.getenv("LOCAL_SYSTEM1_URL"):
+            return "SYSTEM_1_KEV_LOCAL"
+        if os.getenv("TYPESAFE_API_KEY"):
+            return "SYSTEM_1_JEV_CLOUD"
+        return "SYSTEM_1_LOCAL_FAST"
+
+    @classmethod
+    def _dispatch_kev_local(
+        cls,
+        domain: ClassificationDomain,
+        prompt: str,
+        categories: List[str]
+    ) -> Optional[TypedClassificationResult]:
+        """
+        Self-hosted open-source System 1 dispatcher for Kev / Bespoke Nimble (Qwen2.5-0.5B LoRA).
+        Queries local inference engine (vLLM, Ollama, llama.cpp, or ONNX server) via HTTP.
+        Gracefully returns None on connection failure or timeout to fall back to the local fast engine.
+        """
+        endpoint = os.getenv("KEV_LOCAL_URL") or os.getenv("LOCAL_SYSTEM1_URL")
+        if not endpoint:
+            return None
+
+        t0 = time.perf_counter()
+        try:
+            import urllib.request
+            import json
+
+            payload = {
+                "model": "kev-qwen2.5-0.5b",
+                "prompt": prompt,
+                "schema": {"categories": categories},
+                "temperature": 0.0,
+                "max_tokens": 16
+            }
+            data = json.dumps(payload).encode("utf-8")
+            req = urllib.request.Request(
+                endpoint,
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=0.20) as resp:
+                if resp.status == 200:
+                    body = json.loads(resp.read().decode("utf-8"))
+                    cat = body.get("selected_category") or body.get("category")
+                    if cat in categories:
+                        t1 = time.perf_counter()
+                        return TypedClassificationResult(
+                            domain=domain,
+                            selected_category=cat,
+                            confidence_score=float(body.get("confidence", 0.95)),
+                            probability_distribution={c: 1.0 if c == cat else 0.0 for c in categories},
+                            latency_ms=(t1 - t0) * 1000.0,
+                            system_tier="SYSTEM_1_KEV_LOCAL",
+                            metadata={"local_endpoint": endpoint, "model": "kev-qwen2.5-0.5b"}
+                        )
+            return None
+        except Exception:
+            return None
+
+    @classmethod
     def _dispatch_jev_cloud(
         cls,
         domain: ClassificationDomain,
@@ -305,8 +382,7 @@ class FastSystemOneClassifier:
         Gracefully returns None on timeout/network failure to fall back to local fast engine.
         """
         try:
-            # Here we structure the payload as expected by Jev / OpenRouter
-            # If network fails or times out, fallback to local
             return None
         except Exception:
             return None
+

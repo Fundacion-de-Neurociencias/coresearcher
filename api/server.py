@@ -111,6 +111,10 @@ from python.discovery import (
     CategoricalAdjunction,
     MorphismType,
     FastSystemOneClassifier,
+    HakkenEvidenceGate,
+    DreamRSIStrategyGate,
+    ScienceIDEInvariantRunner,
+    JevContinuousVerifier,
 )
 
 
@@ -306,6 +310,28 @@ class SystemOneClassifyRequest(BaseModel):
 
 class FastMarrRequest(BaseModel):
     statement: str
+
+class InTurnGoalVerificationRequest(BaseModel):
+    goal_description: str
+    action_history: Optional[List[str]] = []
+    current_state_payload: Optional[Dict[str, Any]] = {}
+
+class HakkenEvidenceAuditRequest(BaseModel):
+    hypothesis_id: str
+    path_hops: List[Dict[str, Any]]
+    temporal_snapshots: Optional[List[Dict[str, Any]]] = None
+
+class DreamFailureTriageRequest(BaseModel):
+    error_traceback: str
+    execution_context: Optional[Dict[str, Any]] = None
+
+class ScienceIDEInvariantCheckRequest(BaseModel):
+    case_id: str
+    target_codebase: str
+    code_patch: str
+    state_variables: Dict[str, float]
+    differential_rates: Dict[str, float]
+    tolerance: Optional[float] = 1e-4
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -755,6 +781,60 @@ def triage_pr_system_one(diff_text: str):
     Fast System 1 guardrail triage for scientific code diffs (<1ms).
     """
     res = FastSystemOneClassifier.classify_pr_risk(diff_text)
+    return res.to_dict()
+
+# -----------------------------------------------------------------------------
+# 13c. Twin-Gate Epistemic Harness Endpoints (ADR-DISCOVERY-025)
+# -----------------------------------------------------------------------------
+
+@app.post("/api/discovery/harness/verify-in-turn-goal")
+def verify_in_turn_goal(req: InTurnGoalVerificationRequest):
+    """
+    Fast System 1 continuous in-turn goal verification for long-horizon loops (<1ms).
+    """
+    res = JevContinuousVerifier.verify_turn_goal(
+        goal_description=req.goal_description,
+        action_history=req.action_history or [],
+        current_state_payload=req.current_state_payload or {}
+    )
+    return res.to_dict()
+
+@app.post("/api/discovery/harness/hakken-evidence-audit")
+def audit_hakken_evidence(req: HakkenEvidenceAuditRequest):
+    """
+    Hakken-inspired evidence path perturbation audit (PHELInE) evaluating sufficiency, necessity, and temporal drift.
+    """
+    res = HakkenEvidenceGate.audit_evidence_path(
+        hypothesis_id=req.hypothesis_id,
+        path_hops=req.path_hops,
+        temporal_snapshots=req.temporal_snapshots
+    )
+    return res.to_dict()
+
+@app.post("/api/discovery/harness/dream-classify-failure")
+def dream_classify_failure(req: DreamFailureTriageRequest):
+    """
+    Dream-RSI failure classification: distinguishes repairable code bugs from genuine epistemic refutations.
+    """
+    res = DreamRSIStrategyGate.classify_failure_nature(
+        error_traceback=req.error_traceback,
+        execution_context=req.execution_context
+    )
+    return res.to_dict()
+
+@app.post("/api/discovery/science-ide/execute-invariant-check")
+def execute_science_ide_check(req: ScienceIDEInvariantCheckRequest):
+    """
+    ScienceIDE executable simulation check verifying physical conservation laws and numerical tolerances on code patches.
+    """
+    res = ScienceIDEInvariantRunner.evaluate_patch(
+        case_id=req.case_id,
+        target_codebase=req.target_codebase,
+        code_patch=req.code_patch,
+        state_variables=req.state_variables,
+        differential_rates=req.differential_rates,
+        tolerance=req.tolerance or 1e-4
+    )
     return res.to_dict()
 
 # -----------------------------------------------------------------------------

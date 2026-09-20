@@ -24,6 +24,8 @@ class ClassificationDomain(str, Enum):
     PR_RISK_TRIAGE = "PR_RISK_TRIAGE"
     AGORA_BRANCH_ACTION = "AGORA_BRANCH_ACTION"
     MUTATION_TRIGGER = "MUTATION_TRIGGER"
+    FAILURE_TRIAGE = "FAILURE_TRIAGE"
+    GOAL_VERIFICATION = "GOAL_VERIFICATION"
 
 
 @dataclass
@@ -210,6 +212,84 @@ class FastSystemOneClassifier:
             latency_ms=(t1 - t0) * 1000.0,
             system_tier="SYSTEM_1_LOCAL_FAST",
             metadata={"best_overlap_ratio": round(best_overlap, 3), "matched_topic": matching_branch}
+        )
+
+    @classmethod
+    def classify_failure_nature(cls, error_traceback: str) -> TypedClassificationResult:
+        """
+        Fast System 1 classification of error traces (Dream-RSI taxonomy):
+        Distinguishes repairable code/tensor errors from genuine physical/epistemic falsification.
+        """
+        t0 = time.perf_counter()
+        from python.discovery.twin_gate_harness import DreamRSIStrategyGate, ExecutionFailureCategory
+        triage = DreamRSIStrategyGate.classify_failure_nature(error_traceback)
+        t1 = time.perf_counter()
+        
+        cat = triage.category.value
+        dist = {
+            ExecutionFailureCategory.REPAIRABLE_CODE_ERROR.value: 0.1,
+            ExecutionFailureCategory.NUMERICAL_INSTABILITY.value: 0.1,
+            ExecutionFailureCategory.GENUINE_EPISTEMIC_FALSIFICATION.value: 0.1
+        }
+        dist[cat] = triage.confidence
+        # Normalize
+        total = sum(dist.values())
+        norm_dist = {k: v / total for k, v in dist.items()}
+
+        return TypedClassificationResult(
+            domain=ClassificationDomain.FAILURE_TRIAGE,
+            selected_category=cat,
+            confidence_score=triage.confidence,
+            probability_distribution=norm_dist,
+            latency_ms=(t1 - t0) * 1000.0,
+            system_tier="SYSTEM_1_LOCAL_FAST",
+            metadata={
+                "is_repairable": triage.is_repairable,
+                "remediation_strategy": triage.remediation_strategy,
+                "root_cause_snippet": triage.root_cause_snippet
+            }
+        )
+
+    @classmethod
+    def verify_turn_goal(
+        cls,
+        goal_description: str,
+        action_history: List[str],
+        current_state_payload: Dict[str, Any]
+    ) -> TypedClassificationResult:
+        """
+        Fast System 1 in-turn verification for long-horizon agent loops (/goal).
+        Checks if the active goal is met, progressing, or stuck in a loop.
+        """
+        t0 = time.perf_counter()
+        from python.discovery.twin_gate_harness import JevContinuousVerifier
+        res = JevContinuousVerifier.verify_turn_goal(goal_description, action_history, current_state_payload)
+        t1 = time.perf_counter()
+
+        cat = res.recommended_action
+        dist = {
+            "PROCEED_NEXT_STEP": 0.1,
+            "RETRY_STEP": 0.1,
+            "TERMINATE_GOAL_MET": 0.1,
+            "ESCALATE_SYSTEM_TWO": 0.1
+        }
+        dist[cat] = 0.70
+        total = sum(dist.values())
+        norm_dist = {k: v / total for k, v in dist.items()}
+
+        return TypedClassificationResult(
+            domain=ClassificationDomain.GOAL_VERIFICATION,
+            selected_category=cat,
+            confidence_score=0.92 if res.goal_satisfied else 0.85,
+            probability_distribution=norm_dist,
+            latency_ms=(t1 - t0) * 1000.0,
+            system_tier="SYSTEM_1_LOCAL_FAST",
+            metadata={
+                "goal_satisfied": res.goal_satisfied,
+                "progress_score": res.progress_score,
+                "is_loop_stalled": res.is_loop_stalled,
+                "explanation": res.explanation
+            }
         )
 
     @classmethod

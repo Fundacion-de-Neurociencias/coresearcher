@@ -238,6 +238,18 @@ from .fast_system_one_classifier import (
     TypedClassificationResult,
     FastSystemOneClassifier,
 )
+from .twin_gate_harness import (
+    ExecutionFailureCategory,
+    InvariantCheckStatus,
+    FailureTriageResult,
+    EvidencePathPerturbationResult,
+    PhysicalInvariantCheckResult,
+    ContinuousTurnVerificationResult,
+    HakkenEvidenceGate,
+    DreamRSIStrategyGate,
+    ScienceIDEInvariantRunner,
+    JevContinuousVerifier,
+)
 
 __all__ = [
 
@@ -421,4 +433,14 @@ __all__ = [
     "ClassificationDomain",
     "TypedClassificationResult",
     "FastSystemOneClassifier",
+    "ExecutionFailureCategory",
+    "InvariantCheckStatus",
+    "FailureTriageResult",
+    "EvidencePathPerturbationResult",
+    "PhysicalInvariantCheckResult",
+    "ContinuousTurnVerificationResult",
+    "HakkenEvidenceGate",
+    "DreamRSIStrategyGate",
+    "ScienceIDEInvariantRunner",
+    "JevContinuousVerifier",
 ]

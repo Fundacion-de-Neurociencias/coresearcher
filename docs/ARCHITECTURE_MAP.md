@@ -73,6 +73,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `reliability_auditor.py` | `ReliabilityAuditor` | Evaluates reliability, consensus, and replicability across runs | Confidence and consensus scoring |
 | `marr_engine.py` | `MarrTranslationEngine` | Tri-level translation (Computational, Algorithmic, Implementational) | Prevention of category errors in biological theories |
 | `fast_system_one_classifier.py` | `FastSystemOneClassifier` | High-speed, zero-cost System 1 typed decision engine (Jev architecture) | Sub-millisecond Marr classification, PR guardrail triage, and Agora branch routing |
+| `twin_gate_harness.py` | `HakkenEvidenceGate`, `DreamRSIStrategyGate`, `ScienceIDEInvariantRunner`, `JevContinuousVerifier` | Twin-Gate verification harness combining Hakken evidence perturbation, Dream-RSI search resilience, ScienceIDE physical execution, and Jev in-turn verifiers | Failure nature triage (bug vs refutation), multi-hop evidence audit, physical conservation checks |
 | `biological_programs_catalog.py` | `BiologicalProgram` | Library of reusable canonical biological programs | Standardized mechanistic building blocks |
 | `scientific_logic.py` | `PopperEngine`, `DeductionEngine` | Modus Tollens deductive logic and implication matrices | Rigorous deductive falsification |
 | `state_space.py` | `StateSpaceOmega` | Combinatorial hypothesis space with explicit volume pruning | Mathematical definition of scientific search volume |
@@ -115,6 +116,10 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Unknown Mechanism** | `POST /api/discovery/unknown-mechanism/run-100-worlds-benchmark`| `unknown_mechanism_benchmark.py` | 100-world blind abduction benchmark |
 | **Retrospective** | `POST /api/discovery/retrospective/run-time-split-benchmark`| `retrospective_time_split_benchmark.py`| Historical discovery benchmark with temporal cutoff \(\le 2018\) |
 | **TRACES Rigor** | `POST /api/discovery/traces/evaluate-epistemic-rigor` | `traces_epistemic_adapter.py` | Epistemic meta-metric evaluation (DV, RCS, FRI, SG, CSR) |
+| **In-Turn Verifier** | `POST /api/discovery/harness/verify-in-turn-goal` | `twin_gate_harness.py` | Sub-millisecond continuous goal verification for /goal agent loops |
+| **Hakken Gate** | `POST /api/discovery/harness/hakken-evidence-audit` | `twin_gate_harness.py` | Audits evidence chains via PHELInE sufficiency/necessity perturbation |
+| **Dream-RSI Triage**| `POST /api/discovery/harness/dream-classify-failure` | `twin_gate_harness.py` | Isolates code/OOM bugs from genuine epistemic refutations |
+| **ScienceIDE Check**| `POST /api/discovery/science-ide/execute-invariant-check`| `twin_gate_harness.py` | Verifies physical conservation laws on executable simulation patches |
 
 ---
 

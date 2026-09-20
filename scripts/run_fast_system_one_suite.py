@@ -119,11 +119,28 @@ def test_agent_and_api_integration():
     print(f"  [PASS] POST /api/discovery/system-one/classify-marr responded with {data['selected_category']}")
 
 
+def test_tier_resolution():
+    print("\n--- 5. Testing System 1 Tier Resolution (Local vs Kev vs Jev Cloud) ---")
+    
+    # Default is SYSTEM_1_LOCAL_FAST
+    default_tier = FastSystemOneClassifier.get_active_tier()
+    assert default_tier in ["SYSTEM_1_LOCAL_FAST", "SYSTEM_1_KEV_LOCAL", "SYSTEM_1_JEV_CLOUD"]
+    print(f"  [PASS] Default active tier resolved cleanly: {default_tier}")
+
+    # Simulated Kev local endpoint
+    os.environ["KEV_LOCAL_URL"] = "http://localhost:11434/v1/chat/completions"
+    assert FastSystemOneClassifier.get_active_tier() == "SYSTEM_1_KEV_LOCAL"
+    print("  [PASS] KEV_LOCAL_URL detected: SYSTEM_1_KEV_LOCAL")
+    del os.environ["KEV_LOCAL_URL"]
+
+
 if __name__ == "__main__":
     test_fast_marr_classification()
     test_pr_guardrail_triage()
     test_agora_branch_routing()
     test_agent_and_api_integration()
+    test_tier_resolution()
     print("\n=======================================================")
     print(" ALL JEV SYSTEM ONE FAST CLASSIFIER TESTS PASSED (E2E) ")
     print("=======================================================")
+

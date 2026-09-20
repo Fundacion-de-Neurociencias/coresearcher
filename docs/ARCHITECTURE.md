@@ -224,6 +224,10 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Agora Epistemic Cherry-Pick**: `POST /api/discovery/git/branch/cherry-pick` (Adopts verified claims across branches with parent DAG lineage).
 - **Fast System One Marr Classifier**: `POST /api/discovery/system-one/classify-marr` (Sub-millisecond typed tri-level classification).
 - **Fast System One PR Triage**: `POST /api/discovery/system-one/triage-pr` (Instant guardrail detection for data leakage and unphysical code).
+- **Continuous In-Turn Goal Verification**: `POST /api/discovery/harness/verify-in-turn-goal` (Sub-millisecond Jev System 1 step verification for /goal agent loops).
+- **Hakken Evidence Path Perturbation**: `POST /api/discovery/harness/hakken-evidence-audit` (PHELInE sufficiency, necessity, and temporal drift audit).
+- **Dream-RSI Failure Classification**: `POST /api/discovery/harness/dream-classify-failure` (Isolates repairable code/OOM bugs from genuine epistemic refutations).
+- **ScienceIDE Simulation Invariant Check**: `POST /api/discovery/science-ide/execute-invariant-check` (Verifies physical conservation laws and tolerances on executable patches).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -248,7 +252,14 @@ Inspired by TypeSafe AI's Jev model, `python/discovery/fast_system_one_classifie
   - **System 1 (Jev / Fast Classifier)**: Fast Marr classification, PR guardrail triage, branch action routing.
   - **System 2 (Deep Epistemic Core)**: Deductive Modus Tollens, Physical Conservation DAGs, Categorical Holonomy Defect calculation.
 
-### 5. Ecosystem Demarcation (The Scientific Trinity)
+### 5. Twin-Gate Epistemic Harness & Continuous Verification (ADR-DISCOVERY-025)
+Implemented in `python/discovery/twin_gate_harness.py`, this engine establishes a dual-gate defense and continuous verification pipeline:
+- **Hakken Evidence Validity Gate (PHELInE & THiGERLLM)**: Audits proposed scientific relationships before allocating resources. Perturbs multi-step evidence paths to quantify **Sufficiency** (path alone supports prediction), **Necessity** (confidence drop upon path ablation), and **Temporal Stability Drift** across literature milestones.
+- **Dream-RSI Strategy & Robustness Gate**: Prevents premature search tree pruning by rigorously classifying failures into `REPAIRABLE_CODE_ERROR` (tensor dimension mismatch, CUDA OOM, syntax bug) versus `GENUINE_EPISTEMIC_FALSIFICATION` (conservation breach, empirical refutation). Automatically adapts MCTS search breadth and stalling intervention.
+- **ScienceIDE Invariant Sandbox**: Executes scientific patches against pinned simulation codebases, measuring physical conservation quantities (mass continuity, Leray-Hopf dissipation, thermodynamic entropy) instead of relying solely on unit test diffs.
+- **Jev Continuous In-Turn Verifier**: Evaluates step completion, progress scoring, and loop stalling detection in \(< 0.01\text{ ms}\) per agent turn, enabling massively scalable test-time verification compute for `/goal` agent loops.
+
+### 6. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

@@ -250,6 +250,24 @@ from .twin_gate_harness import (
     ScienceIDEInvariantRunner,
     JevContinuousVerifier,
 )
+from .membrane_dynamics_auditor import (
+    MembraneLipidSpecies,
+    ForceFieldArchetype,
+    PressureCouplingScheme,
+    ThermostatScheme,
+    TargetMembraneSystem,
+    BiophysicalBlameTarget,
+    LipidCompositionItem,
+    AuxiliarySimulationParams,
+    ExperimentalReferenceConstraints,
+    MembraneSimulationContract,
+    MembraneSimulationObservables,
+    BiophysicalDuhemQuineDiagnosis,
+    MembraneInvariantVerificationReport,
+    BiophysicalContractBuilder,
+    BiophysicalDuhemQuineAuditor,
+    MembraneInvariantVerifier,
+)
 
 __all__ = [
 
@@ -443,4 +461,20 @@ __all__ = [
     "DreamRSIStrategyGate",
     "ScienceIDEInvariantRunner",
     "JevContinuousVerifier",
+    "MembraneLipidSpecies",
+    "ForceFieldArchetype",
+    "PressureCouplingScheme",
+    "ThermostatScheme",
+    "TargetMembraneSystem",
+    "BiophysicalBlameTarget",
+    "LipidCompositionItem",
+    "AuxiliarySimulationParams",
+    "ExperimentalReferenceConstraints",
+    "MembraneSimulationContract",
+    "MembraneSimulationObservables",
+    "BiophysicalDuhemQuineDiagnosis",
+    "MembraneInvariantVerificationReport",
+    "BiophysicalContractBuilder",
+    "BiophysicalDuhemQuineAuditor",
+    "MembraneInvariantVerifier",
 ]

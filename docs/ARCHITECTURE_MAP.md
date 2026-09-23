@@ -74,6 +74,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `marr_engine.py` | `MarrTranslationEngine` | Tri-level translation (Computational, Algorithmic, Implementational) | Prevention of category errors in biological theories |
 | `fast_system_one_classifier.py` | `FastSystemOneClassifier` | High-speed, zero-cost System 1 typed decision engine (Jev architecture) | Sub-millisecond Marr classification, PR guardrail triage, and Agora branch routing |
 | `twin_gate_harness.py` | `HakkenEvidenceGate`, `DreamRSIStrategyGate`, `ScienceIDEInvariantRunner`, `JevContinuousVerifier` | Twin-Gate verification harness combining Hakken evidence perturbation, Dream-RSI search resilience, ScienceIDE physical execution, and Jev in-turn verifiers | Failure nature triage (bug vs refutation), multi-hop evidence audit, physical conservation checks |
+| `membrane_dynamics_auditor.py` | `BiophysicalContractBuilder`, `BiophysicalDuhemQuineAuditor`, `MembraneInvariantVerifier` | Biophysical membrane simulation contracts and Duhem-Quine failure attribution (BAX, Abeta42, Tau, TREM2) | Isolation of auxiliary parameter defects vs core refutations, symplectic energy audit |
 | `biological_programs_catalog.py` | `BiologicalProgram` | Library of reusable canonical biological programs | Standardized mechanistic building blocks |
 | `scientific_logic.py` | `PopperEngine`, `DeductionEngine` | Modus Tollens deductive logic and implication matrices | Rigorous deductive falsification |
 | `state_space.py` | `StateSpaceOmega` | Combinatorial hypothesis space with explicit volume pruning | Mathematical definition of scientific search volume |
@@ -120,6 +121,9 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Hakken Gate** | `POST /api/discovery/harness/hakken-evidence-audit` | `twin_gate_harness.py` | Audits evidence chains via PHELInE sufficiency/necessity perturbation |
 | **Dream-RSI Triage**| `POST /api/discovery/harness/dream-classify-failure` | `twin_gate_harness.py` | Isolates code/OOM bugs from genuine epistemic refutations |
 | **ScienceIDE Check**| `POST /api/discovery/science-ide/execute-invariant-check`| `twin_gate_harness.py` | Verifies physical conservation laws on executable simulation patches |
+| **Membrane Contract**| `POST /api/discovery/membrane/create-simulation-contract`| `membrane_dynamics_auditor.py` | Formalizes biophysical simulation contracts with SOM provenance |
+| **Membrane Duhem**   | `POST /api/discovery/membrane/audit-duhem-quine` | `membrane_dynamics_auditor.py` | Isolates auxiliary simulation parameter defects from core refutations |
+| **Membrane Invariant**| `POST /api/discovery/membrane/verify-physical-invariants`| `membrane_dynamics_auditor.py` | Verifies symplectic energy drift, bilayer incompressibility, and entropy |
 
 ---
 

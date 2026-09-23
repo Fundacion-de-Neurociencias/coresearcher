@@ -228,6 +228,9 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Hakken Evidence Path Perturbation**: `POST /api/discovery/harness/hakken-evidence-audit` (PHELInE sufficiency, necessity, and temporal drift audit).
 - **Dream-RSI Failure Classification**: `POST /api/discovery/harness/dream-classify-failure` (Isolates repairable code/OOM bugs from genuine epistemic refutations).
 - **ScienceIDE Simulation Invariant Check**: `POST /api/discovery/science-ide/execute-invariant-check` (Verifies physical conservation laws and tolerances on executable patches).
+- **Membrane Simulation Contract**: `POST /api/discovery/membrane/create-simulation-contract` (Formalizes biophysical lipid bilayer contracts with SOM-SHA256 provenance).
+- **Membrane Duhem-Quine Audit**: `POST /api/discovery/membrane/audit-duhem-quine` (Decomposes simulation discrepancies into auxiliary parameter vs core refutations).
+- **Membrane Physical Invariants**: `POST /api/discovery/membrane/verify-physical-invariants` (Audits Hamiltonian energy drift, incompressibility, and entropy).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -259,10 +262,20 @@ Implemented in `python/discovery/twin_gate_harness.py`, this engine establishes 
 - **ScienceIDE Invariant Sandbox**: Executes scientific patches against pinned simulation codebases, measuring physical conservation quantities (mass continuity, Leray-Hopf dissipation, thermodynamic entropy) instead of relying solely on unit test diffs.
 - **Jev Continuous In-Turn Verifier**: Evaluates step completion, progress scoring, and loop stalling detection in \(< 0.01\text{ ms}\) per agent turn, enabling massively scalable test-time verification compute for `/goal` agent loops.
 
-### 6. Ecosystem Demarcation (The Scientific Trinity)
+### 6. Biophysical Membrane Dynamics & Duhem-Quine Simulation Auditor (ADR-DISCOVERY-026)
+Implemented in `python/discovery/membrane_dynamics_auditor.py`, this subsystem formalizes molecular dynamics (MD) workflows for membrane biophysics:
+- **Target Systems**: BAX pro-apoptotic pore opening, Amyloid-\(\beta_{42}\) & Tau membrane permeabilization, and TREM2 microglial lipid raft dynamics.
+- **Formal Duhem-Quine Root-Cause Diagnostics**: When simulation observables (e.g. area per lipid \(A_L\), bilayer thickness \(D_{HH}\), order parameter \(S_{CD}\)) diverge from experimental reference constraints, algebraically isolates whether the blame lies in:
+  - Auxiliary simulation artifacts (`BAROSTAT_SURFACE_TENSION_MISCOUPLING`, `OSMOTIC_DEHYDRATION`, `EQUILIBRATION_TRUNCATION`, `FORCE_FIELD_VDW_OVERATTRACTION`).
+  - Or genuine core refutations (`HARD_CORE_CONFORMATION_REFUTED` / `CORE_HYPOTHESIS_FATAL`).
+- **Physical Invariant Auditing**: Verifies symplectic Hamiltonian energy conservation (\(\le 10^{-4}/\text{ns}\)), bilayer incompressibility, and thermodynamic entropy.
+- **DataAILab Contract Demarcation (`ARCH-002`)**: Generates cryptographically verifiable `SOM-SHA256` simulation contracts, allowing DataAILab to execute heavy GPU molecular dynamics while CoResearcher acts strictly as the epistemic auditor and verifier.
+
+### 7. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).
+
 - **EdiTXT**: The **Editorial & Peer Review Press** (Manuscript generation, figure binding, text anchor verification, peer review workflows).
 
 ---

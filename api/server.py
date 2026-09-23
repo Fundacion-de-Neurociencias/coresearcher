@@ -115,6 +115,13 @@ from python.discovery import (
     DreamRSIStrategyGate,
     ScienceIDEInvariantRunner,
     JevContinuousVerifier,
+    BiophysicalContractBuilder,
+    BiophysicalDuhemQuineAuditor,
+    MembraneInvariantVerifier,
+    MembraneSimulationObservables,
+    TargetMembraneSystem,
+    ForceFieldArchetype,
+    PressureCouplingScheme,
 )
 
 
@@ -332,6 +339,37 @@ class ScienceIDEInvariantCheckRequest(BaseModel):
     state_variables: Dict[str, float]
     differential_rates: Dict[str, float]
     tolerance: Optional[float] = 1e-4
+
+class CreateMembraneContractRequest(BaseModel):
+    system_type: Optional[str] = "BAX_PORE"
+    force_field: Optional[str] = "CHARMM36M"
+    pressure_coupling: Optional[str] = "SEMI_ISOTROPIC_PARRINELLO_RAHMAN"
+    waters_per_lipid: Optional[float] = 40.0
+    equilibration_length_ns: Optional[float] = 100.0
+
+class AuditMembraneDuhemQuineRequest(BaseModel):
+    contract_id: Optional[str] = None
+    system_type: Optional[str] = "BAX_PORE"
+    force_field: Optional[str] = "CHARMM36M"
+    pressure_coupling: Optional[str] = "SEMI_ISOTROPIC_PARRINELLO_RAHMAN"
+    waters_per_lipid: Optional[float] = 40.0
+    observed_area_per_lipid_nm2: float
+    observed_bilayer_thickness_nm: float
+    observed_order_parameter_scd: float
+    observed_pore_radius_nm: Optional[float] = 0.0
+    energy_drift_ratio: Optional[float] = 1e-5
+    entropy_production_rate: Optional[float] = 0.002
+    equilibration_converged: Optional[bool] = True
+    runtime_ns_completed: Optional[float] = 200.0
+
+class VerifyMembraneInvariantsRequest(BaseModel):
+    contract_id: Optional[str] = None
+    system_type: Optional[str] = "BAX_PORE"
+    observed_area_per_lipid_nm2: float
+    observed_bilayer_thickness_nm: float
+    observed_order_parameter_scd: float
+    energy_drift_ratio: Optional[float] = 1e-5
+    entropy_production_rate: Optional[float] = 0.002
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -838,8 +876,86 @@ def execute_science_ide_check(req: ScienceIDEInvariantCheckRequest):
     return res.to_dict()
 
 # -----------------------------------------------------------------------------
+# 13d. Biophysical Membrane Dynamics & Duhem-Quine Endpoints (ADR-DISCOVERY-026)
+# -----------------------------------------------------------------------------
+
+@app.post("/api/discovery/membrane/create-simulation-contract")
+def create_membrane_simulation_contract(req: CreateMembraneContractRequest):
+    """
+    Creates a verifiable biophysical membrane simulation contract (BAX, Abeta42, Tau, TREM2).
+    """
+    ff = ForceFieldArchetype(req.force_field) if req.force_field in [f.value for f in ForceFieldArchetype] else ForceFieldArchetype.CHARMM36M
+    pc = PressureCouplingScheme(req.pressure_coupling) if req.pressure_coupling in [p.value for p in PressureCouplingScheme] else PressureCouplingScheme.SEMI_ISOTROPIC_PARRINELLO_RAHMAN
+    
+    if req.system_type == "AMYLOID_BETA_PORE":
+        contract = BiophysicalContractBuilder.create_amyloid_pore_contract(force_field=ff)
+    else:
+        contract = BiophysicalContractBuilder.create_bax_membrane_contract(
+            force_field=ff,
+            pressure_coupling=pc,
+            waters_per_lipid=req.waters_per_lipid or 40.0,
+            equilibration_length_ns=req.equilibration_length_ns or 100.0
+        )
+    return contract.to_dict()
+
+@app.post("/api/discovery/membrane/audit-duhem-quine")
+def audit_membrane_duhem_quine(req: AuditMembraneDuhemQuineRequest):
+    """
+    Executes formal Duhem-Quine failure attribution on membrane simulation anomalies (e.g. area per lipid mismatch).
+    Differentiates between auxiliary parameter defects (force field, barostat, hydration) and hard-core refutations.
+    """
+    ff = ForceFieldArchetype(req.force_field) if req.force_field in [f.value for f in ForceFieldArchetype] else ForceFieldArchetype.CHARMM36M
+    pc = PressureCouplingScheme(req.pressure_coupling) if req.pressure_coupling in [p.value for p in PressureCouplingScheme] else PressureCouplingScheme.SEMI_ISOTROPIC_PARRINELLO_RAHMAN
+    
+    if req.system_type == "AMYLOID_BETA_PORE":
+        contract = BiophysicalContractBuilder.create_amyloid_pore_contract(contract_id=req.contract_id, force_field=ff)
+    else:
+        contract = BiophysicalContractBuilder.create_bax_membrane_contract(
+            contract_id=req.contract_id,
+            force_field=ff,
+            pressure_coupling=pc,
+            waters_per_lipid=req.waters_per_lipid or 40.0
+        )
+
+    observables = MembraneSimulationObservables(
+        observed_area_per_lipid_nm2=req.observed_area_per_lipid_nm2,
+        observed_bilayer_thickness_nm=req.observed_bilayer_thickness_nm,
+        observed_order_parameter_scd=req.observed_order_parameter_scd,
+        observed_pore_radius_nm=req.observed_pore_radius_nm or 0.0,
+        energy_drift_ratio=req.energy_drift_ratio or 1e-5,
+        entropy_production_rate=req.entropy_production_rate or 0.002,
+        equilibration_converged=req.equilibration_converged if req.equilibration_converged is not None else True,
+        runtime_ns_completed=req.runtime_ns_completed or 200.0
+    )
+
+    diag = BiophysicalDuhemQuineAuditor.diagnose_simulation_anomaly(contract, observables)
+    return diag.to_dict()
+
+@app.post("/api/discovery/membrane/verify-physical-invariants")
+def verify_membrane_invariants(req: VerifyMembraneInvariantsRequest):
+    """
+    Audits membrane simulation against physical conservation laws (Hamiltonian energy drift, incompressibility, entropy).
+    """
+    if req.system_type == "AMYLOID_BETA_PORE":
+        contract = BiophysicalContractBuilder.create_amyloid_pore_contract(contract_id=req.contract_id)
+    else:
+        contract = BiophysicalContractBuilder.create_bax_membrane_contract(contract_id=req.contract_id)
+
+    observables = MembraneSimulationObservables(
+        observed_area_per_lipid_nm2=req.observed_area_per_lipid_nm2,
+        observed_bilayer_thickness_nm=req.observed_bilayer_thickness_nm,
+        observed_order_parameter_scd=req.observed_order_parameter_scd,
+        energy_drift_ratio=req.energy_drift_ratio or 1e-5,
+        entropy_production_rate=req.entropy_production_rate or 0.002
+    )
+
+    report = MembraneInvariantVerifier.verify_invariants(contract, observables)
+    return report.to_dict()
+
+# -----------------------------------------------------------------------------
 # 14. Discovery Workbench & Legacy Endpoints
 # -----------------------------------------------------------------------------
+
 
 @app.post("/api/discovery/workbench/launch")
 def launch_discovery_workbench(req: LaunchWorkbenchRequest):

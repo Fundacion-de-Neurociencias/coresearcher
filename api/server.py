@@ -27,6 +27,7 @@ Includes:
 
 import os
 import sys
+from pathlib import Path
 from typing import Dict, Any, List, Optional
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -125,6 +126,7 @@ from python.discovery import (
     EpistemicPheromoneField,
     MetaRecursiveInstrumentCompiler,
     RealityContactFirewall,
+    PhysicsCorpusAuditor,
 )
 
 
@@ -387,6 +389,11 @@ class AuditRealityFirewallRequest(BaseModel):
     claimed_regularity: str
     rcs_level: int
     empirical_anchors: List[str]
+
+class AuditPhysicsMegarepoRequest(BaseModel):
+    repo_path: str
+    max_files: Optional[int] = 50
+    subdiscipline_filter: Optional[str] = None
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -1009,6 +1016,39 @@ def audit_reality_firewall(req: AuditRealityFirewallRequest):
         rcs_level=req.rcs_level,
         empirical_anchors=req.empirical_anchors
     )
+    return report.to_dict()
+
+# -----------------------------------------------------------------------------
+# 13f. Autonomous Physics Megarepo Epistemic Auditor (ADR-DISCOVERY-028)
+# -----------------------------------------------------------------------------
+
+@app.post("/api/discovery/physics/audit-megarepo")
+def audit_physics_megarepo(req: AuditPhysicsMegarepoRequest):
+    """
+    Acts as an autonomous, independent expert reviewer for massive single-author physics repositories.
+    Executes System 1 fast triage, System 2 formal proof DAGs, physical conservation checks,
+    and Reality Contact Firewall validation to generate an objective Peer Review Dossier.
+    """
+    auditor = PhysicsCorpusAuditor()
+    p = Path(req.repo_path)
+    if not p.exists() or not p.is_dir():
+        raise HTTPException(status_code=404, detail=f"Physics repository path not found: {req.repo_path}")
+
+    items = []
+    for root, _, files in os.walk(p):
+        for f in files:
+            full_path = Path(root) / f
+            item = auditor.scan_and_extract_file(full_path)
+            if item:
+                if req.subdiscipline_filter and item.subdiscipline.value != req.subdiscipline_filter:
+                    continue
+                items.append(item)
+                if len(items) >= (req.max_files or 50):
+                    break
+        if len(items) >= (req.max_files or 50):
+            break
+
+    report = auditor.audit_corpus_batch(items)
     return report.to_dict()
 
 # -----------------------------------------------------------------------------

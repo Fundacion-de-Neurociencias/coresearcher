@@ -234,6 +234,7 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Stigmergy Pheromone Field Query**: `POST /api/discovery/stigmergy/query-pheromone-field` (Scans git history to emit attractors and repulsors for autonomous agent swarms).
 - **Meta-Recursive Instrument Compilation**: `POST /api/discovery/stigmergy/compile-instrument` (Compiles candidate hypotheses into executable simulation worlds).
 - **Reality Contact Firewall Audit**: `POST /api/discovery/stigmergy/audit-reality-firewall` (Blocks promotion of swarm-derived theories to invariant laws unless RCS >= 2.0).
+- **Physics Megarepo Peer Review**: `POST /api/discovery/physics/audit-megarepo` (Autonomous peer review of massive physics corpora across 8 subdisciplines).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -284,11 +285,18 @@ Implemented in `python/discovery/epistemic_stigmergy.py`, this engine draws insp
 - **Meta-Recursive Instrument Compiler**: Implements the Buehler recursive loop (\(\text{Representation} \to \text{Instrument} \to \text{Simulated World} \to \text{Law}\)). Compiles candidate theoretical claims into executable `ConstraintBox` simulation worlds with formal logical rules (`NECESSARY_CONDITION`, `SUFFICIENT_TRIGGER`, `BOUNDARY_THRESHOLD`).
 - **Reality Contact Firewall (Anti-Collective-Hallucination Gate)**: Strict guardrail forbidding closed-world simulation hallucinations. Blocks promotion of any emergent regularities derived by the agent swarm to active invariant constraints unless grounded with an empirical Reality Contact Score of \(RCS \ge 2.0\) (external physical anchors / prospective cohorts).
 
-### 8. Ecosystem Demarcation (The Scientific Trinity)
+### 8. Autonomous Physics Megarepo Epistemic Auditor & Peer Review Engine (ADR-DISCOVERY-028)
+Implemented in `python/discovery/physics_corpus_auditor.py`, this engine instrumentalizes CoResearcher as an independent, objective expert scientific reviewer for massive, single-author physical corpora:
+- **Corpus Crawler & Classifier**: Recursively crawls repositories, extracting theories, mathematical proof DAGs, experimental datasets, and simulation solvers across 8 physical subdisciplines (Classical Mechanics, Electrodynamics, Thermodynamics/StatMech, Quantum Mechanics, General Relativity/Cosmology, QFT/Particles, Condensed Matter, Nonlinear Fluids).
+- **Fast System 1 Triage Tier**: Delivers instant Marr level classification and code risk screening (unseeded stochasticity in simulations, NaN/Inf handling, lookahead bias) in \(< 1\text{ ms}\).
+- **Deep System 2 Mathematical Proof Verification**: Employs `PhysicalCoherenceCourt` to audit `ProofDependencyDAG`s, intercepting circular lemma cycles (`REJECTED_CIRCULAR_LEMMA`) and unproven axiomatic assertions (`REJECTED_UNPROVEN_AXIOM`).
+- **Deep System 2 Conservation & Reality Firewall**: Audits physical conservation laws (Hamiltonian energy drift, Leray-Hopf dissipation, thermodynamic entropy) and enforces `RealityContactFirewall` (\(RCS \ge 2.0\) with external physical anchors) before validating experimental claims.
+- **Editorial Peer Review Dossier**: Synthesizes verified invariants vs rejected claims into a cryptographically anchored (`SOM-SHA256`) citable ReviewGraph and objective editorial publication readiness judgment.
+
+### 9. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).
-
 - **EdiTXT**: The **Editorial & Peer Review Press** (Manuscript generation, figure binding, text anchor verification, peer review workflows).
 
 ---

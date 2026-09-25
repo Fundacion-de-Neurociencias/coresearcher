@@ -122,6 +122,9 @@ from python.discovery import (
     TargetMembraneSystem,
     ForceFieldArchetype,
     PressureCouplingScheme,
+    EpistemicPheromoneField,
+    MetaRecursiveInstrumentCompiler,
+    RealityContactFirewall,
 )
 
 
@@ -370,6 +373,20 @@ class VerifyMembraneInvariantsRequest(BaseModel):
     observed_order_parameter_scd: float
     energy_drift_ratio: Optional[float] = 1e-5
     entropy_production_rate: Optional[float] = 0.002
+
+class QueryPheromoneFieldRequest(BaseModel):
+    uncertainty_threshold: Optional[float] = 0.60
+
+class CompileInstrumentRequest(BaseModel):
+    representation_id: str
+    hypothesis_statement: str
+    key_variables: List[str]
+
+class AuditRealityFirewallRequest(BaseModel):
+    hypothesis_id: str
+    claimed_regularity: str
+    rcs_level: int
+    empirical_anchors: List[str]
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -950,6 +967,48 @@ def verify_membrane_invariants(req: VerifyMembraneInvariantsRequest):
     )
 
     report = MembraneInvariantVerifier.verify_invariants(contract, observables)
+    return report.to_dict()
+
+# -----------------------------------------------------------------------------
+# 13e. Epistemic Stigmergy & Meta-Recursive Instrument Engine (ADR-DISCOVERY-027)
+# -----------------------------------------------------------------------------
+
+@app.post("/api/discovery/stigmergy/query-pheromone-field")
+def query_pheromone_field(req: QueryPheromoneFieldRequest):
+    """
+    Scans the shared EpistemicGitRepo and emits active stigmergic pheromones
+    (attractors and repulsors) that guide autonomous agent swarms without a central planner.
+    """
+    report = EpistemicPheromoneField.scan_git_repository(
+        repo=epistemic_git_repo,
+        uncertainty_threshold=req.uncertainty_threshold or 0.60
+    )
+    return report.to_dict()
+
+@app.post("/api/discovery/stigmergy/compile-instrument")
+def compile_instrument(req: CompileInstrumentRequest):
+    """
+    Compiles a candidate hypothesis into an executable simulation world (Meta-Recursive Buehler Loop).
+    """
+    instrument = MetaRecursiveInstrumentCompiler.compile_hypothesis_into_world(
+        representation_id=req.representation_id,
+        hypothesis_statement=req.hypothesis_statement,
+        key_variables=req.key_variables
+    )
+    return instrument.to_dict()
+
+@app.post("/api/discovery/stigmergy/audit-reality-firewall")
+def audit_reality_firewall(req: AuditRealityFirewallRequest):
+    """
+    Anti-Collective-Hallucination Firewall: blocks promotion of swarm-derived theories
+    to invariant constraints unless RCS >= 2.0 (external empirical grounding).
+    """
+    report = RealityContactFirewall.audit_promotion_request(
+        hypothesis_id=req.hypothesis_id,
+        claimed_regularity=req.claimed_regularity,
+        rcs_level=req.rcs_level,
+        empirical_anchors=req.empirical_anchors
+    )
     return report.to_dict()
 
 # -----------------------------------------------------------------------------

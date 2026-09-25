@@ -268,6 +268,16 @@ from .membrane_dynamics_auditor import (
     BiophysicalDuhemQuineAuditor,
     MembraneInvariantVerifier,
 )
+from .epistemic_stigmergy import (
+    PheromoneType,
+    EpistemicPheromone,
+    PheromoneLandscapeReport,
+    EpistemicPheromoneField,
+    MetaRecursiveInstrument,
+    MetaRecursiveInstrumentCompiler,
+    RealityContactFirewallReport,
+    RealityContactFirewall,
+)
 
 __all__ = [
 
@@ -477,4 +487,12 @@ __all__ = [
     "BiophysicalContractBuilder",
     "BiophysicalDuhemQuineAuditor",
     "MembraneInvariantVerifier",
+    "PheromoneType",
+    "EpistemicPheromone",
+    "PheromoneLandscapeReport",
+    "EpistemicPheromoneField",
+    "MetaRecursiveInstrument",
+    "MetaRecursiveInstrumentCompiler",
+    "RealityContactFirewallReport",
+    "RealityContactFirewall",
 ]

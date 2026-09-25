@@ -75,6 +75,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | `fast_system_one_classifier.py` | `FastSystemOneClassifier` | High-speed, zero-cost System 1 typed decision engine (Jev architecture) | Sub-millisecond Marr classification, PR guardrail triage, and Agora branch routing |
 | `twin_gate_harness.py` | `HakkenEvidenceGate`, `DreamRSIStrategyGate`, `ScienceIDEInvariantRunner`, `JevContinuousVerifier` | Twin-Gate verification harness combining Hakken evidence perturbation, Dream-RSI search resilience, ScienceIDE physical execution, and Jev in-turn verifiers | Failure nature triage (bug vs refutation), multi-hop evidence audit, physical conservation checks |
 | `membrane_dynamics_auditor.py` | `BiophysicalContractBuilder`, `BiophysicalDuhemQuineAuditor`, `MembraneInvariantVerifier` | Biophysical membrane simulation contracts and Duhem-Quine failure attribution (BAX, Abeta42, Tau, TREM2) | Isolation of auxiliary parameter defects vs core refutations, symplectic energy audit |
+| `epistemic_stigmergy.py` | `EpistemicPheromoneField`, `MetaRecursiveInstrumentCompiler`, `RealityContactFirewall` | Epistemic stigmergy over git history, Buehler loop compiler, and anti-hallucination firewall (ADR-DISCOVERY-027) | Decentralized swarm attractors/repulsors, simulation world compilation, RCS >= 2.0 gate |
 | `biological_programs_catalog.py` | `BiologicalProgram` | Library of reusable canonical biological programs | Standardized mechanistic building blocks |
 | `scientific_logic.py` | `PopperEngine`, `DeductionEngine` | Modus Tollens deductive logic and implication matrices | Rigorous deductive falsification |
 | `state_space.py` | `StateSpaceOmega` | Combinatorial hypothesis space with explicit volume pruning | Mathematical definition of scientific search volume |
@@ -124,6 +125,9 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Membrane Contract**| `POST /api/discovery/membrane/create-simulation-contract`| `membrane_dynamics_auditor.py` | Formalizes biophysical simulation contracts with SOM provenance |
 | **Membrane Duhem**   | `POST /api/discovery/membrane/audit-duhem-quine` | `membrane_dynamics_auditor.py` | Isolates auxiliary simulation parameter defects from core refutations |
 | **Membrane Invariant**| `POST /api/discovery/membrane/verify-physical-invariants`| `membrane_dynamics_auditor.py` | Verifies symplectic energy drift, bilayer incompressibility, and entropy |
+| **Stigmergy Field**  | `POST /api/discovery/stigmergy/query-pheromone-field` | `epistemic_stigmergy.py` | Scans git history to emit attractors and repulsors for autonomous agent swarms |
+| **Compile Instrument**| `POST /api/discovery/stigmergy/compile-instrument` | `epistemic_stigmergy.py` | Compiles candidate hypotheses into executable simulation worlds (Buehler loop) |
+| **Reality Firewall**  | `POST /api/discovery/stigmergy/audit-reality-firewall` | `epistemic_stigmergy.py` | Enforces RCS >= 2.0 empirical grounding gate for swarm emergent regularities |
 
 ---
 

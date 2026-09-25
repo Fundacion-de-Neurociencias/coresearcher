@@ -231,6 +231,9 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Membrane Simulation Contract**: `POST /api/discovery/membrane/create-simulation-contract` (Formalizes biophysical lipid bilayer contracts with SOM-SHA256 provenance).
 - **Membrane Duhem-Quine Audit**: `POST /api/discovery/membrane/audit-duhem-quine` (Decomposes simulation discrepancies into auxiliary parameter vs core refutations).
 - **Membrane Physical Invariants**: `POST /api/discovery/membrane/verify-physical-invariants` (Audits Hamiltonian energy drift, incompressibility, and entropy).
+- **Stigmergy Pheromone Field Query**: `POST /api/discovery/stigmergy/query-pheromone-field` (Scans git history to emit attractors and repulsors for autonomous agent swarms).
+- **Meta-Recursive Instrument Compilation**: `POST /api/discovery/stigmergy/compile-instrument` (Compiles candidate hypotheses into executable simulation worlds).
+- **Reality Contact Firewall Audit**: `POST /api/discovery/stigmergy/audit-reality-firewall` (Blocks promotion of swarm-derived theories to invariant laws unless RCS >= 2.0).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -271,7 +274,17 @@ Implemented in `python/discovery/membrane_dynamics_auditor.py`, this subsystem f
 - **Physical Invariant Auditing**: Verifies symplectic Hamiltonian energy conservation (\(\le 10^{-4}/\text{ns}\)), bilayer incompressibility, and thermodynamic entropy.
 - **DataAILab Contract Demarcation (`ARCH-002`)**: Generates cryptographically verifiable `SOM-SHA256` simulation contracts, allowing DataAILab to execute heavy GPU molecular dynamics while CoResearcher acts strictly as the epistemic auditor and verifier.
 
-### 7. Ecosystem Demarcation (The Scientific Trinity)
+### 7. Epistemic Stigmergy & Meta-Recursive Instrument Engine (ADR-DISCOVERY-027)
+Implemented in `python/discovery/epistemic_stigmergy.py`, this engine draws inspiration from Markus Buehler's SwarmWorld (MIT, arXiv 2608.26081) and harmonizes with GeneForge's `StigmergicPheromoneField` and AIDataLab's `ExecutionSnapshot Lineage DAG`:
+- **Epistemic Pheromone Field**: Transforms the shared scientific git history (`EpistemicGitRepo` / `AgoraSharedIndex`) into active stigmergic signals without requiring a central orchestrator:
+  - `INVARIANT_CONSOLIDATION`: Attracts formalizer agents to cherry-pick verified claims into parent lineage trees.
+  - `EPISTEMIC_GAP_EXPLORATION`: Attracts hypothesis explorers and miners toward unresolved open branch frontiers.
+  - `ADVERSARIAL_ARBITRATION`: Attracts Popper agents to execute Modus Tollens refutation audits on high-uncertainty claims.
+  - `REFUTATION_REPULSION`: Strongly repels all agents from re-traversing falsified hypothesis dead-ends recorded in the graveyard.
+- **Meta-Recursive Instrument Compiler**: Implements the Buehler recursive loop (\(\text{Representation} \to \text{Instrument} \to \text{Simulated World} \to \text{Law}\)). Compiles candidate theoretical claims into executable `ConstraintBox` simulation worlds with formal logical rules (`NECESSARY_CONDITION`, `SUFFICIENT_TRIGGER`, `BOUNDARY_THRESHOLD`).
+- **Reality Contact Firewall (Anti-Collective-Hallucination Gate)**: Strict guardrail forbidding closed-world simulation hallucinations. Blocks promotion of any emergent regularities derived by the agent swarm to active invariant constraints unless grounded with an empirical Reality Contact Score of \(RCS \ge 2.0\) (external physical anchors / prospective cohorts).
+
+### 8. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

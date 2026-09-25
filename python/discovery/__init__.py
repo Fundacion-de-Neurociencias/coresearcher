@@ -278,6 +278,14 @@ from .epistemic_stigmergy import (
     RealityContactFirewallReport,
     RealityContactFirewall,
 )
+from .physics_corpus_auditor import (
+    PhysicsSubdiscipline,
+    CorpusItemType,
+    CorpusExtractedItem,
+    ItemVerificationVerdict,
+    MegarepoPeerReviewReport,
+    PhysicsCorpusAuditor,
+)
 
 __all__ = [
 
@@ -495,4 +503,10 @@ __all__ = [
     "MetaRecursiveInstrumentCompiler",
     "RealityContactFirewallReport",
     "RealityContactFirewall",
+    "PhysicsSubdiscipline",
+    "CorpusItemType",
+    "CorpusExtractedItem",
+    "ItemVerificationVerdict",
+    "MegarepoPeerReviewReport",
+    "PhysicsCorpusAuditor",
 ]

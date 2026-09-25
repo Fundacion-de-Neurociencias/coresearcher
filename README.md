@@ -93,6 +93,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Twin-Gate Epistemic Harness**| `scripts/run_twin_gate_harness_suite.py` | ScienceIDE simulation checks, Hakken evidence perturbation, Dream-RSI failure triage, Jev in-turn verifiers. |
 | **Membrane Dynamics Suite**    | `scripts/run_membrane_dynamics_suite.py` | Biophysical membrane simulation contracts, Duhem-Quine failure attribution (BAX, Abeta42, Tau, TREM2), energy drift. |
 | **Epistemic Stigmergy Suite**  | `scripts/run_epistemic_stigmergy_suite.py` | Decentralized git pheromone field scanning, Buehler loop instrument compilation, RCS >= 2.0 reality firewall. |
+| **Physics Megarepo Auditor**   | `scripts/run_physics_corpus_auditor_suite.py` | Autonomous peer review of massive physics corpora across 8 subdisciplines, proof DAGs, and reality firewall. |
 
 ---
 
@@ -112,5 +113,5 @@ For complete, in-depth architectural and constitutional specifications, consult:
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.0.0** (4 Layers, Formal Engines, Mathematical Formulations, API Routes).
 - [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.0.0** (File-by-file directory inventory, data flows, external contracts).
-- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-027).
+- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-028).
 - [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).

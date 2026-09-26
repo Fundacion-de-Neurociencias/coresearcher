@@ -279,6 +279,7 @@ from .epistemic_stigmergy import (
     RealityContactFirewall,
 )
 from .physics_corpus_auditor import (
+    UniversalPhysicsDivision,
     PhysicsSubdiscipline,
     CorpusItemType,
     CorpusExtractedItem,
@@ -503,6 +504,7 @@ __all__ = [
     "MetaRecursiveInstrumentCompiler",
     "RealityContactFirewallReport",
     "RealityContactFirewall",
+    "UniversalPhysicsDivision",
     "PhysicsSubdiscipline",
     "CorpusItemType",
     "CorpusExtractedItem",

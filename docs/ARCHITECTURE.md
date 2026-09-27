@@ -295,6 +295,12 @@ Implemented in `python/discovery/physics_corpus_auditor.py`, this engine instrum
 - **Deep System 2 Mathematical Proof Verification**: Employs `PhysicalCoherenceCourt` to audit `ProofDependencyDAG`s, intercepting circular lemma cycles (`REJECTED_CIRCULAR_LEMMA`) and unproven axiomatic assertions (`REJECTED_UNPROVEN_AXIOM`).
 - **Deep System 2 Conservation & Reality Firewall**: Audits physical conservation laws (Hamiltonian energy drift, Leray-Hopf dissipation, thermodynamic entropy) and enforces `RealityContactFirewall` (\(RCS \ge 2.0\) with external physical anchors like NIST, CERN, CODATA) before certifying experimental claims.
 - **Editorial Peer Review Dossier**: Synthesizes verified invariants vs rejected claims into a cryptographically anchored (`SOM-SHA256`) citable ReviewGraph and objective editorial publication readiness judgment.
+- **(v3.0) LocalAIAdapter — Multi-Protocol Air-Gapped AI**: `call_laya()` (System 1) and `call_local_ia()` (System 2) auto-detect protocol (OpenAI-compat → Ollama-native → deterministic fallback). Zero cloud, 100% local. Configurable via `LAYA_ENDPOINT` / `LOCAL_IA_ENDPOINT` env vars.
+- **(v3.0) `audit_chapter_deep()`**: Full Laya + MarrTranslationEngine + BayesianSurpriseEngine + CommutativeDiagramAuditor pipeline for theoretical chapters. Holonomy defect gate (\(\delta < 10^{-3}\)). NEVER penalizes novelty.
+- **(v3.0) `audit_simulation_deep()`**: DreamRSIStrategyGate (bug vs. genuine falsification) + ScienceIDEInvariantRunner (mass/energy/entropy conservation) + HakkenEvidenceGate (PHELInE perturbation) for simulation solvers.
+- **(v3.0) `run_adversarial_stress_test()`**: 50-case AdversarialDestructionEngine; genuinely falsified claims auto-logged to HypothesisGraveyard.
+- **(v3.0) `prioritize_audit_by_pheromone()`**: EpistemicPheromoneField reorders audit queue by conflict intensity — high-dispute zones first.
+- **(v3.0) Persistent Pipeline**: `scripts/audit_physics_megarepo_full.py` — checkpoint/resume, walks entire megarepo, Ctrl+C safe, writes per-item JSON verdicts + final report.
 
 ### 9. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:

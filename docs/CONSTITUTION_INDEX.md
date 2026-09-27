@@ -109,4 +109,26 @@ This index acts as the **Magna Carta** of the CoResearcher ecosystem. It unifies
 - [MECHANISM_CONSTITUTION.md](file:///c:/Users/usuario/coresearcher/docs/MECHANISM_CONSTITUTION.md) - Mechanical and universal patterns for asynchronous, robust workflows.
 
 ---
+## 5. Physics Megarepo Auditor (ADR-DISCOVERY-028 v3.0)
+
+**Status**: IMPLEMENTED & VERIFIED — Commit 74595ca (2026-09-26)
+**Module**: python/discovery/physics_corpus_auditor.py (v3.0, ~1200 lines)
+**Pipeline**: scripts/audit_physics_megarepo_full.py (persistent, checkpoint-based, resumable)
+**Test Suite**: scripts/run_physics_corpus_auditor_suite.py -- 11/11 PASSED
+
+### Purpose
+Independent, autonomous, zero-cloud peer reviewer for large-scale physics megarepos.
+Evaluates scientific rigor and internal coherence. Does NOT penalize novel or non-mainstream content.
+Validity criteria: dimensional homogeneity + conservation law compliance + internal logical coherence.
+
+### LocalAIAdapter v3.0 (multi-protocol, air-gapped)
+- System 1 (Laya): OpenAI-compat -> Ollama-native -> deterministic fallback
+- System 2 (Local IA): LM Studio OpenAI-compat -> Ollama-native -> deterministic fallback
+- Zero cloud. 100% Lenovo-local. Configurable via LAYA_ENDPOINT / LOCAL_IA_ENDPOINT env vars.
+
+### Usage
+    python scripts/audit_physics_megarepo_full.py --repo-path /path/to/physics_megarepo
+    # Ctrl+C to checkpoint and resume with same command
+
+---
 *Note: This index must be updated immediately and mandatorily whenever a new module, engine, benchmark, or directive is implemented in CoResearcher.*\n

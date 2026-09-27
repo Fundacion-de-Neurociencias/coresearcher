@@ -26,3 +26,20 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# Testing & Quality
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Environment & Checkpoints
+.env
+.env.*
+!.env.example
+corpus_audit_checkpoint.json
+audit_results/

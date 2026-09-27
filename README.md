@@ -2,7 +2,10 @@
 **The Autonomous Epistemic Discovery & Formal Verification Engine for Open Science**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/workflows/ci.yml/badge.svg)](https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/workflows/ci.yml)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI%203.2-009688.svg)](https://fastapi.tiangolo.com)
+[![Pytest](https://img.shields.io/badge/Tests-Pytest%208.3-brightgreen.svg)](tests/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org)
 [![Zero-Mocking](https://img.shields.io/badge/Validation-100%25%20Zero--Mocking-success.svg)](docs/ARCHITECTURE.md)
 [![Category Theory](https://img.shields.io/badge/Algebra-Categorical%20Epistemic-purple.svg)](python/discovery/categorical_epistemic_engine.py)
@@ -40,6 +43,22 @@ CoResearcher is architected into two complementary, tightly integrated cores:
 ---
 
 ## 🚀 Quick Start
+
+### 0. Environment Setup & Testing
+```bash
+# Install production and development dependencies
+pip install -r requirements-dev.txt
+
+# Run the complete pytest verification suite
+pytest tests/ -v
+
+# Verify code formatting and linting
+ruff check tests/
+black --check tests/
+
+# Verify 100% English language policy compliance
+python scripts/enforce_english_policy.py
+```
 
 ### 1. Launch the Production REST API
 ```bash

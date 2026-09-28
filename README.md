@@ -60,7 +60,23 @@ black --check tests/
 python scripts/enforce_english_policy.py
 ```
 
-### 1. Launch the Production REST API
+### 1. Unified CoResearcher CLI
+```bash
+# Display system info and local AI endpoint status
+python -m python.cli.main info
+
+# Audit a scientific or physics megarepo with zero cloud cost
+python -m python.cli.main audit --repo-path /path/to/physics-repo
+
+# Verify a scientific claim against the Reality Contact Firewall (RCS >= 2.0)
+python -m python.cli.main verify --claim "H0 = 67.4 km/s/Mpc" --rcs 2 --anchors "Planck 2018 Legacy"
+
+# Launch the FastAPI REST service
+python -m python.cli.main serve --port 8000
+```
+
+### 2. Launch the Production REST API
+
 ```bash
 # Start the FastAPI discovery and audit server
 uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload

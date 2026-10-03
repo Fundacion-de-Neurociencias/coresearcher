@@ -21,6 +21,13 @@ Scientific discovery is exploding, yet modern AI tools often hallucinate ungroun
 > **CoResearcher is NOT a generative text bot.**  
 > **CoResearcher IS an auditable engine for the progressive reduction of the possible scientific state space (\(\Omega\)) through empirical constraints, deductive falsifications, multi-substrate reality contact, and categorical commutative invariance.**
 
+### 🛡️ The Sovereign AI Invariant (ADR-SOVEREIGNTY-030)
+
+> *"Make sure you own the AI you consume."*  
+> *"Cloud AI is not aligned with you; it is aligned with the corporation that owns it."*
+
+CoResearcher and its sister platforms (**AIDataLab**, **GeneForge**, **Neurodiagnoses**, **EdiTXT**) are built from the ground up to operate on **sovereign, air-gapped local GPU hardware**. By eliminating telemetry and proprietary cloud intermediaries, the ecosystem protects researchers and institutions against epistemic expropriation, idea harvesting, and commercial leakage of preliminary discoveries.
+
 ---
 
 ## ⚡ The Dual-Core System Architecture

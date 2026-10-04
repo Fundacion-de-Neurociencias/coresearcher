@@ -23,6 +23,7 @@ class ScientificViolationCategory(str, Enum):
     CIRCULAR_REASONING = "CIRCULAR_REASONING"
     NON_DETERMINISTIC_ARTIFACT = "NON_DETERMINISTIC_ARTIFACT"
     METHODOLOGICAL_SOUNDNESS = "METHODOLOGICAL_SOUNDNESS"
+    SYNTHETIC_SLOP_UNGROUNDED = "SYNTHETIC_SLOP_UNGROUNDED"
 
 
 class ReviewSeverity(str, Enum):
@@ -135,6 +136,7 @@ class ScientificEpistemicPRAuditor:
             self._audit_physical_conservation(f.file_path, lines, findings)
             self._audit_statistical_multiplicity(f.file_path, lines, findings)
             self._audit_unseeded_randomness(f.file_path, lines, findings)
+            self._audit_synthetic_slop(f.file_path, lines, findings)
 
         critical_c = sum(1 for x in findings if x.severity == ReviewSeverity.CRITICAL_REJECTION)
         major_c = sum(1 for x in findings if x.severity == ReviewSeverity.MAJOR_CONCERN)
@@ -292,6 +294,28 @@ class ScientificEpistemicPRAuditor:
                         "Unseeded random calls break SOM cryptographic snapshot verification across runs."
                     ),
                     suggested_remediation="rng = np.random.default_rng(seed=42)"
+                ))
+
+    def _audit_synthetic_slop(self, path: str, lines: List[str], findings: List[InlineEpistemicFinding]) -> None:
+        """
+        Anti-Slop Invariant (ADR-EPISTEMIC-033):
+        Detects ungrounded speculative assertions or simulated datasets claiming breakthrough
+        findings without empirical data lineage or formal cryptographic anchoring.
+        """
+        for idx, line in enumerate(lines, 1):
+            if "TODO: Replace with real biological data" in line or "simulated_empirical_results = True" in line:
+                findings.append(InlineEpistemicFinding(
+                    file_path=path,
+                    line_number=idx,
+                    category=ScientificViolationCategory.SYNTHETIC_SLOP_UNGROUNDED,
+                    severity=ReviewSeverity.CRITICAL_REJECTION,
+                    title="Ungrounded Academic Slop: Mock Empirical Simulation Declared as Ground Truth",
+                    epistemic_rationale=(
+                        "Per the Post-PDF Computable Science Mandate (ADR-EPISTEMIC-033) and Zero-Mocking Invariant, "
+                        "simulated placeholder datasets cannot be passed into production models or published manuscripts. "
+                        "Empirical claims must bind directly to raw data lineage hashes (RCS >= 2.0)."
+                    ),
+                    suggested_remediation="# Bind directly to raw clinical or molecular dataset on disk with SHA-256 hash"
                 ))
 
     def _generate_markdown_summary(

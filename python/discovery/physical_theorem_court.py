@@ -41,6 +41,7 @@ class CourtVerdict(str, Enum):
     REJECTED_UNPROVEN_AXIOM = "REJECTED_UNPROVEN_AXIOM"
     REJECTED_CONSERVATION_VIOLATION = "REJECTED_CONSERVATION_VIOLATION"
     REJECTED_ADVERSARIAL_SINGULARITY = "REJECTED_ADVERSARIAL_SINGULARITY"
+    REJECTED_ORACULAR_OPAQUE_CLAIM = "REJECTED_ORACULAR_OPAQUE_CLAIM"
 
 
 @dataclass
@@ -366,6 +367,49 @@ class PhysicalCoherenceCourt:
             claim.claim_id, claim.target_equation, CourtVerdict.VERIFIED_COHERENT,
             dag_result, conservation_results, adv_dict, None
         )
+
+    def audit_oracular_proof(
+        self,
+        claim_id: str,
+        target_equation: str,
+        proof_dag: Optional[ProofDependencyDAG] = None,
+        claimed_regularity_class: str = "C^infinity_global",
+        claimed_bound_func: Optional[Callable[[float, float], float]] = None
+    ) -> PhysicalProofAuditReport:
+        """
+        The Terence Tao Epistemic Gate (ADR-EPISTEMIC-032):
+        Audits external oracular AI claims (e.g. mass mathematical solutions, Navier-Stokes claims).
+        Enforces:
+        1. Non-opacity: Rejects bare text/claims lacking explicit ProofDependencyDAG.
+        2. Strict Acyclicity & Axiom Verification: Intercepts circular reasoning and unproven 'sorry' steps.
+        3. Educational Decomposition: Prepares structured diagnostics to avoid overwhelming human peer reviewers.
+        """
+        if proof_dag is None or len(proof_dag.lemmas) == 0:
+            autopsy = (
+                "Oracular Opaque Claim Rejected: Claim lacks an explicit, machine-verifiable ProofDependencyDAG. "
+                "Per the Terence Tao Invariant (ADR-EPISTEMIC-032), mathematical assertions without step-by-step "
+                "decomposed lemmas cannot be admitted into verified scientific knowledge."
+            )
+            return self._build_report(
+                claim_id=claim_id,
+                target_equation=target_equation,
+                verdict=CourtVerdict.REJECTED_ORACULAR_OPAQUE_CLAIM,
+                dag_audit={"is_acyclic": False, "lemmas_count": 0, "unproven_axioms": []},
+                conservation_audit=[],
+                adversarial_audit={},
+                autopsy=autopsy
+            )
+
+        claim_spec = PhysicalClaimSpec(
+            claim_id=claim_id,
+            physical_domain="Mathematical Physics Formal Audit",
+            target_equation=target_equation,
+            proposed_regularity_class=claimed_regularity_class,
+            proof_dag=proof_dag,
+            claimed_enstrophy_bound_func=claimed_bound_func or (lambda Re, t: 1e6 * (1.0 + t)),
+            conservation_constraints=[]
+        )
+        return self.audit_physical_claim(claim_spec)
 
     def _build_report(
         self,

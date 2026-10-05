@@ -28,6 +28,16 @@ from .ontology import (
     OntologyManager,
 )
 
+from .ontology_plan_engine import (
+    AxiomType,
+    PlanSafetyVerdict,
+    OntologicalAxiom,
+    OntologyBlastRadiusReport,
+    OntologyTransaction,
+    OntologyState,
+    OntologyPlanEngine,
+)
+
 from .trust_framework import (
     TrustScore,
     ClaimTrustFramework,
@@ -141,4 +151,13 @@ __all__ = [
     # Scientific Reasoning (Sprint 17)
     "EvidenceCombiner",
     "DiagnosticModelBuilder",
+    
+    # Ontology Infrastructure-as-Code (ADR-ONTOLOGY-035)
+    "AxiomType",
+    "PlanSafetyVerdict",
+    "OntologicalAxiom",
+    "OntologyBlastRadiusReport",
+    "OntologyTransaction",
+    "OntologyState",
+    "OntologyPlanEngine",
 ]

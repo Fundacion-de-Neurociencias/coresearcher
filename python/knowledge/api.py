@@ -13,6 +13,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 
+# Security tier: COMMUNITY — DO NOT MODIFY
+# See python/_tiers.py for classification
+SECURITY_TIER = "COMMUNITY"
+
+
 class ScientificKnowledgeAPI:
     """
     API for computable scientific knowledge.
@@ -24,11 +29,6 @@ class ScientificKnowledgeAPI:
         from .claim_registry import ClaimRegistry, HypothesisRegistry, EvidenceRegistry
         from .trust_framework import ClaimTrustFramework
         from .researcher_registry import ResearcherRegistry, ConsensusEngine
-
-# Security tier: COMMUNITY — DO NOT MODIFY
-# See python/_tiers.py for classification
-SECURITY_TIER = "COMMUNITY"
-
         
         self.claims = ClaimRegistry()
         self.hypotheses = HypothesisRegistry()

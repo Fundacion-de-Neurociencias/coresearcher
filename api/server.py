@@ -127,6 +127,10 @@ from python.discovery import (
     MetaRecursiveInstrumentCompiler,
     RealityContactFirewall,
     PhysicsCorpusAuditor,
+    ExactSymbolicCourt,
+    ExactProofDAG,
+    ExactLemmaNode,
+    EpistemicLemmaStatus,
 )
 
 
@@ -394,6 +398,14 @@ class AuditPhysicsMegarepoRequest(BaseModel):
     repo_path: str
     max_files: Optional[int] = 50
     subdiscipline_filter: Optional[str] = None
+
+class AuditExactSymbolicRequest(BaseModel):
+    theorem_id: str
+    target_statement: Optional[str] = ""
+    lemmas: List[Dict[str, Any]] = []
+    lhs_target: Optional[str] = None
+    rhs_target: Optional[str] = None
+    sequence_benchmark: Optional[List[int]] = None
 
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
@@ -1649,6 +1661,36 @@ def audit_categorical_diagram(req: CategoricalAuditRequest):
             "category_axioms": axioms_check,
             "diagram_audit": audit_res
         }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/discovery/exact-symbolic/audit")
+def audit_exact_symbolic(req: AuditExactSymbolicRequest):
+    """
+    ADR-EPISTEMIC-034: Exact Symbolic Dual-Verification & Obstacle-Driven Discovery Engine
+    Audits candidate mathematical/physical proofs using SymPy and strict lemma purity checks.
+    """
+    try:
+        dag = ExactProofDAG(theorem_id=req.theorem_id, target_statement=req.target_statement or "")
+        for l in req.lemmas:
+            status_str = l.get("status", "ESTABLISHED_AXIOM")
+            status = EpistemicLemmaStatus(status_str) if status_str in EpistemicLemmaStatus.__members__ else EpistemicLemmaStatus.ESTABLISHED_AXIOM
+            dag.add_lemma(ExactLemmaNode(
+                lemma_id=l["lemma_id"],
+                statement=l.get("statement", ""),
+                status=status,
+                premises=l.get("premises", []),
+                symbolic_expression=l.get("symbolic_expression")
+            ))
+
+        report = ExactSymbolicCourt.audit_exact_proof(
+            dag=dag,
+            lhs_target=req.lhs_target,
+            rhs_target=req.rhs_target,
+            sequence_benchmark=req.sequence_benchmark
+        )
+        return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

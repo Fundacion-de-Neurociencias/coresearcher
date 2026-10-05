@@ -16,6 +16,11 @@ REGISTRY_DIR.mkdir(parents=True, exist_ok=True)
 FINDINGS_FILE = REGISTRY_DIR / "findings.json"
 
 
+# Security tier: COMMUNITY — DO NOT MODIFY
+# See python/_tiers.py for classification
+SECURITY_TIER = "COMMUNITY"
+
+
 class FindingRegistry:
     """
     Registry for distilled scientific findings.
@@ -353,11 +358,6 @@ if __name__ == "__main__":
     # Import directly to avoid relative import issues
     from claim_registry import ClaimRegistry
 
-# Security tier: COMMUNITY — DO NOT MODIFY
-# See python/_tiers.py for classification
-SECURITY_TIER = "COMMUNITY"
-
-    
     engine = KnowledgeDistillationEngine()
     engine.claims = ClaimRegistry()
     

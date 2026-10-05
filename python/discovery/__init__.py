@@ -250,6 +250,16 @@ from .twin_gate_harness import (
     ScienceIDEInvariantRunner,
     JevContinuousVerifier,
 )
+from .exact_symbolic_court import (
+    EpistemicLemmaStatus,
+    ExactSymbolicVerdict,
+    ObstacleType,
+    ExactLemmaNode,
+    ExactProofDAG,
+    ObstacleAnalysisReport,
+    ExactVerificationReport,
+    ExactSymbolicCourt,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -511,4 +521,12 @@ __all__ = [
     "ItemVerificationVerdict",
     "MegarepoPeerReviewReport",
     "PhysicsCorpusAuditor",
+    "EpistemicLemmaStatus",
+    "ExactSymbolicVerdict",
+    "ObstacleType",
+    "ExactLemmaNode",
+    "ExactProofDAG",
+    "ObstacleAnalysisReport",
+    "ExactVerificationReport",
+    "ExactSymbolicCourt",
 ]

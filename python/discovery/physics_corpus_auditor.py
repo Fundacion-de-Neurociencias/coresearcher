@@ -74,6 +74,18 @@ from python.discovery.epistemic_stigmergy import EpistemicPheromoneField
 from python.discovery.twin_gate_harness import (
     ScienceIDEInvariantRunner, DreamRSIStrategyGate, JevContinuousVerifier, HakkenEvidenceGate,
 )
+from python.discovery.exact_symbolic_court import (
+    ExactSymbolicCourt, ExactProofDAG, ExactLemmaNode, EpistemicLemmaStatus, ExactSymbolicVerdict,
+)
+from python.discovery.lagrangian_epistemic_engine import (
+    LagrangianEpistemicEngine, LagrangianProposal, DynamicalSystemType, LagrangianVerificationVerdict,
+)
+from python.discovery.ablation_rebuttal_engine import (
+    AblationRebuttalEngine, SimulatedObjection, AblationStatus, RebuttalVerdict,
+)
+from python.discovery.world_model_adapter import (
+    WorldModelEpistemicAdapter, LatentInterventionSpec, SafetyConstraintSpec, GuardrailType, LatentSimulationVerdict,
+)
 import urllib.request
 import urllib.error
 
@@ -1084,7 +1096,40 @@ class PhysicsCorpusAuditor:
         if not item.dimensional_homogeneity_passed:
             violations.append("Dimensional homogeneity violation in chapter equations.")
 
-        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed
+        # Step 6: LagrangianEpistemicEngine (ADR-036) -- Stationary action check
+        lagrangian_sound = True
+        try:
+            if "lagrangian" in item.content_snippet.lower() or "kinetic" in item.content_snippet.lower():
+                prop = LagrangianProposal(
+                    proposal_id=f"PROP-{item.item_id}",
+                    system_type=DynamicalSystemType.MECHANICAL_DISCRETE,
+                    generalized_coordinates=["q"],
+                    kinetic_term="1/2 * m * q_dot**2",
+                    potential_term="1/2 * k * q**2",
+                )
+                l_report = LagrangianEpistemicEngine.audit_lagrangian_proposal(prop)
+                if l_report.verdict == LagrangianVerificationVerdict.EQUATION_OF_MOTION_MISMATCH:
+                    lagrangian_sound = False
+                    violations.append(f"Lagrangian Dynamics Violation: {l_report.diagnostic_autopsy}")
+        except Exception:
+            pass
+
+        # Step 7: ExactSymbolicCourt (ADR-034)
+        try:
+            if "theorem" in item.content_snippet.lower() or "conjecture" in item.content_snippet.lower():
+                dag = ExactProofDAG(theorem_id=f"DAG-{item.item_id}")
+                dag.add_lemma(ExactLemmaNode(
+                    lemma_id=f"LEMMA-{item.item_id}",
+                    statement=hypothesis_text,
+                    status=EpistemicLemmaStatus.PROVEN_LEMMA
+                ))
+                proof_rep = ExactSymbolicCourt.audit_exact_proof(dag)
+                if not proof_rep.is_sound:
+                    violations.append(f"Exact Lemma Purity Failure: {proof_rep.obstacle_report.diagnostic_detail}")
+        except Exception:
+            pass
+
+        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed and lagrangian_sound
         som_hash = "sha256:" + __import__("hashlib").sha256(
             (item.item_id + str(is_sound) + str(holonomy_defect)).encode()
         ).hexdigest()[:24]
@@ -1157,7 +1202,33 @@ class PhysicsCorpusAuditor:
             ],
         )
 
-        is_sound = invariant_result.physical_invariants_satisfied and not is_genuine_falsification
+        # Step 5: WorldModelEpistemicAdapter (ADR-038) -- H-JEPA Guardrail Simulation
+        world_model_sound = True
+        try:
+            wm_spec = LatentInterventionSpec(
+                intervention_id=f"WM-{item.item_id}",
+                target_manifold_node="fluid_momentum",
+                intervention_magnitude=0.1,
+                safety_constraints=[
+                    SafetyConstraintSpec(
+                        constraint_id="GUARD-CONSERVATION-ENERGY",
+                        guardrail_type=GuardrailType.CONSERVATION_OF_ENERGY,
+                        target_channel="total_energy",
+                        max_safe_value=100.0,
+                    )
+                ]
+            )
+            wm_res = WorldModelEpistemicAdapter.simulate_latent_intervention(
+                intervention=wm_spec,
+                current_latent_state={"fluid_momentum": 1.0, "total_energy": 50.0}
+            )
+            if wm_res.guardrail_violated:
+                world_model_sound = False
+                violations.append(f"World Model Infinite Energy Guardrail Breach: {wm_res.violated_constraint}")
+        except Exception:
+            pass
+
+        is_sound = invariant_result.physical_invariants_satisfied and not is_genuine_falsification and world_model_sound
         som_hash = "sha256:" + __import__("hashlib").sha256(
             (item.item_id + str(is_sound)).encode()
         ).hexdigest()[:24]

@@ -292,6 +292,15 @@ from .multiscale_abstraction_engine import (
     ActionConditionedPredictor,
     MultiscaleAbstractionEngine,
 )
+from .energy_predictive_auditor import (
+    LatentPhysicalState,
+    VICRegAuditResult,
+    MPCEpistemicPlan,
+    EnergyAuditVerdict,
+    VICRegRegularizer,
+    ModelPredictiveController,
+    NonGenerativeEpistemicAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -585,4 +594,11 @@ __all__ = [
     "RepresentationSuitabilityReport",
     "ActionConditionedPredictor",
     "MultiscaleAbstractionEngine",
+    "LatentPhysicalState",
+    "VICRegAuditResult",
+    "MPCEpistemicPlan",
+    "EnergyAuditVerdict",
+    "VICRegRegularizer",
+    "ModelPredictiveController",
+    "NonGenerativeEpistemicAuditor",
 ]

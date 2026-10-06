@@ -267,6 +267,15 @@ from .lagrangian_epistemic_engine import (
     LagrangianAuditReport,
     LagrangianEpistemicEngine,
 )
+from .ablation_rebuttal_engine import (
+    AblationStatus,
+    RebuttalVerdict,
+    TheoreticalTermAblation,
+    SimulatedObjection,
+    SimulatedRebuttalResponse,
+    FullAblationRebuttalDossier,
+    AblationRebuttalEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -541,4 +550,11 @@ __all__ = [
     "LagrangianProposal",
     "LagrangianAuditReport",
     "LagrangianEpistemicEngine",
+    "AblationStatus",
+    "RebuttalVerdict",
+    "TheoreticalTermAblation",
+    "SimulatedObjection",
+    "SimulatedRebuttalResponse",
+    "FullAblationRebuttalDossier",
+    "AblationRebuttalEngine",
 ]

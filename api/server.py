@@ -427,6 +427,14 @@ class AuditLagrangianProposalRequest(BaseModel):
     claimed_equation_of_motion: Optional[str] = None
     assumed_symmetries: Optional[List[str]] = []
 
+class RunAblationRebuttalRequest(BaseModel):
+    model_id: str
+    q_name: str
+    kinetic_str: str
+    base_potential_str: str
+    interaction_terms: Dict[str, str]
+    objections: Optional[List[Dict[str, Any]]] = []
+
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
     literature_citations_count: Optional[int] = 0
@@ -1819,6 +1827,41 @@ def audit_lagrangian_proposal(req: AuditLagrangianProposalRequest):
         return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+from python.discovery.ablation_rebuttal_engine import (
+    AblationRebuttalEngine,
+    SimulatedObjection,
+)
+
+
+@app.post("/api/discovery/ablation-rebuttal/run")
+def run_ablation_and_rebuttal(req: RunAblationRebuttalRequest):
+    """
+    ADR-DISCOVERY-037: Automated Theoretical Ablation & Simulated Peer-Review Rebuttal Loop
+    Inspired by ScientistTwo (Google Cloud AI, 2026).
+    """
+    try:
+        objs = []
+        for o in req.objections or []:
+            objs.append(SimulatedObjection(
+                reviewer_id=o.get("reviewer_id", "Reviewer-1"),
+                critique_point=o.get("critique_point", ""),
+                severity=o.get("severity", "MINOR"),
+                targeted_subexpression=o.get("targeted_subexpression")
+            ))
+        dossier = AblationRebuttalEngine.generate_dossier(
+            model_id=req.model_id,
+            q_name=req.q_name,
+            kinetic_str=req.kinetic_str,
+            base_potential_str=req.base_potential_str,
+            interaction_terms=req.interaction_terms,
+            objections=objs
+        )
+        return dossier.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

@@ -134,6 +134,8 @@ from python.discovery import (
     AbstractionLevel,
     MultiscaleStateNode,
     MultiscaleAbstractionEngine,
+    LatentPhysicalState,
+    NonGenerativeEpistemicAuditor,
 )
 
 
@@ -1971,6 +1973,65 @@ def predict_multiscale_latent_transition(req: MultiscalePredictRequest):
             "gradient_norm": verdict.gradient_norm,
             "is_differentiable": verdict.is_differentiable,
             "details": verdict.details,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class EnergyAuditRequest(BaseModel):
+    theory_id: str
+    theory_embedding: List[float]
+    theory_conserved_quantities: Optional[Dict[str, float]] = None
+    theory_hard_violations: Optional[List[str]] = None
+    empirical_reference_embedding: List[float]
+    empirical_conserved_quantities: Optional[Dict[str, float]] = None
+
+
+@app.post("/api/discovery/energy-ebm/audit")
+def audit_theory_energy_ebm(req: EnergyAuditRequest):
+    """
+    ADR-EPISTEMIC-040: Non-Generative Energy-Based Epistemics & Model-Predictive Scientific Auditing
+    Evaluates physical theories using unnormalized energy compatibility (EBM) and VICReg regularizers.
+    """
+    try:
+        theory_latent = LatentPhysicalState(
+            state_id=req.theory_id,
+            embedding=req.theory_embedding,
+            conserved_quantities=req.theory_conserved_quantities or {},
+            hard_violations=req.theory_hard_violations or [],
+        )
+
+        empirical_ref = LatentPhysicalState(
+            state_id=f"ref_{req.theory_id}",
+            embedding=req.empirical_reference_embedding,
+            conserved_quantities=req.empirical_conserved_quantities or {},
+        )
+
+        auditor = NonGenerativeEpistemicAuditor()
+        verdict = auditor.audit_physical_theory(
+            theory_id=req.theory_id,
+            theory_latent=theory_latent,
+            empirical_reference_latent=empirical_ref,
+        )
+
+        return {
+            "theory_id": verdict.theory_id,
+            "unnormalized_energy": verdict.unnormalized_energy,
+            "is_physically_sound": verdict.is_physically_sound,
+            "failure_mode": verdict.failure_mode,
+            "vicreg_health": {
+                "invariance_loss": verdict.vicreg_health.invariance_loss,
+                "variance_loss": verdict.vicreg_health.variance_loss,
+                "covariance_loss": verdict.vicreg_health.covariance_loss,
+                "total_vicreg_loss": verdict.vicreg_health.total_vicreg_loss,
+                "is_representation_collapsed": verdict.vicreg_health.is_representation_collapsed,
+            },
+            "mpc_plan": {
+                "horizon_steps": verdict.mpc_plan.horizon_steps,
+                "best_candidate_energy": verdict.mpc_plan.best_candidate_energy,
+                "residual_rl_calibration_needed": verdict.mpc_plan.residual_rl_calibration_needed,
+                "explanation": verdict.mpc_plan.explanation,
+            },
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

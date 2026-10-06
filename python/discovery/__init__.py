@@ -284,6 +284,14 @@ from .world_model_adapter import (
     LatentSimulationResult,
     WorldModelEpistemicAdapter,
 )
+from .multiscale_abstraction_engine import (
+    AbstractionLevel,
+    MultiscaleStateNode,
+    ActionConditionedPredictionVerdict,
+    RepresentationSuitabilityReport,
+    ActionConditionedPredictor,
+    MultiscaleAbstractionEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -571,4 +579,10 @@ __all__ = [
     "LatentInterventionSpec",
     "LatentSimulationResult",
     "WorldModelEpistemicAdapter",
+    "AbstractionLevel",
+    "MultiscaleStateNode",
+    "ActionConditionedPredictionVerdict",
+    "RepresentationSuitabilityReport",
+    "ActionConditionedPredictor",
+    "MultiscaleAbstractionEngine",
 ]

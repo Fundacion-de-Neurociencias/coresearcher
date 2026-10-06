@@ -131,6 +131,9 @@ from python.discovery import (
     ExactProofDAG,
     ExactLemmaNode,
     EpistemicLemmaStatus,
+    AbstractionLevel,
+    MultiscaleStateNode,
+    MultiscaleAbstractionEngine,
 )
 
 
@@ -1914,6 +1917,61 @@ def simulate_world_model_intervention(req: SimulateWorldModelInterventionRequest
             macro_subgoals=req.macro_subgoals
         )
         return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class MultiscalePredictRequest(BaseModel):
+    node_id: str
+    abstraction_level: str  # MICRO_IMPLEMENTATIONAL, MESO_ALGORITHMIC, MACRO_COMPUTATIONAL_CONSERVATIVE
+    latent_vector: List[float]
+    detail_dimension: int
+    action_vector: List[float]
+    expected_target: Optional[List[float]] = None
+    noise_variance: float = 0.05
+    conserved_quantities: Optional[Dict[str, float]] = None
+
+
+@app.post("/api/discovery/multiscale/predict")
+def predict_multiscale_latent_transition(req: MultiscalePredictRequest):
+    """
+    ADR-DISCOVERY-039: Multiscale Latent Abstraction Hierarchy & Differentiable Action-Conditioned Epistemics
+    Calculates forward latent prediction, prediction horizon, and energy gradients.
+    """
+    try:
+        level_map = {
+            "MICRO_IMPLEMENTATIONAL": AbstractionLevel.MICRO_IMPLEMENTATIONAL,
+            "MESO_ALGORITHMIC": AbstractionLevel.MESO_ALGORITHMIC,
+            "MACRO_COMPUTATIONAL_CONSERVATIVE": AbstractionLevel.MACRO_COMPUTATIONAL_CONSERVATIVE,
+        }
+        level = level_map.get(req.abstraction_level, AbstractionLevel.MESO_ALGORITHMIC)
+
+        state = MultiscaleStateNode(
+            node_id=req.node_id,
+            level=level,
+            latent_vector=req.latent_vector,
+            detail_dimension=req.detail_dimension,
+            noise_variance=req.noise_variance,
+            conserved_quantities=req.conserved_quantities or {},
+        )
+
+        engine = MultiscaleAbstractionEngine()
+        verdict = engine.evaluate_action_conditioned_transition(
+            state=state,
+            action=req.action_vector,
+            expected_target=req.expected_target,
+        )
+
+        return {
+            "source_node_id": verdict.source_node_id,
+            "abstraction_level": verdict.abstraction_level.value,
+            "prediction_horizon": verdict.prediction_horizon,
+            "target_prediction": verdict.target_prediction,
+            "energy_loss": verdict.energy_loss,
+            "gradient_norm": verdict.gradient_norm,
+            "is_differentiable": verdict.is_differentiable,
+            "details": verdict.details,
+        }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

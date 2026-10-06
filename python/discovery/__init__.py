@@ -260,6 +260,13 @@ from .exact_symbolic_court import (
     ExactVerificationReport,
     ExactSymbolicCourt,
 )
+from .lagrangian_epistemic_engine import (
+    DynamicalSystemType,
+    LagrangianVerificationVerdict,
+    LagrangianProposal,
+    LagrangianAuditReport,
+    LagrangianEpistemicEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -529,4 +536,9 @@ __all__ = [
     "ObstacleAnalysisReport",
     "ExactVerificationReport",
     "ExactSymbolicCourt",
+    "DynamicalSystemType",
+    "LagrangianVerificationVerdict",
+    "LagrangianProposal",
+    "LagrangianAuditReport",
+    "LagrangianEpistemicEngine",
 ]

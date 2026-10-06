@@ -418,6 +418,15 @@ class OntologyApplyPlanRequest(BaseModel):
 class OntologyRollbackRequest(BaseModel):
     transaction_id: str
 
+class AuditLagrangianProposalRequest(BaseModel):
+    proposal_id: str
+    system_type: str = "MECHANICAL_DISCRETE"
+    generalized_coordinates: List[str]
+    kinetic_term: str
+    potential_term: str
+    claimed_equation_of_motion: Optional[str] = None
+    assumed_symmetries: Optional[List[str]] = []
+
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
     literature_citations_count: Optional[int] = 0
@@ -1776,6 +1785,41 @@ def rollback_ontology_transaction(req: OntologyRollbackRequest):
         raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+from python.discovery.lagrangian_epistemic_engine import (
+    LagrangianEpistemicEngine,
+    LagrangianProposal,
+    DynamicalSystemType,
+)
+
+
+@app.post("/api/discovery/lagrangian/audit")
+def audit_lagrangian_proposal(req: AuditLagrangianProposalRequest):
+    """
+    ADR-DISCOVERY-036: Generalized Lagrangian Epistemics & Principle of Stationary Action
+    Derives exact Euler-Lagrange equations of motion and audits Noether symmetries.
+    """
+    try:
+        sys_type = (
+            DynamicalSystemType(req.system_type)
+            if req.system_type in DynamicalSystemType.__members__
+            else DynamicalSystemType.MECHANICAL_DISCRETE
+        )
+        proposal = LagrangianProposal(
+            proposal_id=req.proposal_id,
+            system_type=sys_type,
+            generalized_coordinates=req.generalized_coordinates,
+            kinetic_term=req.kinetic_term,
+            potential_term=req.potential_term,
+            claimed_equation_of_motion=req.claimed_equation_of_motion,
+            assumed_symmetries=req.assumed_symmetries or []
+        )
+        report = LagrangianEpistemicEngine.audit_lagrangian_proposal(proposal)
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

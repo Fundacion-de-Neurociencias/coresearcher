@@ -435,6 +435,14 @@ class RunAblationRebuttalRequest(BaseModel):
     interaction_terms: Dict[str, str]
     objections: Optional[List[Dict[str, Any]]] = []
 
+class SimulateWorldModelInterventionRequest(BaseModel):
+    intervention_id: str
+    target_manifold_node: str
+    intervention_magnitude: float
+    current_latent_state: Dict[str, float]
+    safety_constraints: Optional[List[Dict[str, Any]]] = []
+    macro_subgoals: Optional[List[Dict[str, float]]] = None
+
 class EvaluateRealityContactRequest(BaseModel):
     hypothesis_id: str
     literature_citations_count: Optional[int] = 0
@@ -1861,6 +1869,54 @@ def run_ablation_and_rebuttal(req: RunAblationRebuttalRequest):
         return dossier.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+from python.discovery.world_model_adapter import (
+    WorldModelEpistemicAdapter,
+    LatentInterventionSpec,
+    SafetyConstraintSpec,
+    GuardrailType,
+)
+
+
+@app.post("/api/discovery/world-model/simulate")
+def simulate_world_model_intervention(req: SimulateWorldModelInterventionRequest):
+    """
+    ADR-DISCOVERY-038: Latent World Model Grounding & Hierarchical H-JEPA Guardrail Simulation
+    Simulates physical perturbations in the continuous latent manifold with E = +inf guardrails.
+    """
+    try:
+        constraints = []
+        for c in req.safety_constraints or []:
+            g_type = (
+                GuardrailType(c["guardrail_type"])
+                if c["guardrail_type"] in GuardrailType.__members__
+                else GuardrailType.CONSERVATION_OF_ENERGY
+            )
+            constraints.append(SafetyConstraintSpec(
+                constraint_id=c.get("constraint_id", f"GUARD-{len(constraints)+1}"),
+                guardrail_type=g_type,
+                target_channel=c["target_channel"],
+                min_safe_value=c.get("min_safe_value"),
+                max_safe_value=c.get("max_safe_value")
+            ))
+
+        intervention = LatentInterventionSpec(
+            intervention_id=req.intervention_id,
+            target_manifold_node=req.target_manifold_node,
+            intervention_magnitude=req.intervention_magnitude,
+            safety_constraints=constraints
+        )
+
+        result = WorldModelEpistemicAdapter.simulate_latent_intervention(
+            intervention=intervention,
+            current_latent_state=req.current_latent_state,
+            macro_subgoals=req.macro_subgoals
+        )
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

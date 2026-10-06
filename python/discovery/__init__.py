@@ -276,6 +276,14 @@ from .ablation_rebuttal_engine import (
     FullAblationRebuttalDossier,
     AblationRebuttalEngine,
 )
+from .world_model_adapter import (
+    GuardrailType,
+    LatentSimulationVerdict,
+    SafetyConstraintSpec,
+    LatentInterventionSpec,
+    LatentSimulationResult,
+    WorldModelEpistemicAdapter,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -557,4 +565,10 @@ __all__ = [
     "SimulatedRebuttalResponse",
     "FullAblationRebuttalDossier",
     "AblationRebuttalEngine",
+    "GuardrailType",
+    "LatentSimulationVerdict",
+    "SafetyConstraintSpec",
+    "LatentInterventionSpec",
+    "LatentSimulationResult",
+    "WorldModelEpistemicAdapter",
 ]

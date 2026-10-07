@@ -137,6 +137,7 @@ from python.discovery import (
     LatentPhysicalState,
     NonGenerativeEpistemicAuditor,
     SovereignEpistemicBunker,
+    LimitationResolutionEngine,
 )
 
 
@@ -2095,6 +2096,55 @@ def audit_session_perimeter(req: AuditPerimeterRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class ExtractLimitationsRequest(BaseModel):
+    baseline_name: str
+    theory_text: str
+    known_weaknesses: Optional[List[Dict[str, Any]]] = None
+
+
+@app.post("/api/discovery/limitations/extract")
+def extract_baseline_limitations(req: ExtractLimitationsRequest):
+    """
+    ADR-DISCOVERY-042: Problem-Driven Limitation Resolution & Empirical Refinement Engine
+    Extracts actionable theoretical and computational bottlenecks from baseline models.
+    """
+    try:
+        engine = LimitationResolutionEngine()
+        limitations = engine.extract_actionable_limitations(
+            baseline_name=req.baseline_name,
+            theory_text=req.theory_text,
+            known_weaknesses=req.known_weaknesses,
+        )
+        ideas = engine.generate_targeted_seed_ideas(limitations)
+        return {
+            "baseline_name": req.baseline_name,
+            "total_limitations_found": len(limitations),
+            "limitations": [
+                {
+                    "limitation_id": lim.limitation_id,
+                    "category": lim.category.value,
+                    "description": lim.description,
+                    "impact_severity": lim.impact_severity,
+                    "is_actionable": lim.is_actionable,
+                    "formal_bottleneck_equation": lim.formal_bottleneck_equation,
+                }
+                for lim in limitations
+            ],
+            "targeted_seed_ideas": [
+                {
+                    "idea_id": idea.idea_id,
+                    "target_limitation_ids": idea.target_limitation_ids,
+                    "proposed_mechanism": idea.proposed_mechanism,
+                    "novelty_score": idea.novelty_score,
+                }
+                for idea in ideas
+            ],
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

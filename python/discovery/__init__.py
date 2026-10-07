@@ -308,6 +308,15 @@ from .sovereign_epistemic_bunker import (
     AirGapVerificationGate,
     SovereignEpistemicBunker,
 )
+from .limitation_resolution_engine import (
+    LimitationCategory,
+    ScreeningVerdict,
+    BaselineLimitation,
+    TargetedSeedIdea,
+    SubsetScreeningReport,
+    SupplementaryRebuttalExecution,
+    LimitationResolutionEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -613,4 +622,11 @@ __all__ = [
     "AirGapAuditReport",
     "AirGapVerificationGate",
     "SovereignEpistemicBunker",
+    "LimitationCategory",
+    "ScreeningVerdict",
+    "BaselineLimitation",
+    "TargetedSeedIdea",
+    "SubsetScreeningReport",
+    "SupplementaryRebuttalExecution",
+    "LimitationResolutionEngine",
 ]

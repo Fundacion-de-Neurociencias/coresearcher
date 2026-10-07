@@ -136,6 +136,7 @@ from python.discovery import (
     MultiscaleAbstractionEngine,
     LatentPhysicalState,
     NonGenerativeEpistemicAuditor,
+    SovereignEpistemicBunker,
 )
 
 
@@ -2035,6 +2036,66 @@ def audit_theory_energy_ebm(req: EnergyAuditRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class NotarizeThoughtRequest(BaseModel):
+    hypothesis_content: str
+    author_id: Optional[str] = None
+    extra_metadata: Optional[Dict[str, Any]] = None
+
+
+class AuditPerimeterRequest(BaseModel):
+    active_endpoints: List[str]
+    session_id: Optional[str] = "session"
+
+
+@app.post("/api/discovery/sovereignty/notarize")
+def notarize_thought_claim(req: NotarizeThoughtRequest):
+    """
+    ADR-SOVEREIGNTY-041: Zero-Trust Epistemic Bunker & Cryptographic Thought-Privacy Architecture
+    Instantly fingerprints scientific priority with SHA-256 and Merkle proof without cloud leakage.
+    """
+    try:
+        bunker = SovereignEpistemicBunker(author_id=req.author_id or "sovereign_researcher")
+        rec = bunker.notarize_intellectual_claim(
+            hypothesis_content=req.hypothesis_content,
+            author_id=req.author_id,
+            extra_metadata=req.extra_metadata,
+        )
+        return {
+            "thought_hash_sha256": rec.thought_hash_sha256,
+            "timestamp_ns": rec.timestamp_ns,
+            "author_id": rec.author_id,
+            "preview_snippet": rec.preview_snippet,
+            "merkle_anchor": rec.merkle_anchor,
+            "is_airgapped": rec.is_airgapped,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/discovery/sovereignty/audit-perimeter")
+def audit_session_perimeter(req: AuditPerimeterRequest):
+    """
+    ADR-SOVEREIGNTY-041: Verifies network perimeter and raises alarms on non-sovereign endpoints.
+    """
+    try:
+        bunker = SovereignEpistemicBunker()
+        report = bunker.audit_session_perimeter(
+            active_endpoints=req.active_endpoints,
+            session_id=req.session_id or "session",
+        )
+        return {
+            "session_id": report.session_id,
+            "is_fully_airgapped": report.is_fully_airgapped,
+            "blocked_remote_hosts": report.blocked_remote_hosts,
+            "leak_probability": report.leak_probability,
+            "security_verdict": report.security_verdict,
+            "details": report.details,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

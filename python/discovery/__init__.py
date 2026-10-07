@@ -317,6 +317,13 @@ from .limitation_resolution_engine import (
     SupplementaryRebuttalExecution,
     LimitationResolutionEngine,
 )
+from .result_family_orchestrator import (
+    ResultRole,
+    FormalizationTier,
+    FamilyManuscriptNode,
+    ResultFamilyAuditVerdict,
+    ResultFamilyOrchestrator,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -629,4 +636,9 @@ __all__ = [
     "SubsetScreeningReport",
     "SupplementaryRebuttalExecution",
     "LimitationResolutionEngine",
+    "ResultRole",
+    "FormalizationTier",
+    "FamilyManuscriptNode",
+    "ResultFamilyAuditVerdict",
+    "ResultFamilyOrchestrator",
 ]

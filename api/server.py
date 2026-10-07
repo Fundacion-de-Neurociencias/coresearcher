@@ -138,6 +138,10 @@ from python.discovery import (
     NonGenerativeEpistemicAuditor,
     SovereignEpistemicBunker,
     LimitationResolutionEngine,
+    ResultRole,
+    FormalizationTier,
+    ResultFamilyOrchestrator,
+    ResultFamilyAuditVerdict,
 )
 
 
@@ -2144,6 +2148,55 @@ def extract_baseline_limitations(req: ExtractLimitationsRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class ResultFamilyNodeRequest(BaseModel):
+    node_id: str
+    title: str
+    role: str = "CORE_THEOREM"
+    statement: str
+    symbolic_expression: Optional[str] = None
+    has_lean_formalization: bool = False
+    lean_file_path: Optional[str] = None
+    parent_lemma_ids: List[str] = []
+
+
+class ResultFamilyAuditRequest(BaseModel):
+    family_id: str
+    family_title: str
+    discipline: str = "MATHEMATICS"
+    nodes: List[ResultFamilyNodeRequest]
+
+
+@app.post("/api/discovery/families/audit")
+def audit_result_family_endpoint(req: ResultFamilyAuditRequest):
+    """
+    Audits a Result Family (ADR-DISCOVERY-043) enforcing CAS + Lean Dual Formalization Gate
+    and category holonomy commutativity.
+    """
+    try:
+        orchestrator = ResultFamilyOrchestrator(
+            family_id=req.family_id,
+            family_title=req.family_title,
+            discipline=req.discipline,
+        )
+        for n in req.nodes:
+            role_enum = ResultRole(n.role) if n.role in [r.value for r in ResultRole] else ResultRole.CORE_THEOREM
+            orchestrator.add_manuscript_node(
+                node_id=n.node_id,
+                title=n.title,
+                role=role_enum,
+                statement=n.statement,
+                symbolic_expression=n.symbolic_expression,
+                has_lean_formalization=n.has_lean_formalization,
+                lean_file_path=n.lean_file_path,
+                parent_lemma_ids=n.parent_lemma_ids,
+            )
+        verdict = orchestrator.audit_family_epistemic_integrity()
+        return verdict.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

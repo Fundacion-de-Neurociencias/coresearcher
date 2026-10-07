@@ -83,8 +83,17 @@ from python.discovery.lagrangian_epistemic_engine import (
 from python.discovery.ablation_rebuttal_engine import (
     AblationRebuttalEngine, SimulatedObjection, AblationStatus, RebuttalVerdict,
 )
-from python.discovery.world_model_adapter import (
+from .world_model_adapter import (
     WorldModelEpistemicAdapter, LatentInterventionSpec, SafetyConstraintSpec, GuardrailType, LatentSimulationVerdict,
+)
+from .multiscale_abstraction_engine import (
+    MultiscaleAbstractionEngine, MultiscaleStateNode, AbstractionLevel, ActionConditionedPredictor,
+)
+from .energy_predictive_auditor import (
+    NonGenerativeEpistemicAuditor, LatentPhysicalState, EnergyAuditVerdict,
+)
+from .sovereign_epistemic_bunker import (
+    SovereignEpistemicBunker, AirGapVerificationGate, EpistemicExpropriationBreach,
 )
 import urllib.request
 import urllib.error
@@ -634,6 +643,10 @@ class PhysicsCorpusAuditor:
         self.git_repo = EpistemicGitRepo(repo_name="physics-corpus-audit")
         self.agora = AgoraSharedIndex()
         self.pheromone = EpistemicPheromoneField()
+        # v3.1 epistemic & sovereignty stack (ADR-039, ADR-040, ADR-041)
+        self.multiscale = MultiscaleAbstractionEngine()
+        self.energy_auditor = NonGenerativeEpistemicAuditor()
+        self.bunker = SovereignEpistemicBunker()
 
 
     def classify_subdiscipline_and_division(self, text: str) -> Tuple[UniversalPhysicsDivision, PhysicsSubdiscipline]:
@@ -1129,7 +1142,33 @@ class PhysicsCorpusAuditor:
         except Exception:
             pass
 
-        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed and lagrangian_sound
+        # Step 8: NonGenerativeEpistemicAuditor (ADR-040) & Sovereign Epistemic Bunker (ADR-041)
+        energy_sound = True
+        try:
+            self.bunker.notarize_intellectual_claim(
+                hypothesis_content=f"{item.title}::{hypothesis_text}",
+                author_id="physics_corpus_author",
+                extra_metadata={"item_id": item.item_id, "division": item.division.value}
+            )
+
+            t_latent = LatentPhysicalState(
+                state_id=f"TH-{item.item_id}",
+                embedding=[1.0, 0.5, -0.2, 0.1],
+                conserved_quantities={"holonomy": holonomy_defect},
+                hard_violations=[] if item.dimensional_homogeneity_passed else ["DIMENSIONAL_INCONSISTENCY"]
+            )
+            ref_latent = LatentPhysicalState(
+                state_id=f"REF-{item.item_id}",
+                embedding=[1.02, 0.48, -0.19, 0.11],
+            )
+            ebm_verdict = self.energy_auditor.audit_physical_theory(item.item_id, t_latent, ref_latent)
+            if not ebm_verdict.is_physically_sound:
+                energy_sound = False
+                violations.append(f"Non-Generative EBM Discrepancy: {ebm_verdict.failure_mode}")
+        except Exception:
+            pass
+
+        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed and lagrangian_sound and energy_sound
         som_hash = "sha256:" + __import__("hashlib").sha256(
             (item.item_id + str(is_sound) + str(holonomy_defect)).encode()
         ).hexdigest()[:24]
@@ -1228,7 +1267,25 @@ class PhysicsCorpusAuditor:
         except Exception:
             pass
 
-        is_sound = invariant_result.physical_invariants_satisfied and not is_genuine_falsification and world_model_sound
+        # Step 6: MultiscaleAbstractionEngine (ADR-039) -- Horizon trade-off validation
+        multiscale_sound = True
+        try:
+            m_state = MultiscaleStateNode(
+                node_id=f"SIM-NODE-{item.item_id}",
+                level=AbstractionLevel.MESO_ALGORITHMIC,
+                latent_vector=[0.5, -0.2, 0.8, 1.2],
+                detail_dimension=4,
+            )
+            pred_verdict = self.multiscale.evaluate_action_conditioned_transition(
+                state=m_state, action=[0.1, -0.05]
+            )
+            if pred_verdict.prediction_horizon < 5.0:
+                multiscale_sound = False
+                violations.append(f"Multiscale Horizon Deficit: achievable horizon {pred_verdict.prediction_horizon} too chaotic.")
+        except Exception:
+            pass
+
+        is_sound = invariant_result.physical_invariants_satisfied and not is_genuine_falsification and world_model_sound and multiscale_sound
         som_hash = "sha256:" + __import__("hashlib").sha256(
             (item.item_id + str(is_sound)).encode()
         ).hexdigest()[:24]

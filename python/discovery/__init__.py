@@ -301,6 +301,13 @@ from .energy_predictive_auditor import (
     ModelPredictiveController,
     NonGenerativeEpistemicAuditor,
 )
+from .sovereign_epistemic_bunker import (
+    EpistemicExpropriationBreach,
+    NotarizedThoughtRecord,
+    AirGapAuditReport,
+    AirGapVerificationGate,
+    SovereignEpistemicBunker,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -601,4 +608,9 @@ __all__ = [
     "VICRegRegularizer",
     "ModelPredictiveController",
     "NonGenerativeEpistemicAuditor",
+    "EpistemicExpropriationBreach",
+    "NotarizedThoughtRecord",
+    "AirGapAuditReport",
+    "AirGapVerificationGate",
+    "SovereignEpistemicBunker",
 ]

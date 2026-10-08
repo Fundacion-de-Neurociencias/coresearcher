@@ -148,6 +148,8 @@ from python.discovery import (
     SovereignEvidenceEngine,
     MathematicalMethodFamily,
     AsymptoticBarrierAuditor,
+    AlgebraicStructureCompiler,
+    MathematicalFlywheelRunner,
 )
 
 
@@ -2296,6 +2298,30 @@ def audit_asymptotic_barrier_endpoint(req: BarrierAuditRequest):
         return verdict.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class MathematicalFlywheelCycleRequest(BaseModel):
+    cycle_id: str
+    theorems: List[Dict[str, Any]]
+
+
+@app.post("/api/discovery/flywheel/cycle")
+def run_flywheel_cycle_endpoint(req: MathematicalFlywheelCycleRequest):
+    """
+    Algebraic Structure Compiler & Mathematical Flywheel Engine (ADR-DISCOVERY-046).
+    Functorially compiles verified mathematical theorems into executable AI operators
+    and calculates auto-bootstrapping flywheel velocity.
+    """
+    try:
+        flywheel = MathematicalFlywheelRunner()
+        result = flywheel.run_flywheel_cycle(
+            cycle_id=req.cycle_id,
+            input_theorems=req.theorems,
+        )
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

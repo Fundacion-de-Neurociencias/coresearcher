@@ -338,6 +338,13 @@ from .asymptotic_barrier_auditor import (
     BarrierAuditVerdict,
     AsymptoticBarrierAuditor,
 )
+from .algebraic_structure_compiler import (
+    AlgebraicStructureClass,
+    CompiledAlgebraicOperator,
+    FlywheelCycleResult,
+    AlgebraicStructureCompiler,
+    MathematicalFlywheelRunner,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -665,4 +672,9 @@ __all__ = [
     "MethodBarrierProfile",
     "BarrierAuditVerdict",
     "AsymptoticBarrierAuditor",
+    "AlgebraicStructureClass",
+    "CompiledAlgebraicOperator",
+    "FlywheelCycleResult",
+    "AlgebraicStructureCompiler",
+    "MathematicalFlywheelRunner",
 ]

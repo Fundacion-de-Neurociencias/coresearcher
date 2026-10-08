@@ -331,6 +331,13 @@ from .sovereign_evidence_engine import (
     AdversarialClaimAuditVerdict,
     SovereignEvidenceEngine,
 )
+from .asymptotic_barrier_auditor import (
+    MathematicalMethodFamily,
+    BarrierType,
+    MethodBarrierProfile,
+    BarrierAuditVerdict,
+    AsymptoticBarrierAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -653,4 +660,9 @@ __all__ = [
     "CandidateEvidenceItem",
     "AdversarialClaimAuditVerdict",
     "SovereignEvidenceEngine",
+    "MathematicalMethodFamily",
+    "BarrierType",
+    "MethodBarrierProfile",
+    "BarrierAuditVerdict",
+    "AsymptoticBarrierAuditor",
 ]

@@ -146,6 +146,8 @@ from python.discovery import (
     EvidencePolarity,
     CandidateEvidenceItem,
     SovereignEvidenceEngine,
+    MathematicalMethodFamily,
+    AsymptoticBarrierAuditor,
 )
 
 
@@ -2261,6 +2263,40 @@ def audit_claim_evidence_endpoint(req: ClaimEvidenceAuditRequest):
         return verdict.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class BarrierAuditRequest(BaseModel):
+    strategy_id: str
+    target_hypothesis: str
+    method_family: str = "CONTOUR_MOMENT_ESTIMATION"
+    target_threshold: float = 0.50
+    proposed_intermediate_result: Optional[float] = None
+
+
+@app.post("/api/discovery/barriers/audit")
+def audit_asymptotic_barrier_endpoint(req: BarrierAuditRequest):
+    """
+    Asymptotic Barrier Auditor & Parity Obstruction Gate (ADR-DISCOVERY-045).
+    Audits proof strategies against proven mathematical No-Go theorems (Selberg parity,
+    convexity ceilings, relativization) and prunes futile brute-force branches.
+    """
+    try:
+        family_enum = (
+            MathematicalMethodFamily(req.method_family)
+            if req.method_family in [f.value for f in MathematicalMethodFamily]
+            else MathematicalMethodFamily.CONTOUR_MOMENT_ESTIMATION
+        )
+        verdict = AsymptoticBarrierAuditor.audit_proof_strategy(
+            strategy_id=req.strategy_id,
+            target_hypothesis=req.target_hypothesis,
+            method_family=family_enum,
+            target_threshold=req.target_threshold,
+            proposed_intermediate_result=req.proposed_intermediate_result,
+        )
+        return verdict.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

@@ -151,6 +151,9 @@ from python.discovery import (
     AlgebraicStructureCompiler,
     MathematicalFlywheelRunner,
     LeanFormalizationEngine,
+    SemanticBijectivityAuditor,
+    BijectivityVerdict,
+    DriftType,
 )
 
 
@@ -2353,6 +2356,40 @@ def audit_lean_theorem_endpoint(req: LeanFormalizationRequest):
         return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class BijectivityAuditRequest(BaseModel):
+    claim_name: str
+    prose_statement: str
+    lean_code: str
+    frozen_signature_hash: Optional[str] = None
+
+
+@app.post("/api/discovery/lean/audit-bijectivity")
+def audit_bijectivity_endpoint(req: BijectivityAuditRequest):
+    """
+    Semantic Bijectivity & Formal Drift Gate (ADR-DISCOVERY-048).
+    Audits claim-to-formal isomorphism between natural prose and Lean theorem.
+    Detects goalpost shifting, Sobolev regularity drift, or assumption weakening.
+    """
+    try:
+        prose_spec = SemanticBijectivityAuditor.extract_prose_specifications(
+            prose_text=req.prose_statement,
+            claim_name=req.claim_name,
+        )
+        lean_spec = SemanticBijectivityAuditor.extract_lean_specifications(
+            lean_code=req.lean_code,
+            expected_theorem_name=req.claim_name,
+        )
+        verdict = SemanticBijectivityAuditor.audit_bijective_alignment(
+            prose_spec=prose_spec,
+            lean_spec=lean_spec,
+            frozen_signature_hash=req.frozen_signature_hash,
+        )
+        return verdict.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

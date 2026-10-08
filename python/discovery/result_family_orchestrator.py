@@ -33,6 +33,11 @@ from python.discovery.lean_formalization_engine import (
     LeanFormalizationEngine,
     LeanProofStatus,
 )
+from python.discovery.semantic_bijectivity_auditor import (
+    SemanticBijectivityAuditor,
+    BijectivityVerdict,
+    DriftType,
+)
 
 
 class ResultRole(enum.Enum):
@@ -49,6 +54,7 @@ class FormalizationTier(enum.Enum):
     EXACT_CAS_VERIFIED = "EXACT_CAS_VERIFIED"
     LEAN_FORMALIZED = "LEAN_FORMALIZED"
     DUAL_VERIFIED_GROUND_TRUTH = "DUAL_VERIFIED_GROUND_TRUTH"
+    DRIFTED_FORMALIZATION_MISMATCH = "DRIFTED_FORMALIZATION_MISMATCH"
 
 
 @dataclass
@@ -179,6 +185,17 @@ class ResultFamilyOrchestrator:
                 l_rep = LeanFormalizationEngine.audit_lean_source(node.node_id, lean_src)
                 lean_verified = l_rep.is_kernel_sound and not l_rep.contains_sorry
 
+                # ADR-DISCOVERY-048: Semantic Bijectivity & Formal Drift Gate
+                prose_spec = SemanticBijectivityAuditor.extract_prose_specifications(node.statement, node.title)
+                lean_spec = SemanticBijectivityAuditor.extract_lean_specifications(lean_src, node.node_id)
+                bijectivity_verdict = SemanticBijectivityAuditor.audit_bijective_alignment(prose_spec, lean_spec)
+
+                if not bijectivity_verdict.is_bijective:
+                    # Prevent unearned promotion if Lean theorem hallucinated/weakened the goal
+                    lean_verified = False
+                    node.formalization_tier = FormalizationTier.DRIFTED_FORMALIZATION_MISMATCH
+                    continue
+
             # Determine Tier
             if cas_verified and lean_verified:
                 node.formalization_tier = FormalizationTier.DUAL_VERIFIED_GROUND_TRUTH
@@ -236,10 +253,13 @@ class ResultFamilyOrchestrator:
         )
         unformalized_count = sum(
             1 for n in self.nodes.values()
-            if n.formalization_tier == FormalizationTier.PROVISIONAL_UNFORMALIZED_PROSE
+            if n.formalization_tier in [
+                FormalizationTier.PROVISIONAL_UNFORMALIZED_PROSE,
+                FormalizationTier.DRIFTED_FORMALIZATION_MISMATCH,
+            ]
         )
 
-        is_sound = holonomy_defect < 1e-3 and (unformalized_count == 0 or formalized_count > 0)
+        is_sound = holonomy_defect < 1e-3 and (unformalized_count == 0) and (formalized_count > 0 or total_nodes == 0)
 
         # 4. Merkle hash
         raw_repr = json.dumps(

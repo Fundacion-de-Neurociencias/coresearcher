@@ -11,6 +11,7 @@ from __future__ import annotations
 import enum
 import hashlib
 import json
+import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -27,6 +28,10 @@ from python.discovery.exact_symbolic_court import (
     ExactProofDAG,
     ExactSymbolicCourt,
     ExactSymbolicVerdict,
+)
+from python.discovery.lean_formalization_engine import (
+    LeanFormalizationEngine,
+    LeanProofStatus,
 )
 
 
@@ -154,10 +159,30 @@ class ResultFamilyOrchestrator:
                 rep = self.cas_court.audit_exact_proof(dag)
                 cas_verified = rep.is_sound
 
+            # Lean audit if path or code provided
+            lean_verified = False
+            if node.has_lean_formalization:
+                lean_src = ""
+                if node.lean_file_path and os.path.exists(node.lean_file_path):
+                    try:
+                        with open(node.lean_file_path, "r", encoding="utf-8") as f:
+                            lean_src = f.read()
+                    except Exception:
+                        lean_src = ""
+                if not lean_src:
+                    # Synthesize baseline scaffolding if not present on disk
+                    lean_src = LeanFormalizationEngine.synthesize_lean4_scaffolding(
+                        theorem_name=node.node_id,
+                        hypothesis_statement=node.statement,
+                        symbolic_identity=node.symbolic_expression,
+                    )
+                l_rep = LeanFormalizationEngine.audit_lean_source(node.node_id, lean_src)
+                lean_verified = l_rep.is_kernel_sound and not l_rep.contains_sorry
+
             # Determine Tier
-            if cas_verified and node.has_lean_formalization:
+            if cas_verified and lean_verified:
                 node.formalization_tier = FormalizationTier.DUAL_VERIFIED_GROUND_TRUTH
-            elif node.has_lean_formalization:
+            elif lean_verified:
                 node.formalization_tier = FormalizationTier.LEAN_FORMALIZED
             elif cas_verified:
                 node.formalization_tier = FormalizationTier.EXACT_CAS_VERIFIED

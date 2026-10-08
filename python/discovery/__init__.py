@@ -324,6 +324,13 @@ from .result_family_orchestrator import (
     ResultFamilyAuditVerdict,
     ResultFamilyOrchestrator,
 )
+from .sovereign_evidence_engine import (
+    StudyDesignTier,
+    EvidencePolarity,
+    CandidateEvidenceItem,
+    AdversarialClaimAuditVerdict,
+    SovereignEvidenceEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -641,4 +648,9 @@ __all__ = [
     "FamilyManuscriptNode",
     "ResultFamilyAuditVerdict",
     "ResultFamilyOrchestrator",
+    "StudyDesignTier",
+    "EvidencePolarity",
+    "CandidateEvidenceItem",
+    "AdversarialClaimAuditVerdict",
+    "SovereignEvidenceEngine",
 ]

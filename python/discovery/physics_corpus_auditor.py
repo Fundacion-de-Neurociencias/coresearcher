@@ -104,6 +104,9 @@ from .sovereign_evidence_engine import (
 from .asymptotic_barrier_auditor import (
     AsymptoticBarrierAuditor, MathematicalMethodFamily, BarrierType,
 )
+from .semantic_bijectivity_auditor import (
+    SemanticBijectivityAuditor, BijectivityVerdict, DriftType, MathematicalSpecification,
+)
 import urllib.request
 import urllib.error
 
@@ -656,9 +659,10 @@ class PhysicsCorpusAuditor:
         self.multiscale = MultiscaleAbstractionEngine()
         self.energy_auditor = NonGenerativeEpistemicAuditor()
         self.bunker = SovereignEpistemicBunker()
-        # v3.2 frontier mathematical & causal evidence stack (ADR-043, ADR-044, ADR-045)
+        # v3.2 frontier mathematical & causal evidence stack (ADR-043, ADR-044, ADR-045, ADR-048)
         self.evidence_engine = SovereignEvidenceEngine()
         self.barrier_auditor = AsymptoticBarrierAuditor()
+        self.bijectivity_auditor = SemanticBijectivityAuditor()
 
 
     def classify_subdiscipline_and_division(self, text: str) -> Tuple[UniversalPhysicsDivision, PhysicsSubdiscipline]:
@@ -843,6 +847,14 @@ class PhysicsCorpusAuditor:
 
         audit_rep = self.court.audit_physical_claim(claim_spec)
         is_sound = (audit_rep.verdict == CourtVerdict.VERIFIED_COHERENT)
+
+        # Semantic Bijectivity & Formal Drift Gate (ADR-DISCOVERY-048)
+        prose_spec = self.bijectivity_auditor.extract_prose_specifications(item.content_snippet, item.title)
+        lean_spec = self.bijectivity_auditor.extract_lean_specifications(item.content_snippet, item.title)
+        bijectivity_verdict = self.bijectivity_auditor.audit_bijective_alignment(prose_spec, lean_spec)
+        if not bijectivity_verdict.is_bijective:
+            is_sound = False
+            violations.append(f"Semantic Drift Violation: {bijectivity_verdict.summary}")
 
         if not is_sound:
             violations.append(f"Physical Court Rejection: {audit_rep.verdict.value}")

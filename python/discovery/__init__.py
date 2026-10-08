@@ -350,6 +350,12 @@ from .lean_formalization_engine import (
     LeanVerificationReport,
     LeanFormalizationEngine,
 )
+from .semantic_bijectivity_auditor import (
+    DriftType,
+    MathematicalSpecification,
+    BijectivityVerdict,
+    SemanticBijectivityAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -685,4 +691,8 @@ __all__ = [
     "LeanProofStatus",
     "LeanVerificationReport",
     "LeanFormalizationEngine",
+    "DriftType",
+    "MathematicalSpecification",
+    "BijectivityVerdict",
+    "SemanticBijectivityAuditor",
 ]

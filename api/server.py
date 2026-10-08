@@ -142,6 +142,10 @@ from python.discovery import (
     FormalizationTier,
     ResultFamilyOrchestrator,
     ResultFamilyAuditVerdict,
+    StudyDesignTier,
+    EvidencePolarity,
+    CandidateEvidenceItem,
+    SovereignEvidenceEngine,
 )
 
 
@@ -2196,6 +2200,68 @@ def audit_result_family_endpoint(req: ResultFamilyAuditRequest):
         return verdict.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class CandidateEvidenceItemRequest(BaseModel):
+    item_id: str
+    title: str
+    snippet: str
+    study_design: str = "RETROSPECTIVE_OBSERVATIONAL"
+    polarity: str = "SUPPORTS"
+    sample_size: int = 0
+    p_value: Optional[float] = None
+    effect_size: Optional[float] = None
+    doi_or_source: str = ""
+    rcs_level: int = 0
+    confounding_risk: float = 0.0
+    is_pre_registered: bool = False
+
+
+class ClaimEvidenceAuditRequest(BaseModel):
+    claim_id: str
+    claim_text: str
+    evidence_items: List[CandidateEvidenceItemRequest]
+    force_system_two: bool = False
+
+
+@app.post("/api/discovery/evidence/audit")
+def audit_claim_evidence_endpoint(req: ClaimEvidenceAuditRequest):
+    """
+    Sub-second Jev-style Evidence Retrieval & Causal Weighting Engine (ADR-DISCOVERY-044).
+    Decouples semantic topic relevance from objective epistemic strength and detects publication bias.
+    """
+    try:
+        engine = SovereignEvidenceEngine()
+        converted_items: List[CandidateEvidenceItem] = []
+        for it in req.evidence_items:
+            design_enum = StudyDesignTier(it.study_design) if it.study_design in [d.value for d in StudyDesignTier] else StudyDesignTier.RETROSPECTIVE_OBSERVATIONAL
+            polarity_enum = EvidencePolarity(it.polarity) if it.polarity in [p.value for p in EvidencePolarity] else EvidencePolarity.AMBIGUOUS
+            converted_items.append(
+                CandidateEvidenceItem(
+                    item_id=it.item_id,
+                    title=it.title,
+                    snippet=it.snippet,
+                    study_design=design_enum,
+                    polarity=polarity_enum,
+                    sample_size=it.sample_size,
+                    p_value=it.p_value,
+                    effect_size=it.effect_size,
+                    doi_or_source=it.doi_or_source,
+                    rcs_level=it.rcs_level,
+                    confounding_risk=it.confounding_risk,
+                    is_pre_registered=it.is_pre_registered,
+                )
+            )
+        verdict = engine.audit_claim_evidence(
+            claim_id=req.claim_id,
+            claim_text=req.claim_text,
+            evidence_items=converted_items,
+            force_system_two=req.force_system_two,
+        )
+        return verdict.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

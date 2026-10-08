@@ -95,6 +95,15 @@ from .energy_predictive_auditor import (
 from .sovereign_epistemic_bunker import (
     SovereignEpistemicBunker, AirGapVerificationGate, EpistemicExpropriationBreach,
 )
+from .result_family_orchestrator import (
+    ResultFamilyOrchestrator, ResultRole, FormalizationTier,
+)
+from .sovereign_evidence_engine import (
+    SovereignEvidenceEngine, CandidateEvidenceItem, StudyDesignTier, EvidencePolarity,
+)
+from .asymptotic_barrier_auditor import (
+    AsymptoticBarrierAuditor, MathematicalMethodFamily, BarrierType,
+)
 import urllib.request
 import urllib.error
 
@@ -647,6 +656,9 @@ class PhysicsCorpusAuditor:
         self.multiscale = MultiscaleAbstractionEngine()
         self.energy_auditor = NonGenerativeEpistemicAuditor()
         self.bunker = SovereignEpistemicBunker()
+        # v3.2 frontier mathematical & causal evidence stack (ADR-043, ADR-044, ADR-045)
+        self.evidence_engine = SovereignEvidenceEngine()
+        self.barrier_auditor = AsymptoticBarrierAuditor()
 
 
     def classify_subdiscipline_and_division(self, text: str) -> Tuple[UniversalPhysicsDivision, PhysicsSubdiscipline]:
@@ -1168,7 +1180,34 @@ class PhysicsCorpusAuditor:
         except Exception:
             pass
 
-        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed and lagrangian_sound and energy_sound
+        # Step 9: Asymptotic Barrier & No-Go Audit (ADR-045)
+        barrier_sound = True
+        try:
+            lower_snip = item.content_snippet.lower()
+            if "sieve" in lower_snip or "prime" in lower_snip:
+                b_rep = self.barrier_auditor.audit_proof_strategy(
+                    strategy_id=f"BARRIER-{item.item_id}",
+                    target_hypothesis=hypothesis_text,
+                    method_family=MathematicalMethodFamily.CLASSICAL_SIEVE_THEORY,
+                    target_threshold=1.0,
+                )
+                if b_rep.is_obstructed_by_known_barrier:
+                    barrier_sound = False
+                    violations.append(f"Asymptotic Barrier Obstruction: {b_rep.epistemic_advice}")
+            elif "contour" in lower_snip or "riemann" in lower_snip or "zeta" in lower_snip:
+                b_rep = self.barrier_auditor.audit_proof_strategy(
+                    strategy_id=f"BARRIER-{item.item_id}",
+                    target_hypothesis=hypothesis_text,
+                    method_family=MathematicalMethodFamily.CONTOUR_MOMENT_ESTIMATION,
+                    target_threshold=0.50,
+                )
+                if b_rep.is_obstructed_by_known_barrier:
+                    barrier_sound = False
+                    violations.append(f"Asymptotic Barrier Obstruction: {b_rep.epistemic_advice}")
+        except Exception:
+            pass
+
+        is_sound = marr_coherent and holonomy_defect < 1e-3 and item.dimensional_homogeneity_passed and lagrangian_sound and energy_sound and barrier_sound
         som_hash = "sha256:" + __import__("hashlib").sha256(
             (item.item_id + str(is_sound) + str(holonomy_defect)).encode()
         ).hexdigest()[:24]

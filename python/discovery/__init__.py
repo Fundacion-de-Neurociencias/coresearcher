@@ -345,6 +345,11 @@ from .algebraic_structure_compiler import (
     AlgebraicStructureCompiler,
     MathematicalFlywheelRunner,
 )
+from .lean_formalization_engine import (
+    LeanProofStatus,
+    LeanVerificationReport,
+    LeanFormalizationEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -677,4 +682,7 @@ __all__ = [
     "FlywheelCycleResult",
     "AlgebraicStructureCompiler",
     "MathematicalFlywheelRunner",
+    "LeanProofStatus",
+    "LeanVerificationReport",
+    "LeanFormalizationEngine",
 ]

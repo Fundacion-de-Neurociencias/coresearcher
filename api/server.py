@@ -150,6 +150,7 @@ from python.discovery import (
     AsymptoticBarrierAuditor,
     AlgebraicStructureCompiler,
     MathematicalFlywheelRunner,
+    LeanFormalizationEngine,
 )
 
 
@@ -2321,6 +2322,38 @@ def run_flywheel_cycle_endpoint(req: MathematicalFlywheelCycleRequest):
         return result.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class LeanFormalizationRequest(BaseModel):
+    theorem_name: str
+    lean_code: Optional[str] = None
+    hypothesis_statement: Optional[str] = None
+    symbolic_identity: Optional[str] = None
+
+
+@app.post("/api/discovery/lean/audit")
+def audit_lean_theorem_endpoint(req: LeanFormalizationRequest):
+    """
+    Lean 4 Interactive Theorem Prover Gate & Formalization Engine (ADR-DISCOVERY-047).
+    Audits Lean source code for absence of 'sorry', verifies kernel soundness,
+    and synthesizes scaffolding if only prose is provided.
+    """
+    try:
+        code_to_audit = req.lean_code or ""
+        if not code_to_audit and req.hypothesis_statement:
+            code_to_audit = LeanFormalizationEngine.synthesize_lean4_scaffolding(
+                theorem_name=req.theorem_name,
+                hypothesis_statement=req.hypothesis_statement,
+                symbolic_identity=req.symbolic_identity,
+            )
+        report = LeanFormalizationEngine.audit_lean_source(
+            theorem_name=req.theorem_name,
+            lean_code=code_to_audit,
+        )
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

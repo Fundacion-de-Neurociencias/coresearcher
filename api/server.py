@@ -154,6 +154,9 @@ from python.discovery import (
     SemanticBijectivityAuditor,
     BijectivityVerdict,
     DriftType,
+    AuditedHumanOversightEngine,
+    HumanInteractionTelemetry,
+    EpistemicTaskCriticality,
 )
 
 
@@ -2389,6 +2392,59 @@ def audit_bijectivity_endpoint(req: BijectivityAuditRequest):
         return verdict.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class OversightAuditRequest(BaseModel):
+    claim_id: str
+    task_criticality: str = "PARADIGMATIC_NOVELTY"
+    ai_recommendation: str = "ACCEPT"
+    human_decision: str = "ACCEPT"
+    reviewer_id: str = "human_reviewer_01"
+    dwell_time_seconds: float = 30.0
+    counterexamples_inspected: List[str] = []
+    explicit_causal_rationale: str = ""
+    answered_inspection_challenge: bool = True
+    ai_critique_text: str = ""
+    is_mathematically_sound: bool = True
+    conserves_physical_invariants: bool = True
+
+
+@app.post("/api/discovery/oversight/audit")
+def audit_oversight_endpoint(req: OversightAuditRequest):
+    """
+    Audited Human Oversight & Anti-Rubber-Stamping Gate (ADR-DISCOVERY-049).
+    Audits human interaction telemetry against passive automation bias,
+    neutralizes consensus bias, and generates cryptographic Merkle proofs.
+    """
+    try:
+        try:
+            crit = EpistemicTaskCriticality[req.task_criticality]
+        except KeyError:
+            crit = EpistemicTaskCriticality.PARADIGMATIC_NOVELTY
+
+        telemetry = HumanInteractionTelemetry(
+            reviewer_id=req.reviewer_id,
+            dwell_time_seconds=req.dwell_time_seconds,
+            counterexamples_inspected=req.counterexamples_inspected,
+            human_notes_length_chars=len(req.explicit_causal_rationale),
+            substantive_modifications_made=bool(req.explicit_causal_rationale),
+            explicit_causal_rationale=req.explicit_causal_rationale,
+            answered_inspection_challenge=req.answered_inspection_challenge,
+        )
+        record = AuditedHumanOversightEngine.evaluate_oversight_integrity(
+            claim_id=req.claim_id,
+            task_criticality=crit,
+            ai_recommendation=req.ai_recommendation,
+            human_decision=req.human_decision,
+            telemetry=telemetry,
+            ai_critique_text=req.ai_critique_text,
+            is_mathematically_sound=req.is_mathematically_sound,
+            conserves_physical_invariants=req.conserves_physical_invariants,
+        )
+        return record.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 
 

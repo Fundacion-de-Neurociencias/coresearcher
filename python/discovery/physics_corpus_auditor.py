@@ -107,6 +107,13 @@ from .asymptotic_barrier_auditor import (
 from .semantic_bijectivity_auditor import (
     SemanticBijectivityAuditor, BijectivityVerdict, DriftType, MathematicalSpecification,
 )
+from .audited_human_oversight import (
+    AuditedHumanOversightEngine,
+    OversightVerdictStatus,
+    EpistemicTaskCriticality,
+    HumanInteractionTelemetry,
+    OversightAuditRecord,
+)
 import urllib.request
 import urllib.error
 
@@ -427,6 +434,7 @@ class MegarepoPeerReviewReport:
     item_verdicts: List[ItemVerificationVerdict] = field(default_factory=list)
     overall_editorial_judgment: str = ""
     som_corpus_dossier_hash: str = ""
+    audited_oversight_record: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -444,6 +452,7 @@ class MegarepoPeerReviewReport:
             "overall_editorial_judgment": self.overall_editorial_judgment,
             "som_corpus_dossier_hash": self.som_corpus_dossier_hash,
             "item_verdicts": [v.to_dict() for v in self.item_verdicts],
+            "audited_oversight_record": self.audited_oversight_record,
         }
 
 
@@ -659,10 +668,11 @@ class PhysicsCorpusAuditor:
         self.multiscale = MultiscaleAbstractionEngine()
         self.energy_auditor = NonGenerativeEpistemicAuditor()
         self.bunker = SovereignEpistemicBunker()
-        # v3.2 frontier mathematical & causal evidence stack (ADR-043, ADR-044, ADR-045, ADR-048)
+        # v3.2 frontier mathematical & causal evidence stack (ADR-043, ADR-044, ADR-045, ADR-048, ADR-049)
         self.evidence_engine = SovereignEvidenceEngine()
         self.barrier_auditor = AsymptoticBarrierAuditor()
         self.bijectivity_auditor = SemanticBijectivityAuditor()
+        self.oversight_engine = AuditedHumanOversightEngine()
 
 
     def classify_subdiscipline_and_division(self, text: str) -> Tuple[UniversalPhysicsDivision, PhysicsSubdiscipline]:
@@ -1018,6 +1028,22 @@ class PhysicsCorpusAuditor:
         dossier_raw = json.dumps([v.to_dict() for v in verdicts], sort_keys=True)
         dossier_hash = f"sha256:{hashlib.sha256(dossier_raw.encode('utf-8')).hexdigest()[:24]}"
 
+        # ADR-DISCOVERY-049: Audited Human Oversight Gate
+        oversight_rec_dict = None
+        human_telemetry = (simulated_eval_scenarios or {}).get("human_oversight_telemetry")
+        if human_telemetry and isinstance(human_telemetry, HumanInteractionTelemetry):
+            oversight_rec = self.oversight_engine.evaluate_oversight_integrity(
+                claim_id=dossier_hash[:16],
+                task_criticality=EpistemicTaskCriticality.PARADIGMATIC_NOVELTY,
+                ai_recommendation="ACCEPT" if sound_count == len(verdicts) else "REVISE",
+                human_decision=(simulated_eval_scenarios or {}).get("human_decision", "ACCEPT"),
+                telemetry=human_telemetry,
+                ai_critique_text=judgment,
+                is_mathematically_sound=sound_count > 0,
+                conserves_physical_invariants=perpetual_count == 0,
+            )
+            oversight_rec_dict = oversight_rec.to_dict()
+
         return MegarepoPeerReviewReport(
             repo_path=str(Path(items[0].file_path).parent if items else "CORPUS_ROOT"),
             total_items_scanned=len(items),
@@ -1033,6 +1059,7 @@ class PhysicsCorpusAuditor:
             item_verdicts=verdicts,
             overall_editorial_judgment=judgment,
             som_corpus_dossier_hash=dossier_hash,
+            audited_oversight_record=oversight_rec_dict,
         )
 
     # -----------------------------------------------------------------------

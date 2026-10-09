@@ -356,6 +356,14 @@ from .semantic_bijectivity_auditor import (
     BijectivityVerdict,
     SemanticBijectivityAuditor,
 )
+from .audited_human_oversight import (
+    OversightVerdictStatus,
+    EpistemicTaskCriticality,
+    HumanInteractionTelemetry,
+    CognitiveInspectionChallenge,
+    OversightAuditRecord,
+    AuditedHumanOversightEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -695,4 +703,10 @@ __all__ = [
     "MathematicalSpecification",
     "BijectivityVerdict",
     "SemanticBijectivityAuditor",
+    "OversightVerdictStatus",
+    "EpistemicTaskCriticality",
+    "HumanInteractionTelemetry",
+    "CognitiveInspectionChallenge",
+    "OversightAuditRecord",
+    "AuditedHumanOversightEngine",
 ]

@@ -157,6 +157,8 @@ from python.discovery import (
     AuditedHumanOversightEngine,
     HumanInteractionTelemetry,
     EpistemicTaskCriticality,
+    CogenticProofOrchestrator,
+    CandidateLemmaStep,
 )
 
 
@@ -2442,6 +2444,59 @@ def audit_oversight_endpoint(req: OversightAuditRequest):
             conserves_physical_invariants=req.conserves_physical_invariants,
         )
         return record.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class CandidateLemmaStepInput(BaseModel):
+    step_id: str
+    target_conjecture_id: str
+    statement: str
+    symbolic_expression: Optional[str] = None
+    premises: List[str] = []
+    unstated_assumptions: List[str] = []
+    prover_direction: str = "algebraic_decomposition"
+    round_index: int = 1
+
+
+class CogenticProofDiscoveryRequest(BaseModel):
+    conjecture_id: str
+    target_statement: str
+    max_model_budget: int = 100
+    prover_directions: Optional[List[str]] = None
+    candidate_steps: Optional[List[CandidateLemmaStepInput]] = None
+
+
+@app.post("/api/discovery/cogentic/run-proof-discovery")
+def run_cogentic_proof_discovery(req: CogenticProofDiscoveryRequest):
+    """
+    Automated Proof Discovery via Multi-Agent Prove-Verify Harness (ADR-DISCOVERY-050).
+    Inspired by Google Research's Cogentic framework (arXiv:2609.40324, 2026).
+    """
+    try:
+        orchestrator = CogenticProofOrchestrator(max_model_budget=req.max_model_budget)
+        steps = None
+        if req.candidate_steps:
+            steps = [
+                CandidateLemmaStep(
+                    step_id=s.step_id,
+                    target_conjecture_id=s.target_conjecture_id,
+                    statement=s.statement,
+                    symbolic_expression=s.symbolic_expression,
+                    premises=s.premises,
+                    unstated_assumptions=s.unstated_assumptions,
+                    prover_direction=s.prover_direction,
+                    round_index=s.round_index,
+                )
+                for s in req.candidate_steps
+            ]
+        report = orchestrator.run_proof_discovery(
+            conjecture_id=req.conjecture_id,
+            target_statement=req.target_statement,
+            prover_directions=req.prover_directions,
+            candidate_steps=steps,
+        )
+        return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

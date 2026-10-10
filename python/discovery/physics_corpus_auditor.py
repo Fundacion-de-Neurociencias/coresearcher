@@ -114,6 +114,7 @@ from .audited_human_oversight import (
     HumanInteractionTelemetry,
     OversightAuditRecord,
 )
+from python.observer.scientific_ledger import ScientificLedger
 import urllib.request
 import urllib.error
 
@@ -673,6 +674,9 @@ class PhysicsCorpusAuditor:
         self.barrier_auditor = AsymptoticBarrierAuditor()
         self.bijectivity_auditor = SemanticBijectivityAuditor()
         self.oversight_engine = AuditedHumanOversightEngine()
+        # v3.3 unified ledger and latent world model grounding
+        self.world_model = WorldModelEpistemicAdapter()
+        self.ledger = ScientificLedger(ledger_id="physics-corpus-ledger", name="Physics Corpus Scientific Ledger")
 
 
     def classify_subdiscipline_and_division(self, text: str) -> Tuple[UniversalPhysicsDivision, PhysicsSubdiscipline]:
@@ -1028,7 +1032,7 @@ class PhysicsCorpusAuditor:
         dossier_raw = json.dumps([v.to_dict() for v in verdicts], sort_keys=True)
         dossier_hash = f"sha256:{hashlib.sha256(dossier_raw.encode('utf-8')).hexdigest()[:24]}"
 
-        # ADR-DISCOVERY-049: Audited Human Oversight Gate
+        # ADR-DISCOVERY-049 & Unified Ledger Synchronization
         oversight_rec_dict = None
         human_telemetry = (simulated_eval_scenarios or {}).get("human_oversight_telemetry")
         if human_telemetry and isinstance(human_telemetry, HumanInteractionTelemetry):
@@ -1043,6 +1047,24 @@ class PhysicsCorpusAuditor:
                 conserves_physical_invariants=perpetual_count == 0,
             )
             oversight_rec_dict = oversight_rec.to_dict()
+
+        # Synchronize batch results with Scientific Activity Ledger
+        for v in verdicts:
+            self.ledger.record_epistemic_verdict(
+                artifact_id=v.item_id,
+                verdict_type=v.item_type.value,
+                status="SOUND" if v.is_sound else "REJECTED",
+                som_merkle_hash=v.som_audit_hash,
+                details={"title": v.title, "recommendation": v.objective_recommendation, "violations": v.violations},
+            )
+
+        self.ledger.record_epistemic_verdict(
+            artifact_id=f"DOSSIER-{dossier_hash[:12]}",
+            verdict_type="MEGAREPO_PEER_REVIEW_DOSSIER",
+            status="EXCELLENT" if sound_count == len(verdicts) else "REVISED",
+            som_merkle_hash=dossier_hash,
+            details={"sound_count": sound_count, "rejected_count": rejected_count, "judgment": judgment},
+        )
 
         return MegarepoPeerReviewReport(
             repo_path=str(Path(items[0].file_path).parent if items else "CORPUS_ROOT"),

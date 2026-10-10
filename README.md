@@ -136,6 +136,23 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Membrane Dynamics Suite**    | `scripts/run_membrane_dynamics_suite.py` | Biophysical membrane simulation contracts, Duhem-Quine failure attribution (BAX, Abeta42, Tau, TREM2), energy drift. |
 | **Epistemic Stigmergy Suite**  | `scripts/run_epistemic_stigmergy_suite.py` | Decentralized git pheromone field scanning, Buehler loop instrument compilation, RCS >= 2.0 reality firewall. |
 | **Physics Megarepo Auditor v3.0** | `scripts/run_physics_corpus_auditor_suite.py` | Autonomous peer review of massive physics corpora across 10 divisions, 42 subdisciplines, Laya (System 1) / Local IA (System 2) integration, proof DAGs, and physical invariant checks. |
+| **Lean 4 Interactive Prover Gate** | `tests/test_lean_formalization_engine.py` | Lean 4 scaffolding synthesis, AST kernel auditing, strict trapping of unproven `sorry` escapes (ADR-047). |
+| **Semantic Bijectivity & Drift Gate** | `tests/test_semantic_bijectivity_auditor.py` | Isomorphism between natural prose and Lean types, detecting Navier-Stokes derivative order shifts (ADR-048). |
+| **Audited Human Oversight Gate** | `tests/test_audited_human_oversight.py` | Dwell-time cognitive inspection, anti-rubber-stamping challenges, AI consensus bias interception, and Merkle ledger proofs (ADR-049). |
+
+---
+
+## 🐙 GitHub Integration & Epistemic Continuous Integration (CI)
+
+CoResearcher integrates with GitHub across three autonomous planes:
+
+1. **Epistemic PR Auditor (`python/discovery/epistemic_pr_auditor.py`)**:
+   - Acts as a self-hosted scientific peer-reviewer listening to GitHub Pull Request webhooks (`POST /api/webhooks/github`).
+   - Audits code diffs for data leakage (e.g., fitting scalers prior to split), physical conservation breaches (Leray-Hopf dissipation, 2nd law of thermodynamics), and statistical $p$-hacking before merging.
+2. **Git Scanner & Semantic Compiler (`python/observer/git_scanner.py`)**:
+   - Reconstructs scientific discovery lineage directly from Git commit history and pull requests into structured scientific primitives (`QUESTION`, `ACTION`, `CLAIM`, `EVID`).
+3. **Scientific Activity Ledger Synchronization (`python/observer/scientific_ledger.py`)**:
+   - Binds discoveries, peer review verdicts, and formal Lean proofs directly to the repository's cryptographic activity graph, enabling 1-click Zenodo archiving with permanent DOIs.
 
 ---
 
@@ -153,7 +170,7 @@ CoResearcher operates in seamless coordination with two specialized sibling plat
 
 For complete, in-depth architectural and constitutional specifications, consult:
 
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.0.0** (4 Layers, Formal Engines, Mathematical Formulations, API Routes).
-- [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.0.0** (File-by-file directory inventory, data flows, external contracts).
-- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-028).
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.5.0** (5 Layers, Formal Engines, Mathematical Formulations, API Routes).
+- [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.5.0** (File-by-file directory inventory, data flows, external contracts).
+- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-049).
 - [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).

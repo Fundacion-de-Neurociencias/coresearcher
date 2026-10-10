@@ -165,6 +165,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Audited Human Oversight Gate** | `tests/test_audited_human_oversight.py` | Dwell-time cognitive inspection, anti-rubber-stamping challenges, AI consensus bias interception, and Merkle ledger proofs (ADR-049). |
 | **Cogentic Multi-Agent Prove-Verify** | `tests/test_cogentic_proof_orchestrator.py` | Iterative prove-verify loop, parallel provers, 3 adversarial gates (logic, boundary sweep, implicit assumptions), and persistent verified lemma ledger (ADR-050). |
 | **Biomacromolecular Coordination Gate** | `tests/test_biomacromolecular_auditor.py` | Physical coordination court, Van der Waals clash rejection ($r < 1.20\,\text{Å}$), catalytic metal preservation, PROTAC cooperativity ($\alpha > 1.0$), and H-JEPA free-energy rollouts (ADR-051). |
+| **Rosen Autopoietic Closure Gate** | `tests/test_autopoietic_closure_auditor.py` | Rosen (M,R)-systems audit, closure to efficient causation ($\mathcal{H} \subseteq \mathcal{P}$), non-equilibrium dissipation ($\sigma_{\text{ent}} > 0$), and demarcation between living self-fabrication and static mechanical DAGs (ADR-052). |
 
 ---
 

@@ -165,6 +165,10 @@ from python.discovery import (
     ProtacTernaryComplexSpec,
     OpenMMSimulationRecipe,
     BiomacromolecularCoordinationAuditor,
+    MetabolicComponent,
+    CatalyticProcess,
+    AutopoieticSystemSpec,
+    RosenAutopoieticClosureAuditor,
 )
 
 
@@ -2571,6 +2575,74 @@ def audit_biomacromolecular_complex(req: BiomacromolecularAuditRequest):
             complex_spec=spec,
             latent_prior_state=req.latent_prior_state,
         )
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class MetabolicComponentInput(BaseModel):
+    component_id: str
+    name: str
+    is_external_nutrient: bool = False
+    is_dissipated_waste: bool = False
+    molecular_mass_da: float = 100.0
+
+
+class CatalyticProcessInput(BaseModel):
+    process_id: str
+    name: str
+    material_inputs: List[str]
+    efficient_catalysts: List[str]
+    material_products: List[str]
+    entropy_production_rate: float = 0.05
+
+
+class AutopoieticSystemAuditRequest(BaseModel):
+    system_id: str
+    system_name: str
+    components: List[MetabolicComponentInput]
+    processes: List[CatalyticProcessInput]
+
+
+@app.post("/api/discovery/autopoietic/audit-closure")
+def audit_autopoietic_system_closure(req: AutopoieticSystemAuditRequest):
+    """
+    Rosen Autopoietic Closure & Causal Organization Audit (ADR-DISCOVERY-052).
+    Evaluates whether a living system is closed to efficient causation while remaining
+    thermodynamically dissipative and open to material throughput.
+    """
+    try:
+        comp_dict = {
+            c.component_id: MetabolicComponent(
+                component_id=c.component_id,
+                name=c.name,
+                is_external_nutrient=c.is_external_nutrient,
+                is_dissipated_waste=c.is_dissipated_waste,
+                molecular_mass_da=c.molecular_mass_da,
+            )
+            for c in req.components
+        }
+
+        proc_list = [
+            CatalyticProcess(
+                process_id=p.process_id,
+                name=p.name,
+                material_inputs=p.material_inputs,
+                efficient_catalysts=p.efficient_catalysts,
+                material_products=p.material_products,
+                entropy_production_rate=p.entropy_production_rate,
+            )
+            for p in req.processes
+        ]
+
+        spec = AutopoieticSystemSpec(
+            system_id=req.system_id,
+            system_name=req.system_name,
+            components=comp_dict,
+            processes=proc_list,
+        )
+
+        report = RosenAutopoieticClosureAuditor.audit_system(spec)
         return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

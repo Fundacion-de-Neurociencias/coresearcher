@@ -67,6 +67,30 @@ black --check tests/
 python scripts/enforce_english_policy.py
 ```
 
+---
+
+## 🚀 Operational Deployment: Physical & Conceptual Requirements
+
+To put CoResearcher into active production, the system requires both physical infrastructure alignment and conceptual epistemic posture:
+
+### 1. Physical Requirements (Infrastructure & Runtime)
+* **Hardware**: Any modern standard workstation (16+ GB RAM, 5–10 GB free disk space). GPU acceleration is optional: if no GPU is present, lightweight local models execute on CPU or the system degrades deterministically to symbolic engines.
+* **Environment**: Python 3.10+ with standard scientific dependencies (`sympy`, `scipy`, `numpy`, `fastapi`, `uvicorn`, `httpx`). Git must be installed in system `PATH` for ledger Merkelization.
+* **Local Dual-AI Engine (Zero-Cloud / Air-Gapped)**:
+  - **System 1 (Laya - High-speed Marr triage)**: [Ollama](https://ollama.com/) running on `http://localhost:11434` (e.g. `llama3.2:3b`).
+  - **System 2 (Local IA - Deep hypothesis reasoning)**: [LM Studio](https://lmstudio.ai/) or Ollama running on `http://localhost:1234` with an OpenAI-compatible API (e.g. `qwen2.5-coder-7b-instruct`).
+  - *Fallback*: If endpoints are offline, CoResearcher gracefully degrades to deterministic symbolic verification without crashing.
+* **Lean 4 Theorem Prover (Optional for Mathematical Formalization)**:
+  - Run `python scripts/setup_lean4_environment.py` to audit or provision `elan`, `lean`, and `lake`.
+
+### 2. Conceptual Requirements (Epistemic Posture & Input Data)
+* **Real Input Corpus**: A tangible physical artifact—a scientific code repository, simulation scripts (`.py`, `.jl`, `.cpp`), theoretical manuscripts (`.tex`, `.md`), or real patient cohort matrices. CoResearcher strictly prohibits mock/synthetic data in production validation (**Zero Mocking Mandate**).
+* **State Space Reduction Perspective ($\Omega$)**: The goal is not open-ended text generation, but the systematic pruning of unviable hypotheses through empirical conservation laws, dimensional constraints (Buckingham $\Pi$), and Modus Tollens refutation.
+* **Generator $\neq$ Verifier Demarcation**: CoResearcher functions as the independent Epistemic Court. Candidate theories (from humans or generative AIs) are audited for mathematical leaks, Goodhart formal drift, and physical contradictions.
+* **Audited Human Oversight (HITL)**: Human decisions must pass cognitive engagement verification (anti-rubber-stamping dwell-time gates and adversarial challenges) to preserve sovereign provenance.
+
+---
+
 ### 1. Unified CoResearcher CLI
 ```bash
 # Display system info and local AI endpoint status

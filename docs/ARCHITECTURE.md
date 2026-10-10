@@ -1,5 +1,5 @@
 # CoResearcher Master Architecture (2026 Canonical Specification)
-**Version**: 4.0.0 (Epistemic Discovery, Physical Theorem Court & Categorical Algebra)  
+**Version**: 4.5.0 (Epistemic Discovery, Lean 4 Interactive Gate, Bijectivity & Audited Human Oversight)  
 **Status**: Canonical Reference Architecture  
 **Scope**: Full Scientific System (`observer`, `discovery`, `api`, `benchmarks`, `ecosystem`)
 
@@ -31,7 +31,7 @@
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ LAYER 1: PROTOCOL, OBSERVATORY & PROVENANCE                                                                             │
 │ • Git Scanner & Semantic Compiler                 • Zenodo Publisher & DOI Engine    • CrossRef / PubMed / OpenAlex     │
-│ • Scientific Activity Ledger (Audit Lineage)      • Cryptographic SOM Fingerprints   • MCP Evidence Protocol            │
+│ • Scientific Activity Ledger (Audit Lineage)      • Cryptographic SOM Fingerprints   • Audited Human Oversight Gate     │
 └───────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┘
                                                                 │
                                                                 ▼
@@ -39,21 +39,21 @@
 │ LAYER 2: AUTONOMOUS EPISTEMIC DISCOVERY & CONSTRAINTS                                                                   │
 │ • 9 Canonical Discovery Agents                    • Epistemic Tree Search (MCTS)     • Constraint Court (Litigants)     │
 │ • Real-Cohort Disk Pipeline (Neurodiagnoses)      • Universal Invariants (4 Domains) • Bayesian Surprise & Budget     │
-│ • Long-Horizon Multi-Cycle Campaigns              • Substrate Distance (Dry→Damp→Wet)• Defeated Hypotheses Graveyard   │
+│ • Latent World Model (H-JEPA ADR-038)             • Substrate Distance (Dry→Damp→Wet)• Defeated Hypotheses Graveyard   │
 └───────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┘
                                                                 │
                                                                 ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│ LAYER 3: FORMAL VERIFICATION, THEOREM COURTS & CATEGORICAL ALGEBRA                                                      │
-│ • Physical Conservation DAGs (Leray-Hopf, Thermo) • ToolGrad Backward Inversion      • Epistemic PR Auditor (CI Webhook)│
-│ • Epistemic Categories (Obs, Th)                  • Structure-Preserving Functors    • Commutative Holonomy Defect ||Δ||│
-│ • Adjunction Duality (Abduction ⊣ Deduction)       • Strict Zero-Mocking Enforcement  • Adversarial Stress Traps         │
+│ LAYER 3: FORMAL VERIFICATION, THEOREM COURTS & MATHEMATICAL FLYWHEEL                                                    │
+│ • Lean 4 Interactive Prover Gate (ADR-047)        • Semantic Bijectivity Gate (ADR-048) • Asymptotic Barriers (ADR-045) │
+│ • Epistemic Categories & Holonomy Defect ||Δ||    • Mathematical Flywheel (ADR-046) • Exact CAS Court (ADR-034)        │
+│ • Physical Conservation DAGs (Buckingham Pi)      • Result Family Orchestrator (ADR-043) • Sovereign Evidence (ADR-044) │
 └───────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┘
                                                                 │
                                                                 ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
 │ LAYER 4: RUNTIME, REST API & ECOSYSTEM INTEROPERABILITY                                                                 │
-│ • FastAPI Production Server (`api/server.py`)     • GitHub Webhook Receiver          • DataAILab Contract (ARCH-002)    │
+│ • FastAPI Production Server (`api/server.py`)     • GitHub Webhook Receiver (CI)     • DataAILab Contract (ARCH-002)    │
 │ • EdiTXT Text Anchor Handshake (ARCH-003)         • Benchmark Suite (TRACES, 100-W)  • Zenodo Sandbox / Release Engine  │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -300,9 +300,21 @@ Implemented in `python/discovery/physics_corpus_auditor.py`, this engine instrum
 - **(v3.0) `audit_simulation_deep()`**: DreamRSIStrategyGate (bug vs. genuine falsification) + ScienceIDEInvariantRunner (mass/energy/entropy conservation) + HakkenEvidenceGate (PHELInE perturbation) for simulation solvers.
 - **(v3.0) `run_adversarial_stress_test()`**: 50-case AdversarialDestructionEngine; genuinely falsified claims auto-logged to HypothesisGraveyard.
 - **(v3.0) `prioritize_audit_by_pheromone()`**: EpistemicPheromoneField reorders audit queue by conflict intensity — high-dispute zones first.
+- **(v3.0) `audit_simulation_deep()`**: DreamRSIStrategyGate (bug vs. genuine falsification) + ScienceIDEInvariantRunner (mass/energy/entropy conservation) + HakkenEvidenceGate (PHELInE perturbation) for simulation solvers.
+- **(v3.0) `run_adversarial_stress_test()`**: 50-case AdversarialDestructionEngine; genuinely falsified claims auto-logged to HypothesisGraveyard.
+- **(v3.0) `prioritize_audit_by_pheromone()`**: EpistemicPheromoneField reorders audit queue by conflict intensity — high-dispute zones first.
 - **(v3.0) Persistent Pipeline**: `scripts/audit_physics_megarepo_full.py` — checkpoint/resume, walks entire megarepo, Ctrl+C safe, writes per-item JSON verdicts + final report.
 
-### 9. Ecosystem Demarcation (The Scientific Trinity)
+### 9. Frontier Mathematical Verification, Theorem Courts & GitHub CI (ADR-043 - ADR-049)
+
+CoResearcher incorporates deep mathematical and editorial verification gates:
+- **Lean 4 Interactive Prover Gate (ADR-047)** (`python/discovery/lean_formalization_engine.py`): Synthesizes modular Lean 4 scaffolding, invokes the local `lean` compiler, and executes AST kernel auditing to intercept any unproven `sorry` escapes.
+- **Semantic Bijectivity & Formal Drift Gate (ADR-048)** (`python/discovery/semantic_bijectivity_auditor.py`): Bridges natural prose claims with formal Lean signatures to detect goalpost shifting (e.g. Navier-Stokes derivative order shifts from $k=4$ to $k=5$) and enforces cryptographic signature immutability.
+- **Audited Human Oversight Gate (ADR-049)** (`python/discovery/audited_human_oversight.py`): Protects against automation bias and rubber-stamping by enforcing minimum cognitive dwell times, generating adversarial inspection challenges, neutralizing LLM consensus bias, and generating Merkle-anchored oversight records.
+- **Unified Scientific Activity Ledger Bridge**: All verdicts from physics megarepo audits, result families, and human oversight gates are automatically recorded into `ScientificLedger`, bridging discovery engines directly with the Git/Zenodo observatory.
+- **GitHub Epistemic PR CI**: Evaluates incoming pull requests via webhook (`api/server.py`) with `ScientificEpistemicPRAuditor` to block data leakage, conservation law violations, and $p$-hacking before merging.
+
+### 10. Ecosystem Demarcation (The Scientific Trinity)
 Defined in `docs/ECOSYSTEM_BOUNDARIES.md`:
 - **CoResearcher**: The **Epistemic Auditor & Reasoner** (Formal logic, constraints, theorem courts, categorical invariance, provenance).
 - **DataAILab**: The **Empirical Solver & Executor** (High-performance GPU computing, heavy numerical training, raw data pipelines).

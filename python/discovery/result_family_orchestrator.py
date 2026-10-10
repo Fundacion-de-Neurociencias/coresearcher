@@ -38,6 +38,7 @@ from python.discovery.semantic_bijectivity_auditor import (
     BijectivityVerdict,
     DriftType,
 )
+from python.observer.scientific_ledger import ScientificLedger
 
 
 class ResultRole(enum.Enum):
@@ -100,6 +101,7 @@ class ResultFamilyOrchestrator:
         self.discipline = discipline
         self.nodes: Dict[str, FamilyManuscriptNode] = {}
         self.cas_court = ExactSymbolicCourt()
+        self.ledger = ScientificLedger(ledger_id=f"ledger-{family_id}", name=f"{family_title} Ledger")
 
     def add_manuscript_node(
         self,
@@ -285,6 +287,24 @@ class ResultFamilyOrchestrator:
             judgment = "PARTIALLY_FORMALIZED_FAMILY: Core arguments formalized; companion prose pending Lean proof."
         else:
             judgment = "UNFORMALIZED_PROSE_RISK: Substantial risk of unverified LLM hallucinations."
+
+        # Synchronize nodes and verdict into Scientific Activity Ledger
+        for nid, node in self.nodes.items():
+            self.ledger.record_epistemic_verdict(
+                artifact_id=nid,
+                verdict_type=node.role.value,
+                status=node.formalization_tier.value,
+                som_merkle_hash=som_hash,
+                details={"title": node.title, "statement": node.statement},
+            )
+
+        self.ledger.record_epistemic_verdict(
+            artifact_id=f"FAMILY-{self.family_id}",
+            verdict_type="RESULT_FAMILY_VERDICT",
+            status="SOUND" if is_sound else "UNSOUND",
+            som_merkle_hash=som_hash,
+            details={"judgment": judgment, "holonomy": holonomy_defect, "nodes_count": total_nodes},
+        )
 
         return ResultFamilyAuditVerdict(
             family_id=self.family_id,

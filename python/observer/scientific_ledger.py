@@ -48,6 +48,44 @@ class ScientificLedger:
     scientific_unit: str = "investigatable_claim"
     unit_rationale: str = ""
 
+    def record_epistemic_verdict(
+        self,
+        artifact_id: str,
+        verdict_type: str,
+        status: str,
+        som_merkle_hash: str,
+        details: Optional[Dict] = None,
+        author: str = "CoResearcher Epistemic Engine",
+    ) -> Dict:
+        """
+        Bridges the epistemic discovery engines (ADR-043 through ADR-049)
+        directly with the Scientific Activity Ledger.
+        Records an immutable epistemic verdict entry into the ledger's timeline and artifacts.
+        """
+        now_iso = datetime.now().isoformat()
+        entry = {
+            "artifact_id": artifact_id,
+            "verdict_type": verdict_type,
+            "status": status,
+            "som_merkle_hash": som_merkle_hash,
+            "author": author,
+            "recorded_at": now_iso,
+            "details": details or {},
+        }
+        self.artifacts.append(entry)
+
+        # Update timeline
+        date_key = now_iso.split("T")[0]
+        if date_key not in self.timeline:
+            self.timeline[date_key] = []
+        self.timeline[date_key].append({
+            "type": verdict_type,
+            "id": artifact_id,
+            "status": status,
+            "hash": som_merkle_hash,
+        })
+        return entry
+
     def to_dict(self) -> dict:
         data = asdict(self)
         data["workstreams"] = [w.to_dict() for w in self.workstreams]

@@ -364,6 +364,18 @@ from .audited_human_oversight import (
     OversightAuditRecord,
     AuditedHumanOversightEngine,
 )
+from .cogentic_proof_orchestrator import (
+    ProverTrajectoryStatus,
+    VerificationGateType,
+    AdversarialVerdictStatus,
+    CandidateLemmaStep,
+    AdversarialVerificationResult,
+    VerifiedLemmaRecord,
+    AdversarialLemmaVerifier,
+    VerifiedLemmaLedger,
+    CogenticCampaignReport,
+    CogenticProofOrchestrator,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -709,4 +721,14 @@ __all__ = [
     "CognitiveInspectionChallenge",
     "OversightAuditRecord",
     "AuditedHumanOversightEngine",
+    "ProverTrajectoryStatus",
+    "VerificationGateType",
+    "AdversarialVerdictStatus",
+    "CandidateLemmaStep",
+    "AdversarialVerificationResult",
+    "VerifiedLemmaRecord",
+    "AdversarialLemmaVerifier",
+    "VerifiedLemmaLedger",
+    "CogenticCampaignReport",
+    "CogenticProofOrchestrator",
 ]

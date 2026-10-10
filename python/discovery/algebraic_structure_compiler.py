@@ -290,3 +290,30 @@ class MathematicalFlywheelRunner:
             flywheel_velocity_score=velocity_score,
             som_flywheel_hash=som_hash,
         )
+
+    def inject_compiled_operators_into_prompt(
+        self,
+        base_prompt: str,
+        compiled_operators: List[CompiledAlgebraicOperator],
+    ) -> str:
+        """
+        Closes the loop between compiled algebraic operators and local AI inference:
+        Injects the mathematical structure, equivariance constraints, and Casimir invariants
+        directly into the System 1 / System 2 reasoning prompt context.
+        """
+        if not compiled_operators:
+            return base_prompt
+
+        injections = [
+            "\n[MATHEMATICAL FLYWHEEL COMPILED OPERATOR CONSTRAINTS - ADR-046]:",
+            "The following verified algebraic invariants and operators are active in this session:",
+        ]
+        for op in compiled_operators:
+            injections.append(
+                f"- Operator '{op.operator_id}' ({op.structure_class.value}): "
+                f"Equivariant={op.is_equivariant}, Gain='{op.theoretical_complexity_gain}', "
+                f"Invariants={op.casimir_invariants}"
+            )
+        injections.append("Enforce these exact algebraic symmetries in all physical and mathematical deductions.\n")
+
+        return base_prompt + "\n" + "\n".join(injections)

@@ -386,6 +386,15 @@ from .biomacromolecular_auditor import (
     BiomacromolecularAuditReport,
     BiomacromolecularCoordinationAuditor,
 )
+from .autopoietic_closure_auditor import (
+    CausalityType,
+    ClosureVerdictStatus,
+    MetabolicComponent,
+    CatalyticProcess,
+    AutopoieticSystemSpec,
+    AutopoieticClosureAuditReport,
+    RosenAutopoieticClosureAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -749,4 +758,11 @@ __all__ = [
     "OpenMMSimulationRecipe",
     "BiomacromolecularAuditReport",
     "BiomacromolecularCoordinationAuditor",
+    "CausalityType",
+    "ClosureVerdictStatus",
+    "MetabolicComponent",
+    "CatalyticProcess",
+    "AutopoieticSystemSpec",
+    "AutopoieticClosureAuditReport",
+    "RosenAutopoieticClosureAuditor",
 ]

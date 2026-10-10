@@ -164,6 +164,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Semantic Bijectivity & Drift Gate** | `tests/test_semantic_bijectivity_auditor.py` | Isomorphism between natural prose and Lean types, detecting Navier-Stokes derivative order shifts (ADR-048). |
 | **Audited Human Oversight Gate** | `tests/test_audited_human_oversight.py` | Dwell-time cognitive inspection, anti-rubber-stamping challenges, AI consensus bias interception, and Merkle ledger proofs (ADR-049). |
 | **Cogentic Multi-Agent Prove-Verify** | `tests/test_cogentic_proof_orchestrator.py` | Iterative prove-verify loop, parallel provers, 3 adversarial gates (logic, boundary sweep, implicit assumptions), and persistent verified lemma ledger (ADR-050). |
+| **Biomacromolecular Coordination Gate** | `tests/test_biomacromolecular_auditor.py` | Physical coordination court, Van der Waals clash rejection ($r < 1.20\,\text{Å}$), catalytic metal preservation, PROTAC cooperativity ($\alpha > 1.0$), and H-JEPA free-energy rollouts (ADR-051). |
 
 ---
 

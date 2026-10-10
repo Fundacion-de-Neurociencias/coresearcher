@@ -159,6 +159,12 @@ from python.discovery import (
     EpistemicTaskCriticality,
     CogenticProofOrchestrator,
     CandidateLemmaStep,
+    MetalIonType,
+    CoordinationGeometry,
+    MetalCoordinationCenter,
+    ProtacTernaryComplexSpec,
+    OpenMMSimulationRecipe,
+    BiomacromolecularCoordinationAuditor,
 )
 
 
@@ -2495,6 +2501,75 @@ def run_cogentic_proof_discovery(req: CogenticProofDiscoveryRequest):
             target_statement=req.target_statement,
             prover_directions=req.prover_directions,
             candidate_steps=steps,
+        )
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class MetalCoordinationCenterInput(BaseModel):
+    ion_id: str
+    metal_type: str = "ZN2"
+    coordinating_atom_count: int = 4
+    geometry: str = "TETRAHEDRAL"
+    observed_mean_bond_length_angstrom: float = 2.05
+    expected_bond_length_angstrom: float = 2.05
+    tolerance_angstrom: float = 0.35
+
+
+class BiomacromolecularAuditRequest(BaseModel):
+    complex_id: str
+    target_protein: str
+    e3_ligase: str
+    linker_length_atoms: int = 14
+    warhead_kd_nm: float = 12.0
+    e3_kd_nm: float = 25.0
+    ternary_kd_nm: float = 4.5
+    min_atom_distance_angstrom: float = 2.10
+    metal_centers: Optional[List[MetalCoordinationCenterInput]] = None
+    latent_prior_state: Optional[Dict[str, float]] = None
+
+
+@app.post("/api/discovery/biomacromolecular/audit-complex")
+def audit_biomacromolecular_complex(req: BiomacromolecularAuditRequest):
+    """
+    Biomacromolecular & PROTAC Ternary Complex Coordination Audit (ADR-DISCOVERY-051).
+    Evaluates steric clashes, metal coordination geometry, thermodynamic cooperativity,
+    and H-JEPA latent world model physical invariants.
+    """
+    try:
+        metal_centers = []
+        if req.metal_centers:
+            for mc in req.metal_centers:
+                metal_type = MetalIonType[mc.metal_type]
+                geom = CoordinationGeometry[mc.geometry]
+                metal_centers.append(
+                    MetalCoordinationCenter(
+                        ion_id=mc.ion_id,
+                        metal_type=metal_type,
+                        coordinating_atom_count=mc.coordinating_atom_count,
+                        geometry=geom,
+                        observed_mean_bond_length_angstrom=mc.observed_mean_bond_length_angstrom,
+                        expected_bond_length_angstrom=mc.expected_bond_length_angstrom,
+                        tolerance_angstrom=mc.tolerance_angstrom,
+                    )
+                )
+
+        spec = ProtacTernaryComplexSpec(
+            complex_id=req.complex_id,
+            target_protein=req.target_protein,
+            e3_ligase=req.e3_ligase,
+            linker_length_atoms=req.linker_length_atoms,
+            warhead_kd_nm=req.warhead_kd_nm,
+            e3_kd_nm=req.e3_kd_nm,
+            ternary_kd_nm=req.ternary_kd_nm,
+            min_atom_distance_angstrom=req.min_atom_distance_angstrom,
+            metal_centers=metal_centers,
+        )
+
+        report = BiomacromolecularCoordinationAuditor.audit_complex(
+            complex_spec=spec,
+            latent_prior_state=req.latent_prior_state,
         )
         return report.to_dict()
     except Exception as e:

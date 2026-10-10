@@ -376,6 +376,16 @@ from .cogentic_proof_orchestrator import (
     CogenticCampaignReport,
     CogenticProofOrchestrator,
 )
+from .biomacromolecular_auditor import (
+    MetalIonType,
+    CoordinationGeometry,
+    ChemicalValidationVerdict,
+    MetalCoordinationCenter,
+    ProtacTernaryComplexSpec,
+    OpenMMSimulationRecipe,
+    BiomacromolecularAuditReport,
+    BiomacromolecularCoordinationAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -731,4 +741,12 @@ __all__ = [
     "VerifiedLemmaLedger",
     "CogenticCampaignReport",
     "CogenticProofOrchestrator",
+    "MetalIonType",
+    "CoordinationGeometry",
+    "ChemicalValidationVerdict",
+    "MetalCoordinationCenter",
+    "ProtacTernaryComplexSpec",
+    "OpenMMSimulationRecipe",
+    "BiomacromolecularAuditReport",
+    "BiomacromolecularCoordinationAuditor",
 ]

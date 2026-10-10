@@ -163,6 +163,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Lean 4 Interactive Prover Gate** | `tests/test_lean_formalization_engine.py` | Lean 4 scaffolding synthesis, AST kernel auditing, strict trapping of unproven `sorry` escapes (ADR-047). |
 | **Semantic Bijectivity & Drift Gate** | `tests/test_semantic_bijectivity_auditor.py` | Isomorphism between natural prose and Lean types, detecting Navier-Stokes derivative order shifts (ADR-048). |
 | **Audited Human Oversight Gate** | `tests/test_audited_human_oversight.py` | Dwell-time cognitive inspection, anti-rubber-stamping challenges, AI consensus bias interception, and Merkle ledger proofs (ADR-049). |
+| **Cogentic Multi-Agent Prove-Verify** | `tests/test_cogentic_proof_orchestrator.py` | Iterative prove-verify loop, parallel provers, 3 adversarial gates (logic, boundary sweep, implicit assumptions), and persistent verified lemma ledger (ADR-050). |
 
 ---
 

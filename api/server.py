@@ -2705,18 +2705,130 @@ def simulate_vega_decision(req: VegaDecisionRequest):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+# ==========================================
+# HAKKEN & DREAM-RSI ENDPOINTS (ADR-DISCOVERY-054)
+# ==========================================
+
+from python.discovery.hakken_dream_rsi_engine import (
+    ScientificDomainType,
+    LiteratureHop,
+    HakkenLiteratureLinkEngine,
+    BranchOrderingHeuristic,
+    DiscoveryHistoryNode,
+    SearchPolicyConfig,
+    DreamRSIOfflineReplayEngine,
+)
 
 
+class LiteratureHopInput(BaseModel):
+    source_entity: str
+    target_entity: str
+    relation: str
+    literature_citations_count: int = 1
+    temporal_stability_score: float = 0.85
+    confidence_weight: float = 0.85
 
 
+class HakkenLinkPredictionRequest(BaseModel):
+    candidate_id: str
+    domain: str = "AGING_BIOLOGY"
+    source_entity: str
+    target_entity: str
+    predicted_relation: str
+    hops: List[LiteratureHopInput]
+    direct_literature_hits: int = 0
 
 
+class DiscoveryHistoryNodeInput(BaseModel):
+    node_id: str
+    hypothesis_id: str
+    branch_depth: int = 0
+    compute_tokens_cost: int = 1000
+    wet_lab_euro_cost: float = 0.0
+    time_spent_hours: float = 1.0
+    outcome_reward: float = 0.5
+    failure_category: Optional[str] = None
+    is_terminal: bool = False
+    children: List['DiscoveryHistoryNodeInput'] = []
 
 
+DiscoveryHistoryNodeInput.update_forward_refs()
 
 
+class SearchPolicyInput(BaseModel):
+    policy_id: str
+    branch_ordering: str = "VALUE_GREEDY"
+    worker_concurrency: int = 1
+    pruning_reward_threshold: float = 0.20
+    max_tokens_budget: int = 100_000
+    stop_early_on_reward: float = 0.85
 
 
+class DreamRSIReplayRequest(BaseModel):
+    history_tree: DiscoveryHistoryNodeInput
+    policy: SearchPolicyInput
+
+
+def _parse_history_node(inp: DiscoveryHistoryNodeInput) -> DiscoveryHistoryNode:
+    return DiscoveryHistoryNode(
+        node_id=inp.node_id,
+        hypothesis_id=inp.hypothesis_id,
+        branch_depth=inp.branch_depth,
+        compute_tokens_cost=inp.compute_tokens_cost,
+        wet_lab_euro_cost=inp.wet_lab_euro_cost,
+        time_spent_hours=inp.time_spent_hours,
+        outcome_reward=inp.outcome_reward,
+        failure_category=inp.failure_category,
+        is_terminal=inp.is_terminal,
+        children=[_parse_history_node(c) for c in inp.children],
+    )
+
+
+@app.post("/api/discovery/hakken/predict-links")
+def predict_hakken_links(req: HakkenLinkPredictionRequest):
+    try:
+        domain_enum = ScientificDomainType(req.domain)
+        hops = [
+            LiteratureHop(
+                source_entity=h.source_entity,
+                target_entity=h.target_entity,
+                relation=h.relation,
+                literature_citations_count=h.literature_citations_count,
+                temporal_stability_score=h.temporal_stability_score,
+                confidence_weight=h.confidence_weight,
+            )
+            for h in req.hops
+        ]
+        candidate = HakkenLiteratureLinkEngine.predict_undocumented_link(
+            candidate_id=req.candidate_id,
+            domain=domain_enum,
+            source=req.source_entity,
+            target=req.target_entity,
+            predicted_relation=req.predicted_relation,
+            hops=hops,
+            direct_literature_hits=req.direct_literature_hits,
+        )
+        return candidate.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/discovery/dream-rsi/replay-policy")
+def replay_dream_rsi_policy(req: DreamRSIReplayRequest):
+    try:
+        root_node = _parse_history_node(req.history_tree)
+        policy_cfg = SearchPolicyConfig(
+            policy_id=req.policy.policy_id,
+            branch_ordering=BranchOrderingHeuristic(req.policy.branch_ordering),
+            worker_concurrency=req.policy.worker_concurrency,
+            pruning_reward_threshold=req.policy.pruning_reward_threshold,
+            max_tokens_budget=req.policy.max_tokens_budget,
+            stop_early_on_reward=req.policy.stop_early_on_reward,
+        )
+        result = DreamRSIOfflineReplayEngine.replay_policy_on_tree(root_node, policy_cfg)
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 

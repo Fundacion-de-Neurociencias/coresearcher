@@ -403,6 +403,19 @@ from .vega_decision_engine import (
     EnergyLandscape,
     VegaPhysicsDecisionEngine,
 )
+from .hakken_dream_rsi_engine import (
+    ScientificDomainType,
+    TemporalEntityNode,
+    LiteratureHop,
+    PheliNeEvidenceChain,
+    LiteratureLinkCandidate,
+    HakkenLiteratureLinkEngine,
+    BranchOrderingHeuristic,
+    DiscoveryHistoryNode,
+    SearchPolicyConfig,
+    PolicyReplayResult,
+    DreamRSIOfflineReplayEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -779,4 +792,15 @@ __all__ = [
     "VegaDecisionResult",
     "EnergyLandscape",
     "VegaPhysicsDecisionEngine",
+    "ScientificDomainType",
+    "TemporalEntityNode",
+    "LiteratureHop",
+    "PheliNeEvidenceChain",
+    "LiteratureLinkCandidate",
+    "HakkenLiteratureLinkEngine",
+    "BranchOrderingHeuristic",
+    "DiscoveryHistoryNode",
+    "SearchPolicyConfig",
+    "PolicyReplayResult",
+    "DreamRSIOfflineReplayEngine",
 ]

@@ -141,6 +141,8 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Reality Firewall**  | `POST /api/discovery/stigmergy/audit-reality-firewall` | `epistemic_stigmergy.py` | Enforces RCS >= 2.0 empirical grounding gate for swarm emergent regularities |
 | **Physics Megarepo**  | `POST /api/discovery/physics/audit-megarepo` | `physics_corpus_auditor.py` | Autonomous peer review of massive physics corpora across 8 subdisciplines |
 | **Vega Decision**     | `POST /api/discovery/vega/simulate-decision` | `vega_decision_engine.py` | Continuous potential landscape $U(x)$, damped Euler dynamics, and conformal abstention |
+| **Hakken Link Abduction** | `POST /api/discovery/hakken/predict-links` | `hakken_dream_rsi_engine.py` | Predicts undocumented multi-hop links with PHELInE necessity and sufficiency chains |
+| **Dream-RSI Offline Replay** | `POST /api/discovery/dream-rsi/replay-policy` | `hakken_dream_rsi_engine.py` | Simulates search policy execution over frozen discovery trees without re-running models |
 
 ---
 

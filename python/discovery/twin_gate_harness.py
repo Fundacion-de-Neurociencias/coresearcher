@@ -494,6 +494,29 @@ class JevContinuousVerifier:
         if has_result and (progress_val >= 0.95 or "done" in current_state_payload or "verified" in str(current_state_payload).lower()):
             goal_satisfied = True
 
+        # Vega dynamical landscape integration:
+        # Evaluates landscape settlement between SATISFIED (+1.0), IN_PROGRESS (0.0), STALLED (-1.0)
+        try:
+            from python.discovery.vega_decision_engine import PotentialValley, VegaPhysicsDecisionEngine
+            valleys = [
+                PotentialValley("val_stalled", "LOOP_STALLED", center_coordinate=-1.0, depth=1.5 if is_stalled else 0.4),
+                PotentialValley("val_prog", "IN_PROGRESS", center_coordinate=0.0, depth=1.0 + progress_val),
+                PotentialValley("val_sat", "SATISFIED", center_coordinate=1.0, depth=2.0 if goal_satisfied else 0.2),
+            ]
+            init_pos = -0.5 if is_stalled else (0.8 if goal_satisfied else 0.0)
+            vega_res = VegaPhysicsDecisionEngine.simulate_decision(
+                domain="GOAL_CONVERGENCE",
+                valleys=valleys,
+                initial_position=init_pos,
+                friction_gamma=0.6,
+            )
+            if vega_res.selected_category == "SATISFIED":
+                goal_satisfied = True
+            elif vega_res.selected_category == "LOOP_STALLED":
+                is_stalled = True
+        except Exception:
+            pass
+
         # Action directive
         if goal_satisfied:
             action = "TERMINATE_GOAL_MET"

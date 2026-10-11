@@ -71,6 +71,12 @@ class FastSystemOneClassifier:
         """
         t0 = time.perf_counter()
         
+        # Check for Vega physics-based decision engine if configured or requested
+        if os.getenv("USE_VEGA_PHYSICS", "1") == "1":
+            vega_res = cls.classify_marr_with_vega(statement)
+            if vega_res:
+                return vega_res
+
         # Check for open-source local Kev / Bespoke Nimble execution first
         local_kev_res = cls._dispatch_kev_local(
             domain=ClassificationDomain.MARR_LEVEL,
@@ -302,13 +308,79 @@ class FastSystemOneClassifier:
         )
 
     @classmethod
+    def classify_marr_with_vega(cls, statement: str) -> Optional[TypedClassificationResult]:
+        """
+        Classifies Marr level using the Vega physical dynamical landscape simulator.
+        Maps the 3 Marr levels to 3 distinct potential valleys:
+        - COMPUTATIONAL: Center -1.0
+        - ALGORITHMIC: Center 0.0
+        - IMPLEMENTATIONAL: Center +1.0
+        """
+        try:
+            from python.discovery.vega_decision_engine import PotentialValley, VegaPhysicsDecisionEngine
+            
+            stmt = statement.lower()
+            computational_cues = ["goal", "loss function", "optimize", "maintain", "preserve", "stability", "objective", "survival", "homeostasis"]
+            algorithmic_cues = ["diffusion", "graph", "network", "connectome", "propagation", "flux", "rate", "dynamics", "trajectory", "transition", "flow", "cascade"]
+            implementational_cues = ["tau", "abeta", "csf", "plasma", "pet", "mri", "fdg", "phospho", "biomarker", "spectrometry", "enzyme", "lipid", "bax"]
+
+            comp_score = sum(1 for c in computational_cues if c in stmt)
+            algo_score = sum(1 for c in algorithmic_cues if c in stmt)
+            impl_score = sum(1 for c in implementational_cues if c in stmt)
+
+            valleys = [
+                PotentialValley("val_comp", "COMPUTATIONAL", center_coordinate=-1.0, depth=1.0 + 0.4 * comp_score),
+                PotentialValley("val_algo", "ALGORITHMIC", center_coordinate=0.0, depth=1.0 + 0.4 * algo_score),
+                PotentialValley("val_impl", "IMPLEMENTATIONAL", center_coordinate=1.0, depth=1.0 + 0.4 * impl_score),
+            ]
+
+            # Initial position based on statement lexical length modulation
+            init_x = 0.0
+            if comp_score > algo_score and comp_score > impl_score:
+                init_x = -0.5
+            elif impl_score > algo_score and impl_score > comp_score:
+                init_x = 0.5
+
+            vega_res = VegaPhysicsDecisionEngine.simulate_decision(
+                domain="MARR_LEVEL",
+                valleys=valleys,
+                initial_position=init_x,
+            )
+
+            # If abstain, fallback to default category with low confidence
+            selected = vega_res.selected_category
+            if vega_res.is_abstain or selected == "ABSTAIN_AMBIGUOUS":
+                selected = "ALGORITHMIC"  # Median compromise level
+
+            return TypedClassificationResult(
+                domain=ClassificationDomain.MARR_LEVEL,
+                selected_category=selected,
+                confidence_score=vega_res.confidence_score,
+                probability_distribution=vega_res.probability_distribution,
+                latency_ms=vega_res.latency_ms,
+                system_tier="SYSTEM_1_VEGA_PHYSICS",
+                is_fallback=vega_res.is_abstain,
+                metadata={
+                    "is_abstain": vega_res.is_abstain,
+                    "settled_coordinate": vega_res.settled_coordinate,
+                    "barrier_margin": vega_res.barrier_height_margin,
+                    "som_vega_hash": vega_res.som_vega_hash,
+                }
+            )
+        except Exception:
+            return None
+
+    @classmethod
     def get_active_tier(cls) -> str:
         """
         Reports the configured active System 1 execution tier:
+        - 'SYSTEM_1_VEGA_PHYSICS' if USE_VEGA_PHYSICS=1 (default continuous energy landscape).
         - 'SYSTEM_1_KEV_LOCAL' if KEV_LOCAL_URL or LOCAL_SYSTEM1_URL is set (self-hosted Qwen-0.5B).
         - 'SYSTEM_1_JEV_CLOUD' if TYPESAFE_API_KEY is configured.
-        - 'SYSTEM_1_LOCAL_FAST' (default zero-cost deterministic engine).
+        - 'SYSTEM_1_LOCAL_FAST' (deterministic keyword engine).
         """
+        if os.getenv("USE_VEGA_PHYSICS", "1") == "1":
+            return "SYSTEM_1_VEGA_PHYSICS"
         if os.getenv("KEV_LOCAL_URL") or os.getenv("LOCAL_SYSTEM1_URL"):
             return "SYSTEM_1_KEV_LOCAL"
         if os.getenv("TYPESAFE_API_KEY"):

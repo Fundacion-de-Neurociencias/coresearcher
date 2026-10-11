@@ -395,6 +395,14 @@ from .autopoietic_closure_auditor import (
     AutopoieticClosureAuditReport,
     RosenAutopoieticClosureAuditor,
 )
+from .vega_decision_engine import (
+    VegaDecisionDomain,
+    PotentialValley,
+    ParticleTrajectoryPoint,
+    VegaDecisionResult,
+    EnergyLandscape,
+    VegaPhysicsDecisionEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -765,4 +773,10 @@ __all__ = [
     "AutopoieticSystemSpec",
     "AutopoieticClosureAuditReport",
     "RosenAutopoieticClosureAuditor",
+    "VegaDecisionDomain",
+    "PotentialValley",
+    "ParticleTrajectoryPoint",
+    "VegaDecisionResult",
+    "EnergyLandscape",
+    "VegaPhysicsDecisionEngine",
 ]

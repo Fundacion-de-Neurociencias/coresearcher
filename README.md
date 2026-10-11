@@ -166,6 +166,7 @@ python -m python.observer.git_scanner /path/to/research/repo
 | **Cogentic Multi-Agent Prove-Verify** | `tests/test_cogentic_proof_orchestrator.py` | Iterative prove-verify loop, parallel provers, 3 adversarial gates (logic, boundary sweep, implicit assumptions), and persistent verified lemma ledger (ADR-050). |
 | **Biomacromolecular Coordination Gate** | `tests/test_biomacromolecular_auditor.py` | Physical coordination court, Van der Waals clash rejection ($r < 1.20\,\text{Å}$), catalytic metal preservation, PROTAC cooperativity ($\alpha > 1.0$), and H-JEPA free-energy rollouts (ADR-051). |
 | **Rosen Autopoietic Closure Gate** | `tests/test_autopoietic_closure_auditor.py` | Rosen (M,R)-systems audit, closure to efficient causation ($\mathcal{H} \subseteq \mathcal{P}$), non-equilibrium dissipation ($\sigma_{\text{ent}} > 0$), and demarcation between living self-fabrication and static mechanical DAGs (ADR-052). |
+| **Vega Physics Decision Engine** | `tests/test_vega_decision_engine.py` | Continuous potential landscape $U(x)$, damped Newtonian dynamics, conformal bistable abstention (`is_abstain`), and Fast System 1 / Twin Gate integration (ADR-053). |
 
 ---
 

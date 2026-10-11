@@ -140,6 +140,7 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Compile Instrument**| `POST /api/discovery/stigmergy/compile-instrument` | `epistemic_stigmergy.py` | Compiles candidate hypotheses into executable simulation worlds (Buehler loop) |
 | **Reality Firewall**  | `POST /api/discovery/stigmergy/audit-reality-firewall` | `epistemic_stigmergy.py` | Enforces RCS >= 2.0 empirical grounding gate for swarm emergent regularities |
 | **Physics Megarepo**  | `POST /api/discovery/physics/audit-megarepo` | `physics_corpus_auditor.py` | Autonomous peer review of massive physics corpora across 8 subdisciplines |
+| **Vega Decision**     | `POST /api/discovery/vega/simulate-decision` | `vega_decision_engine.py` | Continuous potential landscape $U(x)$, damped Euler dynamics, and conformal abstention |
 
 ---
 

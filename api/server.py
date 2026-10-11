@@ -169,6 +169,8 @@ from python.discovery import (
     CatalyticProcess,
     AutopoieticSystemSpec,
     RosenAutopoieticClosureAuditor,
+    PotentialValley,
+    VegaPhysicsDecisionEngine,
 )
 
 
@@ -2644,6 +2646,62 @@ def audit_autopoietic_system_closure(req: AutopoieticSystemAuditRequest):
 
         report = RosenAutopoieticClosureAuditor.audit_system(spec)
         return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+class PotentialValleyInput(BaseModel):
+    valley_id: str
+    category_name: str
+    center_coordinate: float
+    depth: float
+    width_sigma: float = 0.5
+    prior_weight: float = 1.0
+
+
+class VegaDecisionRequest(BaseModel):
+    domain: str = "TYPED_DECISION"
+    valleys: List[PotentialValleyInput]
+    initial_position: float = 0.0
+    initial_velocity: float = 0.0
+    friction_gamma: float = 0.45
+    mass: float = 1.0
+    dt: float = 0.05
+    max_steps: int = 200
+    abstain_barrier_threshold: float = 0.08
+
+
+@app.post("/api/discovery/vega/simulate-decision")
+def simulate_vega_decision(req: VegaDecisionRequest):
+    """
+    Simulate a physics-based typed decision using the Vega dynamical potential landscape (ADR-DISCOVERY-053).
+    Rolls a particle through candidate outcome valleys with friction damping.
+    """
+    try:
+        valleys = [
+            PotentialValley(
+                valley_id=v.valley_id,
+                category_name=v.category_name,
+                center_coordinate=v.center_coordinate,
+                depth=v.depth,
+                width_sigma=v.width_sigma,
+                prior_weight=v.prior_weight,
+            )
+            for v in req.valleys
+        ]
+
+        res = VegaPhysicsDecisionEngine.simulate_decision(
+            domain=req.domain,
+            valleys=valleys,
+            initial_position=req.initial_position,
+            initial_velocity=req.initial_velocity,
+            friction_gamma=req.friction_gamma,
+            mass=req.mass,
+            dt=req.dt,
+            max_steps=req.max_steps,
+            abstain_barrier_threshold=req.abstain_barrier_threshold,
+        )
+        return res.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 

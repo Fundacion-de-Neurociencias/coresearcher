@@ -23,6 +23,7 @@ from python.discovery.grounded_search_sensor import (
 from python.discovery.reality_contact_score import RealityContactLevel
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_mcp_adapter_query():
@@ -110,7 +111,7 @@ def test_mcp_adapter_execution():
 
 def test_api_endpoints():
     print("\n--- 3. Testing FastAPI Paper2Agent MCP Endpoints ---")
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     # Test Query Endpoint
     query_resp = client.post(

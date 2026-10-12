@@ -7,12 +7,10 @@ Verifies:
 4. Detection of equation of motion mismatch in flawed theoretical proposals.
 """
 
-import pytest
-import sympy as sp
 from python.discovery.lagrangian_epistemic_engine import (
+    DynamicalSystemType,
     LagrangianEpistemicEngine,
     LagrangianProposal,
-    DynamicalSystemType,
     LagrangianVerificationVerdict,
 )
 
@@ -26,9 +24,7 @@ def test_pendulum_euler_lagrange_derivation():
     EOM: m*l**2*Derivative(theta(t), (t, 2)) + g*l*m*sin(theta(t)) = 0
     """
     eom_str, eom_expr = LagrangianEpistemicEngine.derive_discrete_euler_lagrange(
-        q_name="theta",
-        kinetic_str="1/2 * m * l**2 * theta_dot**2",
-        potential_str="-m * g * l * cos(theta)"
+        q_name="theta", kinetic_str="1/2 * m * l**2 * theta_dot**2", potential_str="-m * g * l * cos(theta)"
     )
 
     assert "sin(theta(t))" in eom_str
@@ -40,7 +36,7 @@ def test_pendulum_euler_lagrange_derivation():
         generalized_coordinates=["theta"],
         kinetic_term="1/2 * m * l**2 * theta_dot**2",
         potential_term="-m * g * l * cos(theta)",
-        claimed_equation_of_motion=eom_str
+        claimed_equation_of_motion=eom_str,
     )
 
     report = LagrangianEpistemicEngine.audit_lagrangian_proposal(proposal)
@@ -59,7 +55,7 @@ def test_free_scalar_field_derivation():
     eom_str, eom_expr = LagrangianEpistemicEngine.derive_scalar_field_euler_lagrange(
         phi_name="phi",
         kinetic_density_str="1/2 * dphi_dt**2 - 1/2 * dphi_dx**2",
-        potential_density_str="1/2 * m**2 * phi**2"
+        potential_density_str="1/2 * m**2 * phi**2",
     )
 
     assert "m**2*phi(t, x)" in eom_str
@@ -72,7 +68,7 @@ def test_free_scalar_field_derivation():
         generalized_coordinates=["phi"],
         kinetic_term="1/2 * dphi_dt**2 - 1/2 * dphi_dx**2",
         potential_term="1/2 * m**2 * phi**2",
-        claimed_equation_of_motion=eom_str
+        claimed_equation_of_motion=eom_str,
     )
 
     report = LagrangianEpistemicEngine.audit_lagrangian_proposal(proposal)
@@ -92,7 +88,7 @@ def test_flawed_claimed_eom_interception():
         generalized_coordinates=["theta"],
         kinetic_term="1/2 * m * l**2 * theta_dot**2",
         potential_term="-m * g * l * cos(theta)",
-        claimed_equation_of_motion="m*l**2*Derivative(theta(t), (t, 2)) + g*l*m*theta(t)" # Flawed linear claim
+        claimed_equation_of_motion="m*l**2*Derivative(theta(t), (t, 2)) + g*l*m*theta(t)",  # Flawed linear claim
     )
 
     report = LagrangianEpistemicEngine.audit_lagrangian_proposal(proposal)

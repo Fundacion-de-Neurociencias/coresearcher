@@ -2,10 +2,7 @@
 Tests for Result Family Orchestrator & Dual Formalization Gate (ADR-DISCOVERY-043).
 """
 
-import pytest
 from python.discovery.result_family_orchestrator import (
-    FamilyManuscriptNode,
-    FormalizationTier,
     ResultFamilyAuditVerdict,
     ResultFamilyOrchestrator,
     ResultRole,
@@ -57,7 +54,10 @@ def test_result_family_creation_and_audit():
     assert verdict.core_theorems_count == 1
     assert verdict.formalized_nodes_count >= 1
     assert verdict.holonomy_defect < 1e-3
-    assert verdict.is_epistemically_sound is True
+    # ADR-DISCOVERY-043: an unformalized prose node blocks the family from being
+    # declared sound, even when the core theorem is dual-verified.
+    assert verdict.unformalized_risks_count == 1
+    assert verdict.is_epistemically_sound is False
     assert "PARTIALLY_FORMALIZED_FAMILY" in verdict.editorial_judgment
     assert len(verdict.som_family_merkle_hash) > 10
 

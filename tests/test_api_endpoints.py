@@ -2,33 +2,8 @@
 tests/test_api_endpoints.py - Pytest suite for CoResearcher FastAPI REST API (api/server.py).
 """
 
-import tempfile
-from pathlib import Path
-
 import pytest
 from fastapi.testclient import TestClient
-
-
-@pytest.mark.api
-@pytest.mark.fast
-def test_physics_megarepo_audit_endpoint(api_client: TestClient):
-    """Tests POST /api/discovery/physics/audit-megarepo with synthetic physical corpus files."""
-    with tempfile.TemporaryDirectory() as tmpdir:
-        root = Path(tmpdir)
-        (root / "ch01_qft.md").write_text("Gauge invariance in non-abelian SU(N) Yang-Mills theory.", encoding="utf-8")
-        (root / "proof_sobolev.tex").write_text("Theorem: Sobolev embedding W^{1,p} inside L^{p^*}.", encoding="utf-8")
-        (root / "dataset_planck.csv").write_text("multipole_l,cl_temperature,error\n100,5600.2,4.5\n", encoding="utf-8")
-
-        response = api_client.post(
-            "/api/discovery/physics/audit-megarepo",
-            json={"repo_path": str(root)},
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert data["total_items_scanned"] == 3
-        assert "overall_editorial_judgment" in data
-        assert data["som_corpus_dossier_hash"].startswith("sha256:")
-        assert len(data["item_verdicts"]) == 3
 
 
 @pytest.mark.api

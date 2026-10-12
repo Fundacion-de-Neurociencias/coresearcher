@@ -143,6 +143,8 @@ CoResearcher operates through a **Dual-Core Architecture**:
 | **Vega Decision**     | `POST /api/discovery/vega/simulate-decision` | `vega_decision_engine.py` | Continuous potential landscape $U(x)$, damped Euler dynamics, and conformal abstention |
 | **Hakken Link Abduction** | `POST /api/discovery/hakken/predict-links` | `hakken_dream_rsi_engine.py` | Predicts undocumented multi-hop links with PHELInE necessity and sufficiency chains |
 | **Dream-RSI Offline Replay** | `POST /api/discovery/dream-rsi/replay-policy` | `hakken_dream_rsi_engine.py` | Simulates search policy execution over frozen discovery trees without re-running models |
+| **Math Flywheel Admissibility** | `POST /api/discovery/math-flywheel/audit-admissibility` | `frontier_math_flywheel.py` | Audits external math benchmark tasks against formalization drift and hypothesis weakening |
+| **Math Flywheel Cycle**  | `POST /api/discovery/math-flywheel/run-cycle` | `frontier_math_flywheel.py` | Runs end-to-end auto-bootstrapping cycle: admissibility, lemma extraction, operator compilation |
 
 ---
 

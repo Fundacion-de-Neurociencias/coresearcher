@@ -470,19 +470,8 @@ from .epistemic_stigmergy import (
     RealityContactFirewallReport,
     RealityContactFirewall,
 )
-from .physics_corpus_auditor import (
-    UniversalPhysicsDivision,
-    PhysicsSubdiscipline,
-    CorpusItemType,
-    CorpusExtractedItem,
-    ItemVerificationVerdict,
-    MegarepoPeerReviewReport,
-    PhysicsCorpusAuditor,
-)
 
 __all__ = [
-
-
 
 
     "ManifoldDetector",
@@ -696,13 +685,6 @@ __all__ = [
     "MetaRecursiveInstrumentCompiler",
     "RealityContactFirewallReport",
     "RealityContactFirewall",
-    "UniversalPhysicsDivision",
-    "PhysicsSubdiscipline",
-    "CorpusItemType",
-    "CorpusExtractedItem",
-    "ItemVerificationVerdict",
-    "MegarepoPeerReviewReport",
-    "PhysicsCorpusAuditor",
     "EpistemicLemmaStatus",
     "ExactSymbolicVerdict",
     "ObstacleType",

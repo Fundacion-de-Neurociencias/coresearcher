@@ -2,7 +2,6 @@
 python/cli/main.py - CoResearcher Unified CLI Entry Point (ADR-QA-002)
 Inspired by OpenScience and modern developer toolchains.
 Provides unified commands:
-    coresearcher audit --repo-path <path>
     coresearcher verify --claim <statement> [--rcs <level>]
     coresearcher serve [--host <host>] [--port <port>]
     coresearcher test
@@ -29,21 +28,6 @@ BANNER = r"""
 \____/\____/_/ |_|\___/____/\___/\__,_/_/   \___/_/ /_/\___/_/
    The Autonomous Epistemic Discovery & Formal Verification Engine
 """
-
-
-def cmd_audit(args: argparse.Namespace) -> int:
-    """Executes the universal physics megarepo audit pipeline."""
-    script_path = REPO_ROOT / "scripts" / "audit_physics_megarepo_full.py"
-    cmd = [sys.executable, str(script_path), "--repo-path", args.repo_path]
-    if args.output_dir:
-        cmd.extend(["--output-dir", args.output_dir])
-    if args.batch_size:
-        cmd.extend(["--batch-size", str(args.batch_size)])
-    if args.divisions:
-        cmd.extend(["--divisions", args.divisions])
-
-    print(f"[*] Running CoResearcher Megarepo Audit against: {args.repo_path}")
-    return subprocess.run(cmd, cwd=str(REPO_ROOT)).returncode
 
 
 def cmd_verify(args: argparse.Namespace) -> int:
@@ -115,11 +99,6 @@ def main() -> None:
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
     # audit
-    p_audit = subparsers.add_parser("audit", help="Audit a physics corpus repository (ADR-DISCOVERY-028)")
-    p_audit.add_argument("--repo-path", required=True, help="Path to physics corpus root")
-    p_audit.add_argument("--output-dir", default="./audit_results", help="Directory for JSON verdicts and final report")
-    p_audit.add_argument("--batch-size", type=int, default=20, help="Batch progress interval")
-    p_audit.add_argument("--divisions", default=None, help="Filter by comma-separated division names")
 
     # verify
     p_verify = subparsers.add_parser("verify", help="Audit an empirical claim against the Reality Contact Firewall")
@@ -147,7 +126,6 @@ def main() -> None:
         sys.exit(0)
 
     dispatch = {
-        "audit": cmd_audit,
         "verify": cmd_verify,
         "serve": cmd_serve,
         "test": cmd_test,

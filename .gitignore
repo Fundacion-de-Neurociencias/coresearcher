@@ -43,3 +43,10 @@ build/
 !.env.example
 corpus_audit_checkpoint.json
 audit_results/
+
+# Local scratch output and build metadata
+scratch/
+*.tsbuildinfo
+
+# Private material kept local only (physics megarepository analysis). Never published.
+private/

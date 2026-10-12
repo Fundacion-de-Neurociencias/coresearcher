@@ -10,15 +10,14 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 8 |
 | Tested | Covered by tests, not reachable from the API | 23 |
-| Exercised | Referenced only by benchmark or demo scripts | 18 |
-| Prototype | No test, route or script references it | 26 |
+| Exercised | Referenced only by benchmark or demo scripts | 17 |
+| Prototype | No test, route or script references it | 20 |
 
 | Module | Level | API | Tests | Scripts |
 | --- | --- | --- | --- | --- |
 | `ablation_rebuttal_engine` | Integrated | yes | yes | - |
 | `adversarial_destruction_test` | Exercised | - | - | yes |
 | `algebraic_structure_compiler` | Tested | - | yes | - |
-| `anomaly_detector` | Prototype | - | - | - |
 | `anomaly_discovery_engine` | Prototype | - | - | - |
 | `asymptotic_barrier_auditor` | Tested | - | yes | - |
 | `audited_human_oversight` | Tested | - | yes | - |
@@ -28,20 +27,16 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `bayesian_surprise_engine` | Exercised | - | - | yes |
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
-| `boundary_explorer` | Prototype | - | - | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
 | `constraint_discovery_engine` | Prototype | - | - | - |
-| `cross_domain_transfer` | Prototype | - | - | - |
 | `defeated_hypotheses_graveyard` | Prototype | - | - | - |
 | `discovery_forecast_registry` | Exercised | yes | - | yes |
 | `discovery_teams` | Exercised | - | - | yes |
 | `discovery_workbench` | Prototype | - | - | - |
-| `einstein_generator` | Prototype | - | - | - |
 | `energy_predictive_auditor` | Tested | - | yes | - |
-| `epistemic_gap_detector` | Exercised | - | - | yes |
 | `epistemic_pr_auditor` | Integrated | yes | yes | yes |
 | `epistemic_stigmergy` | Tested | - | yes | yes |
 | `epistemic_trajectory` | Prototype | - | - | - |
@@ -59,14 +54,13 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `lean_formalization_engine` | Tested | - | yes | - |
 | `limitation_resolution_engine` | Tested | - | yes | - |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
-| `manifold_detector` | Exercised | - | - | yes |
+| `manifold_detector` | Prototype | - | - | - |
 | `marr_engine` | Prototype | - | - | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
-| `missing_link_explorer` | Prototype | - | - | - |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
-| `real_cohort_campaign_runner` | Prototype | - | - | - |
+| `real_cohort_campaign_runner` | Exercised | - | - | yes |
 | `real_cohort_empirical_pipeline` | Prototype | - | - | - |
 | `reality_contact_score` | Tested | - | yes | yes |
 | `reality_distance` | Prototype | - | - | - |
@@ -82,7 +76,6 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
 | `test_manifold_detector` | Prototype | - | - | - |
-| `thought_experiment_generator` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |
 | `twin_gate_harness` | Exercised | - | - | yes |

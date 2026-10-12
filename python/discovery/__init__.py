@@ -434,6 +434,14 @@ from .socratic_question_auditor import (
     QuestionEpistemicVerdict,
     SocraticQuestionAuditor,
 )
+from .era_empirical_engine import (
+    MutationStrategy,
+    CodeVariant,
+    ERASearchCampaignReport,
+    ERAMethodologicalMutationGenerator,
+    ClinicalLeadTimeEvaluator,
+    ERAClosedLoopTreeSearch,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -835,4 +843,10 @@ __all__ = [
     "CounterQuestion",
     "QuestionEpistemicVerdict",
     "SocraticQuestionAuditor",
+    "MutationStrategy",
+    "CodeVariant",
+    "ERASearchCampaignReport",
+    "ERAMethodologicalMutationGenerator",
+    "ClinicalLeadTimeEvaluator",
+    "ERAClosedLoopTreeSearch",
 ]

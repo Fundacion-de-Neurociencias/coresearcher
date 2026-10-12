@@ -426,6 +426,14 @@ from .frontier_math_flywheel import (
     ProofEquivalenceAuditor,
     FrontierMathFlywheelEngine,
 )
+from .socratic_question_auditor import (
+    QuestionGranularity,
+    QuestionBiasTier,
+    SmuggledPremise,
+    CounterQuestion,
+    QuestionEpistemicVerdict,
+    SocraticQuestionAuditor,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -821,4 +829,10 @@ __all__ = [
     "ClosedLoopFlywheelResult",
     "ProofEquivalenceAuditor",
     "FrontierMathFlywheelEngine",
+    "QuestionGranularity",
+    "QuestionBiasTier",
+    "SmuggledPremise",
+    "CounterQuestion",
+    "QuestionEpistemicVerdict",
+    "SocraticQuestionAuditor",
 ]

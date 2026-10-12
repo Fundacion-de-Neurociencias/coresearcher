@@ -1,0 +1,535 @@
+{
+  "levels": [
+    "Integrated",
+    "Tested",
+    "Exercised",
+    "Prototype"
+  ],
+  "modules": [
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "ablation_rebuttal_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "adversarial_destruction_test",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "algebraic_structure_compiler",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "anomaly_detector",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "anomaly_discovery_engine",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "asymptotic_barrier_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "audited_human_oversight",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "auto_explicability",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "autopoietic_closure_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Exercised",
+      "module": "backward_execution_synthesizer",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "bayesian_surprise_engine",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "biological_programs_catalog",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "biomacromolecular_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "boundary_explorer",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "categorical_epistemic_engine",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "cogentic_proof_orchestrator",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "constraint_box",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "constraint_court",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "constraint_discovery_engine",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "cross_domain_transfer",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "defeated_hypotheses_graveyard",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": true,
+      "level": "Exercised",
+      "module": "discovery_forecast_registry",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "discovery_teams",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "discovery_workbench",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "einstein_generator",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "energy_predictive_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "epistemic_gap_detector",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "epistemic_pr_auditor",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "epistemic_stigmergy",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "epistemic_trajectory",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "era_empirical_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "exact_symbolic_court",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "failure_engine",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "fast_system_one_classifier",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "frontier_math_flywheel",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "grounded_search_sensor",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "hakken_dream_rsi_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "inference_time_scaling",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "lab_in_the_loop_adapter",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "lagrangian_epistemic_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "latent_factor_discovery",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "lean_formalization_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "limitation_resolution_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "long_horizon_campaign_engine",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "manifold_detector",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "marr_engine",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "membrane_dynamics_auditor",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "missing_link_explorer",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "multiscale_abstraction_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "novelty_detector",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "physical_theorem_court",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "real_cohort_campaign_runner",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "real_cohort_empirical_pipeline",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "reality_contact_score",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "reality_distance",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "reliability_auditor",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "research_budget_engine",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "result_family_orchestrator",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "retrospective_time_split_benchmark",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "scientific_git_history",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "scientific_logic",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "semantic_bijectivity_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "socratic_question_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "sovereign_epistemic_bunker",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "sovereign_evidence_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "state_space",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "test_manifold_detector",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "thought_experiment_generator",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "traces_epistemic_adapter",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Prototype",
+      "module": "trajectory_evolution",
+      "scripts": false,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "twin_gate_harness",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "universal_discovery_engine",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Exercised",
+      "module": "unknown_mechanism_benchmark",
+      "scripts": true,
+      "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "vega_decision_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "world_model_adapter",
+      "scripts": false,
+      "tests": true
+    }
+  ]
+}

@@ -6,14 +6,16 @@ Verifies:
 3. Hierarchical macro-subgoal achievement tracking.
 """
 
-import pytest
 import math
+
+import pytest
+
 from python.discovery.world_model_adapter import (
-    WorldModelEpistemicAdapter,
-    LatentInterventionSpec,
-    SafetyConstraintSpec,
     GuardrailType,
+    LatentInterventionSpec,
     LatentSimulationVerdict,
+    SafetyConstraintSpec,
+    WorldModelEpistemicAdapter,
 )
 
 
@@ -38,12 +40,11 @@ def test_feasible_latent_intervention_minimum_energy():
                 target_channel="total_energy",
                 max_safe_value=20.0,
             )
-        ]
+        ],
     )
 
     result = WorldModelEpistemicAdapter.simulate_latent_intervention(
-        intervention=intervention,
-        current_latent_state=initial_state
+        intervention=intervention, current_latent_state=initial_state
     )
 
     assert result.guardrail_violated is False
@@ -76,12 +77,11 @@ def test_infinite_energy_guardrail_breach_interception():
                 target_channel="total_energy",
                 max_safe_value=20.0,
             )
-        ]
+        ],
     )
 
     result = WorldModelEpistemicAdapter.simulate_latent_intervention(
-        intervention=destructive_intervention,
-        current_latent_state=initial_state
+        intervention=destructive_intervention, current_latent_state=initial_state
     )
 
     assert result.guardrail_violated is True
@@ -103,17 +103,13 @@ def test_hierarchical_subgoal_achievement():
         intervention_id="INT-METABOLIC-RESCUE",
         target_manifold_node="glycolytic_reserve",
         intervention_magnitude=0.50,
-        safety_constraints=[]
+        safety_constraints=[],
     )
 
-    macro_subgoals = [
-        {"glycolytic_reserve": 0.80} # Target is 0.30 + 0.50 = 0.80
-    ]
+    macro_subgoals = [{"glycolytic_reserve": 0.80}]  # Target is 0.30 + 0.50 = 0.80
 
     result = WorldModelEpistemicAdapter.simulate_latent_intervention(
-        intervention=intervention,
-        current_latent_state=initial_state,
-        macro_subgoals=macro_subgoals
+        intervention=intervention, current_latent_state=initial_state, macro_subgoals=macro_subgoals
     )
 
     assert result.guardrail_violated is False

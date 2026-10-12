@@ -22,10 +22,11 @@ if root_dir not in sys.path:
 
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def run_rcs_demo():
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     print("=" * 105)
     print("🌍 CORESEARCHER: THE REALITY CONTACT SCORE (RCS) ENGINE — 'EVERY HYPOTHESIS MUST EARN REALITY'")

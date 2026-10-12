@@ -12,9 +12,9 @@ Verifies:
 from __future__ import annotations
 
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.frontier_math_flywheel import (
     AdmissibilityStatus,
     FrontierMathFlywheelEngine,
@@ -25,7 +25,7 @@ from python.discovery.frontier_math_flywheel import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_admissibility_auditor_detects_sound_problem():

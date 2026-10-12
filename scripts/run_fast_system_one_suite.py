@@ -24,6 +24,7 @@ from python.discovery.fast_system_one_classifier import (
 from python.discovery.discovery_teams import MarrClassifierAgent
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_fast_marr_classification():
@@ -107,7 +108,7 @@ def test_agent_and_api_integration():
     print("  [PASS] MarrClassifierAgent.fast_classify successfully invoked")
 
     # 2. FastAPI POST /api/discovery/system-one/classify-marr
-    client = TestClient(app)
+    client = authenticated_client(app)
     resp = client.post(
         "/api/discovery/system-one/classify-marr",
         json={"statement": "Plasma pTau217 is a diagnostic fluid biomarker"}

@@ -7,12 +7,11 @@ Verifies:
 4. Obstacle-Driven Discovery Engine reporting.
 """
 
-import pytest
 from python.discovery.exact_symbolic_court import (
-    ExactSymbolicCourt,
-    ExactProofDAG,
-    ExactLemmaNode,
     EpistemicLemmaStatus,
+    ExactLemmaNode,
+    ExactProofDAG,
+    ExactSymbolicCourt,
     ExactSymbolicVerdict,
     ObstacleType,
 )
@@ -21,18 +20,14 @@ from python.discovery.exact_symbolic_court import (
 def test_exact_algebraic_identity_verification():
     # True identity: (x + 1)^2 - (x^2 + 2x + 1) == 0
     is_valid, err = ExactSymbolicCourt.verify_algebraic_identity(
-        lhs_expr_str="(x + 1)**2",
-        rhs_expr_str="x**2 + 2*x + 1",
-        variable_names=["x"]
+        lhs_expr_str="(x + 1)**2", rhs_expr_str="x**2 + 2*x + 1", variable_names=["x"]
     )
     assert is_valid is True
     assert err is None
 
     # False identity: (x + 1)^2 != x^2 + 1
     is_valid_false, err_false = ExactSymbolicCourt.verify_algebraic_identity(
-        lhs_expr_str="(x + 1)**2",
-        rhs_expr_str="x**2 + 1",
-        variable_names=["x"]
+        lhs_expr_str="(x + 1)**2", rhs_expr_str="x**2 + 1", variable_names=["x"]
     )
     assert is_valid_false is False
     assert err_false is not None
@@ -41,18 +36,22 @@ def test_exact_algebraic_identity_verification():
 def test_strict_lemma_purity_discard_on_conjecture():
     dag = ExactProofDAG(theorem_id="THM-POINCARE-RECURRENCE")
     # Lemma 1: Established Axiom
-    dag.add_lemma(ExactLemmaNode(
-        lemma_id="LEMMA-1",
-        statement="Energy is conserved in closed Hamiltonian systems.",
-        status=EpistemicLemmaStatus.ESTABLISHED_AXIOM
-    ))
+    dag.add_lemma(
+        ExactLemmaNode(
+            lemma_id="LEMMA-1",
+            statement="Energy is conserved in closed Hamiltonian systems.",
+            status=EpistemicLemmaStatus.ESTABLISHED_AXIOM,
+        )
+    )
     # Lemma 2: Open Conjecture used in proof!
-    dag.add_lemma(ExactLemmaNode(
-        lemma_id="LEMMA-2",
-        statement="All orbits are ergodic on the energy hypersurface (Unproven conjecture).",
-        status=EpistemicLemmaStatus.OPEN_CONJECTURE,
-        premises=["LEMMA-1"]
-    ))
+    dag.add_lemma(
+        ExactLemmaNode(
+            lemma_id="LEMMA-2",
+            statement="All orbits are ergodic on the energy hypersurface (Unproven conjecture).",
+            status=EpistemicLemmaStatus.OPEN_CONJECTURE,
+            premises=["LEMMA-1"],
+        )
+    )
 
     report = ExactSymbolicCourt.audit_exact_proof(dag=dag)
     assert report.is_sound is False
@@ -64,26 +63,25 @@ def test_strict_lemma_purity_discard_on_conjecture():
 
 def test_recurrence_boundary_counterexample_detection():
     dag = ExactProofDAG(theorem_id="THM-FIBONACCI-VARIANT")
-    dag.add_lemma(ExactLemmaNode(
-        lemma_id="LEMMA-BASE",
-        statement="Linear recurrence holds by definition.",
-        status=EpistemicLemmaStatus.PROVEN_LEMMA
-    ))
+    dag.add_lemma(
+        ExactLemmaNode(
+            lemma_id="LEMMA-BASE",
+            statement="Linear recurrence holds by definition.",
+            status=EpistemicLemmaStatus.PROVEN_LEMMA,
+        )
+    )
 
     # Real sequence: Fibonacci 1, 1, 2, 3, 5, 8, 13
     # Flawed recurrence: F_n = F_{n-1} + F_{n-2} BUT fails at index 4 (returns 6 instead of 5)
     sequence = [1, 1, 2, 3, 5, 8, 13]
-    
+
     def buggy_recurrence(history, idx):
         if idx == 4:
             return 6  # Bug / boundary failure
         return history[-1] + history[-2]
 
     report = ExactSymbolicCourt.audit_exact_proof(
-        dag=dag,
-        sequence_benchmark=sequence,
-        recurrence_evaluator=buggy_recurrence,
-        recurrence_order=2
+        dag=dag, sequence_benchmark=sequence, recurrence_evaluator=buggy_recurrence, recurrence_order=2
     )
 
     assert report.is_sound is False
@@ -97,22 +95,24 @@ def test_recurrence_boundary_counterexample_detection():
 
 def test_exact_sound_proof_verification():
     dag = ExactProofDAG(theorem_id="THM-SUM-OF-SQUARES")
-    dag.add_lemma(ExactLemmaNode(
-        lemma_id="LEMMA-BASE-CASE",
-        statement="Base case holds for n=1: 1*(2)*(3)/6 = 1.",
-        status=EpistemicLemmaStatus.ESTABLISHED_AXIOM
-    ))
-    dag.add_lemma(ExactLemmaNode(
-        lemma_id="LEMMA-INDUCTION-STEP",
-        statement="Inductive step n*(n+1)*(2*n+1)/6 + (n+1)^2 = (n+1)*(n+2)*(2*n+3)/6.",
-        status=EpistemicLemmaStatus.PROVEN_LEMMA,
-        premises=["LEMMA-BASE-CASE"]
-    ))
+    dag.add_lemma(
+        ExactLemmaNode(
+            lemma_id="LEMMA-BASE-CASE",
+            statement="Base case holds for n=1: 1*(2)*(3)/6 = 1.",
+            status=EpistemicLemmaStatus.ESTABLISHED_AXIOM,
+        )
+    )
+    dag.add_lemma(
+        ExactLemmaNode(
+            lemma_id="LEMMA-INDUCTION-STEP",
+            statement="Inductive step n*(n+1)*(2*n+1)/6 + (n+1)^2 = (n+1)*(n+2)*(2*n+3)/6.",
+            status=EpistemicLemmaStatus.PROVEN_LEMMA,
+            premises=["LEMMA-BASE-CASE"],
+        )
+    )
 
     report = ExactSymbolicCourt.audit_exact_proof(
-        dag=dag,
-        lhs_target="n*(n+1)*(2*n+1)/6 + (n+1)**2",
-        rhs_target="(n+1)*(n+2)*(2*n+3)/6"
+        dag=dag, lhs_target="n*(n+1)*(2*n+1)/6 + (n+1)**2", rhs_target="(n+1)*(n+2)*(2*n+3)/6"
     )
 
     assert report.is_sound is True

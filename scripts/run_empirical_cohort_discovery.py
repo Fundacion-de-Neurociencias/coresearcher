@@ -22,10 +22,11 @@ if root_dir not in sys.path:
 
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def run_empirical_demo():
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     print("=" * 115)
     print("🔬 CORESEARCHER: 100% EMPIRICAL REAL-COHORT DISCOVERY ENGINE (ZERO MOCKING)")

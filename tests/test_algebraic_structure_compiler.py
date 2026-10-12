@@ -8,10 +8,8 @@ Verifies:
 5. Deterministic SOM SHA-256 Merkle anchoring.
 """
 
-import pytest
 from python.discovery.algebraic_structure_compiler import (
     AlgebraicStructureClass,
-    CompiledAlgebraicOperator,
     AlgebraicStructureCompiler,
     MathematicalFlywheelRunner,
 )

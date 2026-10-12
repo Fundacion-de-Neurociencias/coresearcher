@@ -9,11 +9,11 @@ Verifies that:
 import pytest
 
 from python.discovery.epistemic_pr_auditor import (
-    ScientificEpistemicPRAuditor,
-    PullRequestDiffSnapshot,
     FileDiffChunk,
-    ScientificViolationCategory,
+    PullRequestDiffSnapshot,
     ReviewSeverity,
+    ScientificEpistemicPRAuditor,
+    ScientificViolationCategory,
 )
 from python.discovery.reality_contact_score import (
     RealityContactEvaluator,
@@ -34,7 +34,7 @@ def test_anti_slop_interception_of_mock_simulation():
             "simulated_empirical_results = True\n"
             "# Breakthrough p-value achieved on synthetic cohort\n"
             "p_val = 0.001\n"
-        )
+        ),
     )
     pr = PullRequestDiffSnapshot(
         repo_name="Fundacion-de-Neurociencias/test-pipeline",
@@ -44,14 +44,16 @@ def test_anti_slop_interception_of_mock_simulation():
         commit_sha="abcd1234efgh5678",
         pr_title="feat: breakthrough synthetic discovery",
         pr_description="Adds synthetic simulation run",
-        files=[mock_file]
+        files=[mock_file],
     )
 
     report = auditor.audit_pull_request(pr)
     assert report is not None
     assert len(report.inline_findings) >= 1
-    
-    slop_findings = [f for f in report.inline_findings if f.category == ScientificViolationCategory.SYNTHETIC_SLOP_UNGROUNDED]
+
+    slop_findings = [
+        f for f in report.inline_findings if f.category == ScientificViolationCategory.SYNTHETIC_SLOP_UNGROUNDED
+    ]
     assert len(slop_findings) == 1
     assert slop_findings[0].severity == ReviewSeverity.CRITICAL_REJECTION
     assert "Ungrounded Academic Slop" in slop_findings[0].title
@@ -74,7 +76,7 @@ def test_clean_empirical_code_passes_anti_slop_gate():
             "X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n"
             "scaler = StandardScaler()\n"
             "X_train_scaled = scaler.fit_transform(X_train)\n"
-        )
+        ),
     )
     pr = PullRequestDiffSnapshot(
         repo_name="Fundacion-de-Neurociencias/test-pipeline",
@@ -84,11 +86,13 @@ def test_clean_empirical_code_passes_anti_slop_gate():
         commit_sha="1122334455667788",
         pr_title="feat: empirical cohort evaluation",
         pr_description="Evaluates real cohort data",
-        files=[clean_file]
+        files=[clean_file],
     )
 
     report = auditor.audit_pull_request(pr)
-    slop_findings = [f for f in report.inline_findings if f.category == ScientificViolationCategory.SYNTHETIC_SLOP_UNGROUNDED]
+    slop_findings = [
+        f for f in report.inline_findings if f.category == ScientificViolationCategory.SYNTHETIC_SLOP_UNGROUNDED
+    ]
     assert len(slop_findings) == 0
 
 
@@ -97,9 +101,7 @@ def test_clean_empirical_code_passes_anti_slop_gate():
 def test_reality_contact_score_requires_data_contact():
     """Verifies that RCS Level 0 (pure literature) cannot be promoted as an active invariant."""
     evidence = RealityContactEvidence(
-        literature_citations_count=50,
-        retrospective_cohorts_validated=[],
-        prospective_holdout_datasets=[]
+        literature_citations_count=50, retrospective_cohorts_validated=[], prospective_holdout_datasets=[]
     )
     report = RealityContactEvaluator.evaluate_rcs("THEORY-TEXT-ONLY", evidence)
     assert report.rcs_score == RealityContactLevel.LEVEL_0_LITERATURE_ONLY

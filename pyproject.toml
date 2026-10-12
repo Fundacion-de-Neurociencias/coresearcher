@@ -14,7 +14,6 @@ authors = [
 ]
 keywords = [
     "epistemic-audit",
-    "physics-corpus",
     "falsification",
     "scientific-discovery",
     "formal-verification"
@@ -59,7 +58,6 @@ addopts = "-v --strict-markers -ra"
 markers = [
     "fast: Fast in-memory unit tests",
     "slow: Tests with extensive numerical or combinatorial processing",
-    "physics: Tests exercising the physics corpus auditor (ADR-DISCOVERY-028)",
     "epistemic: Tests exercising epistemic engines and courts",
     "api: Tests invoking REST endpoints via TestClient",
     "policy: Compliance and language governance tests",

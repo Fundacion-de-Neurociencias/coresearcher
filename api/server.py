@@ -171,6 +171,10 @@ from python.discovery import (
     RosenAutopoieticClosureAuditor,
     PotentialValley,
     VegaPhysicsDecisionEngine,
+    ERAClosedLoopTreeSearch,
+    ERAMethodologicalMutationGenerator,
+    CodeVariant,
+    MutationStrategy,
 )
 
 
@@ -2903,4 +2907,64 @@ def run_math_flywheel_cycle(req: MathFlywheelCycleRequest):
         return result.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+class ERAMutateCodeRequest(BaseModel):
+    parent_variant_id: str
+    generation_depth: int = 0
+    mutation_strategy: str = "EXPONENTIAL_DECAY_LAG"
+    parameter_spec: Dict[str, float] = {"decay_alpha": 0.5}
+    code_snippet: str = "y_pred[t] = 0.5 * y[t-1] + 0.5 * y_pred[t-1]"
+    new_variant_id: str = "mutated-variant-1"
+
+
+class ERASearchCampaignRequest(BaseModel):
+    campaign_id: str
+    dataset_name: str
+    ground_truth_time_series: List[float]
+    time_step_days: float = 7.0
+    surge_threshold_quantile: float = 0.85
+    max_iterations: int = 50
+    beam_width: int = 4
+
+
+@app.post("/api/discovery/era/mutate-code")
+def mutate_era_code(req: ERAMutateCodeRequest):
+    try:
+        strat = MutationStrategy(req.mutation_strategy)
+        parent = CodeVariant(
+            variant_id=req.parent_variant_id,
+            parent_id=None,
+            generation_depth=req.generation_depth,
+            mutation_strategy=strat,
+            parameter_spec=req.parameter_spec,
+            code_snippet=req.code_snippet,
+        )
+        mutated = ERAMethodologicalMutationGenerator.mutate_candidate(
+            parent=parent,
+            new_variant_id=req.new_variant_id,
+            target_strategy=strat,
+        )
+        return mutated.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/discovery/era/run-search-campaign")
+def run_era_search_campaign(req: ERASearchCampaignRequest):
+    try:
+        searcher = ERAClosedLoopTreeSearch()
+        report = searcher.run_campaign(
+            campaign_id=req.campaign_id,
+            dataset_name=req.dataset_name,
+            ground_truth_time_series=req.ground_truth_time_series,
+            time_step_days=req.time_step_days,
+            surge_threshold_quantile=req.surge_threshold_quantile,
+            max_iterations=req.max_iterations,
+            beam_width=req.beam_width,
+        )
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 

@@ -5,8 +5,7 @@
   "description": "CoResearcher OS - Open Scientific Operating System",
   "workspaces": [
     "packages/*",
-    "agents/*",
-    "modules/*"
+    "agents/*"
   ],
   "scripts": {
     "build": "npm run build --workspaces",

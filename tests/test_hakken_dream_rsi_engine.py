@@ -12,9 +12,9 @@ Verifies:
 from __future__ import annotations
 
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.hakken_dream_rsi_engine import (
     BranchOrderingHeuristic,
     DiscoveryHistoryNode,
@@ -28,14 +28,35 @@ from python.discovery.hakken_dream_rsi_engine import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_hakken_predict_unrecorded_biological_link():
     hops = [
-        LiteratureHop("miR-155", "SIRT1", "DOWNREGULATES", literature_citations_count=18, temporal_stability_score=0.92, confidence_weight=0.90),
-        LiteratureHop("SIRT1", "p53", "DEACETYLATES", literature_citations_count=35, temporal_stability_score=0.95, confidence_weight=0.92),
-        LiteratureHop("p53", "p21_CIP1", "TRANSCRIPTIONALLY_ACTIVATES", literature_citations_count=52, temporal_stability_score=0.98, confidence_weight=0.95),
+        LiteratureHop(
+            "miR-155",
+            "SIRT1",
+            "DOWNREGULATES",
+            literature_citations_count=18,
+            temporal_stability_score=0.92,
+            confidence_weight=0.90,
+        ),
+        LiteratureHop(
+            "SIRT1",
+            "p53",
+            "DEACETYLATES",
+            literature_citations_count=35,
+            temporal_stability_score=0.95,
+            confidence_weight=0.92,
+        ),
+        LiteratureHop(
+            "p53",
+            "p21_CIP1",
+            "TRANSCRIPTIONALLY_ACTIVATES",
+            literature_citations_count=52,
+            temporal_stability_score=0.98,
+            confidence_weight=0.95,
+        ),
     ]
 
     candidate = HakkenLiteratureLinkEngine.predict_undocumented_link(
@@ -61,8 +82,22 @@ def test_hakken_predict_unrecorded_biological_link():
 def test_hakken_flags_unstable_temporal_drift():
     # Hops with volatile temporal instability
     hops = [
-        LiteratureHop("EntityA", "EntityB", "CORRELATES", literature_citations_count=2, temporal_stability_score=0.20, confidence_weight=0.40),
-        LiteratureHop("EntityB", "EntityC", "PREDICTS", literature_citations_count=1, temporal_stability_score=0.15, confidence_weight=0.35),
+        LiteratureHop(
+            "EntityA",
+            "EntityB",
+            "CORRELATES",
+            literature_citations_count=2,
+            temporal_stability_score=0.20,
+            confidence_weight=0.40,
+        ),
+        LiteratureHop(
+            "EntityB",
+            "EntityC",
+            "PREDICTS",
+            literature_citations_count=1,
+            temporal_stability_score=0.15,
+            confidence_weight=0.35,
+        ),
     ]
 
     chain = HakkenLiteratureLinkEngine.audit_evidence_chain(
@@ -78,10 +113,52 @@ def test_hakken_flags_unstable_temporal_drift():
 
 
 def test_dream_rsi_discovery_tree_total_cost():
-    leaf1 = DiscoveryHistoryNode("n3", "H3", branch_depth=2, compute_tokens_cost=3000, wet_lab_euro_cost=50.0, time_spent_hours=1.0, outcome_reward=0.2, failure_category="EPISTEMIC_FALSIFICATION", is_terminal=True)
-    leaf2 = DiscoveryHistoryNode("n4", "H4", branch_depth=2, compute_tokens_cost=4000, wet_lab_euro_cost=100.0, time_spent_hours=2.0, outcome_reward=0.9, failure_category=None, is_terminal=True)
-    branch = DiscoveryHistoryNode("n2", "H2", branch_depth=1, compute_tokens_cost=2000, wet_lab_euro_cost=20.0, time_spent_hours=0.5, outcome_reward=0.6, failure_category=None, is_terminal=False, children=[leaf1, leaf2])
-    root = DiscoveryHistoryNode("n1", "H1", branch_depth=0, compute_tokens_cost=1000, wet_lab_euro_cost=0.0, time_spent_hours=0.2, outcome_reward=0.4, failure_category=None, is_terminal=False, children=[branch])
+    leaf1 = DiscoveryHistoryNode(
+        "n3",
+        "H3",
+        branch_depth=2,
+        compute_tokens_cost=3000,
+        wet_lab_euro_cost=50.0,
+        time_spent_hours=1.0,
+        outcome_reward=0.2,
+        failure_category="EPISTEMIC_FALSIFICATION",
+        is_terminal=True,
+    )
+    leaf2 = DiscoveryHistoryNode(
+        "n4",
+        "H4",
+        branch_depth=2,
+        compute_tokens_cost=4000,
+        wet_lab_euro_cost=100.0,
+        time_spent_hours=2.0,
+        outcome_reward=0.9,
+        failure_category=None,
+        is_terminal=True,
+    )
+    branch = DiscoveryHistoryNode(
+        "n2",
+        "H2",
+        branch_depth=1,
+        compute_tokens_cost=2000,
+        wet_lab_euro_cost=20.0,
+        time_spent_hours=0.5,
+        outcome_reward=0.6,
+        failure_category=None,
+        is_terminal=False,
+        children=[leaf1, leaf2],
+    )
+    root = DiscoveryHistoryNode(
+        "n1",
+        "H1",
+        branch_depth=0,
+        compute_tokens_cost=1000,
+        wet_lab_euro_cost=0.0,
+        time_spent_hours=0.2,
+        outcome_reward=0.4,
+        failure_category=None,
+        is_terminal=False,
+        children=[branch],
+    )
 
     total_tokens = DreamRSIOfflineReplayEngine.calculate_tree_total_cost(root)
     assert total_tokens == 1000 + 2000 + 3000 + 4000  # 10,000 tokens
@@ -89,13 +166,66 @@ def test_dream_rsi_discovery_tree_total_cost():
 
 def test_dream_rsi_offline_policy_replay_saves_tokens():
     # Construct a tree where branch A is a dead end (low reward) and branch B has high reward
-    bad_leaf = DiscoveryHistoryNode("bad_leaf", "H_bad", branch_depth=2, compute_tokens_cost=10_000, wet_lab_euro_cost=500.0, time_spent_hours=5.0, outcome_reward=0.05, failure_category="EPISTEMIC_FALSIFICATION", is_terminal=True)
-    bad_branch = DiscoveryHistoryNode("bad_branch", "H_deadend", branch_depth=1, compute_tokens_cost=5_000, wet_lab_euro_cost=200.0, time_spent_hours=2.0, outcome_reward=0.10, failure_category=None, is_terminal=False, children=[bad_leaf])
+    bad_leaf = DiscoveryHistoryNode(
+        "bad_leaf",
+        "H_bad",
+        branch_depth=2,
+        compute_tokens_cost=10_000,
+        wet_lab_euro_cost=500.0,
+        time_spent_hours=5.0,
+        outcome_reward=0.05,
+        failure_category="EPISTEMIC_FALSIFICATION",
+        is_terminal=True,
+    )
+    bad_branch = DiscoveryHistoryNode(
+        "bad_branch",
+        "H_deadend",
+        branch_depth=1,
+        compute_tokens_cost=5_000,
+        wet_lab_euro_cost=200.0,
+        time_spent_hours=2.0,
+        outcome_reward=0.10,
+        failure_category=None,
+        is_terminal=False,
+        children=[bad_leaf],
+    )
 
-    good_leaf = DiscoveryHistoryNode("good_leaf", "H_target", branch_depth=2, compute_tokens_cost=5_000, wet_lab_euro_cost=100.0, time_spent_hours=1.0, outcome_reward=0.92, failure_category=None, is_terminal=True)
-    good_branch = DiscoveryHistoryNode("good_branch", "H_promising", branch_depth=1, compute_tokens_cost=3_000, wet_lab_euro_cost=50.0, time_spent_hours=0.5, outcome_reward=0.80, failure_category=None, is_terminal=False, children=[good_leaf])
+    good_leaf = DiscoveryHistoryNode(
+        "good_leaf",
+        "H_target",
+        branch_depth=2,
+        compute_tokens_cost=5_000,
+        wet_lab_euro_cost=100.0,
+        time_spent_hours=1.0,
+        outcome_reward=0.92,
+        failure_category=None,
+        is_terminal=True,
+    )
+    good_branch = DiscoveryHistoryNode(
+        "good_branch",
+        "H_promising",
+        branch_depth=1,
+        compute_tokens_cost=3_000,
+        wet_lab_euro_cost=50.0,
+        time_spent_hours=0.5,
+        outcome_reward=0.80,
+        failure_category=None,
+        is_terminal=False,
+        children=[good_leaf],
+    )
 
-    root = DiscoveryHistoryNode("root", "H_root", branch_depth=0, compute_tokens_cost=1_000, wet_lab_euro_cost=0.0, time_spent_hours=0.1, outcome_reward=0.50, failure_category=None, is_terminal=False, children=[bad_branch, good_branch])
+    root = DiscoveryHistoryNode(
+        "root",
+        "H_root",
+        branch_depth=0,
+        compute_tokens_cost=1_000,
+        wet_lab_euro_cost=0.0,
+        time_spent_hours=0.1,
+        outcome_reward=0.50,
+        failure_category=None,
+        is_terminal=False,
+        children=[bad_branch, good_branch],
+    )
 
     # Value-Greedy policy: prunes branches below 0.20 reward
     policy = SearchPolicyConfig(
@@ -116,9 +246,41 @@ def test_dream_rsi_offline_policy_replay_saves_tokens():
 
 def test_dream_rsi_policy_optimization():
     # Synthetic tree
-    n3 = DiscoveryHistoryNode("n3", "H3", branch_depth=2, compute_tokens_cost=8000, wet_lab_euro_cost=0.0, time_spent_hours=1.0, outcome_reward=0.05, failure_category="EPISTEMIC_FALSIFICATION", is_terminal=True)
-    n2 = DiscoveryHistoryNode("n2", "H2", branch_depth=1, compute_tokens_cost=4000, wet_lab_euro_cost=0.0, time_spent_hours=0.5, outcome_reward=0.88, failure_category=None, is_terminal=False, children=[n3])
-    root = DiscoveryHistoryNode("n1", "H1", branch_depth=0, compute_tokens_cost=1000, wet_lab_euro_cost=0.0, time_spent_hours=0.1, outcome_reward=0.50, failure_category=None, is_terminal=False, children=[n2])
+    n3 = DiscoveryHistoryNode(
+        "n3",
+        "H3",
+        branch_depth=2,
+        compute_tokens_cost=8000,
+        wet_lab_euro_cost=0.0,
+        time_spent_hours=1.0,
+        outcome_reward=0.05,
+        failure_category="EPISTEMIC_FALSIFICATION",
+        is_terminal=True,
+    )
+    n2 = DiscoveryHistoryNode(
+        "n2",
+        "H2",
+        branch_depth=1,
+        compute_tokens_cost=4000,
+        wet_lab_euro_cost=0.0,
+        time_spent_hours=0.5,
+        outcome_reward=0.88,
+        failure_category=None,
+        is_terminal=False,
+        children=[n3],
+    )
+    root = DiscoveryHistoryNode(
+        "n1",
+        "H1",
+        branch_depth=0,
+        compute_tokens_cost=1000,
+        wet_lab_euro_cost=0.0,
+        time_spent_hours=0.1,
+        outcome_reward=0.50,
+        failure_category=None,
+        is_terminal=False,
+        children=[n2],
+    )
 
     opt_res = DreamRSIOfflineReplayEngine.optimize_policy_offline([root])
     assert "selected_best_policy_id" in opt_res
@@ -135,8 +297,22 @@ def test_rest_api_endpoints(client):
         "target_entity": "CoherenceTimeT2",
         "predicted_relation": "OPTIMIZES_RESONANCE_SWEET_SPOT",
         "hops": [
-            {"source_entity": "FluxQubit", "target_entity": "SQUID_Loop", "relation": "COUPLES_MAGNETIC_FLUX", "literature_citations_count": 40, "temporal_stability_score": 0.95, "confidence_weight": 0.92},
-            {"source_entity": "SQUID_Loop", "target_entity": "CoherenceTimeT2", "relation": "SUPPRESSES_FLUX_NOISE", "literature_citations_count": 28, "temporal_stability_score": 0.90, "confidence_weight": 0.88},
+            {
+                "source_entity": "FluxQubit",
+                "target_entity": "SQUID_Loop",
+                "relation": "COUPLES_MAGNETIC_FLUX",
+                "literature_citations_count": 40,
+                "temporal_stability_score": 0.95,
+                "confidence_weight": 0.92,
+            },
+            {
+                "source_entity": "SQUID_Loop",
+                "target_entity": "CoherenceTimeT2",
+                "relation": "SUPPRESSES_FLUX_NOISE",
+                "literature_citations_count": 28,
+                "temporal_stability_score": 0.90,
+                "confidence_weight": 0.88,
+            },
         ],
         "direct_literature_hits": 0,
     }
@@ -169,9 +345,9 @@ def test_rest_api_endpoints(client):
                     "time_spent_hours": 1.0,
                     "outcome_reward": 0.88,
                     "is_terminal": True,
-                    "children": []
+                    "children": [],
                 }
-            ]
+            ],
         },
         "policy": {
             "policy_id": "api_pol",
@@ -179,8 +355,8 @@ def test_rest_api_endpoints(client):
             "worker_concurrency": 1,
             "pruning_reward_threshold": 0.20,
             "max_tokens_budget": 50000,
-            "stop_early_on_reward": 0.85
-        }
+            "stop_early_on_reward": 0.85,
+        },
     }
     d_resp = client.post("/api/discovery/dream-rsi/replay-policy", json=dream_payload)
     assert d_resp.status_code == 200

@@ -7,11 +7,10 @@ Verifies:
 4. Deterministic SOM SHA-256 Merkle anchoring.
 """
 
-import pytest
 from python.discovery.asymptotic_barrier_auditor import (
-    MathematicalMethodFamily,
-    BarrierType,
     AsymptoticBarrierAuditor,
+    BarrierType,
+    MathematicalMethodFamily,
 )
 
 

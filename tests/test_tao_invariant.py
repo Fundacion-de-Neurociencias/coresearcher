@@ -9,11 +9,11 @@ Verifies that:
 import pytest
 
 from python.discovery.physical_theorem_court import (
+    CourtVerdict,
+    DeductionRule,
     PhysicalCoherenceCourt,
     ProofDependencyDAG,
     ProofLemmaNode,
-    DeductionRule,
-    CourtVerdict,
 )
 
 
@@ -56,14 +56,26 @@ def test_circular_proof_detected_by_tao_reviewer():
     """Verifies that the Tao Reviewer catches circular reasoning cycles in candidate proofs."""
     court = PhysicalCoherenceCourt()
     circular_dag = ProofDependencyDAG(theorem_id="CIRCULAR-PROOF")
-    circular_dag.add_lemma(ProofLemmaNode(
-        lemma_id="L1", title="Lemma 1", premises=["L2"],
-        deduction_rule=DeductionRule.MODUS_PONENS, mathematical_statement="A -> B", formal_expression="A => B"
-    ))
-    circular_dag.add_lemma(ProofLemmaNode(
-        lemma_id="L2", title="Lemma 2", premises=["L1"],
-        deduction_rule=DeductionRule.MODUS_PONENS, mathematical_statement="B -> A", formal_expression="B => A"
-    ))
+    circular_dag.add_lemma(
+        ProofLemmaNode(
+            lemma_id="L1",
+            title="Lemma 1",
+            premises=["L2"],
+            deduction_rule=DeductionRule.MODUS_PONENS,
+            mathematical_statement="A -> B",
+            formal_expression="A => B",
+        )
+    )
+    circular_dag.add_lemma(
+        ProofLemmaNode(
+            lemma_id="L2",
+            title="Lemma 2",
+            premises=["L1"],
+            deduction_rule=DeductionRule.MODUS_PONENS,
+            mathematical_statement="B -> A",
+            formal_expression="B => A",
+        )
+    )
 
     report = court.audit_oracular_proof(
         claim_id="CANDIDATE-CIRCULAR-003",
@@ -81,16 +93,26 @@ def test_acyclic_decomposed_proof_verified_coherently():
     """Verifies that an open, decomposed acyclic proof passes with flying colors."""
     court = PhysicalCoherenceCourt()
     valid_dag = ProofDependencyDAG(theorem_id="TAO-VERIFIED-PROOF")
-    valid_dag.add_lemma(ProofLemmaNode(
-        lemma_id="LEMMA-0", title="Sobolev Embedding", premises=[],
-        deduction_rule=DeductionRule.SOBOLEV_EMBEDDING,
-        mathematical_statement="H1 embedding in L6", formal_expression="sobolev_h1_l6()"
-    ))
-    valid_dag.add_lemma(ProofLemmaNode(
-        lemma_id="LEMMA-1", title="Gronwall Energy Estimate", premises=["LEMMA-0"],
-        deduction_rule=DeductionRule.GRONWALL_INEQUALITY,
-        mathematical_statement="d/dt E(t) <= C E(t)", formal_expression="gronwall(E, t)"
-    ))
+    valid_dag.add_lemma(
+        ProofLemmaNode(
+            lemma_id="LEMMA-0",
+            title="Sobolev Embedding",
+            premises=[],
+            deduction_rule=DeductionRule.SOBOLEV_EMBEDDING,
+            mathematical_statement="H1 embedding in L6",
+            formal_expression="sobolev_h1_l6()",
+        )
+    )
+    valid_dag.add_lemma(
+        ProofLemmaNode(
+            lemma_id="LEMMA-1",
+            title="Gronwall Energy Estimate",
+            premises=["LEMMA-0"],
+            deduction_rule=DeductionRule.GRONWALL_INEQUALITY,
+            mathematical_statement="d/dt E(t) <= C E(t)",
+            formal_expression="gronwall(E, t)",
+        )
+    )
 
     report = court.audit_oracular_proof(
         claim_id="VERIFIED-NAVIER-LEMMA-004",

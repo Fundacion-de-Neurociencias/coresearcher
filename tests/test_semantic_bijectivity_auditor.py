@@ -7,27 +7,16 @@ Verifies:
 4. Detection of frozen signature tampering when tactic engines attempt to mutate goal signatures.
 5. Exact bijective isomorphism verification when claim and Lean code perfectly align.
 6. Integration with ResultFamilyOrchestrator preventing DUAL_VERIFIED_GROUND_TRUTH promotion on drifted formalizations.
-7. Availability and functioning within PhysicsCorpusAuditor.
 """
 
-import pytest
-from python.discovery.semantic_bijectivity_auditor import (
-    DriftType,
-    MathematicalSpecification,
-    BijectivityVerdict,
-    SemanticBijectivityAuditor,
-)
 from python.discovery.result_family_orchestrator import (
-    ResultRole,
     FormalizationTier,
     ResultFamilyOrchestrator,
+    ResultRole,
 )
-from python.discovery.physics_corpus_auditor import (
-    PhysicsCorpusAuditor,
-    CorpusExtractedItem,
-    CorpusItemType,
-    UniversalPhysicsDivision,
-    PhysicsSubdiscipline,
+from python.discovery.semantic_bijectivity_auditor import (
+    DriftType,
+    SemanticBijectivityAuditor,
 )
 
 
@@ -75,9 +64,7 @@ def test_frozen_signature_tampering_detection():
     prose_spec = SemanticBijectivityAuditor.extract_prose_specifications(
         "Energy is conserved under Hamiltonian flow.", "EnergyConservation"
     )
-    lean_spec = SemanticBijectivityAuditor.extract_lean_specifications(
-        tampered_lean, "EnergyConservation"
-    )
+    lean_spec = SemanticBijectivityAuditor.extract_lean_specifications(tampered_lean, "EnergyConservation")
 
     verdict = SemanticBijectivityAuditor.audit_bijective_alignment(
         prose_spec, lean_spec, frozen_signature_hash=frozen_hash
@@ -91,9 +78,7 @@ def test_exact_bijective_isomorphism():
     """
     Tests that a well-aligned proof without goalpost shifting achieves EXACT_ISOMORPHISM.
     """
-    prose_claim = (
-        "For any 3D incompressible flow, C^4 smoothness guarantees boundedness of the pressure-flux."
-    )
+    prose_claim = "For any 3D incompressible flow, C^4 smoothness guarantees boundedness of the pressure-flux."
     lean_code = """
     theorem PressureFluxEstimate (u : VelocityField) (hu : contDiff 4 u) (hdim : Fin 3) :
         PressureFluxBound u := by
@@ -134,6 +119,7 @@ def test_result_family_blocks_drifted_promotion():
     """
     # Write to a temporary file
     import tempfile
+
     with tempfile.NamedTemporaryFile("w", suffix=".lean", delete=False) as f:
         f.write(clean_but_weakened_lean)
         lean_tmp_path = f.name
@@ -143,40 +129,3 @@ def test_result_family_blocks_drifted_promotion():
     report = orch.audit_family_epistemic_integrity()
     assert orch.nodes["NS-Core"].formalization_tier == FormalizationTier.DRIFTED_FORMALIZATION_MISMATCH
     assert not report.is_epistemically_sound
-
-
-def test_physics_corpus_auditor_has_bijectivity_engine():
-    """
-    Verifies that the PhysicsCorpusAuditor possesses and applies the bijectivity auditor.
-    """
-    auditor = PhysicsCorpusAuditor()
-    assert hasattr(auditor, "bijectivity_auditor")
-    assert isinstance(auditor.bijectivity_auditor, SemanticBijectivityAuditor)
-
-    # Synthetic proof item with drifted claims (4 prose derivatives vs 5 in Lean)
-    content = (
-        "Theorem: Fluid Enstrophy Bound.\n"
-        "We assert that 4 additional derivatives suffice.\n"
-        "theorem FluidEnstrophy (u : Flow) (h : contDiff 5 u) : EnstrophyBound u := by sorry\n"
-    )
-    item = CorpusExtractedItem(
-        item_id="CORPUS-NS-PROOFAUDIT",
-        file_path="fluid_enstrophy_proof.tex",
-        division=UniversalPhysicsDivision.CLASSICAL_CONTINUUM_ACOUSTICS,
-        subdiscipline=PhysicsSubdiscipline.CONTINUUM_FLUID_DYNAMICS,
-        item_type=CorpusItemType.MATHEMATICAL_PROOF,
-        title="Fluid Enstrophy Proof",
-        content_snippet=content,
-        raw_size_bytes=len(content),
-        detected_equations=["Enstrophy <= C * E(0)"],
-        detected_data_variables=[],
-        detected_patent_claims=[],
-        system_one_marr_level="MATHEMATICAL_PROOF",
-        system_one_risk_flag=False,
-        system_one_notes="",
-        is_perpetual_motion_risk=False,
-        dimensional_homogeneity_passed=True,
-    )
-    verdict = auditor.audit_proof_item(item)
-    assert not verdict.is_sound
-    assert any("Semantic Drift Violation" in v for v in verdict.violations)

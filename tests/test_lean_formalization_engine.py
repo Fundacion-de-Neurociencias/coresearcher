@@ -8,16 +8,14 @@ Verifies:
 5. Deterministic SOM SHA-256 Merkle anchoring.
 """
 
-import pytest
 from python.discovery.lean_formalization_engine import (
-    LeanProofStatus,
-    LeanVerificationReport,
     LeanFormalizationEngine,
+    LeanProofStatus,
 )
 from python.discovery.result_family_orchestrator import (
-    ResultRole,
     FormalizationTier,
     ResultFamilyOrchestrator,
+    ResultRole,
 )
 
 
@@ -104,7 +102,11 @@ def test_result_family_integration_with_lean_engine():
     assert verdict.total_nodes == 2
     # Node-sound has CAS and synthesized clean Lean scaffolding -> upgraded
     sound_node = orchestrator.nodes["NODE-SOUND"]
-    assert sound_node.formalization_tier in [FormalizationTier.DUAL_VERIFIED_GROUND_TRUTH, FormalizationTier.LEAN_FORMALIZED, FormalizationTier.EXACT_CAS_VERIFIED]
+    assert sound_node.formalization_tier in [
+        FormalizationTier.DUAL_VERIFIED_GROUND_TRUTH,
+        FormalizationTier.LEAN_FORMALIZED,
+        FormalizationTier.EXACT_CAS_VERIFIED,
+    ]
 
     # Node-prose remains provisional prose
     prose_node = orchestrator.nodes["NODE-PROSE"]

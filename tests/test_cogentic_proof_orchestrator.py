@@ -11,21 +11,20 @@ Verifies:
 from __future__ import annotations
 
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.cogentic_proof_orchestrator import (
     AdversarialLemmaVerifier,
     AdversarialVerdictStatus,
     CandidateLemmaStep,
     CogenticProofOrchestrator,
-    VerifiedLemmaLedger,
 )
 
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_adversarial_counterexample_trapped():

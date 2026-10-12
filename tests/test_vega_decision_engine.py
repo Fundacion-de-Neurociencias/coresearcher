@@ -12,9 +12,9 @@ Verifies:
 from __future__ import annotations
 
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.fast_system_one_classifier import (
     ClassificationDomain,
     FastSystemOneClassifier,
@@ -27,7 +27,7 @@ from python.discovery.vega_decision_engine import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_clear_valley_settlement_high_confidence():

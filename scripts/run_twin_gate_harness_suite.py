@@ -30,6 +30,7 @@ from python.discovery.fast_system_one_classifier import (
 )
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_hakken_evidence_gate():
@@ -213,7 +214,7 @@ def test_jev_continuous_verifier():
 
 def test_rest_api_endpoints():
     print("\n--- 5. Testing REST API Endpoints via FastAPI TestClient ---")
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     # 1. In-turn goal verification
     r1 = client.post("/api/discovery/harness/verify-in-turn-goal", json={

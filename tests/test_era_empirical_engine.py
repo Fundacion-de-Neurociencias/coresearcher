@@ -6,9 +6,9 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.era_empirical_engine import (
     ClinicalLeadTimeEvaluator,
     CodeVariant,
@@ -21,7 +21,7 @@ from python.discovery.era_empirical_engine import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_era_methodological_mutation_generation():

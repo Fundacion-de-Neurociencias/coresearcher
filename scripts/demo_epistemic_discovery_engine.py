@@ -23,10 +23,11 @@ if root_dir not in sys.path:
 
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def run_discovery_engine_demo():
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     print("=" * 105)
     print("🧬 CORESEARCHER: AUTONOMOUS THEORY DISCOVERY, CONFLICT RESOLUTION & GIT ENGINE")

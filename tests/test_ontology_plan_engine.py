@@ -7,12 +7,11 @@ Verifies:
 4. Offline proof re-verification (acyclicity check).
 """
 
-import pytest
 from python.knowledge.ontology_plan_engine import (
+    AxiomType,
+    OntologicalAxiom,
     OntologyPlanEngine,
     OntologyState,
-    OntologicalAxiom,
-    AxiomType,
     PlanSafetyVerdict,
 )
 
@@ -37,7 +36,7 @@ def test_blast_radius_domain_consequence_expansion():
         axiom_type=AxiomType.DOMAIN_DECLARATION,
         subject="",
         predicate="hasParent",
-        object_target="Person"
+        object_target="Person",
     )
 
     report = engine.plan_change([axiom], max_safe_blast_radius=50)
@@ -67,7 +66,7 @@ def test_contradiction_detection_disjoint_classes():
         axiom_type=AxiomType.PROPERTY_ASSERTION,
         subject="patient_01",
         predicate="rdf:type",
-        object_target="Dementia"
+        object_target="Dementia",
     )
 
     report = engine.plan_change([axiom])
@@ -88,7 +87,7 @@ def test_apply_and_atomic_rollback():
         axiom_type=AxiomType.SUBCLASS_OF,
         subject="PlasmaPTau217",
         predicate="rdfs:subClassOf",
-        object_target="Biomarker"
+        object_target="Biomarker",
     )
 
     report = engine.plan_change([axiom], max_safe_blast_radius=10)

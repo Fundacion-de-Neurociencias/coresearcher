@@ -202,5 +202,40 @@ For complete, in-depth architectural and constitutional specifications, consult:
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.5.0** (5 Layers, Formal Engines, Mathematical Formulations, API Routes).
 - [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.5.0** (File-by-file directory inventory, data flows, external contracts).
-- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-049).
-- [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).
+- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-055).
+- [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).
+
+---
+
+## Role of GitHub and Zenodo in the Research Lifecycle
+
+CoResearcher bridges real-time collaborative development and formal academic preservation:
+
+```text
+       [ GITHUB ]
+ (Live telemetry: Issues, PRs, Commits, CI)
+            │
+            ▼ (Observer: Passive Inference)
+     [ CoResearcher ]
+  (Scientific Ledger: Question → Evidence → Review → Provenance)
+            │
+            ▼ (ZenodoPublisher: Normalization & REST API)
+       [ ZENODO ]
+ (Persistent DOI 10.5281/zenodo.*, citable in academic literature)
+```
+
+### 1. GitHub: Real-Time Telemetry & Passive Inference
+GitHub serves as the active digital laboratory. Through passive inference (see [Observer Constitution](docs/OBSERVER_CONSTITUTION.md)), CoResearcher captures events without requiring manual data entry:
+
+- **GitHub Issues** $\rightarrow$ Inferred as **`QUESTION`** (research directions, hypotheses, open problems).
+- **Commits & Pull Requests** $\rightarrow$ Inferred as **`ACTION / EVIDENCE`** (verifiable units of scientific execution, scripts, reproducible data runs).
+- **PR Reviews & Discussion Threads** $\rightarrow$ Inferred as **`REVIEW`** (peer validation, methodological checks, human-agent sign-offs).
+- **Git Metadata & CI/CD Traces** $\rightarrow$ Inferred as **`PROVENANCE`** (model identities, environment configurations, execution hashes).
+
+### 2. Zenodo: Dual Role (Discovery & Persistent Preservation)
+Zenodo operates at both the input and output phases of research (see [Sprint 37 Zenodo Publishing](docs/SPRINT37_ZENODO_PUBLISHING.md)):
+
+- **Inbound Discovery (Read-only):** The observer monitors existing Zenodo deposits (`zenodo_connector.py`) to connect baseline datasets, software releases, and external scientific outputs to the research graph.
+- **Outbound Preservation & DOI Minting (Publishing):** When a milestone or ledger is finalized, `zenodo_publisher.py` serializes and normalizes the ledger (`ledger_normalizer.py`), uploads the artifact, and registers a permanent **DOI** (`10.5281/zenodo.*`). This makes the collaborative process fully citable, reproducible, and recognized across academic indexes (DataCite, Crossref).
+
+---

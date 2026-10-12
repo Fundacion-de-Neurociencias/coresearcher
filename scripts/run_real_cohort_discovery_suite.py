@@ -5,15 +5,19 @@ Demonstrates:
 1. Real Multi-Cohort Discovery Campaigns (ADNI, NACC, ROSMAP, UK Biobank) across pTau217, GFAP, NfL, TREM2, APOE4, SV2A.
 2. Authentic non-identical outcomes (failures, Duhem-Quine autopsies, anomaly clustering, scope restrictions, and graveyard burials).
 3. Defeated Hypotheses Graveyard registry.
+
+Important: the outcomes printed here come from hard-coded scenarios in
+python/discovery/real_cohort_campaign_runner.py. No cohort file is read, so this script illustrates the
+output format of the epistemic trajectory. It does not test any scientific claim.
 """
 
 import sys
 import os
 import json
 
-if sys.stdout.encoding != 'utf-8':
+if sys.stdout.encoding != "utf-8":
     try:
-        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
 
@@ -41,11 +45,15 @@ def run_suite_demo():
     print("\n[1] EXECUTING 6-BIOMARKER HETEROGENEOUS DISCOVERY CAMPAIGNS:\n")
     outcomes = client.post("/api/discovery/campaigns/run-heterogeneous-suite").json()
 
-    print(f"{'ID':<22} | {'Biomarker':<8} | {'First Attempt':<28} | {'Final Epistemic Status':<26} | {'CDV (Ω)':<8} | {'DV':<6}")
+    print(
+        f"{'ID':<22} | {'Biomarker':<8} | {'First Attempt':<28} | {'Final Epistemic Status':<26} | {'CDV (Ω)':<8} | {'DV':<6}"
+    )
     print("-" * 115)
 
     for o in outcomes:
-        print(f"{o['campaign_id']:<22} | {o['biomarker']:<8} | {o['first_attempt_status'][:28]:<28} | {o['final_epistemic_status']:<26} | {o['mathematical_cdv']:<8.4f} | {o['discovery_value']:<6.4f}")
+        print(
+            f"{o['campaign_id']:<22} | {o['biomarker']:<8} | {o['first_attempt_status'][:28]:<28} | {o['final_epistemic_status']:<26} | {o['mathematical_cdv']:<8.4f} | {o['discovery_value']:<6.4f}"
+        )
 
     print("-" * 115)
 
@@ -55,13 +63,13 @@ def run_suite_demo():
         print(f"    • Cohort Sources:   {', '.join(o['cohort_sources'])}")
         print(f"    • Initial Hyp:      \"{o['initial_hypothesis']}\"")
         print(f"    • Empirical Result: {o['first_attempt_status']}")
-        if o['failure_autopsy']:
-            fa = o['failure_autopsy']
-            blame = fa.get('blame_allocation', 'N/A')
-            rationale = fa.get('root_cause_rationale') or fa.get('root_cause', 'N/A')
+        if o["failure_autopsy"]:
+            fa = o["failure_autopsy"]
+            blame = fa.get("blame_allocation", "N/A")
+            rationale = fa.get("root_cause_rationale") or fa.get("root_cause", "N/A")
             print(f"    • Duhem-Quine Blame:{blame}")
-            print(f"    • Autopsy Cause:    \"{rationale}\"")
-        if o['anomaly_detected']:
+            print(f'    • Autopsy Cause:    "{rationale}"')
+        if o["anomaly_detected"]:
             print(f"    • Anomaly Detected: \"{o['anomaly_detected']}\"")
         print(f"    • Outcome Entry:    {o['promoted_constraint_or_graveyard_entry']}")
         print(f"    • Trajectory:       \"{o['epistemic_trajectory_summary']}\"")
@@ -95,11 +103,16 @@ def run_suite_demo():
         print(f"       • Phenotype:          \"{a['phenotypic_signature']}\"")
         print(f"       • Mean Residual:      |Observed - Predicted| = {a['mean_residual']:.2f}")
         print(f"       • Key Features:       {', '.join(a['key_differentiating_features'])}")
-        print(f"       • Emergent Invariant: \"{a['synthesized_emergent_constraint']}\" (Prunes {a['state_space_omega_pruned_fraction']*100:.1f}% of Ω)")
+        print(
+            f"       • Emergent Invariant: \"{a['synthesized_emergent_constraint']}\" (Prunes {a['state_space_omega_pruned_fraction']*100:.1f}% of Ω)"
+        )
         print()
 
     print("=" * 115)
-    print("✅ AUTHENTIC DISCOVERY, DUHEM-QUINE DIAGNOSTICS & HETEROGENEOUS SUITE FULLY VALIDATED")
+    print(
+        "DEMONSTRATION OUTPUT ONLY. Campaign outcomes are scripted in python/discovery/real_cohort_campaign_runner.py."
+    )
+    print("No cohort data were loaded or analysed by this run; nothing here is an empirical validation.")
     print("=" * 115)
 
 

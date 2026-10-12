@@ -3,18 +3,21 @@
 SECURITY_TIER = "PRIVATE"
 
 from .manifold_detector import ManifoldDetector
-from .epistemic_gap_detector import (
-    EpistemicGapDetector,
-    EpistemicGap,
-    ParadigmResidue,
-    ConstraintHypothesis,
-    GapType,
-    GapCharacterization,
-    RestrictionType,
-    EpistemicStatus,
-    Severity,
-    determine_restriction_epistemic_status,
-)
+try:
+    from .epistemic_gap_detector import (
+        EpistemicGapDetector,
+        EpistemicGap,
+        ParadigmResidue,
+        ConstraintHypothesis,
+        GapType,
+        GapCharacterization,
+        RestrictionType,
+        EpistemicStatus,
+        Severity,
+        determine_restriction_epistemic_status,
+    )
+except ImportError:  # epistemic_gap_detector is a private module (licensed deployments only)
+    pass
 from .epistemic_trajectory import (
     ExplanationLevel,
     ConstraintType,
@@ -475,16 +478,6 @@ __all__ = [
 
 
     "ManifoldDetector",
-    "EpistemicGapDetector",
-    "EpistemicGap",
-    "ParadigmResidue",
-    "ConstraintHypothesis",
-    "GapType",
-    "GapCharacterization",
-    "RestrictionType",
-    "EpistemicStatus",
-    "Severity",
-    "determine_restriction_epistemic_status",
     "ExplanationLevel",
     "ConstraintType",
     "EpistemicConstraintStatus",

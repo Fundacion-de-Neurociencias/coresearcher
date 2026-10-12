@@ -99,7 +99,7 @@ def audit_empirical_evidence(req: AuditEvidenceRequest):
 
 @router.post("/api/zenodo/publish", dependencies=[Depends(require_api_key)])
 def publish_to_zenodo(req: PublishZenodoRequest):
-    token = os.environ.get("ZENODO_API_TOKEN") or "sandbox_token_demo"
+    token = os.environ.get("ZENODO_TOKEN", "")
     use_sandbox = req.use_sandbox if req.use_sandbox is not None else True
 
     ledger = ScientificLedger(
@@ -138,6 +138,11 @@ def publish_to_zenodo(req: PublishZenodoRequest):
         res_data["auto_explanation"] = AutoExplicabilityEngine.explain_zenodo_publishing(res_data)
         return res_data
 
+    if not token:
+        raise HTTPException(
+            status_code=503,
+            detail="Live Zenodo publishing is disabled: set ZENODO_TOKEN in the environment.",
+        )
     try:
         publisher = ZenodoPublisher(api_token=token, use_sandbox=False)
         doi = publisher.publish_and_get_doi(ledger)

@@ -524,7 +524,7 @@ class FrontierMathFlywheelEngine:
             "SubQuadratic_Spectral_Attention_Engine",
             "Simulation_Solver_Symplectic_Integrator",
             "MetaboAD_Heterogeneous_Cohort_Regressor",
-            "Physics_Megarepo_Dimensional_Homogeneity_Court",
+            "Dimensional_Homogeneity_Court",
         ]
 
         # 6. Cryptographic Merkle Sealing

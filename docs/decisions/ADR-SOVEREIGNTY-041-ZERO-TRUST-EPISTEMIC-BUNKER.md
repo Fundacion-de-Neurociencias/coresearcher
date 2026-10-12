@@ -32,4 +32,3 @@ We implement the **Zero-Trust Epistemic Bunker & Sovereign Air-Gap Gate** in `py
 
 ## Consequences
 - Researchers have mathematical certainty that their intellectual property, thought chains, and scientific intuitions never exit their local hardware.
-- Full verification is integrated into `PhysicsCorpusAuditor v3.0` and exposed via API `/api/discovery/sovereignty/audit`.

@@ -3,8 +3,7 @@
 **Status**: PROPOSED & RATIFIED  
 **Date**: 2026-10-05  
 **Author**: CoResearcher Epistemic Architecture Board  
-**Target Modules**: `python/discovery/exact_symbolic_court.py`, `python/discovery/physical_theorem_court.py`, `python/discovery/physics_corpus_auditor.py`, `api/server.py`  
-**Cross-References**: `ADR-DISCOVERY-017` (Physical Theorem Court), `ADR-DISCOVERY-028` (Universal Physics Auditor), `ADR-REASONING-031` (Decoupled Machine Reasoning), `ADR-EPISTEMIC-032` (Terence Tao Invariant), `ADR-EPISTEMIC-033` (Post-PDF Computable Science)
+**Cross-References**: `ADR-DISCOVERY-017` (Physical Theorem Court), `ADR-REASONING-031` (Decoupled Machine Reasoning), `ADR-EPISTEMIC-032` (Terence Tao Invariant), `ADR-EPISTEMIC-033` (Post-PDF Computable Science)
 
 ---
 

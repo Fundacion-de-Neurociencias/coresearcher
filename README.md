@@ -1,241 +1,163 @@
-# CoResearcher (2026 Canonical Edition)
-**The Autonomous Epistemic Discovery & Formal Verification Engine for Open Science**
+# CoResearcher
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/workflows/ci.yml/badge.svg)](https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/workflows/ci.yml)
-[![FastAPI](https://img.shields.io/badge/API-FastAPI%203.2-009688.svg)](https://fastapi.tiangolo.com)
-[![Pytest](https://img.shields.io/badge/Tests-Pytest%208.3-brightgreen.svg)](tests/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org)
-[![Zero-Mocking](https://img.shields.io/badge/Validation-100%25%20Zero--Mocking-success.svg)](docs/ARCHITECTURE.md)
-[![Category Theory](https://img.shields.io/badge/Algebra-Categorical%20Epistemic-purple.svg)](python/discovery/categorical_epistemic_engine.py)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](pyproject.toml)
+[![API contract](https://img.shields.io/badge/API-OpenAPI%20contract-009688.svg)](schemas/openapi.json)
+
+**An auditable engine that tests scientific claims against explicit constraints, falsification rules and evidence provenance.**
+
+CoResearcher audits; it does not answer. Given a claim, it returns a verdict, the rule that produced
+it, the evidence it used, and a cryptographic hash that lets anyone reproduce the verdict.
 
 ---
 
-## 🏛️ The Core Premise
+## Highlights
 
-Scientific discovery is exploding, yet modern AI tools often hallucinate ungrounded hypotheses, engage in statistical \(p\)-hacking, or act merely as bibliographic search engines.
+- **Claim verification.** Reality Contact Score (RCS), Popperian falsification and conservation-law checks.
+- **Formal gates.** Exact symbolic verification (SymPy), Lean 4 proof gate, categorical holonomy checks.
+- **Provenance.** Append-only scientific ledger, Git-based lineage, Merkle-style hashes, Zenodo export.
+- **Sovereign by default.** Runs on local hardware. Local LLMs (Ollama, LM Studio) are optional; without them the system falls back to deterministic symbolic engines.
+- **Documented contract.** About 90 REST operations, described by an OpenAPI schema that CI keeps in sync.
 
-> **CoResearcher is NOT an answer system.**  
-> **CoResearcher is NOT a bibliographic search engine.**  
-> **CoResearcher is NOT a generative text bot.**  
-> **CoResearcher IS an auditable engine for the progressive reduction of the possible scientific state space (\(\Omega\)) through empirical constraints, deductive falsifications, multi-substrate reality contact, and categorical commutative invariance.**
+**What it is not:** a bibliographic search engine, a generative text system, or a source of
+ground-truth conclusions. Every verdict is only as strong as the evidence and benchmarks behind it.
 
-### 🛡️ The Sovereign AI Invariant (ADR-SOVEREIGNTY-030)
+## Status
 
-> *"Make sure you own the AI you consume."*  
-> *"Cloud AI is not aligned with you; it is aligned with the corporation that owns it."*
+| Check | Result | Details |
+| --- | --- | --- |
+| Test suite | 132 passing | [`tests/`](tests) |
+| Scientific benchmarks | 15 of 16 exit cleanly; 1 known failure | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
+| Module maturity | 8 integrated, 23 tested, 18 exercised, 26 prototypes (of 75) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
-CoResearcher and its sister platforms (**AIDataLab**, **GeneForge**, **Neurodiagnoses**, **EdiTXT**) are built from the ground up to operate on **sovereign, air-gapped local GPU hardware**. By eliminating telemetry and proprietary cloud intermediaries, the ecosystem protects researchers and institutions against epistemic expropriation, idea harvesting, and commercial leakage of preliminary discoveries.
+Claims are listed with their supporting script, data origin and last result in the
+[claims register](docs/reference/CLAIMS_REGISTER.md). Read it before citing any number.
 
----
+## Architecture
 
-## ⚡ The Dual-Core System Architecture
+```mermaid
+flowchart LR
+  subgraph Clients
+    CLI["CLI<br/>python -m python.cli.main"]
+    MCP["MCP clients and agents"]
+    GH["GitHub webhook"]
+  end
+  subgraph API["api/ — FastAPI"]
+    R["Routers<br/>discovery · formal_audits · provenance · ontology · webhooks"]
+    SEC["Security<br/>API key · HMAC · rate limit"]
+  end
+  subgraph Core["python/ — engines"]
+    ENG["discovery engines<br/>formal · evidence · generation · physics · governance"]
+    LED["observer<br/>ledger · git scanner"]
+  end
+  LLM[("Local LLMs<br/>Ollama · LM Studio")]
+  ZEN[("Zenodo")]
+  CLI --> R
+  MCP --> R
+  GH --> R
+  R --> SEC --> ENG
+  ENG --> LED
+  ENG -. optional .-> LLM
+  LED --> ZEN
+```
 
-CoResearcher is architected into two complementary, tightly integrated cores:
+The full specification is in [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md).
 
-### 1. The Autonomous Epistemic Discovery & Verification Engine (`python/discovery/`)
-- **State-Space Pruning (\(\Omega\))**: Reduces combinatorial hypothesis spaces via Popperian Modus Tollens deduction and empirical invariant constraints.
-- **Categorical Epistemic Engine**: Models thinking and scientific reasoning using **Category Theory**, structure-preserving **Epistemic Functors**, and **Commutative Diagrams**. Detects fallacies and reverse-causality tears via **Holonomy Defect** (\(\|\Delta M\|_F\)).
-- **Physical Theorem Court**: Audits scientific claims against conservation laws (Mass-Energy, Thermodynamic Entropy, Navier-Stokes energy dissipation) using directed acyclic proof DAGs.
-- **ToolGrad Backward Inversion**: Inverts real datasets into analytical tool-use trajectories and deterministic contracts with cryptographic hashes.
-- **100% Real-Cohort Empirical Pipeline**: Interacts directly with physical patient files on disk (`metaboad_atn_processed.csv`, \(N=66\)) under a strict **Zero-Mocking Mandate**.
-- **Self-Hosted Epistemic PR Auditor**: Listens to GitHub PR webhooks to block data leakage, conservation violations, and \(p\)-hacking before code enters production.
+## Quick start
 
-### 2. The Open Protocol & Traceability Ledger (`python/observer/`)
-- **Git Scanner & Semantic Compiler**: Ingests code diffs, commits, and issues, translating them into canonical primitives: `QUESTION`, `ACTION`, `CLAIM`, and `EVID`.
-- **Scientific Activity Ledger**: Maintains an immutable, append-only graph of scientific progress.
-- **Zenodo DOI Release**: Automatically packages the entire verifiable research trajectory and deposits it directly to **Zenodo**, assigning a permanent citable **DOI**.
+**Requirements:** Python 3.11 or newer. Git on `PATH` for ledger features. Node.js 18 or newer only
+for the TypeScript packages.
 
----
-
-## 🚀 Quick Start
-
-### 0. Environment Setup & Testing
 ```bash
-# Install production and development dependencies
 pip install -r requirements-dev.txt
-
-# Run the complete pytest verification suite
-pytest tests/ -v
-
-# Verify code formatting and linting
-ruff check tests/
-black --check tests/
-
-# Verify 100% English language policy compliance
-python scripts/enforce_english_policy.py
+python -m pytest tests -q
 ```
 
----
+Run the API. Write endpoints need a key; without one they refuse every request.
 
-## 🚀 Operational Deployment: Physical & Conceptual Requirements
-
-To put CoResearcher into active production, the system requires both physical infrastructure alignment and conceptual epistemic posture:
-
-### 1. Physical Requirements (Infrastructure & Runtime)
-* **Hardware**: Any modern standard workstation (16+ GB RAM, 5–10 GB free disk space). GPU acceleration is optional: if no GPU is present, lightweight local models execute on CPU or the system degrades deterministically to symbolic engines.
-* **Environment**: Python 3.10+ with standard scientific dependencies (`sympy`, `scipy`, `numpy`, `fastapi`, `uvicorn`, `httpx`). Git must be installed in system `PATH` for ledger Merkelization.
-* **Local Dual-AI Engine (Zero-Cloud / Air-Gapped)**:
-  - **System 1 (Laya - High-speed Marr triage)**: [Ollama](https://ollama.com/) running on `http://localhost:11434` (e.g. `llama3.2:3b`).
-  - **System 2 (Local IA - Deep hypothesis reasoning)**: [LM Studio](https://lmstudio.ai/) or Ollama running on `http://localhost:1234` with an OpenAI-compatible API (e.g. `qwen2.5-coder-7b-instruct`).
-  - *Fallback*: If endpoints are offline, CoResearcher gracefully degrades to deterministic symbolic verification without crashing.
-* **Lean 4 Theorem Prover (Optional for Mathematical Formalization)**:
-  - Run `python scripts/setup_lean4_environment.py` to audit or provision `elan`, `lean`, and `lake`.
-
-### 2. Conceptual Requirements (Epistemic Posture & Input Data)
-* **Real Input Corpus**: A tangible physical artifact—a scientific code repository, simulation scripts (`.py`, `.jl`, `.cpp`), theoretical manuscripts (`.tex`, `.md`), or real patient cohort matrices. CoResearcher strictly prohibits mock/synthetic data in production validation (**Zero Mocking Mandate**).
-* **State Space Reduction Perspective ($\Omega$)**: The goal is not open-ended text generation, but the systematic pruning of unviable hypotheses through empirical conservation laws, dimensional constraints (Buckingham $\Pi$), and Modus Tollens refutation.
-* **Generator $\neq$ Verifier Demarcation**: CoResearcher functions as the independent Epistemic Court. Candidate theories (from humans or generative AIs) are audited for mathematical leaks, Goodhart formal drift, and physical contradictions.
-* **Audited Human Oversight (HITL)**: Human decisions must pass cognitive engagement verification (anti-rubber-stamping dwell-time gates and adversarial challenges) to preserve sovereign provenance.
-
----
-
-### 1. Unified CoResearcher CLI
 ```bash
-# Display system info and local AI endpoint status
+export CORESEARCHER_API_KEY="$(openssl rand -hex 32)"
+uvicorn api.server:app --host 127.0.0.1 --port 8000
+```
+
+Open <http://127.0.0.1:8000/docs> for interactive documentation.
+
+Run the CLI:
+
+```bash
 python -m python.cli.main info
-
-# Audit a scientific or physics megarepo with zero cloud cost
-python -m python.cli.main audit --repo-path /path/to/physics-repo
-
-# Verify a scientific claim against the Reality Contact Firewall (RCS >= 2.0)
 python -m python.cli.main verify --claim "H0 = 67.4 km/s/Mpc" --rcs 2 --anchors "Planck 2018 Legacy"
-
-# Launch the FastAPI REST service
-python -m python.cli.main serve --port 8000
 ```
 
-### 2. Launch the Production REST API
+## Configuration and security
+
+Copy [`.env.example`](.env.example) to `.env` and set the values you need.
+
+| Variable | Purpose |
+| --- | --- |
+| `CORESEARCHER_API_KEY` | Required in `X-API-Key` for `POST`, `PUT` and `DELETE`. Unset means writes are refused. |
+| `CORESEARCHER_GITHUB_WEBHOOK_SECRET` | Verifies `X-Hub-Signature-256` on the GitHub webhook. Unset disables the webhook. |
+| `CORESEARCHER_CORS_ORIGINS` | Comma-separated browser origins allowed by CORS. |
+| `CORESEARCHER_RATE_LIMIT_PER_MINUTE` | Requests per client IP per minute (default 120). |
+
+The server binds to `127.0.0.1` by default. If you expose it beyond localhost, put it behind a reverse
+proxy with TLS. This repository does not configure that.
+
+Details: [`api/security.py`](api/security.py) and the [REST API reference](docs/reference/API.md).
+
+## Documentation
+
+| Topic | Where to start |
+| --- | --- |
+| Documentation index | [docs/INDEX.md](docs/INDEX.md) |
+| Architecture | [docs/architecture/](docs/architecture) |
+| REST API (generated) | [docs/reference/API.md](docs/reference/API.md) |
+| Claims and evidence | [docs/reference/CLAIMS_REGISTER.md](docs/reference/CLAIMS_REGISTER.md) |
+| Architecture decisions (ADRs) | [docs/decisions/](docs/decisions) |
+| Governance and policies | [docs/governance/](docs/governance) |
+| Public overview | [docs/public/README.md](docs/public/README.md) |
+
+## Repository layout
+
+| Path | Contents |
+| --- | --- |
+| `api/` | FastAPI application, routers, security and shared state |
+| `python/` | Core engines: discovery, observer (ledger), knowledge, ontology, CLI |
+| `packages/` | TypeScript packages: MCP server, provenance, shared types |
+| `agents/` | TypeScript agents (reviewer, co-scientist, neurodiagnoses, autoscientist) |
+| `schemas/` | JSON and YAML contracts, including `openapi.json` |
+| `scripts/` | Benchmark suites, checks and generators |
+| `tests/` | Pytest suite |
+| `docs/` | Documentation (see [docs/INDEX.md](docs/INDEX.md)) |
+
+## Development
 
 ```bash
-# Start the FastAPI discovery and audit server
-uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
-```
-Interactive Swagger documentation is available at `http://localhost:8000/docs`.
-
-### 2. Execute the 100% Empirical Real-Cohort Discovery Pipeline
-```bash
-# Zero-mocking discovery on physical patient files on disk
-python scripts/run_empirical_cohort_discovery.py
+ruff check tests/ api/
+black --check tests/ api/
+python scripts/enforce_english_policy.py
+python scripts/check_repo_consistency.py
+python scripts/export_openapi.py --check
+python scripts/generate_api_reference.py --check
 ```
 
-### 3. Run the Categorical Reasoning & Commutative Diagram Suite
-```bash
-# Verifies category axioms, commutative causal mediation, and detects holonomy defects
-python scripts/run_categorical_reasoning_suite.py
-```
+CI runs these checks on every push and pull request. Code, comments and documentation are in
+English ([language policy](docs/governance/LANGUAGE_POLICY.md)).
 
-### 4. Run the Epistemic Pull Request Reviewer CI
-```bash
-# Audits scientific PRs for data leakage, physical impossibilities, and p-hacking
-python scripts/run_epistemic_pr_auditor_suite.py
-```
+## Limitations
 
-### 5. Ingest and Connect a Git Repository to the Scientific Activity Ledger
-```bash
-# Reconstruct scientific ledger from git commit history
-python -m python.observer.git_scanner /path/to/research/repo
-```
+- Benchmarks are run manually, not in CI. Several use synthetic or hand-built cases, by design.
+- One benchmark needs a clinical dataset that is not in this repository, so it cannot be reproduced from a clean clone.
+- No claim has yet been validated against an external public dataset with confidence intervals.
+- Known open issues are listed in the claims register.
 
----
+## Ecosystem
 
-## 🔬 Benchmark & Stress-Testing Suites
+CoResearcher works with sibling projects: **DataAILab** (empirical solver and GPU worker) and
+**EdiTXT** (editorial and peer-review tooling). See [docs/architecture/ECOSYSTEM_BOUNDARIES.md](docs/architecture/ECOSYSTEM_BOUNDARIES.md).
 
-| Benchmark Suite | Script Runner | Focus & Invariant Tested |
-| :--- | :--- | :--- |
-| **Categorical Reasoning** | `scripts/run_categorical_reasoning_suite.py` | Axiomatic soundness, zero holonomy defect (\(0.00\text{e}+00\)) on sound paths, defect detection on fallacies. |
-| **Epistemic PR Auditor** | `scripts/run_epistemic_pr_auditor_suite.py` | 100% interception of pre-split data leakage, physical conservation breaches, and multiple-testing errors. |
-| **Empirical Cohorts** | `scripts/run_empirical_cohort_discovery.py` | Real clinical cohort regression (MetaboAD \(N=66\)), residual outlier extraction, and metabolic gate invariance. |
-| **Physical Coherence** | `scripts/run_physical_coherence_suite.py` | Proof DAG audit, thermodynamic second law, Navier-Stokes Leray-Hopf dissipation, singularity search. |
-| **ToolGrad Backward Inversion** | `scripts/run_toolgrad_backward_synthesis_suite.py` | Analytical contract synthesis from forward empirical execution trajectories. |
-| **Retrospective Time-Split** | `scripts/run_retrospective_discovery_benchmark.py` | Historical reproduction of AD biomarker milestones quarantined strictly at Cutoff \(\le 2018\). |
-| **100-World Unknown Mechanism**| `scripts/run_unknown_mechanism_benchmark.py` | Autonomous abduction across 100 blind worlds without biological priors. |
-| **Adversarial Destruction** | `scripts/run_adversarial_destruction_suite.py` | 50-case adversarial stress suite (Simpson's paradox, collider stratification, circular reasoning). |
-| **Universal Latent Invariants** | `scripts/run_universal_cross_domain_suite.py` | Cross-domain mathematical scaling across Neuroscience, Astrophysics, Economics, and Marine Ecology. |
-| **Paper2Agent MCP Federation** | `scripts/run_paper_agent_mcp_suite.py` | Virtual author discovery and real analytical tool execution with SHA-256 provenance (\(RCS=2\)). |
-| **Agora Shared Memory Suite**  | `scripts/run_agora_shared_memory_suite.py` | Decentralized git memory, open-branch index, verified-claim reuse, cross-branch cherry-picking. |
-| **Fast System One Suite**      | `scripts/run_fast_system_one_suite.py` | High-speed typed decisions (Jev architecture): sub-millisecond Marr level & PR guardrail triage. |
-| **Twin-Gate Epistemic Harness**| `scripts/run_twin_gate_harness_suite.py` | ScienceIDE simulation checks, Hakken evidence perturbation, Dream-RSI failure triage, Jev in-turn verifiers. |
-| **Membrane Dynamics Suite**    | `scripts/run_membrane_dynamics_suite.py` | Biophysical membrane simulation contracts, Duhem-Quine failure attribution (BAX, Abeta42, Tau, TREM2), energy drift. |
-| **Epistemic Stigmergy Suite**  | `scripts/run_epistemic_stigmergy_suite.py` | Decentralized git pheromone field scanning, Buehler loop instrument compilation, RCS >= 2.0 reality firewall. |
-| **Physics Megarepo Auditor v3.0** | `scripts/run_physics_corpus_auditor_suite.py` | Autonomous peer review of massive physics corpora across 10 divisions, 42 subdisciplines, Laya (System 1) / Local IA (System 2) integration, proof DAGs, and physical invariant checks. |
-| **Lean 4 Interactive Prover Gate** | `tests/test_lean_formalization_engine.py` | Lean 4 scaffolding synthesis, AST kernel auditing, strict trapping of unproven `sorry` escapes (ADR-047). |
-| **Semantic Bijectivity & Drift Gate** | `tests/test_semantic_bijectivity_auditor.py` | Isomorphism between natural prose and Lean types, detecting Navier-Stokes derivative order shifts (ADR-048). |
-| **Audited Human Oversight Gate** | `tests/test_audited_human_oversight.py` | Dwell-time cognitive inspection, anti-rubber-stamping challenges, AI consensus bias interception, and Merkle ledger proofs (ADR-049). |
-| **Cogentic Multi-Agent Prove-Verify** | `tests/test_cogentic_proof_orchestrator.py` | Iterative prove-verify loop, parallel provers, 3 adversarial gates (logic, boundary sweep, implicit assumptions), and persistent verified lemma ledger (ADR-050). |
-| **Biomacromolecular Coordination Gate** | `tests/test_biomacromolecular_auditor.py` | Physical coordination court, Van der Waals clash rejection ($r < 1.20\,\text{Å}$), catalytic metal preservation, PROTAC cooperativity ($\alpha > 1.0$), and H-JEPA free-energy rollouts (ADR-051). |
-| **Rosen Autopoietic Closure Gate** | `tests/test_autopoietic_closure_auditor.py` | Rosen (M,R)-systems audit, closure to efficient causation ($\mathcal{H} \subseteq \mathcal{P}$), non-equilibrium dissipation ($\sigma_{\text{ent}} > 0$), and demarcation between living self-fabrication and static mechanical DAGs (ADR-052). |
-| **Vega Physics Decision Engine** | `tests/test_vega_decision_engine.py` | Continuous potential landscape $U(x)$, damped Newtonian dynamics, conformal bistable abstention (`is_abstain`), and Fast System 1 / Twin Gate integration (ADR-053). |
-| **Hakken & Dream-RSI Discovery Pipeline** | `tests/test_hakken_dream_rsi_engine.py` | Literature link abduction, PHELInE necessity/sufficiency chains, temporal drift gating, and Dream-RSI offline discovery tree search replay optimization (ADR-054). |
-| **Frontier Math Closed-Loop Flywheel** | `tests/test_frontier_math_flywheel.py` | Ingestion of frontier math releases (`openai/math` & Hugging Face), admissibility/drift screening, proof equivalence dense rewards, functorial AI operator compilation, and cross-domain re-investment (ADR-055). |
+## License
 
----
-
-## 🐙 GitHub Integration & Epistemic Continuous Integration (CI)
-
-CoResearcher integrates with GitHub across three autonomous planes:
-
-1. **Epistemic PR Auditor (`python/discovery/epistemic_pr_auditor.py`)**:
-   - Acts as a self-hosted scientific peer-reviewer listening to GitHub Pull Request webhooks (`POST /api/webhooks/github`).
-   - Audits code diffs for data leakage (e.g., fitting scalers prior to split), physical conservation breaches (Leray-Hopf dissipation, 2nd law of thermodynamics), and statistical $p$-hacking before merging.
-2. **Git Scanner & Semantic Compiler (`python/observer/git_scanner.py`)**:
-   - Reconstructs scientific discovery lineage directly from Git commit history and pull requests into structured scientific primitives (`QUESTION`, `ACTION`, `CLAIM`, `EVID`).
-3. **Scientific Activity Ledger Synchronization (`python/observer/scientific_ledger.py`)**:
-   - Binds discoveries, peer review verdicts, and formal Lean proofs directly to the repository's cryptographic activity graph, enabling 1-click Zenodo archiving with permanent DOIs.
-
----
-
-## 🌐 The Scientific Trinity (Ecosystem Boundaries)
-
-CoResearcher operates in seamless coordination with two specialized sibling platforms:
-
-- **CoResearcher** (`Epistemic Auditor & Reasoner`): Formal logic, state space pruning, physical conservation DAGs, categorical commutativity, and ledger provenance.
-- **DataAILab** (`Empirical Solver & GPU Worker`): High-performance tensor computation, numerical training, and heavy empirical simulation (`ARCH-002`).
-- **EdiTXT** (`Editorial & Peer Review Press`): Manuscript authoring, claim-to-text data anchors, figure change-detection, and editorial peer review (`ARCH-003`).
-
----
-
-## 📚 Canonical Architecture Documentation
-
-For complete, in-depth architectural and constitutional specifications, consult:
-
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — **Master Architecture Specification v4.5.0** (5 Layers, Formal Engines, Mathematical Formulations, API Routes).
-- [docs/ARCHITECTURE_MAP.md](docs/ARCHITECTURE_MAP.md) — **System Topology & Component Map v4.5.0** (File-by-file directory inventory, data flows, external contracts).
-- [docs/CONSTITUTION_INDEX.md](docs/CONSTITUTION_INDEX.md) — **Constitutional Index & ADR Register** (ADR-DISCOVERY-001 through ADR-DISCOVERY-055).
-- [docs/ECOSYSTEM_BOUNDARIES.md](docs/ECOSYSTEM_BOUNDARIES.md) — **Ecosystem Demarcation** (Territorial borders and contracts between CoResearcher, DataAILab, and EdiTXT).
-
----
-
-## Role of GitHub and Zenodo in the Research Lifecycle
-
-CoResearcher bridges real-time collaborative development and formal academic preservation:
-
-```text
-       [ GITHUB ]
- (Live telemetry: Issues, PRs, Commits, CI)
-            │
-            ▼ (Observer: Passive Inference)
-     [ CoResearcher ]
-  (Scientific Ledger: Question → Evidence → Review → Provenance)
-            │
-            ▼ (ZenodoPublisher: Normalization & REST API)
-       [ ZENODO ]
- (Persistent DOI 10.5281/zenodo.*, citable in academic literature)
-```
-
-### 1. GitHub: Real-Time Telemetry & Passive Inference
-GitHub serves as the active digital laboratory. Through passive inference (see [Observer Constitution](docs/OBSERVER_CONSTITUTION.md)), CoResearcher captures events without requiring manual data entry:
-
-- **GitHub Issues** $\rightarrow$ Inferred as **`QUESTION`** (research directions, hypotheses, open problems).
-- **Commits & Pull Requests** $\rightarrow$ Inferred as **`ACTION / EVIDENCE`** (verifiable units of scientific execution, scripts, reproducible data runs).
-- **PR Reviews & Discussion Threads** $\rightarrow$ Inferred as **`REVIEW`** (peer validation, methodological checks, human-agent sign-offs).
-- **Git Metadata & CI/CD Traces** $\rightarrow$ Inferred as **`PROVENANCE`** (model identities, environment configurations, execution hashes).
-
-### 2. Zenodo: Dual Role (Discovery & Persistent Preservation)
-Zenodo operates at both the input and output phases of research (see [Sprint 37 Zenodo Publishing](docs/SPRINT37_ZENODO_PUBLISHING.md)):
-
-- **Inbound Discovery (Read-only):** The observer monitors existing Zenodo deposits (`zenodo_connector.py`) to connect baseline datasets, software releases, and external scientific outputs to the research graph.
-- **Outbound Preservation & DOI Minting (Publishing):** When a milestone or ledger is finalized, `zenodo_publisher.py` serializes and normalizes the ledger (`ledger_normalizer.py`), uploads the artifact, and registers a permanent **DOI** (`10.5281/zenodo.*`). This makes the collaborative process fully citable, reproducible, and recognized across academic indexes (DataCite, Crossref).
-
----
+MIT. See [`pyproject.toml`](pyproject.toml). Please cite the project through its Zenodo record once it is published.

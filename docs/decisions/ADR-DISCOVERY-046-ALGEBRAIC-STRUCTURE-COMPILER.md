@@ -31,20 +31,20 @@ Classifies verified mathematical invariants into four actionable computational c
 - `RIEMANNIAN_FISHER_MANIFOLD`: Information geometry utilizing Fisher-Rao metric tensors for second-order natural gradient descent.
 
 ### 2. Functorial Compilation Pipeline ($\mathcal{F}: \mathbf{Category(Math)} \to \mathbf{Category(AI\ Runtime)}$)
-The `AlgebraicStructureCompiler` inspects verified mathematical objects (from `ExactSymbolicCourt`, `ResultFamilyOrchestrator`, or `PhysicsCorpusAuditor`) and extracts their generator relations, commutation tables, and Casimir invariants:
+The `AlgebraicStructureCompiler` inspects verified mathematical objects (from `ExactSymbolicCourt` or `ResultFamilyOrchestrator`) and extracts their generator relations, commutation tables, and Casimir invariants:
 - **Equivariance Verification**: Verifies commutation relation $[T_g, \mathcal{A}(x)] = 0$ across generator group actions.
 - **Operator Synthesis**: Synthesizes executable Python/NumPy matrix generators, multi-vector grade projection masks, and symplectic integrator step functions.
 - **Complexity Advantage Factor**: Quantifies the theoretical acceleration gained (e.g., reducing quadratic $\mathcal{O}(N^2)$ attention to $\mathcal{O}(N \log N)$ spectral convolution).
 
 ### 3. The Mathematical Flywheel Closed-Loop Cycle (`MathematicalFlywheelRunner`)
 Orchestrates the four recursive stages:
-1. **Discover & Verify**: Ingests theorems and chapters through `PhysicsCorpusAuditor` and `ResultFamilyOrchestrator` (CAS + Lean 4).
+1. **Discover & Verify**: Ingests theorems through `ResultFamilyOrchestrator` (CAS + Lean 4).
 2. **Compile to Operators**: Uses `AlgebraicStructureCompiler` to produce equivariant kernels, symplectic steppers, or sub-quadratic spectral operators.
 3. **Calibrate Runtime**: Evaluates operator stability, numerical drift ($\le 10^{-6}$), and parameter efficiency.
 4. **Bootstrap Sovereign AI**: Deploys the generated operators into local agent architectures (Laya / System 1 / System 2), increasing their reasoning throughput and physical fidelity for the next discovery campaign.
 
 ### 4. Zero-Cloud Cryptographic Anchoring
-Generates an immutable cryptographic hash (`som_compiled_operator_hash`) logging the theorem lineage, generator signature, and Lie bracket commutators locally without leaking intellectual assets ([`ADR-SOVEREIGNTY-041`](file:///c:/Users/usuario/coresearcher/docs/decisions/ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)).
+Generates an immutable cryptographic hash (`som_compiled_operator_hash`) logging the theorem lineage, generator signature, and Lie bracket commutators locally without leaking intellectual assets ([`ADR-SOVEREIGNTY-041`](ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)).
 
 ---
 

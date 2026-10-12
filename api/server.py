@@ -2831,4 +2831,76 @@ def replay_dream_rsi_policy(req: DreamRSIReplayRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 
+# ==========================================
+# FRONTIER MATH CLOSED-LOOP FLYWHEEL (ADR-055)
+# ==========================================
+
+from python.discovery.frontier_math_flywheel import (
+    FrontierMathProblemTask,
+    ProofEquivalenceAuditor,
+    FrontierMathFlywheelEngine,
+)
+
+
+class FrontierMathTaskInput(BaseModel):
+    task_id: str
+    title: str
+    problem_statement_prose: str
+    formal_lean_statement: str
+    reference_solution_code: Optional[str] = None
+    domain_topic: str = "ANALYSIS_NUMBER_THEORY"
+    source_repository: str = "openai/math"
+    metadata: Dict[str, Any] = {}
+
+
+class MathFlywheelCycleRequest(BaseModel):
+    cycle_id: str
+    problem_tasks: List[FrontierMathTaskInput]
+    submitted_solutions: Optional[Dict[str, str]] = None
+
+
+@app.post("/api/discovery/math-flywheel/audit-admissibility")
+def audit_math_problem_admissibility(req: FrontierMathTaskInput):
+    try:
+        task = FrontierMathProblemTask(
+            task_id=req.task_id,
+            title=req.title,
+            problem_statement_prose=req.problem_statement_prose,
+            formal_lean_statement=req.formal_lean_statement,
+            reference_solution_code=req.reference_solution_code,
+            domain_topic=req.domain_topic,
+            source_repository=req.source_repository,
+            metadata=req.metadata,
+        )
+        report = FrontierMathFlywheelEngine.audit_problem_admissibility(task)
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/api/discovery/math-flywheel/run-cycle")
+def run_math_flywheel_cycle(req: MathFlywheelCycleRequest):
+    try:
+        engine = FrontierMathFlywheelEngine()
+        tasks = [
+            FrontierMathProblemTask(
+                task_id=t.task_id,
+                title=t.title,
+                problem_statement_prose=t.problem_statement_prose,
+                formal_lean_statement=t.formal_lean_statement,
+                reference_solution_code=t.reference_solution_code,
+                domain_topic=t.domain_topic,
+                source_repository=t.source_repository,
+                metadata=t.metadata,
+            )
+            for t in req.problem_tasks
+        ]
+        result = engine.execute_closed_loop_flywheel_cycle(
+            cycle_id=req.cycle_id,
+            problem_tasks=tasks,
+            submitted_solutions=req.submitted_solutions,
+        )
+        return result.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 

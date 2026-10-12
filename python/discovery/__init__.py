@@ -416,6 +416,16 @@ from .hakken_dream_rsi_engine import (
     PolicyReplayResult,
     DreamRSIOfflineReplayEngine,
 )
+from .frontier_math_flywheel import (
+    AdmissibilityStatus,
+    FrontierMathProblemTask,
+    AdmissibilityAuditReport,
+    ProofEquivalenceScore,
+    ExtractedBridgeLemma,
+    ClosedLoopFlywheelResult,
+    ProofEquivalenceAuditor,
+    FrontierMathFlywheelEngine,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -803,4 +813,12 @@ __all__ = [
     "SearchPolicyConfig",
     "PolicyReplayResult",
     "DreamRSIOfflineReplayEngine",
+    "AdmissibilityStatus",
+    "FrontierMathProblemTask",
+    "AdmissibilityAuditReport",
+    "ProofEquivalenceScore",
+    "ExtractedBridgeLemma",
+    "ClosedLoopFlywheelResult",
+    "ProofEquivalenceAuditor",
+    "FrontierMathFlywheelEngine",
 ]

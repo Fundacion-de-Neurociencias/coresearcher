@@ -30,13 +30,6 @@
     {
       "api": false,
       "level": "Prototype",
-      "module": "anomaly_detector",
-      "scripts": false,
-      "tests": false
-    },
-    {
-      "api": false,
-      "level": "Prototype",
       "module": "anomaly_discovery_engine",
       "scripts": false,
       "tests": false
@@ -99,13 +92,6 @@
     },
     {
       "api": false,
-      "level": "Prototype",
-      "module": "boundary_explorer",
-      "scripts": false,
-      "tests": false
-    },
-    {
-      "api": false,
       "level": "Exercised",
       "module": "categorical_epistemic_engine",
       "scripts": true,
@@ -142,13 +128,6 @@
     {
       "api": false,
       "level": "Prototype",
-      "module": "cross_domain_transfer",
-      "scripts": false,
-      "tests": false
-    },
-    {
-      "api": false,
-      "level": "Prototype",
       "module": "defeated_hypotheses_graveyard",
       "scripts": false,
       "tests": false
@@ -176,24 +155,10 @@
     },
     {
       "api": false,
-      "level": "Prototype",
-      "module": "einstein_generator",
-      "scripts": false,
-      "tests": false
-    },
-    {
-      "api": false,
       "level": "Tested",
       "module": "energy_predictive_auditor",
       "scripts": false,
       "tests": true
-    },
-    {
-      "api": false,
-      "level": "Exercised",
-      "module": "epistemic_gap_detector",
-      "scripts": true,
-      "tests": false
     },
     {
       "api": true,
@@ -316,9 +281,9 @@
     },
     {
       "api": false,
-      "level": "Exercised",
+      "level": "Prototype",
       "module": "manifold_detector",
-      "scripts": true,
+      "scripts": false,
       "tests": false
     },
     {
@@ -333,13 +298,6 @@
       "level": "Exercised",
       "module": "membrane_dynamics_auditor",
       "scripts": true,
-      "tests": false
-    },
-    {
-      "api": false,
-      "level": "Prototype",
-      "module": "missing_link_explorer",
-      "scripts": false,
       "tests": false
     },
     {
@@ -365,9 +323,9 @@
     },
     {
       "api": false,
-      "level": "Prototype",
+      "level": "Exercised",
       "module": "real_cohort_campaign_runner",
-      "scripts": false,
+      "scripts": true,
       "tests": false
     },
     {
@@ -472,13 +430,6 @@
       "api": false,
       "level": "Prototype",
       "module": "test_manifold_detector",
-      "scripts": false,
-      "tests": false
-    },
-    {
-      "api": false,
-      "level": "Prototype",
-      "module": "thought_experiment_generator",
       "scripts": false,
       "tests": false
     },

@@ -40,7 +40,7 @@ The same mass of empirical evidence can give rise to radically different hypothe
 `Representation` is introduced as a first-order entity in the knowledge graph:
 - `representation_id`: Canonical identifier (e.g. `REP-GRAPH-TOPOLOGY-001`, `REP-BIOLOGICAL-PROGRAM-042`).
 - `name`: Name of the observational/conceptual formalism.
-- `observables_space`: Space of variables and patterns that this framework makes **visible** (and what it leaves **invisible** according to [REP-001](file:///c:/Users/usuario/coresearcher/docs/REP-001_REPRESENTATION_AND_OBSERVABILITY.md)).
+- `observables_space`: Space of variables and patterns that this framework makes **visible** (and what it leaves **invisible** according to [REP-001](../research/REP-001_REPRESENTATION_AND_OBSERVABILITY.md)).
 - `invariant_principles`: Preserved physical, biological or mathematical invariants.
 - `marr_level`: Marr's explanatory level (`COMPUTATIONAL`, `ALGORITHMIC`, `IMPLEMENTATIONAL`).
 

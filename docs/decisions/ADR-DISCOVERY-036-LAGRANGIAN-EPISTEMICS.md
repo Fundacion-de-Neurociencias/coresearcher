@@ -3,8 +3,7 @@
 **Status**: PROPOSED & RATIFIED  
 **Date**: 2026-10-06  
 **Author**: CoResearcher Epistemic Architecture Board  
-**Target Modules**: `python/discovery/lagrangian_epistemic_engine.py`, `python/discovery/physical_theorem_court.py`, `python/discovery/physics_corpus_auditor.py`, `api/server.py`  
-**Cross-References**: `ADR-DISCOVERY-001` (Epistemic Trajectory & Representation), `ADR-DISCOVERY-017` (Physical Theorem Court), `ADR-DISCOVERY-028` (Universal Physics Auditor), `ADR-EPISTEMIC-034` (Exact Symbolic Dual-Verification)
+**Cross-References**: `ADR-DISCOVERY-001` (Epistemic Trajectory & Representation), `ADR-DISCOVERY-017` (Physical Theorem Court), `ADR-EPISTEMIC-034` (Exact Symbolic Dual-Verification)
 
 ---
 
@@ -31,7 +30,7 @@ CoResearcher ratifies **ADR-DISCOVERY-036**, establishing the **Generalized Lagr
 
 ### Invariant 1: First-Class Lagrangian Field Specification
 Any physical theory or formal dynamical claim evaluated by CoResearcher can be specified as a Lagrangian density $\mathcal{L}(q, \dot{q})$ or $\mathcal{L}(\phi, \partial_\mu \phi)$.
-- Theoretical chapters in the physics megarepository are parsed for their explicit kinetic terms ($T$), potential terms ($V$), and interaction terms ($\mathcal{L}_{\text{int}}$).
+- Theoretical chapters in physics texts are parsed for their explicit kinetic terms ($T$), potential terms ($V$), and interaction terms ($\mathcal{L}_{\text{int}}$).
 
 ### Invariant 2: Symbolic Euler-Lagrange Automated Derivation
 Using exact Computer Algebra Systems (SymPy, per `ADR-EPISTEMIC-034`), the engine derives the exact equations of motion analytically:

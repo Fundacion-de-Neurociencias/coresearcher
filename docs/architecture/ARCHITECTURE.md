@@ -234,7 +234,6 @@ Located in `api/server.py`, this layer exposes CoResearcher to the external worl
 - **Stigmergy Pheromone Field Query**: `POST /api/discovery/stigmergy/query-pheromone-field` (Scans git history to emit attractors and repulsors for autonomous agent swarms).
 - **Meta-Recursive Instrument Compilation**: `POST /api/discovery/stigmergy/compile-instrument` (Compiles candidate hypotheses into executable simulation worlds).
 - **Reality Contact Firewall Audit**: `POST /api/discovery/stigmergy/audit-reality-firewall` (Blocks promotion of swarm-derived theories to invariant laws unless RCS >= 2.0).
-- **Physics Megarepo Peer Review**: `POST /api/discovery/physics/audit-megarepo` (Autonomous peer review of massive physics corpora across 8 subdisciplines).
 
 ### 2. Paper2Agent (Nature 2026) MCP Federation
 Implemented in `python/discovery/grounded_search_sensor.py` (`PaperAgentMCPAdapter`), this subsystem enables active discovery campaigns to interact directly with external published research papers turned into virtual authors via the Model Context Protocol (MCP):
@@ -285,33 +284,13 @@ Implemented in `python/discovery/epistemic_stigmergy.py`, this engine draws insp
 - **Meta-Recursive Instrument Compiler**: Implements the Buehler recursive loop (\(\text{Representation} \to \text{Instrument} \to \text{Simulated World} \to \text{Law}\)). Compiles candidate theoretical claims into executable `ConstraintBox` simulation worlds with formal logical rules (`NECESSARY_CONDITION`, `SUFFICIENT_TRIGGER`, `BOUNDARY_THRESHOLD`).
 - **Reality Contact Firewall (Anti-Collective-Hallucination Gate)**: Strict guardrail forbidding closed-world simulation hallucinations. Blocks promotion of any emergent regularities derived by the agent swarm to active invariant constraints unless grounded with an empirical Reality Contact Score of \(RCS \ge 2.0\) (external physical anchors / prospective cohorts).
 
-### 8. Universal Physics Megarepo Epistemic Auditor & Peer Review Engine (ADR-DISCOVERY-028 v2.0)
-Implemented in `python/discovery/physics_corpus_auditor.py`, this engine instrumentalizes CoResearcher as an independent, objective expert scientific reviewer for massive, single-author physical corpora across **ALL 10 Major Divisions and 42 Canonical Subdisciplines of Physics**:
-- **Universal Ontology Crawler & Classifier**: Recursively crawls repositories, categorizing chapters and multimodal artifacts across Fundamental High Energy, Gravitation/Cosmology, Quantum Optics/Info, Nuclear/Plasma, Condensed Matter, Thermodynamics/Complexity, Classical/Fluids, Astrophysics, Interdisciplinary Biophysics/Geophysics, and Technical Patents.
-- **Multimodal Artifact Ingestion**: Handles theoretical LaTeX manuscripts, mathematical proofs, tabular and binary datasets (`.csv`, `.dat`, `.parquet`, `.h5`, `.fits`), simulation solvers (`.py`, `.jl`, `.cpp`), and technical patent claims.
-- **Anti-Perpetuum-Mobile Patent Gate**: Strictly intercepts overunity assertions ($\text{COP} > 1.0$), propellantless/reactionless drives, and Carnot bound breaches in technical patent filings.
-- **Dimensional Homogeneity Checker**: Applies the Buckingham $\Pi$ theorem to equations, catching dimensionally incompatible additions (e.g. Energy + Force).
-- **Fast System 1 Triage Tier**: Delivers instant Marr level classification and code risk screening (unseeded stochasticity in simulations, NaN/Inf handling, lookahead bias) in \(< 1\text{ ms}\).
-- **Deep System 2 Mathematical Proof Verification**: Employs `PhysicalCoherenceCourt` to audit `ProofDependencyDAG`s, intercepting circular lemma cycles (`REJECTED_CIRCULAR_LEMMA`) and unproven axiomatic assertions (`REJECTED_UNPROVEN_AXIOM`).
-- **Deep System 2 Conservation & Reality Firewall**: Audits physical conservation laws (Hamiltonian energy drift, Leray-Hopf dissipation, thermodynamic entropy) and enforces `RealityContactFirewall` (\(RCS \ge 2.0\) with external physical anchors like NIST, CERN, CODATA) before certifying experimental claims.
-- **Editorial Peer Review Dossier**: Synthesizes verified invariants vs rejected claims into a cryptographically anchored (`SOM-SHA256`) citable ReviewGraph and objective editorial publication readiness judgment.
-- **(v3.0) LocalAIAdapter — Multi-Protocol Air-Gapped AI**: `call_laya()` (System 1) and `call_local_ia()` (System 2) auto-detect protocol (OpenAI-compat → Ollama-native → deterministic fallback). Zero cloud, 100% local. Configurable via `LAYA_ENDPOINT` / `LOCAL_IA_ENDPOINT` env vars.
-- **(v3.0) `audit_chapter_deep()`**: Full Laya + MarrTranslationEngine + BayesianSurpriseEngine + CommutativeDiagramAuditor pipeline for theoretical chapters. Holonomy defect gate (\(\delta < 10^{-3}\)). NEVER penalizes novelty.
-- **(v3.0) `audit_simulation_deep()`**: DreamRSIStrategyGate (bug vs. genuine falsification) + ScienceIDEInvariantRunner (mass/energy/entropy conservation) + HakkenEvidenceGate (PHELInE perturbation) for simulation solvers.
-- **(v3.0) `run_adversarial_stress_test()`**: 50-case AdversarialDestructionEngine; genuinely falsified claims auto-logged to HypothesisGraveyard.
-- **(v3.0) `prioritize_audit_by_pheromone()`**: EpistemicPheromoneField reorders audit queue by conflict intensity — high-dispute zones first.
-- **(v3.0) `audit_simulation_deep()`**: DreamRSIStrategyGate (bug vs. genuine falsification) + ScienceIDEInvariantRunner (mass/energy/entropy conservation) + HakkenEvidenceGate (PHELInE perturbation) for simulation solvers.
-- **(v3.0) `run_adversarial_stress_test()`**: 50-case AdversarialDestructionEngine; genuinely falsified claims auto-logged to HypothesisGraveyard.
-- **(v3.0) `prioritize_audit_by_pheromone()`**: EpistemicPheromoneField reorders audit queue by conflict intensity — high-dispute zones first.
-- **(v3.0) Persistent Pipeline**: `scripts/audit_physics_megarepo_full.py` — checkpoint/resume, walks entire megarepo, Ctrl+C safe, writes per-item JSON verdicts + final report.
-
 ### 9. Frontier Mathematical Verification, Theorem Courts & GitHub CI (ADR-043 - ADR-049)
 
 CoResearcher incorporates deep mathematical and editorial verification gates:
 - **Lean 4 Interactive Prover Gate (ADR-047)** (`python/discovery/lean_formalization_engine.py`): Synthesizes modular Lean 4 scaffolding, invokes the local `lean` compiler, and executes AST kernel auditing to intercept any unproven `sorry` escapes.
 - **Semantic Bijectivity & Formal Drift Gate (ADR-048)** (`python/discovery/semantic_bijectivity_auditor.py`): Bridges natural prose claims with formal Lean signatures to detect goalpost shifting (e.g. Navier-Stokes derivative order shifts from $k=4$ to $k=5$) and enforces cryptographic signature immutability.
 - **Audited Human Oversight Gate (ADR-049)** (`python/discovery/audited_human_oversight.py`): Protects against automation bias and rubber-stamping by enforcing minimum cognitive dwell times, generating adversarial inspection challenges, neutralizing LLM consensus bias, and generating Merkle-anchored oversight records.
-- **Unified Scientific Activity Ledger Bridge**: All verdicts from physics megarepo audits, result families, and human oversight gates are automatically recorded into `ScientificLedger`, bridging discovery engines directly with the Git/Zenodo observatory.
+- **Unified Scientific Activity Ledger Bridge**: All verdicts from result families, and human oversight gates are automatically recorded into `ScientificLedger`, bridging discovery engines directly with the Git/Zenodo observatory.
 - **GitHub Epistemic PR CI**: Evaluates incoming pull requests via webhook (`api/server.py`) with `ScientificEpistemicPRAuditor` to block data leakage, conservation law violations, and $p$-hacking before merging.
 
 ### 10. Ecosystem Demarcation (The Scientific Trinity)

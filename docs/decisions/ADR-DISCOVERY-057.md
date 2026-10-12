@@ -7,7 +7,7 @@ Accepted
 Traditional epidemiological and clinical trajectory modeling often relies on manual code adjustments by human researchers exploring only a handful of hypotheses, constrained by human fatigue and intuition.
 In 2026, Google Research and Harvard (*Nature*: "An AI system to help scientists write expert-level empirical software", by Michael Brenner and Lizzie Dorfman) demonstrated that **Empirical Research Assistance (ERA)** using closed-loop tree search over empirical code variants (up to 200,000 iterations) outperformed all CDC epidemiological consortia in forecasting hospital admissions for flu and RSV.
 
-In our institutional ecosystem, there is an invariant separation of concerns ([`MEDICALIA_PRINCIPLES.md`](file:///c:/Users/usuario/medicalia/MEDICALIA_PRINCIPLES.md#L109-L122)):
+In our institutional ecosystem, there is an invariant separation of concerns (`MEDICALIA_PRINCIPLES.md`, external repository, lines 109-122):
 - **CoResearcher**: *Generates, calibrates, and stress-tests empirical models* via high-throughput tree search over physical datasets, discovering optimal parameterizations, non-linear mechanisms, and clinical lead-time margins.
 - **Medicalia OS**: *Executes verified knowledge* deterministically in asynchronous clinical practice under MDR Class IIa without online runtime code mutations.
 

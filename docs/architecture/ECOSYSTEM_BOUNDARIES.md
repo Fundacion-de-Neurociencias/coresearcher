@@ -61,11 +61,11 @@ The scientific ecosystem is formally organized as an immutable value chain of th
 
 ### Contract A: CoResearcher $\longrightarrow$ DataAILab (`ResearchQuestionContract`)
 CoResearcher formalizes the scientific question, exposure/outcome variables, falsification thresholds, and boundary conditions (*Scope Conditions*).
-* Schema: [`schemas/research_question_contract.schema.json`](file:///c:/Users/usuario/coresearcher/schemas/research_question_contract.schema.json)
+* Schema: [`schemas/research_question_contract.schema.json`](../../schemas/research_question_contract.schema.json)
 
 ### Contract B: DataAILab $\longrightarrow$ CoResearcher (`EmpiricalEvidenceContract`)
 DataAILab executes pipelines and returns empirical results with the complete cryptographic SOM lineage (`DatasetSnapshot`, `CRSSnapshot`, `SIRSnapshot`, `ExecutionSnapshot`).
-* Schema: [`schemas/empirical_evidence_contract.schema.json`](file:///c:/Users/usuario/coresearcher/schemas/empirical_evidence_contract.schema.json)
+* Schema: [`schemas/empirical_evidence_contract.schema.json`](../../schemas/empirical_evidence_contract.schema.json)
 
 ### Contract C: DataAILab + CoResearcher $\longrightarrow$ EdiTXT (`ReleaseManifest` + `EvidenceGraph`)
 * **DataAILab** provides the `ReleaseManifest` with data artifacts, reproducible figures, and statistical tables.

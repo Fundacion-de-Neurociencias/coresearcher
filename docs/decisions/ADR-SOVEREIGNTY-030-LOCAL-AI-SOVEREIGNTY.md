@@ -65,8 +65,6 @@ To ensure that research institutions, hospitals, and independent scientists reta
 ## 3. Concrete Architectural Invariants across Ecosystem Softwares
 
 ### 3.1. CoResearcher (The Epistemic Engine)
-- **LocalAIAdapter First**: `PhysicsCorpusAuditor` and `PhysicalTheoremCourt` prioritize `System 1` (Laya / Ollama at `localhost:11434`) and `System 2` (Local IA / LM Studio at `localhost:1234`), falling back to deterministic local solvers rather than cloud endpoints.
-- **Zero-Cloud Audit Trails**: When running exhaustive corpus audits (such as `audit_physics_megarepo_full.py`), no hypothesis text, proof step, or raw observation is ever transmitted to commercial third-party APIs.
 
 ### 3.2. AIDataLab (The Empirical OS)
 - **Zero-Telemetry Patient Data**: Clinical data (e.g., `metaboad_atn_processed.csv`) and protected health information (PHI) remain strictly on-device. Neural differential equations and feature extractions execute over local CUDA/MPS acceleration.

@@ -39,4 +39,3 @@ Each family is anchored cryptographically via `SOM-SHA256` in the local `Epistem
 
 ## Consequences
 - Guarantees that CoResearcher matches and exceeds the structural organization of OpenAI's 372 result families while maintaining 100% local mathematical sovereignty and zero risk of thought harvesting.
-- Fully wired into `PhysicsCorpusAuditor v3.1` and exposed via REST API `/api/discovery/families/audit`.

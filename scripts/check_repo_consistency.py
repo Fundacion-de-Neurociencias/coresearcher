@@ -62,8 +62,13 @@ def check_readme_scripts() -> None:
 
 
 def check_markdown_links() -> None:
-    for doc in [ROOT / "README.md", *sorted(path for path in (ROOT / "docs").rglob("*.md") if "private" not in path.parts)]:
-        text = doc.read_text(encoding="utf-8")
+    for doc in [
+        ROOT / "README.md",
+        *sorted(path for path in (ROOT / "docs").rglob("*.md") if "private" not in path.parts),
+    ]:
+        # Inline code and fenced code blocks are not links, so they are removed before scanning.
+        text = re.sub(r"```.*?```", "", doc.read_text(encoding="utf-8"), flags=re.S)
+        text = re.sub(r"`[^`\n]*`", "", text)
         for target in re.findall(r"\]\(([^)\s]+)\)", text):
             if target.startswith(("http://", "https://", "#", "mailto:")):
                 continue

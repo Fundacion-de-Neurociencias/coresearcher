@@ -1,0 +1,274 @@
+{
+  "source": {
+    "repository": "https://github.com/openai/math",
+    "commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+    "license": "Apache-2.0",
+    "attribution": "Prose scope notes and Lean statements are from openai/math (Apache-2.0)."
+  },
+  "sample": [
+    "025",
+    "066",
+    "103",
+    "115",
+    "144",
+    "174",
+    "186",
+    "190",
+    "231",
+    "238",
+    "243",
+    "245",
+    "246",
+    "273",
+    "275",
+    "277",
+    "327",
+    "331",
+    "354",
+    "365"
+  ],
+  "pairs": [
+    {
+      "family": "025",
+      "title": "Short Egyptian fractions",
+      "scope": "An Egyptian-fraction expansion writes a rational number as a sum of distinct unit fractions. The formalization proves that every $a/b$ with $1\\le a<b$ has such an expansion and that the largest minimum length at denominator $b$ is $\\Theta(\\log\\log b)$. If $F(k)$ counts exact $k$-term expansions of $1$, it also proves $\\log\\log F(k)=\\Theta(k)$ and bounds every denominator in such an expansion.\n\nEvery integer $m\\ge2$ occurs as a denominator in an expansion of $1$, with length eventually at most $(257/\\log2+\\varepsilon)\\log\\log m$ for every $\\varepsilon>0$; padding can preserve that denominator. If $v(k)$ is the least integer at least $2$ absent from all exact $k$-term expansions of $1$, then eventually $e^{e^{k/600}}\\le v(k)\\le1+k^{2^{k-1}}$, and $\\liminf_{k\\to\\infty}\\log\\log v(k)/k\\ge\\log2/257$.",
+      "challenge": "lean/ComparatorChallenges/EgyptianFractions.lean",
+      "theorem": "egyptian_length_is_minimum",
+      "statement": "theorem egyptian_length_is_minimum :\n    ∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k) ",
+      "mutants": {
+        "M1": "theorem egyptian_length_is_minimum :\n    ∀ a b : ℕ, 2 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k) ",
+        "M2": "theorem egyptian_length_is_minimum :\n    ∀ a b : ℕ, 1 < a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k) ",
+        "M3": "theorem egyptian_length_is_minimum :\n    ∃ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k) ",
+        "M5": "theorem egyptian_length_is_minimum : ¬ (∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k))\n    "
+      }
+    },
+    {
+      "family": "103",
+      "title": "Exact derandomization of logarithmic space: $`\\mathsf L=\\mathsf{RL}=\\mathsf{BPL}`$",
+      "scope": "The formalization proves $\\mathsf L=\\mathsf{RL}=\\mathsf{BPL}$ for binary languages in an explicit Turing-machine model with logarithmic workspace. The randomized classes use polynomial time: $\\mathsf{RL}$ never accepts a no-instance and accepts a yes-instance with probability at least $1/2$, while $\\mathsf{BPL}$ has acceptance probability at least $2/3$ on yes-instances and at most $1/3$ on no-instances. Thus bounded-error randomness does not enlarge deterministic logarithmic space in this model.\n\nThe selected theorem asserts equality of the language classes. The paper's explicit compiler and numerical running-time bounds are not separately stated in this Comparator target.",
+      "challenge": "lean/ComparatorChallenges/LogspaceEquality.lean",
+      "theorem": "exact_logarithmic_space_derandomization",
+      "statement": "theorem exact_logarithmic_space_derandomization :\n    L = RL ∧ RL = BPL ",
+      "mutants": {
+        "M5": "theorem exact_logarithmic_space_derandomization : ¬ (L = RL ∧ RL = BPL)\n    "
+      }
+    },
+    {
+      "family": "115",
+      "title": "Sampling and counting contingency tables with arbitrary margins",
+      "scope": "The formalization gives an exact uniform sampler for nonnegative integer contingency tables with arbitrary prescribed row and column sums having equal totals. It terminates almost surely, every halted output is feasible, and each table has exactly the uniform limiting probability. Expected bit complexity is polynomial in the dimensions and the binary length of the margins.\n\nIt also gives a sampler with a fixed polynomial time bound on every execution whose total-variation error is at most $2^{-k}$ for requested precision $k\\ge1$. The same Comparator file includes the companion approximation scheme for counting tables with individual cell bounds.\n\nThe formalization gives a fully polynomial randomized approximation scheme for counting nonnegative integer matrices with prescribed row sums, column sums, and individual entry bounds. Both dimensions may vary, the margins and bounds are binary encoded, and zero entry bounds are allowed. For rational $0<\\varepsilon,\\delta<1$, the algorithm returns a nonnegative estimate with relative error at most $\\varepsilon$ with probability at least $1-\\delta$, and returns zero on every execution when no table exists.\n\nThe running time is polynomial in the encoded input size, $\\varepsilon^{-1}$, and $\\log(\\delta^{-1})$ on every random tape. The same Comparator file also contains the companion sampling results for tables without cell bounds.",
+      "challenge": "lean/ComparatorChallenges/ContingencyTables.lean",
+      "theorem": "entry_le_row",
+      "statement": "theorem entry_le_row {X : I → J → ℕ} {r : I → ℕ} {c : J → ℕ}\n    (h : HasMargins X r c) (i : I) (j : J) : X i j ≤ r i ",
+      "mutants": {
+        "M2": "theorem entry_le_row {X : I → J → ℕ} {r : I → ℕ} {c : J → ℕ}\n    (h : HasMargins X r c) (i : I) (j : J) : X i j < r i ",
+        "M4": "theorem entry_le_row {X : I → J → ℕ} {r : I → ℕ} {c : J → ℕ}\n     (i : I) (j : J) : X i j ≤ r i ",
+        "M5": "theorem entry_le_row {X : I → J → ℕ} {r : I → ℕ} {c : J → ℕ}\n    (h : HasMargins X r c) (i : I) (j : J) : ¬ (X i j ≤ r i)\n    "
+      }
+    },
+    {
+      "family": "144",
+      "title": "Banach’s simple Lebesgue-spectrum problem",
+      "scope": "Banach's simple Lebesgue-spectrum problem asks for a probability-preserving transformation with simple Lebesgue spectrum on its mean-zero $L^2$ space. The formalization constructs a smooth volume-preserving diffeomorphism of the three-torus with this property. It gives a real-valued cyclic vector whose integer iterates form an orthonormal basis of the entire mean-zero space, and an isometric identification under which the Koopman operator becomes multiplication by the coordinate function on the circle. The transformation is also ergodic.",
+      "challenge": "lean/ComparatorChallenges/ThreeTorus.lean",
+      "theorem": "simple_lebesgue_spectrum",
+      "statement": "theorem simple_lebesgue_spectrum : MainConclusion ",
+      "mutants": {
+        "M5": "theorem simple_lebesgue_spectrum : ¬ (MainConclusion)\n    "
+      }
+    },
+    {
+      "family": "174",
+      "title": "Deterministic construction of strong thin spanning trees",
+      "scope": "The strong thin-tree conjecture asks for spanning trees that cross every cut sparsely relative to the original graph. The formalized result gives one absolute constant $C>0$ such that every finite loopless $k$-edge-connected multigraph with at least two vertices has a spanning tree crossing each nontrivial cut at most $(C/k)$ times the original cut size. Parallel edges remain distinct. No numerical value of $C$ or construction algorithm is asserted.\n\nThe strong thin-tree problem asks for a spanning tree that crosses every cut sparsely relative to the original graph. The formalization gives one deterministic polynomial-time algorithm and an absolute constant $C>0$ such that a finite $k$-edge-connected loopless multigraph yields a spanning tree using at most a $C/k$ fraction of the edges of every cut. The input may encode parallel-edge multiplicities in binary, and the running time is polynomial in that binary input length.",
+      "challenge": "lean/ComparatorChallenges/StrongThinTree.lean",
+      "theorem": "strongThinTree",
+      "statement": "theorem strongThinTree : MainStatement ",
+      "mutants": {
+        "M5": "theorem strongThinTree : ¬ (MainStatement)\n    "
+      }
+    },
+    {
+      "family": "186",
+      "title": "Uniform influence and sharp thresholds for graph and hypergraph properties",
+      "scope": "The Friedgut–Kalai sharp-threshold conjecture concerns how quickly a nontrivial increasing graph property appears in the independent-edge random graph. For every $n\\ge2$, every such property invariant under vertex relabeling, and $0<\\varepsilon<1/2$, the formalization proves that the edge-probability interval between probabilities $\\varepsilon$ and $1-\\varepsilon$ has width at most $2^{19}\\log(1/(2\\varepsilon))/(\\log n)^2$. The constant is uniform over the graph property, $n$, and $\\varepsilon$.",
+      "challenge": "lean/ComparatorChallenges/SharpThreshold.lean",
+      "theorem": "sharp_threshold_width",
+      "statement": "theorem sharp_threshold_width :\n    ∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)) ",
+      "mutants": {
+        "M1": "theorem sharp_threshold_width :\n    ∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      3 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)) ",
+        "M2": "theorem sharp_threshold_width :\n    ∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 < n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)) ",
+        "M3": "theorem sharp_threshold_width :\n    ∃ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)) ",
+        "M5": "theorem sharp_threshold_width : ¬ (∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)))\n    "
+      }
+    },
+    {
+      "family": "190",
+      "title": "Polynomial removal fails for ordered binary matrices",
+      "scope": "The formalized result disproves a polynomial removal bound for one explicit $66\\times66$ binary pattern. For every $c,C>0$, there is an $n\\times n$ binary matrix at normalized edit distance at least $\\varepsilon>0$ from being pattern-free but with fewer than $c\\varepsilon^C n^{132}$ induced ordered copies. Row and column indices are independently increasing, and every zero and one entry must match. The construction gives an explicit sequence of such matrices, allowing edits in both directions.",
+      "challenge": "lean/ComparatorChallenges/MatrixRemoval.lean",
+      "theorem": "no_polynomial_removal_bound",
+      "statement": "theorem no_polynomial_removal_bound :\n    ∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132) ",
+      "mutants": {
+        "M1": "theorem no_polynomial_removal_bound :\n    ∀ c C : ℝ, 1 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132) ",
+        "M2": "theorem no_polynomial_removal_bound :\n    ∀ c C : ℝ, 0 ≤ c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132) ",
+        "M3": "theorem no_polynomial_removal_bound :\n    ∃ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132) ",
+        "M5": "theorem no_polynomial_removal_bound : ¬ (∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132))\n    "
+      }
+    },
+    {
+      "family": "231",
+      "title": "The free uniform spanning forest is a factor of IID",
+      "scope": "The formalization proves that the free uniform spanning forest is a factor of independent identically distributed vertex labels on every infinite connected locally finite simple unweighted graph. One Borel equivariant rule works for all such graphs and uses no distinguished root.\n\nThe linked supplements also give equivariant IID sampling for invariant strongly Rayleigh laws on countable groups and existence, uniqueness, and IID-factor results for determinantal laws with Hermitian positive-contraction kernels on countable index sets. These group results require neither amenability nor finite generation, and the kernels need not be trace class.",
+      "challenge": "lean/ComparatorChallenges/StronglyRayleighDPP.lean",
+      "theorem": "finite_strongly_rayleigh_response",
+      "statement": "theorem finite_strongly_rayleigh_response :\n    ∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2) ",
+      "mutants": {
+        "M1": "theorem finite_strongly_rayleigh_response :\n    ∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 1) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2) ",
+        "M2": "theorem finite_strongly_rayleigh_response :\n    ∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) <\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2) ",
+        "M3": "theorem finite_strongly_rayleigh_response :\n    ∃ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2) ",
+        "M5": "theorem finite_strongly_rayleigh_response : ¬ (∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2))\n    "
+      }
+    },
+    {
+      "family": "238",
+      "title": "Optimal logarithmic mixing of the Thorp shuffle",
+      "scope": "The formalization proves optimal-order mixing of the Thorp shuffle on $2^d$ cards. After $1600d$ complete shuffles, the full permutation law converges in total variation to uniform as $d\\to\\infty$, uniformly over initial decks. Together with the support lower bound of $2d-O(1)$, this gives mixing time $\\Theta(d)=\\Theta(\\log(2^d))$.\n\nThe linked supporting results include frame and conditional-list estimates, regular trace and spectral bounds, signed moments, and full-density $L^2$ control. They also bound reciprocal Specht-dimension sums and give the eight-block Fourier estimate used in the mixing argument.\n\nThe formalized supporting result turns bounds on partial-permutation cosets into Fourier bounds. Partition a finite set into $b\\ge1$ nonempty blocks, and let $f\\ge0$ be a subprobability weight on its symmetric group whose left-coset masses for each block subgroup are at most $B$. For every irreducible unitary representation of dimension $D$ and every $u>0$, both the squared Hilbert–Schmidt norm and squared operator norm of its Fourier transform are at most $bB\\,C(u)D^{-1+(u+2)/b}$, where $C(u)$ is the stated symmetric-group degree constant.\n\nThe paper's asymptotic conclusion about the product of two random permutations is outside this selected finite estimate.\n\nThe formalized results give averaged conditional mixing for half-permutations in the revealed-path model and full-deck mixing for the Thorp shuffle. In particular, the full-deck total-variation distance tends to zero after $16040400d$ steps on $2^d$ cards, uniformly over deterministic initial decks. The conditional estimate is averaged over the actual outside-path law, rather than asserted for each individual environment. The formalization also includes the associated overlay, reset minorization, and two-color conditional constructions.\n\nThe formalization covers nine routing and representation estimates for Thorp sweeps: adaptive operator and fourth-trace bounds, Casimir moments, dense truncation, sparse contact, harmonic-cycle contraction, smoothing, and three tail or sparse-saving estimates. They bound routing-density deviations and Fourier operators in dense and sparse regimes, including exponential savings in the level scale and representation dimension.\n\nThe conditional high-height estimate requires a sufficiently large cutoff height $J$ that exceeds twice the number $s$ of coordinates in the fixed low block, so $J>2s$. These are the earlier nine statements associated with the paper; its changed later statements and six other result blocks are outside this scope.\n\nThe formalization proves uniform representation bounds for one coordinate sweep of the Thorp shuffle. For each irreducible representation of dimension $D$, it chooses a weight between $D^{3/4}$ and $D$ and a Schatten exponent bounded by one absolute constant so that the weighted Schatten moment is at most one. The sweep's operator norm is consequently at most $D^{-c}$ for one absolute $c>0$.\n\nThe supporting row–column estimate bounds the total squared overlap over all multiplicity copies on an occupied board, with explicit dependence on the row and column representation dimensions, the global dimension, the number of missing cells, and the number of rows or columns containing the global Young diagram. The paper's full physical-mixing conclusion is outside these selected representation estimates.\n\nThe formalization proves a uniform trace-smoothing estimate for coordinate sweeps of the Thorp shuffle on $2^d$ cards. One absolute sweep parameter works for every $d\\ge1$: the regular trace is at most $1+(2^d)^{-10}$, and the full permutation law after the corresponding fixed number of sweeps is within $\\tfrac12(2^d)^{-5}$ of uniform in total variation, for every initial deck. Thus the selected upper bound uses $O(d)$ physical shuffles.\n\nThe formalized result is the weighted compatibility theorem for balanced $A\\times D$ rectangles, with $n=AD$ and $\\sqrt n/2\\le A,D\\le2\\sqrt n$. For arbitrary nonnegative weights on the row and column permutation groups, the normalized compatibility average is bounded by $\\exp(C_0n^{54/100})$ times the product of the marginal $L^{1/\\theta}$ factors, where $\\theta=1-L/\\log\\sqrt n>0$ and the constants are absolute. Compatibility means injectivity in every original column. The bounded regular-moment and other moment/rank conclusions are not included.\n\nThe formalization gives signed representation estimates for coordinate sweeps of the Thorp shuffle. For every signed occurrence of a Young diagram of size $2^d$, it bounds the logarithm of a fixed-order weighted sweep moment by a small multiple of the signed partition entropy plus an explicit remainder-size budget. The moment order is uniform over the diagrams and decompositions after the two small coefficients are fixed.\n\nThe linked supporting angle bound controls the overlap of row, column, and global signed-type projections on an occupied rectangle, with explicit entropy, dimension, and missing-cell factors. These selected estimates support the paper's full-density argument; the full $L^2$ and total-variation mixing conclusion is outside them.\n\nThe formalized binary-sweep theorem gives a universal power contraction in every irreducible representation: for sufficiently large $d$, the averaged sweep on $2^d$ slots has operator norm at most $D^{-g}$ in representation dimension $D$, for some $g>0$. The sign expectation is zero, and a fixed number of independent sweeps approaches uniform in total variation from every initial deck. A separate conditional moment estimate covers allowed power-of-two grids and disjoint coordinate-respecting trajectories, with its stated feasibility premise. Physical-shuffle law identification is not included.\n\nThe formalization proves the paper's strict four-row permanent inequality. There are constants $4/3<p<2$ and $\\varepsilon>0$ such that every probability law on $S_4$ within total-variation distance $\\varepsilon$ of uniform, and with exactly uniform coordinate marginals, satisfies the permanent bound by the product of the four $L^p$ row norms for every nonnegative matrix. The exponent and neighborhood are uniform over those laws. The Thorp mixing consequence is outside this selected statement.",
+      "challenge": "lean/ComparatorChallenges/ThorpFirstReciprocal.lean",
+      "theorem": "first_reciprocal_main",
+      "statement": "theorem first_reciprocal_main :\n    (BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)) ",
+      "mutants": {
+        "M1": "theorem first_reciprocal_main :\n    (BddAbove (Set.range (fun n : {n : ℕ // 2 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)) ",
+        "M2": "theorem first_reciprocal_main :\n    (BddAbove (Set.range (fun n : {n : ℕ // 1 < n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)) ",
+        "M3": "theorem first_reciprocal_main :\n    (BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∃ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)) ",
+        "M5": "theorem first_reciprocal_main : ¬ ((BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)))\n    "
+      }
+    },
+    {
+      "family": "243",
+      "title": "Separating choiceless counting from polynomial time and witnessed choice",
+      "scope": "The formalized result separates polynomial time from choiceless polynomial time with counting. It gives an explicit query on finite structures with eight relations that is invariant under isomorphism and decidable in polynomial time, but is not definable in the stated hereditarily finite-set language with cardinality and polynomial bounds on stages and intermediate objects. The query applies to all finite inputs without a promise. The separate witnessed-symmetric-choice result is not included.\n\nThe formalization proves that witnessed symmetric choice strictly increases the expressive power of choiceless polynomial time with counting. It constructs one fixed sentence with exactly one witnessed-choice occurrence that gives a Boolean answer on every finite input, while no sentence of the original counting formalism defines the same class of inputs.",
+      "challenge": "lean/ComparatorChallenges/ChoicelessPolynomialTime.lean",
+      "theorem": "main",
+      "statement": "theorem main :\n    (∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query) ",
+      "mutants": {
+        "M3": "theorem main :\n    (∃ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query) ",
+        "M5": "theorem main : ¬ ((∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query))\n    "
+      }
+    },
+    {
+      "family": "245",
+      "title": "Weak normalization implies strong normalization in pure type systems",
+      "scope": "The formalization proves the $\\beta$-Barendregt–Geuvers–Klop conjecture for pure type systems: if every legal expression in every valid context has some terminating $\\beta$-reduction sequence, then every $\\beta$-reduction sequence from every such expression terminates. Reduction is allowed inside type annotations, and the specification may have arbitrary sorts and nonfunctional axioms or rules.",
+      "challenge": "lean/ComparatorChallenges/TypeSystemNormalization.lean",
+      "theorem": "weak_implies_strong",
+      "statement": "theorem weak_implies_strong {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P) : SystemStronglyNormalizing P ",
+      "mutants": {
+        "M4": "theorem weak_implies_strong {S : Type u} (P : Specification S)\n     : SystemStronglyNormalizing P ",
+        "M5": "theorem weak_implies_strong {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P) : ¬ (SystemStronglyNormalizing P)\n    "
+      }
+    },
+    {
+      "family": "246",
+      "title": "Cannon's conjecture",
+      "scope": "Cannon's conjecture asks whether a hyperbolic group with boundary homeomorphic to the two-sphere acts geometrically on hyperbolic three-space. The formalization proves that such a group admits an isometric action on $\\mathbb H^3$ that is proper and cocompact and has finite kernel. Hyperbolicity is expressed through uniformly thin geodesic triangles in a Cayley graph, and the boundary hypothesis is a homeomorphism with $S^2$.",
+      "challenge": "lean/ComparatorChallenges/CannonGeometricAction.lean",
+      "theorem": "cannon",
+      "statement": "theorem cannon (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)) :\n    ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite ",
+      "mutants": {
+        "M3": "theorem cannon (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)) :\n    ∀ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite ",
+        "M4": "theorem cannon (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n     :\n    ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite ",
+        "M5": "theorem cannon (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)) : ¬ (∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite)\n    "
+      }
+    },
+    {
+      "family": "273",
+      "title": "The entropy photon-number inequality",
+      "scope": "The formalization proves the entropy photon-number inequality for two independent bosonic inputs with finite mean energy and any finite positive number $n$ of modes. Write $N(\\rho)=g^{-1}(S(\\rho)/n)$, where $S$ is von Neumann entropy and $g(x)=(x+1)\\log(x+1)-x\\log x$ is the thermal entropy per mode. For a beam splitter of transmissivity $0\\le\\eta\\le1$, its output satisfies $N(\\rho_C)\\ge\\eta N(\\rho_A)+(1-\\eta)N(\\rho_B)$.\n\nEntanglement among modes within either input is allowed. The thermal-attenuator minimum-output-entropy and broadcast-capacity consequences in the paper are outside this selected inequality.",
+      "challenge": "lean/ComparatorChallenges/EntropyPhotonNumber.lean",
+      "theorem": "entropy_photon_number_inequality",
+      "statement": "theorem entropy_photon_number_inequality\n    (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC) :\n    η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n) ",
+      "mutants": {
+        "M1": "theorem entropy_photon_number_inequality\n    (n : ℕ) (hn : 2 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC) :\n    η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n) ",
+        "M2": "theorem entropy_photon_number_inequality\n    (n : ℕ) (hn : 1 < n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC) :\n    η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n) ",
+        "M4": "theorem entropy_photon_number_inequality\n    (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n     :\n    η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n) ",
+        "M5": "theorem entropy_photon_number_inequality\n    (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC) : ¬ (η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n))\n    "
+      }
+    },
+    {
+      "family": "275",
+      "title": "QMA-hardness of continuum Coulomb energy",
+      "scope": "The formalization proves QMA-hardness of approximating the electronic Coulomb spectral infimum in three-dimensional continuum space when positive integer nuclear charges are encoded in binary. The instances have distinct rational nuclear positions and a unary electron count, and the energy ranges over antisymmetric continuum states and all spin sectors. A deterministic polynomial-time many-one reduction produces the promise gap with threshold separation at least one, while keeping the complete output length polynomial. The same Comparator file also contains the companion unit-charge result.\n\nThe formalization proves QMA-hardness of approximating the electronic ground-energy infimum for clamped unit-charge nuclei in the full spinful fermionic continuum. The reduction is deterministic and polynomial time, with rational nuclear positions and separated rational energy thresholds. No orbital basis, magnetic field, additional external potential, or binding premise is part of the input.\n\nThe same Comparator file also includes the companion hardness result when positive integer nuclear charges are encoded in binary.",
+      "challenge": "lean/ComparatorChallenges/ContinuumCoulombHardness.lean",
+      "theorem": "readDigits_encode",
+      "statement": "theorem readDigits_encode (digits tail : BitString) :\n    readDigits (encodeDigits digits ++ tail) = (digits, tail) ",
+      "mutants": {
+        "M5": "theorem readDigits_encode (digits tail : BitString) : ¬ (readDigits (encodeDigits digits ++ tail) = (digits, tail))\n    "
+      }
+    },
+    {
+      "family": "277",
+      "title": "Threshold repetition for entangled games",
+      "scope": "The formalization gives exponential threshold parallel repetition for every finite two-player game with arbitrary correlated questions. If its finite-dimensional entangled value is $v<1$, its answer sets are $A,B$, and $0<\\delta<1-v$, then the probability of winning at least the fraction $v+\\delta$ of $k$ repetitions is at most $\\exp(-\\kappa\\delta^{13}k/(1+\\log(|A||B|)))$ for one universal $\\kappa>0$. The bound applies to every joint finite-dimensional strategy and to their supremum, without assuming attainment. The separate distribution-dependent cubic bound is outside this scope.",
+      "challenge": "lean/ComparatorChallenges/EntangledGames.lean",
+      "theorem": "threshold_parallel_repetition",
+      "statement": "theorem threshold_parallel_repetition :\n    ∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k ",
+      "mutants": {
+        "M1": "theorem threshold_parallel_repetition :\n    ∃ κ₀ : ℝ, 1 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k ",
+        "M2": "theorem threshold_parallel_repetition :\n    ∃ κ₀ : ℝ, 0 ≤ κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k ",
+        "M3": "theorem threshold_parallel_repetition :\n    ∀ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k ",
+        "M5": "theorem threshold_parallel_repetition : ¬ (∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k)\n    "
+      }
+    },
+    {
+      "family": "327",
+      "title": "Markov type characterizes superreflexivity",
+      "scope": "The formalized result proves that a real Banach space has nontrivial Markov type exactly when it admits an equivalent uniformly convex norm, hence exactly when it is superreflexive. Nontrivial Markov type means a uniform Markov-type bound for some exponent $p>1$ over all finite stationary reversible chains and all positive times. The exponent and equivalent norm may depend on the space, and the zero space is included. Additional formalized consequences concern uniformly smooth renormings and reflexivity of finitely representable spaces.",
+      "challenge": "lean/ComparatorChallenges/MarkovType.lean",
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm",
+      "statement": "theorem hasNontrivialMarkovType_iff_hasEquivalentUCNorm [CompleteSpace X] :\n    HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X ",
+      "mutants": {
+        "M5": "theorem hasNontrivialMarkovType_iff_hasEquivalentUCNorm [CompleteSpace X] : ¬ (HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X)\n    "
+      }
+    },
+    {
+      "family": "331",
+      "title": "Reflexive midpoint convexity and diamond distortion",
+      "scope": "The paper constructs a Banach space whose midpoint geometry is asymptotically uniformly convex even though no equivalent norm is asymptotically uniformly convex in the usual one-sided sense. The formalization proves that the full dual of the specified segment-norm completion is infinite-dimensional, separable, and reflexive; its averaged midpoint modulus is at least $\\sqrt{1+t^2/12}-1$ for every $t>0$, while every equivalent norm fails asymptotic uniform convexity. It also proves that an embedding of a depth-$k$ countably branching diamond has distortion at least $\\sqrt{1+k/12}$.\n\nThe general-forest and word-forest results use the closed span of the coordinate functionals. Their conclusions retain the finite-ancestor and equivalent-norm hypotheses, including the scale $\\alpha/(2\\beta)$ when $0<\\alpha\\le\\beta$ and the new norm lies between $\\alpha$ and $\\beta$ times the original norm; they do not identify that span with the full dual or assert reflexivity for every forest.\n\nThe paper controls midpoint lenses in Banach spaces defined by tree-segment norms. The formalization proves the following estimate in both the full dual of the finite-height forest space and the coordinate predual of the infinite-tree space. If $x$ is supported on a finite ancestral set $H$, $R\\ge0$, and $\\|x+y\\|,\\|x-y\\|\\le R$, then the part of $y$ outside $H$ has norm at most $2\\sqrt{R^2-\\|x\\|^2}$.\n\nThe formalization also covers selected consequences for averaged midpoint moduli and separated families of vectors, together with reflexivity and renorming obstructions. This scope concerns the segment-space results; the companion results on diamond energies remain separate.\n\nThe paper studies embeddings of countably branching diamond graphs into Banach spaces built from tree segments. The formalization proves that every embedding of the depth-$k$ diamond with distortion $D$, at any positive scale, satisfies $1+k/4\\le D^2$ in either of two spaces: the full dual of the completed finite-height forest space and the closed coordinate span in the dual of the infinite-tree space. The bound applies to all pairs of vertices and is unconditional.\n\nThe formalization also contains selected graph deductions under explicit companion assumptions. Twenty-two of those companion inputs are assumed in these deductions; the diamond distortion bound above does not require them.\n\nThe paper exhibits a real $L_1$ subspace with positive averaged midpoint convexity but no equivalent asymptotically uniformly convex norm. For every closed infinite-dimensional subspace whose unit ball is precompact in measure and which has the Daugavet property, the formalization computes the moduli at every unit vector: the averaged midpoint modulus is $\\max(t/2,t-1)$ and the usual one-sided asymptotic modulus is $\\max(0,t-2)$ for every $t>0$. The same formulas hold after taking the infimum over unit vectors, and every equivalent norm fails asymptotic uniform convexity.\n\nThe formalization also constructs such a subspace on a countable product of unit intervals and proves that it has the stated measure-precompactness and Daugavet properties, so the modulus formulas apply to an actual example.\n\nThe paper constructs Banach spaces from bounded tree potentials and path costs to separate averaged midpoint convexity from asymptotic uniform convexity. For the specified tree-potential completions, the formalization proves completeness, separability, infinite dimension, and an averaged midpoint modulus of at least $\\sqrt{1+t^2/4}-1$ for $0<t<1$. No space linearly isomorphic to one of these completions is asymptotically uniformly convex.\n\nThe formalization also covers selected path-cost duality and comparison results, clipping and energy estimates, and further renorming obstructions. These retain their stated support, head, and tail hypotheses; the remaining auxiliary assertions of the paper are outside this scope.\n\nThe paper forms a real $L_1$ space from the closed span of products of independent multipliers along tree paths. For a positive, nonconstant multiplier of mean one and finite second moment, the formalization proves that this space is infinite-dimensional and has no equivalent asymptotically uniformly convex norm.\n\nFor every $t>0$, the averaged midpoint modulus nevertheless has explicit positive lower bounds. If $G$ is a standard real Gaussian, the exponential-multiplier bound is $\\frac{7t}{480}\\mathbb E[(|G|-20/t)_+]$, where $u_+=\\max(u,0)$. For squared-Gaussian multipliers, the bounds are $\\frac18\\Pr(|G|\\ge4\\sqrt2(2+\\sqrt2)/t)$ and $\\frac14\\Pr(|G|\\ge8\\sqrt6/t)$.\n\nThe paper constructs three Banach spaces from recursive tree potentials: a root-sum space, a zero-root space, and a joined space. The formalization proves that all three are infinite-dimensional and have no equivalent asymptotically uniformly convex norm. The root-sum and joined spaces have averaged midpoint modulus at least $t^3/128$ for $0<t<1$, and the root-sum modulus is positive for every $t>0$. The zero-root estimate retains its finite ancestral support and tail hypotheses, and the zero-root and joined spaces are reflexive.\n\nThe formalization also covers a separated-midpoint result for the joined space and a variable-exponent model with its recursive norm, duality, projections, renorming obstruction, and sixth- and third-order stability estimates. The separation, sequence, support, and head assumptions in these results are essential parts of their statements.",
+      "challenge": "lean/ComparatorChallenges/ForestSpace.lean",
+      "theorem": "main_theorem",
+      "statement": "theorem main_theorem :\n    (¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C) ",
+      "mutants": {
+        "M1": "theorem main_theorem :\n    (¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 1 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C) ",
+        "M2": "theorem main_theorem :\n    (¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 ≤ t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C) ",
+        "M3": "theorem main_theorem :\n    (¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∃ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C) ",
+        "M5": "theorem main_theorem : ¬ ((¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C))\n    "
+      }
+    },
+    {
+      "family": "354",
+      "title": "The isoperimetric profile of the cubic three-torus",
+      "scope": "The formalization determines the isoperimetric profile and all minimizers in the unit cubic flat three-torus. At every volume $0<V<1$, a minimizer exists, and the minimizers, up to null-set changes, are exactly balls, circular tubes about shortest closed geodesics, coordinate slabs, and their complements in the appropriate volume ranges.\n\nThe classification includes all equality cases at the transition volumes $4\\pi/81$ and $1/\\pi$, and every minimizer has the stated candidate-profile perimeter.",
+      "challenge": "lean/ComparatorChallenges/CubicTorus.lean",
+      "theorem": "unit_cubic_isoperimetric",
+      "statement": "theorem unit_cubic_isoperimetric (V : ℝ) (hV : V ∈ Ioo 0 1) :\n    (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E) ",
+      "mutants": {
+        "M1": "theorem unit_cubic_isoperimetric (V : ℝ) (hV : V ∈ Ioo 1 1) :\n    (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E) ",
+        "M3": "theorem unit_cubic_isoperimetric (V : ℝ) (hV : V ∈ Ioo 0 1) :\n    (∀ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E) ",
+        "M4": "theorem unit_cubic_isoperimetric (V : ℝ)  :\n    (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E) ",
+        "M5": "theorem unit_cubic_isoperimetric (V : ℝ) (hV : V ∈ Ioo 0 1) : ¬ ((∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E))\n    "
+      }
+    },
+    {
+      "family": "365",
+      "title": "Joint metric and connection recovery from one boundary patch",
+      "scope": "The Calderón inverse problem asks whether boundary measurements determine an interior conductivity. The formalized result gives nonuniqueness for bounded measurable scalar conductivities on the ball $B(0,3)\\subset\\mathbb R^3$: two uniformly positive conductivities differ on a set of positive volume, equal $1$ near the boundary, and have the same full weak Dirichlet-to-Neumann operator. Weak solutions exist uniquely for every boundary trace.",
+      "challenge": "lean/ComparatorChallenges/Conductivity.lean",
+      "theorem": "main_nonuniqueness",
+      "statement": "theorem main_nonuniqueness : MainStatement ",
+      "mutants": {
+        "M5": "theorem main_nonuniqueness : ¬ (MainStatement)\n    "
+      }
+    }
+  ]
+}

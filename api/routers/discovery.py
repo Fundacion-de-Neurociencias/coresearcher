@@ -27,6 +27,8 @@ from api.schemas import (
     RunConstraintBoxRequest,
     RunEmpiricalDiscoveryRequest,
     RunLongHorizonCampaignRequest,
+    DebateMatchRequest,
+    RunTournamentRequest,
 )
 from api.security import require_api_key
 from api.state import (
@@ -81,6 +83,11 @@ from python.discovery.discovery_forecast_registry import (
 )
 from python.discovery.hakken_dream_rsi_engine import (
     DiscoveryHistoryNode,
+)
+from python.discovery.hypothesis_tournament_arena import (
+    TournamentHypothesis,
+    PairwiseDebateEngine,
+    HypothesisEloTournamentOrchestrator,
 )
 
 router = APIRouter()
@@ -686,3 +693,82 @@ def run_flywheel_cycle_endpoint(req: MathematicalFlywheelCycleRequest):
         return result.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/api/discovery/tournament/debate-match")
+def debate_match_endpoint(req: DebateMatchRequest):
+    """
+    Hypothesis Tournament Arena: Pairwise Debate Match (ADR-DISCOVERY-058).
+    Evaluates 2 competing hypotheses along evidence, physical, omega, and falsifiability axes.
+    """
+    try:
+        h_a = TournamentHypothesis(
+            hypothesis_id=req.hypothesis_a.hypothesis_id,
+            title=req.hypothesis_a.title,
+            statement=req.hypothesis_a.statement,
+            domain=req.hypothesis_a.domain,
+            evidence_score=req.hypothesis_a.evidence_score,
+            physical_consistency_score=req.hypothesis_a.physical_consistency_score,
+            delta_omega_potential=req.hypothesis_a.delta_omega_potential,
+            falsifiability_score=req.hypothesis_a.falsifiability_score,
+            elo_rating=req.hypothesis_a.elo_rating,
+        )
+        h_b = TournamentHypothesis(
+            hypothesis_id=req.hypothesis_b.hypothesis_id,
+            title=req.hypothesis_b.title,
+            statement=req.hypothesis_b.statement,
+            domain=req.hypothesis_b.domain,
+            evidence_score=req.hypothesis_b.evidence_score,
+            physical_consistency_score=req.hypothesis_b.physical_consistency_score,
+            delta_omega_potential=req.hypothesis_b.delta_omega_potential,
+            falsifiability_score=req.hypothesis_b.falsifiability_score,
+            elo_rating=req.hypothesis_b.elo_rating,
+        )
+        res = PairwiseDebateEngine.debate(
+            hyp_a=h_a,
+            hyp_b=h_b,
+            match_id=req.match_id,
+            k_factor=req.k_factor,
+        )
+        return {
+            "match": res.to_dict(),
+            "updated_hypothesis_a": h_a.to_dict(),
+            "updated_hypothesis_b": h_b.to_dict(),
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/api/discovery/tournament/run-tournament")
+def run_tournament_endpoint(req: RunTournamentRequest):
+    """
+    Hypothesis Tournament Arena: Round-Robin Tournament (ADR-DISCOVERY-058).
+    Runs multi-agent pairwise debates and produces an Elo-ranked leaderboard.
+    """
+    try:
+        candidates = [
+            TournamentHypothesis(
+                hypothesis_id=c.hypothesis_id,
+                title=c.title,
+                statement=c.statement,
+                domain=c.domain,
+                evidence_score=c.evidence_score,
+                physical_consistency_score=c.physical_consistency_score,
+                delta_omega_potential=c.delta_omega_potential,
+                falsifiability_score=c.falsifiability_score,
+                elo_rating=c.elo_rating,
+            )
+            for c in req.candidates
+        ]
+        orchestrator = HypothesisEloTournamentOrchestrator()
+        report = orchestrator.run_round_robin_tournament(
+            tournament_id=req.tournament_id,
+            domain=req.domain,
+            candidates=candidates,
+            rounds=req.rounds,
+            k_factor=req.k_factor,
+        )
+        return report.to_dict()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+

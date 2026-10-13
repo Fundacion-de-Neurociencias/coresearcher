@@ -445,6 +445,14 @@ from .era_empirical_engine import (
     ClinicalLeadTimeEvaluator,
     ERAClosedLoopTreeSearch,
 )
+from .hypothesis_tournament_arena import (
+    DebateAxis,
+    TournamentHypothesis,
+    DebateMatchResult,
+    TournamentReport,
+    PairwiseDebateEngine,
+    HypothesisEloTournamentOrchestrator,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -824,4 +832,10 @@ __all__ = [
     "ERAMethodologicalMutationGenerator",
     "ClinicalLeadTimeEvaluator",
     "ERAClosedLoopTreeSearch",
+    "DebateAxis",
+    "TournamentHypothesis",
+    "DebateMatchResult",
+    "TournamentReport",
+    "PairwiseDebateEngine",
+    "HypothesisEloTournamentOrchestrator",
 ]

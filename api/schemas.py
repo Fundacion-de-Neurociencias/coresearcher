@@ -660,3 +660,31 @@ class ERASearchCampaignRequest(BaseModel):
     surge_threshold_quantile: float = 0.85
     max_iterations: int = 50
     beam_width: int = 4
+
+
+class TournamentHypothesisInput(BaseModel):
+    hypothesis_id: str
+    title: str
+    statement: str
+    domain: str = "BIOMEDICINE"
+    evidence_score: float = 0.5
+    physical_consistency_score: float = 0.5
+    delta_omega_potential: float = 0.5
+    falsifiability_score: float = 0.5
+    elo_rating: float = 1200.0
+
+
+class DebateMatchRequest(BaseModel):
+    hypothesis_a: TournamentHypothesisInput
+    hypothesis_b: TournamentHypothesisInput
+    match_id: Optional[str] = None
+    k_factor: float = 32.0
+
+
+class RunTournamentRequest(BaseModel):
+    tournament_id: str
+    domain: str = "BIOMEDICINE"
+    candidates: List[TournamentHypothesisInput]
+    rounds: int = 1
+    k_factor: float = 32.0
+

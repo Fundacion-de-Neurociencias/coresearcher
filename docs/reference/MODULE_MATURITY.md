@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 8 |
+| Integrated | Used by the API and covered by tests | 9 |
 | Tested | Covered by tests, not reachable from the API | 23 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -47,6 +47,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
 | `grounded_search_sensor` | Exercised | - | - | yes |
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |
+| `hypothesis_tournament_arena` | Integrated | yes | yes | - |
 | `inference_time_scaling` | Tested | - | yes | - |
 | `lab_in_the_loop_adapter` | Prototype | - | - | - |
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |

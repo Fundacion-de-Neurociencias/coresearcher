@@ -687,4 +687,3 @@ class RunTournamentRequest(BaseModel):
     candidates: List[TournamentHypothesisInput]
     rounds: int = 1
     k_factor: float = 32.0
-

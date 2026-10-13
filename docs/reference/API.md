@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 89. Interactive documentation is served at `/docs` when the API runs.
+Operations: 91. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -84,6 +84,8 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/discovery/stigmergy/query-pheromone-field` | API key | Query Pheromone Field |
 | `POST` | `/api/discovery/system-one/classify-marr` | API key | Classify Marr System One |
 | `POST` | `/api/discovery/system-one/triage-pr` | API key | Triage Pr System One |
+| `POST` | `/api/discovery/tournament/debate-match` | API key | Debate Match Endpoint |
+| `POST` | `/api/discovery/tournament/run-tournament` | API key | Run Tournament Endpoint |
 | `POST` | `/api/discovery/traces/evaluate-epistemic-rigor` | API key | Evaluate Traces Epistemic Rigor |
 | `GET` | `/api/discovery/trajectory-evolution` | Public | Get Trajectory Evolution |
 | `POST` | `/api/discovery/universal/cross-domain-benchmark` | API key | Run Universal Cross Domain Benchmark |

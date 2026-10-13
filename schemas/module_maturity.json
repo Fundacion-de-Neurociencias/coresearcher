@@ -231,6 +231,13 @@
       "tests": true
     },
     {
+      "api": true,
+      "level": "Integrated",
+      "module": "hypothesis_tournament_arena",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": false,
       "level": "Tested",
       "module": "inference_time_scaling",

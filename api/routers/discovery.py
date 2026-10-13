@@ -8,6 +8,7 @@ from api.schemas import (
     CherryPickClaimRequest,
     ClusterAnomaliesRequest,
     CreateBranchRequest,
+    DebateMatchRequest,
     DiagnoseFailureRequest,
     DiscoveryHistoryNodeInput,
     EpistemicSearchRequest,
@@ -27,7 +28,6 @@ from api.schemas import (
     RunConstraintBoxRequest,
     RunEmpiricalDiscoveryRequest,
     RunLongHorizonCampaignRequest,
-    DebateMatchRequest,
     RunTournamentRequest,
 )
 from api.security import require_api_key
@@ -85,9 +85,9 @@ from python.discovery.hakken_dream_rsi_engine import (
     DiscoveryHistoryNode,
 )
 from python.discovery.hypothesis_tournament_arena import (
-    TournamentHypothesis,
-    PairwiseDebateEngine,
     HypothesisEloTournamentOrchestrator,
+    PairwiseDebateEngine,
+    TournamentHypothesis,
 )
 
 router = APIRouter()
@@ -771,4 +771,3 @@ def run_tournament_endpoint(req: RunTournamentRequest):
         return report.to_dict()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
-

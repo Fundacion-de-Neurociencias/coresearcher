@@ -1,0 +1,2 @@
+# Benchmark protocols are hashed; keep their bytes identical on every platform.
+docs/reference/benchmarks/** text eol=lf

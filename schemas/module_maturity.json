@@ -395,7 +395,7 @@
       "api": false,
       "level": "Tested",
       "module": "semantic_bijectivity_auditor",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

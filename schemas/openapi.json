@@ -1217,6 +1217,38 @@
         "title": "CreateMembraneContractRequest",
         "type": "object"
       },
+      "DebateMatchRequest": {
+        "properties": {
+          "hypothesis_a": {
+            "$ref": "#/components/schemas/TournamentHypothesisInput"
+          },
+          "hypothesis_b": {
+            "$ref": "#/components/schemas/TournamentHypothesisInput"
+          },
+          "k_factor": {
+            "default": 32.0,
+            "title": "K Factor",
+            "type": "number"
+          },
+          "match_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Match Id"
+          }
+        },
+        "required": [
+          "hypothesis_a",
+          "hypothesis_b"
+        ],
+        "title": "DebateMatchRequest",
+        "type": "object"
+      },
       "DiagnoseFailureRequest": {
         "properties": {
           "auxiliary_assumptions": {
@@ -3343,6 +3375,42 @@
         "title": "RunLongHorizonCampaignRequest",
         "type": "object"
       },
+      "RunTournamentRequest": {
+        "properties": {
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/TournamentHypothesisInput"
+            },
+            "title": "Candidates",
+            "type": "array"
+          },
+          "domain": {
+            "default": "BIOMEDICINE",
+            "title": "Domain",
+            "type": "string"
+          },
+          "k_factor": {
+            "default": 32.0,
+            "title": "K Factor",
+            "type": "number"
+          },
+          "rounds": {
+            "default": 1,
+            "title": "Rounds",
+            "type": "integer"
+          },
+          "tournament_id": {
+            "title": "Tournament Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tournament_id",
+          "candidates"
+        ],
+        "title": "RunTournamentRequest",
+        "type": "object"
+      },
       "ScienceIDEInvariantCheckRequest": {
         "properties": {
           "case_id": {
@@ -3528,6 +3596,59 @@
           "outcome_variable"
         ],
         "title": "SynthesizeContractRequest",
+        "type": "object"
+      },
+      "TournamentHypothesisInput": {
+        "properties": {
+          "delta_omega_potential": {
+            "default": 0.5,
+            "title": "Delta Omega Potential",
+            "type": "number"
+          },
+          "domain": {
+            "default": "BIOMEDICINE",
+            "title": "Domain",
+            "type": "string"
+          },
+          "elo_rating": {
+            "default": 1200.0,
+            "title": "Elo Rating",
+            "type": "number"
+          },
+          "evidence_score": {
+            "default": 0.5,
+            "title": "Evidence Score",
+            "type": "number"
+          },
+          "falsifiability_score": {
+            "default": 0.5,
+            "title": "Falsifiability Score",
+            "type": "number"
+          },
+          "hypothesis_id": {
+            "title": "Hypothesis Id",
+            "type": "string"
+          },
+          "physical_consistency_score": {
+            "default": 0.5,
+            "title": "Physical Consistency Score",
+            "type": "number"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "hypothesis_id",
+          "title",
+          "statement"
+        ],
+        "title": "TournamentHypothesisInput",
         "type": "object"
       },
       "ValidationError": {
@@ -6440,6 +6561,80 @@
           }
         ],
         "summary": "Triage Pr System One"
+      }
+    },
+    "/api/discovery/tournament/debate-match": {
+      "post": {
+        "description": "Hypothesis Tournament Arena: Pairwise Debate Match (ADR-DISCOVERY-058).\nEvaluates 2 competing hypotheses along evidence, physical, omega, and falsifiability axes.",
+        "operationId": "debate_match_endpoint_api_discovery_tournament_debate_match_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DebateMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Debate Match Endpoint"
+      }
+    },
+    "/api/discovery/tournament/run-tournament": {
+      "post": {
+        "description": "Hypothesis Tournament Arena: Round-Robin Tournament (ADR-DISCOVERY-058).\nRuns multi-agent pairwise debates and produces an Elo-ranked leaderboard.",
+        "operationId": "run_tournament_endpoint_api_discovery_tournament_run_tournament_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunTournamentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Tournament Endpoint"
       }
     },
     "/api/discovery/traces/evaluate-epistemic-rigor": {

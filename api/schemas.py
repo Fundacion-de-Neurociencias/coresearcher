@@ -687,3 +687,30 @@ class RunTournamentRequest(BaseModel):
     candidates: List[TournamentHypothesisInput]
     rounds: int = 1
     k_factor: float = 32.0
+
+
+class FormalVariableModel(BaseModel):
+    name: str
+    domain: List[Any]
+
+
+class FormalHypothesisModel(BaseModel):
+    hypothesis_id: str
+    variables: List[FormalVariableModel]
+    claims: List[str]
+    assumptions: List[str] = []
+    scope: Optional[str] = None
+    statement: str = ""
+    alternatives: List[str] = []
+
+
+class EvaluateFormalHypothesisRequest(BaseModel):
+    hypothesis: FormalHypothesisModel
+    observations: List[Dict[str, Any]] = []
+    max_examples: int = 5
+
+
+class CompareFormalHypothesesRequest(BaseModel):
+    a: FormalHypothesisModel
+    b: FormalHypothesisModel
+    max_examples: int = 5

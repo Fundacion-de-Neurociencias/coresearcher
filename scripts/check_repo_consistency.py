@@ -77,6 +77,22 @@ def check_markdown_links() -> None:
                 fail(f"{doc.relative_to(ROOT)} links to missing file {path}")
 
 
+def check_readme_maturity_counts() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    table = (ROOT / "docs" / "reference" / "MODULE_MATURITY.md").read_text(encoding="utf-8")
+    actual = {
+        lvl: int(n)
+        for lvl, n in re.findall(r"^\| (Integrated|Tested|Exercised|Prototype) \| [^|]+\| (\d+) \|", table, re.M)
+    }
+    m = re.search(r"(\d+) integrated, (\d+) tested, (\d+) exercised, (\d+) prototypes \(of (\d+)\)", readme)
+    if not m:
+        fail("README.md has no module maturity summary line")
+        return
+    stated = dict(zip(["Integrated", "Tested", "Exercised", "Prototype"], map(int, m.groups()[:4])))
+    if stated != actual or int(m.group(5)) != sum(actual.values()):
+        fail(f"README module maturity {dict(stated)} (of {m.group(5)}) differs from MODULE_MATURITY.md {actual}")
+
+
 CHECKS = [
     check_python_version,
     check_workspaces,
@@ -84,6 +100,7 @@ CHECKS = [
     check_readme_webhook_route,
     check_readme_scripts,
     check_markdown_links,
+    check_readme_maturity_counts,
 ]
 
 if __name__ == "__main__":

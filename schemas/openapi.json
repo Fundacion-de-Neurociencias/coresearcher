@@ -1065,6 +1065,27 @@
         "title": "CogenticProofDiscoveryRequest",
         "type": "object"
       },
+      "CompareFormalHypothesesRequest": {
+        "properties": {
+          "a": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "b": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "max_examples": {
+            "default": 5,
+            "title": "Max Examples",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "a",
+          "b"
+        ],
+        "title": "CompareFormalHypothesesRequest",
+        "type": "object"
+      },
       "CompileInstrumentRequest": {
         "properties": {
           "hypothesis_statement": {
@@ -1679,6 +1700,32 @@
         "title": "EvaluateBayesianSurpriseRequest",
         "type": "object"
       },
+      "EvaluateFormalHypothesisRequest": {
+        "properties": {
+          "hypothesis": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "max_examples": {
+            "default": 5,
+            "title": "Max Examples",
+            "type": "integer"
+          },
+          "observations": {
+            "default": [],
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Observations",
+            "type": "array"
+          }
+        },
+        "required": [
+          "hypothesis"
+        ],
+        "title": "EvaluateFormalHypothesisRequest",
+        "type": "object"
+      },
       "EvaluateRealityContactRequest": {
         "properties": {
           "hypothesis_id": {
@@ -2013,6 +2060,86 @@
           "content"
         ],
         "title": "FileDiffInput",
+        "type": "object"
+      },
+      "FormalHypothesisModel": {
+        "properties": {
+          "alternatives": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Alternatives",
+            "type": "array"
+          },
+          "assumptions": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "claims": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Claims",
+            "type": "array"
+          },
+          "hypothesis_id": {
+            "title": "Hypothesis Id",
+            "type": "string"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope"
+          },
+          "statement": {
+            "default": "",
+            "title": "Statement",
+            "type": "string"
+          },
+          "variables": {
+            "items": {
+              "$ref": "#/components/schemas/FormalVariableModel"
+            },
+            "title": "Variables",
+            "type": "array"
+          }
+        },
+        "required": [
+          "hypothesis_id",
+          "variables",
+          "claims"
+        ],
+        "title": "FormalHypothesisModel",
+        "type": "object"
+      },
+      "FormalVariableModel": {
+        "properties": {
+          "domain": {
+            "items": {},
+            "title": "Domain",
+            "type": "array"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "domain"
+        ],
+        "title": "FormalVariableModel",
         "type": "object"
       },
       "FrontierMathTaskInput": {
@@ -6915,6 +7042,90 @@
           }
         },
         "summary": "Health Check"
+      }
+    },
+    "/api/hypotheses/compare": {
+      "post": {
+        "description": "Logical relation between two hypotheses over the same state space, with discriminating states.",
+        "operationId": "compare_formal_hypotheses_api_hypotheses_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareFormalHypothesesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Compare Formal Hypotheses"
+      }
+    },
+    "/api/hypotheses/evaluate": {
+      "post": {
+        "description": "Exact evaluation over the finite state space: content, assumption conflicts and counterexamples.",
+        "operationId": "evaluate_formal_hypothesis_api_hypotheses_evaluate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluateFormalHypothesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Evaluate Formal Hypothesis"
       }
     },
     "/api/observer/ledger": {

@@ -14,6 +14,7 @@ it, the evidence it used, and a cryptographic hash that lets anyone reproduce th
 
 ## Highlights
 
+- **Formal hypotheses.** Exact evaluation over a finite state space: vacuous, unfalsifiable or self-contradictory hypotheses, conflicting assumptions, counterexamples and logical relations between rivals ([ADR-059](docs/decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md)).
 - **Claim verification.** Reality Contact Score (RCS), Popperian falsification and conservation-law checks.
 - **Formal gates.** Exact symbolic verification (SymPy), Lean 4 proof gate, categorical holonomy checks.
 - **Provenance.** Append-only scientific ledger, Git-based lineage, Merkle-style hashes, Zenodo export.
@@ -27,9 +28,9 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 
 | Check | Result | Details |
 | --- | --- | --- |
-| Test suite | 132 passing | [`tests/`](tests) |
+| Test suite | 161 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 8 integrated, 23 tested, 18 exercised, 26 prototypes (of 75) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 10 integrated, 23 tested, 17 exercised, 20 prototypes (of 70) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
 Claims are listed with their supporting script, data origin and last result in the

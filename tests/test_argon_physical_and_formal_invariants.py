@@ -9,21 +9,13 @@ Verifies:
 
 from __future__ import annotations
 
-import pytest
-
 from python.discovery.frontier_math_flywheel import (
     FrontierMathProblemTask,
     ProofEquivalenceAuditor,
 )
 from python.discovery.physical_theorem_court import (
-    CourtVerdict,
-    DeductionRule,
-    PhysicalClaimSpec,
     PhysicalConservationConstraint,
     PhysicalConservationType,
-    PhysicalCoherenceCourt,
-    ProofDependencyDAG,
-    ProofLemmaNode,
 )
 
 
@@ -121,7 +113,10 @@ def test_riemann_and_graphwalk_metrics():
 
     assert fake_score.graphwalk_holonomy_score == 0.0  # Rejected by GraphWalk holonomy
     assert fake_score.dense_reward_score == 0.0
-    assert "unguided custom axioms" in fake_score.critique_notes.lower() or "custom axioms" in fake_score.critique_notes.lower()
+    assert (
+        "unguided custom axioms" in fake_score.critique_notes.lower()
+        or "custom axioms" in fake_score.critique_notes.lower()
+    )
 
     # 3. Kernel accepted full proof
     complete_code = """

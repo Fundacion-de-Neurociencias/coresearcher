@@ -133,8 +133,9 @@ class ProofEquivalenceScore:
     kernel_accepted: bool
     critique_notes: str
     som_score_hash: str
-    riemann_dense_progress: float = 0.0     # [0.0, 1.0] Argon/RiemannBench analytic density
-    graphwalk_holonomy_score: float = 1.0   # [0.0, 1.0] Argon/GraphWalks long-context DAG consistency
+    # Unvalidated heuristics with hand-set constants (claims register row 20). Not related to any external benchmark.
+    partial_proof_progress_heuristic: float = 0.0  # 1.0 if kernel-accepted, else 0.20 + 0.15 per bridge lemma (max 5)
+    axiom_hygiene_heuristic: float = 1.0  # 0.0 with fake axioms, 0.70 with a remaining sorry, else 1.0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -147,8 +148,8 @@ class ProofEquivalenceScore:
             "kernel_accepted": self.kernel_accepted,
             "critique_notes": self.critique_notes,
             "som_score_hash": self.som_score_hash,
-            "riemann_dense_progress": round(self.riemann_dense_progress, 4),
-            "graphwalk_holonomy_score": round(self.graphwalk_holonomy_score, 4),
+            "partial_proof_progress_heuristic": round(self.partial_proof_progress_heuristic, 4),
+            "axiom_hygiene_heuristic": round(self.axiom_hygiene_heuristic, 4),
         }
 
 
@@ -246,10 +247,10 @@ class ProofEquivalenceAuditor:
         # Kernel acceptance heuristic (syntactically complete theorem without sorry/fake axioms)
         kernel_accepted = declares_target and not has_sorry and not has_fake_axioms
 
-        # Compute continuous dense reward with Argon Riemann & GraphWalk metrics
-        riemann_metric = 1.0 if kernel_accepted else (0.20 + 0.15 * min(5, bridge_lemmas_count))
-        # GraphWalk holonomy: penalize unproved fake axioms or broken long-context references
-        graphwalk_holonomy = 0.0 if has_fake_axioms else (0.70 if has_sorry else 1.0)
+        # Unvalidated heuristics: hand-set constants with no empirical calibration (claims register row 20).
+        partial_progress = 1.0 if kernel_accepted else (0.20 + 0.15 * min(5, bridge_lemmas_count))
+        # Axiom hygiene: penalise fake axioms and any remaining sorry.
+        axiom_hygiene = 0.0 if has_fake_axioms else (0.70 if has_sorry else 1.0)
 
         if kernel_accepted:
             # Full victory! 1.0 reward
@@ -270,7 +271,7 @@ class ProofEquivalenceAuditor:
             is_equivalent = False
             notes = "Syntactically incomplete formalization."
 
-        sig_data = f"{task.task_id}:{is_equivalent}:{dense_reward}:{bridge_lemmas_count}:{kernel_accepted}:{riemann_metric}:{graphwalk_holonomy}"
+        sig_data = f"{task.task_id}:{is_equivalent}:{dense_reward}:{bridge_lemmas_count}:{kernel_accepted}:{partial_progress}:{axiom_hygiene}"
         som_hash = f"sha256:{hashlib.sha256(sig_data.encode('utf-8')).hexdigest()}"
 
         return ProofEquivalenceScore(
@@ -283,8 +284,8 @@ class ProofEquivalenceAuditor:
             kernel_accepted=kernel_accepted,
             critique_notes=notes,
             som_score_hash=som_hash,
-            riemann_dense_progress=riemann_metric,
-            graphwalk_holonomy_score=graphwalk_holonomy,
+            partial_proof_progress_heuristic=partial_progress,
+            axiom_hygiene_heuristic=axiom_hygiene,
         )
 
 

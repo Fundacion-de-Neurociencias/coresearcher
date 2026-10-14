@@ -26,6 +26,11 @@ class DeductionRule(str, Enum):
     AXIOMATIC_ASSERTION = "AXIOMATIC_ASSERTION"  # Unproved 'sorry' step
 
 
+# Unvalidated heuristic: maximum RMSD (in angstrom) to a reference geometry before a conformation is flagged.
+# Hand-set; not derived from xTB or any reference calculation (claims register row 20).
+CONFORMATIONAL_RMSD_HEURISTIC_ANGSTROM = 0.50
+
+
 class PhysicalConservationType(str, Enum):
     ENERGY_DISSIPATION = "ENERGY_DISSIPATION"         # Leray-Hopf: d/dt E(t) <= -nu ||grad u||^2
     MASS_CONTINUITY = "MASS_CONTINUITY"               # div(u) = 0
@@ -33,8 +38,8 @@ class PhysicalConservationType(str, Enum):
     ENTROPY_PRODUCTION = "ENTROPY_PRODUCTION"         # 2nd Law: S_dot >= 0
     BEALE_KATO_MAJDA = "BEALE_KATO_MAJDA"             # int ||omega(t)||_infty dt < infty
     LORENTZ_CAUSALITY = "LORENTZ_CAUSALITY"           # v <= c
-    SYMPLECTIC_PHASE_CONSERVATION = "SYMPLECTIC_PHASE_CONSERVATION" # Argon/ERQA: Liouville volume & symplectic 2-form invariance
-    QUANTUM_TIGHT_BINDING_GEOMETRY = "QUANTUM_TIGHT_BINDING_GEOMETRY" # Argon/xTB: Bond length & conformational quantum ground-state consistency
+    SYMPLECTIC_PHASE_CONSERVATION = "SYMPLECTIC_PHASE_CONSERVATION"  # Liouville: phase-space volume preservation
+    CONFORMATIONAL_RMSD_BOUND = "CONFORMATIONAL_RMSD_BOUND"  # Unvalidated heuristic RMSD threshold (claims register row 20)
 
 
 class CourtVerdict(str, Enum):
@@ -201,7 +206,7 @@ class PhysicalConservationConstraint:
             }
 
         elif self.law_type == PhysicalConservationType.SYMPLECTIC_PHASE_CONSERVATION:
-            # Argon/ERQA: Hamiltonian phase-space volume preservation (div_phase = tr(dH/dq dp) = 0)
+            # Liouville's theorem: Hamiltonian flow preserves phase-space volume (zero divergence).
             phase_divergence = differential_rates.get("phase_space_divergence", 0.0)
             violates = abs(phase_divergence) > self.tolerance
             return {
@@ -211,15 +216,15 @@ class PhysicalConservationConstraint:
                 "violation_magnitude": abs(phase_divergence),
             }
 
-        elif self.law_type == PhysicalConservationType.QUANTUM_TIGHT_BINDING_GEOMETRY:
-            # Argon/xTB: Conformational deviation from quantum ground-state equilibrium
+        elif self.law_type == PhysicalConservationType.CONFORMATIONAL_RMSD_BOUND:
+            # Unvalidated heuristic: a fixed RMSD threshold, not derived from xTB or any reference calculation.
             rmsd_deviation = state_variables.get("conformational_rmsd_angstrom", 0.0)
-            violates = rmsd_deviation > (0.50 + self.tolerance)  # Max 0.50 Angstrom displacement
+            violates = rmsd_deviation > (CONFORMATIONAL_RMSD_HEURISTIC_ANGSTROM + self.tolerance)
             return {
                 "law": self.law_type.value,
                 "satisfied": not violates,
                 "conformational_rmsd_angstrom": rmsd_deviation,
-                "violation_magnitude": max(0.0, rmsd_deviation - 0.50),
+                "violation_magnitude": max(0.0, rmsd_deviation - CONFORMATIONAL_RMSD_HEURISTIC_ANGSTROM),
             }
 
         return {"law": self.law_type.value, "satisfied": True, "violation_magnitude": 0.0}

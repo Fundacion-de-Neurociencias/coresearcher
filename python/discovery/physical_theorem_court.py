@@ -33,6 +33,8 @@ class PhysicalConservationType(str, Enum):
     ENTROPY_PRODUCTION = "ENTROPY_PRODUCTION"         # 2nd Law: S_dot >= 0
     BEALE_KATO_MAJDA = "BEALE_KATO_MAJDA"             # int ||omega(t)||_infty dt < infty
     LORENTZ_CAUSALITY = "LORENTZ_CAUSALITY"           # v <= c
+    SYMPLECTIC_PHASE_CONSERVATION = "SYMPLECTIC_PHASE_CONSERVATION" # Argon/ERQA: Liouville volume & symplectic 2-form invariance
+    QUANTUM_TIGHT_BINDING_GEOMETRY = "QUANTUM_TIGHT_BINDING_GEOMETRY" # Argon/xTB: Bond length & conformational quantum ground-state consistency
 
 
 class CourtVerdict(str, Enum):
@@ -196,6 +198,28 @@ class PhysicalConservationConstraint:
                 "satisfied": not violates,
                 "vorticity_L_infinity": vorticity_L_inf,
                 "violation_magnitude": 1.0 if violates else 0.0
+            }
+
+        elif self.law_type == PhysicalConservationType.SYMPLECTIC_PHASE_CONSERVATION:
+            # Argon/ERQA: Hamiltonian phase-space volume preservation (div_phase = tr(dH/dq dp) = 0)
+            phase_divergence = differential_rates.get("phase_space_divergence", 0.0)
+            violates = abs(phase_divergence) > self.tolerance
+            return {
+                "law": self.law_type.value,
+                "satisfied": not violates,
+                "phase_space_divergence": phase_divergence,
+                "violation_magnitude": abs(phase_divergence),
+            }
+
+        elif self.law_type == PhysicalConservationType.QUANTUM_TIGHT_BINDING_GEOMETRY:
+            # Argon/xTB: Conformational deviation from quantum ground-state equilibrium
+            rmsd_deviation = state_variables.get("conformational_rmsd_angstrom", 0.0)
+            violates = rmsd_deviation > (0.50 + self.tolerance)  # Max 0.50 Angstrom displacement
+            return {
+                "law": self.law_type.value,
+                "satisfied": not violates,
+                "conformational_rmsd_angstrom": rmsd_deviation,
+                "violation_magnitude": max(0.0, rmsd_deviation - 0.50),
             }
 
         return {"law": self.law_type.value, "satisfied": True, "violation_magnitude": 0.0}

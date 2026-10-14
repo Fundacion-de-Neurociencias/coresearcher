@@ -1,10 +1,10 @@
 """
-tests/test_argon_physical_and_formal_invariants.py - Unit test suite for Gemini 4 Argon Formal & Physical Invariants.
+tests/test_heuristic_physical_and_formal_invariants.py - Unit tests for unvalidated physical and formal heuristics.
 
 Verifies:
 1. PhysicalTheoremCourt audits SYMPLECTIC_PHASE_CONSERVATION (Liouville volume preservation / phase divergence = 0).
-2. PhysicalTheoremCourt audits QUANTUM_TIGHT_BINDING_GEOMETRY (xTB ground-state RMSD bound <= 0.50 Angstroms).
-3. ProofEquivalenceAuditor calculates RiemannDenseProgressMetric and GraphWalkHolonomyScore on formal Lean arguments.
+2. PhysicalTheoremCourt audits CONFORMATIONAL_RMSD_BOUND (heuristic RMSD bound of 0.50 angstrom).
+3. ProofEquivalenceAuditor computes the partial-progress and axiom-hygiene heuristics on Lean arguments.
 """
 
 from __future__ import annotations
@@ -51,10 +51,10 @@ def test_symplectic_phase_conservation_violated():
     assert result["violation_magnitude"] == 0.05
 
 
-def test_quantum_tight_binding_geometry_satisfied():
+def test_conformational_rmsd_bound_satisfied():
     """Verifies that conformational RMSD <= 0.50 A satisfies quantum tight-binding ground state constraint."""
     constraint = PhysicalConservationConstraint(
-        law_type=PhysicalConservationType.QUANTUM_TIGHT_BINDING_GEOMETRY,
+        law_type=PhysicalConservationType.CONFORMATIONAL_RMSD_BOUND,
         canonical_formula="RMSD(conformational, ground_state) <= 0.50 A",
         tolerance=1e-4,
     )
@@ -67,10 +67,10 @@ def test_quantum_tight_binding_geometry_satisfied():
     assert result["violation_magnitude"] == 0.0
 
 
-def test_quantum_tight_binding_geometry_violated():
+def test_conformational_rmsd_bound_violated():
     """Verifies that conformational distortion > 0.50 A breaches tight-binding quantum equilibrium."""
     constraint = PhysicalConservationConstraint(
-        law_type=PhysicalConservationType.QUANTUM_TIGHT_BINDING_GEOMETRY,
+        law_type=PhysicalConservationType.CONFORMATIONAL_RMSD_BOUND,
         canonical_formula="RMSD(conformational, ground_state) <= 0.50 A",
         tolerance=1e-4,
     )
@@ -83,8 +83,8 @@ def test_quantum_tight_binding_geometry_violated():
     assert result["violation_magnitude"] > 0.60
 
 
-def test_riemann_and_graphwalk_metrics():
-    """Verifies that Riemann dense progress and GraphWalk holonomy are scored accurately on Lean formal arguments."""
+def test_partial_progress_and_axiom_hygiene_heuristics():
+    """Checks the partial-progress and axiom-hygiene heuristics on Lean arguments."""
     task = FrontierMathProblemTask(
         task_id="task_riemann_test",
         title="Riemann Analytic Continuation",
@@ -100,8 +100,8 @@ def test_riemann_and_graphwalk_metrics():
     """
     partial_score = ProofEquivalenceAuditor.evaluate_submitted_proof(task, partial_code)
 
-    assert partial_score.riemann_dense_progress >= 0.35
-    assert partial_score.graphwalk_holonomy_score == 0.70  # Contains sorry penalty
+    assert partial_score.partial_proof_progress_heuristic >= 0.35
+    assert partial_score.axiom_hygiene_heuristic == 0.70  # Contains sorry penalty
     assert partial_score.contains_sorry_escape is True
 
     # 2. Fake axiom injection
@@ -111,7 +111,7 @@ def test_riemann_and_graphwalk_metrics():
     """
     fake_score = ProofEquivalenceAuditor.evaluate_submitted_proof(task, fake_code)
 
-    assert fake_score.graphwalk_holonomy_score == 0.0  # Rejected by GraphWalk holonomy
+    assert fake_score.axiom_hygiene_heuristic == 0.0  # Fake axioms give zero axiom hygiene
     assert fake_score.dense_reward_score == 0.0
     assert (
         "unguided custom axioms" in fake_score.critique_notes.lower()
@@ -126,6 +126,6 @@ def test_riemann_and_graphwalk_metrics():
     full_score = ProofEquivalenceAuditor.evaluate_submitted_proof(task, complete_code)
 
     assert full_score.kernel_accepted is True
-    assert full_score.riemann_dense_progress == 1.0
-    assert full_score.graphwalk_holonomy_score == 1.0
+    assert full_score.partial_proof_progress_heuristic == 1.0
+    assert full_score.axiom_hygiene_heuristic == 1.0
     assert full_score.dense_reward_score == 1.0

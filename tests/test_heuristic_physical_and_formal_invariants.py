@@ -125,7 +125,7 @@ def test_partial_progress_and_axiom_hygiene_heuristics():
     """
     full_score = ProofEquivalenceAuditor.evaluate_submitted_proof(task, complete_code)
 
-    assert full_score.kernel_accepted is True
+    assert full_score.static_checks_passed is True
     assert full_score.partial_proof_progress_heuristic == 1.0
     assert full_score.axiom_hygiene_heuristic == 1.0
     assert full_score.dense_reward_score == 1.0

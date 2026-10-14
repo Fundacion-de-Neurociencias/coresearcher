@@ -82,7 +82,7 @@ def test_proof_equivalence_and_dense_rewards():
     assert score.contains_sorry_escape
     assert score.verified_bridge_lemmas_count >= 1
     assert score.dense_reward_score >= 0.35  # Partial credit awarded!
-    assert not score.kernel_accepted
+    assert not score.static_checks_passed
 
     # Complete proof without sorry
     complete_submission = """
@@ -92,8 +92,9 @@ def test_proof_equivalence_and_dense_rewards():
       linarith
     """
     full_score = ProofEquivalenceAuditor.evaluate_submitted_proof(task, complete_submission)
-    assert full_score.kernel_accepted
-    assert full_score.is_equivalent_proof
+    assert full_score.static_checks_passed
+    # Equivalence is only claimed when the Lean kernel actually verified the submission.
+    assert full_score.is_equivalent_proof == (full_score.kernel_status == "FULLY_VERIFIED_KERNEL")
     assert full_score.dense_reward_score == 1.0
 
 

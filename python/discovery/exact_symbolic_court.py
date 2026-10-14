@@ -32,6 +32,7 @@ class ExactSymbolicVerdict(str, Enum):
     INDEX_SHIFT_DETECTED = "INDEX_SHIFT_DETECTED"
     SYMBOLIC_IDENTITY_MISMATCH = "SYMBOLIC_IDENTITY_MISMATCH"
     OBSTACLE_ANALYSIS_REQUIRED = "OBSTACLE_ANALYSIS_REQUIRED"
+    NO_CHECKABLE_TARGET = "NO_CHECKABLE_TARGET"  # No identity and no sequence+recurrence: nothing was verified
 
 
 class ObstacleType(str, Enum):
@@ -211,6 +212,32 @@ class ExactSymbolicCourt:
                 expected_value=None,
                 obstacle_report=obstacle,
                 som_audit_hash=f"sha256:{report_hash}"
+            )
+
+        # Step 1b: Refuse to verify when there is nothing to check.
+        has_identity = bool(lhs_target and rhs_target)
+        has_sequence = bool(sequence_benchmark) and recurrence_evaluator is not None
+        if not has_identity and not has_sequence:
+            obstacle = ObstacleAnalysisReport(
+                obstacle_type=ObstacleType.NONE,
+                diagnostic_detail=(
+                    "Nothing to verify: no lhs/rhs identity and no sequence with a recurrence evaluator were supplied."
+                ),
+                suggested_engine_addition="Supply lhs_target and rhs_target, or a sequence_benchmark with its recurrence.",
+            )
+            report_hash = hashlib.sha256(f"{dag.theorem_id}:NO_TARGET".encode()).hexdigest()[:24]
+            return ExactVerificationReport(
+                theorem_id=dag.theorem_id,
+                verdict=ExactSymbolicVerdict.NO_CHECKABLE_TARGET,
+                is_sound=False,
+                lemma_purity_passed=True,
+                conjecture_dependencies=[],
+                counterexample_found=False,
+                counterexample_index=None,
+                observed_value=None,
+                expected_value=None,
+                obstacle_report=obstacle,
+                som_audit_hash=f"sha256:{report_hash}",
             )
 
         # Step 2: Symbolic Algebraic Identity Check (if provided)

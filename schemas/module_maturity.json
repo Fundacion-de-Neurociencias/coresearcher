@@ -212,6 +212,13 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "formal_hypothesis",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "frontier_math_flywheel",
       "scripts": false,
       "tests": true

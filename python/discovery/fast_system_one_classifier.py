@@ -38,7 +38,7 @@ class TypedClassificationResult:
     confidence_score: float  # [0.0, 1.0] calibrated probability
     probability_distribution: Dict[str, float]
     latency_ms: float
-    system_tier: str  # "SYSTEM_1_LOCAL_FAST" | "SYSTEM_1_JEV_CLOUD"
+    system_tier: str  # "SYSTEM_1_VEGA_PHYSICS" | "SYSTEM_1_KEV_LOCAL" | "SYSTEM_1_JEV_CLOUD" | "SYSTEM_1_LOCAL_FAST"
     is_fallback: bool = False
     metadata: Dict[str, Any] = field(default_factory=dict)
 

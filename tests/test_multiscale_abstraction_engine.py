@@ -2,14 +2,12 @@
 Tests for Multiscale Latent Abstraction Engine (ADR-DISCOVERY-039).
 """
 
-import pytest
 from python.discovery.multiscale_abstraction_engine import (
     AbstractionLevel,
-    ActionConditionedPredictor,
     ActionConditionedPredictionVerdict,
+    ActionConditionedPredictor,
     MultiscaleAbstractionEngine,
     MultiscaleStateNode,
-    RepresentationSuitabilityReport,
 )
 
 

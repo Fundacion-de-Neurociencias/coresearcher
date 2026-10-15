@@ -27,6 +27,7 @@ class LeanProofStatus(enum.Enum):
     CONTAINS_UNPROVEN_SORRY = "CONTAINS_UNPROVEN_SORRY"  # Syntactically valid but relies on unproven 'sorry'
     SYNTAX_OR_TYPE_ERROR = "SYNTAX_OR_TYPE_ERROR"        # Fails Lean parsing or type-checking
     UNVERIFIED_PROSE_ONLY = "UNVERIFIED_PROSE_ONLY"      # No Lean code provided
+    NOT_KERNEL_CHECKED = "NOT_KERNEL_CHECKED"            # Lean binary unavailable: only static checks ran
 
 
 @dataclass
@@ -180,14 +181,17 @@ class LeanFormalizationEngine:
                 compiler_output = f"Lean CLI invocation error: {str(e)}"
         else:
             compiler_output = (
-                "Lean 4 binary not in system PATH. Performed deterministic static syntax "
-                "and 'sorry'-free AST kernel auditing."
+                "Lean 4 binary not in system PATH. Only static checks ran ('sorry' and 'axiom' scan); "
+                "the Lean kernel was not run, so the proof is not verified."
             )
-            cli_success = not has_sorry
+            cli_success = False
 
         # 3. Determine Final Status
         if has_sorry:
             status = LeanProofStatus.CONTAINS_UNPROVEN_SORRY
+            is_sound = False
+        elif not lean_bin:
+            status = LeanProofStatus.NOT_KERNEL_CHECKED
             is_sound = False
         elif cli_success:
             status = LeanProofStatus.FULLY_VERIFIED_KERNEL

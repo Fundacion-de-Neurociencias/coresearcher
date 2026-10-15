@@ -4,7 +4,7 @@
 **Date**: 2026-10-06  
 **Author**: CoResearcher Epistemic Architecture Board  
 **Target Modules**: `python/discovery/ablation_rebuttal_engine.py`, `python/discovery/lagrangian_epistemic_engine.py`, `python/discovery/epistemic_pr_auditor.py`, `api/server.py`  
-**Cross-References**: `ADR-DISCOVERY-003` (Hypothesis Alternatives), `ADR-DISCOVERY-019` (Scientific Epistemic PR Auditor), `ADR-DISCOVERY-028` (Universal Physics Megarepo Auditor), `ADR-EPISTEMIC-033` (Post-PDF Computable Science), `ADR-DISCOVERY-036` (Lagrangian Epistemics)
+**Cross-References**: `ADR-DISCOVERY-003` (Hypothesis Alternatives), `ADR-DISCOVERY-019` (Scientific Epistemic PR Auditor), `ADR-EPISTEMIC-033` (Post-PDF Computable Science), `ADR-DISCOVERY-036` (Lagrangian Epistemics)
 
 ---
 
@@ -32,7 +32,6 @@ Every candidate theoretical model, Lagrangian proposal, or empirical pipeline MU
 - **Necessity & Sufficiency Score**: A term is certified as essential iff its removal degrades explanatory power or violates boundary conditions without introducing mathematical singularities.
 
 ### Invariant 2: Closed-Loop Simulated Rebuttal Loop
-When the `PhysicsCorpusAuditor` or `ScientificEpistemicPRAuditor` raises an objection (e.g. potential energy condition breach, anomalous enstrophy, or boundary divergence):
 1. The system triggers the **Simulated Author Rebuttal Subsystem**.
 2. The author agent formulates a formal mathematical defense or coordinate transformation demonstrating that the objection was an artifact of coordinate gauge, or that regularization suppresses the singularity.
 3. The **Meta-Review Arbiter** evaluates the rebuttal against the exact symbolic engine.

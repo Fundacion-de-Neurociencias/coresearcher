@@ -45,7 +45,6 @@ We implement **`FrontierMathFlywheelEngine`** in `python/discovery/frontier_math
 - Evaluates alternative MCTS, Greedy, and Vega search policies in $< 1\,\text{ms}$ offline, finding Pareto-optimal exploration rules without GPU burn.
 
 ### F. Cross-Domain Re-Investment & Cryptographic Provenance
-- Directs accelerated operators and calibrated search policies into **MetaboAD / Neurodiagnoses** (clinical metabolomics and aging biology) and **PhysicsMegarepoAuditor** (fluid dynamics and field theories).
 - Every flywheel cycle emits an immutable SHA-256 Merkle seal `som_math_flywheel_hash` registered in `ScientificLedger`.
 
 ---

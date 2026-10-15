@@ -2,13 +2,10 @@
 tests/test_socratic_question_auditor.py - Test suite for Socratic Question & Epistemic Inquiry Auditor (ADR-DISCOVERY-056).
 """
 
-import pytest
 from python.discovery.socratic_question_auditor import (
-    CounterQuestion,
     QuestionBiasTier,
     QuestionEpistemicVerdict,
     QuestionGranularity,
-    SmuggledPremise,
     SocraticQuestionAuditor,
 )
 
@@ -49,13 +46,18 @@ def test_confirmation_biased_question_audit():
     # State space reduction is penalized due to confirmation bias
     assert verdict.delta_omega_potential < 0.8
     # Verifies canonical refinement replaces loaded claim
-    assert "falsify" in verdict.refined_canonical_formulation.lower() or "modulate" in verdict.refined_canonical_formulation.lower()
+    assert (
+        "falsify" in verdict.refined_canonical_formulation.lower()
+        or "modulate" in verdict.refined_canonical_formulation.lower()
+    )
 
 
 def test_smuggled_premise_detection():
     """Detects embedded unproven assumptions and generates targeted refutation counter-questions."""
     auditor = SocraticQuestionAuditor()
-    question = "Given that microglia activation is purely neurotoxic in tauopathies, how can we inhibit TREM2 signalling?"
+    question = (
+        "Given that microglia activation is purely neurotoxic in tauopathies, how can we inhibit TREM2 signalling?"
+    )
     verdict = auditor.audit_question(
         raw_question=question,
         question_id="QUESTION-000003",
@@ -80,7 +82,7 @@ def test_constitutional_violations():
     verdict = auditor.audit_question(
         raw_question=question,
         question_id="bad_id_123",  # Malformed ID
-        ontology_path="Medicine",   # Only 1 level
+        ontology_path="Medicine",  # Only 1 level
     )
 
     assert verdict.is_constitutionally_valid is False

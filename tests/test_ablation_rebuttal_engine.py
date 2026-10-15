@@ -6,12 +6,11 @@ Verifies:
 3. Closed-loop simulated peer-review critiques & rigorous mathematical rebuttals.
 """
 
-import pytest
 from python.discovery.ablation_rebuttal_engine import (
     AblationRebuttalEngine,
-    SimulatedObjection,
     AblationStatus,
     RebuttalVerdict,
+    SimulatedObjection,
 )
 
 
@@ -28,7 +27,7 @@ def test_theoretical_ablation_quartic_oscillator():
         q_name="q",
         kinetic_str="1/2 * m * q_dot**2",
         base_potential_str="1/2 * k * q**2",
-        interaction_terms={"lambda_quartic": "1/4 * k * q**4"}
+        interaction_terms={"lambda_quartic": "1/4 * k * q**4"},
     )
 
     assert len(ablations) == 1
@@ -47,19 +46,19 @@ def test_simulated_peer_review_rebuttal_loop():
         SimulatedObjection(
             reviewer_id="Reviewer-1 (Differential Geometry)",
             critique_point="Potential coordinate singularity in proposed Lagrangian.",
-            severity="MAJOR"
+            severity="MAJOR",
         ),
         SimulatedObjection(
             reviewer_id="Reviewer-2 (Phenomenology)",
             critique_point="Model may inadvertently rely on linear approximations.",
-            severity="MINOR"
-        )
+            severity="MINOR",
+        ),
     ]
 
     rebuttals = AblationRebuttalEngine.conduct_simulated_peer_review_rebuttal(
         model_id="MODEL-RELATIVISTIC-FIELD",
         objections=objections,
-        derived_dynamics_summary="Covariant Euler-Lagrange equations"
+        derived_dynamics_summary="Covariant Euler-Lagrange equations",
     )
 
     assert len(rebuttals) == 2
@@ -76,15 +75,11 @@ def test_full_dossier_generation():
         model_id="MODEL-PENDULUM-FULL",
         q_name="theta",
         kinetic_str="1/2 * m * l**2 * theta_dot**2",
-        base_potential_str="1/2 * m * g * l * theta**2", # small angle base
+        base_potential_str="1/2 * m * g * l * theta**2",  # small angle base
         interaction_terms={"anharmonic_correction": "1/24 * m * g * l * theta**4"},
         objections=[
-            SimulatedObjection(
-                reviewer_id="Reviewer-1",
-                critique_point="Check coordinate validity.",
-                severity="MINOR"
-            )
-        ]
+            SimulatedObjection(reviewer_id="Reviewer-1", critique_point="Check coordinate validity.", severity="MINOR")
+        ],
     )
 
     assert dossier.overall_peer_review_status == "ACCEPTED_AFTER_REBUTTAL"

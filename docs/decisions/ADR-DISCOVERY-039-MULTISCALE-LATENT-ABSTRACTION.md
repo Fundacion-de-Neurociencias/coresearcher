@@ -47,4 +47,3 @@ $$\mathcal{L}_{\text{rep}} = | \tau_{\text{target}} - \mathcal{H}(s) | + \lambda
 
 ## Consequences
 - The discovery pipeline can evaluate hypotheses and models by testing whether they select the correct level of abstraction rather than penalizing models for omitting micro-details unnecessary for macro-predictions.
-- Full compatibility with the `PhysicsCorpusAuditor v3.0` and `WorldModelEpistemicAdapter`.

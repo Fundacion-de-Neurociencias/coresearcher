@@ -30,6 +30,7 @@ from python.discovery.membrane_dynamics_auditor import (
 from python.discovery.failure_engine import DuhemQuineBlameType
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_contract_construction():
@@ -163,7 +164,7 @@ def test_membrane_invariants_verification():
 
 def test_rest_api_endpoints():
     print("\n--- 4. Testing Biophysical Membrane REST API Endpoints ---")
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     # 1. Create Simulation Contract
     r1 = client.post("/api/discovery/membrane/create-simulation-contract", json={

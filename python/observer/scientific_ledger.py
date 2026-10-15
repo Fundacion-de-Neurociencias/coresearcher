@@ -5,6 +5,8 @@ Verifiable, navigable reconstruction of scientific project history.
 
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from typing import Optional, List, Dict
@@ -85,6 +87,19 @@ class ScientificLedger:
             "hash": som_merkle_hash,
         })
         return entry
+
+    def record_event(self, event_type: str, payload: Optional[Dict] = None) -> Dict:
+        """Records a generic engine event as a ledger entry (used by the tournament, ERA and Socratic engines)."""
+        body = payload or {}
+        digest = hashlib.sha256(json.dumps(body, sort_keys=True, default=str).encode("utf-8")).hexdigest()
+        artifact_id = str(body.get("tournament_id") or body.get("campaign_id") or body.get("question_id") or event_type)
+        return self.record_epistemic_verdict(
+            artifact_id=artifact_id,
+            verdict_type=event_type,
+            status="RECORDED",
+            som_merkle_hash=f"sha256:{digest}",
+            details=body,
+        )
 
     def to_dict(self) -> dict:
         data = asdict(self)

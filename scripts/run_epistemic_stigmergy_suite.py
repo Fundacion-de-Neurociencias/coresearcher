@@ -28,6 +28,7 @@ from python.discovery.epistemic_stigmergy import (
 from python.discovery.scientific_git_history import EpistemicGitRepo
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_pheromone_field_scanning():
@@ -166,7 +167,7 @@ def test_reality_contact_firewall():
 def test_rest_api_endpoints():
     print("\n--- 4. Testing REST API Endpoints (TestClient) ---")
 
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     # 4a. Query Pheromone Field
     resp = client.post("/api/discovery/stigmergy/query-pheromone-field", json={

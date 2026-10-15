@@ -2,7 +2,6 @@
 Tests for Non-Generative Energy-Based Epistemic Auditor (ADR-EPISTEMIC-040).
 """
 
-import pytest
 from python.discovery.energy_predictive_auditor import (
     EnergyAuditVerdict,
     LatentPhysicalState,

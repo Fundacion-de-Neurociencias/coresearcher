@@ -44,6 +44,7 @@ from python.discovery.hakken_dream_rsi_engine import (
     DreamRSIOfflineReplayEngine,
     SearchPolicyConfig,
 )
+from python.discovery.lean_formalization_engine import LeanFormalizationEngine, LeanProofStatus
 from python.discovery.result_family_orchestrator import (
     FamilyManuscriptNode,
     FormalizationTier,
@@ -130,9 +131,13 @@ class ProofEquivalenceScore:
     verified_bridge_lemmas_count: int
     is_exact_string_match: bool
     contains_sorry_escape: bool
-    kernel_accepted: bool
+    static_checks_passed: bool  # target declared, no sorry/admit, no custom axioms (text checks only)
     critique_notes: str
     som_score_hash: str
+    # Unvalidated heuristics with hand-set constants (claims register row 20). Not related to any external benchmark.
+    partial_proof_progress_heuristic: float = 0.0  # 1.0 if kernel-accepted, else 0.20 + 0.15 per bridge lemma (max 5)
+    axiom_hygiene_heuristic: float = 1.0  # 0.0 with fake axioms, 0.70 with a remaining sorry, else 1.0
+    kernel_status: str = "NOT_RUN"  # LeanProofStatus of the submitted code; only FULLY_VERIFIED_KERNEL is a proof
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -142,10 +147,14 @@ class ProofEquivalenceScore:
             "verified_bridge_lemmas_count": self.verified_bridge_lemmas_count,
             "is_exact_string_match": self.is_exact_string_match,
             "contains_sorry_escape": self.contains_sorry_escape,
-            "kernel_accepted": self.kernel_accepted,
+            "static_checks_passed": self.static_checks_passed,
+            "kernel_status": self.kernel_status,
             "critique_notes": self.critique_notes,
             "som_score_hash": self.som_score_hash,
+            "partial_proof_progress_heuristic": round(self.partial_proof_progress_heuristic, 4),
+            "axiom_hygiene_heuristic": round(self.axiom_hygiene_heuristic, 4),
         }
+
 
 
 @dataclass
@@ -238,15 +247,26 @@ class ProofEquivalenceAuditor:
         target_name = task.title.lower().replace(" ", "_")
         declares_target = target_name in clean_submitted.lower() or "theorem" in clean_submitted
 
-        # Kernel acceptance heuristic (syntactically complete theorem without sorry/fake axioms)
-        kernel_accepted = declares_target and not has_sorry and not has_fake_axioms
+        # Static text checks only. They do not run the Lean kernel and do not establish equivalence.
+        static_checks_passed = declares_target and not has_sorry and not has_fake_axioms
+        lean_report = LeanFormalizationEngine.audit_lean_source(task.task_id, clean_submitted)
+        kernel_verified = lean_report.status == LeanProofStatus.FULLY_VERIFIED_KERNEL
 
-        # Compute continuous dense reward
-        if kernel_accepted:
-            # Full victory! 1.0 reward
+        # Unvalidated heuristics: hand-set constants with no empirical calibration (claims register row 20).
+        partial_progress = 1.0 if static_checks_passed else (0.20 + 0.15 * min(5, bridge_lemmas_count))
+        # Axiom hygiene: penalise fake axioms and any remaining sorry.
+        axiom_hygiene = 0.0 if has_fake_axioms else (0.70 if has_sorry else 1.0)
+
+        if static_checks_passed:
+            # Heuristic reward for a complete-looking submission (claims register row 20).
             dense_reward = 1.0
-            is_equivalent = True
-            notes = "Full mathematical equivalence achieved. Kernel accepted without sorry."
+            is_equivalent = kernel_verified
+            notes = (
+                "Lean kernel accepted the submission without sorry or custom axioms."
+                if kernel_verified
+                else "Static checks passed, but the Lean kernel did not verify the submission "
+                f"({lean_report.status.value}); equivalence is not established."
+            )
         elif has_fake_axioms:
             dense_reward = 0.0
             is_equivalent = False
@@ -261,7 +281,7 @@ class ProofEquivalenceAuditor:
             is_equivalent = False
             notes = "Syntactically incomplete formalization."
 
-        sig_data = f"{task.task_id}:{is_equivalent}:{dense_reward}:{bridge_lemmas_count}:{kernel_accepted}"
+        sig_data = f"{task.task_id}:{is_equivalent}:{dense_reward}:{bridge_lemmas_count}:{static_checks_passed}:{lean_report.status.value}:{partial_progress}:{axiom_hygiene}"
         som_hash = f"sha256:{hashlib.sha256(sig_data.encode('utf-8')).hexdigest()}"
 
         return ProofEquivalenceScore(
@@ -271,9 +291,12 @@ class ProofEquivalenceAuditor:
             verified_bridge_lemmas_count=bridge_lemmas_count,
             is_exact_string_match=is_exact_match,
             contains_sorry_escape=has_sorry,
-            kernel_accepted=kernel_accepted,
+            static_checks_passed=static_checks_passed,
+            kernel_status=lean_report.status.value,
             critique_notes=notes,
             som_score_hash=som_hash,
+            partial_proof_progress_heuristic=partial_progress,
+            axiom_hygiene_heuristic=axiom_hygiene,
         )
 
 
@@ -524,7 +547,7 @@ class FrontierMathFlywheelEngine:
             "SubQuadratic_Spectral_Attention_Engine",
             "Simulation_Solver_Symplectic_Integrator",
             "MetaboAD_Heterogeneous_Cohort_Regressor",
-            "Physics_Megarepo_Dimensional_Homogeneity_Court",
+            "Dimensional_Homogeneity_Court",
         ]
 
         # 6. Cryptographic Merkle Sealing

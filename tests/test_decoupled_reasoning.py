@@ -9,8 +9,7 @@ Verifies that:
 import pytest
 
 from python.discovery.inference_time_scaling import EpistemicTreeSearch
-from python.discovery.state_space import StateSpaceOmega, StateSpaceAxis
-from python.discovery.physical_theorem_court import PhysicalCoherenceCourt
+from python.discovery.state_space import StateSpaceOmega
 
 
 @pytest.mark.epistemic

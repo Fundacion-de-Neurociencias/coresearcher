@@ -23,6 +23,7 @@ from python.discovery.scientific_git_history import (
 )
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def test_agora_branch_and_claim_coordination():
@@ -108,7 +109,7 @@ def test_agora_branch_and_claim_coordination():
 
 def test_agora_api_endpoints():
     print("\n--- 2. Testing Agora FastAPI Endpoints ---")
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     # 1. GET /api/discovery/git/open-branches
     resp_open = client.get("/api/discovery/git/open-branches")

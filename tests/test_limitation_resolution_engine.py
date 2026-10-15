@@ -2,13 +2,11 @@
 Tests for Limitation Resolution & Empirical Refinement Engine (ADR-DISCOVERY-042).
 """
 
-import pytest
 from python.discovery.limitation_resolution_engine import (
     BaselineLimitation,
     LimitationCategory,
     LimitationResolutionEngine,
     ScreeningVerdict,
-    SubsetScreeningReport,
     SupplementaryRebuttalExecution,
     TargetedSeedIdea,
 )

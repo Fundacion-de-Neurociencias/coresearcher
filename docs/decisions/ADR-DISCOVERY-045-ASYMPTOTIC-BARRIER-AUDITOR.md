@@ -45,8 +45,8 @@ Upon detecting an asymptotic barrier, the auditor does not simply reject the pro
 - For Circuit Complexity Barriers $\to$ Suggests Geometric Complexity Theory (GCT / Mulmuley-Sohoni) or Interactive Algebraic Proofs.
 
 ### 4. Integration with `ResultFamilyOrchestrator` and `ExactSymbolicCourt`
-- Sits upstream of `ResultFamilyOrchestrator` ([ADR-DISCOVERY-043](file:///c:/Users/usuario/coresearcher/docs/decisions/ADR-DISCOVERY-043-CATEGORICAL-RESULT-FAMILIES.md)) to prevent the construction of spurious Result Families that attempt brute-force proofs across forbidden thresholds.
-- Enforces zero-cloud sovereign cryptographic hashing (`som_barrier_hash`) anchored in local Merkle trees ([ADR-SOVEREIGNTY-041](file:///c:/Users/usuario/coresearcher/docs/decisions/ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)).
+- Sits upstream of `ResultFamilyOrchestrator` ([ADR-DISCOVERY-043](ADR-DISCOVERY-043-CATEGORICAL-RESULT-FAMILIES.md)) to prevent the construction of spurious Result Families that attempt brute-force proofs across forbidden thresholds.
+- Enforces zero-cloud sovereign cryptographic hashing (`som_barrier_hash`) anchored in local Merkle trees ([ADR-SOVEREIGNTY-041](ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)).
 
 ---
 

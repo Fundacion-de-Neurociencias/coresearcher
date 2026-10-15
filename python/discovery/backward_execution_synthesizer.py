@@ -6,14 +6,16 @@ Implements the Execution-First paradigm for scientific discovery:
 3. Reverse-chains causal and statistical pathologies to generate adversarial falsification suites (Simpson paradox, collider bias, leakage).
 """
 
-from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional, Callable
-from pathlib import Path
 import hashlib
 import json
+import os
 import uuid
-import pandas as pd
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional
+
 import numpy as np
+import pandas as pd
 
 
 @dataclass
@@ -46,15 +48,15 @@ class ExecutableAnalyticalTrajectory:
     som_execution_hash: str = ""
 
     def compute_som_hash(self) -> str:
-        serialized = json.dumps({
-            "tid": self.trajectory_id,
-            "dataset": self.target_dataset_path,
-            "steps": [
-                {"id": s.step_id, "tool": s.tool_id, "success": s.execution_success}
-                for s in self.steps
-            ],
-            "state_keys": sorted(list(self.final_execution_state.keys()))
-        }, sort_keys=True)
+        serialized = json.dumps(
+            {
+                "tid": self.trajectory_id,
+                "dataset": self.target_dataset_path,
+                "steps": [{"id": s.step_id, "tool": s.tool_id, "success": s.execution_success} for s in self.steps],
+                "state_keys": sorted(list(self.final_execution_state.keys())),
+            },
+            sort_keys=True,
+        )
         return f"sha256:{hashlib.sha256(serialized.encode('utf-8')).hexdigest()[:24]}"
 
 
@@ -66,7 +68,9 @@ class BackwardContractSynthesizer:
     """
 
     def __init__(self, physical_dataset_path: Optional[Path] = None):
-        self.default_dataset = physical_dataset_path or Path("C:/Users/usuario/Neurodiagnoses Ecosystem/data/metaboad_atn_processed.csv")
+        self.default_dataset = physical_dataset_path or Path(
+            os.environ.get("CORESEARCHER_COHORT_CSV", "data/cohorts/metaboad_atn_processed.csv")
+        )
         self.primitives: Dict[str, AnalyticalToolPrimitive] = {}
         self._register_default_primitives()
 
@@ -83,7 +87,7 @@ class BackwardContractSynthesizer:
             tool_name="Physical Cohort Ingestion & Schema Inspection",
             required_inputs=["dataset_path"],
             produced_outputs=["dataframe", "available_columns", "row_count"],
-            executable_fn=_ingest_data
+            executable_fn=_ingest_data,
         )
 
         # Primitive 2: Filter cohort and extract pair
@@ -110,7 +114,7 @@ class BackwardContractSynthesizer:
             tool_name="Cohort Filtering and Biomarker Pair Extraction",
             required_inputs=["dataframe", "exposure_col", "outcome_col"],
             produced_outputs=["n_valid_pairs", "x_values", "y_values", "filtered_df"],
-            executable_fn=_extract_pair
+            executable_fn=_extract_pair,
         )
 
         # Primitive 3: OLS & Falsification Threshold Computation
@@ -121,7 +125,7 @@ class BackwardContractSynthesizer:
             y_pred = slope * x + intercept
             residuals = y - y_pred
             ss_tot = np.sum((y - np.mean(y)) ** 2)
-            ss_res = np.sum(residuals ** 2)
+            ss_res = np.sum(residuals**2)
             r2 = 1.0 - (ss_res / max(1e-9, ss_tot))
 
             # Falsification boundary: critical beta threshold
@@ -130,15 +134,24 @@ class BackwardContractSynthesizer:
                 "empirical_slope": float(slope),
                 "empirical_intercept": float(intercept),
                 "empirical_r2": float(r2),
-                "suggested_falsification_threshold": f"beta < {falsification_slope_threshold:.3f}" if slope < 0 else f"beta > {falsification_slope_threshold:.3f}"
+                "suggested_falsification_threshold": (
+                    f"beta < {falsification_slope_threshold:.3f}"
+                    if slope < 0
+                    else f"beta > {falsification_slope_threshold:.3f}"
+                ),
             }
 
         self.primitives["TOOL-FIT-OLS-REGRESSION"] = AnalyticalToolPrimitive(
             tool_id="TOOL-FIT-OLS-REGRESSION",
             tool_name="Empirical OLS & Falsification Threshold Computation",
             required_inputs=["x_values", "y_values"],
-            produced_outputs=["empirical_slope", "empirical_intercept", "empirical_r2", "suggested_falsification_threshold"],
-            executable_fn=_fit_ols
+            produced_outputs=[
+                "empirical_slope",
+                "empirical_intercept",
+                "empirical_r2",
+                "suggested_falsification_threshold",
+            ],
+            executable_fn=_fit_ols,
         )
 
     def execute_ground_truth_trajectory(
@@ -146,7 +159,7 @@ class BackwardContractSynthesizer:
         exposure_col: str,
         outcome_col: str,
         dataset_path: Optional[Path] = None,
-        filter_query: Optional[str] = None
+        filter_query: Optional[str] = None,
     ) -> ExecutableAnalyticalTrajectory:
         """
         Step 1: Execute tool chain forward against real physical dataset.
@@ -154,17 +167,14 @@ class BackwardContractSynthesizer:
         """
         target_path = dataset_path or self.default_dataset
         traj = ExecutableAnalyticalTrajectory(
-            trajectory_id=f"TRAJ-{uuid.uuid4().hex[:8].upper()}",
-            target_dataset_path=str(target_path)
+            trajectory_id=f"TRAJ-{uuid.uuid4().hex[:8].upper()}", target_dataset_path=str(target_path)
         )
 
         current_state: Dict[str, Any] = {}
 
         # Step A: Ingest
         step_a = ToolExecutionStep(
-            step_id="STEP-01",
-            tool_id="TOOL-DATA-INGEST",
-            input_bindings={"dataset_path": str(target_path)}
+            step_id="STEP-01", tool_id="TOOL-DATA-INGEST", input_bindings={"dataset_path": str(target_path)}
         )
         try:
             res_a = self.primitives["TOOL-DATA-INGEST"].executable_fn(step_a.input_bindings)
@@ -187,8 +197,8 @@ class BackwardContractSynthesizer:
                 "dataframe": current_state["dataframe"],
                 "exposure_col": exposure_col,
                 "outcome_col": outcome_col,
-                "filter_query": filter_query
-            }
+                "filter_query": filter_query,
+            },
         )
         try:
             res_b = self.primitives["TOOL-EXTRACT-BIOMARKER-PAIR"].executable_fn(step_b.input_bindings)
@@ -207,10 +217,7 @@ class BackwardContractSynthesizer:
         step_c = ToolExecutionStep(
             step_id="STEP-03",
             tool_id="TOOL-FIT-OLS-REGRESSION",
-            input_bindings={
-                "x_values": current_state["x_values"],
-                "y_values": current_state["y_values"]
-            }
+            input_bindings={"x_values": current_state["x_values"], "y_values": current_state["y_values"]},
         )
         try:
             res_c = self.primitives["TOOL-FIT-OLS-REGRESSION"].executable_fn(step_c.input_bindings)
@@ -235,7 +242,7 @@ class BackwardContractSynthesizer:
         question_id: Optional[str] = None,
         hypothesis_id: Optional[str] = None,
         marr_level: str = "ALGORITHMIC",
-        target_population_desc: Optional[str] = None
+        target_population_desc: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Step 2: Invert the ground-truth executable trajectory into a canonical ResearchQuestionContract.
@@ -254,7 +261,10 @@ class BackwardContractSynthesizer:
 
         qid = question_id or f"RQ-2026-{uuid.uuid4().hex[:4].upper()}"
         hid = hypothesis_id or f"HYP-DISCOVERY-{uuid.uuid4().hex[:6].upper()}"
-        pop_desc = target_population_desc or f"Cohort from {Path(trajectory.target_dataset_path).name} with complete ({exp_col}, {out_col}) observations (N={n_pairs})"
+        pop_desc = (
+            target_population_desc
+            or f"Cohort from {Path(trajectory.target_dataset_path).name} with complete ({exp_col}, {out_col}) observations (N={n_pairs})"
+        )
 
         contract = {
             "question_id": qid,
@@ -268,25 +278,22 @@ class BackwardContractSynthesizer:
                 {
                     "prediction_id": f"PRED-{qid}-01",
                     "statement": f"Linear effect of {exp_col} on {out_col} satisfies {threshold} (empirical slope={slope:.4f}, R2={r2*100:.1f}%)",
-                    "falsification_threshold": threshold
+                    "falsification_threshold": threshold,
                 }
             ],
             "scope_conditions": {
-                "valid_domain": [
-                    f"Dataset URI: {trajectory.target_dataset_path}",
-                    f"Sample size N >= {n_pairs}"
-                ],
+                "valid_domain": [f"Dataset URI: {trajectory.target_dataset_path}", f"Sample size N >= {n_pairs}"],
                 "boundary_conditions": [
                     f"Valid observation range: {exp_col} in [{np.min(state['x_values']):.1f}, {np.max(state['x_values']):.1f}]",
-                    f"Bounded outcome range: {out_col} in [{np.min(state['y_values']):.1f}, {np.max(state['y_values']):.1f}]"
-                ]
+                    f"Bounded outcome range: {out_col} in [{np.min(state['y_values']):.1f}, {np.max(state['y_values']):.1f}]",
+                ],
             },
             "backward_synthesis_metadata": {
                 "trajectory_id": trajectory.trajectory_id,
                 "som_execution_hash": trajectory.som_execution_hash,
                 "guaranteed_executable": True,
-                "generation_mode": "TOOLGRAD_EXECUTION_FIRST_INVERSION"
-            }
+                "generation_mode": "TOOLGRAD_EXECUTION_FIRST_INVERSION",
+            },
         }
         return contract
 
@@ -317,7 +324,7 @@ class ReverseAdversarialFalsifier:
 
         x_agg = np.concatenate([x1, x2])
         y_agg = np.concatenate([y1, y2])
-        subgroup = np.array([1]*n1 + [2]*n2)
+        subgroup = np.array([1] * n1 + [2] * n2)
 
         slope_agg, _ = np.polyfit(x_agg, y_agg, 1)
 
@@ -334,27 +341,23 @@ class ReverseAdversarialFalsifier:
                 {
                     "prediction_id": "PRED-SIMPSON-01",
                     "statement": f"Aggregate exposure linearly promotes endpoint with beta >= +0.8 (observed beta={slope_agg:.2f})",
-                    "falsification_threshold": "beta < 0.5"
+                    "falsification_threshold": "beta < 0.5",
                 }
             ],
             "scope_conditions": {
                 "valid_domain": ["Aggregated multi-center cohort"],
-                "boundary_conditions": ["Subgroup partition unobserved in primary model"]
+                "boundary_conditions": ["Subgroup partition unobserved in primary model"],
             },
             "trap_metadata": {
                 "archetype": "SIMPSONS_PARADOX_INVERSION",
                 "ground_truth_subgroup_slope": -1.5,
                 "apparent_aggregate_slope": float(slope_agg),
-                "deception_mechanism": "Confounding by latent clinical stratum (Z) inverting true causal direction"
-            }
+                "deception_mechanism": "Confounding by latent clinical stratum (Z) inverting true causal direction",
+            },
         }
         return {
             "contract": contract,
-            "synthetic_data": {
-                "x": x_agg.tolist(),
-                "y": y_agg.tolist(),
-                "subgroup": subgroup.tolist()
-            }
+            "synthetic_data": {"x": x_agg.tolist(), "y": y_agg.tolist(), "subgroup": subgroup.tolist()},
         }
 
     @staticmethod
@@ -388,19 +391,19 @@ class ReverseAdversarialFalsifier:
                 {
                     "prediction_id": "PRED-COLLIDER-01",
                     "statement": f"In conditioned cohort, Biomarker A negatively predicts Pathology B with beta <= -0.5 (observed beta={slope_cond:.2f})",
-                    "falsification_threshold": "beta > -0.2"
+                    "falsification_threshold": "beta > -0.2",
                 }
             ],
             "scope_conditions": {
                 "valid_domain": ["Inpatient clinical registry"],
-                "boundary_conditions": ["Collider conditioning active"]
+                "boundary_conditions": ["Collider conditioning active"],
             },
             "trap_metadata": {
                 "archetype": "COLLIDER_STRATIFICATION_TRAP",
                 "ground_truth_unconditioned_slope": 0.0,
                 "apparent_conditioned_slope": float(slope_cond),
-                "deception_mechanism": "Conditioning on collider C = A + B induces Berkson's bias and spurious association"
-            }
+                "deception_mechanism": "Conditioning on collider C = A + B induces Berkson's bias and spurious association",
+            },
         }
         return {
             "contract": contract,
@@ -408,6 +411,6 @@ class ReverseAdversarialFalsifier:
                 "x_unconditioned": x.tolist(),
                 "y_unconditioned": y.tolist(),
                 "x_conditioned": x_cond.tolist(),
-                "y_conditioned": y_cond.tolist()
-            }
+                "y_conditioned": y_cond.tolist(),
+            },
         }

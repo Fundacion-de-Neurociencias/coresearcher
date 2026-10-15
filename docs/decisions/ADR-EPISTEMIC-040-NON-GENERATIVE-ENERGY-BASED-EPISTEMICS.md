@@ -42,5 +42,4 @@ Counterfactual stress-testing and falsification discovery are driven by **Model-
 - Trial-and-error RL is strictly quarantined to residual calibration: it is triggered only when empirical reality disconfirms the planned latent forecast, updating the world model transition tensors or the critic cost function.
 
 ## Consequences
-- Physical corpus audits in `PhysicsCorpusAuditor v3.0` evaluate papers and discoveries by unnormalized physical energy minimization rather than text likelihood or popularity.
 - Radical breakthroughs that deviate from mainstream consensus are not penalized if their internal invariant energy satisfies $\mathcal{E} \le \epsilon$.

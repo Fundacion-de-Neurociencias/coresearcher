@@ -9,9 +9,9 @@ import sys
 import os
 import json
 
-if sys.stdout.encoding != 'utf-8':
+if sys.stdout.encoding != "utf-8":
     try:
-        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stdout.reconfigure(encoding="utf-8")
     except Exception:
         pass
 
@@ -21,6 +21,7 @@ if root_dir not in sys.path:
 
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 # 10 Canonical Neurodegeneration Discovery Campaigns
 CAMPAIGNS_SUITE = [
@@ -30,7 +31,7 @@ CAMPAIGNS_SUITE = [
         "disease": "ALZHEIMER_DISEASE",
         "question": "Does plasma pTau217 elevation drive longitudinal cognitive decline via connectome-mediated hub propagation, or via independent vascular/cell-intrinsic collapse?",
         "empirical_value": 0.68,
-        "cutoff": 0.45
+        "cutoff": 0.45,
     },
     {
         "id": "CAMP-02",
@@ -38,7 +39,7 @@ CAMPAIGNS_SUITE = [
         "disease": "ALZHEIMER_DISEASE",
         "question": "Does reactive astrogliosis (plasma GFAP) accelerate cognitive transition only in the presence of amyloid plaque saturation, or as an autonomous neurodegenerative driver?",
         "empirical_value": 0.59,
-        "cutoff": 0.40
+        "cutoff": 0.40,
     },
     {
         "id": "CAMP-03",
@@ -46,7 +47,7 @@ CAMPAIGNS_SUITE = [
         "disease": "ALZHEIMER_DISEASE",
         "question": "Does ApoE4 homozygosity impair synaptic vesicle lipid homeostasis to set an absolute upper bound on cognitive reserve?",
         "empirical_value": 0.72,
-        "cutoff": 0.50
+        "cutoff": 0.50,
     },
     {
         "id": "CAMP-04",
@@ -54,7 +55,7 @@ CAMPAIGNS_SUITE = [
         "disease": "ALZHEIMER_DISEASE",
         "question": "Does TREM2-dependent microglial barrier formation prevent outer plaque protofibrillar tau seeding into neighboring neuropil?",
         "empirical_value": 0.81,
-        "cutoff": 0.55
+        "cutoff": 0.55,
     },
     {
         "id": "CAMP-05",
@@ -62,7 +63,7 @@ CAMPAIGNS_SUITE = [
         "disease": "FRONTOTEMPORAL_DEMENTIA",
         "question": "Is tau propagation strictly rate-limited by baseline synaptic firing rates and trans-synaptic vesicle release kinetics?",
         "empirical_value": 0.64,
-        "cutoff": 0.42
+        "cutoff": 0.42,
     },
     {
         "id": "CAMP-06",
@@ -70,7 +71,7 @@ CAMPAIGNS_SUITE = [
         "disease": "PARKINSON_DISEASE",
         "question": "Does pathological alpha-synuclein propagate retrogradely along the vagus nerve and functional brainstem hubs under strict nodal degree constraints?",
         "empirical_value": 0.77,
-        "cutoff": 0.48
+        "cutoff": 0.48,
     },
     {
         "id": "CAMP-07",
@@ -78,7 +79,7 @@ CAMPAIGNS_SUITE = [
         "disease": "ALS_FTD_CONTINUUM",
         "question": "Is motor neuron loss in ALS/FTD primarily driven by cryptic exon splicing following TDP-43 nuclear loss, rather than cytoplasmic aggregate physical toxicity?",
         "empirical_value": 0.83,
-        "cutoff": 0.50
+        "cutoff": 0.50,
     },
     {
         "id": "CAMP-08",
@@ -86,7 +87,7 @@ CAMPAIGNS_SUITE = [
         "disease": "VASCULAR_DEMENTIA",
         "question": "Does sPDGFRβ-mediated pericyte degeneration precede and license parenchymal amyloid extravasation and microvascular hypoperfusion?",
         "empirical_value": 0.62,
-        "cutoff": 0.44
+        "cutoff": 0.44,
     },
     {
         "id": "CAMP-09",
@@ -94,7 +95,7 @@ CAMPAIGNS_SUITE = [
         "disease": "LEWY_BODY_DEMENTIA",
         "question": "Does neocortical synaptic vesicle glycoprotein 2A (SV2A) density loss below 30% define an irreversible point-of-no-return for cognitive decline?",
         "empirical_value": 0.79,
-        "cutoff": 0.50
+        "cutoff": 0.50,
     },
     {
         "id": "CAMP-10",
@@ -102,13 +103,13 @@ CAMPAIGNS_SUITE = [
         "disease": "EARLY_ALZHEIMER",
         "question": "Does classical complement cascade activation (C1q tagging) mediate early synaptic elimination prior to overt neurofibrillary tangle formation?",
         "empirical_value": 0.71,
-        "cutoff": 0.46
-    }
+        "cutoff": 0.46,
+    },
 ]
 
 
 def run_10_campaigns_benchmark():
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     print("=" * 105)
     print("🏛️ CORESEARCHER: THE 10 CANONICAL DISCOVERY CAMPAIGNS BENCHMARK SUITE (ADR-DISCOVERY-009)")
@@ -121,12 +122,7 @@ def run_10_campaigns_benchmark():
         print(f"\n[{idx:02d}/10] LAUNCHING CAMPAIGN: {c['topic']} ({c['disease']})")
         print(f"      Question: \"{c['question'][:85]}...\"")
 
-        payload = {
-            "question": c["question"],
-            "topic": c["topic"],
-            "disease": c["disease"],
-            "iterations": 10
-        }
+        payload = {"question": c["question"], "topic": c["topic"], "disease": c["disease"], "iterations": 10}
 
         res = client.post("/api/discovery/workbench/launch", json=payload).json()
         state = res["final_state"]
@@ -137,20 +133,24 @@ def run_10_campaigns_benchmark():
         print(f"      • Workbench ID:    {res['workbench_id']}")
         print(f"      • Epistemic State: {state['status']} | Surviving Model: {state['winning_hypothesis_id']}")
         print(f"      • Rivals Audited:  {rivals} rivals evaluated & eliminated via Modus Tollens")
-        print(f"      • State Space Ω:   Pruned by {state['pruned_omega_fraction']*100:.1f}% (Mathematical CDV = {state['mathematical_cdv']})")
+        print(
+            f"      • State Space Ω:   Pruned by {state['pruned_omega_fraction']*100:.1f}% (Mathematical CDV = {state['mathematical_cdv']})"
+        )
         print(f"      • Discovery Value: DV = {state['total_discovery_value']:.4f}")
         print(f"      • Invariant Rule:  \"{state['invariant_boundary_statement']}\"")
         print(f"      • Immutable Log:   {ledger_count} ledger entries permanently sealed")
 
-        results.append({
-            "id": c["id"],
-            "topic": c["topic"],
-            "disease": c["disease"],
-            "status": state["status"],
-            "rivals_eliminated": rivals,
-            "cdv": state["mathematical_cdv"],
-            "dv": state["total_discovery_value"]
-        })
+        results.append(
+            {
+                "id": c["id"],
+                "topic": c["topic"],
+                "disease": c["disease"],
+                "status": state["status"],
+                "rivals_eliminated": rivals,
+                "cdv": state["mathematical_cdv"],
+                "dv": state["total_discovery_value"],
+            }
+        )
 
     # Summary Table
     print("\n" + "=" * 105)
@@ -159,7 +159,9 @@ def run_10_campaigns_benchmark():
     print(f"{'ID':<9} | {'Topic':<32} | {'Disease':<24} | {'Status':<22} | {'Rivals':<7} | {'CDV':<8} | {'DV':<6}")
     print("-" * 105)
     for r in results:
-        print(f"{r['id']:<9} | {r['topic']:<32} | {r['disease']:<24} | {r['status']:<22} | {r['rivals_eliminated']:<7} | {r['cdv']:<8.4f} | {r['dv']:<6.4f}")
+        print(
+            f"{r['id']:<9} | {r['topic']:<32} | {r['disease']:<24} | {r['status']:<22} | {r['rivals_eliminated']:<7} | {r['cdv']:<8.4f} | {r['dv']:<6.4f}"
+        )
 
     print("=" * 105)
     avg_cdv = sum(r["cdv"] for r in results) / len(results)

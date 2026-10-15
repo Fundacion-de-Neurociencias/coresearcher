@@ -12,9 +12,9 @@ Verifies:
 from __future__ import annotations
 
 import pytest
-from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.autopoietic_closure_auditor import (
     AutopoieticSystemSpec,
     CatalyticProcess,
@@ -26,7 +26,7 @@ from python.discovery.autopoietic_closure_auditor import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_causal_open_leak_unproduced_catalyst_detected():

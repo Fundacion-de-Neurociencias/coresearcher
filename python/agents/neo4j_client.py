@@ -38,7 +38,7 @@ class Neo4jClient:
 
         uri = uri or os.environ.get("NEO4J_URI", "bolt://localhost:7687")
         user = user or os.environ.get("NEO4J_USER", "neo4j")
-        password = password or os.environ.get("NEO4J_PASSWORD", "coresearcher_dev")
+        password = password or os.environ.get("NEO4J_PASSWORD")
 
         if not NEO4J_AVAILABLE:
             print("[Neo4j] neo4j driver not installed, falling back to dry-run mode", file=sys.stderr)

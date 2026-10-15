@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 10 |
-| Tested | Covered by tests, not reachable from the API | 23 |
+| Integrated | Used by the API and covered by tests | 11 |
+| Tested | Covered by tests, not reachable from the API | 24 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -45,6 +45,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `failure_engine` | Exercised | - | - | yes |
 | `fast_system_one_classifier` | Tested | - | yes | yes |
 | `formal_hypothesis` | Integrated | yes | yes | yes |
+| `formal_lean` | Integrated | yes | yes | - |
+| `formal_smt` | Tested | - | yes | - |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
 | `grounded_search_sensor` | Exercised | - | - | yes |
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |

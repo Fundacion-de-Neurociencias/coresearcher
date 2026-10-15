@@ -2064,6 +2064,35 @@
         "title": "FileDiffInput",
         "type": "object"
       },
+      "FormalConsequenceRequest": {
+        "properties": {
+          "consequence": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Consequence",
+            "type": "string"
+          },
+          "hypothesis": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "include_lean": {
+            "default": false,
+            "title": "Include Lean",
+            "type": "boolean"
+          },
+          "max_examples": {
+            "default": 5,
+            "title": "Max Examples",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "consequence"
+        ],
+        "title": "FormalConsequenceRequest",
+        "type": "object"
+      },
       "FormalHypothesisModel": {
         "properties": {
           "alternatives": {
@@ -2127,19 +2156,46 @@
       },
       "FormalVariableModel": {
         "properties": {
+          "continuous": {
+            "default": false,
+            "title": "Continuous",
+            "type": "boolean"
+          },
           "domain": {
+            "default": [],
             "items": {},
             "title": "Domain",
             "type": "array"
           },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
           "name": {
             "title": "Name",
             "type": "string"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
           }
         },
         "required": [
-          "name",
-          "domain"
+          "name"
         ],
         "title": "FormalVariableModel",
         "type": "object"
@@ -7114,9 +7170,51 @@
         "summary": "Compare Formal Hypotheses"
       }
     },
+    "/api/hypotheses/entails": {
+      "post": {
+        "description": "Whether a consequence holds wherever the hypothesis applies and its claims hold, with counterexamples.\n\nWith `include_lean`, the response also carries the consequence stated as a Lean 4 theorem. It is not\nkernel-checked by this server.",
+        "operationId": "check_formal_consequence_api_hypotheses_entails_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormalConsequenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Check Formal Consequence"
+      }
+    },
     "/api/hypotheses/evaluate": {
       "post": {
-        "description": "Exact evaluation over the finite state space: content, assumption conflicts and counterexamples.",
+        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.",
         "operationId": "evaluate_formal_hypothesis_api_hypotheses_evaluate_post",
         "requestBody": {
           "content": {

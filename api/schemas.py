@@ -693,7 +693,10 @@ class RunTournamentRequest(BaseModel):
 
 class FormalVariableModel(BaseModel):
     name: str
-    domain: List[Any]
+    domain: List[Any] = []
+    continuous: bool = False
+    lower: Optional[float] = None
+    upper: Optional[float] = None
 
 
 class FormalHypothesisModel(BaseModel):
@@ -716,3 +719,10 @@ class CompareFormalHypothesesRequest(BaseModel):
     a: FormalHypothesisModel
     b: FormalHypothesisModel
     max_examples: int = 5
+
+
+class FormalConsequenceRequest(BaseModel):
+    hypothesis: FormalHypothesisModel
+    consequence: str = Field(min_length=1, max_length=2000)
+    max_examples: int = 5
+    include_lean: bool = False

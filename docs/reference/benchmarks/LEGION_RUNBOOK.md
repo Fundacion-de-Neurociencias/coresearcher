@@ -62,17 +62,46 @@ Record both printed SHA-256 hashes in the ledger and in the freeze table of
 
 ## 3. Lean oracle for the openai/math pilot
 
-Follow section 4 of [LEAN_ORACLE_PROTOCOL.md](LEAN_ORACLE_PROTOCOL.md) (Comparator with `landrun`, non-root user,
-pinned openai/math commit). It runs the 19 original challenges and 52 mutants (71 challenges):
+Protocol: section 4 of [LEAN_ORACLE_PROTOCOL.md](LEAN_ORACLE_PROTOCOL.md) (Comparator with `landrun`, non-root
+user, pinned openai/math commit). It runs the 19 original challenges and 52 mutants (71 challenges). An agent can do
+all of it from [LEGION_AGENT_PROMPT.md](LEGION_AGENT_PROMPT.md).
+
+**Requirements**, checked by the preflight: Linux with Landlock in the kernel, a non-root user, a systemd user
+session (`systemd-run --user`), at least 30 GB free. No sudo is needed.
+
+**1. Toolchain.** The script installs elan, clones openai/math at the pinned commit, fetches the Mathlib cache,
+installs Go under `~/go-sdk`, builds `landrun` (main) and builds `lean4export` and `comparator` for the pinned Lean
+version, all under `~/oracle`. It is idempotent and resumable:
 
 ```bash
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math prepare
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math run
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math report
+PREFLIGHT_ONLY=1 bash scripts/benchmarks/legion/oracle_setup.sh
+bash scripts/benchmarks/legion/oracle_setup.sh
+export PATH="$HOME/oracle/bin:$HOME/.elan/bin:$PATH"
 ```
 
-`prepare` and `report` need no Lean toolchain; `run` does and is resumable. `--timeout` (seconds per challenge)
-defaults to the protocol's 3,600.
+**2. Prepare, build, run, report:**
+
+```bash
+M=~/oracle/openai-math
+python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M prepare
+# build the 19 solutions it lists, from $M/lean:  lake build OAI...
+python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M run
+python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M report
+```
+
+`prepare` and `report` need no Lean toolchain. `run` is resumable; `--timeout` (seconds per challenge) defaults to
+the protocol's 3,600. `report` writes `docs/reference/benchmarks/openai_math_lean_oracle_results.json`; the agent
+then writes `LEAN_ORACLE_REPORT.md` and updates the claims register.
+
+**Notes from the 2026-10-15 trial** (Ubuntu 24.04 under WSL2, 4 cores, 7 GB RAM; stopped during the cache download
+to leave the run to the Legion):
+
+- WSL2 kernel 5.15 has Landlock, and a user-level install works without sudo.
+- WSLg sets `XDG_RUNTIME_DIR` to its own directory; the script switches to `/run/user/UID` when the user bus is
+  there. Without a lingering user manager, `systemctl --user` fails: `loginctl enable-linger $USER` fixes it.
+- The Mathlib cache (about 9,000 files) downloaded at 10 to 200 KB/s on that link: plan an hour or more on a slow
+  connection. Re-running the script resumes.
+- With 7 GB of RAM the run is expected to take many hours; the Legion's memory and cores shorten it.
 
 ## 4. Lean kernel check of z3 entailments (ADR-DISCOVERY-060)
 

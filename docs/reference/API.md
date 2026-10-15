@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 93. Interactive documentation is served at `/docs` when the API runs.
+Operations: 96. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -96,7 +96,10 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/discovery/world-model/simulate` | API key | Simulate World Model Intervention |
 | `GET` | `/api/health` | Public | Health Check |
 | `POST` | `/api/hypotheses/compare` | API key | Compare Formal Hypotheses |
+| `POST` | `/api/hypotheses/entails` | API key | Check Formal Consequence |
 | `POST` | `/api/hypotheses/evaluate` | API key | Evaluate Formal Hypothesis |
+| `POST` | `/api/hypotheses/formalize` | API key | Formalize Hypothesis |
+| `GET` | `/api/hypotheses/scenarios/alzheimer` | Public | Alzheimer Formal Scenario Report |
 | `GET` | `/api/observer/ledger` | Public | Get Activity Ledger |
 | `POST` | `/api/ontology/apply` | API key | Apply Ontology Plan |
 | `POST` | `/api/ontology/plan` | API key | Plan Ontology Change |

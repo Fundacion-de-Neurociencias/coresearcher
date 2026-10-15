@@ -28,9 +28,9 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 
 | Check | Result | Details |
 | --- | --- | --- |
-| Test suite | 161 passing | [`tests/`](tests) |
+| Test suite | 210 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 10 integrated, 23 tested, 17 exercised, 20 prototypes (of 70) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 13 integrated, 24 tested, 17 exercised, 20 prototypes (of 74) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
 Claims are listed with their supporting script, data origin and last result in the
@@ -68,8 +68,8 @@ The full specification is in [docs/architecture/ARCHITECTURE.md](docs/architectu
 
 ## Quick start
 
-**Requirements:** Python 3.11 or newer. Git on `PATH` for ledger features. Node.js 18 or newer only
-for the TypeScript packages.
+**Requirements:** Python 3.11 or newer. Git on `PATH` for ledger features. A local OpenAI-compatible model
+server (Ollama or LM Studio) only for the formalizer.
 
 ```bash
 pip install -r requirements-dev.txt
@@ -125,9 +125,8 @@ Details: [`api/security.py`](api/security.py) and the [REST API reference](docs/
 | Path | Contents |
 | --- | --- |
 | `api/` | FastAPI application, routers, security and shared state |
-| `python/` | Core engines: discovery, observer (ledger), knowledge, ontology, CLI |
-| `packages/` | TypeScript packages: MCP server, provenance, shared types |
-| `agents/` | TypeScript agents (reviewer, co-scientist, neurodiagnoses, autoscientist) |
+| `python/` | Core engines: discovery (formal hypotheses, SMT, formalizer), ledger, ontology plans, CLI |
+| `archive/phase1/` | Earlier project layers kept for history, not maintained: observer, knowledge, agents, connectors, workflows, and the TypeScript workspace |
 | `schemas/` | JSON and YAML contracts, including `openapi.json` |
 | `scripts/` | Benchmark suites, checks and generators |
 | `tests/` | Pytest suite |

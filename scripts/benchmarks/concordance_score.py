@@ -30,7 +30,7 @@ from python.discovery.formal_hypothesis import (  # noqa: E402
     FormalHypothesisError,
     Hypothesis,
     HypothesisEvaluator,
-    Variable,
+    hypothesis_from_dict,
 )
 
 QUESTIONS = ["Q1", "Q2", "Q3", "Q4"]
@@ -71,14 +71,7 @@ def load_judgments(judgment_dir: Path) -> dict:
 
 
 def to_hypothesis(spec: dict) -> Hypothesis:
-    return Hypothesis(
-        hypothesis_id=spec["hypothesis_id"],
-        variables=[Variable(v["name"], tuple(v["domain"])) for v in spec["variables"]],
-        claims=spec["claims"],
-        assumptions=spec.get("assumptions", []),
-        scope=spec.get("scope"),
-        statement=spec.get("statement", ""),
-    )
+    return hypothesis_from_dict(spec)
 
 
 # ---------------------------------------------------------------- CoResearcher arm
@@ -253,7 +246,29 @@ def gold_labels(judgments: dict, adjudications: dict) -> tuple[dict, list]:
     return gold, unresolved
 
 
-def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> dict:
+def _arm_vs_gold(answers: dict, gold: dict, proposer: dict, q: str, order) -> dict:
+    """Agreement of one sealed arm (CoResearcher or the LLM) with the gold label for a categorical question."""
+    rows = [(tid, gold[tid][q], answers[tid][q]) for tid in gold if q in gold[tid] and q in answers.get(tid, {})]
+
+    def kappa_of(rs):
+        return cohen_kappa([(a, b) for _, a, b in rs], order)
+
+    return {
+        "n": len(rows),
+        "raw_agreement": (sum(a == b for _, a, b in rows) / len(rows)) if rows else None,
+        "kappa": kappa_of(rows),
+        "ci95": clustered_bootstrap(rows, lambda r: proposer[r[0]], kappa_of),
+        "confusion_gold_by_arm": confusion([(a, b) for _, a, b in rows]),
+        "disagreements": [{"task_id": t, "gold": a, "arm": b} for t, a, b in rows if a != b],
+    }
+
+
+def _llm_order(order):
+    # INVALID answers from the LLM arm sit outside the ordered scale; they count as maximal disagreement.
+    return None if order is None else order + ["INVALID"]
+
+
+def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict, llm: dict | None = None) -> dict:
     current = seal(tasks)["coresearcher_answers"]
     if current != sealed["coresearcher_answers"]:
         raise SystemExit("Sealed CoResearcher answers differ from a fresh run; the CoResearcher arm changed.")
@@ -297,6 +312,8 @@ def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> di
                 None if jj_kappa is None or cg_ci is None else cg_ci[0] >= jj_kappa - NON_INFERIORITY_MARGIN
             ),
         }
+        if llm is not None:
+            per_question[q]["llm_gold"] = _arm_vs_gold(llm, gold, proposer, q, _llm_order(order))
     cannot_judge = sum(
         1 for by_judge in judgments.values() for a in by_judge.values() for v in a.values() if v == CANNOT_JUDGE
     )
@@ -327,6 +344,14 @@ def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> di
                 ],
             },
         }
+        if llm is not None:
+            lg = [(tid, gold[tid][q], llm[tid][q]) for tid in gold if q in gold[tid] and q in llm.get(tid, {})]
+            lg = [(t, a, b if isinstance(b, (list, tuple)) else []) for t, a, b in lg]  # INVALID scores as empty.
+            per_item_question[q]["llm_gold"] = {
+                "n": len(lg),
+                "mean_jaccard": mean_jaccard(lg),
+                "ci95": clustered_bootstrap(lg, lambda r: proposer[r[0]], mean_jaccard),
+            }
     open_critiques = [
         {"task_id": tid, "judge_orcid": judge, "critiques": a["Q6"]}
         for tid, by_judge in judgments.items()
@@ -350,6 +375,8 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--judgments", type=Path)
     parser.add_argument("--adjudications", type=Path)
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--llm-answers", type=Path)
+    parser.add_argument("--llm-sha256")
     args = parser.parse_args(argv)
     tasks = load_tasks(args.tasks)
     if args.step == "validate":
@@ -369,8 +396,20 @@ def main(argv: list[str]) -> int:
         parser.error("score needs --sealed and --judgments")
     sealed = json.loads(args.sealed.read_text(encoding="utf-8"))
     adjudications = json.loads(args.adjudications.read_text(encoding="utf-8")) if args.adjudications else {}
-    result = score(tasks, sealed, load_judgments(args.judgments), adjudications)
+    llm = None
+    if args.llm_answers:
+        if not args.llm_sha256 or file_sha256(args.llm_answers) != args.llm_sha256:
+            raise SystemExit("LLM arm file does not match the SHA-256 recorded before unblinding.")
+        llm_file = json.loads(args.llm_answers.read_text(encoding="utf-8"))
+        llm = {tid: {q: _norm(v) for q, v in a.items()} for tid, a in llm_file["llm_answers"].items()}
+    result = score(tasks, sealed, load_judgments(args.judgments), adjudications, llm)
     result["sealed_sha256"] = file_sha256(args.sealed)
+    if llm is not None:
+        result["llm_arm"] = {
+            "sha256": args.llm_sha256,
+            "model": llm_file.get("model"),
+            "prompt_sha256": llm_file.get("prompt_sha256"),
+        }
     args.out.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
     print(json.dumps({q: v["coresearcher_gold"]["kappa"] for q, v in result["per_question"].items()}))
     return 0

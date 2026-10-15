@@ -151,8 +151,7 @@
           "items": {
             "type": "object",
             "required": [
-              "name",
-              "domain"
+              "name"
             ],
             "additionalProperties": false,
             "properties": {
@@ -170,8 +169,25 @@
                     "boolean"
                   ]
                 }
+              },
+              "continuous": {
+                "type": "boolean",
+                "description": "Real-valued variable (ADR-DISCOVERY-060); give no domain."
+              },
+              "lower": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "upper": {
+                "type": [
+                  "number",
+                  "null"
+                ]
               }
-            }
+            },
+            "description": "A finite variable with a domain, or a continuous one with optional bounds."
           }
         },
         "scope": {

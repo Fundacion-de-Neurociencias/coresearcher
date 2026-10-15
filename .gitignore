@@ -48,5 +48,5 @@ audit_results/
 scratch/
 *.tsbuildinfo
 
-# Private material kept local only (physics megarepository analysis). Never published.
+# Private material kept local only. Never published.
 private/

@@ -1,7 +1,7 @@
 # Hypothesis Verification Concordance Benchmark: protocol
 
-Status: draft for pre-registration. Fix sections 5 and 6 before the first judgment is collected, then record
-the SHA-256 of this file with every result.
+Status: draft for pre-registration (round 1). Fix sections 5, 6 and 7 before the first judgment is collected,
+then record the SHA-256 of this file with every result (section 9).
 
 Related: [ADR-DISCOVERY-059](../../decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md) (formal hypothesis
 object), task and judgment schemas in [`schemas/`](../../../schemas/), scorer in
@@ -30,12 +30,14 @@ measure human error.
 | Role | Task | Sees the formal object? |
 | --- | --- | --- |
 | Proposer | Submits a task from their own field (section 4) | Writes it |
+| Task manager | Helps the proposer encode the formal object; does not judge or review that task | Helps write it |
 | Task reviewer | Checks the task is well posed and that the formal object faithfully encodes the prose (question Q5) | Yes |
 | Judge (≥ 2 per task) | Answers Q1–Q4 independently, from prose and data only | **No** |
 | Adjudicator | Resolves judge disagreements into a gold label; classifies CoResearcher disagreements | Yes, after unblinding |
 | Maintainer | Runs CoResearcher; never edits tasks or judgments | Yes |
 
-Nobody judges a task they proposed or reviewed. Judges do not discuss tasks before submitting.
+Nobody judges a task they proposed, helped formalize or reviewed. Judges do not discuss tasks before submitting.
+Judges are assigned to tasks in or near their own field, recorded at sign-up with their ORCID and sub-fields.
 
 ## 4. Task format
 
@@ -47,11 +49,13 @@ One JSON file per task, valid against `schemas/hypothesis_verification_task.sche
 - `observations_table` (optional): observations as a table, with column meanings and provenance (public dataset
   identifier, or "illustrative").
 - `context`: the minimum domain background a judge needs; no hints about the expected answers.
+- `premises`: the hypothesis's premises as labelled sentences (`P1`, `P2`, ...), so judges can cite them.
 
 **Hidden from judges (formal arm):**
 - `formal_hypothesis` and optional `formal_rival`: ADR-059 objects (variables with finite domains, scope,
   assumptions, claims).
-- `formal_observations`: the same observations as states over the declared variables.
+- `formal_observations`: the same observations as states over the declared variables, in table-row order.
+- `assumption_labels`: the premise label of each formal assumption, so itemised answers can be compared.
 - `proposer_expected` (optional): the proposer's own answers. Recorded, but never used as the gold label.
 
 Metadata: `task_id`, `proposer_orcid`, `licence`, and `confidential` (if true, the task is run locally and never
@@ -69,6 +73,14 @@ Judges and CoResearcher answer the same four questions. Judges may answer `CANNO
 | Q4 | How does the hypothesis relate to its rival? | `EQUIVALENT`, `STRONGER`, `WEAKER`, `INCOMPARABLE`, `CONTRADICTORY` | `compare` relation |
 
 Q3 is asked only when the task has observations, and Q4 only when it has a rival.
+
+**Itemised answers.** A verdict alone can agree for the wrong reason. Judges therefore also say *where* the
+problem is, and CoResearcher's answer is compared item by item:
+
+| ID | Question to judges | Answer | CoResearcher source |
+| --- | --- | --- | --- |
+| Q2_items | Which premises conflict? | Set of premise labels (empty if none) | Union of the minimal conflicting assumption sets |
+| Q3_items | Which observations refute the hypothesis? | Set of table row numbers (empty if none) | Certain counterexamples |
 
 For each answer judges also give a confidence from 1 to 5 and a one-sentence rationale.
 
@@ -106,23 +118,55 @@ proposer (2,000 resamples), because tasks by one proposer are not independent.
 
    The distribution of these categories is the main qualitative result. Formalization gaps are also cross-checked
    against the Q5 ratings.
-5. Results are reported separately for tasks rated Q5 = `YES` and Q5 = `PARTIALLY`.
+5. **Itemised agreement.** For Q2_items and Q3_items, per-task Jaccard overlap between CoResearcher's set and the
+   gold set (1.0 when both are empty), averaged over tasks, with the same clustered bootstrap and the judge-judge
+   value as ceiling. Every mismatch is listed for the disagreement audit.
+6. Results are reported separately for tasks rated Q5 = `YES` and Q5 = `PARTIALLY`.
 
-## 8. Size
+## 8. What makes a good task, and balance across answers
+
+A task is accepted when it is:
+
+- **Real:** a hypothesis that could appear in the proposer's field, not a puzzle written for the benchmark.
+- **Formalizable:** its variables can be given finite domains without losing what the hypothesis says (checked by Q5).
+- **Discriminating:** it includes a rival, or observations, or both, so that Q3 or Q4 can be asked.
+
+Kappa is unstable when one answer dominates. Proposers are therefore asked to include some flawed hypotheses as
+they really occur in their field: premises that cannot hold together, claims nothing could refute, rivals that
+are in fact equivalent. The maintainers track the answer distribution expected by proposers and invite tasks for
+under-represented answers before judging begins. Proposer expectations are never used as gold labels.
+
+## 9. Rounds and evolving criteria
+
+The questions, the answer sets and the disagreement taxonomy may need to change as experience accumulates. They
+change only **between rounds**:
+
+- Each round has its own protocol version and SHA-256, fixed before its first judgment.
+- Nothing changes within a round. Results are reported per round and never pooled across protocol versions.
+- Changes for the next round come from the disagreement audit of the previous one, and are recorded with the reason.
+
+## 10. Size
 
 - **Pilot:** 20 tasks, 4–6 scientists, 2 judges per task. The goal is to test the forms, the timing and the
   disagreement taxonomy, not to estimate kappa precisely.
 - **Main study:** about 100 tasks. With 2 judges per task, kappa intervals are then roughly ±0.10–0.15; fix the
   exact number after the pilot.
 
-## 9. Credit, intellectual property and confidentiality
+## 11. Credit, intellectual property and confidentiality
 
 - Co-authorship on the benchmark paper for proposers of at least two accepted tasks and for judges of at least ten
   tasks.
 - Hypotheses remain the intellectual property of their proposers.
 - Confidential tasks are run on local hardware only (ADR-SOVEREIGNTY-030). They are reported only in aggregate.
 
-## 10. Known limitations
+## 12. Out of scope
+
+The benchmark does not ask scientists or CoResearcher to rate how important, novel or interesting a hypothesis is.
+CoResearcher judges the formal soundness of a hypothesis: whether it can be refuted, whether its premises hold
+together, whether data refute it, and how it relates to its rivals. Judging scientific value or "taste" is the
+scientists' role, and other benchmarks measure it.
+
+## 13. Known limitations
 
 - Only hypotheses whose variables can be given finite domains can be formalized (ADR-059).
 - The proposer writes both arms, so formalization quality depends on them. Q5 review and the disagreement audit

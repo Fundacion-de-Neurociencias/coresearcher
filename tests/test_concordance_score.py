@@ -101,3 +101,25 @@ def test_score_refuses_a_changed_coresearcher_arm(tmp_path):
     tampered["coresearcher_answers"]["T2"]["Q1"] = "FALSIFIABLE"
     with pytest.raises(SystemExit):
         cs.score(tasks, tampered, cs.load_judgments(judg_dir), {})
+
+
+def test_itemised_premise_agreement_uses_jaccard(tmp_path):
+    tasks_dir, judg_dir = tmp_path / "tasks", tmp_path / "judgments"
+    tasks_dir.mkdir()
+    judg_dir.mkdir()
+    task = _task("C1", ["x == 1"])
+    task["formal"]["hypothesis"]["assumptions"] = ["x > 2", "x < 1", "x >= 0"]
+    task["formal"]["assumption_labels"] = ["P1", "P2", "P3"]
+    (tasks_dir / "C1.json").write_text(json.dumps(task), encoding="utf-8")
+    for i, judge in enumerate(["1111-1111-1111-1111", "2222-2222-2222-2222"]):
+        j = {"task_id": "C1", "judge_orcid": judge, "answers": {"Q2_items": {"value": ["P1"]}}}
+        (judg_dir / f"j{i}.json").write_text(json.dumps(j), encoding="utf-8")
+
+    tasks = cs.load_tasks(tasks_dir)
+    sealed = cs.seal(tasks)
+    assert sealed["coresearcher_answers"]["C1"]["Q2_items"] == ["P1", "P2"]  # P3 is not part of the conflict
+
+    result = cs.score(tasks, sealed, cs.load_judgments(judg_dir), {})
+    items = result["per_item_question"]["Q2_items"]["coresearcher_gold"]
+    assert items["mean_jaccard"] == pytest.approx(0.5)  # {P1} vs {P1, P2}
+    assert items["mismatches"] == [{"task_id": "C1", "gold": ["P1"], "coresearcher": ["P1", "P2"]}]

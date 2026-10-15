@@ -34,6 +34,8 @@ from python.discovery.formal_hypothesis import (  # noqa: E402
 )
 
 QUESTIONS = ["Q1", "Q2", "Q3", "Q4"]
+# Itemised answers: which labelled premises conflict, which table rows (numbered from 1) refute the hypothesis.
+ITEM_QUESTIONS = ["Q2_items", "Q3_items"]
 Q3_ORDER = ["NOT_REFUTED", "POSSIBLY_REFUTED", "REFUTED"]  # ordered: Q3 uses linear weighted kappa
 CANNOT_JUDGE = "CANNOT_JUDGE"
 NON_INFERIORITY_MARGIN = 0.10
@@ -90,7 +92,14 @@ def coresearcher_answers(task: dict) -> dict:
         "Q1": report.content_verdict.value,
         "Q2": "CONFLICTING" if HypothesisEvaluator.conflicting_assumption_sets(h) else "COMPATIBLE",
     }
+    labels = formal.get("assumption_labels") or [f"A{i + 1}" for i in range(len(h.assumptions))]
+    label_of = dict(zip(h.assumptions, labels))
+    conflicts = HypothesisEvaluator.conflicting_assumption_sets(h)
+    answers["Q2_items"] = sorted(
+        {"SCOPE" if e.startswith("scope: ") else label_of.get(e, e) for group in conflicts for e in group}
+    )
     if observations:
+        answers["Q3_items"] = sorted(r["observation_index"] + 1 for r in report.certain_counterexamples)
         if report.certain_counterexamples:
             answers["Q3"] = "REFUTED"
         elif report.possible_counterexamples:
@@ -176,13 +185,23 @@ def confusion(pairs: list) -> dict:
 # ---------------------------------------------------------------- scoring
 
 
+def _norm(value):
+    """Item answers are compared as sets; categorical answers as plain values."""
+    return tuple(sorted(value)) if isinstance(value, list) else value
+
+
+def jaccard(a, b) -> float:
+    a, b = set(a), set(b)
+    return 1.0 if not a and not b else len(a & b) / len(a | b)
+
+
 def gold_labels(judgments: dict, adjudications: dict) -> tuple[dict, list]:
     """Gold per task and question: unanimous judges, else the adjudicator. Unresolved items are listed."""
     gold: dict = {}
     unresolved = []
     for task_id, by_judge in judgments.items():
-        for q in QUESTIONS:
-            values = [a[q] for a in by_judge.values() if q in a and a[q] != CANNOT_JUDGE]
+        for q in QUESTIONS + ITEM_QUESTIONS:
+            values = [_norm(a[q]) for a in by_judge.values() if q in a and a[q] != CANNOT_JUDGE]
             if not values:
                 continue
             if len(set(values)) == 1 and len(values) >= 2:
@@ -241,7 +260,39 @@ def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> di
     cannot_judge = sum(
         1 for by_judge in judgments.values() for a in by_judge.values() for v in a.values() if v == CANNOT_JUDGE
     )
-    return {"per_question": per_question, "unresolved_gold": unresolved, "cannot_judge_answers": cannot_judge}
+    per_item_question = {}
+    for q in ITEM_QUESTIONS:
+        jj = []
+        for task_id, by_judge in judgments.items():
+            vals = [by_judge[o][q] for o in sorted(by_judge) if q in by_judge[o] and by_judge[o][q] != CANNOT_JUDGE]
+            if len(vals) >= 2:
+                jj.append((task_id, vals[0], vals[1]))
+        cg = [(tid, gold[tid][q], answers[tid][q]) for tid in gold if q in gold[tid] and q in answers.get(tid, {})]
+
+        def mean_jaccard(rows):
+            return sum(jaccard(a, b) for _, a, b in rows) / len(rows) if rows else None
+
+        per_item_question[q] = {
+            "judge_judge": {
+                "n": len(jj),
+                "mean_jaccard": mean_jaccard(jj),
+                "ci95": clustered_bootstrap(jj, lambda r: proposer[r[0]], mean_jaccard),
+            },
+            "coresearcher_gold": {
+                "n": len(cg),
+                "mean_jaccard": mean_jaccard(cg),
+                "ci95": clustered_bootstrap(cg, lambda r: proposer[r[0]], mean_jaccard),
+                "mismatches": [
+                    {"task_id": t, "gold": list(a), "coresearcher": list(b)} for t, a, b in cg if set(a) != set(b)
+                ],
+            },
+        }
+    return {
+        "per_question": per_question,
+        "per_item_question": per_item_question,
+        "unresolved_gold": unresolved,
+        "cannot_judge_answers": cannot_judge,
+    }
 
 
 def main(argv: list[str]) -> int:

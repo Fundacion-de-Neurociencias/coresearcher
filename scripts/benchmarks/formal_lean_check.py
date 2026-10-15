@@ -52,6 +52,13 @@ CHECKS = [
         "dose <= 10 or conc > 1",
     ),
     ("C10", {"variables": [S], "claims": ["s*s - 3*s + 2 == 0"]}, "s == 1 or s == 2"),
+    # Added after round 0 to cover more goal shapes of the shape-directed default tactic.
+    ("C11", {"variables": [R, {"name": "k", "domain": [1, 2, 3]}], "claims": ["r >= k"]}, "r >= 1"),
+    ("C12", {"variables": [S], "claims": ["s*s*s - 6*s*s + 11*s - 6 == 0"]}, "s in (1, 2, 3)"),
+    ("C13", {"variables": [R], "claims": ["r > 2"]}, "r != 1"),
+    ("C14", {"variables": [R], "claims": ["r in (1, 2)"]}, "r not in (3, 4)"),
+    ("C15", {"variables": [R], "claims": ["r > 2"]}, "1 < r <= 10"),
+    ("C16", {"variables": [R], "claims": ["r >= 1"]}, "r != 2"),
 ]
 
 

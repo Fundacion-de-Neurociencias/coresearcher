@@ -66,13 +66,19 @@ Follow section 4 of [LEAN_ORACLE_PROTOCOL.md](LEAN_ORACLE_PROTOCOL.md) (Comparat
 pinned openai/math commit). It runs the 19 original challenges and 52 mutants (71 challenges):
 
 ```bash
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math prepare
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math run
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root ~/openai-math report
+bash scripts/benchmarks/legion_lean_oracle_setup.sh ~/oracle-tools ~/openai-math   # as the non-root user
+export PATH="$HOME/oracle-tools/bin:$PATH"
+python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root ~/openai-math
+python scripts/benchmarks/openai_math_lean_oracle.py prepare --math-root ~/openai-math
+# build the 19 solution modules that `prepare` lists, from ~/openai-math/lean, then:
+python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root ~/openai-math   # must pass
+python scripts/benchmarks/openai_math_lean_oracle.py run --math-root ~/openai-math
+python scripts/benchmarks/openai_math_lean_oracle.py report --math-root ~/openai-math
 ```
 
 `prepare` and `report` need no Lean toolchain; `run` does and is resumable. `--timeout` (seconds per challenge)
-defaults to the protocol's 3,600.
+defaults to the protocol's 3,600. The preflight also tells you whether the kernel's Landlock ABI is below v9; if
+it is, the systemd user session is the only guard against UNIX sockets (protocol, step 1), so do not bypass it.
 
 ## 4. Lean kernel check of z3 entailments (ADR-DISCOVERY-060)
 
@@ -82,6 +88,8 @@ python scripts/benchmarks/formal_lean_check.py run --out-dir runs/lean_checks --
     --out runs/lean_checks/results.json
 ```
 
+Expected with the current default tactic: 12 of the 12 entailed checks PROVED and the 4 others NOT_PROVED (the
+result on a Linux container with Mathlib modules built from source; see section 2b of the round 0 results).
 A theorem that z3 rejects and Lean proves is a soundness discrepancy: the command exits with status 1, and neither
 back end should be trusted until it is explained. A theorem z3 accepts but the default tactic cannot prove is not a
 contradiction; it is reported as `NOT_PROVED`.

@@ -8,19 +8,24 @@ Expected outcome: the original copy is accepted and every mutant is rejected. A 
 accepted did not change what the proof establishes, so its "mismatch" label is noise.
 
 Usage (on a Linux machine with Lean, landrun and lean4export installed):
+    python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root /path/to/openai-math
     python scripts/benchmarks/openai_math_lean_oracle.py prepare --math-root /path/to/openai-math
     python scripts/benchmarks/openai_math_lean_oracle.py run     --math-root /path/to/openai-math
     python scripts/benchmarks/openai_math_lean_oracle.py report  --math-root /path/to/openai-math
 
 `prepare` and `report` need no Lean toolchain; `run` does. `run` is resumable: finished entries are
-skipped, so it can be interrupted and restarted.
+skipped, so it can be interrupted and restarted. `preflight` checks the machine before `run` and exits 1 if
+anything required is missing; `scripts/benchmarks/legion_lean_oracle_setup.sh` installs what it checks.
 """
 
 import argparse
+import ctypes
 import json
 import math
 import os
+import platform
 import shlex
+import shutil
 import subprocess
 import sys
 import time
@@ -60,6 +65,126 @@ def check_commit(math_root: Path) -> str:
     if head and head != EXPECTED_COMMIT:
         sys.exit(f"openai/math is at {head[:12]}, expected {EXPECTED_COMMIT[:12]}. Check out the pinned commit first.")
     return head or "unknown (not a git checkout)"
+
+
+# ---------------------------------------------------------------- preflight
+
+# landlock_create_ruleset(NULL, 0, LANDLOCK_CREATE_RULESET_VERSION) returns the kernel's Landlock ABI version.
+_LANDLOCK_SYSCALL = {"x86_64": 444, "aarch64": 444}
+# Landlock ABI from which landrun can also restrict UNIX sockets. Below it, Comparator (which calls landrun with
+# --best-effort) silently falls back to a sandbox without that restriction, and the systemd-run guard is what blocks
+# AF_UNIX. The guard is therefore required, not optional, on such kernels.
+_LANDRUN_FULL_ABI = 9
+
+
+def landlock_abi() -> int:
+    number = _LANDLOCK_SYSCALL.get(platform.machine())
+    if number is None:
+        return -1
+    libc = ctypes.CDLL(None, use_errno=True)
+    return libc.syscall(number, None, ctypes.c_size_t(0), ctypes.c_uint32(1))
+
+
+def _probe(cmd: list[str], cwd: Path | None = None) -> tuple[bool, str]:
+    try:
+        proc = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return False, str(exc)
+    lines = (proc.stdout + proc.stderr).strip().splitlines()
+    return proc.returncode == 0, lines[-1] if lines else ""
+
+
+def _tool(name: str, env_var: str | None = None) -> str:
+    return (os.environ.get(env_var) if env_var else None) or shutil.which(name) or ""
+
+
+def olean_path(math_root: Path, module: str) -> Path:
+    return lean_dir(math_root) / ".lake" / "build" / "lib" / "lean" / (module.replace(".", "/") + ".olean")
+
+
+def preflight(math_root: Path) -> int:
+    """Check everything `run` needs, without running Comparator. Exit 1 if a required check fails."""
+    checks: list[tuple[str, bool, str, bool]] = []  # (name, ok, detail, required)
+
+    def check(name: str, ok: bool, detail: str, required: bool = True) -> None:
+        checks.append((name, ok, detail, required))
+
+    check("Linux", sys.platform.startswith("linux"), sys.platform)
+    euid = os.geteuid() if hasattr(os, "geteuid") else -1
+    check("non-root user", euid not in (0, -1), f"euid {euid}")
+
+    abi = landlock_abi() if sys.platform.startswith("linux") else -1
+    check("Landlock enabled", abi >= 1, f"ABI v{abi}" if abi >= 1 else "not available")
+    check(
+        f"Landlock ABI >= v{_LANDRUN_FULL_ABI} (full landrun sandbox)",
+        abi >= _LANDRUN_FULL_ABI,
+        "below it, landrun falls back (--best-effort) and the systemd-run guard below is required",
+        required=False,
+    )
+    if os.environ.get("COMPARATOR_CMD"):
+        check("systemd-run guard", False, "COMPARATOR_CMD is set: runs bypass the systemd-run guard; unset it")
+    else:
+        ok, tail = _probe(
+            [
+                "systemd-run",
+                "--property=RestrictAddressFamilies=~AF_UNIX",
+                "--user",
+                "--pipe",
+                "--wait",
+                "--quiet",
+                "--",
+                "true",
+            ]
+        )
+        check("systemd-run --user (AF_UNIX guard)", ok, "ok" if ok else f"{tail} (needs a systemd user session)")
+
+    lake = _tool("lake")
+    check("lake on PATH", bool(lake), lake or "install elan")
+    landrun = _tool("landrun", "COMPARATOR_LANDRUN")
+    check("landrun", bool(landrun), landrun or "not on PATH and COMPARATOR_LANDRUN unset")
+    if landrun:
+        ok, tail = _probe(
+            [landrun, "--best-effort", "--ro", "/", "--ldd", "--add-exec", "--", shutil.which("true") or "/bin/true"]
+        )
+        check("landrun sandbox starts", ok, "ok" if ok else tail)
+    lean4export = _tool("lean4export", "COMPARATOR_LEAN4EXPORT")
+    check("lean4export", bool(lean4export), lean4export or "not on PATH and COMPARATOR_LEAN4EXPORT unset")
+    comparator = _tool("comparator")
+    check("comparator on PATH", bool(comparator), comparator or "run uses `lake env comparator`")
+
+    head = check_commit(math_root) if (math_root / ".git").exists() else "missing"
+    check("openai/math at pinned commit", head == EXPECTED_COMMIT, head)
+    toolchain_file = lean_dir(math_root) / "lean-toolchain"
+    toolchain = toolchain_file.read_text(encoding="utf-8").strip() if toolchain_file.exists() else ""
+    if lake and toolchain:
+        ok, tail = _probe([lake, "--version"], cwd=lean_dir(math_root))
+        version = toolchain.rsplit(":v", 1)[-1]
+        check("project toolchain installed", ok and version in tail, f"{toolchain}: {tail}")
+    mathlib_build = lean_dir(math_root) / ".lake" / "packages" / "mathlib" / ".lake" / "build" / "lib"
+    check("Mathlib cache", mathlib_build.is_dir(), "ok" if mathlib_build.is_dir() else "run `lake exe cache get`")
+
+    if manifest_path(math_root).exists():
+        manifest = json.loads(manifest_path(math_root).read_text(encoding="utf-8"))
+        n, problems = len(manifest["entries"]), len(manifest["problems"])
+        check("challenges prepared", n == 71 and problems == 0, f"{n} challenges, {problems} problems")
+        modules = manifest["solution_modules"]
+        missing = [m for m in modules if not olean_path(math_root, m).exists()]
+        check(
+            "solution modules built",
+            not missing,
+            f"{len(modules) - len(missing)}/{len(modules)} built"
+            + (f"; next: lake build {missing[0]}" if missing else ""),
+        )
+    else:
+        check("challenges prepared", False, "run `prepare` first")
+
+    failed = 0
+    for name, ok, detail, required in checks:
+        mark = "ok  " if ok else ("FAIL" if required else "warn")
+        failed += (not ok) and required
+        print(f"[{mark}] {name}: {detail}")
+    print("preflight passed" if not failed else f"preflight failed: {failed} required check(s)")
+    return 1 if failed else 0
 
 
 # ---------------------------------------------------------------- prepare
@@ -240,11 +365,13 @@ def report(math_root: Path) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("step", choices=["prepare", "run", "report"])
+    parser.add_argument("step", choices=["preflight", "prepare", "run", "report"])
     parser.add_argument("--math-root", required=True, type=Path, help="Path to an openai/math checkout")
     parser.add_argument("--timeout", type=int, default=3600, help="Seconds per Comparator run (run step)")
     args = parser.parse_args()
     math_root = args.math_root.resolve()
+    if args.step == "preflight":
+        return preflight(math_root)
     if args.step == "prepare":
         return prepare(math_root)
     if args.step == "run":

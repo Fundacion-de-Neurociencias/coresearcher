@@ -39,6 +39,13 @@ measure human error.
 Nobody judges a task they proposed, helped formalize or reviewed. Judges do not discuss tasks before submitting.
 Judges are assigned to tasks in or near their own field, recorded at sign-up with their ORCID and sub-fields.
 
+**Eligibility.** Proposers, reviewers and judges have published research in the task's field and have peer-review
+experience. Their seniority is recorded so agreement can be analysed by experience.
+
+**Independence.** The proposer nominates task reviewers but must not discuss the task with them before review.
+Proposers and task managers must not run CoResearcher on a task before it is sealed: a proposer who tunes a task
+against CoResearcher's answers would bias the benchmark towards or against it.
+
 ## 4. Task format
 
 One JSON file per task, valid against `schemas/hypothesis_verification_task.schema.json`. It has two parts:
@@ -87,9 +94,17 @@ For each answer judges also give a confidence from 1 to 5 and a one-sentence rat
 **Q5, formalization fidelity** (task reviewers only, before judging starts): does the formal object express the
 prose hypothesis? `YES`, `PARTIALLY`, `NO`, with the mismatch described. Tasks rated `NO` are fixed or withdrawn
 before judging. Tasks rated `PARTIALLY` stay in and are analysed separately.
+This review runs in rounds: the reviewer rates fidelity at every turn and closes the review with an explicit
+`ACCEPTED` statement; the proposer revises in between.
+
+**Q6, open critique** (judges): weaknesses of the hypothesis that Q1–Q4 do not cover, each citing premise labels or
+table rows where possible. Q6 is not scored. It shows what the fixed questions miss and feeds section 9.
 
 ## 6. Collecting judgments
 
+0. **Preflight.** `concordance_score.py validate` must pass for every task: the formal objects build, the
+   rival shares the state space, premise labels match the formal assumptions, and the prose table matches the
+   formal observations row by row. Failing tasks go back to the proposer and task manager.
 1. Judges receive only the prose arm, through a form that writes a JSON file valid against
    `schemas/scientist_judgment.schema.json`. One file per judge per task.
 2. **Commitment before unblinding.** At submission, the SHA-256 of each judgment file is recorded with a timestamp
@@ -144,6 +159,12 @@ change only **between rounds**:
 - Each round has its own protocol version and SHA-256, fixed before its first judgment.
 - Nothing changes within a round. Results are reported per round and never pooled across protocol versions.
 - Changes for the next round come from the disagreement audit of the previous one, and are recorded with the reason.
+- **What the questions missed.** Q6 critiques are grouped by the adjudicator. A recurring weakness becomes a
+  candidate question for the next round only if it can be stated as a check on the formal object; otherwise it is
+  recorded as outside CoResearcher's formal scope.
+- **Saturation.** If CoResearcher matches the gold label on nearly every task of a round while judges also agree
+  with each other, the tasks were too easy for the formal layer to be tested. The next round asks proposers for
+  harder cases: more variables, subtler premise conflicts, rivals that differ in few states.
 
 ## 10. Size
 
@@ -158,6 +179,7 @@ change only **between rounds**:
   tasks.
 - Hypotheses remain the intellectual property of their proposers.
 - Confidential tasks are run on local hardware only (ADR-SOVEREIGNTY-030). They are reported only in aggregate.
+  Unlike benchmarks that publish every accepted task and review thread, publication here is opt-in per task.
 
 ## 12. Out of scope
 

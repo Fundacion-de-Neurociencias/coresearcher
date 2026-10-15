@@ -294,6 +294,25 @@
         "assumptions": ["ph > 7"],
         "claims": ["active", "not active or ph < 6"]
       }
+    },
+    {
+      "id": "F21",
+      "domain": "machine_learning",
+      "prose": "In a two-layer dual-stream network with one unit per stream, the output is the top positive unit. The sensitivity of the output to the hidden positive unit equals the output unit's activation derivative times the positive-to-positive weight, and its sensitivity to the hidden negative unit equals minus that derivative times the negative-to-positive weight. If both weights and the activation derivative are non-negative, the sensitivity to the hidden positive unit is non-negative and the sensitivity to the hidden negative unit is non-positive.",
+      "intended_verdict": "UNFALSIFIABLE",
+      "note": "Smallest instance of the Error Diffusion polarity-invariance claim (Sakana Agentic Scientist, arXiv:2610.18933, G.4; see docs/reference/cases/SAKANA_ED_POLARITY.md). It is a theorem given its definitions, so its gold verdict is UNFALSIFIABLE: no state that satisfies the definitions and assumptions violates it. A formalization that drops an assumption becomes FALSIFIABLE and STRONGER than gold (it forbids states the gold allows), and is scored as a missed defect; that is the failure this item is meant to catch.",
+      "gold": {
+        "variables": [
+          {"name": "w_pp", "continuous": true, "lower": null, "upper": null},
+          {"name": "w_np", "continuous": true, "lower": null, "upper": null},
+          {"name": "d_out", "continuous": true, "lower": null, "upper": null},
+          {"name": "s_p", "continuous": true, "lower": null, "upper": null},
+          {"name": "s_n", "continuous": true, "lower": null, "upper": null}
+        ],
+        "scope": "s_p == d_out * w_pp and s_n == -d_out * w_np",
+        "assumptions": ["w_pp >= 0", "w_np >= 0", "d_out >= 0"],
+        "claims": ["s_p >= 0", "s_n <= 0"]
+      }
     }
   ]
 }

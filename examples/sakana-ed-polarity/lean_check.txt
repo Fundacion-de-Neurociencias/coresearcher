@@ -1,0 +1,15 @@
+Lean kernel check of examples/sakana-ed-polarity/EdPolarity.lean
+Date: 2026-10-15
+Machine: Mac Studio (ssh mac_studio), project ~/coresearcher-lean/mathcheck
+Toolchain: leanprover/lean4:v4.35.0 (Lean 4.35.0, arm64-apple-darwin24.6.0, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc)
+Mathlib: inputRev v4.35.0 (lake-manifest.json of the project)
+File SHA-256: 986badf4e4ee35bda3179da4eca4253c3272ecfd38987fbec60ead0ea8606a1a
+
+$ lake env lean EdPolarity.lean
+(no output; exit code 0; 5.7 s wall)
+
+$ lake env lean EdPolarityAxioms.lean   # the same file followed by two #print axioms commands
+'EdPolarity.sens_polarized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.ed_sign_sufficiency' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+No sorry, no sorryAx; only the three standard axioms of Lean/Mathlib classical mathematics.

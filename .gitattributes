@@ -3,3 +3,6 @@ docs/reference/benchmarks/** text eol=lf
 
 # Shell scripts run on Linux; CRLF would break them.
 *.sh text eol=lf
+
+# Lean files are hashed in their kernel-check logs.
+*.lean text eol=lf

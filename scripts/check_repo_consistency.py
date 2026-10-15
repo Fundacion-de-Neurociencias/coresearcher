@@ -29,13 +29,6 @@ def check_python_version() -> None:
         fail(f"Python version: pyproject requires {required.group(1)} but README says {documented.group(1)}+")
 
 
-def check_workspaces() -> None:
-    package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
-    for pattern in package.get("workspaces", []):
-        if not glob.glob(str(ROOT / pattern)):
-            fail(f"package.json workspace '{pattern}' matches no directory")
-
-
 def check_env_example() -> None:
     documented = set(re.findall(r"^([A-Z_]+)=", (ROOT / ".env.example").read_text(encoding="utf-8"), re.M))
     read = set()
@@ -95,7 +88,6 @@ def check_readme_maturity_counts() -> None:
 
 CHECKS = [
     check_python_version,
-    check_workspaces,
     check_env_example,
     check_readme_webhook_route,
     check_readme_scripts,

@@ -12,6 +12,7 @@ import enum
 import hashlib
 import json
 import os
+import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set, Tuple
 
@@ -87,6 +88,50 @@ class ResultFamilyAuditVerdict:
     som_family_merkle_hash: str
     editorial_judgment: str
     nodes: Dict[str, FamilyManuscriptNode] = field(default_factory=dict)
+    # False when the family has no two parallel derivation paths, so commutativity was not tested.
+    holonomy_checked: bool = False
+
+
+def _split_identity(expression: str) -> Optional[Tuple[str, str]]:
+    """Returns (lhs, rhs) when the expression is a single equation 'A = B'; otherwise None."""
+    if not expression or re.search(r"==|<=|>=|!=|<|>", expression):
+        return None
+    parts = expression.split("=")
+    if len(parts) != 2 or not parts[0].strip() or not parts[1].strip():
+        return None
+    return parts[0].strip(), parts[1].strip()
+
+
+def _parallel_path_pairs(morphisms: List[CategoryMorphism], max_len: int = 4) -> List[Tuple[list, list]]:
+    """All pairs of distinct simple paths that share start and end objects (up to max_len morphisms)."""
+    adjacency: Dict[str, List[CategoryMorphism]] = {}
+    for m in morphisms:
+        adjacency.setdefault(m.domain.object_id, []).append(m)
+    paths: Dict[Tuple[str, str], List[list]] = {}
+
+    def walk(start: str, node: str, path: list, visited: Set[str]) -> None:
+        if path:
+            paths.setdefault((start, node), []).append(list(path))
+        if len(path) >= max_len:
+            return
+        for m in adjacency.get(node, []):
+            nxt = m.codomain.object_id
+            if nxt in visited:
+                continue
+            path.append(m)
+            visited.add(nxt)
+            walk(start, nxt, path, visited)
+            path.pop()
+            visited.discard(nxt)
+
+    for start in list(adjacency):
+        walk(start, start, [], {start})
+    pairs = []
+    for group in paths.values():
+        for i, a in enumerate(group):
+            for b in group[i + 1:]:
+                pairs.append((a, b))
+    return pairs
 
 
 class ResultFamilyOrchestrator:
@@ -154,8 +199,9 @@ class ResultFamilyOrchestrator:
         # 1. CAS Verification on each node
         for nid, node in self.nodes.items():
             cas_verified = False
-            if node.symbolic_expression:
-                # Use ExactSymbolicCourt for exact identity check
+            identity = _split_identity(node.symbolic_expression or "")
+            if identity:
+                # Only an equation 'A = B' can be checked by the CAS; inequalities and prose cannot.
                 dag = ExactProofDAG(theorem_id=f"DAG-{nid}")
                 dag.add_lemma(
                     ExactLemmaNode(
@@ -164,7 +210,7 @@ class ResultFamilyOrchestrator:
                         status=EpistemicLemmaStatus.PROVEN_LEMMA,
                     )
                 )
-                rep = self.cas_court.audit_exact_proof(dag)
+                rep = self.cas_court.audit_exact_proof(dag, lhs_target=identity[0], rhs_target=identity[1])
                 cas_verified = rep.is_sound
 
             # Lean audit if path or code provided
@@ -177,15 +223,16 @@ class ResultFamilyOrchestrator:
                             lean_src = f.read()
                     except Exception:
                         lean_src = ""
+                lean_src_provided = bool(lean_src)
                 if not lean_src:
-                    # Synthesize baseline scaffolding if not present on disk
+                    # Synthesize baseline scaffolding if not present on disk (never counted as a formalization)
                     lean_src = LeanFormalizationEngine.synthesize_lean4_scaffolding(
                         theorem_name=node.node_id,
                         hypothesis_statement=node.statement,
                         symbolic_identity=node.symbolic_expression,
                     )
                 l_rep = LeanFormalizationEngine.audit_lean_source(node.node_id, lean_src)
-                lean_verified = l_rep.is_kernel_sound and not l_rep.contains_sorry
+                lean_verified = lean_src_provided and l_rep.is_kernel_sound and not l_rep.contains_sorry
 
                 # ADR-DISCOVERY-048: Semantic Bijectivity & Formal Drift Gate
                 prose_spec = SemanticBijectivityAuditor.extract_prose_specifications(node.statement, node.title)
@@ -235,13 +282,15 @@ class ResultFamilyOrchestrator:
         for morph in cat_morphisms.values():
             category.add_morphism(morph)
 
-        holonomy_defect = 0.0
-        try:
-            diag_rep = CommutativeDiagramAuditor.audit_diagram_commutativity(category)
-            if isinstance(diag_rep, dict):
-                holonomy_defect = float(diag_rep.get("holonomy_defect", 0.0))
-        except Exception:
-            holonomy_defect = 0.0
+        # Commutativity is only testable where two distinct derivation paths join the same results.
+        defects = []
+        for path_a, path_b in _parallel_path_pairs(list(cat_morphisms.values())):
+            diag_rep = CommutativeDiagramAuditor.audit_diagram_commutativity(path_a, path_b)
+            if "holonomy_defect" in diag_rep:
+                defects.append(float(diag_rep["holonomy_defect"]))
+        holonomy_checked = bool(defects)
+        holonomy_defect = max(defects) if defects else 0.0
+        holonomy_ok = (not holonomy_checked) or holonomy_defect < 1e-3
 
         # 3. Statistical counts
         total_nodes = len(self.nodes)
@@ -261,7 +310,7 @@ class ResultFamilyOrchestrator:
             ]
         )
 
-        is_sound = holonomy_defect < 1e-3 and (unformalized_count == 0) and (formalized_count > 0 or total_nodes == 0)
+        is_sound = holonomy_ok and (unformalized_count == 0) and (formalized_count > 0 or total_nodes == 0)
 
         # 4. Merkle hash
         raw_repr = json.dumps(
@@ -275,15 +324,15 @@ class ResultFamilyOrchestrator:
                     }
                     for nid, n in self.nodes.items()
                 },
-                "holonomy": holonomy_defect,
+                "holonomy": holonomy_defect if holonomy_checked else None,
             },
             sort_keys=True,
         )
         som_hash = f"sha256:{hashlib.sha256(raw_repr.encode('utf-8')).hexdigest()}"
 
-        if formalized_count == total_nodes and holonomy_defect < 1e-3:
-            judgment = "FULLY_FORMALIZED_GROUND_TRUTH: All nodes dual-verified in Lean and CAS."
-        elif formalized_count > 0 and holonomy_defect < 1e-3:
+        if formalized_count == total_nodes and holonomy_ok:
+            judgment = "FULLY_FORMALIZED_GROUND_TRUTH: All nodes kernel-verified in Lean."
+        elif formalized_count > 0 and holonomy_ok:
             judgment = "PARTIALLY_FORMALIZED_FAMILY: Core arguments formalized; companion prose pending Lean proof."
         else:
             judgment = "UNFORMALIZED_PROSE_RISK: Substantial risk of unverified LLM hallucinations."
@@ -303,7 +352,11 @@ class ResultFamilyOrchestrator:
             verdict_type="RESULT_FAMILY_VERDICT",
             status="SOUND" if is_sound else "UNSOUND",
             som_merkle_hash=som_hash,
-            details={"judgment": judgment, "holonomy": holonomy_defect, "nodes_count": total_nodes},
+            details={
+                "judgment": judgment,
+                "holonomy": holonomy_defect if holonomy_checked else None,
+                "nodes_count": total_nodes,
+            },
         )
 
         return ResultFamilyAuditVerdict(
@@ -318,4 +371,5 @@ class ResultFamilyOrchestrator:
             som_family_merkle_hash=som_hash,
             editorial_judgment=judgment,
             nodes=self.nodes,
+            holonomy_checked=holonomy_checked,
         )

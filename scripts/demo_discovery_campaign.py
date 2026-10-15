@@ -20,10 +20,11 @@ if root_dir not in sys.path:
 
 from fastapi.testclient import TestClient
 from api.server import app
+from api.testing import authenticated_client
 
 
 def run_campaign_demo():
-    client = TestClient(app)
+    client = authenticated_client(app)
 
     print("=" * 90)
     print("🤖 CORESEARCHER: CONSTRAINT-LED MULTI-AGENT DISCOVERY CAMPAIGN (ADR-DISCOVERY-007)")

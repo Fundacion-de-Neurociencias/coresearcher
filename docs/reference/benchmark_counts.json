@@ -1,0 +1,16 @@
+{
+  "snapshot": "2026-10-12",
+  "environment": "Windows 11, Python 3.13, PYTHONIOENCODING=utf-8, PYTHONPATH=repository root",
+  "note": "Counts transcribed from the printed output of each script. Entries without a printed denominator are excluded.",
+  "measurements": [
+    {"id": "unknown-mechanism-recovery", "benchmark": "100-world unknown mechanism", "metric": "causal mechanisms recovered", "successes": 87, "trials": 100, "source": "scripts/run_unknown_mechanism_benchmark.py"},
+    {"id": "unknown-mechanism-wrongly-buried", "benchmark": "100-world unknown mechanism", "metric": "true mechanisms wrongly buried (error rate)", "successes": 1, "trials": 100, "source": "scripts/run_unknown_mechanism_benchmark.py"},
+    {"id": "adversarial-flawed-buried", "benchmark": "adversarial destruction", "metric": "flawed hypotheses buried in graveyard", "successes": 21, "trials": 50, "source": "scripts/run_adversarial_destruction_suite.py"},
+    {"id": "adversarial-trap-detection", "benchmark": "adversarial destruction", "metric": "adversarial traps unmasked", "successes": 49, "trials": 50, "source": "scripts/run_adversarial_destruction_suite.py"},
+    {"id": "adversarial-tautologies", "benchmark": "adversarial destruction", "metric": "tautologies rejected", "successes": 14, "trials": 14, "source": "scripts/run_adversarial_destruction_suite.py"},
+    {"id": "toolgrad-backward", "benchmark": "ToolGrad backward synthesis", "metric": "backward execution-first pass", "successes": 4, "trials": 4, "source": "scripts/run_toolgrad_backward_synthesis_suite.py"},
+    {"id": "toolgrad-forward", "benchmark": "ToolGrad backward synthesis", "metric": "forward unverified generation pass", "successes": 2, "trials": 5, "source": "scripts/run_toolgrad_backward_synthesis_suite.py"},
+    {"id": "retrospective-milestones", "benchmark": "retrospective time split", "metric": "historical milestones reproduced", "successes": 4, "trials": 4, "source": "scripts/run_retrospective_discovery_benchmark.py"},
+    {"id": "twin-gate", "benchmark": "twin-gate harness", "metric": "verification gates passed", "successes": 5, "trials": 5, "source": "scripts/run_twin_gate_harness_suite.py"}
+  ]
+}

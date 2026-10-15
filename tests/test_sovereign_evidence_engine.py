@@ -8,13 +8,13 @@ Verifies:
 5. Deterministic SOM SHA-256 Merkle anchoring.
 """
 
-import pytest
 import time
+
 from python.discovery.sovereign_evidence_engine import (
-    StudyDesignTier,
-    EvidencePolarity,
     CandidateEvidenceItem,
+    EvidencePolarity,
     SovereignEvidenceEngine,
+    StudyDesignTier,
 )
 
 

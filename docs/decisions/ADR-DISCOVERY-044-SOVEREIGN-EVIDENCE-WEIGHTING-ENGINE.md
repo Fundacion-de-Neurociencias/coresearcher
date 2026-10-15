@@ -27,7 +27,7 @@ Every candidate literature citation is assigned two decoupled coordinates:
   $$W_{\text{epistemic}} = \text{StudyTypeBase} \times \left(1 + \frac{\text{RCS}}{4}\right) \times (1 - C_{\text{confounding}}) \times \text{ReplicationFactor}$$
   Where:
   - $\text{StudyTypeBase} \in [0.1, 1.0]$: Stratifies study designs (`IN_SILICO_UNVALIDATED`=0.1, `OBSERVATIONAL_EPIDEMIOLOGY`=0.3, `IN_VITRO_PRECLINICAL`=0.5, `MECHANISTIC_ANIMAL_MODEL`=0.7, `RANDOMIZED_CONTROLLED_TRIAL`=0.9, `PREREGISTERED_SYSTEMATIC_META_ANALYSIS`=1.0).
-  - $\text{RCS} \in \{0, 1, 2, 3, 4\}$: Reality Contact Score ([ADR-DISCOVERY-010](file:///c:/Users/usuario/coresearcher/docs/decisions/ADR-DISCOVERY-010-REALITY-CONTACT-SCORE.md)).
+  - $\text{RCS} \in \{0, 1, 2, 3, 4\}$: Reality Contact Score (ADR-DISCOVERY-010).
   - $C_{\text{confounding}} \in [0, 1]$: Methodological vulnerability (unmeasured lifestyle confounders, selective subgroup reporting, lack of multiple comparison corrections).
 
 ### 2. Adversarial Evidence Balance & Publication Bias Penalty
@@ -37,10 +37,10 @@ A **Publication Bias Estimator** computes an asymmetry penalty when a claim is f
 
 ### 3. Sub-Second Jev-Style System 1 Extraction with System 2 Causal Escalation
 - **System 1 (Jev-Style Sub-Second Filter)**: Executes sub-second regex and vector keyword triage, parsing claim entities, study types, sample sizes, and directional polarities (`SUPPORT`, `REFUTE`, `AMBIGUOUS`).
-- **System 2 (Duhem-Quine & Hakken PHELInE Verification)**: If the claim is disputed or the net evidence margin is within ambiguity margins ($|\Delta_{\text{evidence}}| < 0.2$), escalates to the Hakken evidence path perturbation gate ([`EvidencePathPerturbationResult`](file:///c:/Users/usuario/coresearcher/python/discovery/twin_gate_harness.py)) and the Duhem-Quine blame isolation auditor ([`failure_engine.py`](file:///c:/Users/usuario/coresearcher/python/discovery/failure_engine.py)).
+- **System 2 (Duhem-Quine & Hakken PHELInE Verification)**: If the claim is disputed or the net evidence margin is within ambiguity margins ($|\Delta_{\text{evidence}}| < 0.2$), escalates to the Hakken evidence path perturbation gate ([`EvidencePathPerturbationResult`](../../python/discovery/twin_gate_harness.py)) and the Duhem-Quine blame isolation auditor ([`failure_engine.py`](../../python/discovery/failure_engine.py)).
 
 ### 4. Zero-Cloud Sovereignty & Cryptographic Proof
-Operates fully within the local environment ([`ADR-SOVEREIGNTY-041`](file:///c:/Users/usuario/coresearcher/docs/decisions/ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)), generating an immutable SHA-256 Merkle stamp (`som_claim_hash`) to guarantee auditable reproducibility without leaking research hypotheses to third-party corporate APIs.
+Operates fully within the local environment ([`ADR-SOVEREIGNTY-041`](ADR-SOVEREIGNTY-041-ZERO-TRUST-EPISTEMIC-BUNKER.md)), generating an immutable SHA-256 Merkle stamp (`som_claim_hash`) to guarantee auditable reproducibility without leaking research hypotheses to third-party corporate APIs.
 
 ---
 

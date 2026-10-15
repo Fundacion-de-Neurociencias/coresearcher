@@ -5,24 +5,14 @@ Verifies:
 2. Cognitive inspection challenge generation and verification.
 3. Consensus bias interception when AI rejects sound, physically conserved theories for being 'unconventional' or 'not mainstream'.
 4. Verified active human oversight workflow with complete cryptographic Merkle anchoring.
-5. Integration into PhysicsCorpusAuditor batch peer-review dossier reports.
 """
 
-import pytest
 from python.discovery.audited_human_oversight import (
-    OversightVerdictStatus,
+    AuditedHumanOversightEngine,
+    CognitiveInspectionChallenge,
     EpistemicTaskCriticality,
     HumanInteractionTelemetry,
-    CognitiveInspectionChallenge,
-    OversightAuditRecord,
-    AuditedHumanOversightEngine,
-)
-from python.discovery.physics_corpus_auditor import (
-    PhysicsCorpusAuditor,
-    CorpusExtractedItem,
-    CorpusItemType,
-    UniversalPhysicsDivision,
-    PhysicsSubdiscipline,
+    OversightVerdictStatus,
 )
 
 
@@ -133,49 +123,3 @@ def test_active_oversight_verified_full_flow():
     assert record.status == OversightVerdictStatus.ACTIVE_OVERSIGHT_VERIFIED
     assert record.active_oversight_score == 1.0
     assert record.som_oversight_hash.startswith("sha256:")
-
-
-def test_physics_corpus_auditor_batch_with_oversight():
-    """
-    Tests that PhysicsCorpusAuditor.audit_corpus_batch attaches the audited human oversight
-    record to the final MegarepoPeerReviewReport.
-    """
-    auditor = PhysicsCorpusAuditor()
-    item = CorpusExtractedItem(
-        item_id="CORPUS-OVERSIGHT-TEST",
-        file_path="fluid_dynamics_chapter.tex",
-        division=UniversalPhysicsDivision.CLASSICAL_CONTINUUM_ACOUSTICS,
-        subdiscipline=PhysicsSubdiscipline.CONTINUUM_FLUID_DYNAMICS,
-        item_type=CorpusItemType.CHAPTER_THEORY,
-        title="Continuum Fluid Chapter",
-        content_snippet="Continuum flow Navier-Stokes equation derivation with viscous dissipation.",
-        raw_size_bytes=512,
-        detected_equations=["div(u) = 0"],
-        detected_data_variables=[],
-        detected_patent_claims=[],
-        system_one_marr_level="COMPUTATIONAL",
-        system_one_risk_flag=False,
-        system_one_notes="",
-        is_perpetual_motion_risk=False,
-        dimensional_homogeneity_passed=True,
-    )
-    telemetry = HumanInteractionTelemetry(
-        reviewer_id="editor_in_chief",
-        dwell_time_seconds=90.0,
-        counterexamples_inspected=[],
-        human_notes_length_chars=50,
-        substantive_modifications_made=False,
-        explicit_causal_rationale="Incompressible formulation fully coherent.",
-        answered_inspection_challenge=True,
-    )
-    scenarios = {
-        "human_oversight_telemetry": telemetry,
-        "human_decision": "ACCEPT",
-    }
-    report = auditor.audit_corpus_batch([item], simulated_eval_scenarios=scenarios)
-    assert report.audited_oversight_record is not None
-    assert report.audited_oversight_record["status"] in [
-        OversightVerdictStatus.ACTIVE_OVERSIGHT_VERIFIED.value,
-        OversightVerdictStatus.CONSENSUS_BIAS_INTERCEPTED.value,
-    ]
-    assert report.audited_oversight_record["som_oversight_hash"].startswith("sha256:")

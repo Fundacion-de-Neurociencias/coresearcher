@@ -8,7 +8,7 @@ This engine responds directly to the empirical gaps exposed in the PRISMA scopin
 3. Lack of cryptographically verifiable provenance between AI recommendations and human decisions in peer-review and editorial flows.
 
 ## Blocking Questions
-None (0 blocking questions). All contracts are well-specified and integrate cleanly with existing CoResearcher engines (`ScientificLedger`, `EpistemicGitRepo`, `PhysicsCorpusAuditor`, `api/server.py`).
+None (0 blocking questions). All contracts are well-specified and integrate cleanly with existing CoResearcher engines (`ScientificLedger`, `EpistemicGitRepo`, `api/server.py`).
 
 ## Assumptions
 1. *Data*: Editorial interactions consist of AI-generated assessment reports, proposed verdicts (accept/reject/revise), flagged anomalies/violations, and human interaction telemetry (dwell time, inspectable counterexamples examined, modification deltas).
@@ -31,12 +31,10 @@ None (0 blocking questions). All contracts are well-specified and integrate clea
        - `detect_consensus_bias(...)`: checks if AI rejection is ungrounded statistical frequency bias.
        - `generate_cognitive_inspection_challenge(...)`: creates targeted adversarial multiple-choice / counterexample verification challenge for human reviewers.
 3. **Integrate with Existing Systems**:
-   - Update `python/discovery/physics_corpus_auditor.py`: wire human oversight auditing to batch editorial review verdicts.
    - Update `python/discovery/__init__.py`: export new symbols.
    - Add REST API endpoint in `api/server.py` (`POST /api/discovery/oversight/audit`).
 4. **Verification & Testing**:
    - Create `tests/test_audited_human_oversight.py`.
    - Run tests with pytest.
    - Run `python scripts/enforce_english_policy.py`.
-   - Run `python scripts/run_physics_corpus_auditor_suite.py` regression suite.
 5. **Git Commit**: Commit directly to `master` with conventional message.

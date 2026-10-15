@@ -3,18 +3,21 @@
 SECURITY_TIER = "PRIVATE"
 
 from .manifold_detector import ManifoldDetector
-from .epistemic_gap_detector import (
-    EpistemicGapDetector,
-    EpistemicGap,
-    ParadigmResidue,
-    ConstraintHypothesis,
-    GapType,
-    GapCharacterization,
-    RestrictionType,
-    EpistemicStatus,
-    Severity,
-    determine_restriction_epistemic_status,
-)
+try:
+    from .epistemic_gap_detector import (
+        EpistemicGapDetector,
+        EpistemicGap,
+        ParadigmResidue,
+        ConstraintHypothesis,
+        GapType,
+        GapCharacterization,
+        RestrictionType,
+        EpistemicStatus,
+        Severity,
+        determine_restriction_epistemic_status,
+    )
+except ImportError:  # epistemic_gap_detector is a private module (licensed deployments only)
+    pass
 from .epistemic_trajectory import (
     ExplanationLevel,
     ConstraintType,
@@ -442,6 +445,14 @@ from .era_empirical_engine import (
     ClinicalLeadTimeEvaluator,
     ERAClosedLoopTreeSearch,
 )
+from .hypothesis_tournament_arena import (
+    DebateAxis,
+    TournamentHypothesis,
+    DebateMatchResult,
+    TournamentReport,
+    PairwiseDebateEngine,
+    HypothesisEloTournamentOrchestrator,
+)
 from .membrane_dynamics_auditor import (
     MembraneLipidSpecies,
     ForceFieldArchetype,
@@ -470,32 +481,11 @@ from .epistemic_stigmergy import (
     RealityContactFirewallReport,
     RealityContactFirewall,
 )
-from .physics_corpus_auditor import (
-    UniversalPhysicsDivision,
-    PhysicsSubdiscipline,
-    CorpusItemType,
-    CorpusExtractedItem,
-    ItemVerificationVerdict,
-    MegarepoPeerReviewReport,
-    PhysicsCorpusAuditor,
-)
 
 __all__ = [
 
 
-
-
     "ManifoldDetector",
-    "EpistemicGapDetector",
-    "EpistemicGap",
-    "ParadigmResidue",
-    "ConstraintHypothesis",
-    "GapType",
-    "GapCharacterization",
-    "RestrictionType",
-    "EpistemicStatus",
-    "Severity",
-    "determine_restriction_epistemic_status",
     "ExplanationLevel",
     "ConstraintType",
     "EpistemicConstraintStatus",
@@ -696,13 +686,6 @@ __all__ = [
     "MetaRecursiveInstrumentCompiler",
     "RealityContactFirewallReport",
     "RealityContactFirewall",
-    "UniversalPhysicsDivision",
-    "PhysicsSubdiscipline",
-    "CorpusItemType",
-    "CorpusExtractedItem",
-    "ItemVerificationVerdict",
-    "MegarepoPeerReviewReport",
-    "PhysicsCorpusAuditor",
     "EpistemicLemmaStatus",
     "ExactSymbolicVerdict",
     "ObstacleType",
@@ -849,4 +832,10 @@ __all__ = [
     "ERAMethodologicalMutationGenerator",
     "ClinicalLeadTimeEvaluator",
     "ERAClosedLoopTreeSearch",
+    "DebateAxis",
+    "TournamentHypothesis",
+    "DebateMatchResult",
+    "TournamentReport",
+    "PairwiseDebateEngine",
+    "HypothesisEloTournamentOrchestrator",
 ]

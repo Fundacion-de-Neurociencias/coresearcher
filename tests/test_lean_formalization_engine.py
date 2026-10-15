@@ -8,16 +8,16 @@ Verifies:
 5. Deterministic SOM SHA-256 Merkle anchoring.
 """
 
-import pytest
+import shutil
+
 from python.discovery.lean_formalization_engine import (
-    LeanProofStatus,
-    LeanVerificationReport,
     LeanFormalizationEngine,
+    LeanProofStatus,
 )
 from python.discovery.result_family_orchestrator import (
-    ResultRole,
     FormalizationTier,
     ResultFamilyOrchestrator,
+    ResultRole,
 )
 
 
@@ -69,8 +69,13 @@ theorem SimpleIdentity (x : ℝ) : x + 0 = x := by
     assert report.contains_sorry is False
     assert report.sorry_count == 0
     assert "ring" in report.tactics_used
-    assert report.status in [LeanProofStatus.FULLY_VERIFIED_KERNEL]
-    assert report.is_kernel_sound is True
+    if shutil.which("lean") is None:
+        # Without the Lean binary nothing is kernel-checked, so the proof must not count as verified.
+        assert report.status == LeanProofStatus.NOT_KERNEL_CHECKED
+        assert report.is_kernel_sound is False
+    else:
+        # The snippet has no `import Mathlib`, so real Lean may reject it; either outcome is honest.
+        assert report.status in [LeanProofStatus.FULLY_VERIFIED_KERNEL, LeanProofStatus.SYNTAX_OR_TYPE_ERROR]
 
 
 def test_result_family_integration_with_lean_engine():
@@ -86,7 +91,7 @@ def test_result_family_integration_with_lean_engine():
         title="First Law Thermodynamic Invariant",
         role=ResultRole.CORE_THEOREM,
         statement="Energy differential dE equals dQ minus dW",
-        symbolic_expression="dE - (dQ - dW) = 0",
+        symbolic_expression="(a + b)**2 = a**2 + 2*a*b + b**2",
         has_lean_formalization=True,
     )
 
@@ -102,9 +107,10 @@ def test_result_family_integration_with_lean_engine():
     verdict = orchestrator.audit_family_epistemic_integrity()
 
     assert verdict.total_nodes == 2
-    # Node-sound has CAS and synthesized clean Lean scaffolding -> upgraded
+    # The identity is checked by the CAS. No Lean file is supplied, and a synthesized
+    # scaffold never counts as a formalization, so the node is CAS-verified only.
     sound_node = orchestrator.nodes["NODE-SOUND"]
-    assert sound_node.formalization_tier in [FormalizationTier.DUAL_VERIFIED_GROUND_TRUTH, FormalizationTier.LEAN_FORMALIZED, FormalizationTier.EXACT_CAS_VERIFIED]
+    assert sound_node.formalization_tier == FormalizationTier.EXACT_CAS_VERIFIED
 
     # Node-prose remains provisional prose
     prose_node = orchestrator.nodes["NODE-PROSE"]

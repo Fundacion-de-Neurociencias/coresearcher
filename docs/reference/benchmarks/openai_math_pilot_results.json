@@ -1,0 +1,1033 @@
+{
+  "protocol": "docs/reference/benchmarks/OPENAI_MATH_PILOT_PROTOCOL.md",
+  "protocol_sha256": "bec987afae1de13abc1b34c4c94a329b0af76cef53fc717759551c3c721994f6",
+  "coresearcher_commit": "a4b12d59cfe124aea58651b9bb27bcadb79bb58a",
+  "source_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "feasibility": {
+    "pairs_extracted": 19,
+    "extraction_failures": [
+      {
+        "family": "066",
+        "reason": "no theorem found in lean/ComparatorChallenges/CartierChartCompactnessSupport.lean"
+      }
+    ],
+    "mutation_type_coverage": {
+      "M1": 9,
+      "M2": 9,
+      "M3": 10,
+      "M4": 5,
+      "M5": 19
+    },
+    "criterion_pairs": true,
+    "criterion_types": false
+  },
+  "systems": {
+    "S1_coresearcher": {
+      "sensitivity": {
+        "flagged": 8,
+        "n": 52,
+        "value": 0.15384615384615385,
+        "wilson_95": [
+          0.08007685016780322,
+          0.2752408517641015
+        ]
+      },
+      "specificity": {
+        "passed": 17,
+        "n": 19,
+        "value": 0.8947368421052632,
+        "wilson_95": [
+          0.6860591728889099,
+          0.9706414397011299
+        ]
+      },
+      "auroc": 0.5242914979757085,
+      "auroc_family_bootstrap_95": [
+        0.5,
+        0.5607287449392713
+      ],
+      "auroc_null_control": 0.5242914979757085,
+      "by_mutation": {
+        "M1": {
+          "flagged": 2,
+          "n": 9,
+          "sensitivity": 0.2222222222222222,
+          "wilson_95": [
+            0.06322510711784671,
+            0.5474110308930111
+          ]
+        },
+        "M2": {
+          "flagged": 2,
+          "n": 9,
+          "sensitivity": 0.2222222222222222,
+          "wilson_95": [
+            0.06322510711784671,
+            0.5474110308930111
+          ]
+        },
+        "M3": {
+          "flagged": 2,
+          "n": 10,
+          "sensitivity": 0.2,
+          "wilson_95": [
+            0.05668215145437519,
+            0.5098375284633583
+          ]
+        },
+        "M4": {
+          "flagged": 0,
+          "n": 5,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.43448246478317476
+          ]
+        },
+        "M5": {
+          "flagged": 2,
+          "n": 19,
+          "sensitivity": 0.10526315789473684,
+          "wilson_95": [
+            0.02935856029887013,
+            0.31394082711109006
+          ]
+        }
+      }
+    },
+    "B0_always_match": {
+      "sensitivity": {
+        "flagged": 0,
+        "n": 52,
+        "value": 0.0,
+        "wilson_95": [
+          0.0,
+          0.06879223612386234
+        ]
+      },
+      "specificity": {
+        "passed": 19,
+        "n": 19,
+        "value": 1.0,
+        "wilson_95": [
+          0.8318207759473837,
+          1.0
+        ]
+      },
+      "auroc": 0.5,
+      "auroc_family_bootstrap_95": [
+        0.5,
+        0.5
+      ],
+      "auroc_null_control": 0.5,
+      "by_mutation": {
+        "M1": {
+          "flagged": 0,
+          "n": 9,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2991450484195441
+          ]
+        },
+        "M2": {
+          "flagged": 0,
+          "n": 9,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2991450484195441
+          ]
+        },
+        "M3": {
+          "flagged": 0,
+          "n": 10,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.2775327998628892
+          ]
+        },
+        "M4": {
+          "flagged": 0,
+          "n": 5,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.43448246478317476
+          ]
+        },
+        "M5": {
+          "flagged": 0,
+          "n": 19,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.16817922405261626
+          ]
+        }
+      }
+    },
+    "B1_numeric": {
+      "sensitivity": {
+        "flagged": 14,
+        "n": 52,
+        "value": 0.2692307692307692,
+        "wilson_95": [
+          0.16768960295166516,
+          0.40252219833627134
+        ]
+      },
+      "specificity": {
+        "passed": 16,
+        "n": 19,
+        "value": 0.8421052631578947,
+        "wilson_95": [
+          0.6243452472967093,
+          0.9447952836146585
+        ]
+      },
+      "auroc": 0.5531376518218624,
+      "auroc_family_bootstrap_95": [
+        0.5194866171839856,
+        0.5884002770083102
+      ],
+      "auroc_null_control": 0.5222672064777328,
+      "by_mutation": {
+        "M1": {
+          "flagged": 5,
+          "n": 9,
+          "sensitivity": 0.5555555555555556,
+          "wilson_95": [
+            0.26665129349549305,
+            0.8112214789023355
+          ]
+        },
+        "M2": {
+          "flagged": 3,
+          "n": 9,
+          "sensitivity": 0.3333333333333333,
+          "wilson_95": [
+            0.1205838183869109,
+            0.6457978644196036
+          ]
+        },
+        "M3": {
+          "flagged": 3,
+          "n": 10,
+          "sensitivity": 0.3,
+          "wilson_95": [
+            0.10779126740630099,
+            0.6032218525388546
+          ]
+        },
+        "M4": {
+          "flagged": 0,
+          "n": 5,
+          "sensitivity": 0.0,
+          "wilson_95": [
+            0.0,
+            0.43448246478317476
+          ]
+        },
+        "M5": {
+          "flagged": 3,
+          "n": 19,
+          "sensitivity": 0.15789473684210525,
+          "wilson_95": [
+            0.05520471638534141,
+            0.37565475270329074
+          ]
+        }
+      }
+    }
+  },
+  "criteria": {
+    "feasibility_pairs": true,
+    "feasibility_mutation_types": false,
+    "h1_s1_auroc_lower_bound_above_half": false
+  },
+  "rows": [
+    {
+      "family": "025",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "025",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "025",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "025",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "025",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "103",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "103",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "115",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "115",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "115",
+      "mutation": "M4",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "115",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "144",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "144",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "174",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "174",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "186",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "186",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 1.0
+    },
+    {
+      "family": "186",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "186",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "186",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "190",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 2.0
+    },
+    {
+      "family": "190",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 3.0
+    },
+    {
+      "family": "190",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 2.0
+    },
+    {
+      "family": "190",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 2.0
+    },
+    {
+      "family": "190",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 2.0
+    },
+    {
+      "family": "231",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "231",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "231",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "231",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "231",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "238",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": true,
+      "s1_score": 0.9,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "238",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.9,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "238",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.9,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "238",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.9,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "238",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.9,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 9.0
+    },
+    {
+      "family": "243",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "243",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "243",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "245",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "245",
+      "mutation": "M4",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "245",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "246",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "246",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "246",
+      "mutation": "M4",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "246",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "273",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "273",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": true,
+      "b1_score": 1.0
+    },
+    {
+      "family": "273",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "273",
+      "mutation": "M4",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "273",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "275",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "275",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "277",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "277",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "277",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "277",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "277",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "327",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "327",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "331",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": true,
+      "s1_score": 0.3,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "331",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.3,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "331",
+      "mutation": "M2",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.3,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "331",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.3,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "331",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": true,
+      "s1_score": 0.3,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "354",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "354",
+      "mutation": "M1",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "354",
+      "mutation": "M3",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "354",
+      "mutation": "M4",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "354",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "365",
+      "mutation": "ORIGINAL",
+      "label": 0,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    },
+    {
+      "family": "365",
+      "mutation": "M5",
+      "label": 1,
+      "s1_flag": false,
+      "s1_score": 0.0,
+      "b0_flag": false,
+      "b0_score": 0.0,
+      "b1_flag": false,
+      "b1_score": 0.0
+    }
+  ]
+}

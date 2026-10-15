@@ -240,6 +240,13 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "formalization_gate",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "formalizer",
       "scripts": true,
       "tests": true

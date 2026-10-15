@@ -80,10 +80,11 @@ def test_formalize_endpoint_with_a_fake_model(api_client, monkeypatch):
         def __init__(self, *args, **kwargs):
             pass
 
-        def complete(self, messages):
+        def complete(self, messages, **kwargs):
             return "```json\n" + json.dumps({k: v for k, v in CARRIER_LIKE.items() if k != "hypothesis_id"}) + "\n```"
 
     monkeypatch.setattr(hypotheses_router, "ChatClient", FakeClient)
+    monkeypatch.delenv("FORMALIZER_GATE_MODELS", raising=False)
     resp = api_client.post(
         "/api/hypotheses/formalize",
         json={
@@ -95,4 +96,5 @@ def test_formalize_endpoint_with_a_fake_model(api_client, monkeypatch):
     assert resp.status_code == 200
     body = resp.json()
     assert body["status"] == "PARSED" and body["draft"] is True
+    assert body["formalization_gate"]["status"] == "CONSISTENT"
     assert body["comparisons"][0]["relation"] == "EQUIVALENT"

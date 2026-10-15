@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 13 |
+| Integrated | Used by the API and covered by tests | 14 |
 | Tested | Covered by tests, not reachable from the API | 24 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -48,6 +48,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
 | `formal_smt` | Tested | - | yes | - |
+| `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
 | `grounded_search_sensor` | Exercised | - | - | yes |

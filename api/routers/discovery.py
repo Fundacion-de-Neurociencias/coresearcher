@@ -473,7 +473,7 @@ def _workbench_formal(req: LaunchWorkbenchRequest):
 
     None when the request carries no formal hypothesis and does not ask to formalize the question.
     """
-    from api.routers.hypotheses import _to_hypothesis, formal_block, run_formalizer
+    from api.routers.hypotheses import _to_hypothesis, formal_block, gated_payload, run_formalizer
     from python.discovery import alzheimer_formal_scenario
     from python.discovery.formal_hypothesis import FormalHypothesisError
 
@@ -483,18 +483,11 @@ def _workbench_formal(req: LaunchWorkbenchRequest):
         if req.formal_hypothesis is not None:
             return {**base, "source": "request", **formal_block(_to_hypothesis(req.formal_hypothesis), rivals)}
         if req.formalize_question:
-            result = run_formalizer(req.question, "H-WORKBENCH", alzheimer_formal_scenario.variable_schema())
-            block = {
-                **base,
-                "source": "formalizer",
-                "draft": True,
-                "status": result.status.value,
-                "error": result.error,
-                "formal_hypothesis": result.data,
-            }
-            if result.hypothesis is not None and result.status.value == "PARSED":
-                block.update(formal_block(result.hypothesis, rivals))
-            return block
+            # ADR-DISCOVERY-063: the formal block only carries an evaluation when the self-consistency gate passes.
+            result = run_formalizer(
+                req.question, "H-WORKBENCH", alzheimer_formal_scenario.variable_schema(), req.formalizer_samples
+            )
+            return {**base, "source": "formalizer", **gated_payload(result, rivals)}
     except FormalHypothesisError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return None

@@ -213,7 +213,7 @@
       "api": true,
       "level": "Integrated",
       "module": "formal_hypothesis",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

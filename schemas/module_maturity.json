@@ -219,6 +219,20 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "formal_lean",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "formal_smt",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "frontier_math_flywheel",
       "scripts": false,
       "tests": true

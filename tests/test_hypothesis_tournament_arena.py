@@ -8,6 +8,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from api.server import app
+from api.testing import authenticated_client
 from python.discovery.hypothesis_tournament_arena import (
     DebateAxis,
     DebateMatchResult,
@@ -20,7 +21,7 @@ from python.discovery.hypothesis_tournament_arena import (
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    return authenticated_client(app)
 
 
 def test_pairwise_debate_decisive_victory():
@@ -219,3 +220,19 @@ def test_tournament_api_endpoints(client):
     assert t_data["tournament_id"] == "api-tourney-1"
     assert t_data["top_hypothesis"]["hypothesis_id"] == "cand-1"
     assert t_data["tournament_hash"].startswith("sha256:")
+
+
+def test_tournament_endpoints_require_api_key_and_bound_inputs(api_client):
+
+    from api.server import app
+
+    candidate = {"hypothesis_id": "H1", "title": "t", "statement": "s"}
+    body = {"tournament_id": "T", "candidates": [candidate, dict(candidate, hypothesis_id="H2")]}
+    anonymous = TestClient(app, client=("10.2.2.2", 1))
+    assert anonymous.post("/api/discovery/tournament/run-tournament", json=body).status_code == 401
+    assert api_client.post("/api/discovery/tournament/run-tournament", json=body).status_code == 200
+
+    too_many_rounds = dict(body, rounds=1000)
+    assert api_client.post("/api/discovery/tournament/run-tournament", json=too_many_rounds).status_code == 422
+    out_of_range = dict(body, candidates=[dict(candidate, evidence_score=7.0), dict(candidate, hypothesis_id="H2")])
+    assert api_client.post("/api/discovery/tournament/run-tournament", json=out_of_range).status_code == 422

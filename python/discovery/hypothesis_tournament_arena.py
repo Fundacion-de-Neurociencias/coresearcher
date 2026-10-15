@@ -5,6 +5,10 @@ Inspired by:
 Google DeepMind, Google Research & Google Labs (Nature, 2026): "Co-Scientist: A multi-agent AI partner to accelerate research"
 (Idea Tournament via Pairwise Debate & Elo Ranking).
 
+Review note (2026-10-15): the four axis scores are supplied by the caller; this module does not compute them.
+A match is a weighted difference of those scores, so the ranking follows the scores themselves and Elo only
+adds match-order effects. See ADR-DISCOVERY-058 (review section) and claims register row 22.
+
 In contrast to cloud-dependent narrative consensus engines, CoResearcher's Tournament Arena:
 1. Conducts pairwise comparative debates evaluated against rigorous non-generative epistemic axes:
    - Empirical Evidence Grounding (citations, UniProt/ChEMBL bioactivity, biological program linkage).
@@ -32,6 +36,7 @@ from python.observer.scientific_ledger import ScientificLedger
 
 class DebateAxis(str, enum.Enum):
     """The four non-generative axes of scientific pairwise debate."""
+
     EVIDENCE_GROUNDING = "EVIDENCE_GROUNDING"
     PHYSICAL_CONSISTENCY = "PHYSICAL_CONSISTENCY"
     STATE_SPACE_REDUCTION = "STATE_SPACE_REDUCTION"
@@ -41,14 +46,15 @@ class DebateAxis(str, enum.Enum):
 @dataclass
 class TournamentHypothesis:
     """A scientific hypothesis participating in the Elo tournament."""
+
     hypothesis_id: str
     title: str
     statement: str
     domain: str
-    evidence_score: float = 0.5          # [0.0, 1.0] Grounding strength
+    evidence_score: float = 0.5  # [0.0, 1.0] Grounding strength
     physical_consistency_score: float = 0.5  # [0.0, 1.0] Physical court compliance
-    delta_omega_potential: float = 0.5   # [0.0, 1.0] State-space volume reduction
-    falsifiability_score: float = 0.5    # [0.0, 1.0] Popperian falsifiability & testability
+    delta_omega_potential: float = 0.5  # [0.0, 1.0] State-space volume reduction
+    falsifiability_score: float = 0.5  # [0.0, 1.0] Popperian falsifiability & testability
     elo_rating: float = 1200.0
     matches_played: int = 0
     wins: int = 0
@@ -78,6 +84,7 @@ class TournamentHypothesis:
 @dataclass
 class DebateMatchResult:
     """Outcome and detailed breakdown of a pairwise debate between two hypotheses."""
+
     match_id: str
     hypothesis_a_id: str
     hypothesis_b_id: str
@@ -107,6 +114,7 @@ class DebateMatchResult:
 @dataclass
 class TournamentReport:
     """Final consolidated summary of a hypothesis tournament."""
+
     tournament_id: str
     domain: str
     total_matches: int

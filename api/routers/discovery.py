@@ -695,7 +695,7 @@ def run_flywheel_cycle_endpoint(req: MathematicalFlywheelCycleRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/api/discovery/tournament/debate-match")
+@router.post("/api/discovery/tournament/debate-match", dependencies=[Depends(require_api_key)])
 def debate_match_endpoint(req: DebateMatchRequest):
     """
     Hypothesis Tournament Arena: Pairwise Debate Match (ADR-DISCOVERY-058).
@@ -739,7 +739,7 @@ def debate_match_endpoint(req: DebateMatchRequest):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/api/discovery/tournament/run-tournament")
+@router.post("/api/discovery/tournament/run-tournament", dependencies=[Depends(require_api_key)])
 def run_tournament_endpoint(req: RunTournamentRequest):
     """
     Hypothesis Tournament Arena: Round-Robin Tournament (ADR-DISCOVERY-058).

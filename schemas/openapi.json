@@ -1248,6 +1248,8 @@
           },
           "k_factor": {
             "default": 32.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 100.0,
             "title": "K Factor",
             "type": "number"
           },
@@ -3508,6 +3510,8 @@
             "items": {
               "$ref": "#/components/schemas/TournamentHypothesisInput"
             },
+            "maxItems": 50,
+            "minItems": 2,
             "title": "Candidates",
             "type": "array"
           },
@@ -3518,11 +3522,15 @@
           },
           "k_factor": {
             "default": 32.0,
+            "exclusiveMinimum": 0.0,
+            "maximum": 100.0,
             "title": "K Factor",
             "type": "number"
           },
           "rounds": {
             "default": 1,
+            "maximum": 10.0,
+            "minimum": 1.0,
             "title": "Rounds",
             "type": "integer"
           },
@@ -3729,6 +3737,8 @@
         "properties": {
           "delta_omega_potential": {
             "default": 0.5,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "title": "Delta Omega Potential",
             "type": "number"
           },
@@ -3739,16 +3749,22 @@
           },
           "elo_rating": {
             "default": 1200.0,
+            "maximum": 4000.0,
+            "minimum": 0.0,
             "title": "Elo Rating",
             "type": "number"
           },
           "evidence_score": {
             "default": 0.5,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "title": "Evidence Score",
             "type": "number"
           },
           "falsifiability_score": {
             "default": 0.5,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "title": "Falsifiability Score",
             "type": "number"
           },
@@ -3758,6 +3774,8 @@
           },
           "physical_consistency_score": {
             "default": 0.5,
+            "maximum": 1.0,
+            "minimum": 0.0,
             "title": "Physical Consistency Score",
             "type": "number"
           },
@@ -6724,6 +6742,11 @@
             "description": "Validation Error"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Debate Match Endpoint"
       }
     },
@@ -6761,6 +6784,11 @@
             "description": "Validation Error"
           }
         },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "summary": "Run Tournament Endpoint"
       }
     },

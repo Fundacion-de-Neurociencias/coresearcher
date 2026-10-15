@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 # Request Models
@@ -667,26 +667,28 @@ class TournamentHypothesisInput(BaseModel):
     title: str
     statement: str
     domain: str = "BIOMEDICINE"
-    evidence_score: float = 0.5
-    physical_consistency_score: float = 0.5
-    delta_omega_potential: float = 0.5
-    falsifiability_score: float = 0.5
-    elo_rating: float = 1200.0
+    # Axis scores are supplied by the caller; the arena does not compute them.
+    evidence_score: float = Field(0.5, ge=0.0, le=1.0)
+    physical_consistency_score: float = Field(0.5, ge=0.0, le=1.0)
+    delta_omega_potential: float = Field(0.5, ge=0.0, le=1.0)
+    falsifiability_score: float = Field(0.5, ge=0.0, le=1.0)
+    elo_rating: float = Field(1200.0, ge=0.0, le=4000.0)
 
 
 class DebateMatchRequest(BaseModel):
     hypothesis_a: TournamentHypothesisInput
     hypothesis_b: TournamentHypothesisInput
     match_id: Optional[str] = None
-    k_factor: float = 32.0
+    k_factor: float = Field(32.0, gt=0.0, le=100.0)
 
 
 class RunTournamentRequest(BaseModel):
     tournament_id: str
     domain: str = "BIOMEDICINE"
-    candidates: List[TournamentHypothesisInput]
-    rounds: int = 1
-    k_factor: float = 32.0
+    # Bounded: the cost grows with rounds x candidates^2.
+    candidates: List[TournamentHypothesisInput] = Field(..., min_length=2, max_length=50)
+    rounds: int = Field(1, ge=1, le=10)
+    k_factor: float = Field(32.0, gt=0.0, le=100.0)
 
 
 class FormalVariableModel(BaseModel):

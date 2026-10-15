@@ -1,0 +1,661 @@
+{
+  "status": "SHOWCASE: written by the CoResearcher maintainers from the Sakana rubric text (arXiv:2610.18933, G.4)",
+  "source": "arXiv:2610.18933, appendix G.4 and Table 6",
+  "main_claim": {
+    "L1-W1": {
+      "depth": 1,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L1-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L2-W1": {
+      "depth": 2,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L3-W1": {
+      "depth": 3,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L4-W1": {
+      "depth": 4,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L4-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L4-W1-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L1-W2": {
+      "depth": 1,
+      "width": 2,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L1-W2-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L2-W2": {
+      "depth": 2,
+      "width": 2,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L2-W2-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L2-W2-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L3-W2": {
+      "depth": 3,
+      "width": 2,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L3-W2-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L3-W2-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    }
+  },
+  "variants": {
+    "L2-W1 without W>=0": {
+      "depth": 2,
+      "width": 1,
+      "dropped": [
+        "Wpp>=0",
+        "Wnp>=0",
+        "Wnn>=0",
+        "Wpn>=0"
+      ],
+      "status": "REFUTED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-sign-without-Wpp-Wnp-Wnn-Wpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": -1,
+            "sg": -1,
+            "Wpp_2_0_0": -1,
+            "Wnp_2_0_0": -1,
+            "dp_1_0": 1,
+            "sp_1_0": -1,
+            "dn_1_0": 1,
+            "sn_1_0": 1,
+            "dp_2_0": 1,
+            "sp_2_0": 1,
+            "xp_0_0": -1,
+            "xn_0_0": -1,
+            "xp_1_0": 1,
+            "xn_1_0": 1
+          },
+          "violated_claims": [
+            "(-1 * xp_0_0 * dp_1_0 * sg) * (e * 1 * xp_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dp_1_0 * sg) * (e * -1 * xn_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dn_1_0 * sg) * (e * 1 * xn_0_0 * dn_1_0 * sn_1_0) <= 0"
+          ]
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-polarity-without-Wpp-Wnp-Wnn-Wpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": 1,
+            "sg": 1,
+            "Wpp_2_0_0": -1,
+            "Wnp_2_0_0": -1,
+            "sp_1_0": -1,
+            "sn_1_0": 1,
+            "dp_2_0": 1,
+            "sp_2_0": 1
+          },
+          "violated_claims": [
+            "sp_1_0 >= 0",
+            "sn_1_0 <= 0"
+          ]
+        }
+      }
+    },
+    "L2-W1 without f'>=0": {
+      "depth": 2,
+      "width": 1,
+      "dropped": [
+        "fprime_p>=0",
+        "fprime_n>=0"
+      ],
+      "status": "REFUTED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-sign-without-fpp-fpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": -1,
+            "sg": -1,
+            "Wpp_2_0_0": 1,
+            "Wnp_2_0_0": 1,
+            "dp_1_0": 1,
+            "sp_1_0": -1,
+            "dn_1_0": 1,
+            "sn_1_0": 1,
+            "dp_2_0": -1,
+            "sp_2_0": 1,
+            "xp_0_0": -1,
+            "xn_0_0": -1,
+            "xp_1_0": 1,
+            "xn_1_0": 1
+          },
+          "violated_claims": [
+            "(-1 * xp_0_0 * dp_1_0 * sg) * (e * 1 * xp_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dp_1_0 * sg) * (e * -1 * xn_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dn_1_0 * sg) * (e * 1 * xn_0_0 * dn_1_0 * sn_1_0) <= 0"
+          ]
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-polarity-without-fpp-fpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "Wpp_2_0_0": 1,
+            "sp_1_0": -1,
+            "dp_2_0": -1,
+            "sp_2_0": 1
+          },
+          "violated_claims": [
+            "sp_1_0 >= 0"
+          ]
+        }
+      }
+    },
+    "L2-W1 sign-equivalent to W^T transport": {
+      "depth": 2,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L2-W1-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L2-W1 value-equivalent to W^T transport": {
+      "hypothesis_id": "ED-TRANSPORT-L2-W1",
+      "backend": "smt",
+      "content_verdict": "FALSIFIABLE",
+      "status": "REFUTED",
+      "conflicting_assumption_sets": [],
+      "witness": {
+        "e": 1,
+        "sg": 1,
+        "Wpp_1_0_0": 1,
+        "Wnp_1_0_0": 1,
+        "Wnn_1_0_0": 1,
+        "Wpn_1_0_0": 1,
+        "Wpp_2_0_0": 0.5,
+        "Wnp_2_0_0": 1,
+        "Wnn_2_0_0": 1,
+        "Wpn_2_0_0": 1,
+        "dp_1_0": 1,
+        "sp_1_0": 0.5,
+        "dn_1_0": 1,
+        "sn_1_0": -1,
+        "dp_2_0": 1,
+        "sp_2_0": 1,
+        "dn_2_0": 1,
+        "xp_0_0": -1,
+        "xn_0_0": 1,
+        "xp_1_0": -1,
+        "xn_1_0": 1
+      },
+      "violated_claims": [
+        "(-1 * xp_1_0 * dp_2_0 * sg) * (e * 1 * xp_0_0 * dp_1_0 * sp_1_0) == (-1 * xp_0_0 * dp_1_0 * sg) * (e * 1 * xp_1_0 * dp_2_0 * sp_2_0)"
+      ]
+    },
+    "L3-W1 without W>=0": {
+      "depth": 3,
+      "width": 1,
+      "dropped": [
+        "Wpp>=0",
+        "Wnp>=0",
+        "Wnn>=0",
+        "Wpn>=0"
+      ],
+      "status": "REFUTED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-sign-without-Wpp-Wnp-Wnn-Wpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": 1,
+            "sg": 1,
+            "Wpp_2_0_0": 1,
+            "Wnn_2_0_0": 1,
+            "Wpp_3_0_0": -1,
+            "Wnp_3_0_0": -1,
+            "dp_1_0": 1,
+            "sp_1_0": -1,
+            "dn_1_0": 1,
+            "sn_1_0": 1,
+            "dp_2_0": 1,
+            "sp_2_0": -1,
+            "dn_2_0": 1,
+            "sn_2_0": 1,
+            "dp_3_0": 1,
+            "sp_3_0": 1,
+            "xp_0_0": -1,
+            "xn_0_0": -1,
+            "xp_1_0": -1,
+            "xn_1_0": -1,
+            "xp_2_0": 1,
+            "xn_2_0": 1
+          },
+          "violated_claims": [
+            "(-1 * xp_0_0 * dp_1_0 * sg) * (e * 1 * xp_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dp_1_0 * sg) * (e * -1 * xn_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dn_1_0 * sg) * (e * 1 * xn_0_0 * dn_1_0 * sn_1_0) <= 0"
+          ]
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-polarity-without-Wpp-Wnp-Wnn-Wpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": 1,
+            "sg": 1,
+            "Wnn_2_0_0": 1,
+            "Wpn_2_0_0": 1,
+            "Wpp_3_0_0": -1,
+            "Wnp_3_0_0": -1,
+            "sp_1_0": -1,
+            "sn_1_0": 1,
+            "sp_2_0": -1,
+            "dn_2_0": 1,
+            "sn_2_0": 1,
+            "dp_3_0": 1,
+            "sp_3_0": 1
+          },
+          "violated_claims": [
+            "sp_1_0 >= 0",
+            "sn_1_0 <= 0",
+            "sp_2_0 >= 0"
+          ]
+        }
+      }
+    },
+    "L3-W1 without f'>=0": {
+      "depth": 3,
+      "width": 1,
+      "dropped": [
+        "fprime_p>=0",
+        "fprime_n>=0"
+      ],
+      "status": "REFUTED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-sign-without-fpp-fpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "e": 1,
+            "sg": 1,
+            "Wnp_2_0_0": 1,
+            "Wpn_2_0_0": 1,
+            "Wpp_3_0_0": 1,
+            "Wnp_3_0_0": 1,
+            "dp_1_0": 1,
+            "sp_1_0": -1,
+            "sn_1_0": -1,
+            "dp_2_0": -1,
+            "sp_2_0": -1,
+            "dn_2_0": 1,
+            "sn_2_0": 1,
+            "dp_3_0": -1,
+            "sp_3_0": 1,
+            "xp_0_0": -1,
+            "xn_0_0": -1,
+            "xp_1_0": -1,
+            "xn_1_0": -1,
+            "xp_2_0": 1,
+            "xn_2_0": 1
+          },
+          "violated_claims": [
+            "(-1 * xp_0_0 * dp_1_0 * sg) * (e * 1 * xp_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(1 * xn_0_0 * dp_1_0 * sg) * (e * -1 * xn_0_0 * dp_1_0 * sp_1_0) <= 0",
+            "(-1 * xp_1_0 * dp_2_0 * sg) * (e * 1 * xp_1_0 * dp_2_0 * sp_2_0) <= 0"
+          ]
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-polarity-without-fpp-fpn",
+          "backend": "smt",
+          "content_verdict": "FALSIFIABLE",
+          "status": "REFUTED",
+          "conflicting_assumption_sets": [],
+          "witness": {
+            "Wnp_3_0_0": 1,
+            "sn_2_0": 1,
+            "dp_3_0": -1,
+            "sp_3_0": 1
+          },
+          "violated_claims": [
+            "sn_2_0 <= 0"
+          ]
+        }
+      }
+    },
+    "L3-W1 sign-equivalent to W^T transport": {
+      "depth": 3,
+      "width": 1,
+      "dropped": [],
+      "status": "PROVED",
+      "parts": {
+        "sign": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-sign",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        },
+        "polarity": {
+          "hypothesis_id": "ED-POLARITY-L3-W1-polarity",
+          "backend": "smt",
+          "content_verdict": "UNFALSIFIABLE",
+          "status": "PROVED",
+          "conflicting_assumption_sets": [],
+          "witness": null,
+          "violated_claims": []
+        }
+      }
+    },
+    "L3-W1 value-equivalent to W^T transport": {
+      "hypothesis_id": "ED-TRANSPORT-L3-W1",
+      "backend": "smt",
+      "content_verdict": "FALSIFIABLE",
+      "status": "REFUTED",
+      "conflicting_assumption_sets": [],
+      "witness": {
+        "e": 1,
+        "sg": 1,
+        "Wpp_1_0_0": 1,
+        "Wnp_1_0_0": 1,
+        "Wnn_1_0_0": 1,
+        "Wpn_1_0_0": 1,
+        "Wpp_2_0_0": 1,
+        "Wnp_2_0_0": 1,
+        "Wnn_2_0_0": 1,
+        "Wpn_2_0_0": 1,
+        "Wpp_3_0_0": 0.5,
+        "Wnp_3_0_0": 1,
+        "Wnn_3_0_0": 1,
+        "Wpn_3_0_0": 1,
+        "dp_1_0": 1,
+        "sp_1_0": 1.5,
+        "dn_1_0": 1,
+        "sn_1_0": -1.5,
+        "dp_2_0": 1,
+        "sp_2_0": 0.5,
+        "dn_2_0": 1,
+        "sn_2_0": -1,
+        "dp_3_0": 1,
+        "sp_3_0": 1,
+        "dn_3_0": 1,
+        "xp_0_0": 1,
+        "xn_0_0": 1,
+        "xp_1_0": -1,
+        "xn_1_0": 1,
+        "xp_2_0": -1,
+        "xn_2_0": 1
+      },
+      "violated_claims": [
+        "(-1 * xp_2_0 * dp_3_0 * sg) * (e * 1 * xp_1_0 * dp_2_0 * sp_2_0) == (-1 * xp_1_0 * dp_2_0 * sg) * (e * 1 * xp_2_0 * dp_3_0 * sp_3_0)"
+      ]
+    }
+  },
+  "assumption_necessity": {
+    "L1-W1": {
+      "Wpp>=0": "REDUNDANT",
+      "Wnp>=0": "REDUNDANT",
+      "Wnn>=0": "REDUNDANT",
+      "Wpn>=0": "REDUNDANT",
+      "fprime_p>=0": "REDUNDANT",
+      "fprime_n>=0": "REDUNDANT"
+    },
+    "L2-W1": {
+      "Wpp>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wnn>=0": "REDUNDANT",
+      "Wpn>=0": "REDUNDANT",
+      "fprime_p>=0": "NECESSARY",
+      "fprime_n>=0": "REDUNDANT"
+    },
+    "L3-W1": {
+      "Wpp>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wnn>=0": "NECESSARY",
+      "Wpn>=0": "NECESSARY",
+      "fprime_p>=0": "NECESSARY",
+      "fprime_n>=0": "NECESSARY"
+    },
+    "L4-W1": {
+      "Wpp>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wnn>=0": "NECESSARY",
+      "Wpn>=0": "NECESSARY",
+      "fprime_p>=0": "NECESSARY",
+      "fprime_n>=0": "NECESSARY"
+    },
+    "L1-W2": {
+      "Wpp>=0": "REDUNDANT",
+      "Wnp>=0": "REDUNDANT",
+      "Wnn>=0": "REDUNDANT",
+      "Wpn>=0": "REDUNDANT",
+      "fprime_p>=0": "REDUNDANT",
+      "fprime_n>=0": "REDUNDANT"
+    },
+    "L2-W2": {
+      "Wpp>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wnn>=0": "REDUNDANT",
+      "Wpn>=0": "REDUNDANT",
+      "fprime_p>=0": "NECESSARY",
+      "fprime_n>=0": "REDUNDANT"
+    },
+    "L3-W2": {
+      "Wpp>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wnn>=0": "NECESSARY",
+      "Wpn>=0": "NECESSARY",
+      "fprime_p>=0": "NECESSARY",
+      "fprime_n>=0": "NECESSARY"
+    }
+  },
+  "replay": {
+    "random_nonnegative_sigmoid_networks": {
+      "networks": 50,
+      "weights_checked": 2400,
+      "disagreements": 0
+    },
+    "negative_weight_witness": {
+      "weights_checked": 8,
+      "disagreements": [
+        {
+          "weight": "Wpp_1_0_0",
+          "dy_dw": -0.0476007294136771,
+          "ed_predicted": 0.2350037122015945
+        },
+        {
+          "weight": "Wnp_1_0_0",
+          "dy_dw": 0.0476007294136771,
+          "ed_predicted": -0.2350037122015945
+        }
+      ]
+    },
+    "decreasing_activation_witness": {
+      "weights_checked": 8,
+      "disagreements": [
+        {
+          "weight": "Wpp_1_0_0",
+          "dy_dw": -10.000000000509601,
+          "ed_predicted": 2.0
+        },
+        {
+          "weight": "Wnp_1_0_0",
+          "dy_dw": 10.000000000509601,
+          "ed_predicted": -2.0
+        },
+        {
+          "weight": "Wnn_1_0_0",
+          "dy_dw": 5.00000000069889,
+          "ed_predicted": -2.0
+        },
+        {
+          "weight": "Wpn_1_0_0",
+          "dy_dw": -5.00000000069889,
+          "ed_predicted": 2.0
+        }
+      ]
+    }
+  },
+  "seconds": 903.4
+}

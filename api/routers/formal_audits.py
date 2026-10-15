@@ -374,11 +374,6 @@ def audit_reality_firewall(req: AuditRealityFirewallRequest):
     return report.to_dict()
 
 
-# -----------------------------------------------------------------------------
-# 13f. Autonomous Physics Megarepo Epistemic Auditor (ADR-DISCOVERY-028)
-# -----------------------------------------------------------------------------
-
-
 @router.post("/api/discovery/physical-court/audit-theorem", dependencies=[Depends(require_api_key)])
 def audit_physical_theorem(req: AuditTheoremRequest):
     try:

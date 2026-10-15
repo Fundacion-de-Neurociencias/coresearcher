@@ -1,0 +1,51 @@
+{
+  "task_id": "EXAMPLE-001",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "Neurodegeneration (illustrative example of the task format; not a real finding)",
+    "statement": "In people who do not carry APOE4 and have high structural connectivity of cortical hubs, cognitive decline over 36 months is slow.",
+    "rival_statement": "In people who do not carry APOE4, cognitive decline over 36 months is slow, whatever their hub connectivity.",
+    "context": "Hub connectivity is classified as high or low from diffusion MRI. Decline is classified as slow or fast from the change in a cognitive score over 36 months.",
+    "observations_table": {
+      "columns": {
+        "apoe4": "APOE4 status: carrier or non_carrier",
+        "hub": "Cortical hub connectivity: high or low",
+        "decline": "36-month cognitive decline: slow or fast"
+      },
+      "rows": [
+        {"apoe4": "non_carrier", "hub": "high", "decline": "slow"},
+        {"apoe4": "non_carrier", "hub": "low", "decline": "fast"}
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "hypothesis_id": "EXAMPLE-001-H",
+      "variables": [
+        {"name": "apoe4", "domain": ["carrier", "non_carrier"]},
+        {"name": "hub", "domain": ["high", "low"]},
+        {"name": "decline", "domain": ["slow", "fast"]}
+      ],
+      "assumptions": ["apoe4 == 'non_carrier'", "hub == 'high'"],
+      "claims": ["decline == 'slow'"]
+    },
+    "rival": {
+      "hypothesis_id": "EXAMPLE-001-R",
+      "variables": [
+        {"name": "apoe4", "domain": ["carrier", "non_carrier"]},
+        {"name": "hub", "domain": ["high", "low"]},
+        {"name": "decline", "domain": ["slow", "fast"]}
+      ],
+      "assumptions": ["apoe4 == 'non_carrier'"],
+      "claims": ["decline == 'slow'"]
+    },
+    "observations": [
+      {"apoe4": "non_carrier", "hub": "high", "decline": "slow"},
+      {"apoe4": "non_carrier", "hub": "low", "decline": "fast"}
+    ],
+    "proposer_expected": {"Q1": "FALSIFIABLE", "Q2": "COMPATIBLE", "Q3": "NOT_REFUTED", "Q4": "WEAKER"}
+  }
+}

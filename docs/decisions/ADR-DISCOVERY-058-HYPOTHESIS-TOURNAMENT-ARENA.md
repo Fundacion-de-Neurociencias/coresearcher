@@ -34,3 +34,26 @@ We implement `HypothesisEloTournamentOrchestrator` and `PairwiseDebateEngine` (`
 ## Consequences
 - **Positive**: Displaces narrative bias with formal comparative ranking; ensures the top hypotheses promoted to wet-lab protocols or Medicalia clinical guidelines have survived exhaustive adversarial debate.
 - **Sovereignty**: Runs 100% locally on local hardware without cloud dependence.
+
+## Review (2026-10-15)
+
+This ADR was added in a separate session. A review of the code found these gaps between the text above and the
+implementation. The ADR text is kept unchanged as the original record.
+
+- **The axis scores are inputs, not evaluations.** `evidence_score`, `physical_consistency_score`,
+  `delta_omega_potential` and `falsifiability_score` are supplied by the caller. Nothing in the arena consults
+  UniProt or ChEMBL, conservation laws, holonomy or Omega.
+- **A "debate" is a weighted difference of those four numbers** (weights 0.30/0.30/0.25/0.15, draw margin 0.05,
+  both hand-set and unvalidated). There is no multi-agent or adversarial exchange.
+- **Elo adds no information.** Because each match is decided by the fixed scores, the ranking is determined by the
+  weighted score itself; the Elo update only adds dependence on match order. This reproduces the scalar-scoring
+  problem the Context section cites as the motivation.
+- **Not implemented:** top-K ladders and adaptive K-factors (K is a constant).
+- **Scope.** The evidence-grounding axis grades sources and evidence, which the owner has placed outside
+  CoResearcher's formal scope.
+- **Fixed in review:** both endpoints now require the API key, and inputs are bounded (scores in [0, 1], at most
+  50 candidates and 10 rounds), since the cost grows with rounds x candidates² and the endpoints were unauthenticated.
+
+A formal alternative is `HypothesisEvaluator.compare` (ADR-DISCOVERY-059), which decides the logical relation between
+two hypotheses (equivalent, stronger, weaker, incomparable or contradictory) from their content rather than from
+supplied scores.

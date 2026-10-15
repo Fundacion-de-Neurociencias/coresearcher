@@ -463,7 +463,41 @@ def launch_discovery_workbench(req: LaunchWorkbenchRequest):
         iterations=req.iterations or 10,
     )
     workbenches_registry[wb.workbench_id] = wb
-    return wb.to_dict()
+    result = wb.to_dict()
+    result["formal"] = _workbench_formal(req)
+    return result
+
+
+def _workbench_formal(req: LaunchWorkbenchRequest):
+    """ADR-DISCOVERY-061: evaluate the hypothesis as a formal object against the formal Alzheimer rivals.
+
+    None when the request carries no formal hypothesis and does not ask to formalize the question.
+    """
+    from api.routers.hypotheses import _to_hypothesis, formal_block, run_formalizer
+    from python.discovery import alzheimer_formal_scenario
+    from python.discovery.formal_hypothesis import FormalHypothesisError
+
+    rivals = alzheimer_formal_scenario.rival_hypotheses()
+    base = {"rivals_status": alzheimer_formal_scenario.STATUS}
+    try:
+        if req.formal_hypothesis is not None:
+            return {**base, "source": "request", **formal_block(_to_hypothesis(req.formal_hypothesis), rivals)}
+        if req.formalize_question:
+            result = run_formalizer(req.question, "H-WORKBENCH", alzheimer_formal_scenario.variable_schema())
+            block = {
+                **base,
+                "source": "formalizer",
+                "draft": True,
+                "status": result.status.value,
+                "error": result.error,
+                "formal_hypothesis": result.data,
+            }
+            if result.hypothesis is not None and result.status.value == "PARSED":
+                block.update(formal_block(result.hypothesis, rivals))
+            return block
+    except FormalHypothesisError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    return None
 
 
 @router.get("/api/discovery/workbench/{workbench_id}")

@@ -50,8 +50,8 @@ collections. They are interpreted over the Python AST and never passed to `eval`
 
 ## Limitations
 
-- **Finite domains only.** Continuous quantities must be discretised. An SMT back end (for example z3) would lift this
-  limit for linear arithmetic; it is not part of this decision.
+- **Finite domains only.** Continuous quantities had to be discretised. ADR-DISCOVERY-060 lifts this limit with an
+  SMT back end.
 - **Exhaustive enumeration** is capped at 2,000,000 states, and the conflict search at 12 assumptions.
-- **Not yet wired:** CAS and Lean checks of formal consequences, and the conversion of `state_space.py`'s fixed
+- **Not yet wired:** the conversion of `state_space.py`'s fixed
   neurodegeneration Omega and the existing `RivalHypothesis` records into this form.

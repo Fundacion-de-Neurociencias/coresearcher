@@ -28,6 +28,13 @@
       "tests": true
     },
     {
+      "api": true,
+      "level": "Integrated",
+      "module": "alzheimer_formal_scenario",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": false,
       "level": "Prototype",
       "module": "anomaly_discovery_engine",
@@ -213,6 +220,27 @@
       "api": true,
       "level": "Integrated",
       "module": "formal_hypothesis",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "formal_lean",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "formal_smt",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "formalizer",
       "scripts": true,
       "tests": true
     },

@@ -2064,6 +2064,35 @@
         "title": "FileDiffInput",
         "type": "object"
       },
+      "FormalConsequenceRequest": {
+        "properties": {
+          "consequence": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Consequence",
+            "type": "string"
+          },
+          "hypothesis": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "include_lean": {
+            "default": false,
+            "title": "Include Lean",
+            "type": "boolean"
+          },
+          "max_examples": {
+            "default": 5,
+            "title": "Max Examples",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "consequence"
+        ],
+        "title": "FormalConsequenceRequest",
+        "type": "object"
+      },
       "FormalHypothesisModel": {
         "properties": {
           "alternatives": {
@@ -2127,21 +2156,90 @@
       },
       "FormalVariableModel": {
         "properties": {
+          "continuous": {
+            "default": false,
+            "title": "Continuous",
+            "type": "boolean"
+          },
           "domain": {
+            "default": [],
             "items": {},
             "title": "Domain",
             "type": "array"
           },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
           "name": {
             "title": "Name",
             "type": "string"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
           }
         },
         "required": [
-          "name",
-          "domain"
+          "name"
         ],
         "title": "FormalVariableModel",
+        "type": "object"
+      },
+      "FormalizeHypothesisRequest": {
+        "properties": {
+          "hypothesis_id": {
+            "default": "H-FORMALIZED",
+            "title": "Hypothesis Id",
+            "type": "string"
+          },
+          "prose": {
+            "maxLength": 5000,
+            "minLength": 1,
+            "title": "Prose",
+            "type": "string"
+          },
+          "rivals": {
+            "items": {
+              "$ref": "#/components/schemas/FormalHypothesisModel"
+            },
+            "maxItems": 10,
+            "title": "Rivals",
+            "type": "array"
+          },
+          "variable_schema": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FormalVariableModel"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variable Schema"
+          }
+        },
+        "required": [
+          "prose"
+        ],
+        "title": "FormalizeHypothesisRequest",
         "type": "object"
       },
       "FrontierMathTaskInput": {
@@ -2416,6 +2514,21 @@
             ],
             "default": "ALZHEIMER_DISEASE",
             "title": "Disease"
+          },
+          "formal_hypothesis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FormalHypothesisModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formalize_question": {
+            "default": false,
+            "title": "Formalize Question",
+            "type": "boolean"
           },
           "iterations": {
             "anyOf": [
@@ -7114,9 +7227,51 @@
         "summary": "Compare Formal Hypotheses"
       }
     },
+    "/api/hypotheses/entails": {
+      "post": {
+        "description": "Whether a consequence holds wherever the hypothesis applies and its claims hold, with counterexamples.\n\nWith `include_lean`, the response also carries the consequence stated as a Lean 4 theorem. It is not\nkernel-checked by this server.",
+        "operationId": "check_formal_consequence_api_hypotheses_entails_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormalConsequenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Check Formal Consequence"
+      }
+    },
     "/api/hypotheses/evaluate": {
       "post": {
-        "description": "Exact evaluation over the finite state space: content, assumption conflicts and counterexamples.",
+        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.",
         "operationId": "evaluate_formal_hypothesis_api_hypotheses_evaluate_post",
         "requestBody": {
           "content": {
@@ -7154,6 +7309,65 @@
           }
         ],
         "summary": "Evaluate Formal Hypothesis"
+      }
+    },
+    "/api/hypotheses/formalize": {
+      "post": {
+        "description": "Prose -> formal object (by the configured local model) -> exact evaluation and comparison with rivals.\n\nThe formal object is a draft: the researcher must confirm it says what the prose meant before relying on the\nverdicts, which only cover the object.",
+        "operationId": "formalize_hypothesis_api_hypotheses_formalize_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormalizeHypothesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Formalize Hypothesis"
+      }
+    },
+    "/api/hypotheses/scenarios/alzheimer": {
+      "get": {
+        "description": "The demo Alzheimer rivals as formal hypotheses (draft, pending scientist review), evaluated and compared.",
+        "operationId": "alzheimer_formal_scenario_report_api_hypotheses_scenarios_alzheimer_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Alzheimer Formal Scenario Report"
       }
     },
     "/api/observer/ledger": {

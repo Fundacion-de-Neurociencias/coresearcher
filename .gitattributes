@@ -1,2 +1,5 @@
 # Benchmark protocols are hashed; keep their bytes identical on every platform.
 docs/reference/benchmarks/** text eol=lf
+
+# Shell scripts run on Linux; CRLF would break them.
+*.sh text eol=lf

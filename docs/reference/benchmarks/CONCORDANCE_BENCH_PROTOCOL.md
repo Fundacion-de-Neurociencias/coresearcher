@@ -138,12 +138,34 @@ proposer (2,000 resamples), because tasks by one proposer are not independent.
    value as ceiling. Every mismatch is listed for the disagreement audit.
 6. Results are reported separately for tasks rated Q5 = `YES` and Q5 = `PARTIALLY`.
 
+## 7a. Third arm: a local language model judging from the prose
+
+The benchmark asks whether CoResearcher's formal checks add something beyond reading the prose carefully. A
+language model that reads the same prose as the judges is the natural comparison: if it agrees with the gold labels as
+well as CoResearcher does, the formal object adds little for these questions.
+
+- **Model.** Laya, or another model served locally (Ollama or LM Studio on the Lenovo Legion), so confidential tasks
+  never leave the Fundación. The exact model tag is fixed before round 1 and recorded with the results.
+- **Input.** Only the prose arm: statement, context, premises, observation table and rival. Never the formal arm or
+  the proposer's expected answers. The prompt (`concordance-llm-arm-v1` in `concordance_llm_arm.py`) gives the same
+  definitions the judges receive, and its SHA-256 is recorded.
+- **Decoding.** Temperature 0, seed 0, one output per task, no retries. An answer that is missing or outside the
+  answer set is scored as `INVALID` (a disagreement); it is never dropped or re-asked.
+- **Sealing.** The LLM answers are sealed and their SHA-256 recorded in the ledger before any judgment is opened,
+  exactly like CoResearcher's. `concordance_score.py score --llm-answers ... --llm-sha256 ...` refuses a file whose
+  hash differs.
+- **Analysis.** For every question, the LLM–gold kappa with its clustered interval and the LLM–gold Jaccard for
+  itemised answers, reported next to the CoResearcher–gold values. This comparison is descriptive; the
+  pre-registered criterion of section 7 applies to CoResearcher only. The LLM arm is not a judge and never
+  contributes to the gold label.
+
 ## 8. What makes a good task, and balance across answers
 
 A task is accepted when it is:
 
 - **Real:** a hypothesis that could appear in the proposer's field, not a puzzle written for the benchmark.
-- **Formalizable:** its variables can be given finite domains without losing what the hypothesis says (checked by Q5).
+- **Formalizable:** its variables can be given finite domains or real ranges without losing what the hypothesis says
+  (checked by Q5).
 - **Discriminating:** it includes a rival, or observations, or both, so that Q3 or Q4 can be asked.
 
 Kappa is unstable when one answer dominates. Proposers are therefore asked to include some flawed hypotheses as

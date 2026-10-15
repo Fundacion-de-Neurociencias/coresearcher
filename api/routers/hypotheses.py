@@ -7,36 +7,24 @@ from api.schemas import (
     EvaluateFormalHypothesisRequest,
     FormalConsequenceRequest,
     FormalHypothesisModel,
+    FormalizeHypothesisRequest,
 )
 from api.security import require_api_key
+from python.discovery import alzheimer_formal_scenario
 from python.discovery.formal_hypothesis import (
     FormalHypothesisError,
     Hypothesis,
     HypothesisEvaluator,
-    Variable,
+    hypothesis_from_dict,
 )
 from python.discovery.formal_lean import consequence_theorem
+from python.discovery.formalizer import ChatClient, FormalizationStatus, formalize
 
 router = APIRouter()
 
-_SCALARS = (str, int, float, bool)
-
 
 def _to_hypothesis(model: FormalHypothesisModel) -> Hypothesis:
-    variables = []
-    for v in model.variables:
-        if not all(isinstance(value, _SCALARS) for value in v.domain):
-            raise FormalHypothesisError(f"Domain of {v.name!r} must contain only strings, numbers or booleans.")
-        variables.append(Variable(v.name, tuple(v.domain), v.continuous, v.lower, v.upper))
-    return Hypothesis(
-        hypothesis_id=model.hypothesis_id,
-        variables=variables,
-        claims=model.claims,
-        assumptions=model.assumptions,
-        scope=model.scope,
-        statement=model.statement,
-        alternatives=model.alternatives,
-    )
+    return hypothesis_from_dict(model.model_dump())
 
 
 def _bounded(n: int) -> int:
@@ -82,4 +70,58 @@ def check_formal_consequence(req: FormalConsequenceRequest):
             payload["lean_status"] = "NOT_KERNEL_CHECKED"
     except FormalHypothesisError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    return payload
+
+
+@router.get("/api/hypotheses/scenarios/alzheimer")
+def alzheimer_formal_scenario_report():
+    """The demo Alzheimer rivals as formal hypotheses (draft, pending scientist review), evaluated and compared."""
+    return alzheimer_formal_scenario.scenario_report()
+
+
+def formal_block(hypothesis: Hypothesis, rivals: list) -> dict:
+    """Evaluation of a formal hypothesis and its comparison with every rival over the same state space."""
+    comparisons = []
+    for rival in rivals:
+        try:
+            comparisons.append(HypothesisEvaluator.compare(hypothesis, rival, max_examples=3).to_dict())
+        except FormalHypothesisError as exc:
+            comparisons.append(
+                {
+                    "hypothesis_a": hypothesis.hypothesis_id,
+                    "hypothesis_b": rival.hypothesis_id,
+                    "relation": None,
+                    "error": str(exc),
+                }
+            )
+    return {"evaluation": HypothesisEvaluator.evaluate(hypothesis).to_dict(), "comparisons": comparisons}
+
+
+def run_formalizer(prose: str, hypothesis_id: str, schema):
+    """Calls the configured formalizer model; HTTP 503 when none is configured, 502 when it cannot be reached."""
+    try:
+        client = ChatClient()
+    except ValueError as exc:
+        raise HTTPException(status_code=503, detail=f"Formalizer not configured: {exc}") from exc
+    try:
+        return formalize(prose, client, hypothesis_id, schema)
+    except Exception as exc:  # Transport and HTTP errors from the model endpoint.
+        raise HTTPException(status_code=502, detail=f"Formalizer endpoint failed: {type(exc).__name__}") from exc
+
+
+@router.post("/api/hypotheses/formalize", dependencies=[Depends(require_api_key)])
+def formalize_hypothesis(req: FormalizeHypothesisRequest):
+    """Prose -> formal object (by the configured local model) -> exact evaluation and comparison with rivals.
+
+    The formal object is a draft: the researcher must confirm it says what the prose meant before relying on the
+    verdicts, which only cover the object.
+    """
+    schema = [v.model_dump() for v in req.variable_schema] if req.variable_schema is not None else None
+    result = run_formalizer(req.prose, req.hypothesis_id, schema)
+    payload = {"status": result.status.value, "error": result.error, "formal_hypothesis": result.data, "draft": True}
+    if result.status == FormalizationStatus.PARSED:
+        try:
+            payload.update(formal_block(result.hypothesis, [_to_hypothesis(r) for r in req.rivals]))
+        except FormalHypothesisError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
     return payload

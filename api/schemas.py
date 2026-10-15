@@ -222,6 +222,9 @@ class LaunchWorkbenchRequest(BaseModel):
     topic: Optional[str] = "Preclinical Neurodegeneration"
     disease: Optional[str] = "ALZHEIMER_DISEASE"
     iterations: Optional[int] = 10
+    # ADR-DISCOVERY-061: the hypothesis as a formal object, or ask the formalizer to build one from `question`.
+    formal_hypothesis: Optional["FormalHypothesisModel"] = None
+    formalize_question: bool = False
 
 
 class AuditEvidenceRequest(BaseModel):
@@ -721,8 +724,18 @@ class CompareFormalHypothesesRequest(BaseModel):
     max_examples: int = 5
 
 
+class FormalizeHypothesisRequest(BaseModel):
+    prose: str = Field(min_length=1, max_length=5000)
+    hypothesis_id: str = "H-FORMALIZED"
+    variable_schema: Optional[List[FormalVariableModel]] = None
+    rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+
+
 class FormalConsequenceRequest(BaseModel):
     hypothesis: FormalHypothesisModel
     consequence: str = Field(min_length=1, max_length=2000)
     max_examples: int = 5
     include_lean: bool = False
+
+
+LaunchWorkbenchRequest.model_rebuild()

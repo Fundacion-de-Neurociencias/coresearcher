@@ -15,37 +15,113 @@
         "decline": "36-month cognitive decline: slow or fast"
       },
       "rows": [
-        {"apoe4": "non_carrier", "hub": "high", "decline": "slow"},
-        {"apoe4": "non_carrier", "hub": "low", "decline": "fast"}
+        {
+          "apoe4": "non_carrier",
+          "hub": "high",
+          "decline": "slow"
+        },
+        {
+          "apoe4": "non_carrier",
+          "hub": "low",
+          "decline": "fast"
+        }
       ],
       "provenance": "illustrative"
+    },
+    "premises": {
+      "P1": "The person does not carry APOE4.",
+      "P2": "The person has high cortical hub connectivity."
     }
   },
   "formal": {
     "hypothesis": {
       "hypothesis_id": "EXAMPLE-001-H",
       "variables": [
-        {"name": "apoe4", "domain": ["carrier", "non_carrier"]},
-        {"name": "hub", "domain": ["high", "low"]},
-        {"name": "decline", "domain": ["slow", "fast"]}
+        {
+          "name": "apoe4",
+          "domain": [
+            "carrier",
+            "non_carrier"
+          ]
+        },
+        {
+          "name": "hub",
+          "domain": [
+            "high",
+            "low"
+          ]
+        },
+        {
+          "name": "decline",
+          "domain": [
+            "slow",
+            "fast"
+          ]
+        }
       ],
-      "assumptions": ["apoe4 == 'non_carrier'", "hub == 'high'"],
-      "claims": ["decline == 'slow'"]
+      "assumptions": [
+        "apoe4 == 'non_carrier'",
+        "hub == 'high'"
+      ],
+      "claims": [
+        "decline == 'slow'"
+      ]
     },
     "rival": {
       "hypothesis_id": "EXAMPLE-001-R",
       "variables": [
-        {"name": "apoe4", "domain": ["carrier", "non_carrier"]},
-        {"name": "hub", "domain": ["high", "low"]},
-        {"name": "decline", "domain": ["slow", "fast"]}
+        {
+          "name": "apoe4",
+          "domain": [
+            "carrier",
+            "non_carrier"
+          ]
+        },
+        {
+          "name": "hub",
+          "domain": [
+            "high",
+            "low"
+          ]
+        },
+        {
+          "name": "decline",
+          "domain": [
+            "slow",
+            "fast"
+          ]
+        }
       ],
-      "assumptions": ["apoe4 == 'non_carrier'"],
-      "claims": ["decline == 'slow'"]
+      "assumptions": [
+        "apoe4 == 'non_carrier'"
+      ],
+      "claims": [
+        "decline == 'slow'"
+      ]
     },
     "observations": [
-      {"apoe4": "non_carrier", "hub": "high", "decline": "slow"},
-      {"apoe4": "non_carrier", "hub": "low", "decline": "fast"}
+      {
+        "apoe4": "non_carrier",
+        "hub": "high",
+        "decline": "slow"
+      },
+      {
+        "apoe4": "non_carrier",
+        "hub": "low",
+        "decline": "fast"
+      }
     ],
-    "proposer_expected": {"Q1": "FALSIFIABLE", "Q2": "COMPATIBLE", "Q3": "NOT_REFUTED", "Q4": "WEAKER"}
+    "proposer_expected": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q3": "NOT_REFUTED",
+      "Q4": "WEAKER",
+      "Q2_items": [],
+      "Q3_items": []
+    },
+    "assumption_labels": [
+      "P1",
+      "P2"
+    ]
   }
 }

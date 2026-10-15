@@ -4,36 +4,219 @@
   "title": "Scientist judgment for a concordance task",
   "description": "One judge's blinded answers for one task, given from the prose arm only. See docs/reference/benchmarks/CONCORDANCE_BENCH_PROTOCOL.md.",
   "type": "object",
-  "required": ["task_id", "judge_orcid", "submitted_at", "minutes_spent", "answers"],
+  "required": [
+    "task_id",
+    "judge_orcid",
+    "submitted_at",
+    "minutes_spent",
+    "answers"
+  ],
   "additionalProperties": false,
   "properties": {
-    "task_id": {"type": "string"},
-    "judge_orcid": {"type": "string", "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$"},
-    "submitted_at": {"type": "string", "format": "date-time"},
-    "minutes_spent": {"type": "number", "minimum": 0},
+    "task_id": {
+      "type": "string"
+    },
+    "judge_orcid": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "minutes_spent": {
+      "type": "number",
+      "minimum": 0
+    },
     "answers": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Q1": {"$ref": "#/$defs/answer_Q1"},
-        "Q2": {"$ref": "#/$defs/answer_Q2"},
-        "Q3": {"$ref": "#/$defs/answer_Q3"},
-        "Q4": {"$ref": "#/$defs/answer_Q4"}
+        "Q1": {
+          "$ref": "#/$defs/answer_Q1"
+        },
+        "Q2": {
+          "$ref": "#/$defs/answer_Q2"
+        },
+        "Q3": {
+          "$ref": "#/$defs/answer_Q3"
+        },
+        "Q4": {
+          "$ref": "#/$defs/answer_Q4"
+        },
+        "Q2_items": {
+          "$ref": "#/$defs/answer_Q2_items"
+        },
+        "Q3_items": {
+          "$ref": "#/$defs/answer_Q3_items"
+        }
       }
     }
   },
   "$defs": {
     "meta": {
       "type": "object",
-      "required": ["confidence", "rationale"],
+      "required": [
+        "confidence",
+        "rationale"
+      ],
       "properties": {
-        "confidence": {"type": "integer", "minimum": 1, "maximum": 5},
-        "rationale": {"type": "string"}
+        "confidence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "rationale": {
+          "type": "string"
+        }
       }
     },
-    "answer_Q1": {"allOf": [{"$ref": "#/$defs/meta"}, {"properties": {"value": {"enum": ["VACUOUS", "SELF_CONTRADICTORY", "UNFALSIFIABLE", "FALSIFIABLE", "CANNOT_JUDGE"]}}, "required": ["value"]}]},
-    "answer_Q2": {"allOf": [{"$ref": "#/$defs/meta"}, {"properties": {"value": {"enum": ["COMPATIBLE", "CONFLICTING", "CANNOT_JUDGE"]}}, "required": ["value"]}]},
-    "answer_Q3": {"allOf": [{"$ref": "#/$defs/meta"}, {"properties": {"value": {"enum": ["REFUTED", "POSSIBLY_REFUTED", "NOT_REFUTED", "CANNOT_JUDGE"]}}, "required": ["value"]}]},
-    "answer_Q4": {"allOf": [{"$ref": "#/$defs/meta"}, {"properties": {"value": {"enum": ["EQUIVALENT", "STRONGER", "WEAKER", "INCOMPARABLE", "CONTRADICTORY", "CANNOT_JUDGE"]}}, "required": ["value"]}]}
+    "answer_Q1": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "enum": [
+                "VACUOUS",
+                "SELF_CONTRADICTORY",
+                "UNFALSIFIABLE",
+                "FALSIFIABLE",
+                "CANNOT_JUDGE"
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ]
+    },
+    "answer_Q2": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "enum": [
+                "COMPATIBLE",
+                "CONFLICTING",
+                "CANNOT_JUDGE"
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ]
+    },
+    "answer_Q3": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "enum": [
+                "REFUTED",
+                "POSSIBLY_REFUTED",
+                "NOT_REFUTED",
+                "CANNOT_JUDGE"
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ]
+    },
+    "answer_Q4": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "enum": [
+                "EQUIVALENT",
+                "STRONGER",
+                "WEAKER",
+                "INCOMPARABLE",
+                "CONTRADICTORY",
+                "CANNOT_JUDGE"
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ]
+    },
+    "answer_Q2_items": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "const": "CANNOT_JUDGE"
+                }
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ],
+      "description": "Labels of the premises that conflict; empty list if none."
+    },
+    "answer_Q3_items": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/meta"
+        },
+        {
+          "properties": {
+            "value": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                },
+                {
+                  "const": "CANNOT_JUDGE"
+                }
+              ]
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      ],
+      "description": "Row numbers (from 1) of the observations that refute the hypothesis; empty list if none."
+    }
   }
 }

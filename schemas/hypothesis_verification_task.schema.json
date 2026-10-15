@@ -119,6 +119,14 @@
           "description": "Premise label for each formal assumption, in the same order as formal.hypothesis.assumptions."
         }
       }
+    },
+    "nominated_reviewers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[\\dX]$"
+      },
+      "description": "ORCIDs of reviewers nominated by the proposer. The proposer must not discuss the task with them before review."
     }
   },
   "$defs": {

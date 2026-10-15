@@ -123,3 +123,29 @@ def test_itemised_premise_agreement_uses_jaccard(tmp_path):
     items = result["per_item_question"]["Q2_items"]["coresearcher_gold"]
     assert items["mean_jaccard"] == pytest.approx(0.5)  # {P1} vs {P1, P2}
     assert items["mismatches"] == [{"task_id": "C1", "gold": ["P1"], "coresearcher": ["P1", "P2"]}]
+
+
+def test_preflight_accepts_the_example_task():
+    assert cs.validate_task(json.loads(EXAMPLE.read_text(encoding="utf-8"))) == []
+
+
+def test_preflight_catches_label_and_table_mismatches():
+    task = json.loads(EXAMPLE.read_text(encoding="utf-8"))
+    broken = copy.deepcopy(task)
+    broken["formal"]["assumption_labels"] = ["P1"]  # two assumptions, one label
+    assert any("assumption_labels" in p for p in cs.validate_task(broken))
+
+    broken = copy.deepcopy(task)
+    broken["prose"]["observations_table"]["rows"][1]["decline"] = "slow"  # judges would see different data
+    assert any("row 2 differs" in p for p in cs.validate_task(broken))
+
+
+def test_open_critiques_are_collected(tmp_path):
+    tasks_dir, judg_dir = _setup(tmp_path)
+    critique = {"task_id": "T1", "judge_orcid": "3333-3333-3333-3333", "answers": {"Q6": [{"text": "Scope too broad"}]}}
+    (judg_dir / "critique.json").write_text(json.dumps(critique), encoding="utf-8")
+    tasks = cs.load_tasks(tasks_dir)
+    result = cs.score(tasks, cs.seal(tasks), cs.load_judgments(judg_dir), {"T3": {"Q1": "SELF_CONTRADICTORY"}})
+    assert result["open_critiques"] == [
+        {"task_id": "T1", "judge_orcid": "3333-3333-3333-3333", "critiques": [{"text": "Scope too broad"}]}
+    ]

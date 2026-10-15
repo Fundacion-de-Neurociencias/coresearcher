@@ -49,6 +49,9 @@
         },
         "Q3_items": {
           "$ref": "#/$defs/answer_Q3_items"
+        },
+        "Q6": {
+          "$ref": "#/$defs/answer_Q6"
         }
       }
     }
@@ -217,6 +220,32 @@
         }
       ],
       "description": "Row numbers (from 1) of the observations that refute the hypothesis; empty list if none."
+    },
+    "answer_Q6": {
+      "type": "array",
+      "description": "Open critique: weaknesses not covered by Q1-Q4, each citing premise labels or table rows when possible. Not scored; used to propose new questions for the next round.",
+      "items": {
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 5
+          },
+          "cites": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "integer"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

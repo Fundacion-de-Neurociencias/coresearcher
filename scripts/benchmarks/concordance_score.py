@@ -64,7 +64,8 @@ def load_judgments(judgment_dir: Path) -> dict:
     judgments: dict = {}
     for path in sorted(judgment_dir.glob("*.json")):
         j = json.loads(path.read_text(encoding="utf-8"))
-        answers = {q: a["value"] for q, a in j.get("answers", {}).items()}
+        # Q6 (open critique) is a list of critiques; every other answer carries a "value".
+        answers = {q: (a if q == "Q6" else a["value"]) for q, a in j.get("answers", {}).items()}
         judgments.setdefault(j["task_id"], {})[j["judge_orcid"]] = answers
     return judgments
 
@@ -109,6 +110,45 @@ def coresearcher_answers(task: dict) -> dict:
     if formal.get("rival"):
         answers["Q4"] = HypothesisEvaluator.compare(h, to_hypothesis(formal["rival"])).relation.value
     return answers
+
+
+def validate_task(task: dict) -> list:
+    """Preflight checks before a task is sent to judges. Returns a list of problems (empty when valid)."""
+    problems = []
+    prose, formal = task.get("prose", {}), task.get("formal", {})
+    try:
+        h = to_hypothesis(formal["hypothesis"])
+    except (KeyError, FormalHypothesisError) as exc:
+        return [f"formal hypothesis does not build: {exc}"]
+    if formal.get("rival"):
+        try:
+            rival = to_hypothesis(formal["rival"])
+            if [(v.name, v.domain) for v in rival.variables] != [(v.name, v.domain) for v in h.variables]:
+                problems.append("rival does not share the hypothesis's variables and domains")
+        except FormalHypothesisError as exc:
+            problems.append(f"formal rival does not build: {exc}")
+        if not prose.get("rival_statement"):
+            problems.append("formal rival given but prose.rival_statement is missing")
+    labels = formal.get("assumption_labels")
+    if h.assumptions:
+        if labels is None or len(labels) != len(h.assumptions):
+            problems.append("assumption_labels must give one label per formal assumption")
+        elif set(labels) - set(prose.get("premises", {})):
+            problems.append(f"labels {sorted(set(labels) - set(prose.get('premises', {})))} are not prose premises")
+    observations = formal.get("observations") or []
+    rows = (prose.get("observations_table") or {}).get("rows", [])
+    if len(rows) != len(observations):
+        problems.append(f"prose table has {len(rows)} rows but formal observations has {len(observations)}")
+    else:
+        for i, (row, obs) in enumerate(zip(rows, observations), start=1):
+            shared = set(row) & set(obs)
+            if any(row[k] != obs[k] for k in shared):
+                problems.append(f"row {i} differs between the prose table and the formal observation")
+    try:
+        HypothesisEvaluator.confront(h, observations)
+    except FormalHypothesisError as exc:
+        problems.append(f"observations invalid: {exc}")
+    return problems
 
 
 def seal(tasks: dict) -> dict:
@@ -287,9 +327,16 @@ def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> di
                 ],
             },
         }
+    open_critiques = [
+        {"task_id": tid, "judge_orcid": judge, "critiques": a["Q6"]}
+        for tid, by_judge in judgments.items()
+        for judge, a in by_judge.items()
+        if a.get("Q6")
+    ]
     return {
         "per_question": per_question,
         "per_item_question": per_item_question,
+        "open_critiques": open_critiques,
         "unresolved_gold": unresolved,
         "cannot_judge_answers": cannot_judge,
     }
@@ -297,14 +344,23 @@ def score(tasks: dict, sealed: dict, judgments: dict, adjudications: dict) -> di
 
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("step", choices=["seal", "score"])
+    parser.add_argument("step", choices=["validate", "seal", "score"])
     parser.add_argument("--tasks", type=Path, required=True)
     parser.add_argument("--sealed", type=Path)
     parser.add_argument("--judgments", type=Path)
     parser.add_argument("--adjudications", type=Path)
-    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     tasks = load_tasks(args.tasks)
+    if args.step == "validate":
+        failed = {tid: probs for tid, t in tasks.items() if (probs := validate_task(t))}
+        for tid, probs in failed.items():
+            for prob in probs:
+                print(f"[FAIL] {tid}: {prob}")
+        print(f"{len(tasks)} tasks checked, {len(failed)} with problems.")
+        return 1 if failed else 0
+    if not args.out:
+        parser.error("seal and score need --out")
     if args.step == "seal":
         args.out.write_text(json.dumps(seal(tasks), indent=2, sort_keys=True), encoding="utf-8")
         print(f"Sealed {len(tasks)} tasks. SHA-256: {file_sha256(args.out)}")

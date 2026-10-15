@@ -1,0 +1,299 @@
+{
+  "dataset_id": "formalizer-seed-v1",
+  "status": "DRAFT: gold formalizations written by the CoResearcher maintainers; to be reviewed by two scientists before round 1",
+  "items": [
+    {
+      "id": "F01",
+      "domain": "neurology",
+      "prose": "Among people with amyloid pathology, APOE4 carriers show fast cognitive decline.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "amyloid", "domain": ["positive", "negative"]},
+          {"name": "apoe4", "domain": ["carrier", "non_carrier"]},
+          {"name": "decline", "domain": ["fast", "slow"]}
+        ],
+        "scope": "amyloid == 'positive'",
+        "assumptions": [],
+        "claims": ["apoe4 != 'carrier' or decline == 'fast'"]
+      }
+    },
+    {
+      "id": "F02",
+      "domain": "pharmacology",
+      "prose": "Plasma concentration rises with dose: above a dose of 10 mg, plasma concentration exceeds 2 mg/L.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "dose", "continuous": true, "lower": 0, "upper": 100},
+          {"name": "conc", "continuous": true, "lower": 0, "upper": null}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["dose <= 10 or conc > 2"]
+      }
+    },
+    {
+      "id": "F03",
+      "domain": "clinical",
+      "prose": "After the treatment, the patient's symptoms either improve or do not improve.",
+      "intended_verdict": "UNFALSIFIABLE",
+      "gold": {
+        "variables": [{"name": "outcome", "domain": ["improved", "not_improved"]}],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["outcome == 'improved' or outcome == 'not_improved'"]
+      }
+    },
+    {
+      "id": "F04",
+      "domain": "neurology",
+      "prose": "Cortical tau level, in arbitrary units, is always above 5 and always below 3.",
+      "intended_verdict": "SELF_CONTRADICTORY",
+      "gold": {
+        "variables": [{"name": "tau", "continuous": true, "lower": 0, "upper": 10}],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["tau > 5", "tau < 3"]
+      }
+    },
+    {
+      "id": "F05",
+      "domain": "clinical",
+      "prose": "In patients who are younger than 40 years and also older than 80 years, the drug at least halves the relapse rate (relapse ratio at most 0.5).",
+      "intended_verdict": "VACUOUS",
+      "gold": {
+        "variables": [
+          {"name": "age", "continuous": true, "lower": 0, "upper": 120},
+          {"name": "relapse_ratio", "continuous": true, "lower": 0, "upper": null}
+        ],
+        "scope": null,
+        "assumptions": ["age < 40", "age > 80"],
+        "claims": ["relapse_ratio <= 0.5"]
+      }
+    },
+    {
+      "id": "F06",
+      "domain": "ecology",
+      "prose": "Where the predator is present, prey density stays below 50 individuals per hectare.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "predator", "domain": ["present", "absent"]},
+          {"name": "prey", "continuous": true, "lower": 0, "upper": null}
+        ],
+        "scope": "predator == 'present'",
+        "assumptions": [],
+        "claims": ["prey < 50"]
+      }
+    },
+    {
+      "id": "F07",
+      "domain": "physics",
+      "prose": "At fixed volume, the gas pressure is proportional to its temperature, with proportionality constant 0.5.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "p", "continuous": true, "lower": 0, "upper": null},
+          {"name": "T", "continuous": true, "lower": 0, "upper": null}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["p == 0.5 * T"]
+      }
+    },
+    {
+      "id": "F08",
+      "domain": "epidemiology",
+      "prose": "An outbreak grows only if the reproduction number R exceeds 1.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "R", "continuous": true, "lower": 0, "upper": 20},
+          {"name": "growing", "domain": [true, false]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["not growing or R > 1"]
+      }
+    },
+    {
+      "id": "F09",
+      "domain": "economics",
+      "prose": "If the interest rate rises above 5%, investment falls.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "rate", "continuous": true, "lower": 0, "upper": 30},
+          {"name": "investment_change", "domain": ["up", "down", "flat"]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["rate <= 5 or investment_change == 'down'"]
+      }
+    },
+    {
+      "id": "F10",
+      "domain": "pharmacology",
+      "prose": "Assuming normal renal function, drug clearance is at least 60 mL/min.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "renal", "domain": ["normal", "impaired"]},
+          {"name": "clearance", "continuous": true, "lower": 0, "upper": 300}
+        ],
+        "scope": null,
+        "assumptions": ["renal == 'normal'"],
+        "claims": ["clearance >= 60"]
+      }
+    },
+    {
+      "id": "F11",
+      "domain": "neurology",
+      "prose": "Synaptic loss occurs if and only if both amyloid and tau pathology are present.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "amyloid", "domain": [true, false]},
+          {"name": "tau", "domain": [true, false]},
+          {"name": "loss", "domain": [true, false]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["not loss or (amyloid and tau)", "not (amyloid and tau) or loss"]
+      }
+    },
+    {
+      "id": "F12",
+      "domain": "neurology",
+      "prose": "Between two consecutive visits, a patient's Braak stage never decreases.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "stage_first", "domain": [0, 1, 2, 3, 4, 5, 6]},
+          {"name": "stage_second", "domain": [0, 1, 2, 3, 4, 5, 6]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["stage_second >= stage_first"]
+      }
+    },
+    {
+      "id": "F13",
+      "domain": "physics",
+      "prose": "For an object of mass 2 kg, the kinetic energy in joules equals half the mass times the speed squared.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "E", "continuous": true, "lower": 0, "upper": null},
+          {"name": "v", "continuous": true, "lower": null, "upper": null}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["E == 0.5 * 2 * v**2"]
+      }
+    },
+    {
+      "id": "F14",
+      "domain": "physiology",
+      "prose": "Resting heart rate in the cohort lies between 0 and 300 beats per minute.",
+      "intended_verdict": "UNFALSIFIABLE",
+      "gold": {
+        "variables": [{"name": "hr", "continuous": true, "lower": 0, "upper": 300}],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["hr >= 0 and hr <= 300"]
+      }
+    },
+    {
+      "id": "F15",
+      "domain": "neurology",
+      "prose": "In people over 75, white matter lesions rather than amyloid drive decline: decline is fast when lesions are high and slow when lesions are low, whatever the amyloid status. The amyloid cascade is the rival explanation.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "age", "continuous": true, "lower": 0, "upper": 120},
+          {"name": "wmh", "domain": ["high", "low"]},
+          {"name": "amyloid", "domain": ["positive", "negative"]},
+          {"name": "decline", "domain": ["fast", "slow"]}
+        ],
+        "scope": "age > 75",
+        "assumptions": [],
+        "claims": ["wmh != 'high' or decline == 'fast'", "wmh != 'low' or decline == 'slow'"],
+        "alternatives": ["amyloid cascade"]
+      }
+    },
+    {
+      "id": "F16",
+      "domain": "immunology",
+      "prose": "Only blood types A and AB react to the reagent.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "blood", "domain": ["A", "B", "AB", "O"]},
+          {"name": "reacts", "domain": [true, false]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["not reacts or blood in ('A', 'AB')"]
+      }
+    },
+    {
+      "id": "F17",
+      "domain": "climate",
+      "prose": "Coral bleaching occurs whenever sea surface temperature exceeds the local maximum by more than 1 degree Celsius.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "anomaly", "continuous": true, "lower": null, "upper": null},
+          {"name": "bleaching", "domain": [true, false]}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["anomaly <= 1 or bleaching"]
+      }
+    },
+    {
+      "id": "F18",
+      "domain": "clinical",
+      "prose": "Depending on the patient, the biomarker may go up, go down or stay the same after treatment.",
+      "intended_verdict": "UNFALSIFIABLE",
+      "gold": {
+        "variables": [{"name": "change", "domain": ["up", "down", "same"]}],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["change in ('up', 'down', 'same')"]
+      }
+    },
+    {
+      "id": "F19",
+      "domain": "chemistry",
+      "prose": "In the closed reaction vessel, total mass is conserved: the mass after the reaction equals the mass before it.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {
+        "variables": [
+          {"name": "m_before", "continuous": true, "lower": 0, "upper": null},
+          {"name": "m_after", "continuous": true, "lower": 0, "upper": null}
+        ],
+        "scope": null,
+        "assumptions": [],
+        "claims": ["m_after == m_before"]
+      }
+    },
+    {
+      "id": "F20",
+      "domain": "biochemistry",
+      "prose": "In the distal small intestine, where pH is above 7, the enzyme is always active; and the enzyme is active only at pH below 6.",
+      "intended_verdict": "SELF_CONTRADICTORY",
+      "gold": {
+        "variables": [
+          {"name": "ph", "continuous": true, "lower": 0, "upper": 14},
+          {"name": "active", "domain": [true, false]}
+        ],
+        "scope": null,
+        "assumptions": ["ph > 7"],
+        "claims": ["active", "not active or ph < 6"]
+      }
+    }
+  ]
+}

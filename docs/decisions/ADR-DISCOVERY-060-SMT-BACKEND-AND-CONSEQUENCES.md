@@ -37,6 +37,9 @@ hypothesis entails is how its predictions are derived.
    the reals) z3 is a decision procedure, so a CAS adds no checking power; it remains in use for identities in
    `exact_symbolic_court`.
 
+Comparison precedence changed: `EQUIVALENT` is now checked before `CONTRADICTORY`, so a self-contradictory hypothesis
+compared with an equivalent formulation of itself is reported as `EQUIVALENT` (previously `CONTRADICTORY`).
+
 ## Limits
 
 - Unsupported by SMT: `%`, `//`, powers with a variable or negative exponent, and ordering comparisons on string

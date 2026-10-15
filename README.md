@@ -28,9 +28,9 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 
 | Check | Result | Details |
 | --- | --- | --- |
-| Test suite | 193 passing | [`tests/`](tests) |
+| Test suite | 210 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 11 integrated, 24 tested, 17 exercised, 20 prototypes (of 72) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 13 integrated, 24 tested, 17 exercised, 20 prototypes (of 74) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
 Claims are listed with their supporting script, data origin and last result in the

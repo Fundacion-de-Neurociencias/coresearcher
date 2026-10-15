@@ -149,3 +149,45 @@ def test_open_critiques_are_collected(tmp_path):
     assert result["open_critiques"] == [
         {"task_id": "T1", "judge_orcid": "3333-3333-3333-3333", "critiques": [{"text": "Scope too broad"}]}
     ]
+
+
+# --- third arm: local language model judging from the prose (section 7a) -----------
+
+_arm_spec = importlib.util.spec_from_file_location(
+    "concordance_llm_arm", ROOT / "scripts/benchmarks/concordance_llm_arm.py"
+)
+arm = importlib.util.module_from_spec(_arm_spec)
+_arm_spec.loader.exec_module(arm)
+
+
+def test_llm_prompt_contains_only_the_prose_arm():
+    task = json.loads(EXAMPLE.read_text(encoding="utf-8"))
+    prompt = arm.user_prompt(task)
+    assert task["prose"]["statement"] in prompt
+    formal_claim = task["formal"]["hypothesis"]["claims"][0]
+    assert formal_claim not in prompt and "proposer_expected" not in prompt
+    assert set(arm.questions_for(task)) >= {"Q1", "Q2", "Q2_items"}
+
+
+def test_llm_answers_are_validated():
+    task = _task("T1", ["x <= 1"])
+    text = 'Sure: {"Q1": {"value": "FALSIFIABLE", "confidence": 4, "rationale": "r"}, "Q2": {"value": "MAYBE"}}'
+    assert arm.parse_answers(text, task) == {"Q1": "FALSIFIABLE", "Q2": "INVALID", "Q2_items": "INVALID"}
+    assert arm.parse_answers("no json", task)["Q1"] == "INVALID"
+
+
+def test_score_includes_the_llm_arm(tmp_path):
+    tasks_dir, judg_dir = _setup(tmp_path)
+    tasks = cs.load_tasks(tasks_dir)
+
+    class Fake:
+        model = "fake"
+
+        def complete(self, messages):
+            return '{"Q1": {"value": "FALSIFIABLE"}, "Q2": {"value": "COMPATIBLE"}, "Q2_items": {"value": []}}'
+
+    llm = arm.run(tasks, Fake())["llm_answers"]
+    result = cs.score(tasks, cs.seal(tasks), cs.load_judgments(judg_dir), {"T3": {"Q1": "SELF_CONTRADICTORY"}}, llm)
+    q1 = result["per_question"]["Q1"]["llm_gold"]
+    assert q1["n"] == 3 and q1["raw_agreement"] == pytest.approx(2 / 3)
+    assert q1["disagreements"] == [{"task_id": "T3", "gold": "SELF_CONTRADICTORY", "arm": "FALSIFIABLE"}]

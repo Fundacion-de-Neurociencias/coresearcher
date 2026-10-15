@@ -395,10 +395,12 @@ def _verdict(applicable: bool, all_forbidden: bool, none_forbidden: bool) -> Con
 
 
 def _relation(allowed_by_both: bool, only_a: bool, only_b: bool) -> Relation:
-    if not allowed_by_both:
-        return Relation.CONTRADICTORY
+    # Equivalence first: two identical self-contradictory hypotheses forbid the same states and are EQUIVALENT,
+    # even though no state is allowed by both.
     if not only_a and not only_b:
         return Relation.EQUIVALENT
+    if not allowed_by_both:
+        return Relation.CONTRADICTORY
     if not only_b:
         return Relation.STRONGER
     if not only_a:
@@ -707,3 +709,41 @@ class HypothesisEvaluator:
             vacuous=vacuous,
             counterexamples=counter,
         )
+
+
+_SCALARS = (str, int, float, bool)
+
+
+def hypothesis_from_dict(data: Dict[str, Any]) -> Hypothesis:
+    """Builds a Hypothesis from its JSON form (the API schema and the formalizer output share it)."""
+    if not isinstance(data, dict):
+        raise FormalHypothesisError("A hypothesis must be a JSON object.")
+    raw_vars = data.get("variables")
+    if not isinstance(raw_vars, list):
+        raise FormalHypothesisError("'variables' must be a list.")
+    variables = []
+    for v in raw_vars:
+        if not isinstance(v, dict) or not isinstance(v.get("name"), str):
+            raise FormalHypothesisError("Each variable needs a string 'name'.")
+        domain = v.get("domain") or []
+        if not isinstance(domain, list) or not all(isinstance(value, _SCALARS) for value in domain):
+            raise FormalHypothesisError(f"Domain of {v['name']!r} must contain only strings, numbers or booleans.")
+        variables.append(
+            Variable(v["name"], tuple(domain), bool(v.get("continuous", False)), v.get("lower"), v.get("upper"))
+        )
+    for key in ("claims", "assumptions", "alternatives"):
+        value = data.get(key, [])
+        if not isinstance(value, list) or not all(isinstance(x, str) for x in value):
+            raise FormalHypothesisError(f"'{key}' must be a list of strings.")
+    scope = data.get("scope")
+    if scope is not None and not isinstance(scope, str):
+        raise FormalHypothesisError("'scope' must be a string or null.")
+    return Hypothesis(
+        hypothesis_id=str(data.get("hypothesis_id") or "H"),
+        variables=variables,
+        claims=list(data.get("claims", [])),
+        assumptions=list(data.get("assumptions", [])),
+        scope=scope or None,
+        statement=str(data.get("statement", "")),
+        alternatives=list(data.get("alternatives", [])),
+    )

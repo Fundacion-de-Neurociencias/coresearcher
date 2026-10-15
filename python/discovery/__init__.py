@@ -1,5 +1,5 @@
 # Security tier: PRIVATE — DO NOT MODIFY
-# See python/_tiers.py for classification
+# Historical tier list: archive/phase1/python/_tiers.py. Current status: docs/reference/MODULE_MATURITY.md
 SECURITY_TIER = "PRIVATE"
 
 from .manifold_detector import ManifoldDetector

@@ -63,6 +63,22 @@ _BINARY: Dict[type, Callable[[Any, Any], Any]] = {
 }
 
 
+class _LowercaseBooleans(ast.NodeTransformer):
+    """Reads `true` and `false` as the constants True and False, unless a variable has that name.
+
+    Language models trained on JSON write the lowercase forms; in round 0 they made 3 of qwen2.5:14b's 4 invalid
+    outputs. Accepting them changes no meaning, so it is done here rather than by asking the model in the prompt.
+    """
+
+    def __init__(self, variables: set):
+        self.variables = variables
+
+    def visit_Name(self, node: ast.Name) -> ast.AST:
+        if node.id in ("true", "false") and node.id not in self.variables:
+            return ast.copy_location(ast.Constant(node.id == "true"), node)
+        return node
+
+
 class Predicate:
     """A boolean expression over the hypothesis variables, parsed once and interpreted safely."""
 
@@ -74,7 +90,7 @@ class Predicate:
             tree = ast.parse(self.expression, mode="eval")
         except SyntaxError as exc:
             raise FormalHypothesisError(f"Invalid predicate {expression!r}: {exc.msg}") from exc
-        self._node = tree.body
+        self._node = _LowercaseBooleans(set(variables)).visit(tree).body
         self.variables_used = self._validate(self._node, set(variables))
 
     def _validate(self, node: ast.AST, known: set) -> set:

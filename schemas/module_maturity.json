@@ -163,6 +163,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "ed_polarity_case",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "energy_predictive_auditor",
       "scripts": false,
       "tests": true

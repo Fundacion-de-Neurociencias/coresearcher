@@ -82,3 +82,6 @@ samples), 1 of 3 for Laya and 2 of 10 for mixed N=5.
   dataset before citing these numbers as anything but exploratory.
 - Raw outputs are kept on the development machine (`private/runs/gate/`) and can be re-scored with
   `formalizer_bench.py gate`.
+- After this run the dataset gained item F21 (SHA-256 now `76d10aed...`). These results cover F01 to F20 only;
+  replaying them needs the 20-item dataset (`git show a70c0d2:docs/reference/benchmarks/formalizer_dataset.json`
+  passed as `--dataset`), and F21 needs new samples.

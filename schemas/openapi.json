@@ -2221,6 +2221,19 @@
             "title": "Rivals",
             "type": "array"
           },
+          "samples": {
+            "anyOf": [
+              {
+                "maximum": 7.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Samples"
+          },
           "variable_schema": {
             "anyOf": [
               {
@@ -2529,6 +2542,19 @@
             "default": false,
             "title": "Formalize Question",
             "type": "boolean"
+          },
+          "formalizer_samples": {
+            "anyOf": [
+              {
+                "maximum": 7.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formalizer Samples"
           },
           "iterations": {
             "anyOf": [
@@ -7313,7 +7339,7 @@
     },
     "/api/hypotheses/formalize": {
       "post": {
-        "description": "Prose -> formal object (by the configured local model) -> exact evaluation and comparison with rivals.\n\nThe formal object is a draft: the researcher must confirm it says what the prose meant before relying on the\nverdicts, which only cover the object.",
+        "description": "Prose -> N formal objects (by the configured local model) -> self-consistency gate -> exact evaluation.\n\nThe gate (ADR-DISCOVERY-063) accepts a formalization only when a strict majority of the samples is proved\nlogically equivalent; otherwise the response is FORMALIZATION_AMBIGUOUS and carries no evaluation. An accepted\nobject is still a draft: the researcher must confirm it says what the prose meant.",
         "operationId": "formalize_hypothesis_api_hypotheses_formalize_post",
         "requestBody": {
           "content": {

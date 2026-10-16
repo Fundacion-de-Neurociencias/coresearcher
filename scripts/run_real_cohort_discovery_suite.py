@@ -11,9 +11,8 @@ python/discovery/real_cohort_campaign_runner.py. No cohort file is read, so this
 output format of the epistemic trajectory. It does not test any scientific claim.
 """
 
-import sys
 import os
-import json
+import sys
 
 if sys.stdout.encoding != "utf-8":
     try:
@@ -25,9 +24,15 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
-from fastapi.testclient import TestClient
 from api.server import app
 from api.testing import authenticated_client
+
+
+def _json(response):
+    """Stop with a non-zero exit code if an endpoint fails, instead of printing a partial demo."""
+    if response.status_code != 200:
+        raise SystemExit(f"{response.request.method} {response.request.url.path} returned {response.status_code}")
+    return response.json()
 
 
 def run_suite_demo():
@@ -43,7 +48,7 @@ def run_suite_demo():
     # 1. Run Heterogeneous Multi-Cohort Discovery Campaigns
     # -------------------------------------------------------------------------
     print("\n[1] EXECUTING 6-BIOMARKER HETEROGENEOUS DISCOVERY CAMPAIGNS:\n")
-    outcomes = client.post("/api/discovery/campaigns/run-heterogeneous-suite").json()
+    outcomes = _json(client.post("/api/discovery/campaigns/run-heterogeneous-suite"))
 
     print(
         f"{'ID':<22} | {'Biomarker':<8} | {'First Attempt':<28} | {'Final Epistemic Status':<26} | {'CDV (Ω)':<8} | {'DV':<6}"
@@ -80,7 +85,7 @@ def run_suite_demo():
     # -------------------------------------------------------------------------
     print("-" * 115)
     print("[3] DEFEATED HYPOTHESES GRAVEYARD (The Public Registry of Refuted Theories):\n")
-    graveyard = client.get("/api/discovery/graveyard/list").json()
+    graveyard = _json(client.get("/api/discovery/graveyard/list"))
 
     for idx, g in enumerate(graveyard, 1):
         print(f"    🪦 [Grave {idx}] {g['record_id']} — {g['hypothesis_id']} (Demised: {g['demise_date']})")
@@ -96,7 +101,7 @@ def run_suite_demo():
     # -------------------------------------------------------------------------
     print("-" * 115)
     print("[4] ANOMALY DISCOVERY ENGINE (Observed − Predicted = Emergent Paradigm Shift):\n")
-    anomalies = client.post("/api/discovery/anomalies/detect-and-cluster", json={}).json()
+    anomalies = _json(client.post("/api/discovery/anomalies/detect-and-cluster", json={}))
 
     for idx, a in enumerate(anomalies, 1):
         print(f"    🌟 [Cluster {idx}] {a['cluster_name']} (n = {a['sample_count']} outlier subjects)")

@@ -247,6 +247,13 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "formalization_gate",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "formalizer",
       "scripts": true,
       "tests": true
@@ -368,6 +375,13 @@
       "level": "Integrated",
       "module": "physical_theorem_court",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "ptau217_cutoff_case",
+      "scripts": false,
       "tests": true
     },
     {

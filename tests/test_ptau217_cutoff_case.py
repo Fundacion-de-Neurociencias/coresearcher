@@ -1,7 +1,5 @@
 """Tests for the plasma p-tau217 cutoff decision rule case (python/discovery/ptau217_cutoff_case.py)."""
 
-import pytest
-
 from python.discovery import ptau217_cutoff_case as ptau
 
 
@@ -27,7 +25,6 @@ def test_necessity_table():
     assert table["ordered_cutoffs"] == "NECESSARY"
 
 
-
 def test_cohort_simulation_performance():
     cohort = ptau.simulate_patient_cohort(n_patients=600, amyloid_prevalence=0.35, ckd_prevalence=0.15, rng_seed=42)
     assert len(cohort) == 600
@@ -41,6 +38,7 @@ def test_cohort_simulation_performance():
     # With unadjusted CKD, false positives increase due to reduced peripheral clearance
     perf_all = ptau.evaluate_two_cutoff_rule(cohort, c_low=0.70, c_high=1.30, filter_ckd=False)
     assert perf_all["false_positives"] >= perf_filtered["false_positives"]
+
 
 if __name__ == "__main__":
     test_main_ptau217_hypothesis_is_proved()

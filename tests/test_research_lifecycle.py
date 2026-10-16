@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
+from python.discovery.hypothesis_tournament_arena import TournamentHypothesis, TournamentReport
 from python.discovery.research_lifecycle import (
     EXPORT_SCHEMA,
     STAGES,
@@ -23,7 +24,6 @@ from python.discovery.research_lifecycle import (
     project_to_dict,
     verify_tournament_elo,
 )
-from python.discovery.hypothesis_tournament_arena import TournamentHypothesis, TournamentReport
 
 T0 = datetime(2026, 10, 1, tzinfo=timezone.utc)
 SHA = "a" * 64
@@ -280,7 +280,6 @@ def test_watcher_scan_and_alert_callback(tmp_path):
     assert alerts == [FindingKind.PENDING_HUMAN]
 
 
-
 def test_ontrack_export_shape():
     svc = service()
     svc.create_project("p", "P")
@@ -291,7 +290,6 @@ def test_ontrack_export_shape():
     assert row["stage"] == "PROTOCOL" and row["stage_index"] == 2 and row["stage_count"] == 7
     assert row["gate_decision"] == "INCOMPLETE" and row["checklist"] == {"required_satisfied": 0, "required_total": 4}
     assert row["version"] == 2 and len(row["digest"]) == 64 and row["latest_release"] is None
-
 
 
 # --- API ------------------------------------------------------------------------

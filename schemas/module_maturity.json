@@ -413,6 +413,13 @@
       "tests": false
     },
     {
+      "api": true,
+      "level": "Integrated",
+      "module": "research_lifecycle",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": false,
       "level": "Tested",
       "module": "result_family_orchestrator",

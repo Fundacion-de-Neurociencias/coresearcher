@@ -53,8 +53,40 @@ Lean 4 v4.35.0 with Mathlib, default tactic of `formal_lean.py`.
   `linarith` and `nlinarith`), not in elaboration, so the exported theorems are well formed. A stronger default tactic
   (splitting conjunctions, case analysis on disjunctive and finite-domain premises) is the next improvement.
 
+## 2b. After round 0: shape-directed default tactic (2026-10-15)
+
+The fixed default tactic was replaced by a proof script built from the shape of the consequence
+(`default_tactic` in `formal_lean.py`): premises are split into cases (`casesm*`), conjunctions are proved part by
+part, negations (`¬`, `≠`, `not in`) are introduced and refuted, and disjunctions are tried side by side, by
+contradiction, and, for a disjunction of equalities, through a vanishing product
+(`(a₁ - b₁) * … * (aₙ - bₙ) = 0`). Six checks (C11–C16) were added to cover more goal shapes.
+
+Run on Lean 4 v4.35.0 with Mathlib at its `v4.35.0` tag, on a Linux cloud container. The Mathlib cache was not
+reachable there, so Mathlib was built from source for the modules the script uses, and each file imported those
+modules instead of the whole of `Mathlib`. The same tactics are in `import Mathlib`; the Legion run (runbook,
+job 4) confirms with the full import.
+
+| Check | z3 | Round 0 tactic | New default tactic |
+| --- | --- | --- | --- |
+| C01, C03, C06 | entailed | PROVED | PROVED |
+| C05, C07, C09, C10 | entailed | NOT_PROVED | PROVED |
+| C11 (3-value domain), C12 (cubic roots), C13 (`≠`), C14 (`not in`), C15 (chained bounds) | entailed | not run | PROVED |
+| C02, C04, C08, C16 | not entailed | NOT_PROVED | NOT_PROVED |
+
+- **12 of 12 z3 entailments are kernel-checked**, and no theorem z3 rejected was proved (no soundness discrepancy).
+  The round 0 tactic, re-run in the same environment, reproduced the round 0 table exactly (3 of 7).
+- Three Lean pitfalls found while doing this, now handled in the generator: `norm_num` can succeed without closing
+  the goal (it is now followed by `done`); a failure inside a nested `by` term is logged, not raised, so an
+  enclosing `first` does not try its next alternative (the script uses `refine … ?_` instead); and `push_neg` is
+  deprecated in Mathlib for v4.35 (the script uses `simp only [not_or, not_and_or, not_le, not_lt]`).
+- The checks are still small, constructed cases. Passing them shows that the export and the tactic work on these
+  shapes, not that every z3 entailment of a real hypothesis will be kernel-checked.
+
 ## 3. Not run
 
 - **Lean oracle for the openai/math pilot (71 challenges):** Comparator sandboxes with `landrun`, which needs Linux.
-  It waits for the Legion or another Linux host.
+  It waits for the Legion. The setup was prepared and checked on a Linux container: `prepare` on the real pinned
+  checkout (71 challenges, no problems), the three tools built with the project toolchain, and Comparator with the
+  real `landrun` accepting and rejecting its own test examples as a non-root user. See section 5 of
+  [LEAN_ORACLE_PROTOCOL.md](LEAN_ORACLE_PROTOCOL.md).
 - **Concordance LLM arm:** needs the 20 frozen pilot tasks, which the scientists write.

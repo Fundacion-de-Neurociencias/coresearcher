@@ -483,7 +483,7 @@ def _workbench_formal(req: LaunchWorkbenchRequest):
         if req.formal_hypothesis is not None:
             return {**base, "source": "request", **formal_block(_to_hypothesis(req.formal_hypothesis), rivals)}
         if req.formalize_question:
-            # ADR-DISCOVERY-063: the formal block only carries an evaluation when the self-consistency gate passes.
+            # ADR-DISCOVERY-064: the formal block only carries an evaluation when the self-consistency gate passes.
             result = run_formalizer(
                 req.question, "H-WORKBENCH", alzheimer_formal_scenario.variable_schema(), req.formalizer_samples
             )

@@ -1172,6 +1172,31 @@
         "title": "CreateBranchRequest",
         "type": "object"
       },
+      "CreateLifecycleProjectRequest": {
+        "properties": {
+          "project_id": {
+            "maxLength": 64,
+            "title": "Project Id",
+            "type": "string"
+          },
+          "template": {
+            "default": "default",
+            "title": "Template",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 300,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id",
+          "title"
+        ],
+        "title": "CreateLifecycleProjectRequest",
+        "type": "object"
+      },
       "CreateMembraneContractRequest": {
         "properties": {
           "equilibration_length_ns": {
@@ -2676,6 +2701,145 @@
           "formal_expression"
         ],
         "title": "LemmaInput",
+        "type": "object"
+      },
+      "LifecycleActorRequest": {
+        "properties": {
+          "actor": {
+            "maxLength": 100,
+            "title": "Actor",
+            "type": "string"
+          }
+        },
+        "required": [
+          "actor"
+        ],
+        "title": "LifecycleActorRequest",
+        "type": "object"
+      },
+      "LifecycleReleaseRequest": {
+        "properties": {
+          "actor": {
+            "maxLength": 100,
+            "title": "Actor",
+            "type": "string"
+          },
+          "summary": {
+            "default": "",
+            "maxLength": 5000,
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "actor"
+        ],
+        "title": "LifecycleReleaseRequest",
+        "type": "object"
+      },
+      "LifecycleResultRequest": {
+        "properties": {
+          "actor": {
+            "maxLength": 100,
+            "title": "Actor",
+            "type": "string"
+          },
+          "artifact_path": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact Path"
+          },
+          "check_id": {
+            "maxLength": 100,
+            "title": "Check Id",
+            "type": "string"
+          },
+          "criteria": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Analysis: criterion id -> MET or NOT_MET",
+            "title": "Criteria",
+            "type": "object"
+          },
+          "note": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Note",
+            "type": "string"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "role": {
+            "description": "AGENT, VERIFIER_TOOL or HUMAN",
+            "title": "Role",
+            "type": "string"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "maxLength": 64,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "check_id",
+          "ok",
+          "actor",
+          "role"
+        ],
+        "title": "LifecycleResultRequest",
+        "type": "object"
+      },
+      "LifecycleReworkRequest": {
+        "properties": {
+          "actor": {
+            "maxLength": 100,
+            "title": "Actor",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "title": "Reason",
+            "type": "string"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage",
+          "actor",
+          "reason"
+        ],
+        "title": "LifecycleReworkRequest",
         "type": "object"
       },
       "LiteratureHopInput": {
@@ -7339,7 +7503,7 @@
     },
     "/api/hypotheses/formalize": {
       "post": {
-        "description": "Prose -> N formal objects (by the configured local model) -> self-consistency gate -> exact evaluation.\n\nThe gate (ADR-DISCOVERY-063) accepts a formalization only when a strict majority of the samples is proved\nlogically equivalent; otherwise the response is FORMALIZATION_AMBIGUOUS and carries no evaluation. An accepted\nobject is still a draft: the researcher must confirm it says what the prose meant.",
+        "description": "Prose -> N formal objects (by the configured local model) -> self-consistency gate -> exact evaluation.\n\nThe gate (ADR-DISCOVERY-064) accepts a formalization only when a strict majority of the samples is proved\nlogically equivalent; otherwise the response is FORMALIZATION_AMBIGUOUS and carries no evaluation. An accepted\nobject is still a draft: the researcher must confirm it says what the prose meant.",
         "operationId": "formalize_hypothesis_api_hypotheses_formalize_post",
         "requestBody": {
           "content": {
@@ -7394,6 +7558,420 @@
           }
         },
         "summary": "Alzheimer Formal Scenario Report"
+      }
+    },
+    "/api/lifecycle/ontrack": {
+      "get": {
+        "description": "Every project in the `coresearcher.lifecycle/v1` shape that OnTrack ingests.",
+        "operationId": "lifecycle_ontrack_status_api_lifecycle_ontrack_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Lifecycle Ontrack Status"
+      }
+    },
+    "/api/lifecycle/projects": {
+      "get": {
+        "operationId": "list_lifecycle_projects_api_lifecycle_projects_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Lifecycle Projects"
+      },
+      "post": {
+        "operationId": "create_lifecycle_project_api_lifecycle_projects_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLifecycleProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Create Lifecycle Project"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}": {
+      "get": {
+        "operationId": "get_lifecycle_project_api_lifecycle_projects__project_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Lifecycle Project"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/gate": {
+      "get": {
+        "description": "Decision for the gate of the current stage, with the status of each check and why.",
+        "operationId": "evaluate_lifecycle_gate_api_lifecycle_projects__project_id__gate_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Evaluate Lifecycle Gate"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/gate/pass": {
+      "post": {
+        "description": "Record the current gate as passed (refused unless every required check is satisfied) and advance.",
+        "operationId": "pass_lifecycle_gate_api_lifecycle_projects__project_id__gate_pass_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifecycleActorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Pass Lifecycle Gate"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/release": {
+      "post": {
+        "description": "Release the current version. The kind (EXPLORATORY or PREREGISTERED) is decided by policy, not the caller.",
+        "operationId": "release_lifecycle_project_api_lifecycle_projects__project_id__release_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifecycleReleaseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Release Lifecycle Project"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/results": {
+      "post": {
+        "description": "Record a check result. A self-check (role AGENT) is kept but never satisfies a VERIFIER or HUMAN check.",
+        "operationId": "submit_lifecycle_result_api_lifecycle_projects__project_id__results_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifecycleResultRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Submit Lifecycle Result"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/rework": {
+      "post": {
+        "operationId": "rework_lifecycle_stage_api_lifecycle_projects__project_id__rework_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LifecycleReworkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Rework Lifecycle Stage"
+      }
+    },
+    "/api/lifecycle/template": {
+      "get": {
+        "description": "The checklist of every stage: each check's kind (VERIFIER, HUMAN, ARTIFACT, RUBRIC) and threshold.",
+        "operationId": "lifecycle_template_api_lifecycle_template_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "schema": {
+              "default": "default",
+              "title": "Name",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Lifecycle Template"
+      }
+    },
+    "/api/lifecycle/watch": {
+      "get": {
+        "description": "Stalled stages, pending sign-offs, unreleased reports, and artifacts that changed after they were recorded.",
+        "operationId": "watch_lifecycle_api_lifecycle_watch_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Watch Lifecycle"
       }
     },
     "/api/observer/ledger": {

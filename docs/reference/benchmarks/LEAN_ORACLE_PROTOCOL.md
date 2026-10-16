@@ -36,8 +36,19 @@ needs an extra step (section 6).
 Comparator needs Linux: it sandboxes the build with `landrun` (Landlock) and must not run as root. Steps
 marked *(official)* follow the Comparator or openai/math READMEs; the others are ordinary setup.
 
+Steps 2 to 4 are scripted: as the non-root user, run
+`bash scripts/benchmarks/legion_lean_oracle_setup.sh [TOOLS_DIR] [MATH_ROOT]` (defaults `~/oracle-tools` and
+`~/openai-math`), then `python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root MATH_ROOT`.
+The preflight checks every item below and exits 1 while a required one is missing.
+
 1. **System.** Recent Linux with Landlock support, a systemd user session, a non-root user, and enough disk
    for Mathlib's cache plus the project's dependencies. Check free space before downloading.
+   - **Landlock ABI and the systemd guard.** `landrun` from `main` asks for Landlock ABI v9. Comparator calls it
+     with `--best-effort`, so on an older kernel (Linux 6.18 reports ABI v7) it falls back to a sandbox that does
+     not restrict UNIX sockets, without any error. The `systemd-run --property=RestrictAddressFamilies=~AF_UNIX
+     --user` wrapper then is the only guard against that, so a working systemd user session is required, not
+     optional. The preflight reports the ABI and tests the wrapper. `COMPARATOR_CMD` bypasses the wrapper and is
+     for local tests only.
 2. **Lean.** Install `elan`. The project pins `leanprover/lean4:v4.34.1` through `lean/lean-toolchain`, and
    `elan` picks it up automatically.
 3. **openai/math at the pinned commit.**
@@ -46,11 +57,21 @@ marked *(official)* follow the Comparator or openai/math READMEs; the others are
    cd openai-math && git checkout 1581d4cbdd69a0faf34b2089614fe2a814316a6a
    cd lean && lake exe cache get
    ```
+   Do not run `lake update` (the openai/math challenge README does): the manifest is part of the pinned
+   commit, and updating would move the dependencies.
    *(official)* If compiling fails with memory-map errors, raise `vm.max_map_count` or set
    `GLIBC_TUNABLES=glibc.malloc.mmap_max=0:glibc.malloc.arena_max=1` (openai/math `lean/README.md`).
 4. **Comparator tools** *(official)*: build `landrun` from its `main` branch, `lean4export` at a version
    compatible with Lean v4.34.1, and `comparator` from `leanprover/comparator`. Put all three on `PATH`, or
    set `COMPARATOR_LANDRUN` and `COMPARATOR_LEAN4EXPORT`.
+   - Pinned versions: `lean4export` and `comparator` at their `v4.34.0` tags (`076e8e5` and `d03acab`; the
+     Comparator tag pins that same `lean4export`), both built with the project toolchain `v4.34.1` by overriding
+     their `lean-toolchain`. `.olean` files record the Lean version that wrote them, and both tools read the
+     project's files. No `v4.34.1` tags exist upstream. The setup script records the exact commits in
+     `TOOLS_DIR/tools.txt`; copy that file into the results commit.
+   - Standalone Comparator is deprecated upstream: from Lean v4.35.0 it ships in core as `lake comparator` and
+     `lake check`. openai/math pins v4.34.1, so this protocol keeps the standalone tool. Moving to v4.35 would
+     change the pinned commit and is out of scope for this pilot.
 5. **CoResearcher.** Check out the branch that contains this script and the pilot dataset.
 6. **Prepare** (writes 71 challenges into `lean/ComparatorChallenges/OracleMutants/` of the openai/math
    checkout, plus a manifest; no Lean needed):
@@ -75,6 +96,20 @@ marked *(official)* follow the Comparator or openai/math READMEs; the others are
 `prepare` was run against a minimal mirror of the pinned commit: 71 challenges from 19 pairs, no problems.
 The generated mutants were checked by hand. `report` was checked with synthetic outcomes, and `run` refuses
 to start outside Linux. No Comparator result exists yet.
+
+## 5b. Checked on Linux before the Legion (2026-10-15)
+
+On a Linux cloud container (kernel 6.18, Landlock ABI v7, no systemd user session):
+
+- `prepare` on a real checkout of openai/math at the pinned commit: 71 challenges from 19 pairs, no problems.
+- `landrun` (`main`, `811cfff`), `lean4export` and `comparator` (both `v4.34.0` tags) built with Lean
+  v4.34.1 as described in step 4.
+- Comparator, with the real `landrun` and as a non-root user, accepted its `simple_match` test project and
+  rejected `simple_mismatch`. This was run without the systemd guard, which needs a user session the container
+  does not have.
+- `preflight` reported the expected failures there: no systemd user session, no Mathlib cache, 0 of 19
+  solution modules built. The Mathlib cache host was not reachable from the container, so nothing in openai/math
+  was compiled and no oracle result exists yet.
 
 ## 6. Next step (design only): a Lean-based fidelity auditor
 

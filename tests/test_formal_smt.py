@@ -225,8 +225,28 @@ def test_lean_theorem_states_premises_and_goal():
     assert "(k = (1 : ℝ) ∨ k = (2 : ℝ))" in text
     assert "(r ≠ (7/2 : ℝ))" in text
     assert "((r * r) ≥ ((2 : ℝ) * k))" in text
-    assert text.rstrip().splitlines()[-2].strip() == "(r > (7/5 : ℝ)) := by"
+    assert "    (r > (7/5 : ℝ)) := by\n" in text
     assert "NOT_KERNEL_CHECKED" in text
+
+
+def test_lean_default_tactic_follows_goal_shape():
+    """The script splits premises, then proves the goal by its shape (checked against Lean v4.35 + Mathlib)."""
+    from python.discovery.formal_lean import consequence_theorem
+
+    k = Variable("k", (1, 2))
+    tactic = consequence_theorem(H("T", ["r >= 3 * k"], variables=(R, k)), "r >= 3").split(":= by\n", 1)[1]
+    assert tactic.splitlines()[0] == "  try casesm* _ ∧ _, _ ∨ _"
+    conj = consequence_theorem(H("T", ["r > 2"]), "r > 1 and r < 11")
+    assert "refine ⟨?_, ?_⟩" in conj and conj.count("(focus (") == 2 and "(by " not in conj
+    roots = consequence_theorem(H("T", ["r*r - 3*r + 2 == 0"]), "r in (1, 2)")
+    assert "(left; " in roots and "(right; " in roots
+    assert "refine (mul_ne_zero (sub_ne_zero.mpr hne0) (sub_ne_zero.mpr hne1)) ?_" in roots
+    mixed = consequence_theorem(H("T", ["r > 2"]), "r > 5 or r > 1")
+    assert "mul_ne_zero" not in mixed and "simp only [not_or, not_and_or, not_le, not_lt] at hne" in mixed
+    assert "(intro hc; " in consequence_theorem(H("T", ["r > 2"]), "r != 1")
+    assert "push_neg" not in roots + mixed
+    custom = consequence_theorem(H("T", ["r > 2"]), "r > 1", tactic="linarith")
+    assert custom.endswith(":= by\n  linarith\n")
 
 
 def test_lean_export_rejects_string_variables():

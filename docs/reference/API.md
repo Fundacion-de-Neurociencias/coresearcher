@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 96. Interactive documentation is served at `/docs` when the API runs.
+Operations: 107. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -100,6 +100,17 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/hypotheses/evaluate` | API key | Evaluate Formal Hypothesis |
 | `POST` | `/api/hypotheses/formalize` | API key | Formalize Hypothesis |
 | `GET` | `/api/hypotheses/scenarios/alzheimer` | Public | Alzheimer Formal Scenario Report |
+| `GET` | `/api/lifecycle/ontrack` | Public | Lifecycle Ontrack Status |
+| `GET` | `/api/lifecycle/projects` | Public | List Lifecycle Projects |
+| `POST` | `/api/lifecycle/projects` | API key | Create Lifecycle Project |
+| `GET` | `/api/lifecycle/projects/{project_id}` | Public | Get Lifecycle Project |
+| `GET` | `/api/lifecycle/projects/{project_id}/gate` | Public | Evaluate Lifecycle Gate |
+| `POST` | `/api/lifecycle/projects/{project_id}/gate/pass` | API key | Pass Lifecycle Gate |
+| `POST` | `/api/lifecycle/projects/{project_id}/release` | API key | Release Lifecycle Project |
+| `POST` | `/api/lifecycle/projects/{project_id}/results` | API key | Submit Lifecycle Result |
+| `POST` | `/api/lifecycle/projects/{project_id}/rework` | API key | Rework Lifecycle Stage |
+| `GET` | `/api/lifecycle/template` | Public | Lifecycle Template |
+| `GET` | `/api/lifecycle/watch` | Public | Watch Lifecycle |
 | `GET` | `/api/observer/ledger` | Public | Get Activity Ledger |
 | `POST` | `/api/ontology/apply` | API key | Apply Ontology Plan |
 | `POST` | `/api/ontology/plan` | API key | Plan Ontology Change |

@@ -1,4 +1,4 @@
-"""Formal hypothesis evaluation endpoints (ADR-DISCOVERY-059, ADR-DISCOVERY-060, ADR-DISCOVERY-063)."""
+"""Formal hypothesis evaluation endpoints (ADR-DISCOVERY-059, ADR-DISCOVERY-060, ADR-DISCOVERY-064)."""
 
 import os
 
@@ -116,7 +116,7 @@ def _gate_samples(requested) -> int:
 
 
 def run_formalizer(prose: str, hypothesis_id: str, schema, samples=None) -> GateResult:
-    """Draws N formalizations from the configured model(s) and gates them by exact equivalence (ADR-063).
+    """Draws N formalizations from the configured model(s) and gates them by exact equivalence (ADR-064).
 
     N comes from the request, else FORMALIZER_SAMPLES, else 5. FORMALIZER_GATE_MODELS (comma-separated) spreads the
     samples over several models served at the same endpoint. HTTP 503 when no model is configured, 502 when the
@@ -170,7 +170,7 @@ def gated_payload(result: GateResult, rivals: list) -> dict:
 def formalize_hypothesis(req: FormalizeHypothesisRequest):
     """Prose -> N formal objects (by the configured local model) -> self-consistency gate -> exact evaluation.
 
-    The gate (ADR-DISCOVERY-063) accepts a formalization only when a strict majority of the samples is proved
+    The gate (ADR-DISCOVERY-064) accepts a formalization only when a strict majority of the samples is proved
     logically equivalent; otherwise the response is FORMALIZATION_AMBIGUOUS and carries no evaluation. An accepted
     object is still a draft: the researcher must confirm it says what the prose meant.
     """

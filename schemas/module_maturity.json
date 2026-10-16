@@ -163,6 +163,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "ed_polarity_case",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "energy_predictive_auditor",
       "scripts": false,
       "tests": true
@@ -372,6 +379,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "ptau217_cutoff_case",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Exercised",
       "module": "real_cohort_campaign_runner",
       "scripts": true,
@@ -411,6 +425,13 @@
       "module": "research_budget_engine",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "research_lifecycle",
+      "scripts": false,
+      "tests": true
     },
     {
       "api": false,

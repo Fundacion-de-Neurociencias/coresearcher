@@ -14,9 +14,14 @@ make every later verdict wrong while looking exact.
 
 ## 2. Dataset
 
-20 prose hypotheses across 12 domains (`formalizer_dataset.json`), each with a variable schema and a gold
-formalization written by the maintainers. Gold verdicts: 14 `FALSIFIABLE`, 3 `UNFALSIFIABLE`, 2 `SELF_CONTRADICTORY`,
+21 prose hypotheses across 13 domains (`formalizer_dataset.json`), each with a variable schema and a gold
+formalization written by the maintainers. Gold verdicts: 14 `FALSIFIABLE`, 4 `UNFALSIFIABLE`, 2 `SELF_CONTRADICTORY`,
 1 `VACUOUS`. The defective items are deliberate: the formalizer must preserve the defect, not repair it.
+
+F21 (added 2026-10-15, after round 0) is a mathematical claim, the smallest instance of the Error Diffusion
+polarity invariance from Sakana's Agentic Scientist ([SAKANA_ED_POLARITY.md](../cases/SAKANA_ED_POLARITY.md)). Being a
+theorem given its definitions, its gold verdict is `UNFALSIFIABLE`; a formalization that drops one of its assumptions
+becomes `FALSIFIABLE` and `STRONGER` than gold (it forbids states the gold allows). Round 0 ran on F01-F20 only.
 
 `formalizer_bench.py gold-check` verifies that every gold formalization has its intended verdict. Before round 1,
 two scientists from the Fundación review the gold formalizations; disagreements are resolved by discussion and
@@ -35,7 +40,7 @@ the first run. The frozen prompt is `formalizer-v1` (`python/discovery/formalize
 
 ## 4. Metrics
 
-Over all 20 items:
+Over all 21 items:
 
 | Metric | Definition |
 | --- | --- |
@@ -60,9 +65,9 @@ is included if it is served through an OpenAI-compatible endpoint. See
 
 ## 6. Interpretation
 
-- The benchmark measures translation fidelity on 20 items. It does not measure whether a hypothesis is true or
+- The benchmark measures translation fidelity on 21 items. It does not measure whether a hypothesis is true or
   whether the gold variables are the right model of the phenomenon.
-- With n = 20, a single item moves each rate by 0.05. Results are descriptive; no model is declared better unless the
+- With n = 21, a single item moves each rate by about 0.05. Results are descriptive; no model is declared better unless the
   difference survives an exact McNemar test on paired items at alpha 0.05.
 - Until a model reaches equivalence to gold of at least 0.80 with no spurious defects, formalizer output is shown in
   the UI as a draft that the researcher must confirm before it is evaluated.

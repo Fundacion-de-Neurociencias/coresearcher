@@ -83,17 +83,19 @@ export PATH="$HOME/oracle/bin:$HOME/.elan/bin:$PATH"
 
 ```bash
 M=~/oracle/openai-math
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M prepare
+python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root $M
+python scripts/benchmarks/openai_math_lean_oracle.py prepare --math-root $M
 # build the 19 solutions it lists, from $M/lean:  lake build OAI...
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M run
-python scripts/benchmarks/openai_math_lean_oracle.py --math-root $M report
+python scripts/benchmarks/openai_math_lean_oracle.py preflight --math-root $M   # must pass
+python scripts/benchmarks/openai_math_lean_oracle.py run --math-root $M
+python scripts/benchmarks/openai_math_lean_oracle.py report --math-root $M
 ```
 
 `prepare` and `report` need no Lean toolchain. `run` is resumable; `--timeout` (seconds per challenge) defaults to
 the protocol's 3,600. `report` writes `docs/reference/benchmarks/openai_math_lean_oracle_results.json`; the agent
 then writes `LEAN_ORACLE_REPORT.md` and updates the claims register.
 
-**Notes from the 2026-10-15 trial** (Ubuntu 24.04 under WSL2, 4 cores, 7 GB RAM; stopped during the cache download
+**Notes from the trial** (Ubuntu 24.04 under WSL2, 4 cores, 7 GB RAM; stopped during the cache download
 to leave the run to the Legion):
 
 - WSL2 kernel 5.15 has Landlock, and a user-level install works without sudo.
@@ -102,6 +104,7 @@ to leave the run to the Legion):
 - The Mathlib cache (about 9,000 files) downloaded at 10 to 200 KB/s on that link: plan an hour or more on a slow
   connection. Re-running the script resumes.
 - With 7 GB of RAM the run is expected to take many hours; the Legion's memory and cores shorten it.
+- If the kernel's Landlock ABI is below v9, the systemd user session is the only guard against UNIX sockets (protocol, step 1), so do not bypass it.
 
 ## 4. Lean kernel check of z3 entailments (ADR-DISCOVERY-060)
 
@@ -111,6 +114,8 @@ python scripts/benchmarks/formal_lean_check.py run --out-dir runs/lean_checks --
     --out runs/lean_checks/results.json
 ```
 
+Expected with the current default tactic: 12 of the 12 entailed checks PROVED and the 4 others NOT_PROVED (the
+result on a Linux container with Mathlib modules built from source; see section 2b of the round 0 results).
 A theorem that z3 rejects and Lean proves is a soundness discrepancy: the command exits with status 1, and neither
 back end should be trusted until it is explained. A theorem z3 accepts but the default tactic cannot prove is not a
 contradiction; it is reported as `NOT_PROVED`.

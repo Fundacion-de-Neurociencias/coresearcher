@@ -21,7 +21,9 @@ from python.discovery.research_lifecycle import (
     Stage,
     ontrack_status,
     project_to_dict,
+    verify_tournament_elo,
 )
+from python.discovery.hypothesis_tournament_arena import TournamentHypothesis, TournamentReport
 
 T0 = datetime(2026, 10, 1, tzinfo=timezone.utc)
 SHA = "a" * 64
@@ -232,6 +234,53 @@ def test_watcher_reports_drift_missing_pending_stalled_and_unreleased(tmp_path):
     assert LifecycleWatcher(done).scan(now) == []
 
 
+def test_verify_tournament_elo_gate_integration():
+    hyp_a = TournamentHypothesis("hyp-a", "Hypothesis A", "A is true", "bio", elo_rating=1280.0)
+    hyp_b = TournamentHypothesis("hyp-b", "Hypothesis B", "B is true", "bio", elo_rating=1120.0)
+    report = TournamentReport(
+        tournament_id="tourn-1",
+        domain="bio",
+        total_matches=1,
+        leaderboard=[hyp_a, hyp_b],
+        top_hypothesis=hyp_a,
+        matches=[],
+        tournament_hash="sha256:1234",
+        execution_time_seconds=0.1,
+    )
+    # Check above threshold
+    res_pass = verify_tournament_elo(report, "hyp-a", min_elo=1200.0)
+    assert res_pass.ok is True
+    assert res_pass.role == ActorRole.VERIFIER_TOOL
+    assert res_pass.check_id == "protocol.tournament_elo"
+
+    # Check below threshold
+    res_fail = verify_tournament_elo(report, "hyp-b", min_elo=1200.0)
+    assert res_fail.ok is False
+    assert res_fail.role == ActorRole.VERIFIER_TOOL
+
+    # Check missing hypothesis
+    res_missing = verify_tournament_elo(report, "hyp-unknown", min_elo=1200.0)
+    assert res_missing.ok is False
+
+
+def test_watcher_scan_and_alert_callback(tmp_path):
+    svc = service()
+    svc.create_project("p_alert", "P Alert")
+    svc.submit_result(
+        "p_alert", "question.statement", True, "agent-1", ActorRole.AGENT, artifact_path="runs/q.md", sha256=SHA
+    )
+    watcher = LifecycleWatcher(svc, root=None, stall_days=7)
+    alerts = []
+
+    findings = watcher.scan_and_alert(
+        now=T0 + timedelta(days=1),
+        alert_callback=lambda f: alerts.append(f.kind),
+    )
+    assert len(findings) == 1
+    assert alerts == [FindingKind.PENDING_HUMAN]
+
+
+
 def test_ontrack_export_shape():
     svc = service()
     svc.create_project("p", "P")
@@ -242,6 +291,7 @@ def test_ontrack_export_shape():
     assert row["stage"] == "PROTOCOL" and row["stage_index"] == 2 and row["stage_count"] == 7
     assert row["gate_decision"] == "INCOMPLETE" and row["checklist"] == {"required_satisfied": 0, "required_total": 4}
     assert row["version"] == 2 and len(row["digest"]) == 64 and row["latest_release"] is None
+
 
 
 # --- API ------------------------------------------------------------------------

@@ -137,6 +137,12 @@ DEFAULT_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
         _c("protocol.criteria", "Number of pre-registered pass/fail criteria.", R, threshold=1),
         _c("protocol.dataset_frozen", "The evaluation dataset is frozen and hashed.", A),
         _c("protocol.review", "The protocol and dataset were reviewed before any run.", H),
+        _c(
+            "protocol.tournament_elo",
+            "The candidate hypothesis defeated rival hypotheses in the Elo arena above threshold.",
+            V,
+            required=False,
+        ),
     ),
     Stage.EXECUTION: (
         _c("execution.raw_outputs", "Raw outputs are kept and hashed before any scoring.", A),
@@ -693,6 +699,64 @@ class LifecycleWatcher:
                     )
                 )
         return out
+
+    def scan_and_alert(
+        self,
+        now: Optional[datetime] = None,
+        alert_callback: Optional[Callable[[Finding], None]] = None,
+    ) -> List[Finding]:
+        """Runs scan and invokes an alert callback for every detected finding (stalled, pending human, drift)."""
+        findings = self.scan(now=now)
+        if alert_callback:
+            for finding in findings:
+                alert_callback(finding)
+        return findings
+
+
+def verify_tournament_elo(
+    tournament_report: Any,
+    target_hypothesis_id: str,
+    min_elo: float = 1200.0,
+    check_id: str = "protocol.tournament_elo",
+    actor: str = "tournament_arena",
+    at: Optional[str] = None,
+) -> CheckResult:
+    """Certifies whether a hypothesis attained the minimum Elo rating in a tournament report (ADR-058 & ADR-063).
+
+    Returns a CheckResult with ActorRole.VERIFIER_TOOL suitable for stage gate verification.
+    """
+    timestamp = at or datetime.now(timezone.utc).isoformat()
+    leaderboard = getattr(tournament_report, "leaderboard", [])
+    matching = [h for h in leaderboard if getattr(h, "hypothesis_id", "") == target_hypothesis_id]
+    if not matching:
+        return CheckResult(
+            check_id=check_id,
+            ok=False,
+            actor=actor,
+            role=ActorRole.VERIFIER_TOOL,
+            at=timestamp,
+            note=f"Hypothesis '{target_hypothesis_id}' not found in tournament leaderboard.",
+            value=0.0,
+        )
+
+    hyp = matching[0]
+    rating = float(getattr(hyp, "elo_rating", 0.0))
+    passed = rating >= min_elo
+    note = (
+        f"Elo rating {rating:.2f} satisfies minimum requirement ({min_elo:.2f})."
+        if passed
+        else f"Elo rating {rating:.2f} is below minimum requirement ({min_elo:.2f})."
+    )
+    return CheckResult(
+        check_id=check_id,
+        ok=passed,
+        actor=actor,
+        role=ActorRole.VERIFIER_TOOL,
+        at=timestamp,
+        note=note,
+        value=rating,
+    )
+
 
 
 # --------------------------------------------------------------------------- export

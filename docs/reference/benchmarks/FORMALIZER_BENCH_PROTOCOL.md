@@ -38,6 +38,11 @@ Decoding is deterministic (temperature 0, seed 0). One output per item per model
 the first run. The frozen prompt is `formalizer-v1` (`python/discovery/formalizer.py`); its SHA-256 is printed by
 `gold-check` and stored in every run file.
 
+The predicate language reads `true` and `false` as the constants `True` and `False`, unless a variable has that name
+(decided on 2026-10-16, before the freeze). Round 0 showed models writing the JSON forms. Accepting them changes no
+meaning, so the prompt is not changed and stays `formalizer-v1`. Round 0 outputs are not re-scored with this rule:
+the decision was taken from those items, and only the frozen dataset measures its effect.
+
 ## 4. Metrics
 
 Over all 21 items:

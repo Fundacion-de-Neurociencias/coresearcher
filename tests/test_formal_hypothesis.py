@@ -7,6 +7,7 @@ from python.discovery.formal_hypothesis import (
     FormalHypothesisError,
     Hypothesis,
     HypothesisEvaluator,
+    Predicate,
     Relation,
     Variable,
 )
@@ -171,3 +172,15 @@ def test_api_evaluate_and_compare(api_client):
     resp = api_client.post("/api/hypotheses/compare", json={"a": hypothesis, "b": narrow})
     assert resp.status_code == 200
     assert resp.json()["relation"] == "EQUIVALENT"
+
+
+def test_lowercase_true_false_read_as_constants():
+    """JSON-style booleans from a model mean the same as Python's (formalizer protocol, section 3)."""
+    flag = Variable("flag", (True, False))
+    lower = H("L", ["flag == true or x > 2"], variables=(X, flag))
+    upper = H("U", ["flag == True or x > 2"], variables=(X, flag))
+    assert HypothesisEvaluator.compare(lower, upper).relation == Relation.EQUIVALENT
+    assert Predicate("false or x == 1", ["x"]).evaluate({"x": 1})
+    assert not Predicate("not true", ["x"]).evaluate({"x": 0})
+    # A declared variable named `true` keeps its meaning.
+    assert not Predicate("true == 1", ["true"]).evaluate({"true": 0})

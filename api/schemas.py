@@ -739,3 +739,39 @@ class FormalConsequenceRequest(BaseModel):
 
 
 LaunchWorkbenchRequest.model_rebuild()
+
+
+# --- Research lifecycle (ADR-DISCOVERY-063) ----------------------------------------
+
+
+class CreateLifecycleProjectRequest(BaseModel):
+    project_id: str = Field(..., max_length=64)
+    title: str = Field(..., max_length=300)
+    template: str = "default"
+
+
+class LifecycleResultRequest(BaseModel):
+    check_id: str = Field(..., max_length=100)
+    ok: bool
+    actor: str = Field(..., max_length=100)
+    role: str = Field(..., description="AGENT, VERIFIER_TOOL or HUMAN")
+    note: str = Field("", max_length=2000)
+    value: Optional[float] = None
+    artifact_path: Optional[str] = Field(None, max_length=500)
+    sha256: Optional[str] = Field(None, max_length=64)
+    criteria: Dict[str, str] = Field(default_factory=dict, description="Analysis: criterion id -> MET or NOT_MET")
+
+
+class LifecycleActorRequest(BaseModel):
+    actor: str = Field(..., max_length=100)
+
+
+class LifecycleReworkRequest(BaseModel):
+    stage: str
+    actor: str = Field(..., max_length=100)
+    reason: str = Field(..., max_length=2000)
+
+
+class LifecycleReleaseRequest(BaseModel):
+    actor: str = Field(..., max_length=100)
+    summary: str = Field("", max_length=5000)

@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 13 |
+| Integrated | Used by the API and covered by tests | 14 |
 | Tested | Covered by tests, not reachable from the API | 24 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -72,6 +72,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `reality_distance` | Prototype | - | - | - |
 | `reliability_auditor` | Prototype | - | - | - |
 | `research_budget_engine` | Prototype | - | - | - |
+| `research_lifecycle` | Integrated | yes | yes | - |
 | `result_family_orchestrator` | Tested | - | yes | - |
 | `retrospective_time_split_benchmark` | Exercised | - | - | yes |
 | `scientific_git_history` | Tested | - | yes | yes |

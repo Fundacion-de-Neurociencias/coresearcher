@@ -65,7 +65,9 @@ Hypothesis H1 (S1 AUROC lower bound above 0.5): **not met.**
   mathematics. Scaling the benchmark up would only confirm a null result.
 - Mutation coverage depends heavily on statement shape. M5 (negation) applies everywhere; M4 rarely does.
   The full benchmark needs at least 100 pairs to get ≥ 15 pairs for M1–M3, or more operators.
-- Lean/Comparator confirmation of mutants remains to be done, on a Linux machine with the Lean toolchain.
+- Lean/Comparator confirmed the labels (2026-10-17): 19/19 originals accepted and 52/52 mutants rejected, with
+  no label noise. 3 mutants are ill-formed Lean (M3 over instance binders, M5 in one multi-line statement); fix
+  these operators before scaling up. See section 5b of [LEAN_ORACLE_PROTOCOL.md](LEAN_ORACLE_PROTOCOL.md).
 
 ## Status
 

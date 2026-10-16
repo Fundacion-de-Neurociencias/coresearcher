@@ -97,7 +97,71 @@ The preflight checks every item below and exits 1 while a required one is missin
 The generated mutants were checked by hand. `report` was checked with synthetic outcomes, and `run` refuses
 to start outside Linux. No Comparator result exists yet.
 
-## 5b. Checked on Linux before the Legion (2026-10-15)
+## 5b. Linux runs
+
+### Lenovo Legion, full run (2026-10-17)
+
+**Environment.** The Legion runs Windows 11 Pro; the oracle ran in **WSL2** (Ubuntu 26.04 LTS, kernel
+`6.6.114.1-microsoft-standard-WSL2`, Landlock ABI **v3**), on an Intel Core Ultra 9 275HX with 24 threads and
+31 GB of RAM assigned to WSL, on the Linux file system (not `/mnt/c`). Systemd was enabled in WSL, the user
+manager kept alive with `loginctl enable-linger`, and every step ran as an unprivileged user (uid 1000).
+Tool commits, as written by the setup script, are in
+[`openai_math_lean_oracle_tools.txt`](openai_math_lean_oracle_tools.txt): openai/math `1581d4c`, Lean v4.34.1,
+`landrun` `ec104f6` (`main`), `lean4export` `076e8e5` and `comparator` `d03acab` (both `v4.34.0` tags).
+
+**Sandbox.** Landlock ABI v3 is below v9, so `landrun --best-effort` does not restrict UNIX sockets. Every run went
+through the `systemd-run --property=RestrictAddressFamilies=~AF_UNIX --user` guard (step 8); `COMPARATOR_CMD` was
+not set. The final `preflight` passed with only the expected ABI warning.
+
+**Setup deviation (build only, no change to the procedure).** The openai/math lakefile applies its compatibility
+patches for 12 dependencies (`rellich-kondrachov`, `carleson`, `PrimeNumberTheoremAnd` and 9 more) only in its
+`post_update` hook, which runs on `lake update` alone. Step 3 forbids `lake update`, so the first build of the 19
+solution modules failed in `rellich-kondrachov`. The 12 patches from the pinned commit's `patches/` directory were
+applied with `git apply`, with the same forward and reverse checks as the hook; no dependency commit moved. The
+setup script now does this, and `tools.txt` lists the patched packages. The 19 modules then built without errors
+(14,454 jobs, 23 minutes).
+
+**Result** ([`openai_math_lean_oracle_results.json`](openai_math_lean_oracle_results.json)). 71 runs, no timeouts,
+78 minutes in total. The longest run was F275_ORIGINAL (12.7 minutes, about 21 GB of memory in use).
+
+| | Result | 95% Wilson interval |
+| --- | --- | --- |
+| Originals accepted | 19/19 | 0.832–1.000 |
+| Mutants rejected | 52/52 | 0.931–1.000 |
+| M1 numeric literal | 9/9 | 0.701–1.000 |
+| M2 order relation | 9/9 | 0.701–1.000 |
+| M3 quantifier | 10/10 | 0.722–1.000 |
+| M4 hypothesis removed | 5/5 | 0.566–1.000 |
+| M5 negation | 19/19 | 0.832–1.000 |
+
+- **Pipeline sound: met.** Every original copy was accepted.
+- **Labels valid: met.** The lower bound 0.931 is at least 0.9.
+- **Label noise: none.** No mutant was accepted.
+- **Sensitivity analysis** ([`openai_math_oracle_sensitivity.json`](openai_math_oracle_sensitivity.json), script
+  [`openai_math_oracle_sensitivity.py`](../../../scripts/benchmarks/openai_math_oracle_sensitivity.py)). With no
+  noisy labels to remove, the S1/B0/B1 figures are unchanged: S1 8/52 flagged, 17/19 passed, AUROC 0.524
+  (0.500–0.561); B0 0/52, 19/19, 0.500; B1 14/52, 16/19, 0.553 (0.519–0.588). The script first reproduces the
+  published pilot figures exactly, then recomputes them.
+
+**How the mutants were rejected.** 45 runs ended with Comparator's "challenge and solution theorem statement do
+not match". The other 7 failed earlier, because the mutated challenge file did not compile:
+
+- 4 are real changes of meaning. In families 115 and 275 the pilot extracted a helper lemma that is proved inside
+  the challenge file, and the mutation breaks that proof (F115_M2, F115_M4, F115_M5, F275_M5).
+- 3 are **ill-formed mutants**, a defect of the mutation operators: M3 turned `∀` into `∃` over instance binders
+  such as `[Fintype F]`, which `∃` does not accept (F231_M3, F243_M3), and M5 left a parenthesis unclosed in a
+  multi-line statement (F277_M5). Their rejection says nothing about the labels.
+
+Supplementary, not pre-registered: without the 3 ill-formed mutants, 49/49 are rejected (lower bound 0.927); S1
+flags 8/49 (AUROC 0.529) and B1 13/49 (AUROC 0.550). Without all 7 build failures, 45/45 (lower bound 0.921). The
+conclusions do not change.
+
+**What this does and does not show.** Comparator compares the challenge statement with the one the solution proves.
+A mutant is accepted only if it leaves that statement unchanged, so this oracle can find mutants that changed
+nothing, but not mutants that changed the text into a logically equivalent statement. Within that limit, the
+pilot labels hold, and the null result for S1 (claims register, row 19) is not an artefact of label noise.
+
+### Cloud container, before the Legion (2026-10-15)
 
 On a Linux cloud container (kernel 6.18, Landlock ABI v7, no systemd user session):
 

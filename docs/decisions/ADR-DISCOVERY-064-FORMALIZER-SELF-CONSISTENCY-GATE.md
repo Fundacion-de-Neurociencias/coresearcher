@@ -1,4 +1,4 @@
-# ADR-DISCOVERY-063: Self-consistency gate on the formalizer
+# ADR-DISCOVERY-064: Self-consistency gate on the formalizer
 
 **Status:** Accepted
 **Date:** 2026-10-15

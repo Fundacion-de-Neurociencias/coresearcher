@@ -1,4 +1,4 @@
-"""Tests for the formalizer self-consistency gate (ADR-DISCOVERY-063). No model is called."""
+"""Tests for the formalizer self-consistency gate (ADR-DISCOVERY-064). No model is called."""
 
 import json
 import sys

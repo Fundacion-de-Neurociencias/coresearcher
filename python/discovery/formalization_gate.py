@@ -1,5 +1,5 @@
 """
-python/discovery/formalization_gate.py - Self-consistency gate on the formalizer (ADR-DISCOVERY-063).
+python/discovery/formalization_gate.py - Self-consistency gate on the formalizer (ADR-DISCOVERY-064).
 
 The formalizer (ADR-DISCOVERY-061) is a language model, and a single output can silently mean something other than
 the prose. The gate draws N independent formalizations of the same prose (different seeds, a positive temperature,

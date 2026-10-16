@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-15. **Status:** exploratory, on the same unfrozen 20-item seed dataset as
 [round 0](ROUND0_EXPLORATORY_RESULTS.md). **Decision record:**
-[ADR-DISCOVERY-063](../../decisions/ADR-DISCOVERY-063-FORMALIZER-SELF-CONSISTENCY-GATE.md). **Generated tables and
+[ADR-DISCOVERY-064](../../decisions/ADR-DISCOVERY-064-FORMALIZER-SELF-CONSISTENCY-GATE.md). **Generated tables and
 per-item rows:** [FORMALIZER_GATE_REPORT.md](FORMALIZER_GATE_REPORT.md).
 
 ## 1. Setup

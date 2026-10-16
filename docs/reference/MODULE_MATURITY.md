@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 14 |
-| Tested | Covered by tests, not reachable from the API | 24 |
+| Integrated | Used by the API and covered by tests | 15 |
+| Tested | Covered by tests, not reachable from the API | 26 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -37,6 +37,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `discovery_forecast_registry` | Exercised | yes | - | yes |
 | `discovery_teams` | Exercised | - | - | yes |
 | `discovery_workbench` | Prototype | - | - | - |
+| `ed_polarity_case` | Tested | - | yes | yes |
 | `energy_predictive_auditor` | Tested | - | yes | - |
 | `epistemic_pr_auditor` | Integrated | yes | yes | yes |
 | `epistemic_stigmergy` | Tested | - | yes | yes |
@@ -67,12 +68,14 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `ptau217_cutoff_case` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |
 | `real_cohort_empirical_pipeline` | Prototype | - | - | - |
 | `reality_contact_score` | Tested | - | yes | yes |
 | `reality_distance` | Prototype | - | - | - |
 | `reliability_auditor` | Prototype | - | - | - |
 | `research_budget_engine` | Prototype | - | - | - |
+| `research_lifecycle` | Integrated | yes | yes | - |
 | `result_family_orchestrator` | Tested | - | yes | - |
 | `retrospective_time_split_benchmark` | Exercised | - | - | yes |
 | `scientific_git_history` | Tested | - | yes | yes |

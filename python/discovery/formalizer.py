@@ -177,7 +177,7 @@ class ChatClient:
 
     def complete(self, messages: List[Dict[str, str]], temperature: float = 0.0, seed: int = 0) -> str:
         """One completion. The defaults are the frozen benchmark decoding; the self-consistency gate
-        (ADR-DISCOVERY-063) passes other seeds and a positive temperature to draw independent samples."""
+        (ADR-DISCOVERY-064) passes other seeds and a positive temperature to draw independent samples."""
         import httpx
 
         headers = {"Authorization": f"Bearer {self._api_key}"} if self._api_key else {}

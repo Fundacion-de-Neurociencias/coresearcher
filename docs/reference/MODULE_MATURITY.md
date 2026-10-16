@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 14 |
-| Tested | Covered by tests, not reachable from the API | 25 |
+| Integrated | Used by the API and covered by tests | 15 |
+| Tested | Covered by tests, not reachable from the API | 26 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -49,6 +49,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
 | `formal_smt` | Tested | - | yes | - |
+| `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
 | `grounded_search_sensor` | Exercised | - | - | yes |
@@ -67,6 +68,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `ptau217_cutoff_case` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |
 | `real_cohort_empirical_pipeline` | Prototype | - | - | - |
 | `reality_contact_score` | Tested | - | yes | yes |

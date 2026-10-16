@@ -225,6 +225,7 @@ class LaunchWorkbenchRequest(BaseModel):
     # ADR-DISCOVERY-061: the hypothesis as a formal object, or ask the formalizer to build one from `question`.
     formal_hypothesis: Optional["FormalHypothesisModel"] = None
     formalize_question: bool = False
+    formalizer_samples: Optional[int] = Field(default=None, ge=1, le=7)  # ADR-DISCOVERY-064 gate size.
 
 
 class AuditEvidenceRequest(BaseModel):
@@ -729,6 +730,8 @@ class FormalizeHypothesisRequest(BaseModel):
     hypothesis_id: str = "H-FORMALIZED"
     variable_schema: Optional[List[FormalVariableModel]] = None
     rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+    # ADR-DISCOVERY-064: number of independent formalizations for the self-consistency gate (default 5).
+    samples: Optional[int] = Field(default=None, ge=1, le=7)
 
 
 class FormalConsequenceRequest(BaseModel):

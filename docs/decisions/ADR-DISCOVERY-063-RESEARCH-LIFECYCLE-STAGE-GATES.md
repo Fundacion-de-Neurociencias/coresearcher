@@ -72,6 +72,15 @@ their state to OnTrack.
    draft until OnTrack's PLM model is published; field names follow the vocabulary OnTrack uses (stage gates,
    versions, releases, policies).
 
+## Amendment (2026-10-17): human sign-offs are optional
+
+At the principal investigator's request, HUMAN checks no longer block a gate in the `default` and `benchmark`
+templates.
+
+- A person can still sign, and the release notes always list who signed and which checks, or say "none".
+- VERIFIER checks still refuse self-checks, so an agent still cannot certify its own work.
+- Projects that want sign-offs to block use the `signed` template, which is the original checklist.
+
 ## Consequences
 
 - The formalizer round 1, the concordance pilot and the Lean oracle can be run as lifecycle projects. A

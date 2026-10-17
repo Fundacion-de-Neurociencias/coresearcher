@@ -103,7 +103,7 @@ def test_self_check_never_satisfies_a_verifier_check():
 
 def test_pending_human_fail_and_latest_result_wins():
     svc = service()
-    svc.create_project("p", "P")
+    svc.create_project("p", "P", template="signed")
     run_to(svc, "p", Stage.HYPOTHESIS)
     satisfy(svc, "p", Stage.HYPOTHESIS, skip={"hypothesis.confirmed"})
     assert svc.evaluate_gate("p").decision == GateDecision.PENDING_HUMAN
@@ -212,7 +212,7 @@ def test_watcher_reports_drift_missing_pending_stalled_and_unreleased(tmp_path):
     question = tmp_path / "runs" / "question.md"
     question.write_text("Does X predict Y?", encoding="utf-8")
     svc = service()
-    svc.create_project("p", "P")
+    svc.create_project("p", "P", template="signed")
     sha = hashlib.sha256(question.read_bytes()).hexdigest()
     svc.submit_result(
         "p", "question.statement", True, "agent-1", ActorRole.AGENT, artifact_path="runs/question.md", sha256=sha
@@ -265,7 +265,7 @@ def test_verify_tournament_elo_gate_integration():
 
 def test_watcher_scan_and_alert_callback(tmp_path):
     svc = service()
-    svc.create_project("p_alert", "P Alert")
+    svc.create_project("p_alert", "P Alert", template="signed")
     svc.submit_result(
         "p_alert", "question.statement", True, "agent-1", ActorRole.AGENT, artifact_path="runs/q.md", sha256=SHA
     )
@@ -288,7 +288,7 @@ def test_ontrack_export_shape():
     assert status["schema"] == EXPORT_SCHEMA and status["product"] == "coresearcher"
     (row,) = status["projects"]
     assert row["stage"] == "PROTOCOL" and row["stage_index"] == 2 and row["stage_count"] == 7
-    assert row["gate_decision"] == "INCOMPLETE" and row["checklist"] == {"required_satisfied": 0, "required_total": 4}
+    assert row["gate_decision"] == "INCOMPLETE" and row["checklist"] == {"required_satisfied": 0, "required_total": 3}
     assert row["version"] == 2 and len(row["digest"]) == 64 and row["latest_release"] is None
 
 
@@ -340,3 +340,25 @@ def test_api_lifecycle_writes_need_a_key():
 
     response = TestClient(app).post("/api/lifecycle/projects", json={"project_id": "x", "title": "x"})
     assert response.status_code in (401, 503)
+
+
+def test_human_sign_offs_are_optional_by_default_and_reported():
+    svc = service()
+    svc.create_project("p", "P")
+    satisfy(svc, "p", Stage.QUESTION, skip={"question.owner"})
+    assert svc.evaluate_gate("p").decision == GateDecision.PASS
+    svc.pass_gate("p", "maintainer")
+    run_all(svc, "p")  # satisfy() signs every later stage
+    notes = svc.release("p", "maintainer").notes
+    assert "Human sign-offs: scientist-1 (analysis.deviations)" in notes and "question.owner" not in notes
+    unsigned = service()
+    unsigned.create_project("u", "U")
+    while not unsigned.get("u").passed(Stage.REPORT):
+        satisfy(
+            unsigned,
+            "u",
+            unsigned.get("u").stage,
+            skip={c.check_id for c in unsigned.get("u").checks(unsigned.get("u").stage) if c.kind == CheckKind.HUMAN},
+        )
+        unsigned.pass_gate("u", "maintainer")
+    assert "Human sign-offs: none" in unsigned.release("u", "maintainer").notes

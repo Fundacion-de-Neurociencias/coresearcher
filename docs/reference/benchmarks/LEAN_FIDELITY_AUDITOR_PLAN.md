@@ -138,6 +138,47 @@ Limits of this result:
 **Go/no-go:** at least 30% of determined originals come out *faithful*. Below that, the formalizer is the
 bottleneck, and a test run would only measure its failures.
 
+### Phase 2 preparation (2026-10-17; no model run yet)
+
+**Prose screen.** `screen-sheet` wrote two identical sheets,
+[`reader_A.md`](lean_fidelity_screen/reader_A.md) and [`reader_B.md`](lean_fidelity_screen/reader_B.md). Each one
+shows, for every family, the prose, the target statement and a link to the challenge file at the pinned commit,
+followed by two boxes (*determined*, *underdetermined*) and a note line. The rules are at the top of each sheet.
+Each reader fills in their own sheet alone, before any model output exists, and commits it. `screen-score` then
+writes `lean_fidelity_screen/screen_result.json` with agreement, Cohen's kappa and the scored families: those
+**both** readers marked *determined*. Disagreements are not resolved by discussion; they are reported and the
+family is not scored.
+
+**Formalizer input.** `formalize` builds, for each family:
+
+- *Context:* the challenge file without the target theorem, its docstring and its proof, with the line
+  `-- [statement to formalize]` in their place. The target statement does not occur in any of the 19 contexts.
+- *Prompt* `fidelity-formalize-v1` (SHA-256 `8121656dd978…`): the prose, the context, and the theorem's name.
+  The name lets the model pick the right result when the prose describes several. It does not reveal the
+  statement, and mutants keep the same name. The model must reply with one `theorem <name> … := by sorry`.
+- *Raw outputs* go to a JSONL file (default `private/lean_fidelity/formalize_<model>.jsonl`): one meta line
+  (model, endpoint host, prompt version and hash, openai/math commit, temperature 0, seed 0), then one line per
+  family with the reply, the parsed statement, a status (`parsed`, `wrong_name`, `no_theorem`, `no_output`) and
+  the prompt length. A transport failure is recorded; `--resume` redoes only those families.
+- `--dry-run` writes the 19 prompts to `private/lean_fidelity/prompts/` without calling a model. They range from
+  about 900 to 8,100 tokens (F331).
+
+**Context length.** Ollama truncates prompts silently to its default context length, which is shorter than the
+longest prompts. Serve the model with `OLLAMA_CONTEXT_LENGTH=16384` (or an equivalent setting), and check after
+the run that `prompt_chars` stayed within it.
+
+**Open decision: wrapper statements.** In 6 families (115, 144, 174, 245, 275, 365), the conclusion is a single
+Prop-valued definition of the challenge file, such as `MainStatement`. That definition stays in the context, so
+the model can restate its name without formalizing anything, and the check would then test only the name.
+The sheets show these definitions so the readers judge them. Before the model runs, choose one of:
+
+1. **Exclude** them from the phase 2 headline and report them separately (the simplest option).
+2. **Unfold** them: also remove the definition from the context, and compare against its body. This is closer
+   to the question, but it changes the context and the mutants for these families.
+
+The comparison step (`compare`) is not written yet. It reuses the phase 1 check file and the frozen tactic, and
+compares each parsed candidate with the original and with each mutant.
+
 ### Phase 3. Pre-registration and test run
 
 1. Freeze the protocol: model tag, prompt hash, tactic script, heartbeat and wall-time limits, the prose screen

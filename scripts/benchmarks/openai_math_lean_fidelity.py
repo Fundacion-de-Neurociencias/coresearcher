@@ -519,6 +519,8 @@ def load_targets(math_root: Path) -> list[dict]:
 SCREEN_DIR = ROOT / "docs" / "reference" / "benchmarks" / "lean_fidelity_screen"
 READERS = ("A", "B")
 VERDICTS = ("determined", "underdetermined")
+# Shown above the definition of a wrapper statement; parse_sheet reads it back to mark the family.
+WRAPPER_NOTE = "The statement is a named proposition defined in the challenge file. Judge its definition:"
 SCREEN_RULES = """\
 For each family, read the prose and the formal statement, then tick exactly one box.
 
@@ -589,7 +591,7 @@ def screen_sheet(targets: list[dict], reader: str, commit: str) -> str:
         wrapper = wrapper_definition(t)
         if wrapper:
             lines += [
-                "The statement is a named proposition defined in the challenge file. Judge its definition:",
+                WRAPPER_NOTE,
                 "",
                 "```lean",
                 wrapper,
@@ -615,6 +617,7 @@ def parse_sheet(text: str) -> dict[str, dict]:
         out[m.group(1)] = {
             "verdict": ticked[0] if len(ticked) == 1 else None,
             "note": note.group(1).strip() if note else "",
+            "wrapper": WRAPPER_NOTE in section,
         }
     return out
 
@@ -629,21 +632,30 @@ def cohen_kappa(a: list[str], b: list[str]) -> float | None:
 
 
 def screen_score(sheets: dict[str, str]) -> dict:
-    """Combines the readers' sheets. A family is scored only when every reader marked it determined."""
+    """Combines the readers' sheets. A family is scored only when every reader marked it determined.
+
+    Wrapper families (the statement is one named proposition of the challenge file) are kept out of the headline
+    set and listed separately: their definition stays in the formalizer's context, so a match can be a restated
+    name rather than a formalization.
+    """
     parsed = {reader: parse_sheet(text) for reader, text in sheets.items()}
     families = sorted(set().union(*(p.keys() for p in parsed.values())))
     missing = [f"{r}:F{f}" for r, p in parsed.items() for f in families if not p.get(f, {}).get("verdict")]
     if missing:
         return {"complete": False, "missing": missing}
-    rows = [{"family": f, **{r: parsed[r][f] for r in parsed}} for f in families]
+    wrappers = {f for f in families if any(parsed[r][f]["wrapper"] for r in parsed)}
+    rows = [{"family": f, "wrapper": f in wrappers, **{r: parsed[r][f] for r in parsed}} for f in families]
     verdicts = {r: [parsed[r][f]["verdict"] for f in families] for r in parsed}
     a, b = (verdicts[r] for r in READERS)
+    determined = [f for f, x, y in zip(families, a, b) if x == y == "determined"]
     return {
         "complete": True,
         "rule": "scored only when both readers marked the family determined",
         "agreement": round(sum(x == y for x, y in zip(a, b)) / len(families), 3),
         "cohen_kappa": cohen_kappa(a, b),
-        "determined": [f for f, x, y in zip(families, a, b) if x == y == "determined"],
+        "determined": determined,
+        "headline": [f for f in determined if f not in wrappers],
+        "wrappers_reported_separately": [f for f in determined if f in wrappers],
         "rows": rows,
     }
 
@@ -781,6 +793,7 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
             row = {
                 "family": t["family"],
                 "theorem": t["theorem"],
+                "wrapper": wrapper_definition(t) is not None,
                 "prompt_chars": sum(len(m["content"]) for m in messages),
                 "output": output,
                 "transport_error": error,

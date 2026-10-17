@@ -430,7 +430,14 @@
       "api": true,
       "level": "Integrated",
       "module": "research_lifecycle",
-      "scripts": false,
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "research_package",
+      "scripts": true,
       "tests": true
     },
     {

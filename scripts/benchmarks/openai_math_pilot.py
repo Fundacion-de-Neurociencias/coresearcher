@@ -72,14 +72,32 @@ def first_challenge_path(note: str) -> str | None:
 
 
 def theorem_statement(lean: str) -> tuple[str, str, int, int] | None:
-    """Returns (name, statement_text, start, end) for the first theorem; statement ends before ':= by'."""
+    """Returns (name, statement_text, start, end) for the first theorem; statement ends before ':= by'.
+
+    Only a ':=' outside brackets ends the statement; one inside brackets belongs to a named argument such
+    as (k := k) or to a binder default value.
+    """
     m = re.search(r"\btheorem\s+([^\s(:{\[]+)", lean)
     if not m:
         return None
-    end = lean.find(":=", m.end())
+    end = _top_level_assign(lean, m.end())
     if end == -1:
         return None
     return m.group(1), lean[m.start() : end], m.start(), end
+
+
+def _top_level_assign(text: str, start: int) -> int:
+    """Index of the first ':=' at bracket depth 0 from start, or -1."""
+    depth = 0
+    for i in range(start, len(text)):
+        ch = text[i]
+        if ch in "([{⟨⦃":
+            depth += 1
+        elif ch in ")]}⟩⦄":
+            depth -= 1
+        elif depth == 0 and text.startswith(":=", i):
+            return i
+    return -1
 
 
 def title_of(note: str) -> str:
@@ -101,6 +119,33 @@ def _top_level_colon(stmt: str) -> int:
         elif ch == ":" and depth == 0 and not stmt.startswith(":=", i):
             return i
     return -1
+
+
+def _balanced(text: str) -> bool:
+    """True when every bracket in text is closed in order."""
+    pairs = {")": "(", "]": "[", "}": "{", "⟩": "⟨"}
+    stack = []
+    for ch in text:
+        if ch in "([{⟨":
+            stack.append(ch)
+        elif ch in pairs:
+            if not stack or stack.pop() != pairs[ch]:
+                return False
+    return not stack
+
+
+def _binder_list(stmt: str, i: int) -> str:
+    """Text between the quantifier at i and the ',' that ends its binder list (depth 0)."""
+    depth = 0
+    for j in range(i + 1, len(stmt)):
+        ch = stmt[j]
+        if ch in "([{⟨⦃":
+            depth += 1
+        elif ch in ")]}⟩⦄":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            return stmt[i + 1 : j]
+    return stmt[i + 1 :]
 
 
 def mutate(stmt: str) -> dict[str, str]:
@@ -128,6 +173,9 @@ def mutate(stmt: str) -> dict[str, str]:
 
     for i, ch in enumerate(stmt):
         if ch in "∀∃":
+            # ∃ takes no instance or implicit binders ([Fintype F], {x}, ⦃x⦄), and ∃! has no ∀ form.
+            if stmt.startswith("∃!", i) or re.search(r"[\[{⦃]", _binder_list(stmt, i)):
+                continue
             mutants["M3"] = stmt[:i] + ("∃" if ch == "∀" else "∀") + stmt[i + 1 :]
             break
 
@@ -139,7 +187,9 @@ def mutate(stmt: str) -> dict[str, str]:
             b = explicit[-1]
             mutants["M4"] = stmt[: b.start()] + stmt[b.end() :]
 
-    if concl_start is not None and stmt[concl_start:].strip():
+    # An unbalanced conclusion means the statement was cut at an inner ':=' (a named argument such as
+    # (k := k)); wrapping it in ¬ ( ... ) would leave a parenthesis open, so M5 does not apply.
+    if concl_start is not None and stmt[concl_start:].strip() and _balanced(stmt[concl_start:]):
         conclusion = stmt[concl_start:].rstrip()
         mutants["M5"] = stmt[:concl_start] + " ¬ (" + conclusion.strip() + ")\n    "
     return {k: v for k, v in mutants.items() if v != stmt}

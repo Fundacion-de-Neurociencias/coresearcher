@@ -97,7 +97,7 @@
       "right": "∀ a b : ℕ, 2 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
       "outcome": "not_shown",
       "messages": [
-        "84: unsolved goals"
+        "86: unsolved goals"
       ],
       "theorem": "egyptian_length_is_minimum"
     },
@@ -108,7 +108,7 @@
       "right": "∀ a b : ℕ, 1 < a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
       "outcome": "not_shown",
       "messages": [
-        "105: unsolved goals"
+        "108: unsolved goals"
       ],
       "theorem": "egyptian_length_is_minimum"
     },
@@ -119,7 +119,7 @@
       "right": "∃ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
       "outcome": "not_shown",
       "messages": [
-        "126: unsolved goals"
+        "130: unsolved goals"
       ],
       "theorem": "egyptian_length_is_minimum"
     },
@@ -130,7 +130,7 @@
       "right": "¬ (∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k))",
       "outcome": "not_shown",
       "messages": [
-        "147: unsolved goals"
+        "152: unsolved goals"
       ],
       "theorem": "egyptian_length_is_minimum"
     },
@@ -177,7 +177,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "241: unsolved goals"
+        "251: unsolved goals"
       ],
       "theorem": "egyptian_length_is_minimum"
     },
@@ -197,7 +197,7 @@
       "right": "¬ (L = RL ∧ RL = BPL)",
       "outcome": "not_shown",
       "messages": [
-        "152: unsolved goals"
+        "154: unsolved goals"
       ],
       "theorem": "exact_logarithmic_space_derandomization"
     },
@@ -226,7 +226,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "185: unsolved goals"
+        "190: unsolved goals"
       ],
       "theorem": "exact_logarithmic_space_derandomization"
     },
@@ -246,7 +246,7 @@
       "right": "¬ (Algorithms.BoundedSamplingStatement)",
       "outcome": "not_shown",
       "messages": [
-        "226: unsolved goals"
+        "228: unsolved goals"
       ],
       "theorem": "boundedSampling"
     },
@@ -266,7 +266,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "248: unsolved goals"
+        "252: unsolved goals"
       ],
       "theorem": "boundedSampling"
     },
@@ -286,7 +286,7 @@
       "right": "¬ (MainConclusion)",
       "outcome": "not_shown",
       "messages": [
-        "98: unsolved goals"
+        "100: unsolved goals"
       ],
       "theorem": "simple_lebesgue_spectrum"
     },
@@ -306,7 +306,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "120: unsolved goals"
+        "124: unsolved goals"
       ],
       "theorem": "simple_lebesgue_spectrum"
     },
@@ -326,7 +326,7 @@
       "right": "¬ (MainStatement)",
       "outcome": "not_shown",
       "messages": [
-        "54: unsolved goals"
+        "56: unsolved goals"
       ],
       "theorem": "strongThinTree"
     },
@@ -346,7 +346,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "76: unsolved goals"
+        "80: unsolved goals"
       ],
       "theorem": "strongThinTree"
     },
@@ -366,7 +366,7 @@
       "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      3 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
       "outcome": "not_shown",
       "messages": [
-        "83: unsolved goals"
+        "85: unsolved goals"
       ],
       "theorem": "sharp_threshold_width"
     },
@@ -377,7 +377,7 @@
       "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 < n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
       "outcome": "not_shown",
       "messages": [
-        "102: unsolved goals"
+        "105: unsolved goals"
       ],
       "theorem": "sharp_threshold_width"
     },
@@ -388,7 +388,7 @@
       "right": "∃ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
       "outcome": "not_shown",
       "messages": [
-        "121: unsolved goals"
+        "125: unsolved goals"
       ],
       "theorem": "sharp_threshold_width"
     },
@@ -399,7 +399,7 @@
       "right": "¬ (∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)))",
       "outcome": "not_shown",
       "messages": [
-        "140: unsolved goals"
+        "145: unsolved goals"
       ],
       "theorem": "sharp_threshold_width"
     },
@@ -446,7 +446,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "224: unsolved goals"
+        "234: unsolved goals"
       ],
       "theorem": "sharp_threshold_width"
     },
@@ -466,7 +466,7 @@
       "right": "∀ c C : ℝ, 1 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
       "outcome": "not_shown",
       "messages": [
-        "107: Tactic `simp` failed with a nested error:"
+        "109: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "no_polynomial_removal_bound"
     },
@@ -477,7 +477,7 @@
       "right": "∀ c C : ℝ, 0 ≤ c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
       "outcome": "not_shown",
       "messages": [
-        "130: Tactic `simp` failed with a nested error:"
+        "133: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "no_polynomial_removal_bound"
     },
@@ -488,7 +488,7 @@
       "right": "∃ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
       "outcome": "not_shown",
       "messages": [
-        "153: Tactic `simp` failed with a nested error:"
+        "157: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "no_polynomial_removal_bound"
     },
@@ -499,7 +499,7 @@
       "right": "¬ (∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132))",
       "outcome": "not_shown",
       "messages": [
-        "176: Tactic `simp` failed with a nested error:"
+        "181: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "no_polynomial_removal_bound"
     },
@@ -537,7 +537,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "252: unsolved goals"
+        "261: unsolved goals"
       ],
       "theorem": "no_polynomial_removal_bound"
     },
@@ -557,7 +557,7 @@
       "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 1) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
       "outcome": "not_shown",
       "messages": [
-        "192: unsolved goals"
+        "194: unsolved goals"
       ],
       "theorem": "finite_strongly_rayleigh_response"
     },
@@ -568,7 +568,7 @@
       "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) <\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
       "outcome": "not_shown",
       "messages": [
-        "225: unsolved goals"
+        "228: unsolved goals"
       ],
       "theorem": "finite_strongly_rayleigh_response"
     },
@@ -579,7 +579,7 @@
       "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∃ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
       "outcome": "not_shown",
       "messages": [
-        "258: unsolved goals"
+        "262: unsolved goals"
       ],
       "theorem": "finite_strongly_rayleigh_response"
     },
@@ -590,7 +590,7 @@
       "right": "¬ (∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2))",
       "outcome": "not_shown",
       "messages": [
-        "291: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+        "296: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
       ],
       "theorem": "finite_strongly_rayleigh_response"
     },
@@ -628,7 +628,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "401: unsolved goals"
+        "410: unsolved goals"
       ],
       "theorem": "finite_strongly_rayleigh_response"
     },
@@ -648,7 +648,7 @@
       "right": "(BddAbove (Set.range (fun n : {n : ℕ // 2 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
       "outcome": "not_shown",
       "messages": [
-        "297: Tactic `simp` failed with a nested error:"
+        "299: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "first_reciprocal_main"
     },
@@ -659,7 +659,7 @@
       "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 < n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
       "outcome": "not_shown",
       "messages": [
-        "344: Tactic `simp` failed with a nested error:"
+        "347: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "first_reciprocal_main"
     },
@@ -670,7 +670,7 @@
       "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∃ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
       "outcome": "not_shown",
       "messages": [
-        "391: Tactic `simp` failed with a nested error:"
+        "395: Tactic `simp` failed with a nested error:"
       ],
       "theorem": "first_reciprocal_main"
     },
@@ -681,7 +681,7 @@
       "right": "¬ ((BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)))",
       "outcome": "not_shown",
       "messages": [
-        "434: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+        "439: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
       ],
       "theorem": "first_reciprocal_main"
     },
@@ -719,7 +719,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "585: unsolved goals"
+        "594: unsolved goals"
       ],
       "theorem": "first_reciprocal_main"
     },
@@ -739,7 +739,7 @@
       "right": "¬ ((∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query))",
       "outcome": "not_shown",
       "messages": [
-        "577: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+        "579: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
       ],
       "theorem": "main"
     },
@@ -768,7 +768,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "620: unsolved goals"
+        "625: unsolved goals"
       ],
       "theorem": "main"
     },
@@ -788,7 +788,7 @@
       "right": "∀ {S : Type u} (P : Specification S), SystemStronglyNormalizing P",
       "outcome": "not_shown",
       "messages": [
-        "133: unsolved goals"
+        "135: unsolved goals"
       ],
       "theorem": "weak_implies_strong"
     },
@@ -799,7 +799,7 @@
       "right": "∀ {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P), ¬ (SystemStronglyNormalizing P)",
       "outcome": "not_shown",
       "messages": [
-        "146: unsolved goals"
+        "149: unsolved goals"
       ],
       "theorem": "weak_implies_strong"
     },
@@ -828,7 +828,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "183: unsolved goals"
+        "189: unsolved goals"
       ],
       "theorem": "weak_implies_strong"
     },
@@ -848,7 +848,7 @@
       "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ∀ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite",
       "outcome": "not_shown",
       "messages": [
-        "117: unsolved goals"
+        "119: unsolved goals"
       ],
       "theorem": "cannon"
     },
@@ -859,7 +859,7 @@
       "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles), ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite",
       "outcome": "not_shown",
       "messages": [
-        "133: unsolved goals"
+        "136: unsolved goals"
       ],
       "theorem": "cannon"
     },
@@ -870,7 +870,7 @@
       "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ¬ (∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite)",
       "outcome": "not_shown",
       "messages": [
-        "150: unsolved goals"
+        "154: unsolved goals"
       ],
       "theorem": "cannon"
     },
@@ -908,7 +908,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "211: unsolved goals"
+        "219: unsolved goals"
       ],
       "theorem": "cannon"
     },
@@ -928,7 +928,7 @@
       "right": "∀ (n : ℕ) (hn : 2 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
       "outcome": "not_shown",
       "messages": [
-        "129: unsolved goals"
+        "131: unsolved goals"
       ],
       "theorem": "entropy_photon_number_inequality"
     },
@@ -939,7 +939,7 @@
       "right": "∀ (n : ℕ) (hn : 1 < n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
       "outcome": "not_shown",
       "messages": [
-        "148: unsolved goals"
+        "151: unsolved goals"
       ],
       "theorem": "entropy_photon_number_inequality"
     },
@@ -950,7 +950,7 @@
       "right": "∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
       "outcome": "not_shown",
       "messages": [
-        "166: unsolved goals"
+        "170: unsolved goals"
       ],
       "theorem": "entropy_photon_number_inequality"
     },
@@ -961,7 +961,7 @@
       "right": "∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), ¬ (η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n))",
       "outcome": "not_shown",
       "messages": [
-        "185: unsolved goals"
+        "190: unsolved goals"
       ],
       "theorem": "entropy_photon_number_inequality"
     },
@@ -999,7 +999,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "253: unsolved goals"
+        "262: unsolved goals"
       ],
       "theorem": "entropy_photon_number_inequality"
     },
@@ -1019,7 +1019,7 @@
       "right": "¬ (QMAHard unitCoulombCodec.encode unitCoulombPromise)",
       "outcome": "not_shown",
       "messages": [
-        "562: unsolved goals"
+        "564: unsolved goals"
       ],
       "theorem": "unit_coulomb_qmaHard"
     },
@@ -1039,7 +1039,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "584: unsolved goals"
+        "588: unsolved goals"
       ],
       "theorem": "unit_coulomb_qmaHard"
     },
@@ -1059,7 +1059,7 @@
       "right": "∃ κ₀ : ℝ, 1 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
       "outcome": "not_shown",
       "messages": [
-        "112: unsolved goals"
+        "114: unsolved goals"
       ],
       "theorem": "threshold_parallel_repetition"
     },
@@ -1070,7 +1070,7 @@
       "right": "∃ κ₀ : ℝ, 0 ≤ κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
       "outcome": "not_shown",
       "messages": [
-        "139: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+        "142: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
       ],
       "theorem": "threshold_parallel_repetition"
     },
@@ -1081,7 +1081,7 @@
       "right": "∀ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
       "outcome": "not_shown",
       "messages": [
-        "166: unsolved goals"
+        "170: unsolved goals"
       ],
       "theorem": "threshold_parallel_repetition"
     },
@@ -1092,7 +1092,7 @@
       "right": "¬ (∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k))",
       "outcome": "not_shown",
       "messages": [
-        "193: unsolved goals"
+        "198: unsolved goals"
       ],
       "theorem": "threshold_parallel_repetition"
     },
@@ -1130,7 +1130,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "285: unsolved goals"
+        "294: unsolved goals"
       ],
       "theorem": "threshold_parallel_repetition"
     },
@@ -1150,7 +1150,7 @@
       "right": "∀ [CompleteSpace X], ¬ (HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X)",
       "outcome": "not_shown",
       "messages": [
-        "87: unsolved goals"
+        "89: unsolved goals"
       ],
       "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
     },
@@ -1170,7 +1170,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "109: unsolved goals"
+        "113: unsolved goals"
       ],
       "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
     },
@@ -1190,7 +1190,7 @@
       "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 1 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
       "outcome": "not_shown",
       "messages": [
-        "494: unsolved goals"
+        "496: unsolved goals"
       ],
       "theorem": "main_theorem"
     },
@@ -1201,7 +1201,7 @@
       "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 ≤ t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
       "outcome": "not_shown",
       "messages": [
-        "519: unsolved goals"
+        "522: unsolved goals"
       ],
       "theorem": "main_theorem"
     },
@@ -1212,7 +1212,7 @@
       "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∃ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
       "outcome": "not_shown",
       "messages": [
-        "544: unsolved goals"
+        "548: unsolved goals"
       ],
       "theorem": "main_theorem"
     },
@@ -1223,7 +1223,7 @@
       "right": "¬ ((¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C))",
       "outcome": "not_shown",
       "messages": [
-        "569: unsolved goals"
+        "574: unsolved goals"
       ],
       "theorem": "main_theorem"
     },
@@ -1261,7 +1261,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "650: unsolved goals"
+        "659: unsolved goals"
       ],
       "theorem": "main_theorem"
     },
@@ -1281,7 +1281,7 @@
       "right": "∀ (V : ℝ) (hV : V ∈ Ioo 1 1), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
       "outcome": "not_shown",
       "messages": [
-        "115: unsolved goals"
+        "117: unsolved goals"
       ],
       "theorem": "unit_cubic_isoperimetric"
     },
@@ -1292,7 +1292,7 @@
       "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), (∀ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
       "outcome": "not_shown",
       "messages": [
-        "132: unsolved goals"
+        "135: unsolved goals"
       ],
       "theorem": "unit_cubic_isoperimetric"
     },
@@ -1303,7 +1303,7 @@
       "right": "∀ (V : ℝ), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
       "outcome": "not_shown",
       "messages": [
-        "149: unsolved goals"
+        "153: unsolved goals"
       ],
       "theorem": "unit_cubic_isoperimetric"
     },
@@ -1314,7 +1314,7 @@
       "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), ¬ ((∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E))",
       "outcome": "not_shown",
       "messages": [
-        "166: unsolved goals"
+        "171: unsolved goals"
       ],
       "theorem": "unit_cubic_isoperimetric"
     },
@@ -1352,7 +1352,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "226: unsolved goals"
+        "235: unsolved goals"
       ],
       "theorem": "unit_cubic_isoperimetric"
     },
@@ -1372,7 +1372,7 @@
       "right": "¬ (MainStatement)",
       "outcome": "not_shown",
       "messages": [
-        "93: unsolved goals"
+        "95: unsolved goals"
       ],
       "theorem": "main_nonuniqueness"
     },
@@ -1392,7 +1392,7 @@
       "right": "(2 : ℕ) + 2 = 5",
       "outcome": "not_shown",
       "messages": [
-        "115: unsolved goals"
+        "119: unsolved goals"
       ],
       "theorem": "main_nonuniqueness"
     }

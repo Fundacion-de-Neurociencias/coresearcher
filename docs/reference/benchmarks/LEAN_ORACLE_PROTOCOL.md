@@ -113,6 +113,8 @@ On a Linux cloud container (kernel 6.18, Landlock ABI v7, no systemd user sessio
 
 ## 6. Next step (design only): a Lean-based fidelity auditor
 
+The phased plan is in [LEAN_FIDELITY_AUDITOR_PLAN.md](LEAN_FIDELITY_AUDITOR_PLAN.md).
+
 Answering the prose-fidelity question with Lean needs one more component:
 
 1. **Autoformalize** the scope prose with a local model on the Legion, producing a Lean statement `S_p`.

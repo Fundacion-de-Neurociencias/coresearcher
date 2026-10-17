@@ -135,8 +135,8 @@ Limits of this result:
   *underdetermined* otherwise. Only determined families are scored. The number excluded is reported.
 - Report: elaboration rate, then step 4a/4b/4c counts on originals and mutants.
 
-**Go/no-go:** at least 30% of determined originals come out *faithful*. Below that, the formalizer is the
-bottleneck, and a test run would only measure its failures.
+**Go/no-go:** at least 30% of the headline originals (determined, wrappers excluded; see below) come out
+*faithful*. Below that, the formalizer is the bottleneck, and a test run would only measure its failures.
 
 ### Phase 2 preparation (2026-10-17; no model run yet)
 
@@ -167,14 +167,19 @@ family is not scored.
 longest prompts. Serve the model with `OLLAMA_CONTEXT_LENGTH=16384` (or an equivalent setting), and check after
 the run that `prompt_chars` stayed within it.
 
-**Open decision: wrapper statements.** In 6 families (115, 144, 174, 245, 275, 365), the conclusion is a single
-Prop-valued definition of the challenge file, such as `MainStatement`. That definition stays in the context, so
-the model can restate its name without formalizing anything, and the check would then test only the name.
-The sheets show these definitions so the readers judge them. Before the model runs, choose one of:
+**Wrapper statements: excluded from the headline (decided 2026-10-17, before any model run).** In 6
+families (115, 144, 174, 245, 275, 365), the conclusion is a single Prop-valued definition of the challenge file,
+such as `MainStatement`. That definition stays in the context, so the model can restate its name without
+formalizing anything, and the check would then test only the name. The sheets show these definitions so the
+readers can judge them. These families are **not part of the phase 2 headline**:
 
-1. **Exclude** them from the phase 2 headline and report them separately (the simplest option).
-2. **Unfold** them: also remove the definition from the context, and compare against its body. This is closer
-   to the question, but it changes the context and the mutants for these families.
+- `screen-score` lists them in `wrappers_reported_separately` and keeps them out of `headline`, which is the set
+  scored for the go/no-go. `determined` still lists every family both readers marked determined.
+- `formalize` marks each output row with `wrapper: true/false`. The model is still run on them, and their
+  results are reported in a separate table, with no claim drawn from them.
+- Phase 2 can therefore score at most 13 families. The alternative, removing the definition from the context
+  and comparing against its body, was not chosen. It would change the context and the mutants for these
+  families, and it is left for phase 3 if 13 proves too few.
 
 The comparison step (`compare`) is not written yet. It reuses the phase 1 check file and the frozen tactic, and
 compares each parsed candidate with the original and with each mutant.

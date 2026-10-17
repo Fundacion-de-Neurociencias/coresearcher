@@ -154,7 +154,8 @@ def test_parse_candidate():
 def test_screen_sheet_round_trip_and_score():
     targets = [_target(), {**_target(), "family": "002"}]
     sheet = fid.screen_sheet(targets, "A", "1581d4cbdd69a0faf34b2089614fe2a814316a6a")
-    assert fid.parse_sheet(sheet) == {"001": {"verdict": None, "note": ""}, "002": {"verdict": None, "note": ""}}
+    blank = {"verdict": None, "note": "", "wrapper": False}
+    assert fid.parse_sheet(sheet) == {"001": blank, "002": blank}
     a = sheet.replace("- [ ] determined", "- [x] determined")
     b = a.replace("## F002: T", "## F002: T", 1)
     b = b[: b.index("## F002")] + b[b.index("## F002") :].replace(
@@ -211,3 +212,14 @@ def test_wrapper_definition_detects_named_propositions():
     assert fid.wrapper_definition(_target()) is None
     sheet = fid.screen_sheet([{**_target(), **target, "theorem": name}], "A", "c" * 40)
     assert "Judge its definition" in sheet
+
+
+def test_screen_score_keeps_wrappers_out_of_the_headline():
+    lean = "def MainStatement : Prop :=\n  ∀ n : ℕ, n = n\n\ntheorem main : MainStatement := by\n  sorry\n"
+    name, stmt, start, end = fid.pilot.theorem_statement(lean, "main")
+    wrapper = {**_target(), "family": "002", "statement": stmt, "lean": lean, "start": start, "end": end}
+    sheet = fid.screen_sheet([_target(), wrapper], "A", "c" * 40).replace("- [ ] determined", "- [x] determined")
+    result = fid.screen_score({"A": sheet, "B": sheet})
+    assert result["determined"] == ["001", "002"]
+    assert result["headline"] == ["001"] and result["wrappers_reported_separately"] == ["002"]
+    assert [r["wrapper"] for r in result["rows"]] == [False, True]

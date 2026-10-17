@@ -89,3 +89,11 @@ def test_theorem_statement_ignores_named_argument_assign():
 def test_theorem_statement_ignores_binder_default_value():
     lean = "theorem t (n : ℕ := 3) : n = n := rfl\n"
     assert pilot.theorem_statement(lean)[1] == "theorem t (n : ℕ := 3) : n = n "
+
+
+def test_theorem_statement_by_name_skips_helper_lemmas():
+    lean = "theorem helper : 1 = 1 := by\n  rfl\n\ntheorem target (n : ℕ) : n = n := by\n  sorry\n"
+    assert pilot.theorem_statement(lean)[0] == "helper"
+    assert pilot.theorem_statement(lean, "target")[1] == "theorem target (n : ℕ) : n = n "
+    assert pilot.challenge_target('{"theorem_names": ["OAI.X.target"]}') == "target"
+    assert pilot.challenge_target(None) is None

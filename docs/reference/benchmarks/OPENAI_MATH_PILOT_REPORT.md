@@ -75,8 +75,10 @@ Hypothesis H1 (S1 AUROC lower bound above 0.5): **not met.**
   mutant is unchanged. Statement extraction was also fixed: it now ends at the first `:=` outside brackets,
   so a named argument or binder default no longer truncates the statement. In the pilot this affects only
   family 277, the only frozen statement with unbalanced brackets; in the full benchmark its statement will be
-  complete and M5 will apply to it again. The frozen pilot dataset and results were not regenerated. Tests:
-  `tests/test_openai_math_pilot_mutate.py`.
+  complete and M5 will apply to it again. Extraction also took the first theorem in the challenge file,
+  which in families 115 and 275 is a helper lemma with its own proof (`entry_le_row`, `readDigits_encode`), not
+  the challenge. It now takes the first theorem listed in the challenge's Comparator config. The frozen pilot
+  dataset and results were not regenerated. Tests: `tests/test_openai_math_pilot_mutate.py`.
 
 ## Status
 

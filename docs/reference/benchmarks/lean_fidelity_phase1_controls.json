@@ -1,0 +1,1400 @@
+{
+  "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 1)",
+  "openai_math_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "lean_version": "Lean (version 4.34.1, x86_64-w64-windows-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "os": "Windows-11-10.0.26200-SP0",
+  "heartbeats": 400000,
+  "tactic": "  first\n  | exact Iff.rfl\n  | (simp only [not_not, and_comm, and_left_comm, and_assoc, or_comm, or_left_comm, or_assoc]; done)\n  | (constructor <;> intro h <;> first | exact h | simpa using h | aesop | tauto)\n",
+  "summary": {
+    "families": 19,
+    "families_untrusted": [],
+    "identity": {
+      "n": 19,
+      "proved": 19,
+      "not_shown": 0,
+      "invalid": 0,
+      "timeout": 0,
+      "setup_error": 0
+    },
+    "mutant": {
+      "n": 49,
+      "proved": 0,
+      "not_shown": 49,
+      "invalid": 0,
+      "timeout": 0,
+      "setup_error": 0
+    },
+    "rewrite": {
+      "n": 44,
+      "proved": 44,
+      "not_shown": 0,
+      "invalid": 0,
+      "timeout": 0,
+      "setup_error": 0
+    },
+    "rewrite_by_rule": {
+      "rename": {
+        "proved": 9,
+        "not_shown": 0,
+        "invalid": 0,
+        "timeout": 0,
+        "setup_error": 0
+      },
+      "flip_lt": {
+        "proved": 8,
+        "not_shown": 0,
+        "invalid": 0,
+        "timeout": 0,
+        "setup_error": 0
+      },
+      "swap": {
+        "proved": 6,
+        "not_shown": 0,
+        "invalid": 0,
+        "timeout": 0,
+        "setup_error": 0
+      },
+      "curry": {
+        "proved": 2,
+        "not_shown": 0,
+        "invalid": 0,
+        "timeout": 0,
+        "setup_error": 0
+      },
+      "double_negation": {
+        "proved": 19,
+        "not_shown": 0,
+        "invalid": 0,
+        "timeout": 0,
+        "setup_error": 0
+      }
+    },
+    "sentinel": {
+      "n": 19,
+      "proved": 0,
+      "not_shown": 19,
+      "invalid": 0,
+      "timeout": 0,
+      "setup_error": 0
+    },
+    "prover_recall": 1.0,
+    "go": true
+  },
+  "rows": [
+    {
+      "family": "025",
+      "id": "F025_identity",
+      "kind": "identity",
+      "right": "∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_M1",
+      "kind": "mutant",
+      "right": "∀ a b : ℕ, 2 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
+      "outcome": "not_shown",
+      "messages": [
+        "84: unsolved goals"
+      ],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_M2",
+      "kind": "mutant",
+      "right": "∀ a b : ℕ, 1 < a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
+      "outcome": "not_shown",
+      "messages": [
+        "105: unsolved goals"
+      ],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_M3",
+      "kind": "mutant",
+      "right": "∃ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
+      "outcome": "not_shown",
+      "messages": [
+        "126: unsolved goals"
+      ],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_M5",
+      "kind": "mutant",
+      "right": "¬ (∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k))",
+      "outcome": "not_shown",
+      "messages": [
+        "147: unsolved goals"
+      ],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_rename",
+      "kind": "rewrite",
+      "right": "∀ a_r b_r : ℕ, 1 ≤ a_r → a_r < b_r →\n  (∃ n : Fin (egyptianLength a_r b_r) → ℕ,\n    IsEgyptianExpansion ((a_r : ℚ) / (b_r : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a_r : ℚ) / (b_r : ℚ)) n) →\n    egyptianLength a_r b_r ≤ k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_flip_lt",
+      "kind": "rewrite",
+      "right": "∀ a b : ℕ, a ≥ 1 → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_curry",
+      "kind": "rewrite",
+      "right": "∀ a b : ℕ, (((1 ≤ a) ∧ (a < b)) → (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ a b : ℕ, 1 ≤ a → a < b →\n  (∃ n : Fin (egyptianLength a b) → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) ∧\n  (∀ k : ℕ, (∃ n : Fin k → ℕ,\n    IsEgyptianExpansion ((a : ℚ) / (b : ℚ)) n) →\n    egyptianLength a b ≤ k))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "025",
+      "id": "F025_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "241: unsolved goals"
+      ],
+      "theorem": "egyptian_length_is_minimum"
+    },
+    {
+      "family": "103",
+      "id": "F103_identity",
+      "kind": "identity",
+      "right": "L = RL ∧ RL = BPL",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "exact_logarithmic_space_derandomization"
+    },
+    {
+      "family": "103",
+      "id": "F103_M5",
+      "kind": "mutant",
+      "right": "¬ (L = RL ∧ RL = BPL)",
+      "outcome": "not_shown",
+      "messages": [
+        "152: unsolved goals"
+      ],
+      "theorem": "exact_logarithmic_space_derandomization"
+    },
+    {
+      "family": "103",
+      "id": "F103_swap",
+      "kind": "rewrite",
+      "right": "((RL = BPL) ∧ (L = RL))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "exact_logarithmic_space_derandomization"
+    },
+    {
+      "family": "103",
+      "id": "F103_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(L = RL ∧ RL = BPL)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "exact_logarithmic_space_derandomization"
+    },
+    {
+      "family": "103",
+      "id": "F103_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "185: unsolved goals"
+      ],
+      "theorem": "exact_logarithmic_space_derandomization"
+    },
+    {
+      "family": "115",
+      "id": "F115_identity",
+      "kind": "identity",
+      "right": "Algorithms.BoundedSamplingStatement",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "boundedSampling"
+    },
+    {
+      "family": "115",
+      "id": "F115_M5",
+      "kind": "mutant",
+      "right": "¬ (Algorithms.BoundedSamplingStatement)",
+      "outcome": "not_shown",
+      "messages": [
+        "226: unsolved goals"
+      ],
+      "theorem": "boundedSampling"
+    },
+    {
+      "family": "115",
+      "id": "F115_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(Algorithms.BoundedSamplingStatement)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "boundedSampling"
+    },
+    {
+      "family": "115",
+      "id": "F115_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "248: unsolved goals"
+      ],
+      "theorem": "boundedSampling"
+    },
+    {
+      "family": "144",
+      "id": "F144_identity",
+      "kind": "identity",
+      "right": "MainConclusion",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "simple_lebesgue_spectrum"
+    },
+    {
+      "family": "144",
+      "id": "F144_M5",
+      "kind": "mutant",
+      "right": "¬ (MainConclusion)",
+      "outcome": "not_shown",
+      "messages": [
+        "98: unsolved goals"
+      ],
+      "theorem": "simple_lebesgue_spectrum"
+    },
+    {
+      "family": "144",
+      "id": "F144_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(MainConclusion)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "simple_lebesgue_spectrum"
+    },
+    {
+      "family": "144",
+      "id": "F144_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "120: unsolved goals"
+      ],
+      "theorem": "simple_lebesgue_spectrum"
+    },
+    {
+      "family": "174",
+      "id": "F174_identity",
+      "kind": "identity",
+      "right": "MainStatement",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "strongThinTree"
+    },
+    {
+      "family": "174",
+      "id": "F174_M5",
+      "kind": "mutant",
+      "right": "¬ (MainStatement)",
+      "outcome": "not_shown",
+      "messages": [
+        "54: unsolved goals"
+      ],
+      "theorem": "strongThinTree"
+    },
+    {
+      "family": "174",
+      "id": "F174_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(MainStatement)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "strongThinTree"
+    },
+    {
+      "family": "174",
+      "id": "F174_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "76: unsolved goals"
+      ],
+      "theorem": "strongThinTree"
+    },
+    {
+      "family": "186",
+      "id": "F186_identity",
+      "kind": "identity",
+      "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_M1",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      3 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
+      "outcome": "not_shown",
+      "messages": [
+        "83: unsolved goals"
+      ],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_M2",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 < n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
+      "outcome": "not_shown",
+      "messages": [
+        "102: unsolved goals"
+      ],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_M3",
+      "kind": "mutant",
+      "right": "∃ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
+      "outcome": "not_shown",
+      "messages": [
+        "121: unsolved goals"
+      ],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_M5",
+      "kind": "mutant",
+      "right": "¬ (∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)))",
+      "outcome": "not_shown",
+      "messages": [
+        "140: unsolved goals"
+      ],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_rename",
+      "kind": "rewrite",
+      "right": "∀ (n_r : ℕ) (f_r : GraphConfig n_r → Bool) (ε_r : ℝ),\n      2 ≤ n_r → VertexInvariant f_r → IncreasingGraphProperty f_r →\n      NontrivialGraphProperty f_r → 0 < ε_r → ε_r < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε_r) f_r - graphQuantile ε_r f_r ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n_r : ℝ)) ^ 2) * Real.log (1 / (2 * ε_r))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_flip_lt",
+      "kind": "rewrite",
+      "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      n ≥ 2 → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_curry",
+      "kind": "rewrite",
+      "right": "∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ), (((2 ≤ n) ∧ (VertexInvariant f)) → IncreasingGraphProperty f → NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) → graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),\n      2 ≤ n → VertexInvariant f → IncreasingGraphProperty f →\n      NontrivialGraphProperty f → 0 < ε → ε < (1 / 2 : ℝ) →\n      graphQuantile (1 - ε) f - graphQuantile ε f ≤\n        ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε)))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "186",
+      "id": "F186_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "224: unsolved goals"
+      ],
+      "theorem": "sharp_threshold_width"
+    },
+    {
+      "family": "190",
+      "id": "F190_identity",
+      "kind": "identity",
+      "right": "∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_M1",
+      "kind": "mutant",
+      "right": "∀ c C : ℝ, 1 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
+      "outcome": "not_shown",
+      "messages": [
+        "107: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_M2",
+      "kind": "mutant",
+      "right": "∀ c C : ℝ, 0 ≤ c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
+      "outcome": "not_shown",
+      "messages": [
+        "130: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_M3",
+      "kind": "mutant",
+      "right": "∃ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
+      "outcome": "not_shown",
+      "messages": [
+        "153: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_M5",
+      "kind": "mutant",
+      "right": "¬ (∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132))",
+      "outcome": "not_shown",
+      "messages": [
+        "176: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_rename",
+      "kind": "rewrite",
+      "right": "∀ c_r C_r : ℝ, 0 < c_r → 0 < C_r →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c_r * Real.rpow ε C_r * ((n : ℝ) ^ 132)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_flip_lt",
+      "kind": "rewrite",
+      "right": "∀ c C : ℝ, c > 0 → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ c C : ℝ, 0 < c → 0 < C →\n  ∃ n : ℕ, 1 ≤ n ∧\n    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧\n      ∃ A : BinaryMatrix n,\n        fixedDistance A ≥ ε ∧\n        (copyCount fixedH A : ℝ) <\n          c * Real.rpow ε C * ((n : ℝ) ^ 132))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "190",
+      "id": "F190_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "252: unsolved goals"
+      ],
+      "theorem": "no_polynomial_removal_bound"
+    },
+    {
+      "family": "231",
+      "id": "F231_identity",
+      "kind": "identity",
+      "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_M1",
+      "kind": "mutant",
+      "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 1) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
+      "outcome": "not_shown",
+      "messages": [
+        "192: unsolved goals"
+      ],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_M2",
+      "kind": "mutant",
+      "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) <\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
+      "outcome": "not_shown",
+      "messages": [
+        "225: unsolved goals"
+      ],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_M3",
+      "kind": "mutant",
+      "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∃ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
+      "outcome": "not_shown",
+      "messages": [
+        "258: unsolved goals"
+      ],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_M5",
+      "kind": "mutant",
+      "right": "¬ (∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2))",
+      "outcome": "not_shown",
+      "messages": [
+        "291: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+      ],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_rename",
+      "kind": "rewrite",
+      "right": "∀ (F_r : Type u_1) [Fintype F_r] [Nonempty F_r] (μ_r : ProbabilityMeasure (F_r → Bool)),\n      StronglyRayleighFinite μ_r →\n        (∀ (i j : F_r) (h : F_r → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ_r (coordinatePerturb h j r) i)\n            (tiltCovariance μ_r h i j) 0) ∧\n        (∀ (i : F_r) (h : F_r → ℝ),\n          (∑ j : F_r, |tiltCovariance μ_r h i j|) ≤\n              2 * tiltMean μ_r h i * (1 - tiltMean μ_r h i) ∧\n            2 * tiltMean μ_r h i * (1 - tiltMean μ_r h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F_r) (h h' : F_r → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F_r, |h j - h' j| ≤ D) →\n            |tiltMean μ_r h i - tiltMean μ_r h' i| ≤ D / 2)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_flip_lt",
+      "kind": "rewrite",
+      "right": "∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          D ≥ 0 → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ (F : Type u_1) [Fintype F] [Nonempty F] (μ : ProbabilityMeasure (F → Bool)),\n      StronglyRayleighFinite μ →\n        (∀ (i j : F) (h : F → ℝ),\n          HasDerivAt (fun r : ℝ => tiltMean μ (coordinatePerturb h j r) i)\n            (tiltCovariance μ h i j) 0) ∧\n        (∀ (i : F) (h : F → ℝ),\n          (∑ j : F, |tiltCovariance μ h i j|) ≤\n              2 * tiltMean μ h i * (1 - tiltMean μ h i) ∧\n            2 * tiltMean μ h i * (1 - tiltMean μ h i) ≤ (1 : ℝ) / 2) ∧\n        (∀ (i : F) (h h' : F → ℝ) (D : ℝ),\n          0 ≤ D → (∀ j : F, |h j - h' j| ≤ D) →\n            |tiltMean μ h i - tiltMean μ h' i| ≤ D / 2))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "231",
+      "id": "F231_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "401: unsolved goals"
+      ],
+      "theorem": "finite_strongly_rayleigh_response"
+    },
+    {
+      "family": "238",
+      "id": "F238_identity",
+      "kind": "identity",
+      "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_M1",
+      "kind": "mutant",
+      "right": "(BddAbove (Set.range (fun n : {n : ℕ // 2 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
+      "outcome": "not_shown",
+      "messages": [
+        "297: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_M2",
+      "kind": "mutant",
+      "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 < n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
+      "outcome": "not_shown",
+      "messages": [
+        "344: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_M3",
+      "kind": "mutant",
+      "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∃ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
+      "outcome": "not_shown",
+      "messages": [
+        "391: Tactic `simp` failed with a nested error:"
+      ],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_M5",
+      "kind": "mutant",
+      "right": "¬ ((BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)))",
+      "outcome": "not_shown",
+      "messages": [
+        "434: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+      ],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_flip_lt",
+      "kind": "rewrite",
+      "right": "(BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, n ≥ 1 → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_swap",
+      "kind": "rewrite",
+      "right": "(((∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ))) ∧ ((BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0))))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬((BddAbove (Set.range (fun n : {n : ℕ // 1 ≤ n} => reciprocalFirst n.val)) ∧\n    (∀ n : ℕ, 1 ≤ n → reciprocalFirst n ≤ C1) ∧\n    Tendsto exceptionalFirst atTop (nhds 0)) ∧\n    (∀ (d : ℕ) (_hd : 3 ≤ d)\n    (e : Position d ≃ Fin 8 × Fin (2 ^ (d - 3)))\n    {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℂ E]\n    [FiniteDimensional ℂ E]\n    (ρ : Representation ℂ (Equiv.Perm (Position d)) E)\n    [Representation.IsIrreducible ρ]\n    (_ : ∀ g x y, ⟪ρ g x, ρ g y⟫_ℂ = ⟪x, y⟫_ℂ)\n    (ν : Equiv.Perm (Position d) → ℝ)\n    (_ : ∀ g, 0 ≤ ν g) (_ : ∑ g, ν g = 1)\n    (_ : ∀ (i : Fin 8) (g : Equiv.Perm (Position d)),\n      ∑ h : Equiv.Perm (Fin (2 ^ (d - 3))),\n          ν (g * Block.embedding e (Pi.mulSingle i h)) ≤\n        4 * (Fintype.card (Equiv.Perm (Fin (2 ^ (d - 3)))) : ℝ) /\n          Fintype.card (Equiv.Perm (Position d))),\n    ‖LinearMap.toContinuousLinearMap (Fourier.integrated ρ (fun g => (ν g : ℂ)))‖ ≤\n      Real.sqrt (32 * C1) * (Module.finrank ℂ E : ℝ) ^ (-5 / 16 : ℝ)))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "238",
+      "id": "F238_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "585: unsolved goals"
+      ],
+      "theorem": "first_reciprocal_main"
+    },
+    {
+      "family": "243",
+      "id": "F243_identity",
+      "kind": "identity",
+      "right": "(∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main"
+    },
+    {
+      "family": "243",
+      "id": "F243_M5",
+      "kind": "mutant",
+      "right": "¬ ((∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query))",
+      "outcome": "not_shown",
+      "messages": [
+        "577: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+      ],
+      "theorem": "main"
+    },
+    {
+      "family": "243",
+      "id": "F243_swap",
+      "kind": "rewrite",
+      "right": "((OrdinaryPolynomialTime ∧ ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query)) ∧ ((∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query))))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main"
+    },
+    {
+      "family": "243",
+      "id": "F243_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬((∀ (A B : Type) [Fintype A] [Fintype B] (S : Input A) (T : Input B),\n      S.Iso T → (S.query ↔ T.query)) ∧\n    OrdinaryPolynomialTime ∧\n    ¬ FullCPT.EvaluationDefinable (fun {_} [_] I => I.query))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main"
+    },
+    {
+      "family": "243",
+      "id": "F243_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "620: unsolved goals"
+      ],
+      "theorem": "main"
+    },
+    {
+      "family": "245",
+      "id": "F245_identity",
+      "kind": "identity",
+      "right": "∀ {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P), SystemStronglyNormalizing P",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "245",
+      "id": "F245_M4",
+      "kind": "mutant",
+      "right": "∀ {S : Type u} (P : Specification S), SystemStronglyNormalizing P",
+      "outcome": "not_shown",
+      "messages": [
+        "133: unsolved goals"
+      ],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "245",
+      "id": "F245_M5",
+      "kind": "mutant",
+      "right": "∀ {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P), ¬ (SystemStronglyNormalizing P)",
+      "outcome": "not_shown",
+      "messages": [
+        "146: unsolved goals"
+      ],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "245",
+      "id": "F245_rename",
+      "kind": "rewrite",
+      "right": "∀ {S_r : Type u} (P_r : Specification S_r)\n    (h_r : SystemWeaklyNormalizing P_r), SystemStronglyNormalizing P_r",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "245",
+      "id": "F245_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ {S : Type u} (P : Specification S)\n    (h : SystemWeaklyNormalizing P), SystemStronglyNormalizing P)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "245",
+      "id": "F245_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "183: unsolved goals"
+      ],
+      "theorem": "weak_implies_strong"
+    },
+    {
+      "family": "246",
+      "id": "F246_identity",
+      "kind": "identity",
+      "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_M3",
+      "kind": "mutant",
+      "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ∀ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite",
+      "outcome": "not_shown",
+      "messages": [
+        "117: unsolved goals"
+      ],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_M4",
+      "kind": "mutant",
+      "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles), ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite",
+      "outcome": "not_shown",
+      "messages": [
+        "133: unsolved goals"
+      ],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_M5",
+      "kind": "mutant",
+      "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ¬ (∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite)",
+      "outcome": "not_shown",
+      "messages": [
+        "150: unsolved goals"
+      ],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_rename",
+      "kind": "rewrite",
+      "right": "∀ (G_r : Type u) [Group G_r] [TopologicalSpace G_r] [DiscreteTopology G_r]\n    (D_r : CayleyData G_r) (hthin_r : D_r.ThinTriangles)\n    (hsphere_r : Nonempty (Boundary D_r ≃ₜ SphereTwo)), ∃ ρ : G_r →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G_r).Finite",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_swap",
+      "kind": "rewrite",
+      "right": "∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ∃ ρ : G →* H3Isom, ((CocompactAction ρ ∧ (ρ.ker : Set G).Finite) ∧ (ProperAction ρ))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ (G : Type u) [Group G] [TopologicalSpace G] [DiscreteTopology G]\n    (D : CayleyData G) (hthin : D.ThinTriangles)\n    (hsphere : Nonempty (Boundary D ≃ₜ SphereTwo)), ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧\n      (ρ.ker : Set G).Finite)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "cannon"
+    },
+    {
+      "family": "246",
+      "id": "F246_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "211: unsolved goals"
+      ],
+      "theorem": "cannon"
+    },
+    {
+      "family": "273",
+      "id": "F273_identity",
+      "kind": "identity",
+      "right": "∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_M1",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (hn : 2 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
+      "outcome": "not_shown",
+      "messages": [
+        "129: unsolved goals"
+      ],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_M2",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (hn : 1 < n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
+      "outcome": "not_shown",
+      "messages": [
+        "148: unsolved goals"
+      ],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_M4",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
+      "outcome": "not_shown",
+      "messages": [
+        "166: unsolved goals"
+      ],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_M5",
+      "kind": "mutant",
+      "right": "∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), ¬ (η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n))",
+      "outcome": "not_shown",
+      "messages": [
+        "185: unsolved goals"
+      ],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_rename",
+      "kind": "rewrite",
+      "right": "∀ (n_r : ℕ) (hn_r : 1 ≤ n_r) (ρA_r ρB_r ρC_r : State n_r)\n    (hA_r : FiniteEnergy ρA_r) (hB_r : FiniteEnergy ρB_r)\n    (η_r : ℝ) (hη_r : η_r ∈ Set.Icc 0 1)\n    (hC_r : IsBeamSplitterOutput η_r ρA_r ρB_r ρC_r), η_r * gInv (entropy ρA_r / n_r) + (1 - η_r) * gInv (entropy ρB_r / n_r) ≤\n      gInv (entropy ρC_r / n_r)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_flip_lt",
+      "kind": "rewrite",
+      "right": "∀ (n : ℕ) (hn : n ≥ 1) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ (n : ℕ) (hn : 1 ≤ n) (ρA ρB ρC : State n)\n    (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB)\n    (η : ℝ) (hη : η ∈ Set.Icc 0 1)\n    (hC : IsBeamSplitterOutput η ρA ρB ρC), η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n) ≤\n      gInv (entropy ρC / n))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "273",
+      "id": "F273_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "253: unsolved goals"
+      ],
+      "theorem": "entropy_photon_number_inequality"
+    },
+    {
+      "family": "275",
+      "id": "F275_identity",
+      "kind": "identity",
+      "right": "QMAHard unitCoulombCodec.encode unitCoulombPromise",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_coulomb_qmaHard"
+    },
+    {
+      "family": "275",
+      "id": "F275_M5",
+      "kind": "mutant",
+      "right": "¬ (QMAHard unitCoulombCodec.encode unitCoulombPromise)",
+      "outcome": "not_shown",
+      "messages": [
+        "562: unsolved goals"
+      ],
+      "theorem": "unit_coulomb_qmaHard"
+    },
+    {
+      "family": "275",
+      "id": "F275_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(QMAHard unitCoulombCodec.encode unitCoulombPromise)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_coulomb_qmaHard"
+    },
+    {
+      "family": "275",
+      "id": "F275_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "584: unsolved goals"
+      ],
+      "theorem": "unit_coulomb_qmaHard"
+    },
+    {
+      "family": "277",
+      "id": "F277_identity",
+      "kind": "identity",
+      "right": "∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_M1",
+      "kind": "mutant",
+      "right": "∃ κ₀ : ℝ, 1 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "not_shown",
+      "messages": [
+        "112: unsolved goals"
+      ],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_M2",
+      "kind": "mutant",
+      "right": "∃ κ₀ : ℝ, 0 ≤ κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "not_shown",
+      "messages": [
+        "139: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+      ],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_M3",
+      "kind": "mutant",
+      "right": "∀ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "not_shown",
+      "messages": [
+        "166: unsolved goals"
+      ],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_M5",
+      "kind": "mutant",
+      "right": "¬ (∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k))",
+      "outcome": "not_shown",
+      "messages": [
+        "193: unsolved goals"
+      ],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_rename",
+      "kind": "rewrite",
+      "right": "∃ κ₀_r : ℝ, 0 < κ₀_r ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀_r * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀_r * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_flip_lt",
+      "kind": "rewrite",
+      "right": "∃ κ₀ : ℝ, κ₀ > 0 ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∃ κ₀ : ℝ, 0 < κ₀ ∧\n      ∀ (x y a b : ℕ) (G : Game x y a b), entangledValue G < 1 →\n      ∀ (δ : ℝ), 0 < δ → δ < 1 - entangledValue G →\n      ∀ (k : ℕ), 1 ≤ k →\n        (∀ S : RepeatedStrategy x y a b k,\n          thresholdProbability G δ S ≤\n            Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k)) ∧\n        thresholdValue (k := k) G δ ≤\n          Real.exp (-κ₀ * δ ^ 13 / (1 + Real.log (((a + 1) * (b + 1) : ℕ) : ℝ)) * k))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "277",
+      "id": "F277_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "285: unsolved goals"
+      ],
+      "theorem": "threshold_parallel_repetition"
+    },
+    {
+      "family": "327",
+      "id": "F327_identity",
+      "kind": "identity",
+      "right": "∀ [CompleteSpace X], HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
+    },
+    {
+      "family": "327",
+      "id": "F327_M5",
+      "kind": "mutant",
+      "right": "∀ [CompleteSpace X], ¬ (HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X)",
+      "outcome": "not_shown",
+      "messages": [
+        "87: unsolved goals"
+      ],
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
+    },
+    {
+      "family": "327",
+      "id": "F327_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ [CompleteSpace X], HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
+    },
+    {
+      "family": "327",
+      "id": "F327_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "109: unsolved goals"
+      ],
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm"
+    },
+    {
+      "family": "331",
+      "id": "F331_identity",
+      "kind": "identity",
+      "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_M1",
+      "kind": "mutant",
+      "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 1 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
+      "outcome": "not_shown",
+      "messages": [
+        "494: unsolved goals"
+      ],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_M2",
+      "kind": "mutant",
+      "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 ≤ t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
+      "outcome": "not_shown",
+      "messages": [
+        "519: unsolved goals"
+      ],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_M3",
+      "kind": "mutant",
+      "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∃ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
+      "outcome": "not_shown",
+      "messages": [
+        "544: unsolved goals"
+      ],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_M5",
+      "kind": "mutant",
+      "right": "¬ ((¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C))",
+      "outcome": "not_shown",
+      "messages": [
+        "569: unsolved goals"
+      ],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_flip_lt",
+      "kind": "rewrite",
+      "right": "(¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, t > 0 →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_swap",
+      "kind": "rewrite",
+      "right": "((TopologicalSpace.SeparableSpace (FullDual Vertex) ∧ Reflexive (FullDual Vertex) ∧ (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧ (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧ (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C)) ∧ ((¬FiniteDimensional ℝ (FullDual Vertex))))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬((¬FiniteDimensional ℝ (FullDual Vertex)) ∧\n    TopologicalSpace.SeparableSpace (FullDual Vertex) ∧\n    Reflexive (FullDual Vertex) ∧\n    (∀ (α β : ℝ) (R : EquivalentNorm (FullDual Vertex) α β), ¬IsAUC R.N) ∧\n    (∀ t : ℝ, 0 < t →\n      Real.sqrt (1+t^2/12)-1 ≤ averageModulus (FullDual Vertex) norm t) ∧\n    (∀ (k : ℕ) (f : (Diamond.diamond k).V → FullDual Vertex) (C : ℝ),\n      Diamond.EmbeddingBound k f C → Real.sqrt (1+(k:ℝ)/12) ≤ C))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "331",
+      "id": "F331_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "650: unsolved goals"
+      ],
+      "theorem": "main_theorem"
+    },
+    {
+      "family": "354",
+      "id": "F354_identity",
+      "kind": "identity",
+      "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_M1",
+      "kind": "mutant",
+      "right": "∀ (V : ℝ) (hV : V ∈ Ioo 1 1), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
+      "outcome": "not_shown",
+      "messages": [
+        "115: unsolved goals"
+      ],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_M3",
+      "kind": "mutant",
+      "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), (∀ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
+      "outcome": "not_shown",
+      "messages": [
+        "132: unsolved goals"
+      ],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_M4",
+      "kind": "mutant",
+      "right": "∀ (V : ℝ), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)",
+      "outcome": "not_shown",
+      "messages": [
+        "149: unsolved goals"
+      ],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_M5",
+      "kind": "mutant",
+      "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), ¬ ((∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E))",
+      "outcome": "not_shown",
+      "messages": [
+        "166: unsolved goals"
+      ],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_rename",
+      "kind": "rewrite",
+      "right": "∀ (V_r : ℝ) (hV_r : V_r ∈ Ioo 0 1), (∃ E : Set Torus, IsMinimizerAt V_r E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V_r E →\n      perimeter E = ENNReal.ofReal (candidateProfile V_r)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V_r E ↔ StandardRegionAt V_r E)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_swap",
+      "kind": "rewrite",
+      "right": "∀ (V : ℝ) (hV : V ∈ Ioo 0 1), (((∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧ (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E)) ∧ ((∃ E : Set Torus, IsMinimizerAt V E)))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(∀ (V : ℝ) (hV : V ∈ Ioo 0 1), (∃ E : Set Torus, IsMinimizerAt V E) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E →\n      perimeter E = ENNReal.ofReal (candidateProfile V)) ∧\n    (∀ E : Set Torus, IsMinimizerAt V E ↔ StandardRegionAt V E))",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "354",
+      "id": "F354_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "226: unsolved goals"
+      ],
+      "theorem": "unit_cubic_isoperimetric"
+    },
+    {
+      "family": "365",
+      "id": "F365_identity",
+      "kind": "identity",
+      "right": "MainStatement",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_nonuniqueness"
+    },
+    {
+      "family": "365",
+      "id": "F365_M5",
+      "kind": "mutant",
+      "right": "¬ (MainStatement)",
+      "outcome": "not_shown",
+      "messages": [
+        "93: unsolved goals"
+      ],
+      "theorem": "main_nonuniqueness"
+    },
+    {
+      "family": "365",
+      "id": "F365_double_negation",
+      "kind": "rewrite",
+      "right": "¬¬(MainStatement)",
+      "outcome": "proved",
+      "messages": [],
+      "theorem": "main_nonuniqueness"
+    },
+    {
+      "family": "365",
+      "id": "F365_sentinel",
+      "kind": "sentinel",
+      "right": "(2 : ℕ) + 2 = 5",
+      "outcome": "not_shown",
+      "messages": [
+        "115: unsolved goals"
+      ],
+      "theorem": "main_nonuniqueness"
+    }
+  ]
+}

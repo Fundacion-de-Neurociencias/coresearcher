@@ -194,8 +194,61 @@ formalizing anything, and the check would then test only the name. These familie
   and comparing against its body, was not chosen. It would change the context and the mutants for these
   families, and it is left for phase 3 if 13 proves too few.
 
-The comparison step (`compare`) is not written yet. It reuses the phase 1 check file and the frozen tactic, and
-compares each parsed candidate with the original and with each mutant.
+**Comparison step.** `compare --responses <formalize output>` writes, for each family, one check file with the
+candidate against the original, the candidate against each mutant, and the sentinel, all with the frozen phase 1
+tactic. A candidate that does not elaborate makes the family *abstain*. Every check runs with
+`set_option autoImplicit false`. `lake env lean` does not apply the project's own setting, and without it an
+unknown name in a candidate would become a bound variable and elaborate. Phase 1 was re-run with this header:
+the results are unchanged (identity 19/19, mutants 0/49, recall 44/44).
+
+### Phase 2 result (2026-10-17, Legion, Windows 11, RTX 5090 24 GB)
+
+Two formalizers, both at temperature 0 and seed 0 with prompt `fidelity-formalize-v1`. Raw replies and Lean
+results are in [`lean_fidelity_phase2/`](lean_fidelity_phase2/).
+
+- **Qwen2.5 7.6B Instruct**, Q4_K_M, through Ollama's native API with `num_ctx` 32,768 (digest
+  `dae161e27b0e`, tag `qwen2.5:latest`).
+- **Qwen2.5-Coder 7B Instruct** through LM Studio, loaded with a context of 32,768
+  (`qwen2.5.1-coder-7b-instruct`).
+
+All 38 replies contained a parseable theorem. No prompt filled the context (largest: 7,705 tokens).
+
+| Headline, 13 families | Qwen2.5 7B | Qwen2.5-Coder 7B |
+|---|---|---|
+| Candidate elaborates | 6 | 6 |
+| Original *faithful* | **0** | **0** |
+| Mutants flagged (of mutants in elaborated families) | 21/21 | 18/18 |
+| Discriminating families | 0 | 0 |
+| Numerically anchored (12): faithful | 0 | 0 |
+
+**Go/no-go: no-go for both models.** 0 of 13 headline originals are faithful, against a threshold of 30%.
+As planned, the formalizer is the bottleneck. The prover is not: phase 1 showed it proves the equivalences
+that a correct formalizer would produce.
+
+Why the candidates fail (headline families):
+
+- **Do not elaborate (7 of 13 for each model):** invented or misnamed identifiers (`log`, `N`,
+  `InfiniteDimensional`, `Finset.nonempty`), syntax that is not Lean 4 (`L = RL = BPL`, `∀ c C > 0`), and
+  type errors.
+- **Elaborate but differ (6 of 13):** a missing hypothesis (F327 drops `[CompleteSpace X]`, so the claim is
+  for normed spaces instead of Banach spaces), only part of a conjunction stated (F354), or a different result
+  from the prose formalized (F231 states the countable-group result, while the target is the finite lemma; this
+  is the underdetermined case described above).
+
+Every mutant was flagged, but this says nothing yet: a candidate that is not equivalent to the original is
+not equivalent to its mutants either.
+
+**Wrappers, reported separately (no claim):** Qwen2.5 7B is *faithful* on 4 of 6 and Qwen2.5-Coder 7B on 6 of
+6. These are mostly the artifact that excluding them was meant to avoid: in 115, 275 and 365 both models restate
+the definition's name (`theorem main_nonuniqueness : MainStatement`), and in 144 and 174 they copy the
+definition's body from the context.
+
+**What this means.** With 7B local models, the pipeline works end to end and measures what it should, but
+there is no fidelity signal to evaluate. Moving to phase 3 with these models would only measure their
+failures. Options, to be decided before more runs: a stronger general model that fits in 24 GB (for example a
+32B coder model at 4-bit), a model trained for Lean autoformalization, or prompt iterations on this development
+set, which phase 2 allows. Any new model or prompt is run on the same 19 families and reported next to these
+results.
 
 ### Phase 3. Pre-registration and test run
 

@@ -311,7 +311,12 @@ def _insertion_point(lean: str, start: int) -> int:
 
 def check_block(check_id: str, left: str, right: str, line: int) -> tuple[str, dict]:
     """One `example` that tries to prove left ↔ right; returns the text and its line ranges."""
-    header = f"-- fidelity check {check_id}\nset_option maxHeartbeats {HEARTBEATS} in\nexample :\n"
+    # `lake env lean` does not apply the project's `autoImplicit false`; without it an unknown name in a candidate
+    # would become a bound variable, and the statement would elaborate with a different meaning.
+    header = (
+        f"-- fidelity check {check_id}\nset_option autoImplicit false in\n"
+        f"set_option maxHeartbeats {HEARTBEATS} in\nexample :\n"
+    )
     # `:= by` gets a line of its own: Lean reports failed tactics at `by`, so that line belongs to the proof.
     stmt = f"    ({left}) ↔\n    ({right})\n"
     text = header + stmt + "    := by\n" + TACTIC + "\n"
@@ -389,6 +394,20 @@ def trusted(outcomes: dict[str, dict], outside: list[str], sentinel_id: str) -> 
     return None
 
 
+def run_check_file(family: str, check_file: Path, ranges: list[dict], lean_root: Path, timeout: int):
+    """Runs one generated file through Lean; returns (outcome per check id, seconds)."""
+    code, output, seconds = _run(["lake", "env", "lean", str(check_file)], lean_root, timeout)
+    if code is None:
+        outcomes = {r["id"]: {"outcome": "timeout", "messages": []} for r in ranges}
+    else:
+        outcomes, outside = classify(output, ranges)
+        problem = trusted(outcomes, outside, f"F{family}_{SENTINEL[0]}")
+        if problem:
+            outcomes = {r["id"]: {"outcome": "setup_error", "messages": [problem]} for r in ranges}
+    print(f"F{family}: {len(ranges)} checks ({seconds:.0f} s)", flush=True)
+    return outcomes, seconds
+
+
 def controls(math_root: Path, out_dir: Path, timeout: int, jobs: int) -> int:
     commit = oracle.check_commit(math_root)
     lean_root = oracle.lean_dir(math_root)
@@ -415,15 +434,7 @@ def controls(math_root: Path, out_dir: Path, timeout: int, jobs: int) -> int:
         pair, info, checks, check_file, ranges = job
         if not checks:
             return pair["family"], info, [], None, 0.0
-        code, output, seconds = _run(["lake", "env", "lean", str(check_file)], lean_root, timeout)
-        if code is None:
-            outcomes = {r["id"]: {"outcome": "timeout", "messages": []} for r in ranges}
-        else:
-            outcomes, outside = classify(output, ranges)
-            problem = trusted(outcomes, outside, f"F{pair['family']}_{SENTINEL[0]}")
-            if problem:
-                outcomes = {r["id"]: {"outcome": "setup_error", "messages": [problem]} for r in ranges}
-        print(f"F{pair['family']}: {len(checks)} checks ({seconds:.0f} s)", flush=True)
+        outcomes, seconds = run_check_file(pair["family"], check_file, ranges, lean_root, timeout)
         return pair["family"], info, checks, outcomes, seconds
 
     with ThreadPoolExecutor(max_workers=jobs) as pool:
@@ -911,10 +922,127 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
     return 0
 
 
+# ---------------------------------------------------------------- phase 2: compare
+
+
+def family_verdict(original: dict | None, mutants: list[dict]) -> dict:
+    """Auditor verdict for one family from its check outcomes.
+
+    abstain: no candidate, or the candidate did not elaborate. Otherwise the original is faithful when proved
+    equivalent; each mutant is flagged unless proved equivalent; the family discriminates when the original is
+    faithful and every mutant is flagged.
+    """
+    if original is None or original["outcome"] in ("invalid", "setup_error"):
+        reason = "no candidate" if original is None else original["outcome"]
+        return {"verdict": "abstain", "reason": reason, "mutants": len(mutants), "mutants_flagged": 0}
+    faithful = original["outcome"] == "proved"
+    flagged = sum(m["outcome"] in ("not_shown", "timeout") for m in mutants)
+    return {
+        "verdict": "faithful" if faithful else "flagged",
+        "mutants": len(mutants),
+        "mutants_flagged": flagged,
+        "discriminating": faithful and flagged == len(mutants),
+    }
+
+
+def phase2_summary(verdicts: dict[str, dict], families: list[str]) -> dict:
+    sub = [verdicts[f] for f in families if f in verdicts]
+    n = len(families)
+    elaborated = [v for v in sub if v["verdict"] != "abstain"]
+    faithful = sum(v["verdict"] == "faithful" for v in elaborated)
+    mutants = sum(v["mutants"] for v in elaborated)
+    flagged = sum(v["mutants_flagged"] for v in elaborated)
+    return {
+        "families": n,
+        "elaborated": len(elaborated),
+        "faithful": faithful,
+        "faithful_rate_of_all": round(faithful / n, 3) if n else None,
+        "specificity_of_elaborated": round(faithful / len(elaborated), 3) if elaborated else None,
+        "mutants": mutants,
+        "mutants_flagged": flagged,
+        "discriminating_families": sum(v.get("discriminating", False) for v in elaborated),
+    }
+
+
+def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs: int) -> int:
+    commit = oracle.check_commit(math_root)
+    lean_root = oracle.lean_dir(math_root)
+    lines = [json.loads(line) for line in responses.read_text(encoding="utf-8").splitlines() if line]
+    meta = next(x for x in lines if x.get("kind") == "meta")
+    replies = {x["family"]: x for x in lines if x.get("kind") != "meta"}
+    label = re.sub(r"[^A-Za-z0-9._-]", "_", meta["model"])
+    work = out_dir / f"compare_{label}"
+    work.mkdir(parents=True, exist_ok=True)
+    targets = load_targets(math_root)
+    screen = auto_screen(targets)
+
+    jobs_list = []
+    for t in targets:
+        reply = replies.get(t["family"], {})
+        candidate = reply.get("candidate") if reply.get("status") in ("parsed", "wrong_name") else None
+        if candidate is None:
+            jobs_list.append((t, reply, []))
+            continue
+        cand = statement_prop(candidate)
+        checks = [(f"F{t['family']}_original", cand, statement_prop(t["statement"]))]
+        for code, mutant in sorted(pilot.mutate(t["statement"]).items()):
+            checks.append((f"F{t['family']}_{code}", cand, statement_prop(mutant)))
+        checks.append((f"F{t['family']}_{SENTINEL[0]}", SENTINEL[1], SENTINEL[2]))
+        jobs_list.append((t, reply, checks))
+
+    def run_one(job):
+        t, reply, checks = job
+        if not checks:
+            return t, reply, [], {}
+        text, ranges = build_check_file(t["lean"], t["start"], checks)
+        check_file = work / f"F{t['family']}.lean"
+        check_file.write_text(text, encoding="utf-8")
+        outcomes, _ = run_check_file(t["family"], check_file, ranges, lean_root, timeout)
+        return t, reply, checks, outcomes
+
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        finished = list(pool.map(run_one, jobs_list))
+
+    verdicts, rows = {}, []
+    for t, reply, checks, outcomes in finished:
+        fam = t["family"]
+        original = outcomes.get(f"F{fam}_original")
+        mutants = [outcomes[c[0]] for c in checks if c[0] not in (f"F{fam}_original", f"F{fam}_{SENTINEL[0]}")]
+        verdicts[fam] = family_verdict(original, mutants)
+        rows.append(
+            {
+                "family": fam,
+                "theorem": t["theorem"],
+                "status": reply.get("status", "missing"),
+                "candidate": reply.get("candidate"),
+                **verdicts[fam],
+                "checks": {c[0]: outcomes[c[0]] for c in checks},
+            }
+        )
+    result = {
+        "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 2)",
+        "formalizer": {k: meta.get(k) for k in ("model", "model_digest", "client", "num_ctx", "prompt_sha256")},
+        "openai_math_commit": commit,
+        "heartbeats": HEARTBEATS,
+        "tactic": TACTIC,
+        "headline": phase2_summary(verdicts, screen["headline"]),
+        "headline_anchored": phase2_summary(verdicts, screen["headline_anchored"]),
+        "wrappers_reported_separately": phase2_summary(verdicts, screen["wrappers_reported_separately"]),
+        "rows": rows,
+    }
+    headline = result["headline"]
+    result["go"] = bool(headline["families"]) and headline["faithful"] / headline["families"] >= 0.3
+    out = ROOT / "docs" / "reference" / "benchmarks" / "lean_fidelity_phase2" / f"compare_{label}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({k: result[k] for k in ("headline", "headline_anchored", "wrappers_reported_separately", "go")}))
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
-        "step", choices=["env-check", "controls", "screen-auto", "screen-sheet", "screen-score", "formalize"]
+        "step", choices=["env-check", "controls", "screen-auto", "screen-sheet", "screen-score", "formalize", "compare"]
     )
     parser.add_argument("--math-root", type=Path, help="Path to an openai/math checkout (all steps but screen-score)")
     parser.add_argument("--timeout", type=int, default=1800, help="Seconds per Lean file or model call")
@@ -924,6 +1052,7 @@ def main() -> int:
     parser.add_argument("--model", help="Model name at the endpoint (formalize)")
     parser.add_argument("--base-url", help="Endpoint (formalize; default localhost:11434 or localhost:1234/v1)")
     parser.add_argument("--out", type=Path, help="Raw outputs, JSONL (formalize)")
+    parser.add_argument("--responses", type=Path, help="formalize output to check with Lean (compare)")
     parser.add_argument("--resume", action="store_true", help="Keep finished families from --out (formalize)")
     parser.add_argument("--dry-run", action="store_true", help="Write the prompts only; call no model (formalize)")
     parser.add_argument(
@@ -940,6 +1069,10 @@ def main() -> int:
         return env_check(math_root, args.timeout)
     if args.step == "controls":
         return controls(math_root, args.out_dir.resolve(), args.timeout, args.jobs)
+    if args.step == "compare":
+        if args.responses is None:
+            parser.error("--responses is required for compare")
+        return compare(math_root, args.responses.resolve(), args.out_dir.resolve(), args.timeout, args.jobs)
     if args.step == "screen-auto":
         return cmd_screen_auto(math_root)
     if args.step == "screen-sheet":

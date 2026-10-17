@@ -66,6 +66,17 @@ Hypothesis H1 (S1 AUROC lower bound above 0.5): **not met.**
 - Mutation coverage depends heavily on statement shape. M5 (negation) applies everywhere; M4 rarely does.
   The full benchmark needs at least 100 pairs to get ≥ 15 pairs for M1–M3, or more operators.
 - Lean/Comparator confirmation of mutants remains to be done, on a Linux machine with the Lean toolchain.
+- The oracle run found three mutants that were rejected only because they do not parse (F231_M3, F243_M3,
+  F277_M5). The operators were fixed after the pilot, for the full benchmark only: M3 no longer turns a
+  quantifier into `∃` when its binders include instance or implicit binders (`[Fintype F]`, `{x}`), nor
+  touches `∃!`, and moves on to the next quantifier instead; M5 is skipped when the extracted conclusion has
+  unbalanced brackets, which happens when extraction stops at the `:=` of a named argument such as
+  `(k := k)`. On the pilot statements this changes F231_M3 and removes F243_M3 and F277_M5; every other
+  mutant is unchanged. Statement extraction was also fixed: it now ends at the first `:=` outside brackets,
+  so a named argument or binder default no longer truncates the statement. In the pilot this affects only
+  family 277, the only frozen statement with unbalanced brackets; in the full benchmark its statement will be
+  complete and M5 will apply to it again. The frozen pilot dataset and results were not regenerated. Tests:
+  `tests/test_openai_math_pilot_mutate.py`.
 
 ## Status
 

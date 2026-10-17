@@ -30,7 +30,7 @@ import copy
 import hashlib
 import json
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from enum import Enum
 from pathlib import Path
@@ -125,18 +125,23 @@ V, H, A, R = CheckKind.VERIFIER, CheckKind.HUMAN, CheckKind.ARTIFACT, CheckKind.
 DEFAULT_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     Stage.QUESTION: (
         _c("question.statement", "The research question is written down and hashed.", A),
-        _c("question.owner", "A scientist owns the question and agrees it is worth answering.", H),
+        _c("question.owner", "A scientist owns the question and agrees it is worth answering.", H, required=False),
     ),
     Stage.HYPOTHESIS: (
         _c("hypothesis.formal_object", "The formal evaluator finds the hypothesis falsifiable and consistent.", V),
         _c("hypothesis.rivals", "Number of rival hypotheses compared with it.", R, threshold=1),
-        _c("hypothesis.confirmed", "The researcher confirms the formal object says what the prose meant.", H),
+        _c(
+            "hypothesis.confirmed",
+            "The researcher confirms the formal object says what the prose meant.",
+            H,
+            required=False,
+        ),
     ),
     Stage.PROTOCOL: (
         _c("protocol.document", "The protocol, with pre-registered criteria, is written and hashed.", A),
         _c("protocol.criteria", "Number of pre-registered pass/fail criteria.", R, threshold=1),
         _c("protocol.dataset_frozen", "The evaluation dataset is frozen and hashed.", A),
-        _c("protocol.review", "The protocol and dataset were reviewed before any run.", H),
+        _c("protocol.review", "The protocol and dataset were reviewed before any run.", H, required=False),
         _c(
             "protocol.tournament_elo",
             "The candidate hypothesis defeated rival hypotheses in the Elo arena above threshold.",
@@ -156,15 +161,52 @@ DEFAULT_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     Stage.ANALYSIS: (
         _c("analysis.criteria_evaluated", "Every pre-registered criterion is scored MET or NOT_MET by script.", V),
         _c("analysis.intervals", "Proportions are reported with confidence intervals (1 = yes).", R, threshold=1),
-        _c("analysis.deviations", "Deviations from the protocol are listed and acknowledged.", H),
+        _c("analysis.deviations", "Deviations from the protocol are listed and acknowledged.", H, required=False),
     ),
     Stage.REPORT: (
         _c("report.claims_register", "The claims register row is updated, whatever the outcome.", A),
-        _c("report.signoff", "A maintainer signs off the report and its limits.", H),
+        _c("report.signoff", "A maintainer signs off the report and its limits.", H, required=False),
     ),
 }
 
-TEMPLATES: Dict[str, Dict[Stage, Tuple[CheckTemplate, ...]]] = {"default": DEFAULT_TEMPLATE}
+# For projects that validate a benchmark or its labels rather than test a scientific hypothesis: the "hypothesis" is
+# the claim about the benchmark, and the controls are the positive and negative controls the protocol fixes.
+BENCHMARK_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
+    Stage.QUESTION: DEFAULT_TEMPLATE[Stage.QUESTION],
+    Stage.HYPOTHESIS: (
+        _c("hypothesis.claim", "The claim about the benchmark under test is written down and hashed.", A),
+        _c("hypothesis.falsifier", "Number of outcomes stated in advance that would refute the claim.", R, threshold=1),
+    ),
+    Stage.PROTOCOL: (
+        _c("protocol.document", "The protocol, with pre-registered criteria, is written and hashed.", A),
+        _c("protocol.criteria", "Number of pre-registered pass/fail criteria.", R, threshold=1),
+        _c("protocol.dataset_frozen", "The benchmark items are frozen and hashed.", A),
+        _c("protocol.review", "The protocol and items were reviewed before any run.", H, required=False),
+    ),
+    Stage.EXECUTION: (
+        _c("execution.raw_outputs", "Raw outputs are kept and hashed before any scoring.", A),
+        _c("execution.environment", "Tool versions of the run are recorded and hashed.", A),
+    ),
+    Stage.CONTROLS: (
+        _c("controls.positive", "The positive control behaves as the protocol requires (checked by the tool).", V),
+    ),
+    Stage.ANALYSIS: DEFAULT_TEMPLATE[Stage.ANALYSIS],
+    Stage.REPORT: DEFAULT_TEMPLATE[Stage.REPORT],
+}
+
+# Human sign-offs are optional in the default and benchmark templates (decided 2026-10-17): a person may sign, and
+# the release notes say whether anyone did, but a project is not held back waiting for one. Verifier checks still
+# refuse self-checks. Projects that want sign-offs to block use the "signed" template.
+SIGNED_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
+    stage: tuple(replace(c, required=True) if c.kind == CheckKind.HUMAN else c for c in checks)
+    for stage, checks in DEFAULT_TEMPLATE.items()
+}
+
+TEMPLATES: Dict[str, Dict[Stage, Tuple[CheckTemplate, ...]]] = {
+    "default": DEFAULT_TEMPLATE,
+    "benchmark": BENCHMARK_TEMPLATE,
+    "signed": SIGNED_TEMPLATE,
+}
 
 
 def template_to_dict(name: str) -> Dict[str, Any]:
@@ -232,6 +274,7 @@ class Project:
     releases: List[Release] = field(default_factory=list)
     protocol_reworked_after_execution: bool = False
     last_event_at: str = ""
+    forked_from: Optional[Dict[str, Any]] = None  # set when the project was forked from an imported package
 
     def checks(self, stage: Stage) -> Tuple[CheckTemplate, ...]:
         return TEMPLATES[self.template][stage]
@@ -327,6 +370,13 @@ def release_kind(project: Project) -> Tuple[ReleaseKind, List[str]]:
 
 
 def analysis_criteria(project: Project) -> Dict[str, str]:
+    """Criteria scored in the analysis stage, read from the gate's hashed evidence once that gate has passed."""
+    for gate in project.active_gates():
+        if gate.stage == Stage.ANALYSIS:
+            for result in gate.evidence.values():
+                if result.get("criteria"):
+                    return dict(result["criteria"])
+            return {}
     for check in project.checks(Stage.ANALYSIS):
         evaluation = _evaluate_check(check, project.results.get(check.check_id, []))
         if evaluation.result and evaluation.result.criteria:
@@ -348,10 +398,11 @@ def _canonical(data: Any) -> bytes:
 class LifecycleService:
     """Event-sourced store of research projects. Every change goes through `_record`, so replay rebuilds the state."""
 
-    def __init__(self, log_path: Optional[Path] = None, clock: Callable[[], str] = _now):
+    def __init__(self, log_path: Optional[Path] = None, clock: Callable[[], str] = _now, read_only: bool = False):
         self.projects: Dict[str, Project] = {}
         self.events: List[Dict[str, Any]] = []
         self._clock = clock
+        self.read_only = read_only
         self._log_path = Path(log_path) if log_path else None
         if self._log_path and self._log_path.exists():
             for line in self._log_path.read_text(encoding="utf-8").splitlines():
@@ -447,19 +498,46 @@ class LifecycleService:
     def get(self, project_id: str) -> Project:
         return self._get(project_id)
 
+    @classmethod
+    def from_events(cls, events: List[Dict[str, Any]], read_only: bool = True) -> "LifecycleService":
+        """Rebuild a service by replaying events, as an import does. Read-only unless asked otherwise."""
+        service = cls()
+        for event in events:
+            service._apply(_upgrade(copy.deepcopy(event)))
+        service.read_only = read_only
+        return service
+
+    def adopt(self, events: List[Dict[str, Any]], project_id: str, forked_from: Dict[str, Any]) -> Project:
+        """Copy another project's history under a new id, as a fork. The copy keeps the original times, records
+        where it came from, and can then be changed like any other project."""
+        if project_id in self.projects:
+            raise LifecycleError(f"Project {project_id!r} already exists.")
+        if not events or events[0]["type"] != "project_created":
+            raise LifecycleError("A history to adopt must start with project_created.")
+        if not re.match(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$", project_id):
+            raise LifecycleError("project_id: 1-64 letters, digits, '.', '_' or '-'.")
+        for index, original in enumerate(events):
+            payload = copy.deepcopy(original["payload"])
+            if index == 0:
+                payload["forked_from"] = forked_from
+            self._record(original["type"], project_id, payload, at=original["at"])
+        return self.projects[project_id]
+
     def project_events(self, project_id: str) -> List[Dict[str, Any]]:
         self._get(project_id)
         return [e for e in self.events if e["project_id"] == project_id]
 
     # ---- event log
 
-    def _record(self, kind: str, project_id: str, payload: Dict[str, Any]) -> None:
+    def _record(self, kind: str, project_id: str, payload: Dict[str, Any], at: Optional[str] = None) -> None:
+        if self.read_only:
+            raise LifecycleError("This lifecycle is read-only (an imported package); fork it to make changes.")
         event = {
             "schema_version": SCHEMA_VERSION,
             "seq": len(self.events) + 1,
             "type": kind,
             "project_id": project_id,
-            "at": self._clock(),
+            "at": at or self._clock(),
             "payload": payload,
         }
         # Apply first, so an invalid event never reaches the durable log.
@@ -472,7 +550,11 @@ class LifecycleService:
     def _apply(self, event: Dict[str, Any]) -> None:
         kind, pid, at, payload = event["type"], event["project_id"], event["at"], copy.deepcopy(event["payload"])
         if kind == "project_created":
-            self.projects[pid] = Project(pid, payload["title"], payload["template"], at, last_event_at=at)
+            if payload["template"] not in TEMPLATES:
+                raise LifecycleError(f"Unknown template {payload['template']!r}.")
+            self.projects[pid] = Project(
+                pid, payload["title"], payload["template"], at, last_event_at=at, forked_from=payload.get("forked_from")
+            )
         else:
             project = self.projects[pid]
             project.last_event_at = at
@@ -480,6 +562,15 @@ class LifecycleService:
                 payload["role"] = ActorRole(payload["role"])
                 project.results.setdefault(payload["check_id"], []).append(CheckResult(at=at, **payload))
             elif kind == "gate_passed":
+                # A log may only record a gate that its own results pass, with exactly those results as evidence.
+                # Replay enforces it, so results and hashed evidence cannot disagree.
+                evaluations = [
+                    _evaluate_check(c, project.results.get(c.check_id, [])) for c in project.checks(project.stage)
+                ]
+                required = [e for e in evaluations if e.check.required]
+                expected = {e.check.check_id: e.result.to_dict() for e in evaluations if e.result is not None}
+                if not all(e.status == CheckStatus.SATISFIED for e in required) or payload["evidence"] != expected:
+                    raise LifecycleError(f"Gate {project.stage.value} does not follow from the recorded results.")
                 previous = project.digest
                 version = max((g.version for g in project.gates), default=0) + 1
                 digest = hashlib.sha256(
@@ -565,11 +656,20 @@ def release_notes(
     """Release notes written from the log, never from a model: outcome first, then what was checked and changed."""
     met = sorted(k for k, v in release.criteria.items() if v == "MET")
     not_met = sorted(k for k, v in release.criteria.items() if v == "NOT_MET")
+    signers = sorted(
+        {
+            f"{e['actor']} ({check_id})"
+            for gate in project.active_gates()
+            for check_id, e in gate.evidence.items()
+            if e["role"] == ActorRole.HUMAN.value and e["ok"]
+        }
+    )
     lines = [
         f"# {project.title}: release {release.release_id}",
         "",
         f"- Kind: **{release.kind.value}**" + (f" ({'; '.join(kind_reasons)})" if kind_reasons else ""),
         f"- Version {release.version}, digest `{release.digest[:16]}`, released by {release.actor} at {release.at}",
+        f"- Human sign-offs: {', '.join(signers) if signers else 'none'}",
         "",
         "## Outcome",
         "",
@@ -758,7 +858,6 @@ def verify_tournament_elo(
     )
 
 
-
 # --------------------------------------------------------------------------- export
 
 
@@ -776,6 +875,7 @@ def project_to_dict(project: Project, service: LifecycleService) -> Dict[str, An
         "gates": [g.to_dict() for g in project.gates],
         "releases": [r.to_dict() for r in project.releases],
         "protocol_reworked_after_execution": project.protocol_reworked_after_execution,
+        "forked_from": project.forked_from,
     }
 
 

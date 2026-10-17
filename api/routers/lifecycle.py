@@ -3,7 +3,8 @@
 import os
 from pathlib import Path
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi.responses import Response
 
 from api.schemas import (
     CreateLifecycleProjectRequest,
@@ -21,6 +22,13 @@ from python.discovery.research_lifecycle import (
     ontrack_status,
     project_to_dict,
     template_to_dict,
+)
+from python.discovery.research_package import (
+    EXTENSION,
+    PackageError,
+    SensitiveContentError,
+    export_package,
+    import_package,
 )
 
 router = APIRouter()
@@ -142,3 +150,39 @@ def watch_lifecycle():
 def lifecycle_ontrack_status():
     """Every project in the `coresearcher.lifecycle/v1` shape that OnTrack ingests."""
     return ontrack_status(service, LifecycleWatcher(service, root=ROOT).scan())
+
+
+MAX_UPLOAD_BYTES = 256 * 1024**2
+
+
+@router.get("/api/lifecycle/projects/{project_id}/package", dependencies=[Depends(require_api_key)])
+def export_lifecycle_package(project_id: str, allow_sensitive: bool = False):
+    """The project as a research package (ADR-DISCOVERY-065): log, artifacts, README and RO-Crate metadata.
+
+    Artifacts that changed or vanished since a check recorded them are listed as omissions. Possible credentials
+    stop the export unless `allow_sensitive` is set. Requires the API key because the package carries file contents.
+    """
+    _project(project_id)
+    try:
+        data, _ = export_package(service, project_id, ROOT, allow_sensitive=allow_sensitive)
+    except SensitiveContentError as exc:
+        raise HTTPException(status_code=422, detail={"error": str(exc), "findings": exc.findings}) from exc
+    except PackageError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    return Response(
+        content=data,
+        media_type="application/gzip",
+        headers={"Content-Disposition": f'attachment; filename="{project_id}{EXTENSION}"'},
+    )
+
+
+@router.post("/api/lifecycle/packages/inspect", dependencies=[Depends(require_api_key)])
+async def inspect_lifecycle_package(request: Request):
+    """Verify a research package sent as the raw request body, without importing it. Nothing is stored."""
+    data = await request.body()
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="Package too large for inspection over the API.")
+    try:
+        return import_package(data).summary()
+    except PackageError as exc:
+        return {"valid": False, "error": str(exc)}

@@ -29,6 +29,8 @@ Observations:
   This is a candidate change for `formalizer-v2`: state the capitalisation in the prompt, or accept the lowercase
   forms in the predicate language. It must be decided **before** the freeze and then measured on the frozen dataset;
   changing it now and re-running on the same items would overfit.
+  **Decided on 2026-10-16:** the predicate language accepts the lowercase forms (option two). The prompt is
+  unchanged; see section 3 of the protocol.
 - Its other errors are the instructive kind: an implication written with `implies` (F01), a VACUOUS hypothesis
   formalized without its impossible premise pair (F05), a self-contradiction lost by turning an assumption into scope
   (F20), and a dose threshold turned into a contradiction (F02).

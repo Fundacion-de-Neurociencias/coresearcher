@@ -43,6 +43,23 @@ echo "openai/math at $(git -C "$MATH_ROOT" rev-parse --short HEAD), toolchain $T
 # No `lake update`: the manifest is part of the pinned commit, and updating would move the dependencies.
 (cd "$MATH_ROOT/lean" && lake exe cache get)
 
+# The lakefile patches 11 dependencies while Lake resolves them, but applies the patches for these 12 only in its
+# `post_update` hook, which runs on `lake update` alone. Without them, rellich-kondrachov (and others) fail to build
+# against the pinned Mathlib. Apply the same patches with the same checks as the hook, without moving any commit.
+POST_UPDATE_PATCHED="fixed-point-theorems PrimeNumberTheoremAnd Zeta3Irrational rellich-kondrachov carleson StrongPNT
+  AbsorptionCutoff AINTLIB ClassFieldTheory schoenflies-lean SphereEversion gromov"
+for label in $POST_UPDATE_PATCHED; do
+  dep="$MATH_ROOT/lean/.lake/packages/$label"
+  patch="$MATH_ROOT/lean/patches/$label-lean4341.patch"
+  if git -C "$dep" apply --check --reverse "$patch" 2>/dev/null; then
+    continue
+  fi
+  git -C "$dep" apply --check "$patch"
+  git -C "$dep" apply --whitespace=nowarn "$patch"
+  git -C "$dep" apply --check --reverse "$patch"
+  echo "$label: applied compatibility patch"
+done
+
 # 2. landrun from the main branch (Comparator README). The commit is recorded in tools.txt.
 if [ ! -x "$TOOLS_DIR/bin/landrun" ]; then
   rm -rf "$TOOLS_DIR/src/landrun"
@@ -70,6 +87,7 @@ build_lean_tool comparator "$COMPARATOR_TAG" comparator
   echo "landrun $(git -C "$TOOLS_DIR/src/landrun" rev-parse HEAD)"
   echo "lean4export $(git -C "$TOOLS_DIR/src/lean4export" rev-parse HEAD)"
   echo "comparator $(git -C "$TOOLS_DIR/src/comparator" rev-parse HEAD)"
+  echo "post_update patches applied: $(echo $POST_UPDATE_PATCHED)"
 } > "$TOOLS_DIR/tools.txt"
 cat "$TOOLS_DIR/tools.txt"
 

@@ -71,13 +71,15 @@ def first_challenge_path(note: str) -> str | None:
     return f"lean/ComparatorChallenges/{m.group(1)}" if m else None
 
 
-def theorem_statement(lean: str) -> tuple[str, str, int, int] | None:
-    """Returns (name, statement_text, start, end) for the first theorem; statement ends before ':= by'.
+def theorem_statement(lean: str, name: str | None = None) -> tuple[str, str, int, int] | None:
+    """Returns (name, statement_text, start, end) for the theorem called name, or for the first theorem when
+    name is None. The statement ends before ':= by'.
 
     Only a ':=' outside brackets ends the statement; one inside brackets belongs to a named argument such
     as (k := k) or to a binder default value.
     """
-    m = re.search(r"\btheorem\s+([^\s(:{\[]+)", lean)
+    target = re.escape(name) if name else r"[^\s(:{\[]+"
+    m = re.search(rf"\btheorem\s+({target})(?=[\s(:{{\[])", lean)
     if not m:
         return None
     end = _top_level_assign(lean, m.end())
@@ -98,6 +100,18 @@ def _top_level_assign(text: str, start: int) -> int:
         elif depth == 0 and text.startswith(":=", i):
             return i
     return -1
+
+
+def challenge_target(config: str | None) -> str | None:
+    """Short name of the first theorem a Comparator config checks, or None.
+
+    The first theorem in a challenge file can be a helper lemma with its own proof rather than the challenge
+    (families 115 and 275 in the pilot), so extraction should look for this name.
+    """
+    if not config:
+        return None
+    names = json.loads(config).get("theorem_names") or []
+    return names[0].rsplit(".", 1)[-1] if names else None
 
 
 def title_of(note: str) -> str:
@@ -313,7 +327,8 @@ def main() -> int:
             failures.append({"family": fam, "reason": "no scope section or no Comparator statement link"})
             continue
         lean = fetch(challenge)
-        parsed = theorem_statement(lean) if lean else None
+        target = challenge_target(fetch(challenge.removesuffix(".lean") + ".json"))
+        parsed = theorem_statement(lean, target) if lean else None
         if not parsed:
             failures.append({"family": fam, "reason": f"no theorem found in {challenge}"})
             continue

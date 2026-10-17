@@ -38,10 +38,36 @@ run on any machine with Lean 4 and Mathlib, Windows included. Only the oracle in
 1. Install `elan`. openai/math pins `leanprover/lean4:v4.34.1` in `lean/lean-toolchain`, and `elan` picks it up.
 2. Clone openai/math at `1581d4cbdd69a0faf34b2089614fe2a814316a6a`, then run `lake exe cache get` in `lean/`.
    Do not run `lake update`.
-3. Build the modules the 19 pilot challenges import, and check that each challenge elaborates with its proof
-   replaced by `sorry`.
+3. Run `python scripts/benchmarks/openai_math_lean_fidelity.py env-check --math-root <openai-math>`. The 19
+   pilot challenges import only `Mathlib` and carry their own definitions, with proofs already `sorry`, so
+   nothing from openai/math has to be built. For each challenge it checks the statement extraction
+   (balanced, found once, same theorem name) and elaborates the file with `lake env lean`.
 
-Done when all 19 elaborate. Record OS, Lean version, build times and peak memory.
+Done when all 19 pass both checks. The output, `docs/reference/benchmarks/lean_fidelity_env_check.json`,
+records OS, Lean version and elaboration time per file.
+
+**Windows notes** (found during the first setup, 2026-10-17). None of them changes a pinned file or commit:
+
+- Clone openai/math with `core.longpaths=true` and leave `preprints/` out with a sparse checkout. Some PDF
+  paths are longer than Windows allows, and the PDFs are not needed.
+- Set `core.autocrlf=false` in the clone before checking out. With Git for Windows' default (`true`), files
+  are checked out with CRLF and the dependency patches in `lean/patches/` fail to apply (`iut` first).
+- Run `lake exe cache get` with `GIT_CONFIG_COUNT=2 GIT_CONFIG_KEY_0=core.autocrlf GIT_CONFIG_VALUE_0=false
+  GIT_CONFIG_KEY_1=core.longpaths GIT_CONFIG_VALUE_1=true`, so the dependency clones get the same settings
+  without touching the global Git configuration.
+- `AINTLIB` at `160e4466` has a top-level file named `2026-07-16T07:39:08Z`. Windows does not allow `:` in
+  file names, so checkout fails. In `.lake/packages/AINTLIB`, set `core.protectNTFS=false`, exclude that one
+  file with a sparse checkout, and check out the pinned commit. The file is not Lean code.
+- Lake then warns that the 11 patched dependencies have local changes. This is expected: the changes are the
+  patches.
+
+### Phase 0 result (2026-10-17, Windows 11)
+
+Lean 4.34.1, openai/math at `1581d4cb`, Mathlib cache of 8,908 files. Extraction was sound and the challenge
+elaborated for 19 of 19 pairs, at about 37 s per file, most of it spent loading Mathlib. Family 277 is the
+only statement that differs from the frozen pilot one, as expected after the extraction fix. Negative
+control: the pilot mutant F243_M3 fails with `unexpected token '['; expected ','`, the error the oracle
+reported, so the harness does detect parse errors.
 
 ### Phase 1. Can the comparison step prove equivalences? (no model)
 

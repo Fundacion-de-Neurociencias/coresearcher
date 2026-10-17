@@ -231,3 +231,17 @@ def test_auto_screen_marks_wrappers_and_numeric_anchoring():
     result = fid.auto_screen([anchored, loose])
     assert result["headline"] == ["001", "002"] and result["headline_anchored"] == ["001"]
     assert result["rows"][1]["missing"] == ["7"]
+
+
+def test_family_verdict_and_summary():
+    proved, shown_not = {"outcome": "proved"}, {"outcome": "not_shown"}
+    assert fid.family_verdict(None, [])["verdict"] == "abstain"
+    assert fid.family_verdict({"outcome": "invalid"}, [shown_not])["reason"] == "invalid"
+    good = fid.family_verdict(proved, [shown_not, {"outcome": "timeout"}])
+    assert good["verdict"] == "faithful" and good["discriminating"]
+    leaky = fid.family_verdict(proved, [shown_not, proved])
+    assert leaky["mutants_flagged"] == 1 and not leaky["discriminating"]
+    flagged = fid.family_verdict(shown_not, [shown_not])
+    summary = fid.phase2_summary({"a": good, "b": flagged, "c": fid.family_verdict(None, [])}, ["a", "b", "c"])
+    assert summary["elaborated"] == 2 and summary["faithful"] == 1 and summary["faithful_rate_of_all"] == 0.333
+    assert summary["specificity_of_elaborated"] == 0.5 and summary["discriminating_families"] == 1

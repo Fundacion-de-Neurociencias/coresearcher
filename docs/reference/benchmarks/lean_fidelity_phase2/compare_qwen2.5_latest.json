@@ -1,0 +1,862 @@
+{
+  "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 2)",
+  "formalizer": {
+    "model": "qwen2.5:latest",
+    "model_digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+    "client": "ollama-native",
+    "num_ctx": 32768,
+    "prompt_sha256": "8121656dd9780cfa7afde955a68af1a6a79f32560ff43ad0ba2799f801c4d8d1"
+  },
+  "openai_math_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "heartbeats": 400000,
+  "tactic": "  first\n  | exact Iff.rfl\n  | (simp only [not_not, and_comm, and_left_comm, and_assoc, or_comm, or_left_comm, or_assoc]; done)\n  | (constructor <;> intro h <;> first | exact h | simpa using h | aesop | tauto)\n",
+  "headline": {
+    "families": 13,
+    "elaborated": 6,
+    "faithful": 0,
+    "faithful_rate_of_all": 0.0,
+    "specificity_of_elaborated": 0.0,
+    "mutants": 21,
+    "mutants_flagged": 21,
+    "discriminating_families": 0
+  },
+  "headline_anchored": {
+    "families": 12,
+    "elaborated": 5,
+    "faithful": 0,
+    "faithful_rate_of_all": 0.0,
+    "specificity_of_elaborated": 0.0,
+    "mutants": 17,
+    "mutants_flagged": 17,
+    "discriminating_families": 0
+  },
+  "wrappers_reported_separately": {
+    "families": 6,
+    "elaborated": 5,
+    "faithful": 4,
+    "faithful_rate_of_all": 0.667,
+    "specificity_of_elaborated": 0.8,
+    "mutants": 6,
+    "mutants_flagged": 6,
+    "discriminating_families": 4
+  },
+  "rows": [
+    {
+      "family": "025",
+      "theorem": "egyptian_length_is_minimum",
+      "status": "parsed",
+      "candidate": "theorem egyptian_length_is_minimum :\n  ∀ a b : ℕ, 1 ≤ a ∧ a < b →\n    egyptianLength a b = maxEgyptianLength b",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F025_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "60: unsolved goals"
+          ]
+        },
+        "F025_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "78: unsolved goals"
+          ]
+        },
+        "F025_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "96: unsolved goals"
+          ]
+        },
+        "F025_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "114: unsolved goals"
+          ]
+        },
+        "F025_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "132: unsolved goals"
+          ]
+        },
+        "F025_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "144: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "103",
+      "theorem": "exact_logarithmic_space_derandomization",
+      "status": "parsed",
+      "candidate": "theorem exact_logarithmic_space_derandomization : L = RL = BPL",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 1,
+      "mutants_flagged": 0,
+      "checks": {
+        "F103_original": {
+          "outcome": "invalid",
+          "messages": [
+            "140: unexpected token '='; expected ')', ',' or ':'"
+          ]
+        },
+        "F103_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "152: unexpected token '='; expected ')', ',' or ':'"
+          ]
+        },
+        "F103_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "166: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "115",
+      "theorem": "boundedSampling",
+      "status": "parsed",
+      "candidate": "theorem boundedSampling : Algorithms.BoundedSamplingStatement",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F115_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F115_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "228: unsolved goals"
+          ]
+        },
+        "F115_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "240: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "144",
+      "theorem": "simple_lebesgue_spectrum",
+      "status": "parsed",
+      "candidate": "theorem simple_lebesgue_spectrum :\n  ∃ T : Equiv.Perm OAI.ThreeTorus.Torus,\n    OAI.ThreeTorus.Smooth T ∧ OAI.ThreeTorus.Smooth T.symm ∧\n    MeasureTheory.MeasurePreserving T OAI.ThreeTorus.μ OAI.ThreeTorus.μ ∧\n    ∃ f : OAI.ThreeTorus.H₀, OAI.ThreeTorus.IsReal f ∧\n    ∃ v : ℤ → OAI.ThreeTorus.H₀,\n      (∀ n : ℤ, ∀ᵐ x ∂OAI.ThreeTorus.μ, (v n).1 x = f.1 ((T ^ n) x)) ∧\n      OAI.ThreeTorus.Orthonormal ℂ v ∧\n      Dense (Submodule.span ℂ (Set.range v) : Set OAI.ThreeTorus.H₀) ∧\n      OAI.ThreeTorus.Ergodic T OAI.ThreeTorus.μ ∧\n      ∃ W : OAI.ThreeTorus.H₀ ≃ₗᵢ[ℂ] OAI.ThreeTorus.CircleH,\n        ∀ g : OAI.ThreeTorus.H₀, ∃ h : OAI.ThreeTorus.H₀,\n          (∀ᵐ x ∂OAI.ThreeTorus.μ, h.1 x = g.1 (T x)) ∧\n          (∀ᵐ z ∂(AddCircle.haarAddCircle (T := (1 : ℝ))),\n            W h z = fourier 1 z * W g z)",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 1,
+      "mutants_flagged": 0,
+      "checks": {
+        "F144_original": {
+          "outcome": "invalid",
+          "messages": [
+            "92: (lean.unknownIdentifier): Unknown identifier `OAI.ThreeTorus.Orthonormal`",
+            "94: (lean.unknownIdentifier): Unknown identifier `OAI.ThreeTorus.Ergodic`",
+            "104: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F144_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "117: (lean.unknownIdentifier): Unknown identifier `OAI.ThreeTorus.Orthonormal`",
+            "119: (lean.unknownIdentifier): Unknown identifier `OAI.ThreeTorus.Ergodic`",
+            "129: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F144_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "138: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "174",
+      "theorem": "strongThinTree",
+      "status": "parsed",
+      "candidate": "theorem strongThinTree : ∃ C : ℝ, 0 < C ∧ ∀ (k : ℕ), 1 ≤ k → ∀ (n m : ℕ), 2 ≤ n →\n  ∀ G : MultiGraph n m, G.EdgeConnected k →\n    ∃ T : Finset (Fin m), G.SpanningTree T ∧\n      ∀ S : Finset (Fin n), S.Nonempty → S ≠ Finset.univ →\n        ((G.cut T S).card : ℝ) ≤ (C / (k : ℝ)) * (G.cut Finset.univ S).card",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F174_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F174_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "64: unsolved goals"
+          ]
+        },
+        "F174_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "76: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "186",
+      "theorem": "sharp_threshold_width",
+      "status": "parsed",
+      "candidate": "theorem sharp_threshold_width (n : ℕ) (ε : ℝ) (hε : 0 < ε ∧ ε < 1/2) (f : GraphConfig n → Bool) (hinv : VertexInvariant f) (hinc : IncreasingGraphProperty f) (hnontriv : NontrivialGraphProperty f) : ℝ",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F186_original": {
+          "outcome": "invalid",
+          "messages": [
+            "55: Application type mismatch: The argument",
+            "61: unsolved goals"
+          ]
+        },
+        "F186_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "71: Application type mismatch: The argument",
+            "77: unsolved goals"
+          ]
+        },
+        "F186_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "87: Application type mismatch: The argument",
+            "93: unsolved goals"
+          ]
+        },
+        "F186_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "103: Application type mismatch: The argument",
+            "109: unsolved goals"
+          ]
+        },
+        "F186_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "119: Application type mismatch: The argument",
+            "125: unsolved goals"
+          ]
+        },
+        "F186_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "137: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "190",
+      "theorem": "no_polynomial_removal_bound",
+      "status": "parsed",
+      "candidate": "theorem no_polynomial_removal_bound (c C : ℝ) (n : ℕ) (ε : ℝ) (hn : n ≥ 66) (hε : ε > 0) :\n  ∃ (A : OAI.Problem348.BinaryMatrix n), OAI.Problem348.HFree OAI.Problem348.fixedH A ∧\n  OAI.Problem348.hammingDistance A (OAI.Problem348.fixedH n) ≥ ε ∧\n  OAI.Problem348.copyCount OAI.Problem348.fixedH A < c * ε ^ C * n ^ 132",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F190_original": {
+          "outcome": "invalid",
+          "messages": [
+            "68: Application type mismatch: The argument",
+            "81: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "88: Application type mismatch: The argument",
+            "101: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "108: Application type mismatch: The argument",
+            "121: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "128: Application type mismatch: The argument",
+            "141: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "148: Application type mismatch: The argument",
+            "157: unsolved goals"
+          ]
+        },
+        "F190_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "169: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "231",
+      "theorem": "finite_strongly_rayleigh_response",
+      "status": "parsed",
+      "candidate": "theorem finite_strongly_rayleigh_response :\n    ∀ (Γ : Type u_2) [Group Γ] [Countable Γ] [MeasurableSpace Γ],\n      ∀ μ : ProbabilityMeasure (Γ → Bool),\n        StronglyRayleighCountable μ → InvariantBinaryLaw μ → HasEquivariantIIDFactor μ",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F231_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "151: unsolved goals"
+          ]
+        },
+        "F231_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "176: unsolved goals"
+          ]
+        },
+        "F231_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "201: unsolved goals"
+          ]
+        },
+        "F231_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "226: unsolved goals"
+          ]
+        },
+        "F231_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "251: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F231_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "263: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "238",
+      "theorem": "first_reciprocal_main",
+      "status": "parsed",
+      "candidate": "theorem first_reciprocal_main : ∀ n : ℕ, reciprocalFirst n = C1",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F238_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "229: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F238_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "259: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F238_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "289: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F238_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "319: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F238_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "349: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F238_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "361: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "243",
+      "theorem": "main",
+      "status": "parsed",
+      "candidate": "theorem main : EvaluationDefinable (fun _ => true)",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 1,
+      "mutants_flagged": 0,
+      "checks": {
+        "F243_original": {
+          "outcome": "invalid",
+          "messages": [
+            "553: (lean.unknownIdentifier): Unknown identifier `EvaluationDefinable`",
+            "558: unsolved goals"
+          ]
+        },
+        "F243_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "568: (lean.unknownIdentifier): Unknown identifier `EvaluationDefinable`",
+            "573: unsolved goals"
+          ]
+        },
+        "F243_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "585: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "245",
+      "theorem": "weak_implies_strong",
+      "status": "parsed",
+      "candidate": "theorem weak_implies_strong {S : Type u} (P : Specification S) (Γ : List (Expr S)) (M : Expr S) (h : Legal P Γ M) : StronglyNormalizing M",
+      "verdict": "flagged",
+      "mutants": 2,
+      "mutants_flagged": 2,
+      "discriminating": false,
+      "checks": {
+        "F245_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "121: unsolved goals"
+          ]
+        },
+        "F245_M4": {
+          "outcome": "not_shown",
+          "messages": [
+            "133: unsolved goals"
+          ]
+        },
+        "F245_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "146: unsolved goals"
+          ]
+        },
+        "F245_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "158: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "246",
+      "theorem": "cannon",
+      "status": "parsed",
+      "candidate": "theorem cannon (G : Type u) [Group G] (D : CayleyData G) (hThin : D.ThinTriangles) (hBoundary : D.graph.Boundary ≃ SphereTwo) : \n  ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧ Finite (Ker ρ)",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 3,
+      "mutants_flagged": 0,
+      "checks": {
+        "F246_original": {
+          "outcome": "invalid",
+          "messages": [
+            "93: (lean.invalidField): Invalid field `Boundary`: The environment does not contain `SimpleGraph.Boundary`, so it is not possible to project the field `Boundary` from an expression",
+            "93: (lean.unknownIdentifier): Unknown identifier `Ker`",
+            "98: unsolved goals"
+          ]
+        },
+        "F246_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "108: (lean.invalidField): Invalid field `Boundary`: The environment does not contain `SimpleGraph.Boundary`, so it is not possible to project the field `Boundary` from an expression",
+            "108: (lean.unknownIdentifier): Unknown identifier `Ker`",
+            "113: unsolved goals"
+          ]
+        },
+        "F246_M4": {
+          "outcome": "invalid",
+          "messages": [
+            "123: (lean.invalidField): Invalid field `Boundary`: The environment does not contain `SimpleGraph.Boundary`, so it is not possible to project the field `Boundary` from an expression",
+            "123: (lean.unknownIdentifier): Unknown identifier `Ker`",
+            "127: unsolved goals"
+          ]
+        },
+        "F246_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "137: (lean.invalidField): Invalid field `Boundary`: The environment does not contain `SimpleGraph.Boundary`, so it is not possible to project the field `Boundary` from an expression",
+            "137: (lean.unknownIdentifier): Unknown identifier `Ker`",
+            "142: unsolved goals"
+          ]
+        },
+        "F246_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "154: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "273",
+      "theorem": "entropy_photon_number_inequality",
+      "status": "parsed",
+      "candidate": "theorem entropy_photon_number_inequality (η : ℝ) (ρA ρB ρC : State n) (N : ℝ) (hN : N = gInv (S ρC / n)) (hη : 0 ≤ η ∧ η ≤ 1) : N ≥ η * N ρA + (1 - η) * N ρB",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F273_original": {
+          "outcome": "invalid",
+          "messages": [
+            "101: (lean.unknownIdentifier): Unknown identifier `n`",
+            "101: (lean.unknownIdentifier): Unknown identifier `n`",
+            "101: (lean.unknownIdentifier): Unknown identifier `n`",
+            "101: (lean.unknownIdentifier): Unknown identifier `S`",
+            "101: (lean.unknownIdentifier): Unknown identifier `n`",
+            "101: Function expected at",
+            "101: Function expected at",
+            "107: unsolved goals"
+          ]
+        },
+        "F273_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "117: (lean.unknownIdentifier): Unknown identifier `n`",
+            "117: (lean.unknownIdentifier): Unknown identifier `n`",
+            "117: (lean.unknownIdentifier): Unknown identifier `n`",
+            "117: (lean.unknownIdentifier): Unknown identifier `S`",
+            "117: (lean.unknownIdentifier): Unknown identifier `n`",
+            "117: Function expected at",
+            "117: Function expected at",
+            "123: unsolved goals"
+          ]
+        },
+        "F273_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "133: (lean.unknownIdentifier): Unknown identifier `n`",
+            "133: (lean.unknownIdentifier): Unknown identifier `n`",
+            "133: (lean.unknownIdentifier): Unknown identifier `n`",
+            "133: (lean.unknownIdentifier): Unknown identifier `S`",
+            "133: (lean.unknownIdentifier): Unknown identifier `n`",
+            "133: Function expected at",
+            "133: Function expected at",
+            "139: unsolved goals"
+          ]
+        },
+        "F273_M4": {
+          "outcome": "invalid",
+          "messages": [
+            "149: (lean.unknownIdentifier): Unknown identifier `n`",
+            "149: (lean.unknownIdentifier): Unknown identifier `n`",
+            "149: (lean.unknownIdentifier): Unknown identifier `n`",
+            "149: (lean.unknownIdentifier): Unknown identifier `S`",
+            "149: (lean.unknownIdentifier): Unknown identifier `n`",
+            "149: Function expected at",
+            "149: Function expected at",
+            "154: unsolved goals"
+          ]
+        },
+        "F273_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "164: (lean.unknownIdentifier): Unknown identifier `n`",
+            "164: (lean.unknownIdentifier): Unknown identifier `n`",
+            "164: (lean.unknownIdentifier): Unknown identifier `n`",
+            "164: (lean.unknownIdentifier): Unknown identifier `S`",
+            "164: (lean.unknownIdentifier): Unknown identifier `n`",
+            "164: Function expected at",
+            "164: Function expected at",
+            "170: unsolved goals"
+          ]
+        },
+        "F273_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "182: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "275",
+      "theorem": "unit_coulomb_qmaHard",
+      "status": "parsed",
+      "candidate": "theorem unit_coulomb_qmaHard : QMAHard unitCoulombCodec.encode unitCoulombPromise",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F275_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F275_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "564: unsolved goals"
+          ]
+        },
+        "F275_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "576: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "277",
+      "theorem": "threshold_parallel_repetition",
+      "status": "parsed",
+      "candidate": "theorem threshold_parallel_repetition {x y a b : ℕ} (G : Game x y a b) (v : ℝ) (A B : Finset (Fin (a + 1) × Fin (b + 1))) (δ : ℝ) (k : ℕ) (h_v : v < 1) (h_A : A.nonempty) (h_B : B.nonempty) (h_δ : 0 < δ) (h_k : k > 0) : \n  thresholdValue G δ ≤ exp (-κ * δ^13 * k / (1 + log (A.card * B.card)))",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F277_original": {
+          "outcome": "invalid",
+          "messages": [
+            "68: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "68: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "68: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "78: unsolved goals"
+          ]
+        },
+        "F277_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "88: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "88: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "88: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "98: unsolved goals"
+          ]
+        },
+        "F277_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "108: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "108: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "108: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "118: unsolved goals"
+          ]
+        },
+        "F277_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "128: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "128: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "128: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "138: unsolved goals"
+          ]
+        },
+        "F277_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "148: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "148: (lean.invalidField): Invalid field `nonempty`: The environment does not contain `Finset.nonempty`, so it is not possible to project the field `nonempty` from an expression",
+            "148: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "158: unsolved goals"
+          ]
+        },
+        "F277_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "170: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "327",
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm",
+      "status": "parsed",
+      "candidate": "theorem hasNontrivialMarkovType_iff_hasEquivalentUCNorm (X : Type*) [NormedAddCommGroup X] [NormedSpace ℝ X] :\n  HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X",
+      "verdict": "flagged",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": false,
+      "checks": {
+        "F327_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "77: unsolved goals"
+          ]
+        },
+        "F327_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "89: unsolved goals"
+          ]
+        },
+        "F327_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "101: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "331",
+      "theorem": "main_theorem",
+      "status": "parsed",
+      "candidate": "theorem main_theorem : True",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F331_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "463: unsolved goals"
+          ]
+        },
+        "F331_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "482: unsolved goals"
+          ]
+        },
+        "F331_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "501: unsolved goals"
+          ]
+        },
+        "F331_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "520: unsolved goals"
+          ]
+        },
+        "F331_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "539: unsolved goals"
+          ]
+        },
+        "F331_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "551: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "354",
+      "theorem": "unit_cubic_isoperimetric",
+      "status": "parsed",
+      "candidate": "theorem unit_cubic_isoperimetric (V : ℝ) (E : Set OAI.CubicTorus.Torus) : \n  OAI.CubicTorus.IsMinimizerAt V E",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F354_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "96: unsolved goals"
+          ]
+        },
+        "F354_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "111: unsolved goals"
+          ]
+        },
+        "F354_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "126: unsolved goals"
+          ]
+        },
+        "F354_M4": {
+          "outcome": "not_shown",
+          "messages": [
+            "141: unsolved goals"
+          ]
+        },
+        "F354_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "156: unsolved goals"
+          ]
+        },
+        "F354_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "168: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "365",
+      "theorem": "main_nonuniqueness",
+      "status": "parsed",
+      "candidate": "theorem main_nonuniqueness : MainStatement",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F365_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F365_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "95: unsolved goals"
+          ]
+        },
+        "F365_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "107: unsolved goals"
+          ]
+        }
+      }
+    }
+  ],
+  "go": false
+}

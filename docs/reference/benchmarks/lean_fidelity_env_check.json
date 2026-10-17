@@ -1,0 +1,356 @@
+{
+  "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 0)",
+  "openai_math_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "lean_version": "Lean (version 4.34.1, x86_64-w64-windows-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "os": "Windows-11-10.0.26200-SP0",
+  "timeout_seconds": 1800,
+  "summary": {
+    "pairs": 19,
+    "extraction_ok": 19,
+    "elaboration_ok": 19
+  },
+  "rows": [
+    {
+      "family": "025",
+      "challenge": "lean/ComparatorChallenges/EgyptianFractions.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.3,
+        "errors": []
+      }
+    },
+    {
+      "family": "103",
+      "challenge": "lean/ComparatorChallenges/LogspaceEquality.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.7,
+        "errors": []
+      }
+    },
+    {
+      "family": "115",
+      "challenge": "lean/ComparatorChallenges/ContingencyTables.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.2,
+        "errors": []
+      }
+    },
+    {
+      "family": "144",
+      "challenge": "lean/ComparatorChallenges/ThreeTorus.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.8,
+        "errors": []
+      }
+    },
+    {
+      "family": "174",
+      "challenge": "lean/ComparatorChallenges/StrongThinTree.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.6,
+        "errors": []
+      }
+    },
+    {
+      "family": "186",
+      "challenge": "lean/ComparatorChallenges/SharpThreshold.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.8,
+        "errors": []
+      }
+    },
+    {
+      "family": "190",
+      "challenge": "lean/ComparatorChallenges/MatrixRemoval.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.6,
+        "errors": []
+      }
+    },
+    {
+      "family": "231",
+      "challenge": "lean/ComparatorChallenges/StronglyRayleighDPP.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 37.2,
+        "errors": []
+      }
+    },
+    {
+      "family": "238",
+      "challenge": "lean/ComparatorChallenges/ThorpFirstReciprocal.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 37.5,
+        "errors": []
+      }
+    },
+    {
+      "family": "243",
+      "challenge": "lean/ComparatorChallenges/ChoicelessPolynomialTime.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 37.2,
+        "errors": []
+      }
+    },
+    {
+      "family": "245",
+      "challenge": "lean/ComparatorChallenges/TypeSystemNormalization.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 37.0,
+        "errors": []
+      }
+    },
+    {
+      "family": "246",
+      "challenge": "lean/ComparatorChallenges/CannonGeometricAction.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 35.5,
+        "errors": []
+      }
+    },
+    {
+      "family": "273",
+      "challenge": "lean/ComparatorChallenges/EntropyPhotonNumber.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.8,
+        "errors": []
+      }
+    },
+    {
+      "family": "275",
+      "challenge": "lean/ComparatorChallenges/ContinuumCoulombHardness.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 38.1,
+        "errors": []
+      }
+    },
+    {
+      "family": "277",
+      "challenge": "lean/ComparatorChallenges/EntangledGames.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": false
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.8,
+        "errors": []
+      }
+    },
+    {
+      "family": "327",
+      "challenge": "lean/ComparatorChallenges/MarkovType.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.9,
+        "errors": []
+      }
+    },
+    {
+      "family": "331",
+      "challenge": "lean/ComparatorChallenges/ForestSpace.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 38.2,
+        "errors": []
+      }
+    },
+    {
+      "family": "354",
+      "challenge": "lean/ComparatorChallenges/CubicTorus.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 36.5,
+        "errors": []
+      }
+    },
+    {
+      "family": "365",
+      "challenge": "lean/ComparatorChallenges/Conductivity.lean",
+      "extraction": {
+        "ok": true,
+        "same_theorem": true,
+        "balanced": true,
+        "found_once": true,
+        "matches_frozen_statement": true
+      },
+      "elaboration": {
+        "ok": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 37.3,
+        "errors": []
+      }
+    }
+  ]
+}

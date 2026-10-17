@@ -50,8 +50,9 @@ and in files spread across the repository. AIPOCH Open-Science packages a finish
    test a hypothesis. The claim is about the benchmark, and the control is the protocol's positive control.
 8. **First package.** [`openai-math-lean-oracle.crpkg`](../reference/packages/openai-math-lean-oracle.crpkg),
    built by [`build_oracle_package.py`](../../scripts/packages/build_oracle_package.py) from repository files. It
-   includes the protocol as pre-registered in `f89caf7` (2026-10-13), recovered from git. Human checks are recorded
-   only when a person signs off; until then the package stops at the open gate and says so.
+   includes the protocol as pre-registered in `f89caf7` (2026-10-13), recovered from git, and it is signed off by
+   the principal investigator. It is released as PREREGISTERED with both criteria met. Its digest is published in
+   [the package index](../reference/packages/README.md).
 
 ## Limits
 

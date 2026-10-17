@@ -30,7 +30,7 @@ import copy
 import hashlib
 import json
 import re
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from enum import Enum
 from pathlib import Path
@@ -125,18 +125,23 @@ V, H, A, R = CheckKind.VERIFIER, CheckKind.HUMAN, CheckKind.ARTIFACT, CheckKind.
 DEFAULT_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     Stage.QUESTION: (
         _c("question.statement", "The research question is written down and hashed.", A),
-        _c("question.owner", "A scientist owns the question and agrees it is worth answering.", H),
+        _c("question.owner", "A scientist owns the question and agrees it is worth answering.", H, required=False),
     ),
     Stage.HYPOTHESIS: (
         _c("hypothesis.formal_object", "The formal evaluator finds the hypothesis falsifiable and consistent.", V),
         _c("hypothesis.rivals", "Number of rival hypotheses compared with it.", R, threshold=1),
-        _c("hypothesis.confirmed", "The researcher confirms the formal object says what the prose meant.", H),
+        _c(
+            "hypothesis.confirmed",
+            "The researcher confirms the formal object says what the prose meant.",
+            H,
+            required=False,
+        ),
     ),
     Stage.PROTOCOL: (
         _c("protocol.document", "The protocol, with pre-registered criteria, is written and hashed.", A),
         _c("protocol.criteria", "Number of pre-registered pass/fail criteria.", R, threshold=1),
         _c("protocol.dataset_frozen", "The evaluation dataset is frozen and hashed.", A),
-        _c("protocol.review", "The protocol and dataset were reviewed before any run.", H),
+        _c("protocol.review", "The protocol and dataset were reviewed before any run.", H, required=False),
         _c(
             "protocol.tournament_elo",
             "The candidate hypothesis defeated rival hypotheses in the Elo arena above threshold.",
@@ -156,11 +161,11 @@ DEFAULT_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     Stage.ANALYSIS: (
         _c("analysis.criteria_evaluated", "Every pre-registered criterion is scored MET or NOT_MET by script.", V),
         _c("analysis.intervals", "Proportions are reported with confidence intervals (1 = yes).", R, threshold=1),
-        _c("analysis.deviations", "Deviations from the protocol are listed and acknowledged.", H),
+        _c("analysis.deviations", "Deviations from the protocol are listed and acknowledged.", H, required=False),
     ),
     Stage.REPORT: (
         _c("report.claims_register", "The claims register row is updated, whatever the outcome.", A),
-        _c("report.signoff", "A maintainer signs off the report and its limits.", H),
+        _c("report.signoff", "A maintainer signs off the report and its limits.", H, required=False),
     ),
 }
 
@@ -176,7 +181,7 @@ BENCHMARK_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
         _c("protocol.document", "The protocol, with pre-registered criteria, is written and hashed.", A),
         _c("protocol.criteria", "Number of pre-registered pass/fail criteria.", R, threshold=1),
         _c("protocol.dataset_frozen", "The benchmark items are frozen and hashed.", A),
-        _c("protocol.review", "The protocol and items were reviewed before any run.", H),
+        _c("protocol.review", "The protocol and items were reviewed before any run.", H, required=False),
     ),
     Stage.EXECUTION: (
         _c("execution.raw_outputs", "Raw outputs are kept and hashed before any scoring.", A),
@@ -189,9 +194,18 @@ BENCHMARK_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     Stage.REPORT: DEFAULT_TEMPLATE[Stage.REPORT],
 }
 
+# Human sign-offs are optional in the default and benchmark templates (decided 2026-10-17): a person may sign, and
+# the release notes say whether anyone did, but a project is not held back waiting for one. Verifier checks still
+# refuse self-checks. Projects that want sign-offs to block use the "signed" template.
+SIGNED_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
+    stage: tuple(replace(c, required=True) if c.kind == CheckKind.HUMAN else c for c in checks)
+    for stage, checks in DEFAULT_TEMPLATE.items()
+}
+
 TEMPLATES: Dict[str, Dict[Stage, Tuple[CheckTemplate, ...]]] = {
     "default": DEFAULT_TEMPLATE,
     "benchmark": BENCHMARK_TEMPLATE,
+    "signed": SIGNED_TEMPLATE,
 }
 
 
@@ -642,11 +656,20 @@ def release_notes(
     """Release notes written from the log, never from a model: outcome first, then what was checked and changed."""
     met = sorted(k for k, v in release.criteria.items() if v == "MET")
     not_met = sorted(k for k, v in release.criteria.items() if v == "NOT_MET")
+    signers = sorted(
+        {
+            f"{e['actor']} ({check_id})"
+            for gate in project.active_gates()
+            for check_id, e in gate.evidence.items()
+            if e["role"] == ActorRole.HUMAN.value and e["ok"]
+        }
+    )
     lines = [
         f"# {project.title}: release {release.release_id}",
         "",
         f"- Kind: **{release.kind.value}**" + (f" ({'; '.join(kind_reasons)})" if kind_reasons else ""),
         f"- Version {release.version}, digest `{release.digest[:16]}`, released by {release.actor} at {release.at}",
+        f"- Human sign-offs: {', '.join(signers) if signers else 'none'}",
         "",
         "## Outcome",
         "",

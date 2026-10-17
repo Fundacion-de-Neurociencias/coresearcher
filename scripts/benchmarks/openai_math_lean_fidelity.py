@@ -660,6 +660,47 @@ def screen_score(sheets: dict[str, str]) -> dict:
     }
 
 
+# Numbers that are structural in most statements (bounds such as 0 < ε or 1 ≤ k), not content the prose must give.
+STRUCTURAL_NUMBERS = {"0", "1", "2"}
+
+
+def auto_screen_row(target: dict) -> dict:
+    """Mechanical, reproducible screen of one family: wrapper or not, and its numeric anchoring.
+
+    A family is numerically anchored when every number in its statement (or in its wrapper definition), other
+    than 0, 1 and 2, also occurs in the prose. It replaces no judgment about meaning; it only marks families
+    whose constants the prose cannot have supplied.
+    """
+    wrapper = wrapper_definition(target)
+    text = target["statement"] + ("\n" + wrapper if wrapper else "")
+    prose_numbers = set(pilot.NUM.findall(target["scope"]))
+    missing = sorted({n for n in pilot.NUM.findall(text) if n not in prose_numbers and n not in STRUCTURAL_NUMBERS})
+    return {"family": target["family"], "wrapper": wrapper is not None, "anchored": not missing, "missing": missing}
+
+
+def auto_screen(targets: list[dict]) -> dict:
+    rows = [auto_screen_row(t) for t in targets]
+    headline = [r["family"] for r in rows if not r["wrapper"]]
+    return {
+        "rule": "headline = every family that is not a wrapper; anchored is a secondary stratum",
+        "structural_numbers": sorted(STRUCTURAL_NUMBERS),
+        "headline": headline,
+        "headline_anchored": [r["family"] for r in rows if not r["wrapper"] and r["anchored"]],
+        "wrappers_reported_separately": [r["family"] for r in rows if r["wrapper"]],
+        "rows": rows,
+    }
+
+
+def cmd_screen_auto(math_root: Path) -> int:
+    result = {"openai_math_commit": oracle.check_commit(math_root), **auto_screen(load_targets(math_root))}
+    SCREEN_DIR.mkdir(parents=True, exist_ok=True)
+    path = SCREEN_DIR / "auto_screen.json"
+    path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({k: v for k, v in result.items() if k != "rows"}, indent=2))
+    print(f"Wrote {path}")
+    return 0
+
+
 def cmd_screen_sheet(math_root: Path, force: bool) -> int:
     commit = oracle.check_commit(math_root)
     targets = load_targets(math_root)
@@ -747,6 +788,61 @@ def parse_candidate(output: str, name: str) -> tuple[str, str | None]:
     return "no_theorem", None
 
 
+def _context_full(client) -> bool | None:
+    """True when the prompt filled the model's context, so Ollama may have cut it."""
+    tokens, limit = getattr(client, "last_prompt_tokens", None), getattr(client, "num_ctx", None)
+    return None if tokens is None or limit is None else tokens >= limit - 16
+
+
+class OllamaClient:
+    """Ollama's native chat API, which, unlike its OpenAI-compatible endpoint, accepts a context length per call.
+
+    Ollama truncates a prompt longer than its context silently, so every reply also records how many prompt
+    tokens the model read (`last_prompt_tokens`); `formalize` flags a reply whose prompt filled the context.
+    """
+
+    def __init__(self, model: str, base_url: str | None = None, num_ctx: int = 32768, timeout: float = 1800.0):
+        self.model, self.num_ctx, self.timeout = model, num_ctx, timeout
+        self.base_url = (base_url or "http://localhost:11434").rstrip("/")
+        self.last_prompt_tokens = None
+
+    def digest(self) -> str | None:
+        import httpx
+
+        models = httpx.get(f"{self.base_url}/api/tags", timeout=60).json().get("models", [])
+        return next((m.get("digest") for m in models if m.get("name") == self.model), None)
+
+    def complete(self, messages, temperature: float = 0.0, seed: int = 0) -> str:
+        import httpx
+
+        options = {"temperature": temperature, "seed": seed, "num_ctx": self.num_ctx}
+        body = {"model": self.model, "messages": messages, "stream": False, "options": options}
+        response = httpx.post(f"{self.base_url}/api/chat", json=body, timeout=self.timeout)
+        response.raise_for_status()
+        data = response.json()
+        self.last_prompt_tokens = data.get("prompt_eval_count")
+        return data["message"]["content"]
+
+
+class OpenAICompatClient:
+    """An OpenAI-compatible endpoint such as LM Studio's. The context length is set when the model is loaded
+    there, so it is passed in as num_ctx only to flag replies whose prompt filled it (`usage.prompt_tokens`)."""
+
+    def __init__(self, model: str, base_url: str, num_ctx: int, timeout: float = 1800.0):
+        self.model, self.base_url, self.num_ctx, self.timeout = model, base_url.rstrip("/"), num_ctx, timeout
+        self.last_prompt_tokens = None
+
+    def complete(self, messages, temperature: float = 0.0, seed: int = 0) -> str:
+        import httpx
+
+        body = {"model": self.model, "messages": messages, "temperature": temperature, "seed": seed}
+        response = httpx.post(f"{self.base_url}/chat/completions", json=body, timeout=self.timeout)
+        response.raise_for_status()
+        data = response.json()
+        self.last_prompt_tokens = (data.get("usage") or {}).get("prompt_tokens")
+        return data["choices"][0]["message"]["content"]
+
+
 def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir: Path | None) -> int:
     commit = oracle.check_commit(math_root)
     targets = load_targets(math_root)
@@ -776,6 +872,11 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
         "seed": 0,
         "started": time.strftime("%Y-%m-%dT%H:%M:%S"),
     }
+    if isinstance(client, OllamaClient):
+        # Ollama tags are aliases: several names can point at one model, so the digest identifies it.
+        meta.update(client="ollama-native", model_digest=client.digest(), num_ctx=client.num_ctx)
+    elif isinstance(client, OpenAICompatClient):
+        meta.update(client="openai-compatible", num_ctx=client.num_ctx)
     out.parent.mkdir(parents=True, exist_ok=True)
     with out.open("w", encoding="utf-8") as fh:
         fh.write(json.dumps(meta) + "\n")
@@ -795,6 +896,8 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
                 "theorem": t["theorem"],
                 "wrapper": wrapper_definition(t) is not None,
                 "prompt_chars": sum(len(m["content"]) for m in messages),
+                "prompt_tokens": getattr(client, "last_prompt_tokens", None),
+                "context_full": _context_full(client),
                 "output": output,
                 "transport_error": error,
                 "status": status,
@@ -810,17 +913,23 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("step", choices=["env-check", "controls", "screen-sheet", "screen-score", "formalize"])
+    parser.add_argument(
+        "step", choices=["env-check", "controls", "screen-auto", "screen-sheet", "screen-score", "formalize"]
+    )
     parser.add_argument("--math-root", type=Path, help="Path to an openai/math checkout (all steps but screen-score)")
     parser.add_argument("--timeout", type=int, default=1800, help="Seconds per Lean file or model call")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "private" / "lean_fidelity", help="Generated files")
     parser.add_argument("--jobs", type=int, default=4, help="Lean processes in parallel (controls)")
     parser.add_argument("--force", action="store_true", help="Overwrite screen sheets that already have verdicts")
-    parser.add_argument("--model", help="Model name at the endpoint (formalize; default FORMALIZER_MODEL)")
-    parser.add_argument("--base-url", help="OpenAI-compatible endpoint (formalize; default FORMALIZER_BASE_URL)")
+    parser.add_argument("--model", help="Model name at the endpoint (formalize)")
+    parser.add_argument("--base-url", help="Endpoint (formalize; default localhost:11434 or localhost:1234/v1)")
     parser.add_argument("--out", type=Path, help="Raw outputs, JSONL (formalize)")
     parser.add_argument("--resume", action="store_true", help="Keep finished families from --out (formalize)")
     parser.add_argument("--dry-run", action="store_true", help="Write the prompts only; call no model (formalize)")
+    parser.add_argument(
+        "--backend", choices=["ollama", "openai"], default="ollama", help="ollama: native API; openai: e.g. LM Studio"
+    )
+    parser.add_argument("--num-ctx", type=int, default=32768, help="Context length (set per call with ollama)")
     args = parser.parse_args()
     if args.step == "screen-score":
         return cmd_screen_score()
@@ -831,13 +940,18 @@ def main() -> int:
         return env_check(math_root, args.timeout)
     if args.step == "controls":
         return controls(math_root, args.out_dir.resolve(), args.timeout, args.jobs)
+    if args.step == "screen-auto":
+        return cmd_screen_auto(math_root)
     if args.step == "screen-sheet":
         return cmd_screen_sheet(math_root, args.force)
     if args.dry_run:
         return cmd_formalize(math_root, Path(), None, False, args.out_dir.resolve() / "prompts")
-    from python.discovery.formalizer import ChatClient
-
-    client = ChatClient(base_url=args.base_url, model=args.model, timeout=args.timeout)
+    if not args.model:
+        parser.error("--model is required for formalize")
+    if args.backend == "ollama":
+        client = OllamaClient(args.model, args.base_url, args.num_ctx, args.timeout)
+    else:
+        client = OpenAICompatClient(args.model, args.base_url or "http://localhost:1234/v1", args.num_ctx, args.timeout)
     out = args.out or args.out_dir / f"formalize_{re.sub(r'[^A-Za-z0-9._-]', '_', client.model)}.jsonl"
     return cmd_formalize(math_root, out.resolve(), client, args.resume, None)
 

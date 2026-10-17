@@ -126,28 +126,34 @@ Limits of this result:
 ### Phase 2. Formalizer on the development set
 
 - **Development set:** the 19 pilot families. Prompts may be changed freely here. Results are exploratory.
-- **Model:** one local model on the Legion. The tag, decoding settings (temperature 0, seed 0) and prompt hash
+- **Models:** local models on the Legion. Model identity, decoding settings (temperature 0, seed 0) and prompt hash
   are recorded as in [FORMALIZER_BENCH_PROTOCOL.md](FORMALIZER_BENCH_PROTOCOL.md).
-- **Prose screen:** a scope note often summarizes several results, and the challenge theorem can be a lemma that
-  the prose does not state. Family 231 is an example: the prose is about uniform spanning forests, while the
-  theorem bounds the tilt covariance of a strongly Rayleigh measure. Before any model run, two readers who do
-  not see model outputs mark each family as *determined* if `P` fixes the meaning of `S_ref`, and as
-  *underdetermined* otherwise. Only determined families are scored. The number excluded is reported.
+- **Headline set (no human screen):** every family that is not a wrapper (see below), 13 of 19. Results are not
+  conditioned on any judgment of the prose. A scope note can summarize several results, and the challenge theorem
+  can be a lemma the prose does not state; family 231 is an example. Such underdetermined prose can only make an
+  original come out *not shown*. It cannot make an original *faithful*, nor make a family discriminating, since
+  that needs the original *faithful*. Specificity and the discriminating-family count are therefore **lower
+  bounds** on what the formalizer can do when the prose determines the statement.
+- **Secondary stratum (mechanical):** `screen-auto` marks a family *numerically anchored* when every number in its
+  statement (or wrapper definition), other than 0, 1 and 2, occurs in the prose. It was computed and committed
+  before any model output existed ([`auto_screen.json`](lean_fidelity_screen/auto_screen.json)). Results are
+  also reported for the anchored families, as a secondary analysis.
 - Report: elaboration rate, then step 4a/4b/4c counts on originals and mutants.
 
-**Go/no-go:** at least 30% of the headline originals (determined, wrappers excluded; see below) come out
-*faithful*. Below that, the formalizer is the bottleneck, and a test run would only measure its failures.
+**Go/no-go:** at least 30% of the headline originals come out *faithful*. Below that, the formalizer is the
+bottleneck, and a test run would only measure its failures.
 
 ### Phase 2 preparation (2026-10-17; no model run yet)
 
-**Prose screen.** `screen-sheet` wrote two identical sheets,
-[`reader_A.md`](lean_fidelity_screen/reader_A.md) and [`reader_B.md`](lean_fidelity_screen/reader_B.md). Each one
-shows, for every family, the prose, the target statement and a link to the challenge file at the pinned commit,
-followed by two boxes (*determined*, *underdetermined*) and a note line. The rules are at the top of each sheet.
-Each reader fills in their own sheet alone, before any model output exists, and commits it. `screen-score` then
-writes `lean_fidelity_screen/screen_result.json` with agreement, Cohen's kappa and the scored families: those
-**both** readers marked *determined*. Disagreements are not resolved by discussion; they are reported and the
-family is not scored.
+**Screen: two human readers replaced (decided 2026-10-17, before any model run).** The first design had two
+independent readers mark each family *determined* or *underdetermined*, and scored only the families both marked
+determined. Two readers are not available, so that screen no longer gates anything. The headline above needs no
+judgment, and reports lower bounds instead. Using one person, or a language model, as the readers was rejected:
+one reader gives no agreement measure, and a model judge would bring in the errors this benchmark measures.
+`screen-sheet` and `screen-score` remain, with their sheets
+([`reader_A.md`](lean_fidelity_screen/reader_A.md), [`reader_B.md`](lean_fidelity_screen/reader_B.md)). If two
+readers ever fill them in, blind to model outputs, their result is an extra secondary analysis: agreement,
+Cohen's kappa, and the families both marked determined.
 
 **Formalizer input.** `formalize` builds, for each family:
 
@@ -164,20 +170,27 @@ family is not scored.
   about 900 to 8,100 tokens (F331).
 
 **Context length.** Ollama truncates prompts silently to its default context length, which is shorter than the
-longest prompts. Serve the model with `OLLAMA_CONTEXT_LENGTH=16384` (or an equivalent setting), and check after
-the run that `prompt_chars` stayed within it.
+longest prompts. `formalize --backend ollama` therefore calls Ollama's native API with `num_ctx` (default 32,768)
+on every request, and `--backend openai` (LM Studio) expects the model to be loaded with at least that context.
+Both record the prompt tokens the model actually read (`prompt_tokens`), and set `context_full` when the prompt
+filled the context. A row with `context_full: true` is treated as a failed call.
+
+**Model identity.** Ollama tags are aliases: on this machine, `qwen2.5:latest`, `qwen2.5-coder:7b`,
+`qwen3.5:latest` and three `claude-3-5-*` tags all point at the same model (digest `dae161e27b0e`, Qwen2.5 7.6B
+Q4_K_M). The meta line therefore records the model digest, and results name the model by what it is, not by its
+tag.
 
 **Wrapper statements: excluded from the headline (decided 2026-10-17, before any model run).** In 6
 families (115, 144, 174, 245, 275, 365), the conclusion is a single Prop-valued definition of the challenge file,
 such as `MainStatement`. That definition stays in the context, so the model can restate its name without
-formalizing anything, and the check would then test only the name. The sheets show these definitions so the
-readers can judge them. These families are **not part of the phase 2 headline**:
+formalizing anything, and the check would then test only the name. These families are **not part of the phase
+2 headline**:
 
-- `screen-score` lists them in `wrappers_reported_separately` and keeps them out of `headline`, which is the set
-  scored for the go/no-go. `determined` still lists every family both readers marked determined.
+- `screen-auto` (and `screen-score`, if readers fill the sheets) lists them in `wrappers_reported_separately` and
+  keeps them out of `headline`, which is the set scored for the go/no-go.
 - `formalize` marks each output row with `wrapper: true/false`. The model is still run on them, and their
   results are reported in a separate table, with no claim drawn from them.
-- Phase 2 can therefore score at most 13 families. The alternative, removing the definition from the context
+- Phase 2 therefore scores 13 families. The alternative, removing the definition from the context
   and comparing against its body, was not chosen. It would change the context and the mutants for these
   families, and it is left for phase 3 if 13 proves too few.
 

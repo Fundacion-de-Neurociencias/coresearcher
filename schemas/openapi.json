@@ -7577,6 +7577,28 @@
         "summary": "Lifecycle Ontrack Status"
       }
     },
+    "/api/lifecycle/packages/inspect": {
+      "post": {
+        "description": "Verify a research package sent as the raw request body, without importing it. Nothing is stored.",
+        "operationId": "inspect_lifecycle_package_api_lifecycle_packages_inspect_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Inspect Lifecycle Package"
+      }
+    },
     "/api/lifecycle/projects": {
       "get": {
         "operationId": "list_lifecycle_projects_api_lifecycle_projects_get",
@@ -7758,6 +7780,59 @@
           }
         ],
         "summary": "Pass Lifecycle Gate"
+      }
+    },
+    "/api/lifecycle/projects/{project_id}/package": {
+      "get": {
+        "description": "The project as a research package (ADR-DISCOVERY-065): log, artifacts, README and RO-Crate metadata.\n\nArtifacts that changed or vanished since a check recorded them are listed as omissions. Possible credentials\nstop the export unless `allow_sensitive` is set. Requires the API key because the package carries file contents.",
+        "operationId": "export_lifecycle_package_api_lifecycle_projects__project_id__package_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "schema": {
+              "title": "Project Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "allow_sensitive",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Allow Sensitive",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Export Lifecycle Package"
       }
     },
     "/api/lifecycle/projects/{project_id}/release": {

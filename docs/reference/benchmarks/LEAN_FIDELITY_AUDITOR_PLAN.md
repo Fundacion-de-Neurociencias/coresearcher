@@ -203,27 +203,36 @@ the results are unchanged (identity 19/19, mutants 0/49, recall 44/44).
 
 ### Phase 2 result (2026-10-17, Legion, Windows 11, RTX 5090 24 GB)
 
-Two formalizers, both at temperature 0 and seed 0 with prompt `fidelity-formalize-v1`. Raw replies and Lean
+Three formalizers, all at temperature 0 and seed 0 with prompt `fidelity-formalize-v1`. Raw replies and Lean
 results are in [`lean_fidelity_phase2/`](lean_fidelity_phase2/).
 
 - **Qwen2.5 7.6B Instruct**, Q4_K_M, through Ollama's native API with `num_ctx` 32,768 (digest
   `dae161e27b0e`, tag `qwen2.5:latest`).
 - **Qwen2.5-Coder 7B Instruct** through LM Studio, loaded with a context of 32,768
   (`qwen2.5.1-coder-7b-instruct`).
+- **Qwen2.5-Coder 32B Instruct**, Q4_K_M (32.8B), through Ollama's native API with `num_ctx` 12,288 (digest
+  `b92d6a0bd47e`, tag `qwen2.5-coder:32b`, 19.85 GB from the Ollama registry). It ran fully on the GPU (22 GB).
+  The smaller context fits the longest prompt with room for the reply.
 
-All 38 replies contained a parseable theorem. No prompt filled the context (largest: 7,705 tokens).
+No prompt filled the context (largest: 7,705 tokens). All 38 replies of the 7B models contained a parseable
+theorem; the 32B model gave 18 of 19, and in F238 it looped on one expression and never closed the theorem.
 
-| Headline, 13 families | Qwen2.5 7B | Qwen2.5-Coder 7B |
-|---|---|---|
-| Candidate elaborates | 6 | 6 |
-| Original *faithful* | **0** | **0** |
-| Mutants flagged (of mutants in elaborated families) | 21/21 | 18/18 |
-| Discriminating families | 0 | 0 |
-| Numerically anchored (12): faithful | 0 | 0 |
+| Headline, 13 families | Qwen2.5 7B | Qwen2.5-Coder 7B | Qwen2.5-Coder 32B |
+|---|---|---|---|
+| Candidate elaborates | 6 | 6 | 7 |
+| Original *faithful* | **0** | **0** | **1** (F103) |
+| Mutants flagged (of mutants in elaborated families) | 21/21 | 18/18 | 22/22 |
+| Discriminating families | 0 | 0 | 1 |
+| Numerically anchored (12): faithful | 0 | 0 | 1 |
 
-**Go/no-go: no-go for both models.** 0 of 13 headline originals are faithful, against a threshold of 30%.
-As planned, the formalizer is the bottleneck. The prover is not: phase 1 showed it proves the equivalences
-that a correct formalizer would produce.
+**Go/no-go: no-go for all three models.** At most 1 of 13 headline originals is faithful, against a threshold
+of 30%. As planned, the formalizer is the bottleneck. The prover is not: phase 1 showed it proves the
+equivalences that a correct formalizer would produce.
+
+The 32B model's one faithful family is the shortest statement in the set (`L = RL ∧ RL = BPL`). Its closest
+miss is F273: the candidate matches the original except that it drops the hypothesis `1 ≤ n` and writes
+`η ∈ Set.Icc 0 1` as two inequalities, so it states a different theorem and is correctly flagged. In F190 it
+drops `ε` and changes the bound.
 
 Why the candidates fail (headline families):
 
@@ -238,17 +247,24 @@ Why the candidates fail (headline families):
 Every mutant was flagged, but this says nothing yet: a candidate that is not equivalent to the original is
 not equivalent to its mutants either.
 
-**Wrappers, reported separately (no claim):** Qwen2.5 7B is *faithful* on 4 of 6 and Qwen2.5-Coder 7B on 6 of
-6. These are mostly the artifact that excluding them was meant to avoid: in 115, 275 and 365 both models restate
+**Wrappers, reported separately (no claim):** Qwen2.5 7B is *faithful* on 4 of 6, and Qwen2.5-Coder 7B and 32B
+on 6 of 6. These are mostly the artifact that excluding them was meant to avoid: in 115, 275 and 365 both models restate
 the definition's name (`theorem main_nonuniqueness : MainStatement`), and in 144 and 174 they copy the
 definition's body from the context.
 
-**What this means.** With 7B local models, the pipeline works end to end and measures what it should, but
-there is no fidelity signal to evaluate. Moving to phase 3 with these models would only measure their
-failures. Options, to be decided before more runs: a stronger general model that fits in 24 GB (for example a
-32B coder model at 4-bit), a model trained for Lean autoformalization, or prompt iterations on this development
-set, which phase 2 allows. Any new model or prompt is run on the same 19 families and reported next to these
-results.
+**What this means.** The pipeline works end to end and measures what it should, but with general local models
+up to 32B there is no fidelity signal to evaluate: going from 7B to 32B moved the headline from 0 to 1 of 13.
+Moving to phase 3 with these models would only measure their failures. Remaining options, to be decided before
+more runs:
+
+- a model trained for Lean 4 autoformalization;
+- prompt iterations on this development set, which phase 2 allows; for example, feeding back Lean's
+  elaboration errors for one or two repair rounds, since about half of the failures are names or syntax that do
+  not elaborate;
+- a different auditor output: report *which direction* fails (candidate implies original, or the reverse), so
+  that a near miss such as F273 shows up as "stronger" or "weaker" rather than only "not shown".
+
+Any new model or prompt is run on the same 19 families and reported next to these results.
 
 ### Phase 3. Pre-registration and test run
 
@@ -291,3 +307,28 @@ One script, `scripts/benchmarks/openai_math_lean_fidelity.py`, with subcommands 
 `env-check`, `controls` (phase 1), `formalize` (raw model outputs, stored as in the formalizer benchmark),
 `compare` (Lean, resumable), and `report` (offline, deterministic). The context building, rewrite rules and
 Lean file generation are covered by unit tests that do not need Lean, like the pilot's mutation tests.
+
+## 7. Place in CoResearcher
+
+This auditor is meant to replace a gate that already exists, not to stand alone. These are the modules it
+touches (levels from [MODULE_MATURITY.md](../MODULE_MATURITY.md)):
+
+| Module | Level | Relation |
+|---|---|---|
+| `semantic_bijectivity_auditor` (ADR-DISCOVERY-048) | Tested | The gate this auditor would replace. [Claim 19](../CLAIMS_REGISTER.md) is NOT SUPPORTED after the pilot. |
+| `frontier_math_flywheel` (ADR-DISCOVERY-055) | Integrated, API | Uses the bijectivity gate to mark a task `ADMISSIBLE_SOUND` ("bijectively aligned"). That verdict currently rests on an unsupported claim. |
+| `result_family_orchestrator` (ADR-DISCOVERY-043) | Tested | Runs the same bijectivity gate on each node of a result family. |
+| `lean_formalization_engine` (ADR-DISCOVERY-047) | Tested | Audits Lean source; the flywheel and the orchestrator call it before the bijectivity gate. |
+| `formalizer` (ADR-DISCOVERY-061) | Integrated, API | The same OpenAI-compatible client pattern; this auditor adds a native Ollama client with a per-call context and prompt-token check. |
+| `formalization_gate` (ADR-DISCOVERY-064) | Integrated, API | Self-consistency over N samples, compared exactly by z3. The phase 1 equivalence check is the Lean counterpart: two Lean candidates agree when Lean proves them equivalent. |
+| `formal_lean` (ADR-DISCOVERY-060) | Integrated, API | Exports z3-checked consequences to Lean; it shares the Lean toolchain set up in phase 0. |
+| `research_lifecycle` (ADR-DISCOVERY-063) | Integrated, API | Stage gates. A formal statement entering the PROTOCOL stage could be required to pass this fidelity check. |
+
+Integration rules, in order:
+
+1. Nothing is wired in until phase 3 supports a claim. A gate that cannot discriminate (phase 2: 0 of 13
+   faithful with 7B formalizers) must not label statements as aligned.
+2. Until then, the existing `ADMISSIBLE_SOUND` verdicts from the bijectivity gate should be described as
+   unsupported wherever they surface (API responses, reports). That change belongs to its own task.
+3. When the auditor is wired in, it reports three outcomes, not two: *faithful*, *flagged* (not shown
+   equivalent) and *abstain* (no candidate elaborated). An abstention is never reported as alignment.

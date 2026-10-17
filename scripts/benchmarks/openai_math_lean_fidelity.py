@@ -2,10 +2,15 @@
 
 Plan: docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md
 
-Phases 0 and 1 are implemented so far:
+Phases 0 and 1, and the preparation of phase 2, are implemented so far:
 
-    python scripts/benchmarks/openai_math_lean_fidelity.py env-check --math-root /path/to/openai-math
-    python scripts/benchmarks/openai_math_lean_fidelity.py controls  --math-root /path/to/openai-math
+    python scripts/benchmarks/openai_math_lean_fidelity.py env-check    --math-root /path/to/openai-math
+    python scripts/benchmarks/openai_math_lean_fidelity.py controls     --math-root /path/to/openai-math
+    python scripts/benchmarks/openai_math_lean_fidelity.py screen-sheet --math-root /path/to/openai-math
+    python scripts/benchmarks/openai_math_lean_fidelity.py screen-score
+    python scripts/benchmarks/openai_math_lean_fidelity.py formalize    --math-root /path/to/openai-math --dry-run
+    python scripts/benchmarks/openai_math_lean_fidelity.py formalize    --math-root /path/to/openai-math
+        --model <tag> --base-url <OpenAI-compatible endpoint> [--resume]
 
 `env-check` (phase 0): for each of the 19 pilot pairs it checks that the statement extraction is sound on the
 real challenge file (balanced, found exactly once, same theorem name) and that the challenge elaborates with
@@ -16,11 +21,18 @@ script, that the statement is equivalent to itself (must succeed), to each mutan
 meaning-preserving rewrites (prover recall). Generated files go to private/lean_fidelity/ (git-ignored); the
 results go to docs/reference/benchmarks/lean_fidelity_phase1_controls.json.
 
-Both need Lean and the Mathlib cache (`lake exe cache get` in openai-math/lean), but not Comparator, so they
-also run on Windows.
+`screen-sheet` writes one Markdown sheet per reader to docs/reference/benchmarks/lean_fidelity_screen/; each
+reader ticks whether the prose determines the statement. `screen-score` combines the sheets (agreement, Cohen's
+kappa, the families both readers marked determined). `formalize` asks a model for a Lean statement from the prose
+and the challenge file without its target theorem, and stores the raw replies as JSONL; `--dry-run` only writes
+the prompts. No Lean is needed for these three.
+
+env-check and controls need Lean and the Mathlib cache (`lake exe cache get` in openai-math/lean), but not
+Comparator, so they also run on Windows.
 """
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import platform
@@ -32,6 +44,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(ROOT))
 DATASET = ROOT / "docs" / "reference" / "benchmarks" / "openai_math_pilot_dataset.json"
 ENV_CHECK_OUT = ROOT / "docs" / "reference" / "benchmarks" / "lean_fidelity_env_check.json"
 CONTROLS_OUT = ROOT / "docs" / "reference" / "benchmarks" / "lean_fidelity_phase1_controls.json"
@@ -470,17 +483,350 @@ def controls(math_root: Path, out_dir: Path, timeout: int, jobs: int) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- phase 2: shared inputs
+
+
+def load_targets(math_root: Path) -> list[dict]:
+    """For each pilot pair: prose, challenge file, Comparator config and the target theorem's statement."""
+    targets = []
+    for pair in json.loads(DATASET.read_text(encoding="utf-8"))["pairs"]:
+        path = math_root / pair["challenge"]
+        lean = path.read_text(encoding="utf-8")
+        config_path = path.with_suffix(".json")
+        config = config_path.read_text(encoding="utf-8") if config_path.exists() else None
+        parsed = pilot.theorem_statement(lean, pilot.challenge_target(config))
+        if not parsed:
+            raise SystemExit(f"F{pair['family']}: target theorem not found in {pair['challenge']}")
+        name, stmt, start, end = parsed
+        targets.append(
+            {
+                "family": pair["family"],
+                "title": pair["title"],
+                "scope": pair["scope"],
+                "challenge": pair["challenge"],
+                "theorem": name,
+                "statement": stmt.strip(),
+                "lean": lean,
+                "start": start,
+                "end": end,
+            }
+        )
+    return targets
+
+
+# ---------------------------------------------------------------- phase 2: prose screen
+
+SCREEN_DIR = ROOT / "docs" / "reference" / "benchmarks" / "lean_fidelity_screen"
+READERS = ("A", "B")
+VERDICTS = ("determined", "underdetermined")
+SCREEN_RULES = """\
+For each family, read the prose and the formal statement, then tick exactly one box.
+
+- **determined**: a competent mathematician who reads only the prose, and is told the theorem's name and given
+  the definitions in the challenge file, would write a statement with the same mathematical content: the same
+  objects, quantifiers, hypotheses, constants and bounds, up to notation. If the prose describes several
+  results, it is determined when one of them is this statement and the name is enough to pick it.
+- **underdetermined**: the statement contains something the prose does not fix. Examples: it is a lemma the
+  prose does not state, it has a constant, bound or hypothesis the prose does not give, or it combines results
+  of which the prose mentions only some.
+
+When unsure, choose underdetermined. Decide alone: do not discuss with the other reader and do not look at any
+model output. Add a short note when the choice is not obvious."""
+
+
+def wrapper_definition(target: dict) -> str | None:
+    """The definition when the conclusion is one Prop-valued constant of the challenge file applied to variables.
+
+    Such a statement carries its content in that definition, which stays in the formalizer's context, so a
+    model can restate the name without formalizing anything.
+    """
+    stmt = target["statement"]
+    concl = stmt[pilot._top_level_colon(stmt) + 1 :].strip()
+    m = re.fullmatch(r"([\w.']+)(?:\s+[\w.']+)*", concl)
+    if not m:
+        return None
+    short = re.escape(m.group(1).rsplit(".", 1)[-1])
+    lean = target["lean"]
+    d = re.search(rf"^(?:noncomputable\s+)?(?:def|abbrev)\s+(?:[\w.]+\.)?{short}\b[^\n]*", lean, re.M)
+    if not d:
+        return None
+    text = lean[d.start() : declaration_end(lean, d.end())].strip()
+    return text if re.search(r":\s*Prop\b", text[: text.find(":=") if ":=" in text else len(text)]) else None
+
+
+def screen_sheet(targets: list[dict], reader: str, commit: str) -> str:
+    """The Markdown sheet one reader fills in."""
+    lines = [
+        f"# Prose screen for the Lean fidelity auditor: reader {reader}",
+        "",
+        "Plan: [LEAN_FIDELITY_AUDITOR_PLAN.md](../LEAN_FIDELITY_AUDITOR_PLAN.md), phase 2. Reader name: ",
+        "",
+        f"Source: [openai/math](https://github.com/openai/math) at commit `{commit[:12]}`, Apache-2.0.",
+        "",
+        "## Rules",
+        "",
+        SCREEN_RULES,
+        "",
+    ]
+    for t in targets:
+        url = f"https://github.com/openai/math/blob/{commit}/{t['challenge']}"
+        lines += [
+            f"## F{t['family']}: {t['title']}",
+            "",
+            f"Challenge file: [{t['challenge']}]({url}). Theorem: `{t['theorem']}`.",
+            "",
+            "**Prose**",
+            "",
+            *[f"> {line}" if line else ">" for line in t["scope"].splitlines()],
+            "",
+            "**Formal statement**",
+            "",
+            "```lean",
+            t["statement"],
+            "```",
+            "",
+        ]
+        wrapper = wrapper_definition(t)
+        if wrapper:
+            lines += [
+                "The statement is a named proposition defined in the challenge file. Judge its definition:",
+                "",
+                "```lean",
+                wrapper,
+                "```",
+                "",
+            ]
+        lines += [
+            *[f"- [ ] {v}" for v in VERDICTS],
+            "",
+            "Note: ",
+            "",
+        ]
+    return "\n".join(lines)
+
+
+def parse_sheet(text: str) -> dict[str, dict]:
+    """Verdict and note per family from a filled sheet; verdict None when not exactly one box is ticked."""
+    out = {}
+    for m in re.finditer(r"^## F(\d+):.*?(?=^## F\d+:|\Z)", text, re.M | re.S):
+        section = m.group(0)
+        ticked = [v for v in VERDICTS if re.search(rf"^- \[[xX]\] {v}\s*$", section, re.M)]
+        note = re.search(r"^Note:[ \t]*(.*)$", section, re.M)
+        out[m.group(1)] = {
+            "verdict": ticked[0] if len(ticked) == 1 else None,
+            "note": note.group(1).strip() if note else "",
+        }
+    return out
+
+
+def cohen_kappa(a: list[str], b: list[str]) -> float | None:
+    n = len(a)
+    if n == 0:
+        return None
+    observed = sum(x == y for x, y in zip(a, b)) / n
+    expected = sum((a.count(v) / n) * (b.count(v) / n) for v in VERDICTS)
+    return None if expected == 1 else round((observed - expected) / (1 - expected), 3)
+
+
+def screen_score(sheets: dict[str, str]) -> dict:
+    """Combines the readers' sheets. A family is scored only when every reader marked it determined."""
+    parsed = {reader: parse_sheet(text) for reader, text in sheets.items()}
+    families = sorted(set().union(*(p.keys() for p in parsed.values())))
+    missing = [f"{r}:F{f}" for r, p in parsed.items() for f in families if not p.get(f, {}).get("verdict")]
+    if missing:
+        return {"complete": False, "missing": missing}
+    rows = [{"family": f, **{r: parsed[r][f] for r in parsed}} for f in families]
+    verdicts = {r: [parsed[r][f]["verdict"] for f in families] for r in parsed}
+    a, b = (verdicts[r] for r in READERS)
+    return {
+        "complete": True,
+        "rule": "scored only when both readers marked the family determined",
+        "agreement": round(sum(x == y for x, y in zip(a, b)) / len(families), 3),
+        "cohen_kappa": cohen_kappa(a, b),
+        "determined": [f for f, x, y in zip(families, a, b) if x == y == "determined"],
+        "rows": rows,
+    }
+
+
+def cmd_screen_sheet(math_root: Path, force: bool) -> int:
+    commit = oracle.check_commit(math_root)
+    targets = load_targets(math_root)
+    SCREEN_DIR.mkdir(parents=True, exist_ok=True)
+    for reader in READERS:
+        path = SCREEN_DIR / f"reader_{reader}.md"
+        if path.exists() and not force and any(v["verdict"] for v in parse_sheet(path.read_text("utf-8")).values()):
+            print(f"{path} already has verdicts; not overwritten (use --force).")
+            continue
+        path.write_text(screen_sheet(targets, reader, commit), encoding="utf-8")
+        print(f"Wrote {path}")
+    return 0
+
+
+def cmd_screen_score() -> int:
+    sheets = {r: (SCREEN_DIR / f"reader_{r}.md").read_text(encoding="utf-8") for r in READERS}
+    result = screen_score(sheets)
+    (SCREEN_DIR / "screen_result.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({k: v for k, v in result.items() if k != "rows"}, indent=2))
+    return 0 if result["complete"] else 1
+
+
+# ---------------------------------------------------------------- phase 2: formalize
+
+PROMPT_VERSION = "fidelity-formalize-v1"
+MARKER = "-- [statement to formalize]"
+SYSTEM_PROMPT = (
+    "You are an expert in Lean 4 and Mathlib. You turn a mathematical claim written in prose into a Lean 4 "
+    "theorem statement. You never write proofs."
+)
+USER_PROMPT = """\
+Below is a Lean 4 file and a claim in prose. Write one Lean 4 theorem named `{name}` that states exactly the \
+result described in the prose, using the definitions in the file where they apply. It will be inserted at the \
+line `{marker}`, so it can use everything defined before that line.
+
+Rules:
+- State the claim; do not prove it. End the theorem with `:= by sorry`.
+- Do not add hypotheses, constants or conclusions that the prose does not give.
+- Reply with a single ```lean code block that contains only that theorem.
+
+Prose:
+{prose}
+
+File:
+```lean
+{context}
+```"""
+
+
+def prompt_sha256() -> str:
+    return hashlib.sha256((PROMPT_VERSION + SYSTEM_PROMPT + USER_PROMPT + MARKER).encode("utf-8")).hexdigest()
+
+
+def declaration_end(lean: str, end: int) -> int:
+    """End of the declaration whose statement ends at end: the next line that starts at column 0."""
+    m = re.compile(r"^\S", re.M).search(lean, lean.find("\n", end) + 1 if "\n" in lean[end:] else len(lean))
+    return m.start() if m else len(lean)
+
+
+def build_context(target: dict) -> str:
+    """The challenge file without the target theorem, its docstring and its proof; a marker takes their place."""
+    lean = target["lean"]
+    start = _insertion_point(lean, target["start"])
+    stop = declaration_end(lean, target["end"])
+    return lean[:start] + MARKER + "\n\n" + lean[stop:]
+
+
+def build_messages(target: dict) -> list[dict[str, str]]:
+    user = USER_PROMPT.format(
+        name=target["theorem"], marker=MARKER, prose=target["scope"].strip(), context=build_context(target)
+    )
+    return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
+
+
+def parse_candidate(output: str, name: str) -> tuple[str, str | None]:
+    """(status, statement) from a model reply: parsed, wrong_name (another theorem was stated) or no_theorem."""
+    block = re.search(r"```(?:lean4?|)\s*\n(.*?)```", output, re.S)
+    code = block.group(1) if block else output
+    parsed = pilot.theorem_statement(code, name)
+    if parsed:
+        return "parsed", parsed[1].strip()
+    other = pilot.theorem_statement(code)
+    if other:
+        return "wrong_name", other[1].strip()
+    return "no_theorem", None
+
+
+def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir: Path | None) -> int:
+    commit = oracle.check_commit(math_root)
+    targets = load_targets(math_root)
+    if dry_run_dir is not None:
+        dry_run_dir.mkdir(parents=True, exist_ok=True)
+        for t in targets:
+            messages = build_messages(t)
+            text = "\n\n".join(f"## {m['role']}\n\n{m['content']}" for m in messages)
+            (dry_run_dir / f"F{t['family']}_prompt.md").write_text(text, encoding="utf-8")
+            print(f"F{t['family']}: {len(text)} chars, about {len(text) // 3} tokens")
+        print(f"Prompts in {dry_run_dir}; no model was called. Prompt {PROMPT_VERSION} {prompt_sha256()[:12]}")
+        return 0
+
+    kept = {}
+    if resume and out.exists():
+        previous = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines() if line]
+        kept = {x["family"]: x for x in previous if x.get("kind") != "meta" and not x.get("transport_error")}
+    meta = {
+        "kind": "meta",
+        "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 2)",
+        "model": client.model,
+        "base_url_host": client.base_url.split("//")[-1].split("/")[0],
+        "prompt_version": PROMPT_VERSION,
+        "prompt_sha256": prompt_sha256(),
+        "openai_math_commit": commit,
+        "temperature": 0.0,
+        "seed": 0,
+        "started": time.strftime("%Y-%m-%dT%H:%M:%S"),
+    }
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", encoding="utf-8") as fh:
+        fh.write(json.dumps(meta) + "\n")
+        for t in targets:
+            if t["family"] in kept:
+                fh.write(json.dumps(kept[t["family"]], ensure_ascii=False) + "\n")
+                continue
+            messages = build_messages(t)
+            t0 = time.time()
+            try:
+                output, error = client.complete(messages, temperature=0.0, seed=0), ""
+            except Exception as exc:  # A transport failure is recorded, not retried silently; --resume redoes it.
+                output, error = "", f"{type(exc).__name__}: {exc}"
+            status, candidate = parse_candidate(output, t["theorem"]) if output else ("no_output", None)
+            row = {
+                "family": t["family"],
+                "theorem": t["theorem"],
+                "prompt_chars": sum(len(m["content"]) for m in messages),
+                "output": output,
+                "transport_error": error,
+                "status": status,
+                "candidate": candidate,
+                "seconds": round(time.time() - t0, 2),
+            }
+            fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+            fh.flush()
+            print(f"F{t['family']}: {status}{' ERROR ' + error if error else ''}", flush=True)
+    print(f"Wrote {out}")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("step", choices=["env-check", "controls"])
-    parser.add_argument("--math-root", required=True, type=Path, help="Path to an openai/math checkout")
-    parser.add_argument("--timeout", type=int, default=1800, help="Seconds per Lean file")
+    parser.add_argument("step", choices=["env-check", "controls", "screen-sheet", "screen-score", "formalize"])
+    parser.add_argument("--math-root", type=Path, help="Path to an openai/math checkout (all steps but screen-score)")
+    parser.add_argument("--timeout", type=int, default=1800, help="Seconds per Lean file or model call")
     parser.add_argument("--out-dir", type=Path, default=ROOT / "private" / "lean_fidelity", help="Generated files")
     parser.add_argument("--jobs", type=int, default=4, help="Lean processes in parallel (controls)")
+    parser.add_argument("--force", action="store_true", help="Overwrite screen sheets that already have verdicts")
+    parser.add_argument("--model", help="Model name at the endpoint (formalize; default FORMALIZER_MODEL)")
+    parser.add_argument("--base-url", help="OpenAI-compatible endpoint (formalize; default FORMALIZER_BASE_URL)")
+    parser.add_argument("--out", type=Path, help="Raw outputs, JSONL (formalize)")
+    parser.add_argument("--resume", action="store_true", help="Keep finished families from --out (formalize)")
+    parser.add_argument("--dry-run", action="store_true", help="Write the prompts only; call no model (formalize)")
     args = parser.parse_args()
+    if args.step == "screen-score":
+        return cmd_screen_score()
+    if args.math_root is None:
+        parser.error("--math-root is required for this step")
+    math_root = args.math_root.resolve()
     if args.step == "env-check":
-        return env_check(args.math_root.resolve(), args.timeout)
-    return controls(args.math_root.resolve(), args.out_dir.resolve(), args.timeout, args.jobs)
+        return env_check(math_root, args.timeout)
+    if args.step == "controls":
+        return controls(math_root, args.out_dir.resolve(), args.timeout, args.jobs)
+    if args.step == "screen-sheet":
+        return cmd_screen_sheet(math_root, args.force)
+    if args.dry_run:
+        return cmd_formalize(math_root, Path(), None, False, args.out_dir.resolve() / "prompts")
+    from python.discovery.formalizer import ChatClient
+
+    client = ChatClient(base_url=args.base_url, model=args.model, timeout=args.timeout)
+    out = args.out or args.out_dir / f"formalize_{re.sub(r'[^A-Za-z0-9._-]', '_', client.model)}.jsonl"
+    return cmd_formalize(math_root, out.resolve(), client, args.resume, None)
 
 
 if __name__ == "__main__":

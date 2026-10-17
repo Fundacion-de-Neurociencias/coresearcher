@@ -106,3 +106,108 @@ def test_classify_and_trust():
     assert fid.trusted(outcomes, outside, "s").startswith("errors outside")
     outcomes, outside = fid.classify("", ranges)
     assert fid.trusted(outcomes, outside, "s") == "the sentinel check did not fail as expected"
+
+
+# ---------------------------------------------------------------- phase 2
+
+TARGET_LEAN = (
+    "import Mathlib\n\nnamespace X\n\ndef f (n : ℕ) : ℕ := n + 1\n\n"
+    "/-- The answer. -/\ntheorem target (n : ℕ) : f n > n := by\n  sorry\n\nend X\n"
+)
+
+
+def _target():
+    name, stmt, start, end = fid.pilot.theorem_statement(TARGET_LEAN, "target")
+    return {
+        "family": "001",
+        "theorem": name,
+        "statement": stmt,
+        "lean": TARGET_LEAN,
+        "start": start,
+        "end": end,
+        "scope": "For every natural number n, f n exceeds n.",
+        "title": "T",
+        "challenge": "lean/X.lean",
+    }
+
+
+def test_build_context_removes_target_docstring_and_proof():
+    context = fid.build_context(_target())
+    assert "theorem target" not in context and "The answer" not in context and "sorry" not in context
+    assert "def f (n : ℕ)" in context and context.rstrip().endswith("end X")
+    assert fid.MARKER in context
+
+
+def test_prompt_gives_name_prose_and_context_but_not_the_statement():
+    user = fid.build_messages(_target())[1]["content"]
+    assert "`target`" in user and "f n exceeds n" in user and "def f" in user
+    assert "f n > n" not in user
+
+
+def test_parse_candidate():
+    reply = "Here it is:\n```lean\ntheorem target (n : ℕ) : n < f n := by sorry\n```\n"
+    assert fid.parse_candidate(reply, "target") == ("parsed", "theorem target (n : ℕ) : n < f n")
+    assert fid.parse_candidate("```lean\ntheorem other : True := by sorry\n```", "target")[0] == "wrong_name"
+    assert fid.parse_candidate("I cannot do this.", "target") == ("no_theorem", None)
+
+
+def test_screen_sheet_round_trip_and_score():
+    targets = [_target(), {**_target(), "family": "002"}]
+    sheet = fid.screen_sheet(targets, "A", "1581d4cbdd69a0faf34b2089614fe2a814316a6a")
+    assert fid.parse_sheet(sheet) == {"001": {"verdict": None, "note": ""}, "002": {"verdict": None, "note": ""}}
+    a = sheet.replace("- [ ] determined", "- [x] determined")
+    b = a.replace("## F002: T", "## F002: T", 1)
+    b = b[: b.index("## F002")] + b[b.index("## F002") :].replace(
+        "- [x] determined\n- [ ] underdetermined", "- [ ] determined\n- [X] underdetermined"
+    )
+    b = b.replace("Note: \n", "Note: constant not in the prose\n", 1)
+    assert fid.parse_sheet(b)["002"]["verdict"] == "underdetermined"
+    result = fid.screen_score({"A": a, "B": b})
+    assert result["complete"] and result["determined"] == ["001"] and result["agreement"] == 0.5
+    assert fid.screen_score({"A": sheet, "B": b}) == {"complete": False, "missing": ["A:F001", "A:F002"]}
+
+
+def test_cohen_kappa():
+    assert fid.cohen_kappa(["determined", "underdetermined"] * 2, ["determined", "underdetermined"] * 2) == 1.0
+    assert fid.cohen_kappa(["determined"] * 4, ["determined"] * 4) is None
+
+
+class FakeClient:
+    model = "fake:1b"
+    base_url = "http://localhost:11434/v1"
+
+    def __init__(self, reply):
+        self.reply, self.calls = reply, []
+
+    def complete(self, messages, temperature=0.0, seed=0):
+        self.calls.append((temperature, seed))
+        if isinstance(self.reply, Exception):
+            raise self.reply
+        return self.reply
+
+
+def test_formalize_writes_raw_outputs_and_resumes(tmp_path, monkeypatch):
+    import json
+
+    monkeypatch.setattr(fid.oracle, "check_commit", lambda root: "c" * 40)
+    monkeypatch.setattr(fid, "load_targets", lambda root: [_target()])
+    out = tmp_path / "f.jsonl"
+    fid.cmd_formalize(tmp_path, out, FakeClient(OSError("down")), False, None)
+    rows = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()]
+    assert rows[0]["kind"] == "meta" and rows[0]["prompt_sha256"] == fid.prompt_sha256()
+    assert rows[1]["status"] == "no_output" and rows[1]["transport_error"].startswith("OSError")
+    client = FakeClient("```lean\ntheorem target (n : ℕ) : n < f n := by sorry\n```")
+    fid.cmd_formalize(tmp_path, out, client, True, None)
+    rows = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()]
+    assert client.calls == [(0.0, 0)] and rows[1]["status"] == "parsed"
+    assert rows[1]["candidate"] == "theorem target (n : ℕ) : n < f n"
+
+
+def test_wrapper_definition_detects_named_propositions():
+    lean = "def MainStatement : Prop :=\n  ∀ n : ℕ, n = n\n\ntheorem main : MainStatement := by\n  sorry\n"
+    name, stmt, start, end = fid.pilot.theorem_statement(lean, "main")
+    target = {"statement": stmt, "lean": lean, "start": start, "end": end}
+    assert fid.wrapper_definition(target) == "def MainStatement : Prop :=\n  ∀ n : ℕ, n = n"
+    assert fid.wrapper_definition(_target()) is None
+    sheet = fid.screen_sheet([{**_target(), **target, "theorem": name}], "A", "c" * 40)
+    assert "Judge its definition" in sheet

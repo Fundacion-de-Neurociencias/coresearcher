@@ -223,3 +223,11 @@ def test_screen_score_keeps_wrappers_out_of_the_headline():
     assert result["determined"] == ["001", "002"]
     assert result["headline"] == ["001"] and result["wrappers_reported_separately"] == ["002"]
     assert [r["wrapper"] for r in result["rows"]] == [False, True]
+
+
+def test_auto_screen_marks_wrappers_and_numeric_anchoring():
+    anchored = {**_target(), "statement": "theorem t (n : ℕ) : n ^ 2 < 7 * n + 1", "scope": "below 7 n"}
+    loose = {**anchored, "family": "002", "scope": "below some multiple of n"}
+    result = fid.auto_screen([anchored, loose])
+    assert result["headline"] == ["001", "002"] and result["headline_anchored"] == ["001"]
+    assert result["rows"][1]["missing"] == ["7"]

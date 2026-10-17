@@ -1,0 +1,168 @@
+{
+  "openai_math_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "rule": "headline = every family that is not a wrapper; anchored is a secondary stratum",
+  "structural_numbers": [
+    "0",
+    "1",
+    "2"
+  ],
+  "headline": [
+    "025",
+    "103",
+    "186",
+    "190",
+    "231",
+    "238",
+    "243",
+    "246",
+    "273",
+    "277",
+    "327",
+    "331",
+    "354"
+  ],
+  "headline_anchored": [
+    "025",
+    "103",
+    "186",
+    "190",
+    "231",
+    "243",
+    "246",
+    "273",
+    "277",
+    "327",
+    "331",
+    "354"
+  ],
+  "wrappers_reported_separately": [
+    "115",
+    "144",
+    "174",
+    "245",
+    "275",
+    "365"
+  ],
+  "rows": [
+    {
+      "family": "025",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "103",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "115",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "144",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "174",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "186",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "190",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "231",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "238",
+      "wrapper": false,
+      "anchored": false,
+      "missing": [
+        "16",
+        "3",
+        "32",
+        "4",
+        "8"
+      ]
+    },
+    {
+      "family": "243",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "245",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "246",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "273",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "275",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "277",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "327",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "331",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "354",
+      "wrapper": false,
+      "anchored": true,
+      "missing": []
+    },
+    {
+      "family": "365",
+      "wrapper": true,
+      "anchored": true,
+      "missing": []
+    }
+  ]
+}

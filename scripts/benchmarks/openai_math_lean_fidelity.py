@@ -812,8 +812,15 @@ class OllamaClient:
     tokens the model read (`last_prompt_tokens`); `formalize` flags a reply whose prompt filled the context.
     """
 
-    def __init__(self, model: str, base_url: str | None = None, num_ctx: int = 32768, timeout: float = 1800.0):
-        self.model, self.num_ctx, self.timeout = model, num_ctx, timeout
+    def __init__(
+        self,
+        model: str,
+        base_url: str | None = None,
+        num_ctx: int = 32768,
+        timeout: float = 1800.0,
+        num_predict: int | None = None,
+    ):
+        self.model, self.num_ctx, self.timeout, self.num_predict = model, num_ctx, timeout, num_predict
         self.base_url = (base_url or "http://localhost:11434").rstrip("/")
         self.last_prompt_tokens = None
 
@@ -827,6 +834,9 @@ class OllamaClient:
         import httpx
 
         options = {"temperature": temperature, "seed": seed, "num_ctx": self.num_ctx}
+        if self.num_predict:
+            # A cap on the reply, so a model that loops on one expression cannot stall the server.
+            options["num_predict"] = self.num_predict
         body = {"model": self.model, "messages": messages, "stream": False, "options": options}
         response = httpx.post(f"{self.base_url}/api/chat", json=body, timeout=self.timeout)
         response.raise_for_status()
@@ -885,7 +895,9 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
     }
     if isinstance(client, OllamaClient):
         # Ollama tags are aliases: several names can point at one model, so the digest identifies it.
-        meta.update(client="ollama-native", model_digest=client.digest(), num_ctx=client.num_ctx)
+        meta.update(
+            client="ollama-native", model_digest=client.digest(), num_ctx=client.num_ctx, num_predict=client.num_predict
+        )
     elif isinstance(client, OpenAICompatClient):
         meta.update(client="openai-compatible", num_ctx=client.num_ctx)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -919,6 +931,159 @@ def cmd_formalize(math_root: Path, out: Path, client, resume: bool, dry_run_dir:
             fh.flush()
             print(f"F{t['family']}: {status}{' ERROR ' + error if error else ''}", flush=True)
     print(f"Wrote {out}")
+    return 0
+
+
+# ---------------------------------------------------------------- phase 2: repair
+
+REPAIR_VERSION = "fidelity-repair-v1"
+REPAIR_PROMPT = """\
+Lean 4 rejected your theorem when it was inserted at the line `{marker}`. Its errors (line numbers count from \
+the first line of your theorem):
+
+{errors}
+
+Rewrite the theorem so that it elaborates in that file and still states exactly the result described in the \
+prose. Use only names that exist in the file or in Mathlib. Reply with a single ```lean code block that contains \
+only the theorem, ending with `:= by sorry`."""
+NO_THEOREM_PROMPT = """\
+Your reply did not contain a complete theorem named `{name}` ending with `:= by sorry`. Reply with a single \
+```lean code block that contains only that theorem."""
+
+
+def repair_sha256() -> str:
+    return hashlib.sha256((REPAIR_VERSION + REPAIR_PROMPT + NO_THEOREM_PROMPT).encode("utf-8")).hexdigest()
+
+
+def elaboration_file(target: dict, candidate: str) -> tuple[str, int, int]:
+    """The formalizer's own context with the candidate at the marker: (text, first line, line after it).
+
+    The target theorem is not in this file, so the errors fed back say nothing about the reference statement.
+    """
+    context = build_context(target)
+    block = "set_option autoImplicit false in\n" + candidate.strip() + " := by sorry\n"
+    first = context[: context.index(MARKER)].count("\n") + 2  # the line after `set_option`
+    return context.replace(MARKER, block, 1), first, first + candidate.strip().count("\n") + 1
+
+
+def candidate_errors(code: int | None, output: str, first: int) -> list[str] | None:
+    """Errors of one elaboration run, with line numbers relative to the candidate; None when it elaborated."""
+    if code is None:
+        return ["Lean timed out while elaborating the theorem."]
+    # Lake's "repository has local changes" warnings (the dependency patches) carry local paths; drop them.
+    output = re.sub(r"(?m)^warning: \S+: repository .*\n?", "", output)
+    blocks = re.split(r"(?m)^(?=\S[^\n]*?:\d+:\d+: )", output)
+    errors = []
+    for b in blocks:
+        m = re.match(r"[^\n]*?:(\d+):(\d+): error:?\s*", b)
+        if m:
+            message = f"line {int(m.group(1)) - first + 1}: {b[m.end():].strip()}"[:600]
+            if message not in errors:
+                errors.append(message)
+    if not errors and code != 0:
+        errors.append("Lean failed without an error message.")
+    return errors or None
+
+
+def elaborate_candidates(items: list[tuple[dict, str]], work: Path, lean_root: Path, timeout: int, jobs: int):
+    """Elaborates each (target, candidate); returns {family: errors or None}."""
+    work.mkdir(parents=True, exist_ok=True)
+
+    def one(item):
+        target, candidate = item
+        text, first, _ = elaboration_file(target, candidate)
+        path = (work / f"F{target['family']}.lean").resolve()
+        path.write_text(text, encoding="utf-8")
+        code, output, _ = _run(["lake", "env", "lean", str(path)], lean_root, timeout)
+        return target["family"], candidate_errors(code, output, first)
+
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        return dict(pool.map(one, items))
+
+
+def repair(math_root: Path, responses: Path, out: Path, client, rounds: int, timeout: int, jobs: int, elaborate=None):
+    """Feeds Lean's elaboration errors (or a missing theorem) back to the formalizer for up to `rounds` rounds.
+
+    Writes a formalize-style JSONL whose candidate is the last one, with every round kept in `history`.
+    """
+    lean_root = oracle.lean_dir(math_root)
+    elaborate = elaborate or (
+        lambda items, rnd: elaborate_candidates(items, out.parent / f"{out.stem}_round{rnd}", lean_root, timeout, jobs)
+    )
+    lines = [json.loads(line) for line in responses.read_text(encoding="utf-8").splitlines() if line]
+    meta = next(x for x in lines if x.get("kind") == "meta")
+    rows = {x["family"]: dict(x, history=[], repair_rounds=0) for x in lines if x.get("kind") != "meta"}
+    targets = {t["family"]: t for t in load_targets(math_root)}
+    convo = {}
+    for fam, row in rows.items():
+        convo[fam] = build_messages(targets[fam]) + [{"role": "assistant", "content": row.get("output", "")}]
+
+    def has_candidate(row):
+        return row.get("status") in ("parsed", "wrong_name") and row.get("candidate")
+
+    for rnd in range(1, rounds + 1):
+        checked = elaborate([(targets[f], r["candidate"]) for f, r in rows.items() if has_candidate(r)], rnd - 1)
+        todo = {}
+        for fam, row in rows.items():
+            if has_candidate(row):
+                row["elaboration_errors"] = checked.get(fam)
+                if checked.get(fam):
+                    todo[fam] = REPAIR_PROMPT.format(marker=MARKER, errors="\n\n".join(checked[fam][:5]))
+            elif row.get("status") == "no_theorem":
+                # A transport failure (no_output) is not the model's answer, so it gets no feedback.
+                todo[fam] = NO_THEOREM_PROMPT.format(name=targets[fam]["theorem"])
+        if not todo:
+            break
+        for fam, feedback in todo.items():
+            row = rows[fam]
+            convo[fam].append({"role": "user", "content": feedback})
+            t0 = time.time()
+            try:
+                output, error = client.complete(convo[fam], temperature=0.0, seed=0), ""
+            except Exception as exc:
+                output, error = "", f"{type(exc).__name__}: {exc}"
+            convo[fam].append({"role": "assistant", "content": output})
+            status, candidate = parse_candidate(output, targets[fam]["theorem"]) if output else ("no_output", None)
+            row["history"].append(
+                {
+                    "round": rnd,
+                    "feedback": feedback,
+                    "previous_candidate": row.get("candidate"),
+                    "output": output,
+                    "transport_error": error,
+                    "status": status,
+                    "prompt_tokens": getattr(client, "last_prompt_tokens", None),
+                    "context_full": _context_full(client),
+                    "seconds": round(time.time() - t0, 2),
+                }
+            )
+            if error:
+                # A transport failure is not the model's answer: keep the previous candidate and record the error.
+                del convo[fam][-2:]
+                row["repair_transport_errors"] = row.get("repair_transport_errors", 0) + 1
+                print(f"F{fam} round {rnd}: transport error, previous candidate kept", flush=True)
+                continue
+            row.update(status=status, candidate=candidate, output=output, repair_rounds=rnd)
+            print(f"F{fam} round {rnd}: {status}", flush=True)
+
+    final = elaborate([(targets[f], r["candidate"]) for f, r in rows.items() if has_candidate(r)], rounds)
+    for fam, row in rows.items():
+        row["elaborates"] = bool(has_candidate(row)) and not final.get(fam)
+    meta = dict(
+        meta,
+        label=f"{re.sub(r'[^A-Za-z0-9._-]', '_', meta['model'])}_repair{rounds}",
+        repair_version=REPAIR_VERSION,
+        repair_sha256=repair_sha256(),
+        repair_rounds=rounds,
+        repaired_from=responses.name,
+        repair_num_predict=getattr(client, "num_predict", None),
+    )
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", encoding="utf-8") as fh:
+        fh.write(json.dumps(meta) + "\n")
+        for fam in sorted(rows):
+            fh.write(json.dumps(rows[fam], ensure_ascii=False) + "\n")
+    print(f"elaborates after repair: {sum(r['elaborates'] for r in rows.values())}/{len(rows)} -> {out}")
     return 0
 
 
@@ -970,7 +1135,7 @@ def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs:
     lines = [json.loads(line) for line in responses.read_text(encoding="utf-8").splitlines() if line]
     meta = next(x for x in lines if x.get("kind") == "meta")
     replies = {x["family"]: x for x in lines if x.get("kind") != "meta"}
-    label = re.sub(r"[^A-Za-z0-9._-]", "_", meta["model"])
+    label = meta.get("label") or re.sub(r"[^A-Za-z0-9._-]", "_", meta["model"])
     work = out_dir / f"compare_{label}"
     work.mkdir(parents=True, exist_ok=True)
     targets = load_targets(math_root)
@@ -1021,7 +1186,10 @@ def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs:
         )
     result = {
         "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 2)",
-        "formalizer": {k: meta.get(k) for k in ("model", "model_digest", "client", "num_ctx", "prompt_sha256")},
+        "formalizer": {
+            k: meta.get(k)
+            for k in ("model", "model_digest", "client", "num_ctx", "prompt_sha256", "repair_rounds", "repair_sha256")
+        },
         "openai_math_commit": commit,
         "heartbeats": HEARTBEATS,
         "tactic": TACTIC,
@@ -1042,7 +1210,17 @@ def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
-        "step", choices=["env-check", "controls", "screen-auto", "screen-sheet", "screen-score", "formalize", "compare"]
+        "step",
+        choices=[
+            "env-check",
+            "controls",
+            "screen-auto",
+            "screen-sheet",
+            "screen-score",
+            "formalize",
+            "repair",
+            "compare",
+        ],
     )
     parser.add_argument("--math-root", type=Path, help="Path to an openai/math checkout (all steps but screen-score)")
     parser.add_argument("--timeout", type=int, default=1800, help="Seconds per Lean file or model call")
@@ -1052,7 +1230,9 @@ def main() -> int:
     parser.add_argument("--model", help="Model name at the endpoint (formalize)")
     parser.add_argument("--base-url", help="Endpoint (formalize; default localhost:11434 or localhost:1234/v1)")
     parser.add_argument("--out", type=Path, help="Raw outputs, JSONL (formalize)")
-    parser.add_argument("--responses", type=Path, help="formalize output to check with Lean (compare)")
+    parser.add_argument("--responses", type=Path, help="formalize output to repair or check with Lean")
+    parser.add_argument("--rounds", type=int, default=2, help="Repair rounds (repair)")
+    parser.add_argument("--max-tokens", type=int, help="Cap on each reply, Ollama num_predict (formalize, repair)")
     parser.add_argument("--resume", action="store_true", help="Keep finished families from --out (formalize)")
     parser.add_argument("--dry-run", action="store_true", help="Write the prompts only; call no model (formalize)")
     parser.add_argument(
@@ -1069,6 +1249,8 @@ def main() -> int:
         return env_check(math_root, args.timeout)
     if args.step == "controls":
         return controls(math_root, args.out_dir.resolve(), args.timeout, args.jobs)
+    if args.step in ("repair", "compare") and args.responses is None:
+        parser.error("--responses is required for repair and compare")
     if args.step == "compare":
         if args.responses is None:
             parser.error("--responses is required for compare")
@@ -1080,11 +1262,14 @@ def main() -> int:
     if args.dry_run:
         return cmd_formalize(math_root, Path(), None, False, args.out_dir.resolve() / "prompts")
     if not args.model:
-        parser.error("--model is required for formalize")
+        parser.error("--model is required for formalize and repair")
     if args.backend == "ollama":
-        client = OllamaClient(args.model, args.base_url, args.num_ctx, args.timeout)
+        client = OllamaClient(args.model, args.base_url, args.num_ctx, args.timeout, args.max_tokens)
     else:
         client = OpenAICompatClient(args.model, args.base_url or "http://localhost:1234/v1", args.num_ctx, args.timeout)
+    if args.step == "repair":
+        out = args.out or args.out_dir / f"{args.responses.stem}_repair{args.rounds}.jsonl"
+        return repair(math_root, args.responses.resolve(), out.resolve(), client, args.rounds, args.timeout, args.jobs)
     out = args.out or args.out_dir / f"formalize_{re.sub(r'[^A-Za-z0-9._-]', '_', client.model)}.jsonl"
     return cmd_formalize(math_root, out.resolve(), client, args.resume, None)
 

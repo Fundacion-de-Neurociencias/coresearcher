@@ -4321,6 +4321,23 @@
         "summary": "Audit Empirical Evidence"
       }
     },
+    "/api/capabilities": {
+      "get": {
+        "description": "Every endpoint as an OnTrack CapabilityContract: input and output schemas, determinism, operation class,\nwhether it needs the API key, and the maturity of the modules behind it (docs/reference/MODULE_MATURITY.md).",
+        "operationId": "capabilities_api_capabilities_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Capabilities"
+      }
+    },
     "/api/discovery/ablation-rebuttal/run": {
       "post": {
         "description": "ADR-DISCOVERY-037: Automated Theoretical Ablation & Simulated Peer-Review Rebuttal Loop\nInspired by ScientistTwo (Google Cloud AI, 2026).",
@@ -7359,6 +7376,122 @@
         "summary": "Simulate World Model Intervention"
       }
     },
+    "/api/evidence/graphs/{graph_id}": {
+      "get": {
+        "description": "A graph this server produced recently. Graphs are content-addressed; a missing one is recomputed by asking.",
+        "operationId": "get_evidence_graph_api_evidence_graphs__graph_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "graph_id",
+            "required": true,
+            "schema": {
+              "title": "Graph Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Evidence Graph"
+      }
+    },
+    "/api/evidence/requests": {
+      "post": {
+        "description": "Answer an EvidenceRequest with an EvidenceGraph (schema `coresearcher.evidence/v1`).\n\nNothing in CoResearcher's evidence changes: the graph is computed from lifecycle projects, published research\npackages, the claims register, formal hypotheses and formal cases. Requires the API key because formal checks\ncan be expensive.",
+        "operationId": "resolve_evidence_request_api_evidence_requests_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "title": "Request",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Resolve Evidence Request"
+      }
+    },
+    "/api/evidence/schema": {
+      "get": {
+        "description": "The JSON Schemas of the EvidenceRequest and EvidenceGraph contract (coresearcher.evidence/v1).",
+        "operationId": "evidence_schema_api_evidence_schema_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Evidence Schema"
+      }
+    },
+    "/api/evidence/targets": {
+      "get": {
+        "description": "Everything an EvidenceRequest can point at: lifecycle projects, packages, register rows and formal cases.",
+        "operationId": "evidence_targets_api_evidence_targets_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Evidence Targets"
+      }
+    },
     "/api/health": {
       "get": {
         "operationId": "health_check_api_health_get",
@@ -7577,6 +7710,23 @@
         "summary": "Lifecycle Ontrack Status"
       }
     },
+    "/api/lifecycle/packages": {
+      "get": {
+        "description": "Research packages published in docs/reference/packages, with the digests listed in the package index.",
+        "operationId": "list_published_packages_api_lifecycle_packages_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Published Packages"
+      }
+    },
     "/api/lifecycle/packages/inspect": {
       "post": {
         "description": "Verify a research package sent as the raw request body, without importing it. Nothing is stored.",
@@ -7597,6 +7747,44 @@
           }
         ],
         "summary": "Inspect Lifecycle Package"
+      }
+    },
+    "/api/lifecycle/packages/{name}": {
+      "get": {
+        "description": "A published research package, byte for byte. Published packages are public, so no key is needed.",
+        "operationId": "download_published_package_api_lifecycle_packages__name__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "title": "Name",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download Published Package"
       }
     },
     "/api/lifecycle/projects": {

@@ -245,3 +245,83 @@ def test_family_verdict_and_summary():
     summary = fid.phase2_summary({"a": good, "b": flagged, "c": fid.family_verdict(None, [])}, ["a", "b", "c"])
     assert summary["elaborated"] == 2 and summary["faithful"] == 1 and summary["faithful_rate_of_all"] == 0.333
     assert summary["specificity_of_elaborated"] == 0.5 and summary["discriminating_families"] == 1
+
+
+def test_elaboration_file_places_candidate_without_the_reference():
+    text, first, after = fid.elaboration_file(_target(), "theorem target (n : ℕ) :\n    n < f n")
+    lines = text.splitlines()
+    assert lines[first - 2] == "set_option autoImplicit false in"
+    assert lines[first - 1] == "theorem target (n : ℕ) :" and lines[after - 2].strip().startswith("n < f n")
+    assert "f n > n" not in text and "The answer" not in text
+
+
+def test_candidate_errors_relative_lines():
+    out = "C:/x/F.lean:12:4: error: unknown identifier 'log'\nmore detail\nC:/x/F.lean:20:0: warning: sorry\n"
+    assert fid.candidate_errors(1, out, 11) == ["line 2: unknown identifier 'log'\nmore detail"]
+    assert fid.candidate_errors(0, "C:/x/F.lean:20:0: warning: declaration uses 'sorry'\n", 11) is None
+    assert fid.candidate_errors(None, "", 11) == ["Lean timed out while elaborating the theorem."]
+    lake = "warning: iut: repository 'C:/Users/me/x' has local changes\n"
+    error = "C:/x/F.lean:12:4: error: unknown identifier 'log'\n"
+    twice = error + lake + error
+    assert fid.candidate_errors(1, twice, 11) == ["line 2: unknown identifier 'log'"]
+
+
+class ScriptedClient(FakeClient):
+    def __init__(self, replies):
+        super().__init__(None)
+        self.replies, self.seen = list(replies), []
+
+    def complete(self, messages, temperature=0.0, seed=0):
+        self.seen.append(messages)
+        return self.replies.pop(0)
+
+
+def test_repair_feeds_back_errors_and_stops_when_it_elaborates(tmp_path, monkeypatch):
+    import json
+
+    monkeypatch.setattr(fid, "load_targets", lambda root: [_target(), {**_target(), "family": "002"}])
+    responses = tmp_path / "r.jsonl"
+    rows = [
+        {"kind": "meta", "model": "fake:1b"},
+        {"family": "001", "status": "parsed", "candidate": "theorem target (n : ℕ) : log n < f n", "output": "a"},
+        {"family": "002", "status": "no_theorem", "candidate": None, "output": "I cannot"},
+    ]
+    responses.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+    bad = "theorem target (n : ℕ) : log n < f n"
+
+    def fake_elaborate(items, rnd):
+        return {t["family"]: (["line 1: unknown identifier 'log'"] if c == bad else None) for t, c in items}
+
+    client = ScriptedClient(
+        [
+            "```lean\ntheorem target (n : ℕ) : n < f n := by sorry\n```",
+            "```lean\ntheorem target : True := by sorry\n```",
+        ]
+    )
+    out = tmp_path / "out.jsonl"
+    fid.repair(tmp_path, responses, out, client, 2, 60, 1, elaborate=fake_elaborate)
+    result = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()]
+    meta, r1, r2 = result
+    assert meta["repair_rounds"] == 2 and meta["label"] == "fake_1b_repair2"
+    assert r1["candidate"] == "theorem target (n : ℕ) : n < f n" and r1["elaborates"] and r1["repair_rounds"] == 1
+    assert "unknown identifier 'log'" in r1["history"][0]["feedback"]
+    assert r2["status"] == "parsed" and "did not contain a complete theorem" in r2["history"][0]["feedback"]
+    assert len(client.seen) == 2
+    # The reference statement never reaches the model.
+    assert all("f n > n" not in m["content"] for msgs in client.seen for m in msgs)
+
+
+def test_repair_keeps_the_candidate_on_a_transport_error(tmp_path, monkeypatch):
+    import json
+
+    monkeypatch.setattr(fid, "load_targets", lambda root: [_target()])
+    bad = "theorem target (n : ℕ) : log n < f n"
+    responses = tmp_path / "r.jsonl"
+    rows = [{"kind": "meta", "model": "m"}, {"family": "001", "status": "parsed", "candidate": bad, "output": "a"}]
+    responses.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+    client = FakeClient(OSError("connection reset"))
+    out = tmp_path / "out.jsonl"
+    fid.repair(tmp_path, responses, out, client, 2, 60, 1, elaborate=lambda items, rnd: {"001": ["line 1: bad"]})
+    row = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()][1]
+    assert row["candidate"] == bad and row["repair_transport_errors"] == 2 and not row["elaborates"]
+    assert [h["transport_error"].startswith("OSError") for h in row["history"]] == [True, True]

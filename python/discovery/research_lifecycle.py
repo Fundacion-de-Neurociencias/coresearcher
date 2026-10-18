@@ -202,10 +202,74 @@ SIGNED_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
     for stage, checks in DEFAULT_TEMPLATE.items()
 }
 
+# Audit of a claimed formal result, such as "a model proved X in Lean" (ADR-DISCOVERY-066). Two blocks:
+# - Validity decides whether the result stands: the proof establishes the formal statement, the statement is
+#   faithful to the problem as posed, the prose proof is correct, and the two solutions are equivalent. Only the
+#   first has an automatic check; fidelity has none that works yet (claims register, row 19), so the other three are
+#   expert reviews, and they block.
+# - Provenance records who contributed what (people, models, tools). It never decides validity: a correct proof is
+#   correct whoever wrote it. It is reported in the release notes, and its absence is stated.
+FORMAL_CLAIM_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
+    Stage.QUESTION: (
+        _c("question.statement", "The problem as originally posed, in prose, is recorded and hashed.", A),
+    ),
+    Stage.HYPOTHESIS: (
+        _c("claim.formal_statement", "The formal (Lean) statement of the claimed result is recorded and hashed.", A),
+        _c("claim.prose_solution", "The human-readable solution is recorded and hashed.", A),
+    ),
+    Stage.PROTOCOL: (
+        _c("protocol.document", "The audit protocol, fixed before any check runs, is recorded and hashed.", A),
+    ),
+    Stage.EXECUTION: (
+        _c(
+            "execution.proof_checked",
+            "The kernel (e.g. Comparator) accepts the proof of the formal statement, "
+            "with only the permitted axioms.",
+            V,
+        ),
+        _c("execution.environment", "Prover, library and tool versions are recorded and hashed.", A),
+    ),
+    Stage.CONTROLS: (
+        _c(
+            "controls.statement_fidelity",
+            "An expert review finds the formal statement faithful to the problem as " "posed (validity: blocks).",
+            H,
+        ),
+        _c(
+            "controls.mutant_rejection",
+            "Mutated statements are rejected by the same check, so it is not vacuous.",
+            V,
+            required=False,
+        ),
+    ),
+    Stage.ANALYSIS: (
+        _c(
+            "analysis.prose_review",
+            "Expert or peer review finds the human-readable proof correct (validity: blocks).",
+            H,
+        ),
+        _c(
+            "analysis.equivalence",
+            "An expert review finds the prose and formal solutions essentially equivalent " "(validity: blocks).",
+            H,
+        ),
+    ),
+    Stage.REPORT: (
+        _c("report.claims_register", "The claims register row is updated, whatever the outcome.", A),
+        _c(
+            "report.provenance",
+            "Provenance record: who contributed what. Reported, never decides validity.",
+            A,
+            required=False,
+        ),
+    ),
+}
+
 TEMPLATES: Dict[str, Dict[Stage, Tuple[CheckTemplate, ...]]] = {
     "default": DEFAULT_TEMPLATE,
     "benchmark": BENCHMARK_TEMPLATE,
     "signed": SIGNED_TEMPLATE,
+    "formal-claim": FORMAL_CLAIM_TEMPLATE,
 }
 
 
@@ -664,12 +728,22 @@ def release_notes(
             if e["role"] == ActorRole.HUMAN.value and e["ok"]
         }
     )
+    provenance = []
+    if any(c.check_id == "report.provenance" for c in project.checks(Stage.REPORT)):
+        record = next(
+            (g.evidence.get("report.provenance") for g in project.active_gates() if g.stage == Stage.REPORT), None
+        )
+        provenance = [
+            "- Provenance (does not affect validity): "
+            + (f"`{record['artifact_path']}`" if record and record.get("ok") else "not declared")
+        ]
     lines = [
         f"# {project.title}: release {release.release_id}",
         "",
         f"- Kind: **{release.kind.value}**" + (f" ({'; '.join(kind_reasons)})" if kind_reasons else ""),
         f"- Version {release.version}, digest `{release.digest[:16]}`, released by {release.actor} at {release.at}",
         f"- Human sign-offs: {', '.join(signers) if signers else 'none'}",
+        *provenance,
         "",
         "## Outcome",
         "",

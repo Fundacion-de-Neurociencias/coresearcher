@@ -120,6 +120,24 @@ A theorem that z3 rejects and Lean proves is a soundness discrepancy: the comman
 back end should be trusted until it is explained. A theorem z3 accepts but the default tactic cannot prove is not a
 contradiction; it is reported as `NOT_PROVED`.
 
+## 5. Unknown-mechanism v3, PySR arm
+
+Protocol: [UNKNOWN_MECHANISM_V3_PROTOCOL.md](UNKNOWN_MECHANISM_V3_PROTOCOL.md). The library (L) and ridge (R) arms
+have no Julia dependency and may already have run elsewhere. They are kept in the same raw file. This job runs the
+PySR arm, on real and null data:
+
+```bash
+pip install pysr==2.7.0          # the first import installs Julia and SymbolicRegression.jl ~2.7.0
+python -c "import pysr"          # one-off download and precompilation; needs internet access
+python scripts/benchmarks/run_unknown_mechanism_v3.py run --arm P
+python scripts/benchmarks/run_unknown_mechanism_v3.py run --arm P --null
+python scripts/benchmarks/run_unknown_mechanism_v3.py score
+```
+
+Both `run` commands are resumable. Expect several hours for the 200 searches. Commit
+`unknown_mechanism_v3_raw.jsonl` and `unknown_mechanism_v3_results.json`, then update row 18 of the claims
+register with the criteria as they came out.
+
 ## What comes back to the repository
 
 Run files (`runs/`) stay on the Legion unless they contain no confidential text. Reports, hashes and claims-register

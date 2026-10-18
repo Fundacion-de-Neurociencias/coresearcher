@@ -1,0 +1,100 @@
+{
+  "protocol": "docs/reference/benchmarks/UNKNOWN_MECHANISM_V3_PROTOCOL.md",
+  "protocol_sha256": "cb61cdaca6aebf589a01f1cdaa1f1ac9ffba009944544168eb771bd9a58d446f",
+  "arms": {
+    "L": {
+      "real": {
+        "mean_test_r2": 0.7502051152201351,
+        "bootstrap_95": [
+          0.6797040372155353,
+          0.8163514107132959
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": 0.976151539020826,
+          "MULTIPLICATIVE_COUPLING": 0.9900244879814328,
+          "REGIME_PHASE_SHIFT": 0.8609460229861172,
+          "SIMPSONS_CAUSAL_INVERSION": 0.8228903377917764,
+          "THRESHOLD_INVARIANT_GATE": 0.8632728104862734,
+          "UNOBSERVED_LATENT_MANIFOLD": -0.00112786471986335
+        }
+      },
+      "null": {
+        "mean_test_r2": -0.06325436881514777,
+        "bootstrap_95": [
+          -0.0748502843598048,
+          -0.05294681836353992
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": -0.06536812210886436,
+          "MULTIPLICATIVE_COUPLING": -0.05967530836829001,
+          "REGIME_PHASE_SHIFT": -0.04615765197396976,
+          "SIMPSONS_CAUSAL_INVERSION": -0.09603103798116742,
+          "THRESHOLD_INVARIANT_GATE": -0.050508438020161396,
+          "UNOBSERVED_LATENT_MANIFOLD": -0.0629639331661415
+        }
+      },
+      "null_gate_passed": true
+    },
+    "R": {
+      "real": {
+        "mean_test_r2": 0.7183518927247705,
+        "bootstrap_95": [
+          0.6469047506106941,
+          0.7834508566600896
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": 0.9215763929707282,
+          "MULTIPLICATIVE_COUPLING": 0.988897259019077,
+          "REGIME_PHASE_SHIFT": 0.7528693661588589,
+          "SIMPSONS_CAUSAL_INVERSION": 0.849262998769232,
+          "THRESHOLD_INVARIANT_GATE": 0.8507924983389017,
+          "UNOBSERVED_LATENT_MANIFOLD": -0.037795881751787656
+        }
+      },
+      "null": {
+        "mean_test_r2": -0.035615453142088756,
+        "bootstrap_95": [
+          -0.045623144721029345,
+          -0.02670383467615797
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": -0.03842238961721227,
+          "MULTIPLICATIVE_COUPLING": -0.04251939580122338,
+          "REGIME_PHASE_SHIFT": -0.019411687351552475,
+          "SIMPSONS_CAUSAL_INVERSION": -0.041551786111768005,
+          "THRESHOLD_INVARIANT_GATE": -0.037032568653898215,
+          "UNOBSERVED_LATENT_MANIFOLD": -0.035187447109906955
+        }
+      },
+      "null_gate_passed": true
+    },
+    "P": {
+      "real": {
+        "status": "not run"
+      },
+      "null": {
+        "status": "not run"
+      }
+    }
+  },
+  "criteria": {
+    "C1": {
+      "comparison": "L - R",
+      "mean_delta_r2": 0.031853222495364805,
+      "bootstrap_95": [
+        0.017370802584111965,
+        0.047287969172235524
+      ],
+      "met": true,
+      "baseline_better": false,
+      "interpretable": true,
+      "null_gates": {
+        "L": true,
+        "R": true
+      }
+    },
+    "C2": {
+      "status": "not run"
+    }
+  }
+}

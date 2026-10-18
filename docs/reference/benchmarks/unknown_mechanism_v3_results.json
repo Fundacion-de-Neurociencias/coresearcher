@@ -70,11 +70,36 @@
     },
     "P": {
       "real": {
-        "status": "not run"
+        "mean_test_r2": 0.8476207245158469,
+        "bootstrap_95": [
+          0.7964276148852353,
+          0.8934040204779045
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": 0.9642983817402898,
+          "MULTIPLICATIVE_COUPLING": 0.9901502964671249,
+          "REGIME_PHASE_SHIFT": 0.41206525529153254,
+          "SIMPSONS_CAUSAL_INVERSION": 0.8698381313058315,
+          "THRESHOLD_INVARIANT_GATE": 0.8598220410869724,
+          "UNOBSERVED_LATENT_MANIFOLD": 0.9915748719892773
+        }
       },
       "null": {
-        "status": "not run"
-      }
+        "mean_test_r2": -Infinity,
+        "bootstrap_95": [
+          NaN,
+          -0.06524159452246617
+        ],
+        "by_archetype": {
+          "HARMONIC_NONLINEAR": -Infinity,
+          "MULTIPLICATIVE_COUPLING": -0.04797757152778711,
+          "REGIME_PHASE_SHIFT": -0.09061918900754555,
+          "SIMPSONS_CAUSAL_INVERSION": -0.05192954370649419,
+          "THRESHOLD_INVARIANT_GATE": -0.030440694657753203,
+          "UNOBSERVED_LATENT_MANIFOLD": -0.13104374186345993
+        }
+      },
+      "null_gate_passed": true
     }
   },
   "criteria": {
@@ -82,8 +107,8 @@
       "comparison": "L - R",
       "mean_delta_r2": 0.031853222495364805,
       "bootstrap_95": [
-        0.017370802584111965,
-        0.047287969172235524
+        0.017377273269302433,
+        0.046783295055729764
       ],
       "met": true,
       "baseline_better": false,
@@ -94,7 +119,19 @@
       }
     },
     "C2": {
-      "status": "not run"
+      "comparison": "L - P",
+      "mean_delta_r2": -0.09741560929571164,
+      "bootstrap_95": [
+        -0.19153881411329177,
+        -0.006907065475322112
+      ],
+      "met": false,
+      "baseline_better": true,
+      "interpretable": true,
+      "null_gates": {
+        "L": true,
+        "P": true
+      }
     }
   }
 }

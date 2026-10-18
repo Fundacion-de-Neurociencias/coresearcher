@@ -3,6 +3,11 @@
 **Status**: Canonical Reference  
 **Extended**: SPRINT 60B - Decision Trajectory Tracking
 
+> **Implemented contract.** This specification is the long-term design. The EvidenceGraph the API returns today is
+> `coresearcher.evidence/v1` ([ADR-DISCOVERY-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md),
+> schemas in [`schemas/evidence/v1/`](../../schemas/evidence/v1)). The draft files
+> `schemas/evidence_request.schema.json` and `schemas/evidence_graph.schema.json` are not implemented.
+
 ---
 
 ## 1. Central Concept

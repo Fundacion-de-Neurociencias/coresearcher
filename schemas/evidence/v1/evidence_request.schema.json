@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/evidence/v1/evidence_request.schema.json",
+  "title": "EvidenceRequest (coresearcher.evidence/v1)",
+  "description": "What a client (EdiTXT) asks CoResearcher about. CoResearcher answers with an EvidenceGraph built only from what it holds (ADR-DISCOVERY-067).",
+  "type": "object",
+  "required": ["target"],
+  "additionalProperties": false,
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "pattern": "^ER-[A-Za-z0-9-]{1,64}$",
+      "description": "Optional client id. When absent, the server derives one from the graph digest."
+    },
+    "target": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": ["LIFECYCLE_PROJECT", "RESEARCH_PACKAGE", "REGISTERED_CLAIM", "FORMAL_HYPOTHESIS", "FORMAL_CASE", "QUESTION"]
+        },
+        "id": {"type": "string", "minLength": 1, "maxLength": 200},
+        "text": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "hypothesis": {"type": "object", "description": "A formal hypothesis object, as accepted by POST /api/hypotheses/evaluate."}
+      },
+      "allOf": [
+        {"if": {"properties": {"type": {"const": "FORMAL_HYPOTHESIS"}}}, "then": {"required": ["hypothesis"]}},
+        {"if": {"properties": {"type": {"const": "QUESTION"}}}, "then": {"required": ["text"]}},
+        {
+          "if": {"properties": {"type": {"enum": ["LIFECYCLE_PROJECT", "RESEARCH_PACKAGE", "REGISTERED_CLAIM", "FORMAL_CASE"]}}},
+          "then": {"required": ["id"]}
+        },
+        {
+          "if": {"properties": {"type": {"const": "FORMAL_CASE"}}},
+          "then": {"properties": {"id": {"enum": ["ptau217_two_cutoff", "alzheimer_rivals", "ed_polarity"]}}}
+        }
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "consequences": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {"type": "string"},
+          "description": "FORMAL_HYPOTHESIS only: expressions to check for entailment."
+        },
+        "rivals": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {"type": "object"},
+          "description": "FORMAL_HYPOTHESIS only: rival hypotheses to compare against, with discriminating states."
+        }
+      }
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {"type": "string", "maxLength": 200},
+      "description": "Ids of the manuscript claims the client links to this target (for example EdiTXT's CLM-001)."
+    },
+    "requested_by": {"type": "string", "maxLength": 200}
+  }
+}

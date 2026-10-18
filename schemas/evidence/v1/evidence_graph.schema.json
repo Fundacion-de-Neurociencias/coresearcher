@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coresearcher.org/schemas/evidence/v1/evidence_graph.schema.json",
+  "title": "EvidenceGraph (coresearcher.evidence/v1)",
+  "description": "CoResearcher's answer to an EvidenceRequest: evidence, how it relates, and every gap. Content-addressed: graph_id and provenance.digest are the SHA-256 of the canonical target, nodes, edges and gaps. No manuscript grading (BOUNDARY_WITH_EDITXT.md).",
+  "type": "object",
+  "required": ["schema", "graph_id", "request_id", "target", "nodes", "edges", "gaps", "focus", "provenance", "links"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "coresearcher.evidence/v1"},
+    "graph_id": {"type": "string", "pattern": "^EG-[0-9a-f]{16}$"},
+    "request_id": {"type": "string", "pattern": "^ER-[A-Za-z0-9-]{1,64}$"},
+    "target": {
+      "type": "object",
+      "required": ["type"],
+      "description": "The request target. A FORMAL_HYPOTHESIS target carries hypothesis_id instead of the full object."
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "label", "attributes"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string"},
+          "kind": {
+            "enum": [
+              "lifecycle_project", "gate", "verification", "review", "artifact", "measure", "release", "criterion",
+              "provenance", "research_package", "registered_claim", "script", "formal_hypothesis", "consequence",
+              "rival", "formal_case", "assumption", "question", "claim"
+            ]
+          },
+          "label": {"type": "string"},
+          "attributes": {"type": "object"}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "relation", "justification"],
+        "additionalProperties": false,
+        "properties": {
+          "source": {"type": "string"},
+          "target": {"type": "string"},
+          "relation": {
+            "enum": [
+              "derived_from", "verified_by", "reviewed_by", "recorded_in", "measured_by", "supports", "contradicts",
+              "forked_from", "requires", "discriminates"
+            ]
+          },
+          "justification": {"type": "string"}
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "description": "Everything missing, failed, stale or out of scope. Gaps are never hidden.",
+      "items": {
+        "type": "object",
+        "required": ["kind", "description", "node"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {"type": "string", "pattern": "^[a-z_]+$"},
+          "description": {"type": "string"},
+          "node": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "focus": {"type": "string", "description": "Id of the node the request targets."},
+    "provenance": {
+      "type": "object",
+      "required": ["generated_by", "generated_at", "digest", "sources", "requested_by", "boundary"],
+      "additionalProperties": false,
+      "properties": {
+        "generated_by": {"const": "coresearcher"},
+        "generated_at": {"type": "string"},
+        "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "sources": {"type": "array", "items": {"type": "string"}},
+        "requested_by": {"type": "string"},
+        "boundary": {"type": "string"}
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": ["self"],
+      "properties": {"self": {"type": "string", "pattern": "^/api/evidence/graphs/EG-[0-9a-f]{16}$"}}
+    }
+  }
+}

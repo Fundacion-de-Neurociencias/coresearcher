@@ -16,12 +16,13 @@ it, the evidence it used, and a cryptographic hash that lets anyone reproduce th
 
 - **Formal hypotheses.** Exact evaluation over a finite state space: vacuous, unfalsifiable or self-contradictory hypotheses, conflicting assumptions, counterexamples and logical relations between rivals ([ADR-059](docs/decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md)).
 - **Stage gates.** Research projects pass checklist gates from question to report; an agent cannot certify its own work, versions are hash-chained, and releases list every criterion not met ([ADR-063](docs/decisions/ADR-DISCOVERY-063-RESEARCH-LIFECYCLE-STAGE-GATES.md)).
+- **Evidence for EdiTXT.** An EvidenceRequest about a lifecycle project, research package, registered claim, formal hypothesis or formal case returns a content-addressed EvidenceGraph with every gap listed; a capability catalogue describes every endpoint ([ADR-067](docs/decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md)).
 - **Research packages.** One `.crpkg` file carries a project's history and artifacts to another machine, verified on import and read-only until forked ([ADR-065](docs/decisions/ADR-DISCOVERY-065-RESEARCH-PACKAGES.md)).
 - **Claim verification.** Reality Contact Score (RCS), Popperian falsification and conservation-law checks.
 - **Formal gates.** Exact symbolic verification (SymPy), Lean 4 proof gate, categorical holonomy checks.
 - **Provenance.** Append-only scientific ledger, Git-based lineage, Merkle-style hashes, Zenodo export.
 - **Sovereign by default.** Runs on local hardware. Local LLMs (Ollama, LM Studio) are optional; without them the system falls back to deterministic symbolic engines.
-- **Documented contract.** About 90 REST operations, described by an OpenAPI schema that CI keeps in sync.
+- **Documented contract.** About 115 REST operations, described by an OpenAPI schema that CI keeps in sync.
 
 **What it is not:** a bibliographic search engine, a generative text system, or a source of
 ground-truth conclusions. Every verdict is only as strong as the evidence and benchmarks behind it.
@@ -32,7 +33,7 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 | --- | --- | --- |
 | Test suite | 210 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 16 integrated, 26 tested, 17 exercised, 20 prototypes (of 79) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 17 integrated, 26 tested, 17 exercised, 20 prototypes (of 80) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
 Claims are listed with their supporting script, data origin and last result in the
@@ -82,10 +83,11 @@ Run the API. Write endpoints need a key; without one they refuse every request.
 
 ```bash
 export CORESEARCHER_API_KEY="$(openssl rand -hex 32)"
-uvicorn api.server:app --host 127.0.0.1 --port 8000
+uvicorn api.server:app --host 127.0.0.1 --port 8001
 ```
 
-Open <http://127.0.0.1:8000/docs> for interactive documentation.
+Open <http://127.0.0.1:8001/docs> for interactive documentation. Port 8001 is the ecosystem convention: DataAILab runs
+on 8000 and reaches CoResearcher through `CORESEARCHER_URL=http://127.0.0.1:8001`.
 
 Run the CLI:
 
@@ -160,6 +162,8 @@ English ([language policy](docs/governance/LANGUAGE_POLICY.md)).
 
 CoResearcher works with sibling projects: **DataAILab** (empirical solver and GPU worker) and
 **EdiTXT** (editorial and peer-review tooling). See [docs/architecture/ECOSYSTEM_BOUNDARIES.md](docs/architecture/ECOSYSTEM_BOUNDARIES.md).
+CoResearcher has no user interface of its own: EdiTXT is the shared frontend, and it reaches CoResearcher through
+the evidence contract and the capability catalogue of [ADR-067](docs/decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md).
 
 ## License
 

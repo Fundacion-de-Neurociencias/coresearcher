@@ -262,6 +262,13 @@ FORMAL_CLAIM_TEMPLATE: Dict[Stage, Tuple[CheckTemplate, ...]] = {
             A,
             required=False,
         ),
+        _c(
+            "report.premise_origin",
+            "Premise record: where each premise came from (supplied, literature, a person, or introduced by the "
+            "system) and whether data tested it. Reported, never decides validity.",
+            A,
+            required=False,
+        ),
     ),
 }
 
@@ -729,14 +736,15 @@ def release_notes(
         }
     )
     provenance = []
-    if any(c.check_id == "report.provenance" for c in project.checks(Stage.REPORT)):
-        record = next(
-            (g.evidence.get("report.provenance") for g in project.active_gates() if g.stage == Stage.REPORT), None
-        )
-        provenance = [
-            "- Provenance (does not affect validity): "
+    report_checks = {c.check_id for c in project.checks(Stage.REPORT)}
+    for check_id, label in (("report.provenance", "Provenance"), ("report.premise_origin", "Premise origin")):
+        if check_id not in report_checks:
+            continue
+        record = next((g.evidence.get(check_id) for g in project.active_gates() if g.stage == Stage.REPORT), None)
+        provenance.append(
+            f"- {label} (does not affect validity): "
             + (f"`{record['artifact_path']}`" if record and record.get("ok") else "not declared")
-        ]
+        )
     lines = [
         f"# {project.title}: release {release.release_id}",
         "",

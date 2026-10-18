@@ -203,6 +203,13 @@
       "tests": true
     },
     {
+      "api": true,
+      "level": "Integrated",
+      "module": "evidence_service",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": false,
       "level": "Tested",
       "module": "exact_symbolic_court",

@@ -252,15 +252,47 @@ on 6 of 6. These are mostly the artifact that excluding them was meant to avoid:
 the definition's name (`theorem main_nonuniqueness : MainStatement`), and in 144 and 174 they copy the
 definition's body from the context.
 
+**Repair rounds (2026-10-18).** `repair` elaborates each candidate alone, in the same context the formalizer saw
+(the target theorem is not in it), and feeds Lean's errors on that candidate back to the model, for up to two
+rounds (`fidelity-repair-v1`, SHA-256 `428f3b2fb673…`). A reply with no theorem gets a request for one. Nothing
+from the comparison with the original or the mutants reaches the model. Replies were capped at 2,048 tokens
+(`num_predict`): a first attempt without the cap lost the Ollama server in round 2, when F243 ran for 660 s, so
+it was discarded and repeated. In the repeated run there were no transport errors and no full contexts.
+
+| Headline, 13 families | Qwen2.5-Coder 32B | + 2 repair rounds |
+|---|---|---|
+| Candidate elaborates | 7 | **10** |
+| Original *faithful* (frozen tactic) | 1 | 1 |
+| Mutants flagged (of mutants in elaborated families) | 22/22 | 33/33 |
+| Discriminating families | 1 | 1 |
+
+Repair turned 3 failing candidates into elaborating ones (F186, F238, F246); F243, F277 and F331 still fail after
+two rounds. Repair works on names and syntax, which were about half of the failures, but does not by itself make
+the statements faithful.
+
+**Manual audit of the flagged repaired candidates.** The repaired F186 candidate is **equivalent** to the
+original: it writes `(2^19 / (log n)^2) * log(1/(2ε))` as `2^19 * log(1/(2ε)) / (log n)^2`, writes `2 ≤ n` as
+`n ≥ 2`, and orders the binders differently. A hand-written proof (`intro` in each order, `convert … using 1`,
+`push_cast`, `ring`) elaborates with no errors; see
+[`manual/F186_equivalence.lean`](lean_fidelity_phase2/manual/F186_equivalence.lean). The frozen phase 1 tactic
+does not find it, so this *flagged* verdict is a **prover miss**, not a formalizer error. F246 differs for real:
+it drops `[DiscreteTopology G]` and adds a topology instance on the boundary. The headline above keeps the
+pre-specified rule (1 of 13). With the manual audit, the faithful count is at least 2 of 13, still below 30%.
+
+This is the first evidence that the phase 1 recall of 1.00 does not carry over to real candidates. Binder
+reordering and field arithmetic were not among the phase 1 rewrite rules. Before phase 3, add both as rewrite
+rules, extend the tactic (for example `intro` with the binders reordered, then `push_cast` and `ring_nf`), and
+measure recall again in phase 1, never on these candidates.
+
 **What this means.** The pipeline works end to end and measures what it should, but with general local models
-up to 32B there is no fidelity signal to evaluate: going from 7B to 32B moved the headline from 0 to 1 of 13.
+up to 32B there is no fidelity signal to evaluate: going from 7B to 32B moved the headline from 0 to 1 of 13,
+and two repair rounds made more candidates elaborate without making more of them faithful.
 Moving to phase 3 with these models would only measure their failures. Remaining options, to be decided before
 more runs:
 
 - a model trained for Lean 4 autoformalization;
-- prompt iterations on this development set, which phase 2 allows; for example, feeding back Lean's
-  elaboration errors for one or two repair rounds, since about half of the failures are names or syntax that do
-  not elaborate;
+- prompt iterations on this development set, which phase 2 allows (the repair rounds above were the first);
+- a stronger comparison step, measured in phase 1 (binder reordering and field arithmetic, see the F186 miss);
 - a different auditor output: report *which direction* fails (candidate implies original, or the reverse), so
   that a near miss such as F273 shows up as "stronger" or "weaker" rather than only "not shown".
 

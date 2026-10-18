@@ -362,3 +362,32 @@ def test_human_sign_offs_are_optional_by_default_and_reported():
         )
         unsigned.pass_gate("u", "maintainer")
     assert "Human sign-offs: none" in unsigned.release("u", "maintainer").notes
+
+
+def test_formal_claim_template_separates_validity_from_provenance():
+    svc = service()
+    svc.create_project("ns", "Claimed proof", template="formal-claim")
+    for stage in (Stage.QUESTION, Stage.HYPOTHESIS, Stage.PROTOCOL):
+        satisfy(svc, "ns", stage)
+        svc.pass_gate("ns", "auditor")
+    # The prover's own report is a self-check: it cannot satisfy the kernel check.
+    svc.submit_result("ns", "execution.proof_checked", True, "the-model", ActorRole.AGENT)
+    satisfy(svc, "ns", Stage.EXECUTION, skip={"execution.proof_checked"})
+    assert svc.evaluate_gate("ns").decision == GateDecision.INCOMPLETE
+    svc.submit_result("ns", "execution.proof_checked", True, "comparator", ActorRole.VERIFIER_TOOL)
+    svc.pass_gate("ns", "auditor")
+    # Expert reviews of validity block, unlike optional sign-offs elsewhere.
+    satisfy(svc, "ns", Stage.CONTROLS, skip={"controls.statement_fidelity"})
+    assert svc.evaluate_gate("ns").decision == GateDecision.PENDING_HUMAN
+    svc.submit_result(
+        "ns", "controls.statement_fidelity", False, "expert-1", ActorRole.HUMAN, note="drops a hypothesis"
+    )
+    assert svc.evaluate_gate("ns").decision == GateDecision.FAIL
+    svc.submit_result("ns", "controls.statement_fidelity", True, "expert-2", ActorRole.HUMAN)
+    svc.pass_gate("ns", "auditor")
+    satisfy(svc, "ns", Stage.ANALYSIS)
+    svc.pass_gate("ns", "auditor")
+    # Provenance is optional and never blocks; the release notes say whether it was declared.
+    satisfy(svc, "ns", Stage.REPORT, skip={"report.provenance"})
+    svc.pass_gate("ns", "auditor")
+    assert "Provenance (does not affect validity): not declared" in svc.release("ns", "auditor").notes

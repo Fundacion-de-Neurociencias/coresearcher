@@ -138,6 +138,23 @@ Both `run` commands are resumable. Expect several hours for the 200 searches. Co
 `unknown_mechanism_v3_raw.jsonl` and `unknown_mechanism_v3_results.json`, then update row 18 of the claims
 register with the criteria as they came out.
 
+## 6. Unknown-mechanism v4, PySR and language-model arms
+
+Protocol: [UNKNOWN_MECHANISM_V4_PROTOCOL.md](UNKNOWN_MECHANISM_V4_PROTOCOL.md). The oracle (O), library (L) and ridge
+(R) arms need only numpy and scipy and may already have run elsewhere. This job runs the PySR arm (P) and the local
+language-model arm (E), on real and null data. E uses `qwen2.5:14b-instruct-q4_K_M` from setup step 2.
+
+```bash
+python scripts/benchmarks/run_unknown_mechanism_v4.py run --arm P
+python scripts/benchmarks/run_unknown_mechanism_v4.py run --arm P --null
+FORMALIZER_BASE_URL=http://localhost:11434/v1 python scripts/benchmarks/run_unknown_mechanism_v4.py run --arm E
+FORMALIZER_BASE_URL=http://localhost:11434/v1 python scripts/benchmarks/run_unknown_mechanism_v4.py run --arm E --null
+python scripts/benchmarks/run_unknown_mechanism_v4.py score
+```
+
+Every `run` command is resumable. Commit `unknown_mechanism_v4_raw.jsonl` and `unknown_mechanism_v4_results.json`,
+then update the claims-register row for v4 with the criteria as they came out.
+
 ## What comes back to the repository
 
 Run files (`runs/`) stay on the Legion unless they contain no confidential text. Reports, hashes and claims-register

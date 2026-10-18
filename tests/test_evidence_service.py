@@ -149,6 +149,40 @@ def test_formal_hypothesis_with_consequences_and_rivals():
     assert any(e["relation"] == "discriminates" for e in graph["edges"])
 
 
+def test_premise_origin_is_reported_per_assumption_and_never_changes_the_verdict():
+    declared = dict(
+        HYPOTHESIS,
+        premise_provenance={
+            "group == 'non_carrier'": {"origin": "SYSTEM", "tested_against_data": True, "source": "agent run 7"}
+        },
+    )
+    graph = resolve({"target": {"type": "FORMAL_HYPOTHESIS", "hypothesis": declared}})
+    premise = next(n for n in graph["nodes"] if n["kind"] == "assumption")
+    assert premise["attributes"] == {"origin": "SYSTEM", "tested_against_data": True, "source": "agent run 7"}
+    assert "premise_untested" not in kinds(graph)
+    focus = next(n for n in graph["nodes"] if n["id"] == graph["focus"])
+    assert focus["attributes"]["premise_origins"] == {"SYSTEM": 1}
+
+    undeclared = resolve({"target": {"type": "FORMAL_HYPOTHESIS", "hypothesis": HYPOTHESIS}})
+    premise = next(n for n in undeclared["nodes"] if n["kind"] == "assumption")
+    assert premise["attributes"]["origin"] == "UNDECLARED" and "premise_untested" in kinds(undeclared)
+
+    def verdict(g):
+        return next(n["attributes"]["content_verdict"] for n in g["nodes"] if n["kind"] == "verification")
+
+    assert verdict(graph) == verdict(undeclared)  # provenance never decides validity
+    for bad in (
+        {"not an assumption": {"origin": "SYSTEM"}},
+        {"group == 'non_carrier'": {"origin": "ORACLE"}},
+        {"group == 'non_carrier'": {"tested_against_data": "yes"}},
+        ["SYSTEM"],
+    ):
+        with pytest.raises(ev.EvidenceRequestError):
+            ev.resolve(
+                {"target": {"type": "FORMAL_HYPOTHESIS", "hypothesis": dict(HYPOTHESIS, premise_provenance=bad)}}
+            )
+
+
 def test_formal_cases():
     ptau = resolve({"target": {"type": "FORMAL_CASE", "id": "ptau217_two_cutoff"}})
     assert {n["label"] for n in ptau["nodes"] if n["kind"] == "assumption"} == {
@@ -157,6 +191,8 @@ def test_formal_cases():
         "ordered_cutoffs",
     }
     assert "content_in_assumptions" in kinds(ptau) and "model_scope" in kinds(ptau)
+    assert kinds(ptau).count("premise_untested") == 3
+    assert {n["attributes"]["origin"] for n in ptau["nodes"] if n["kind"] == "assumption"} == {"LITERATURE"}
     rivals = resolve({"target": {"type": "FORMAL_CASE", "id": "alzheimer_rivals"}})
     assert len([n for n in rivals["nodes"] if n["kind"] == "rival"]) >= 2 and "draft" in kinds(rivals)
     with pytest.raises(ev.EvidenceRequestError):

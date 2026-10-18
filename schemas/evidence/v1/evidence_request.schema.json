@@ -21,7 +21,7 @@
         },
         "id": {"type": "string", "minLength": 1, "maxLength": 200},
         "text": {"type": "string", "minLength": 1, "maxLength": 1000},
-        "hypothesis": {"type": "object", "description": "A formal hypothesis object, as accepted by POST /api/hypotheses/evaluate."}
+        "hypothesis": {"type": "object", "description": "A formal hypothesis object, as accepted by POST /api/hypotheses/evaluate. Optional premise_provenance maps each assumption to {origin: SUPPLIED | LITERATURE | PERSON | SYSTEM | UNDECLARED, tested_against_data: boolean, source: string}. It is reported on the assumption nodes and never changes a verdict."}
       },
       "allOf": [
         {"if": {"properties": {"type": {"const": "FORMAL_HYPOTHESIS"}}}, "then": {"required": ["hypothesis"]}},

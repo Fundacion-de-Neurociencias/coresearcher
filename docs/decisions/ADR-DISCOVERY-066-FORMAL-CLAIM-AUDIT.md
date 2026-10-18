@@ -56,3 +56,12 @@ tool versions, each hashed, and it can be shipped as a research package (ADR-DIS
   designed in LEAN_ORACLE_PROTOCOL.md section 6 has not been built.
 - Expert reviews block in this template, unlike optional sign-offs elsewhere. Here they are the evidence of validity,
   not an approval.
+
+## Amendment (2026-10-18): premise origin
+
+A second optional REPORT check, `report.premise_origin`, records where each premise of the claim came from (supplied
+in the input, literature, a person, or introduced by the system) and whether data tested it. Like
+`report.provenance`, it never blocks and never decides validity. The release notes state it, or state that it was
+not declared. It answers a different question from validity: whether the result shows that a system proposed its
+own premises, or only reasoned from premises it was given. The EvidenceGraph reports the same information on each
+premise ([ADR-DISCOVERY-067](ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md), amendment).

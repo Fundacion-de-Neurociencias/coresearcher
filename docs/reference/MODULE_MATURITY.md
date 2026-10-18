@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 16 |
+| Integrated | Used by the API and covered by tests | 17 |
 | Tested | Covered by tests, not reachable from the API | 26 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -43,6 +43,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `epistemic_stigmergy` | Tested | - | yes | yes |
 | `epistemic_trajectory` | Prototype | - | - | - |
 | `era_empirical_engine` | Tested | - | yes | - |
+| `evidence_service` | Integrated | yes | yes | - |
 | `exact_symbolic_court` | Tested | - | yes | - |
 | `failure_engine` | Exercised | - | - | yes |
 | `fast_system_one_classifier` | Tested | - | yes | yes |

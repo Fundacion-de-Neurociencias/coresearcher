@@ -95,7 +95,15 @@ Input:  EvidenceRequest
 Output: EvidenceGraph
 ```
 
-###EvidenceRequest
+> **Implemented contract (2026-10-18).** The fields below are the original design. The contract CoResearcher
+> implements is `coresearcher.evidence/v1`: JSON Schemas in [`schemas/evidence/v1/`](../../schemas/evidence/v1),
+> endpoint `POST /api/evidence/requests`, decision in
+> [ADR-DISCOVERY-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md). A request names a target
+> CoResearcher holds (lifecycle project, research package, registered claim, formal hypothesis, formal case or free
+> question) instead of `target_claim`, and the graph carries no confidence scores, because CoResearcher has no
+> calibrated method that would produce them. Gaps and provenance are implemented as described.
+
+### EvidenceRequest
 
 Structured request for scientific evidence. Must include:
 
@@ -104,7 +112,7 @@ Structured request for scientific evidence. Must include:
 - **minimum_confidence**: Minimum confidence threshold (0.0 - 1.0)
 - **provenance_required**: Boolean - if full traceability is required
 
-###EvidenceGraph
+### EvidenceGraph
 
 Evidence graph with complete traceability. Must include:
 

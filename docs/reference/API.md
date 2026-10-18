@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 109. Interactive documentation is served at `/docs` when the API runs.
+Operations: 116. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -11,6 +11,7 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | Method | Path | Auth | Operation |
 | --- | --- | --- | --- |
 | `POST` | `/api/audit/evidence` | API key | Audit Empirical Evidence |
+| `GET` | `/api/capabilities` | Public | Capabilities |
 | `POST` | `/api/discovery/ablation-rebuttal/run` | API key | Run Ablation And Rebuttal |
 | `POST` | `/api/discovery/adversarial/run-destruction-test` | API key | Run Adversarial Destruction Test |
 | `POST` | `/api/discovery/anomalies/detect-and-cluster` | API key | Detect And Cluster Anomalies |
@@ -94,6 +95,10 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/discovery/workbench/launch` | API key | Launch Discovery Workbench |
 | `GET` | `/api/discovery/workbench/{workbench_id}` | Public | Get Discovery Workbench |
 | `POST` | `/api/discovery/world-model/simulate` | API key | Simulate World Model Intervention |
+| `GET` | `/api/evidence/graphs/{graph_id}` | Public | Get Evidence Graph |
+| `POST` | `/api/evidence/requests` | API key | Resolve Evidence Request |
+| `GET` | `/api/evidence/schema` | Public | Evidence Schema |
+| `GET` | `/api/evidence/targets` | Public | Evidence Targets |
 | `GET` | `/api/health` | Public | Health Check |
 | `POST` | `/api/hypotheses/compare` | API key | Compare Formal Hypotheses |
 | `POST` | `/api/hypotheses/entails` | API key | Check Formal Consequence |
@@ -101,7 +106,9 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/hypotheses/formalize` | API key | Formalize Hypothesis |
 | `GET` | `/api/hypotheses/scenarios/alzheimer` | Public | Alzheimer Formal Scenario Report |
 | `GET` | `/api/lifecycle/ontrack` | Public | Lifecycle Ontrack Status |
+| `GET` | `/api/lifecycle/packages` | Public | List Published Packages |
 | `POST` | `/api/lifecycle/packages/inspect` | API key | Inspect Lifecycle Package |
+| `GET` | `/api/lifecycle/packages/{name}` | Public | Download Published Package |
 | `GET` | `/api/lifecycle/projects` | Public | List Lifecycle Projects |
 | `POST` | `/api/lifecycle/projects` | API key | Create Lifecycle Project |
 | `GET` | `/api/lifecycle/projects/{project_id}` | Public | Get Lifecycle Project |

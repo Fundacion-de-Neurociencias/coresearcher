@@ -14,6 +14,7 @@ from api.schemas import (
     LifecycleReworkRequest,
 )
 from api.security import require_api_key
+from python.discovery.evidence_service import PACKAGES_DIR, list_packages
 from python.discovery.research_lifecycle import (
     ActorRole,
     LifecycleError,
@@ -186,3 +187,25 @@ async def inspect_lifecycle_package(request: Request):
         return import_package(data).summary()
     except PackageError as exc:
         return {"valid": False, "error": str(exc)}
+
+
+@router.get("/api/lifecycle/packages")
+def list_published_packages():
+    """Research packages published in docs/reference/packages, with the digests listed in the package index."""
+    return {"packages": list_packages()}
+
+
+@router.get("/api/lifecycle/packages/{name}")
+def download_published_package(name: str):
+    """A published research package, byte for byte. Published packages are public, so no key is needed."""
+    published = {p["name"]: p for p in list_packages()}
+    if name not in published:
+        raise HTTPException(status_code=404, detail=f"No published package {name!r}.")
+    return Response(
+        content=(PACKAGES_DIR / name).read_bytes(),
+        media_type="application/gzip",
+        headers={
+            "Content-Disposition": f'attachment; filename="{name}"',
+            "X-Package-SHA256": published[name]["sha256"],
+        },
+    )

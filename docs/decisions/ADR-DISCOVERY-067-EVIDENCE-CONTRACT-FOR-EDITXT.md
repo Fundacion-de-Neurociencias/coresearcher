@@ -103,6 +103,29 @@ DataAILab keeps port 8000 and calls CoResearcher on **port 8001** (`CORESEARCHER
 - Evidence requests need the API key, like every POST, because formal checks can be expensive. EdiTXT holds the key
   on its server and never sends it to the browser.
 
+## Amendment (2026-10-18): premise origin
+
+A formal result is only as good as its premises. The pTau217 case shows it: the rule is PROVED but UNFALSIFIABLE,
+because the claims follow from the assumptions alone. Its empirical content therefore lies entirely in the premises,
+which is the abductive part of the work. Graphs now say where each premise came from:
+
+- Every premise is an `assumption` node, linked to its hypothesis or formal case by `requires`. Each node carries:
+  - `origin`: `SUPPLIED` (given in the input), `LITERATURE`, `PERSON`, `SYSTEM` (introduced by CoResearcher or an
+    agent) or `UNDECLARED`;
+  - `tested_against_data`;
+  - `source`.
+- A hypothesis object can declare these in `premise_provenance`. Undeclared premises are reported as `UNDECLARED` and
+  untested, never guessed. The premises of the pTau217 and ED polarity cases come from the cited literature and have
+  not been tested against data by CoResearcher.
+- Each untested premise is a `premise_untested` gap. The focus node summarises the origins (`premise_origins`).
+- **Origin never changes a verdict.** Validity does not depend on who proposed a premise. What origin does show is
+  how much a result says about the system's own ability to propose premises; this follows ADR-DISCOVERY-066.
+  `SYSTEM` premises confirmed by data are the evidence that a system made what Zahavy (ICML 2026) calls the "jump".
+  The unknown-mechanism v4 benchmark measures that directly.
+
+The `formal-claim` template gains the matching optional check `report.premise_origin`
+([ADR-DISCOVERY-066](ADR-DISCOVERY-066-FORMAL-CLAIM-AUDIT.md), amendment).
+
 ## Verification
 
 `tests/test_evidence_service.py` validates every target type against both JSON Schemas, checks that edges and gaps

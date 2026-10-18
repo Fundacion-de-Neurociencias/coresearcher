@@ -1,0 +1,258 @@
+{
+  "protocol": "docs/reference/benchmarks/UNKNOWN_MECHANISM_V4_PROTOCOL.md",
+  "protocol_sha256": "22d1e1ee5641d0e27b4c50562362bcc54b10cea7e8cc1ed15cedfeeec625e9ee",
+  "validity": {
+    "oracle_mean_test_r2": 0.989627094698129,
+    "oracle_recovered": 98,
+    "met": true
+  },
+  "arms": {
+    "O": {
+      "real": {
+        "mean_test_r2": 0.989627094698129,
+        "bootstrap_95": [
+          0.9853258859202,
+          0.9934234689423268
+        ],
+        "recovered": 98,
+        "recovery_wilson_95": [
+          0.929988209271456,
+          0.9944980324498376
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": 0.998614798000196,
+            "recovered": 25,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": 0.993366001806399,
+            "recovered": 23,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": 0.9940288048609961,
+            "recovered": 25,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": 0.9724987741249251,
+            "recovered": 25,
+            "worlds": 25
+          }
+        }
+      },
+      "null": {
+        "mean_test_r2": -0.8875060164342844,
+        "bootstrap_95": [
+          -1.3808519378592223,
+          -0.46037835378489084
+        ],
+        "recovered": 0,
+        "recovery_wilson_95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": -0.4731781406585929,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": -2.733786443184073,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": -0.22578125581308403,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": -0.11727822608138787,
+            "recovered": 0,
+            "worlds": 25
+          }
+        }
+      },
+      "null_gate_passed": true,
+      "J_met": true
+    },
+    "L": {
+      "real": {
+        "mean_test_r2": -2.4620414114965943,
+        "bootstrap_95": [
+          -3.2651574354752104,
+          -1.6761039535717244
+        ],
+        "recovered": 6,
+        "recovery_wilson_95": [
+          0.027786123963188192,
+          0.1247681544589592
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": -7.4885365509482265,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": 0.4983956513706652,
+            "recovered": 5,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": -0.7052817086580384,
+            "recovered": 1,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": -2.152743037750778,
+            "recovered": 0,
+            "worlds": 25
+          }
+        }
+      },
+      "null": {
+        "mean_test_r2": -1.2892806409910675,
+        "bootstrap_95": [
+          -1.7638999596635447,
+          -0.8648207720245036
+        ],
+        "recovered": 0,
+        "recovery_wilson_95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": -1.258261901974,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": -1.1244968494652448,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": -1.7467623702313722,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": -1.0276014422936532,
+            "recovered": 0,
+            "worlds": 25
+          }
+        }
+      },
+      "null_gate_passed": true,
+      "J_met": false
+    },
+    "R": {
+      "real": {
+        "mean_test_r2": -3.4789047694675834,
+        "bootstrap_95": [
+          -4.416418421426949,
+          -2.571404619680987
+        ],
+        "recovered": 4,
+        "recovery_wilson_95": [
+          0.01566330399154762,
+          0.0983707143588792
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": -9.875246085653522,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": 0.5024298319710754,
+            "recovered": 2,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": -0.8528717208561808,
+            "recovered": 2,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": -3.6899311033317037,
+            "recovered": 0,
+            "worlds": 25
+          }
+        }
+      },
+      "null": {
+        "mean_test_r2": -0.2922492808330104,
+        "bootstrap_95": [
+          -0.4610060331613215,
+          -0.1559081992440943
+        ],
+        "recovered": 0,
+        "recovery_wilson_95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ],
+        "by_archetype": {
+          "ABS_KINK": {
+            "mean_test_r2": -0.25041377318913915,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "FRACTIONAL_POWER": {
+            "mean_test_r2": -0.5899851426298229,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "LOG_SATURATION": {
+            "mean_test_r2": -0.20102112889084542,
+            "recovered": 0,
+            "worlds": 25
+          },
+          "SAWTOOTH": {
+            "mean_test_r2": -0.127577078622234,
+            "recovered": 0,
+            "worlds": 25
+          }
+        }
+      },
+      "null_gate_passed": true,
+      "J_met": false
+    },
+    "P": {
+      "real": {
+        "status": "not run"
+      },
+      "null": {
+        "status": "not run"
+      }
+    },
+    "E": {
+      "real": {
+        "status": "not run"
+      },
+      "null": {
+        "status": "not run"
+      }
+    }
+  },
+  "extrapolation": {
+    "R - L": {
+      "mean_delta_r2": -1.0168633579709885,
+      "bootstrap_95": [
+        -1.7840407652783963,
+        -0.25691939001996084
+      ]
+    },
+    "P - L": {
+      "status": "not run"
+    },
+    "E - L": {
+      "status": "not run"
+    }
+  }
+}

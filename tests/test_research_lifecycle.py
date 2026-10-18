@@ -391,3 +391,21 @@ def test_formal_claim_template_separates_validity_from_provenance():
     satisfy(svc, "ns", Stage.REPORT, skip={"report.provenance"})
     svc.pass_gate("ns", "auditor")
     assert "Provenance (does not affect validity): not declared" in svc.release("ns", "auditor").notes
+
+
+def test_formal_claim_premise_origin_is_reported_and_never_blocks():
+    svc = service()
+    svc.create_project("po", "Claimed discovery", template="formal-claim")
+    run_to(svc, "po", Stage.REPORT)
+    satisfy(svc, "po", Stage.REPORT, skip={"report.premise_origin"})
+    svc.pass_gate("po", "auditor")
+    notes = svc.release("po", "auditor").notes
+    assert "Premise origin (does not affect validity): not declared" in notes
+    assert "Provenance (does not affect validity): `runs/report.provenance.json`" in notes
+
+    svc.create_project("po2", "Claimed discovery, premises declared", template="formal-claim")
+    run_all(svc, "po2")
+    assert (
+        "Premise origin (does not affect validity): `runs/report.premise_origin.json`"
+        in svc.release("po2", "auditor").notes
+    )

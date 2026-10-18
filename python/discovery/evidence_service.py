@@ -49,6 +49,8 @@ TARGET_TYPES = (
 FORMAL_CASES = ("ptau217_two_cutoff", "alzheimer_rivals", "ed_polarity")
 MAX_RIVALS = 5
 MAX_CONSEQUENCES = 10
+# Where a premise came from. Provenance only: it never changes a verdict (ADR-DISCOVERY-066, ADR-DISCOVERY-067).
+PREMISE_ORIGINS = ("SUPPLIED", "LITERATURE", "PERSON", "SYSTEM", "UNDECLARED")
 
 
 class EvidenceRequestError(ValueError):
@@ -340,6 +342,64 @@ def _registered_claim(g: _Graph, row: str) -> str:
     return rid
 
 
+def _premise_provenance(spec: Dict[str, Any], assumptions: List[str]) -> Dict[str, Dict[str, Any]]:
+    """Reads the optional `premise_provenance` of a hypothesis object: for each assumption, its origin, whether data
+    tested it, and a source. Undeclared assumptions are reported as UNDECLARED and untested, never guessed.
+    """
+    raw = spec.get("premise_provenance") or {}
+    if not isinstance(raw, dict):
+        raise EvidenceRequestError(
+            "premise_provenance must map each assumption to {origin, tested_against_data, source}."
+        )
+    unknown = set(raw) - set(assumptions)
+    if unknown:
+        raise EvidenceRequestError(
+            f"premise_provenance names assumptions the hypothesis does not have: {sorted(unknown)}."
+        )
+    out = {}
+    for assumption in assumptions:
+        entry = raw.get(assumption) or {}
+        if not isinstance(entry, dict):
+            raise EvidenceRequestError(f"premise_provenance for {assumption!r} must be an object.")
+        origin = entry.get("origin", "UNDECLARED")
+        if origin not in PREMISE_ORIGINS:
+            raise EvidenceRequestError(f"Premise origin must be one of {list(PREMISE_ORIGINS)}.")
+        tested = entry.get("tested_against_data", False)
+        if not isinstance(tested, bool):
+            raise EvidenceRequestError("tested_against_data must be true or false.")
+        out[assumption] = {
+            "origin": origin,
+            "tested_against_data": tested,
+            "source": str(entry.get("source", ""))[:300],
+        }
+    return out
+
+
+def _premise_nodes(g: _Graph, owner: str, owner_id: str, premises: Dict[str, Dict[str, Any]], extra=None) -> None:
+    """One assumption node per premise, linked by `requires`, and a gap for each premise no data has tested."""
+    for name, provenance in premises.items():
+        attrs = {**(extra or {}).get(name, {}), **provenance}
+        aid = g.node(f"assumption:{owner_id}:{name}", "assumption", name, **attrs)
+        why = f"Premise of {owner_id}, origin {provenance['origin'].lower()}"
+        if "necessity" in attrs:
+            why += f"; dropping it breaks the proof: {attrs['necessity']}"
+        g.edge(owner, aid, "requires", why + ".")
+        if not provenance["tested_against_data"]:
+            g.gap(
+                "premise_untested",
+                f"The premise {name!r} ({provenance['origin'].lower()}) has not been tested against data. "
+                "Its origin does not affect validity; whether it holds does.",
+                aid,
+            )
+
+
+def _origin_summary(premises: Dict[str, Dict[str, Any]]) -> Dict[str, int]:
+    summary: Dict[str, int] = {}
+    for provenance in premises.values():
+        summary[provenance["origin"]] = summary.get(provenance["origin"], 0) + 1
+    return dict(sorted(summary.items()))
+
+
 def _hypothesis_graph(g: _Graph, spec: Dict[str, Any], consequences: List[str], rivals: List[Dict[str, Any]]) -> str:
     from python.discovery.formal_hypothesis import FormalHypothesisError, HypothesisEvaluator, hypothesis_from_dict
     from python.discovery.formal_lean import consequence_theorem
@@ -349,14 +409,16 @@ def _hypothesis_graph(g: _Graph, spec: Dict[str, Any], consequences: List[str], 
         report = HypothesisEvaluator.evaluate(hypothesis, max_examples=3)
     except FormalHypothesisError as exc:
         raise EvidenceRequestError(f"The formal hypothesis is invalid: {exc}") from exc
+    premises = _premise_provenance(spec, [p.expression for p in hypothesis._assumptions])
     hid = g.node(
         f"hypothesis:{hypothesis.hypothesis_id}",
         "formal_hypothesis",
         hypothesis.hypothesis_id,
         variables=hypothesis.variable_names,
         claims=[p.expression for p in hypothesis._claims],
-        assumptions=[p.expression for p in hypothesis._assumptions],
+        premise_origins=_origin_summary(premises),
     )
+    _premise_nodes(g, hid, hypothesis.hypothesis_id, premises)
     verdict = report.content_verdict.value
     vid = g.node(
         f"verdict:{hypothesis.hypothesis_id}",
@@ -476,9 +538,12 @@ def _formal_case(g: _Graph, case: str) -> str:
                 "empirical content lies in the assumptions, which must be checked against data.",
                 vid,
             )
-        for assumption, necessity in sorted(report["necessity"].items()):
-            aid = g.node(f"assumption:{case}:{assumption}", "assumption", assumption, necessity=necessity)
-            g.edge(kid, aid, "requires", f"Dropping it breaks the proof: {necessity}.")
+        premises = {
+            name: {"origin": "LITERATURE", "tested_against_data": False, "source": report["source"]}
+            for name in sorted(report["necessity"])
+        }
+        g.nodes[kid]["attributes"]["premise_origins"] = _origin_summary(premises)
+        _premise_nodes(g, kid, case, premises, {n: {"necessity": v} for n, v in report["necessity"].items()})
         g.gap(
             "model_scope",
             "A formal case shows the claim holds under its stated assumptions; whether patients "
@@ -540,10 +605,13 @@ def _formal_case(g: _Graph, case: str) -> str:
             status=item.get("status"),
         )
         g.edge(kid, vid, "verified_by", "Decided for this network size.")
-    for name, necessity in sorted((report.get("assumption_necessity") or {}).items()):
-        if isinstance(necessity, str):
-            aid = g.node(f"assumption:{case}:{name}", "assumption", name, necessity=necessity)
-            g.edge(kid, aid, "requires", necessity)
+    necessity = {n: v for n, v in sorted((report.get("assumption_necessity") or {}).items()) if isinstance(v, str)}
+    premises = {
+        name: {"origin": "LITERATURE", "tested_against_data": False, "source": str(report.get("source", ""))}
+        for name in necessity
+    }
+    g.nodes[kid]["attributes"]["premise_origins"] = _origin_summary(premises)
+    _premise_nodes(g, kid, case, premises, {n: {"necessity": v} for n, v in necessity.items()})
     return kid
 
 

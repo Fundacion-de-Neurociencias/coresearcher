@@ -12,7 +12,7 @@ from api.schemas import (
     FormalizeHypothesisRequest,
 )
 from api.security import require_api_key
-from python.discovery import alzheimer_formal_scenario
+from python.discovery import alzheimer_formal_scenario, formal_thresholds
 from python.discovery.formal_hypothesis import (
     FormalHypothesisError,
     Hypothesis,
@@ -20,13 +20,8 @@ from python.discovery.formal_hypothesis import (
     hypothesis_from_dict,
 )
 from python.discovery.formal_lean import consequence_theorem
-from python.discovery.formalization_gate import (
-    DEFAULT_SAMPLES,
-    DEFAULT_TEMPERATURE,
-    MAX_SAMPLES,
-    GateResult,
-    formalize_gated,
-)
+from python.discovery.formal_status import FormalStatus, relay
+from python.discovery.formalization_gate import GateResult, formalize_gated
 from python.discovery.formalizer import ChatClient
 
 router = APIRouter()
@@ -76,7 +71,8 @@ def check_formal_consequence(req: FormalConsequenceRequest):
         payload = result.to_dict()
         if req.include_lean:
             payload["lean_theorem"] = consequence_theorem(hypothesis, req.consequence)
-            payload["lean_status"] = "NOT_KERNEL_CHECKED"
+            payload["lean_status"] = FormalStatus.NOT_KERNEL_CHECKED.value
+            payload["mandatory_relays"] = payload["mandatory_relays"] + [relay("LEAN_NOT_KERNEL_CHECKED")]
     except FormalHypothesisError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return payload
@@ -107,12 +103,14 @@ def formal_block(hypothesis: Hypothesis, rivals: list) -> dict:
 
 
 def _gate_samples(requested) -> int:
+    max_samples = formal_thresholds.get("gate_max_samples")
+    default = formal_thresholds.get("gate_samples")
     if requested is not None:
-        return max(1, min(MAX_SAMPLES, requested))
+        return max(1, min(max_samples, requested))
     try:
-        return max(1, min(MAX_SAMPLES, int(os.getenv("FORMALIZER_SAMPLES", DEFAULT_SAMPLES))))
+        return max(1, min(max_samples, int(os.getenv("FORMALIZER_SAMPLES", default))))
     except ValueError:
-        return DEFAULT_SAMPLES
+        return default
 
 
 def run_formalizer(prose: str, hypothesis_id: str, schema, samples=None) -> GateResult:
@@ -129,8 +127,8 @@ def run_formalizer(prose: str, hypothesis_id: str, schema, samples=None) -> Gate
         else:
             client = ChatClient()
             clients = {getattr(client, "model", "") or "default": client}
-        temperature = float(os.getenv("FORMALIZER_GATE_TEMPERATURE", DEFAULT_TEMPERATURE))
-    except ValueError as exc:
+        temperature = float(os.getenv("FORMALIZER_GATE_TEMPERATURE", formal_thresholds.get("gate_temperature")))
+    except (ValueError, formal_thresholds.ThresholdError) as exc:
         raise HTTPException(status_code=503, detail=f"Formalizer not configured: {exc}") from exc
     try:
         return formalize_gated(prose, clients, _gate_samples(samples), hypothesis_id, schema, temperature)

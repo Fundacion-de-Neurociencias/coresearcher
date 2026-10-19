@@ -23,9 +23,12 @@ from typing import Any, Dict, List, Optional
 
 import z3
 
-from python.discovery.formal_hypothesis import FormalHypothesisError, Predicate
+from python.discovery import formal_thresholds
+from python.discovery.formal_hypothesis import FormalHypothesisError, Predicate, SolverUndecided
 
-SOLVER_TIMEOUT_MS = 10_000  # Per solver call; on timeout the question is reported as undecided, never answered.
+# Versioned default; the value in force is the threshold solver_timeout_ms (ADR-DISCOVERY-068). Per solver call; on
+# timeout the question is reported as UNDECIDED, never answered.
+SOLVER_TIMEOUT_MS = formal_thresholds.FORMAL_DEFAULTS.values["solver_timeout_ms"]
 
 _ARITH = {
     ast.Add: lambda a, b: a + b,
@@ -239,7 +242,7 @@ class _Translator:
 
 def _solver():
     solver = z3.Solver()
-    solver.set("timeout", SOLVER_TIMEOUT_MS)
+    solver.set("timeout", int(formal_thresholds.get("solver_timeout_ms")))
     return solver
 
 
@@ -249,7 +252,7 @@ def satisfiable(*formulas) -> Optional[Any]:
     solver.add(*formulas)
     result = solver.check()
     if result == z3.unknown:
-        raise FormalHypothesisError(f"The SMT solver could not decide the formula ({solver.reason_unknown()}).")
+        raise SolverUndecided(f"The SMT solver could not decide the formula ({solver.reason_unknown()}).")
     return solver.model() if result == z3.sat else None
 
 
@@ -261,7 +264,7 @@ def models(formula, table: SymbolTable, limit: int) -> List[Dict[str, Any]]:
     while len(found) < limit:
         result = solver.check()
         if result == z3.unknown:
-            raise FormalHypothesisError(f"The SMT solver could not decide the formula ({solver.reason_unknown()}).")
+            raise SolverUndecided(f"The SMT solver could not decide the formula ({solver.reason_unknown()}).")
         if result == z3.unsat:
             break
         model = solver.model()

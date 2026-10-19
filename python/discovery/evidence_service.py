@@ -34,6 +34,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
+from python.discovery.formal_provenance import canonical
+
 SCHEMA = "coresearcher.evidence/v1"
 ROOT = Path(__file__).resolve().parent.parent.parent
 PACKAGES_DIR = ROOT / "docs" / "reference" / "packages"
@@ -76,7 +78,8 @@ class _Graph:
 
 
 def _canonical(data: Any) -> bytes:
-    return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, default=str).encode("utf-8")
+    """The ADR-067 canonical JSON, defined once in formal_provenance and shared with formal verdicts (ADR-068)."""
+    return canonical(data)
 
 
 def _sha256_file(path: Path) -> str:

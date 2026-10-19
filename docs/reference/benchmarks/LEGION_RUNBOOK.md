@@ -172,6 +172,8 @@ python scripts/benchmarks/run_counterexample_search.py run --arm P
 python scripts/benchmarks/run_counterexample_search.py score
 ```
 
+- This job cannot run from the cloud sandbox: it has no access to `ollama.com` or `huggingface.co`, so the model must be
+  pulled on the Legion, which has network access. If `ollama list` does not show the tag above, run `ollama pull` first.
 - `run` is resumable. It skips items already recorded under the same protocol hash, so an interrupted job can simply be
   restarted with the same command.
 - Check first that the corpus and the protocol are unchanged: `python scripts/benchmarks/run_counterexample_search.py

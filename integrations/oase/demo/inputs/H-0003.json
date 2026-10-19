@@ -1,0 +1,35 @@
+{
+  "id": "H-0003",
+  "title": "[Illustrative] TREM2 agonism rescues dystrophy even without functional TREM2",
+  "statement": "In TREM2 loss-of-function carriers, a TREM2 agonist reduces neuritic dystrophy relative to vehicle, although microglia without functional TREM2 cannot respond to TREM2 ligands.",
+  "mechanism": "Combination of H-0001 and H-0002 by an evolution operator: keeps the dystrophy reduction and the receptor requirement, and moves both to loss-of-function carriers.",
+  "predictions": [
+    "TREM2 loss-of-function, agonist: dystrophy decreases vs vehicle."
+  ],
+  "experiments": [
+    {
+      "design": "Amyloid-positive mouse model, TREM2-normal and TREM2 loss-of-function arms, early and late stage, agonist antibody vs vehicle.",
+      "readout": "Neuritic dystrophy (LAMP1+ dystrophic neurites per plaque) relative to vehicle.",
+      "est_difficulty": "med"
+    }
+  ],
+  "evidence": [
+    {
+      "lit_id": "ILLUSTRATIVE-NO-LITERATURE",
+      "role": "constrains",
+      "note": "Illustrative demo hypothesis. No literature was consulted and none is claimed; the formal check never reads this field."
+    }
+  ],
+  "focus_area": "Illustrative Stage 1 target: TREM2 agonism in amyloid pathology (CoResearcher OASE adapter demo)",
+  "lineage": {
+    "parents": [
+      "H-0001",
+      "H-0002"
+    ],
+    "operator": "combine"
+  },
+  "status": "proposed",
+  "created_by": "illustrative-author",
+  "epoch": 0,
+  "created_at": "2026-10-19T00:00:00Z"
+}

@@ -1,0 +1,42 @@
+{
+  "hypothesis_id": "H-0004",
+  "variables": [
+    {
+      "name": "stage",
+      "domain": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "name": "trem2_function",
+      "domain": [
+        "normal",
+        "loss"
+      ]
+    },
+    {
+      "name": "treatment",
+      "domain": [
+        "agonist",
+        "vehicle"
+      ]
+    },
+    {
+      "name": "dystrophy_change",
+      "domain": [
+        "decrease",
+        "none",
+        "increase"
+      ]
+    }
+  ],
+  "scope": null,
+  "assumptions": [
+    "treatment != 'vehicle' or dystrophy_change == 'none'"
+  ],
+  "claims": [
+    "dystrophy_change in ('decrease', 'none', 'increase')"
+  ],
+  "statement": "TREM2 agonism modulates neuritic dystrophy: depending on stage and TREM2 status, dystrophy may decrease, stay unchanged or increase relative to vehicle."
+}

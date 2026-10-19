@@ -1,0 +1,68 @@
+{
+  "schema": "oase.formal-request.v1",
+  "transport": "package",
+  "hypothesis": {
+    "kind": "hypex",
+    "id": "H-0004",
+    "title": "[Illustrative] TREM2 agonism modulates neuritic dystrophy in a context-dependent way",
+    "statement": "TREM2 agonism modulates neuritic dystrophy: depending on stage and TREM2 status, dystrophy may decrease, stay unchanged or increase relative to vehicle.",
+    "source": "inputs/H-0004.json",
+    "source_sha256": "9b728aac5d599ed4bf7bc80d26c7620e997fceb08461a237f2ae2f92228bb41b"
+  },
+  "coresearcher_request": {
+    "schema": "coresearcher.formal.request/v1",
+    "input_kind": "formal",
+    "hypothesis": {
+      "hypothesis_id": "H-0004",
+      "variables": [
+        {
+          "name": "stage",
+          "domain": [
+            "early",
+            "late"
+          ]
+        },
+        {
+          "name": "trem2_function",
+          "domain": [
+            "normal",
+            "loss"
+          ]
+        },
+        {
+          "name": "treatment",
+          "domain": [
+            "agonist",
+            "vehicle"
+          ]
+        },
+        {
+          "name": "dystrophy_change",
+          "domain": [
+            "decrease",
+            "none",
+            "increase"
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [
+        "treatment != 'vehicle' or dystrophy_change == 'none'"
+      ],
+      "claims": [
+        "dystrophy_change in ('decrease', 'none', 'increase')"
+      ],
+      "statement": "TREM2 agonism modulates neuritic dystrophy: depending on stage and TREM2 status, dystrophy may decrease, stay unchanged or increase relative to vehicle."
+    },
+    "prose": null,
+    "hypothesis_id": "H-0004",
+    "variable_schema": null,
+    "rivals": [],
+    "consequences": [],
+    "observations": [],
+    "max_examples": 5,
+    "backend": "auto",
+    "samples": null,
+    "include_lean": false
+  }
+}

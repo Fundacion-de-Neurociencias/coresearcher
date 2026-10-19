@@ -1,0 +1,33 @@
+{
+  "id": "H-0002",
+  "title": "[Illustrative] TREM2 agonism helps only once plaques are established",
+  "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2.",
+  "mechanism": "Early plaques are already compacted by baseline TREM2 signalling, so extra agonism adds nothing; late, signalling is saturated by soluble TREM2 and agonism restores it.",
+  "predictions": [
+    "Early stage, TREM2-normal: no change vs vehicle.",
+    "Late stage, TREM2-normal: agonist reduces dystrophy vs vehicle."
+  ],
+  "experiments": [
+    {
+      "design": "Amyloid-positive mouse model, TREM2-normal and TREM2 loss-of-function arms, early and late stage, agonist antibody vs vehicle.",
+      "readout": "Neuritic dystrophy (LAMP1+ dystrophic neurites per plaque) relative to vehicle.",
+      "est_difficulty": "med"
+    }
+  ],
+  "evidence": [
+    {
+      "lit_id": "ILLUSTRATIVE-NO-LITERATURE",
+      "role": "constrains",
+      "note": "Illustrative demo hypothesis. No literature was consulted and none is claimed; the formal check never reads this field."
+    }
+  ],
+  "focus_area": "Illustrative Stage 1 target: TREM2 agonism in amyloid pathology (CoResearcher OASE adapter demo)",
+  "lineage": {
+    "parents": [],
+    "operator": "null"
+  },
+  "status": "proposed",
+  "created_by": "illustrative-author",
+  "epoch": 0,
+  "created_at": "2026-10-19T00:00:00Z"
+}

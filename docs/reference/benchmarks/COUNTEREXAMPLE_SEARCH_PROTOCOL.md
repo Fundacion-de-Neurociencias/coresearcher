@@ -93,7 +93,7 @@ do not change after any result is seen.
 
 Script: `scripts/benchmarks/run_counterexample_search.py`, with `run --arm E|R|P [--worlds a-b]` and `score`, resumable
 like the v4 benchmark. Arms E and R need only the standard library and the formal predicate module. Arm P needs a local
-model (`FORMALIZER_BASE_URL`, `FORMALIZER_MODEL`) and runs on the Legion (runbook, section 7 of LEGION_RUNBOOK.md).
+model (`FORMALIZER_BASE_URL`, `FORMALIZER_MODEL`) and runs on the Legion (runbook, section 7).
 
 ## 9. Revision history
 

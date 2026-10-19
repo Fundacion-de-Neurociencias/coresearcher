@@ -276,7 +276,7 @@
       "api": true,
       "level": "Integrated",
       "module": "formal_thresholds",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

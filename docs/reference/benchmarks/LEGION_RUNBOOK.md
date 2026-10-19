@@ -155,6 +155,38 @@ python scripts/benchmarks/run_unknown_mechanism_v4.py score
 Every `run` command is resumable. Commit `unknown_mechanism_v4_raw.jsonl` and `unknown_mechanism_v4_results.json`,
 then update the claims-register row for v4 with the criteria as they came out.
 
+## 7. Counterexample search, proposer arm (P)
+
+Protocol: [COUNTEREXAMPLE_SEARCH_PROTOCOL.md](COUNTEREXAMPLE_SEARCH_PROTOCOL.md). Arms E (exact evaluator) and R (random
+search) have already run here, and their raw records are committed. This job runs only arm P, the local language model
+proposing states. It does not change the protocol, the corpus or the scoring. If anything in this section conflicts
+with the protocol, the protocol wins, and the session stops and reports the conflict.
+
+```bash
+git pull origin claude/stoic-turing-eb2nk2
+. .venv/bin/activate                            # the venv from section 0
+export FORMALIZER_BASE_URL=http://localhost:11434/v1
+export FORMALIZER_MODEL=qwen2.5:14b-instruct-q4_K_M
+ollama pull qwen2.5:14b-instruct-q4_K_M        # the same tag as the formalizer benchmark
+python scripts/benchmarks/run_counterexample_search.py run --arm P
+python scripts/benchmarks/run_counterexample_search.py score
+```
+
+- `run` is resumable. It skips items already recorded under the same protocol hash, so an interrupted job can simply be
+  restarted with the same command.
+- Check first that the corpus and the protocol are unchanged: `python scripts/benchmarks/run_counterexample_search.py
+  score` must print the validity block for E and R before the P run starts. Its protocol hash must match the one in the
+  committed results file.
+- Expect about 200 items × 5 model calls. Each call should take well under a minute on this machine; if one call
+  takes longer, let it finish, do not change timeouts or prompts.
+- Do not edit the prompt, the seeds or the budget. Do not drop items. A failed call is recorded as no candidates for that
+  call, which the script already does; report the count of failed calls, do not retry them by hand.
+
+Commit `counterexample_raw.jsonl` (the P rows are appended to the same file) and `counterexample_results.json`, then
+update the claims-register row for this benchmark with the criteria as they came out. Report the four numbers the
+scoring prints: detection on planted items for P, R and E, the false detections on correct items (must be 0), and the
+criteria A and S with their intervals. Do not report a result that the scoring does not produce.
+
 ## What comes back to the repository
 
 Run files (`runs/`) stay on the Legion unless they contain no confidential text. Reports, hashes and claims-register

@@ -1,0 +1,40 @@
+{
+  "protocol_sha256": "23ee52646913a3e87bf8bc25067700d74fd3c2957ab6f86e577e1a3ec7c4c708",
+  "validity": {
+    "false_detections_correct": {
+      "E": 0,
+      "R": 0
+    },
+    "met": true
+  },
+  "arms": {
+    "E": {
+      "detection_planted": 0.0,
+      "detection_planted_wilson_95": [
+        3.469446951953614e-18,
+        0.03699349820698568
+      ],
+      "false_detection_correct": 0.0,
+      "false_detections_correct": 0,
+      "proposals": 0,
+      "confirmed": 0,
+      "confirmation_rate": 0.0
+    },
+    "R": {
+      "detection_planted": 0.46,
+      "detection_planted_wilson_95": [
+        0.36560808309024106,
+        0.5573513967663177
+      ],
+      "false_detection_correct": 0.0,
+      "false_detections_correct": 0,
+      "proposals": 10000,
+      "confirmed": 61,
+      "confirmation_rate": 0.0061
+    },
+    "P": {
+      "status": "not run"
+    }
+  },
+  "criteria": {}
+}

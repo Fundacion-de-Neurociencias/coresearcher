@@ -6,6 +6,7 @@ Provides unified commands:
     coresearcher serve [--host <host>] [--port <port>]
     coresearcher test
     coresearcher info
+    coresearcher formal run | analyze | doctor   (ADR-DISCOVERY-068)
 """
 
 from __future__ import annotations
@@ -119,6 +120,11 @@ def main() -> None:
     # info
     subparsers.add_parser("info", help="Display system architecture and active AI endpoints")
 
+    # formal run | analyze | doctor (ADR-DISCOVERY-068)
+    from python.cli import formal
+
+    formal.add_parser(subparsers)
+
     args = parser.parse_args()
     if not args.command:
         print(BANNER)
@@ -130,6 +136,7 @@ def main() -> None:
         "serve": cmd_serve,
         "test": cmd_test,
         "info": cmd_info,
+        "formal": formal.main,
     }
 
     exit_code = dispatch[args.command](args)

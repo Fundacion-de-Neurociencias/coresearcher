@@ -247,7 +247,35 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "formal_pipeline",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "formal_provenance",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "formal_smt",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "formal_status",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "formal_thresholds",
       "scripts": false,
       "tests": true
     },

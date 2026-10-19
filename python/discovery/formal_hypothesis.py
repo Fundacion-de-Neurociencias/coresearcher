@@ -28,14 +28,25 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Tuple
 
-MAX_STATES = 2_000_000
-MAX_ASSUMPTIONS_FOR_CONFLICT_SEARCH = 12
+from python.discovery import formal_provenance, formal_status, formal_thresholds
+
+# Versioned defaults; the values in force come from formal_thresholds (ADR-DISCOVERY-068).
+MAX_STATES = formal_thresholds.FORMAL_DEFAULTS.values["max_states"]
+MAX_ASSUMPTIONS_FOR_CONFLICT_SEARCH = formal_thresholds.FORMAL_DEFAULTS.values["max_assumptions_for_conflict_search"]
 
 State = Dict[str, Any]
 
 
 class FormalHypothesisError(ValueError):
     """Raised when a hypothesis or an observation is malformed."""
+
+
+class SolverUndecided(FormalHypothesisError):
+    """z3 returned unknown (timeout or incompleteness). The question is UNDECIDED, never answered (ADR-068)."""
+
+
+class ThresholdExceeded(FormalHypothesisError):
+    """The question is larger than a formal threshold allows (max_states, conflict search). BLOCKED (ADR-068)."""
 
 
 # ---------------------------------------------------------------------------
@@ -240,9 +251,10 @@ class Hypothesis:
             from python.discovery import formal_smt
 
             formal_smt.encode(self)  # Fails early on constructs the SMT back end cannot decide.
-        elif self.omega_size > MAX_STATES:
-            raise FormalHypothesisError(
-                f"State space has {self.omega_size:,} states; exhaustive evaluation is capped at {MAX_STATES:,}."
+        elif self.omega_size > formal_thresholds.get("max_states"):
+            raise ThresholdExceeded(
+                f"State space has {self.omega_size:,} states; exhaustive evaluation is capped at "
+                f"{formal_thresholds.get('max_states'):,} (threshold max_states)."
             )
 
     @property
@@ -318,8 +330,14 @@ class EvaluationReport:
     possible_counterexamples: List[Dict[str, Any]]
     observations_checked: int
     is_refuted: bool
+    mandatory_relays: List[Dict[str, str]] = field(default_factory=list)
+    provenance: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
+        return _sealed(self)
+
+    def body(self) -> Dict[str, Any]:
+        """The verdict itself, without status, relays or provenance; `output_sha256` is its digest."""
         return {
             "hypothesis_id": self.hypothesis_id,
             "backend": self.backend,
@@ -350,8 +368,13 @@ class ComparisonReport:
     forbidden_only_by_b: Optional[int]
     forbidden_by_both: Optional[int]
     discriminating_examples: List[Dict[str, Any]]
+    mandatory_relays: List[Dict[str, str]] = field(default_factory=list)
+    provenance: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
+        return _sealed(self)
+
+    def body(self) -> Dict[str, Any]:
         return {
             "hypothesis_a": self.hypothesis_a,
             "hypothesis_b": self.hypothesis_b,
@@ -375,8 +398,13 @@ class ConsequenceReport:
     follows_from_claims: bool  # Entailed, and not already implied by domains, scope and assumptions alone.
     vacuous: bool  # No applicable state is allowed, so everything is entailed trivially.
     counterexamples: List[State]
+    mandatory_relays: List[Dict[str, str]] = field(default_factory=list)
+    provenance: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
+        return _sealed(self)
+
+    def body(self) -> Dict[str, Any]:
         return {
             "hypothesis_id": self.hypothesis_id,
             "consequence": self.consequence,
@@ -386,6 +414,26 @@ class ConsequenceReport:
             "vacuous": self.vacuous,
             "counterexamples": self.counterexamples,
         }
+
+
+def _sealed(report) -> Dict[str, Any]:
+    """Body, the shared status (a report exists only for a decided question), relays and provenance."""
+    return {
+        **report.body(),
+        "formal_status": formal_status.FormalStatus.DECIDED.value,
+        "mandatory_relays": list(report.mandatory_relays),
+        "provenance": report.provenance,
+    }
+
+
+def _seal(report, operation: str, inputs: Dict[str, Any], extra_relays: Sequence[str] = ()):
+    """Attaches the mandatory relays and the provenance block (ADR-068) to a freshly computed report."""
+    codes = ["FORMAL_NOT_EMPIRICAL", formal_status.backend_relay(report.backend), *extra_relays]
+    if any(src != "default" for src in formal_thresholds.active().sources().values()):
+        codes.append("THRESHOLDS_OVERRIDDEN")
+    report.mandatory_relays = formal_status.relays(codes)
+    report.provenance = formal_provenance.build(operation, inputs, report.body(), report.backend)
+    return report
 
 
 _BACKENDS = ("auto", "enumeration", "smt")
@@ -426,8 +474,9 @@ def _relation(allowed_by_both: bool, only_a: bool, only_b: bool) -> Relation:
 
 def _minimal_unsatisfiable(labels: List[str], satisfiable: Callable[[Sequence[int]], bool]) -> List[List[str]]:
     """Minimal subsets of the indexed premises that are jointly unsatisfiable, smallest first."""
-    if len(labels) > MAX_ASSUMPTIONS_FOR_CONFLICT_SEARCH:
-        raise FormalHypothesisError(f"Conflict search is limited to {MAX_ASSUMPTIONS_FOR_CONFLICT_SEARCH} assumptions.")
+    limit = formal_thresholds.get("max_assumptions_for_conflict_search")
+    if len(labels) > limit:
+        raise ThresholdExceeded(f"Conflict search is limited to {limit} assumptions (threshold).")
     if satisfiable(range(len(labels))):
         return []
     minimal: List[Tuple[int, ...]] = []
@@ -481,8 +530,14 @@ class HypothesisEvaluator:
         backend: str = "auto",
     ) -> EvaluationReport:
         observations = observations or []
+        inputs = {
+            "hypothesis": hypothesis_to_dict(hypothesis),
+            "observations": observations,
+            "max_examples": max_examples,
+            "backend": backend,
+        }
         if _use_smt(backend, hypothesis):
-            return cls._evaluate_smt(hypothesis, observations, max_examples)
+            return _seal(cls._evaluate_smt(hypothesis, observations, max_examples), "evaluate", inputs)
         applicable = forbidden = 0
         claim_exclusions: Dict[str, Optional[int]] = {c.expression: 0 for c in hypothesis._claims}
         falsifiers: List[State] = []
@@ -502,7 +557,7 @@ class HypothesisEvaluator:
         conflicts = cls.conflicting_assumption_sets(hypothesis, "enumeration") if applicable == 0 else []
         certain, possible = cls.confront(hypothesis, observations, backend="enumeration")
 
-        return EvaluationReport(
+        report = EvaluationReport(
             hypothesis_id=hypothesis.hypothesis_id,
             backend="enumeration",
             omega_size=hypothesis.omega_size,
@@ -520,6 +575,7 @@ class HypothesisEvaluator:
             observations_checked=len(observations),
             is_refuted=bool(certain),
         )
+        return _seal(report, "evaluate", inputs)
 
     @classmethod
     def _evaluate_smt(cls, hypothesis: Hypothesis, observations: List[State], max_examples: int) -> EvaluationReport:
@@ -633,8 +689,14 @@ class HypothesisEvaluator:
     def compare(cls, a: Hypothesis, b: Hypothesis, max_examples: int = 5, backend: str = "auto") -> ComparisonReport:
         """Logical relation between two hypotheses over the same state space."""
         cls._same_space(a, b)
+        inputs = {
+            "a": hypothesis_to_dict(a),
+            "b": hypothesis_to_dict(b),
+            "max_examples": max_examples,
+            "backend": backend,
+        }
         if _use_smt(backend, a, b):
-            return cls._compare_smt(a, b, max_examples)
+            return _seal(cls._compare_smt(a, b, max_examples), "compare", inputs)
         only_a = only_b = both = allowed_by_both = 0
         examples: List[Dict[str, Any]] = []
         for state in a.states():
@@ -650,7 +712,7 @@ class HypothesisEvaluator:
                     examples.append({"state": state, "forbidden_by": a.hypothesis_id if fa else b.hypothesis_id})
             if not fa and not fb:
                 allowed_by_both += 1
-        return ComparisonReport(
+        report = ComparisonReport(
             hypothesis_a=a.hypothesis_id,
             hypothesis_b=b.hypothesis_id,
             backend="enumeration",
@@ -660,6 +722,7 @@ class HypothesisEvaluator:
             forbidden_by_both=both,
             discriminating_examples=examples,
         )
+        return _seal(report, "compare", inputs)
 
     @staticmethod
     def _compare_smt(a: Hypothesis, b: Hypothesis, max_examples: int) -> ComparisonReport:
@@ -716,7 +779,7 @@ class HypothesisEvaluator:
             implied_without_claims = all(predicate.evaluate(s) for s in applicable)
             name = "enumeration"
         entailed = not counter
-        return ConsequenceReport(
+        report = ConsequenceReport(
             hypothesis_id=hypothesis.hypothesis_id,
             consequence=predicate.expression,
             backend=name,
@@ -725,9 +788,40 @@ class HypothesisEvaluator:
             vacuous=vacuous,
             counterexamples=counter,
         )
+        extra = []
+        if vacuous:
+            extra.append("VACUOUS_ENTAILMENT")
+        elif entailed and not report.follows_from_claims:
+            extra.append("ENTAILED_BY_ASSUMPTIONS_ALONE")
+        inputs = {
+            "hypothesis": hypothesis_to_dict(hypothesis),
+            "consequence": consequence,
+            "max_examples": max_examples,
+            "backend": backend,
+        }
+        return _seal(report, "entails", inputs, extra)
 
 
 _SCALARS = (str, int, float, bool)
+
+
+def hypothesis_to_dict(hypothesis: Hypothesis) -> Dict[str, Any]:
+    """The JSON form of a hypothesis; `hypothesis_from_dict` inverts it."""
+    variables: List[Dict[str, Any]] = []
+    for v in hypothesis.variables:
+        if v.continuous:
+            variables.append({"name": v.name, "continuous": True, "lower": v.lower, "upper": v.upper})
+        else:
+            variables.append({"name": v.name, "domain": list(v.domain)})
+    return {
+        "hypothesis_id": hypothesis.hypothesis_id,
+        "variables": variables,
+        "scope": hypothesis.scope,
+        "assumptions": list(hypothesis.assumptions),
+        "claims": list(hypothesis.claims),
+        "statement": hypothesis.statement,
+        "alternatives": list(hypothesis.alternatives),
+    }
 
 
 def hypothesis_from_dict(data: Dict[str, Any]) -> Hypothesis:

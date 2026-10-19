@@ -1,0 +1,69 @@
+{
+  "schema": "oase.formal-request.v1",
+  "transport": "package",
+  "hypothesis": {
+    "kind": "hypex",
+    "id": "H-0003",
+    "title": "[Illustrative] TREM2 agonism rescues dystrophy even without functional TREM2",
+    "statement": "In TREM2 loss-of-function carriers, a TREM2 agonist reduces neuritic dystrophy relative to vehicle, although microglia without functional TREM2 cannot respond to TREM2 ligands.",
+    "source": "inputs/H-0003.json",
+    "source_sha256": "2c2f174d91a574c851790cdfe3873689e1c8eb3d1d814d235f142a3c1007f8b4"
+  },
+  "coresearcher_request": {
+    "schema": "coresearcher.formal.request/v1",
+    "input_kind": "formal",
+    "hypothesis": {
+      "hypothesis_id": "H-0003",
+      "variables": [
+        {
+          "name": "stage",
+          "domain": [
+            "early",
+            "late"
+          ]
+        },
+        {
+          "name": "trem2_function",
+          "domain": [
+            "normal",
+            "loss"
+          ]
+        },
+        {
+          "name": "treatment",
+          "domain": [
+            "agonist",
+            "vehicle"
+          ]
+        },
+        {
+          "name": "dystrophy_change",
+          "domain": [
+            "decrease",
+            "none",
+            "increase"
+          ]
+        }
+      ],
+      "scope": "trem2_function == 'loss' and treatment == 'agonist'",
+      "assumptions": [
+        "treatment != 'vehicle' or dystrophy_change == 'none'",
+        "trem2_function != 'loss' or dystrophy_change == 'none'"
+      ],
+      "claims": [
+        "dystrophy_change == 'decrease'"
+      ],
+      "statement": "In TREM2 loss-of-function carriers, a TREM2 agonist reduces neuritic dystrophy relative to vehicle, although microglia without functional TREM2 cannot respond to TREM2 ligands."
+    },
+    "prose": null,
+    "hypothesis_id": "H-0003",
+    "variable_schema": null,
+    "rivals": [],
+    "consequences": [],
+    "observations": [],
+    "max_examples": 5,
+    "backend": "auto",
+    "samples": null,
+    "include_lean": false
+  }
+}

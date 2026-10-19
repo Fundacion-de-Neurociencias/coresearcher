@@ -1,0 +1,141 @@
+{
+  "record_type": "analysis",
+  "source": "raw/formal/blocked/fm-H-0001.response.json",
+  "cli_version": "0.3.0",
+  "cli_integrity": "b7e5e35-dirty",
+  "env_version": "unpinned-dev:sha256:e4c8d31ebfdc0f9d2ce6bf72d6d0e41fdc10258492570d6965249786e44205f6",
+  "timestamp": "2026-10-19T13:06:30Z",
+  "threshold_set": "formal@1.0",
+  "thresholds_applied": {
+    "max_states": 2000000,
+    "max_assumptions_for_conflict_search": 12,
+    "solver_timeout_ms": 10000,
+    "gate_samples": 5,
+    "gate_max_samples": 7,
+    "gate_temperature": 0.7,
+    "gate_majority_fraction": 0.5,
+    "formalizer_temperature": 0.0,
+    "formalizer_seed": 0,
+    "max_formal_defects": 0
+  },
+  "metrics": {
+    "defect_count": null
+  },
+  "assessment": {
+    "formal_status": "BLOCKED",
+    "reason": "CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.",
+    "hypothesis_id": "H-0001",
+    "transport": "package",
+    "verdict": {},
+    "criteria": {
+      "content_verdict": null,
+      "defects": [],
+      "max_formal_defects": {
+        "metric": "defect_count",
+        "value": null,
+        "comparison": "value <= threshold",
+        "threshold": 0,
+        "met": null
+      },
+      "min_excluded_fraction_of_applicable": {
+        "metric": "excluded_fraction_of_applicable",
+        "value": null,
+        "comparison": "value >= threshold",
+        "threshold": null,
+        "met": null,
+        "unresolved": true
+      }
+    },
+    "evidence_assessment": {
+      "execution_outcome": "blocked",
+      "evidence_status": "not_assessed",
+      "evidence": {
+        "artifact_path": "raw/formal/blocked/fm-H-0001.response.json",
+        "artifact_sha256": "bc996885c013eb9b11eb3e308e10ae41d00f00f52098d23fd93123f1350a5944",
+        "evidence_type": "formal-soundness",
+        "metric_name": "defect_count",
+        "metric_value": null,
+        "metric_units": "count",
+        "threshold_set": "formal@1.0",
+        "method": null,
+        "context": "formal_status=BLOCKED"
+      }
+    },
+    "reproduction": {
+      "reproduces_run": null,
+      "reports_compared": 0,
+      "mismatches": [],
+      "thresholds_match_run": true
+    },
+    "reports": {
+      "evaluation": null,
+      "comparisons": [],
+      "consequences": []
+    },
+    "formalization_gate": null,
+    "formal_hypothesis": null,
+    "lean": [],
+    "coresearcher": {
+      "engine_version": "4.1.0",
+      "z3_version": "5.3.1",
+      "threshold_set": "formal@2026.10.1",
+      "thresholds_applied": {
+        "formalizer_seed": 0,
+        "formalizer_temperature": 0.0,
+        "gate_majority_fraction": 0.5,
+        "gate_max_samples": 7,
+        "gate_samples": 5,
+        "gate_temperature": 0.7,
+        "max_assumptions_for_conflict_search": 12,
+        "max_states": 2000000,
+        "solver_timeout_ms": 10000
+      },
+      "threshold_sources": {
+        "formalizer_seed": "default",
+        "formalizer_temperature": "default",
+        "gate_majority_fraction": "default",
+        "gate_max_samples": "default",
+        "gate_samples": "default",
+        "gate_temperature": "default",
+        "max_assumptions_for_conflict_search": "default",
+        "max_states": "default",
+        "solver_timeout_ms": "default"
+      },
+      "threshold_provenance": "max_states, max_assumptions_for_conflict_search: engineering caps of ADR-059 (exhaustive enumeration and subset search stay under a minute). solver_timeout_ms: ADR-060, per z3 call; a timeout is UNDECIDED. gate_samples, gate_max_samples, gate_temperature, gate_majority_fraction: ADR-064 and the N=3/5/7 ablation in FORMALIZER_GATE_RESULTS.md. formalizer_temperature, formalizer_seed: frozen decoding of the ADR-061 formalizer benchmark."
+    }
+  },
+  "cli_modified": true,
+  "cli_modified_note": "OASE source has uncommitted modifications. Artifacts may not be reproducible under the declared cli_version.",
+  "mandatory_relays": [
+    {
+      "code": "formal.blocked",
+      "message": "Report the check as blocked by a missing capability or threshold. Nothing was assessed: record not_assessed, never a negative. (CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.)",
+      "coresearcher_code": "BLOCKED"
+    }
+  ],
+  "threshold_sources": {
+    "max_states": "default",
+    "max_assumptions_for_conflict_search": "default",
+    "solver_timeout_ms": "default",
+    "gate_samples": "default",
+    "gate_max_samples": "default",
+    "gate_temperature": "default",
+    "gate_majority_fraction": "default",
+    "formalizer_temperature": "default",
+    "formalizer_seed": "default",
+    "max_formal_defects": "default"
+  },
+  "threshold_provenance": "CoResearcher formal@2026.10.1 (ADR-DISCOVERY-068): max_states and max_assumptions_for_conflict_search are engineering caps (ADR-059); solver_timeout_ms per z3 call, a timeout is UNDECIDED (ADR-060); gate_* from the ADR-064 self-consistency gate and its N=3/5/7 ablation; formalizer_* frozen decoding of the ADR-061 benchmark. max_formal_defects: definitional (ADR-059 content verdicts). min_excluded_fraction_of_applicable: no defensible published value.",
+  "thresholds_unresolved": [
+    "min_excluded_fraction_of_applicable"
+  ],
+  "written_by": "formal-demo",
+  "work_order_id": null,
+  "source_sha256": "bc996885c013eb9b11eb3e308e10ae41d00f00f52098d23fd93123f1350a5944",
+  "capability_state": {
+    "z3": "available",
+    "lean": "unavailable",
+    "formalizer": "unconfigured",
+    "coresearcher": "available"
+  }
+}

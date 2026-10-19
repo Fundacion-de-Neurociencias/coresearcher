@@ -73,3 +73,18 @@ jobs:
           pip install pytest pytest-asyncio pytest-cov httpx jsonschema
       - name: Run pytest
         run: python -m pytest tests/ -v --durations=10
+
+  oase-conformance:
+    # OASE (GoogleCloudPlatform/LifeSciences, Apache 2.0) imports fcntl, so the adapter's integration
+    # tests run here, on Linux, against OASE at the pinned commit (ADR-DISCOVERY-069).
+    name: OASE conformance (formal adapter at the pinned OASE commit)
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - name: Clone OASE, apply the adapter, run OASE's checks and conformance tests, then ours
+        run: bash integrations/oase/ci/conformance.sh

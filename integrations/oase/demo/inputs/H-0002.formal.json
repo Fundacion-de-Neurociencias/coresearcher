@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "H-0002",
+  "variables": [
+    {
+      "name": "stage",
+      "domain": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "name": "trem2_function",
+      "domain": [
+        "normal",
+        "loss"
+      ]
+    },
+    {
+      "name": "treatment",
+      "domain": [
+        "agonist",
+        "vehicle"
+      ]
+    },
+    {
+      "name": "dystrophy_change",
+      "domain": [
+        "decrease",
+        "none",
+        "increase"
+      ]
+    }
+  ],
+  "scope": null,
+  "assumptions": [
+    "treatment != 'vehicle' or dystrophy_change == 'none'"
+  ],
+  "claims": [
+    "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'",
+    "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'"
+  ],
+  "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2."
+}

@@ -1,0 +1,115 @@
+{
+  "schema": "oase.formal-request.v1",
+  "transport": "package",
+  "hypothesis": {
+    "kind": "hypex",
+    "id": "H-0001",
+    "title": "[Illustrative] Early TREM2 agonism reduces neuritic dystrophy if TREM2 works",
+    "statement": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost.",
+    "source": "inputs/H-0001.json",
+    "source_sha256": "582a1e1b735e1025c53a1af149445f3479a82ded9250194e076243608e1ce907"
+  },
+  "coresearcher_request": {
+    "schema": "coresearcher.formal.request/v1",
+    "input_kind": "formal",
+    "hypothesis": {
+      "hypothesis_id": "H-0001",
+      "variables": [
+        {
+          "name": "stage",
+          "domain": [
+            "early",
+            "late"
+          ]
+        },
+        {
+          "name": "trem2_function",
+          "domain": [
+            "normal",
+            "loss"
+          ]
+        },
+        {
+          "name": "treatment",
+          "domain": [
+            "agonist",
+            "vehicle"
+          ]
+        },
+        {
+          "name": "dystrophy_change",
+          "domain": [
+            "decrease",
+            "none",
+            "increase"
+          ]
+        }
+      ],
+      "scope": "stage == 'early'",
+      "assumptions": [
+        "treatment != 'vehicle' or dystrophy_change == 'none'"
+      ],
+      "claims": [
+        "not (treatment == 'agonist' and trem2_function == 'normal') or dystrophy_change == 'decrease'",
+        "not (treatment == 'agonist' and trem2_function == 'loss') or dystrophy_change == 'none'"
+      ],
+      "statement": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost."
+    },
+    "prose": null,
+    "hypothesis_id": "H-0001",
+    "variable_schema": null,
+    "rivals": [
+      {
+        "hypothesis_id": "H-0002",
+        "variables": [
+          {
+            "name": "stage",
+            "domain": [
+              "early",
+              "late"
+            ]
+          },
+          {
+            "name": "trem2_function",
+            "domain": [
+              "normal",
+              "loss"
+            ]
+          },
+          {
+            "name": "treatment",
+            "domain": [
+              "agonist",
+              "vehicle"
+            ]
+          },
+          {
+            "name": "dystrophy_change",
+            "domain": [
+              "decrease",
+              "none",
+              "increase"
+            ]
+          }
+        ],
+        "scope": null,
+        "assumptions": [
+          "treatment != 'vehicle' or dystrophy_change == 'none'"
+        ],
+        "claims": [
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'",
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'"
+        ],
+        "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2."
+      }
+    ],
+    "consequences": [
+      "not (stage == 'early' and trem2_function == 'normal' and treatment == 'agonist') or dystrophy_change != 'increase'"
+    ],
+    "observations": [],
+    "max_examples": 5,
+    "backend": "auto",
+    "samples": null,
+    "include_lean": false
+  }
+}

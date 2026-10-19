@@ -1,0 +1,71 @@
+{
+  "schema": "oase.formal-request.v1",
+  "transport": "package",
+  "hypothesis": {
+    "kind": "hypex",
+    "id": "H-0002",
+    "title": "[Illustrative] TREM2 agonism helps only once plaques are established",
+    "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2.",
+    "source": "inputs/H-0002.json",
+    "source_sha256": "0bc4861caad07ec6a7e0160ce54e57e388503a259afed0e80cbd8942d1195790"
+  },
+  "coresearcher_request": {
+    "schema": "coresearcher.formal.request/v1",
+    "input_kind": "formal",
+    "hypothesis": {
+      "hypothesis_id": "H-0002",
+      "variables": [
+        {
+          "name": "stage",
+          "domain": [
+            "early",
+            "late"
+          ]
+        },
+        {
+          "name": "trem2_function",
+          "domain": [
+            "normal",
+            "loss"
+          ]
+        },
+        {
+          "name": "treatment",
+          "domain": [
+            "agonist",
+            "vehicle"
+          ]
+        },
+        {
+          "name": "dystrophy_change",
+          "domain": [
+            "decrease",
+            "none",
+            "increase"
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [
+        "treatment != 'vehicle' or dystrophy_change == 'none'"
+      ],
+      "claims": [
+        "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'",
+        "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'"
+      ],
+      "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2."
+    },
+    "prose": null,
+    "hypothesis_id": "H-0002",
+    "variable_schema": null,
+    "rivals": [],
+    "consequences": [
+      "not (stage == 'early' and trem2_function == 'normal' and treatment == 'agonist') or dystrophy_change != 'increase'"
+    ],
+    "observations": [],
+    "max_examples": 5,
+    "backend": "auto",
+    "samples": null,
+    "include_lean": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "tool": "formal",
+  "subcommand": "run",
+  "work_order_id": null,
+  "cli_version": "0.3.0",
+  "cli_integrity": "b7e5e35-dirty",
+  "env_version": "unpinned-dev:sha256:e4c8d31ebfdc0f9d2ce6bf72d6d0e41fdc10258492570d6965249786e44205f6",
+  "interpreter": "py3.12-x86_64",
+  "endpoint": null,
+  "parameters": {
+    "hypothesis": "inputs/H-0003.json",
+    "candidate": null,
+    "formal": "inputs/H-0003.formal.json",
+    "rivals": [],
+    "consequences": [],
+    "observations": 0,
+    "samples": null,
+    "max_examples": 5,
+    "lean": false,
+    "transport": "package"
+  },
+  "timestamp": "2026-10-19T13:06:04Z",
+  "completed": "2026-10-19T13:06:04Z",
+  "outputs": [
+    {
+      "path": "fm-H-0003.request.json",
+      "sha256": "baec821460de55e61ad96f38335e682d1ecc7bd23d9589f27bbb7cdcf96aca44",
+      "bytes": 2023
+    },
+    {
+      "path": "fm-H-0003.response.json",
+      "sha256": "615d93d291565b8471d7df439d89fc57e3186d7f5620feaa1b76cb2787d0577e",
+      "bytes": 5581
+    }
+  ],
+  "warnings": [
+    "Environment is not provisioned from a shared tools volume (/scion-volumes/tools/ENV_VERSION absent); env_version is a developer fallback and does not pin transitive dependencies.",
+    "Do not cite a formal verdict as support for the hypothesis being true. FALSIFIABLE, consistent or entailed describes the formal object; whether its premises hold in the world is a separate, empirical question.",
+    "Scope the verdict to the declared finite domains. Values outside them were never considered."
+  ],
+  "mandatory_relays": [
+    {
+      "code": "formal.not_empirical",
+      "message": "Do not cite a formal verdict as support for the hypothesis being true. FALSIFIABLE, consistent or entailed describes the formal object; whether its premises hold in the world is a separate, empirical question."
+    },
+    {
+      "code": "formal.enumeration_declared_domains_only",
+      "message": "Scope the verdict to the declared finite domains. Values outside them were never considered."
+    }
+  ],
+  "cli_modified": true,
+  "cli_modified_note": "OASE source has uncommitted modifications. Artifacts may not be reproducible under the declared cli_version.",
+  "hypothesis_id": "H-0003",
+  "formal_status": "DECIDED",
+  "threshold_set": "formal@1.0",
+  "thresholds_applied": {
+    "max_states": 2000000,
+    "max_assumptions_for_conflict_search": 12,
+    "solver_timeout_ms": 10000,
+    "gate_samples": 5,
+    "gate_max_samples": 7,
+    "gate_temperature": 0.7,
+    "gate_majority_fraction": 0.5,
+    "formalizer_temperature": 0.0,
+    "formalizer_seed": 0,
+    "max_formal_defects": 0
+  },
+  "threshold_sources": {
+    "max_states": "default",
+    "max_assumptions_for_conflict_search": "default",
+    "solver_timeout_ms": "default",
+    "gate_samples": "default",
+    "gate_max_samples": "default",
+    "gate_temperature": "default",
+    "gate_majority_fraction": "default",
+    "formalizer_temperature": "default",
+    "formalizer_seed": "default",
+    "max_formal_defects": "default"
+  },
+  "coresearcher": {
+    "engine_version": "4.1.0",
+    "z3_version": "5.3.1",
+    "threshold_set": "formal@2026.10.1",
+    "thresholds_applied": {
+      "formalizer_seed": 0,
+      "formalizer_temperature": 0.0,
+      "gate_majority_fraction": 0.5,
+      "gate_max_samples": 7,
+      "gate_samples": 5,
+      "gate_temperature": 0.7,
+      "max_assumptions_for_conflict_search": 12,
+      "max_states": 2000000,
+      "solver_timeout_ms": 10000
+    },
+    "threshold_sources": {
+      "formalizer_seed": "default",
+      "formalizer_temperature": "default",
+      "gate_majority_fraction": "default",
+      "gate_max_samples": "default",
+      "gate_samples": "default",
+      "gate_temperature": "default",
+      "max_assumptions_for_conflict_search": "default",
+      "max_states": "default",
+      "solver_timeout_ms": "default"
+    },
+    "threshold_provenance": "max_states, max_assumptions_for_conflict_search: engineering caps of ADR-059 (exhaustive enumeration and subset search stay under a minute). solver_timeout_ms: ADR-060, per z3 call; a timeout is UNDECIDED. gate_samples, gate_max_samples, gate_temperature, gate_majority_fraction: ADR-064 and the N=3/5/7 ablation in FORMALIZER_GATE_RESULTS.md. formalizer_temperature, formalizer_seed: frozen decoding of the ADR-061 formalizer benchmark."
+  },
+  "capability_state": {
+    "z3": "available",
+    "lean": "unavailable",
+    "formalizer": "unconfigured",
+    "coresearcher": "available"
+  }
+}

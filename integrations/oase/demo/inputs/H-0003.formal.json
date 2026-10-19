@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "H-0003",
+  "variables": [
+    {
+      "name": "stage",
+      "domain": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "name": "trem2_function",
+      "domain": [
+        "normal",
+        "loss"
+      ]
+    },
+    {
+      "name": "treatment",
+      "domain": [
+        "agonist",
+        "vehicle"
+      ]
+    },
+    {
+      "name": "dystrophy_change",
+      "domain": [
+        "decrease",
+        "none",
+        "increase"
+      ]
+    }
+  ],
+  "scope": "trem2_function == 'loss' and treatment == 'agonist'",
+  "assumptions": [
+    "treatment != 'vehicle' or dystrophy_change == 'none'",
+    "trem2_function != 'loss' or dystrophy_change == 'none'"
+  ],
+  "claims": [
+    "dystrophy_change == 'decrease'"
+  ],
+  "statement": "In TREM2 loss-of-function carriers, a TREM2 agonist reduces neuritic dystrophy relative to vehicle, although microglia without functional TREM2 cannot respond to TREM2 ligands."
+}

@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 17 |
-| Tested | Covered by tests, not reachable from the API | 26 |
+| Integrated | Used by the API and covered by tests | 19 |
+| Tested | Covered by tests, not reachable from the API | 28 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -49,7 +49,11 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `fast_system_one_classifier` | Tested | - | yes | yes |
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
+| `formal_pipeline` | Tested | - | yes | - |
+| `formal_provenance` | Tested | - | yes | - |
 | `formal_smt` | Tested | - | yes | - |
+| `formal_status` | Integrated | yes | yes | - |
+| `formal_thresholds` | Integrated | yes | yes | - |
 | `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |

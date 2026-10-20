@@ -68,3 +68,12 @@ function calls other than the listed operators, or prose inside a predicate.
 Answer only with the JSON object.
 
 Research question: {question}
+
+## 8. Rubric prompt (frozen)
+
+You review a scientific hypothesis, given here as a formal object. Rate its falsifiability on a scale from 1 (no
+observation could refute it) to 10 (it names a precise observation that would refute it). Answer only with JSON:
+{"falsifiability": <integer 1-10>}
+
+Research question: {question}
+Hypothesis (formal object): {hypothesis}

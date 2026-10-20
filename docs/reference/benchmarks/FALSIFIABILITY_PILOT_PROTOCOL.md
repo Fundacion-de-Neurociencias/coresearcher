@@ -1,6 +1,7 @@
 # Falsifiability: exact measure against rubric score, pre-registered pilot
 
-Status: drafted on 2026-10-20, before any measurement under this protocol. Nothing here has been run. The script will
+Status: drafted on 2026-10-20. Configuration revision of the same day, before any measurement: the rubric judge is
+fixed as `qwen2.5-coder:32b` (section 3.3). Nothing here has been run. The script will
 record this file's SHA-256 with every raw result, and scoring refuses results produced under a different protocol
 hash.
 
@@ -50,9 +51,10 @@ reason. The exclusion rate is reported as a result in its own right.
 
 ### 3.3 Rubric scores
 
-Each hypothesis receives the rubric falsifiability score (1–10) from the rubric judge used in DFM-Bench-style
-evaluation, with three independent reviews, the median taken as the score. The judge is a model that is not among the
-systems being compared. Its name and version are fixed before any run.
+Each hypothesis receives the rubric falsifiability score (1–10) from **`qwen2.5-coder:32b`** served by Ollama, exact
+tag and digest recorded. Three reviews with three separate prompts, the median taken as the score. The judge is not the
+formalizer (`qwen2.5:14b-instruct-q4_K_M`). Judge and formalizer share a model family, so their correlation is reported
+with every result.
 
 ## 4. Exact measure
 
@@ -109,7 +111,9 @@ data.
 - Finite-domain exact measures depend on the declared domain and its discretization. A different discretization can
   change the forbidden fraction. The pilot fixes the discretization in the formal file and reports it with every
   result.
-- Three rubric reviews from models of one family are correlated; the median is not three independent opinions. The
+- All reviews and the formalizer come from one model family. The median of three reviews is not three independent
+  opinions, and the agreement reported in Q1 is partly a family effect. This is the main threat to Q1 under this
+  configuration. The
   DFM-Bench authors state this explicitly.
 - Human calibration of the rubric is pending in DiscoveryRSI, and this pilot does not supply it. Its Q3 uses human
   ratings only where they exist.

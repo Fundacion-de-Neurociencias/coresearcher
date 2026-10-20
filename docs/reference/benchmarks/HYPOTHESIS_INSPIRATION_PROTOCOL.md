@@ -1,7 +1,8 @@
 # Hypothesis inspiration: pre-registered protocol
 
-Status: drafted on 2026-10-20, before any measurement under this protocol. Nothing in this file has been run. The
-script that implements it will record this file's SHA-256 with every raw result, and scoring refuses results produced
+Status: drafted on 2026-10-20. Configuration revision of the same day, before any measurement: the available model
+environment is Ollama with Qwen 2.5 only, so the frontier comparators and the frontier judge are removed (sections 4
+and 5.4). Nothing in this file has been run. The script that implements it will record this file's SHA-256 with every raw result, and scoring refuses results produced
 under a different protocol hash.
 
 Reference point: DiscoveryRSI (arXiv:2610.23839, Zhong et al., PhAI Labs, 2026) reports 6.3 % literature inspiration
@@ -47,11 +48,11 @@ budget, the same evidence pack and the same output schema.
 - **C3, CoResearcher after two rounds.** Not implemented, for the same reason.
 - **C4, same compute, no credit assignment and no harness replay.** Not implemented.
 
-Consequence: the primary contrast (C3 against F1) and the mechanism contrast (C3 against C4) cannot be run until a
-self-improvement pipeline exists. Under the current code, the only runnable arms are C1, F1 and F2, and the protocol
-then supports only an exploratory comparison of C1 with F1 and F2, reported as exploratory, with no criterion read.
-- **F1, frontier comparator A**, named by exact version and serving date.
-- **F2, frontier comparator B**, named by exact version and serving date.
+Consequence: the primary contrast (C3 against F1) and the mechanism contrast (C3 against C4) cannot be run. The only
+runnable arm is C1, so the protocol supports only an exploratory rate for C1 against its random-reference floor
+(section 5.6). No criterion is read from it, and it says nothing about DiscoveryRSI.
+- **F1, frontier comparator A (removed in this configuration)**, named by exact version and serving date.
+- **F2, frontier comparator B (removed in this configuration)**, named by exact version and serving date.
 
 The model names, versions, dates and prompts of F1 and F2 are recorded in the raw records. A comparator is included
 only if it can be run under the same budget. If not, it is reported as not run, never estimated.
@@ -79,7 +80,9 @@ boundary is stated; no boundary is guessed.
 
 ### 5.4 Judge
 
-- The judge is a model that is **not** one of the arms. Its name and version are fixed in this protocol before any run.
+- The judge is **`qwen2.5-coder:32b`** served by Ollama, exact tag and digest recorded in every raw record. It is not
+  the generator of C1 (`qwen2.5:14b-instruct-q4_K_M`). It belongs to the same model family as the generator, so its
+  agreement with the generator is correlated, and this is reported with every result.
 - The judge sees the full text of R and the full text of H. It reads no other arm's output and knows nothing about
   which arm H belongs to. H is presented under a random identifier.
 - The judge returns yes or no and a quoted passage from R. A yes without a passage is recorded as no.

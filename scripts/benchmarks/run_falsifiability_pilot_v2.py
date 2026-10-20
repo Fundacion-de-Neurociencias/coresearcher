@@ -134,7 +134,14 @@ def measure(rows: list, complete) -> list:
         if hypothesis is None:
             record.update({"exact": None, "rubric": None})
         else:
-            record["exact"] = v1.exact_measure(hypothesis)
+            try:
+                record["exact"] = v1.exact_measure(hypothesis)
+            except FormalHypothesisError as exc:
+                # Protocol v2, amendment: an object whose predicates cannot be evaluated on its own domain is INVALID.
+                record.update({"formalization": "INVALID", "reason": f"EVALUATION_ERROR: {str(exc)[:200]}"})
+                record.update({"exact": None, "rubric": None})
+                out.append(record)
+                continue
             record["rubric"] = rubric(row["question"], row["formal"], complete)
         out.append(record)
     return out

@@ -131,3 +131,19 @@ def test_score_refuses_measures_from_another_protocol(tmp_path, monkeypatch):
     )
     with pytest.raises(SystemExit):
         v2.cmd_score()
+
+
+def test_evaluation_errors_are_invalid_and_do_not_stop_the_run():
+    mixed = {
+        **VALID,
+        "variables": [{"name": "group", "domain": ["a", "b"]}, {"name": "outcome", "domain": [0, 1, "censored"]}],
+        "claims": ["outcome < 5"],
+    }
+    rows = [
+        {"question_id": "Q1", "domain": "d", "question": "q", "parsed": True, "formal": mixed},
+        {"question_id": "Q2", "domain": "d", "question": "q", "parsed": True, "formal": VALID},
+    ]
+    out = v2.measure(rows, lambda p, s: '{"falsifiability": 5}')
+    assert out[0]["formalization"] == "INVALID" and out[0]["reason"].startswith("EVALUATION_ERROR")
+    assert out[0]["exact"] is None and out[0]["rubric"] is None
+    assert out[1]["formalization"] == "VALID" and out[1]["exact"]["verdict"] == "FALSIFIABLE"

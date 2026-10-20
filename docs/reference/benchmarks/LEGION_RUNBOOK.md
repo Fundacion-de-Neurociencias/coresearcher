@@ -212,8 +212,22 @@ Record the exact tags and digests (`ollama show <tag>`) in the first raw record 
 section on that machine with `FORMALIZER_BASE_URL=http://localhost:11434/v1`. Network addresses of the host are kept
 out of this repository; set them only in the local `.env`.
 
-- Pulled: `qwen2.5-coder:32b` (judge and rubric judge).
-- Not yet pulled: `qwen2.5:14b-instruct-q4_K_M` (formalizer and C1 generator). Pull it before section 8.3.
+- Pulled and reported on 2026-10-20, with digests that the host reports (not yet checked against the files, see below):
+
+  | Role | Tag | Manifest digest | Weights blob (GGUF) |
+  | --- | --- | --- | --- |
+  | C1 generator and formalizer | `qwen2.5:14b-instruct-q4_K_M` | `sha256:7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6` | `sha256:2049f5674b1e92b4464e5729975c9689fcfbf0b0e4443ccf10b5339f370f9a54` (9.0 GB) |
+  | Judge and rubric judge | `qwen2.5-coder:32b` | `sha256:b92d6a0bd47ee79114298de0177bf920c05a706d12633950b3936778492bef41` | `sha256:ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9` (19.9 GB) |
+
+- Verify on the Mac Studio before the first run. The blob file name must match its digest:
+
+  ```bash
+  shasum -a 256 ~/.ollama/models/blobs/sha256-2049f5674b1e92b4464e5729975c9689fcfbf0b0e4443ccf10b5339f370f9a54
+  shasum -a 256 ~/.ollama/models/blobs/sha256-ac3d1ba8aa77755dab3806d9024e9c385ea0d5b412d6bdf9157f8a4a7e9fc0d9
+  ```
+
+  Each output must equal the digest in the table. If it does not, the model is not the one recorded, and no run starts.
+- `manuel-sovereign:32b` was removed from the host on 2026-10-20 (reported). It must not be recreated for any arm.
 - **Never use `manuel-sovereign:32b` in any arm.** It is a derived model with a personal system prompt injected from
   a private vault. Using it as a judge, generator or formalizer would put those criteria into the measurement.
   Every arm uses an unmodified base tag.

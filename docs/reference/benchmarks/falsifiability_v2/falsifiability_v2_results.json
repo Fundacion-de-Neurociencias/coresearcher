@@ -1,0 +1,85 @@
+{
+  "questions": 200,
+  "excluded": 47,
+  "excluded_reasons": [
+    "EVALUATION_ERROR: Cannot evaluate \"((genetic_variant == 'present') and (survival_time < 5)) or ((genetic_variant == 'absent') and (survival_time >= 5))\" at {'genetic_variant': 'present', 'survival_time': 'censored', 'd",
+    "EVALUATION_ERROR: Cannot evaluate '(drug_target_binding_affinity >= 0.0) and (drug_target_binding_affinity <= 1.0)' at {'drug_target_binding_affinity': '0.0', 'toxicity_grade': '1'}: '>=' not supported between instance",
+    "EVALUATION_ERROR: Cannot evaluate 'mtDNA_copy_number >= 0' at {'mtDNA_copy_number': '0', 'tau_aggregation_level': 'low'}: '>=' not supported between instances of 'str' and 'int'",
+    "Invalid predicate \"((drug_target_binding_affinity == 'high') or (drug_target_binding_affinity == 'medium')) implies (biomarker_response == 'positive')\": invalid syntax",
+    "Invalid predicate \"((gut_microbiome_diversity == 'low') and (time_period == '5_years')) or ((gut_microbiome_diversity == 'medium') and (time_period == '5_years')) or ((gut_microbiome_diversity == 'hig",
+    "Invalid predicate \"((gut_microbiome_diversity == 'low') or (gut_microbiome_diversity == 'medium')) and (incident_cardiovascular_disease == 'yes') implies (gut_microbiome_diversity == 'low') or (incide",
+    "Invalid predicate \"((microRNA_profile == 'high') and (age >= 70)) or ((microRNA_profile == 'low') and (age < 70)) implies (cognitive_decline == 'yes')\": invalid syntax",
+    "Invalid predicate \"((serum_metabolite_level == 'high') and (frailty_status == 'non-frail')) implies (time_to_progression < 5)\": invalid syntax",
+    "Invalid predicate \"((serum_metabolite_panel == 'high') and (frailty_status == 'non-frail')) implies (time_to_progression > 2)\": invalid syntax",
+    "Invalid predicate \"((sodium_intake == 'high') and (icu_discharge_status == 'discharged')) implies (in_hospital_mortality == 'deceased') or (in_hospital_mortality == 'alive')\": invalid syntax",
+    "Invalid predicate \"((urine_output == '<500ml') or (urine_output == '500-1000ml')) and (age in ['75-84', '85+']) implies (readmission == 'yes') or (readmission == 'no')\": invalid syntax",
+    "Invalid predicate \"(aberrant_splicing == 'present') and (mouse_cohort == 'knockout') implies (barrier_integrity == 'compromised')\": invalid syntax",
+    "Invalid predicate \"(aberrant_splicing == 'present') and (mouse_knockout == 'knockout') implies (cell_death == 'present')\": invalid syntax",
+    "Invalid predicate \"(copy_number_gain == 'present') => (biomarker_response == 'positive')\": invalid syntax",
+    "Invalid predicate \"(copy_number_gain == 'present') implies (time_to_resistance < 5)\": invalid syntax",
+    "Invalid predicate \"(genetic_variant == 'present') and (therapy_response == 'negative') implies (not genetic_variant == 'absent') or (therapy_response == 'negative')\": invalid syntax",
+    "Invalid predicate \"(gut_microbiome_diversity == 'low') or (gut_microbiome_diversity == 'medium') implies (frailty_progression != 'rapid_progression')\": invalid syntax",
+    "Invalid predicate \"(microRNA_profile == 'high') implies (frailty_score > 3)\": invalid syntax",
+    "Invalid predicate \"(microglial_activation == 'high') and (genetic_modification == 'knockout') implies (neuronal_firing == 'deficit')\": invalid syntax",
+    "Invalid predicate \"(microglial_activation == 'high') implies (lipid_accumulation > 'low')\": invalid syntax",
+    "Invalid predicate \"(microglial_activation == 'high') implies (tau_aggregation > 'low')\": invalid syntax",
+    "Invalid predicate \"(pathway_activity_score > 0.5) implies (biomarker_response == 'positive')\": invalid syntax",
+    "Invalid predicate \"(pathway_activity_score > 0.5) implies (response_to_therapy == 'positive')\": invalid syntax",
+    "Invalid predicate \"(plasma_abundance == 'high') or (plasma_abundance == 'medium') implies (overall_survival == 'good')\": invalid syntax",
+    "Invalid predicate \"(plasma_abundance == 'high') or (plasma_abundance == 'medium') implies (therapy_response != 'no_response')\": invalid syntax",
+    "Invalid predicate \"(plasma_abundance == 'high') or (plasma_abundance == 'medium') implies (therapy_response == 'positive')\": invalid syntax",
+    "Invalid predicate \"(plasma_proteomic_signature == 'high') and (frailty_progression == 'yes') implies (age >= 70)\": invalid syntax",
+    "Invalid predicate \"(plasma_proteomic_signature == 'high') implies (cognitive_decline == 'yes')\": invalid syntax",
+    "Invalid predicate \"(polygenic_risk_score in ['0-10', '11-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100])\": unterminated string literal (detected at line 1)",
+    "Invalid predicate \"(promoter_methylation_level == 'high') or (promoter_methylation_level == 'medium') implies (biomarker_response == 'positive')\": invalid syntax",
+    "Invalid predicate \"(readmission_history == '3+ times') or (readmission_history == '1-2 times') implies (in_hospital_mortality == 'deceased') or (readmission_history == 'none')\": invalid syntax",
+    "Invalid predicate \"(readmission_history == 'three_or_more') or (readmission_history == 'two') or (readmission_history == 'one') or (readmission_history == 'none') and (in_hospital_mortality == 'deceas",
+    "Invalid predicate \"(regulator_function == 'loss_of_function') implies (barrier_integrity != 'high')\": invalid syntax",
+    "Invalid predicate \"(regulator_function == 'loss_of_function') implies (neuronal_firing == 'deficit')\": invalid syntax",
+    "Invalid predicate \"(sodium_intake == 'high') and (age in ['75-84', '85+']) implies (readmission == 'yes')\": invalid syntax",
+    "Invalid predicate \"(tissue_specific_eQTL_signal == 'high') or (tissue_specific_eQTL_signal == 'medium') implies (overall_survival == 'good')\": invalid syntax",
+    "Invalid predicate '(drug_target_binding_affinity > 0.5) implies (disease_free_interval >= 120)': invalid syntax",
+    "Invalid predicate '(drug_target_binding_affinity > 0.5) implies (time_to_resistance < 120)': invalid syntax",
+    "Invalid predicate '(frailty_index > 0.5) implies (ed_visits >= 2)': invalid syntax",
+    "NO_JSON",
+    "Unsupported construct Subscript in \"((serum_creatinine[0] < serum_creatinine[6]) and (functional_status == 'declined')) or (not (serum_creatinine[0] < serum_creatinine[6]))\". Only comparisons, and/or/",
+    "Unsupported construct Subscript in \"((serum_creatinine[time] > serum_creatinine[time-1]) and (progression == 'progression')) or (not (serum_creatinine[time] > serum_creatinine[time-1]))\". Only compari",
+    "Variable name '30_day_readmission' is not a valid identifier."
+  ],
+  "analysed": 153,
+  "q1": {
+    "kappa": 0.0016542597187758218,
+    "kappa_95": [
+      -3.660864714820021e-17,
+      0.0052204451615965475
+    ],
+    "spearman_fraction_vs_rubric": 0.17067110855015188,
+    "rubric_cut_at_median": 8.0
+  },
+  "q2": {
+    "exact_falsifiable": 144,
+    "informative": 144,
+    "informative_share_95": [
+      0.9740163628569635,
+      1.0000000000000002
+    ],
+    "threshold": 0.05
+  },
+  "q3": {
+    "status": "not run",
+    "reason": "no revision pairs exist (protocol section 5.3)"
+  },
+  "criteria": {
+    "A_agreement": {
+      "met": false,
+      "required_lower_bound": 0.4
+    },
+    "I_informativeness": {
+      "met": true,
+      "required_share": 0.7
+    }
+  },
+  "protocol": "FALSIFIABILITY_PILOT_V2_PROTOCOL.md",
+  "scope": "formal hypotheses generated by the pinned model; prose hypotheses are not covered (see v1 results)",
+  "protocol_sha256": "048020594c5286fdb86a5642759d01c7fcb376d5a4a4c4ca62b5a1dcbc315af3"
+}

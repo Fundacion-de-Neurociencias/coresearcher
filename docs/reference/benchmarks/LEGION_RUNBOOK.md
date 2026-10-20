@@ -196,16 +196,17 @@ Protocols: [HYPOTHESIS_INSPIRATION_PROTOCOL.md](HYPOTHESIS_INSPIRATION_PROTOCOL.
 This section says what the Legion session can do now and what must be decided first. Do not start a run from this
 section alone.
 
-### 8.1 Decisions required before any run
+### 8.1 Model configuration (decided 2026-10-20, recorded in both protocols)
 
-Each decision must be written into its protocol and committed before the first run, because the protocols fix their
-judges and comparators before any result is seen. The Legion session must not choose these names itself.
+Only Ollama with Qwen 2.5 is available, so:
 
-1. **Judge for the inspiration protocol** (section 5.4): a model that is not one of the arms, with exact version.
-2. **Frontier comparators F1 and F2** (section 4): exact model versions and serving dates, runnable under the same
-   budget. If none is available, the arms are reported as not run.
-3. **Rubric judge for the falsifiability pilot** (section 3.3): a model that is not among the systems compared, with
-   exact version, plus the number of reviews (three, as written).
+1. **Formalizer** (falsifiability pilot): `qwen2.5:14b-instruct-q4_K_M`. Not installed on the Legion yet: pull it.
+2. **Generator for C1** (inspiration protocol): `qwen2.5:14b-instruct-q4_K_M`.
+3. **Rubric judge** (falsifiability pilot) and **judge** (inspiration protocol): `qwen2.5-coder:32b`. Pull it if absent.
+4. **Frontier comparators F1 and F2: removed.** The inspiration protocol therefore supports only an exploratory C1
+   rate against its random-reference floor. It cannot test the DiscoveryRSI comparison.
+
+Record the exact tags and digests (`ollama show <tag>`) in the first raw record of each run.
 
 ### 8.2 Required code that does not exist yet
 
@@ -240,7 +241,8 @@ versions and prompt hashes. Do not report Q3, and do not change the threshold of
 
 ### 8.4 Inspiration protocol
 
-Nothing in 8.4 can run until 8.1 and 8.2 are complete. Once they are, the Legion session follows section 5 of the
+Nothing in 8.4 can run until 8.2 is complete. With the configuration in 8.1, only the exploratory C1 analysis is
+possible. Once they are, the Legion session follows section 5 of the
 protocol in order: question bank, reference corpus, retrieval with the whole-proposal query, judge with the random
 identifier, human validation sample, random-reference control, then cluster-bootstrap analysis. Report every arm
 with its denominator, and report the human-validation gate result before any judged rate.

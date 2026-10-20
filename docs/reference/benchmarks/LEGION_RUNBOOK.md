@@ -235,14 +235,24 @@ out of this repository; set them only in the local `.env`.
   generator, which would reduce the family correlation reported in both protocols. Adopting it needs its exact tag
   (`ollama list`) and a protocol revision committed before any run. Until then, `qwen2.5-coder:32b` stays the judge.
 
-### 8.2 Required code that does not exist yet
+### 8.2 Code status
 
-- A **question-bank generator** for the inspiration protocol (200 questions, seed `61000`, four domains).
-- The **citation-traversal reference corpus** (section 5.3) and its date rule.
-- The **hypothesis generator** for the falsifiability pilot, which must produce up to 300 hypotheses from a frozen
-  question bank (seed `62000`).
-- **Self-improvement arms C2 to C4**: CoResearcher has no per-hypothesis credit assignment or harness replay. The
-  primary and mechanism contrasts of the inspiration protocol are therefore not runnable.
+- **Question bank:** written and tested (`scripts/benchmarks/build_question_bank.py`, 200 questions, committed
+  `question_bank.json`). Runs offline.
+- **Reference corpus:** written and tested with a simulated network (`scripts/benchmarks/build_reference_corpus.py`).
+  It needs network access to `api.openalex.org`, which this sandbox does not have. Run it on the Mac Studio:
+
+  ```bash
+  export OPENALEX_MAILTO=<a contact address you control>   # optional; OpenAlex's polite pool
+  python scripts/benchmarks/build_reference_corpus.py anchors
+  python scripts/benchmarks/build_reference_corpus.py corpus
+  ```
+
+  Commit `anchors.json` and `corpus.jsonl` after each step, with their printed hashes. The anchors are frozen once: do
+  not rerun the `anchors` step after any result exists.
+- **Hypothesis generator** for the falsifiability pilot: still to write.
+- **Self-improvement arms C2 to C4:** not implemented. The primary and mechanism contrasts of the inspiration protocol are
+  therefore not runnable.
 
 ### 8.3 Falsifiability pilot, what can run once 8.1 and 8.2 are done
 

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "frozen_on": "2026-10-20",
+  "note": "Frozen before any question is generated for a run. Changing this file changes the question bank hash and requires a new protocol revision.",
+  "template": "Does {exposure} predict {outcome} among {population}?",
+  "window": {"from": "2025-04-01", "to": "2026-10-14"},
+  "domains": {
+    "clinical_population_health": {
+      "exposure": [
+        "serum creatinine trajectory",
+        "urine output after ICU admission",
+        "systolic blood pressure variability",
+        "hospital readmission history",
+        "frailty index at admission",
+        "daily step count",
+        "antibiotic exposure in the first week",
+        "sodium intake estimated from urine"
+      ],
+      "outcome": [
+        "30-day readmission",
+        "in-hospital mortality",
+        "progression of acute kidney injury",
+        "functional decline at six months",
+        "emergency department visits in one year",
+        "fall-related injury"
+      ],
+      "population": [
+        "adults discharged from intensive care",
+        "community-dwelling older adults",
+        "patients with chronic kidney disease",
+        "adults admitted with pneumonia"
+      ]
+    },
+    "therapeutic_target_prioritization": {
+      "exposure": [
+        "a genetic variant in the candidate gene",
+        "baseline expression of the target in tumour tissue",
+        "plasma abundance of the target protein",
+        "pathway activity score",
+        "copy-number gain at the locus",
+        "promoter methylation",
+        "predicted drug-target binding affinity",
+        "tissue-specific eQTL signal"
+      ],
+      "outcome": [
+        "response to standard therapy",
+        "overall survival",
+        "time to resistance",
+        "grade 3 or higher toxicity",
+        "disease-free interval",
+        "biomarker-defined response"
+      ],
+      "population": [
+        "patients with hepatocellular carcinoma",
+        "patients with non-small cell lung cancer",
+        "patients with type 2 diabetes",
+        "patients with rheumatoid arthritis"
+      ]
+    },
+    "disease_mechanisms": {
+      "exposure": [
+        "loss of function of the regulator",
+        "increased inflammatory cytokine signalling",
+        "impaired autophagy flux",
+        "mitochondrial DNA copy number",
+        "altered microglial activation",
+        "reduced synaptic gene expression",
+        "aberrant splicing of the transcript",
+        "epigenetic silencing of the repressor"
+      ],
+      "outcome": [
+        "cell death",
+        "tau aggregation",
+        "fibrosis score",
+        "lipid accumulation",
+        "barrier integrity",
+        "neuronal firing deficit"
+      ],
+      "population": [
+        "patient-derived organoid lines",
+        "knockout mouse cohorts",
+        "post-mortem brain samples",
+        "iPSC-derived neurons from donors"
+      ]
+    },
+    "population_multiomics": {
+      "exposure": [
+        "plasma proteomic signature",
+        "gut microbiome diversity",
+        "blood DNA methylation age",
+        "serum metabolite panel",
+        "polygenic risk score",
+        "transcriptomic immune signature",
+        "circulating microRNA profile",
+        "lipidomic profile"
+      ],
+      "outcome": [
+        "incident cardiovascular disease",
+        "incident dementia",
+        "incident type 2 diabetes",
+        "all-cause mortality",
+        "cognitive decline over five years",
+        "frailty progression"
+      ],
+      "population": [
+        "UK Biobank participants",
+        "a cohort of community-dwelling adults",
+        "participants of a long-running birth cohort",
+        "older adults in a national registry"
+      ]
+    }
+  }
+}

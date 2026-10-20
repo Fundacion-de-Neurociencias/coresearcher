@@ -208,6 +208,19 @@ Only Ollama with Qwen 2.5 is available, so:
 
 Record the exact tags and digests (`ollama show <tag>`) in the first raw record of each run.
 
+**Host and status (2026-10-20).** The Ollama host is a Mac Studio, not the Legion machine. Run every command in this
+section on that machine with `FORMALIZER_BASE_URL=http://localhost:11434/v1`. Network addresses of the host are kept
+out of this repository; set them only in the local `.env`.
+
+- Pulled: `qwen2.5-coder:32b` (judge and rubric judge).
+- Not yet pulled: `qwen2.5:14b-instruct-q4_K_M` (formalizer and C1 generator). Pull it before section 8.3.
+- **Never use `manuel-sovereign:32b` in any arm.** It is a derived model with a personal system prompt injected from
+  a private vault. Using it as a judge, generator or formalizer would put those criteria into the measurement.
+  Every arm uses an unmodified base tag.
+- Optional judge: a 30B Nemotron model is present on the host. It belongs to a different model family from the Qwen
+  generator, which would reduce the family correlation reported in both protocols. Adopting it needs its exact tag
+  (`ollama list`) and a protocol revision committed before any run. Until then, `qwen2.5-coder:32b` stays the judge.
+
 ### 8.2 Required code that does not exist yet
 
 - A **question-bank generator** for the inspiration protocol (200 questions, seed `61000`, four domains).

@@ -42,9 +42,14 @@ Every arm answers the same research questions, drawn once from the question bank
 budget, the same evidence pack and the same output schema.
 
 - **C1, CoResearcher base model** (no self-improvement).
-- **C2, CoResearcher after one round** of the pipeline's own improvement procedure.
-- **C3, CoResearcher after two rounds.**
-- **C4, same compute, no credit assignment and no harness replay.** The control that separates the mechanisms.
+- **C2, CoResearcher after one round** of the pipeline's own improvement procedure. **Not implemented:** CoResearcher
+  has no per-hypothesis credit assignment, no training on research trajectories and no harness replay.
+- **C3, CoResearcher after two rounds.** Not implemented, for the same reason.
+- **C4, same compute, no credit assignment and no harness replay.** Not implemented.
+
+Consequence: the primary contrast (C3 against F1) and the mechanism contrast (C3 against C4) cannot be run until a
+self-improvement pipeline exists. Under the current code, the only runnable arms are C1, F1 and F2, and the protocol
+then supports only an exploratory comparison of C1 with F1 and F2, reported as exploratory, with no criterion read.
 - **F1, frontier comparator A**, named by exact version and serving date.
 - **F2, frontier comparator B**, named by exact version and serving date.
 

@@ -254,27 +254,22 @@ out of this repository; set them only in the local `.env`.
 - **Self-improvement arms C2 to C4:** not implemented. The primary and mechanism contrasts of the inspiration protocol are
   therefore not runnable.
 
-### 8.3 Falsifiability pilot, what can run once 8.1 and 8.2 are done
+### 8.3 Falsifiability pilot (runnable on the Mac Studio, after the model check in 8.1)
 
-Model prerequisites are the same as in section 0, step 2:
+The pilot has three steps, each run once. Between steps, nothing in the protocol or the hypothesis files may change.
 
 ```bash
-ollama pull qwen2.5:14b-instruct-q4_K_M
 export FORMALIZER_BASE_URL=http://localhost:11434/v1
-export FORMALIZER_MODEL=qwen2.5:14b-instruct-q4_K_M
+python scripts/benchmarks/run_falsifiability_pilot.py generate   # 200 hypotheses, one per bank question
+python scripts/benchmarks/run_falsifiability_pilot.py measure    # formalize (gate), exact measure, 3 rubric reviews
+python scripts/benchmarks/run_falsifiability_pilot.py score      # Q1, Q2 and their criteria
 ```
 
-Then, in order, and each step recorded with its hash:
-
-1. Freeze the question bank and the generator prompt. Commit them.
-2. Generate the hypotheses, then formalize each with the pinned formalizer. Keep only those that pass the
-   self-consistency gate (ADR-DISCOVERY-064). Record every exclusion with its reason.
-3. Compute the exact measure with the formal evaluator: content verdict and forbidden fraction (protocol section 4).
-4. Score each hypothesis with the rubric judge, three reviews, median (protocol section 3.3).
-5. Analyse Q1 and Q2 as written. Q3 is not run.
-
-Report, for each arm: the exclusion rate, kappa with its interval, the informative share, and the exact model
-versions and prompt hashes. Do not report Q3, and do not change the threshold of 0.05 after seeing any result.
+- `generate` refuses to run if `hypotheses.jsonl` already exists. Delete nothing: the generated set is frozen by design.
+- `score` refuses measures produced under another protocol hash.
+- Report the numbers printed by `score`: exclusions and their reasons, kappa with its interval, the Spearman correlation
+  (or "not defined" if a set is constant), the informative share with its interval, and both criteria. Q3 is not run.
+- The judge and the formalizer share a model family. That correlation is part of every reported result.
 
 ### 8.4 Inspiration protocol
 

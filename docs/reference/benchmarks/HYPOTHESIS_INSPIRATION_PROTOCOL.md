@@ -92,6 +92,12 @@ The per-arm date rule is applied after the corpus is frozen, and never changes i
 was published after that arm's model release date, recorded exactly. Where only a month is known, the boundary is the
 first day of that month and the boundary is stated. No cutoff is guessed.
 
+**Description of the frozen corpus (recorded after freezing, before any judgment).** 2 975 works, all inside the window,
+no duplicates. 2 967 are citing works and 8 are references: the backward leg contributes almost nothing, because the
+references of the anchors predate the window. 539 works (18 %) have no abstract. A judge that reads only the text of R
+cannot make a positive call on those works, so they can only lower the rates. This is a limit of the corpus, and it is
+reported with every result, together with the share of matched candidates that lack an abstract.
+
 The corpus is smaller than a multi-hop traversal, and it reaches only what OpenAlex links to the anchors. A paper that is
 not linked to an anchor cannot match, and this limits every rate that follows.
 

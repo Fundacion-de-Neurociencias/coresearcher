@@ -82,7 +82,9 @@ Built once by `scripts/benchmarks/build_reference_corpus.py`, from OpenAlex only
 
 - **Anchors:** the five most-cited articles per domain, for a fixed query, in the window 2024-01-01 to 2026-10-14. They are
   retrieved once and frozen to `anchors.json`, with the hash of the query file.
-- **Traversal:** one hop in each direction. The references of each anchor, and up to 200 citing works per anchor.
+- **Traversal:** one hop in each direction. The references of each anchor, and up to 200 citing works per anchor. The
+  citing works are requested by page number at a fixed page size of 100, most cited first, so the subset of 200 is
+  reproducible. The cursor form of paging is not used, because the public OpenAlex tier refuses it without a key.
 - **Window:** only works published between 2025-04-01 and 2026-10-14 are kept. Each work appears once.
 - The output is `corpus.jsonl`, with its SHA-256. The corpus is identical for every arm.
 

@@ -239,17 +239,20 @@ out of this repository; set them only in the local `.env`.
 
 - **Question bank:** written and tested (`scripts/benchmarks/build_question_bank.py`, 200 questions, committed
   `question_bank.json`). Runs offline.
-- **Reference corpus:** written and tested with a simulated network (`scripts/benchmarks/build_reference_corpus.py`).
-  It needs network access to `api.openalex.org`, which this sandbox does not have. Run it on the Mac Studio:
+- **Reference corpus:** `scripts/benchmarks/build_reference_corpus.py`, tested with a simulated network. It needs
+  network access to `api.openalex.org`. Run it on the Mac Studio, **from the committed code only**:
 
-  ```bash
-  export OPENALEX_MAILTO=<a contact address you control>   # optional; OpenAlex's polite pool
-  python scripts/benchmarks/build_reference_corpus.py anchors
-  python scripts/benchmarks/build_reference_corpus.py corpus
-  ```
+  1. Check the local copy: `git status` and `git diff`. Any local change to `build_reference_corpus.py` must be
+     discarded, because the committed version is the one that is frozen: `git checkout -- scripts/benchmarks/build_reference_corpus.py`.
+  2. The anchors were already frozen on the Mac (`anchors.json`, SHA-256 `9d6844b7b0e0da7b4c08597ebdd3a38bcfbc517833c8db55822ff42d633925fd`).
+     Check that hash, then **commit that file** to the repository, so the anchors are versioned with the code:
+     `git add docs/reference/benchmarks/inspiration/anchors.json && git commit -m "Freeze inspiration anchors" && git push`.
+     Do not run the `anchors` step again: it would produce different anchors if OpenAlex's ranking has changed.
+  3. Run the corpus step: `python scripts/benchmarks/build_reference_corpus.py corpus`.
+  4. Commit `corpus.jsonl` with the hash it prints.
 
-  Commit `anchors.json` and `corpus.jsonl` after each step, with their printed hashes. The anchors are frozen once: do
-  not rerun the `anchors` step after any result exists.
+  OpenAlex's public tier refuses cursor paging. The committed code pages by number, so no key is needed. An optional
+  contact address can be set with `OPENALEX_MAILTO`.
 - **Hypothesis generator** for the falsifiability pilot: still to write.
 - **Self-improvement arms C2 to C4:** not implemented. The primary and mechanism contrasts of the inspiration protocol are
   therefore not runnable.

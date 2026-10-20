@@ -189,6 +189,62 @@ update the claims-register row for this benchmark with the criteria as they came
 scoring prints: detection on planted items for P, R and E, the false detections on correct items (must be 0), and the
 criteria A and S with their intervals. Do not report a result that the scoring does not produce.
 
+## 8. Hypothesis inspiration and falsifiability pilot (not yet runnable)
+
+Protocols: [HYPOTHESIS_INSPIRATION_PROTOCOL.md](HYPOTHESIS_INSPIRATION_PROTOCOL.md) and
+[FALSIFIABILITY_PILOT_PROTOCOL.md](FALSIFIABILITY_PILOT_PROTOCOL.md). Both are drafts, and nothing in them has run.
+This section says what the Legion session can do now and what must be decided first. Do not start a run from this
+section alone.
+
+### 8.1 Decisions required before any run
+
+Each decision must be written into its protocol and committed before the first run, because the protocols fix their
+judges and comparators before any result is seen. The Legion session must not choose these names itself.
+
+1. **Judge for the inspiration protocol** (section 5.4): a model that is not one of the arms, with exact version.
+2. **Frontier comparators F1 and F2** (section 4): exact model versions and serving dates, runnable under the same
+   budget. If none is available, the arms are reported as not run.
+3. **Rubric judge for the falsifiability pilot** (section 3.3): a model that is not among the systems compared, with
+   exact version, plus the number of reviews (three, as written).
+
+### 8.2 Required code that does not exist yet
+
+- A **question-bank generator** for the inspiration protocol (200 questions, seed `61000`, four domains).
+- The **citation-traversal reference corpus** (section 5.3) and its date rule.
+- The **hypothesis generator** for the falsifiability pilot, which must produce up to 300 hypotheses from a frozen
+  question bank (seed `62000`).
+- **Self-improvement arms C2 to C4**: CoResearcher has no per-hypothesis credit assignment or harness replay. The
+  primary and mechanism contrasts of the inspiration protocol are therefore not runnable.
+
+### 8.3 Falsifiability pilot, what can run once 8.1 and 8.2 are done
+
+Model prerequisites are the same as in section 0, step 2:
+
+```bash
+ollama pull qwen2.5:14b-instruct-q4_K_M
+export FORMALIZER_BASE_URL=http://localhost:11434/v1
+export FORMALIZER_MODEL=qwen2.5:14b-instruct-q4_K_M
+```
+
+Then, in order, and each step recorded with its hash:
+
+1. Freeze the question bank and the generator prompt. Commit them.
+2. Generate the hypotheses, then formalize each with the pinned formalizer. Keep only those that pass the
+   self-consistency gate (ADR-DISCOVERY-064). Record every exclusion with its reason.
+3. Compute the exact measure with the formal evaluator: content verdict and forbidden fraction (protocol section 4).
+4. Score each hypothesis with the rubric judge, three reviews, median (protocol section 3.3).
+5. Analyse Q1 and Q2 as written. Q3 is not run.
+
+Report, for each arm: the exclusion rate, kappa with its interval, the informative share, and the exact model
+versions and prompt hashes. Do not report Q3, and do not change the threshold of 0.05 after seeing any result.
+
+### 8.4 Inspiration protocol
+
+Nothing in 8.4 can run until 8.1 and 8.2 are complete. Once they are, the Legion session follows section 5 of the
+protocol in order: question bank, reference corpus, retrieval with the whole-proposal query, judge with the random
+identifier, human validation sample, random-reference control, then cluster-bootstrap analysis. Report every arm
+with its denominator, and report the human-validation gate result before any judged rate.
+
 ## What comes back to the repository
 
 Run files (`runs/`) stay on the Legion unless they contain no confidential text. Reports, hashes and claims-register

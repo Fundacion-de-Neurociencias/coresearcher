@@ -140,7 +140,7 @@ def formalize_with_model(prose: str, question_id: str):
     from python.discovery.formalizer import ChatClient
 
     client = ChatClient(model=GENERATOR_MODEL)
-    result = formalize_gated(prose, {"formalizer": client}, hypothesis_id=question_id)
+    result = formalize_gated(prose, {GENERATOR_MODEL: client}, hypothesis_id=question_id)
     formal = result.formalization
     if result.passes and formal is not None and formal.hypothesis is not None:
         return "PASSED_GATE", formal.hypothesis, ""

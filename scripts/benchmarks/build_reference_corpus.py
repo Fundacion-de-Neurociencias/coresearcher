@@ -21,7 +21,8 @@ QUERIES = INSPIRATION / "anchor_queries.json"
 ANCHORS = INSPIRATION / "anchors.json"
 CORPUS = INSPIRATION / "corpus.jsonl"
 API = "https://api.openalex.org"
-PAGE = 200
+# OpenAlex refuses more than 100 values in one ID filter, so id batches and page sizes stay at 100.
+PAGE = 100
 
 
 def _sha256(path: Path) -> str:
@@ -106,17 +107,22 @@ def _referenced(fetch, anchor_id: str) -> list:
 
 
 def _citing(fetch, anchor_id: str, cap: int) -> list:
-    """Works that cite this anchor, up to `cap`."""
-    works, cursor = [], "*"
+    """Works that cite this anchor, up to `cap`, in a fixed order (most cited first) so the subset is reproducible.
+    Pages are requested by number: the cursor form of paging needs an API key on OpenAlex's public tier."""
+    works, page = [], 1
     while len(works) < cap:
+        # The page size stays fixed: OpenAlex offsets page n by (n - 1) x per-page, so changing it mid-way skips works.
         data = fetch(
             f"{API}/works",
-            {"filter": f"cites:{anchor_id}", "per-page": min(PAGE, cap - len(works)), "cursor": cursor},
+            {"filter": f"cites:{anchor_id}", "sort": "cited_by_count:desc", "per-page": PAGE, "page": page},
         )
-        works.extend(data.get("results", []))
-        cursor = data.get("meta", {}).get("next_cursor")
-        if not cursor or not data.get("results"):
+        batch = data.get("results", [])
+        if not batch:
             break
+        works.extend(batch)
+        if len(batch) < PAGE:
+            break
+        page += 1
     return works[:cap]
 
 

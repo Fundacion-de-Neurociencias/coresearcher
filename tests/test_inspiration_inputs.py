@@ -52,7 +52,8 @@ def test_window_is_inclusive_and_rejects_missing_dates():
 class FakeOpenAlex:
     """Answers the three request shapes the corpus builder uses."""
 
-    def __init__(self):
+    def __init__(self, extra_citers=0):
+        self.extra_citers = extra_citers
         self.calls = []
         self.works = {
             "W1": {
@@ -79,7 +80,12 @@ class FakeOpenAlex:
             ids = params["filter"].split(":", 1)[1].split("|")
             return {"results": [self.works[i] for i in ids if i in self.works]}
         if url.endswith("/works") and str(params.get("filter", "")).startswith("cites:"):
-            return {"results": [self.works["W4"]], "meta": {"next_cursor": None}}
+            citers = [self.works["W4"]] + [
+                {"id": f"https://openalex.org/W{100 + i}", "title": "c", "publication_date": "2025-09-01"}
+                for i in range(self.extra_citers)
+            ]
+            size, page = params["per-page"], params["page"]
+            return {"results": citers[(page - 1) * size : page * size]}
         if "/works/" in url:
             return self.works[url.rsplit("/", 1)[-1]]
         raise AssertionError(f"unexpected request {url} {params}")
@@ -118,3 +124,18 @@ def test_corpus_keeps_only_in_window_works_once_each(isolated_inspiration):
 def test_corpus_requires_anchors_first(isolated_inspiration):
     with pytest.raises(SystemExit):
         rc.build_corpus(FakeOpenAlex())
+
+
+def test_citations_are_paged_by_number_and_stop_at_the_cap(tmp_path, monkeypatch):
+    monkeypatch.setattr(rc, "PAGE", 3)
+    fake = FakeOpenAlex(extra_citers=6)  # 7 citing works in total
+    assert [w["id"] for w in rc._citing(fake, "W1", cap=5)] == [
+        f"https://openalex.org/W{i}" for i in [4, 100, 101, 102, 103]
+    ]
+    pages = [params["page"] for url, params in fake.calls if params.get("filter", "").startswith("cites:")]
+    assert pages == [1, 2]  # stops after the second page, which is past the cap
+    sizes = {params["per-page"] for _, params in fake.calls if "cites:" in params.get("filter", "")}
+    assert sizes == {3}  # one page size throughout
+    assert all(
+        params.get("sort") == "cited_by_count:desc" for _, params in fake.calls if "cites:" in params.get("filter", "")
+    )

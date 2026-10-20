@@ -61,8 +61,12 @@ only if it can be run under the same budget. If not, it is reported as not run, 
 
 ### 5.1 Research questions
 
-200 research questions drawn by a fixed seed (`61000`) from a bank frozen before any arm runs. Questions are stratified
-across four life-science domains, 50 each. No question is written after seeing outputs.
+200 research questions, 50 per life-science domain, drawn from the frozen vocabulary
+`docs/reference/benchmarks/inspiration/question_vocabulary.json` by `scripts/benchmarks/build_question_bank.py`, with
+seed `61000`. The bank is written to `question_bank.json` and records the hashes of the vocabulary and of this protocol.
+No question is written after seeing outputs. The questions are templated (for example "Does serum creatinine trajectory
+predict 30-day readmission among adults discharged from intensive care?"), which keeps them comparable and reproducible,
+and limits how natural they sound.
 
 ### 5.2 Retrieval query
 
@@ -73,10 +77,21 @@ read only the first 6 000 characters of a 41 134-character proposal.
 
 ### 5.3 Reference corpus and date rule
 
-A single reference corpus is built once, from a citation traversal with a fixed number of hops, from a fixed seed set
-of anchor papers per domain. The corpus is identical for all arms. The date rule is the release date of each model
-version, recorded exactly. Where only a month is known for a serving identifier, the month is recorded and the
-boundary is stated; no boundary is guessed.
+Built once by `scripts/benchmarks/build_reference_corpus.py`, from OpenAlex only, with the settings frozen in
+`inspiration/anchor_queries.json`:
+
+- **Anchors:** the five most-cited articles per domain, for a fixed query, in the window 2024-01-01 to 2026-10-14. They are
+  retrieved once and frozen to `anchors.json`, with the hash of the query file.
+- **Traversal:** one hop in each direction. The references of each anchor, and up to 200 citing works per anchor.
+- **Window:** only works published between 2025-04-01 and 2026-10-14 are kept. Each work appears once.
+- The output is `corpus.jsonl`, with its SHA-256. The corpus is identical for every arm.
+
+The per-arm date rule is applied after the corpus is frozen, and never changes it: a work counts for an arm only if it
+was published after that arm's model release date, recorded exactly. Where only a month is known, the boundary is the
+first day of that month and the boundary is stated. No cutoff is guessed.
+
+The corpus is smaller than a multi-hop traversal, and it reaches only what OpenAlex links to the anchors. A paper that is
+not linked to an anchor cannot match, and this limits every rate that follows.
 
 ### 5.4 Judge
 

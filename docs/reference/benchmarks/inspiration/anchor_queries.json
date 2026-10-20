@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "frozen_on": "2026-10-20",
+  "note": "Anchor queries, one per domain. The anchors are the five most-cited works per query in the window below, retrieved once and frozen to anchors.json with their hash.",
+  "anchors_per_domain": 5,
+  "anchor_window": {"from": "2024-01-01", "to": "2026-10-14"},
+  "queries": {
+    "clinical_population_health": "acute kidney injury readmission mortality cohort",
+    "therapeutic_target_prioritization": "drug target prioritisation genetic evidence therapy response",
+    "disease_mechanisms": "mechanism neurodegeneration organoid knockout pathway",
+    "population_multiomics": "multi-omics cohort biomarker incident disease prospective"
+  },
+  "traversal": {"hops": 1, "max_citing_per_anchor": 200, "window": {"from": "2025-04-01", "to": "2026-10-14"}}
+}

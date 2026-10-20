@@ -1,0 +1,1608 @@
+{
+  "seed": 61000,
+  "per_domain": 50,
+  "vocabulary_sha256": "dad7d7aa4db08c3022322060f99793944e9027826e276f19fd0861c57dfd42c4",
+  "protocol_sha256": "c2786b27ce67c9eb466fff2af00402cf8810314690ffc64460e89b1b65699bf9",
+  "questions": [
+    {
+      "id": "Q-clinical_population_health-001",
+      "domain": "clinical_population_health",
+      "text": "Does antibiotic exposure in the first week predict functional decline at six months among adults discharged from intensive care?",
+      "exposure": "antibiotic exposure in the first week",
+      "outcome": "functional decline at six months",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-002",
+      "domain": "clinical_population_health",
+      "text": "Does antibiotic exposure in the first week predict functional decline at six months among community-dwelling older adults?",
+      "exposure": "antibiotic exposure in the first week",
+      "outcome": "functional decline at six months",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-003",
+      "domain": "clinical_population_health",
+      "text": "Does antibiotic exposure in the first week predict functional decline at six months among patients with chronic kidney disease?",
+      "exposure": "antibiotic exposure in the first week",
+      "outcome": "functional decline at six months",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-004",
+      "domain": "clinical_population_health",
+      "text": "Does antibiotic exposure in the first week predict in-hospital mortality among community-dwelling older adults?",
+      "exposure": "antibiotic exposure in the first week",
+      "outcome": "in-hospital mortality",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-005",
+      "domain": "clinical_population_health",
+      "text": "Does antibiotic exposure in the first week predict in-hospital mortality among patients with chronic kidney disease?",
+      "exposure": "antibiotic exposure in the first week",
+      "outcome": "in-hospital mortality",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-006",
+      "domain": "clinical_population_health",
+      "text": "Does daily step count predict 30-day readmission among community-dwelling older adults?",
+      "exposure": "daily step count",
+      "outcome": "30-day readmission",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-007",
+      "domain": "clinical_population_health",
+      "text": "Does daily step count predict fall-related injury among community-dwelling older adults?",
+      "exposure": "daily step count",
+      "outcome": "fall-related injury",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-008",
+      "domain": "clinical_population_health",
+      "text": "Does daily step count predict fall-related injury among patients with chronic kidney disease?",
+      "exposure": "daily step count",
+      "outcome": "fall-related injury",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-009",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict 30-day readmission among adults discharged from intensive care?",
+      "exposure": "frailty index at admission",
+      "outcome": "30-day readmission",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-010",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict emergency department visits in one year among patients with chronic kidney disease?",
+      "exposure": "frailty index at admission",
+      "outcome": "emergency department visits in one year",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-011",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict fall-related injury among adults admitted with pneumonia?",
+      "exposure": "frailty index at admission",
+      "outcome": "fall-related injury",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-012",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict functional decline at six months among adults admitted with pneumonia?",
+      "exposure": "frailty index at admission",
+      "outcome": "functional decline at six months",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-013",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict functional decline at six months among adults discharged from intensive care?",
+      "exposure": "frailty index at admission",
+      "outcome": "functional decline at six months",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-014",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict in-hospital mortality among adults admitted with pneumonia?",
+      "exposure": "frailty index at admission",
+      "outcome": "in-hospital mortality",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-015",
+      "domain": "clinical_population_health",
+      "text": "Does frailty index at admission predict progression of acute kidney injury among adults discharged from intensive care?",
+      "exposure": "frailty index at admission",
+      "outcome": "progression of acute kidney injury",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-016",
+      "domain": "clinical_population_health",
+      "text": "Does hospital readmission history predict 30-day readmission among adults discharged from intensive care?",
+      "exposure": "hospital readmission history",
+      "outcome": "30-day readmission",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-017",
+      "domain": "clinical_population_health",
+      "text": "Does hospital readmission history predict 30-day readmission among community-dwelling older adults?",
+      "exposure": "hospital readmission history",
+      "outcome": "30-day readmission",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-018",
+      "domain": "clinical_population_health",
+      "text": "Does hospital readmission history predict in-hospital mortality among adults discharged from intensive care?",
+      "exposure": "hospital readmission history",
+      "outcome": "in-hospital mortality",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-019",
+      "domain": "clinical_population_health",
+      "text": "Does hospital readmission history predict in-hospital mortality among patients with chronic kidney disease?",
+      "exposure": "hospital readmission history",
+      "outcome": "in-hospital mortality",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-020",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict 30-day readmission among community-dwelling older adults?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "30-day readmission",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-021",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict fall-related injury among adults admitted with pneumonia?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "fall-related injury",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-022",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict fall-related injury among adults discharged from intensive care?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "fall-related injury",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-023",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict functional decline at six months among adults admitted with pneumonia?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "functional decline at six months",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-024",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict progression of acute kidney injury among adults discharged from intensive care?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "progression of acute kidney injury",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-025",
+      "domain": "clinical_population_health",
+      "text": "Does serum creatinine trajectory predict progression of acute kidney injury among community-dwelling older adults?",
+      "exposure": "serum creatinine trajectory",
+      "outcome": "progression of acute kidney injury",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-026",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict 30-day readmission among community-dwelling older adults?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "30-day readmission",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-027",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict 30-day readmission among patients with chronic kidney disease?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "30-day readmission",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-028",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict emergency department visits in one year among adults discharged from intensive care?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "emergency department visits in one year",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-029",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict emergency department visits in one year among patients with chronic kidney disease?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "emergency department visits in one year",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-030",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict functional decline at six months among patients with chronic kidney disease?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "functional decline at six months",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-031",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict in-hospital mortality among adults admitted with pneumonia?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "in-hospital mortality",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-032",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict in-hospital mortality among adults discharged from intensive care?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "in-hospital mortality",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-033",
+      "domain": "clinical_population_health",
+      "text": "Does sodium intake estimated from urine predict in-hospital mortality among community-dwelling older adults?",
+      "exposure": "sodium intake estimated from urine",
+      "outcome": "in-hospital mortality",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-034",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict 30-day readmission among adults discharged from intensive care?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "30-day readmission",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-035",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict emergency department visits in one year among patients with chronic kidney disease?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "emergency department visits in one year",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-036",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict fall-related injury among community-dwelling older adults?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "fall-related injury",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-037",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict fall-related injury among patients with chronic kidney disease?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "fall-related injury",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-038",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict functional decline at six months among patients with chronic kidney disease?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "functional decline at six months",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-039",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict in-hospital mortality among adults discharged from intensive care?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "in-hospital mortality",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-040",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict in-hospital mortality among patients with chronic kidney disease?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "in-hospital mortality",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-041",
+      "domain": "clinical_population_health",
+      "text": "Does systolic blood pressure variability predict progression of acute kidney injury among patients with chronic kidney disease?",
+      "exposure": "systolic blood pressure variability",
+      "outcome": "progression of acute kidney injury",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-042",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict 30-day readmission among adults admitted with pneumonia?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "30-day readmission",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-043",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict 30-day readmission among community-dwelling older adults?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "30-day readmission",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-044",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict emergency department visits in one year among adults admitted with pneumonia?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "emergency department visits in one year",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-045",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict emergency department visits in one year among adults discharged from intensive care?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "emergency department visits in one year",
+      "population": "adults discharged from intensive care"
+    },
+    {
+      "id": "Q-clinical_population_health-046",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict emergency department visits in one year among patients with chronic kidney disease?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "emergency department visits in one year",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-047",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict fall-related injury among patients with chronic kidney disease?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "fall-related injury",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-clinical_population_health-048",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict in-hospital mortality among adults admitted with pneumonia?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "in-hospital mortality",
+      "population": "adults admitted with pneumonia"
+    },
+    {
+      "id": "Q-clinical_population_health-049",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict progression of acute kidney injury among community-dwelling older adults?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "progression of acute kidney injury",
+      "population": "community-dwelling older adults"
+    },
+    {
+      "id": "Q-clinical_population_health-050",
+      "domain": "clinical_population_health",
+      "text": "Does urine output after ICU admission predict progression of acute kidney injury among patients with chronic kidney disease?",
+      "exposure": "urine output after ICU admission",
+      "outcome": "progression of acute kidney injury",
+      "population": "patients with chronic kidney disease"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-001",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict biomarker-defined response among patients with hepatocellular carcinoma?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "biomarker-defined response",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-002",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict disease-free interval among patients with non-small cell lung cancer?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "disease-free interval",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-003",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict grade 3 or higher toxicity among patients with hepatocellular carcinoma?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-004",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict overall survival among patients with rheumatoid arthritis?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "overall survival",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-005",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict overall survival among patients with type 2 diabetes?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "overall survival",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-006",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict response to standard therapy among patients with non-small cell lung cancer?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "response to standard therapy",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-007",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict time to resistance among patients with hepatocellular carcinoma?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "time to resistance",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-008",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does a genetic variant in the candidate gene predict time to resistance among patients with rheumatoid arthritis?",
+      "exposure": "a genetic variant in the candidate gene",
+      "outcome": "time to resistance",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-009",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict biomarker-defined response among patients with hepatocellular carcinoma?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "biomarker-defined response",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-010",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict biomarker-defined response among patients with non-small cell lung cancer?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "biomarker-defined response",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-011",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict grade 3 or higher toxicity among patients with non-small cell lung cancer?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-012",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict overall survival among patients with hepatocellular carcinoma?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "overall survival",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-013",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict response to standard therapy among patients with non-small cell lung cancer?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "response to standard therapy",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-014",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does baseline expression of the target in tumour tissue predict response to standard therapy among patients with rheumatoid arthritis?",
+      "exposure": "baseline expression of the target in tumour tissue",
+      "outcome": "response to standard therapy",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-015",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does copy-number gain at the locus predict biomarker-defined response among patients with rheumatoid arthritis?",
+      "exposure": "copy-number gain at the locus",
+      "outcome": "biomarker-defined response",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-016",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does copy-number gain at the locus predict grade 3 or higher toxicity among patients with type 2 diabetes?",
+      "exposure": "copy-number gain at the locus",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-017",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does copy-number gain at the locus predict overall survival among patients with non-small cell lung cancer?",
+      "exposure": "copy-number gain at the locus",
+      "outcome": "overall survival",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-018",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does copy-number gain at the locus predict overall survival among patients with type 2 diabetes?",
+      "exposure": "copy-number gain at the locus",
+      "outcome": "overall survival",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-019",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does copy-number gain at the locus predict time to resistance among patients with hepatocellular carcinoma?",
+      "exposure": "copy-number gain at the locus",
+      "outcome": "time to resistance",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-020",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict biomarker-defined response among patients with non-small cell lung cancer?",
+      "exposure": "pathway activity score",
+      "outcome": "biomarker-defined response",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-021",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict biomarker-defined response among patients with type 2 diabetes?",
+      "exposure": "pathway activity score",
+      "outcome": "biomarker-defined response",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-022",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict disease-free interval among patients with non-small cell lung cancer?",
+      "exposure": "pathway activity score",
+      "outcome": "disease-free interval",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-023",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict disease-free interval among patients with rheumatoid arthritis?",
+      "exposure": "pathway activity score",
+      "outcome": "disease-free interval",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-024",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict grade 3 or higher toxicity among patients with hepatocellular carcinoma?",
+      "exposure": "pathway activity score",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-025",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict grade 3 or higher toxicity among patients with non-small cell lung cancer?",
+      "exposure": "pathway activity score",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-026",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does pathway activity score predict response to standard therapy among patients with type 2 diabetes?",
+      "exposure": "pathway activity score",
+      "outcome": "response to standard therapy",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-027",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict biomarker-defined response among patients with non-small cell lung cancer?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "biomarker-defined response",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-028",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict biomarker-defined response among patients with rheumatoid arthritis?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "biomarker-defined response",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-029",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict disease-free interval among patients with hepatocellular carcinoma?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "disease-free interval",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-030",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict grade 3 or higher toxicity among patients with hepatocellular carcinoma?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-031",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict grade 3 or higher toxicity among patients with type 2 diabetes?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-032",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict overall survival among patients with rheumatoid arthritis?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "overall survival",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-033",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict response to standard therapy among patients with non-small cell lung cancer?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "response to standard therapy",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-034",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict response to standard therapy among patients with type 2 diabetes?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "response to standard therapy",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-035",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does plasma abundance of the target protein predict time to resistance among patients with type 2 diabetes?",
+      "exposure": "plasma abundance of the target protein",
+      "outcome": "time to resistance",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-036",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict biomarker-defined response among patients with hepatocellular carcinoma?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "biomarker-defined response",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-037",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict disease-free interval among patients with non-small cell lung cancer?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "disease-free interval",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-038",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict disease-free interval among patients with type 2 diabetes?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "disease-free interval",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-039",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict grade 3 or higher toxicity among patients with non-small cell lung cancer?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-040",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict response to standard therapy among patients with non-small cell lung cancer?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "response to standard therapy",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-041",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict response to standard therapy among patients with type 2 diabetes?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "response to standard therapy",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-042",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does predicted drug-target binding affinity predict time to resistance among patients with type 2 diabetes?",
+      "exposure": "predicted drug-target binding affinity",
+      "outcome": "time to resistance",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-043",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does promoter methylation predict biomarker-defined response among patients with rheumatoid arthritis?",
+      "exposure": "promoter methylation",
+      "outcome": "biomarker-defined response",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-044",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does promoter methylation predict grade 3 or higher toxicity among patients with non-small cell lung cancer?",
+      "exposure": "promoter methylation",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with non-small cell lung cancer"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-045",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does promoter methylation predict overall survival among patients with hepatocellular carcinoma?",
+      "exposure": "promoter methylation",
+      "outcome": "overall survival",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-046",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does promoter methylation predict time to resistance among patients with hepatocellular carcinoma?",
+      "exposure": "promoter methylation",
+      "outcome": "time to resistance",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-047",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does tissue-specific eQTL signal predict disease-free interval among patients with type 2 diabetes?",
+      "exposure": "tissue-specific eQTL signal",
+      "outcome": "disease-free interval",
+      "population": "patients with type 2 diabetes"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-048",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does tissue-specific eQTL signal predict grade 3 or higher toxicity among patients with hepatocellular carcinoma?",
+      "exposure": "tissue-specific eQTL signal",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-049",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does tissue-specific eQTL signal predict grade 3 or higher toxicity among patients with rheumatoid arthritis?",
+      "exposure": "tissue-specific eQTL signal",
+      "outcome": "grade 3 or higher toxicity",
+      "population": "patients with rheumatoid arthritis"
+    },
+    {
+      "id": "Q-therapeutic_target_prioritization-050",
+      "domain": "therapeutic_target_prioritization",
+      "text": "Does tissue-specific eQTL signal predict overall survival among patients with hepatocellular carcinoma?",
+      "exposure": "tissue-specific eQTL signal",
+      "outcome": "overall survival",
+      "population": "patients with hepatocellular carcinoma"
+    },
+    {
+      "id": "Q-disease_mechanisms-001",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict barrier integrity among knockout mouse cohorts?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "barrier integrity",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-002",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict cell death among knockout mouse cohorts?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "cell death",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-003",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict fibrosis score among post-mortem brain samples?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "fibrosis score",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-004",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict lipid accumulation among iPSC-derived neurons from donors?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "lipid accumulation",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-005",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict lipid accumulation among post-mortem brain samples?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "lipid accumulation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-006",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict tau aggregation among knockout mouse cohorts?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "tau aggregation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-007",
+      "domain": "disease_mechanisms",
+      "text": "Does aberrant splicing of the transcript predict tau aggregation among patient-derived organoid lines?",
+      "exposure": "aberrant splicing of the transcript",
+      "outcome": "tau aggregation",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-008",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict cell death among iPSC-derived neurons from donors?",
+      "exposure": "altered microglial activation",
+      "outcome": "cell death",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-009",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict lipid accumulation among iPSC-derived neurons from donors?",
+      "exposure": "altered microglial activation",
+      "outcome": "lipid accumulation",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-010",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict neuronal firing deficit among knockout mouse cohorts?",
+      "exposure": "altered microglial activation",
+      "outcome": "neuronal firing deficit",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-011",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict neuronal firing deficit among patient-derived organoid lines?",
+      "exposure": "altered microglial activation",
+      "outcome": "neuronal firing deficit",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-012",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict neuronal firing deficit among post-mortem brain samples?",
+      "exposure": "altered microglial activation",
+      "outcome": "neuronal firing deficit",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-013",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict tau aggregation among knockout mouse cohorts?",
+      "exposure": "altered microglial activation",
+      "outcome": "tau aggregation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-014",
+      "domain": "disease_mechanisms",
+      "text": "Does altered microglial activation predict tau aggregation among patient-derived organoid lines?",
+      "exposure": "altered microglial activation",
+      "outcome": "tau aggregation",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-015",
+      "domain": "disease_mechanisms",
+      "text": "Does epigenetic silencing of the repressor predict barrier integrity among patient-derived organoid lines?",
+      "exposure": "epigenetic silencing of the repressor",
+      "outcome": "barrier integrity",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-016",
+      "domain": "disease_mechanisms",
+      "text": "Does epigenetic silencing of the repressor predict fibrosis score among patient-derived organoid lines?",
+      "exposure": "epigenetic silencing of the repressor",
+      "outcome": "fibrosis score",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-017",
+      "domain": "disease_mechanisms",
+      "text": "Does epigenetic silencing of the repressor predict fibrosis score among post-mortem brain samples?",
+      "exposure": "epigenetic silencing of the repressor",
+      "outcome": "fibrosis score",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-018",
+      "domain": "disease_mechanisms",
+      "text": "Does epigenetic silencing of the repressor predict lipid accumulation among iPSC-derived neurons from donors?",
+      "exposure": "epigenetic silencing of the repressor",
+      "outcome": "lipid accumulation",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-019",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict barrier integrity among knockout mouse cohorts?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "barrier integrity",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-020",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict barrier integrity among patient-derived organoid lines?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "barrier integrity",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-021",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict cell death among knockout mouse cohorts?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "cell death",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-022",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict cell death among post-mortem brain samples?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "cell death",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-023",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict fibrosis score among iPSC-derived neurons from donors?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "fibrosis score",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-024",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict lipid accumulation among patient-derived organoid lines?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "lipid accumulation",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-025",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict neuronal firing deficit among patient-derived organoid lines?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "neuronal firing deficit",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-026",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict neuronal firing deficit among post-mortem brain samples?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "neuronal firing deficit",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-027",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict tau aggregation among iPSC-derived neurons from donors?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "tau aggregation",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-028",
+      "domain": "disease_mechanisms",
+      "text": "Does impaired autophagy flux predict tau aggregation among post-mortem brain samples?",
+      "exposure": "impaired autophagy flux",
+      "outcome": "tau aggregation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-029",
+      "domain": "disease_mechanisms",
+      "text": "Does increased inflammatory cytokine signalling predict lipid accumulation among knockout mouse cohorts?",
+      "exposure": "increased inflammatory cytokine signalling",
+      "outcome": "lipid accumulation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-030",
+      "domain": "disease_mechanisms",
+      "text": "Does increased inflammatory cytokine signalling predict lipid accumulation among post-mortem brain samples?",
+      "exposure": "increased inflammatory cytokine signalling",
+      "outcome": "lipid accumulation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-031",
+      "domain": "disease_mechanisms",
+      "text": "Does increased inflammatory cytokine signalling predict neuronal firing deficit among patient-derived organoid lines?",
+      "exposure": "increased inflammatory cytokine signalling",
+      "outcome": "neuronal firing deficit",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-032",
+      "domain": "disease_mechanisms",
+      "text": "Does loss of function of the regulator predict barrier integrity among knockout mouse cohorts?",
+      "exposure": "loss of function of the regulator",
+      "outcome": "barrier integrity",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-033",
+      "domain": "disease_mechanisms",
+      "text": "Does loss of function of the regulator predict fibrosis score among knockout mouse cohorts?",
+      "exposure": "loss of function of the regulator",
+      "outcome": "fibrosis score",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-034",
+      "domain": "disease_mechanisms",
+      "text": "Does loss of function of the regulator predict lipid accumulation among knockout mouse cohorts?",
+      "exposure": "loss of function of the regulator",
+      "outcome": "lipid accumulation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-035",
+      "domain": "disease_mechanisms",
+      "text": "Does loss of function of the regulator predict lipid accumulation among post-mortem brain samples?",
+      "exposure": "loss of function of the regulator",
+      "outcome": "lipid accumulation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-036",
+      "domain": "disease_mechanisms",
+      "text": "Does loss of function of the regulator predict neuronal firing deficit among post-mortem brain samples?",
+      "exposure": "loss of function of the regulator",
+      "outcome": "neuronal firing deficit",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-037",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict barrier integrity among patient-derived organoid lines?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "barrier integrity",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-038",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict cell death among post-mortem brain samples?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "cell death",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-039",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict fibrosis score among knockout mouse cohorts?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "fibrosis score",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-040",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict fibrosis score among patient-derived organoid lines?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "fibrosis score",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-041",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict neuronal firing deficit among iPSC-derived neurons from donors?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "neuronal firing deficit",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-042",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict neuronal firing deficit among knockout mouse cohorts?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "neuronal firing deficit",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-043",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict neuronal firing deficit among patient-derived organoid lines?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "neuronal firing deficit",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-044",
+      "domain": "disease_mechanisms",
+      "text": "Does mitochondrial DNA copy number predict tau aggregation among post-mortem brain samples?",
+      "exposure": "mitochondrial DNA copy number",
+      "outcome": "tau aggregation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-045",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict barrier integrity among iPSC-derived neurons from donors?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "barrier integrity",
+      "population": "iPSC-derived neurons from donors"
+    },
+    {
+      "id": "Q-disease_mechanisms-046",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict barrier integrity among patient-derived organoid lines?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "barrier integrity",
+      "population": "patient-derived organoid lines"
+    },
+    {
+      "id": "Q-disease_mechanisms-047",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict cell death among post-mortem brain samples?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "cell death",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-048",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict lipid accumulation among knockout mouse cohorts?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "lipid accumulation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-disease_mechanisms-049",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict lipid accumulation among post-mortem brain samples?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "lipid accumulation",
+      "population": "post-mortem brain samples"
+    },
+    {
+      "id": "Q-disease_mechanisms-050",
+      "domain": "disease_mechanisms",
+      "text": "Does reduced synaptic gene expression predict tau aggregation among knockout mouse cohorts?",
+      "exposure": "reduced synaptic gene expression",
+      "outcome": "tau aggregation",
+      "population": "knockout mouse cohorts"
+    },
+    {
+      "id": "Q-population_multiomics-001",
+      "domain": "population_multiomics",
+      "text": "Does blood DNA methylation age predict all-cause mortality among UK Biobank participants?",
+      "exposure": "blood DNA methylation age",
+      "outcome": "all-cause mortality",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-002",
+      "domain": "population_multiomics",
+      "text": "Does blood DNA methylation age predict frailty progression among UK Biobank participants?",
+      "exposure": "blood DNA methylation age",
+      "outcome": "frailty progression",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-003",
+      "domain": "population_multiomics",
+      "text": "Does blood DNA methylation age predict incident cardiovascular disease among a cohort of community-dwelling adults?",
+      "exposure": "blood DNA methylation age",
+      "outcome": "incident cardiovascular disease",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-004",
+      "domain": "population_multiomics",
+      "text": "Does blood DNA methylation age predict incident dementia among a cohort of community-dwelling adults?",
+      "exposure": "blood DNA methylation age",
+      "outcome": "incident dementia",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-005",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict all-cause mortality among participants of a long-running birth cohort?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "all-cause mortality",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-006",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict cognitive decline over five years among older adults in a national registry?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "cognitive decline over five years",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-007",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict cognitive decline over five years among participants of a long-running birth cohort?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "cognitive decline over five years",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-008",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict frailty progression among a cohort of community-dwelling adults?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "frailty progression",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-009",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict frailty progression among older adults in a national registry?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "frailty progression",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-010",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict incident cardiovascular disease among UK Biobank participants?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "incident cardiovascular disease",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-011",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict incident cardiovascular disease among a cohort of community-dwelling adults?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "incident cardiovascular disease",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-012",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict incident cardiovascular disease among participants of a long-running birth cohort?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "incident cardiovascular disease",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-013",
+      "domain": "population_multiomics",
+      "text": "Does circulating microRNA profile predict incident type 2 diabetes among older adults in a national registry?",
+      "exposure": "circulating microRNA profile",
+      "outcome": "incident type 2 diabetes",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-014",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict all-cause mortality among UK Biobank participants?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "all-cause mortality",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-015",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict cognitive decline over five years among UK Biobank participants?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "cognitive decline over five years",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-016",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict frailty progression among UK Biobank participants?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "frailty progression",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-017",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict frailty progression among a cohort of community-dwelling adults?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "frailty progression",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-018",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident cardiovascular disease among UK Biobank participants?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident cardiovascular disease",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-019",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident cardiovascular disease among a cohort of community-dwelling adults?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident cardiovascular disease",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-020",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident cardiovascular disease among participants of a long-running birth cohort?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident cardiovascular disease",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-021",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident dementia among UK Biobank participants?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident dementia",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-022",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident dementia among older adults in a national registry?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident dementia",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-023",
+      "domain": "population_multiomics",
+      "text": "Does gut microbiome diversity predict incident dementia among participants of a long-running birth cohort?",
+      "exposure": "gut microbiome diversity",
+      "outcome": "incident dementia",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-024",
+      "domain": "population_multiomics",
+      "text": "Does lipidomic profile predict all-cause mortality among older adults in a national registry?",
+      "exposure": "lipidomic profile",
+      "outcome": "all-cause mortality",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-025",
+      "domain": "population_multiomics",
+      "text": "Does lipidomic profile predict incident cardiovascular disease among a cohort of community-dwelling adults?",
+      "exposure": "lipidomic profile",
+      "outcome": "incident cardiovascular disease",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-026",
+      "domain": "population_multiomics",
+      "text": "Does lipidomic profile predict incident cardiovascular disease among older adults in a national registry?",
+      "exposure": "lipidomic profile",
+      "outcome": "incident cardiovascular disease",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-027",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict cognitive decline over five years among a cohort of community-dwelling adults?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "cognitive decline over five years",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-028",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict frailty progression among UK Biobank participants?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "frailty progression",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-029",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict frailty progression among older adults in a national registry?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "frailty progression",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-030",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict frailty progression among participants of a long-running birth cohort?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "frailty progression",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-031",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict incident dementia among a cohort of community-dwelling adults?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "incident dementia",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-032",
+      "domain": "population_multiomics",
+      "text": "Does plasma proteomic signature predict incident dementia among participants of a long-running birth cohort?",
+      "exposure": "plasma proteomic signature",
+      "outcome": "incident dementia",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-033",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict all-cause mortality among participants of a long-running birth cohort?",
+      "exposure": "polygenic risk score",
+      "outcome": "all-cause mortality",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-034",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict incident cardiovascular disease among UK Biobank participants?",
+      "exposure": "polygenic risk score",
+      "outcome": "incident cardiovascular disease",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-035",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict incident cardiovascular disease among a cohort of community-dwelling adults?",
+      "exposure": "polygenic risk score",
+      "outcome": "incident cardiovascular disease",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-036",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict incident dementia among a cohort of community-dwelling adults?",
+      "exposure": "polygenic risk score",
+      "outcome": "incident dementia",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-037",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict incident type 2 diabetes among UK Biobank participants?",
+      "exposure": "polygenic risk score",
+      "outcome": "incident type 2 diabetes",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-038",
+      "domain": "population_multiomics",
+      "text": "Does polygenic risk score predict incident type 2 diabetes among older adults in a national registry?",
+      "exposure": "polygenic risk score",
+      "outcome": "incident type 2 diabetes",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-039",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict all-cause mortality among older adults in a national registry?",
+      "exposure": "serum metabolite panel",
+      "outcome": "all-cause mortality",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-040",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict cognitive decline over five years among a cohort of community-dwelling adults?",
+      "exposure": "serum metabolite panel",
+      "outcome": "cognitive decline over five years",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-041",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict cognitive decline over five years among older adults in a national registry?",
+      "exposure": "serum metabolite panel",
+      "outcome": "cognitive decline over five years",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-042",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict frailty progression among UK Biobank participants?",
+      "exposure": "serum metabolite panel",
+      "outcome": "frailty progression",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-043",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict frailty progression among a cohort of community-dwelling adults?",
+      "exposure": "serum metabolite panel",
+      "outcome": "frailty progression",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-044",
+      "domain": "population_multiomics",
+      "text": "Does serum metabolite panel predict incident type 2 diabetes among older adults in a national registry?",
+      "exposure": "serum metabolite panel",
+      "outcome": "incident type 2 diabetes",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-045",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict all-cause mortality among participants of a long-running birth cohort?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "all-cause mortality",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-046",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict cognitive decline over five years among UK Biobank participants?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "cognitive decline over five years",
+      "population": "UK Biobank participants"
+    },
+    {
+      "id": "Q-population_multiomics-047",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict frailty progression among a cohort of community-dwelling adults?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "frailty progression",
+      "population": "a cohort of community-dwelling adults"
+    },
+    {
+      "id": "Q-population_multiomics-048",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict incident dementia among older adults in a national registry?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "incident dementia",
+      "population": "older adults in a national registry"
+    },
+    {
+      "id": "Q-population_multiomics-049",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict incident dementia among participants of a long-running birth cohort?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "incident dementia",
+      "population": "participants of a long-running birth cohort"
+    },
+    {
+      "id": "Q-population_multiomics-050",
+      "domain": "population_multiomics",
+      "text": "Does transcriptomic immune signature predict incident type 2 diabetes among a cohort of community-dwelling adults?",
+      "exposure": "transcriptomic immune signature",
+      "outcome": "incident type 2 diabetes",
+      "population": "a cohort of community-dwelling adults"
+    }
+  ]
+}

@@ -36,6 +36,11 @@ a measurable one, and every report of version 2 must say so.
 3. **Validity.** The output is parsed as JSON and passed to `hypothesis_from_dict`. Outputs that fail are recorded as
    `INVALID` with the error. They stay in the denominator.
 4. **Exact measure.** Unchanged from version 1: content verdict and forbidden fraction from the formal evaluator.
+   **Amendment (2026-10-20, before any measure output was saved).** An object that constructs but whose predicates
+   raise an evaluation error on its own declared domain (for example a domain that mixes numbers and text, compared with
+   `<`) is `INVALID`, with the error recorded as the reason. The first `measure` run stopped on such an object (item 54)
+   and saved nothing. The rule applies to every object alike; it is an existing category of the protocol, not a new
+   threshold.
    A state space above `max_states` is `BLOCKED` and excluded, and counted.
 5. **Rubric.** The judge `qwen2.5-coder:32b` receives the question and the formal object as JSON. It rates falsifiability
    from 1 to 10 with three reviews (seeds `64000 + k`), the median taken. The judge does not see the exact measure.

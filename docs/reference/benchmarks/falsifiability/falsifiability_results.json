@@ -1,0 +1,42 @@
+{
+  "questions": 200,
+  "excluded": 198,
+  "excluded_reasons": [
+    "FORMALIZATION_AMBIGUOUS",
+    "FORMALIZATION_FAILED"
+  ],
+  "analysed": 2,
+  "q1": {
+    "kappa": 0.0,
+    "kappa_95": [
+      0.0,
+      0.0
+    ],
+    "spearman_fraction_vs_rubric": null,
+    "rubric_cut_at_median": 9.0
+  },
+  "q2": {
+    "exact_falsifiable": 2,
+    "informative": 0,
+    "informative_share_95": [
+      0.0,
+      0.6576197724933469
+    ],
+    "threshold": 0.05
+  },
+  "q3": {
+    "status": "not run",
+    "reason": "no revision pairs exist (protocol section 5.3)"
+  },
+  "criteria": {
+    "A_agreement": {
+      "met": false,
+      "required_lower_bound": 0.4
+    },
+    "I_informativeness": {
+      "met": false,
+      "required_share": 0.7
+    }
+  },
+  "protocol_sha256": "318cf249e24e3055c0d63fae0e91bae12dc518eb827299da90ed64813f644ea2"
+}

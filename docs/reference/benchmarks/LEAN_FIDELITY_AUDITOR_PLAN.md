@@ -123,7 +123,54 @@ Limits of this result:
 - The mutants were 0 of 49 equivalent. This agrees with the Lean oracle, which rejected every pilot mutant
   against the paper's proof.
 
-### Phase 2. Formalizer on the development set
+### Phase 1, second measurement (2026-10-21): binder order and field arithmetic
+
+Phase 2 showed a prover miss (F186, below): a real candidate that differed from its reference only in binder
+order and in how a product with a quotient was written. Phase 1 was therefore extended, and re-measured on the
+reference statements only. **No phase 2 candidate was used to tune or re-score anything.**
+
+New rewrite rules, each refused when it cannot be applied safely:
+
+- `implicit_binder`: `∀ (x : T)` to `∀ {x : T}`.
+- `swap_binders`: swaps two adjacent binder groups when the second does not use the first.
+- `swap_premises`: `A → B → C` to `B → A → C`.
+- `mul_comm` and `add_comm`: swap two atomic operands when nothing binds tighter on either side.
+- `div_mul`: `(A / B) * C` to `A * C / B`.
+- `order_and_arithmetic`: every rule above that applies, in sequence, when at least two do.
+
+Tactic changes, tuned on these rewrites:
+
+1. **A bug fix.** `aesop` that makes progress without closing the goal only warns. `first` then stopped at that
+   alternative and never tried the next one; Lean's linter reported them as "never executed". Each alternative
+   now ends in `done`, so it fails unless it closes everything. This bug also kept `tauto` from ever running in
+   the first measurement.
+2. A new last alternative: introduce every binder and premise on both sides, rewrite `≥`/`>` as `≤`/`<`, then
+   `apply` the other side and close its premises by `assumption`. If that fails, instantiate the other side with
+   `convert h .. using 1` and close the remaining goals by `assumption` or `ring_nf`. `ring_nf` orders atoms
+   differently under a binder than for a local variable, which is why `h` is instantiated first.
+
+| Rule | n | Old tactic | New tactic |
+|---|---|---|---|
+| The five first rules (rename, `<`/`>`, swap ∧/∨, curry, ¬¬) | 44 | 44 | 44 |
+| `implicit_binder` | 6 | 6 | 6 |
+| `swap_binders` | 3 | 2 | 3 |
+| `swap_premises` | 2 | 1 | 2 |
+| `mul_comm` | 2 | 0 | 1 |
+| `add_comm` | 1 | 0 | 1 |
+| `div_mul` | 1 | 0 | 1 |
+| `order_and_arithmetic` | 3 | 1 | 3 |
+| **Prover recall** | 62 | **54 (0.87)** | **61 (0.98)** |
+| Identity proved (must be 19) | 19 | 19 | 19 |
+| Mutants proved equivalent (must be 0) | 49 | 0 | 0 |
+
+The remaining miss is F238 `mul_comm` (`32 * C1` to `C1 * 32` inside a square root, in the longest statement of
+the set), where the tactic runs out of budget. Tuning stopped there, after three iterations, to avoid fitting
+these 62 rewrites. The same caveat as before applies: this recall is in-sample. The new rules were chosen because
+of one phase 2 failure, but they were applied and measured only on the reference statements.
+
+One run in between is not reported in the table. In it, Windows Application Control blocked a DLL, so Lean did
+not run and produced no output. Every family failed its sentinel and was marked untrusted instead of scored.
+
 
 - **Development set:** the 19 pilot families. Prompts may be changed freely here. Results are exploratory.
 - **Models:** local models on the Legion. Model identity, decoding settings (temperature 0, seed 0) and prompt hash
@@ -280,9 +327,9 @@ it drops `[DiscreteTopology G]` and adds a topology instance on the boundary. Th
 pre-specified rule (1 of 13). With the manual audit, the faithful count is at least 2 of 13, still below 30%.
 
 This is the first evidence that the phase 1 recall of 1.00 does not carry over to real candidates. Binder
-reordering and field arithmetic were not among the phase 1 rewrite rules. Before phase 3, add both as rewrite
-rules, extend the tactic (for example `intro` with the binders reordered, then `push_cast` and `ring_nf`), and
-measure recall again in phase 1, never on these candidates.
+reordering and field arithmetic were not among the phase 1 rewrite rules. Both were then added and recall was
+measured again in phase 1, never on these candidates (see "Phase 1, second measurement" above: 61 of 62). The
+phase 2 candidates have not been re-scored with the new tactic.
 
 **What this means.** The pipeline works end to end and measures what it should, but with general local models
 up to 32B there is no fidelity signal to evaluate: going from 7B to 32B moved the headline from 0 to 1 of 13,

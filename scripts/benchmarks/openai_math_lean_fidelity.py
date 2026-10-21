@@ -151,7 +151,19 @@ TACTIC = (
     "  first\n"
     "  | exact Iff.rfl\n"
     "  | (simp only [not_not, and_comm, and_left_comm, and_assoc, or_comm, or_left_comm, or_assoc]; done)\n"
-    "  | (constructor <;> intro h <;> first | exact h | simpa using h | aesop | tauto)\n"
+    # `aesop` that makes progress without closing the goal only warns, so `first` would stop there and never try
+    # the next alternative; `; done` makes each alternative fail unless it closes everything.
+    "  | (constructor <;> intro h <;> first | exact h | simpa using h | (aesop; done) | tauto)\n"
+    # Added 2026-10-19, tuned on the binder-order and arithmetic rewrites only: introduce every binder and premise,
+    # normalize ≥/> and ring arithmetic, then apply the other side and close its premises from the context.
+    "  | (constructor <;> intro h <;> intros <;> (try simp only [ge_iff_le, gt_iff_lt] at *) <;>\n"
+    "      first\n"
+    "      | (apply h <;> assumption)\n"
+    # `ring_nf` orders atoms differently under a binder than for a local, so instantiate `h` first (`h ..`) and
+    # only then compare the arithmetic.
+    "      | (convert h .. using 1 <;> first | assumption | (ring_nf; done))\n"
+    "      | (ring_nf at h ⊢; apply h <;> assumption)\n"
+    "      | (ring_nf at *; aesop; done))\n"
 )
 IDENT = r"[^\W\d][\w'₀-₉!?]*"
 # Constructs that bind or have lower precedence than ∨, so a split at a depth-0 ∨, ∧ or → would be wrong.
@@ -275,13 +287,164 @@ def _curry(prop: str) -> str | None:
     return f"{prefix}((({parts[0]}) ∧ ({parts[1]})) → {' → '.join(parts[2:])})"
 
 
+def _binder_groups(prop: str) -> tuple[list[str], str] | None:
+    """The bracketed binder groups of a leading `∀` and the rest after its comma, or None."""
+    if not prop.startswith("∀"):
+        return None
+    binders = pilot._binder_list(prop, 0)
+    groups, depth, start = [], 0, None
+    for i, ch in enumerate(binders):
+        if ch in "([{⦃":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch in ")]}⦄":
+            depth -= 1
+            if depth == 0:
+                groups.append(binders[start : i + 1])
+        elif depth == 0 and not ch.isspace():
+            return None  # unbracketed binders such as `∀ a b : ℕ,`
+    rest = prop[1 + len(binders) + 1 :]
+    return (groups, rest) if groups else None
+
+
+def _group_names(group: str) -> list[str]:
+    m = re.match(r"[(\{⦃\[]\s*([^:]+?)\s*:", group)
+    return [n for n in (m.group(1).split() if m else []) if re.fullmatch(IDENT, n) and n != "_"]
+
+
+def _mentions(text: str, names: list[str]) -> bool:
+    return any(re.search(rf"(?<![\w'.₀-₉]){re.escape(n)}(?![\w'₀-₉!?])", text) for n in names)
+
+
+def _implicit_binder(prop: str) -> str | None:
+    """`∀ (x : T) …` to `∀ {x : T} …`: binder information does not change a proposition."""
+    parsed = _binder_groups(prop)
+    if not parsed:
+        return None
+    groups, rest = parsed
+    for i, g in enumerate(groups):
+        if g.startswith("("):
+            groups = groups[:i] + ["{" + g[1:-1] + "}"] + groups[i + 1 :]
+            return "∀ " + " ".join(groups) + "," + rest
+    return None
+
+
+def _swap_binders(prop: str) -> str | None:
+    """Swaps the first two adjacent binder groups of a leading `∀` where the second does not use the first."""
+    parsed = _binder_groups(prop)
+    if not parsed:
+        return None
+    groups, rest = parsed
+    for i in range(len(groups) - 1):
+        a, b = groups[i], groups[i + 1]
+        names = _group_names(a)
+        if names and not _mentions(b, names) and not a.startswith("[") and not b.startswith("["):
+            groups = groups[:i] + [b, a] + groups[i + 2 :]
+            return "∀ " + " ".join(groups) + "," + rest
+    return None
+
+
+def _swap_premises(prop: str) -> str | None:
+    """`A → B → C` to `B → A → C` under the leading quantifiers."""
+    prefix, body = _peel(prop)
+    parts = _split(body, "→")
+    if not parts or len(parts) < 3:
+        return None
+    return f"{prefix}(({parts[1]}) → ({parts[0]}) → {' → '.join(parts[2:])})"
+
+
+_LEFT_EDGE = "(,∧∨→↔¬:=≤<≥>≠+-"
+_RIGHT_EDGE = ")∧∨→↔,=≤<≥>≠+-"
+_ATOM = r"[\w'₀-₉.]+"
+
+
+def _edges_ok(prop: str, start: int, end: int, left: str, right: str) -> bool:
+    before, after = prop[:start].rstrip(), prop[end:].lstrip()
+    return (not before or before[-1] in left) and (not after or after[0] in right)
+
+
+def _mul_comm(prop: str) -> str | None:
+    """`a * b` to `b * a` where both factors are atoms and nothing binds tighter on either side."""
+    for m in re.finditer(rf"({_ATOM})\s*\*\s*({_ATOM})", prop):
+        if _edges_ok(prop, m.start(), m.end(), _LEFT_EDGE, _RIGHT_EDGE):
+            return prop[: m.start()] + f"{m.group(2)} * {m.group(1)}" + prop[m.end() :]
+    return None
+
+
+def _add_comm(prop: str) -> str | None:
+    """`a + b` to `b + a` where the sum is a whole operand of a relation or connective."""
+    for m in re.finditer(rf"({_ATOM})\s*\+\s*({_ATOM})", prop):
+        if _edges_ok(prop, m.start(), m.end(), "(,∧∨→↔¬:=≤<≥>≠", ")∧∨→↔,=≤<≥>≠"):
+            return prop[: m.start()] + f"{m.group(2)} + {m.group(1)}" + prop[m.end() :]
+    return None
+
+
+def _div_mul(prop: str) -> str | None:
+    """`(A / B) * C` to `A * C / B`, with C an atom or an atom applied to one bracketed argument."""
+    for m in re.finditer(r"\(", prop):
+        depth, close = 0, None
+        for j in range(m.start(), len(prop)):
+            depth += prop[j] == "("
+            depth -= prop[j] == ")"
+            if depth == 0:
+                close = j
+                break
+        if close is None:
+            continue
+        inner = prop[m.start() + 1 : close]
+        cuts = _depth0(inner, "/")
+        if len(cuts) != 1 or _depth0(inner, "*") or _depth0(inner, "+") or _depth0(inner, "-"):
+            continue
+        tail = re.match(rf"\s*\*\s*{_ATOM}", prop[close + 1 :])
+        if not tail:
+            continue
+        end = close + 1 + tail.end()
+        arg = re.match(r"\s*\(", prop[end:])
+        if arg:  # one bracketed argument, nested brackets allowed
+            depth, j = 0, end + arg.end() - 1
+            for j in range(j, len(prop)):
+                depth += prop[j] == "("
+                depth -= prop[j] == ")"
+                if depth == 0:
+                    break
+            end = j + 1
+        if not _edges_ok(prop, m.start(), end, _LEFT_EDGE, _RIGHT_EDGE):
+            continue
+        factor = prop[close + 1 : end].strip()[1:].strip()  # drop the leading `*`
+        a, b = inner[: cuts[0]].strip(), inner[cuts[0] + 1 :].strip()
+        return prop[: m.start()] + f"{a} * {factor} / {b}" + prop[end:]
+    return None
+
+
 REWRITES = {
     "rename": _rename,
     "flip_lt": _flip_lt,
     "swap": _swap,
     "curry": _curry,
     "double_negation": lambda prop: f"¬¬({prop})",
+    # Added after phase 2 (2026-10-19): a real candidate (F186) differed from its reference only in these.
+    "implicit_binder": _implicit_binder,
+    "swap_binders": _swap_binders,
+    "swap_premises": _swap_premises,
+    "mul_comm": _mul_comm,
+    "add_comm": _add_comm,
+    "div_mul": _div_mul,
 }
+_ORDER_ARITH = ("implicit_binder", "swap_binders", "swap_premises", "div_mul", "mul_comm", "add_comm")
+
+
+def _combined(prop: str) -> str | None:
+    """Every binder-order and arithmetic rule that applies, one after another, as F186's candidate combined them."""
+    out, applied = prop, 0
+    for code in _ORDER_ARITH:
+        new = REWRITES[code](out)
+        if new and new != out:
+            out, applied = new, applied + 1
+    return out if applied >= 2 else None
+
+
+REWRITES["order_and_arithmetic"] = _combined
 
 
 def rewrites(prop: str) -> dict[str, str]:

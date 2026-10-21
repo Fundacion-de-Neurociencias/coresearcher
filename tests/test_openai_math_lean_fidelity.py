@@ -325,3 +325,42 @@ def test_repair_keeps_the_candidate_on_a_transport_error(tmp_path, monkeypatch):
     row = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()][1]
     assert row["candidate"] == bad and row["repair_transport_errors"] == 2 and not row["elaborates"]
     assert [h["transport_error"].startswith("OSError") for h in row["history"]] == [True, True]
+
+
+# ---------------------------------------------------------------- binder-order and arithmetic rewrites
+
+F186_PROP = (
+    "∀ (n : ℕ) (f : G n) (ε : ℝ), 2 ≤ n → V f → 0 < ε → "
+    "q f ≤ ((2 : ℝ) ^ 19 / (Real.log (n : ℝ)) ^ 2) * Real.log (1 / (2 * ε))"
+)
+
+
+def test_implicit_binder_and_swap_binders_respect_dependencies():
+    assert fid._implicit_binder(F186_PROP).startswith("∀ {n : ℕ} (f : G n) (ε : ℝ),")
+    # (f : G n) uses n, so the first legal swap is f with ε.
+    assert fid._swap_binders(F186_PROP).startswith("∀ (n : ℕ) (ε : ℝ) (f : G n),")
+    assert fid._swap_binders("∀ (n : ℕ) (h : 0 < n), P n") is None
+    assert fid._swap_binders("∀ a b : ℕ, a = b") is None
+
+
+def test_swap_premises():
+    assert fid._swap_premises("∀ a : ℕ, 1 ≤ a → a < 2 → P a") == "∀ a : ℕ, ((a < 2) → (1 ≤ a) → P a)"
+
+
+def test_div_mul_handles_nested_arguments():
+    out = fid._div_mul(F186_PROP)
+    assert out.endswith("q f ≤ (2 : ℝ) ^ 19 * Real.log (1 / (2 * ε)) / (Real.log (n : ℝ)) ^ 2")
+
+
+def test_commutation_only_on_whole_operands():
+    assert fid._mul_comm("x ≤ 2 * ε") == "x ≤ ε * 2"
+    assert fid._mul_comm("f a * b ≤ c") is None
+    assert fid._mul_comm("x ≤ a * b ^ 2") is None
+    assert fid._add_comm("x ≤ a + b") == "x ≤ b + a"
+    assert fid._add_comm("x ≤ a + b * c") is None
+
+
+def test_combined_rule_needs_two_rules():
+    combined = fid._combined(F186_PROP)
+    assert combined.startswith("∀ {n : ℕ} (ε : ℝ) (f : G n),")
+    assert fid._combined("∀ (n : ℕ), n = n") is None

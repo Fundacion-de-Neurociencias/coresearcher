@@ -328,8 +328,27 @@ pre-specified rule (1 of 13). With the manual audit, the faithful count is at le
 
 This is the first evidence that the phase 1 recall of 1.00 does not carry over to real candidates. Binder
 reordering and field arithmetic were not among the phase 1 rewrite rules. Both were then added and recall was
-measured again in phase 1, never on these candidates (see "Phase 1, second measurement" above: 61 of 62). The
-phase 2 candidates have not been re-scored with the new tactic.
+measured again in phase 1, never on these candidates (see "Phase 1, second measurement" above: 61 of 62).
+
+**Post-hoc re-scoring with the second tactic (2026-10-21).** This is reported apart from the results above,
+which stay as they were scored. After the tactic was frozen again in phase 1, `compare --tag rescore_tactic2`
+re-checked the four existing candidate sets. No candidate was regenerated or edited. The original
+`compare_*.json` files are unchanged, and the new ones are `compare_*_rescore_tactic2.json`. Each records the
+tactic's SHA-256 (`80e220727f83…`).
+
+| Headline, 13 families | Faithful, first tactic | Faithful, second tactic | Mutants flagged, second tactic | Discriminating, second tactic |
+|---|---|---|---|---|
+| Qwen2.5 7B | 0 | 0 | 21/21 | 0 |
+| Qwen2.5-Coder 7B | 0 | 0 | 18/18 | 0 |
+| Qwen2.5-Coder 32B | 1 | 1 | 22/22 | 1 |
+| Qwen2.5-Coder 32B + 2 repair rounds | 1 | **2** | 33/33 | **2** |
+
+The only verdict that changed is F186 after repair, from *flagged* to *faithful*. This is the candidate the
+manual audit had already shown to be equivalent, so the second tactic now finds that proof on its own. Its four
+mutants stay flagged, which makes F186 a discriminating family. No mutant of any candidate became equivalent,
+and the wrapper families are unchanged. Two of 13 is still below the 30% go threshold: **phase 2 remains a
+no-go**. This re-scoring does not replace the headline. It shows that one of the earlier *flagged* verdicts was
+a prover miss, and that the second tactic recovers it without accepting any mutant.
 
 **What this means.** The pipeline works end to end and measures what it should, but with general local models
 up to 32B there is no fidelity signal to evaluate: going from 7B to 32B moved the headline from 0 to 1 of 13,

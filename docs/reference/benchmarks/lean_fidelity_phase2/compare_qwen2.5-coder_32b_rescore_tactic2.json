@@ -1,0 +1,809 @@
+{
+  "plan": "docs/reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md (phase 2)",
+  "formalizer": {
+    "model": "qwen2.5-coder:32b",
+    "model_digest": "b92d6a0bd47ee79114298de0177bf920c05a706d12633950b3936778492bef41",
+    "client": "ollama-native",
+    "num_ctx": 12288,
+    "prompt_sha256": "8121656dd9780cfa7afde955a68af1a6a79f32560ff43ad0ba2799f801c4d8d1",
+    "repair_rounds": null,
+    "repair_sha256": null
+  },
+  "openai_math_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+  "heartbeats": 400000,
+  "tactic": "  first\n  | exact Iff.rfl\n  | (simp only [not_not, and_comm, and_left_comm, and_assoc, or_comm, or_left_comm, or_assoc]; done)\n  | (constructor <;> intro h <;> first | exact h | simpa using h | (aesop; done) | tauto)\n  | (constructor <;> intro h <;> intros <;> (try simp only [ge_iff_le, gt_iff_lt] at *) <;>\n      first\n      | (apply h <;> assumption)\n      | (convert h .. using 1 <;> first | assumption | (ring_nf; done))\n      | (ring_nf at h ⊢; apply h <;> assumption)\n      | (ring_nf at *; aesop; done))\n",
+  "tactic_sha256": "80e220727f83d303170aeb9dc7ab948de6610c683e19731c7593a44f1b9c8d16",
+  "tag": "rescore_tactic2",
+  "headline": {
+    "families": 13,
+    "elaborated": 7,
+    "faithful": 1,
+    "faithful_rate_of_all": 0.077,
+    "specificity_of_elaborated": 0.143,
+    "mutants": 22,
+    "mutants_flagged": 22,
+    "discriminating_families": 1
+  },
+  "headline_anchored": {
+    "families": 12,
+    "elaborated": 7,
+    "faithful": 1,
+    "faithful_rate_of_all": 0.083,
+    "specificity_of_elaborated": 0.143,
+    "mutants": 22,
+    "mutants_flagged": 22,
+    "discriminating_families": 1
+  },
+  "wrappers_reported_separately": {
+    "families": 6,
+    "elaborated": 6,
+    "faithful": 6,
+    "faithful_rate_of_all": 1.0,
+    "specificity_of_elaborated": 1.0,
+    "mutants": 7,
+    "mutants_flagged": 7,
+    "discriminating_families": 6
+  },
+  "rows": [
+    {
+      "family": "025",
+      "theorem": "egyptian_length_is_minimum",
+      "status": "parsed",
+      "candidate": "theorem egyptian_length_is_minimum :\n    ∀ m : ℕ, 2 ≤ m → ∀ ε : ℝ, 0 < ε → ∃ k : ℕ, ∃ n : Fin k → ℕ,\n      IsOneExpansion n ∧ (∃ i : Fin k, n i = m) ∧ (k : ℝ) ≤ (257 / Real.log 2 + ε) * Real.log (Real.log (m : ℝ))",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F025_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "70: unsolved goals",
+            "70: unsolved goals"
+          ]
+        },
+        "F025_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "94: unsolved goals",
+            "94: unsolved goals"
+          ]
+        },
+        "F025_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "118: unsolved goals",
+            "118: unsolved goals"
+          ]
+        },
+        "F025_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "142: unsolved goals",
+            "142: unsolved goals"
+          ]
+        },
+        "F025_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "166: unsolved goals",
+            "166: unsolved goals"
+          ]
+        },
+        "F025_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "184: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "103",
+      "theorem": "exact_logarithmic_space_derandomization",
+      "status": "parsed",
+      "candidate": "theorem exact_logarithmic_space_derandomization : L = RL ∧ RL = BPL",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F103_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F103_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "170: `ring_nf` made no progress anywhere",
+            "170: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F103_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "188: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "115",
+      "theorem": "boundedSampling",
+      "status": "parsed",
+      "candidate": "theorem boundedSampling : Algorithms.BoundedSamplingStatement",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F115_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F115_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "244: `ring_nf` made no progress anywhere",
+            "244: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F115_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "262: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "144",
+      "theorem": "simple_lebesgue_spectrum",
+      "status": "parsed",
+      "candidate": "theorem simple_lebesgue_spectrum : MainConclusion",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F144_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F144_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "116: `ring_nf` made no progress anywhere",
+            "116: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F144_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "134: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "174",
+      "theorem": "strongThinTree",
+      "status": "parsed",
+      "candidate": "theorem strongThinTree : MainStatement",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F174_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F174_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "72: `ring_nf` made no progress anywhere",
+            "72: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F174_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "90: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "186",
+      "theorem": "sharp_threshold_width",
+      "status": "parsed",
+      "candidate": "theorem sharp_threshold_width {n : ℕ} (hn : n ≥ 2) {f : GraphConfig n → Bool}\n  (hinv : VertexInvariant f) (hinc : IncreasingGraphProperty f) (hnontriv : NontrivialGraphProperty f)\n  (ε : ℝ) (hε : 0 < ε) (hε' : ε < 1/2) :\n  graphQuantile (1 - ε) f - graphQuantile ε f ≤ 2^19 * log (1 / (2 * ε)) / (log n)^2",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F186_original": {
+          "outcome": "invalid",
+          "messages": [
+            "57: (lean.unknownIdentifier): Unknown identifier `log`",
+            "57: (lean.unknownIdentifier): Unknown identifier `log`",
+            "73: unsolved goals",
+            "73: unsolved goals"
+          ]
+        },
+        "F186_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "81: (lean.unknownIdentifier): Unknown identifier `log`",
+            "81: (lean.unknownIdentifier): Unknown identifier `log`",
+            "97: unsolved goals",
+            "97: unsolved goals"
+          ]
+        },
+        "F186_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "105: (lean.unknownIdentifier): Unknown identifier `log`",
+            "105: (lean.unknownIdentifier): Unknown identifier `log`",
+            "121: unsolved goals",
+            "121: unsolved goals"
+          ]
+        },
+        "F186_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "129: (lean.unknownIdentifier): Unknown identifier `log`",
+            "129: (lean.unknownIdentifier): Unknown identifier `log`",
+            "145: unsolved goals",
+            "145: unsolved goals"
+          ]
+        },
+        "F186_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "153: (lean.unknownIdentifier): Unknown identifier `log`",
+            "153: (lean.unknownIdentifier): Unknown identifier `log`",
+            "169: unsolved goals",
+            "169: unsolved goals"
+          ]
+        },
+        "F186_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "187: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "190",
+      "theorem": "no_polynomial_removal_bound",
+      "status": "parsed",
+      "candidate": "theorem no_polynomial_removal_bound : ∀ c C : ℝ, c > 0 ∧ C > 0 → ∃ n : ℕ, n > 0 ∧ ∃ A : BinaryMatrix n, fixedDistance A > 0 ∧ copyCount fixedH A < c * (fixedDistance A) ^ C * n ^ 132",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F190_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "79: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "103: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "127: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "151: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F190_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "181: unsolved goals",
+            "181: unsolved goals"
+          ]
+        },
+        "F190_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "199: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "231",
+      "theorem": "finite_strongly_rayleigh_response",
+      "status": "parsed",
+      "candidate": "theorem finite_strongly_rayleigh_response :\n    ∀ (Γ : Type u_5) [Group Γ] [Countable Γ] [MeasurableSpace Γ],\n      ∀ μ : ProbabilityMeasure (Γ → Bool),\n        StronglyRayleighCountable μ → HasEquivariantIIDFactor μ",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F231_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "161: unsolved goals",
+            "161: unsolved goals"
+          ]
+        },
+        "F231_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "192: unsolved goals",
+            "192: unsolved goals"
+          ]
+        },
+        "F231_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "223: unsolved goals",
+            "223: unsolved goals"
+          ]
+        },
+        "F231_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "254: unsolved goals",
+            "254: unsolved goals"
+          ]
+        },
+        "F231_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "275: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F231_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "303: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "238",
+      "theorem": "first_reciprocal_main",
+      "status": "no_theorem",
+      "candidate": null,
+      "verdict": "abstain",
+      "reason": "no candidate",
+      "mutants": 0,
+      "mutants_flagged": 0,
+      "checks": {}
+    },
+    {
+      "family": "243",
+      "theorem": "main",
+      "status": "parsed",
+      "candidate": "theorem main : ∃ query : OrderedQuery.OrderedInput → Bool, (∀ (A : Type) [Fintype A] (S : Input A), query (OrderedQuery.ordered S (Equiv.ofInjective (fun x => x) (by simp))) = S.query) ∧ (∃ time space : Polynomial ℕ, (∀ (S : OrderedQuery.OrderedInput), OrdinaryPolynomialTime.query time space (TableMachine.code S) = some (GaussMachine.boolCode (query S)))) ∧ ¬ EvaluationDefinable query",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 1,
+      "mutants_flagged": 0,
+      "checks": {
+        "F243_original": {
+          "outcome": "invalid",
+          "messages": [
+            "553: (lean.unknownIdentifier): Unknown identifier `OrderedQuery.ordered`",
+            "553: (lean.unknownIdentifier): Unknown constant `OAI.CPTSeparation.OrdinaryPolynomialTime.query`",
+            "553: (lean.unknownIdentifier): Unknown identifier `EvaluationDefinable`",
+            "567: Tactic `simp` failed with a nested error:"
+          ]
+        },
+        "F243_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "574: (lean.unknownIdentifier): Unknown identifier `OrderedQuery.ordered`",
+            "574: (lean.unknownIdentifier): Unknown constant `OAI.CPTSeparation.OrdinaryPolynomialTime.query`",
+            "574: (lean.unknownIdentifier): Unknown identifier `EvaluationDefinable`",
+            "579: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F243_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "607: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "245",
+      "theorem": "weak_implies_strong",
+      "status": "parsed",
+      "candidate": "theorem weak_implies_strong {S : Type u} (P : Specification S) : SystemWeaklyNormalizing P → SystemStronglyNormalizing P",
+      "verdict": "faithful",
+      "mutants": 2,
+      "mutants_flagged": 2,
+      "discriminating": true,
+      "checks": {
+        "F245_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F245_M4": {
+          "outcome": "not_shown",
+          "messages": [
+            "149: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F245_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "168: `ring_nf` made no progress anywhere",
+            "168: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F245_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "186: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "246",
+      "theorem": "cannon",
+      "status": "parsed",
+      "candidate": "theorem cannon {G : Type u} [Group G] [TopologicalSpace G] (D : CayleyData G)\n  [H : TopologicalSpace (Boundary D)] (hThin : D.ThinTriangles)\n  (hBoundary : Nonempty (Homeomorph (Boundary D) SphereTwo)) :\n  ∃ ρ : G →* H3Isom, ProperAction ρ ∧ CocompactAction ρ ∧ ρ.ker.Finite",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 3,
+      "mutants_flagged": 0,
+      "checks": {
+        "F246_original": {
+          "outcome": "invalid",
+          "messages": [
+            "95: (lean.invalidField): Invalid field `Finite`: The environment does not contain `Subgroup.Finite`, so it is not possible to project the field `Finite` from an expression",
+            "110: unsolved goals",
+            "110: unsolved goals"
+          ]
+        },
+        "F246_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "118: (lean.invalidField): Invalid field `Finite`: The environment does not contain `Subgroup.Finite`, so it is not possible to project the field `Finite` from an expression",
+            "133: unsolved goals",
+            "133: unsolved goals"
+          ]
+        },
+        "F246_M4": {
+          "outcome": "invalid",
+          "messages": [
+            "141: (lean.invalidField): Invalid field `Finite`: The environment does not contain `Subgroup.Finite`, so it is not possible to project the field `Finite` from an expression",
+            "155: unsolved goals",
+            "155: unsolved goals"
+          ]
+        },
+        "F246_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "163: (lean.invalidField): Invalid field `Finite`: The environment does not contain `Subgroup.Finite`, so it is not possible to project the field `Finite` from an expression",
+            "178: unsolved goals",
+            "178: unsolved goals"
+          ]
+        },
+        "F246_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "196: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "273",
+      "theorem": "entropy_photon_number_inequality",
+      "status": "parsed",
+      "candidate": "theorem entropy_photon_number_inequality {n : ℕ} (η : ℝ) (ρA ρB ρC : State n) (hη : 0 ≤ η) (hη1 : η ≤ 1) (hA : FiniteEnergy ρA) (hB : FiniteEnergy ρB) (hC : IsBeamSplitterOutput η ρA ρB ρC) : gInv (entropy ρC / n) ≥ η * gInv (entropy ρA / n) + (1 - η) * gInv (entropy ρB / n)",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F273_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "117: unsolved goals"
+          ]
+        },
+        "F273_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "139: unsolved goals"
+          ]
+        },
+        "F273_M2": {
+          "outcome": "not_shown",
+          "messages": [
+            "161: unsolved goals"
+          ]
+        },
+        "F273_M4": {
+          "outcome": "not_shown",
+          "messages": [
+            "182: unsolved goals",
+            "182: unsolved goals"
+          ]
+        },
+        "F273_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "204: unsolved goals",
+            "204: unsolved goals"
+          ]
+        },
+        "F273_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "222: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "275",
+      "theorem": "unit_coulomb_qmaHard",
+      "status": "parsed",
+      "candidate": "theorem unit_coulomb_qmaHard : QMAHard unitCoulombCodec.encode unitCoulombPromise",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F275_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F275_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "580: `ring_nf` made no progress anywhere",
+            "580: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F275_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "598: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "277",
+      "theorem": "threshold_parallel_repetition",
+      "status": "parsed",
+      "candidate": "theorem threshold_parallel_repetition {x y a b k : ℕ} (G : Game x y a b) (v δ : ℝ)\n  (h_v_lt_1 : v < 1) (h_δ_pos : 0 < δ) (h_δ_bound : δ < 1 - v) :\n  thresholdValue G δ ≤ exp (-κ * δ ^ 13 * k / (1 + log (↑(Fin.card (Fin (a + 1))) * ↑(Fin.card (Fin (b + 1))))))",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F277_original": {
+          "outcome": "invalid",
+          "messages": [
+            "69: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "89: unsolved goals",
+            "89: unsolved goals"
+          ]
+        },
+        "F277_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "96: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "116: unsolved goals",
+            "116: unsolved goals"
+          ]
+        },
+        "F277_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "123: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "133: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F277_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "150: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "170: unsolved goals",
+            "170: unsolved goals"
+          ]
+        },
+        "F277_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "177: (lean.unknownIdentifier): Unknown identifier `exp`",
+            "187: (deterministic) timeout at `whnf`, maximum number of heartbeats (400000) has been reached"
+          ]
+        },
+        "F277_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "215: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "327",
+      "theorem": "hasNontrivialMarkovType_iff_hasEquivalentUCNorm",
+      "status": "parsed",
+      "candidate": "theorem hasNontrivialMarkovType_iff_hasEquivalentUCNorm (X : Type*) [NormedAddCommGroup X] [NormedSpace ℝ X] :\n  HasNontrivialMarkovType X ↔ HasEquivalentUCNorm X",
+      "verdict": "flagged",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": false,
+      "checks": {
+        "F327_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "87: `ring_nf` made no progress anywhere",
+            "87: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F327_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "105: `ring_nf` made no progress anywhere",
+            "105: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F327_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "123: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "331",
+      "theorem": "main_theorem",
+      "status": "parsed",
+      "candidate": "theorem main_theorem :\n  ∀ (E : Type) [NormedAddCommGroup E] [NormedSpace ℝ E],\n  ∃ (V : Type) [PartialOrder V], Reflexive (FullDual V) ∧\n  (∀ t : ℝ, t > 0 → averageModulus (FullDual V) t ≥ sqrt (1 + t^2 / 12) - 1) ∧\n  (∀ (N : EquivalentNorm (FullDual V) α β), ¬ IsAUC N)",
+      "verdict": "abstain",
+      "reason": "invalid",
+      "mutants": 4,
+      "mutants_flagged": 0,
+      "checks": {
+        "F331_original": {
+          "outcome": "invalid",
+          "messages": [
+            "455: unexpected token '['; expected ','"
+          ]
+        },
+        "F331_M1": {
+          "outcome": "invalid",
+          "messages": [
+            "483: unexpected token '['; expected ','"
+          ]
+        },
+        "F331_M2": {
+          "outcome": "invalid",
+          "messages": [
+            "511: unexpected token '['; expected ','"
+          ]
+        },
+        "F331_M3": {
+          "outcome": "invalid",
+          "messages": [
+            "539: unexpected token '['; expected ','"
+          ]
+        },
+        "F331_M5": {
+          "outcome": "invalid",
+          "messages": [
+            "567: unexpected token '['; expected ','"
+          ]
+        },
+        "F331_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "606: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "354",
+      "theorem": "unit_cubic_isoperimetric",
+      "status": "parsed",
+      "candidate": "theorem unit_cubic_isoperimetric (V : ℝ) (E : Set Torus) :\n  0 < V ∧ V < 1 → IsMinimizerAt V E → StandardRegionAt V E",
+      "verdict": "flagged",
+      "mutants": 4,
+      "mutants_flagged": 4,
+      "discriminating": false,
+      "checks": {
+        "F354_original": {
+          "outcome": "not_shown",
+          "messages": [
+            "106: unsolved goals"
+          ]
+        },
+        "F354_M1": {
+          "outcome": "not_shown",
+          "messages": [
+            "127: unsolved goals"
+          ]
+        },
+        "F354_M3": {
+          "outcome": "not_shown",
+          "messages": [
+            "148: unsolved goals",
+            "148: unsolved goals"
+          ]
+        },
+        "F354_M4": {
+          "outcome": "not_shown",
+          "messages": [
+            "169: unsolved goals"
+          ]
+        },
+        "F354_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "190: unsolved goals",
+            "190: unsolved goals"
+          ]
+        },
+        "F354_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "208: unsolved goals"
+          ]
+        }
+      }
+    },
+    {
+      "family": "365",
+      "theorem": "main_nonuniqueness",
+      "status": "parsed",
+      "candidate": "theorem main_nonuniqueness : MainStatement",
+      "verdict": "faithful",
+      "mutants": 1,
+      "mutants_flagged": 1,
+      "discriminating": true,
+      "checks": {
+        "F365_original": {
+          "outcome": "proved",
+          "messages": []
+        },
+        "F365_M5": {
+          "outcome": "not_shown",
+          "messages": [
+            "111: `ring_nf` made no progress anywhere",
+            "111: `ring_nf` made no progress anywhere"
+          ]
+        },
+        "F365_sentinel": {
+          "outcome": "not_shown",
+          "messages": [
+            "129: unsolved goals"
+          ]
+        }
+      }
+    }
+  ],
+  "go": false
+}

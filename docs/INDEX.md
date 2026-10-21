@@ -18,6 +18,8 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | Document | Purpose |
 | --- | --- |
 | [Architecture specification](architecture/ARCHITECTURE.md) | Canonical description of layers, engines and data flows |
+| [Capability map](architecture/CAPABILITY_MAP.md) | Every discovery module by capability: what it does, ADR, maturity, API or MCP reach, backing claim, data flow, and integration fixes |
+| [Functional review](architecture/FUNCTIONAL_REVIEW.md) | What CoResearcher is for, which pipelines exist in code, and what each module really does, with a keep, wire, merge or archive recommendation |
 | [Ecosystem boundaries](architecture/ECOSYSTEM_BOUNDARIES.md) | Responsibilities of CoResearcher, DataAILab and EdiTXT |
 | [Observer and ledger](architecture/scientific-ledger.md) | Scientific activity ledger and provenance |
 | [Architecture folder](architecture/) | Supporting architecture notes |

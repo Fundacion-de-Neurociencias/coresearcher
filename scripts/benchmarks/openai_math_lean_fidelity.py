@@ -1292,13 +1292,15 @@ def phase2_summary(verdicts: dict[str, dict], families: list[str]) -> dict:
     }
 
 
-def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs: int) -> int:
+def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs: int, tag: str = "") -> int:
     commit = oracle.check_commit(math_root)
     lean_root = oracle.lean_dir(math_root)
     lines = [json.loads(line) for line in responses.read_text(encoding="utf-8").splitlines() if line]
     meta = next(x for x in lines if x.get("kind") == "meta")
     replies = {x["family"]: x for x in lines if x.get("kind") != "meta"}
     label = meta.get("label") or re.sub(r"[^A-Za-z0-9._-]", "_", meta["model"])
+    # A tag keeps a later re-scoring (for example with a newer tactic) next to the original result, not over it.
+    label = f"{label}_{tag}" if tag else label
     work = out_dir / f"compare_{label}"
     work.mkdir(parents=True, exist_ok=True)
     targets = load_targets(math_root)
@@ -1356,6 +1358,8 @@ def compare(math_root: Path, responses: Path, out_dir: Path, timeout: int, jobs:
         "openai_math_commit": commit,
         "heartbeats": HEARTBEATS,
         "tactic": TACTIC,
+        "tactic_sha256": hashlib.sha256(TACTIC.encode("utf-8")).hexdigest(),
+        "tag": tag or None,
         "headline": phase2_summary(verdicts, screen["headline"]),
         "headline_anchored": phase2_summary(verdicts, screen["headline_anchored"]),
         "wrappers_reported_separately": phase2_summary(verdicts, screen["wrappers_reported_separately"]),
@@ -1395,6 +1399,9 @@ def main() -> int:
     parser.add_argument("--out", type=Path, help="Raw outputs, JSONL (formalize)")
     parser.add_argument("--responses", type=Path, help="formalize output to repair or check with Lean")
     parser.add_argument("--rounds", type=int, default=2, help="Repair rounds (repair)")
+    parser.add_argument(
+        "--tag", default="", help="Suffix for the compare output, so it does not replace an earlier one"
+    )
     parser.add_argument("--max-tokens", type=int, help="Cap on each reply, Ollama num_predict (formalize, repair)")
     parser.add_argument("--resume", action="store_true", help="Keep finished families from --out (formalize)")
     parser.add_argument("--dry-run", action="store_true", help="Write the prompts only; call no model (formalize)")
@@ -1417,7 +1424,7 @@ def main() -> int:
     if args.step == "compare":
         if args.responses is None:
             parser.error("--responses is required for compare")
-        return compare(math_root, args.responses.resolve(), args.out_dir.resolve(), args.timeout, args.jobs)
+        return compare(math_root, args.responses.resolve(), args.out_dir.resolve(), args.timeout, args.jobs, args.tag)
     if args.step == "screen-auto":
         return cmd_screen_auto(math_root)
     if args.step == "screen-sheet":

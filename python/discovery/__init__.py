@@ -353,6 +353,12 @@ from .rule30_word_exclusion import (
     RelaxationAnalysisReport,
     Rule30PeriodicWordExclusionEngine,
 )
+from .rule30_reasoning_bridge import (
+    CandidateWord,
+    StripCertificateVerdict,
+    BitmaskStripCertificateExplorer,
+    Rule30ReasoningBridge,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -772,6 +778,10 @@ __all__ = [
     "WordExclusionTarget",
     "RelaxationAnalysisReport",
     "Rule30PeriodicWordExclusionEngine",
+    "CandidateWord",
+    "StripCertificateVerdict",
+    "BitmaskStripCertificateExplorer",
+    "Rule30ReasoningBridge",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

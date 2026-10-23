@@ -341,6 +341,18 @@ from .asymptotic_barrier_auditor import (
     BarrierAuditVerdict,
     AsymptoticBarrierAuditor,
 )
+from .cellular_automata_barrier_auditor import (
+    ElementaryRule,
+    CellularBarrierType,
+    CandidateInvariantAuditResult,
+    CellularAutomataBarrierAuditor,
+    RuleDefinition,
+)
+from .rule30_word_exclusion import (
+    WordExclusionTarget,
+    RelaxationAnalysisReport,
+    Rule30PeriodicWordExclusionEngine,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -752,6 +764,14 @@ __all__ = [
     "MethodBarrierProfile",
     "BarrierAuditVerdict",
     "AsymptoticBarrierAuditor",
+    "ElementaryRule",
+    "CellularBarrierType",
+    "CandidateInvariantAuditResult",
+    "CellularAutomataBarrierAuditor",
+    "RuleDefinition",
+    "WordExclusionTarget",
+    "RelaxationAnalysisReport",
+    "Rule30PeriodicWordExclusionEngine",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

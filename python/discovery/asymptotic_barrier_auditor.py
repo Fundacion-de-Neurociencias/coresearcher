@@ -3,7 +3,7 @@ python/discovery/asymptotic_barrier_auditor.py - Asymptotic Barrier Auditor & Pa
 
 Audits mathematical and theoretical physics proof strategies against known No-Go theorems
 and asymptotic ceilings (Selberg Parity Barrier, Baker-Gill-Solovay Relativization,
-Razborov-Rudich Natural Proofs, Convexity / Off-Diagonal Zeta Barriers).
+Razborov-Rudich Natural Proofs, Convexity / Off-Diagonal Zeta Barriers, Cellular Realization Barriers).
 Prevents infinite brute-force loops and guides autonomous agents toward orthogonal paradigms.
 """
 
@@ -25,6 +25,7 @@ class MathematicalMethodFamily(enum.Enum):
     BILINEAR_EXPONENT_PAIR_SUMS = "BILINEAR_EXPONENT_PAIR_SUMS"            # Weyl / Huxley limit (e.g. theta = 7/64)
     NON_COMMUTATIVE_SPECTRAL_GEOMETRY = "NON_COMMUTATIVE_SPECTRAL_GEOMETRY"# Bypasses classical parity/convexity
     AUTOMORPHIC_LANGLANDS_FUNCTORIALITY = "AUTOMORPHIC_LANGLANDS_FUNCTORIALITY" # Global algebraic invariant
+    CELLULAR_AUTOMATA_LOCAL_INVARIANT = "CELLULAR_AUTOMATA_LOCAL_INVARIANT" # Local invariant / linear abstraction
 
 
 class BarrierType(enum.Enum):
@@ -34,6 +35,7 @@ class BarrierType(enum.Enum):
     RELATIVIZATION_ORACULAR_CEILING = "RELATIVIZATION_ORACULAR_CEILING"
     NATURAL_PROOF_PSEUDORANDOM_CEILING = "NATURAL_PROOF_PSEUDORANDOM_CEILING"
     LOCAL_CONVEXITY_SUB_CONVEXITY_GAP = "LOCAL_CONVEXITY_SUB_CONVEXITY_GAP"
+    CELLULAR_REALIZATION_BARRIER = "CELLULAR_REALIZATION_BARRIER"
     NONE_DETECTED = "NONE_DETECTED"
 
 
@@ -99,6 +101,21 @@ KNOWN_BARRIER_PROFILES: Dict[MathematicalMethodFamily, MethodBarrierProfile] = {
         suggested_orthogonal_paradigms=[
             "NON_NATURALIZING_ALGEBRAIC_METHODS",
             "GEOMETRIC_COMPLEXITY_THEORY",
+        ],
+    ),
+    MathematicalMethodFamily.CELLULAR_AUTOMATA_LOCAL_INVARIANT: MethodBarrierProfile(
+        method_family=MathematicalMethodFamily.CELLULAR_AUTOMATA_LOCAL_INVARIANT,
+        known_barrier=BarrierType.CELLULAR_REALIZATION_BARRIER,
+        theoretical_ceiling=0.0,
+        barrier_description=(
+            "Cellular Realization Barrier: Linear or semi-linear local invariant properties shared with "
+            "Rule 90, 150, or 210 provably yield eventual periodicity or constant center columns, "
+            "and cannot resolve Rule 30 aperiodicity."
+        ),
+        suggested_orthogonal_paradigms=[
+            "FINITE_WINDOW_PREFIX_BARRIER_EXCLUSION",
+            "LEAN4_RULIOLOGY_REALIZATION_CERTIFICATE",
+            "NON_LINEAR_LEFT_PERMUTIVE_CHAOS",
         ],
     ),
 }
@@ -178,7 +195,11 @@ class AsymptoticBarrierAuditor:
                     barrier_name = profile.known_barrier.value
                     barrier_desc = profile.barrier_description
                     recs = profile.suggested_orthogonal_paradigms
-            elif method_family in [MathematicalMethodFamily.RELATIVIZING_COMBINATORICS, MathematicalMethodFamily.NATURAL_CIRCUIT_LOWER_BOUNDS]:
+            elif method_family in [
+                MathematicalMethodFamily.RELATIVIZING_COMBINATORICS,
+                MathematicalMethodFamily.NATURAL_CIRCUIT_LOWER_BOUNDS,
+                MathematicalMethodFamily.CELLULAR_AUTOMATA_LOCAL_INVARIANT,
+            ]:
                 is_obstructed = True
                 barrier_name = profile.known_barrier.value
                 barrier_desc = profile.barrier_description

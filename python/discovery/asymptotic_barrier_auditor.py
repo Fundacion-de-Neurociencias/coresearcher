@@ -26,6 +26,7 @@ class MathematicalMethodFamily(enum.Enum):
     NON_COMMUTATIVE_SPECTRAL_GEOMETRY = "NON_COMMUTATIVE_SPECTRAL_GEOMETRY"# Bypasses classical parity/convexity
     AUTOMORPHIC_LANGLANDS_FUNCTORIALITY = "AUTOMORPHIC_LANGLANDS_FUNCTORIALITY" # Global algebraic invariant
     CELLULAR_AUTOMATA_LOCAL_INVARIANT = "CELLULAR_AUTOMATA_LOCAL_INVARIANT" # Local invariant / linear abstraction
+    METAPLECTIC_MOLLIFICATION = "METAPLECTIC_MOLLIFICATION"                 # Metaplectic Eisenstein / mollified moments
 
 
 class BarrierType(enum.Enum):
@@ -101,6 +102,20 @@ KNOWN_BARRIER_PROFILES: Dict[MathematicalMethodFamily, MethodBarrierProfile] = {
         suggested_orthogonal_paradigms=[
             "NON_NATURALIZING_ALGEBRAIC_METHODS",
             "GEOMETRIC_COMPLEXITY_THEORY",
+        ],
+    ),
+    MathematicalMethodFamily.METAPLECTIC_MOLLIFICATION: MethodBarrierProfile(
+        method_family=MathematicalMethodFamily.METAPLECTIC_MOLLIFICATION,
+        known_barrier=BarrierType.CONVEXITY_OFF_DIAGONAL_CEILING,
+        theoretical_ceiling=0.750,
+        barrier_description=(
+            "Convexity / Off-Diagonal Interference Barrier: Higher-order metaplectic Eisenstein moments and mollifiers "
+            "suffer from off-diagonal polynomial interference, bounding zero-free regions strictly to Re(s) >= 3/4."
+        ),
+        suggested_orthogonal_paradigms=[
+            "NON_COMMUTATIVE_SPECTRAL_GEOMETRY (Polya-Hilbert / Connes Operator Algebra)",
+            "AUTOMORPHIC_LANGLANDS_FUNCTORIALITY",
+            "EXACT_COHOMOLOGICAL_ALGEBRA",
         ],
     ),
     MathematicalMethodFamily.CELLULAR_AUTOMATA_LOCAL_INVARIANT: MethodBarrierProfile(
@@ -183,7 +198,7 @@ class AsymptoticBarrierAuditor:
             ceiling = profile.theoretical_ceiling
             # For threshold directions (e.g. Riemann: target is 0.50, current contour methods ceiling is 0.75)
             # A contour method aiming for 0.50 is attempting to penetrate below 0.75.
-            if method_family == MathematicalMethodFamily.CONTOUR_MOMENT_ESTIMATION:
+            if method_family in [MathematicalMethodFamily.CONTOUR_MOMENT_ESTIMATION, MathematicalMethodFamily.METAPLECTIC_MOLLIFICATION]:
                 if target_threshold < ceiling:  # Trying to reach Re(s) = 0.50 with a method ceiling of 0.75
                     is_obstructed = True
                     barrier_name = profile.known_barrier.value

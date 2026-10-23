@@ -1,28 +1,32 @@
 """
 python/discovery/ptau217_cutoff_case.py - Biomedical showcase: Plasma p-tau217 two-cutoff decision rule as a formal hypothesis.
 
-Inspired by:
-Palmqvist et al. (2020, 2024), Ashton et al. (2024), Bateman et al. (Nature Medicine, 2024)
-on plasma phospho-tau217 (p-tau217) for identifying Alzheimer's Disease pathology (amyloid PET positivity and tau accumulation).
+Empirical grounding & retrieved citations:
+- Palmqvist et al. (2024), JAMA 332(16):1343-1354, PMID: 39068545:
+  "Blood Biomarkers to Detect Alzheimer Disease in Primary Care and Secondary Care."
+  Evaluates plasma p-tau217 percentage (APS2, %p-tau217) using predefined two-cutoff triage rules.
+- Ashton et al. (2024), JAMA Neurol 81(3):255-263, PMID: 38252443:
+  "Diagnostic Accuracy of a Plasma Phosphorylated Tau 217 Immunoassay for Alzheimer Disease Pathology."
+  Two-cutoff decision thresholds: lower cutoff ensuring high sensitivity/NPV, higher cutoff ensuring high specificity/PPV.
+
+Evidence status:
+- Mathematical boundary logic: VERIFIED via Z3 formal SMT solver.
+- Cohort simulator distributions: ILLUSTRATIVE synthetic simulator modeled after reported distribution separation.
 
 Clinical claim:
 In preclinical and early symptomatic cognitive impairment, a two-cutoff rule (low cutoff c_low, high cutoff c_high)
 for plasma p-tau217 triages patients into three tiers:
-1. Rule-out tier (p_tau <= c_low): amyloid-beta PET negative with >= 90% sensitivity (NPV high).
-2. Rule-in tier (p_tau >= c_high): amyloid-beta PET positive with >= 90% specificity (PPV high).
-3. Intermediate/Indeterminate tier (c_low < p_tau < c_high): requires confirmatory CSF or amyloid PET.
+1. Rule-out tier (p_tau <= c_low): amyloid-beta PET negative with high sensitivity.
+2. Rule-in tier (p_tau >= c_high): amyloid-beta PET positive with high specificity.
+3. Intermediate/Indeterminate tier (c_low < p_tau < c_high): requires confirmatory testing.
 
 Formal analysis:
 This module formalizes the mathematical and pathophysiological conditions under which the two-cutoff clinical
 decision rule is sound:
 - Positive separation between non-AD distribution (Aβ-) and AD distribution (Aβ+).
-- Monotonicity: higher plasma p-tau217 corresponds to non-decreasing probability of amyloid PET positivity.
 - Normal renal clearance (eGFR >= 60 mL/min/1.73m^2). Chronic kidney disease (CKD) impairs peripheral clearance
   and inflates plasma p-tau217, generating false positives if cutoffs are unadjusted.
-- Absence of non-amyloid confounding tauopathies.
-
-We formulate the claim in Z3 via `python.discovery.formal_hypothesis`, examine the necessity of each physiological
-assumption, synthesize checkable counterexamples when assumptions are dropped, and provide an empirical cohort simulator.
+- Ordered cutoffs (c_low < c_high).
 """
 
 from __future__ import annotations
@@ -35,7 +39,8 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 from python.discovery.formal_hypothesis import FormalHypothesisError, Hypothesis, HypothesisEvaluator, Variable
 
 STATUS = "SHOWCASE: plasma p-tau217 two-cutoff clinical triage rule under formal assumption decomposition"
-SOURCE = "Palmqvist et al. (2024), Ashton et al. (2024), Bateman et al. (2024)"
+EVIDENCE_STATUS = "illustrative_simulation_verified_smt"
+SOURCE = "Palmqvist et al. 2024 (PMID: 39068545); Ashton et al. 2024 (PMID: 38252443)"
 
 ASSUMPTIONS = (
     "biomarker_separation",

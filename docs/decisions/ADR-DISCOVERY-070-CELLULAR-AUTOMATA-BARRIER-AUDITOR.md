@@ -21,7 +21,7 @@ Without an automated **Cellular Automata Barrier Auditor**, autonomous discovery
 
 ## Architectural Decision
 
-We design and implement **`ADR-DISCOVERY-070: Cellular Automata Barrier Auditor & Realization Filter`** along with **`ADR-DISCOVERY-071: Periodic Word Exclusion Engine`** in CoResearcher:
+We design and implement **`ADR-DISCOVERY-070: Cellular Automata Barrier Auditor & Realization Filter`** along with **`ADR-DISCOVERY-071: Periodic Word Exclusion Engine`** and **`ADR-DISCOVERY-072: Tri-Phase Reasoning Bridge`** in CoResearcher:
 
 ### 1. Realization Barrier Filtering (`python/discovery/cellular_automata_barrier_auditor.py`)
 - Evaluates candidate invariants against an archetype catalog of elementary cellular automata: `RULE_30`, `RULE_90`, `RULE_150`, and `RULE_210`.
@@ -38,7 +38,12 @@ We design and implement **`ADR-DISCOVERY-070: Cellular Automata Barrier Auditor 
 - Exploits Jen's theorem ($v = 1$ moving left edge): forcing column 0 into repeating $10^q$ forces adjacent columns into periodicity, deriving a formal contradiction against the speed-1 left cone.
 - Emits formally verified Lean 4 code targeting `Rule30Submission.lean` and checked by the Rule 30 Prize Kit verifier (`Check.lean`).
 
-### 4. Integration with CoResearcher Epistemic Framework
+### 4. Tri-Phase Reasoning Bridge (`python/discovery/rule30_reasoning_bridge.py`, ADR-DISCOVERY-072)
+- **Phase 1 (Python AST / Exploration)**: `BitmaskStripCertificateExplorer` searches for valid strip width $K$ and warmup period $k$ over candidate words, enforcing the subset trap condition $\text{applyWord}(w, S_0) \subseteq S_0$ and column 1 constancy at all white phases of $w$.
+- **Phase 2 (Barrier Gate)**: Audits the exact same strip certificate against Rule 90 and Rule 150. Requires that the certificate breaks on linear rules, guaranteeing that the mathematical property is grounded in the non-linear OR coupling of Rule 30.
+- **Phase 3 (Formal Lean 4 Certification)**: Dispatches `Rule30Submission.lean` to the Mac Studio compute node, runs `lake build Rule30Submission`, and checks kernel replay with `lake env lean --run Check.lean Rule30Submission --claim partial --headline Rule30Submission.<name>`, obtaining clean `{"verdict": "pass"}` execution.
+
+### 5. Integration with CoResearcher Epistemic Framework
 - **`AsymptoticBarrierAuditor` (ADR-DISCOVERY-045)**: Registered `MathematicalMethodFamily.CELLULAR_AUTOMATA_LOCAL_INVARIANT` and `BarrierType.CELLULAR_REALIZATION_BARRIER` to prune dead-end strategies at the top level of the discovery lifecycle.
 - **Stage Gates (ADR-DISCOVERY-063)**: Integrated into the formal verification pipeline, ensuring candidate hypotheses are audited before proceeding from `HYPOTHESIS` to `PROTOCOL`.
 - **Lean 4 Remote Verification Node**: Synchronized with the Mac Studio verification environment running Lean 4.35 and the compiled `Rule30PrizeKit` kernel replay.

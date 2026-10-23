@@ -3,7 +3,8 @@
   "validity": {
     "false_detections_correct": {
       "E": 0,
-      "R": 0
+      "R": 0,
+      "P": 0
     },
     "met": true
   },
@@ -33,8 +34,36 @@
       "confirmation_rate": 0.0061
     },
     "P": {
-      "status": "not run"
+      "detection_planted": 1.0,
+      "detection_planted_wilson_95": [
+        0.9630065017930143,
+        1.0
+      ],
+      "false_detection_correct": 0.0,
+      "false_detections_correct": 0,
+      "proposals": 9203,
+      "confirmed": 2707,
+      "confirmation_rate": 0.2941432141692926
     }
   },
-  "criteria": {}
+  "criteria": {
+    "A": {
+      "comparison": "P - R",
+      "mean": 0.54,
+      "bootstrap_95": [
+        0.44,
+        0.64
+      ],
+      "met": true
+    },
+    "S": {
+      "comparison": "P - E",
+      "mean": 1.0,
+      "bootstrap_95": [
+        1.0,
+        1.0
+      ],
+      "met": true
+    }
+  }
 }

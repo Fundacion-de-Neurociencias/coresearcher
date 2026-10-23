@@ -359,6 +359,11 @@ from .rule30_reasoning_bridge import (
     BitmaskStripCertificateExplorer,
     Rule30ReasoningBridge,
 )
+from .quasi_riemann_synergistic_auditor import (
+    LeanMicrokernelReplayVerdict,
+    QuasiRiemannVerificationReport,
+    QuasiRiemannSynergisticAuditor,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -782,6 +787,9 @@ __all__ = [
     "StripCertificateVerdict",
     "BitmaskStripCertificateExplorer",
     "Rule30ReasoningBridge",
+    "LeanMicrokernelReplayVerdict",
+    "QuasiRiemannVerificationReport",
+    "QuasiRiemannSynergisticAuditor",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

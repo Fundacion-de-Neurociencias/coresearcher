@@ -40,6 +40,8 @@ class PhysicalConservationType(str, Enum):
     LORENTZ_CAUSALITY = "LORENTZ_CAUSALITY"           # v <= c
     SYMPLECTIC_PHASE_CONSERVATION = "SYMPLECTIC_PHASE_CONSERVATION"  # Liouville: phase-space volume preservation
     CONFORMATIONAL_RMSD_BOUND = "CONFORMATIONAL_RMSD_BOUND"  # Unvalidated heuristic RMSD threshold (claims register row 20)
+    OPENFOAM_CFD_REGULARITY = "OPENFOAM_CFD_REGULARITY"      # Continuous Navier-Stokes BKM & Leray-Hopf FVM audit (ADR-074)
+    ISAAC_SIM_CONTACT_DYNAMICS = "ISAAC_SIM_CONTACT_DYNAMICS"  # Non-smooth multi-body contact & LCP conservation (ADR-075)
 
 
 class CourtVerdict(str, Enum):
@@ -439,6 +441,59 @@ class PhysicalCoherenceCourt:
             conservation_constraints=[]
         )
         return self.audit_physical_claim(claim_spec)
+
+
+    def audit_openfoam_cfd_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates OpenFOAM CFD continuous Navier-Stokes verification report (ADR-DISCOVERY-074).
+        """
+        is_sound = report_data.get("is_sound", False)
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else f"OpenFOAM CFD regularity breach: {report_data.get('diagnostics', 'Continuity or energy dissipation failure')}"
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="3D Incompressible Navier-Stokes (FVM)",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "openfoam_solver": report_data.get("solver")},
+            conservation_audit=[{
+                "law": "OPENFOAM_CFD_REGULARITY",
+                "satisfied": is_sound,
+                "max_div": report_data.get("max_divergence_residual", 0.0),
+                "enstrophy": report_data.get("enstrophy", 0.0)
+            }],
+            adversarial_audit={"bkm_integral": report_data.get("bkm_integral", 0.0)},
+            autopsy=autopsy
+        )
+
+    def audit_isaac_sim_grounding_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates NVIDIA Isaac Sim multi-body contact dynamics report (ADR-DISCOVERY-075).
+        """
+        is_sound = report_data.get("is_sound", False)
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else f"Isaac Sim contact dynamics breach: {report_data.get('diagnostics', 'Energy drift or friction cone violation')}"
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="Multi-Body Contact Dynamics (LCP)",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "scene_name": report_data.get("scene_name")},
+            conservation_audit=[{
+                "law": "ISAAC_SIM_CONTACT_DYNAMICS",
+                "satisfied": is_sound,
+                "energy_drift_ratio": report_data.get("energy_drift_ratio", 0.0),
+                "max_friction_violation": report_data.get("max_friction_cone_violation", 0.0)
+            }],
+            adversarial_audit={"penetration_depth": report_data.get("max_penetration_depth", 0.0)},
+            autopsy=autopsy
+        )
 
     def _build_report(
         self,

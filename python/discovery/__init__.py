@@ -364,6 +364,21 @@ from .quasi_riemann_synergistic_auditor import (
     QuasiRiemannVerificationReport,
     QuasiRiemannSynergisticAuditor,
 )
+from .openfoam_continuum_oracle import (
+    OpenFoamSolverType,
+    OpenFoamExecutionMode,
+    OpenFoamCaseConfig,
+    OpenFoamVerificationReport,
+    OpenFoamContinuumOracle,
+)
+from .isaac_sim_grounding_adapter import (
+    JointType,
+    IsaacSimExecutionMode,
+    ContactFrictionModel,
+    RigidBodyDefinition,
+    IsaacSimVerificationReport,
+    IsaacSimGroundingAdapter,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -790,6 +805,17 @@ __all__ = [
     "LeanMicrokernelReplayVerdict",
     "QuasiRiemannVerificationReport",
     "QuasiRiemannSynergisticAuditor",
+    "OpenFoamSolverType",
+    "OpenFoamExecutionMode",
+    "OpenFoamCaseConfig",
+    "OpenFoamVerificationReport",
+    "OpenFoamContinuumOracle",
+    "JointType",
+    "IsaacSimExecutionMode",
+    "ContactFrictionModel",
+    "RigidBodyDefinition",
+    "IsaacSimVerificationReport",
+    "IsaacSimGroundingAdapter",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

@@ -9,18 +9,22 @@ import tempfile
 import numpy as np
 import pytest
 
-from python.discovery import (
+from python.discovery.openfoam_continuum_oracle import (
     OpenFoamSolverType,
     OpenFoamExecutionMode,
     OpenFoamCaseConfig,
     OpenFoamVerificationReport,
     OpenFoamContinuumOracle,
+)
+from python.discovery.isaac_sim_grounding_adapter import (
     JointType,
     IsaacSimExecutionMode,
     ContactFrictionModel,
     RigidBodyDefinition,
     IsaacSimVerificationReport,
     IsaacSimGroundingAdapter,
+)
+from python.discovery.physical_theorem_court import (
     PhysicalCoherenceCourt,
     CourtVerdict,
     PhysicalConservationType,

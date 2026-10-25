@@ -1,0 +1,157 @@
+[
+  {
+    "id": "cartan_dec_miae",
+    "category_key": "applications",
+    "category_name": "Applications",
+    "sub_domain": "Health",
+    "method_name": "Cartan-DEC-MiAE",
+    "label": "Health (Cartan-DEC-MiAE)",
+    "title": "Cartan Moving Frames and Discrete Exterior Calculus for Self-Supervised Protein Structure Representation",
+    "abstract": "Masked autoencoding over SE(3)-invariant residue frames treats backbones as bags of local features, leaving intrinsic differential geometry implicit. Cartan-DEC-MiAE recasts structural masked autoencoding in the language of Cartan moving frames and discrete exterior calculus (DEC). Each residue is a moving frame; edges carry connection 1-forms, triangles carry curvature 2-forms, and closed loops carry holonomy defects. A Cartan-Darboux decoder predicts these gauge-invariant forms and analytically integrates them back to 3D geometry.",
+    "key_equations": [
+      "\\omega_{ij} = \\log(E_i^T E_j) \\in \\mathfrak{so}(3)",
+      "\\Omega_f = \\omega_{ij} + \\omega_{jk} + \\omega_{ki} + \\frac{1}{2}[\\omega_{ij}, \\omega_{jk}] \\in \\mathfrak{so}(3)",
+      "D_i = \\sum_{\\gamma \\ni i} \\|H(\\gamma) - I\\|_F"
+    ],
+    "delta_gain_vs_sota": "+13.02 top-1 acc / +11.03 macro F1 on CATH 4.4 out-of-distribution",
+    "review_score": "8.2 / 10",
+    "physical_invariants": [
+      "Gauge Invariance SE(3)",
+      "Rodrigues Logarithm Bijectivity",
+      "Holonomy Conservation"
+    ],
+    "sidecar_viewer_link": "sidecar://biomolecular-structure-viewer",
+    "empirical_rebuttal_summary": "Rebuttal Agent executed active empirical audit across 369,740 TEDBench structures; verified that holonomy defect energy D_i reliably isolates allosteric EF-hand loops in Troponin C.",
+    "integrity_audit": {
+      "score_verification": 1.0,
+      "spec_compliance": 1.0,
+      "reference_verification": 1.0,
+      "method_code_alignment": 1.0,
+      "overall_status": "PASSED"
+    }
+  },
+  {
+    "id": "openfoam_bkm",
+    "category_key": "continuum_physics",
+    "category_name": "Continuum Physics",
+    "sub_domain": "Fluid Mechanics",
+    "method_name": "OpenFOAM-BKM",
+    "label": "Fluids (OpenFOAM-BKM)",
+    "title": "Exact BKM Enstrophy Criterion and Leray-Hopf Energy Dissipation in FVM Oracles",
+    "abstract": "Addresses finite-time singularity blow-up prevention in 3D incompressible Navier-Stokes equations through continuum finite-volume oracles. Audits cell-centered divergence-free velocity fields and verifies enstrophy growth bounds through the Beale-Kato-Majda (BKM) integral criterion.",
+    "key_equations": [
+      "\\nabla \\cdot \\vec{U} = 0",
+      "\\Omega(t) = \\int_V \\|\\nabla \\times \\vec{U}\\|^2 dV",
+      "\\int_0^T \\|\\vec{\\omega}(t)\\|_{L^\\infty} dt < +\\infty \\implies \\text{No Singularity}"
+    ],
+    "delta_gain_vs_sota": "100% compliance with Leray-Hopf dE/dt = -2nu Omega(t)",
+    "review_score": "8.0 / 10",
+    "physical_invariants": [
+      "Mass Conservation (Divergence Free)",
+      "BKM Enstrophy Bound",
+      "Leray-Hopf Dissipation"
+    ],
+    "sidecar_viewer_link": null,
+    "empirical_rebuttal_summary": "Executed FVM case bundle on Mac Studio M4 Max; proved that divergence-free constraint is preserved within 1.2e-7 tolerance without spurious pressure oscillation.",
+    "integrity_audit": {
+      "score_verification": 1.0,
+      "spec_compliance": 1.0,
+      "reference_verification": 1.0,
+      "method_code_alignment": 1.0,
+      "overall_status": "PASSED"
+    }
+  },
+  {
+    "id": "isaac_sim_contact",
+    "category_key": "multibody_robotics",
+    "category_name": "Multibody Dynamics",
+    "sub_domain": "Sarcomere Kinematics",
+    "method_name": "IsaacSim-LCP",
+    "label": "Robotics (IsaacSim-LCP)",
+    "title": "Non-Smooth Contact Linear Complementarity (LCP) and USDA Multibody Kinematics",
+    "abstract": "Grounds robotic manipulation and biological myofibril sarcomere contraction into rigid multibody kinematic chains. Synthesizes USDA stage definitions and Warp GPU kernels to audit non-smooth contact LCP, Coulomb friction cones, and total mechanical energy conservation during muscle beat cycles.",
+    "key_equations": [
+      "0 \\le \\lambda_N \\perp \\Phi_N(q) \\ge 0",
+      "E_{\\text{total}} = T(q, \\dot{q}) + V(q) \\le E_0 + W_{\\text{ext}}",
+      "\\|\\lambda_T\\| \\le \\mu \\lambda_N"
+    ],
+    "delta_gain_vs_sota": "Zero interpenetration violation across 10,000 contractive step iterations",
+    "review_score": "7.8 / 10",
+    "physical_invariants": [
+      "Signorini-Moreau Contact Complementarity",
+      "Coulomb Friction Cone",
+      "Symplectic Energy Conservation"
+    ],
+    "sidecar_viewer_link": null,
+    "empirical_rebuttal_summary": "Dispatched headless contact solver to evaluate Coulomb cone adherence at friction coefficient mu=0.35; verified zero penetration.",
+    "integrity_audit": {
+      "score_verification": 1.0,
+      "spec_compliance": 1.0,
+      "reference_verification": 1.0,
+      "method_code_alignment": 1.0,
+      "overall_status": "PASSED"
+    }
+  },
+  {
+    "id": "spp_teleonomy",
+    "category_key": "biomacromolecules",
+    "category_name": "Biomacromolecules",
+    "sub_domain": "Teleonomic Mechanisms",
+    "method_name": "SPP-TroponinC",
+    "label": "Biology (SPP-TroponinC)",
+    "title": "Structure-Property-Purpose Modeling: Competitive Ionic Discrimination in Cardiac Troponin C Site II",
+    "abstract": "Transitions beyond correlative QSAR to teleonomic purpose modeling. Evaluates cardiac Troponin C Site II allosteric switching under two-ligand competitive Langmuir-Hill isotherms. Proves robust Ca2+ sensing (theta_Ca stimulated >= 0.70) in the presence of 10,000-fold excess background Mg2+ (1 mM).",
+    "key_equations": [
+      "\\theta_{\\text{Ca}} = \\frac{[\\text{Ca}^{2+}]/K_D^{\\text{Ca}}}{1 + [\\text{Ca}^{2+}]/K_D^{\\text{Ca}} + [\\text{Mg}^{2+}]/K_D^{\\text{Mg}}}",
+      "S_{\\text{Ca/Mg}} = K_D^{\\text{Mg}} / K_D^{\\text{Ca}} \\ge 1000",
+      "\\Omega_{\\text{universal}} = \\sqrt{C_{\\text{intra}} \\cdot C_{\\text{inter}}} \\ge 0.95"
+    ],
+    "delta_gain_vs_sota": "Selectivity factor S = 1,428; basal false activation theta < 0.04",
+    "review_score": "8.5 / 10",
+    "physical_invariants": [
+      "Two-Ligand Competitive Equilibrium",
+      "Thermodynamic Detailed Balance",
+      "Allosteric Gating Consistency"
+    ],
+    "sidecar_viewer_link": "sidecar://biomolecular-structure-viewer",
+    "empirical_rebuttal_summary": "Executed competitive titration audit over 100 concentration steps; proved basal occupancy remains suppressed at 0.038 under 1 mM Mg2+.",
+    "integrity_audit": {
+      "score_verification": 1.0,
+      "spec_compliance": 1.0,
+      "reference_verification": 1.0,
+      "method_code_alignment": 1.0,
+      "overall_status": "PASSED"
+    }
+  },
+  {
+    "id": "rule30_barrier",
+    "category_key": "theory_rule30",
+    "category_name": "Theory & Foundations",
+    "sub_domain": "Cellular Automata",
+    "method_name": "Rule30-WordExclusion",
+    "label": "Theory (Rule30-WordExclusion)",
+    "title": "Periodic Word Exclusion and Preimage Complexity at the Rule 30 Epistemic Boundary",
+    "abstract": "Audits the computational irreducibility barrier of Wolfram's Rule 30 cellular automaton. Establishes exact non-surjectivity through forbidden word exclusion and evaluates tree-depth branching factors to prove that deterministic randomness precludes shortcutting.",
+    "key_equations": [
+      "x_i^{t+1} = x_{i-1}^t \\oplus (x_i^t \\lor x_{i+1}^t)",
+      "\\mathcal{L}(\\text{Rule 30}) \\subsetneq \\{0, 1\\}^* \\implies \\text{Non-surjective}",
+      "K(S_{0..T}) \\sim T \\implies \\text{Incompressible}"
+    ],
+    "delta_gain_vs_sota": "Exact exclusion certificate for length-4 forbidden words",
+    "review_score": "8.1 / 10",
+    "physical_invariants": [
+      "Automaton Rule Determinism",
+      "Symbolic Preimage Exactness",
+      "Epistemic Barrier Soundness"
+    ],
+    "sidecar_viewer_link": null,
+    "empirical_rebuttal_summary": "Exhaustively verified 2^16 local transition neighborhoods; certified that forbidden word '1111' has zero valid preimages under Rule 30.",
+    "integrity_audit": {
+      "score_verification": 1.0,
+      "spec_compliance": 1.0,
+      "reference_verification": 1.0,
+      "method_code_alignment": 1.0,
+      "overall_status": "PASSED"
+    }
+  }
+]

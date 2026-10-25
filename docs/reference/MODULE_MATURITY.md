@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 35 |
+| Tested | Covered by tests, not reachable from the API | 38 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -28,8 +28,10 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `bayesian_surprise_engine` | Exercised | - | - | yes |
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
+| `cartan_dec_proteomics_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
+| `coe_integrity_auditor` | Tested | - | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
@@ -44,6 +46,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `epistemic_stigmergy` | Tested | - | yes | yes |
 | `epistemic_trajectory` | Prototype | - | - | - |
 | `era_empirical_engine` | Tested | - | yes | - |
+| `evidence_portal` | Tested | - | yes | - |
 | `evidence_service` | Integrated | yes | yes | - |
 | `exact_symbolic_court` | Tested | - | yes | - |
 | `failure_engine` | Exercised | - | - | yes |

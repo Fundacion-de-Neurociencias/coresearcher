@@ -42,6 +42,7 @@ class PhysicalConservationType(str, Enum):
     CONFORMATIONAL_RMSD_BOUND = "CONFORMATIONAL_RMSD_BOUND"  # Unvalidated heuristic RMSD threshold (claims register row 20)
     OPENFOAM_CFD_REGULARITY = "OPENFOAM_CFD_REGULARITY"      # Continuous Navier-Stokes BKM & Leray-Hopf FVM audit (ADR-074)
     ISAAC_SIM_CONTACT_DYNAMICS = "ISAAC_SIM_CONTACT_DYNAMICS"  # Non-smooth multi-body contact & LCP conservation (ADR-075)
+    STRUCTURE_PROPERTY_PURPOSE_COHERENCE = "STRUCTURE_PROPERTY_PURPOSE_COHERENCE"  # Teleonomic causal SPP coupling (ADR-076)
 
 
 class CourtVerdict(str, Enum):
@@ -492,6 +493,32 @@ class PhysicalCoherenceCourt:
                 "max_friction_violation": report_data.get("max_friction_cone_violation", 0.0)
             }],
             adversarial_audit={"penetration_depth": report_data.get("max_penetration_depth", 0.0)},
+            autopsy=autopsy
+        )
+
+    def audit_spp_teleonomic_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates Structure-Property-Purpose (SPP) teleonomic causal report (ADR-DISCOVERY-076).
+        """
+        is_sound = report_data.get("is_purpose_fulfilled", False)
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else f"Structure-Property-Purpose breach: {report_data.get('diagnostics', 'Purpose unfulfilled or competitive collapse')}"
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="Structure-Property-Purpose (SPP) Causal Chain",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "purpose_class": report_data.get("purpose_class")},
+            conservation_audit=[{
+                "law": "STRUCTURE_PROPERTY_PURPOSE_COHERENCE",
+                "satisfied": is_sound,
+                "theta_target_stim": report_data.get("theta_target_stimulated", 0.0),
+                "selectivity_ratio_s": report_data.get("selectivity_ratio_s", 0.0)
+            }],
+            adversarial_audit={"theta_competing": report_data.get("theta_competing_stimulated", 0.0)},
             autopsy=autopsy
         )
 

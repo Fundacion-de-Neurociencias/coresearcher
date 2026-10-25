@@ -379,6 +379,14 @@ from .isaac_sim_grounding_adapter import (
     IsaacSimVerificationReport,
     IsaacSimGroundingAdapter,
 )
+from .structure_property_purpose_engine import (
+    TeleonomicPurposeClass,
+    IonicSelectivityProfile,
+    StructurePropertyPurposeSpec,
+    CompetitiveOccupancyReport,
+    MultiscaleSppTriadReport,
+    StructurePropertyPurposeEngine,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -816,6 +824,12 @@ __all__ = [
     "RigidBodyDefinition",
     "IsaacSimVerificationReport",
     "IsaacSimGroundingAdapter",
+    "TeleonomicPurposeClass",
+    "IonicSelectivityProfile",
+    "StructurePropertyPurposeSpec",
+    "CompetitiveOccupancyReport",
+    "MultiscaleSppTriadReport",
+    "StructurePropertyPurposeEngine",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

@@ -99,6 +99,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "cartan_dec_proteomics_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Exercised",
       "module": "categorical_epistemic_engine",
       "scripts": true,
@@ -108,6 +115,13 @@
       "api": false,
       "level": "Tested",
       "module": "cellular_automata_barrier_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "coe_integrity_auditor",
       "scripts": false,
       "tests": true
     },
@@ -206,6 +220,13 @@
       "api": false,
       "level": "Tested",
       "module": "era_empirical_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "evidence_portal",
       "scripts": false,
       "tests": true
     },

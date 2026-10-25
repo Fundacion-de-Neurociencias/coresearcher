@@ -528,6 +528,27 @@ from .epistemic_stigmergy import (
     RealityContactFirewall,
 )
 
+from .cartan_dec_proteomics_auditor import (
+    ResidueFrame,
+    ConnectionOneForm,
+    CurvatureTwoForm,
+    HolonomyDefectReport,
+    CartanDECStructureReport,
+    CartanDECProteomicsAuditor,
+)
+from .coe_integrity_auditor import (
+    IntegrityDimension,
+    EmpiricalRebuttalVerdict,
+    IntegrityAuditResult,
+    EmpiricalRebuttalDossier,
+    FullCoEIntegrityReport,
+    CoEIntegrityAuditor,
+)
+from .evidence_portal import (
+    DiscoveryPaperEntry,
+    EvidencePortalGenerator,
+)
+
 __all__ = [
 
 
@@ -916,4 +937,18 @@ __all__ = [
     "TournamentReport",
     "PairwiseDebateEngine",
     "HypothesisEloTournamentOrchestrator",
+    "ResidueFrame",
+    "ConnectionOneForm",
+    "CurvatureTwoForm",
+    "HolonomyDefectReport",
+    "CartanDECStructureReport",
+    "CartanDECProteomicsAuditor",
+    "IntegrityDimension",
+    "EmpiricalRebuttalVerdict",
+    "IntegrityAuditResult",
+    "EmpiricalRebuttalDossier",
+    "FullCoEIntegrityReport",
+    "CoEIntegrityAuditor",
+    "DiscoveryPaperEntry",
+    "EvidencePortalGenerator",
 ]

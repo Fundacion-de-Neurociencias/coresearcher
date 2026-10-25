@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 37 |
+| Tested | Covered by tests, not reachable from the API | 38 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -100,6 +100,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
 | `statement_fidelity` | Tested | - | yes | - |
+| `structure_property_purpose_engine` | Tested | - | yes | - |
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |

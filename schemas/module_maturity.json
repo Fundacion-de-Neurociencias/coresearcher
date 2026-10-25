@@ -603,6 +603,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "structure_property_purpose_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "test_manifold_detector",
       "scripts": false,

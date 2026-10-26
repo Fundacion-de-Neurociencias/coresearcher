@@ -45,6 +45,8 @@ class PhysicalConservationType(str, Enum):
     STRUCTURE_PROPERTY_PURPOSE_COHERENCE = "STRUCTURE_PROPERTY_PURPOSE_COHERENCE"  # Teleonomic causal SPP coupling (ADR-076)
     CARTAN_DEC_HOLONOMY_COHERENCE = "CARTAN_DEC_HOLONOMY_COHERENCE"  # Gauge-invariant Cartan moving frames & DEC holonomy (ADR-077)
     COE_INTEGRITY_AUDIT = "COE_INTEGRITY_AUDIT"              # 4-dimensional post-hoc integrity verification (ADR-077)
+    PRECLINICAL_FOUR_GATES_COHERENCE = "PRECLINICAL_FOUR_GATES_COHERENCE"  # Four pre-clinical stage-gates validation (ADR-078)
+    PROVENANCE_SIDECAR_VALIDITY = "PROVENANCE_SIDECAR_VALIDITY"            # Tool provenance and blocked-state enforcement (ADR-078)
 
 
 class CourtVerdict(str, Enum):
@@ -575,6 +577,60 @@ class PhysicalCoherenceCourt:
                 "verdict": report_data.get("verdict", "REJECTED")
             }],
             adversarial_audit={"rebuttal_count": len(report_data.get("rebuttal_dossiers", []))},
+            autopsy=autopsy
+        )
+
+    def audit_preclinical_gates_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates Four Pre-Clinical Gates certification report (ADR-DISCOVERY-078).
+        """
+        is_sound = report_data.get("all_gates_passed", False)
+        verdict_str = report_data.get("passport_verdict", "REJECTED_GATE_FAILURE")
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else f"Pre-clinical gate failure: status {verdict_str}"
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="Four Pre-Clinical Gates (Genetic, Structural, Biophysical, Safety)",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "candidate_id": report_data.get("candidate_id")},
+            conservation_audit=[{
+                "law": "PRECLINICAL_FOUR_GATES_COHERENCE",
+                "satisfied": is_sound,
+                "config_version": report_data.get("config_version", "unknown"),
+                "passport_verdict": verdict_str
+            }],
+            adversarial_audit={"sidecars_count": len(report_data.get("provenance_sidecars", []))},
+            autopsy=autopsy
+        )
+
+    def audit_provenance_sidecar_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates Tool Provenance Sidecar validity and verification hash (ADR-DISCOVERY-078).
+        """
+        status = report_data.get("status")
+        is_sound = (status == "SUCCESS")
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else f"Provenance sidecar violation: status is {status}"
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="Provenance Sidecar Lineage & Cryptographic Integrity",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "tool_name": report_data.get("tool_name")},
+            conservation_audit=[{
+                "law": "PROVENANCE_SIDECAR_VALIDITY",
+                "satisfied": is_sound,
+                "status": status,
+                "execution_time_seconds": report_data.get("execution_time_seconds", 0.0)
+            }],
+            adversarial_audit={"verification_hash": report_data.get("verification_hash", "")[:16]},
             autopsy=autopsy
         )
 

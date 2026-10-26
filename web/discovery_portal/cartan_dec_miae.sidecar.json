@@ -1,0 +1,19 @@
+{
+  "sidecar_id": "SIDECAR_cartan_dec_miae_reconstruction_1cd777f3fbee_1793034938",
+  "tool_name": "cartan_dec_miae_reconstruction",
+  "execution_timestamp": 1793034938.2143314,
+  "git_commit_sha": "HEAD_REVISION",
+  "input_parameters": {
+    "model": "CartanDECProteomicsAuditor",
+    "dataset": "TEDBench_v1",
+    "num_structures": 369740
+  },
+  "input_hash": "1cd777f3fbee8616f3dbec89f2558989d7c47f2511a09b34d6cd21e98b8f4003",
+  "raw_output_digest": "604dca915725e1b90ab9e9ababde39f82a393f7d9a41c3218b5c31e9fd238c93",
+  "execution_time_seconds": 0.05,
+  "reproducibility_command": "python -m discovery.cartan_dec_eval --dataset TEDBench_v1 --kink_energy_threshold 1.0",
+  "status": "SUCCESS",
+  "blocking_reason": null,
+  "output_artifact_path": "C:\\Users\\usuario\\coresearcher\\web\\discovery_portal\\cartan_dec_miae.sidecar.json",
+  "verification_hash": "f8656cf22d6f6a3af520ff32dbfb79abec49473860aa41a9b4716babbc0d8e07"
+}

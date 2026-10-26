@@ -1,0 +1,20 @@
+{
+  "sidecar_id": "SIDECAR_troponin_c_ionic_selectivity_auditor_03c9743a8829_1793034938",
+  "tool_name": "troponin_c_ionic_selectivity_auditor",
+  "execution_timestamp": 1793034938.2171993,
+  "git_commit_sha": "HEAD_REVISION",
+  "input_parameters": {
+    "mechanism_id": "TROPONIN_C_SITE_II",
+    "target_ion": "Ca2+",
+    "competing_ion": "Mg2+",
+    "competing_conc_m": 0.001
+  },
+  "input_hash": "03c9743a8829f3f7f054af506c25ce928001ad508031bd9d2ba6f152dcfb221a",
+  "raw_output_digest": "a3243c7788501f1f81a41cd5e87d0e6b4ec429adb240511172813e6f26a7bb7b",
+  "execution_time_seconds": 0.05,
+  "reproducibility_command": "python -m discovery.spp_engine --mechanism TROPONIN_C_SITE_II --titration_points 100",
+  "status": "SUCCESS",
+  "blocking_reason": null,
+  "output_artifact_path": "C:\\Users\\usuario\\coresearcher\\web\\discovery_portal\\troponin_c_site_ii.sidecar.json",
+  "verification_hash": "6b8023b8d6ac204fbf92191bf274371ad11605896766ab725ad34cc3919b6851"
+}

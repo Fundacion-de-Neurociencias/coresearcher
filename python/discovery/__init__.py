@@ -528,6 +528,19 @@ from .epistemic_stigmergy import (
     RealityContactFirewall,
 )
 
+from .provenance_sidecar_engine import (
+    ToolExecutionStatus,
+    ProvenanceSidecar,
+    ProvenanceSidecarEngine,
+)
+from .preclinical_gates_engine import (
+    PreClinicalGateType,
+    PassportVerdict,
+    GateThresholdsConfig,
+    SingleGateEvaluation,
+    PreClinicalPassport,
+    PreClinicalGatesValidator,
+)
 from .cartan_dec_proteomics_auditor import (
     ResidueFrame,
     ConnectionOneForm,
@@ -951,4 +964,13 @@ __all__ = [
     "CoEIntegrityAuditor",
     "DiscoveryPaperEntry",
     "EvidencePortalGenerator",
+    "ToolExecutionStatus",
+    "ProvenanceSidecar",
+    "ProvenanceSidecarEngine",
+    "PreClinicalGateType",
+    "PassportVerdict",
+    "GateThresholdsConfig",
+    "SingleGateEvaluation",
+    "PreClinicalPassport",
+    "PreClinicalGatesValidator",
 ]

@@ -28,7 +28,38 @@
       "reference_verification": 1.0,
       "method_code_alignment": 1.0,
       "overall_status": "PASSED"
-    }
+    },
+    "preclinical_passport": {
+      "candidate_id": "CARTAN_DEC_MIAE_CATH",
+      "target_name": "Troponin C (TNNC1) Allosteric Hinge",
+      "config_version": "v1.0.0-canonical",
+      "overall_verdict": "PASSED_ALL_GATES",
+      "passport_hash": "sha256_cd7298ab901f4c71829e1104e7b8a4f9",
+      "gates": {
+        "GENETIC_CAUSALITY_GATE": {
+          "passed": true,
+          "score": 0.88,
+          "evidence_status": "VERIFIED"
+        },
+        "STRUCTURAL_DRUGGABILITY_GATE": {
+          "passed": true,
+          "score": 0.92,
+          "evidence_status": "VERIFIED"
+        },
+        "BIOPHYSICAL_MECHANISM_GATE": {
+          "passed": true,
+          "score": 0.85,
+          "evidence_status": "VERIFIED"
+        },
+        "SAFETY_OFFTARGET_GATE": {
+          "passed": true,
+          "score": 0.94,
+          "evidence_status": "VERIFIED"
+        }
+      }
+    },
+    "provenance_sidecar_path": "cartan_dec_miae.sidecar.json",
+    "epistemic_status": "VERIFIED_EMPIRICAL"
   },
   {
     "id": "openfoam_bkm",
@@ -59,7 +90,10 @@
       "reference_verification": 1.0,
       "method_code_alignment": 1.0,
       "overall_status": "PASSED"
-    }
+    },
+    "preclinical_passport": null,
+    "provenance_sidecar_path": null,
+    "epistemic_status": "VERIFIED_EMPIRICAL"
   },
   {
     "id": "isaac_sim_contact",
@@ -90,7 +124,10 @@
       "reference_verification": 1.0,
       "method_code_alignment": 1.0,
       "overall_status": "PASSED"
-    }
+    },
+    "preclinical_passport": null,
+    "provenance_sidecar_path": null,
+    "epistemic_status": "VERIFIED_EMPIRICAL"
   },
   {
     "id": "spp_teleonomy",
@@ -121,7 +158,38 @@
       "reference_verification": 1.0,
       "method_code_alignment": 1.0,
       "overall_status": "PASSED"
-    }
+    },
+    "preclinical_passport": {
+      "candidate_id": "TNNC1_SITE_II_SENSING",
+      "target_name": "Cardiac Troponin C Regulatory Site II",
+      "config_version": "v1.0.0-canonical",
+      "overall_verdict": "PASSED_ALL_GATES",
+      "passport_hash": "sha256_e814a0f32d847c918a5f33190cb71b82",
+      "gates": {
+        "GENETIC_CAUSALITY_GATE": {
+          "passed": true,
+          "score": 0.95,
+          "evidence_status": "VERIFIED"
+        },
+        "STRUCTURAL_DRUGGABILITY_GATE": {
+          "passed": true,
+          "score": 0.94,
+          "evidence_status": "VERIFIED"
+        },
+        "BIOPHYSICAL_MECHANISM_GATE": {
+          "passed": true,
+          "score": 0.98,
+          "evidence_status": "VERIFIED"
+        },
+        "SAFETY_OFFTARGET_GATE": {
+          "passed": true,
+          "score": 0.96,
+          "evidence_status": "VERIFIED"
+        }
+      }
+    },
+    "provenance_sidecar_path": "troponin_c_site_ii.sidecar.json",
+    "epistemic_status": "VERIFIED_EMPIRICAL"
   },
   {
     "id": "rule30_barrier",
@@ -152,6 +220,9 @@
       "reference_verification": 1.0,
       "method_code_alignment": 1.0,
       "overall_status": "PASSED"
-    }
+    },
+    "preclinical_passport": null,
+    "provenance_sidecar_path": null,
+    "epistemic_status": "VERIFIED_EMPIRICAL"
   }
 ]

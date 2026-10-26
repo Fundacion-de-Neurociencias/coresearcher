@@ -471,6 +471,20 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "preclinical_gates_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "provenance_sidecar_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "ptau217_cutoff_case",
       "scripts": false,
       "tests": true

@@ -1,0 +1,34 @@
+{
+  "id": "H-0004",
+  "title": "[Illustrative] TREM2 agonism modulates neuritic dystrophy in a context-dependent way",
+  "statement": "TREM2 agonism modulates neuritic dystrophy: depending on stage and TREM2 status, dystrophy may decrease, stay unchanged or increase relative to vehicle.",
+  "mechanism": "TREM2 signalling has both protective (compaction) and pro-inflammatory arms whose balance depends on context.",
+  "predictions": [
+    "The effect of agonism on dystrophy depends on context."
+  ],
+  "experiments": [
+    {
+      "design": "Amyloid-positive mouse model, TREM2-normal and TREM2 loss-of-function arms, early and late stage, agonist antibody vs vehicle.",
+      "readout": "Neuritic dystrophy (LAMP1+ dystrophic neurites per plaque) relative to vehicle.",
+      "est_difficulty": "med"
+    }
+  ],
+  "evidence": [
+    {
+      "lit_id": "ILLUSTRATIVE-NO-LITERATURE",
+      "role": "constrains",
+      "note": "Illustrative demo hypothesis. No literature was consulted and none is claimed; the formal check never reads this field."
+    }
+  ],
+  "focus_area": "Illustrative Stage 1 target: TREM2 agonism in amyloid pathology (CoResearcher OASE adapter demo)",
+  "lineage": {
+    "parents": [
+      "H-0001"
+    ],
+    "operator": "simplify"
+  },
+  "status": "proposed",
+  "created_by": "illustrative-author",
+  "epoch": 0,
+  "created_at": "2026-10-19T00:00:00Z"
+}

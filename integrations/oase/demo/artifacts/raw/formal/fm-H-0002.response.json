@@ -1,0 +1,226 @@
+{
+  "schema": "oase.formal-response.v1",
+  "transport": "package",
+  "formal_status": "DECIDED",
+  "exception": null,
+  "coresearcher_response": {
+    "schema": "coresearcher.formal.response/v1",
+    "formal_status": "DECIDED",
+    "reason": "",
+    "formalizer": null,
+    "formalization_gate": null,
+    "formal_hypothesis": {
+      "hypothesis_id": "H-0002",
+      "variables": [
+        {
+          "name": "stage",
+          "domain": [
+            "early",
+            "late"
+          ]
+        },
+        {
+          "name": "trem2_function",
+          "domain": [
+            "normal",
+            "loss"
+          ]
+        },
+        {
+          "name": "treatment",
+          "domain": [
+            "agonist",
+            "vehicle"
+          ]
+        },
+        {
+          "name": "dystrophy_change",
+          "domain": [
+            "decrease",
+            "none",
+            "increase"
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [
+        "treatment != 'vehicle' or dystrophy_change == 'none'"
+      ],
+      "claims": [
+        "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'",
+        "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'"
+      ],
+      "statement": "TREM2 agonism has no effect on neuritic dystrophy at an early stage and reduces it at a late stage, in brains with functional TREM2."
+    },
+    "reports": {
+      "evaluation": {
+        "hypothesis_id": "H-0002",
+        "backend": "enumeration",
+        "omega_size": 24,
+        "applicable_states": 16,
+        "forbidden_states": 4,
+        "content_verdict": "FALSIFIABLE",
+        "excluded_fraction_of_omega": 0.16666666666666666,
+        "excluded_fraction_of_applicable": 0.25,
+        "conflicting_assumption_sets": [],
+        "claim_exclusions": {
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'": 2,
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'": 2
+        },
+        "claims_with_content": [
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'early') or dystrophy_change == 'none'",
+          "not (treatment == 'agonist' and trem2_function == 'normal' and stage == 'late') or dystrophy_change == 'decrease'"
+        ],
+        "falsifier_examples": [
+          {
+            "stage": "early",
+            "trem2_function": "normal",
+            "treatment": "agonist",
+            "dystrophy_change": "decrease"
+          },
+          {
+            "stage": "early",
+            "trem2_function": "normal",
+            "treatment": "agonist",
+            "dystrophy_change": "increase"
+          },
+          {
+            "stage": "late",
+            "trem2_function": "normal",
+            "treatment": "agonist",
+            "dystrophy_change": "none"
+          },
+          {
+            "stage": "late",
+            "trem2_function": "normal",
+            "treatment": "agonist",
+            "dystrophy_change": "increase"
+          }
+        ],
+        "certain_counterexamples": [],
+        "possible_counterexamples": [],
+        "observations_checked": 0,
+        "is_refuted": false,
+        "formal_status": "DECIDED",
+        "mandatory_relays": [
+          {
+            "code": "FORMAL_NOT_EMPIRICAL",
+            "message": "A formal verdict is about the formal object only. Consistent, falsifiable or entailed does not mean empirically true; whether the premises hold in the world is outside this check."
+          },
+          {
+            "code": "ENUMERATION_DECLARED_DOMAINS_ONLY",
+            "message": "Decided by enumerating the declared finite domains. Values outside those domains were never considered."
+          }
+        ],
+        "provenance": {
+          "engine": "coresearcher",
+          "engine_version": "4.1.0",
+          "operation": "evaluate",
+          "backend": "enumeration",
+          "z3_version": "5.3.1",
+          "solver_timeout_ms": null,
+          "input_sha256": "990b609d3b669675b2afe8315d74c8f91b217c3b21290a5bd60130a26d7d1122",
+          "output_sha256": "f94d8fd55d9fe3a87c36a72d6e405711247dfc03a7d40c092400c3f4e25e883d",
+          "threshold_set": "formal@2026.10.1",
+          "thresholds_applied": {
+            "formalizer_seed": 0,
+            "formalizer_temperature": 0.0,
+            "gate_majority_fraction": 0.5,
+            "gate_max_samples": 7,
+            "gate_samples": 5,
+            "gate_temperature": 0.7,
+            "max_assumptions_for_conflict_search": 12,
+            "max_states": 2000000,
+            "solver_timeout_ms": 10000
+          },
+          "threshold_sources": {
+            "formalizer_seed": "default",
+            "formalizer_temperature": "default",
+            "gate_majority_fraction": "default",
+            "gate_max_samples": "default",
+            "gate_samples": "default",
+            "gate_temperature": "default",
+            "max_assumptions_for_conflict_search": "default",
+            "max_states": "default",
+            "solver_timeout_ms": "default"
+          },
+          "threshold_provenance": "max_states, max_assumptions_for_conflict_search: engineering caps of ADR-059 (exhaustive enumeration and subset search stay under a minute). solver_timeout_ms: ADR-060, per z3 call; a timeout is UNDECIDED. gate_samples, gate_max_samples, gate_temperature, gate_majority_fraction: ADR-064 and the N=3/5/7 ablation in FORMALIZER_GATE_RESULTS.md. formalizer_temperature, formalizer_seed: frozen decoding of the ADR-061 formalizer benchmark.",
+          "timestamp": "2026-10-19T13:05:50Z",
+          "python": "3.12.3",
+          "platform": "Linux"
+        }
+      },
+      "comparisons": [],
+      "consequences": [
+        {
+          "hypothesis_id": "H-0002",
+          "consequence": "not (stage == 'early' and trem2_function == 'normal' and treatment == 'agonist') or dystrophy_change != 'increase'",
+          "backend": "enumeration",
+          "entailed": true,
+          "follows_from_claims": true,
+          "vacuous": false,
+          "counterexamples": [],
+          "formal_status": "DECIDED",
+          "mandatory_relays": [
+            {
+              "code": "FORMAL_NOT_EMPIRICAL",
+              "message": "A formal verdict is about the formal object only. Consistent, falsifiable or entailed does not mean empirically true; whether the premises hold in the world is outside this check."
+            },
+            {
+              "code": "ENUMERATION_DECLARED_DOMAINS_ONLY",
+              "message": "Decided by enumerating the declared finite domains. Values outside those domains were never considered."
+            }
+          ],
+          "provenance": {
+            "engine": "coresearcher",
+            "engine_version": "4.1.0",
+            "operation": "entails",
+            "backend": "enumeration",
+            "z3_version": "5.3.1",
+            "solver_timeout_ms": null,
+            "input_sha256": "1819a4a39d0e224acc23f8c587e411e0986893d315a4d45b3fbbd68c47ca7ff0",
+            "output_sha256": "32c28a9a8fc862cf2057c283ff7b89aa054b989279a840fa92289ced4635260e",
+            "threshold_set": "formal@2026.10.1",
+            "thresholds_applied": {
+              "formalizer_seed": 0,
+              "formalizer_temperature": 0.0,
+              "gate_majority_fraction": 0.5,
+              "gate_max_samples": 7,
+              "gate_samples": 5,
+              "gate_temperature": 0.7,
+              "max_assumptions_for_conflict_search": 12,
+              "max_states": 2000000,
+              "solver_timeout_ms": 10000
+            },
+            "threshold_sources": {
+              "formalizer_seed": "default",
+              "formalizer_temperature": "default",
+              "gate_majority_fraction": "default",
+              "gate_max_samples": "default",
+              "gate_samples": "default",
+              "gate_temperature": "default",
+              "max_assumptions_for_conflict_search": "default",
+              "max_states": "default",
+              "solver_timeout_ms": "default"
+            },
+            "threshold_provenance": "max_states, max_assumptions_for_conflict_search: engineering caps of ADR-059 (exhaustive enumeration and subset search stay under a minute). solver_timeout_ms: ADR-060, per z3 call; a timeout is UNDECIDED. gate_samples, gate_max_samples, gate_temperature, gate_majority_fraction: ADR-064 and the N=3/5/7 ablation in FORMALIZER_GATE_RESULTS.md. formalizer_temperature, formalizer_seed: frozen decoding of the ADR-061 formalizer benchmark.",
+            "timestamp": "2026-10-19T13:05:50Z",
+            "python": "3.12.3",
+            "platform": "Linux"
+          }
+        }
+      ]
+    },
+    "lean": [],
+    "mandatory_relays": [
+      {
+        "code": "FORMAL_NOT_EMPIRICAL",
+        "message": "A formal verdict is about the formal object only. Consistent, falsifiable or entailed does not mean empirically true; whether the premises hold in the world is outside this check."
+      },
+      {
+        "code": "ENUMERATION_DECLARED_DOMAINS_ONLY",
+        "message": "Decided by enumerating the declared finite domains. Values outside those domains were never considered."
+      }
+    ]
+  }
+}

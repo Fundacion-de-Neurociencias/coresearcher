@@ -9,3 +9,6 @@ docs/reference/benchmarks/** text eol=lf
 
 # Vendored third-party files are pinned by SHA-256; keep their bytes identical on every platform.
 examples/local-smoothing-fidelity/LocalSmoothing.json -text
+
+# Demo artifacts carry sha256 checksums of their own bytes; never convert line endings.
+integrations/oase/demo/** -text

@@ -1,0 +1,27 @@
+{
+  "schema": "oase.evidence-assessment.v1",
+  "id": "AR-002",
+  "concept_ref": "IC-001",
+  "claim": "H-0003 is formally sound: not vacuous, not self-contradictory, falsifiable",
+  "evidence_status": "contradicted",
+  "execution_outcome": "completed",
+  "evidence": {
+    "artifact_path": "raw/formal/fm-H-0003.response.json",
+    "artifact_sha256": "615d93d291565b8471d7df439d89fc57e3186d7f5620feaa1b76cb2787d0577e",
+    "evidence_type": "formal-soundness",
+    "metric_name": "defect_count",
+    "metric_value": 1,
+    "metric_units": "count",
+    "threshold_set": "formal@1.0",
+    "method": "coresearcher-enumeration",
+    "context": "formal_status=DECIDED",
+    "analysis_path": "raw/formal/fm-H-0003.analysis.json"
+  },
+  "mandatory_relays": [
+    "formal.not_empirical",
+    "formal.enumeration_declared_domains_only"
+  ],
+  "assessed_at": "2026-10-19T13:06:08Z",
+  "assessed_by": "formal-demo",
+  "rationale": "oase formal analyze: formal_status=DECIDED, criteria.max_formal_defects.met=False, reproduces_run=True; threshold_set formal@1.0."
+}

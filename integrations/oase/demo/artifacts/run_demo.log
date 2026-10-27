@@ -1,0 +1,72 @@
+$ oase formal run inputs/H-0001.json --formal inputs/H-0001.formal.json --rival inputs/H-0002.formal.json --consequence not (stage == 'early' and trem2_function == 'normal' and treatment == 'agonist') or dystrophy_change != 'increase'
+raw/formal/fm-H-0001_vs_H-0002.request.json
+raw/formal/fm-H-0001_vs_H-0002.response.json
+raw/formal/fm-H-0001_vs_H-0002.meta.json
+exit 0
+$ oase formal analyze raw/formal/fm-H-0001_vs_H-0002.meta.json
+Hypothesis: H-0001 [threshold_set formal@1.0]
+Verdict: FALSIFIABLE, INCOMPARABLE vs H-0002, 1/1 consequence(s) entailed
+max_formal_defects: met=True (defects=none)
+AR: completed / supported
+Reproduces run: True
+Relays: formal.not_empirical, formal.enumeration_declared_domains_only
+raw/formal/fm-H-0001_vs_H-0002.analysis.json
+exit 0
+$ oase formal run inputs/H-0002.json --formal inputs/H-0002.formal.json --consequence not (stage == 'early' and trem2_function == 'normal' and treatment == 'agonist') or dystrophy_change != 'increase'
+raw/formal/fm-H-0002.request.json
+raw/formal/fm-H-0002.response.json
+raw/formal/fm-H-0002.meta.json
+exit 0
+$ oase formal analyze raw/formal/fm-H-0002.meta.json
+Hypothesis: H-0002 [threshold_set formal@1.0]
+Verdict: FALSIFIABLE, 1/1 consequence(s) entailed
+max_formal_defects: met=True (defects=none)
+AR: completed / supported
+Reproduces run: True
+Relays: formal.not_empirical, formal.enumeration_declared_domains_only
+raw/formal/fm-H-0002.analysis.json
+exit 0
+$ oase formal run inputs/H-0003.json --formal inputs/H-0003.formal.json
+raw/formal/fm-H-0003.request.json
+raw/formal/fm-H-0003.response.json
+raw/formal/fm-H-0003.meta.json
+exit 0
+$ oase formal analyze raw/formal/fm-H-0003.meta.json
+Hypothesis: H-0003 [threshold_set formal@1.0]
+Verdict: SELF_CONTRADICTORY
+max_formal_defects: met=False (defects=['SELF_CONTRADICTORY'])
+AR: completed / contradicted
+Reproduces run: True
+Relays: formal.not_empirical, formal.enumeration_declared_domains_only
+raw/formal/fm-H-0003.analysis.json
+exit 0
+$ oase formal run inputs/H-0004.json --formal inputs/H-0004.formal.json
+raw/formal/fm-H-0004.request.json
+raw/formal/fm-H-0004.response.json
+raw/formal/fm-H-0004.meta.json
+exit 0
+$ oase formal analyze raw/formal/fm-H-0004.meta.json
+Hypothesis: H-0004 [threshold_set formal@1.0]
+Verdict: UNFALSIFIABLE
+max_formal_defects: met=False (defects=['UNFALSIFIABLE'])
+AR: completed / contradicted
+Reproduces run: True
+Relays: formal.not_empirical, formal.enumeration_declared_domains_only
+raw/formal/fm-H-0004.analysis.json
+exit 0
+$ oase formal run inputs/H-0001.json --out raw/formal/blocked
+raw/formal/blocked/fm-H-0001.request.json
+raw/formal/blocked/fm-H-0001.response.json
+raw/formal/blocked/fm-H-0001.meta.json
+error: BLOCKED: CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.
+exit 8
+$ oase formal analyze raw/formal/blocked/fm-H-0001.meta.json
+Hypothesis: H-0001 [threshold_set formal@1.0]
+Verdict: BLOCKED: CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.
+max_formal_defects: met=None (defects=none)
+AR: blocked / not_assessed
+Reproduces run: None
+Relays: formal.blocked
+raw/formal/blocked/fm-H-0001.analysis.json
+error: BLOCKED: CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.
+exit 8

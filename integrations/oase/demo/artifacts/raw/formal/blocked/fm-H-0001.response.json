@@ -1,0 +1,21 @@
+{
+  "schema": "oase.formal-response.v1",
+  "transport": "package",
+  "formal_status": "BLOCKED",
+  "exception": "CapabilityUnavailable",
+  "coresearcher_response": {
+    "schema": "coresearcher.formal.response/v1",
+    "formal_status": "BLOCKED",
+    "reason": "CapabilityUnavailable: formalizer model is unavailable: set FORMALIZER_MODEL (and FORMALIZER_BASE_URL) or pass a formal object.",
+    "formalizer": null,
+    "formalization_gate": null,
+    "formal_hypothesis": null,
+    "reports": {
+      "evaluation": null,
+      "comparisons": [],
+      "consequences": []
+    },
+    "lean": [],
+    "mandatory_relays": []
+  }
+}

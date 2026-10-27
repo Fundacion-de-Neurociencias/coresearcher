@@ -1,0 +1,60 @@
+{
+  "schema": "oase.gate-policy.v1",
+  "id": "GP-001",
+  "version": 1,
+  "stage": 1,
+  "gate_name": "Stage 1 target nomination (example: formal soundness criterion)",
+  "effective_date": "2026-10-19",
+  "created_at": "2026-10-19T00:00:00Z",
+  "requirements": [
+    {
+      "req_id": "REQ-001",
+      "version": 1,
+      "description": "The nominating hypothesis is formally sound: its formal object is not vacuous, not self-contradictory and falsifiable. Metric defect_count from `oase formal analyze`; met when it is at or below the max_formal_defects threshold (inclusive). A non-verdict (UNDECIDED, BLOCKED, ambiguous formalization) is not_assessed and leaves the requirement unevaluated; it is never a failure.",
+      "type": "scientific_cutoff",
+      "evidence_type": "formal-soundness",
+      "threshold_set": "formal@1.0",
+      "threshold_key": "max_formal_defects",
+      "direction": "below",
+      "units": "count",
+      "endpoint": "defect_count",
+      "applicability": {
+        "modality": null,
+        "stage": [
+          1
+        ],
+        "indication": null,
+        "method_required": [
+          "coresearcher-enumeration",
+          "coresearcher-smt"
+        ],
+        "data_required": null
+      },
+      "authority": "program_lead",
+      "override_permitted": true,
+      "effective_date": "2026-10-19"
+    },
+    {
+      "req_id": "REQ-002",
+      "version": 1,
+      "description": "Prefer hypotheses that forbid more of their applicable state space (excluded_fraction_of_applicable in the analysis metrics). Informs ordering only. The threshold min_excluded_fraction_of_applicable is UNRESOLVED in formal@1.0: no value may be invented; until the program sets one in .oase/thresholds.yaml the fraction is recorded without a pass/fail.",
+      "type": "prioritization_heuristic",
+      "evidence_type": "formal-soundness",
+      "threshold_set": "formal@1.0",
+      "threshold_key": "min_excluded_fraction_of_applicable",
+      "direction": "above",
+      "applicability": {
+        "modality": null,
+        "stage": [
+          1
+        ],
+        "indication": null,
+        "method_required": null,
+        "data_required": null
+      },
+      "authority": "program_lead",
+      "override_permitted": true,
+      "effective_date": "2026-10-19"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "oase.formal-request.v1",
+  "transport": "package",
+  "hypothesis": {
+    "kind": "hypex",
+    "id": "H-0001",
+    "title": "[Illustrative] Early TREM2 agonism reduces neuritic dystrophy if TREM2 works",
+    "statement": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost.",
+    "source": "inputs/H-0001.json",
+    "source_sha256": "582a1e1b735e1025c53a1af149445f3479a82ded9250194e076243608e1ce907"
+  },
+  "coresearcher_request": {
+    "schema": "coresearcher.formal.request/v1",
+    "input_kind": "prose",
+    "hypothesis": null,
+    "prose": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost.",
+    "hypothesis_id": "H-0001",
+    "variable_schema": null,
+    "rivals": [],
+    "consequences": [],
+    "observations": [],
+    "max_examples": 5,
+    "backend": "auto",
+    "samples": null,
+    "include_lean": false,
+    "formalizer_messages": [
+      {
+        "role": "system",
+        "content": "You translate scientific hypotheses written in prose into a formal object. You do not judge the hypothesis, add knowledge, or fix it. You state exactly what the text asserts, under the conditions the text gives.\n\nOutput one JSON object and nothing else, with these keys:\n- \"variables\": list of {\"name\": identifier, \"domain\": [values]} for finite variables, or\n  {\"name\": identifier, \"continuous\": true, \"lower\": number or null, \"upper\": number or null} for real quantities.\n- \"scope\": a predicate saying where the hypothesis applies, or null.\n- \"assumptions\": list of predicates the text takes for granted (auxiliary conditions).\n- \"claims\": list of predicates the text asserts must hold wherever scope and assumptions hold.\n- \"alternatives\": list of short prose names of rival explanations the text mentions (may be empty).\n\nPredicates are Python-like boolean expressions over the variables only: comparisons (== != < <= > >=), and, or,\nnot, + - * /, constant integer powers (x**2), and membership in literal lists (x in ('a', 'b')). Strings are\nquoted. No function calls, no attributes, no variables other than those declared.\n\nAn implication \"if P then Q\" is written as the claim \"not (P) or (Q)\". If a variable schema is given, use exactly\nthose variable names and domains and do not add variables."
+      },
+      {
+        "role": "user",
+        "content": "Hypothesis:\nIn amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost.\n\nVariable schema (use exactly these variables; null means choose them yourself):\nnull"
+      }
+    ]
+  }
+}

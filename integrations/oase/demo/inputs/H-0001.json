@@ -1,0 +1,33 @@
+{
+  "id": "H-0001",
+  "title": "[Illustrative] Early TREM2 agonism reduces neuritic dystrophy if TREM2 works",
+  "statement": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost.",
+  "mechanism": "Agonism enhances TREM2-dependent microglial clustering and plaque compaction, which limits dystrophic neurite formation; without functional receptor the agonist has nothing to act on.",
+  "predictions": [
+    "Early stage, TREM2-normal: agonist reduces dystrophy vs vehicle.",
+    "Early stage, TREM2 loss-of-function: no change vs vehicle."
+  ],
+  "experiments": [
+    {
+      "design": "Amyloid-positive mouse model, TREM2-normal and TREM2 loss-of-function arms, early and late stage, agonist antibody vs vehicle.",
+      "readout": "Neuritic dystrophy (LAMP1+ dystrophic neurites per plaque) relative to vehicle.",
+      "est_difficulty": "med"
+    }
+  ],
+  "evidence": [
+    {
+      "lit_id": "ILLUSTRATIVE-NO-LITERATURE",
+      "role": "constrains",
+      "note": "Illustrative demo hypothesis. No literature was consulted and none is claimed; the formal check never reads this field."
+    }
+  ],
+  "focus_area": "Illustrative Stage 1 target: TREM2 agonism in amyloid pathology (CoResearcher OASE adapter demo)",
+  "lineage": {
+    "parents": [],
+    "operator": "null"
+  },
+  "status": "proposed",
+  "created_by": "illustrative-author",
+  "epoch": 0,
+  "created_at": "2026-10-19T00:00:00Z"
+}

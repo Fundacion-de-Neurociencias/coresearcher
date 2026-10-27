@@ -1,0 +1,43 @@
+{
+  "hypothesis_id": "H-0001",
+  "variables": [
+    {
+      "name": "stage",
+      "domain": [
+        "early",
+        "late"
+      ]
+    },
+    {
+      "name": "trem2_function",
+      "domain": [
+        "normal",
+        "loss"
+      ]
+    },
+    {
+      "name": "treatment",
+      "domain": [
+        "agonist",
+        "vehicle"
+      ]
+    },
+    {
+      "name": "dystrophy_change",
+      "domain": [
+        "decrease",
+        "none",
+        "increase"
+      ]
+    }
+  ],
+  "scope": "stage == 'early'",
+  "assumptions": [
+    "treatment != 'vehicle' or dystrophy_change == 'none'"
+  ],
+  "claims": [
+    "not (treatment == 'agonist' and trem2_function == 'normal') or dystrophy_change == 'decrease'",
+    "not (treatment == 'agonist' and trem2_function == 'loss') or dystrophy_change == 'none'"
+  ],
+  "statement": "In amyloid-positive brains at an early stage, a TREM2 agonist reduces neuritic dystrophy relative to vehicle when microglial TREM2 is functional, and has no effect when TREM2 function is lost."
+}

@@ -6,3 +6,6 @@ docs/reference/benchmarks/** text eol=lf
 
 # Lean files are hashed in their kernel-check logs.
 *.lean text eol=lf
+
+# Demo artifacts carry sha256 checksums of their own bytes; never convert line endings.
+integrations/oase/demo/** -text

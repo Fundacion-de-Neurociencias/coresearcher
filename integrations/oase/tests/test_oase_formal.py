@@ -406,6 +406,31 @@ def test_fabricated_verdict_with_reforged_checksum_is_not_reproduced(project):
     assert record["assessment"]["verdict"]["content_verdict"] == "FALSIFIABLE"
 
 
+def _reforge(project, path):
+    meta_path = project / "raw/formal/fm-H-0002.meta.json"
+    meta = json.loads(meta_path.read_text())
+    for entry in meta["outputs"]:
+        if entry["path"] == path.name:
+            entry["sha256"] = provenance.sha256_file(path)
+            entry["bytes"] = path.stat().st_size
+    meta_path.write_text(json.dumps(meta, indent=2))
+
+
+def test_engine_upgrade_is_an_environment_change_not_a_disagreement(project):
+    """A run stamped by another z3 build reproduces if its verdict digests match (OASE: env stamps are volatile)."""
+    path = _run_h2(project)
+    record = json.loads(path.read_text())
+    record["coresearcher_response"]["reports"]["evaluation"]["provenance"]["z3_version"] = "0.0.1"
+    path.write_text(json.dumps(record, indent=2) + "\n")
+    _reforge(project, path)
+    result = oase("formal", "analyze", "raw/formal/fm-H-0002.meta.json")
+    assert result.exit_code == 0, result.output
+    reproduction = analysis(project, "fm-H-0002")["assessment"]["reproduction"]
+    assert reproduction["reproduces_run"] is True
+    assert [c["field"] for c in reproduction["engine_changes"]] == ["z3_version"]
+    assert "0.0.1" in reproduction["engine_changes"][0]["run"]
+
+
 def test_analyze_refuses_the_network(project, monkeypatch):
     _run_h2(project)
     from python.discovery import formal_pipeline

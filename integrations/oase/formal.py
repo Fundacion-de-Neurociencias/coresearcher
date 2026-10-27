@@ -949,6 +949,50 @@ def _sockets_refused():
         )
 
 
+#: Engine stamps inside each report's provenance. They say which engine build
+#: produced the report, like OASE's env_version, and are compared as an
+#: environment change, never as a disagreement: the verdict is compared through
+#: input_sha256 and output_sha256, which do not depend on them.
+ENGINE_STAMPS = ("engine_version", "z3_version")
+
+
+def _split_engine_stamps(response: Any, found: set[tuple[str, Any]]) -> Any:
+    """A copy of `response` without engine stamps; the stamps go into `found`."""
+    if isinstance(response, dict):
+        out = {}
+        for key, value in response.items():
+            if key == "provenance" and isinstance(value, dict):
+                found.update((k, value.get(k)) for k in ENGINE_STAMPS if k in value)
+                value = {k: v for k, v in value.items() if k not in ENGINE_STAMPS}
+            out[key] = _split_engine_stamps(value, found)
+        return out
+    if isinstance(response, list):
+        return [_split_engine_stamps(v, found) for v in response]
+    return response
+
+
+def _compare(cr: dict[str, Any], run_response: dict, response: dict) -> dict:
+    """Run vs recomputed response, verdict by verdict; engine stamps reported apart."""
+    before: set[tuple[str, Any]] = set()
+    after: set[tuple[str, Any]] = set()
+    old = _split_engine_stamps(run_response, before)
+    new = _split_engine_stamps(response, after)
+    try:
+        comparison = cr["cli"]._compare_with_run(old, new)
+    except Exception as exc:  # CoResearcher's CliError on a malformed response.
+        raise ArtifactError(f"the run's response is not comparable: {exc}") from exc
+    comparison["engine_changes"] = [
+        {
+            "field": key,
+            "run": sorted(str(v) for k, v in before if k == key),
+            "analyze": sorted(str(v) for k, v in after if k == key),
+        }
+        for key in ENGINE_STAMPS
+        if {v for k, v in before if k == key} != {v for k, v in after if k == key}
+    ]
+    return comparison
+
+
 def _meta_for(path: Path) -> Path:
     for suffix in (".meta.json", ".response.json", ".request.json", ".analysis.json"):
         if path.name.endswith(suffix):
@@ -1060,12 +1104,14 @@ def analyze(
             exception_name = "EndpointUnavailable"
 
     if recomputed:
-        try:
-            comparison = cr["cli"]._compare_with_run(run_response, response)
-        except Exception as exc:  # CoResearcher's CliError on a malformed response.
-            raise ArtifactError(f"the run's response is not comparable: {exc}") from exc
+        comparison = _compare(cr, run_response, response)
     else:
-        comparison = {"reproduces_run": None, "reports_compared": 0, "mismatches": []}
+        comparison = {
+            "reproduces_run": None,
+            "reports_compared": 0,
+            "mismatches": [],
+            "engine_changes": [],
+        }
     comparison["thresholds_match_run"] = (
         sidecar.get("thresholds_applied") == ts.applied()
     )
@@ -1152,6 +1198,11 @@ def analyze(
     mapping = assessment["evidence_assessment"]
     emit.line(f"AR: {mapping['execution_outcome']} / {mapping['evidence_status']}")
     emit.line(f"Reproduces run: {comparison['reproduces_run']}")
+    for change in comparison["engine_changes"]:
+        emit.line(
+            f"Engine changed since run: {change['field']} "
+            f"{', '.join(change['run'])} -> {', '.join(change['analyze'])}"
+        )
     if relays:
         emit.line(f"Relays: {', '.join(r['code'] for r in relays)}")
     emit.path(project.relative(analysis_path), "analysis")

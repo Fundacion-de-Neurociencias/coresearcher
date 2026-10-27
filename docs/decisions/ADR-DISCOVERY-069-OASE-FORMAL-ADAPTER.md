@@ -60,7 +60,10 @@ copied to `tools/oase/commands/formal.py`.
   refuses raw sockets too, because the engine's formalizer client is not OASE's. It checks every declared output
   against its sha256 (exit 3), re-runs the verdict locally with z3 or enumeration from the stored formal object (and
   the gate from the stored raw outputs), compares it with the run report by report (`input_sha256`, `output_sha256`,
-  threshold set) and applies `formal@1.0`. It writes `<stem>.analysis.json` through `provenance.write_analysis`, so
+  threshold set) and applies `formal@1.0`. The engine stamps inside each report's provenance (`engine_version`,
+  `z3_version`) are reported as an environment change in `reproduction.engine_changes`, never as a disagreement: the
+  verdict is compared through the digests, and OASE treats environment stamps as volatile, so a z3 release between
+  run and analyze does not turn an identical verdict into "not reproduced". It writes `<stem>.analysis.json` through `provenance.write_analysis`, so
   OASE's refusal to replace a differing analysis, `--out` second opinions and cross-work-order protection apply
   unchanged. The assessment carries the verdict, the criteria, the AR mapping (section 5), the reproduction result,
   the reports, the gate and the formal object.

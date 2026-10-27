@@ -359,8 +359,22 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "lean_junk_lint",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "limitation_resolution_engine",
       "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "local_smoothing_case",
+      "scripts": true,
       "tests": true
     },
     {
@@ -535,6 +549,13 @@
       "api": true,
       "level": "Integrated",
       "module": "state_space",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "statement_fidelity",
       "scripts": false,
       "tests": true
     },

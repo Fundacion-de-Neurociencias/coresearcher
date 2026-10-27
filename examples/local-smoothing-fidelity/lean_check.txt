@@ -1,0 +1,22 @@
+Lean kernel check of openai/math ComparatorChallenges/LocalSmoothing.json
+Date: 2026-10-27
+Status: NOT RUN. No kernel check is reported by this case.
+
+Target: lake env comparator ComparatorChallenges/LocalSmoothing.json
+Source: https://github.com/openai/math at 7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a
+Pinned toolchain: leanprover/lean4:v4.34.1 (lean/lean-toolchain)
+Mathlib: d13f23b723b8a846827a245b89c10fc7d3f11612 (lean/lake-manifest.json)
+Statement file SHA-256: 58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd
+Permitted axioms: propext, Quot.sound, Classical.choice
+
+Why it did not run:
+- Comparator sandboxes the check with landrun (Linux Landlock); the only Lean machine available (Mac Studio,
+  macOS 26.5, arm64, elan with Lean 4.35.0) cannot run landrun, so the documented command cannot run there.
+- A substitute (lake build of OAI.Analysis.Fourier.LocalSmoothing.Comparator at the pinned commit, then
+  #print axioms for the six theorems) was prepared but not started: the session's permission policy blocked
+  running the downloaded project's build. That substitute would not have been a Comparator check either.
+
+To run it: on Linux with comparator, landrun and lean4export on PATH, from lean/ at the pinned commit:
+  lake exe cache get
+  lake env comparator ComparatorChallenges/LocalSmoothing.json
+and record toolchain, Mathlib rev, file SHA-256, printed axioms and wall time here.

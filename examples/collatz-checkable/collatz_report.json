@@ -1,0 +1,448 @@
+{
+  "case": "Collatz: what is mechanically checkable",
+  "claim_status": "OPEN: no proof is claimed",
+  "dag": {
+    "is_acyclic": true,
+    "missing_premises": [],
+    "open_nodes": [
+      "NoNontrivialCycle",
+      "NoDivergentOrbit",
+      "Collatz"
+    ],
+    "nodes": [
+      {
+        "id": "AffineForm",
+        "title": "T^k(r + 2^k t) = T^k(r) + 3^m t for every t",
+        "status": "checked here",
+        "premises": [],
+        "imports": [
+          "Terras1976"
+        ]
+      },
+      {
+        "id": "ParityBijection",
+        "title": "n mod 2^k determines and is determined by the first k parities",
+        "status": "checked here",
+        "premises": [
+          "AffineForm"
+        ],
+        "imports": [
+          "Terras1976"
+        ]
+      },
+      {
+        "id": "TwoAdicLift",
+        "title": "T preserves Haar measure on the 2-adic integers (cylinder level)",
+        "status": "checked here",
+        "premises": [
+          "ParityBijection"
+        ],
+        "imports": [
+          "Lagarias1985"
+        ]
+      },
+      {
+        "id": "Drift",
+        "title": "mean log-factor per step is log(3/4)/2 < 0",
+        "status": "checked here",
+        "premises": [],
+        "imports": []
+      },
+      {
+        "id": "DensityCore",
+        "title": "fraction of parity vectors with 3^m < 2^k tends to 1",
+        "status": "checked here",
+        "premises": [
+          "ParityBijection",
+          "Drift"
+        ],
+        "imports": []
+      },
+      {
+        "id": "StoppingDensity1",
+        "title": "almost every n has finite stopping time",
+        "status": "imported",
+        "premises": [
+          "AffineForm",
+          "DensityCore"
+        ],
+        "imports": [
+          "Terras1976",
+          "Everett1977"
+        ]
+      },
+      {
+        "id": "AlmostBounded",
+        "title": "almost all orbits attain almost bounded values",
+        "status": "imported",
+        "premises": [
+          "StoppingDensity1"
+        ],
+        "imports": [
+          "Tao2022"
+        ]
+      },
+      {
+        "id": "CountReaching1",
+        "title": "#{n <= x reaching 1} >= x^0.84",
+        "status": "imported",
+        "premises": [],
+        "imports": [
+          "KrasikovLagarias2003"
+        ]
+      },
+      {
+        "id": "CycleEquation",
+        "title": "a cycle with k steps and m odd steps has n (2^k - 3^m) = c > 0",
+        "status": "checked here",
+        "premises": [
+          "AffineForm"
+        ],
+        "imports": []
+      },
+      {
+        "id": "ProductIdentity",
+        "title": "2^k / 3^m = prod over odd cycle elements of (1 + 1/(3x))",
+        "status": "checked here",
+        "premises": [],
+        "imports": []
+      },
+      {
+        "id": "OwnVerification",
+        "title": "every n < 2^20 reaches 1 (re-run here)",
+        "status": "checked here",
+        "premises": [],
+        "imports": []
+      },
+      {
+        "id": "CycleSizeBound",
+        "title": "a nontrivial cycle has at least m_min odd steps, given a verification bound",
+        "status": "checked here",
+        "premises": [
+          "CycleEquation",
+          "ProductIdentity"
+        ],
+        "imports": [
+          "Barina2021",
+          "Eliahou1993"
+        ]
+      },
+      {
+        "id": "OneCycles",
+        "title": "no nontrivial 1-cycles",
+        "status": "imported",
+        "premises": [
+          "CycleEquation"
+        ],
+        "imports": [
+          "Steiner1977"
+        ]
+      },
+      {
+        "id": "FewBlockCycles",
+        "title": "no nontrivial m-cycles, m <= 68",
+        "status": "imported",
+        "premises": [
+          "CycleEquation"
+        ],
+        "imports": [
+          "SimonsDeWeger2005"
+        ]
+      },
+      {
+        "id": "NoNontrivialCycle",
+        "title": "GAP: no nontrivial cycle",
+        "status": "OPEN",
+        "premises": [
+          "CycleSizeBound",
+          "OneCycles",
+          "FewBlockCycles"
+        ],
+        "imports": []
+      },
+      {
+        "id": "NoDivergentOrbit",
+        "title": "GAP: no orbit tends to infinity",
+        "status": "OPEN",
+        "premises": [
+          "AlmostBounded",
+          "CountReaching1"
+        ],
+        "imports": []
+      },
+      {
+        "id": "Collatz",
+        "title": "every orbit reaches 1",
+        "status": "OPEN",
+        "premises": [
+          "NoNontrivialCycle",
+          "NoDivergentOrbit",
+          "OwnVerification"
+        ],
+        "imports": [
+          "Conway1972"
+        ]
+      }
+    ],
+    "external": {
+      "Terras1976": {
+        "what": "parity vectors of length k are in bijection with residues mod 2^k; stopping time is finite for a set of density 1",
+        "use": "input"
+      },
+      "Everett1977": {
+        "what": "almost every n has an iterate below n",
+        "use": "input"
+      },
+      "Lagarias1985": {
+        "what": "T extends to the 2-adic integers, preserves Haar measure, and is conjugate to the shift",
+        "use": "input"
+      },
+      "Steiner1977": {
+        "what": "the only cycle with one block of odd steps is the trivial one",
+        "use": "input"
+      },
+      "SimonsDeWeger2005": {
+        "what": "no nontrivial m-cycle (m blocks of odd steps) for m <= 68",
+        "use": "input"
+      },
+      "Eliahou1993": {
+        "what": "lower bound on cycle length from a verification bound (17,087,915 at 2^40)",
+        "use": "cross-check"
+      },
+      "Barina2021": {
+        "what": "every n < 2^68 reaches 1 (computation)",
+        "use": "input"
+      },
+      "KrasikovLagarias2003": {
+        "what": "at least x^0.84 integers n <= x reach 1, for large x",
+        "use": "input"
+      },
+      "Tao2022": {
+        "what": "almost all orbits (logarithmic density) attain almost bounded values",
+        "use": "input"
+      },
+      "Conway1972": {
+        "what": "generalized Collatz problems are undecidable",
+        "use": "meta"
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "terras.affine",
+      "claim": "T^k(r + 2^k t) = T^k(r) + 3^m t",
+      "scope": "every r < 2^k, k <= 14, symbolic t",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "T^k(r + 2^k t) = T^k(r) + 3^m t, all r < 2^k, k <= 14, every integer t",
+          "holds": true
+        }
+      ],
+      "values": {
+        "example_r5_k6": "9*t + 1"
+      }
+    },
+    {
+      "id": "terras.bijection",
+      "claim": "parity vectors <-> residues mod 2^k",
+      "scope": "exhaustive, k <= 16",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "r mod 2^k -> first k parities is a bijection onto {0,1}^k, k <= 16",
+          "holds": true
+        }
+      ],
+      "values": {}
+    },
+    {
+      "id": "lift.haar",
+      "claim": "the 2-adic extension preserves Haar measure",
+      "scope": "cylinder sets mod 2^(k+1), k <= 14",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "each class mod 2^k has exactly 2 preimage classes mod 2^(k+1) (Haar measure preserved on cylinders), k <= 14",
+          "holds": true
+        }
+      ],
+      "values": {
+        "note": "N has Haar measure 0 in Z_2"
+      }
+    },
+    {
+      "id": "heuristic.drift",
+      "claim": "negative mean drift of log n",
+      "scope": "exact",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "E[log factor] = log(1/2)/2 + log(3/2)/2 = log(3/4)/2",
+          "holds": true
+        },
+        {
+          "assertion": "log(3/4)/2 < 0",
+          "holds": true
+        }
+      ],
+      "values": {}
+    },
+    {
+      "id": "terras.density_core",
+      "claim": "most parity vectors contract",
+      "scope": "exact binomial sums, k <= 400",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "fraction of length-k parity vectors with 3^m < 2^k exceeds 0.999 at k = 400 (exact binomial sum)",
+          "holds": true
+        },
+        {
+          "assertion": "threshold m < k / log2 3 has slope 1/log2 3 > 1/2, the binomial mean",
+          "holds": true
+        }
+      ],
+      "values": {
+        "fraction_with_3^m<2^k": {
+          "25": 0.885238528251648,
+          "50": 0.9675456764638639,
+          "100": 0.9966814397420369,
+          "200": 0.9999179073748418,
+          "400": 0.999999935338315
+        }
+      }
+    },
+    {
+      "id": "cycle.equation",
+      "claim": "the cycle equation n(2^k - 3^m) = c",
+      "scope": "n < 3000, four values of k",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "2^k T^k(n) = 3^m n + sum_j 3^(m-1-j) 2^(s_j), n < 3000, k in {1,5,17,40}",
+          "holds": true
+        },
+        {
+          "assertion": "hence a cycle (T^k(n) = n) has n (2^k - 3^m) = c > 0, so 2^k > 3^m",
+          "holds": true
+        },
+        {
+          "assertion": "trivial cycle 1 -> 2 -> 1: k = 2, m = 1, c = 1, n = 1",
+          "holds": true
+        }
+      ],
+      "values": {}
+    },
+    {
+      "id": "cycle.product",
+      "claim": "2^k/3^m = prod (1 + 1/(3x))",
+      "scope": "symbolic step identity",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "odd step: T(x)/x = (3/2)(1 + 1/(3x))",
+          "holds": true
+        },
+        {
+          "assertion": "trivial cycle: 2^2/3^1 = 1 + 1/3",
+          "holds": true
+        },
+        {
+          "assertion": "trivial cycle: 0 < k - m log2 3 = m log2(1 + 1/(3N)) with k = 2, m = 1, N = 1",
+          "holds": true
+        },
+        {
+          "assertion": "log2(1 + 1/(3N)) is decreasing in N, so N = smallest cycle element gives the bound",
+          "holds": true
+        }
+      ],
+      "values": {}
+    },
+    {
+      "id": "verification.own",
+      "claim": "all n < 2^20 reach 1",
+      "scope": "exhaustive, re-run",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "every 1 <= n < 2^20 reaches 1 (induction on n)",
+          "holds": true
+        }
+      ],
+      "values": {}
+    },
+    {
+      "id": "cycle.size_bound",
+      "claim": "minimal size of a nontrivial cycle from a verification bound",
+      "scope": "exact continued fractions; conditional on the imported bound 2^68",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "reproduces Eliahou (1993): at 2^40 the minimal cycle length is 17,087,915",
+          "holds": true
+        },
+        {
+          "assertion": "the answer is stable between 120 and 200 digits of precision",
+          "holds": true
+        }
+      ],
+      "values": {
+        "at_2^40": {
+          "m": 10781274,
+          "k": 17087915,
+          "inside": true
+        },
+        "at_2^68": {
+          "m": 72057431991,
+          "k": 114208327604,
+          "inside": true
+        }
+      }
+    },
+    {
+      "id": "gap.cycles",
+      "claim": "no nontrivial cycle exists",
+      "scope": "open problem",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "values": {}
+    },
+    {
+      "id": "gap.divergence",
+      "claim": "no orbit diverges",
+      "scope": "open problem",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "values": {}
+    },
+    {
+      "id": "tao.almost_bounded",
+      "claim": "Tao's almost-all theorem",
+      "scope": "analytic; imported, not re-proved",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "values": {}
+    }
+  ],
+  "negative_controls": [
+    {
+      "label": "3x-1 map: 5 -> 7 -> 10 -> 5 is a nontrivial cycle",
+      "detected": true
+    },
+    {
+      "label": "3x-1 map: the descent check does not certify n = 5",
+      "detected": true
+    },
+    {
+      "label": "verification bound 2^39 does not reproduce Eliahou's 17,087,915",
+      "detected": true
+    }
+  ],
+  "summary": {
+    "VERIFIED": 9,
+    "REFUTED": 0,
+    "NOT_ENCODABLE": 3
+  },
+  "seconds": 1.4
+}

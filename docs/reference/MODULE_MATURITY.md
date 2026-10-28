@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 31 |
+| Tested | Covered by tests, not reachable from the API | 32 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -30,6 +30,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `biomacromolecular_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
+| `collatz_case` | Tested | - | yes | yes |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
 | `constraint_discovery_engine` | Prototype | - | - | - |

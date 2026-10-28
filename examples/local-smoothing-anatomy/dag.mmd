@@ -1,0 +1,109 @@
+flowchart BT
+  Eq2_2_2_4["Eq2.2-2.4: The symbol determines the Gaussian"]
+  Lem2_1["Lem2.1: Lifted bilinear tensor is PSD with divergence-free columns"]
+  Lem3_1["Lem3.1: Hessian calculus"]
+  Lem3_2["Lem3.2: Moore determinant and cofactor identities"]
+  Lem6_1["Lem6.1: Propagation across a thin cylinder"]
+  Rem6_2["Rem6.2: Sharpness of Lemma 6.1 for scalar supersolutions"]
+  Prop8_1["Prop8.1: Radial focusing"]
+  AppC["AppC: Disjoint packets and the weak norm"]
+  Lem11_3["Lem11.3: Combining dilates"]
+  Prop2_2["Prop2.2: The wave current A0 in quaternionic coordinates"]
+  Lem3_3["Lem3.3: Cofactor divergence"]
+  ThmA_1["ThmA.1: Periodic Dirichlet problem"]
+  Prop8_2["Prop8.2: Weak spacetime obstruction"]
+  Eq2_15["Eq2.15: Time component on a frequency cap"]
+  Lem4_1["Lem4.1: Fiber geometry"]
+  Sec4_2["Sec4.2: Regularized current and Dirichlet potential (4.5)-(4.8)"]
+  Prop4_2["Prop4.2: Energy balance"]
+  Lem4_3["Lem4.3: Energy comparison"]
+  Prop5_1["Prop5.1: Energy bounds on a fixed fiber"]
+  Prop6_3["Prop6.3: Critical estimate on the torus for one cap"]
+  AppD["AppD: Linear Dirichlet problem for the planar wave (n = 2 route)"]
+  Thm1_2["Thm1.2: Critical annular estimate"]
+  ThmE_1["ThmE.1: Curved characteristic sheets of symmetric systems"]
+  Eq7_3["Eq7.3: Interpolated annular estimate"]
+  Lem9_2["Lem9.2: Local spherical extension from the wave"]
+  ThmB_1["ThmB.1: Angular endpoint"]
+  Thm1_1["Thm1.1: Euclidean local smoothing"]
+  Cor7_1["Cor7.1: Logarithmic Sobolev estimate"]
+  Cor9_3["Cor9.3: Global sphere and cone extension"]
+  Lem9_4["Lem9.4: From caps to tubes"]
+  Cor9_1["Cor9.1: Spherical extension, Kakeya maximal, Hausdorff dimension"]
+  Eq10_3["Eq10.3: Rescaled wave estimate"]
+  Cor12_1["Cor12.1: Paraboloid extension and Schrodinger smoothing"]
+  Eq9_7["Eq9.7: Nikodym maximal estimate"]
+  Sec9_4_curves["Sec9.4-curves: Nikodym dimension and quadratic curve families"]
+  Lem10_2["Lem10.2: Maximal estimate for a thin shell"]
+  Lem11_2["Lem11.2: One interval of radii"]
+  Thm10_1["Thm10.1: Bochner-Riesz means"]
+  Thm11_1["Thm11.1: Stein's square function"]
+  Lem2_1 --> Prop2_2
+  Eq2_2_2_4 --> Prop2_2
+  Prop2_2 --> Eq2_15
+  Lem3_1 --> Lem3_3
+  Lem3_2 --> Lem3_3
+  Lem3_1 --> Lem4_1
+  Prop2_2 --> Lem4_1
+  Lem3_1 --> ThmA_1
+  Lem3_2 --> ThmA_1
+  Prop2_2 --> Sec4_2
+  Lem3_2 --> Sec4_2
+  Lem3_3 --> Sec4_2
+  Lem4_1 --> Sec4_2
+  ThmA_1 --> Sec4_2
+  Sec4_2 --> Prop4_2
+  Lem3_1 --> Prop4_2
+  Lem3_2 --> Prop4_2
+  Lem3_3 --> Prop4_2
+  Lem4_1 --> Prop4_2
+  Sec4_2 --> Lem4_3
+  Lem3_2 --> Lem4_3
+  Lem3_3 --> Lem4_3
+  Prop4_2 --> Prop5_1
+  Lem4_3 --> Prop5_1
+  Lem4_1 --> Prop5_1
+  Eq2_15 --> Prop5_1
+  Prop2_2 --> Prop5_1
+  Sec4_2 --> Prop5_1
+  ThmA_1 --> Prop5_1
+  Lem6_1 --> Prop6_3
+  Prop5_1 --> Prop6_3
+  Prop6_3 --> Thm1_2
+  Thm1_2 --> Eq7_3
+  Eq7_3 --> Thm1_1
+  Eq7_3 --> Cor7_1
+  AppC --> Prop8_2
+  Thm1_2 --> Lem9_2
+  Lem9_2 --> Cor9_3
+  Thm1_2 --> Cor9_3
+  Lem9_2 --> Lem9_4
+  Lem9_2 --> Cor9_1
+  Lem9_4 --> Cor9_1
+  Thm1_2 --> Cor9_1
+  Cor9_1 --> Eq9_7
+  Cor9_1 --> Sec9_4_curves
+  Thm1_1 --> Eq10_3
+  Eq10_3 --> Lem10_2
+  Lem10_2 --> Thm10_1
+  Eq10_3 --> Thm10_1
+  Eq10_3 --> Lem11_2
+  Lem11_2 --> Thm11_1
+  Lem11_3 --> Thm11_1
+  Lem9_2 --> Cor12_1
+  Thm1_2 --> Cor12_1
+  Cor9_3 --> Cor12_1
+  Thm1_2 --> ThmB_1
+  Prop8_1 --> ThmB_1
+  Prop2_2 --> AppD
+  Prop4_2 --> AppD
+  Lem6_1 --> AppD
+  Prop5_1 --> AppD
+  Lem2_1 --> ThmE_1
+  Lem3_1 --> ThmE_1
+  Lem4_3 --> ThmE_1
+  Prop4_2 --> ThmE_1
+  Lem6_1 --> ThmE_1
+  Prop5_1 --> ThmE_1
+  Prop6_3 --> ThmE_1
+  ThmA_1 --> ThmE_1

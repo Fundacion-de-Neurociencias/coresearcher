@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 31 |
+| Tested | Covered by tests, not reachable from the API | 32 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -67,6 +67,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `lean_formalization_engine` | Tested | - | yes | - |
 | `lean_junk_lint` | Tested | - | yes | - |
 | `limitation_resolution_engine` | Tested | - | yes | - |
+| `local_smoothing_anatomy` | Tested | - | yes | yes |
 | `local_smoothing_case` | Tested | - | yes | yes |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
 | `manifold_detector` | Prototype | - | - | - |

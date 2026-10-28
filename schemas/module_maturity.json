@@ -400,6 +400,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "mahler_obligations",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "manifold_detector",
       "scripts": false,
@@ -432,6 +439,13 @@
       "module": "novelty_detector",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "obligation_ledger",
+      "scripts": false,
+      "tests": true
     },
     {
       "api": false,

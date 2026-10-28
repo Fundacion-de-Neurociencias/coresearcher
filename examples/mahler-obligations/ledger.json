@@ -1,0 +1,339 @@
+{
+  "source": {
+    "repository": "https://github.com/openai/math",
+    "commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+    "paper": "preprints/The-Mahler-Conjecture-for-General-Convex-Bodies-September-22-2026/paper.pdf",
+    "statements": "build/sections/01-cones.tex (lem:profile-identities, prop:scalar-input)",
+    "author_programs": "verification/programs/*.py (not run here, by design)",
+    "lean": "not formalized; the Comparator targets in family 087 cover the symmetric case and its equality classification only (symmetric_mahler, symmetric_mahler_equality)"
+  },
+  "claim": {
+    "id": "mahler.general.scalar_input",
+    "statement": "Lemma 'Profile identities' and Proposition 'Scalar inequalities' hold for the stated profiles and exact parameters (input to the Mahler conjecture for general convex bodies)",
+    "source": "01-cones.tex: lem:profile-identities, prop:scalar-input",
+    "status": "CHECKED_NUMERIC",
+    "is_proved": false,
+    "obligations": [
+      {
+        "id": "identities",
+        "statement": "(N+2)g = d; d' = 2xd - v' - 2g'; Nd - v'' = -(N+2)(d + g'')",
+        "source": "lem:profile-identities, (2)",
+        "kind": "identity",
+        "status": "DISCHARGED_SYMBOLIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_SYMBOLIC",
+            "method": "sympy simplify",
+            "scope": "for any p with p' = phi; exact",
+            "by": "CoResearcher",
+            "margin": null,
+            "detail": {
+              "(N+2)g = d": true,
+              "d' = 2xd - v' - 2g'": true,
+              "Nd - v'' = -(N+2)(d + g'')": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: b - r^2 - d > 0",
+        "statement": "b - r^2 - d > 0",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.05482888943391684,
+            "detail": {
+              "at": -20.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: |v' - x| <= .319",
+        "statement": "|v' - x| <= .319",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.001032329856149039,
+            "detail": {
+              "at": -2.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: C <= -.341",
+        "statement": "C <= -.341",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.0003411712057654337,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: S_q > 0",
+        "statement": "S_q > 0",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.11648001086579518,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_-^2 + t_- C + K > 0",
+        "statement": "lambda t_-^2 + t_- C + K > 0",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.000908230395122972,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_+^2 + t_+ C + K < 0",
+        "statement": "lambda t_+^2 + t_+ C + K < 0",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.0007489788768987489,
+            "detail": {
+              "at": -3.36
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "pointwise: 2(-.37)C - .37^2 - 4 lambda K > m_*^2",
+        "statement": "2(-.37)C - .37^2 - 4 lambda K > m_*^2",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.009034873030459134,
+            "detail": {
+              "at": -1.08
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) first",
+        "statement": "(3) first",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "(z, x) in [-12.0, 12.0]^2, step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.023968772306844688,
+            "detail": {
+              "min": 0.023968772306844688,
+              "at_z": 0.0,
+              "at_x": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) second",
+        "statement": "(3) second",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "(z, x) in [-12.0, 12.0]^2, step 0.02",
+            "by": "CoResearcher",
+            "margin": 1.021054806445651,
+            "detail": {
+              "min": 1.021054806445651,
+              "at_z": -12.0,
+              "at_x": -12.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      },
+      {
+        "id": "segment: (4)",
+        "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment",
+        "source": "prop:scalar-input, (4); prop:segment-estimate",
+        "kind": "segment inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "segments with endpoints in [-12.0, 12.0] every 0.04; trapezoid step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.2696390986329139,
+            "detail": {
+              "segments": 180300,
+              "max_left_over_right": 0.7303609013670861,
+              "at": [
+                -3.36,
+                -0.92
+              ]
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      }
+    ],
+    "counts": {
+      "DISCHARGED_FORMAL": 0,
+      "DISCHARGED_SYMBOLIC": 1,
+      "CHECKED_NUMERIC": 10,
+      "CERTIFIED_BY_AUTHOR": 0,
+      "OPEN": 0,
+      "REFUTED": 0
+    }
+  },
+  "seconds": 620.2
+}

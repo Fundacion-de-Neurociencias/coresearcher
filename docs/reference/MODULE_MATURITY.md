@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 31 |
+| Tested | Covered by tests, not reachable from the API | 32 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -74,6 +74,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
+| `openai_math_strategy` | Tested | - | yes | yes |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |

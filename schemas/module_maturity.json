@@ -420,6 +420,13 @@
       "tests": false
     },
     {
+      "api": false,
+      "level": "Tested",
+      "module": "openai_math_strategy",
+      "scripts": true,
+      "tests": true
+    },
+    {
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",

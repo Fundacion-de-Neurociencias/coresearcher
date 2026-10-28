@@ -1,0 +1,212 @@
+{
+  "families": 373,
+  "manuscripts": 721,
+  "disciplines": {
+    "Theoretical computer science": 41,
+    "Combinatorics": 37,
+    "Algebraic and complex geometry": 36,
+    "Number theory": 31,
+    "Probability and statistical mechanics": 29,
+    "Differential geometry": 29,
+    "Mathematical physics": 25,
+    "Operator algebras": 19,
+    "Algebra": 18,
+    "Topology": 18,
+    "Real and complex analysis": 16,
+    "Partial differential equations": 16,
+    "Convex and metric geometry": 15,
+    "Group theory": 14,
+    "Dynamical systems and ergodic theory": 12,
+    "Functional analysis": 11,
+    "Mathematical logic": 6
+  },
+  "family_size_distribution": {
+    "1": 205,
+    "2": 97,
+    "3": 36,
+    "4": 13,
+    "5": 8,
+    "6": 4,
+    "7": 3,
+    "8": 2,
+    "9": 1,
+    "12": 1,
+    "13": 2,
+    "14": 1
+  },
+  "multi_manuscript_families": 168,
+  "manuscripts_by_date_top": {
+    "September 24": 188,
+    "September 23": 171,
+    "October 5": 108,
+    "September 25": 86,
+    "September 26": 53,
+    "September 27": 50,
+    "October 6": 21,
+    "October 4": 20
+  },
+  "lead_verbs": {
+    "Proves": 166,
+    "Constructs": 43,
+    "Resolves": 40,
+    "For": 27,
+    "Disproves": 18,
+    "Gives": 13,
+    "Every": 12,
+    "Determines": 9
+  },
+  "citations": {
+    "dirs_with_bib": 514,
+    "citing_papers": 281,
+    "edges": 436,
+    "intra_family_edges": 288,
+    "cross_family_pairs": 93,
+    "cross_discipline_pairs": 15,
+    "direction": {
+      "same day": 247,
+      "earlier": 145,
+      "later": 44
+    },
+    "mutual_citation_components": 53,
+    "mutual_citation_component_sizes": {
+      "2": 41,
+      "3": 8,
+      "4": 2,
+      "5": 2
+    },
+    "longest_chain": 6
+  },
+  "formalization": {
+    "formalized_papers": 176,
+    "families_with_formalized_paper": 138,
+    "negative_or_constructive_families": 61,
+    "negative_or_constructive_formalized": 33,
+    "by_discipline": {
+      "Theoretical computer science": [
+        23,
+        41
+      ],
+      "Combinatorics": [
+        18,
+        37
+      ],
+      "Algebraic and complex geometry": [
+        8,
+        36
+      ],
+      "Number theory": [
+        7,
+        31
+      ],
+      "Probability and statistical mechanics": [
+        9,
+        29
+      ],
+      "Differential geometry": [
+        8,
+        29
+      ],
+      "Mathematical physics": [
+        6,
+        25
+      ],
+      "Operator algebras": [
+        7,
+        19
+      ],
+      "Algebra": [
+        8,
+        18
+      ],
+      "Topology": [
+        1,
+        18
+      ],
+      "Real and complex analysis": [
+        8,
+        16
+      ],
+      "Partial differential equations": [
+        3,
+        16
+      ],
+      "Convex and metric geometry": [
+        10,
+        15
+      ],
+      "Group theory": [
+        7,
+        14
+      ],
+      "Dynamical systems and ergodic theory": [
+        2,
+        12
+      ],
+      "Functional analysis": [
+        8,
+        11
+      ],
+      "Mathematical logic": [
+        5,
+        6
+      ]
+    }
+  },
+  "commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+  "preprint_dirs": 751,
+  "traces": {
+    "traces": 10,
+    "positivity_or_sign_pivot": 7,
+    "cross_field_import_pivot": 5,
+    "builds_on_own_output": 2,
+    "abandoned_routes_median": 30.0,
+    "abandoned_routes_range": [
+      6,
+      60
+    ],
+    "audit_share_median": 0.33,
+    "decision_form_prompts": 7
+  },
+  "trace_text_counts": {
+    "ordinary-two-point-correlations": {
+      "sections": 5,
+      "verbatim_excerpts": 4
+    },
+    "irrationality-exponent-of-pi": {
+      "sections": 45,
+      "verbatim_excerpts": 69
+    },
+    "symmetric-and-general-mahler-conjectures": {
+      "sections": 49,
+      "verbatim_excerpts": 52
+    },
+    "basic-semidefinite-threshold-np-hardness": {
+      "sections": 12,
+      "verbatim_excerpts": 10
+    },
+    "quasipolynomial-arithmetic-progressions": {
+      "sections": 39,
+      "verbatim_excerpts": 54
+    },
+    "kaplansky-direct-finiteness-characteristic-two": {
+      "sections": 23,
+      "verbatim_excerpts": 25
+    },
+    "mezard-parisi-formula": {
+      "sections": 3,
+      "verbatim_excerpts": 2
+    },
+    "spontaneous-magnetization-quantum-heisenberg-ferromagnet": {
+      "sections": 6,
+      "verbatim_excerpts": 2
+    },
+    "free-group-factor-isomorphism": {
+      "sections": 7,
+      "verbatim_excerpts": 8
+    },
+    "relativistic-vlasov-maxwell": {
+      "sections": 5,
+      "verbatim_excerpts": 1
+    }
+  }
+}

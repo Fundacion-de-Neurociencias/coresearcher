@@ -401,6 +401,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "mahler_interval",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "mahler_obligations",
       "scripts": true,
       "tests": true

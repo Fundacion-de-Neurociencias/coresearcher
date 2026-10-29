@@ -225,8 +225,10 @@ def segment_ratio(t: Dict[str, np.ndarray], step: int) -> Dict[str, Any]:
     return {"segments": count, "max_left_over_right": float(worst[0]), "at": worst[1]}
 
 
-def build_ledger(grid: Dict[str, Any]) -> Claim:
-    """Assemble the ledger from computed results. `grid` holds the outputs of the check functions and their scopes."""
+def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None) -> Claim:
+    """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
+    `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
+    obligation on the proved window and one outside it, so a window proof never stands in for the whole statement."""
     claim = Claim(
         "mahler.general.scalar_input",
         "Lemma 'Profile identities' and Proposition 'Scalar inequalities' hold for the stated profiles and exact "
@@ -256,15 +258,57 @@ def build_ledger(grid: Dict[str, Any]) -> Claim:
         "all x, including tails",
         "author",
     )
+    first = (interval or {}).get("first_bullet")
     for name, m in grid["pointwise"]["margins"].items():
-        ob = Obligation(f"pointwise: {name}", name, "prop:scalar-input, first bullet", "pointwise inequality")
+        rest = "" if not first else f" for |x| > {first['window'][1]:g}"
+        ob = Obligation(
+            f"pointwise: {name}{rest}", name + rest, "prop:scalar-input, first bullet", "pointwise inequality"
+        )
         ob.discharges.append(_numeric_discharge(m["min"], grid["pointwise"]["scope"], {"at": m["at"]}))
         ob.discharges.append(author)
+        if first:
+            w = first["window"][1]
+            proved = Obligation(
+                f"pointwise: {name} on |x| <= {w:g}",
+                f"{name} on |x| <= {w:g}",
+                "prop:scalar-input, first bullet",
+                "pointwise inequality",
+            )
+            keys = INTERVAL_KEYS[name]
+            margin = min(first["min_lower_bound"][k] for k in keys)
+            proved.discharges.append(
+                _interval_discharge(
+                    first["verified"],
+                    f"|x| <= {w:g} (evenness for x < 0)",
+                    margin,
+                    {"certified_boxes": first["certified_boxes"]},
+                )
+            )
+            claim.obligations.append(proved)
         claim.obligations.append(ob)
-    for name, m in grid["two_variable"]["margins"].items():
-        ob = Obligation(f"two-variable: {name}", name, "prop:scalar-input, (3)", "pointwise inequality")
+    second = (interval or {}).get("two_variable")
+    for idx, (name, m) in enumerate(grid["two_variable"]["margins"].items()):
+        rest = "" if not second else f" outside [-{second['window'][1]:g}, {second['window'][1]:g}]^2"
+        ob = Obligation(f"two-variable: {name}{rest}", name + rest, "prop:scalar-input, (3)", "pointwise inequality")
         ob.discharges.append(_numeric_discharge(m["min"], grid["two_variable"]["scope"], m))
         ob.discharges.append(author)
+        if second:
+            w = second["window"][1]
+            proved = Obligation(
+                f"two-variable: {name} on [-{w:g}, {w:g}]^2",
+                f"{name} on [-{w:g}, {w:g}]^2",
+                "prop:scalar-input, (3)",
+                "pointwise inequality",
+            )
+            proved.discharges.append(
+                _interval_discharge(
+                    second["verified"],
+                    f"(z, x) in [-{w:g}, {w:g}]^2",
+                    second["min_lower_bound"][idx],
+                    {"certified_pairs": second["certified_pairs"]},
+                )
+            )
+            claim.obligations.append(proved)
         claim.obligations.append(ob)
     seg = grid["segments"]
     ob = Obligation(
@@ -279,6 +323,24 @@ def build_ledger(grid: Dict[str, Any]) -> Claim:
     return claim
 
 
+# Ledger names of the first-bullet inequalities -> the margins of mahler_interval.FIRST_BULLET that prove them.
+INTERVAL_KEYS = {
+    "b - r^2 - d > 0": ["b - r^2 - d > 0"],
+    "|v' - x| <= .319": ["v' - x <= .319", "-(v' - x) <= .319"],
+    "C <= -.341": ["C <= -.341"],
+    "S_q > 0": ["S_q > 0"],
+    "lambda t_-^2 + t_- C + K > 0": ["lambda t_-^2 + t_- C + K > 0"],
+    "lambda t_+^2 + t_+ C + K < 0": ["lambda t_+^2 + t_+ C + K < 0"],
+    "2(-.37)C - .37^2 - 4 lambda K > m_*^2": ["2(-.37)C - .37^2 - 4 lambda K > m_*^2"],
+}
+
+
+def _interval_discharge(verified: bool, scope: str, margin: float, detail: Dict[str, Any]) -> Discharge:
+    status = Status.DISCHARGED_INTERVAL if verified else Status.OPEN
+    method = "mpmath interval arithmetic, branch and bound (mahler_interval.py)"
+    return Discharge(status, method, scope, "CoResearcher", margin=margin, detail=detail)
+
+
 def _numeric_discharge(margin: float, scope: str, detail: Dict[str, Any]) -> Discharge:
     status = Status.CHECKED_NUMERIC if margin > 0 else Status.REFUTED
     return Discharge(
@@ -291,7 +353,14 @@ def _numeric_discharge(margin: float, scope: str, detail: Dict[str, Any]) -> Dis
     )
 
 
-def run(pointwise_h: float = 0.02, pointwise_L: float = 20.0, h: float = 0.02, L: float = 12.0, step: int = 2):
+def run(
+    pointwise_h: float = 0.02,
+    pointwise_L: float = 20.0,
+    h: float = 0.02,
+    L: float = 12.0,
+    step: int = 2,
+    interval: Dict[str, Any] = None,
+):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
     grid = {
@@ -306,4 +375,4 @@ def run(pointwise_h: float = 0.02, pointwise_L: float = 20.0, h: float = 0.02, L
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid), grid
+    return build_ledger(grid, interval), grid

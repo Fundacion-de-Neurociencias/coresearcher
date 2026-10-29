@@ -5,10 +5,12 @@ A claimed result rests on obligations: identities, inequalities, analytic steps,
 each obligation, who discharged it, how, and over what scope, and rolls the statuses up to the claim. The roll-up is
 the weakest link: a claim is never stronger than its least-checked obligation.
 
-Statuses, strongest first. Only the first two are proofs.
+Statuses, strongest first. Only the first three are proofs.
 
 - DISCHARGED_FORMAL: proved in a proof assistant whose kernel check was run.
 - DISCHARGED_SYMBOLIC: an exact identity or decision procedure (CAS, SMT) proved it for all inputs in its domain.
+- DISCHARGED_INTERVAL: rigorous interval arithmetic (outward rounding, branch and bound) proved it on the whole
+  domain stated in the obligation. It rests on the correctness of the interval library.
 - CHECKED_NUMERIC: independently evaluated on a bounded sample of its domain, with no violation found. Evidence, not a
   proof; the scope (ranges, resolution, precision) is mandatory.
 - CERTIFIED_BY_AUTHOR: the source supplies its own certificate (program, appendix) that this ledger did not re-run.
@@ -28,17 +30,19 @@ from typing import Any, Dict, List, Optional
 class Status(str, Enum):
     DISCHARGED_FORMAL = "DISCHARGED_FORMAL"
     DISCHARGED_SYMBOLIC = "DISCHARGED_SYMBOLIC"
+    DISCHARGED_INTERVAL = "DISCHARGED_INTERVAL"
     CHECKED_NUMERIC = "CHECKED_NUMERIC"
     CERTIFIED_BY_AUTHOR = "CERTIFIED_BY_AUTHOR"
     OPEN = "OPEN"
     REFUTED = "REFUTED"
 
 
-PROOF_STATUSES = {Status.DISCHARGED_FORMAL, Status.DISCHARGED_SYMBOLIC}
+PROOF_STATUSES = {Status.DISCHARGED_FORMAL, Status.DISCHARGED_SYMBOLIC, Status.DISCHARGED_INTERVAL}
 # Strength order for the weakest-link roll-up (REFUTED is handled separately: it dominates).
 _RANK = [
     Status.DISCHARGED_FORMAL,
     Status.DISCHARGED_SYMBOLIC,
+    Status.DISCHARGED_INTERVAL,
     Status.CHECKED_NUMERIC,
     Status.CERTIFIED_BY_AUTHOR,
     Status.OPEN,

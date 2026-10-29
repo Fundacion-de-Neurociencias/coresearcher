@@ -15,9 +15,12 @@ case [MAHLER_SCALAR_OBLIGATIONS.md](../reference/cases/MAHLER_SCALAR_OBLIGATIONS
    inequality, an analytic step or an imported theorem. Each one records every discharge: its status, method, scope,
    who produced it and, for numeric checks, its smallest margin.
 2. **Statuses are kept apart.** In decreasing strength they are DISCHARGED_FORMAL (kernel-checked),
-   DISCHARGED_SYMBOLIC (exact CAS/SMT), CHECKED_NUMERIC (bounded-sample evidence, with a mandatory scope),
+   DISCHARGED_SYMBOLIC (exact CAS/SMT), DISCHARGED_INTERVAL (rigorous interval arithmetic with outward rounding over
+   the obligation's whole stated domain), CHECKED_NUMERIC (bounded-sample evidence, with a mandatory scope),
    CERTIFIED_BY_AUTHOR (the source's own certificate, not re-run) and OPEN. REFUTED dominates everything. Only the
-   first two count as proofs. The ledger never converts numeric evidence or an author's certificate into a proof.
+   first three count as proofs. The ledger never converts numeric evidence or an author's certificate into a proof.
+   A proof on part of a domain (a bounded window) is recorded by splitting the obligation into the proved part and
+   the rest; the window proof never discharges the original, unrestricted statement.
 3. **A claim takes the status of its weakest obligation.** A claim is never reported as stronger than its
    least-checked obligation.
 4. **Checks are independent of the source's own code.** Third-party verification programs are read as data and not

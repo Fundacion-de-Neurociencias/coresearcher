@@ -23,7 +23,9 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=ROOT / "examples" / "mahler-obligations" / "ledger.json")
     args = parser.parse_args()
     start = time.time()
-    claim, _ = mo.run()
+    proof = args.out.parent / "interval_proof.json"
+    interval = json.loads(proof.read_text(encoding="utf-8")) if proof.exists() else None
+    claim, _ = mo.run(interval=interval)
     report = {"source": mo.SOURCE, "claim": claim.to_dict(), "seconds": round(time.time() - start, 1)}
     args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {args.out} in {report['seconds']} s; claim status {report['claim']['status']}")

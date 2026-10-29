@@ -68,5 +68,10 @@ def test_committed_ledger():
     assert claim["status"] == Status.CHECKED_NUMERIC.value and claim["is_proved"] is False
     by_id = {o["id"]: o for o in claim["obligations"]}
     assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
-    assert len(claim["obligations"]) == 11
+    # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; 1 segment inequality
+    assert len(claim["obligations"]) == 20
     assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])
+    windows = [o for o in claim["obligations"] if " on " in o["id"]]
+    assert len(windows) == 9 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in windows)
+    rest = [o for o in claim["obligations"] if o["kind"] != "identity" and " on " not in o["id"]]
+    assert all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

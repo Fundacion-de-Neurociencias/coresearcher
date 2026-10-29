@@ -1,0 +1,46 @@
+{
+  "reduction": [
+    {
+      "identity": "S_pi = r(a u + b u_perp)",
+      "holds": true
+    },
+    {
+      "identity": "S_pi(z).pi(x)",
+      "holds": true
+    },
+    {
+      "identity": "S_pi(z).S_pi(x)",
+      "holds": true
+    },
+    {
+      "identity": "|S_pi|^2",
+      "holds": true
+    }
+  ],
+  "tail_config": {
+    "x0": 6,
+    "mills_terms": 16,
+    "phi_power": 32,
+    "truncation": 40
+  },
+  "band": [
+    [
+      3.0,
+      6.0,
+      0.00390625
+    ]
+  ],
+  "result": {
+    "window": 3.0,
+    "boxes_1d": 2779,
+    "pairs_checked": 7344616,
+    "phase_splits": 16,
+    "min_lower_bound": [
+      0.04003631714574873,
+      0.9756232384866005
+    ],
+    "uncertified": [],
+    "verified": true
+  },
+  "seconds": 730.2
+}

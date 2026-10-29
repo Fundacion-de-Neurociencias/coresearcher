@@ -13,7 +13,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [Module maturity](reference/MODULE_MATURITY.md) | How each discovery module is used: integrated, tested, exercised or prototype |
 | [Sakana ED polarity case](reference/cases/SAKANA_ED_POLARITY.md) | Showcase: an agentic-science rubric claim proved by z3 and Lean, with the necessity of each assumption |
 | [Local smoothing statement fidelity](reference/cases/LOCAL_SMOOTHING_STATEMENT_FIDELITY.md) | Do six Lean Comparator statements say what the paper claims? Range equivalence by z3, junk-value lint, coverage map (ADR-070) |
-| [Mahler scalar obligations](reference/cases/MAHLER_SCALAR_OBLIGATIONS.md) | Obligation ledger pilot (ADR-076): identities proved symbolically; the first-bullet inequalities proved for every real x (interval arithmetic plus Laurent-Taylor tail models); the rest checked numerically, independent of the authors' programs |
+| [Mahler scalar obligations](reference/cases/MAHLER_SCALAR_OBLIGATIONS.md) | Obligation ledger pilot (ADR-076): identities and every pointwise inequality (first bullet on R, (3) on R^2) proved by interval arithmetic and Laurent-Taylor tail models; the segment inequality checked numerically; independent of the authors' programs |
 
 ## Architecture
 

@@ -21,6 +21,7 @@ Trust base: mpmath interval arithmetic and Python's exact rationals.
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 from fractions import Fraction
 from functools import lru_cache
 from typing import Any, Dict, List, Tuple
@@ -37,6 +38,27 @@ T = Fraction(1, X0)
 NMILLS = 10  # terms of the Mills series; remainder ~ (2n-1)!! t^{2n}
 KPHI = 40  # phi = w t^K, valid since X0^2 = 64 > K
 NTRUNC = 24  # Laurent terms of order >= NTRUNC go into the remainder
+DEFAULT = (8, 10, 40, 24)
+
+
+def configure(x0: int, nmills: int, kphi: int, ntrunc: int) -> None:
+    """Choose the tail start X0 and the model orders; requires X0^2 > K (phi x^K decreasing) and 2n < NTRUNC."""
+    global X0, T, NMILLS, KPHI, NTRUNC
+    if x0 * x0 <= kphi or 2 * nmills >= ntrunc:
+        raise ValueError("need X0^2 > K and 2 n < NTRUNC")
+    X0, T, NMILLS, KPHI, NTRUNC = x0, Fraction(1, x0), nmills, kphi, ntrunc
+    inputs.cache_clear()
+    base_models.cache_clear()
+
+
+@contextmanager
+def tail_config(x0: int, nmills: int, kphi: int, ntrunc: int):
+    old = (X0, NMILLS, KPHI, NTRUNC)
+    configure(x0, nmills, kphi, ntrunc)
+    try:
+        yield
+    finally:
+        configure(*old)
 
 
 def _iv(v) -> Any:
@@ -282,6 +304,8 @@ def to_ltm(expr: sp.Expr, env: Dict[sp.Symbol, LTM]) -> LTM:
             return to_ltm(base, env) ** n
         if base == mi.Y:
             return env["invY"] ** (-n)
+        if base == mi.p:
+            return env["invp"] ** (-n)
         raise ValueError(f"unsupported inverse {expr}")
     if expr.is_Symbol:
         return env[expr]
@@ -312,11 +336,22 @@ def _split_log(expr: sp.Expr):
 def base_models() -> Dict[str, Tuple[LTM, LTM]]:
     """(E0 + log Psi E1, E1) for d, d1, d2, g, g2, so that f = A + log(t) B."""
     inp = inputs()
-    env = {mi.x: inp["x"], mi.p: inp["p"], mi.ph: inp["ph"], mi.Y: inp["Y"], "invY": inp["x"] * inp["invPsi"]}
+    with mi.ivdps(40):
+        invp_rho = iv.mpf([1, (1 / (1 - iv.mpf(inp["umax"]))).b])
+    # 1/p = 1/(1 - u) = 1 + u * (1/(1 - u)), and 1/(1 - u) lies in [1, 1/(1 - umax)]
+    invp_model = 1 + inp["u"] * LTM.const(invp_rho)
+    env = {
+        mi.x: inp["x"],
+        mi.p: inp["p"],
+        mi.ph: inp["ph"],
+        mi.Y: inp["Y"],
+        "invY": inp["x"] * inp["invPsi"],
+        "invp": invp_model,
+    }
     for k in range(8):
         env[mi.H[k]] = inp["H"][k]
     d, g = mi.d_stable, mi.g_stable
-    exprs = {"d": d, "d1": mi.D(d), "d2": mi.D(d, 2), "g": g, "g2": mi.D(g, 2)}
+    exprs = {"d": d, "d1": mi.D(d), "d2": mi.D(d, 2), "g": g, "g2": mi.D(g, 2), "v2": mi.D(mi.v_stable, 2)}
     out = {}
     with mi.ivdps(40):
         log2, logpi = iv.log(iv.mpf(2)), iv.log(iv.pi)

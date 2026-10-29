@@ -76,6 +76,8 @@ def test_committed_ledger():
     # the first bullet's tails (|x| > 8) are proved too (mahler_tail.py), so the first bullet holds on all of R
     tails = [o for o in claim["obligations"] if o["id"].startswith("pointwise:") and "for |x| >" in o["id"]]
     assert len(tails) == 7 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in tails)
-    rest = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
-    rest += [o for o in claim["obligations"] if o["id"].startswith("segment")]
-    assert len(rest) == 3 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)
+    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) remains numeric
+    outside = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
+    assert len(outside) == 2 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in outside)
+    rest = [o for o in claim["obligations"] if o["id"].startswith("segment")]
+    assert len(rest) == 1 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

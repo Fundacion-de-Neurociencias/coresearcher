@@ -474,7 +474,7 @@
         "statement": "(3) first outside [-3, 3]^2",
         "source": "prop:scalar-input, (3)",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -496,6 +496,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) outside [-3, 3]^2, every phase (mahler_twovar.py; t = 1/x models for |x| >= 6)",
+            "by": "CoResearcher",
+            "margin": 0.04003631714574873,
+            "detail": {
+              "pairs_checked": 7344616,
+              "boxes_1d": 2779
+            }
           }
         ]
       },
@@ -524,7 +535,7 @@
         "statement": "(3) second outside [-3, 3]^2",
         "source": "prop:scalar-input, (3)",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -546,6 +557,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) outside [-3, 3]^2, every phase (mahler_twovar.py; t = 1/x models for |x| >= 6)",
+            "by": "CoResearcher",
+            "margin": 0.9756232384866005,
+            "detail": {
+              "pairs_checked": 7344616,
+              "boxes_1d": 2779
+            }
           }
         ]
       },
@@ -586,12 +608,12 @@
     "counts": {
       "DISCHARGED_FORMAL": 0,
       "DISCHARGED_SYMBOLIC": 1,
-      "DISCHARGED_INTERVAL": 16,
-      "CHECKED_NUMERIC": 3,
+      "DISCHARGED_INTERVAL": 18,
+      "CHECKED_NUMERIC": 1,
       "CERTIFIED_BY_AUTHOR": 0,
       "OPEN": 0,
       "REFUTED": 0
     }
   },
-  "seconds": 891.0
+  "seconds": 982.5
 }

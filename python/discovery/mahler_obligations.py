@@ -225,7 +225,9 @@ def segment_ratio(t: Dict[str, np.ndarray], step: int) -> Dict[str, Any]:
     return {"segments": count, "max_left_over_right": float(worst[0]), "at": worst[1]}
 
 
-def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None, tail: Dict[str, Any] = None) -> Claim:
+def build_ledger(
+    grid: Dict[str, Any], interval: Dict[str, Any] = None, tail: Dict[str, Any] = None, twovar: Dict[str, Any] = None
+) -> Claim:
     """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
     `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
     obligation on the proved window and one outside it, so a window proof never stands in for the whole statement."""
@@ -303,6 +305,16 @@ def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None, tail: Di
         ob = Obligation(f"two-variable: {name}{rest}", name + rest, "prop:scalar-input, (3)", "pointwise inequality")
         ob.discharges.append(_numeric_discharge(m["min"], grid["two_variable"]["scope"], m))
         ob.discharges.append(author)
+        if second and twovar and twovar["result"]["window"] <= second["window"][1]:
+            res = twovar["result"]
+            ob.discharges.append(
+                _interval_discharge(
+                    res["verified"],
+                    "(z, x) outside [-3, 3]^2, every phase (mahler_twovar.py; t = 1/x models for |x| >= 6)",
+                    res["min_lower_bound"][idx],
+                    {"pairs_checked": res["pairs_checked"], "boxes_1d": res["boxes_1d"]},
+                )
+            )
         if second:
             w = second["window"][1]
             proved = Obligation(
@@ -372,6 +384,7 @@ def run(
     step: int = 2,
     interval: Dict[str, Any] = None,
     tail: Dict[str, Any] = None,
+    twovar: Dict[str, Any] = None,
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
@@ -387,4 +400,4 @@ def run(
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid, interval, tail), grid
+    return build_ledger(grid, interval, tail, twovar), grid

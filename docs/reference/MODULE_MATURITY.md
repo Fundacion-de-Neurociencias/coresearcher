@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 31 |
+| Tested | Covered by tests, not reachable from the API | 37 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -29,6 +29,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
+| `cellular_automata_barrier_auditor` | Tested | - | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
@@ -61,6 +62,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |
 | `hypothesis_tournament_arena` | Integrated | yes | yes | - |
 | `inference_time_scaling` | Tested | - | yes | - |
+| `isaac_sim_grounding_adapter` | Tested | - | yes | - |
 | `lab_in_the_loop_adapter` | Prototype | - | - | - |
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
 | `latent_factor_discovery` | Exercised | - | - | yes |
@@ -74,8 +76,10 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
+| `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
+| `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |
 | `real_cohort_empirical_pipeline` | Prototype | - | - | - |
 | `reality_contact_score` | Tested | - | yes | yes |
@@ -86,6 +90,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `research_package` | Integrated | yes | yes | yes |
 | `result_family_orchestrator` | Tested | - | yes | - |
 | `retrospective_time_split_benchmark` | Exercised | - | - | yes |
+| `rule30_reasoning_bridge` | Tested | - | yes | - |
+| `rule30_word_exclusion` | Tested | - | yes | - |
 | `scientific_git_history` | Tested | - | yes | yes |
 | `scientific_logic` | Prototype | - | - | - |
 | `semantic_bijectivity_auditor` | Tested | - | yes | yes |

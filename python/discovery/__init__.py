@@ -341,6 +341,44 @@ from .asymptotic_barrier_auditor import (
     BarrierAuditVerdict,
     AsymptoticBarrierAuditor,
 )
+from .cellular_automata_barrier_auditor import (
+    ElementaryRule,
+    CellularBarrierType,
+    CandidateInvariantAuditResult,
+    CellularAutomataBarrierAuditor,
+    RuleDefinition,
+)
+from .rule30_word_exclusion import (
+    WordExclusionTarget,
+    RelaxationAnalysisReport,
+    Rule30PeriodicWordExclusionEngine,
+)
+from .rule30_reasoning_bridge import (
+    CandidateWord,
+    StripCertificateVerdict,
+    BitmaskStripCertificateExplorer,
+    Rule30ReasoningBridge,
+)
+from .quasi_riemann_synergistic_auditor import (
+    LeanMicrokernelReplayVerdict,
+    QuasiRiemannVerificationReport,
+    QuasiRiemannSynergisticAuditor,
+)
+from .openfoam_continuum_oracle import (
+    OpenFoamSolverType,
+    OpenFoamExecutionMode,
+    OpenFoamCaseConfig,
+    OpenFoamVerificationReport,
+    OpenFoamContinuumOracle,
+)
+from .isaac_sim_grounding_adapter import (
+    JointType,
+    IsaacSimExecutionMode,
+    ContactFrictionModel,
+    RigidBodyDefinition,
+    IsaacSimVerificationReport,
+    IsaacSimGroundingAdapter,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -752,6 +790,32 @@ __all__ = [
     "MethodBarrierProfile",
     "BarrierAuditVerdict",
     "AsymptoticBarrierAuditor",
+    "ElementaryRule",
+    "CellularBarrierType",
+    "CandidateInvariantAuditResult",
+    "CellularAutomataBarrierAuditor",
+    "RuleDefinition",
+    "WordExclusionTarget",
+    "RelaxationAnalysisReport",
+    "Rule30PeriodicWordExclusionEngine",
+    "CandidateWord",
+    "StripCertificateVerdict",
+    "BitmaskStripCertificateExplorer",
+    "Rule30ReasoningBridge",
+    "LeanMicrokernelReplayVerdict",
+    "QuasiRiemannVerificationReport",
+    "QuasiRiemannSynergisticAuditor",
+    "OpenFoamSolverType",
+    "OpenFoamExecutionMode",
+    "OpenFoamCaseConfig",
+    "OpenFoamVerificationReport",
+    "OpenFoamContinuumOracle",
+    "JointType",
+    "IsaacSimExecutionMode",
+    "ContactFrictionModel",
+    "RigidBodyDefinition",
+    "IsaacSimVerificationReport",
+    "IsaacSimGroundingAdapter",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",

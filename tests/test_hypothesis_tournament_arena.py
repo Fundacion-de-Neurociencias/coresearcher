@@ -223,7 +223,6 @@ def test_tournament_api_endpoints(client):
 
 
 def test_tournament_endpoints_require_api_key_and_bound_inputs(api_client):
-
     from api.server import app
 
     candidate = {"hypothesis_id": "H1", "title": "t", "statement": "s"}

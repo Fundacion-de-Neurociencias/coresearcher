@@ -30,7 +30,7 @@ def plan_ontology_change(req: OntologyPlanChangeRequest):
             ax_type = AxiomType(ax["axiom_type"])
             axioms.append(
                 OntologicalAxiom(
-                    axiom_id=ax.get("axiom_id", f"AX-{len(axioms)+1}"),
+                    axiom_id=ax.get("axiom_id", f"AX-{len(axioms) + 1}"),
                     axiom_type=ax_type,
                     subject=ax.get("subject", ""),
                     predicate=ax.get("predicate", ""),

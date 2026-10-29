@@ -51,7 +51,9 @@ def test_layer1_microkernel_replay_verification():
 def test_layer2_semantic_bijectivity_audit():
     """Verifies bijective alignment and traps artificial domain restrictions."""
     prose = "The Riemann zeta function satisfies zeta(s) != 0 for all complex s with Re(s) > 7/8."
-    sound_lean = "theorem riemann_zeta_zero_free_7_8 (s : Complex) (h_re : 7 / 8 < s.re) : riemannZeta s ≠ 0 := by linarith"
+    sound_lean = (
+        "theorem riemann_zeta_zero_free_7_8 (s : Complex) (h_re : 7 / 8 < s.re) : riemannZeta s ≠ 0 := by linarith"
+    )
 
     verdict_sound = QuasiRiemannSynergisticAuditor.audit_layer2_semantic_bijectivity(
         prose_claim=prose,
@@ -121,7 +123,9 @@ def test_full_synergistic_4_layer_audit():
     """Verifies the complete 4-layer audit consensus pipeline on Quasi-Riemann Hypothesis."""
     auditor = QuasiRiemannSynergisticAuditor()
     prose = "The Riemann zeta function satisfies zeta(s) != 0 for all complex s with Re(s) > 7/8."
-    sound_lean = "theorem riemann_zeta_zero_free_7_8 (s : Complex) (h_re : 7 / 8 < s.re) : riemannZeta s ≠ 0 := by linarith"
+    sound_lean = (
+        "theorem riemann_zeta_zero_free_7_8 (s : Complex) (h_re : 7 / 8 < s.re) : riemannZeta s ≠ 0 := by linarith"
+    )
     sound_proof = """
     lemma metaplectic_fourier_spectral_decay (s : Complex) : FourierDecay s := by linarith
     theorem riemann_zeta_zero_free_7_8 (s : Complex) (h_re : 7 / 8 < s.re) : riemannZeta s ≠ 0 := by

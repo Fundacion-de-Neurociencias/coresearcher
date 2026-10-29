@@ -27,6 +27,6 @@ def test_english_language_policy_compliance():
     )
 
     assert result.returncode == 0, (
-        f"English language policy violation detected!\n" f"STDOUT:\n{result.stdout}\n" f"STDERR:\n{result.stderr}"
+        f"English language policy violation detected!\nSTDOUT:\n{result.stdout}\nSTDERR:\n{result.stderr}"
     )
     assert "[PASS] 100% English Compliance Verified" in result.stdout

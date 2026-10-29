@@ -31,6 +31,7 @@ def test_cellular_barrier_auditor_rejects_rule90_shared_invariant():
     is caught and rejected by the realization barrier.
     """
     auditor = CellularAutomataBarrierAuditor()
+
     # Invariant that holds universally across all rules
     def universal_invariant(rule, t):
         return True
@@ -54,6 +55,7 @@ def test_cellular_barrier_auditor_rejects_rule150_shared_invariant():
     is rejected with RULE150_REALIZATION_OBSTRUCTION.
     """
     auditor = CellularAutomataBarrierAuditor()
+
     def invariant(rule, t):
         return rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_150]
 
@@ -74,6 +76,7 @@ def test_cellular_barrier_auditor_rejects_rule210_shared_invariant():
     is rejected with RULE210_REALIZATION_OBSTRUCTION.
     """
     auditor = CellularAutomataBarrierAuditor()
+
     def invariant(rule, t):
         return rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_210]
 
@@ -94,6 +97,7 @@ def test_cellular_barrier_auditor_admits_rule30_specific_invariant():
     is recognized as admissible and passes the realization firewall.
     """
     auditor = CellularAutomataBarrierAuditor()
+
     # Holds only on Rule 30's non-linear structure
     def rule30_only_invariant(rule, t):
         return rule == ElementaryRule.RULE_30
@@ -115,6 +119,7 @@ def test_cellular_barrier_auditor_rejects_false_rule30_invariant():
     Asserts that an invariant false for Rule 30 itself is immediately rejected.
     """
     auditor = CellularAutomataBarrierAuditor()
+
     def false_invariant(rule, t):
         return False
 

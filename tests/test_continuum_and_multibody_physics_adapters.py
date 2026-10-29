@@ -36,7 +36,7 @@ def test_openfoam_case_bundle_synthesis():
             kinematic_viscosity=0.01,
             delta_t=0.005,
             end_time=0.5,
-            inlet_velocity=(1.0, 0.0, 0.0)
+            inlet_velocity=(1.0, 0.0, 0.0),
         )
         bundle = OpenFoamContinuumOracle.generate_case_bundle(config, temp_dir)
 
@@ -89,7 +89,7 @@ def test_openfoam_velocity_field_divergence_free_sound():
         nu=nu,
         dt=dt,
         prior_kinetic_energy=None,
-        divergence_tolerance=0.15  # Discrete finite-difference grid truncation tolerance
+        divergence_tolerance=0.15,  # Discrete finite-difference grid truncation tolerance
     )
 
     assert report.is_sound is True
@@ -112,11 +112,7 @@ def test_openfoam_velocity_field_divergence_breach():
     u_grid[1] = 10.0 * Y
 
     report = OpenFoamContinuumOracle.audit_velocity_field_invariants(
-        velocity_grid=u_grid,
-        cell_sizes=(0.1, 0.1, 0.1),
-        nu=0.01,
-        dt=0.01,
-        divergence_tolerance=1e-3
+        velocity_grid=u_grid, cell_sizes=(0.1, 0.1, 0.1), nu=0.01, dt=0.01, divergence_tolerance=1e-3
     )
 
     assert report.is_sound is False
@@ -134,7 +130,7 @@ def test_isaac_sim_usd_and_warp_synthesis():
             collision_geometry="sphere",
             geometry_dimensions=(0.2, 0.0, 0.0),
             initial_position=(0.0, 1.5, 0.0),
-            linear_velocity=(1.0, 0.0, 0.0)
+            linear_velocity=(1.0, 0.0, 0.0),
         ),
         RigidBodyDefinition(
             name="base_anchor",
@@ -142,12 +138,10 @@ def test_isaac_sim_usd_and_warp_synthesis():
             inertia_diagonal=(0.0, 0.0, 0.0),
             collision_geometry="cube",
             geometry_dimensions=(0.1, 0.1, 0.1),
-            initial_position=(0.0, 2.0, 0.0)
-        )
+            initial_position=(0.0, 2.0, 0.0),
+        ),
     ]
-    joints = [
-        {"name": "revolute_joint_0", "type": "REVOLUTE", "body0": "base_anchor", "body1": "pendulum_bob"}
-    ]
+    joints = [{"name": "revolute_joint_0", "type": "REVOLUTE", "body0": "base_anchor", "body1": "pendulum_bob"}]
 
     usd_str = IsaacSimGroundingAdapter.generate_usd_stage(bodies, joints, "Test_Stage")
     assert "#usda 1.0" in usd_str
@@ -195,7 +189,7 @@ def test_isaac_sim_trajectory_energy_and_contact_sound():
         contact_tangent_forces=ft,
         friction_mu=0.5,
         gravity=gravity,
-        energy_drift_tolerance=1e-3
+        energy_drift_tolerance=1e-3,
     )
 
     assert report.is_sound is True
@@ -224,7 +218,7 @@ def test_isaac_sim_friction_cone_violation_caught():
         masses=masses,
         contact_normal_forces=fn,
         contact_tangent_forces=ft,
-        friction_mu=0.5
+        friction_mu=0.5,
     )
 
     assert report.is_sound is False
@@ -243,7 +237,7 @@ def test_physical_coherence_court_synergistic_arbitration():
         "max_divergence_residual": 1e-5,
         "enstrophy": 12.4,
         "bkm_integral": 45.0,
-        "diagnostics": "Taylor-Green vortex verified"
+        "diagnostics": "Taylor-Green vortex verified",
     }
     foam_audit = court.audit_openfoam_cfd_report("CLAIM-CFD-001", openfoam_sound_data)
     assert foam_audit.verdict == CourtVerdict.VERIFIED_COHERENT
@@ -255,7 +249,7 @@ def test_physical_coherence_court_synergistic_arbitration():
         "max_divergence_residual": 8.5,
         "enstrophy": 999.0,
         "bkm_integral": 1e7,
-        "diagnostics": "Divergence blow-up"
+        "diagnostics": "Divergence blow-up",
     }
     foam_breach_audit = court.audit_openfoam_cfd_report("CLAIM-CFD-002", openfoam_breach_data)
     assert foam_breach_audit.verdict == CourtVerdict.REJECTED_CONSERVATION_VIOLATION
@@ -268,7 +262,7 @@ def test_physical_coherence_court_synergistic_arbitration():
         "energy_drift_ratio": 0.001,
         "max_friction_cone_violation": 0.0,
         "max_penetration_depth": 0.0,
-        "diagnostics": "LCP contact verified"
+        "diagnostics": "LCP contact verified",
     }
     isaac_audit = court.audit_isaac_sim_grounding_report("CLAIM-ISAAC-001", isaac_sound_data)
     assert isaac_audit.verdict == CourtVerdict.VERIFIED_COHERENT
@@ -279,7 +273,7 @@ def test_physical_coherence_court_synergistic_arbitration():
         "energy_drift_ratio": 0.25,
         "max_friction_cone_violation": 4.5,
         "max_penetration_depth": 0.1,
-        "diagnostics": "Friction cone exceeded"
+        "diagnostics": "Friction cone exceeded",
     }
     isaac_breach_audit = court.audit_isaac_sim_grounding_report("CLAIM-ISAAC-002", isaac_breach_data)
     assert isaac_breach_audit.verdict == CourtVerdict.REJECTED_CONSERVATION_VIOLATION

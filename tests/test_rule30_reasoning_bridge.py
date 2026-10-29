@@ -34,14 +34,10 @@ def test_bitmask_strip_certificate_explorer():
     w8_bools = [False, True, True, True, True, True, True, True]  # 0 1^7
 
     # Holds on Rule 30
-    assert explorer.evaluate_strip_certificate(
-        ElementaryRule.RULE_30, w8_bools, K=5, k_warmup=2
-    ) is True
+    assert explorer.evaluate_strip_certificate(ElementaryRule.RULE_30, w8_bools, K=5, k_warmup=2) is True
 
     # Breaks on linear Rule 90
-    assert explorer.evaluate_strip_certificate(
-        ElementaryRule.RULE_90, w8_bools, K=5, k_warmup=2
-    ) is False
+    assert explorer.evaluate_strip_certificate(ElementaryRule.RULE_90, w8_bools, K=5, k_warmup=2) is False
 
 
 def test_rule30_reasoning_bridge_barrier_clearing():

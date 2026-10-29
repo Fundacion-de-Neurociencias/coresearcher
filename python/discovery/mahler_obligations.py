@@ -333,6 +333,25 @@ def build_ledger(
             )
             claim.obligations.append(proved)
         claim.obligations.append(ob)
+    if grid.get("segment_reduction"):
+        red = Obligation(
+            "segment: algebraic reduction of (4) to the budget (s0), and the short-width arithmetic",
+            "circle mean (A_h, B_h), A^2 + B^2 identity, f0* > 0, p_a +/- p_d, (4) <=> (s0), chord identities, "
+            "exact short-width budget > .54 given the stated profile bounds",
+            "08-segments.tex: subsec:segments-reduction, lem:segment-chord, subsec:segments-short",
+            "identity",
+        )
+        ok = all(grid["segment_reduction"].values())
+        red.discharges.append(
+            Discharge(
+                Status.DISCHARGED_SYMBOLIC if ok else Status.REFUTED,
+                "sympy simplify and exact rationals (mahler_segment.py)",
+                "all segments; the profile bounds and the tail, middle and large regimes are not covered",
+                "CoResearcher",
+                detail=grid["segment_reduction"],
+            )
+        )
+        claim.obligations.append(red)
     seg = grid["segments"]
     ob = Obligation(
         "segment: (4)",
@@ -388,7 +407,10 @@ def run(
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
+    from python.discovery.mahler_segment import segment_checks
+
     grid = {
+        "segment_reduction": segment_checks(),
         "identities": check_profile_identities(),
         "pointwise": {
             "margins": pointwise_margins(t_point),

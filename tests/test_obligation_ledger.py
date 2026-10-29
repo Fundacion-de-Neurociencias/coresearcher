@@ -68,8 +68,11 @@ def test_committed_ledger():
     assert claim["status"] == Status.CHECKED_NUMERIC.value and claim["is_proved"] is False
     by_id = {o["id"]: o for o in claim["obligations"]}
     assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
-    # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; 1 segment inequality
-    assert len(claim["obligations"]) == 20
+    # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; the segment inequality
+    # (4) plus its proved algebraic reduction
+    assert len(claim["obligations"]) == 21
+    red = [o for o in claim["obligations"] if o["id"].startswith("segment: algebraic reduction")]
+    assert len(red) == 1 and red[0]["status"] == Status.DISCHARGED_SYMBOLIC.value
     assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])
     windows = [o for o in claim["obligations"] if " on " in o["id"]]
     assert len(windows) == 9 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in windows)
@@ -79,5 +82,5 @@ def test_committed_ledger():
     # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) remains numeric
     outside = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
     assert len(outside) == 2 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in outside)
-    rest = [o for o in claim["obligations"] if o["id"].startswith("segment")]
+    rest = [o for o in claim["obligations"] if o["id"].startswith("segment: (4)")]
     assert len(rest) == 1 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

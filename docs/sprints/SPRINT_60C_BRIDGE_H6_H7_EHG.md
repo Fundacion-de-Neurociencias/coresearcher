@@ -23,7 +23,7 @@
 
 ### EHG v2 — Einstein Hypothesis Generator v2
 - **Status**: EXPLORATORY
-- **Document**: `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md`
+- **Document**: Einstein generator vision (private, not in this repository)
 - **Activation**: Only after H7 validated
 
 ---

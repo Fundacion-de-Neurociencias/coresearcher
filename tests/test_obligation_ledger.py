@@ -73,5 +73,9 @@ def test_committed_ledger():
     assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])
     windows = [o for o in claim["obligations"] if " on " in o["id"]]
     assert len(windows) == 9 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in windows)
-    rest = [o for o in claim["obligations"] if o["kind"] != "identity" and " on " not in o["id"]]
-    assert all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)
+    # the first bullet's tails (|x| > 8) are proved too (mahler_tail.py), so the first bullet holds on all of R
+    tails = [o for o in claim["obligations"] if o["id"].startswith("pointwise:") and "for |x| >" in o["id"]]
+    assert len(tails) == 7 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in tails)
+    rest = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
+    rest += [o for o in claim["obligations"] if o["id"].startswith("segment")]
+    assert len(rest) == 3 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

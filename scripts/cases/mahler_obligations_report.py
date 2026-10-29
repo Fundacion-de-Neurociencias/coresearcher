@@ -25,7 +25,9 @@ def main() -> None:
     start = time.time()
     proof = args.out.parent / "interval_proof.json"
     interval = json.loads(proof.read_text(encoding="utf-8")) if proof.exists() else None
-    claim, _ = mo.run(interval=interval)
+    tail_path = args.out.parent / "tail_proof.json"
+    tail = json.loads(tail_path.read_text(encoding="utf-8")) if tail_path.exists() else None
+    claim, _ = mo.run(interval=interval, tail=tail)
     report = {"source": mo.SOURCE, "claim": claim.to_dict(), "seconds": round(time.time() - start, 1)}
     args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {args.out} in {report['seconds']} s; claim status {report['claim']['status']}")

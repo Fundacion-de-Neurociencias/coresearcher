@@ -225,7 +225,7 @@ def segment_ratio(t: Dict[str, np.ndarray], step: int) -> Dict[str, Any]:
     return {"segments": count, "max_left_over_right": float(worst[0]), "at": worst[1]}
 
 
-def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None) -> Claim:
+def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None, tail: Dict[str, Any] = None) -> Claim:
     """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
     `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
     obligation on the proved window and one outside it, so a window proof never stands in for the whole statement."""
@@ -266,6 +266,17 @@ def build_ledger(grid: Dict[str, Any], interval: Dict[str, Any] = None) -> Claim
         )
         ob.discharges.append(_numeric_discharge(m["min"], grid["pointwise"]["scope"], {"at": m["at"]}))
         ob.discharges.append(author)
+        if first and tail and tail["x_from"] <= first["window"][1]:
+            res = tail["result"]
+            ob.discharges.append(
+                _interval_discharge(
+                    res["verified"],
+                    f"|x| >= {tail['x_from']:g} (Laurent-Taylor models in t = 1/x on [0, 1/{tail['x_from']:g}]; "
+                    "evenness for x < 0)",
+                    min(res["min_lower_bound"][k] for k in INTERVAL_KEYS[name]),
+                    {"certified_boxes": res["certified_boxes"], "method": "mahler_tail.py"},
+                )
+            )
         if first:
             w = first["window"][1]
             proved = Obligation(
@@ -360,6 +371,7 @@ def run(
     L: float = 12.0,
     step: int = 2,
     interval: Dict[str, Any] = None,
+    tail: Dict[str, Any] = None,
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
@@ -375,4 +387,4 @@ def run(
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid, interval), grid
+    return build_ledger(grid, interval, tail), grid

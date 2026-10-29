@@ -61,7 +61,7 @@
         "statement": "b - r^2 - d > 0 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -81,6 +81,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.053599980363428855,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -109,7 +120,7 @@
         "statement": "|v' - x| <= .319 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -129,6 +140,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.19693094549368378,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -157,7 +179,7 @@
         "statement": "C <= -.341 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -177,6 +199,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.1524093831806867,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -205,7 +238,7 @@
         "statement": "S_q > 0 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -225,6 +258,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.504029383843862,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -253,7 +297,7 @@
         "statement": "lambda t_-^2 + t_- C + K > 0 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -273,6 +317,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.011247907432508485,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -301,7 +356,7 @@
         "statement": "lambda t_+^2 + t_+ C + K < 0 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -321,6 +376,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.010583429415629996,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -349,7 +415,7 @@
         "statement": "2(-.37)C - .37^2 - 4 lambda K > m_*^2 for |x| > 8",
         "source": "prop:scalar-input, first bullet",
         "kind": "pointwise inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -369,6 +435,17 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.056654778673079886,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
           }
         ]
       },
@@ -509,12 +586,12 @@
     "counts": {
       "DISCHARGED_FORMAL": 0,
       "DISCHARGED_SYMBOLIC": 1,
-      "DISCHARGED_INTERVAL": 9,
-      "CHECKED_NUMERIC": 10,
+      "DISCHARGED_INTERVAL": 16,
+      "CHECKED_NUMERIC": 3,
       "CERTIFIED_BY_AUTHOR": 0,
       "OPEN": 0,
       "REFUTED": 0
     }
   },
-  "seconds": 853.9
+  "seconds": 891.0
 }

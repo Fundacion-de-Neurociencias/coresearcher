@@ -11,14 +11,10 @@ Verifies the 4-layer synergistic verification of the Quasi-Riemann Hypothesis (R
 
 from __future__ import annotations
 
-import pytest
-
 from python.discovery.algebraic_structure_compiler import AlgebraicStructureClass
 from python.discovery.asymptotic_barrier_auditor import BarrierType
 from python.discovery.quasi_riemann_synergistic_auditor import (
-    LeanMicrokernelReplayVerdict,
     QuasiRiemannSynergisticAuditor,
-    QuasiRiemannVerificationReport,
 )
 
 

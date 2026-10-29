@@ -6,28 +6,21 @@ ADR-DISCOVERY-074 and ADR-DISCOVERY-075
 import os
 import shutil
 import tempfile
-import numpy as np
-import pytest
 
-from python.discovery.openfoam_continuum_oracle import (
-    OpenFoamSolverType,
-    OpenFoamExecutionMode,
-    OpenFoamCaseConfig,
-    OpenFoamVerificationReport,
-    OpenFoamContinuumOracle,
-)
+import numpy as np
+
 from python.discovery.isaac_sim_grounding_adapter import (
-    JointType,
-    IsaacSimExecutionMode,
-    ContactFrictionModel,
-    RigidBodyDefinition,
-    IsaacSimVerificationReport,
     IsaacSimGroundingAdapter,
+    RigidBodyDefinition,
+)
+from python.discovery.openfoam_continuum_oracle import (
+    OpenFoamCaseConfig,
+    OpenFoamContinuumOracle,
+    OpenFoamSolverType,
 )
 from python.discovery.physical_theorem_court import (
-    PhysicalCoherenceCourt,
     CourtVerdict,
-    PhysicalConservationType,
+    PhysicalCoherenceCourt,
 )
 
 

@@ -22,7 +22,6 @@ from python.discovery.cellular_automata_barrier_auditor import (
 )
 from python.discovery.rule30_word_exclusion import (
     Rule30PeriodicWordExclusionEngine,
-    WordExclusionTarget,
 )
 
 
@@ -33,7 +32,8 @@ def test_cellular_barrier_auditor_rejects_rule90_shared_invariant():
     """
     auditor = CellularAutomataBarrierAuditor()
     # Invariant that holds universally across all rules
-    universal_invariant = lambda rule, t: True
+    def universal_invariant(rule, t):
+        return True
 
     verdict = auditor.audit_invariant_against_realization_barrier(
         candidate_id="INV-UNIVERSAL-SHARED",
@@ -54,7 +54,8 @@ def test_cellular_barrier_auditor_rejects_rule150_shared_invariant():
     is rejected with RULE150_REALIZATION_OBSTRUCTION.
     """
     auditor = CellularAutomataBarrierAuditor()
-    invariant = lambda rule, t: rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_150]
+    def invariant(rule, t):
+        return rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_150]
 
     verdict = auditor.audit_invariant_against_realization_barrier(
         candidate_id="INV-RULE150-SHARED",
@@ -73,7 +74,8 @@ def test_cellular_barrier_auditor_rejects_rule210_shared_invariant():
     is rejected with RULE210_REALIZATION_OBSTRUCTION.
     """
     auditor = CellularAutomataBarrierAuditor()
-    invariant = lambda rule, t: rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_210]
+    def invariant(rule, t):
+        return rule in [ElementaryRule.RULE_30, ElementaryRule.RULE_210]
 
     verdict = auditor.audit_invariant_against_realization_barrier(
         candidate_id="INV-RULE210-SHARED",
@@ -93,7 +95,8 @@ def test_cellular_barrier_auditor_admits_rule30_specific_invariant():
     """
     auditor = CellularAutomataBarrierAuditor()
     # Holds only on Rule 30's non-linear structure
-    rule30_only_invariant = lambda rule, t: rule == ElementaryRule.RULE_30
+    def rule30_only_invariant(rule, t):
+        return rule == ElementaryRule.RULE_30
 
     verdict = auditor.audit_invariant_against_realization_barrier(
         candidate_id="INV-RULE30-NONLINEAR",
@@ -112,7 +115,8 @@ def test_cellular_barrier_auditor_rejects_false_rule30_invariant():
     Asserts that an invariant false for Rule 30 itself is immediately rejected.
     """
     auditor = CellularAutomataBarrierAuditor()
-    false_invariant = lambda rule, t: False
+    def false_invariant(rule, t):
+        return False
 
     verdict = auditor.audit_invariant_against_realization_barrier(
         candidate_id="INV-FALSE-R30",

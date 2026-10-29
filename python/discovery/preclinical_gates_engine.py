@@ -52,6 +52,9 @@ class GateThresholdsConfig:
     max_basal_leak_occupancy: float = 0.15         # Max allowable false activation at resting basal state
     min_homolog_selectivity_ratio: float = 100.0   # Kd(off-target) / Kd(target)
     max_tolerated_safety_alerts: int = 0           # Zero tolerance for severe tox/hERG alerts
+    max_clashscore: float = 30.0                   # Max allowable all-atom steric clashes per 1000 atoms (ADR-079)
+    max_ramachandran_outliers_pct: float = 5.0    # Max allowable Ramachandran dihedral outliers percentage (ADR-079)
+    max_molprobity_score: float = 3.5              # Max allowable composite MolProbity crystallographic score (ADR-079)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -174,17 +177,42 @@ class PreClinicalGatesValidator:
         else:
             plddt = float(struct_data.get("mean_plddt", 0.0))
             pocket_score = float(struct_data.get("pocket_druggability_score", 0.0))
-            passed = (plddt >= cfg.min_structural_plddt) and (pocket_score >= cfg.min_pocket_druggability_score)
+
+            # Phenix / MolProbity geometric sterics validation (ADR-079)
+            clashscore = float(struct_data.get("clashscore", 0.0))
+            rama_out_pct = float(struct_data.get("rama_outliers_pct", 0.0))
+            molprobity = float(struct_data.get("molprobity_score", 0.0))
+
+            geom_passed = True
+            geom_notes = []
+            if "clashscore" in struct_data and clashscore > cfg.max_clashscore:
+                geom_passed = False
+                geom_notes.append(f"clashscore {clashscore:.1f} > {cfg.max_clashscore:.1f}")
+            if "rama_outliers_pct" in struct_data and rama_out_pct > cfg.max_ramachandran_outliers_pct:
+                geom_passed = False
+                geom_notes.append(f"rama outliers {rama_out_pct:.1f}% > {cfg.max_ramachandran_outliers_pct:.1f}%")
+            if "molprobity_score" in struct_data and molprobity > cfg.max_molprobity_score:
+                geom_passed = False
+                geom_notes.append(f"molprobity {molprobity:.2f} > {cfg.max_molprobity_score:.2f}")
+
+            passed = (plddt >= cfg.min_structural_plddt) and (pocket_score >= cfg.min_pocket_druggability_score) and geom_passed
             sidecar_ref = struct_data.get("sidecar_id")
             if sidecar_ref:
                 sidecars.append(sidecar_ref)
+
+            summary = f"pLDDT: {plddt:.1f}, Pocket Score: {pocket_score:.2f}, Hinges: {struct_data.get('hinges_detected', 0)}"
+            if geom_notes:
+                summary += f" [GEOMETRY VIOLATIONS: {', '.join(geom_notes)}]"
+            elif "molprobity_score" in struct_data:
+                summary += f" [MolProbity: {molprobity:.2f}, Clashscore: {clashscore:.1f}]"
+
             evaluations[PreClinicalGateType.STRUCTURAL_DRUGGABILITY_GATE.value] = SingleGateEvaluation(
                 gate_type=PreClinicalGateType.STRUCTURAL_DRUGGABILITY_GATE,
                 passed=passed,
                 observed_score=plddt,
                 threshold_value=cfg.min_structural_plddt,
                 metric_name="alphafold_plddt",
-                evidence_summary=f"pLDDT: {plddt:.1f}, Pocket Score: {pocket_score:.2f}, Hinges: {struct_data.get('hinges_detected', 0)}",
+                evidence_summary=summary,
                 sidecar_id=sidecar_ref
             )
 

@@ -462,6 +462,13 @@
       "tests": true
     },
     {
+      "api": false,
+      "level": "Tested",
+      "module": "phenix_molprobity_oracle",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",

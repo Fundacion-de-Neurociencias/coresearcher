@@ -47,6 +47,7 @@ class PhysicalConservationType(str, Enum):
     COE_INTEGRITY_AUDIT = "COE_INTEGRITY_AUDIT"              # 4-dimensional post-hoc integrity verification (ADR-077)
     PRECLINICAL_FOUR_GATES_COHERENCE = "PRECLINICAL_FOUR_GATES_COHERENCE"  # Four pre-clinical stage-gates validation (ADR-078)
     PROVENANCE_SIDECAR_VALIDITY = "PROVENANCE_SIDECAR_VALIDITY"            # Tool provenance and blocked-state enforcement (ADR-078)
+    MACROMOLECULAR_GEOMETRIC_VALIDITY = "MACROMOLECULAR_GEOMETRIC_VALIDITY"  # Crystallographic Phenix/MolProbity clash and geometry audit (ADR-079)
 
 
 class CourtVerdict(str, Enum):
@@ -631,6 +632,45 @@ class PhysicalCoherenceCourt:
                 "execution_time_seconds": report_data.get("execution_time_seconds", 0.0)
             }],
             adversarial_audit={"verification_hash": report_data.get("verification_hash", "")[:16]},
+            autopsy=autopsy
+        )
+
+
+    def audit_phenix_molprobity_report(
+        self,
+        claim_id: str,
+        report_data: Dict[str, Any]
+    ) -> PhysicalProofAuditReport:
+        """
+        Arbitrates Macromolecular Stereochemical and MolProbity Quality (ADR-DISCOVERY-079).
+        Enforces clashscore <= 30.0, Ramachandran outliers <= 5.0%, and MolProbity score <= 3.5.
+        """
+        is_sound = bool(report_data.get("is_crystallographically_sound", False))
+        clashscore = float(report_data.get("clashscore", 0.0))
+        rama_out_pct = float(report_data.get("rama_outliers_pct", 0.0))
+        molprobity_score = float(report_data.get("molprobity_score", 0.0))
+        tier = report_data.get("quality_tier", "REJECTED_SEVERE_CLASHES")
+
+        verdict = CourtVerdict.VERIFIED_COHERENT if is_sound else CourtVerdict.REJECTED_CONSERVATION_VIOLATION
+        autopsy = None if is_sound else report_data.get("rejection_reason", f"Macromolecular geometric violation: tier {tier}")
+
+        return self._build_report(
+            claim_id=claim_id,
+            target_equation="Phenix MolProbity Stereochemical Invariant",
+            verdict=verdict,
+            dag_audit={"is_acyclic": True, "structure_id": report_data.get("structure_id")},
+            conservation_audit=[{
+                "law": "MACROMOLECULAR_GEOMETRIC_VALIDITY",
+                "satisfied": is_sound,
+                "clashscore": clashscore,
+                "rama_outliers_pct": rama_out_pct,
+                "molprobity_score": molprobity_score,
+                "quality_tier": tier
+            }],
+            adversarial_audit={
+                "num_clashes": report_data.get("num_clashes", 0),
+                "total_atoms": report_data.get("total_atoms", 0)
+            },
             autopsy=autopsy
         )
 

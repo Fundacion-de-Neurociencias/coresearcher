@@ -561,6 +561,18 @@ from .evidence_portal import (
     DiscoveryPaperEntry,
     EvidencePortalGenerator,
 )
+from .phenix_molprobity_oracle import (
+    RamachandranConformation,
+    StructuralQualityTier,
+    AtomCoordinate,
+    ResidueBackboneAngles,
+    StericClashDetail,
+    MolProbityReport,
+    PhenixMolProbityOracle,
+    compute_dihedral_angle,
+    classify_ramachandran_region,
+    classify_rotamer_outlier,
+)
 
 __all__ = [
 
@@ -973,4 +985,14 @@ __all__ = [
     "SingleGateEvaluation",
     "PreClinicalPassport",
     "PreClinicalGatesValidator",
+    "RamachandranConformation",
+    "StructuralQualityTier",
+    "AtomCoordinate",
+    "ResidueBackboneAngles",
+    "StericClashDetail",
+    "MolProbityReport",
+    "PhenixMolProbityOracle",
+    "compute_dihedral_angle",
+    "classify_ramachandran_region",
+    "classify_rotamer_outlier",
 ]

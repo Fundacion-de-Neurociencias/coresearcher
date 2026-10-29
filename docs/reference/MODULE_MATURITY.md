@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 40 |
+| Tested | Covered by tests, not reachable from the API | 44 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -80,6 +80,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
+| `phenix_molprobity_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
 | `preclinical_gates_engine` | Tested | - | yes | - |
 | `provenance_sidecar_engine` | Tested | - | yes | - |

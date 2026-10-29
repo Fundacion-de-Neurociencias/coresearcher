@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 34 |
+| Tested | Covered by tests, not reachable from the API | 37 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -67,7 +67,9 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
 | `latent_factor_discovery` | Exercised | - | - | yes |
 | `lean_formalization_engine` | Tested | - | yes | - |
+| `lean_junk_lint` | Tested | - | yes | - |
 | `limitation_resolution_engine` | Tested | - | yes | - |
+| `local_smoothing_case` | Tested | - | yes | yes |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
 | `manifold_detector` | Prototype | - | - | - |
 | `marr_engine` | Prototype | - | - | - |
@@ -97,6 +99,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_epistemic_bunker` | Tested | - | yes | - |
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
+| `statement_fidelity` | Tested | - | yes | - |
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |
@@ -105,9 +108,3 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `unknown_mechanism_benchmark` | Exercised | - | - | yes |
 | `vega_decision_engine` | Tested | - | yes | - |
 | `world_model_adapter` | Integrated | yes | yes | - |
-
-<!-- rows kept from the previously applied version so that none is lost (reviewed 2026-10-29) -->
-| Tested | Covered by tests, not reachable from the API | 31 |
-| `lean_junk_lint` | Tested | - | yes | - |
-| `local_smoothing_case` | Tested | - | yes | yes |
-| `statement_fidelity` | Tested | - | yes | - |

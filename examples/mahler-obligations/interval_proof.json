@@ -1,0 +1,69 @@
+{
+  "symbolic": [
+    {
+      "check": "even: d",
+      "holds": true
+    },
+    {
+      "check": "even: g",
+      "holds": true
+    },
+    {
+      "check": "even: v",
+      "holds": true
+    },
+    {
+      "check": "stable form: d",
+      "holds": true
+    },
+    {
+      "check": "stable form: g",
+      "holds": true
+    },
+    {
+      "check": "stable form: v",
+      "holds": true
+    },
+    {
+      "check": "derivative rule: Y' = xY - 1",
+      "holds": true
+    },
+    {
+      "check": "derivative rule: u' = -phi",
+      "holds": true
+    }
+  ],
+  "first_bullet": {
+    "window": [
+      -8.0,
+      8.0
+    ],
+    "verified": true,
+    "certified_boxes": 4644,
+    "min_lower_bound": {
+      "b - r^2 - d > 0": 0.06051271756755263,
+      "v' - x <= .319": 0.3182894080826255,
+      "-(v' - x) <= .319": 2.8055960436341156e-06,
+      "C <= -.341": 4.040625735093089e-07,
+      "S_q > 0": 0.000597345121062575,
+      "lambda t_-^2 + t_- C + K > 0": 0.0008924625127727207,
+      "lambda t_+^2 + t_+ C + K < 0": 1.2884473560886445e-05,
+      "2(-.37)C - .37^2 - 4 lambda K > m_*^2": 0.004493613140269262
+    },
+    "uncertified": []
+  },
+  "two_variable": {
+    "window": [
+      -3.0,
+      3.0
+    ],
+    "verified": true,
+    "certified_pairs": 167121,
+    "min_lower_bound": [
+      9.93210875543937e-07,
+      0.00018980175631719273
+    ],
+    "uncertified": []
+  },
+  "seconds": 1180.2
+}

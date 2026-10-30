@@ -400,6 +400,55 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "mahler_interval",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_obligations",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_ranges",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_segment",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_segment_box",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_tail",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_twovar",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "manifold_detector",
       "scripts": false,
@@ -436,6 +485,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "obligation_ledger",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "openfoam_continuum_oracle",
       "scripts": false,
       "tests": true
@@ -444,6 +500,13 @@
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "proof_pipeline",
       "scripts": true,
       "tests": true
     },

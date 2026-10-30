@@ -351,7 +351,17 @@ def base_models() -> Dict[str, Tuple[LTM, LTM]]:
     for k in range(8):
         env[mi.H[k]] = inp["H"][k]
     d, g = mi.d_stable, mi.g_stable
-    exprs = {"d": d, "d1": mi.D(d), "d2": mi.D(d, 2), "g": g, "g2": mi.D(g, 2), "v2": mi.D(mi.v_stable, 2)}
+    exprs = {
+        "d": d,
+        "d1": mi.D(d),
+        "d2": mi.D(d, 2),
+        "g": g,
+        "g1": mi.D(g),
+        "g2": mi.D(g, 2),
+        "g3": mi.D(g, 3),
+        "g4": mi.D(g, 4),
+        "v2": mi.D(mi.v_stable, 2),
+    }
     out = {}
     with mi.ivdps(40):
         log2, logpi = iv.log(iv.mpf(2)), iv.log(iv.pi)

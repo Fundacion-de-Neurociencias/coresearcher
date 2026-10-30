@@ -226,7 +226,11 @@ def segment_ratio(t: Dict[str, np.ndarray], step: int) -> Dict[str, Any]:
 
 
 def build_ledger(
-    grid: Dict[str, Any], interval: Dict[str, Any] = None, tail: Dict[str, Any] = None, twovar: Dict[str, Any] = None
+    grid: Dict[str, Any],
+    interval: Dict[str, Any] = None,
+    tail: Dict[str, Any] = None,
+    twovar: Dict[str, Any] = None,
+    ranges: Dict[str, Any] = None,
 ) -> Claim:
     """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
     `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
@@ -352,6 +356,43 @@ def build_ledger(
             )
         )
         claim.obligations.append(red)
+    if grid.get("short_elementary"):
+        el = Obligation(
+            "segment: elementary inequalities of the short-width cost table",
+            "W <= 1.507, int W <= 1.012, sinh^2 h >= h^2 + h^4/3, sin^2 y bound, |sin y - y cos y| <= y^3/3, "
+            "0 <= coth h - 1/h <= h/3, avg beta^2 <= 1/3 + .05 h^2",
+            "08-segments.tex: subsec:segments-short",
+            "identity",
+        )
+        ok = all(grid["short_elementary"].values())
+        el.discharges.append(
+            Discharge(
+                Status.DISCHARGED_SYMBOLIC if ok else Status.REFUTED,
+                "series sign arguments, coefficient comparison, interval arithmetic (mahler_segment.py)",
+                "h <= .16 (h <= .54 for the beta^2 bound), |y| <= 2",
+                "CoResearcher",
+                detail=grid["short_elementary"],
+            )
+        )
+        claim.obligations.append(el)
+    if ranges:
+        rb = Obligation(
+            "segment: profile bounds |q-dot|, |C-dot|, |n_C|, |n_q|, U_* (lem:scalar-ranges)",
+            "|q-dot| <= .193, |C-dot| <= .247, |n_C| <= .79, |n_q| <= .53, U_* <= .54 r^2 w^2 for every real x",
+            "07-scalar.tex: lem:scalar-ranges",
+            "pointwise inequality",
+        )
+        ok = ranges["window"]["verified"] and ranges["tail"]["verified"]
+        margin = min(min(ranges["window"]["min_lower_bound"].values()), min(ranges["tail"]["min_lower_bound"].values()))
+        rb.discharges.append(
+            _interval_discharge(
+                ok,
+                "every real x: |x| <= 8 by interval branch and bound, |x| >= 8 by Laurent-Taylor models; evenness",
+                margin,
+                {"window_boxes": ranges["window"]["certified_boxes"], "tail_boxes": ranges["tail"]["certified_boxes"]},
+            )
+        )
+        claim.obligations.append(rb)
     seg = grid["segments"]
     ob = Obligation(
         "segment: (4)",
@@ -404,13 +445,15 @@ def run(
     interval: Dict[str, Any] = None,
     tail: Dict[str, Any] = None,
     twovar: Dict[str, Any] = None,
+    ranges: Dict[str, Any] = None,
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
-    from python.discovery.mahler_segment import segment_checks
+    from python.discovery.mahler_segment import segment_checks, short_width_elementary
 
     grid = {
         "segment_reduction": segment_checks(),
+        "short_elementary": short_width_elementary(),
         "identities": check_profile_identities(),
         "pointwise": {
             "margins": pointwise_margins(t_point),
@@ -422,4 +465,4 @@ def run(
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid, interval, tail, twovar), grid
+    return build_ledger(grid, interval, tail, twovar, ranges), grid

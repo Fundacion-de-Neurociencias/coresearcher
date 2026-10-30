@@ -161,4 +161,59 @@ def segment_checks() -> Dict[str, bool]:
     out.update({f"chord: {k}": v for k, v in check_chord_identities().items()})
     sw = short_width_budget()
     out["short-width budget > .54 (exact)"] = bool(sw["exceeds_cost_.54"])
-    return out
+    return {k_: bool(v_) for k_, v_ in out.items()}
+
+
+def short_width_elementary() -> Dict[str, bool]:
+    """The elementary one-variable inequalities behind the authors' short-width cost table (h <= .16, wh <= .736)."""
+    import mpmath as mp
+
+    iv = mp.iv
+    hh, y, k = sp.symbols("hh y k", positive=True)
+    out: Dict[str, bool] = {}
+    # (i) weight constants of the chord kernel at h = .16; S = sinh h / h and cosh h increase (positive coefficients)
+    S_series = sp.series(sp.sinh(hh) / hh, hh, 0, 12).removeO()
+    increasing = all(c > 0 for c in sp.Poly(S_series, hh).coeffs())
+    iv.dps = 30
+    H = iv.mpf(16) / 100
+    eH = iv.exp(H)
+    sinhH, coshH = (eH - 1 / eH) / 2, (eH + 1 / eH) / 2
+    S = sinhH / H
+    out["W <= 1.507 and int W <= 1.012 at h <= .16"] = (
+        increasing and (iv.mpf(3) / 2 * S).b <= mp.mpf("1.507") and (S * (1 + coshH) / 2).b <= mp.mpf("1.012")
+    )
+    # (ii) sinh^2 h = (cosh 2h - 1)/2 = sum_{k>=1} 2^(2k-1) h^(2k)/(2k)!: all coefficients positive, first two 1 and 1/3
+    ident = sp.simplify((sp.sinh(hh) ** 2 - (sp.cosh(2 * hh) - 1) / 2).rewrite(sp.exp)) == 0
+    first = sp.series(sp.sinh(hh) ** 2, hh, 0, 6).removeO()
+    out["sinh^2 h >= h^2 + h^4/3"] = ident and sp.expand(first - hh**2 - hh**4 / 3) == 0
+    # (iii) sin^2 y = sum (-1)^(k+1) 2^(2k-1) y^(2k)/(2k)!; for |y| <= 2 and k >= 4 the terms decrease (ratio <= 16/90),
+    # so stopping after a positive term overestimates: sin^2 y <= y^2 - y^4/3 + 2y^6/45
+    part = sum((-1) ** (j + 1) * sp.Integer(2) ** (2 * j - 1) * y ** (2 * j) / sp.factorial(2 * j) for j in (1, 2, 3))
+    ratio_ok = all(sp.Rational(4 * 4, (2 * j + 1) * (2 * j + 2)) < 1 for j in range(4, 60))
+    out["sin^2 y <= y^2 - y^4/3 + 2y^6/45 (|y| <= 2)"] = (
+        sp.expand(part - (y**2 - y**4 / 3 + 2 * y**6 / 45)) == 0 and ratio_ok
+    )
+    # (iv) sin y - y cos y = sum (-1)^(k+1) 2k y^(2k+1)/(2k+1)!; term ratio y^2/(2k(2k+3)) <= .736^2/10 < 1
+    lead = sp.series(sp.sin(y) - y * sp.cos(y), y, 0, 5).removeO()
+    out["0 <= sin y - y cos y <= y^3/3 (0 <= y <= .736)"] = (
+        sp.expand(lead - y**3 / 3) == 0 and sp.Rational(736, 1000) ** 2 / 10 < 1
+    )
+    # (v) coth h - 1/h <= h/3  <=>  h cosh h <= (1 + h^2/3) sinh h; coefficient of h^(2k+1): (4k^2 - 4k)/(3 (2k+1)!) >= 0;
+    # and coth h - 1/h >= 0 <=> h cosh h >= sinh h: 1/(2k)! >= 1/(2k+1)!
+    diff_coef = sp.simplify(1 / sp.factorial(2 * k + 1) + 1 / (3 * sp.factorial(2 * k - 1)) - 1 / sp.factorial(2 * k))
+    target = (4 * k**2 - 4 * k) / (3 * sp.factorial(2 * k + 1))
+    out["0 <= coth h - 1/h <= h/3"] = sp.simplify(diff_coef - target) == 0
+    # (vi) avg beta^2 = 1 - 2/(h tanh h) + 2/h^2 = 1/3 + 2h^2/45 - 4h^4/945 + ...: the coth series alternates with
+    # term ratio zeta(2n+2)/zeta(2n) (h/pi)^2 < 1, so the average is at most 1/3 + 2h^2/45 <= 1/3 + .05 h^2
+    b = sp.Symbol("b")
+    avg = sp.simplify(sp.integrate(b**2 * sp.cosh(hh * b), (b, -1, 1)) / 2 / (sp.sinh(hh) / hh))
+    ser = sp.series(avg, hh, 0, 6).removeO()
+    coeffs = [ser.coeff(hh, 0), ser.coeff(hh, 2), ser.coeff(hh, 4)]
+    out["avg beta^2 <= 1/3 + .05 h^2 (h <= .54)"] = (
+        coeffs[0] == sp.Rational(1, 3)
+        and coeffs[1] == sp.Rational(2, 45)
+        and coeffs[2] < 0
+        and sp.Rational(2, 45) <= sp.Rational(5, 100)
+        and (sp.Rational(54, 100) / sp.pi) ** 2 < 1
+    )
+    return {k_: bool(v_) for k_, v_ in out.items()}

@@ -40,3 +40,8 @@ def test_negative_control_a_wrong_budget_constant_is_caught():
         ** 2
     )
     assert ms.short_width_budget()["value"] - (sq2 - sq2_paper) / (4 * lam) < Fraction(54, 100)
+
+
+def test_short_width_elementary_inequalities_hold():
+    checks = ms.short_width_elementary()
+    assert len(checks) == 6 and all(checks.values()), checks

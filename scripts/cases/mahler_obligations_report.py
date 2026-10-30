@@ -29,7 +29,9 @@ def main() -> None:
     tail = json.loads(tail_path.read_text(encoding="utf-8")) if tail_path.exists() else None
     tv_path = args.out.parent / "twovar_proof.json"
     twovar = json.loads(tv_path.read_text(encoding="utf-8")) if tv_path.exists() else None
-    claim, _ = mo.run(interval=interval, tail=tail, twovar=twovar)
+    rg_path = args.out.parent / "ranges_proof.json"
+    ranges = json.loads(rg_path.read_text(encoding="utf-8")) if rg_path.exists() else None
+    claim, _ = mo.run(interval=interval, tail=tail, twovar=twovar, ranges=ranges)
     report = {"source": mo.SOURCE, "claim": claim.to_dict(), "seconds": round(time.time() - start, 1)}
     args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {args.out} in {report['seconds']} s; claim status {report['claim']['status']}")

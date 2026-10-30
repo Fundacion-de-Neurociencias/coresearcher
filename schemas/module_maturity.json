@@ -415,6 +415,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "mahler_ranges",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "mahler_segment",
       "scripts": false,
       "tests": true

@@ -70,7 +70,13 @@ def test_committed_ledger():
     assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
     # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; the segment inequality
     # (4) plus its proved algebraic reduction
-    assert len(claim["obligations"]) == 21
+    assert len(claim["obligations"]) == 23
+    extra = [
+        o for o in claim["obligations"] if o["id"].startswith("segment: elementary") or "profile bounds" in o["id"]
+    ]
+    assert len(extra) == 2 and all(
+        o["status"] in (Status.DISCHARGED_SYMBOLIC.value, Status.DISCHARGED_INTERVAL.value) for o in extra
+    )
     red = [o for o in claim["obligations"] if o["id"].startswith("segment: algebraic reduction")]
     assert len(red) == 1 and red[0]["status"] == Status.DISCHARGED_SYMBOLIC.value
     assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])

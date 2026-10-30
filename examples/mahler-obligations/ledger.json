@@ -601,6 +601,52 @@
         ]
       },
       {
+        "id": "segment: elementary inequalities of the short-width cost table",
+        "statement": "W <= 1.507, int W <= 1.012, sinh^2 h >= h^2 + h^4/3, sin^2 y bound, |sin y - y cos y| <= y^3/3, 0 <= coth h - 1/h <= h/3, avg beta^2 <= 1/3 + .05 h^2",
+        "source": "08-segments.tex: subsec:segments-short",
+        "kind": "identity",
+        "status": "DISCHARGED_SYMBOLIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_SYMBOLIC",
+            "method": "series sign arguments, coefficient comparison, interval arithmetic (mahler_segment.py)",
+            "scope": "h <= .16 (h <= .54 for the beta^2 bound), |y| <= 2",
+            "by": "CoResearcher",
+            "margin": null,
+            "detail": {
+              "W <= 1.507 and int W <= 1.012 at h <= .16": true,
+              "sinh^2 h >= h^2 + h^4/3": true,
+              "sin^2 y <= y^2 - y^4/3 + 2y^6/45 (|y| <= 2)": true,
+              "0 <= sin y - y cos y <= y^3/3 (0 <= y <= .736)": true,
+              "0 <= coth h - 1/h <= h/3": true,
+              "avg beta^2 <= 1/3 + .05 h^2 (h <= .54)": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: profile bounds |q-dot|, |C-dot|, |n_C|, |n_q|, U_* (lem:scalar-ranges)",
+        "statement": "|q-dot| <= .193, |C-dot| <= .247, |n_C| <= .79, |n_q| <= .53, U_* <= .54 r^2 w^2 for every real x",
+        "source": "07-scalar.tex: lem:scalar-ranges",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "every real x: |x| <= 8 by interval branch and bound, |x| >= 8 by Laurent-Taylor models; evenness",
+            "by": "CoResearcher",
+            "margin": 2.244703183092425e-06,
+            "detail": {
+              "window_boxes": 48550,
+              "tail_boxes": 16
+            }
+          }
+        ]
+      },
+      {
         "id": "segment: (4)",
         "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment",
         "source": "prop:scalar-input, (4); prop:segment-estimate",
@@ -636,13 +682,13 @@
     ],
     "counts": {
       "DISCHARGED_FORMAL": 0,
-      "DISCHARGED_SYMBOLIC": 2,
-      "DISCHARGED_INTERVAL": 18,
+      "DISCHARGED_SYMBOLIC": 3,
+      "DISCHARGED_INTERVAL": 19,
       "CHECKED_NUMERIC": 1,
       "CERTIFIED_BY_AUTHOR": 0,
       "OPEN": 0,
       "REFUTED": 0
     }
   },
-  "seconds": 457.4
+  "seconds": 812.0
 }

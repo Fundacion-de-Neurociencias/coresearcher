@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 43 |
+| Tested | Covered by tests, not reachable from the API | 44 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -73,6 +73,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
 | `mahler_interval` | Tested | - | yes | yes |
 | `mahler_obligations` | Tested | - | yes | yes |
+| `mahler_ranges` | Tested | - | yes | yes |
 | `mahler_segment` | Tested | - | yes | - |
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |

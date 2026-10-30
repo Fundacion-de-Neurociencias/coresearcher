@@ -647,8 +647,32 @@
         ]
       },
       {
-        "id": "segment: (4)",
-        "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment",
+        "id": "segment: (4) on the middle and large widths (|l| <= 1.4, y <= 3.6, h >= .16)",
+        "statement": "e_K + Gamma + (X^2 + Y^2)/(4 lambda) + t_+ (p_a + b_a) < (1 + t_+) V_u on every segment with m >= 0, |l| <= 1.4, y <= 3.6, h >= .16 (t = asinh(x/s)); m < 0 by reflection",
+        "source": "08-segments.tex: subsec:segments-middle, subsec:segments-large (replaced by a direct check)",
+        "kind": "segment inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "exact form of (4); rigorous segment averages from interval cell integrals in t; every pair of endpoint cells (width 1/1280, failing pairs refined to 1/10240) in float intervals rounded outward",
+            "by": "CoResearcher",
+            "margin": 3.46760578202876e-08,
+            "detail": {
+              "pairs": [
+                12534436,
+                1070056
+              ],
+              "max_left_over_right": 0.9999952654071974
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: (4) outside the middle and large widths",
+        "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment with h <= .16 (short), or l <= -1.4, l >= 1.4 or y >= 3.6 (tails)",
         "source": "prop:scalar-input, (4); prop:segment-estimate",
         "kind": "segment inequality",
         "status": "CHECKED_NUMERIC",
@@ -683,12 +707,12 @@
     "counts": {
       "DISCHARGED_FORMAL": 0,
       "DISCHARGED_SYMBOLIC": 3,
-      "DISCHARGED_INTERVAL": 19,
+      "DISCHARGED_INTERVAL": 20,
       "CHECKED_NUMERIC": 1,
       "CERTIFIED_BY_AUTHOR": 0,
       "OPEN": 0,
       "REFUTED": 0
     }
   },
-  "seconds": 812.0
+  "seconds": 734.1
 }

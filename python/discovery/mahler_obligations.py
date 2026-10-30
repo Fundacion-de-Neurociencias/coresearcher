@@ -231,6 +231,7 @@ def build_ledger(
     tail: Dict[str, Any] = None,
     twovar: Dict[str, Any] = None,
     ranges: Dict[str, Any] = None,
+    segbox: Dict[str, Any] = None,
 ) -> Claim:
     """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
     `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
@@ -393,10 +394,30 @@ def build_ledger(
             )
         )
         claim.obligations.append(rb)
+    if segbox:
+        sbx = Obligation(
+            "segment: (4) on the middle and large widths (|l| <= 1.4, y <= 3.6, h >= .16)",
+            "e_K + Gamma + (X^2 + Y^2)/(4 lambda) + t_+ (p_a + b_a) < (1 + t_+) V_u on every segment with m >= 0, "
+            "|l| <= 1.4, y <= 3.6, h >= .16 (t = asinh(x/s)); m < 0 by reflection",
+            "08-segments.tex: subsec:segments-middle, subsec:segments-large (replaced by a direct check)",
+            "segment inequality",
+        )
+        levels = segbox["levels"]
+        sbx.discharges.append(
+            _interval_discharge(
+                segbox["verified"],
+                "exact form of (4); rigorous segment averages from interval cell integrals in t; every pair of "
+                "endpoint cells (width 1/1280, failing pairs refined to 1/10240) in float intervals rounded outward",
+                segbox["min_margin"],
+                {"pairs": [lv["pairs"] for lv in levels], "max_left_over_right": segbox["max_ratio"]},
+            )
+        )
+        claim.obligations.append(sbx)
     seg = grid["segments"]
     ob = Obligation(
-        "segment: (4)",
-        "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment",
+        "segment: (4)" + (" outside the middle and large widths" if segbox else ""),
+        "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment"
+        + (" with h <= .16 (short), or l <= -1.4, l >= 1.4 or y >= 3.6 (tails)" if segbox else ""),
         "prop:scalar-input, (4); prop:segment-estimate",
         "segment inequality",
     )
@@ -446,6 +467,7 @@ def run(
     tail: Dict[str, Any] = None,
     twovar: Dict[str, Any] = None,
     ranges: Dict[str, Any] = None,
+    segbox: Dict[str, Any] = None,
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
@@ -465,4 +487,4 @@ def run(
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid, interval, tail, twovar, ranges), grid
+    return build_ledger(grid, interval, tail, twovar, ranges, segbox), grid

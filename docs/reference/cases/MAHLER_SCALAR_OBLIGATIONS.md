@@ -215,12 +215,45 @@ So every numeric and algebraic input of the short-width regime (h ≤ .16) is no
 short deductions that combine them (Cauchy–Schwarz, the chord identity, the cost table) follow the manuscript, and
 we have not machine-checked them as a single statement.
 
-**Not yet checked by us:** the tail, middle and large regimes of (4), including the authors' Bernstein certificates.
-Until they are done, the obligation "segment: (4)" stays CHECKED_NUMERIC + CERTIFIED_BY_AUTHOR, and so does the
-proposition.
+**The middle and large widths, by a direct check (`mahler_segment_box.py`).** On the bounded region
+{|l| ≤ 1.4, y ≤ 3.6, h ≥ .16, m ≥ 0} (l = m − h, y = m + h in t = asinh(x/s)) we do not reproduce the authors'
+Bernstein certificates. Instead we check the exact form of (4) directly:
+
+    e_K + Γ + (X² + Y²)/(4λ) + t₊(p_a + b_a) < (1 + t₊)V_u,   V_u = r²(1 − A_h² − B_h² tanh²m) + V_q.
+
+- The t-axis is cut into cells of width 1/1280. On each cell, K, C, q and q² are enclosed by second-order Taylor
+  forms in x (|x| ≤ 8) or by the Laurent–Taylor models (|x| ≥ 8). The profiles are even, so negative cells mirror
+  positive ones.
+- Segment averages use the density cosh t, so they are uniform averages in x. Each one is a sum of cell integrals
+  plus two partial end cells, and each partial cell is enclosed by [0, width] times the cell enclosure. Prefix sums
+  carry an explicit bound on the float rounding.
+- Every pair of endpoint cells in the region is checked in float intervals, widened by one ulp per operation. The
+  circle factors A_h, B_h, cos wh, sin wh and tanh m are enclosed with mpmath. Pairs that fail are split into
+  8 × 8 sub-pairs at cell width 1/10240 and checked again.
+- Reflection t ↦ −t preserves both sides of (4), so m ≥ 0 suffices.
+
+Result (`examples/mahler-obligations/segment_box_proof.json`, about 12 minutes with 8 workers):
+
+- all 12,534,436 cell pairs are certified;
+- 17,596 of them needed the refinement into 1,070,056 sub-pairs. They lie next to the short-width boundary
+  (h ≈ .16, l ≈ .23–.59), where both sides of (4) are about .008 and the absolute margin is about .002;
+- the smallest certified lower bound of right − left is 3.5·10⁻⁸;
+- the true worst ratio left/right in the region, from midpoint values, is about .76.
+
+DISCHARGED_INTERVAL.
+
+**Not yet checked by us:**
+
+- the tail regime (l ≤ −1.4, l ≥ 1.4, or y ≥ 3.6);
+- a single machine-checked statement of the short-width deduction.
+
+Until they are done, the obligation "segment: (4) outside the middle and large widths" stays CHECKED_NUMERIC +
+CERTIFIED_BY_AUTHOR, and so does the proposition.
 
 ## 8. What remains
 
-- **The segment inequality (4):** the tail, middle and large regimes of §7.
+- **The segment inequality (4):**
+  - the tail regime;
+  - the combination step of the short-width regime, whose inputs are all proved (§7).
 - **The rest of the proof.** The cone, entropy and quadratic arguments of Sections 1–6 are covered by the manuscript
   alone.

@@ -69,8 +69,8 @@ def test_committed_ledger():
     by_id = {o["id"]: o for o in claim["obligations"]}
     assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
     # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; the segment inequality
-    # (4) plus its proved algebraic reduction
-    assert len(claim["obligations"]) == 23
+    # (4) plus its proved algebraic reduction; (4) on the middle and large widths is proved apart from the rest
+    assert len(claim["obligations"]) == 24
     extra = [
         o for o in claim["obligations"] if o["id"].startswith("segment: elementary") or "profile bounds" in o["id"]
     ]
@@ -80,13 +80,15 @@ def test_committed_ledger():
     red = [o for o in claim["obligations"] if o["id"].startswith("segment: algebraic reduction")]
     assert len(red) == 1 and red[0]["status"] == Status.DISCHARGED_SYMBOLIC.value
     assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])
-    windows = [o for o in claim["obligations"] if " on " in o["id"]]
+    windows = [o for o in claim["obligations"] if " on " in o["id"] and not o["id"].startswith("segment")]
     assert len(windows) == 9 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in windows)
     # the first bullet's tails (|x| > 8) are proved too (mahler_tail.py), so the first bullet holds on all of R
     tails = [o for o in claim["obligations"] if o["id"].startswith("pointwise:") and "for |x| >" in o["id"]]
     assert len(tails) == 7 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in tails)
-    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) remains numeric
+    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) outside the middle and large widths remains numeric
     outside = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
     assert len(outside) == 2 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in outside)
-    rest = [o for o in claim["obligations"] if o["id"].startswith("segment: (4)")]
+    box = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) on the middle")]
+    assert len(box) == 1 and box[0]["status"] == Status.DISCHARGED_INTERVAL.value
+    rest = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) outside")]
     assert len(rest) == 1 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

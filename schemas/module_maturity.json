@@ -429,6 +429,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "mahler_segment_box",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "mahler_tail",
       "scripts": true,
       "tests": true

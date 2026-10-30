@@ -449,6 +449,7 @@ _VAR = r"(?<![\w'.\\])[A-Za-zα-ωΑ-Ω](?![\w'(])"
 _TERM = rf"(?:{_NUM}|{_VAR}|∞)"
 _CHAIN = re.compile(rf"({_TERM})\s*(>=|<=|≥|≤|<|>)\s*({_TERM})(?:\s*(>=|<=|≥|≤|<|>)\s*({_TERM}))?")
 _FLIP = {">=": "<=", "<=": ">=", "<": ">", ">": "<"}
+_ARITH = set("+-*/^·•")
 
 
 def _prose_math(text: str) -> str:
@@ -468,6 +469,9 @@ def _atoms(text: str) -> List[Tuple[str, str, str]]:
     """(variable, op, number) atoms from chains like `2 <= p < ∞` or `n ≥ 3`; infinite bounds are dropped."""
     atoms = []
     for m in _CHAIN.finditer(text):
+        before, after = text[: m.start()].rstrip()[-1:], text[m.end() :].lstrip()[:1]
+        if before in _ARITH or after in _ARITH:
+            continue  # `n - 1 < x` or `2 ≤ p * q`: a term of a larger expression, not a bound on a letter.
         terms = [m.group(1), m.group(3)] + ([m.group(5)] if m.group(5) else [])
         ops = [_OPS[m.group(2)]] + ([_OPS[m.group(4)]] if m.group(4) else [])
         for (left, right), op in zip(zip(terms, terms[1:]), ops):

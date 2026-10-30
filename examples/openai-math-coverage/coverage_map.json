@@ -382,9 +382,9 @@
    "paper": "B > min((n - 1)*(1 - 2/p), 2/p) + 1/2 - 1/p",
    "lean": "B > 2*n + 6",
    "paper_only_witness": {
-    "n": 3,
-    "p": 8,
-    "B": "17/8"
+    "n": 5,
+    "p": "66/25",
+    "B": "59/44"
    },
    "lean_source": "Definitions.lean, LogarithmicSobolev: ∀ p B, 2 < p → 2 * n + 6 < B → ... logBesselPotential (smoothingOrder n p) B f"
   }
@@ -22124,17 +22124,7 @@
     "target": 0.2,
     "scope": 0.533
    },
-   "auto_range_check": {
-    "variables": [
-     "δ"
-    ],
-    "integer": [],
-    "paper": "δ > 0 and δ < 1",
-    "lean": "δ > 0 and δ < 1",
-    "relation": "EQUIVALENT",
-    "paper_only_witness": null,
-    "lean_only_witness": null
-   },
+   "auto_range_check": null,
    "range_check": null,
    "status": "KERNEL_TARGET_EQUIVALENT",
    "basis": "judgement",

@@ -250,6 +250,9 @@ _TIMES = {r"\cdot", r"\times"}
 _FRAC = {r"\frac", r"\dfrac", r"\tfrac"}
 
 
+_MAX_EXPONENT = 10_000  # 2^{10^{10}} is in the fragment but cannot be evaluated exactly.
+
+
 class Unparsed(Exception):
     pass
 
@@ -344,6 +347,8 @@ class _Parser:
         if self.peek() == "^":
             self.take()
             exp = self.group_or_atom()
+            if base.is_number and exp.is_number and abs(exp) > _MAX_EXPONENT:
+                raise Unparsed("numeric power too large to evaluate exactly")
             return sympy.Pow(base, exp, evaluate=True)
         return base
 
@@ -461,18 +466,21 @@ def to_sympy(latex: str) -> sympy.Expr:
 # ---------------------------------------------------------------------------
 
 _RNG_SEED = 20261030
+_MAX_SIMPLIFY_OPS = 80  # sympy.simplify on larger differences can run for minutes; the numeric verdict stands.
 
 
 def _numeric_differs(a: sympy.Expr, b: sympy.Expr, rng: random.Random) -> Optional[bool]:
-    """True if a != b at some random positive rational point, False if equal at all of them, None if undefined."""
+    """True if a != b at some random positive rational point, False if equal at all of them, None if undefined.
+    Points are substituted inside evalf (30 digits): exact substitution into powers with symbolic exponents can
+    build integers with millions of digits."""
     symbols = sorted(a.free_symbols | b.free_symbols, key=str)
     seen_defined = False
     for _ in range(4):
         point = {s: sympy.Rational(rng.randint(2, 97), rng.randint(1, 13)) for s in symbols}
         try:
-            va = sympy.nsimplify(a.subs(point)) if symbols else a
-            vb = sympy.nsimplify(b.subs(point)) if symbols else b
-            diff = sympy.N(va - vb, 30)
+            va = a.evalf(30, subs=point)
+            vb = b.evalf(30, subs=point)
+            diff = (va - vb).evalf(30)
         except Exception:
             return None
         if diff.has(sympy.zoo, sympy.nan, sympy.oo, -sympy.oo) or not diff.is_number:
@@ -481,7 +489,7 @@ def _numeric_differs(a: sympy.Expr, b: sympy.Expr, rng: random.Random) -> Option
             # Complex values from real-looking input: undefined for this check (roots of negatives etc.).
             continue
         seen_defined = True
-        if abs(diff) > sympy.Float("1e-20") * (1 + abs(sympy.N(va, 30))):
+        if abs(diff) > sympy.Float("1e-20") * (1 + abs(va)):
             return True
     return False if seen_defined else None
 
@@ -542,7 +550,7 @@ def check_math(files: Dict[str, str], coverage: Coverage) -> List[Flag]:
                     differs = _numeric_differs(a, b, rng)
                     if differs:
                         try:
-                            if sympy.simplify(a - b) == 0:
+                            if sympy.count_ops(a - b) <= _MAX_SIMPLIFY_OPS and sympy.simplify(a - b) == 0:
                                 continue
                         except Exception:
                             pass

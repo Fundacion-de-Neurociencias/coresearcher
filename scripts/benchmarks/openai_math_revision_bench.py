@@ -144,7 +144,15 @@ def long_path(path: Path) -> Path:
 
 
 def sh(*args, cwd=None, check=True) -> str:
-    out = subprocess.run(list(args), cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    # A blobless clone fetches missing blobs on demand; retry a stalled fetch instead of hanging.
+    for attempt in range(3):
+        try:
+            out = subprocess.run(list(args), cwd=cwd, capture_output=True, text=True, encoding="utf-8",
+                                 errors="replace", timeout=600)
+            break
+        except subprocess.TimeoutExpired:
+            if attempt == 2:
+                raise
     if check and out.returncode != 0:
         raise RuntimeError(f"{' '.join(args)} failed: {out.stderr.strip()}")
     return out.stdout
@@ -471,11 +479,11 @@ def main() -> None:
     clone = ensure_clone(args.clone)
     if args.command == "dataset":
         data = build_dataset(clone)
-        DATASET.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        DATASET.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {DATASET} ({len(data['items'])} items)")
     else:
         results = run(clone)
-        RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         print(json.dumps(results["summary"], indent=2))
 
 

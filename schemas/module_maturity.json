@@ -423,7 +423,7 @@
       "api": false,
       "level": "Tested",
       "module": "mahler_segment",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -486,7 +486,7 @@
       "api": false,
       "level": "Tested",
       "module": "obligation_ledger",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -500,6 +500,13 @@
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "proof_pipeline",
       "scripts": true,
       "tests": true
     },

@@ -14,6 +14,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [Sakana ED polarity case](reference/cases/SAKANA_ED_POLARITY.md) | Showcase: an agentic-science rubric claim proved by z3 and Lean, with the necessity of each assumption |
 | [Local smoothing statement fidelity](reference/cases/LOCAL_SMOOTHING_STATEMENT_FIDELITY.md) | Do six Lean Comparator statements say what the paper claims? Range equivalence by z3, junk-value lint, coverage map (ADR-070) |
 | [Mahler scalar obligations](reference/cases/MAHLER_SCALAR_OBLIGATIONS.md) | Obligation ledger pilot (ADR-076): identities and every pointwise inequality (first bullet on R, (3) on R^2) proved by interval arithmetic and Laurent-Taylor tail models; for the segment inequality, its reduction, the short-width inputs and the middle and large widths proved, the tails checked numerically; independent of the authors' programs |
+| [Proof pipeline](reference/PROOF_PIPELINE.md) | Reproducible obligation proofs: one-command rerun, SHA-256 manifest, fast audit that rejects stale or unverified proofs (ADR-076) |
 
 ## Architecture
 

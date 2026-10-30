@@ -250,7 +250,13 @@ DISCHARGED_INTERVAL.
 Until they are done, the obligation "segment: (4) outside the middle and large widths" stays CHECKED_NUMERIC +
 CERTIFIED_BY_AUTHOR, and so does the proposition.
 
-## 8. What remains
+## 8. Reproducing the proof
+
+`python scripts/cases/mahler_reproduce.py` audits the committed reports in seconds against
+`examples/mahler-obligations/manifest.json`. `--run all` reruns every proof, which takes about 3.5 hours with
+8 workers. See [PROOF_PIPELINE.md](../PROOF_PIPELINE.md).
+
+## 9. What remains
 
 - **The segment inequality (4):**
   - the tail regime;

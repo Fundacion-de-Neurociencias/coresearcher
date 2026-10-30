@@ -31,6 +31,12 @@ case [MAHLER_SCALAR_OBLIGATIONS.md](../reference/cases/MAHLER_SCALAR_OBLIGATIONS
    announcements. Hypothesis generation stays outside this public module: generators (for example the private
    Einstein generator, ADR-059) emit hypotheses that this verifier checks, and a generator never assigns its own
    verdict (ADR-002).
+6. **Every proof is reproducible and auditable.** A case lists its proof steps (script, report, the source files it
+   depends on). A manifest records the SHA-256 of every source and report and the environment. A fast audit
+   (`proof_pipeline.check`) rejects a missing or unverified report, a report that differs from the manifest, a proof
+   whose sources changed after it ran (STALE), and a ledger whose claim status is not the weakest-link roll-up.
+   Hashes ignore line endings and wall-clock fields, so another machine can reproduce them. See
+   [PROOF_PIPELINE.md](../reference/PROOF_PIPELINE.md).
 
 ## Consequences
 

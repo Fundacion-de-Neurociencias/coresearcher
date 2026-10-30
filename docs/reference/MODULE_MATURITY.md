@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 45 |
+| Tested | Covered by tests, not reachable from the API | 46 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -74,7 +74,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `mahler_interval` | Tested | - | yes | yes |
 | `mahler_obligations` | Tested | - | yes | yes |
 | `mahler_ranges` | Tested | - | yes | yes |
-| `mahler_segment` | Tested | - | yes | - |
+| `mahler_segment` | Tested | - | yes | yes |
 | `mahler_segment_box` | Tested | - | yes | yes |
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |
@@ -83,9 +83,10 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
-| `obligation_ledger` | Tested | - | yes | - |
+| `obligation_ledger` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `proof_pipeline` | Tested | - | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |

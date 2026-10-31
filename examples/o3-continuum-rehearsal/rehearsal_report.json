@@ -1,0 +1,887 @@
+{
+  "source": {
+    "repository": "https://github.com/openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "retrieved": "2026-10-30",
+    "family": "215. Canonical O(3) continuum limit and exact O(4) mass asymptotics",
+    "paper": "preprints/The-canonical-massive-continuum-limit-of-the-two-dimensional-O3-model-October-4-2026/massive-continuum-o3.pdf",
+    "paper_sha256": "e75bfb353c2d3374503bbb899eb01dc21c94ed49fede6b3eb48f7ffce64527b2",
+    "paper_readme_sha256": "6b32afbadf435843c325fd3be749f009a45fd764387f9f2d7293bc0c9f5cb9b8",
+    "contents": "CONTENTS.md",
+    "contents_sha256": "080badcb677fb80be0e695c21a8ec88bcb3a46dd3e3078ca10061e6b289be175",
+    "scope_note": "lean/docs/215.md",
+    "scope_note_sha256": "41ed31b3d5b0f9c0ce5df3604527f17b26eec23b225a7a2184f5a9c2d936ac30",
+    "lean_statements": "lean/ComparatorChallenges/ClassicalON.lean",
+    "lean_statements_sha256": "c2f5f88455b811eb6b56c1ae80ff91f4e398e18e7c7fbeee6daca8da4122d696",
+    "comparator_config": "lean/ComparatorChallenges/ClassicalON.json",
+    "comparator_config_sha256": "47cb3623915c8cfcc35099fabd0c44173afa72b706eb0526c4b8d3855e789252",
+    "solution_main": "lean/OAI/Probability/ClassicalON/Main.lean",
+    "solution_main_sha256": "0e4bca8c6b8fe89ffec32eda5d3222af85062a2e3e685729f41578076b528c8a",
+    "solution_model": "lean/OAI/Probability/ClassicalON/Model.lean",
+    "solution_model_sha256": "1db13f5d22a51650533bc85ae609b23eb9b4a9927cac11e50c5642b52b1da378",
+    "permitted_axioms": [
+      "propext",
+      "Quot.sound",
+      "Classical.choice"
+    ]
+  },
+  "checklist": {
+    "id": "o3-continuum-claim",
+    "version": "1.0.0",
+    "sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+    "lock": {
+      "spec": "o3_continuum_claim.v1.json",
+      "id": "o3-continuum-claim",
+      "version": "1.0.0",
+      "frozen_on": "2026-10-30",
+      "sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+      "canonicalization": "json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=False), UTF-8"
+    }
+  },
+  "lean_transcription": {
+    "statement": "OAI.ClassicalON.main : ExponentialDecay (instance n = 3)",
+    "facts": [
+      "field == 'O3_sigma'",
+      "dim == 2",
+      "volume == 'finite_box'",
+      "spacing == 1",
+      "continuum_limit == 'none'",
+      "two_point_decay == 'exponential'"
+    ],
+    "fact_sources": {
+      "field == 'O3_sigma'": "abbrev Spin (n : ℕ) := ↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) 1); interaction = ∑ e, b e * ⟪σ e.1, σ e.2⟫ over nearest-neighbour edges; ∀ (n : ℕ), 3 ≤ n → ... (n = 3)",
+      "dim == 2": "abbrev Site := ℤ × ℤ",
+      "volume == 'finite_box'": "structure LatticeGraph where vertices : Finset Site; edges : Finset ...",
+      "spacing == 1": "sites in ℤ × ℤ, distances by siteDistance in lattice units; no spacing parameter",
+      "continuum_limit == 'none'": "no limit of any kind appears in the statement",
+      "two_point_decay == 'exponential'": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+    },
+    "quotes": {
+      "O3-FIELD": "Spin n = unit sphere in EuclideanSpace ℝ (Fin n); ∀ n ≥ 3",
+      "O3-DIM2": "abbrev Site := ℤ × ℤ",
+      "O3-INFINITE-VOLUME": "vertices : Finset Site",
+      "O3-CONTINUUM": "Site := ℤ × ℤ; no spacing, no limit",
+      "LAT-DECAY": "0 ≤ correlation n G b x y ∧ correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+    },
+    "notes": {
+      "O3-FIELD": "The Lean statement quantifies over every n ≥ 3, so in this coordinate it is stronger than needed: n = 3 is one instance.",
+      "O3-INFINITE-VOLUME": "The bound is uniform over all finite subgraphs, a volume-uniform estimate, but no infinite-volume measure is defined or asserted. lean/docs/215.md says the infinite-volume limit is not included.",
+      "O3-CONTINUUM": "The object is the lattice model at unit spacing; the statement has no rescaled field (1.3), no susceptibility or correlation-length normalization and no beta -> infinity limit.",
+      "O3-INTERNAL-SYMMETRY": "The lattice measure is O(n)-invariant by construction, but the statement asserts no invariance and the paper's claim is about the continuum hierarchy.",
+      "O3-MASS-GAP": "Exponential decay in lattice units at fixed beta is a lattice correlation-length statement, not the continuum Hamiltonian gap of Theorem 1.2 (iii), which needs the decay in physical units uniformly as beta -> infinity.",
+      "O3-NONTRIVIAL": "Nothing about four-point functions appears.",
+      "LAT-DECAY": "Matches the companion paper's abstract: every n ≥ 3, every beta > 0, uniform over finite free-boundary subgraphs and edge strengths in [0, beta]."
+    }
+  },
+  "coverage": [
+    {
+      "obligation": "O3-FIELD",
+      "title": "The nearest-neighbour O(3) model",
+      "category": "core",
+      "clause": "field == 'O3_sigma'",
+      "coverage": "COVERED",
+      "formal_text": "Spin n = unit sphere in EuclideanSpace ℝ (Fin n); ∀ n ≥ 3",
+      "note": "The Lean statement quantifies over every n ≥ 3, so in this coordinate it is stronger than needed: n = 3 is one instance."
+    },
+    {
+      "obligation": "O3-DIM2",
+      "title": "Two dimensions",
+      "category": "core",
+      "clause": "dim == 2",
+      "coverage": "COVERED",
+      "formal_text": "abbrev Site := ℤ × ℤ",
+      "note": ""
+    },
+    {
+      "obligation": "O3-INFINITE-VOLUME",
+      "title": "Infinite volume",
+      "category": "core",
+      "clause": "volume == 'infinite'",
+      "coverage": "OBJECT_DIFFERS",
+      "formal_text": "vertices : Finset Site",
+      "note": "The bound is uniform over all finite subgraphs, a volume-uniform estimate, but no infinite-volume measure is defined or asserted. lean/docs/215.md says the infinite-volume limit is not included."
+    },
+    {
+      "obligation": "O3-CONTINUUM",
+      "title": "Canonical continuum limit",
+      "category": "core",
+      "clause": "spacing == 0 and continuum_limit == 'canonical'",
+      "coverage": "OBJECT_DIFFERS",
+      "formal_text": "Site := ℤ × ℤ; no spacing, no limit",
+      "note": "The object is the lattice model at unit spacing; the statement has no rescaled field (1.3), no susceptibility or correlation-length normalization and no beta -> infinity limit."
+    },
+    {
+      "obligation": "O3-OS-REGULARITY",
+      "title": "OS axiom: regularity",
+      "category": "core",
+      "clause": "os_regularity",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-OS-EUCLIDEAN",
+      "title": "OS axiom: Euclidean invariance",
+      "category": "core",
+      "clause": "os_euclidean_invariance",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-OS-RP",
+      "title": "OS axiom: reflection positivity",
+      "category": "core",
+      "clause": "os_reflection_positivity",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-OS-SYMMETRY",
+      "title": "OS axiom: symmetry",
+      "category": "core",
+      "clause": "os_symmetry",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-OS-CLUSTER",
+      "title": "OS axiom: cluster property",
+      "category": "core",
+      "clause": "os_cluster",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-INTERNAL-SYMMETRY",
+      "title": "Internal O(3) invariance",
+      "category": "core",
+      "clause": "internal_o3_invariance",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": "The lattice measure is O(n)-invariant by construction, but the statement asserts no invariance and the paper's claim is about the continuum hierarchy."
+    },
+    {
+      "obligation": "O3-NONTRIVIAL",
+      "title": "Nonzero connected four-point function",
+      "category": "core",
+      "clause": "connected_4pt == 'nonzero'",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": "Nothing about four-point functions appears."
+    },
+    {
+      "obligation": "O3-UNIQUE-VACUUM",
+      "title": "Unique vacuum, nonzero vacuum complement",
+      "category": "core",
+      "clause": "unique_vacuum",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": ""
+    },
+    {
+      "obligation": "O3-MASS-GAP",
+      "title": "Positive Hamiltonian gap",
+      "category": "core",
+      "clause": "mass_gap > 0",
+      "coverage": "NOT_ADDRESSED",
+      "formal_text": "",
+      "note": "Exponential decay in lattice units at fixed beta is a lattice correlation-length statement, not the continuum Hamiltonian gap of Theorem 1.2 (iii), which needs the decay in physical units uniformly as beta -> infinity."
+    },
+    {
+      "obligation": "LAT-DECAY",
+      "title": "Exponential decay of lattice two-point correlations",
+      "category": "companion",
+      "clause": "two_point_decay == 'exponential'",
+      "coverage": "COVERED",
+      "formal_text": "0 ≤ correlation n G b x y ∧ correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)",
+      "note": "Matches the companion paper's abstract: every n ≥ 3, every beta > 0, uniform over finite free-boundary subgraphs and edge strengths in [0, beta]."
+    }
+  ],
+  "coverage_counts": {
+    "COVERED": 3,
+    "OBJECT_DIFFERS": 2,
+    "NOT_ADDRESSED": 9
+  },
+  "probes": {
+    "paper_claim": {
+      "statement": "paper: Theorem 1.1, Theorem 1.2, Corollary 1.3",
+      "checklist": "o3-continuum-claim v1.0.0",
+      "checklist_sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+      "clauses": {
+        "O3-FIELD": "field == 'O3_sigma'",
+        "O3-DIM2": "dim == 2",
+        "O3-INFINITE-VOLUME": "volume == 'infinite'",
+        "O3-CONTINUUM": "spacing == 0 and continuum_limit == 'canonical'",
+        "O3-OS-REGULARITY": "os_regularity",
+        "O3-OS-EUCLIDEAN": "os_euclidean_invariance",
+        "O3-OS-RP": "os_reflection_positivity",
+        "O3-OS-SYMMETRY": "os_symmetry",
+        "O3-OS-CLUSTER": "os_cluster",
+        "O3-INTERNAL-SYMMETRY": "internal_o3_invariance",
+        "O3-NONTRIVIAL": "connected_4pt == 'nonzero'",
+        "O3-UNIQUE-VACUUM": "unique_vacuum",
+        "O3-MASS-GAP": "mass_gap > 0"
+      },
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": [],
+      "witnesses": [
+        {
+          "witness": "zero_theory_2d",
+          "title": "Zero theory on R^2",
+          "kind": "trivial",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-NONTRIVIAL",
+            "O3-UNIQUE-VACUUM"
+          ],
+          "open_clauses": [
+            "O3-FIELD",
+            "O3-MASS-GAP"
+          ]
+        },
+        {
+          "witness": "gaussian_massive_vector_2d",
+          "title": "Free massive three-component Gaussian field on R^2",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-FIELD",
+            "O3-NONTRIVIAL"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "lattice_o3_high_temperature_finite",
+          "title": "Lattice O(3) model on a finite subgraph of Z^2 at small beta",
+          "kind": "lattice_only",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-INFINITE-VOLUME",
+            "O3-CONTINUUM",
+            "O3-OS-EUCLIDEAN",
+            "O3-OS-CLUSTER"
+          ],
+          "open_clauses": [
+            "O3-OS-REGULARITY",
+            "O3-UNIQUE-VACUUM",
+            "O3-MASS-GAP"
+          ]
+        },
+        {
+          "witness": "lattice_o3_torus",
+          "title": "Lattice O(3) model on a periodic torus",
+          "kind": "finite_volume",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-INFINITE-VOLUME",
+            "O3-CONTINUUM",
+            "O3-OS-EUCLIDEAN",
+            "O3-OS-CLUSTER"
+          ],
+          "open_clauses": [
+            "O3-OS-REGULARITY",
+            "O3-OS-SYMMETRY",
+            "O3-NONTRIVIAL",
+            "O3-UNIQUE-VACUUM",
+            "O3-MASS-GAP"
+          ]
+        },
+        {
+          "witness": "o3_lattice_3d",
+          "title": "Three-dimensional lattice O(3) model",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-DIM2",
+            "O3-CONTINUUM",
+            "O3-OS-EUCLIDEAN"
+          ],
+          "open_clauses": [
+            "O3-INFINITE-VOLUME",
+            "O3-OS-REGULARITY",
+            "O3-OS-RP",
+            "O3-OS-SYMMETRY",
+            "O3-OS-CLUSTER",
+            "O3-INTERNAL-SYMMETRY",
+            "O3-NONTRIVIAL",
+            "O3-UNIQUE-VACUUM",
+            "O3-MASS-GAP"
+          ]
+        },
+        {
+          "witness": "subsequential_limit_2d",
+          "title": "Continuum limit point along a prescribed trajectory or subsequence",
+          "kind": "weak_limit",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-CONTINUUM"
+          ],
+          "open_clauses": [
+            "O3-OS-REGULARITY",
+            "O3-OS-EUCLIDEAN",
+            "O3-OS-RP",
+            "O3-OS-SYMMETRY",
+            "O3-OS-CLUSTER",
+            "O3-INTERNAL-SYMMETRY",
+            "O3-NONTRIVIAL",
+            "O3-UNIQUE-VACUUM",
+            "O3-MASS-GAP"
+          ]
+        }
+      ]
+    },
+    "lean_covered_part_of_claim": {
+      "statement": "the part of the paper's claim that ClassicalON.main covers",
+      "checklist": "o3-continuum-claim v1.0.0",
+      "checklist_sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+      "clauses": {
+        "O3-FIELD": "field == 'O3_sigma'",
+        "O3-DIM2": "dim == 2"
+      },
+      "outcome": "VACUOUS_RELATIVE_TO_INTENT",
+      "satisfied_by": [
+        "lattice_o3_high_temperature_finite",
+        "lattice_o3_torus",
+        "subsequential_limit_2d"
+      ],
+      "undetermined": [
+        "zero_theory_2d"
+      ],
+      "witnesses": [
+        {
+          "witness": "zero_theory_2d",
+          "title": "Zero theory on R^2",
+          "kind": "trivial",
+          "result": "UNDETERMINED",
+          "excluded_by": [],
+          "open_clauses": [
+            "O3-FIELD"
+          ]
+        },
+        {
+          "witness": "gaussian_massive_vector_2d",
+          "title": "Free massive three-component Gaussian field on R^2",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-FIELD"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "lattice_o3_high_temperature_finite",
+          "title": "Lattice O(3) model on a finite subgraph of Z^2 at small beta",
+          "kind": "lattice_only",
+          "result": "SATISFIES",
+          "excluded_by": [],
+          "open_clauses": []
+        },
+        {
+          "witness": "lattice_o3_torus",
+          "title": "Lattice O(3) model on a periodic torus",
+          "kind": "finite_volume",
+          "result": "SATISFIES",
+          "excluded_by": [],
+          "open_clauses": []
+        },
+        {
+          "witness": "o3_lattice_3d",
+          "title": "Three-dimensional lattice O(3) model",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "O3-DIM2"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "subsequential_limit_2d",
+          "title": "Continuum limit point along a prescribed trajectory or subsequence",
+          "kind": "weak_limit",
+          "result": "SATISFIES",
+          "excluded_by": [],
+          "open_clauses": []
+        }
+      ]
+    }
+  },
+  "exclusion_lint": {
+    "file": "lean/ComparatorChallenges/ClassicalON.lean",
+    "theorem": "main",
+    "checklist": "o3-continuum-claim v1.0.0",
+    "checklist_sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+    "closure": [
+      "abbrev Site (lines 11-11)",
+      "def PositiveNeighbor (lines 13-14)",
+      "structure LatticeGraph (lines 16-19)",
+      "abbrev Spin (lines 21-21)",
+      "abbrev Configuration (lines 22-22)",
+      "def sphereProbability (lines 24-26)",
+      "def referenceLaw (lines 28-29)",
+      "def interaction (lines 31-33)",
+      "def partition (lines 35-36)",
+      "def correlation (lines 38-41)",
+      "def siteDistance (lines 43-44)",
+      "def ExponentialDecay (lines 46-51)",
+      "theorem main (lines 53-54)"
+    ],
+    "obligations": {
+      "O3-FIELD": {
+        "markers": [
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "Spin",
+            "line": 21,
+            "snippet": "abbrev Spin (n : ℕ) := ↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) 1)"
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "sphereProbability",
+            "line": 24,
+            "snippet": "def sphereProbability (n : ℕ) : Measure (Spin n) :="
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "referenceLaw",
+            "line": 29,
+            "snippet": "Measure.pi (fun _ => sphereProbability n)"
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "3 ≤ n",
+            "declaration": "ExponentialDecay",
+            "line": 47,
+            "snippet": "∀ (n : ℕ), 3 ≤ n → ∀ (β : ℝ), 0 < β →"
+          }
+        ],
+        "counter_markers": []
+      },
+      "O3-DIM2": {
+        "markers": [
+          {
+            "obligation": "O3-DIM2",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          }
+        ],
+        "counter_markers": []
+      },
+      "O3-INFINITE-VOLUME": {
+        "markers": [],
+        "counter_markers": [
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 17,
+            "snippet": "vertices : Finset Site"
+          },
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 18,
+            "snippet": "edges : Finset (vertices × vertices)"
+          }
+        ]
+      },
+      "O3-CONTINUUM": {
+        "markers": [],
+        "counter_markers": [
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "siteDistance",
+            "line": 43,
+            "snippet": "def siteDistance (x y : Site) : ℝ :="
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "ExponentialDecay",
+            "line": 51,
+            "snippet": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+          }
+        ]
+      },
+      "O3-OS-REGULARITY": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-OS-EUCLIDEAN": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-OS-RP": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-OS-SYMMETRY": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-OS-CLUSTER": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-INTERNAL-SYMMETRY": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-NONTRIVIAL": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-UNIQUE-VACUUM": {
+        "markers": [],
+        "counter_markers": []
+      },
+      "O3-MASS-GAP": {
+        "markers": [],
+        "counter_markers": []
+      }
+    },
+    "witnesses": [
+      {
+        "witness": "zero_theory_2d",
+        "title": "Zero theory on R^2",
+        "status": "NO_EXCLUDING_CLAUSE_FOUND",
+        "excluding_obligations": [
+          "O3-NONTRIVIAL",
+          "O3-UNIQUE-VACUUM"
+        ],
+        "evidence": [],
+        "counter_evidence": [],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      },
+      {
+        "witness": "gaussian_massive_vector_2d",
+        "title": "Free massive three-component Gaussian field on R^2",
+        "status": "ADDRESSED_IN_TEXT",
+        "excluding_obligations": [
+          "O3-FIELD",
+          "O3-NONTRIVIAL"
+        ],
+        "evidence": [
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "Spin",
+            "line": 21,
+            "snippet": "abbrev Spin (n : ℕ) := ↥(Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) 1)"
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "sphereProbability",
+            "line": 24,
+            "snippet": "def sphereProbability (n : ℕ) : Measure (Spin n) :="
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "sphere",
+            "declaration": "referenceLaw",
+            "line": 29,
+            "snippet": "Measure.pi (fun _ => sphereProbability n)"
+          },
+          {
+            "obligation": "O3-FIELD",
+            "pattern": "3 ≤ n",
+            "declaration": "ExponentialDecay",
+            "line": 47,
+            "snippet": "∀ (n : ℕ), 3 ≤ n → ∀ (β : ℝ), 0 < β →"
+          }
+        ],
+        "counter_evidence": [],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      },
+      {
+        "witness": "lattice_o3_high_temperature_finite",
+        "title": "Lattice O(3) model on a finite subgraph of Z^2 at small beta",
+        "status": "NO_EXCLUDING_CLAUSE_FOUND",
+        "excluding_obligations": [
+          "O3-INFINITE-VOLUME",
+          "O3-CONTINUUM",
+          "O3-OS-EUCLIDEAN",
+          "O3-OS-CLUSTER"
+        ],
+        "evidence": [],
+        "counter_evidence": [
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 17,
+            "snippet": "vertices : Finset Site"
+          },
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 18,
+            "snippet": "edges : Finset (vertices × vertices)"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "siteDistance",
+            "line": 43,
+            "snippet": "def siteDistance (x y : Site) : ℝ :="
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "ExponentialDecay",
+            "line": 51,
+            "snippet": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+          }
+        ],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      },
+      {
+        "witness": "lattice_o3_torus",
+        "title": "Lattice O(3) model on a periodic torus",
+        "status": "NO_EXCLUDING_CLAUSE_FOUND",
+        "excluding_obligations": [
+          "O3-INFINITE-VOLUME",
+          "O3-CONTINUUM",
+          "O3-OS-EUCLIDEAN",
+          "O3-OS-CLUSTER"
+        ],
+        "evidence": [],
+        "counter_evidence": [
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 17,
+            "snippet": "vertices : Finset Site"
+          },
+          {
+            "obligation": "O3-INFINITE-VOLUME",
+            "pattern": "Finset",
+            "declaration": "LatticeGraph",
+            "line": 18,
+            "snippet": "edges : Finset (vertices × vertices)"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "siteDistance",
+            "line": 43,
+            "snippet": "def siteDistance (x y : Site) : ℝ :="
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "ExponentialDecay",
+            "line": 51,
+            "snippet": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+          }
+        ],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      },
+      {
+        "witness": "o3_lattice_3d",
+        "title": "Three-dimensional lattice O(3) model",
+        "status": "ADDRESSED_IN_TEXT",
+        "excluding_obligations": [
+          "O3-DIM2",
+          "O3-CONTINUUM",
+          "O3-OS-EUCLIDEAN"
+        ],
+        "evidence": [
+          {
+            "obligation": "O3-DIM2",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          }
+        ],
+        "counter_evidence": [
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "siteDistance",
+            "line": 43,
+            "snippet": "def siteDistance (x y : Site) : ℝ :="
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "ExponentialDecay",
+            "line": 51,
+            "snippet": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+          }
+        ],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      },
+      {
+        "witness": "subsequential_limit_2d",
+        "title": "Continuum limit point along a prescribed trajectory or subsequence",
+        "status": "NO_EXCLUDING_CLAUSE_FOUND",
+        "excluding_obligations": [
+          "O3-CONTINUUM"
+        ],
+        "evidence": [],
+        "counter_evidence": [
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "ℤ × ℤ",
+            "declaration": "Site",
+            "line": 11,
+            "snippet": "abbrev Site := ℤ × ℤ"
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "siteDistance",
+            "line": 43,
+            "snippet": "def siteDistance (x y : Site) : ℝ :="
+          },
+          {
+            "obligation": "O3-CONTINUUM",
+            "pattern": "siteDistance",
+            "declaration": "ExponentialDecay",
+            "line": 51,
+            "snippet": "correlation n G b x y ≤ A * Real.exp (-m * siteDistance x.val y.val)"
+          }
+        ],
+        "semantic_confirmation": "HUMAN_REQUIRED"
+      }
+    ],
+    "flag": "POSSIBLY_VACUOUS_RELATIVE_TO_INTENT"
+  },
+  "family_coverage": [
+    {
+      "item": "O(3) continuum, Theorem 1.1 (i)",
+      "claim": "the rescaled fields (1.3) converge jointly in law and in all moments through all real beta -> infinity",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "no continuum field, no limit in any Lean statement of the family"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.1 (ii)",
+      "claim": "Schwinger distributions converge in the strong topology of S'((R^2)^n)",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "no Schwinger distribution is defined"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.1 (iii)",
+      "claim": "unit susceptibility and second-moment length; equals the Theorem 1.2 hierarchy after rescaling",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "-"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.2 (i)",
+      "claim": "convergence along the prescribed trajectory beta_N; same limit from tori tending to the plane",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "-"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.2 (ii) and Corollary 1.3",
+      "claim": "Euclidean and internal O(3) invariance, reflection positivity, symmetry, clustering, factorial bounds; reconstruction of a local unitary relativistic theory",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "none of the OS axioms is stated (exclusion lint: no marker)"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.2 (iii)",
+      "claim": "unique vacuum, nonzero vacuum complement, H_phys >= m > 0 on it",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "lattice exponential decay at fixed beta is not the continuum gap"
+    },
+    {
+      "item": "O(3) continuum, Theorem 1.2 (iv)",
+      "claim": "nonzero connected four-point distribution on separated time supports",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "non-triviality is not stated"
+    },
+    {
+      "item": "Isolated particle pole (October 4, 2026)",
+      "claim": "the vector two-point spectral measure has an isolated atom at the lowest mass",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "-"
+    },
+    {
+      "item": "Exact O(4) mass asymptotics (October 5, 2026)",
+      "claim": "m_lat(beta) ~ 32 exp(pi/4 - 1/2) sqrt(beta) exp(-pi beta)",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "lean/docs/215.md: the O(4) spectral-gap claim is not included"
+    },
+    {
+      "item": "Sharp O(4) mass bounds (September 23, 2026)",
+      "claim": "full transfer gap within constant multiples of sqrt(beta) exp(-pi beta); positive gap at every beta",
+      "status": "NOT_FORMALIZED",
+      "lean": "-",
+      "fidelity": "lean/docs/215.md: the O(4) spectral-gap claim is not included"
+    },
+    {
+      "item": "Exponential decay in classical O(n) models (September 23, 2026)",
+      "claim": "exponential decay for n >= 3, every beta > 0, uniform over finite free-boundary subgraphs",
+      "status": "COMPARATOR",
+      "lean": "OAI.ClassicalON.main : ExponentialDecay",
+      "fidelity": "matches the abstract (n >= 3, beta > 0, finite subgraphs, edge strengths in [0, beta]); range not audited with z3 here"
+    }
+  ],
+  "files_read": [
+    "CONTENTS.md (family 215 entry)",
+    "lean/docs/215.md",
+    "lean/ComparatorChallenges/ClassicalON.lean",
+    "lean/ComparatorChallenges/ClassicalON.json",
+    "lean/OAI/Probability/ClassicalON/Main.lean",
+    "lean/OAI/Probability/ClassicalON/Model.lean",
+    "the file list of lean/OAI/Probability/ClassicalON/ (117 modules; no continuum, Schwinger or OS module name)",
+    "the paper massive-continuum-o3.pdf, Section 1 (Theorems 1.1, 1.2, Corollary 1.3) and the abstract"
+  ],
+  "kernel_check": {
+    "status": "NOT RUN",
+    "reason": "Comparator needs landrun (Linux Landlock) and a full openai/math build; neither was run in this session. Nothing here depends on whether ClassicalON.main is proved."
+  }
+}

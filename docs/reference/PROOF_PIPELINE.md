@@ -44,7 +44,7 @@ Hashes ignore CRLF versus LF and the `seconds` fields of the reports. A rerun on
 reproduces the same report hashes whenever the results agree. Float interval arithmetic with outward rounding is
 deterministic under IEEE 754, and the worker pools return results in order.
 
-## 3. Reproduction record (Mahler, 2026-10-30)
+## 3. Reproduction record (Mahler, 2026-10-30 and 2026-10-31)
 
 Four proofs were rerun from scratch into a separate folder and compared with the committed reports:
 
@@ -53,11 +53,15 @@ Four proofs were rerun from scratch into a separate folder and compared with the
   of `mahler_tail.py` and lacked four entries of model metadata. The report was regenerated from the current code.
   This is the stale-certificate case the audit is designed for. The first manifest had been built from the current
   code, so only a rerun could reveal it;
-- `ranges` (about 2.2 hours) was not rerun in this pass.
+- `ranges` was rerun on 2026-10-31 (2 h 21 min with 6 workers) and reproduced bit for bit;
+- `segment_tails` (2026-10-31) was run twice from scratch, the zone ranges included, with identical results.
+
+Every proof step of the case has now been reproduced from scratch.
 
 ## 4. Reusable techniques from the Mahler pilot
 
-Each technique is a module that a new case can reuse or copy.
+Each technique is a module that a new case can reuse or copy. The case-independent ones live in
+[`interval_engine.py`](../../python/discovery/interval_engine.py).
 
 | Technique | Module | Use it when |
 | --- | --- | --- |
@@ -67,6 +71,11 @@ Each technique is a module that a new case can reuse or copy.
 | Vectorized float intervals with one-ulp outward rounding | `mahler_twovar`, `mahler_segment_box` | millions of boxes or pairs |
 | Cell integrals + prefix sums + partial end cells | `mahler_segment_box` | inequalities on averages over segments |
 | Adaptive refinement of only the failing boxes | `mahler_twovar`, `mahler_segment_box` | thin regions where the margin is small |
+| Taylor models in h with exact rational coefficients and explicit remainders | `interval_engine.TaylorModel` | quotients such as (1 − cos wh)/h² that must stay exact as h → 0 |
+| Knapsack bound on an average with interval weights | `interval_engine.knapsack_average` | averages over unbounded sets split into zones whose share is known only up to an interval |
+| Generic branch and bound over boxes, infinite bounds allowed | `interval_engine.branch_and_bound` | any certify-or-split proof |
+| Certified bound propagation chaining proved obligations | `mahler_segment_tails` | a statement whose inputs are other obligations of the ledger (here the proved profile bounds) |
+| Independent numeric reference as a soundness audit | `mahler_segment_tails.reference_margin` | checking that certified lower bounds never exceed the true value |
 
 ## 5. Adding a new case
 
@@ -79,16 +88,23 @@ Each technique is a module that a new case can reuse or copy.
 4. Run `--run all`, commit the reports and the manifest, and add a test that audits the committed manifest
    (`tests/test_proof_pipeline.py`).
 
-## 6. Next steps
+## 6. Integration in CoResearcher
 
-- **Rerun `ranges`** to close the reproduction record.
-- **Generic engines.** Extract the branch-and-bound driver, the Laurent–Taylor model class and the vectorized
-  interval operations into case-independent modules. Today each Mahler module carries its own copy of the
-  vectorized operations.
-- **Audit in CI.** Run the fast audit in the test suite. This is already done for Mahler through
-  `test_committed_mahler_manifest_audits_clean`. Rerun the long proofs on a schedule on a work machine, never with
-  personal data.
+- **Registry.** `python/discovery/proof_cases.py` lists every proof case: steps, manifest, ledger. A new case
+  becomes auditable everywhere by adding one entry.
+- **CLI.** `python scripts/cases/<case>_reproduce.py` audits a case, reruns it, or rewrites its manifest.
+- **API.** Both endpoints are read-only and return a claim's status only together with its audit.
+  - `GET /api/obligations/cases` lists every case with its claim status and audit result.
+  - `GET /api/obligations/cases/{case_id}` returns the case's full ledger and audit.
+- **Tests.** The committed manifest of every case is audited in the test suite (`tests/test_proof_pipeline.py`,
+  `tests/test_api_obligations.py`). CI therefore fails when a proof goes stale.
+
+## 7. Next steps
+
 - **Lean export.** Interval certificates can be replayed in Lean through a verified interval library. Doing so
   would raise DISCHARGED_INTERVAL obligations to DISCHARGED_FORMAL.
-- **API.** Expose the ledger and the audit result next to the existing verification endpoints, so that a claim's
-  status always comes with its audit.
+- **More cases.** Each new claimed result with scalar inequalities can reuse `interval_engine`. Examples are the
+  other openai/math results whose appendices rely on authors' programs.
+- **Shared vectorized operations.** `mahler_twovar` and `mahler_segment_box` keep their own copies of the float
+  interval operations. They were left in place so that their committed proofs stay valid against the manifest.
+  A new case should take the operations from one shared place.

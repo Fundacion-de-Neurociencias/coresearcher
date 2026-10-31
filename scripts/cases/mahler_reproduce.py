@@ -1,7 +1,7 @@
 """Reproduce or audit the whole Mahler scalar-input proof (proof_pipeline.py, ADR-076).
 
 python scripts/cases/mahler_reproduce.py                  # fast audit against manifest.json (seconds)
-python scripts/cases/mahler_reproduce.py --run all        # rerun every proof (about 3.5 hours with 8 workers)
+python scripts/cases/mahler_reproduce.py --run all        # rerun every proof (about 4 hours with 8 workers)
 python scripts/cases/mahler_reproduce.py --run segment_box ledger
 python scripts/cases/mahler_reproduce.py --write-manifest # record the current reports and sources
 
@@ -18,58 +18,11 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from python.discovery import proof_pipeline as pp  # noqa: E402
+from python.discovery.proof_cases import CASES, EX  # noqa: E402
 
-EX = "examples/mahler-obligations/"
-D = "python/discovery/"
-BASE = [D + "mahler_interval.py", D + "mahler_obligations.py"]
-TAIL = BASE + [D + "mahler_tail.py"]
-STEPS = [
-    pp.ProofStep(
-        "interval",
-        "scripts/cases/mahler_interval_report.py",
-        EX + "interval_proof.json",
-        ["first_bullet.verified", "two_variable.verified"],
-        BASE,
-        minutes=20,
-    ),
-    pp.ProofStep("tail", "scripts/cases/mahler_tail_report.py", EX + "tail_proof.json", ["result.verified"], TAIL),
-    pp.ProofStep(
-        "twovar",
-        "scripts/cases/mahler_twovar_report.py",
-        EX + "twovar_proof.json",
-        ["result.verified"],
-        TAIL + [D + "mahler_twovar.py"],
-        minutes=12,
-    ),
-    pp.ProofStep(
-        "ranges",
-        "scripts/cases/mahler_ranges_report.py",
-        EX + "ranges_proof.json",
-        ["window.verified", "tail.verified"],
-        TAIL + [D + "mahler_ranges.py"],
-        minutes=135,
-    ),
-    pp.ProofStep(
-        "segment_box",
-        "scripts/cases/mahler_segment_box_report.py",
-        EX + "segment_box_proof.json",
-        ["verified"],
-        TAIL + [D + "mahler_ranges.py", D + "mahler_segment_box.py"],
-        minutes=12,
-    ),
-    pp.ProofStep(
-        "ledger",
-        "scripts/cases/mahler_obligations_report.py",
-        EX + "ledger.json",
-        [],
-        BASE
-        + [D + "obligation_ledger.py", D + "mahler_segment.py"]
-        + [EX + f for f in ("interval_proof.json", "tail_proof.json", "twovar_proof.json", "ranges_proof.json")]
-        + [EX + "segment_box_proof.json"],
-        minutes=14,
-    ),
-]
-MANIFEST = ROOT / EX / "manifest.json"
+CASE = CASES["mahler-scalar-input"]
+STEPS = CASE.steps
+MANIFEST = ROOT / CASE.manifest
 
 
 def main() -> None:

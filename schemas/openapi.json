@@ -9140,6 +9140,61 @@
         "summary": "Audit Manuscript"
       }
     },
+    "/api/obligations/cases": {
+      "get": {
+        "description": "Every registered proof case with its claim status (weakest-link roll-up) and whether its audit passes.",
+        "operationId": "list_proof_cases_api_obligations_cases_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Proof Cases"
+      }
+    },
+    "/api/obligations/cases/{case_id}": {
+      "get": {
+        "description": "The case's ledger (claim, obligations, discharges) and the audit of its proofs: every report present and\nverified, hashes equal to the manifest, no proof STALE against its sources, consistent roll-up. A claim's status\nis only reported together with its audit.",
+        "operationId": "get_proof_case_api_obligations_cases__case_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Proof Case"
+      }
+    },
     "/api/observer/ledger": {
       "get": {
         "operationId": "get_activity_ledger_api_observer_ledger_get",

@@ -373,6 +373,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "interval_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "isaac_sim_grounding_adapter",
       "scripts": false,
       "tests": true
@@ -465,13 +472,20 @@
       "api": false,
       "level": "Tested",
       "module": "mahler_segment",
-      "scripts": true,
+      "scripts": false,
       "tests": true
     },
     {
       "api": false,
       "level": "Tested",
       "module": "mahler_segment_box",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_segment_tails",
       "scripts": true,
       "tests": true
     },
@@ -549,7 +563,7 @@
       "api": false,
       "level": "Tested",
       "module": "obligation_ledger",
-      "scripts": true,
+      "scripts": false,
       "tests": true
     },
     {
@@ -579,6 +593,13 @@
       "module": "preregistration",
       "scripts": true,
       "tests": true
+    },
+    {
+      "api": true,
+      "level": "Exercised",
+      "module": "proof_cases",
+      "scripts": true,
+      "tests": false
     },
     {
       "api": false,

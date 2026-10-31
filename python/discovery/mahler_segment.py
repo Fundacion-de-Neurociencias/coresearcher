@@ -174,14 +174,19 @@ def short_width_elementary() -> Dict[str, bool]:
     # (i) weight constants of the chord kernel at h = .16; S = sinh h / h and cosh h increase (positive coefficients)
     S_series = sp.series(sp.sinh(hh) / hh, hh, 0, 12).removeO()
     increasing = all(c > 0 for c in sp.Poly(S_series, hh).coeffs())
-    iv.dps = 30
-    H = iv.mpf(16) / 100
-    eH = iv.exp(H)
-    sinhH, coshH = (eH - 1 / eH) / 2, (eH + 1 / eH) / 2
-    S = sinhH / H
-    out["W <= 1.507 and int W <= 1.012 at h <= .16"] = (
-        increasing and (iv.mpf(3) / 2 * S).b <= mp.mpf("1.507") and (S * (1 + coshH) / 2).b <= mp.mpf("1.012")
-    )
+    old_dps, iv.dps = iv.dps, 30  # restored below, so the global interval precision does not leak to callers
+    try:
+        H = iv.mpf(16) / 100
+        eH = iv.exp(H)
+        sinhH, coshH = (eH - 1 / eH) / 2, (eH + 1 / eH) / 2
+        S = sinhH / H
+        out["W <= 1.507 and int W <= 1.012 at h <= .16"] = (
+            increasing
+            and (iv.mpf(3) / 2 * S).b <= iv.mpf(1507) / 1000
+            and (S * (1 + coshH) / 2).b <= iv.mpf(1012) / 1000
+        )
+    finally:
+        iv.dps = old_dps
     # (ii) sinh^2 h = (cosh 2h - 1)/2 = sum_{k>=1} 2^(2k-1) h^(2k)/(2k)!: all coefficients positive, first two 1 and 1/3
     ident = sp.simplify((sp.sinh(hh) ** 2 - (sp.cosh(2 * hh) - 1) / 2).rewrite(sp.exp)) == 0
     first = sp.series(sp.sinh(hh) ** 2, hh, 0, 6).removeO()

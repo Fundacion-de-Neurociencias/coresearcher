@@ -37,16 +37,30 @@ case [MAHLER_SCALAR_OBLIGATIONS.md](../reference/cases/MAHLER_SCALAR_OBLIGATIONS
    whose sources changed after it ran (STALE), and a ledger whose claim status is not the weakest-link roll-up.
    Hashes ignore line endings and wall-clock fields, so another machine can reproduce them. See
    [PROOF_PIPELINE.md](../reference/PROOF_PIPELINE.md).
+7. **Proof cases are a product capability.** Every case is registered in `python/discovery/proof_cases.py`. The
+   same entry drives:
+   - the CLI rerun and audit;
+   - the tests;
+   - the read-only API, which returns a claim's status only together with its audit:
+     `GET /api/obligations/cases` and `GET /api/obligations/cases/{case_id}`.
+
+   Case-independent proof techniques live in `python/discovery/interval_engine.py`:
+   - Taylor models with exact rational coefficients;
+   - knapsack bounds on averages;
+   - branch and bound.
 
 ## Consequences
 
 - The first application covers the scalar input of the Mahler conjecture for general convex bodies, which is the
-  obligation that the released summary left conditional:
-  - its three identities are DISCHARGED_SYMBOLIC;
-  - all ten of its inequalities are CHECKED_NUMERIC on bounded ranges, with recorded margins;
-  - the claim is therefore CHECKED_NUMERIC and not proved. The unbounded tails remain covered only by the
-    authors' appendices and programs.
-- An obligation moves from CHECKED_NUMERIC to DISCHARGED_SYMBOLIC only through rigorous interval enclosures with
-  tail bounds of our own, or through a Lean proof.
+  obligation that the released summary left conditional. As of 2026-10-31:
+  - its 24 obligations are all proved: 3 DISCHARGED_SYMBOLIC and 21 DISCHARGED_INTERVAL;
+  - this includes every pointwise inequality on R, the two-variable inequalities on R², and the segment
+    inequality on every region of endpoints, up to infinity;
+  - the claim is DISCHARGED_INTERVAL. None of it depends on the authors' programs.
+  The history is in [MAHLER_SCALAR_OBLIGATIONS.md](../reference/cases/MAHLER_SCALAR_OBLIGATIONS.md). The pilot
+  started with every inequality CHECKED_NUMERIC on bounded ranges.
+- An obligation moves from CHECKED_NUMERIC to a proof status only through rigorous enclosures with tail bounds of
+  our own (DISCHARGED_INTERVAL), an exact symbolic argument (DISCHARGED_SYMBOLIC) or a Lean proof
+  (DISCHARGED_FORMAL).
 - The ledger can be joined with the ADR-070 coverage map and with the citation graph of a corpus. A withdrawal can
   then be propagated to every claim that depends on it.

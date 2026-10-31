@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 127. Interactive documentation is served at `/docs` when the API runs.
+Operations: 129. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -123,6 +123,8 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `GET` | `/api/lifecycle/template` | Public | Lifecycle Template |
 | `GET` | `/api/lifecycle/watch` | Public | Watch Lifecycle |
 | `POST` | `/api/manuscripts/audit` | API key | Audit Manuscript |
+| `GET` | `/api/obligations/cases` | Public | List Proof Cases |
+| `GET` | `/api/obligations/cases/{case_id}` | Public | Get Proof Case |
 | `GET` | `/api/observer/ledger` | Public | Get Activity Ledger |
 | `POST` | `/api/ontology/apply` | API key | Apply Ontology Plan |
 | `POST` | `/api/ontology/plan` | API key | Plan Ontology Change |

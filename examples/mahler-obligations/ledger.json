@@ -11,8 +11,8 @@
     "id": "mahler.general.scalar_input",
     "statement": "Lemma 'Profile identities' and Proposition 'Scalar inequalities' hold for the stated profiles and exact parameters (input to the Mahler conjecture for general convex bodies)",
     "source": "01-cones.tex: lem:profile-identities, prop:scalar-input",
-    "status": "CHECKED_NUMERIC",
-    "is_proved": false,
+    "status": "DISCHARGED_INTERVAL",
+    "is_proved": true,
     "obligations": [
       {
         "id": "identities",
@@ -675,7 +675,7 @@
         "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment with h <= .16 (short), or l <= -1.4, l >= 1.4 or y >= 3.6 (tails)",
         "source": "prop:scalar-input, (4); prop:segment-estimate",
         "kind": "segment inequality",
-        "status": "CHECKED_NUMERIC",
+        "status": "DISCHARGED_INTERVAL",
         "independent": true,
         "discharges": [
           {
@@ -700,6 +700,31 @@
             "by": "author",
             "margin": null,
             "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "certified bound propagation (mahler_segment_tails.py, interval_engine.py): zone ranges with the far zone closed at x = infinity, knapsack averages, chord kernel and mean-value bounds, exact rational Taylor models of the circle part; the margin is divided by h^2 for h <= 1",
+            "scope": "every segment with m >= 0 outside the middle and large widths, up to infinity; uses the proved profile bounds (lem:scalar-ranges) and the middle and large widths for the skipped boxes",
+            "by": "CoResearcher",
+            "margin": 0.002377650264192694,
+            "detail": {
+              "certified_boxes": 1474,
+              "skipped_boxes_in_bounded_region": 130,
+              "lemmas": {
+                "margin = right - left of (4)": true,
+                "d margin / d V_q = 1 + X/(2 lambda)": true,
+                "V_pi split": true,
+                "sinh z / z increasing": true,
+                "quotient bound (z3)": true,
+                "int (1 - beta^2) dbeta/2 = 2/3": true,
+                "chord identity change of variables": true,
+                "x-length": true
+              },
+              "depends_on": [
+                "segment: profile bounds |q-dot|, |C-dot|, |n_C|, |n_q|, U_* (lem:scalar-ranges)",
+                "segment: (4) on the middle and large widths (|l| <= 1.4, y <= 3.6, h >= .16)"
+              ]
+            }
           }
         ]
       }
@@ -707,12 +732,12 @@
     "counts": {
       "DISCHARGED_FORMAL": 0,
       "DISCHARGED_SYMBOLIC": 3,
-      "DISCHARGED_INTERVAL": 20,
-      "CHECKED_NUMERIC": 1,
+      "DISCHARGED_INTERVAL": 21,
+      "CHECKED_NUMERIC": 0,
       "CERTIFIED_BY_AUTHOR": 0,
       "OPEN": 0,
       "REFUTED": 0
     }
   },
-  "seconds": 372.5
+  "seconds": 885.5
 }

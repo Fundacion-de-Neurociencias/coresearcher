@@ -1,0 +1,22 @@
+{
+  "region": "m >= 0, h > 0, outside {|l| <= 1.4, y <= 3.6, h >= .16} (t = asinh(x/s), l = m - h, y = m + h)",
+  "zones": 385,
+  "initial_boxes": 1598,
+  "certified_boxes": 1474,
+  "skipped_boxes_in_bounded_region": 130,
+  "evaluations": 1480,
+  "min_lower_bound": 0.002377650264192694,
+  "failed": [],
+  "lemmas": {
+    "margin = right - left of (4)": true,
+    "d margin / d V_q = 1 + X/(2 lambda)": true,
+    "V_pi split": true,
+    "sinh z / z increasing": true,
+    "quotient bound (z3)": true,
+    "int (1 - beta^2) dbeta/2 = 2/3": true,
+    "chord identity change of variables": true,
+    "x-length": true
+  },
+  "verified": true,
+  "seconds": 797.0
+}

@@ -9,8 +9,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 23 |
-| Tested | Covered by tests, not reachable from the API | 57 |
-| Exercised | Referenced only by benchmark or demo scripts | 17 |
+| Tested | Covered by tests, not reachable from the API | 59 |
+| Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
 | Module | Level | API | Tests | Scripts |
@@ -67,6 +67,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |
 | `hypothesis_tournament_arena` | Integrated | yes | yes | - |
 | `inference_time_scaling` | Tested | - | yes | - |
+| `interval_engine` | Tested | - | yes | - |
 | `isaac_sim_grounding_adapter` | Tested | - | yes | - |
 | `lab_in_the_loop_adapter` | Prototype | - | - | - |
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
@@ -80,8 +81,9 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `mahler_interval` | Tested | - | yes | yes |
 | `mahler_obligations` | Tested | - | yes | yes |
 | `mahler_ranges` | Tested | - | yes | yes |
-| `mahler_segment` | Tested | - | yes | yes |
+| `mahler_segment` | Tested | - | yes | - |
 | `mahler_segment_box` | Tested | - | yes | yes |
+| `mahler_segment_tails` | Tested | - | yes | yes |
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |
 | `manifold_detector` | Prototype | - | - | - |
@@ -92,11 +94,12 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `o3_continuum_case` | Tested | - | yes | yes |
-| `obligation_ledger` | Tested | - | yes | yes |
+| `obligation_ledger` | Tested | - | yes | - |
 | `openai_math_coverage` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
 | `preregistration` | Tested | - | yes | yes |
+| `proof_cases` | Exercised | yes | - | yes |
 | `proof_pipeline` | Tested | - | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |

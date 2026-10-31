@@ -105,8 +105,10 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
 ### 2.7 The obligation ledger
 
 - **What.** A ledger of named obligations with independent discharge and a reproducible proof pipeline (one-command
-  rerun, SHA-256 manifest, an audit that rejects stale proofs). Its pilot is the Mahler scalar input: 23 of 24
-  obligations proved.
+  rerun, SHA-256 manifest, an audit that rejects stale proofs). Its pilot is the Mahler scalar input. All 24
+  obligations are proved, so the claim is DISCHARGED_INTERVAL, and every proof step has been reproduced from
+  scratch. Proof cases are registered once and served read-only at `/api/obligations/cases`, each together with
+  its audit.
   ([ADR-076](../decisions/ADR-DISCOVERY-076-OBLIGATION-LEDGER.md),
   [case](cases/MAHLER_SCALAR_OBLIGATIONS.md), [pipeline](PROOF_PIPELINE.md), PR #18)
 - **Why.** Long proofs fail at single steps. A ledger makes every step's status explicit and keeps it reproducible.

@@ -65,7 +65,8 @@ def test_committed_ledger():
     report = json.loads(LEDGER.read_text(encoding="utf-8"))
     claim = report["claim"]
     assert report["source"]["commit"] == mo.SOURCE["commit"]
-    assert claim["status"] == Status.CHECKED_NUMERIC.value and claim["is_proved"] is False
+    # every obligation is proved, so the claim is proved (DISCHARGED_INTERVAL is its weakest status)
+    assert claim["status"] == Status.DISCHARGED_INTERVAL.value and claim["is_proved"] is True
     by_id = {o["id"]: o for o in claim["obligations"]}
     assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
     # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; the segment inequality
@@ -85,10 +86,13 @@ def test_committed_ledger():
     # the first bullet's tails (|x| > 8) are proved too (mahler_tail.py), so the first bullet holds on all of R
     tails = [o for o in claim["obligations"] if o["id"].startswith("pointwise:") and "for |x| >" in o["id"]]
     assert len(tails) == 7 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in tails)
-    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) outside the middle and large widths remains numeric
+    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); the short widths and tails of (4) are proved too (mahler_segment_tails.py)
     outside = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
     assert len(outside) == 2 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in outside)
     box = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) on the middle")]
     assert len(box) == 1 and box[0]["status"] == Status.DISCHARGED_INTERVAL.value
     rest = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) outside")]
-    assert len(rest) == 1 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)
+    assert len(rest) == 1 and rest[0]["status"] == Status.DISCHARGED_INTERVAL.value
+    # the numeric check and the author's certificate stay recorded beside the proof
+    kinds = {d["status"] for d in rest[0]["discharges"]}
+    assert {Status.CHECKED_NUMERIC.value, Status.CERTIFIED_BY_AUTHOR.value, Status.DISCHARGED_INTERVAL.value} <= kinds

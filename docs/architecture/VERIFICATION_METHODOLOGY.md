@@ -11,7 +11,7 @@ AI-science results: Sakana's Agentic Scientist, Google's OASE, OpenAI's `openai/
 Yang–Mills claim. **The results of those exercises are not the goal.** They were preparatory and demonstrative work,
 meant to expose *methods* of verification and reasoning that make CoResearcher stronger.
 
-This document names those methods. For each one it states:
+This document names those methods (M1–M11). For each one it states:
 
 - what it contributes, and why;
 - how it works;
@@ -160,6 +160,46 @@ domain-neutral.
 - **Beyond.** It works the same way for a mechanistic model: knowing which assumption a model's predictions rest on
   tells CoResearcher which obligation to check first.
 
+### M11. When a premise falls, everything built on it must be re-examined
+
+- **Contribution.** The Exponential Time Hypothesis (ETH) has been assumed in hundreds of conditional results. If it
+  is false, each "X is hard unless ETH fails" loses its footing. A single retraction cascades.
+- **How.** Every hypothesis records the premises it assumes and where each premise comes from. Premise provenance
+  already exists, but it never decides validity. When a premise is refuted or downgraded, mark every dependent
+  hypothesis and claim for re-evaluation, and lower its rung on the trust ladder until it is re-checked.
+- **Came from.** The ETH refutation (`openai/math` family 378, published 2026-10-25), found independently and on the
+  same date by an OpenAI model and a Claude research model.
+- **Integration.** Not yet. It belongs with block B: the cited-results registry also carries the dependency edges.
+- **Beyond.** In biomedicine, a retracted mechanism or a revised biomarker threshold is a fallen premise. Every
+  hypothesis that assumed it must be flagged.
+
+### Calibration from the ETH case
+
+The Lean Comparator statement for family 378 (`lean/ComparatorChallenges/SubexponentialSAT.lean`) is a positive
+example of statement fidelity. It builds in the guards that keep a complexity claim from being vacuous:
+
+- **Uniformity.** One machine is quantified *before* all inputs (∃ machine, ∀ n, F). A machine allowed to depend on
+  n could hard-code answers.
+- **An explicit cost model.** A deterministic multitape Turing machine built on Mathlib's `Turing.Tape`, with time
+  counted as steps of its step function.
+- **Halting with exact output.** The binary count is written on a tape, and the halting state carries the SAT
+  answer.
+- **A space bound at every prefix** of the execution, not only at the end.
+- **The parameters are explicit.** The bound is stated in terms of n (variables) and L (encoding bit length). The
+  encoding begins with n in unary, so L ≥ n, and for fixed k the factor in L is polynomial in n.
+
+There is also one subtlety, which teaches M1:
+
+- The headline writes the exponent as n/(log n)^{1/2+o(1)}. The Lean bound is n·(log log n)²/√(log n), which fits
+  that form only if the o(1) is allowed to be negative. The manuscript's own bound has a single log log n.
+- Asymptotic notation hides a direction. The fidelity service should turn it into explicit quantified forms before
+  comparing the two statements, instead of matching notation.
+
+The ETH case also exercises the top rungs of the trust ladder. Two independent AI systems reached the result, and a
+human working group led by the hypothesis's authors (Impagliazzo, Paturi, with Williams) is reviewing it. Each of
+these is a separate signal of independent reproduction, and none is a kernel check. Our own Comparator run is
+recorded at NOT_RUN until it is executed.
+
 ## 3. How the methods compose
 
 A hypothesis submitted to CoResearcher should pass through all of them in order:
@@ -181,8 +221,8 @@ the weight lies (M10).
 | Block | Methods | Capability | State |
 | --- | --- | --- | --- |
 | A | M1, M4, M7 | Vacuity probe in the evaluator, trust ladder in reports and the evidence graph, fidelity compare and Lean lint as API/CLI services | In progress |
-| B | M6 | Registry of cited results with typed hypotheses and conventions, checked at each use, with dependency propagation | Next |
-| C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing) as regression tests in CI | Next |
+| B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Next |
+| C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Next |
 | D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses | After B and C |
 | E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | After D |
 

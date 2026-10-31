@@ -1,0 +1,1973 @@
+{
+  "source": {
+    "repository": "https://github.com/openai/math.git",
+    "pre_commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+    "post_commit": "301488868beec11bfd897168433b0a64f5258559",
+    "head_at_build": "4eaee87548250b2682affda7d05d947c05554bae",
+    "history_md_sha256": "41c2a2d470014b3628695c7aabf5fd0c93f6f687621fca172062f22b59ed6a1e"
+  },
+  "control_seed": 20261030,
+  "location_tolerance": 2,
+  "items": [
+    {
+      "id": "A-pointwise-2-converse-for-elliptic-curves-with-rational-two-torsion",
+      "group": "citation_update",
+      "family": "004",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "A-pointwise-2-converse-for-elliptic-curves-with-rational-two-torsion-September-24-2026",
+        "tree": "745858c44787a71a7c4b2d63d6e72df100db131f"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "A-pointwise-2-converse-for-elliptic-curves-with-rational-two-torsion-October-7-2026",
+        "tree": "1209ef2da6ee8e6cc395c246b660f2e93302d20f"
+      },
+      "version_note": "This version updates a citation to a revised manuscript in this collection"
+    },
+    {
+      "id": "Abelian-covers-Gale-correspondences-and-the-Hodge-conjecture-for-powers",
+      "group": "citation_update",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Abelian-covers-Gale-correspondences-and-the-Hodge-conjecture-for-powers-September-30-2026",
+        "tree": "9d4c0f808a41f01a76cf84e52c84042734bed4e4"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Abelian-covers-Gale-correspondences-and-the-Hodge-conjecture-for-powers-October-6-2026",
+        "tree": "10b943586f6ea65e2eab389f1587fa844c0cbd5c"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+      "group": "revised",
+      "family": "034",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds-October-5-2026",
+        "tree": "987b0b014854314020edd9cfee43d11d1c8cdaee"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds-October-6-2026",
+        "tree": "636c5a29587039aed061fee6b5712dabaecd1842"
+      },
+      "version_note": "This version clarifies the independent ordinary-MMP input and states the remaining Iitaka-subadditivity and effective-abundance hypotheses explicitly",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version clarifies the independent ordinary-MMP input and states the remaining Iitaka-subadditivity and effective-abundance hypotheses explicitly",
+      "defect_type": "unstated hypotheses of used inputs",
+      "locations": {
+        "appendices/projective_exclusions.tex": [
+          [
+            220,
+            224
+          ]
+        ],
+        "main.tex": [
+          [
+            9,
+            10
+          ],
+          [
+            14,
+            15
+          ]
+        ],
+        "references.bib": [
+          [
+            17,
+            17
+          ]
+        ],
+        "sections/introduction.tex": [
+          [
+            24,
+            30
+          ]
+        ],
+        "sections/premises.tex": [
+          [
+            1,
+            1
+          ],
+          [
+            235,
+            238
+          ],
+          [
+            266,
+            266
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples",
+      "group": "revised",
+      "family": "341",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples-September-23-2026",
+        "tree": "35da71ea66a06d8864f1621a693f7dc5fec06a2e"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples-October-7-2026",
+        "tree": "63fd1e7f6cf5909a25ed99bf12351fb5497a3a11"
+      },
+      "version_note": "This version clarifies the prescribed cohomology-class criterion used in the deformation argument, removes an unnecessary cone-comparison citation, and updates the companion-paper citation",
+      "history": "Taming and hypersymplectic deformation (2 manuscripts). Removed an unnecessary cone-comparison dependency.",
+      "defect": "This version clarifies the prescribed cohomology-class criterion used in the deformation argument, removes an unnecessary cone-comparison citation, and updates the companion-paper citation",
+      "defect_type": "dependency on the incorrect cone comparison of a companion paper",
+      "locations": {
+        "sections/01-introduction.tex": [
+          [
+            172,
+            174
+          ],
+          [
+            182,
+            182
+          ],
+          [
+            186,
+            186
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank",
+      "group": "revised",
+      "family": "002",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank-October-3-2026",
+        "tree": "702b0295a52d2a37ebefd9860e94c217cb39a06e"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank-October-7-2026",
+        "tree": "da0416b0a8cdb6e556bf511df720d0bcfa94bd3c"
+      },
+      "version_note": "This version removes an obsolete supporting citation and updates citations to revised manuscripts in this collection",
+      "history": "Exact Birch-Swinnerton-Dyer Formula from Low Selmer Corank: removed an obsolete introductory citation to a removed supporting manuscript.",
+      "defect": "This version removes an obsolete supporting citation and updates citations to revised manuscripts in this collection",
+      "defect_type": "citation to a removed supporting manuscript",
+      "locations": {
+        "sections/01-introduction.tex": [
+          [
+            134,
+            134
+          ]
+        ]
+      },
+      "encodable": [
+        "CITATION"
+      ],
+      "lean_scope": null
+    },
+    {
+      "id": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "family": "056",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds-October-5-2026",
+        "tree": "226050e9c84e86a9df3e7d156f9b2ab8a95a4af7"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds-October-6-2026",
+        "tree": "3c063b6c4f774f51d46b0a969a26c5deb6ec8812"
+      },
+      "version_note": "This version adds carrier-positivity and multiplier-ideal arguments and revises the contraction induction for ordinary negative-ray programs",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version adds carrier-positivity and multiplier-ideal arguments and revises the contraction induction for ordinary negative-ray programs",
+      "defect_type": "proof gap (contraction induction)",
+      "locations": {
+        "references.bib": [
+          [
+            0,
+            1
+          ],
+          [
+            609,
+            610
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            158,
+            158
+          ]
+        ],
+        "sections/03-steps.tex": [
+          [
+            191,
+            191
+          ]
+        ],
+        "sections/04-terminal.tex": [
+          [
+            311,
+            313
+          ]
+        ],
+        "sections/06-perturbation.tex": [
+          [
+            1593,
+            1594
+          ],
+          [
+            1597,
+            1598
+          ],
+          [
+            1613,
+            1619
+          ],
+          [
+            1651,
+            1652
+          ],
+          [
+            1861,
+            1862
+          ],
+          [
+            1864,
+            1865
+          ],
+          [
+            1867,
+            1872
+          ],
+          [
+            1874,
+            1875
+          ],
+          [
+            1881,
+            1881
+          ],
+          [
+            1912,
+            1913
+          ],
+          [
+            1940,
+            1942
+          ],
+          [
+            1944,
+            1944
+          ],
+          [
+            1946,
+            1953
+          ],
+          [
+            1955,
+            1964
+          ],
+          [
+            2041,
+            2041
+          ],
+          [
+            2047,
+            2047
+          ]
+        ],
+        "sections/08-resolutions.tex": [
+          [
+            123,
+            123
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Fontaine-Mazur-modularity-at-the-prime-2",
+      "group": "citation_update",
+      "family": "010",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Fontaine-Mazur-modularity-at-the-prime-2-September-23-2026",
+        "tree": "0ee45180189a3993a01e33c1936e427d0c5166eb"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Fontaine-Mazur-modularity-at-the-prime-2-October-6-2026",
+        "tree": "b01dad92005597ad3c3da844f61b93ba8afd55e8"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights",
+      "group": "revised",
+      "family": "232",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights-September-25-2026",
+        "tree": "e6f3ed0f69de2a24cf8ead1fc9dbe3a27ec311c4"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights-October-6-2026",
+        "tree": "e080f70f0bd93eeb607b6eac96bcf3ffe66cdd9c"
+      },
+      "version_note": "This version supplies the annulus proof of the circuit estimate used in the discrete argument",
+      "history": "Lipschitz heights and Ashkin-Teller currents (4 manuscripts): repaired crossing, boundary-attachment, conditioning and convergence arguments.",
+      "defect": "This version supplies the annulus proof of the circuit estimate used in the discrete argument",
+      "defect_type": "proof gap (missing argument)",
+      "locations": {
+        "main.tex": [
+          [
+            68,
+            69
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            192,
+            192
+          ]
+        ],
+        "sections/02-discrete.tex": [
+          [
+            151,
+            151
+          ],
+          [
+            154,
+            154
+          ],
+          [
+            170,
+            171
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Goldfelds-analytic-density-conjecture-and-the-2-converse-for-elliptic-curves",
+      "group": "citation_update",
+      "family": "006",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Goldfelds-analytic-density-conjecture-and-the-2-converse-for-elliptic-curves-September-23-2026",
+        "tree": "60dfee294fd2705ef92c7db5ed247dd0609a43d5"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Goldfelds-analytic-density-conjecture-and-the-2-converse-for-elliptic-curves-October-7-2026",
+        "tree": "9cfb8e4c005b4a396f6b09a544c0771039cd75c3"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Hilberts-tenth-problem-over-the-rational-numbers",
+      "group": "citation_update",
+      "family": "004",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Hilberts-tenth-problem-over-the-rational-numbers-September-24-2026",
+        "tree": "8c182acceb70e6fc422e1de2d20c492a551c6b04"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Hilberts-tenth-problem-over-the-rational-numbers-October-6-2026",
+        "tree": "0a112e434f6bf7f316e2999a63813ce58447e432"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Incompressible-Box-Transport-and-Finite-Computation",
+      "group": "revised",
+      "family": "376",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Incompressible-Box-Transport-and-Finite-Computation-September-27-2026",
+        "tree": "01d334b9517b0eadc85ad1d8d93cd24823af33a3"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Incompressible-Box-Transport-and-Finite-Computation-October-6-2026",
+        "tree": "b02d6922631b44a995a9851660b8ab3715f64584"
+      },
+      "version_note": "This version supplies effective torus-projection and common-clock decay estimates, including the projected-force and pressure bounds",
+      "history": "Incompressible Box Transport and Finite Computation: revised the torus-projection and common-clock estimates.",
+      "defect": "This version supplies effective torus-projection and common-clock decay estimates, including the projected-force and pressure bounds",
+      "defect_type": "effective estimates asserted without an effective proof",
+      "locations": {
+        "analysis.tex": [
+          [
+            165,
+            170
+          ],
+          [
+            173,
+            179
+          ],
+          [
+            181,
+            183
+          ],
+          [
+            185,
+            191
+          ]
+        ],
+        "clocks.tex": [
+          [
+            118,
+            121
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": "Lean note 376 formalizes the sheet-program and halting-detection statements; the defect is in the prose proof of the projection and decay estimates, not in a formal statement"
+    },
+    {
+      "id": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+      "group": "revised",
+      "family": "034",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity-October-4-2026",
+        "tree": "bcc78e9ab80114e83470c27b81ded21960c83888"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity-October-6-2026",
+        "tree": "5a6934f97ddd5ff593a97ece2ca2405bfd1f3d73"
+      },
+      "version_note": "This version supplies base-presentation and multiplier-ideal arguments for the induction, including the adjoint pullback and contraction-descent steps",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version supplies base-presentation and multiplier-ideal arguments for the induction, including the adjoint pullback and contraction-descent steps",
+      "defect_type": "proof gap (induction steps)",
+      "locations": {
+        "references.bib": [
+          [
+            789,
+            790
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            83,
+            83
+          ],
+          [
+            96,
+            97
+          ],
+          [
+            107,
+            107
+          ],
+          [
+            120,
+            123
+          ]
+        ],
+        "sections/03a-program-foundations.tex": [
+          [
+            37,
+            37
+          ],
+          [
+            51,
+            51
+          ]
+        ],
+        "sections/03c-restricted-induction.tex": [
+          [
+            54,
+            55
+          ],
+          [
+            58,
+            59
+          ],
+          [
+            970,
+            971
+          ],
+          [
+            1122,
+            1123
+          ],
+          [
+            1125,
+            1126
+          ],
+          [
+            1128,
+            1133
+          ],
+          [
+            1588,
+            1593
+          ],
+          [
+            1809,
+            1814
+          ],
+          [
+            1840,
+            1859
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Milnes-rationality-conjecture-for-abelian-varieties",
+      "group": "citation_update",
+      "family": "001",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Milnes-rationality-conjecture-for-abelian-varieties-September-23-2026",
+        "tree": "a7e118c6ff4181e61ffec880fe0c16eeaddf2667"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Milnes-rationality-conjecture-for-abelian-varieties-October-7-2026",
+        "tree": "0336415f6561dd1537c2af2af42908b0843a3586"
+      },
+      "version_note": "This version updates a citation to a revised manuscript in this collection"
+    },
+    {
+      "id": "Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds",
+      "group": "revised",
+      "family": "036",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds-October-4-2026",
+        "tree": "4167640abca1b450f536c03d7c6a654040154120"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds-October-6-2026",
+        "tree": "0dc4464d95201523735c4e045635397ccde55e32"
+      },
+      "version_note": "This version states the Iitaka, model, and contraction inputs used in the divisorial-decomposition argument explicitly",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version states the Iitaka, model, and contraction inputs used in the divisorial-decomposition argument explicitly",
+      "defect_type": "unstated hypotheses of used inputs",
+      "locations": {
+        "companions.bib": [
+          [
+            5,
+            6
+          ],
+          [
+            14,
+            14
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            58,
+            60
+          ],
+          [
+            65,
+            66
+          ]
+        ],
+        "sections/02-preliminaries.tex": [
+          [
+            154,
+            154
+          ],
+          [
+            177,
+            180
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Taming-implies-compatibility-on-four-manifolds",
+      "group": "revised",
+      "family": "342",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Taming-implies-compatibility-on-four-manifolds-September-23-2026",
+        "tree": "1482e92ff4ea679f0091a20f11a1d20ec0f38701"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Taming-implies-compatibility-on-four-manifolds-October-6-2026",
+        "tree": "2c97767dab38ba0b1cf5ae6b0ad8ab8c9603ea89"
+      },
+      "version_note": "This version characterizes the compatible cone by intersection positivity, restricts the cone-sum equality to $h_J^-=b_2^+-1$, and adds a four-torus example of strict inclusion",
+      "history": "Taming and hypersymplectic deformation (2 manuscripts). Corrected the cone-equality claim, added a strict-inclusion example.",
+      "defect": "This version characterizes the compatible cone by intersection positivity, restricts the cone-sum equality to $h_J^-=b_2^+-1$, and adds a four-torus example of strict inclusion",
+      "defect_type": "claim beyond the hypotheses of a cited theorem (cone sum equality asserted without h_J^- = b_2^+ - 1); false in general (four-torus strict inclusion)",
+      "locations": {
+        "main.tex": [
+          [
+            11,
+            12
+          ],
+          [
+            19,
+            20
+          ]
+        ],
+        "preamble.tex": [
+          [
+            19,
+            20
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            34,
+            35
+          ],
+          [
+            37,
+            37
+          ],
+          [
+            40,
+            44
+          ],
+          [
+            46,
+            46
+          ],
+          [
+            48,
+            52
+          ],
+          [
+            55,
+            60
+          ],
+          [
+            68,
+            71
+          ],
+          [
+            80,
+            82
+          ],
+          [
+            94,
+            105
+          ],
+          [
+            195,
+            195
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": "Lean note 342 formalizes only the main theorem (taming implies compatibility); the defect is in the cone corollary, which has no Lean statement"
+    },
+    {
+      "id": "Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "family": "056",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds-October-5-2026",
+        "tree": "3a10e635939a92452f60f37751627a943485965a"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds-October-6-2026",
+        "tree": "dc20ab82fc135cd891de382a6994dfd10591b008"
+      },
+      "version_note": "This version clarifies that only independent negativity, codimension-two smoothness, and cycle-comparison results are used from the companion fourfold paper",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version clarifies that only independent negativity, codimension-two smoothness, and cycle-comparison results are used from the companion fourfold paper",
+      "defect_type": "unclear dependency on a companion paper",
+      "locations": {
+        "build/sections/01-introduction.tex": [
+          [
+            199,
+            200
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "family": "056",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds-October-5-2026",
+        "tree": "0b8b444ea1fc7f7d923116601171da5ada7fa2e4"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds-October-7-2026",
+        "tree": "3c8c3efb5fb844afc862688ee531824e8adf12d3"
+      },
+      "version_note": "This version clarifies the independent relative MMP and birational-comparison inputs used by the proof and updates citations to revised companion papers",
+      "history": "Kähler minimal model programs and abundance (6 manuscripts): expanded positivity and contraction arguments and clarified which results are used as inputs, with their required hypotheses.",
+      "defect": "This version clarifies the independent relative MMP and birational-comparison inputs used by the proof and updates citations to revised companion papers",
+      "defect_type": "unclear dependency on companion inputs",
+      "locations": {
+        "sections/02-preliminaries.tex": [
+          [
+            238,
+            239
+          ]
+        ],
+        "termination-generalized-lc-kahler-fourfolds.tex": [
+          [
+            359,
+            360
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+      "group": "revised",
+      "family": "232",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data-September-25-2026",
+        "tree": "6b395f2f6dd2620f2e3136ccbcd6dd06db475489"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data-October-6-2026",
+        "tree": "9732974c7cd5448406f2ad9636ccc1326d4d9937"
+      },
+      "version_note": "This version derives the conditional cut and loop estimates from the companion weighted annulus circuit theorem at $x=1$",
+      "history": "Lipschitz heights and Ashkin-Teller currents (4 manuscripts): repaired crossing, boundary-attachment, conditioning and convergence arguments.",
+      "defect": "This version derives the conditional cut and loop estimates from the companion weighted annulus circuit theorem at $x=1$",
+      "defect_type": "proof gap (estimates re-derived from a companion theorem)",
+      "locations": {
+        "references.bib": [
+          [
+            87,
+            88
+          ]
+        ],
+        "sections/01-introduction.tex": [
+          [
+            101,
+            107
+          ],
+          [
+            158,
+            163
+          ]
+        ],
+        "sections/03-cuts.tex": [
+          [
+            3,
+            7
+          ],
+          [
+            9,
+            9
+          ],
+          [
+            12,
+            17
+          ],
+          [
+            19,
+            25
+          ],
+          [
+            27,
+            45
+          ],
+          [
+            53,
+            62
+          ],
+          [
+            64,
+            96
+          ],
+          [
+            138,
+            139
+          ],
+          [
+            169,
+            170
+          ]
+        ],
+        "sections/04-moments.tex": [
+          [
+            27,
+            28
+          ],
+          [
+            137,
+            138
+          ],
+          [
+            149,
+            149
+          ],
+          [
+            158,
+            161
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "The-Selmer-converse-for-elliptic-curves-at-every-prime",
+      "group": "citation_update",
+      "family": "002",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-Selmer-converse-for-elliptic-curves-at-every-prime-September-24-2026",
+        "tree": "ef0def2702287c25b240c17554f8b9cf0daa514e"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-Selmer-converse-for-elliptic-curves-at-every-prime-October-7-2026",
+        "tree": "963c61e950f08f4f55576651f7995711596635b8"
+      },
+      "version_note": "This version updates a citation to a revised manuscript in this collection"
+    },
+    {
+      "id": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+      "group": "revised",
+      "family": "233",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents-September-25-2026",
+        "tree": "12b976db46a75e8e31fbcb847fde3ee07cec6b20"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents-October-6-2026",
+        "tree": "645fdc598261f87fdcf6e788e2c7eaf638a71499"
+      },
+      "version_note": "This version corrects the transmission and boundary-collar arguments, replaces excursion convergence with a signed-loop-soup/GMC argument tied to the same limiting field, and updates the companion-paper citation",
+      "history": "Lipschitz heights and Ashkin-Teller currents (4 manuscripts): repaired crossing, boundary-attachment, conditioning and convergence arguments.",
+      "defect": "This version corrects the transmission and boundary-collar arguments, replaces excursion convergence with a signed-loop-soup/GMC argument tied to the same limiting field, and updates the companion-paper citation",
+      "defect_type": "incorrect argument replaced (transmission, boundary collar, excursion convergence)",
+      "locations": {
+        "references.bib": [
+          [
+            284,
+            285
+          ]
+        ],
+        "sections/03-spatial.tex": [
+          [
+            777,
+            777
+          ],
+          [
+            857,
+            858
+          ],
+          [
+            899,
+            911
+          ],
+          [
+            913,
+            934
+          ],
+          [
+            936,
+            950
+          ],
+          [
+            952,
+            967
+          ],
+          [
+            969,
+            977
+          ]
+        ],
+        "sections/07-local-sets.tex": [
+          [
+            822,
+            825
+          ]
+        ],
+        "sections/08-local-kernel.tex": [
+          [
+            29,
+            29
+          ],
+          [
+            67,
+            67
+          ],
+          [
+            442,
+            443
+          ],
+          [
+            445,
+            447
+          ],
+          [
+            449,
+            460
+          ],
+          [
+            462,
+            487
+          ],
+          [
+            490,
+            490
+          ],
+          [
+            492,
+            494
+          ],
+          [
+            496,
+            498
+          ],
+          [
+            504,
+            508
+          ],
+          [
+            561,
+            567
+          ],
+          [
+            569,
+            578
+          ],
+          [
+            580,
+            584
+          ],
+          [
+            586,
+            588
+          ],
+          [
+            590,
+            603
+          ],
+          [
+            652,
+            653
+          ],
+          [
+            675,
+            676
+          ],
+          [
+            678,
+            678
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "The-mean-analytic-rank-of-quadratic-twists-of-elliptic-curves",
+      "group": "citation_update",
+      "family": "006",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-mean-analytic-rank-of-quadratic-twists-of-elliptic-curves-September-23-2026",
+        "tree": "653cef75f640d36f5f0fd11393c7ea78a43397bb"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-mean-analytic-rank-of-quadratic-twists-of-elliptic-curves-October-6-2026",
+        "tree": "48ccf04b62a5e000ebe04ca827f688d22e159ff4"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "The-p-adic-section-conjecture",
+      "group": "citation_update",
+      "family": "019",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-p-adic-section-conjecture-September-24-2026",
+        "tree": "285b580d29e4a75a6f8ff712f79033004fb99ef4"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-p-adic-section-conjecture-October-6-2026",
+        "tree": "f9103ffaf6f46f9d6a346f14e018a6e060d6ca44"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "The-rational-Hodge-conjecture-for-CM-abelian-varieties",
+      "group": "citation_update",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-rational-Hodge-conjecture-for-CM-abelian-varieties-September-30-2026",
+        "tree": "67e2c753c186c1fe4c601e91284504b164e390a6"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-rational-Hodge-conjecture-for-CM-abelian-varieties-October-6-2026",
+        "tree": "bf0cf5f7483134462156c4431bbe35f42fac920d"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "The-two-primary-Birch-Swinnerton-Dyer-formula-in-Selmer-corank-at-most-one",
+      "group": "citation_update",
+      "family": "002",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-two-primary-Birch-Swinnerton-Dyer-formula-in-Selmer-corank-at-most-one-September-24-2026",
+        "tree": "7f698cc72f855c328578d5c35495401a52772ccf"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "The-two-primary-Birch-Swinnerton-Dyer-formula-in-Selmer-corank-at-most-one-October-6-2026",
+        "tree": "44af7170ae2568eca1bbd4506613c7b78475cb98"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+      "group": "revised",
+      "family": "232",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice-September-25-2026",
+        "tree": "7217417dee441515ee7f688edb90ae5f515d4d61"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice-October-6-2026",
+        "tree": "af9792405653407150634948ed55333a92b698fe"
+      },
+      "version_note": "This version repairs the boundary-attachment, landing-comparison, and multiscale separation arguments, including the conditional walk and hookup steps, and supplies terminal-side identification and harmonic-mass nonreturn for whole-curve convergence",
+      "history": "Lipschitz heights and Ashkin-Teller currents (4 manuscripts): repaired crossing, boundary-attachment, conditioning and convergence arguments.",
+      "defect": "This version repairs the boundary-attachment, landing-comparison, and multiscale separation arguments, including the conditional walk and hookup steps, and supplies terminal-side identification and harmonic-mass nonreturn for whole-curve convergence",
+      "defect_type": "proof gap (several repaired steps)",
+      "locations": {
+        "paper.tex": [
+          [
+            173,
+            176
+          ],
+          [
+            200,
+            200
+          ],
+          [
+            271,
+            272
+          ],
+          [
+            339,
+            340
+          ],
+          [
+            360,
+            364
+          ]
+        ],
+        "sections/cell.tex": [
+          [
+            757,
+            769
+          ]
+        ],
+        "sections/foundations.tex": [
+          [
+            219,
+            220
+          ]
+        ],
+        "sections/geometry.tex": [
+          [
+            29,
+            31
+          ],
+          [
+            35,
+            36
+          ],
+          [
+            40,
+            40
+          ],
+          [
+            42,
+            42
+          ],
+          [
+            56,
+            57
+          ],
+          [
+            63,
+            64
+          ],
+          [
+            67,
+            67
+          ],
+          [
+            69,
+            69
+          ],
+          [
+            82,
+            82
+          ],
+          [
+            88,
+            104
+          ],
+          [
+            111,
+            111
+          ],
+          [
+            114,
+            115
+          ],
+          [
+            229,
+            229
+          ],
+          [
+            231,
+            232
+          ],
+          [
+            234,
+            235
+          ],
+          [
+            253,
+            271
+          ],
+          [
+            275,
+            286
+          ],
+          [
+            288,
+            293
+          ],
+          [
+            295,
+            307
+          ],
+          [
+            309,
+            311
+          ],
+          [
+            313,
+            313
+          ],
+          [
+            315,
+            329
+          ],
+          [
+            331,
+            338
+          ],
+          [
+            340,
+            354
+          ],
+          [
+            356,
+            368
+          ],
+          [
+            370,
+            371
+          ],
+          [
+            373,
+            376
+          ],
+          [
+            378,
+            391
+          ],
+          [
+            393,
+            393
+          ],
+          [
+            395,
+            405
+          ],
+          [
+            407,
+            415
+          ],
+          [
+            417,
+            419
+          ],
+          [
+            421,
+            424
+          ],
+          [
+            427,
+            427
+          ],
+          [
+            429,
+            432
+          ],
+          [
+            434,
+            434
+          ],
+          [
+            436,
+            437
+          ],
+          [
+            439,
+            452
+          ],
+          [
+            454,
+            470
+          ],
+          [
+            472,
+            477
+          ],
+          [
+            479,
+            483
+          ],
+          [
+            485,
+            485
+          ],
+          [
+            488,
+            500
+          ],
+          [
+            574,
+            574
+          ],
+          [
+            690,
+            697
+          ],
+          [
+            744,
+            747
+          ],
+          [
+            749,
+            751
+          ],
+          [
+            755,
+            759
+          ],
+          [
+            761,
+            767
+          ],
+          [
+            769,
+            775
+          ],
+          [
+            777,
+            783
+          ],
+          [
+            786,
+            791
+          ],
+          [
+            793,
+            798
+          ],
+          [
+            800,
+            801
+          ],
+          [
+            803,
+            804
+          ],
+          [
+            806,
+            825
+          ],
+          [
+            827,
+            835
+          ],
+          [
+            837,
+            839
+          ],
+          [
+            841,
+            841
+          ],
+          [
+            843,
+            844
+          ],
+          [
+            846,
+            847
+          ],
+          [
+            849,
+            854
+          ],
+          [
+            856,
+            857
+          ],
+          [
+            859,
+            861
+          ],
+          [
+            863,
+            863
+          ],
+          [
+            865,
+            871
+          ],
+          [
+            873,
+            890
+          ],
+          [
+            892,
+            901
+          ],
+          [
+            908,
+            908
+          ],
+          [
+            911,
+            912
+          ],
+          [
+            934,
+            934
+          ],
+          [
+            951,
+            952
+          ],
+          [
+            987,
+            989
+          ],
+          [
+            1016,
+            1017
+          ],
+          [
+            1024,
+            1026
+          ],
+          [
+            1028,
+            1031
+          ],
+          [
+            1082,
+            1082
+          ],
+          [
+            1113,
+            1114
+          ],
+          [
+            1116,
+            1119
+          ],
+          [
+            1186,
+            1191
+          ],
+          [
+            1263,
+            1265
+          ],
+          [
+            1313,
+            1318
+          ]
+        ],
+        "sections/interface.tex": [
+          [
+            38,
+            42
+          ],
+          [
+            69,
+            77
+          ],
+          [
+            238,
+            238
+          ],
+          [
+            240,
+            241
+          ],
+          [
+            246,
+            247
+          ],
+          [
+            344,
+            344
+          ],
+          [
+            351,
+            355
+          ],
+          [
+            358,
+            363
+          ],
+          [
+            373,
+            375
+          ],
+          [
+            378,
+            379
+          ],
+          [
+            411,
+            413
+          ],
+          [
+            416,
+            421
+          ],
+          [
+            431,
+            432
+          ],
+          [
+            435,
+            444
+          ],
+          [
+            468,
+            469
+          ],
+          [
+            482,
+            484
+          ],
+          [
+            487,
+            498
+          ],
+          [
+            502,
+            502
+          ],
+          [
+            514,
+            514
+          ],
+          [
+            529,
+            536
+          ],
+          [
+            540,
+            545
+          ],
+          [
+            718,
+            718
+          ],
+          [
+            838,
+            840
+          ],
+          [
+            843,
+            850
+          ],
+          [
+            852,
+            862
+          ],
+          [
+            864,
+            868
+          ],
+          [
+            886,
+            894
+          ],
+          [
+            896,
+            896
+          ],
+          [
+            898,
+            898
+          ],
+          [
+            903,
+            904
+          ],
+          [
+            913,
+            915
+          ],
+          [
+            917,
+            921
+          ],
+          [
+            923,
+            927
+          ],
+          [
+            930,
+            930
+          ],
+          [
+            933,
+            933
+          ],
+          [
+            935,
+            936
+          ]
+        ]
+      },
+      "encodable": [],
+      "lean_scope": null
+    },
+    {
+      "id": "Unrestricted-pro-modularity-at-the-prime-two",
+      "group": "citation_update",
+      "family": "010",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026",
+        "tree": "b7b61ec7def2d9523bc76d1d72e74611b6c9eb62"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Unrestricted-pro-modularity-at-the-prime-two-October-6-2026",
+        "tree": "932283064ae7a76cea0815ae66fcba1099e10356"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Weil-classes-and-Hodge-classes-on-abelian-powers",
+      "group": "citation_update",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Weil-classes-and-Hodge-classes-on-abelian-powers-September-30-2026",
+        "tree": "d700d23b34a3fdd2731ae66aef0f06525daee022"
+      },
+      "post": {
+        "commit": "301488868beec11bfd897168433b0a64f5258559",
+        "dir": "Weil-classes-and-Hodge-classes-on-abelian-powers-October-6-2026",
+        "tree": "728add2ee9cd4fae3ec28852cdbdc703731190b4"
+      },
+      "version_note": "This version updates citations to revised manuscripts in this collection"
+    },
+    {
+      "id": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+      "group": "withdrawn",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces-October-3-2026",
+        "tree": "67701367af6f2270e617f2a29c9f35da735c3c25"
+      },
+      "post": null,
+      "version_note": "# [Withdrawal notice: Algebraicity of Kuga-Satake Correspondences for K3 Surfaces](manuscript.pdf)\n\nOpenAI  \n**Withdrawn on October 6, 2026.**\n\nThe proof relies on an adaptation of the flawed stabilization-trace construction in [Algebraicity of Weil classes on split abelian eightfolds](https://github.com/openai/math/blob/main/preprints/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026/paper.pdf). The sign error in that construction prevents the required signed-double-point cancellation. The resulting gap leaves this paper's claimed algebraicity theorem unproved.\n\nThis withdrawal concerns the proof; it does not assert that the mathematical statement is false.",
+      "history": "Withdrawals: relies on the flawed stabilization-trace construction.",
+      "defect": "Adapts the same stabilization-trace step: reverse traces of sign (-1)^l make the count I + m(-1)^l = 0; the sign error of the Weil-eightfold paper carries over.",
+      "defect_type": "sign convention imported from a cited lemma; dependency on a withdrawn construction",
+      "locations": {
+        "manuscript.tex": [
+          [
+            1962,
+            1975
+          ]
+        ]
+      },
+      "encodable": []
+    },
+    {
+      "id": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+      "group": "withdrawn",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026",
+        "tree": "f9decde7689aae722b7fce73fe6c712c4f7bb5c1"
+      },
+      "post": null,
+      "version_note": "# [Withdrawal notice: Algebraicity of Weil classes on split abelian eightfolds](paper.pdf)\n\nOpenAI  \n**Withdrawn on October 6, 2026.**\n\nThe proof contains a sign error in the stabilization-trace argument used to obtain negative double points. In the manuscript's signed double-point convention, write $I(f_1)=-m$ with $m>0$. The proof assigns each reverse stabilization trace sign $+1$ and therefore claims that inserting $m$ such traces makes the signed count zero.\n\nAccounting for the opposite source orientations of the two branches of the standard cusp gives sign $-1$ for each reverse trace in this convention. The resulting count is therefore\n\n$$I_{\\mathrm{new}}=I(f_1)-m=-2m\\ne0.$$\n\nThe Eliashberg-Murphy cancellation theorem invoked at this step requires zero signed double-point count, so its hypothesis is not met. The subsequent oriented-surgery and embedded-brane construction is therefore unsupported, and the paper does not establish its claimed algebraicity theorem.\n\nThis withdrawal concerns the proof; it does not assert that the mathematical statement is false.",
+      "history": "Withdrawals: a sign error invalidates a stabilization-trace cancellation argument.",
+      "defect": "Reverse stabilization traces are assigned sign +1 (from (-1)^k with k = 4, imported from the cited trace lemma); with the opposite source orientations of the cusp branches the sign is -1, so the signed double-point count is I(f_1) - m = -2m, not 0, and the Eliashberg-Murphy cancellation hypothesis fails. The displayed arithmetic I(f_1)+m = 0 is consistent with the wrong sign.",
+      "defect_type": "sign convention imported from a cited lemma",
+      "locations": {
+        "sections/03-topology.tex": [
+          [
+            479,
+            492
+          ]
+        ]
+      },
+      "encodable": []
+    },
+    {
+      "id": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+      "group": "withdrawn",
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces-October-4-2026",
+        "tree": "2630ed6bced2c51d34a0f9acbac5370bfe0b0ed1"
+      },
+      "post": null,
+      "version_note": "# [Withdrawal notice: The rational Hodge conjecture for products of K3 surfaces](hodge-conjecture-products-k3.pdf)\n\nOpenAI  \n**Withdrawn on October 6, 2026.**\n\nThe proof relies on an adaptation of the flawed stabilization-trace construction in [Algebraicity of Weil classes on split abelian eightfolds](https://github.com/openai/math/blob/main/preprints/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026/paper.pdf). The sign error in that construction prevents the required signed-double-point cancellation. The resulting gap leaves this paper's claimed rational Hodge theorem for products of projective K3 surfaces unproved.\n\nThis withdrawal concerns the proof; it does not assert that the mathematical statement is false.",
+      "history": "Withdrawals: relies on the flawed stabilization-trace construction.",
+      "defect": "Adapts the same stabilization-trace step (trace signs (-1)^{k-1}, (-1)^k; d reverse traces make the count zero); the sign error carries over.",
+      "defect_type": "sign convention imported from a cited lemma; dependency on a withdrawn construction",
+      "locations": {
+        "manuscript/topology.tex": [
+          [
+            502,
+            515
+          ]
+        ]
+      },
+      "encodable": []
+    },
+    {
+      "id": "A-Conditional-Reduction-for-Algebraic-Kuga-Satake-Correspondences",
+      "group": "control",
+      "matched_to": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+      "same_family": true,
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "A-Conditional-Reduction-for-Algebraic-Kuga-Satake-Correspondences-September-10-2026",
+        "tree": "f070e3ead2a9cd36362441e5ed47dbad420d9a47"
+      },
+      "post": null
+    },
+    {
+      "id": "Algebraic-Kuga-Satake-correspondences-and-Hodge-conjectures-on-a-K3-quadratic-locus",
+      "group": "control",
+      "matched_to": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+      "same_family": true,
+      "family": "032",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Algebraic-Kuga-Satake-correspondences-and-Hodge-conjectures-on-a-K3-quadratic-locus-September-30-2026",
+        "tree": "bcd86ed1f932263ae0387e15469e1966c7c2e94c"
+      },
+      "post": null
+    },
+    {
+      "id": "Relative-denominators-and-effective-systems-for-log-Calabi-Yau-fibrations",
+      "group": "control",
+      "matched_to": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+      "same_family": true,
+      "family": "034",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Relative-denominators-and-effective-systems-for-log-Calabi-Yau-fibrations-September-27-2026",
+        "tree": "75775f1f3e9d5aca21d663916111c9f24ccb00cc"
+      },
+      "post": null
+    },
+    {
+      "id": "A-Torsion-Free-Group-Algebra-That-Is-Not-Directly-Finite",
+      "group": "control",
+      "matched_to": "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples",
+      "same_family": false,
+      "family": "197",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "A-Torsion-Free-Group-Algebra-That-Is-Not-Directly-Finite-October-4-2026",
+        "tree": "2342939856aee5815cebd434e96709d76250abe1"
+      },
+      "post": null
+    },
+    {
+      "id": "The-Blockwise-Alperin-Weight-Conjecture",
+      "group": "control",
+      "matched_to": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank",
+      "same_family": false,
+      "family": "202",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "The-Blockwise-Alperin-Weight-Conjecture-September-23-2026",
+        "tree": "3a714b59550c8d83eda920f8b45dc719aee0878e"
+      },
+      "post": null
+    },
+    {
+      "id": "Termination-for-projective-log-canonical-fourfolds-with-rational-boundary",
+      "group": "control",
+      "matched_to": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+      "same_family": true,
+      "family": "056",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Termination-for-projective-log-canonical-fourfolds-with-rational-boundary-September-24-2026",
+        "tree": "43765e16c8dec87ee8fbf964cb04ab5e7be9c17b"
+      },
+      "post": null
+    },
+    {
+      "id": "Uniform-exclusion-of-Landau-Siegel-zeros",
+      "group": "control",
+      "matched_to": "Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights",
+      "same_family": false,
+      "family": "003",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Uniform-exclusion-of-Landau-Siegel-zeros-October-1-2026",
+        "tree": "c074e8ce90584cf18844c216d660d9b74bdfd2ed"
+      },
+      "post": null
+    },
+    {
+      "id": "Prefix-Instructions-and-Incompressible-Flows",
+      "group": "control",
+      "matched_to": "Incompressible-Box-Transport-and-Finite-Computation",
+      "same_family": true,
+      "family": "376",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Prefix-Instructions-and-Incompressible-Flows-September-27-2026",
+        "tree": "e5989abf688390eb7552eed4a6e725fa2e08efca"
+      },
+      "post": null
+    },
+    {
+      "id": "Arithmetic-Stein-degree-bounds-for-log-Calabi-Yau-pairs",
+      "group": "control",
+      "matched_to": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+      "same_family": true,
+      "family": "034",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Arithmetic-Stein-degree-bounds-for-log-Calabi-Yau-pairs-September-25-2026",
+        "tree": "4ef24c58e64a0d3626f23e2d0d2856dbbfbf4d3d"
+      },
+      "post": null
+    },
+    {
+      "id": "Minimal-models-in-numerical-dimension-one",
+      "group": "control",
+      "matched_to": "Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds",
+      "same_family": true,
+      "family": "036",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Minimal-models-in-numerical-dimension-one-September-24-2026",
+        "tree": "8bedf95fc430c8e378d8ab73b593da0d395cbfcd"
+      },
+      "post": null
+    },
+    {
+      "id": "From-partial-permutation-information-to-Fourier-bounds",
+      "group": "control",
+      "matched_to": "Taming-implies-compatibility-on-four-manifolds",
+      "same_family": false,
+      "family": "238",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "From-partial-permutation-information-to-Fourier-bounds-September-26-2026",
+        "tree": "26eeb304d56e29fe7d4ca0643efc3b525978bfe5"
+      },
+      "post": null
+    },
+    {
+      "id": "Projective-Space-Bases-of-Lagrangian-Fibrations",
+      "group": "control",
+      "matched_to": "Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds",
+      "same_family": false,
+      "family": "041",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Projective-Space-Bases-of-Lagrangian-Fibrations-September-23-2026",
+        "tree": "66bc83877aa9503df40f2185f17fdfb7add73f12"
+      },
+      "post": null
+    },
+    {
+      "id": "An-exponential-two-way-deterministic-state-lower-bound-for-one-way-liveness",
+      "group": "control",
+      "matched_to": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+      "same_family": false,
+      "family": "129",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "An-exponential-two-way-deterministic-state-lower-bound-for-one-way-liveness-September-25-2026",
+        "tree": "9c22e10c110fbc0939d1b1351583905f9dbfcd4a"
+      },
+      "post": null
+    },
+    {
+      "id": "two-limit-cycles-for-quintic-lienard-systems",
+      "group": "control",
+      "matched_to": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+      "same_family": false,
+      "family": "143",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "two-limit-cycles-for-quintic-lienard-systems-September-24-2026",
+        "tree": "401f6d86b0924a2a8f5648728783a107864a56c4"
+      },
+      "post": null
+    },
+    {
+      "id": "Anticanonical-nonvanishing-from-smooth-semipositivity",
+      "group": "control",
+      "matched_to": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+      "same_family": false,
+      "family": "068",
+      "family_has_lean": false,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026",
+        "tree": "d0b4424527f91d4b8b1887ca6d84af54d58d2a45"
+      },
+      "post": null
+    },
+    {
+      "id": "Beyond-the-Square-Root-Exponent-for-Depth-Three-Boolean-Circuits",
+      "group": "control",
+      "matched_to": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+      "same_family": false,
+      "family": "112",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "Beyond-the-Square-Root-Exponent-for-Depth-Three-Boolean-Circuits-September-23-2026",
+        "tree": "c3f0e2d846c8b67986c25387c65867c13b852350"
+      },
+      "post": null
+    },
+    {
+      "id": "A-power-saving-for-planar-halving-lines",
+      "group": "control",
+      "matched_to": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+      "same_family": false,
+      "family": "183",
+      "family_has_lean": true,
+      "pre": {
+        "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+        "dir": "A-power-saving-for-planar-halving-lines-September-25-2026",
+        "tree": "b3da22e090602def2ae094db10008e2f8a341b94"
+      },
+      "post": null
+    }
+  ]
+}

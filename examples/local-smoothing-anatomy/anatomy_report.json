@@ -1,0 +1,2305 @@
+{
+  "case": "Local smoothing for the Euclidean wave equation: proof anatomy",
+  "commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+  "repository": "https://github.com/openai/math",
+  "sources": [
+    {
+      "role": "target",
+      "title": "Local smoothing for the Euclidean wave equation (October 25, 2026)",
+      "path": "preprints/Local-smoothing-for-the-Euclidean-wave-equation-October-25-2026/paper.pdf",
+      "pages": 59,
+      "sha256": "9ca156c552f2d940528f7131716326ef0d67a5829e723e1d294d74560c8636ff"
+    },
+    {
+      "role": "precursor",
+      "title": "Critical local smoothing for the three-dimensional wave equation (September 24, 2026)",
+      "path": "preprints/Critical-local-smoothing-for-the-three-dimensional-wave-equation-September-24-2026/paper.pdf",
+      "pages": 165,
+      "sha256": "79299093c07ea305c5d094e58ab10d76cc299624b7af6c7e4a1d459435f3b614"
+    },
+    {
+      "role": "precursor",
+      "title": "Elliptic capacity propagation and Fourier restriction to the sphere (September 24, 2026)",
+      "path": "preprints/Elliptic-capacity-propagation-and-Fourier-restriction-to-the-sphere-September-24-2026/Elliptic-capacity-propagation-and-Fourier-restriction-to-the-sphere-September-24-2026.pdf",
+      "pages": 103,
+      "sha256": "669efdbef915014402795e07bfbcb958ae534b6910f05a8737a6fce0c216d394"
+    },
+    {
+      "role": "reasoning summary (family 087)",
+      "title": "Symmetric and general Mahler conjectures",
+      "path": "reasoning_traces/symmetric-and-general-mahler-conjectures.pdf",
+      "sha256": "933c27e3af898878d897adda58bdc5693bbf4a4eaeec37802daedbdb4d0f89f3"
+    },
+    {
+      "role": "reasoning summary (family 362)",
+      "title": "The three-dimensional relativistic Vlasov-Maxwell system",
+      "path": "reasoning_traces/relativistic-vlasov-maxwell.pdf",
+      "sha256": "fbb80877b643c266a65f304b4db652ff8489bf7374266eadf60ea85c9d3a63a0"
+    },
+    {
+      "role": "process statement",
+      "title": "README.md",
+      "path": "README.md",
+      "sha256": "6cb7f0e387b67c051227c6ba27aca87ee82d9dd2530b6452b86b8681a2e2743a"
+    },
+    {
+      "role": "process statement",
+      "title": "history.md",
+      "path": "history.md",
+      "sha256": "ac688a38eb9afdb1f3c339c1df251cdb1aa7d8f18067b3ce5d668a96d690f5fb"
+    }
+  ],
+  "dag": {
+    "is_acyclic": true,
+    "cycle_path": [],
+    "missing_premises": [],
+    "imported_leaves": 40,
+    "internal_nodes": 39,
+    "main_chain": [
+      "Thm1.1",
+      "Eq7.3",
+      "Thm1.2",
+      "Prop6.3",
+      "Prop5.1",
+      "Prop4.2"
+    ],
+    "nodes": [
+      {
+        "id": "Eq2.2-2.4",
+        "title": "The symbol determines the Gaussian",
+        "section": "2.1",
+        "premises": [],
+        "imports": [],
+        "imports_transitive": [],
+        "formal_status": []
+      },
+      {
+        "id": "Lem2.1",
+        "title": "Lifted bilinear tensor is PSD with divergence-free columns",
+        "section": "2.2",
+        "premises": [],
+        "imports": [
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "imports_transitive": [
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem3.1",
+        "title": "Hessian calculus",
+        "section": "3.1",
+        "premises": [],
+        "imports": [],
+        "imports_transitive": [],
+        "formal_status": []
+      },
+      {
+        "id": "Lem3.2",
+        "title": "Moore determinant and cofactor identities",
+        "section": "3.2",
+        "premises": [],
+        "imports": [
+          "Alesker2003a"
+        ],
+        "imports_transitive": [
+          "Alesker2003a"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem6.1",
+        "title": "Propagation across a thin cylinder",
+        "section": "6",
+        "premises": [],
+        "imports": [
+          "MortersPeres"
+        ],
+        "imports_transitive": [
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Rem6.2",
+        "title": "Sharpness of Lemma 6.1 for scalar supersolutions",
+        "section": "6",
+        "premises": [],
+        "imports": [],
+        "imports_transitive": [],
+        "formal_status": []
+      },
+      {
+        "id": "Prop8.1",
+        "title": "Radial focusing",
+        "section": "8",
+        "premises": [],
+        "imports": [
+          "BRRS2025",
+          "Stein1993"
+        ],
+        "imports_transitive": [
+          "BRRS2025",
+          "Stein1993"
+        ],
+        "formal_status": [
+          {
+            "item": "Proposition 8.1 (8.1)",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing/Sharpness (sobolev_estimate_sharp_order, logarithmic_estimate_exponent_necessary)",
+            "fidelity": "not audited"
+          }
+        ]
+      },
+      {
+        "id": "AppC",
+        "title": "Disjoint packets and the weak norm",
+        "section": "C",
+        "premises": [],
+        "imports": [
+          "Fefferman1971",
+          "FernandezDelgadoDeLaSalle"
+        ],
+        "imports_transitive": [
+          "Fefferman1971",
+          "FernandezDelgadoDeLaSalle"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem11.3",
+        "title": "Combining dilates",
+        "section": "11",
+        "premises": [],
+        "imports": [
+          "Seeger1988",
+          "GuoRoosYung",
+          "Stein1993"
+        ],
+        "imports_transitive": [
+          "Seeger1988",
+          "GuoRoosYung",
+          "Stein1993"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Prop2.2",
+        "title": "The wave current A0 in quaternionic coordinates",
+        "section": "2.3",
+        "premises": [
+          "Lem2.1",
+          "Eq2.2-2.4"
+        ],
+        "imports": [
+          "Husimi1940"
+        ],
+        "imports_transitive": [
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem3.3",
+        "title": "Cofactor divergence",
+        "section": "3.3",
+        "premises": [
+          "Lem3.1",
+          "Lem3.2"
+        ],
+        "imports": [
+          "Alesker2013"
+        ],
+        "imports_transitive": [
+          "Alesker2013",
+          "Alesker2003a"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "ThmA.1",
+        "title": "Periodic Dirichlet problem",
+        "section": "A",
+        "premises": [
+          "Lem3.1",
+          "Lem3.2"
+        ],
+        "imports": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov"
+        ],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem A.1",
+            "status": "not checked",
+            "lean": "-",
+            "fidelity": "proof-internal; not searched"
+          }
+        ]
+      },
+      {
+        "id": "Prop8.2",
+        "title": "Weak spacetime obstruction",
+        "section": "8",
+        "premises": [
+          "AppC"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Fefferman1971",
+          "FernandezDelgadoDeLaSalle"
+        ],
+        "formal_status": [
+          {
+            "item": "Proposition 8.2 (8.4)",
+            "status": "not checked",
+            "lean": "-",
+            "fidelity": "Sharpness/ has packet and modulation files that were not read"
+          }
+        ]
+      },
+      {
+        "id": "Eq2.15",
+        "title": "Time component on a frequency cap",
+        "section": "2.4",
+        "premises": [
+          "Prop2.2"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem4.1",
+        "title": "Fiber geometry",
+        "section": "4.1",
+        "premises": [
+          "Lem3.1",
+          "Prop2.2"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Sec4.2",
+        "title": "Regularized current and Dirichlet potential (4.5)-(4.8)",
+        "section": "4.2",
+        "premises": [
+          "Prop2.2",
+          "Lem3.2",
+          "Lem3.3",
+          "Lem4.1",
+          "ThmA.1"
+        ],
+        "imports": [
+          "Serre2018",
+          "Serre2019"
+        ],
+        "imports_transitive": [
+          "Serre2018",
+          "Serre2019",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Prop4.2",
+        "title": "Energy balance",
+        "section": "4.3",
+        "premises": [
+          "Sec4.2",
+          "Lem3.1",
+          "Lem3.2",
+          "Lem3.3",
+          "Lem4.1"
+        ],
+        "imports": [
+          "Serre2023",
+          "Aubin1984",
+          "Mabuchi1986",
+          "Ahag2009"
+        ],
+        "imports_transitive": [
+          "Serre2023",
+          "Aubin1984",
+          "Mabuchi1986",
+          "Ahag2009",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem4.3",
+        "title": "Energy comparison",
+        "section": "4.4",
+        "premises": [
+          "Sec4.2",
+          "Lem3.2",
+          "Lem3.3"
+        ],
+        "imports": [
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020"
+        ],
+        "imports_transitive": [
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Alesker2013",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Prop5.1",
+        "title": "Energy bounds on a fixed fiber",
+        "section": "5",
+        "premises": [
+          "Prop4.2",
+          "Lem4.3",
+          "Lem4.1",
+          "Eq2.15",
+          "Prop2.2",
+          "Sec4.2",
+          "ThmA.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Prop6.3",
+        "title": "Critical estimate on the torus for one cap",
+        "section": "6",
+        "premises": [
+          "Lem6.1",
+          "Prop5.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "AppD",
+        "title": "Linear Dirichlet problem for the planar wave (n = 2 route)",
+        "section": "D",
+        "premises": [
+          "Prop2.2",
+          "Prop4.2",
+          "Lem6.1",
+          "Prop5.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Thm1.2",
+        "title": "Critical annular estimate",
+        "section": "7.1",
+        "premises": [
+          "Prop6.3"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem 1.2 (1.2)",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing.Main.logarithmic_refinement (LogarithmicRefinement)",
+            "fidelity": "WEAKER: Lean log power 2n + 5 against 2/pc = (n-1)/n (z3); the sharp power is not formalized"
+          }
+        ]
+      },
+      {
+        "id": "ThmE.1",
+        "title": "Curved characteristic sheets of symmetric systems",
+        "section": "E",
+        "premises": [
+          "Lem2.1",
+          "Lem3.1",
+          "Lem4.3",
+          "Prop4.2",
+          "Lem6.1",
+          "Prop5.1",
+          "Prop6.3",
+          "ThmA.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem E.1",
+            "status": "not checked",
+            "lean": "-",
+            "fidelity": "not searched"
+          }
+        ]
+      },
+      {
+        "id": "Eq7.3",
+        "title": "Interpolated annular estimate",
+        "section": "7.2",
+        "premises": [
+          "Thm1.2"
+        ],
+        "imports": [
+          "Grafakos2014"
+        ],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem9.2",
+        "title": "Local spherical extension from the wave",
+        "section": "9",
+        "premises": [
+          "Thm1.2"
+        ],
+        "imports": [
+          "Hormander1973",
+          "Tao1999"
+        ],
+        "imports_transitive": [
+          "Hormander1973",
+          "Tao1999",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "ThmB.1",
+        "title": "Angular endpoint",
+        "section": "B",
+        "premises": [
+          "Thm1.2",
+          "Prop8.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "BRRS2025",
+          "Stein1993",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem B.1",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "no statement located"
+          }
+        ]
+      },
+      {
+        "id": "Thm1.1",
+        "title": "Euclidean local smoothing",
+        "section": "7.2",
+        "premises": [
+          "Eq7.3"
+        ],
+        "imports": [
+          "Grafakos2014"
+        ],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem 1.1 (1.1)",
+            "status": "Comparator target",
+            "lean": "euclidean_local_smoothing",
+            "fidelity": "range and Sobolev order EQUIVALENT (z3)"
+          }
+        ]
+      },
+      {
+        "id": "Cor7.1",
+        "title": "Logarithmic Sobolev estimate",
+        "section": "7.2",
+        "premises": [
+          "Eq7.3"
+        ],
+        "imports": [
+          "Grafakos2014",
+          "HeoNazarovSeeger2011"
+        ],
+        "imports_transitive": [
+          "Grafakos2014",
+          "HeoNazarovSeeger2011",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Corollary 7.1 (7.4)",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing.Main.logarithmic_sobolev (LogarithmicSobolev)",
+            "fidelity": "WEAKER: Lean needs B > 2n + 6 and has no log-log factor (z3 on the C = 0 slice)"
+          }
+        ]
+      },
+      {
+        "id": "Cor9.3",
+        "title": "Global sphere and cone extension",
+        "section": "9.1",
+        "premises": [
+          "Lem9.2",
+          "Thm1.2"
+        ],
+        "imports": [
+          "Tao1999",
+          "Nicola2009"
+        ],
+        "imports_transitive": [
+          "Tao1999",
+          "Nicola2009",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres",
+          "Hormander1973"
+        ],
+        "formal_status": [
+          {
+            "item": "Corollary 9.3 (9.3)",
+            "status": "Comparator target",
+            "lean": "spherical_restriction",
+            "fidelity": "range EQUIVALENT (z3)"
+          },
+          {
+            "item": "Corollary 9.3, b = inf",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "b : ℝ in the Comparator statement excludes b = ∞ (trivial L1 bound)"
+          },
+          {
+            "item": "Corollary 9.3 (9.4)",
+            "status": "Lean statement outside Comparator",
+            "lean": "Cone.Main.cone_extension (ConeExtensionEstimates)",
+            "fidelity": "not audited"
+          }
+        ]
+      },
+      {
+        "id": "Lem9.4",
+        "title": "From caps to tubes",
+        "section": "9.2",
+        "premises": [
+          "Lem9.2"
+        ],
+        "imports": [
+          "BCSS1986",
+          "Bourgain1991"
+        ],
+        "imports_transitive": [
+          "BCSS1986",
+          "Bourgain1991",
+          "Hormander1973",
+          "Tao1999",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Cor9.1",
+        "title": "Spherical extension, Kakeya maximal, Hausdorff dimension",
+        "section": "9.3",
+        "premises": [
+          "Lem9.2",
+          "Lem9.4",
+          "Thm1.2"
+        ],
+        "imports": [
+          "Keich1999"
+        ],
+        "imports_transitive": [
+          "Keich1999",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres",
+          "BCSS1986",
+          "Bourgain1991",
+          "Hormander1973",
+          "Tao1999"
+        ],
+        "formal_status": [
+          {
+            "item": "Corollary 9.1, first estimate",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "Restriction/Local*.lean exist but were not read; no statement with the 2/pc power located"
+          },
+          {
+            "item": "Corollary 9.1, Kakeya maximal",
+            "status": "Comparator target",
+            "lean": "kakeya_maximal",
+            "fidelity": "range EQUIVALENT (z3); bound WEAKER: δ^{-ε} for every ε > 0 instead of log^{4/pc} (log^c(2/δ) <= C_ε δ^{-ε}, not conversely; outside the SMT fragment)"
+          },
+          {
+            "item": "Corollary 9.1, Hausdorff dimension",
+            "status": "Comparator target",
+            "lean": "kakeya",
+            "fidelity": "EQUIVALENT; no measurability assumed on either side"
+          },
+          {
+            "item": "Corollary 9.1, Minkowski (bounded sets)",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing.FurtherResults.kakeya_minkowski",
+            "fidelity": "not audited"
+          }
+        ]
+      },
+      {
+        "id": "Eq10.3",
+        "title": "Rescaled wave estimate",
+        "section": "10",
+        "premises": [
+          "Thm1.1"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Cor12.1",
+        "title": "Paraboloid extension and Schrodinger smoothing",
+        "section": "12",
+        "premises": [
+          "Lem9.2",
+          "Thm1.2",
+          "Cor9.3"
+        ],
+        "imports": [
+          "Tao1999",
+          "Kim2017",
+          "LeeRogersSeeger2013"
+        ],
+        "imports_transitive": [
+          "Tao1999",
+          "Kim2017",
+          "LeeRogersSeeger2013",
+          "Nicola2009",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres",
+          "Hormander1973"
+        ],
+        "formal_status": [
+          {
+            "item": "Corollary 12.1 (12.1)",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "no statement located (no paraboloid or Schrödinger module in OAI/Analysis/Fourier)"
+          },
+          {
+            "item": "Corollary 12.1 (12.2)",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "no statement located"
+          },
+          {
+            "item": "Corollary 12.1 (12.3)",
+            "status": "prose only",
+            "lean": "-",
+            "fidelity": "no statement located"
+          }
+        ]
+      },
+      {
+        "id": "Eq9.7",
+        "title": "Nikodym maximal estimate",
+        "section": "9.4",
+        "premises": [
+          "Cor9.1"
+        ],
+        "imports": [
+          "Tao1999",
+          "GaoLiuXi"
+        ],
+        "imports_transitive": [
+          "Tao1999",
+          "GaoLiuXi",
+          "Keich1999",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres",
+          "BCSS1986",
+          "Bourgain1991",
+          "Hormander1973"
+        ],
+        "formal_status": [
+          {
+            "item": "(9.7) Nikodym maximal",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing.FurtherResults.nikodym_maximal (NikodymMaximalConjecture)",
+            "fidelity": "WEAKER by its docstring: every positive ε loss instead of the log power; definition not read"
+          }
+        ]
+      },
+      {
+        "id": "Sec9.4-curves",
+        "title": "Nikodym dimension and quadratic curve families",
+        "section": "9.4",
+        "premises": [
+          "Cor9.1"
+        ],
+        "imports": [
+          "Nadjimzadah2026"
+        ],
+        "imports_transitive": [
+          "Nadjimzadah2026",
+          "Keich1999",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres",
+          "BCSS1986",
+          "Bourgain1991",
+          "Hormander1973",
+          "Tao1999"
+        ],
+        "formal_status": [
+          {
+            "item": "Section 9.4, Nikodym dimension",
+            "status": "Lean statement outside Comparator",
+            "lean": "LocalSmoothing.FurtherResults.nikodym_dimension",
+            "fidelity": "not audited"
+          },
+          {
+            "item": "Section 9.4, quadratic curves",
+            "status": "Lean statement outside Comparator",
+            "lean": "FurtherResults.quadratic_curve_dimension_infimum_attained, matrix_quadratic_curve_dimension_infimum_attained",
+            "fidelity": "not audited"
+          }
+        ]
+      },
+      {
+        "id": "Lem10.2",
+        "title": "Maximal estimate for a thin shell",
+        "section": "10",
+        "premises": [
+          "Eq10.3"
+        ],
+        "imports": [
+          "Grafakos2014"
+        ],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Lem11.2",
+        "title": "One interval of radii",
+        "section": "11",
+        "premises": [
+          "Eq10.3"
+        ],
+        "imports": [],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": []
+      },
+      {
+        "id": "Thm10.1",
+        "title": "Bochner-Riesz means",
+        "section": "10",
+        "premises": [
+          "Lem10.2",
+          "Eq10.3"
+        ],
+        "imports": [
+          "BeltranHickmanSogge",
+          "Sogge1991"
+        ],
+        "imports_transitive": [
+          "BeltranHickmanSogge",
+          "Sogge1991",
+          "Grafakos2014",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem 10.1 (10.1)",
+            "status": "Comparator target",
+            "lean": "bochner_riesz",
+            "fidelity": "range EQUIVALENT (z3); Schwartz data in Lean"
+          },
+          {
+            "item": "Theorem 10.1 (10.2)",
+            "status": "Lean statement outside Comparator",
+            "lean": "BochnerRiesz.MainTheorem.bochnerRieszMaximalLp_of_localSmoothing, MaximalLp.localSmoothing_bochnerRiesz_Lp_full_maximal",
+            "fidelity": "not audited"
+          },
+          {
+            "item": "Theorem 10.1, convergence",
+            "status": "Lean statement outside Comparator",
+            "lean": "BochnerRiesz.AEConvergence.localSmoothing_bochnerRiesz_Lp_ae_convergence",
+            "fidelity": "not audited"
+          }
+        ]
+      },
+      {
+        "id": "Thm11.1",
+        "title": "Stein's square function",
+        "section": "11",
+        "premises": [
+          "Lem11.2",
+          "Lem11.3"
+        ],
+        "imports": [
+          "Grafakos2014"
+        ],
+        "imports_transitive": [
+          "Grafakos2014",
+          "Seeger1988",
+          "GuoRoosYung",
+          "Stein1993",
+          "Alesker2003b",
+          "Zhu2016",
+          "CNS1985",
+          "GilbargTrudinger",
+          "EvansKrylov",
+          "Alesker2003a",
+          "Serre2018",
+          "Serre2019",
+          "Husimi1940",
+          "Friedrichs1954",
+          "BaouendiTreves1982",
+          "Kaiser1990",
+          "Alesker2013",
+          "Aubin1984",
+          "BBGZ2013",
+          "Wan2020",
+          "Serre2023",
+          "Mabuchi1986",
+          "Ahag2009",
+          "MortersPeres"
+        ],
+        "formal_status": [
+          {
+            "item": "Theorem 11.1",
+            "status": "Comparator target",
+            "lean": "stein_square",
+            "fidelity": "range EQUIVALENT (z3, both paper forms); deriv junk branch open for human review"
+          }
+        ]
+      }
+    ],
+    "external": {
+      "Friedrichs1954": {
+        "ref": "25",
+        "what": "bilinear flux of a symmetric hyperbolic system",
+        "use": "input"
+      },
+      "BaouendiTreves1982": {
+        "ref": "6",
+        "what": "complex vector fields of tube coordinates",
+        "use": "input"
+      },
+      "Kaiser1990": {
+        "ref": "41",
+        "what": "conserved current at imaginary displacement (Klein-Gordon)",
+        "use": "model"
+      },
+      "Husimi1940": {
+        "ref": "39",
+        "what": "Husimi density (interpretation of the null component)",
+        "use": "model"
+      },
+      "Serre2018": {
+        "ref": "69",
+        "what": "compensated integrability for positive divergence-free tensors",
+        "use": "model"
+      },
+      "Serre2019": {
+        "ref": "70",
+        "what": "the wave stress tensor need not be positive for n >= 2",
+        "use": "model"
+      },
+      "Serre2023": {
+        "ref": "71",
+        "what": "Schur complement isolating a diagonal entry",
+        "use": "model"
+      },
+      "Alesker2003a": {
+        "ref": "2",
+        "what": "Moore determinant conventions (Thms 1.1.8-1.1.9)",
+        "use": "input"
+      },
+      "Alesker2003b": {
+        "ref": "3",
+        "what": "quaternionic Dirichlet problem on balls; Levi form",
+        "use": "model"
+      },
+      "Alesker2013": {
+        "ref": "4",
+        "what": "divergence-free cofactor of a quaternionic Hessian",
+        "use": "reproved"
+      },
+      "Zhu2016": {
+        "ref": "81",
+        "what": "quaternionic Dirichlet problem with subsolution",
+        "use": "model"
+      },
+      "CNS1985": {
+        "ref": "15",
+        "what": "Caffarelli-Nirenberg-Spruck boundary C2 estimates",
+        "use": "input"
+      },
+      "GilbargTrudinger": {
+        "ref": "31",
+        "what": "Schauder theory; Thms 17.14, 17.26'",
+        "use": "input"
+      },
+      "EvansKrylov": {
+        "ref": "22,47,48",
+        "what": "Evans-Krylov C^{2,alpha} estimates",
+        "use": "input"
+      },
+      "Aubin1984": {
+        "ref": "5",
+        "what": "Aubin J-functional",
+        "use": "model"
+      },
+      "Mabuchi1986": {
+        "ref": "52",
+        "what": "Mabuchi energy L (segment integral)",
+        "use": "model"
+      },
+      "BBGZ2013": {
+        "ref": "10",
+        "what": "variational approach to complex Monge-Ampere",
+        "use": "model"
+      },
+      "Ahag2009": {
+        "ref": "1",
+        "what": "Laplacian of the slice energy on a product domain",
+        "use": "model"
+      },
+      "Wan2020": {
+        "ref": "76",
+        "what": "variational principle, quaternionic finite energy",
+        "use": "model"
+      },
+      "MortersPeres": {
+        "ref": "57",
+        "what": "harmonic measure of an annulus (interpretation)",
+        "use": "model"
+      },
+      "Grafakos2014": {
+        "ref": "32",
+        "what": "Riesz-Thorin, Littlewood-Paley, Mihlin",
+        "use": "input"
+      },
+      "HeoNazarovSeeger2011": {
+        "ref": "37",
+        "what": "B = C = 0 in (7.4) for n >= 4 (comparison)",
+        "use": "model"
+      },
+      "BRRS2025": {
+        "ref": "9",
+        "what": "radial focusing test",
+        "use": "input"
+      },
+      "Stein1993": {
+        "ref": "74",
+        "what": "stationary phase; sharp function inequality",
+        "use": "input"
+      },
+      "Fefferman1971": {
+        "ref": "23",
+        "what": "ball multiplier tube geometry",
+        "use": "input"
+      },
+      "FernandezDelgadoDeLaSalle": {
+        "ref": "24",
+        "what": "compressed tube unions",
+        "use": "input"
+      },
+      "Hormander1973": {
+        "ref": "38",
+        "what": "oscillatory integral to extension",
+        "use": "input"
+      },
+      "Tao1999": {
+        "ref": "75",
+        "what": "epsilon removal (Thm 1.2); BR implies restriction; Nikodym",
+        "use": "input"
+      },
+      "Kim2017": {
+        "ref": "46",
+        "what": "epsilon removal for compact hypersurfaces",
+        "use": "input"
+      },
+      "Nicola2009": {
+        "ref": "61",
+        "what": "slicing from the sphere to the cone",
+        "use": "input"
+      },
+      "BCSS1986": {
+        "ref": "7",
+        "what": "random signs on caps",
+        "use": "input"
+      },
+      "Bourgain1991": {
+        "ref": "13",
+        "what": "restriction to Kakeya via caps",
+        "use": "input"
+      },
+      "Keich1999": {
+        "ref": "44",
+        "what": "grouping radii for Hausdorff dimension",
+        "use": "input"
+      },
+      "GaoLiuXi": {
+        "ref": "30",
+        "what": "Nikodym on manifolds, straightening charts",
+        "use": "input"
+      },
+      "Nadjimzadah2026": {
+        "ref": "59",
+        "what": "lifting curved Kakeya sets",
+        "use": "input"
+      },
+      "BeltranHickmanSogge": {
+        "ref": "8",
+        "what": "local smoothing implies Bochner-Riesz (Props 39-40)",
+        "use": "input"
+      },
+      "Sogge1991": {
+        "ref": "72",
+        "what": "local smoothing to summability",
+        "use": "model"
+      },
+      "Seeger1988": {
+        "ref": "67",
+        "what": "annular pieces to multiplier estimates",
+        "use": "input"
+      },
+      "GuoRoosYung": {
+        "ref": "34",
+        "what": "square-function version of Seeger's method",
+        "use": "input"
+      },
+      "LeeRogersSeeger2013": {
+        "ref": "51",
+        "what": "extension to Schrodinger space-time estimates",
+        "use": "input"
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "exponent.critical",
+      "claim": "pc = 2n/(n-1) from 1 + 1/d, and the derived constants at pc",
+      "source": "Sec. 1.4, 4.2, 7.2",
+      "tool": "sympy",
+      "scope": "symbolic in n; d = n - 1",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "2(1 + 1/d) = 2n/(n-1) with d = n - 1",
+          "holds": true
+        },
+        {
+          "assertion": "pc = 1 + (n+1)/(n-1) (used in Cor 9.3)",
+          "holds": true
+        },
+        {
+          "assertion": "s+(pc) = (n-1)/2 - n/pc = 0",
+          "holds": true
+        },
+        {
+          "assertion": "2/pc = (n-1)/n",
+          "holds": true
+        },
+        {
+          "assertion": "delta_pc = 1/2 - 1/pc = 1/(2n) (Cor 7.1)",
+          "holds": true
+        },
+        {
+          "assertion": "B*(pc) = beta(pc) + delta_pc = 1/2 + 1/pc (Cor 7.1)",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "exponent.focusing",
+      "claim": "the focusing integral has exponent -1 exactly at pc",
+      "source": "Prop 8.1",
+      "tool": "sympy",
+      "scope": "symbolic in d and p",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "d - dp/2 = -1 has the single solution p = 2(d+1)/d",
+          "holds": true
+        },
+        {
+          "assertion": "that solution is pc = 2n/(n-1)",
+          "holds": true
+        },
+        {
+          "assertion": "p < pc gives exponent > -1 (convergent): exponent - (-1) = d(pc - p)/2",
+          "holds": true
+        },
+        {
+          "assertion": "at p = pc the integral is log(N/(4A)): int_eps^{1/4} u^{-1} du = log(1/(4 eps))",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "exponent.scaling",
+      "claim": "dp = 2n, Ap/q = 2A, N^0, paraboloid and Schrodinger powers 0, (10.3)",
+      "source": "Lemma 9.2, 9.4, (9.6), Cor 12.1, (10.3), Thm 10.1",
+      "tool": "sympy",
+      "scope": "symbolic in n, d, p",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "Lemma 9.4: d p = 2n at p = pc",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 9.4: q = p/2 = n/(n-1)",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 9.4: A p / q = 2A",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 9.2: N^(n/p - d/2) has exponent 0 at pc",
+          "holds": true
+        },
+        {
+          "assertion": "(9.6): 2 A n = 2(n-1) at A = 2/pc",
+          "holds": true
+        },
+        {
+          "assertion": "Kakeya radial test: 1 - 1/n = 2/pc",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 12.1 paraboloid: delta^(-d + (d+2)/pc + d/pc) has exponent 0",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 12.1 Schrodinger: lambda^(d - (2d+2)/pc) has exponent 0",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 12.1 (12.3) at r = p: s = d - 2(d+1)/p",
+          "holds": true
+        },
+        {
+          "assertion": "(10.3): R^((n+1)/p) R^(-n/p) R^sigma = R^(1/p + sigma)",
+          "holds": true
+        },
+        {
+          "assertion": "Thm 10.1: n(1/2 - 1/p) - 1/2 = s+(p) argument (n-1)/2 - n/p",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "exponent.interpolation",
+      "claim": "(7.3) log and h powers; Cor 9.3 interpolation; Cor 7.1 summability",
+      "source": "(7.3), Cor 9.3, Cor 7.1",
+      "tool": "sympy + z3",
+      "scope": "symbolic; z3 over reals with n >= 2",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "(7.3), 2 <= p <= pc: log power theta * 2/pc = d(1 - 2/p)",
+          "holds": true
+        },
+        {
+          "assertion": "(7.3), p >= pc: log power (1 - theta) * 2/pc = 2/p",
+          "holds": true
+        },
+        {
+          "assertion": "(7.3), p >= pc: h power theta * d/2 = d/2 - n/p",
+          "holds": true
+        },
+        {
+          "assertion": "the two log powers meet at pc",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 9.3: theta/s = 1/b at theta = s/b",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 9.3: 1 - theta + theta/s = 1/a",
+          "holds": true
+        },
+        {
+          "assertion": "Cor 9.3: b > pc and b > (n+1)a'/(n-1) imply s > pc",
+          "holds": true,
+          "z3": "unsat"
+        },
+        {
+          "assertion": "Cor 9.3: and a < b implies s < b",
+          "holds": true,
+          "z3": "unsat"
+        },
+        {
+          "assertion": "Cor 7.1: (B - beta)/delta_p > 1 iff B > beta + delta_p (delta_p > 0)",
+          "holds": true,
+          "z3": "unsat"
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "exponent.depth",
+      "claim": "density m forces depth m^(1/d); (-u) mu ~ |g|^pc; rank-one det(B + alpha I)",
+      "source": "Sec. 1.4, 4.2, Prop 5.1",
+      "tool": "sympy",
+      "scope": "symbolic; det(B + alpha I) in real m x m, m = 2..5",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "Prop 5.1: h^2 s^(2d) (h s)^(-d q) = sigma^(n-2): exponent of h",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 5.1: h^2 s^(2d) (h s)^(-d q) = sigma^(n-2): exponent of s",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 5.1: depth m^(1/d) times density m is m^q",
+          "holds": true
+        },
+        {
+          "assertion": "with m ~ |g|^2: (|g|^2)^q = |g|^pc",
+          "holds": true
+        },
+        {
+          "assertion": "det(beta e e^T/|e|^2 + alpha I) = (beta + alpha) alpha^(m-1), m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "det(beta e e^T/|e|^2 + alpha I) = (beta + alpha) alpha^(m-1), m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "det(beta e e^T/|e|^2 + alpha I) = (beta + alpha) alpha^(m-1), m = 4",
+          "holds": true
+        },
+        {
+          "assertion": "det(beta e e^T/|e|^2 + alpha I) = (beta + alpha) alpha^(m-1), m = 5",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "lemma3.2.real",
+      "claim": "cofactor identities (3.6)-(3.8)",
+      "source": "Lemma 3.2",
+      "tool": "sympy",
+      "scope": "real symmetric m x m, m = 2..4 (Schur: m = 3); the quaternionic Moore determinant is not encoded",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "(3.7) det(A + t v v^T) = det A + t v^T C(A) v, real symmetric m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(3.6) C(A) : B = d/dt det(A + tB) at 0, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "Euler: C(A) : A = m det A, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(3.7) det(A + t v v^T) = det A + t v^T C(A) v, real symmetric m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(3.6) C(A) : B = d/dt det(A + tB) at 0, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "Euler: C(A) : A = m det A, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(3.7) det(A + t v v^T) = det A + t v^T C(A) v, real symmetric m = 4",
+          "holds": true
+        },
+        {
+          "assertion": "(3.6) C(A) : B = d/dt det(A + tB) at 0, m = 4",
+          "holds": true
+        },
+        {
+          "assertion": "Euler: C(A) : A = m det A, m = 4",
+          "holds": true
+        },
+        {
+          "assertion": "(3.8) det M = det(D) * sigma, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(3.8) the form of M - sigma v0 v0^T is (w + D^-1 c b)^T D (w + D^-1 c b)",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "lemma3.3.real",
+      "claim": "Hessian cofactor columns are divergence free",
+      "source": "Lemma 3.3",
+      "tool": "sympy",
+      "scope": "real Hessian (one slot), generic smooth u in m = 2, 3 variables; not the 3- or 4-slot quaternionic case",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "Lemma 3.3 real-Hessian model: every column of C(D^2 u) is divergence free, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 3.3 real-Hessian model: every column of C(D^2 u) is divergence free, m = 3",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "lemma4.3.model",
+      "claim": "Lemma 4.3 energy identity and (4.14) with a rank-one background",
+      "source": "Lemma 4.3",
+      "tool": "sympy",
+      "scope": "real Monge-Ampere on the unit ball of R^m, m = 2, 3, constant rank-one B, polynomial u vanishing on the sphere, exact integrals; bounds (4.14) on one convex instance",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "ball integrator: |B^2| = pi and int_{B^2} x0^2 = pi/4",
+          "holds": true
+        },
+        {
+          "assertion": "rank-one segment: det((1-theta)B + theta D) = theta^m det D + (1-theta) theta^(m-1) C(D):B, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "model is not degenerate: X0 != 0 and int grad u^T C grad u != 0, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 4.3 identity F = (m-1)/(m+1) X0 + (lambda m (m+1))^-1 int grad u^T C(Du) grad u, m = 2",
+          "holds": true
+        },
+        {
+          "assertion": "rank-one segment: det((1-theta)B + theta D) = theta^m det D + (1-theta) theta^(m-1) C(D):B, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "model is not degenerate: X0 != 0 and int grad u^T C grad u != 0, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "Lemma 4.3 identity F = (m-1)/(m+1) X0 + (lambda m (m+1))^-1 int grad u^T C(Du) grad u, m = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(4.14) (m-1)/(m+1) X0 <= F <= m/(m+1) X0 on a convex instance (m = 2, beta = 3, lambda = 7)",
+          "holds": true
+        },
+        {
+          "assertion": "theta integrals: int theta^m = 1/(m+1), int (1-theta) theta^(m-1) = 1/(m(m+1))",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "eq2.2-2.4",
+      "claim": "null-frame modes, the symbol (2.2), flux, imaginary light-ray Gaussian and (2.4)",
+      "source": "(2.1)-(2.4)",
+      "tool": "sympy",
+      "scope": "d = 1, 2, 3 symbolic",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "(2.1) null-frame phase equals X.xi - T|xi|, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) |xi| = kappa (1 + |v|^2/2)/sqrt 2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.1) mode solves (2 d_t d_s0 + Lap_x) u = 0, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -C(p) = [[|v|^2, -v^T], [-v, I]], d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -w^T C(p) w = |w' - v w0|^2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) kernel of C(p) contains E(v) = (1, v), d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "P(d_s0 phi, grad phi) = ((2 d_t d_s0 + Lap) phi, 0, ..., 0), d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "flux is null: q_T^2 = q_b^2 + |q_x|^2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "q_T = (w0^2 + |w'|^2/2)/sqrt 2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) sum of two real squares = |zeta - v R|^2 (complex), d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.1) null-frame phase equals X.xi - T|xi|, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) |xi| = kappa (1 + |v|^2/2)/sqrt 2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.1) mode solves (2 d_t d_s0 + Lap_x) u = 0, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -C(p) = [[|v|^2, -v^T], [-v, I]], d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -w^T C(p) w = |w' - v w0|^2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) kernel of C(p) contains E(v) = (1, v), d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "P(d_s0 phi, grad phi) = ((2 d_t d_s0 + Lap) phi, 0, ..., 0), d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "flux is null: q_T^2 = q_b^2 + |q_x|^2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "q_T = (w0^2 + |w'|^2/2)/sqrt 2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) sum of two real squares = |zeta - v R|^2 (complex), d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.1) null-frame phase equals X.xi - T|xi|, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) |xi| = kappa (1 + |v|^2/2)/sqrt 2, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.1) mode solves (2 d_t d_s0 + Lap_x) u = 0, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -C(p) = [[|v|^2, -v^T], [-v, I]], d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) -w^T C(p) w = |w' - v w0|^2, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.2) kernel of C(p) contains E(v) = (1, v), d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "P(d_s0 phi, grad phi) = ((2 d_t d_s0 + Lap) phi, 0, ..., 0), d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "flux is null: q_T^2 = q_b^2 + |q_x|^2, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "q_T = (w0^2 + |w'|^2/2)/sqrt 2, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.4) sum of two real squares = |zeta - v R|^2 (complex), d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "1 - omega.theta - |omega - theta|^2/2 = 1 - (|omega|^2 + |theta|^2)/2, which is 0 on unit vectors",
+          "holds": true
+        },
+        {
+          "assertion": "normalization: int_C kappa exp(-kappa |zeta|^2) d zeta = pi (one complex variable)",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "eq2.11-2.13",
+      "claim": "flux map Jacobian (2.11), polarization column (2.12), tangency (2.13), V_T",
+      "source": "(2.9)-(2.13), Prop 2.2",
+      "tool": "sympy",
+      "scope": "d = 1, 2, 3, complex-bilinear algebra",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "(2.11) complex Jacobian of (R, zeta, omega) -> (R^2, R zeta, omega - zeta.zeta/2) is 2 R^(d+1), d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.12) M E(v) = (2R, zeta + R v, -zeta.v) = 2R (1, (v+W)/2, -W.v/2), d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.13) pi(w) V^v = -(w - W).(w - v)/2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 2.2 V_T^v = (V_t - V_s0)/sqrt 2 = (1 + W.v/2)/sqrt 2, d = 1",
+          "holds": true
+        },
+        {
+          "assertion": "(2.11) complex Jacobian of (R, zeta, omega) -> (R^2, R zeta, omega - zeta.zeta/2) is 2 R^(d+1), d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.12) M E(v) = (2R, zeta + R v, -zeta.v) = 2R (1, (v+W)/2, -W.v/2), d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.13) pi(w) V^v = -(w - W).(w - v)/2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 2.2 V_T^v = (V_t - V_s0)/sqrt 2 = (1 + W.v/2)/sqrt 2, d = 2",
+          "holds": true
+        },
+        {
+          "assertion": "(2.11) complex Jacobian of (R, zeta, omega) -> (R^2, R zeta, omega - zeta.zeta/2) is 2 R^(d+1), d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.12) M E(v) = (2R, zeta + R v, -zeta.v) = 2R (1, (v+W)/2, -W.v/2), d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "(2.13) pi(w) V^v = -(w - W).(w - v)/2, d = 3",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 2.2 V_T^v = (V_t - V_s0)/sqrt 2 = (1 + W.v/2)/sqrt 2, d = 3",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "remark6.2",
+      "claim": "explicit supersolution showing the two log losses are sharp",
+      "source": "Remark 6.2",
+      "tool": "sympy",
+      "scope": "symbolic in b, s, T; the final inequality also on an exact grid of (b, r)",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "p(s) = log(3/s)/D is radially harmonic",
+          "holds": true
+        },
+        {
+          "assertion": "p(b) = 1 and p(3) = 0",
+          "holds": true
+        },
+        {
+          "assertion": "Lap_tau g = p",
+          "holds": true
+        },
+        {
+          "assertion": "L is radially harmonic",
+          "holds": true
+        },
+        {
+          "assertion": "Lap_{T,tau} E = (cos T - 1) p",
+          "holds": true
+        },
+        {
+          "assertion": "trace E(T, b) = 1 - cos T",
+          "holds": true
+        },
+        {
+          "assertion": "E(T, 3) = 0",
+          "holds": true
+        },
+        {
+          "assertion": "g'(s) = s (1 + 2 log(3/s)) / (4D) (> 0 on (0, 3])",
+          "holds": true
+        },
+        {
+          "assertion": "(1 - p(r)) g(3) = 9 log(r/b) / (4 D^2)",
+          "holds": true
+        },
+        {
+          "assertion": "0 <= E(0, r) <= 9 log(r/b)/(4D^2) at b in {1/10, 1/100}, r in {b, 2b, 1/2, 1, 2, 3}",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "lemma6.1.radial",
+      "claim": "radial comparison in log r and its integral bounds",
+      "source": "Lemma 6.1, Prop 6.3",
+      "tool": "sympy + z3",
+      "scope": "algebraic steps of the proof; the maximum principle and weak Harnack are not encoded",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "x = log(s/b): u'' + u'/s = s^-2 u_xx",
+          "holds": true
+        },
+        {
+          "assertion": "radial harmonic functions are affine in log s: Lap log s = 0",
+          "holds": true
+        },
+        {
+          "assertion": "Volterra form psi(x) = x + int_0^x (x-z) P psi solves psi'' = P psi, psi(0) = 0, psi'(0) = 1",
+          "holds": true
+        },
+        {
+          "assertion": "Volterra form has psi(0) = 0 and psi'(0) = 1",
+          "holds": true
+        },
+        {
+          "assertion": "dividing by x: psi/x = 1 + int z(x-z)/x (psi(z)/z) P(z) dz (integrands agree)",
+          "holds": true
+        },
+        {
+          "assertion": "z(x - z)/x <= min(z, A - z) for 0 <= z <= x <= A, x > 0",
+          "holds": true,
+          "z3": "unsat"
+        },
+        {
+          "assertion": "kappa^2 term: int_0^inf t e^(-2t) dt = 1/4",
+          "holds": true
+        },
+        {
+          "assertion": "sin(pi T/3) H'' = d/dT[sin H' - (pi/3) cos H] - (pi/3)^2 sin H",
+          "holds": true
+        },
+        {
+          "assertion": "boundary terms of that antiderivative on [0, 3] are (pi/3)(H(0) + H(3))",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 6.3: with s = b t, b = 2Kh: s log(s/b) V ds = (log t / t) e^(-2cK t) dt (C = 1)",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 6.3: majorant int_1^inf e^(-t) dt = 1/e",
+          "holds": true
+        },
+        {
+          "assertion": "Prop 6.3: 0 <= int_1^inf (log t / t) e^(-t) dt <= 1/e (numerical quadrature, 30 digits)",
+          "holds": true
+        },
+        {
+          "assertion": "(6.2) at r = 2b: log(r/b) / D^2 = log 2 / D^2",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "thm11.1.l2",
+      "claim": "the L2 identity for Stein's square function",
+      "source": "Thm 11.1",
+      "tool": "sympy",
+      "scope": "symbolic in alpha > 1/2",
+      "status": "VERIFIED",
+      "assertions": [
+        {
+          "assertion": "Thm 11.1 at p = 2: 2 alpha^2 int_0^1 u (1-u)^(2 alpha - 2) du = alpha/(2 alpha - 1)",
+          "holds": true
+        },
+        {
+          "assertion": "1/2 + s+(p) = n(1/2 - 1/p) above the max",
+          "holds": true
+        }
+      ],
+      "note": ""
+    },
+    {
+      "id": "lemma2.1",
+      "claim": "the lifted tensor B is PSD with divergence-free columns",
+      "source": "Lemma 2.1",
+      "tool": "-",
+      "scope": "needs holomorphic extension and tube-coordinate vector fields over a general symmetric system",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    },
+    {
+      "id": "prop2.2",
+      "claim": "A0 is smooth, PSD, tangent to Phi, with divergence-free real columns",
+      "source": "Prop 2.2",
+      "tool": "-",
+      "scope": "needs the quaternionic push-forward (2.7) of a finite mode sum",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    },
+    {
+      "id": "lemma3.2.quaternionic",
+      "claim": "Moore determinant identities for quaternionic Hermitian matrices",
+      "source": "Lemma 3.2",
+      "tool": "-",
+      "scope": "the Moore determinant is not available in SymPy; only the real-symmetric model was checked",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    },
+    {
+      "id": "prop4.2",
+      "claim": "energy balance (4.12) on moving fibers",
+      "source": "Prop 4.2",
+      "tool": "-",
+      "scope": "distributional Green identity on a moving domain",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    },
+    {
+      "id": "prop5.1",
+      "claim": "fixed-fiber bounds (5.1)-(5.3)",
+      "source": "Prop 5.1",
+      "tool": "-",
+      "scope": "kernel majorants, comparison principle and Gaussian inversion estimates",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    },
+    {
+      "id": "thmA.1",
+      "claim": "periodic quaternionic Dirichlet problem",
+      "source": "Theorem A.1",
+      "tool": "-",
+      "scope": "continuity method and a priori estimates",
+      "status": "NOT_ENCODABLE",
+      "assertions": [],
+      "note": ""
+    }
+  ],
+  "mutants": [
+    {
+      "base": "lemma4.3.model",
+      "label": "coefficient n/(n+1) instead of (n-1)/(n+1)",
+      "status": "REFUTED",
+      "expected": "REFUTED"
+    },
+    {
+      "base": "exponent.focusing",
+      "label": "Stein-Tomas exponent instead of pc",
+      "status": "REFUTED",
+      "expected": "REFUTED"
+    },
+    {
+      "base": "remark6.2",
+      "label": "comparison function without the log term",
+      "status": "REFUTED",
+      "expected": "REFUTED"
+    },
+    {
+      "base": "lemma4.3.model",
+      "label": "rank-two background",
+      "status": "REFUTED",
+      "expected": "REFUTED"
+    },
+    {
+      "base": "eq2.2-2.4",
+      "label": "translation by +i instead of -i",
+      "status": "REFUTED",
+      "expected": "REFUTED"
+    }
+  ],
+  "summary": {
+    "VERIFIED": 13,
+    "REFUTED": 0,
+    "NOT_ENCODABLE": 6
+  },
+  "seconds": 72.1
+}

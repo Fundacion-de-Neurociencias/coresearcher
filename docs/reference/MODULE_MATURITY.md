@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 23 |
-| Tested | Covered by tests, not reachable from the API | 57 |
+| Tested | Covered by tests, not reachable from the API | 59 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -33,6 +33,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `cited_import_ledger` | Tested | - | yes | yes |
 | `cited_registry` | Integrated | yes | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
+| `collatz_case` | Tested | - | yes | yes |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
 | `constraint_discovery_engine` | Prototype | - | - | - |
@@ -74,6 +75,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `lean_formalization_engine` | Tested | - | yes | - |
 | `lean_junk_lint` | Tested | - | yes | yes |
 | `limitation_resolution_engine` | Tested | - | yes | - |
+| `local_smoothing_anatomy` | Tested | - | yes | yes |
 | `local_smoothing_case` | Tested | - | yes | yes |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
 | `mahler_interval` | Tested | - | yes | yes |

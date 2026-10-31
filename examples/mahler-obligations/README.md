@@ -7,5 +7,6 @@ obligations of the scalar input of "The Mahler Conjecture for General Convex Bod
 
 The proof reports beside it are written by their own scripts in `scripts/cases/`: `interval_proof.json`
 (`mahler_interval_report.py`), `tail_proof.json` (`mahler_tail_report.py`), `twovar_proof.json`
-(`mahler_twovar_report.py`), `ranges_proof.json` (`mahler_ranges_report.py`) and `segment_box_proof.json`
-(`mahler_segment_box_report.py`). The ledger script reads them when they exist.
+(`mahler_twovar_report.py`), `ranges_proof.json` (`mahler_ranges_report.py`), `segment_box_proof.json`
+(`mahler_segment_box_report.py`) and `segment_tails_proof.json` with its zone ranges `segment_tails_zones.json`
+(`mahler_segment_tails_report.py`). `manifest.json` holds their hashes (`mahler_reproduce.py`). The ledger script reads them when they exist.

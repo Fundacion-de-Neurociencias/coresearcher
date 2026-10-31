@@ -22,6 +22,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | Document | Purpose |
 | --- | --- |
 | [Architecture specification](architecture/ARCHITECTURE.md) | Canonical description of layers, engines and data flows |
+| [Verification methodology](architecture/VERIFICATION_METHODOLOGY.md) | The ten methods distilled from the October 2026 exercises, how they compose, and the integration roadmap |
 | [Ecosystem boundaries](architecture/ECOSYSTEM_BOUNDARIES.md) | Responsibilities of CoResearcher, DataAILab and EdiTXT |
 | [Observer and ledger](architecture/scientific-ledger.md) | Scientific activity ledger and provenance |
 | [Architecture folder](architecture/) | Supporting architecture notes |

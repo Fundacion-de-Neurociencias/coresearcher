@@ -134,6 +134,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "collatz_case",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "constraint_box",
       "scripts": false,

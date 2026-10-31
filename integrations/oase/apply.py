@@ -87,6 +87,26 @@ RELAYS = {
         "Treat the run's verdict as unverified. Re-analysis from the stored "
         "artifacts did not reproduce it under the same thresholds."
     ),
+    "formal.vacuous_relative_to_intent": (
+        "Return the hypothesis to its author with the witness in intent_probe: "
+        "its claims hold of an object it declared it must exclude."
+    ),
+    "formal.trivial_witness_satisfies_claims": (
+        "Show the satisfied default probe with the verdict and ask whether the "
+        "claims were meant to exclude it. It does not change the verdict."
+    ),
+    "formal.claim_below_kernel_checked": (
+        "State each claim's trust rung from claim_trust. Do not call a claim "
+        "checked or proved unless its rung is KERNEL_CHECKED or higher."
+    ),
+    "formal.fidelity_range_only": (
+        "Scope the fidelity relation to the hypothesis range. Conclusions were "
+        "not compared and the transcriptions were taken as given."
+    ),
+    "formal.lint_is_syntactic": (
+        "Treat OPEN findings as questions for a human, not defects, and read "
+        "each DISCHARGED reason before relying on it."
+    ),
 }
 
 

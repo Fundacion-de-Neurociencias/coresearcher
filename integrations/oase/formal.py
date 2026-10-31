@@ -94,7 +94,12 @@ _HYPEX_ID = re.compile(r"^H-[0-9]{4}$")
 _SAFE_ID = re.compile(r"[^A-Za-z0-9._-]+")
 
 #: CoResearcher content verdicts that are defects of the hypothesis itself.
-DEFECT_VERDICTS = ("VACUOUS", "SELF_CONTRADICTORY", "UNFALSIFIABLE")
+DEFECT_VERDICTS = (
+    "VACUOUS",
+    "SELF_CONTRADICTORY",
+    "UNFALSIFIABLE",
+    "VACUOUS_RELATIVE_TO_INTENT",
+)
 
 #: Thresholds that belong to the CoResearcher engine (they bound the
 #: computation). The decision thresholds of formal@1.0 are applied here.
@@ -219,6 +224,11 @@ def _oase_code(coresearcher_code: str) -> str:
         "FORMALIZATION_FAILED": "formal.formalization_failed",
         "UNDECIDED": "formal.undecided",
         "BLOCKED": "formal.blocked",
+        "VACUOUS_RELATIVE_TO_INTENT": "formal.vacuous_relative_to_intent",
+        "TRIVIAL_WITNESS_SATISFIES_CLAIMS": "formal.trivial_witness_satisfies_claims",
+        "CLAIM_BELOW_KERNEL_CHECKED": "formal.claim_below_kernel_checked",
+        "FIDELITY_RANGE_ONLY": "formal.fidelity_range_only",
+        "LINT_IS_SYNTACTIC": "formal.lint_is_syntactic",
     }
     if coresearcher_code not in mapping:
         raise SchemaError(

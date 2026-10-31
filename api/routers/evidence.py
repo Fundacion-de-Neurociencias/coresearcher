@@ -77,6 +77,9 @@ DETERMINISTIC = {
     ("POST", "/api/hypotheses/evaluate"),
     ("POST", "/api/hypotheses/compare"),
     ("POST", "/api/hypotheses/entails"),
+    ("POST", "/api/fidelity/compare"),
+    ("POST", "/api/fidelity/lean-lint"),
+    ("POST", "/api/trust/assess"),
     ("POST", "/api/lifecycle/packages/inspect"),
     ("GET", "/api/hypotheses/scenarios/alzheimer"),
     ("GET", "/api/lifecycle/template"),
@@ -89,6 +92,9 @@ READ_ONLY_POSTS = {
     "/api/hypotheses/compare",
     "/api/hypotheses/entails",
     "/api/hypotheses/formalize",
+    "/api/fidelity/compare",
+    "/api/fidelity/lean-lint",
+    "/api/trust/assess",
     "/api/lifecycle/packages/inspect",
 }
 

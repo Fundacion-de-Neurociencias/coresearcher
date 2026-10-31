@@ -25,6 +25,7 @@ from api.routers import (
     formal_audits,
     hypotheses,
     lifecycle,
+    manuscripts,
     ontology,
     provenance,
     webhooks,
@@ -58,7 +59,18 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-API-Key"],
 )
 
-for _module in (discovery, evidence, fidelity, formal_audits, hypotheses, lifecycle, provenance, ontology, webhooks):
+for _module in (
+    discovery,
+    evidence,
+    fidelity,
+    formal_audits,
+    hypotheses,
+    lifecycle,
+    manuscripts,
+    provenance,
+    ontology,
+    webhooks,
+):
     app.include_router(_module.router)
 
 

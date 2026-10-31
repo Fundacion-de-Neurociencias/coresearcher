@@ -953,6 +953,74 @@
         "title": "CherryPickClaimRequest",
         "type": "object"
       },
+      "CitedHypothesisModel": {
+        "properties": {
+          "phrases": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Phrases",
+            "type": "array"
+          },
+          "text": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "phrases"
+        ],
+        "title": "CitedHypothesisModel",
+        "type": "object"
+      },
+      "CitedResultModel": {
+        "properties": {
+          "conventions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Conventions",
+            "type": "object"
+          },
+          "hypotheses": {
+            "items": {
+              "$ref": "#/components/schemas/CitedHypothesisModel"
+            },
+            "maxItems": 50,
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "key": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Key",
+            "type": "string"
+          },
+          "locator": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Locator",
+            "type": "string"
+          },
+          "statement": {
+            "default": "",
+            "maxLength": 4000,
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "locator"
+        ],
+        "title": "CitedResultModel",
+        "type": "object"
+      },
       "ClaimEvidenceAuditRequest": {
         "properties": {
           "claim_id": {
@@ -3152,6 +3220,60 @@
           "relation"
         ],
         "title": "LiteratureHopInput",
+        "type": "object"
+      },
+      "ManuscriptAuditRequest": {
+        "description": "LaTeX sources of one manuscript ({path: text}, .tex/.bib/.bbl) and optional context for the import checks.",
+        "properties": {
+          "claim": {
+            "default": "",
+            "maxLength": 4000,
+            "title": "Claim",
+            "type": "string"
+          },
+          "collection": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 5000,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection"
+          },
+          "files": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "minProperties": 1,
+            "title": "Files",
+            "type": "object"
+          },
+          "manuscript_status": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Manuscript Status",
+            "type": "object"
+          },
+          "registry": {
+            "items": {
+              "$ref": "#/components/schemas/CitedResultModel"
+            },
+            "maxItems": 500,
+            "title": "Registry",
+            "type": "array"
+          }
+        },
+        "required": [
+          "files"
+        ],
+        "title": "ManuscriptAuditRequest",
         "type": "object"
       },
       "MathFlywheelCycleRequest": {
@@ -8717,6 +8839,48 @@
           }
         },
         "summary": "Watch Lifecycle"
+      }
+    },
+    "/api/manuscripts/audit": {
+      "post": {
+        "description": "Seams of one manuscript: unresolved citations and every import from a cited source as an OPEN obligation.\n\n`citation_gate.status` is PASS, FAIL, or NO_BIBLIOGRAPHY (then `formal_status` is UNDECIDED: the gate cannot\njudge, which is a non-verdict, never a pass). `imports` lists CONVENTION_TRANSFER, HYPOTHESIS_MATCH (MATCHED,\nUNMATCHED or NO_ENTRY against the optional `registry`), DEPENDENCY and EFFECTIVE_CONSTANT obligations with file\nand line. Detection is lexical; obligations are never discharged here. `claim_trust` is a view beside the report:\na prose claim stays CLAIMED.",
+        "operationId": "audit_manuscript_api_manuscripts_audit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManuscriptAuditRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Audit Manuscript"
       }
     },
     "/api/observer/ledger": {

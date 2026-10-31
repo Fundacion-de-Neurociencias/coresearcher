@@ -824,6 +824,33 @@ class TrustAssessRequest(BaseModel):
     claims: List[TrustEvidenceModel] = Field(min_length=1, max_length=100)
 
 
+# --- Manuscript audit: citation gate and import obligations (ADR-DISCOVERY-077, ADR-DISCOVERY-082) ---------------
+
+
+class CitedHypothesisModel(BaseModel):
+    text: str = Field(min_length=1, max_length=2000)
+    # Literal phrases, any of which shows the hypothesis is stated where the result is used. Never regular expressions.
+    phrases: List[str] = Field(min_length=1, max_length=20)
+
+
+class CitedResultModel(BaseModel):
+    key: str = Field(min_length=1, max_length=300)
+    locator: str = Field(min_length=1, max_length=300)
+    statement: str = Field(default="", max_length=4000)
+    hypotheses: List[CitedHypothesisModel] = Field(default_factory=list, max_length=50)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+
+
+class ManuscriptAuditRequest(BaseModel):
+    """LaTeX sources of one manuscript ({path: text}, .tex/.bib/.bbl) and optional context for the import checks."""
+
+    files: Dict[str, str] = Field(min_length=1)
+    registry: List[CitedResultModel] = Field(default_factory=list, max_length=500)
+    manuscript_status: Dict[str, str] = Field(default_factory=dict)
+    collection: Optional[List[str]] = Field(default=None, max_length=5000)
+    claim: str = Field(default="", max_length=4000)
+
+
 LaunchWorkbenchRequest.model_rebuild()
 
 

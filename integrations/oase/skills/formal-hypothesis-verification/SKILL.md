@@ -108,6 +108,9 @@ be acted on:
 | `formal.claim_below_kernel_checked` | State each claim's trust rung; never call a claim proved below KERNEL_CHECKED. |
 | `formal.fidelity_range_only` | Scope a fidelity relation to the range; conclusions were not compared. |
 | `formal.lint_is_syntactic` | Treat OPEN lint findings as questions for a human, not defects. |
+| `formal.imports_are_lexical` | Treat each import obligation as a line to check, not a defect. |
+| `formal.import_obligations_open` | Never call the manuscript's claims verified while an import obligation is OPEN. |
+| `formal.citations_unresolved` | Report each unresolved citation with file and line. |
 
 **Consequence rules.** A DECIDED defect stops the hypothesis from entering a
 tournament as written: return it to its author with the verdict and, for

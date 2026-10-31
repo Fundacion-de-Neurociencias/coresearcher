@@ -107,6 +107,18 @@ RELAYS = {
         "Treat OPEN findings as questions for a human, not defects, and read "
         "each DISCHARGED reason before relying on it."
     ),
+    "formal.imports_are_lexical": (
+        "Import obligations were found by lexical rules. Treat each one as a "
+        "line to check, not as a defect, and a MATCHED hypothesis as a textual match."
+    ),
+    "formal.import_obligations_open": (
+        "Do not call the manuscript's claims verified while any import "
+        "obligation is OPEN; list them with file and line."
+    ),
+    "formal.citations_unresolved": (
+        "Report each unresolved citation with file and line; the cited result "
+        "cannot be checked until it resolves."
+    ),
 }
 
 

@@ -20,7 +20,9 @@ is refused while it runs. It never replaces a differing `.analysis.json` (exit 9
 
 Statement checks use the same two phases (ADR-DISCOVERY-080): `formal fidelity --spec S.json` (paper range vs formal
 range) and `formal lean-lint --file F.lean` (junk-value findings) write the same three records, and `formal analyze`
-re-derives them offline. `formal trust --evidence E.json` grades claims on the trust ladder and prints the result.
+re-derives them offline. `formal manuscript --dir D` (ADR-DISCOVERY-082) audits the LaTeX sources of one manuscript:
+the citation gate and the import obligations of ADR-077, with the same three records and the same offline analysis.
+`formal trust --evidence E.json` grades claims on the trust ladder and prints the result.
 
 `coresearcher formal doctor` reports which capabilities are present: z3, a Lean toolchain, a formalizer model.
 
@@ -245,6 +247,32 @@ def lean_lint(args: argparse.Namespace) -> int:
     return _record_run(formal_pipeline.make_lint_request(source, path.name, reviews), args, "formal lean-lint")
 
 
+def manuscript(args: argparse.Namespace) -> int:
+    """Phase 1 of a manuscript audit: citation gate and import obligations over a directory of LaTeX sources."""
+    from python.discovery import manuscript_audit
+
+    root = Path(args.dir)
+    if not root.is_dir():
+        raise CliError(f"Manuscript directory not found: {root}", formal_status.EXIT_ARTIFACT)
+    files = {
+        p.relative_to(root).as_posix(): p.read_text(encoding="utf-8", errors="replace")
+        for p in sorted(root.rglob("*"))
+        if p.is_file() and p.suffix in manuscript_audit.SOURCE_SUFFIXES
+    }
+    if not files:
+        raise CliError(f"No .tex, .bib or .bbl sources under {root}", formal_status.EXIT_REFUSAL)
+    registry = _read_json(Path(args.registry), "cited-result registry") if args.registry else []
+    status = _read_json(Path(args.manuscript_status), "manuscript status") if args.manuscript_status else {}
+    collection = None
+    if args.collection:
+        collection = sorted(p.name for p in Path(args.collection).iterdir() if p.is_dir())
+    try:
+        request = formal_pipeline.make_manuscript_request(files, registry, status, collection, args.claim or "")
+    except ValueError as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+    return _record_run(request, args, "formal manuscript")
+
+
 def trust(args: argparse.Namespace) -> int:
     """Grades each claim in an evidence file (one object or a list) on the trust ladder; prints JSON. Exit 0 or 9."""
     data = _read_json(Path(args.evidence), "trust evidence")
@@ -312,7 +340,8 @@ def _record_run(
         "parameters": {
             k: v
             for k, v in request.items()
-            if k not in ("hypothesis", "rivals", "formalizer_messages", "source", "spec", "claim_evidence")
+            if k
+            not in ("hypothesis", "rivals", "formalizer_messages", "source", "spec", "claim_evidence", "files", "registry")
         },
         **threshold_record,
         "timestamp": started,
@@ -490,6 +519,9 @@ def analyze(args: argparse.Namespace) -> int:
     lint = record["verdict"].get("lean_lint")
     if lint:
         flat += [f"lean_lint.{k}={v}" for k, v in lint.items()]
+    audit = record["verdict"].get("manuscript_audit")
+    if audit:
+        flat += [f"manuscript_audit.{k}={v}" for k, v in audit.items()]
     summary = ", ".join(flat) or "no verdict"
     print(f"{record['formal_status']} ({summary}); reproduces_run={comparison['reproduces_run']}")
     return _analysis_exit(response, comparison, exception)
@@ -629,6 +661,16 @@ def add_parser(subparsers) -> None:
     p_lint.add_argument("--reviews", help="JSON list of {theorem, kind, line, note} review notes")
     _two_phase(p_lint)
 
+    p_ms = sub.add_parser(
+        "manuscript", help="Phase 1: citation gate and import obligations of a LaTeX manuscript (ADR-077, ADR-082)"
+    )
+    p_ms.add_argument("--dir", required=True, help="Directory holding the manuscript's .tex, .bib and .bbl sources")
+    p_ms.add_argument("--registry", help="JSON list of cited results with hypotheses as literal phrases")
+    p_ms.add_argument("--manuscript-status", help="JSON {manuscript: status} of withdrawn or corrected companions")
+    p_ms.add_argument("--collection", help="Directory whose subdirectories are the collection's manuscripts")
+    p_ms.add_argument("--claim", help="The manuscript's main claim, for the trust-ladder view")
+    _two_phase(p_ms)
+
     p_trust = sub.add_parser("trust", help="Grade claims on the trust ladder from recorded evidence (ADR-080)")
     p_trust.add_argument("--evidence", required=True, help="JSON evidence object, or a list of them")
 
@@ -643,10 +685,11 @@ def main(args: argparse.Namespace) -> int:
         "doctor": doctor,
         "fidelity": fidelity,
         "lean-lint": lean_lint,
+        "manuscript": manuscript,
         "trust": trust,
     }
     if not getattr(args, "formal_command", None):
-        print("usage: coresearcher formal {run,analyze,fidelity,lean-lint,trust,doctor} ...", file=sys.stderr)
+        print("usage: coresearcher formal {run,analyze,fidelity,lean-lint,manuscript,trust,doctor} ...", file=sys.stderr)
         return 2
     try:
         return commands[args.formal_command](args)

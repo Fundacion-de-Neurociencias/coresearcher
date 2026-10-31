@@ -112,7 +112,13 @@ def test_relays_command_attributes_every_formal_code():
     result = oase("relays", "--json")
     records = json.loads(result.output)
     formal_codes = {c: r for c, r in records.items() if c.startswith("formal.")}
-    assert len(formal_codes) == 19
+    # Every relay the adapter registers (apply.RELAYS), no more and no fewer; counted, not hard-coded.
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("oase_apply", Path(__file__).resolve().parents[1] / "apply.py")
+    adapter = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(adapter)
+    assert set(formal_codes) == set(adapter.RELAYS)
     for code, record in formal_codes.items():
         assert record["emitted_by"], f"{code} has no emission site"
 

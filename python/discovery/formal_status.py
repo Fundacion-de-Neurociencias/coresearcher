@@ -167,6 +167,19 @@ RELAY_CODES: Dict[str, str] = {
         "The junk-value lint is a static pass over the text. It can miss junk values hidden in Mathlib definitions; "
         "OPEN means a human decides, DISCHARGED names the text that rules the junk branch out."
     ),
+    "IMPORTS_ARE_LEXICAL": (
+        "Import obligations are found by lexical rules (citations with locators, sign and convention words, "
+        "'effective' with an unspecified constant). They place an OPEN obligation at a line; they do not decide the "
+        "mathematics, and a MATCHED hypothesis is a textual match, not a proof."
+    ),
+    "IMPORT_OBLIGATIONS_OPEN": (
+        "The manuscript has OPEN import obligations. Its claims are not verified until each one is discharged "
+        "(ADR-076): a claim is never stronger than its weakest obligation."
+    ),
+    "CITATIONS_UNRESOLVED": (
+        "At least one citation key has no bibliography entry, or a collection link names a manuscript that does not "
+        "exist. The cited result cannot be checked."
+    ),
 }
 
 

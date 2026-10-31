@@ -229,6 +229,9 @@ def _oase_code(coresearcher_code: str) -> str:
         "CLAIM_BELOW_KERNEL_CHECKED": "formal.claim_below_kernel_checked",
         "FIDELITY_RANGE_ONLY": "formal.fidelity_range_only",
         "LINT_IS_SYNTACTIC": "formal.lint_is_syntactic",
+        "IMPORTS_ARE_LEXICAL": "formal.imports_are_lexical",
+        "IMPORT_OBLIGATIONS_OPEN": "formal.import_obligations_open",
+        "CITATIONS_UNRESOLVED": "formal.citations_unresolved",
     }
     if coresearcher_code not in mapping:
         raise SchemaError(

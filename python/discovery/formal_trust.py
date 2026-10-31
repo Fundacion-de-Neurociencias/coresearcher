@@ -251,6 +251,9 @@ def for_response(request: Dict[str, Any], response: Dict[str, Any]) -> List[Dict
     Lean theorems the pipeline states are NOT_KERNEL_CHECKED, so they never lift a claim; only `claim_evidence` given
     in the request can.
     """
+    if request.get("input_kind") == "manuscript_audit" and (response.get("reports") or {}).get("manuscript_audit"):
+        # Prose claims have no pinned formal statement: they stay CLAIMED, and the audit never lifts them (ADR-082).
+        return [assess({"claim": request.get("claim") or "the manuscript's claims"})]
     evaluation = (response.get("reports") or {}).get("evaluation")
     hypothesis = response.get("formal_hypothesis")
     if not evaluation or not isinstance(hypothesis, dict):

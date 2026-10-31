@@ -12,7 +12,7 @@
 graph), ADR-DISCOVERY-068 (status, relays, provenance, two-phase CLI), ADR-DISCOVERY-070 (statement fidelity, junk-value
 lint)
 **Context record:** [`docs/reference/EXTERNAL_RESULTS_PROGRAM.md`](../reference/EXTERNAL_RESULTS_PROGRAM.md)
-**Numbering:** 077 to 079 are taken by records on open branches, so this record takes 080.
+**Numbering:** 077 is used on master and 078 and 079 by records on open branches, so this record takes 080. The pre-registration record of PR #22 is 081.
 
 ## Context
 
@@ -28,7 +28,7 @@ yet product features:
 3. **Check the question before the answer** (lesson 1). The ADR-070 range comparison and junk-value lint existed only
    as library functions driven by one case script.
 
-A pre-registration branch (ADR-077, `trust_ladder.ClaimRecord`, `trivial_witness`) applies the same ideas to one
+A pre-registration record (ADR-081, PR #22: `trust_ladder.ClaimRecord`, `trivial_witness`) applies the same ideas to one
 announced result through a frozen checklist and a hand-kept, dated claim history. This record makes the generic
 mechanisms part of every formal report, the API and the CLI.
 
@@ -137,7 +137,7 @@ recomputes the rung from fields and digests only:
 - **Store the trust rung inside the formal reports.** Rejected: it would change the bytes of every stored response
   and break run/analyze reproduction of existing runs, and the rung depends on evidence outside the formal object.
   It is a view computed beside the reports.
-- **Reuse `trust_ladder.ClaimRecord` (ADR-077).** It records a dated, hand-curated history for one announced result
+- **Reuse `trust_ladder.ClaimRecord` (ADR-081).** It records a dated, hand-curated history for one announced result
   and checks only that evidence keys are present. Formal reports need a stateless function of the evidence with
   digest checks. The two use the same rung names, so a claim record's latest step can be cross-checked against
   `formal_trust.assess` once both are merged.

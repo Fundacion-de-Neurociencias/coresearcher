@@ -22,7 +22,7 @@ rule failed. A rung is never inferred from a related status: NOT_KERNEL_CHECKED,
 a claim where it is. Rungs are not skipped: a kernel check of a statement nobody audited stays at STATEMENT_PUBLIC.
 
 This module grades evidence that is handed to it; it never runs Lean. It is complementary to a hand-kept claim
-history (`trust_ladder.ClaimRecord`, ADR-077, where it exists): that one records dated steps for an announced
+history (`trust_ladder.ClaimRecord`, ADR-081, where it exists): that one records dated steps for an announced
 result, this one recomputes the rung of every claim from its evidence, for formal reports and the evidence graph.
 """
 

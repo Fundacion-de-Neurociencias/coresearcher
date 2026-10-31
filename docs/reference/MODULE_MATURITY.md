@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 21 |
+| Integrated | Used by the API and covered by tests | 22 |
 | Tested | Covered by tests, not reachable from the API | 55 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -82,6 +82,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |
 | `manifold_detector` | Prototype | - | - | - |
+| `manuscript_audit` | Integrated | yes | yes | - |
 | `manuscript_checks` | Tested | - | yes | yes |
 | `marr_engine` | Prototype | - | - | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |

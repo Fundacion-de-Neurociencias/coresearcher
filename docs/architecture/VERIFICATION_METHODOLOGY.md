@@ -101,7 +101,11 @@ domain-neutral.
   - At each use, check that the hypotheses are discharged and that the conventions match.
   - Propagate a correction to every result that depends on the corrected one.
 - **Came from.** The time-travel benchmark (PR #19).
-- **Integration.** Not yet. This is block B.
+- **Integration.** In part (ADR-082).
+  - The citation gate and the import obligations of ADR-077 are a service: `POST /api/manuscripts/audit` and
+    `coresearcher formal manuscript`.
+  - The registry holds cited results with hypotheses as literal phrases and conventions as typed fields.
+  - Still to do in block B: comparing typed conventions automatically, and premises beyond manuscripts.
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

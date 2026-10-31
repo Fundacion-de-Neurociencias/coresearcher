@@ -92,6 +92,28 @@ def make_lint_request(source: str, file: str, reviews: Optional[List[Dict[str, A
     }
 
 
+def make_manuscript_request(
+    files: Dict[str, str],
+    registry: Optional[List[Dict[str, Any]]] = None,
+    manuscript_status: Optional[Dict[str, str]] = None,
+    collection: Optional[List[str]] = None,
+    claim: str = "",
+) -> Dict[str, Any]:
+    """A manuscript audit request: citation gate and import obligations over LaTeX sources (ADR-077, ADR-082).
+    The sources are stored in full, so `formal analyze` can re-derive the report offline."""
+    if not isinstance(files, dict) or not files:
+        raise ValueError("A manuscript audit needs a non-empty {path: text} map of sources.")
+    return {
+        "schema": REQUEST_SCHEMA,
+        "input_kind": "manuscript_audit",
+        "files": files,
+        "registry": registry or [],
+        "manuscript_status": manuscript_status or {},
+        "collection": collection,
+        "claim": claim,
+    }
+
+
 def _parse(data: Any, what: str):
     try:
         return hypothesis_from_dict(data)
@@ -155,7 +177,7 @@ def compute(
         "mandatory_relays": [],
     }
     relay_codes: List[str] = []
-    if request["input_kind"] in ("fidelity", "lean_lint"):
+    if request["input_kind"] in ("fidelity", "lean_lint", "manuscript_audit"):
         return _compute_statement_check(request, response)
     try:
         if request["input_kind"] == "prose":
@@ -215,7 +237,8 @@ def compute(
 
 
 def _compute_statement_check(request: Dict[str, Any], response: Dict[str, Any]) -> Dict[str, Any]:
-    """Fidelity and lint requests: one sealed report under `reports[kind]`; the other report slots stay empty."""
+    """Fidelity, lint and manuscript-audit requests: one sealed report under `reports[kind]`; the other report slots
+    stay empty."""
     from python.discovery import fidelity_service
 
     kind = request["input_kind"]
@@ -223,6 +246,16 @@ def _compute_statement_check(request: Dict[str, Any], response: Dict[str, Any]) 
     try:
         if kind == "fidelity":
             report = fidelity_service.compare(request["spec"], request.get("integer_values"))
+        elif kind == "manuscript_audit":
+            from python.discovery import manuscript_audit
+
+            report = manuscript_audit.audit(
+                request["files"],
+                request.get("registry"),
+                request.get("manuscript_status"),
+                request.get("collection"),
+                request.get("claim") or "",
+            )
         else:
             report = fidelity_service.lean_lint(
                 request["source"], request.get("file") or "<string>", request["reviews"]
@@ -261,6 +294,13 @@ def verdict(response: Dict[str, Any]) -> Dict[str, Any]:
         out["fidelity"] = reports["fidelity"]["relation"]
     if reports.get("lean_lint"):
         out["lean_lint"] = {"open": reports["lean_lint"]["open"], "discharged": reports["lean_lint"]["discharged"]}
+    audit = reports.get("manuscript_audit")
+    if audit:
+        out["manuscript_audit"] = {
+            "citation_gate": audit["citation_gate"]["status"],
+            "unresolved_citations": len(audit["citation_gate"]["unresolved"]),
+            "open_obligations": audit["open_obligations"],
+        }
     if reports["comparisons"]:
         out["relations"] = {c["hypothesis_b"]: c["relation"] for c in reports["comparisons"]}
     if reports["consequences"]:
@@ -318,6 +358,14 @@ def metrics(response: Dict[str, Any]) -> Dict[str, Any]:
     lint = response["reports"].get("lean_lint")
     if lint:
         out["lean_lint"] = {"declarations": len(lint["declarations"]), "sites": len(lint["sites"])}
+    audit = response["reports"].get("manuscript_audit")
+    if audit:
+        out["manuscript_audit"] = {
+            "source_lines": audit["source_lines"],
+            "citations": audit["citation_gate"]["citations"],
+            "import_counts": audit["import_counts"],
+            "hypothesis_outcomes": audit["hypothesis_outcomes"],
+        }
     return out
 
 
@@ -331,7 +379,7 @@ def report_digests(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         named.append(("evaluation", reports["evaluation"]))
     named += [(f"comparison[{i}]", c) for i, c in enumerate(reports["comparisons"])]
     named += [(f"consequence[{i}]", c) for i, c in enumerate(reports["consequences"])]
-    named += [(kind, reports[kind]) for kind in ("fidelity", "lean_lint") if reports.get(kind)]
+    named += [(kind, reports[kind]) for kind in ("fidelity", "lean_lint", "manuscript_audit") if reports.get(kind)]
     for name, report in named:
         p = report["provenance"]
         out.append(

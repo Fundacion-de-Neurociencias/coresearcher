@@ -133,7 +133,10 @@ asymptotics, sharp O(4) mass bounds) and the exponential-decay paper, only the l
 scope note is accurate; the gap is between the family headline in `CONTENTS.md` ("constructs the canonical
 continuum limit … with a positive mass gap", with a Lean link) and what the Lean statement covers.
 
-Kernel check: NOT RUN (Comparator needs landrun on Linux and a full openai/math build). Nothing above depends on it.
+Kernel check: not run, by decision. Every result above concerns what the Lean statement says, so it holds whether or not
+`ClassicalON.main` is proved. Running Comparator would mean building and executing the downloaded openai/math project,
+which this audit treats as untrusted data. For Yang–Mills, the kernel check is the KERNEL_CHECKED rung of the claim
+record, which comes after the statement audit.
 
 Report: [rehearsal_report.json](../../../examples/o3-continuum-rehearsal/rehearsal_report.json). Regenerate with
 `python scripts/cases/o3_rehearsal_report.py`.

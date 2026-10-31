@@ -266,8 +266,11 @@ def case_report() -> Dict[str, Any]:
         "family_coverage": FAMILY_COVERAGE,
         "files_read": FILES_READ,
         "kernel_check": {
-            "status": "NOT RUN",
-            "reason": "Comparator needs landrun (Linux Landlock) and a full openai/math build; neither was run in "
-            "this session. Nothing here depends on whether ClassicalON.main is proved.",
+            "status": "NOT RUN (decided, closed)",
+            "reason": "Not needed: the rehearsal audits what the Lean statement says, and every result above holds "
+            "whether or not ClassicalON.main is proved. Running Comparator would mean building and executing the "
+            "downloaded openai/math project (its lakefile and Mathlib build), which this audit treats as untrusted "
+            "data and does not execute. A kernel check belongs to the KERNEL_CHECKED rung of a claim record, and "
+            "no claim record is kept for the O(3) family.",
         },
     }

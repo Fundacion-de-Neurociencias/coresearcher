@@ -16,13 +16,31 @@ Both are deterministic: the same request gives the same `output_sha256` under th
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Sequence
+import contextlib
+import threading
+from typing import Any, Dict, Iterator, List, Optional, Sequence
 
 from python.discovery import formal_provenance, formal_status, formal_thresholds
 from python.discovery.formal_hypothesis import FormalHypothesisError
 from python.discovery.formal_status import FormalStatus
 
 MAX_LEAN_SOURCE_CHARS = 400_000
+_Z3_LOCK = threading.RLock()
+
+
+@contextlib.contextmanager
+def _fresh_z3_context() -> Iterator[None]:
+    """Runs a decision in a fresh z3 main context, one at a time.
+
+    z3 picks a model by its internal term order, which depends on every query made earlier in the process. A witness
+    must not depend on that history, or the same request would get a different `output_sha256` (ADR-068). Expressions
+    made before the reset keep their own context; nothing made inside is used after it.
+    """
+    import z3
+
+    with _Z3_LOCK:
+        z3.z3._main_ctx = None  # main_ctx() builds a new context on its next call.
+        yield
 
 
 def _number_or_none(value: Any, what: str) -> Optional[float]:
@@ -113,16 +131,18 @@ def compare(spec_data: Dict[str, Any], integer_values: Optional[Dict[str, Sequen
     from python.discovery import statement_fidelity
 
     spec = spec_from_dict(spec_data)
-    try:
-        result = statement_fidelity.compare_ranges(spec)
-    except SyntaxError as exc:
-        raise FormalHypothesisError(f"A range is not a valid predicate: {exc.msg}") from exc
-    body = result.to_dict()
     if integer_values:
         missing = [p.name for p in spec.parameters if p.integer and p.name not in integer_values]
         if missing:
             raise FormalHypothesisError(f"integer_values must give values for every integer parameter: {missing}.")
-        body["cross_check"] = statement_fidelity.cross_check(spec, integer_values)
+    try:
+        with _fresh_z3_context():
+            result = statement_fidelity.compare_ranges(spec)
+            body = result.to_dict()
+            if integer_values:
+                body["cross_check"] = statement_fidelity.cross_check(spec, integer_values)
+    except SyntaxError as exc:
+        raise FormalHypothesisError(f"A range is not a valid predicate: {exc.msg}") from exc
     undecided = result.relation == statement_fidelity.Fidelity.UNDECIDED
     status = FormalStatus.UNDECIDED if undecided else FormalStatus.DECIDED
     inputs = {"spec": spec_to_dict(spec)}

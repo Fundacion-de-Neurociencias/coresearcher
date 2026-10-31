@@ -112,7 +112,7 @@ def test_relays_command_attributes_every_formal_code():
     result = oase("relays", "--json")
     records = json.loads(result.output)
     formal_codes = {c: r for c, r in records.items() if c.startswith("formal.")}
-    assert len(formal_codes) == 14
+    assert len(formal_codes) == 19
     for code, record in formal_codes.items():
         assert record["emitted_by"], f"{code} has no emission site"
 

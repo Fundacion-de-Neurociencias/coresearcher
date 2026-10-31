@@ -4,6 +4,7 @@ import random
 from fractions import Fraction
 
 import pytest
+import z3
 
 from python.discovery import statement_fidelity as sf
 from python.discovery.formal_hypothesis import Predicate, SolverUndecided
@@ -20,8 +21,12 @@ def _stein(lean: str) -> RangeSpec:
 
 
 def _holds(expression: str, names, state) -> bool:
-    exact = {k: Fraction(v) for k, v in state.items()}
-    return Predicate(desugar(expression), names).evaluate(exact)
+    """Exact truth at a state. Predicate evaluation divides integer literals in floats, so a witness exactly on a
+    boundary (alpha == max(...)) could be misjudged; z3 substitution keeps every value rational."""
+    encoder = sf._Encoder([Parameter(name) for name in names])
+    formula = encoder.formula(expression)
+    values = [(encoder.table.symbols[k], z3.RealVal(str(Fraction(v)))) for k, v in state.items()]
+    return z3.is_true(z3.simplify(z3.substitute(formula, *values)))
 
 
 # ---------------------------------------------------------------------------

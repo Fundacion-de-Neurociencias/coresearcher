@@ -35,7 +35,7 @@ mechanisms part of every formal report, the API and the CLI.
 ### Methodology
 
 This record implements three methods of the verification methodology
-([`docs/architecture/VERIFICATION_METHODOLOGY.md`](../architecture/VERIFICATION_METHODOLOGY.md)):
+(`docs/architecture/VERIFICATION_METHODOLOGY.md`, added in PR #23):
 
 - **M1, check the question before the answer:** the fidelity services (section 3);
 - **M4, existence and generality claims can be vacuous:** the intent probe (section 1);
@@ -107,6 +107,9 @@ recomputes the rung from fields and digests only:
   witnesses, methods, division hazards, quantities), `formal_status`, relays (FORMAL_NOT_EMPIRICAL,
   FIDELITY_RANGE_ONLY) and an ADR-068 provenance block (operation `fidelity_compare`). An UNDECIDED relation has
   `formal_status` UNDECIDED: a non-verdict, exit code 10. Optional `integer_values` adds the `cross_check` slice.
+- z3 chooses a model by its internal term order, and that order depends on every earlier query in the process. Each
+  comparison therefore runs in a fresh z3 context, one at a time. Without this, the same request could return a
+  different witness, and so a different `output_sha256`, depending on what the server had computed before.
 - `lean_lint(source)` wraps `lean_junk_lint.lint`: findings DISCHARGED or OPEN, optional review notes, the statement
   digest, relays LINT_IS_SYNTACTIC and LEAN_NOT_KERNEL_CHECKED, provenance (operation `lean_lint`).
 - API: `POST /api/fidelity/compare`, `POST /api/fidelity/lean-lint`. Both are catalogued DETERMINISTIC and READ_ONLY.

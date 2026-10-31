@@ -507,6 +507,15 @@ def _run_http(
         out["reports"] = {"evaluation": None, "comparisons": [], "consequences": []}
         return out, exchanges
     for kind, body in calls:
+        if kind == "evaluation":
+            # API-only view (ADR-DISCOVERY-080): the pipeline report carries no
+            # trust rungs, so they are dropped to keep run and analyze comparable.
+            body.pop("claim_trust", None)
+            body["mandatory_relays"] = [
+                r
+                for r in body.get("mandatory_relays") or []
+                if r["code"] != "CLAIM_BELOW_KERNEL_CHECKED"
+            ]
         codes += [r["code"] for r in body.get("mandatory_relays") or []]
         if kind == "consequence" and "lean_theorem" in body:
             out["lean"].append(

@@ -28,7 +28,7 @@ def ym():
 
 
 def test_ym_checklist_matches_its_lock_and_the_published_hash(ym):
-    assert ym.sha256 == YM_SHA256  # Also quoted in ADR-077 and the case doc; changing it means a new version.
+    assert ym.sha256 == YM_SHA256  # Also quoted in ADR-081 and the case doc; changing it means a new version.
     assert ym.lock["sha256"] == YM_SHA256
     assert ym.lock["frozen_on"] == ym.data["frozen_on"] == "2026-10-30"
     assert ym.version == "1.0.0"

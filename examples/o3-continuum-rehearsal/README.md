@@ -2,7 +2,7 @@
 
 Inputs and outputs of the rehearsal described in
 [`docs/reference/cases/YANG_MILLS_PREREGISTRATION.md`](../../docs/reference/cases/YANG_MILLS_PREREGISTRATION.md),
-section 3 (ADR-DISCOVERY-077).
+section 3 (ADR-DISCOVERY-081).
 
 | File | What it is |
 |---|---|

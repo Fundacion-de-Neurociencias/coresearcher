@@ -5,6 +5,7 @@ import random
 from fractions import Fraction
 
 import pytest
+import z3
 
 from python.discovery import statement_fidelity as sf
 from python.discovery.formal_hypothesis import Predicate, SolverUndecided
@@ -257,3 +258,21 @@ def test_irrational_only_difference_is_marked_approximate():
     result = compare_ranges(RangeSpec("t", params, paper="x*x != 2", lean="x >= 0"))
     assert result.relation == Fidelity.STRONGER
     assert result.lean_only_witness["approximate"] == ["x"]
+
+
+def test_algebraic_model_is_rationalized_into_a_checkable_witness():
+    encoder = sf._Encoder([Parameter("x"), Parameter("y")])
+    formulas = [encoder.formula("x >= 1"), encoder.formula("x <= 2"), encoder.formula("y == x")]
+    x = encoder.table.symbols["x"]
+    model = _z3_model(formulas + [x * x == 2])
+    assert z3.is_algebraic_value(model.eval(x, model_completion=True))
+    witness = encoder.decode(sf._rational_model(encoder, model, formulas))
+    state = {k: Fraction(v) for k, v in witness.items()}
+    assert 1 <= state["x"] <= 2 and state["y"] == state["x"]
+
+
+def _z3_model(formulas):
+    solver = z3.Solver()
+    solver.add(*formulas)
+    assert solver.check() == z3.sat
+    return solver.model()

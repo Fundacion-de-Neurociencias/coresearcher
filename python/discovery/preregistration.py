@@ -1,5 +1,5 @@
 """
-python/discovery/preregistration.py - Frozen acceptance checklists for claimed existence results (ADR-DISCOVERY-077).
+python/discovery/preregistration.py - Frozen acceptance checklists for claimed existence results (ADR-DISCOVERY-081).
 
 A checklist fixes, before the claimant's formal statement is public, what that statement must say. It holds:
 

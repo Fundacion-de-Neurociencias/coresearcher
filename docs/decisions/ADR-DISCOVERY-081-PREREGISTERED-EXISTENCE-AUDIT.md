@@ -1,4 +1,4 @@
-# ADR-DISCOVERY-077: Pre-registered acceptance checklists, a trivial-witness probe and a trust ladder for announced existence results
+# ADR-DISCOVERY-081: Pre-registered acceptance checklists, a trivial-witness probe and a trust ladder for announced existence results
 
 **Status:** Accepted
 **Date:** 2026-10-31 (checklist frozen 2026-10-30)
@@ -11,6 +11,8 @@
 ADR-DISCOVERY-068 (non-verdict statuses, `NOT_KERNEL_CHECKED`), ADR-DISCOVERY-070 (statement fidelity, junk-value
 lint, case-file practice), ADR-DISCOVERY-076 (obligation ledger)
 **Case:** [`docs/reference/cases/YANG_MILLS_PREREGISTRATION.md`](../reference/cases/YANG_MILLS_PREREGISTRATION.md)
+**Numbering:** first opened as ADR-077. 077 went to import obligations on master, and 078 to 080 are taken on other
+branches, so this record takes 081.
 
 ## Context
 

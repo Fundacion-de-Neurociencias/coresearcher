@@ -1,6 +1,6 @@
 """
 python/discovery/yang_mills_case.py - Pre-registered audit of the announced existence proof of four-dimensional
-quantum Yang-Mills theory (ADR-DISCOVERY-077).
+quantum Yang-Mills theory (ADR-DISCOVERY-081).
 
 On October 26, 2026 OpenAI announced an existence proof of quantum Yang-Mills theory including fermions. A
 committee (Douglas, Gross (chair), Jaffe, Klebanov, Nekrasov) holds the manuscript and a Lean formalization and will

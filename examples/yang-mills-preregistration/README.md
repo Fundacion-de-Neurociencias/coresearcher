@@ -2,7 +2,7 @@
 
 Inputs and outputs of the case described in
 [`docs/reference/cases/YANG_MILLS_PREREGISTRATION.md`](../../docs/reference/cases/YANG_MILLS_PREREGISTRATION.md)
-(ADR-DISCOVERY-077).
+(ADR-DISCOVERY-081).
 
 | File | What it is |
 |---|---|

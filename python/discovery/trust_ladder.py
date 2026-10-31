@@ -1,5 +1,5 @@
 """
-python/discovery/trust_ladder.py - Trust-ladder statuses for announced formal results (ADR-DISCOVERY-077).
+python/discovery/trust_ladder.py - Trust-ladder statuses for announced formal results (ADR-DISCOVERY-081).
 
 An announced result climbs five rungs. Each rung records what has been checked about the formal claim, never
 whether the result is important or who deserves credit:

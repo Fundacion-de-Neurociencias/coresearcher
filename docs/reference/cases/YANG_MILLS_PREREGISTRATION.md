@@ -1,6 +1,6 @@
 # Yang–Mills existence: pre-registered acceptance criteria, and a rehearsal on the O(3) continuum limit
 
-**ADR:** [ADR-DISCOVERY-077](../../decisions/ADR-DISCOVERY-077-PREREGISTERED-EXISTENCE-AUDIT.md)
+**ADR:** [ADR-DISCOVERY-081](../../decisions/ADR-DISCOVERY-081-PREREGISTERED-EXISTENCE-AUDIT.md)
 **Status of the claim:** CLAIMED (statement not public), recorded 2026-10-30
 **Checklist:** `ym4-existence` v1.0.0, frozen 2026-10-30, SHA-256
 `2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353`

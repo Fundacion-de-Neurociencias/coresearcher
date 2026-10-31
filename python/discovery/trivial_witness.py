@@ -1,5 +1,5 @@
 """
-python/discovery/trivial_witness.py - Trivial-witness probe for existence statements (ADR-DISCOVERY-077).
+python/discovery/trivial_witness.py - Trivial-witness probe for existence statements (ADR-DISCOVERY-081).
 
 An existence statement "there is a T with P(T)" can be kernel-checked and still say much less than its title: if a
 cheap model satisfies P, the statement is true for a reason unrelated to the result it names. For quantum field

@@ -1,5 +1,5 @@
 """
-python/discovery/o3_continuum_case.py - Rehearsal of the pre-registered existence audit (ADR-DISCOVERY-077) on
+python/discovery/o3_continuum_case.py - Rehearsal of the pre-registered existence audit (ADR-DISCOVERY-081) on
 openai/math family 215, "The canonical massive continuum limit of the two-dimensional O(3) model".
 
 The paper claims a continuum theory: OS axioms, a nonzero connected four-point function, a unique vacuum and a

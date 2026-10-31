@@ -69,6 +69,17 @@ def test_negative_control_without_the_proved_derivative_bound(zones):
     assert lb is None or lb <= 0
 
 
+def test_certified_bounds_never_exceed_the_true_margin(zones):
+    """Soundness audit against an independent Gauss-Legendre value of (4), short widths and tails."""
+    boxes = st.initial_boxes()
+    for m, h in ((0.43, 0.15), (1.9, 0.05), (2.2, 3.1), (0.3, 6.5)):
+        box = next(b for b in boxes if b[0] <= m <= b[1] and b[2] <= h <= b[3])
+        lb = st.evaluate_box(zones, *box)
+        true = st.reference_margin(m, h)
+        certified = lb * h * h if box[3] <= 1 else lb
+        assert 0 < certified <= true, (m, h, certified, true)
+
+
 def test_committed_proof():
     report = json.loads((EX / "segment_tails_proof.json").read_text(encoding="utf-8"))
     assert report["verified"] and not report["failed"] and all(report["lemmas"].values())

@@ -615,3 +615,52 @@ def verify_with_cells(cells, pool_factory, workers: int = 8) -> Dict[str, Any]:
     report["lemmas"] = lemma_checks()
     report["verified"] = all(p["verified"] for p in parts) and all(report["lemmas"].values())
     return report
+
+
+def reference_margin(m: float, h: float, nodes: int = 40) -> float:
+    """Independent numeric value of right minus left of (4) on the segment with midpoint m and half-width h (in t):
+    Gauss-Legendre in t with density cosh t, profiles from mahler_obligations.evaluate (x < 8) or the Laurent-Taylor
+    models at a point (x >= 8), closed-form circle part. Not a proof: a soundness audit of the certified bounds,
+    which must never exceed it."""
+    from python.discovery import mahler_obligations as mo
+
+    with mp.workdps(30):
+        r, w, lam, tp, ms, tc, tr, s = (
+            mp.mpf(v) for v in ("0.22", "4.6", "0.65", "0.064", "0.352", "0.021", "0.043", "3.6")
+        )
+
+        def prof(t):
+            x = abs(float(s * mp.sinh(t)))
+            if x < 8:
+                e = mo.evaluate(x)
+                d = mp.mpf(e["d"])
+                return d - 2 * mp.mpf(e["g"]), -d + mp.mpf("6.5") * mp.mpf(e["g2"]), mp.mpf(e["q"])
+            tt = Fraction(1) / Fraction(x)
+            bm = mt.base_models()
+            v = {k: mt.evaluate_pair(bm[k], tt, tt) for k in ("d", "g", "g2")}
+            pr = sb._prof_from_jets(v["d"], v["g"], v["g2"])
+            return tuple(mp.mpf(pr[k].mid) for k in ("K", "C", "q"))
+
+        na, nw = np.polynomial.legendre.leggauss(nodes)
+        m, h = mp.mpf(m), mp.mpf(h)
+        D = 2 * mp.cosh(m) * mp.sinh(h)
+        acc = [mp.mpf(0)] * 4
+        for a, b in zip(na, nw):
+            t = m + h * mp.mpf(a)
+            K, C, q = prof(t)
+            wgt = mp.mpf(b) * h * mp.cosh(t) / D
+            acc = [acc[0] + wgt * K, acc[1] + wgt * C, acc[2] + wgt * q, acc[3] + wgt * q * q]
+        Kb, Cb, qb, q2b = acc
+        (Kl, Cl, ql), (Ky, Cy, qy) = prof(m - h), prof(m + h)
+        eK = Kb - (Kl + Ky) / 2
+        Gam = mp.mpf("0.8") / ms**2 * (mp.mpf("1.25") * (Ky - Kl + tc * (Cy - Cl)) ** 2 + 5 * tr**2 * (Cy - Cl) ** 2)
+        A = (mp.cos(w * h) + w * mp.coth(h) * mp.sin(w * h)) / (1 + w**2)
+        B = (mp.coth(h) * mp.sin(w * h) - w * mp.cos(w * h)) / (1 + w**2)
+        th = mp.tanh(m)
+        Vpi = r**2 * (1 - A**2 - B**2 * th**2)
+        pa, pd = 2 * r**2 * (1 - A * mp.cos(w * h)), -2 * r**2 * B * th * mp.sin(w * h)
+        Vq = q2b - qb**2
+        bp, bm_ = Vq + (qb - qy) ** 2, Vq + (qb - ql) ** 2
+        X = Cb - (Cy + Cl) / 2 - pa - (bp + bm_) / 2
+        Y = (Cy - Cl) / 2 - pd - (bp - bm_) / 2
+        return float((1 + tp) * (Vpi + Vq) - (eK + Gam + (X**2 + Y**2) / (4 * lam) + tp * (pa + (bp + bm_) / 2)))

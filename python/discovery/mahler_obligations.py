@@ -232,6 +232,7 @@ def build_ledger(
     twovar: Dict[str, Any] = None,
     ranges: Dict[str, Any] = None,
     segbox: Dict[str, Any] = None,
+    tails: Dict[str, Any] = None,
 ) -> Claim:
     """Assemble the ledger from computed results. `grid` holds the outputs of the numeric checks and their scopes;
     `interval` is the report of mahler_interval (optional). With an interval proof each inequality is split into an
@@ -423,6 +424,28 @@ def build_ledger(
     )
     ob.discharges.append(_numeric_discharge(1 - seg["result"]["max_left_over_right"], seg["scope"], seg["result"]))
     ob.discharges.append(author)
+    if tails:
+        ob.discharges.append(
+            Discharge(
+                Status.DISCHARGED_INTERVAL if tails["verified"] else Status.OPEN,
+                "certified bound propagation (mahler_segment_tails.py, interval_engine.py): zone ranges with the far "
+                "zone closed at x = infinity, knapsack averages, chord kernel and mean-value bounds, exact rational "
+                "Taylor models of the circle part; the margin is divided by h^2 for h <= 1",
+                "every segment with m >= 0 outside the middle and large widths, up to infinity; uses the proved "
+                "profile bounds (lem:scalar-ranges) and the middle and large widths for the skipped boxes",
+                "CoResearcher",
+                margin=tails["min_lower_bound"],
+                detail={
+                    "certified_boxes": tails["certified_boxes"],
+                    "skipped_boxes_in_bounded_region": tails["skipped_boxes_in_bounded_region"],
+                    "lemmas": tails["lemmas"],
+                    "depends_on": [
+                        "segment: profile bounds |q-dot|, |C-dot|, |n_C|, |n_q|, U_* (lem:scalar-ranges)",
+                        "segment: (4) on the middle and large widths (|l| <= 1.4, y <= 3.6, h >= .16)",
+                    ],
+                },
+            )
+        )
     claim.obligations.append(ob)
     return claim
 
@@ -468,6 +491,7 @@ def run(
     twovar: Dict[str, Any] = None,
     ranges: Dict[str, Any] = None,
     segbox: Dict[str, Any] = None,
+    tails: Dict[str, Any] = None,
 ):
     t_point = profile_table(pointwise_h, pointwise_L)
     t = t_point if (pointwise_h, pointwise_L) == (h, L) else profile_table(h, L)
@@ -487,4 +511,4 @@ def run(
             "scope": f"segments with endpoints in [-{L}, {L}] every {step * h:g}; trapezoid step {h}",
         },
     }
-    return build_ledger(grid, interval, tail, twovar, ranges, segbox), grid
+    return build_ledger(grid, interval, tail, twovar, ranges, segbox, tails), grid

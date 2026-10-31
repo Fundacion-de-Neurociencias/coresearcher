@@ -58,6 +58,20 @@ STEPS = [
         minutes=12,
     ),
     pp.ProofStep(
+        "segment_tails",
+        "scripts/cases/mahler_segment_tails_report.py",
+        EX + "segment_tails_proof.json",
+        ["verified"],
+        TAIL
+        + [
+            D + "mahler_ranges.py",
+            D + "mahler_segment_box.py",
+            D + "mahler_segment_tails.py",
+            D + "interval_engine.py",
+        ],
+        minutes=40,
+    ),
+    pp.ProofStep(
         "ledger",
         "scripts/cases/mahler_obligations_report.py",
         EX + "ledger.json",
@@ -65,7 +79,7 @@ STEPS = [
         BASE
         + [D + "obligation_ledger.py", D + "mahler_segment.py"]
         + [EX + f for f in ("interval_proof.json", "tail_proof.json", "twovar_proof.json", "ranges_proof.json")]
-        + [EX + "segment_box_proof.json"],
+        + [EX + "segment_box_proof.json", EX + "segment_tails_proof.json"],
         minutes=14,
     ),
 ]

@@ -33,7 +33,9 @@ def main() -> None:
     ranges = json.loads(rg_path.read_text(encoding="utf-8")) if rg_path.exists() else None
     sb_path = args.out.parent / "segment_box_proof.json"
     segbox = json.loads(sb_path.read_text(encoding="utf-8")) if sb_path.exists() else None
-    claim, _ = mo.run(interval=interval, tail=tail, twovar=twovar, ranges=ranges, segbox=segbox)
+    tl_path = args.out.parent / "segment_tails_proof.json"
+    tails = json.loads(tl_path.read_text(encoding="utf-8")) if tl_path.exists() else None
+    claim, _ = mo.run(interval=interval, tail=tail, twovar=twovar, ranges=ranges, segbox=segbox, tails=tails)
     report = {"source": mo.SOURCE, "claim": claim.to_dict(), "seconds": round(time.time() - start, 1)}
     args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Wrote {args.out} in {report['seconds']} s; claim status {report['claim']['status']}")

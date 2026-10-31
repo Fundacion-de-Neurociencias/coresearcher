@@ -404,6 +404,7 @@ def _origin_summary(premises: Dict[str, Dict[str, Any]]) -> Dict[str, int]:
 
 
 def _hypothesis_graph(g: _Graph, spec: Dict[str, Any], consequences: List[str], rivals: List[Dict[str, Any]]) -> str:
+    from python.discovery import formal_trust
     from python.discovery.formal_hypothesis import FormalHypothesisError, HypothesisEvaluator, hypothesis_from_dict
     from python.discovery.formal_lean import consequence_theorem
 
@@ -420,6 +421,12 @@ def _hypothesis_graph(g: _Graph, spec: Dict[str, Any], consequences: List[str], 
         variables=hypothesis.variable_names,
         claims=[p.expression for p in hypothesis._claims],
         premise_origins=_origin_summary(premises),
+        # Trust-ladder rung of each claim (ADR-080): the formal object is supplied with the request, so its claims
+        # start at STATEMENT_PUBLIC; nothing here audits or kernel-checks them.
+        claim_trust={
+            a["claim"]: a["rung"]
+            for a in formal_trust.for_claims([p.expression for p in hypothesis._claims], "evidence request")
+        },
     )
     _premise_nodes(g, hid, hypothesis.hypothesis_id, premises)
     verdict = report.content_verdict.value
@@ -431,12 +438,15 @@ def _hypothesis_graph(g: _Graph, spec: Dict[str, Any], consequences: List[str], 
         content_verdict=verdict,
         excluded_fraction_of_applicable=report.excluded_fraction_of_applicable,
         falsifier_examples=report.falsifier_examples,
+        **({"intent_probe": report.intent_probe} if report.intent_probe is not None else {}),
     )
     g.edge(hid, vid, "verified_by", "Exact evaluation over the declared variables and domains.")
     explain = {
         "VACUOUS": "No state satisfies the scope and assumptions: the hypothesis speaks about nothing.",
         "SELF_CONTRADICTORY": "Every applicable state is forbidden: the claims contradict the assumptions.",
         "UNFALSIFIABLE": "No state is forbidden: no observation could refute the claims as stated.",
+        "VACUOUS_RELATIVE_TO_INTENT": "A declared non-witness satisfies the claims: they hold of an object they "
+        "were meant to exclude (see the verdict's intent_probe).",
     }
     if verdict in explain:
         g.gap(verdict.lower(), explain[verdict], vid)
@@ -574,7 +584,12 @@ def _formal_case(g: _Graph, case: str) -> str:
                 not_formalized=rival["not_formalized"],
             )
             g.edge(kid, nid, "derived_from", "Rival formalised in the scenario.")
-            if evaluation.get("content_verdict") in ("VACUOUS", "UNFALSIFIABLE", "SELF_CONTRADICTORY"):
+            if evaluation.get("content_verdict") in (
+                "VACUOUS",
+                "UNFALSIFIABLE",
+                "SELF_CONTRADICTORY",
+                "VACUOUS_RELATIVE_TO_INTENT",
+            ):
                 g.gap(evaluation["content_verdict"].lower(), f"{hid_} is {evaluation['content_verdict']}.", nid)
         for c in report["comparisons"]:
             a, b = c["hypothesis_a"], c["hypothesis_b"]

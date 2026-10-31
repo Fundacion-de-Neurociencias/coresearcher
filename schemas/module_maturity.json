@@ -247,6 +247,13 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "fidelity_service",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "formal_hypothesis",
       "scripts": true,
       "tests": true
@@ -291,6 +298,13 @@
       "level": "Integrated",
       "module": "formal_thresholds",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "formal_trust",
+      "scripts": false,
       "tests": true
     },
     {

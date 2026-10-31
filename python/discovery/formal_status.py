@@ -147,6 +147,26 @@ RELAY_CODES: Dict[str, str] = {
     "THRESHOLDS_OVERRIDDEN": (
         "At least one formal threshold differs from the versioned default; see threshold_sources."
     ),
+    "VACUOUS_RELATIVE_TO_INTENT": (
+        "A state the hypothesis declares as a non-witness satisfies its claims (see intent_probe). The claims hold "
+        "of an object they were meant to exclude, such as the zero, free or a lower-dimensional model."
+    ),
+    "TRIVIAL_WITNESS_SATISFIES_CLAIMS": (
+        "A generic trivial witness (variables at zero or at a bound) satisfies the claims. This is advisory and does "
+        "not change the verdict; declare it as a non-witness if the claims must exclude it."
+    ),
+    "CLAIM_BELOW_KERNEL_CHECKED": (
+        "At least one claim is below KERNEL_CHECKED on the trust ladder: no recorded Lean kernel check (toolchain, "
+        "file SHA-256, permitted axioms) covers it. See claim_trust for the rung of each claim and what is missing."
+    ),
+    "FIDELITY_RANGE_ONLY": (
+        "Statement fidelity is decided for the hypothesis range only. Conclusions are not compared, and the range "
+        "transcriptions are taken as given; the solver decides the encodings, not the transcription."
+    ),
+    "LINT_IS_SYNTACTIC": (
+        "The junk-value lint is a static pass over the text. It can miss junk values hidden in Mathlib definitions; "
+        "OPEN means a human decides, DISCHARGED names the text that rules the junk branch out."
+    ),
 }
 
 

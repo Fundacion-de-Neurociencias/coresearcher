@@ -18,7 +18,17 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import discovery, evidence, formal_audits, hypotheses, lifecycle, ontology, provenance, webhooks
+from api.routers import (
+    discovery,
+    evidence,
+    fidelity,
+    formal_audits,
+    hypotheses,
+    lifecycle,
+    ontology,
+    provenance,
+    webhooks,
+)
 from api.security import RateLimitMiddleware
 from api.state import (
     biological_programs_list,
@@ -48,7 +58,7 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-API-Key"],
 )
 
-for _module in (discovery, evidence, formal_audits, hypotheses, lifecycle, provenance, ontology, webhooks):
+for _module in (discovery, evidence, fidelity, formal_audits, hypotheses, lifecycle, provenance, ontology, webhooks):
     app.include_router(_module.router)
 
 

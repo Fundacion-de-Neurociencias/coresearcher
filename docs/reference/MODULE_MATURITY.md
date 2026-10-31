@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 19 |
+| Integrated | Used by the API and covered by tests | 21 |
 | Tested | Covered by tests, not reachable from the API | 55 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -49,6 +49,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `exact_symbolic_court` | Tested | - | yes | - |
 | `failure_engine` | Exercised | - | - | yes |
 | `fast_system_one_classifier` | Tested | - | yes | yes |
+| `fidelity_service` | Integrated | yes | yes | - |
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
 | `formal_pipeline` | Tested | - | yes | - |
@@ -56,6 +57,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `formal_smt` | Tested | - | yes | - |
 | `formal_status` | Integrated | yes | yes | - |
 | `formal_thresholds` | Integrated | yes | yes | yes |
+| `formal_trust` | Integrated | yes | yes | - |
 | `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |

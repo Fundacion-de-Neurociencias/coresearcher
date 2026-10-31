@@ -235,6 +235,9 @@ class Hypothesis:
     scope: Optional[str] = None
     statement: str = ""  # Human-readable description; never evaluated.
     alternatives: List[str] = field(default_factory=list)
+    # Intended non-witnesses (ADR-DISCOVERY-080): partial states the claims must NOT be satisfied by, such as the
+    # zero model, a free or degenerate model, or a lower-dimensional case. Each is {"label": str, "state": {...}}.
+    non_witnesses: List[Dict[str, Any]] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         names = [v.name for v in self.variables]
@@ -247,6 +250,7 @@ class Hypothesis:
         self._claims = [Predicate(c, names) for c in self.claims]
         self._assumptions = [Predicate(a, names) for a in self.assumptions]
         self._scope = Predicate(self.scope, names) if self.scope else None
+        self.non_witnesses = [_non_witness(w, {v.name: v for v in self.variables}) for w in self.non_witnesses]
         if self.is_continuous:
             from python.discovery import formal_smt
 
@@ -302,6 +306,16 @@ class ContentVerdict(str, Enum):
     SELF_CONTRADICTORY = "SELF_CONTRADICTORY"  # Every applicable state is forbidden: claims contradict assumptions.
     UNFALSIFIABLE = "UNFALSIFIABLE"  # No state is forbidden: no observation could refute it.
     FALSIFIABLE = "FALSIFIABLE"
+    # A declared non-witness satisfies the claims: the hypothesis is consistent and may be falsifiable, but it holds
+    # of a state its author said it must exclude (ADR-DISCOVERY-080). Distinct from VACUOUS, which means no state
+    # is in scope at all. `intent_probe.base_verdict` keeps the verdict it replaces.
+    VACUOUS_RELATIVE_TO_INTENT = "VACUOUS_RELATIVE_TO_INTENT"
+
+
+class ProbeOutcome(str, Enum):
+    SATISFIES_CLAIMS = "SATISFIES_CLAIMS"  # Some completion is in scope, meets the assumptions and every claim.
+    FORBIDDEN = "FORBIDDEN"  # Some completion is applicable, and every applicable completion violates a claim.
+    OUT_OF_SCOPE = "OUT_OF_SCOPE"  # No completion is in scope and meets the assumptions.
 
 
 class Relation(str, Enum):
@@ -332,13 +346,16 @@ class EvaluationReport:
     is_refuted: bool
     mandatory_relays: List[Dict[str, str]] = field(default_factory=list)
     provenance: Optional[Dict[str, Any]] = None
+    # Present only when non-witnesses were declared or default probes were requested, so reports of hypotheses
+    # without them keep their bytes and digests (ADR-DISCOVERY-080).
+    intent_probe: Optional[Dict[str, Any]] = None
 
     def to_dict(self) -> Dict[str, Any]:
         return _sealed(self)
 
     def body(self) -> Dict[str, Any]:
         """The verdict itself, without status, relays or provenance; `output_sha256` is its digest."""
-        return {
+        body = {
             "hypothesis_id": self.hypothesis_id,
             "backend": self.backend,
             "omega_size": self.omega_size,
@@ -356,6 +373,9 @@ class EvaluationReport:
             "observations_checked": self.observations_checked,
             "is_refuted": self.is_refuted,
         }
+        if self.intent_probe is not None:
+            body["intent_probe"] = self.intent_probe
+        return body
 
 
 @dataclass
@@ -528,7 +548,14 @@ class HypothesisEvaluator:
         observations: Optional[List[State]] = None,
         max_examples: int = 5,
         backend: str = "auto",
+        default_probes: bool = False,
     ) -> EvaluationReport:
+        """Content verdict, conflicts, falsifiers and counterexamples; with non-witnesses, the intent probe.
+
+        `default_probes` adds the generic trivial witnesses (`default_non_witnesses`) to the declared ones. A default
+        probe that satisfies the claims is reported with a relay and never changes the verdict: only a non-witness
+        the author declared can make a hypothesis VACUOUS_RELATIVE_TO_INTENT.
+        """
         observations = observations or []
         inputs = {
             "hypothesis": hypothesis_to_dict(hypothesis),
@@ -536,8 +563,20 @@ class HypothesisEvaluator:
             "max_examples": max_examples,
             "backend": backend,
         }
-        if _use_smt(backend, hypothesis):
-            return _seal(cls._evaluate_smt(hypothesis, observations, max_examples), "evaluate", inputs)
+        if default_probes:
+            inputs["default_probes"] = True  # Only when set, so earlier requests keep their input digests.
+        smt = _use_smt(backend, hypothesis)
+        if smt:
+            report = cls._evaluate_smt(hypothesis, observations, max_examples)
+        else:
+            report = cls._evaluate_enumeration(hypothesis, observations, max_examples)
+        extra = cls._apply_intent_probe(report, hypothesis, default_probes, smt)
+        return _seal(report, "evaluate", inputs, extra)
+
+    @classmethod
+    def _evaluate_enumeration(
+        cls, hypothesis: Hypothesis, observations: List[State], max_examples: int
+    ) -> EvaluationReport:
         applicable = forbidden = 0
         claim_exclusions: Dict[str, Optional[int]] = {c.expression: 0 for c in hypothesis._claims}
         falsifiers: List[State] = []
@@ -575,7 +614,69 @@ class HypothesisEvaluator:
             observations_checked=len(observations),
             is_refuted=bool(certain),
         )
-        return _seal(report, "evaluate", inputs)
+        return report
+
+    # -- intent probe (ADR-DISCOVERY-080) ---------------------------------------------------------------------
+
+    @classmethod
+    def probe(cls, hypothesis: Hypothesis, state: State, smt: bool = False) -> Tuple[ProbeOutcome, Optional[State]]:
+        """Whether a (partial) state satisfies the hypothesis: some completion applies and meets every claim.
+
+        Returns the outcome and, for SATISFIES_CLAIMS, the full witness state.
+        """
+        if smt:
+            from python.discovery import formal_smt
+
+            enc = formal_smt.encode(hypothesis)
+            fixed = enc.table.fix(state)
+            model = formal_smt.satisfiable(fixed, enc.applies, enc.claims_hold)
+            if model is not None:
+                return ProbeOutcome.SATISFIES_CLAIMS, enc.table.decode(model)
+            if formal_smt.satisfiable(fixed, enc.applies) is None:
+                return ProbeOutcome.OUT_OF_SCOPE, None
+            return ProbeOutcome.FORBIDDEN, None
+        applicable = False
+        for completion in cls._completions(hypothesis, state):
+            if not hypothesis.applies(completion):
+                continue
+            applicable = True
+            if not hypothesis.violated_claims(completion):
+                return ProbeOutcome.SATISFIES_CLAIMS, completion
+        return (ProbeOutcome.FORBIDDEN if applicable else ProbeOutcome.OUT_OF_SCOPE), None
+
+    @classmethod
+    def _apply_intent_probe(
+        cls, report: EvaluationReport, hypothesis: Hypothesis, default_probes: bool, smt: bool
+    ) -> List[str]:
+        probes = [dict(w, origin="declared") for w in hypothesis.non_witnesses]
+        if default_probes:
+            declared = [w["state"] for w in hypothesis.non_witnesses]
+            probes += [
+                dict(w, origin="default") for w in default_non_witnesses(hypothesis) if w["state"] not in declared
+            ]
+        if not probes and not default_probes:
+            return []
+        results = []
+        for item in probes:
+            outcome, witness = cls.probe(hypothesis, item["state"], smt)
+            results.append({**item, "outcome": outcome.value, "witness": witness})
+        satisfied = [r for r in results if r["outcome"] == ProbeOutcome.SATISFIES_CLAIMS.value]
+        declared_hits = [r["label"] for r in satisfied if r["origin"] == "declared"]
+        default_hits = [r["label"] for r in satisfied if r["origin"] == "default"]
+        base = report.content_verdict
+        report.intent_probe = {
+            "base_verdict": base.value,
+            "probes": results,
+            "declared_non_witnesses_satisfied": declared_hits,
+            "default_probes_satisfied": default_hits,
+        }
+        extra: List[str] = []
+        if declared_hits and base in (ContentVerdict.FALSIFIABLE, ContentVerdict.UNFALSIFIABLE):
+            report.content_verdict = ContentVerdict.VACUOUS_RELATIVE_TO_INTENT
+            extra.append("VACUOUS_RELATIVE_TO_INTENT")
+        if default_hits:
+            extra.append("TRIVIAL_WITNESS_SATISFIES_CLAIMS")
+        return extra
 
     @classmethod
     def _evaluate_smt(cls, hypothesis: Hypothesis, observations: List[State], max_examples: int) -> EvaluationReport:
@@ -821,6 +922,8 @@ def hypothesis_to_dict(hypothesis: Hypothesis) -> Dict[str, Any]:
         "claims": list(hypothesis.claims),
         "statement": hypothesis.statement,
         "alternatives": list(hypothesis.alternatives),
+        # Only when declared, so hypotheses without them keep their input digests.
+        **({"non_witnesses": [dict(w) for w in hypothesis.non_witnesses]} if hypothesis.non_witnesses else {}),
     }
 
 
@@ -848,6 +951,9 @@ def hypothesis_from_dict(data: Dict[str, Any]) -> Hypothesis:
     scope = data.get("scope")
     if scope is not None and not isinstance(scope, str):
         raise FormalHypothesisError("'scope' must be a string or null.")
+    non_witnesses = data.get("non_witnesses") or []
+    if not isinstance(non_witnesses, list):
+        raise FormalHypothesisError("'non_witnesses' must be a list of {label, state} objects.")
     return Hypothesis(
         hypothesis_id=str(data.get("hypothesis_id") or "H"),
         variables=variables,
@@ -856,4 +962,72 @@ def hypothesis_from_dict(data: Dict[str, Any]) -> Hypothesis:
         scope=scope or None,
         statement=str(data.get("statement", "")),
         alternatives=list(data.get("alternatives", [])),
+        non_witnesses=list(non_witnesses),
     )
+
+
+def _non_witness(item: Any, variables: Dict[str, Variable]) -> Dict[str, Any]:
+    """Validates one declared non-witness: {"label": str, "state": {variable: value}} with values in their domains."""
+    if not isinstance(item, dict) or not isinstance(item.get("state"), dict):
+        raise FormalHypothesisError("Each non-witness must be an object with a 'state' object (and a 'label').")
+    label = item.get("label") or ""
+    if not isinstance(label, str):
+        raise FormalHypothesisError("A non-witness 'label' must be a string.")
+    state = item["state"]
+    if not state:
+        raise FormalHypothesisError("A non-witness must fix at least one variable.")
+    for name, value in state.items():
+        var = variables.get(name)
+        if var is None:
+            raise FormalHypothesisError(f"Non-witness {label!r} uses undeclared variable {name!r}.")
+        if var.continuous:
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise FormalHypothesisError(f"Non-witness {label!r}: {name!r} must be a finite number.")
+            if (var.lower is not None and value < var.lower) or (var.upper is not None and value > var.upper):
+                raise FormalHypothesisError(f"Non-witness {label!r}: {name}={value!r} is outside its bounds.")
+        elif value not in var.domain:
+            raise FormalHypothesisError(f"Non-witness {label!r}: {name}={value!r} is outside its domain {var.domain}.")
+    return {"label": label or ", ".join(f"{k}={v!r}" for k, v in state.items()), "state": dict(state)}
+
+
+def _is_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def default_non_witnesses(hypothesis: Hypothesis) -> List[Dict[str, Any]]:
+    """Generic trivial witnesses derived from the variables alone (ADR-DISCOVERY-080).
+
+    - every numeric variable that admits 0 set to 0 (the zero model);
+    - every numeric variable at its lower bound, and every one at its upper bound (degenerate extremes).
+
+    Variables that cannot take the value are left free, so each probe asks whether *some* completion satisfies the
+    claims. String and boolean variables are never fixed. The empty scope needs no probe: it is the VACUOUS verdict.
+    """
+    zero: State = {}
+    lower: State = {}
+    upper: State = {}
+    for v in hypothesis.variables:
+        if v.continuous:
+            if (v.lower is None or v.lower <= 0) and (v.upper is None or v.upper >= 0):
+                zero[v.name] = 0
+            if v.lower is not None:
+                lower[v.name] = v.lower
+            if v.upper is not None:
+                upper[v.name] = v.upper
+            continue
+        if not all(_is_number(x) for x in v.domain):
+            continue
+        zeros = [x for x in v.domain if x == 0]
+        if zeros:
+            zero[v.name] = zeros[0]
+        lower[v.name] = min(v.domain)
+        upper[v.name] = max(v.domain)
+    probes: List[Dict[str, Any]] = []
+    for label, state in (
+        ("default: numeric variables at zero", zero),
+        ("default: numeric variables at their lower bounds", lower),
+        ("default: numeric variables at their upper bounds", upper),
+    ):
+        if state and all(state != p["state"] for p in probes):
+            probes.append({"label": label, "state": state})
+    return probes

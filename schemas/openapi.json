@@ -984,6 +984,46 @@
         "title": "ClaimEvidenceAuditRequest",
         "type": "object"
       },
+      "ClaimEvidenceModel": {
+        "description": "Evidence recorded for one claim, graded by the trust ladder's mechanical rules (ADR-080).",
+        "properties": {
+          "kernel_check": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kernel Check"
+          },
+          "reproductions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 20,
+            "title": "Reproductions",
+            "type": "array"
+          },
+          "statement_audit": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statement Audit"
+          }
+        },
+        "title": "ClaimEvidenceModel",
+        "type": "object"
+      },
       "ClusterAnomaliesRequest": {
         "properties": {
           "cohort_name": {
@@ -1729,6 +1769,18 @@
       },
       "EvaluateFormalHypothesisRequest": {
         "properties": {
+          "claim_evidence": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ClaimEvidenceModel"
+            },
+            "title": "Claim Evidence",
+            "type": "object"
+          },
+          "default_probes": {
+            "default": false,
+            "title": "Default Probes",
+            "type": "boolean"
+          },
           "hypothesis": {
             "$ref": "#/components/schemas/FormalHypothesisModel"
           },
@@ -2061,6 +2113,162 @@
         "title": "FastMarrRequest",
         "type": "object"
       },
+      "FidelityCompareRequest": {
+        "description": "Paper range vs formal range of one theorem, in the predicate language plus max, min and abs (ADR-070).",
+        "properties": {
+          "domain": {
+            "default": "True",
+            "maxLength": 4000,
+            "title": "Domain",
+            "type": "string"
+          },
+          "encoding": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Encoding",
+            "type": "array"
+          },
+          "integer_values": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "items": {
+                    "type": "integer"
+                  },
+                  "type": "array"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integer Values"
+          },
+          "lean": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Lean",
+            "type": "string"
+          },
+          "lean_source": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Lean Source",
+            "type": "string"
+          },
+          "paper": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Paper",
+            "type": "string"
+          },
+          "paper_source": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Paper Source",
+            "type": "string"
+          },
+          "parameters": {
+            "items": {
+              "$ref": "#/components/schemas/FidelityParameterModel"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Parameters",
+            "type": "array"
+          },
+          "quantities": {
+            "items": {
+              "$ref": "#/components/schemas/FidelityQuantityModel"
+            },
+            "maxItems": 20,
+            "title": "Quantities",
+            "type": "array"
+          },
+          "theorem": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Theorem",
+            "type": "string"
+          }
+        },
+        "required": [
+          "theorem",
+          "parameters",
+          "paper",
+          "lean"
+        ],
+        "title": "FidelityCompareRequest",
+        "type": "object"
+      },
+      "FidelityParameterModel": {
+        "properties": {
+          "integer": {
+            "default": false,
+            "title": "Integer",
+            "type": "boolean"
+          },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "FidelityParameterModel",
+        "type": "object"
+      },
+      "FidelityQuantityModel": {
+        "properties": {
+          "lean": {
+            "maxLength": 2000,
+            "title": "Lean",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "paper": {
+            "maxLength": 2000,
+            "title": "Paper",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "paper",
+          "lean"
+        ],
+        "title": "FidelityQuantityModel",
+        "type": "object"
+      },
       "FileDiffInput": {
         "properties": {
           "content": {
@@ -2146,6 +2354,14 @@
           "hypothesis_id": {
             "title": "Hypothesis Id",
             "type": "string"
+          },
+          "non_witnesses": {
+            "items": {
+              "$ref": "#/components/schemas/NonWitnessModel"
+            },
+            "maxItems": 50,
+            "title": "Non Witnesses",
+            "type": "array"
           },
           "scope": {
             "anyOf": [
@@ -2662,6 +2878,64 @@
         "title": "LeanFormalizationRequest",
         "type": "object"
       },
+      "LeanLintRequest": {
+        "properties": {
+          "file": {
+            "default": "<string>",
+            "maxLength": 300,
+            "title": "File",
+            "type": "string"
+          },
+          "reviews": {
+            "items": {
+              "$ref": "#/components/schemas/LeanReviewModel"
+            },
+            "maxItems": 500,
+            "title": "Reviews",
+            "type": "array"
+          },
+          "source": {
+            "maxLength": 400000,
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source"
+        ],
+        "title": "LeanLintRequest",
+        "type": "object"
+      },
+      "LeanReviewModel": {
+        "properties": {
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "line": {
+            "title": "Line",
+            "type": "integer"
+          },
+          "note": {
+            "maxLength": 4000,
+            "title": "Note",
+            "type": "string"
+          },
+          "theorem": {
+            "title": "Theorem",
+            "type": "string"
+          }
+        },
+        "required": [
+          "theorem",
+          "kind",
+          "line",
+          "note"
+        ],
+        "title": "LeanReviewModel",
+        "type": "object"
+      },
       "LemmaInput": {
         "properties": {
           "deduction_rule": {
@@ -3158,6 +3432,26 @@
           "action_vector"
         ],
         "title": "MultiscalePredictRequest",
+        "type": "object"
+      },
+      "NonWitnessModel": {
+        "description": "A (partial) state the claims must NOT be satisfied by, such as the zero or the free model (ADR-080).",
+        "properties": {
+          "label": {
+            "default": "",
+            "title": "Label",
+            "type": "string"
+          },
+          "state": {
+            "additionalProperties": true,
+            "title": "State",
+            "type": "object"
+          }
+        },
+        "required": [
+          "state"
+        ],
+        "title": "NonWitnessModel",
         "type": "object"
       },
       "NotarizeThoughtRequest": {
@@ -4097,6 +4391,110 @@
           "statement"
         ],
         "title": "TournamentHypothesisInput",
+        "type": "object"
+      },
+      "TrustAssessRequest": {
+        "properties": {
+          "claims": {
+            "items": {
+              "$ref": "#/components/schemas/TrustEvidenceModel"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Claims",
+            "type": "array"
+          }
+        },
+        "required": [
+          "claims"
+        ],
+        "title": "TrustAssessRequest",
+        "type": "object"
+      },
+      "TrustEvidenceModel": {
+        "properties": {
+          "claim": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Claim",
+            "type": "string"
+          },
+          "kernel_check": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kernel Check"
+          },
+          "reproductions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 20,
+            "title": "Reproductions",
+            "type": "array"
+          },
+          "statement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrustStatementModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "statement_audit": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statement Audit"
+          }
+        },
+        "required": [
+          "claim"
+        ],
+        "title": "TrustEvidenceModel",
+        "type": "object"
+      },
+      "TrustStatementModel": {
+        "properties": {
+          "location": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Location",
+            "type": "string"
+          },
+          "sha256": {
+            "maxLength": 128,
+            "title": "Sha256",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 400000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "location",
+          "sha256"
+        ],
+        "title": "TrustStatementModel",
         "type": "object"
       },
       "ValidationError": {
@@ -7492,6 +7890,90 @@
         "summary": "Evidence Targets"
       }
     },
+    "/api/fidelity/compare": {
+      "post": {
+        "description": "Paper range vs formal range of one theorem, decided by z3: the strength of the formal statement.\n\n`relation` is EQUIVALENT, STRONGER (the formal range is strictly larger), WEAKER or INCOMPARABLE, with a witness\nfor every non-empty difference. When the solver gives up, or a division by zero is reachable in the encoding,\n`formal_status` is UNDECIDED and `undecided_reasons` says why; that is a non-verdict, never a relation.",
+        "operationId": "compare_statement_ranges_api_fidelity_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FidelityCompareRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Compare Statement Ranges"
+      }
+    },
+    "/api/fidelity/lean-lint": {
+      "post": {
+        "description": "Junk-value lint of a Lean statement file: every site of a total-function convention, DISCHARGED or OPEN.\n\nDISCHARGED names the statement text that rules the junk branch out; OPEN means a human decides. The lint is\nsyntactic and never runs Lean, so the statement stays NOT_KERNEL_CHECKED.",
+        "operationId": "lint_lean_statement_api_fidelity_lean_lint_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeanLintRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Lint Lean Statement"
+      }
+    },
     "/api/health": {
       "get": {
         "operationId": "health_check_api_health_get",
@@ -7594,7 +8076,7 @@
     },
     "/api/hypotheses/evaluate": {
       "post": {
-        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.",
+        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.\n\nWith `hypothesis.non_witnesses`, each declared non-witness is probed; if one satisfies the claims, the verdict is\nVACUOUS_RELATIVE_TO_INTENT and `intent_probe` carries the witness. `default_probes` adds generic trivial witnesses,\nwhich are advisory. `claim_trust` gives each claim's trust-ladder rung (ADR-080).",
         "operationId": "evaluate_formal_hypothesis_api_hypotheses_evaluate_post",
         "requestBody": {
           "content": {
@@ -8377,6 +8859,48 @@
           }
         ],
         "summary": "Rollback Ontology Transaction"
+      }
+    },
+    "/api/trust/assess": {
+      "post": {
+        "description": "The trust-ladder rung of each claim, from recorded evidence, by mechanical rules.\n\nCLAIMED -> STATEMENT_PUBLIC -> STATEMENT_AUDITED -> KERNEL_CHECKED -> INDEPENDENTLY_REPRODUCED. Each rung reports\nwhether it is met and, if not, which rule failed. NOT_KERNEL_CHECKED never counts as a kernel check.",
+        "operationId": "assess_claim_trust_api_trust_assess_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrustAssessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Assess Claim Trust"
       }
     },
     "/api/webhooks/github": {

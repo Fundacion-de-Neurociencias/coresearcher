@@ -103,6 +103,11 @@ be acted on:
 | `formal.undecided` | Report the question as undecided; it is not evidence of a defect or a refutation. |
 | `formal.blocked` | Report the check as blocked; record not_assessed. |
 | `formal.not_reproduced` | Treat the run's verdict as unverified; do not cite it. |
+| `formal.vacuous_relative_to_intent` | Return the hypothesis with the witness: its claims hold of a declared non-witness. |
+| `formal.trivial_witness_satisfies_claims` | Show the satisfied default probe; ask whether the claims should exclude it. |
+| `formal.claim_below_kernel_checked` | State each claim's trust rung; never call a claim proved below KERNEL_CHECKED. |
+| `formal.fidelity_range_only` | Scope a fidelity relation to the range; conclusions were not compared. |
+| `formal.lint_is_syntactic` | Treat OPEN lint findings as questions for a human, not defects. |
 
 **Consequence rules.** A DECIDED defect stops the hypothesis from entering a
 tournament as written: return it to its author with the verdict and, for

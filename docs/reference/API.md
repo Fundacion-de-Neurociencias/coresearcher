@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 116. Interactive documentation is served at `/docs` when the API runs.
+Operations: 129. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -99,6 +99,8 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/evidence/requests` | API key | Resolve Evidence Request |
 | `GET` | `/api/evidence/schema` | Public | Evidence Schema |
 | `GET` | `/api/evidence/targets` | Public | Evidence Targets |
+| `POST` | `/api/fidelity/compare` | API key | Compare Statement Ranges |
+| `POST` | `/api/fidelity/lean-lint` | API key | Lint Lean Statement |
 | `GET` | `/api/health` | Public | Health Check |
 | `POST` | `/api/hypotheses/compare` | API key | Compare Formal Hypotheses |
 | `POST` | `/api/hypotheses/entails` | API key | Check Formal Consequence |
@@ -120,9 +122,20 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/lifecycle/projects/{project_id}/rework` | API key | Rework Lifecycle Stage |
 | `GET` | `/api/lifecycle/template` | Public | Lifecycle Template |
 | `GET` | `/api/lifecycle/watch` | Public | Watch Lifecycle |
+| `POST` | `/api/manuscripts/audit` | API key | Audit Manuscript |
+| `GET` | `/api/obligations/cases` | Public | List Proof Cases |
+| `GET` | `/api/obligations/cases/{case_id}` | Public | Get Proof Case |
 | `GET` | `/api/observer/ledger` | Public | Get Activity Ledger |
 | `POST` | `/api/ontology/apply` | API key | Apply Ontology Plan |
 | `POST` | `/api/ontology/plan` | API key | Plan Ontology Change |
 | `POST` | `/api/ontology/rollback` | API key | Rollback Ontology Transaction |
+| `POST` | `/api/registry/cite-check` | API key | Cite Check |
+| `POST` | `/api/registry/dependencies` | API key | Add Dependency |
+| `POST` | `/api/registry/entries` | API key | Register Entry |
+| `GET` | `/api/registry/entries/{entry_id}` | Public | Get Entry |
+| `POST` | `/api/registry/entries/{entry_id}/retract` | API key | Retract Entry |
+| `POST` | `/api/registry/flags/{node}/reevaluated` | API key | Clear Flag |
+| `GET` | `/api/registry/impact/{node}` | Public | Impact |
+| `POST` | `/api/trust/assess` | API key | Assess Claim Trust |
 | `POST` | `/api/webhooks/github` | HMAC signature | Audit Pr Webhook |
 | `POST` | `/api/zenodo/publish` | API key | Publish To Zenodo |

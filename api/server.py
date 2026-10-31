@@ -21,12 +21,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routers import (
     discovery,
     evidence,
+    fidelity,
     formal_audits,
     hypotheses,
     lifecycle,
+    manuscripts,
     obligations,
     ontology,
     provenance,
+    registry,
     webhooks,
 )
 from api.security import RateLimitMiddleware
@@ -58,7 +61,20 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-API-Key"],
 )
 
-for _module in (discovery, evidence, formal_audits, hypotheses, lifecycle, obligations, provenance, ontology, webhooks):
+for _module in (
+    discovery,
+    evidence,
+    fidelity,
+    formal_audits,
+    hypotheses,
+    lifecycle,
+    manuscripts,
+    obligations,
+    provenance,
+    ontology,
+    registry,
+    webhooks,
+):
     app.include_router(_module.router)
 
 

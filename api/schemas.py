@@ -703,6 +703,13 @@ class FormalVariableModel(BaseModel):
     upper: Optional[float] = None
 
 
+class NonWitnessModel(BaseModel):
+    """A (partial) state the claims must NOT be satisfied by, such as the zero or the free model (ADR-080)."""
+
+    label: str = ""
+    state: Dict[str, Any]
+
+
 class FormalHypothesisModel(BaseModel):
     hypothesis_id: str
     variables: List[FormalVariableModel]
@@ -711,12 +718,25 @@ class FormalHypothesisModel(BaseModel):
     scope: Optional[str] = None
     statement: str = ""
     alternatives: List[str] = []
+    non_witnesses: List[NonWitnessModel] = Field(default_factory=list, max_length=50)
+
+
+class ClaimEvidenceModel(BaseModel):
+    """Evidence recorded for one claim, graded by the trust ladder's mechanical rules (ADR-080)."""
+
+    statement_audit: Optional[Dict[str, Any]] = None
+    kernel_check: Optional[Dict[str, Any]] = None
+    reproductions: List[Dict[str, Any]] = Field(default_factory=list, max_length=20)
 
 
 class EvaluateFormalHypothesisRequest(BaseModel):
     hypothesis: FormalHypothesisModel
     observations: List[Dict[str, Any]] = []
     max_examples: int = 5
+    # ADR-080: also probe generic trivial witnesses (numeric variables at zero or at a bound). Advisory only.
+    default_probes: bool = False
+    # ADR-080: evidence that can lift a claim above STATEMENT_PUBLIC, keyed by the claim's predicate text.
+    claim_evidence: Dict[str, ClaimEvidenceModel] = Field(default_factory=dict)
 
 
 class CompareFormalHypothesesRequest(BaseModel):
@@ -739,6 +759,151 @@ class FormalConsequenceRequest(BaseModel):
     consequence: str = Field(min_length=1, max_length=2000)
     max_examples: int = 5
     include_lean: bool = False
+
+
+# --- Statement fidelity and the trust ladder (ADR-DISCOVERY-080) ----------------------------
+
+
+class FidelityParameterModel(BaseModel):
+    name: str
+    integer: bool = False
+    lower: Optional[float] = None
+    upper: Optional[float] = None
+
+
+class FidelityQuantityModel(BaseModel):
+    name: str
+    paper: str = Field(max_length=2000)
+    lean: str = Field(max_length=2000)
+
+
+class FidelityCompareRequest(BaseModel):
+    """Paper range vs formal range of one theorem, in the predicate language plus max, min and abs (ADR-070)."""
+
+    theorem: str = Field(min_length=1, max_length=200)
+    parameters: List[FidelityParameterModel] = Field(min_length=1, max_length=20)
+    paper: str = Field(min_length=1, max_length=4000)
+    lean: str = Field(min_length=1, max_length=4000)
+    domain: str = Field(default="True", max_length=4000)
+    paper_source: str = Field(default="", max_length=2000)
+    lean_source: str = Field(default="", max_length=2000)
+    encoding: List[str] = Field(default_factory=list, max_length=50)
+    quantities: List[FidelityQuantityModel] = Field(default_factory=list, max_length=20)
+    # Optional cross-check through HypothesisEvaluator.compare with integer parameters fixed to these values.
+    integer_values: Optional[Dict[str, List[int]]] = None
+
+
+class LeanReviewModel(BaseModel):
+    theorem: str
+    kind: str
+    line: int
+    note: str = Field(max_length=4000)
+
+
+class LeanLintRequest(BaseModel):
+    source: str = Field(min_length=1, max_length=400_000)
+    file: str = Field(default="<string>", max_length=300)
+    reviews: List[LeanReviewModel] = Field(default_factory=list, max_length=500)
+
+
+class TrustStatementModel(BaseModel):
+    text: str = Field(min_length=1, max_length=400_000)
+    location: str = Field(min_length=1, max_length=2000)
+    sha256: str = Field(max_length=128)
+
+
+class TrustEvidenceModel(BaseModel):
+    claim: str = Field(min_length=1, max_length=4000)
+    statement: Optional[TrustStatementModel] = None
+    statement_audit: Optional[Dict[str, Any]] = None
+    kernel_check: Optional[Dict[str, Any]] = None
+    reproductions: List[Dict[str, Any]] = Field(default_factory=list, max_length=20)
+
+
+class TrustAssessRequest(BaseModel):
+    claims: List[TrustEvidenceModel] = Field(min_length=1, max_length=100)
+
+
+# --- Manuscript audit: citation gate and import obligations (ADR-DISCOVERY-077, ADR-DISCOVERY-082) ---------------
+
+
+class CitedHypothesisModel(BaseModel):
+    text: str = Field(min_length=1, max_length=2000)
+    # Literal phrases, any of which shows the hypothesis is stated where the result is used. Never regular expressions.
+    phrases: List[str] = Field(min_length=1, max_length=20)
+
+
+class CitedResultModel(BaseModel):
+    key: str = Field(min_length=1, max_length=300)
+    locator: str = Field(min_length=1, max_length=300)
+    statement: str = Field(default="", max_length=4000)
+    hypotheses: List[CitedHypothesisModel] = Field(default_factory=list, max_length=50)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+
+
+class RegistryHypothesisModel(BaseModel):
+    text: str = Field(min_length=1, max_length=2000)
+    # Predicate in the ADR-059 language over the citing context's variables; empty when not formalized.
+    formal: str = Field(default="", max_length=2000)
+    # Literal phrases for lexical presence in a citing text. Never regular expressions; never a discharge.
+    phrases: List[str] = Field(default_factory=list, max_length=20)
+
+
+class RegistryEntryRequest(BaseModel):
+    """A cited result or premise. `source` is provenance only and never decides validity (ADR-DISCOVERY-083)."""
+
+    id: str = Field(min_length=1, max_length=120)
+    source: str = Field(min_length=1, max_length=1000)
+    statement: str = Field(min_length=1, max_length=4000)
+    key: str = Field(default="", max_length=300)
+    locator: str = Field(default="", max_length=300)
+    kind: str = Field(default="result", max_length=40)
+    formal_statement: Optional[Dict[str, Any]] = None
+    hypotheses: List[RegistryHypothesisModel] = Field(default_factory=list, max_length=50)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    rung: str = "CLAIMED"
+
+
+class CitingContextModel(BaseModel):
+    """Where a registered result is used: declared variables, assumptions, conventions and optional text."""
+
+    variables: List[Dict[str, Any]] = Field(default_factory=list, max_length=50)
+    assumptions: List[str] = Field(default_factory=list, max_length=100)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    text: str = Field(default="", max_length=20000)
+
+
+class CiteCheckRequest(BaseModel):
+    entry_id: str = Field(min_length=1, max_length=120)
+    version: Optional[int] = Field(default=None, ge=1)
+    context: CitingContextModel
+
+
+class RegistryDependencyRequest(BaseModel):
+    node: str = Field(min_length=1, max_length=120)
+    depends_on: str = Field(min_length=1, max_length=120)
+
+
+class RegistryRetractRequest(BaseModel):
+    reason: str = Field(min_length=1, max_length=2000)
+    downgrade_to: Optional[str] = None
+    date: Optional[str] = Field(default=None, max_length=10)
+
+
+class RegistryReevaluatedRequest(BaseModel):
+    note: str = Field(min_length=1, max_length=2000)
+
+
+class ManuscriptAuditRequest(BaseModel):
+    """LaTeX sources of one manuscript ({path: text}, .tex/.bib/.bbl) and optional context for the import checks."""
+
+    files: Dict[str, str] = Field(min_length=1)
+    registry: List[CitedResultModel] = Field(default_factory=list, max_length=500)
+    # Also use the stored cited-results registry (ADR-DISCOVERY-083) for the hypothesis-match obligations.
+    use_registry: bool = False
+    manuscript_status: Dict[str, str] = Field(default_factory=dict)
+    collection: Optional[List[str]] = Field(default=None, max_length=5000)
+    claim: str = Field(default="", max_length=4000)
 
 
 LaunchWorkbenchRequest.model_rebuild()

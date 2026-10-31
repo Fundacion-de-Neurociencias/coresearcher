@@ -280,6 +280,40 @@ def division_hazards(spec: RangeSpec, expression: str) -> List[str]:
     return hazards
 
 
+def _rational_model(encoder: "_Encoder", model, formulas: Sequence[Any]):
+    """A model with rational values where one exists near the given one.
+
+    Nonlinear real arithmetic can return algebraic numbers. Their decimal approximation may fall outside a
+    lower-dimensional difference set (a boundary such as alpha = max(...)), so the witness would not be checkable.
+    Each irrational coordinate is pinned in turn to a rational approximation and the formulas are re-solved; the
+    first all-rational model is returned, otherwise the original one."""
+
+    def irrational(m):
+        return [sym for sym in encoder.table.symbols.values()
+                if z3.is_algebraic_value(m.eval(sym, model_completion=True))]
+
+    pins = []
+    for _ in range(len(encoder.table.symbols)):
+        open_syms = irrational(model)
+        if not open_syms:
+            return model
+        sym = open_syms[0]
+        value = model.eval(sym, model_completion=True)
+        for digits in (2, 4, 8, 16):
+            pin = sym == z3.RealVal(str(Fraction(value.approx(digits).as_fraction())))
+            try:
+                candidate = formal_smt.satisfiable(*formulas, *pins, pin)
+            except SolverUndecided:
+                candidate = None
+            if candidate is not None:
+                pins.append(pin)
+                model = candidate
+                break
+        else:
+            return model
+    return model
+
+
 def _difference(spec: RangeSpec, inside: str, outside: str) -> tuple:
     """A point in `inside` and not in `outside`: (status, witness, method). Status is True, False or None."""
     reasons = []
@@ -300,7 +334,18 @@ def _difference(spec: RangeSpec, inside: str, outside: str) -> tuple:
         method = "real relaxation" if relaxed else "exact"
         if model is None:
             return False, None, method, reasons
+        constraints = [encoder.bounds(), encoder.formula(spec.domain), encoder.formula(inside)]
+        model = _rational_model(encoder, model, constraints + [z3.Not(encoder.formula(outside))])
+        irrational = [
+            name
+            for name, sym in encoder.table.symbols.items()
+            if z3.is_algebraic_value(model.eval(sym, model_completion=True))
+        ]
         witness = encoder.decode(model)
+        if irrational:
+            # The difference has points, but none with rational coordinates was found near this one; the decimal
+            # approximation printed for these parameters need not lie in the difference itself.
+            witness["approximate"] = irrational
         if relaxed and any(p.integer and not isinstance(witness[p.name], int) for p in spec.parameters):
             reasons.append(f"real relaxation found only a non-integral witness {witness}")
             return None, None, "undecided", reasons

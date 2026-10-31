@@ -22,9 +22,11 @@ def test_taylor_models_enclose_the_functions():
     iSh = ie.tm_reciprocal_one_plus(Sh - 1, 17)
     f = (1 - Sc * Sc * iSh * iSh).shift(2)
     for h in (0.003, 0.2, 0.7, 1.0):
-        hh = mp.mpf(h)
-        assert mp.mpf(C.evaluate(h, h).a) <= mp.cos(w * hh) <= mp.mpf(C.evaluate(h, h).b)
-        ref = (1 - (mp.sin(float(w) * hh) / (float(w) * hh) / (mp.sinh(hh) / hh)) ** 2) / hh**2
+        with mp.workdps(50):  # the reference itself cancels as h -> 0
+            hh, ww = mp.mpf(h), mp.mpf(23) / 5
+            cref = mp.cos(ww * hh)
+            ref = (1 - (mp.sin(ww * hh) / (ww * hh) / (mp.sinh(hh) / hh)) ** 2) / hh**2
+        assert mp.mpf(C.evaluate(h, h).a) <= cref <= mp.mpf(C.evaluate(h, h).b)
         v = f.evaluate(h, h)
         assert v.a <= ref <= v.b and v.b - v.a < 1e-6
     # the limit at h = 0 is exact: (w^2 + 1)/3

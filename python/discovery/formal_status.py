@@ -147,6 +147,39 @@ RELAY_CODES: Dict[str, str] = {
     "THRESHOLDS_OVERRIDDEN": (
         "At least one formal threshold differs from the versioned default; see threshold_sources."
     ),
+    "VACUOUS_RELATIVE_TO_INTENT": (
+        "A state the hypothesis declares as a non-witness satisfies its claims (see intent_probe). The claims hold "
+        "of an object they were meant to exclude, such as the zero, free or a lower-dimensional model."
+    ),
+    "TRIVIAL_WITNESS_SATISFIES_CLAIMS": (
+        "A generic trivial witness (variables at zero or at a bound) satisfies the claims. This is advisory and does "
+        "not change the verdict; declare it as a non-witness if the claims must exclude it."
+    ),
+    "CLAIM_BELOW_KERNEL_CHECKED": (
+        "At least one claim is below KERNEL_CHECKED on the trust ladder: no recorded Lean kernel check (toolchain, "
+        "file SHA-256, permitted axioms) covers it. See claim_trust for the rung of each claim and what is missing."
+    ),
+    "FIDELITY_RANGE_ONLY": (
+        "Statement fidelity is decided for the hypothesis range only. Conclusions are not compared, and the range "
+        "transcriptions are taken as given; the solver decides the encodings, not the transcription."
+    ),
+    "LINT_IS_SYNTACTIC": (
+        "The junk-value lint is a static pass over the text. It can miss junk values hidden in Mathlib definitions; "
+        "OPEN means a human decides, DISCHARGED names the text that rules the junk branch out."
+    ),
+    "IMPORTS_ARE_LEXICAL": (
+        "Import obligations are found by lexical rules (citations with locators, sign and convention words, "
+        "'effective' with an unspecified constant). They place an OPEN obligation at a line; they do not decide the "
+        "mathematics, and a MATCHED hypothesis is a textual match, not a proof."
+    ),
+    "IMPORT_OBLIGATIONS_OPEN": (
+        "The manuscript has OPEN import obligations. Its claims are not verified until each one is discharged "
+        "(ADR-076): a claim is never stronger than its weakest obligation."
+    ),
+    "CITATIONS_UNRESOLVED": (
+        "At least one citation key has no bibliography entry, or a collection link names a manuscript that does not "
+        "exist. The cited result cannot be checked."
+    ),
 }
 
 

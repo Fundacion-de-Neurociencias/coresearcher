@@ -1,5 +1,6 @@
 """Tests for statement fidelity (python/discovery/statement_fidelity.py) and the Lean junk-value lint."""
 
+import ast
 import random
 from fractions import Fraction
 
@@ -20,9 +21,26 @@ def _stein(lean: str) -> RangeSpec:
     return RangeSpec("stein", [N, Parameter("p", lower=2), Parameter("alpha")], paper=STEIN_PAPER, lean=lean)
 
 
+class _ExactLiterals(ast.NodeTransformer):
+    """Turns numeric literals into named Fraction constants, so `1/2` is exact rather than the float 0.5."""
+
+    def __init__(self):
+        self.values = {}
+
+    def visit_Constant(self, node):
+        if isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
+            name = f"lit_{len(self.values)}"
+            self.values[name] = Fraction(node.value)
+            return ast.copy_location(ast.Name(name, ast.Load()), node)
+        return node
+
+
 def _holds(expression: str, names, state) -> bool:
-    exact = {k: Fraction(v) for k, v in state.items()}
-    return Predicate(desugar(expression), names).evaluate(exact)
+    """Exact evaluation: a witness on a boundary (alpha == 81/146) must not be judged in floating point."""
+    literals = _ExactLiterals()
+    tree = literals.visit(ast.parse(desugar(expression), mode="eval"))
+    exact = {k: Fraction(v) for k, v in state.items()} | literals.values
+    return Predicate(ast.unparse(tree), list(names) + list(literals.values)).evaluate(exact)
 
 
 # ---------------------------------------------------------------------------
@@ -221,6 +239,25 @@ def test_definitions_are_followed_transitively():
     )
     finding = _one(_findings(body), "BOCHNER_INTEGRAL")
     assert (finding.theorem, finding.declaration, finding.status) == ("t", "inner", "OPEN")
+
+
+def test_algebraic_witnesses_are_replaced_by_checkable_rationals():
+    # Every point of lean minus paper lies on x^2 = 2 or on the boundary x = 1; z3 may return the irrational one.
+    params = [Parameter("x", lower=0)]
+    spec = RangeSpec("t", params, paper="x*x != 2 and x != 1", lean="x >= 0")
+    result = compare_ranges(spec)
+    witness = result.lean_only_witness
+    if "approximate" in witness:
+        assert witness["approximate"] == ["x"]
+    else:
+        assert Fraction(witness["x"]) == 1
+
+
+def test_irrational_only_difference_is_marked_approximate():
+    params = [Parameter("x", lower=0)]
+    result = compare_ranges(RangeSpec("t", params, paper="x*x != 2", lean="x >= 0"))
+    assert result.relation == Fidelity.STRONGER
+    assert result.lean_only_witness["approximate"] == ["x"]
 
 
 def test_algebraic_model_is_rationalized_into_a_checkable_witness():

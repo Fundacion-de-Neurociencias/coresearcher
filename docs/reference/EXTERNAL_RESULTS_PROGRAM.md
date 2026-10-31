@@ -126,7 +126,16 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
   2. keep a registry of cited theorems with their hypotheses, matched at each use;
   3. propagate dependencies across manuscripts.
 
-### 2.9 In progress
+### 2.9 Lessons 1, 3 and 4 as product features
+
+- **What.** A hypothesis can declare intended non-witnesses; one that satisfies the claims gives the verdict
+  VACUOUS_RELATIVE_TO_INTENT, with the witness. Every evaluated claim carries a trust-ladder rung computed by
+  mechanical rules. The ADR-070 range comparison and junk-value lint are served by the API and the two-phase CLI.
+  ([ADR-080](../decisions/ADR-DISCOVERY-080-INTENT-PROBE-TRUST-LADDER-FIDELITY-SERVICE.md))
+- **Why.** These checks had been run by hand in single cases. As features, they apply to every claim CoResearcher
+  evaluates.
+
+### 2.10 In progress
 
 - **Corpus-wide claim-vs-Lean coverage.** This is the mechanical version of the gap found by hand twice: in local
   smoothing, and in the O(3) continuum limit, where only lattice decay is formalized and the continuum limit, the

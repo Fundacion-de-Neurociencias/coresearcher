@@ -1,0 +1,8 @@
+{
+  "spec": "o3_continuum_claim.v1.json",
+  "id": "o3-continuum-claim",
+  "version": "1.0.0",
+  "frozen_on": "2026-10-30",
+  "sha256": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210",
+  "canonicalization": "json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=False), UTF-8"
+}

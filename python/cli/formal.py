@@ -18,6 +18,12 @@ offline and deterministic: it checks every output checksum, re-runs the gate fro
 enumeration from the stored formal object, and compares its result with the run's, report by report. Network access
 is refused while it runs. It never replaces a differing `.analysis.json` (exit 9) unless `--overwrite` is given.
 
+Statement checks use the same two phases (ADR-DISCOVERY-080): `formal fidelity --spec S.json` (paper range vs formal
+range) and `formal lean-lint --file F.lean` (junk-value findings) write the same three records, and `formal analyze`
+re-derives them offline. `formal manuscript --dir D` (ADR-DISCOVERY-082) audits the LaTeX sources of one manuscript:
+the citation gate and the import obligations of ADR-077, with the same three records and the same offline analysis.
+`formal trust --evidence E.json` grades claims on the trust ladder and prints the result.
+
 `coresearcher formal doctor` reports which capabilities are present: z3, a Lean toolchain, a formalizer model.
 
 Exit codes: 0 decided; 3 artifact missing, malformed or checksum mismatch; 4 threshold unresolved; 7 formalizer
@@ -38,7 +44,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional
 
-from python.discovery import formal_pipeline, formal_provenance, formal_status, formal_thresholds
+from python.discovery import formal_pipeline, formal_provenance, formal_status, formal_thresholds, formal_trust
 from python.discovery.formal_status import FormalStatus
 
 TOOL = "coresearcher"
@@ -201,14 +207,94 @@ def _request_from_args(args: argparse.Namespace) -> Dict[str, Any]:
             backend=args.backend,
             samples=args.samples,
             include_lean=args.lean,
+            default_probes=args.default_probes,
+            claim_evidence=_read_json(Path(args.claim_evidence), "claim evidence") if args.claim_evidence else None,
         )
     except ValueError as exc:
         raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
 
 
+def _trust_block(request: Dict[str, Any], response: Dict[str, Any]) -> Dict[str, Any]:
+    """Per-claim trust rungs and their relay, for the sidecar and the analysis record (never inside the response)."""
+    claim_trust = formal_trust.for_response(request, response)
+    return {"claim_trust": claim_trust, "relays": formal_trust.relays(claim_trust)}
+
+
 def run(args: argparse.Namespace, clients: Optional[Dict[str, Any]] = None) -> int:
     """Phase 1. `clients` is injectable for tests; by default the configured formalizer model(s) are used."""
-    request = _request_from_args(args)
+    return _record_run(_request_from_args(args), args, "formal run", clients)
+
+
+def fidelity(args: argparse.Namespace) -> int:
+    """Phase 1 of a statement-fidelity check: paper range vs formal range of one theorem."""
+    spec = _read_json(Path(args.spec), "fidelity spec")
+    values = _read_json(Path(args.integer_values), "integer values") if args.integer_values else None
+    try:
+        request = formal_pipeline.make_fidelity_request(spec, values)
+    except ValueError as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+    return _record_run(request, args, "formal fidelity")
+
+
+def lean_lint(args: argparse.Namespace) -> int:
+    """Phase 1 of a junk-value lint of one Lean statement file."""
+    path = Path(args.file)
+    try:
+        source = path.read_text(encoding="utf-8")
+    except FileNotFoundError as exc:
+        raise CliError(f"Lean file not found: {path}", formal_status.EXIT_ARTIFACT) from exc
+    reviews = _read_json(Path(args.reviews), "reviews") if args.reviews else []
+    return _record_run(formal_pipeline.make_lint_request(source, path.name, reviews), args, "formal lean-lint")
+
+
+def manuscript(args: argparse.Namespace) -> int:
+    """Phase 1 of a manuscript audit: citation gate and import obligations over a directory of LaTeX sources."""
+    from python.discovery import manuscript_audit
+
+    root = Path(args.dir)
+    if not root.is_dir():
+        raise CliError(f"Manuscript directory not found: {root}", formal_status.EXIT_ARTIFACT)
+    files = {
+        p.relative_to(root).as_posix(): p.read_text(encoding="utf-8", errors="replace")
+        for p in sorted(root.rglob("*"))
+        if p.is_file() and p.suffix in manuscript_audit.SOURCE_SUFFIXES
+    }
+    if not files:
+        raise CliError(f"No .tex, .bib or .bbl sources under {root}", formal_status.EXIT_REFUSAL)
+    registry = _read_json(Path(args.registry), "cited-result registry") if args.registry else []
+    status = _read_json(Path(args.manuscript_status), "manuscript status") if args.manuscript_status else {}
+    collection = None
+    if args.collection:
+        collection = sorted(p.name for p in Path(args.collection).iterdir() if p.is_dir())
+    try:
+        request = formal_pipeline.make_manuscript_request(files, registry, status, collection, args.claim or "")
+    except ValueError as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+    return _record_run(request, args, "formal manuscript")
+
+
+def trust(args: argparse.Namespace) -> int:
+    """Grades each claim in an evidence file (one object or a list) on the trust ladder; prints JSON. Exit 0 or 9."""
+    data = _read_json(Path(args.evidence), "trust evidence")
+    items = data if isinstance(data, list) else [data]
+    try:
+        assessments = [formal_trust.assess(item) for item in items]
+    except ValueError as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+    print(
+        json.dumps(
+            {"claim_trust": assessments, "mandatory_relays": formal_trust.relays(assessments)},
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
+    return 0
+
+
+def _record_run(
+    request: Dict[str, Any], args: argparse.Namespace, subcommand: str, clients: Optional[Dict[str, Any]] = None
+) -> int:
+    """Computes a request and writes its request, response and sidecar records."""
     thresholds = _thresholds_from_flags(args.threshold)
     if request["input_kind"] == "prose":
         from python.discovery.formalizer import build_messages
@@ -239,24 +325,32 @@ def run(args: argparse.Namespace, clients: Optional[Dict[str, Any]] = None) -> i
     if request["input_kind"] == "prose":
         endpoint = (os.getenv("FORMALIZER_BASE_URL") or "http://localhost:11434/v1").rstrip("/")
     warnings = [response["reason"]] if response["reason"] else []
+    trust_block = _trust_block(request, response)
+    relays = response["mandatory_relays"] + trust_block["relays"]
     sidecar = {
         "schema": SIDECAR_SCHEMA,
         "tool": TOOL,
-        "subcommand": "formal run",
+        "subcommand": subcommand,
         "work_order_id": os.getenv("CORESEARCHER_WORK_ORDER") or None,
         "cli_version": formal_provenance.engine_version(),
         "cli_integrity": cli_integrity(),
         "env_version": env_version(),
         "interpreter": sys.executable,
         "endpoint": endpoint,
-        "parameters": {k: v for k, v in request.items() if k not in ("hypothesis", "rivals", "formalizer_messages")},
+        "parameters": {
+            k: v
+            for k, v in request.items()
+            if k
+            not in ("hypothesis", "rivals", "formalizer_messages", "source", "spec", "claim_evidence", "files", "registry")
+        },
         **threshold_record,
         "timestamp": started,
         "completed": formal_provenance.utc_now(),
         "outputs": [_output_entry(paths["request"]), _output_entry(paths["response"])],
         "formal_status": response["formal_status"],
-        "warnings": warnings + [r["message"] for r in response["mandatory_relays"]],
-        "mandatory_relays": response["mandatory_relays"],
+        "warnings": warnings + [r["message"] for r in relays],
+        "mandatory_relays": relays,
+        "claim_trust": trust_block["claim_trust"],
         "capability_state": capability_state(),
     }
     _write_json(paths["meta"], sidecar)
@@ -368,6 +462,7 @@ def analyze(args: argparse.Namespace) -> int:
         )
     exception = response.pop("_exception", None)
     comparison = _compare_with_run(run_response, response)
+    trust_block = _trust_block(request, response)
     comparison["thresholds_match_run"] = sidecar.get("thresholds_applied") == thresholds.applied()
     record: Dict[str, Any] = {
         "record_type": "analysis",
@@ -390,7 +485,8 @@ def analyze(args: argparse.Namespace) -> int:
             "reason": response["reason"],
             **comparison,
         },
-        "mandatory_relays": response["mandatory_relays"],
+        "mandatory_relays": response["mandatory_relays"] + trust_block["relays"],
+        "claim_trust": trust_block["claim_trust"],
         "reports": response["reports"],
         "formalization_gate": response["formalization_gate"],
         "lean": response["lean"],
@@ -419,7 +515,14 @@ def analyze(args: argparse.Namespace) -> int:
         )
     _write_json(out, record)
     print(out)
-    summary = ", ".join(f"{k}={v}" for k, v in record["verdict"].items() if not isinstance(v, dict)) or "no verdict"
+    flat = [f"{k}={v}" for k, v in record["verdict"].items() if not isinstance(v, dict)]
+    lint = record["verdict"].get("lean_lint")
+    if lint:
+        flat += [f"lean_lint.{k}={v}" for k, v in lint.items()]
+    audit = record["verdict"].get("manuscript_audit")
+    if audit:
+        flat += [f"manuscript_audit.{k}={v}" for k, v in audit.items()]
+    summary = ", ".join(flat) or "no verdict"
     print(f"{record['formal_status']} ({summary}); reproduces_run={comparison['reproduces_run']}")
     return _analysis_exit(response, comparison, exception)
 
@@ -525,6 +628,12 @@ def add_parser(subparsers) -> None:
     p_run.add_argument("--backend", default="auto", choices=("auto", "enumeration", "smt"))
     p_run.add_argument("--samples", type=int, default=None, help="Formalizer samples (default: gate_samples)")
     p_run.add_argument("--lean", action="store_true", help="Also state each consequence as a Lean 4 theorem")
+    p_run.add_argument(
+        "--default-probes",
+        action="store_true",
+        help="Also probe generic trivial witnesses (variables at zero or at a bound); advisory, never a verdict",
+    )
+    p_run.add_argument("--claim-evidence", help="JSON file mapping a claim to its audit, kernel check, reproductions")
     p_run.add_argument("--threshold", action="append", help="Override a threshold for this run: KEY=VALUE")
     p_run.add_argument("--out", default=os.path.join("raw", "formal"), help="Output directory")
     p_run.add_argument("--name", default=None, help="Artifact base name (default: digest of the request)")
@@ -536,14 +645,51 @@ def add_parser(subparsers) -> None:
     p_an.add_argument("--out", default=None, help="Analysis path (default: next to the sidecar)")
     p_an.add_argument("--overwrite", action="store_true", help="Replace a differing existing analysis")
 
+    def _two_phase(p) -> None:
+        p.add_argument("--threshold", action="append", help="Override a threshold for this run: KEY=VALUE")
+        p.add_argument("--out", default=os.path.join("raw", "formal"), help="Output directory")
+        p.add_argument("--name", default=None, help="Artifact base name (default: digest of the request)")
+        p.add_argument("--overwrite", action="store_true", help="Replace an existing run with the same name")
+
+    p_fid = sub.add_parser("fidelity", help="Phase 1: paper range vs formal range of a theorem (ADR-070, ADR-080)")
+    p_fid.add_argument("--spec", required=True, help="Fidelity spec JSON: theorem, parameters, paper, lean, ...")
+    p_fid.add_argument("--integer-values", help="JSON {param: [values]} for a cross-check through compare")
+    _two_phase(p_fid)
+
+    p_lint = sub.add_parser("lean-lint", help="Phase 1: junk-value lint of a Lean statement file (ADR-070, ADR-080)")
+    p_lint.add_argument("--file", required=True, help="Lean source file")
+    p_lint.add_argument("--reviews", help="JSON list of {theorem, kind, line, note} review notes")
+    _two_phase(p_lint)
+
+    p_ms = sub.add_parser(
+        "manuscript", help="Phase 1: citation gate and import obligations of a LaTeX manuscript (ADR-077, ADR-082)"
+    )
+    p_ms.add_argument("--dir", required=True, help="Directory holding the manuscript's .tex, .bib and .bbl sources")
+    p_ms.add_argument("--registry", help="JSON list of cited results with hypotheses as literal phrases")
+    p_ms.add_argument("--manuscript-status", help="JSON {manuscript: status} of withdrawn or corrected companions")
+    p_ms.add_argument("--collection", help="Directory whose subdirectories are the collection's manuscripts")
+    p_ms.add_argument("--claim", help="The manuscript's main claim, for the trust-ladder view")
+    _two_phase(p_ms)
+
+    p_trust = sub.add_parser("trust", help="Grade claims on the trust ladder from recorded evidence (ADR-080)")
+    p_trust.add_argument("--evidence", required=True, help="JSON evidence object, or a list of them")
+
     p_doc = sub.add_parser("doctor", help="Report z3, Lean and formalizer availability and the thresholds in force")
     p_doc.add_argument("--probe", action="store_true", help="Also contact the formalizer endpoint")
 
 
 def main(args: argparse.Namespace) -> int:
-    commands = {"run": run, "analyze": analyze, "doctor": doctor}
+    commands = {
+        "run": run,
+        "analyze": analyze,
+        "doctor": doctor,
+        "fidelity": fidelity,
+        "lean-lint": lean_lint,
+        "manuscript": manuscript,
+        "trust": trust,
+    }
     if not getattr(args, "formal_command", None):
-        print("usage: coresearcher formal {run,analyze,doctor} ...", file=sys.stderr)
+        print("usage: coresearcher formal {run,analyze,fidelity,lean-lint,manuscript,trust,doctor} ...", file=sys.stderr)
         return 2
     try:
         return commands[args.formal_command](args)

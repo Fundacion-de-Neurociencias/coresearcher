@@ -404,12 +404,33 @@ def _discharge(site: Site, owner: Declaration, ctx: _Context) -> Tuple[Status, s
     return Status.OPEN, ""
 
 
+_IDENT = re.compile(r"[\w']+")
+_TOKENS: Dict[Tuple[int, str], Set[str]] = {}
+
+
+def _tokens(declaration: Declaration) -> Set[str]:
+    """Maximal [\\w']+ runs of the declaration text, cached: a name made of such characters occurs as a whole
+    identifier (the regex test below) exactly when it is one of these runs."""
+    key = (id(declaration), declaration.text)
+    if key not in _TOKENS:
+        if len(_TOKENS) > 50000:
+            _TOKENS.clear()
+        _TOKENS[key] = set(_IDENT.findall(declaration.text))
+    return _TOKENS[key]
+
+
 def _uses(declaration: Declaration, others: Sequence[Declaration]) -> List[Declaration]:
-    return [
-        d
-        for d in others
-        if d is not declaration and re.search(rf"(?<![\w']){re.escape(d.short)}(?![\w'])", declaration.text)
-    ]
+    tokens = _tokens(declaration)
+    used = []
+    for d in others:
+        if d is declaration:
+            continue
+        if _IDENT.fullmatch(d.short):
+            if d.short in tokens:
+                used.append(d)
+        elif re.search(rf"(?<![\w']){re.escape(d.short)}(?![\w'])", declaration.text):
+            used.append(d)
+    return used
 
 
 def lint(source: str, file: str = "<string>", reviews: Optional[Dict[Tuple[str, str, int], str]] = None) -> LintReport:

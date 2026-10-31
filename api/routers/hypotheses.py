@@ -12,7 +12,7 @@ from api.schemas import (
     FormalizeHypothesisRequest,
 )
 from api.security import require_api_key
-from python.discovery import alzheimer_formal_scenario, formal_thresholds
+from python.discovery import alzheimer_formal_scenario, formal_thresholds, formal_trust
 from python.discovery.formal_hypothesis import (
     FormalHypothesisError,
     Hypothesis,
@@ -37,13 +37,28 @@ def _bounded(n: int) -> int:
 
 @router.post("/api/hypotheses/evaluate", dependencies=[Depends(require_api_key)])
 def evaluate_formal_hypothesis(req: EvaluateFormalHypothesisRequest):
-    """Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples."""
+    """Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.
+
+    With `hypothesis.non_witnesses`, each declared non-witness is probed; if one satisfies the claims, the verdict is
+    VACUOUS_RELATIVE_TO_INTENT and `intent_probe` carries the witness. `default_probes` adds generic trivial witnesses,
+    which are advisory. `claim_trust` gives each claim's trust-ladder rung (ADR-080).
+    """
     try:
         hypothesis = _to_hypothesis(req.hypothesis)
-        report = HypothesisEvaluator.evaluate(hypothesis, req.observations, max_examples=_bounded(req.max_examples))
+        report = HypothesisEvaluator.evaluate(
+            hypothesis,
+            req.observations,
+            max_examples=_bounded(req.max_examples),
+            default_probes=req.default_probes,
+        )
+        payload = report.to_dict()
+        evidence = {claim: e.model_dump(exclude_none=True) for claim, e in req.claim_evidence.items()}
+        location = f"API request, input_sha256 {payload['provenance']['input_sha256']}"
+        payload["claim_trust"] = formal_trust.for_claims(list(hypothesis.claims), location, evidence)
+        payload["mandatory_relays"] = payload["mandatory_relays"] + formal_trust.relays(payload["claim_trust"])
     except FormalHypothesisError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
-    return report.to_dict()
+    return payload
 
 
 @router.post("/api/hypotheses/compare", dependencies=[Depends(require_api_key)])

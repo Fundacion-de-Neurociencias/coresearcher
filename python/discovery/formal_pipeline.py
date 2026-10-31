@@ -39,10 +39,21 @@ def make_request(
     backend: str = "auto",
     samples: Optional[int] = None,
     include_lean: bool = False,
+    default_probes: bool = False,
+    claim_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
-    """A formal request. Exactly one of `hypothesis` (a formal object) and `prose` must be given."""
+    """A formal request. Exactly one of `hypothesis` (a formal object) and `prose` must be given.
+
+    `default_probes` and `claim_evidence` (ADR-DISCOVERY-080) are recorded only when set, so requests that do not use
+    them are byte-identical to earlier ones.
+    """
     if (hypothesis is None) == (prose is None):
         raise ValueError("Give exactly one of a formal hypothesis and prose.")
+    extra: Dict[str, Any] = {}
+    if default_probes:
+        extra["default_probes"] = True
+    if claim_evidence:
+        extra["claim_evidence"] = claim_evidence
     return {
         "schema": REQUEST_SCHEMA,
         "input_kind": "formal" if hypothesis is not None else "prose",
@@ -57,6 +68,49 @@ def make_request(
         "backend": backend,
         "samples": samples,
         "include_lean": include_lean,
+        **extra,
+    }
+
+
+def make_fidelity_request(
+    spec: Dict[str, Any], integer_values: Optional[Dict[str, List[int]]] = None
+) -> Dict[str, Any]:
+    """A statement-fidelity request: paper range vs formal range of one theorem (ADR-070, ADR-080)."""
+    if not isinstance(spec, dict):
+        raise ValueError("A fidelity spec must be a JSON object.")
+    return {"schema": REQUEST_SCHEMA, "input_kind": "fidelity", "spec": spec, "integer_values": integer_values}
+
+
+def make_lint_request(source: str, file: str, reviews: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
+    """A junk-value lint request for one Lean statement file (ADR-070, ADR-080). The source is stored in full."""
+    return {
+        "schema": REQUEST_SCHEMA,
+        "input_kind": "lean_lint",
+        "source": source,
+        "file": file,
+        "reviews": reviews or [],
+    }
+
+
+def make_manuscript_request(
+    files: Dict[str, str],
+    registry: Optional[List[Dict[str, Any]]] = None,
+    manuscript_status: Optional[Dict[str, str]] = None,
+    collection: Optional[List[str]] = None,
+    claim: str = "",
+) -> Dict[str, Any]:
+    """A manuscript audit request: citation gate and import obligations over LaTeX sources (ADR-077, ADR-082).
+    The sources are stored in full, so `formal analyze` can re-derive the report offline."""
+    if not isinstance(files, dict) or not files:
+        raise ValueError("A manuscript audit needs a non-empty {path: text} map of sources.")
+    return {
+        "schema": REQUEST_SCHEMA,
+        "input_kind": "manuscript_audit",
+        "files": files,
+        "registry": registry or [],
+        "manuscript_status": manuscript_status or {},
+        "collection": collection,
+        "claim": claim,
     }
 
 
@@ -117,12 +171,14 @@ def compute(
         "reason": "",
         "formalizer": None,
         "formalization_gate": None,
-        "formal_hypothesis": request["hypothesis"],
+        "formal_hypothesis": request.get("hypothesis"),
         "reports": {"evaluation": None, "comparisons": [], "consequences": []},
         "lean": [],
         "mandatory_relays": [],
     }
     relay_codes: List[str] = []
+    if request["input_kind"] in ("fidelity", "lean_lint", "manuscript_audit"):
+        return _compute_statement_check(request, response)
     try:
         if request["input_kind"] == "prose":
             result = _formalize(request, clients, raw_outputs, specs)
@@ -141,7 +197,13 @@ def compute(
             response["formal_hypothesis"] = result.formalization.data
         hypothesis = _parse(response["formal_hypothesis"], "formal hypothesis")
         n, backend = request["max_examples"], request["backend"]
-        evaluation = HypothesisEvaluator.evaluate(hypothesis, request["observations"], max_examples=n, backend=backend)
+        evaluation = HypothesisEvaluator.evaluate(
+            hypothesis,
+            request["observations"],
+            max_examples=n,
+            backend=backend,
+            default_probes=bool(request.get("default_probes", False)),
+        )
         response["reports"]["evaluation"] = evaluation.to_dict()
         relay_codes += [r["code"] for r in evaluation.mandatory_relays]
         for rival in request["rivals"]:
@@ -174,6 +236,43 @@ def compute(
     return response
 
 
+def _compute_statement_check(request: Dict[str, Any], response: Dict[str, Any]) -> Dict[str, Any]:
+    """Fidelity, lint and manuscript-audit requests: one sealed report under `reports[kind]`; the other report slots
+    stay empty."""
+    from python.discovery import fidelity_service
+
+    kind = request["input_kind"]
+    response["reports"][kind] = None
+    try:
+        if kind == "fidelity":
+            report = fidelity_service.compare(request["spec"], request.get("integer_values"))
+        elif kind == "manuscript_audit":
+            from python.discovery import manuscript_audit
+
+            report = manuscript_audit.audit(
+                request["files"],
+                request.get("registry"),
+                request.get("manuscript_status"),
+                request.get("collection"),
+                request.get("claim") or "",
+            )
+        else:
+            report = fidelity_service.lean_lint(
+                request["source"], request.get("file") or "<string>", request["reviews"]
+            )
+        response["reports"][kind] = report
+        response["formal_status"] = report["formal_status"]
+        if report["formal_status"] != FormalStatus.DECIDED.value:
+            response["reason"] = "; ".join(report.get("undecided_reasons") or []) or "The solver did not decide."
+        response["mandatory_relays"] = list(report["mandatory_relays"])
+    except Exception as exc:
+        status = formal_status.classify(exc)
+        response["formal_status"] = status.value
+        response["reason"] = f"{type(exc).__name__}: {exc}"
+        response["_exception"] = exc
+    return response
+
+
 def verdict(response: Dict[str, Any]) -> Dict[str, Any]:
     """The decided results of a response, in one small block (empty when nothing was decided)."""
     out: Dict[str, Any] = {}
@@ -184,6 +283,24 @@ def verdict(response: Dict[str, Any]) -> Dict[str, Any]:
     if reports["evaluation"]:
         out["content_verdict"] = reports["evaluation"]["content_verdict"]
         out["is_refuted"] = reports["evaluation"]["is_refuted"]
+        probe = reports["evaluation"].get("intent_probe")
+        if probe is not None:  # Only when non-witnesses were probed, so earlier verdict blocks are unchanged.
+            out["intent"] = {
+                "base_verdict": probe["base_verdict"],
+                "declared_non_witnesses_satisfied": probe["declared_non_witnesses_satisfied"],
+                "default_probes_satisfied": probe["default_probes_satisfied"],
+            }
+    if reports.get("fidelity"):
+        out["fidelity"] = reports["fidelity"]["relation"]
+    if reports.get("lean_lint"):
+        out["lean_lint"] = {"open": reports["lean_lint"]["open"], "discharged": reports["lean_lint"]["discharged"]}
+    audit = reports.get("manuscript_audit")
+    if audit:
+        out["manuscript_audit"] = {
+            "citation_gate": audit["citation_gate"]["status"],
+            "unresolved_citations": len(audit["citation_gate"]["unresolved"]),
+            "open_obligations": audit["open_obligations"],
+        }
     if reports["comparisons"]:
         out["relations"] = {c["hypothesis_b"]: c["relation"] for c in reports["comparisons"]}
     if reports["consequences"]:
@@ -231,6 +348,24 @@ def metrics(response: Dict[str, Any]) -> Dict[str, Any]:
             {"consequence": c["consequence"], "counterexamples": len(c["counterexamples"])}
             for c in response["reports"]["consequences"]
         ]
+    fidelity = response["reports"].get("fidelity")
+    if fidelity:
+        out["fidelity"] = {
+            "method": fidelity["method"],
+            "division_hazards": len(fidelity["division_hazards"]),
+            "quantities": len(fidelity["quantities"]),
+        }
+    lint = response["reports"].get("lean_lint")
+    if lint:
+        out["lean_lint"] = {"declarations": len(lint["declarations"]), "sites": len(lint["sites"])}
+    audit = response["reports"].get("manuscript_audit")
+    if audit:
+        out["manuscript_audit"] = {
+            "source_lines": audit["source_lines"],
+            "citations": audit["citation_gate"]["citations"],
+            "import_counts": audit["import_counts"],
+            "hypothesis_outcomes": audit["hypothesis_outcomes"],
+        }
     return out
 
 
@@ -244,6 +379,7 @@ def report_digests(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         named.append(("evaluation", reports["evaluation"]))
     named += [(f"comparison[{i}]", c) for i, c in enumerate(reports["comparisons"])]
     named += [(f"consequence[{i}]", c) for i, c in enumerate(reports["consequences"])]
+    named += [(kind, reports[kind]) for kind in ("fidelity", "lean_lint", "manuscript_audit") if reports.get(kind)]
     for name, report in named:
         p = report["provenance"]
         out.append(

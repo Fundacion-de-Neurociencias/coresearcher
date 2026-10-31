@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 49 |
+| Integrated | Used by the API and covered by tests | 23 |
+| Tested | Covered by tests, not reachable from the API | 56 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -31,6 +31,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
 | `cited_import_ledger` | Tested | - | yes | yes |
+| `cited_registry` | Integrated | yes | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `collatz_case` | Tested | - | yes | yes |
 | `constraint_box` | Prototype | - | - | - |
@@ -50,13 +51,15 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `exact_symbolic_court` | Tested | - | yes | - |
 | `failure_engine` | Exercised | - | - | yes |
 | `fast_system_one_classifier` | Tested | - | yes | yes |
+| `fidelity_service` | Integrated | yes | yes | - |
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
 | `formal_pipeline` | Tested | - | yes | - |
 | `formal_provenance` | Tested | - | yes | - |
 | `formal_smt` | Tested | - | yes | - |
 | `formal_status` | Integrated | yes | yes | - |
-| `formal_thresholds` | Integrated | yes | yes | - |
+| `formal_thresholds` | Integrated | yes | yes | yes |
+| `formal_trust` | Integrated | yes | yes | - |
 | `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
@@ -81,14 +84,18 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |
 | `manifold_detector` | Prototype | - | - | - |
+| `manuscript_audit` | Integrated | yes | yes | - |
 | `manuscript_checks` | Tested | - | yes | yes |
 | `marr_engine` | Prototype | - | - | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
+| `o3_continuum_case` | Tested | - | yes | yes |
 | `obligation_ledger` | Tested | - | yes | yes |
+| `openai_math_coverage` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `preregistration` | Tested | - | yes | yes |
 | `proof_pipeline` | Tested | - | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
@@ -115,8 +122,12 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |
+| `trivial_witness` | Tested | - | yes | - |
+| `trivial_witness_probe` | Tested | - | yes | yes |
+| `trust_ladder` | Tested | - | yes | - |
 | `twin_gate_harness` | Exercised | - | - | yes |
 | `universal_discovery_engine` | Exercised | - | - | yes |
 | `unknown_mechanism_benchmark` | Exercised | - | - | yes |
 | `vega_decision_engine` | Tested | - | yes | - |
 | `world_model_adapter` | Integrated | yes | yes | - |
+| `yang_mills_case` | Tested | - | yes | yes |

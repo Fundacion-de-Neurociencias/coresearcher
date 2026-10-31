@@ -415,6 +415,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "local_smoothing_anatomy",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "local_smoothing_case",
       "scripts": true,
       "tests": true

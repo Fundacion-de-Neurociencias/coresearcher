@@ -1,0 +1,94 @@
+"""Tests for the obligation ledger (ADR-DISCOVERY-076) and its Mahler scalar-input pilot."""
+
+import json
+from pathlib import Path
+
+import pytest
+
+from python.discovery import mahler_obligations as mo
+from python.discovery.obligation_ledger import Claim, Discharge, Obligation, Status
+
+LEDGER = Path(__file__).resolve().parent.parent / "examples" / "mahler-obligations" / "ledger.json"
+
+
+def _ob(*statuses, by="CoResearcher"):
+    ob = Obligation("o", "s", "src", "identity")
+    for s in statuses:
+        ob.discharges.append(Discharge(s, "m", "scope", by))
+    return ob
+
+
+def test_weakest_link_and_refutation_dominate():
+    claim = Claim("c", "s", "src", [_ob(Status.DISCHARGED_SYMBOLIC), _ob(Status.CHECKED_NUMERIC)])
+    assert claim.status == Status.CHECKED_NUMERIC and not claim.is_proved
+    claim.obligations.append(_ob(Status.DISCHARGED_FORMAL, Status.REFUTED))
+    assert claim.status == Status.REFUTED
+    assert Claim("c", "s", "src", [_ob()]).status == Status.OPEN
+
+
+def test_numeric_and_author_certificates_never_count_as_proofs():
+    claim = Claim("c", "s", "src", [_ob(Status.CERTIFIED_BY_AUTHOR, by="author"), _ob(Status.CHECKED_NUMERIC)])
+    assert not claim.is_proved
+    assert not claim.obligations[0].independent and claim.obligations[1].independent
+    with pytest.raises(ValueError):
+        Discharge(Status.CHECKED_NUMERIC, "m", " ", "CoResearcher")
+
+
+def test_profile_identities_are_symbolically_true():
+    assert all(ok for _, ok in mo.check_profile_identities())
+
+
+@pytest.fixture(scope="module")
+def table():
+    return mo.profile_table(0.25, 6.0)
+
+
+def test_pointwise_inequalities_hold_on_a_coarse_grid(table):
+    margins = mo.pointwise_margins(table)
+    assert len(margins) == 7 and all(m["min"] > 0 for m in margins.values()), margins
+    # The tightest bound in the proposition: C <= -.341 is attained within 4e-4 at x = 0.
+    assert margins["C <= -.341"]["min"] < 4e-4 and margins["C <= -.341"]["at"] == 0.0
+
+
+def test_negative_controls_tighter_constants_are_refuted(table):
+    tight = mo.pointwise_margins(table, {"C": -0.342, "v": 0.317})
+    assert tight["C <= -.341"]["min"] < 0 and tight["|v' - x| <= .319"]["min"] < 0
+
+
+def test_two_variable_and_segment_inequalities_on_a_coarse_grid(table):
+    assert all(m["min"] > 0 for m in mo.two_variable_margins(table).values())
+    seg = mo.segment_ratio(table, step=2)
+    assert seg["segments"] > 100 and seg["max_left_over_right"] < 1
+
+
+def test_committed_ledger():
+    report = json.loads(LEDGER.read_text(encoding="utf-8"))
+    claim = report["claim"]
+    assert report["source"]["commit"] == mo.SOURCE["commit"]
+    assert claim["status"] == Status.CHECKED_NUMERIC.value and claim["is_proved"] is False
+    by_id = {o["id"]: o for o in claim["obligations"]}
+    assert by_id["identities"]["status"] == Status.DISCHARGED_SYMBOLIC.value
+    # 1 identity obligation; 7 + 2 inequalities each split into a proved window and the rest; the segment inequality
+    # (4) plus its proved algebraic reduction; (4) on the middle and large widths is proved apart from the rest
+    assert len(claim["obligations"]) == 24
+    extra = [
+        o for o in claim["obligations"] if o["id"].startswith("segment: elementary") or "profile bounds" in o["id"]
+    ]
+    assert len(extra) == 2 and all(
+        o["status"] in (Status.DISCHARGED_SYMBOLIC.value, Status.DISCHARGED_INTERVAL.value) for o in extra
+    )
+    red = [o for o in claim["obligations"] if o["id"].startswith("segment: algebraic reduction")]
+    assert len(red) == 1 and red[0]["status"] == Status.DISCHARGED_SYMBOLIC.value
+    assert all(o["status"] != Status.REFUTED.value for o in claim["obligations"])
+    windows = [o for o in claim["obligations"] if " on " in o["id"] and not o["id"].startswith("segment")]
+    assert len(windows) == 9 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in windows)
+    # the first bullet's tails (|x| > 8) are proved too (mahler_tail.py), so the first bullet holds on all of R
+    tails = [o for o in claim["obligations"] if o["id"].startswith("pointwise:") and "for |x| >" in o["id"]]
+    assert len(tails) == 7 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in tails)
+    # (3) outside [-3, 3]^2 is proved too (mahler_twovar.py); only the segment inequality (4) outside the middle and large widths remains numeric
+    outside = [o for o in claim["obligations"] if o["id"].startswith("two-variable") and "outside" in o["id"]]
+    assert len(outside) == 2 and all(o["status"] == Status.DISCHARGED_INTERVAL.value for o in outside)
+    box = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) on the middle")]
+    assert len(box) == 1 and box[0]["status"] == Status.DISCHARGED_INTERVAL.value
+    rest = [o for o in claim["obligations"] if o["id"].startswith("segment: (4) outside")]
+    assert len(rest) == 1 and all(o["status"] == Status.CHECKED_NUMERIC.value for o in rest)

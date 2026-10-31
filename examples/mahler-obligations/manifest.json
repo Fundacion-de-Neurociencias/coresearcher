@@ -1,0 +1,87 @@
+{
+  "environment": {
+    "python": "3.13.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "mpmath": "1.3.0",
+    "sympy": "1.13.3",
+    "numpy": "2.4.6",
+    "git_commit": "a123788ebb2b8be9c0ef31f2d0fd3ecd9e3186bb"
+  },
+  "steps": {
+    "interval": {
+      "script": "scripts/cases/mahler_interval_report.py",
+      "output": "examples/mahler-obligations/interval_proof.json",
+      "output_sha256": "6abd94447a14a669a43e7c962be3de6f5a48683587789040df2e97ce52d162b4",
+      "sources": {
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "scripts/cases/mahler_interval_report.py": "62b4624788dfc5033aff6047922d2015b8ac667601f60f00c836345a15de6ff7"
+      }
+    },
+    "tail": {
+      "script": "scripts/cases/mahler_tail_report.py",
+      "output": "examples/mahler-obligations/tail_proof.json",
+      "output_sha256": "1743191b5d2b965831c3609625a974dad875b67bec37468c826430a2c628b6d6",
+      "sources": {
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "python/discovery/mahler_tail.py": "1943392e4cd96e8f17e971b38ad0248b9c4cda64df30e32213f5008d3134eb0d",
+        "scripts/cases/mahler_tail_report.py": "06f8226baa794775fe6b9e877378f776cee91e78345d4fd707e9bc43ef0066b3"
+      }
+    },
+    "twovar": {
+      "script": "scripts/cases/mahler_twovar_report.py",
+      "output": "examples/mahler-obligations/twovar_proof.json",
+      "output_sha256": "ef44d202dd0c270d37423188a62192ffea1621cc629a20fb60de88aa36b8f05b",
+      "sources": {
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "python/discovery/mahler_tail.py": "1943392e4cd96e8f17e971b38ad0248b9c4cda64df30e32213f5008d3134eb0d",
+        "python/discovery/mahler_twovar.py": "013f7aa8c22a8aa1c7c73db7b582a4065e934f6b6d7ce8954f5468dd01dee2ca",
+        "scripts/cases/mahler_twovar_report.py": "dbbf1dacceeb83bfea1e38805e334c36164d83d013d9b5942e7317c99220b387"
+      }
+    },
+    "ranges": {
+      "script": "scripts/cases/mahler_ranges_report.py",
+      "output": "examples/mahler-obligations/ranges_proof.json",
+      "output_sha256": "1bd7287a0013a222c166078f894a3c7670ce925a7f95c8654eed37fad1944cea",
+      "sources": {
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "python/discovery/mahler_ranges.py": "c6169e1e05376a05a91052a81ed73a2ce1ac5e5148b6719b4126451ef59b67e1",
+        "python/discovery/mahler_tail.py": "1943392e4cd96e8f17e971b38ad0248b9c4cda64df30e32213f5008d3134eb0d",
+        "scripts/cases/mahler_ranges_report.py": "64b99fd2b3a17b428f3d6c7689567ef983a8dcdbda95e9490f2db96e90673717"
+      }
+    },
+    "segment_box": {
+      "script": "scripts/cases/mahler_segment_box_report.py",
+      "output": "examples/mahler-obligations/segment_box_proof.json",
+      "output_sha256": "f468ee3fb773166219c3df02c2c6dd8500b14c4f21a22d83bb02cb56704ac8f8",
+      "sources": {
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "python/discovery/mahler_ranges.py": "c6169e1e05376a05a91052a81ed73a2ce1ac5e5148b6719b4126451ef59b67e1",
+        "python/discovery/mahler_segment_box.py": "7ef26aa00d1dda782e4e108e37bbff4b76e0cf7e5983a5e520c895bc2f07315a",
+        "python/discovery/mahler_tail.py": "1943392e4cd96e8f17e971b38ad0248b9c4cda64df30e32213f5008d3134eb0d",
+        "scripts/cases/mahler_segment_box_report.py": "5f28bac14f67dead2a8101123c025166c8d23ddca1684278946a4d0a59b41106"
+      }
+    },
+    "ledger": {
+      "script": "scripts/cases/mahler_obligations_report.py",
+      "output": "examples/mahler-obligations/ledger.json",
+      "output_sha256": "1de5d8bc98394083ee113018c8971db6714e750e25eff4df0c1dfe39bd03b144",
+      "sources": {
+        "examples/mahler-obligations/interval_proof.json": "bd45a7e1443cea6c92c33c22e41c5ab0facbc91cee3c2678eb5c4110b8c2d850",
+        "examples/mahler-obligations/ranges_proof.json": "651fe9a7c3130c7dd0023de44a7996dae7c246541213c489937a3c535271b801",
+        "examples/mahler-obligations/segment_box_proof.json": "050a0abbee36b6264fd645e358d04d7f81ca095587bd934dbde720836f2ec71c",
+        "examples/mahler-obligations/tail_proof.json": "edbbfa68846543eb1e13739cf098b591b06337508010edb43faa43a5392b88c0",
+        "examples/mahler-obligations/twovar_proof.json": "e82bb1f15b811b09a1fdbb336425ca35b8304dda574160c37853a36fc06470cf",
+        "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
+        "python/discovery/mahler_obligations.py": "58882d76e04a89fb8bd178ee9938d63ccf253f8f4b0156265e6c3b852052bf74",
+        "python/discovery/mahler_segment.py": "6e6b0848859bd851a8800784273b44e1995346128bb72d25548d5f2edbad888f",
+        "python/discovery/obligation_ledger.py": "5783c5810b8d2c1ad8358d62034ab655ae7712c43196b11e316334a39c21886b",
+        "scripts/cases/mahler_obligations_report.py": "837fbfead23ae0d98a65adddc9af8fb95cec0d84f30ccc025454f35a7af72742"
+      }
+    }
+  }
+}

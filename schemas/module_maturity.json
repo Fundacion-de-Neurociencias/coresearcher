@@ -107,6 +107,20 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "cellular_automata_barrier_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "cited_import_ledger",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "cogentic_proof_orchestrator",
       "scripts": false,
       "tests": true
@@ -337,6 +351,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "isaac_sim_grounding_adapter",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "lab_in_the_loop_adapter",
       "scripts": false,
@@ -367,7 +388,7 @@
       "api": false,
       "level": "Tested",
       "module": "lean_junk_lint",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -393,10 +414,66 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "mahler_interval",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_obligations",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_ranges",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_segment",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_segment_box",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_tail",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "mahler_twovar",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Prototype",
       "module": "manifold_detector",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "manuscript_checks",
+      "scripts": true,
+      "tests": true
     },
     {
       "api": false,
@@ -427,6 +504,20 @@
       "tests": false
     },
     {
+      "api": false,
+      "level": "Tested",
+      "module": "obligation_ledger",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "openfoam_continuum_oracle",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",
@@ -436,7 +527,21 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "proof_pipeline",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "ptau217_cutoff_case",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "quasi_riemann_synergistic_auditor",
       "scripts": false,
       "tests": true
     },
@@ -513,6 +618,20 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "rule30_reasoning_bridge",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "rule30_word_exclusion",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "scientific_git_history",
       "scripts": true,
       "tests": true
@@ -563,7 +682,7 @@
       "api": false,
       "level": "Tested",
       "module": "statement_fidelity",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

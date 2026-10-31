@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 32 |
+| Tested | Covered by tests, not reachable from the API | 49 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -29,6 +29,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
+| `cellular_automata_barrier_auditor` | Tested | - | yes | - |
+| `cited_import_ledger` | Tested | - | yes | yes |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `collatz_case` | Tested | - | yes | yes |
 | `constraint_box` | Prototype | - | - | - |
@@ -62,21 +64,34 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |
 | `hypothesis_tournament_arena` | Integrated | yes | yes | - |
 | `inference_time_scaling` | Tested | - | yes | - |
+| `isaac_sim_grounding_adapter` | Tested | - | yes | - |
 | `lab_in_the_loop_adapter` | Prototype | - | - | - |
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
 | `latent_factor_discovery` | Exercised | - | - | yes |
 | `lean_formalization_engine` | Tested | - | yes | - |
-| `lean_junk_lint` | Tested | - | yes | - |
+| `lean_junk_lint` | Tested | - | yes | yes |
 | `limitation_resolution_engine` | Tested | - | yes | - |
 | `local_smoothing_case` | Tested | - | yes | yes |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
+| `mahler_interval` | Tested | - | yes | yes |
+| `mahler_obligations` | Tested | - | yes | yes |
+| `mahler_ranges` | Tested | - | yes | yes |
+| `mahler_segment` | Tested | - | yes | yes |
+| `mahler_segment_box` | Tested | - | yes | yes |
+| `mahler_tail` | Tested | - | yes | yes |
+| `mahler_twovar` | Tested | - | yes | yes |
 | `manifold_detector` | Prototype | - | - | - |
+| `manuscript_checks` | Tested | - | yes | yes |
 | `marr_engine` | Prototype | - | - | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
+| `obligation_ledger` | Tested | - | yes | yes |
+| `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `proof_pipeline` | Tested | - | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
+| `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |
 | `real_cohort_empirical_pipeline` | Prototype | - | - | - |
 | `reality_contact_score` | Tested | - | yes | yes |
@@ -87,6 +102,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `research_package` | Integrated | yes | yes | yes |
 | `result_family_orchestrator` | Tested | - | yes | - |
 | `retrospective_time_split_benchmark` | Exercised | - | - | yes |
+| `rule30_reasoning_bridge` | Tested | - | yes | - |
+| `rule30_word_exclusion` | Tested | - | yes | - |
 | `scientific_git_history` | Tested | - | yes | yes |
 | `scientific_logic` | Prototype | - | - | - |
 | `semantic_bijectivity_auditor` | Tested | - | yes | yes |
@@ -94,7 +111,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_epistemic_bunker` | Tested | - | yes | - |
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
-| `statement_fidelity` | Tested | - | yes | - |
+| `statement_fidelity` | Tested | - | yes | yes |
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |

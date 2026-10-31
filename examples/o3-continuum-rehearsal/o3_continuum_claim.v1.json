@@ -1,0 +1,259 @@
+{
+  "id": "o3-continuum-claim",
+  "version": "1.0.0",
+  "frozen_on": "2026-10-30",
+  "title": "Rehearsal checklist: the claims of 'The canonical massive continuum limit of the two-dimensional O(3) model' (openai/math family 215)",
+  "purpose": "A rehearsal of the Yang-Mills pre-registration on public material. The obligations are the paper's own claims (Theorem 1.1, Theorem 1.2, Corollary 1.3), written in the same schema as the Yang-Mills checklist, so the same tools can map what the Lean formalization covers.",
+  "scope": "Formal statement fidelity only. Nothing here assesses whether the paper's proof is correct, its credit or its announcement.",
+  "anchoring_rule": [
+    "The obligations quote the paper, pinned by SHA-256. The Lean statement is mapped onto them, never the reverse."
+  ],
+  "claims": {
+    "O3": "Theorem 1.1, Theorem 1.2 and Corollary 1.3: a canonical continuum limit of the nearest-neighbour two-dimensional O(3) model through all real beta -> infinity, satisfying the OS axioms, internally O(3) invariant, with a nonzero connected four-point function, a unique vacuum and a positive mass gap.",
+    "DECAY": "Companion paper: exponential decay of two-point correlations for the classical nearest-neighbour O(n) model, n >= 3, at every finite positive inverse temperature, uniformly over finite free-boundary subgraphs."
+  },
+  "references": {
+    "O3paper": {
+      "citation": "OpenAI, The canonical massive continuum limit of the two-dimensional O(3) model (October 4, 2026), openai/math preprint.",
+      "url": "https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/preprints/The-canonical-massive-continuum-limit-of-the-two-dimensional-O3-model-October-4-2026/massive-continuum-o3.pdf",
+      "sha256": "e75bfb353c2d3374503bbb899eb01dc21c94ed49fede6b3eb48f7ffce64527b2",
+      "read": true
+    },
+    "DecayPaper": {
+      "citation": "OpenAI, Exponential decay in two-dimensional classical O(n) models (September 23, 2026), openai/math preprint. Abstract read in CONTENTS.md, family 215.",
+      "url": "https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/CONTENTS.md",
+      "sha256": "080badcb677fb80be0e695c21a8ec88bcb3a46dd3e3078ca10061e6b289be175",
+      "read": true
+    },
+    "OS73": {
+      "citation": "K. Osterwalder and R. Schrader, Axioms for Euclidean Green's functions, Commun. Math. Phys. 31 (1973), 83-112.",
+      "read": false
+    }
+  },
+  "vocabulary": {
+    "dim": {"domain": [2, 3, 4], "meaning": "Euclidean dimension of the object."},
+    "volume": {"domain": ["infinite", "torus", "finite_box"], "meaning": "infinite = the plane (or Z^2); torus = periodic box; finite_box = finite subgraph."},
+    "spacing": {"continuous": true, "lower": 0, "meaning": "Lattice spacing of the object; 0 for a continuum object."},
+    "continuum_limit": {"domain": ["canonical", "prescribed_trajectory", "subsequence_only", "none"], "meaning": "canonical = through all real beta -> infinity without subsequences (or a direct continuum construction); prescribed_trajectory = along one chosen sequence beta_N; subsequence_only = a limit point; none = no limit."},
+    "field": {"domain": ["O3_sigma", "On_sigma_other_n", "gaussian_vector", "none"], "meaning": "Which model's fields the object carries."},
+    "os_regularity": {"domain": [true, false], "meaning": "Tempered Schwinger functions with the factorial bound."},
+    "os_euclidean_invariance": {"domain": [true, false], "meaning": "Invariance under the full Euclidean group E(2)."},
+    "os_reflection_positivity": {"domain": [true, false], "meaning": "Reflection positivity."},
+    "os_symmetry": {"domain": [true, false], "meaning": "Permutation symmetry."},
+    "os_cluster": {"domain": [true, false], "meaning": "Cluster property."},
+    "internal_o3_invariance": {"domain": [true, false], "meaning": "Invariance under the internal O(3) rotations of the spins."},
+    "connected_4pt": {"domain": ["zero", "nonzero"], "meaning": "Whether a connected four-point correlation is nonzero (non-Gaussian)."},
+    "unique_vacuum": {"domain": [true, false], "meaning": "The reconstructed theory has a unique vacuum and a nonzero vacuum complement."},
+    "mass_gap": {"continuous": true, "lower": 0, "meaning": "Lower bound of the continuum Hamiltonian on the vacuum complement."},
+    "two_point_decay": {"domain": ["exponential", "power_law", "not_established"], "meaning": "Decay of the two-point correlation in the object's own units."}
+  },
+  "obligations": [
+    {
+      "id": "O3-FIELD",
+      "title": "The nearest-neighbour O(3) model",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "The fields are those of the nearest-neighbour O(3) model with unit spins, no external field and no topological term.",
+      "formal_clause": "field == 'O3_sigma'",
+      "sources": [{"ref": "O3paper", "locator": "abstract; Theorem 1.1 and probability (1.1)"}],
+      "lean_markers": ["sphere", "3 ≤ n", "Fin 3"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-DIM2",
+      "title": "Two dimensions",
+      "category": "core",
+      "applies_to": ["O3", "DECAY"],
+      "requirement": "The theory is two-dimensional (1 + 1 after reconstruction).",
+      "formal_clause": "dim == 2",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii): a theory in 1 + 1 dimensions"}],
+      "lean_markers": ["ℤ × ℤ", "Fin 2\\b", "EuclideanSpace ℝ \\(Fin 2\\)"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-INFINITE-VOLUME",
+      "title": "Infinite volume",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "The object lives on the whole plane: the periodic thermodynamic limit, then the continuum limit.",
+      "formal_clause": "volume == 'infinite'",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.1: the periodic thermodynamic limit exists; Theorem 1.2 (i): tori tending to the plane"}],
+      "lean_markers": ["EuclideanSpace ℝ \\(Fin 2\\)", "[Tt]hermodynamic", "atTop"],
+      "lean_counter_markers": ["Finset", "Fintype", "\\bZMod\\b", "[Tt]orus"]
+    },
+    {
+      "id": "O3-CONTINUUM",
+      "title": "Canonical continuum limit",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "The fields (1.3) converge as beta -> infinity through all real values, without subsequences, to one limiting hierarchy.",
+      "formal_clause": "spacing == 0 and continuum_limit == 'canonical'",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.1 (i)-(iii)"}],
+      "lean_markers": ["[Cc]ontinuum", "SchwartzMap", "𝓝\\[>\\] 0", "Tendsto"],
+      "lean_counter_markers": ["ℤ × ℤ", "siteDistance"]
+    },
+    {
+      "id": "O3-OS-REGULARITY",
+      "title": "OS axiom: regularity",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "Schwinger distributions in S'((R^2)^n) with the factorial bound of Theorem 1.2 (ii).",
+      "formal_clause": "os_regularity",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii), factorial bound"}, {"ref": "OS73", "locator": "regularity"}],
+      "lean_markers": ["SchwartzMap", "[Tt]empered", "[Ff]actorial"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-OS-EUCLIDEAN",
+      "title": "OS axiom: Euclidean invariance",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "Invariance under the full Euclidean group of the plane.",
+      "formal_clause": "os_euclidean_invariance",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii); Corollary 1.3"}],
+      "lean_markers": ["EuclideanGroup", "LinearIsometry", "[Ee]uclidean\\w*[Ii]nvarian", "[Rr]otation\\w*[Ii]nvarian"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-OS-RP",
+      "title": "OS axiom: reflection positivity",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "Reflection positivity of the limiting Schwinger distributions.",
+      "formal_clause": "os_reflection_positivity",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii); Section 11.1"}],
+      "lean_markers": ["[Rr]eflection\\w*[Pp]ositiv", "[Oo]sterwalder"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-OS-SYMMETRY",
+      "title": "OS axiom: symmetry",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "Permutation symmetry of the Schwinger distributions.",
+      "formal_clause": "os_symmetry",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii); Corollary 1.3"}],
+      "lean_markers": ["Equiv\\.Perm", "[Pp]ermut"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-OS-CLUSTER",
+      "title": "OS axiom: cluster property",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "Clustering of the limiting Schwinger distributions.",
+      "formal_clause": "os_cluster",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii); Proposition 11.2"}],
+      "lean_markers": ["[Cc]luster", "[Ee]rgodic"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-INTERNAL-SYMMETRY",
+      "title": "Internal O(3) invariance",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "The limiting hierarchy is internally O(3) invariant.",
+      "formal_clause": "internal_o3_invariance",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (ii); Corollary 1.3"}],
+      "lean_markers": ["orthogonalGroup", "[Ii]nternal\\w*[Ii]nvarian"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-NONTRIVIAL",
+      "title": "Nonzero connected four-point function",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "A connected four-point distribution is nonzero on smooth tests with strictly separated time supports (no Wick factorization).",
+      "formal_clause": "connected_4pt == 'nonzero'",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (iv); Corollary 1.3"}],
+      "lean_markers": ["[Tt]runcated", "[Cc]onnected\\w*[Cc]orrelat", "[Cc]umulant", "[Uu]rsell", "[Ww]ick"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-UNIQUE-VACUUM",
+      "title": "Unique vacuum, nonzero vacuum complement",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "The reconstructed theory has a unique vacuum and a nonzero vacuum complement.",
+      "formal_clause": "unique_vacuum",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (iii); Corollary 1.3"}],
+      "lean_markers": ["[Vv]acuum"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "O3-MASS-GAP",
+      "title": "Positive Hamiltonian gap",
+      "category": "core",
+      "applies_to": ["O3"],
+      "requirement": "H_phys restricted to the vacuum complement is at least m > 0 (in the continuum theory's units).",
+      "formal_clause": "mass_gap > 0",
+      "sources": [{"ref": "O3paper", "locator": "Theorem 1.2 (iii); Corollary 1.3"}],
+      "lean_markers": ["[Hh]amiltonian", "[Ss]pectralGap", "[Mm]ass[Gg]ap"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "LAT-DECAY",
+      "title": "Exponential decay of lattice two-point correlations",
+      "category": "companion",
+      "applies_to": ["DECAY"],
+      "requirement": "For n >= 3 and every beta > 0, two-point correlations decay exponentially, uniformly over finite free-boundary subgraphs and bounded nonnegative edge strengths.",
+      "formal_clause": "two_point_decay == 'exponential'",
+      "sources": [{"ref": "DecayPaper", "locator": "abstract"}],
+      "lean_markers": ["Real\\.exp \\(-m"],
+      "lean_counter_markers": []
+    }
+  ],
+  "witnesses": [
+    {
+      "id": "zero_theory_2d",
+      "title": "Zero theory on R^2",
+      "kind": "trivial",
+      "facts": ["dim == 2", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'canonical'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "internal_o3_invariance", "connected_4pt == 'zero'", "not unique_vacuum", "two_point_decay == 'exponential'"],
+      "note": "All Schwinger functions vanish beyond order 0. Any upper bound on the two-point function holds. The vacuum complement is empty, which the paper's 'nonzero vacuum complement' excludes. The field label is left free.",
+      "references": []
+    },
+    {
+      "id": "gaussian_massive_vector_2d",
+      "title": "Free massive three-component Gaussian field on R^2",
+      "kind": "gaussian",
+      "facts": ["dim == 2", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'canonical'", "field == 'gaussian_vector'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "internal_o3_invariance", "connected_4pt == 'zero'", "unique_vacuum", "mass_gap > 0", "two_point_decay == 'exponential'"],
+      "note": "Satisfies every OS axiom, has a unique vacuum, a mass gap and O(3) symmetry. Only the nonzero connected four-point function (and the field identity) separates it from the claim.",
+      "references": ["OS73"]
+    },
+    {
+      "id": "lattice_o3_high_temperature_finite",
+      "title": "Lattice O(3) model on a finite subgraph of Z^2 at small beta",
+      "kind": "lattice_only",
+      "facts": ["dim == 2", "volume == 'finite_box'", "spacing == 1", "continuum_limit == 'none'", "field == 'O3_sigma'", "not os_euclidean_invariance", "not os_cluster", "os_reflection_positivity", "os_symmetry", "internal_o3_invariance", "connected_4pt == 'nonzero'", "two_point_decay == 'exponential'"],
+      "note": "Exponential decay at high temperature (small beta) is classical, from high-temperature expansions; it needs none of the family's results. This witness carries the lattice model's field label, two dimensions and exponential decay, and nothing continuum.",
+      "references": []
+    },
+    {
+      "id": "lattice_o3_torus",
+      "title": "Lattice O(3) model on a periodic torus",
+      "kind": "finite_volume",
+      "facts": ["dim == 2", "volume == 'torus'", "spacing > 0", "continuum_limit == 'none'", "field == 'O3_sigma'", "not os_euclidean_invariance", "not os_cluster", "os_reflection_positivity", "internal_o3_invariance"],
+      "note": "A finite periodic box at fixed spacing.",
+      "references": []
+    },
+    {
+      "id": "o3_lattice_3d",
+      "title": "Three-dimensional lattice O(3) model",
+      "kind": "lower_dimension",
+      "facts": ["dim == 3", "spacing > 0", "continuum_limit == 'none'", "field == 'O3_sigma'", "not os_euclidean_invariance"],
+      "note": "The same model in another dimension; it has a low-temperature ordered phase, so it does not decay exponentially at every beta. Its decay is left free.",
+      "references": []
+    },
+    {
+      "id": "subsequential_limit_2d",
+      "title": "Continuum limit point along a prescribed trajectory or subsequence",
+      "kind": "weak_limit",
+      "facts": ["dim == 2", "volume == 'infinite'", "spacing == 0", "continuum_limit in ('prescribed_trajectory', 'subsequence_only')", "field == 'O3_sigma'"],
+      "note": "What Theorem 1.2 gives before Theorem 1.1 removes the trajectory. Other features left free.",
+      "references": []
+    }
+  ],
+  "audit_protocol": [
+    "Same protocol as ym4-existence v1.0.0, applied to lean/ComparatorChallenges/ClassicalON.lean."
+  ]
+}

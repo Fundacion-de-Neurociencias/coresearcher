@@ -1,0 +1,747 @@
+{
+  "checklist": {
+    "id": "ym4-existence",
+    "version": "1.0.0",
+    "frozen_on": "2026-10-30",
+    "sha256": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353",
+    "lock": {
+      "spec": "ym4_existence_checklist.v1.json",
+      "id": "ym4-existence",
+      "version": "1.0.0",
+      "frozen_on": "2026-10-30",
+      "sha256": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353",
+      "canonicalization": "json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=False), UTF-8"
+    }
+  },
+  "claim_record": {
+    "id": "openai-ym4-existence-2026",
+    "claim": "Existence of quantum Yang-Mills theory, including coupling to fermions (committee statement, October 2026). The statement does not name the dimension or the gauge groups covered; it names SU(3) with quarks (QCD) as context and says the mass gap and confinement remain open.",
+    "claimant": "OpenAI",
+    "scope_note": "Formal statement fidelity only; not credit, news or correctness of the proof.",
+    "rung": "CLAIMED",
+    "formal_status": "NOT_KERNEL_CHECKED",
+    "mandatory_relays": [
+      {
+        "code": "LEAN_NOT_KERNEL_CHECKED",
+        "message": "A Lean 4 theorem was stated but no Lean kernel checked it here. Treat it as a claim, not a proof."
+      }
+    ],
+    "next_rung": "STATEMENT_PUBLIC",
+    "next_rung_needs": [
+      "statement_location",
+      "statement_sha256"
+    ],
+    "history": [
+      {
+        "rung": "CLAIMED",
+        "date": "2026-10-30",
+        "reason": "Statement not public: neither the 1147-page manuscript nor the Lean formalization has been released. The committee will release the Lean proof after checking that the definitions and problem statement match the standard ones.",
+        "evidence": {
+          "announcement": "https://www.kitp.ucsb.edu/sites/default/files/YM_working_group.pdf",
+          "announcement_sha256": "dbab31f0f954ac8265a3fc1c1a29664c7fa0b7f16c616d58012e65896557bd12",
+          "retrieved": "2026-10-30",
+          "checklist_frozen_before_statement": "ym4-existence v1.0.0"
+        }
+      }
+    ]
+  },
+  "obligations": [
+    {
+      "id": "YM-GROUP-NONABELIAN",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "gauge_group in ('SU2', 'SU3', 'SUN_only', 'all_compact_simple')"
+    },
+    {
+      "id": "YM-GROUP-COVERAGE",
+      "category": "scope",
+      "applies_to": [
+        "YM"
+      ],
+      "clause": "gauge_group == 'all_compact_simple'"
+    },
+    {
+      "id": "YM-SPACETIME-DIM4",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "dim == 4"
+    },
+    {
+      "id": "YM-SPACETIME-INFINITE",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "volume == 'infinite'"
+    },
+    {
+      "id": "YM-OS-REGULARITY",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "os_regularity"
+    },
+    {
+      "id": "YM-OS-EUCLIDEAN",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "os_euclidean_invariance"
+    },
+    {
+      "id": "YM-OS-RP",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "os_reflection_positivity"
+    },
+    {
+      "id": "YM-OS-SYMMETRY",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "os_symmetry"
+    },
+    {
+      "id": "YM-OS-CLUSTER",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "os_cluster"
+    },
+    {
+      "id": "YM-CONTINUUM",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "spacing == 0 and continuum_limit == 'lattice_independent'"
+    },
+    {
+      "id": "YM-OBS-GAUGE-INVARIANT",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "observables in ('local_and_loops', 'local_gauge_invariant', 'wilson_loops_only')"
+    },
+    {
+      "id": "YM-OBS-LOCAL-CURVATURE",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "observables in ('local_and_loops', 'local_gauge_invariant')"
+    },
+    {
+      "id": "YM-NONTRIVIAL",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "connected_4pt == 'nonzero'"
+    },
+    {
+      "id": "YM-SHORT-DISTANCE",
+      "category": "core",
+      "applies_to": [
+        "YM",
+        "QCD"
+      ],
+      "clause": "short_distance == 'asymptotic_freedom'"
+    },
+    {
+      "id": "QCD-FERMIONS",
+      "category": "qcd",
+      "applies_to": [
+        "QCD"
+      ],
+      "clause": "fermions == 'quarks_fundamental'"
+    },
+    {
+      "id": "QCD-GROUP-SU3",
+      "category": "qcd",
+      "applies_to": [
+        "QCD"
+      ],
+      "clause": "gauge_group in ('SU3', 'SUN_only', 'all_compact_simple')"
+    },
+    {
+      "id": "OUT-MASS-GAP",
+      "category": "out_of_claim",
+      "applies_to": [],
+      "clause": "mass_gap > 0"
+    },
+    {
+      "id": "OUT-CONFINEMENT",
+      "category": "out_of_claim",
+      "applies_to": [],
+      "clause": "confinement == 'area_law'"
+    }
+  ],
+  "self_probe": {
+    "YM": {
+      "statement": "checklist, claim YM",
+      "checklist": "ym4-existence v1.0.0",
+      "checklist_sha256": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353",
+      "clauses": {
+        "YM-GROUP-NONABELIAN": "gauge_group in ('SU2', 'SU3', 'SUN_only', 'all_compact_simple')",
+        "YM-GROUP-COVERAGE": "gauge_group == 'all_compact_simple'",
+        "YM-SPACETIME-DIM4": "dim == 4",
+        "YM-SPACETIME-INFINITE": "volume == 'infinite'",
+        "YM-OS-REGULARITY": "os_regularity",
+        "YM-OS-EUCLIDEAN": "os_euclidean_invariance",
+        "YM-OS-RP": "os_reflection_positivity",
+        "YM-OS-SYMMETRY": "os_symmetry",
+        "YM-OS-CLUSTER": "os_cluster",
+        "YM-CONTINUUM": "spacing == 0 and continuum_limit == 'lattice_independent'",
+        "YM-OBS-GAUGE-INVARIANT": "observables in ('local_and_loops', 'local_gauge_invariant', 'wilson_loops_only')",
+        "YM-OBS-LOCAL-CURVATURE": "observables in ('local_and_loops', 'local_gauge_invariant')",
+        "YM-NONTRIVIAL": "connected_4pt == 'nonzero'",
+        "YM-SHORT-DISTANCE": "short_distance == 'asymptotic_freedom'"
+      },
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": [],
+      "witnesses": [
+        {
+          "witness": "zero_theory",
+          "title": "Zero theory (vacuum only)",
+          "kind": "trivial",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": [
+            "YM-GROUP-NONABELIAN",
+            "YM-GROUP-COVERAGE",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE"
+          ]
+        },
+        {
+          "witness": "free_scalar_4d",
+          "title": "Free (Gaussian) scalar field on R^4",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-GROUP-NONABELIAN",
+            "YM-GROUP-COVERAGE",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "free_nonabelian_gaussian_4d",
+          "title": "Yang-Mills at zero coupling (dim G copies of Maxwell)",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE"
+          ]
+        },
+        {
+          "witness": "maxwell_u1_4d",
+          "title": "Abelian U(1) Maxwell theory on R^4",
+          "kind": "abelian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-GROUP-NONABELIAN",
+            "YM-GROUP-COVERAGE",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "ym_2d",
+          "title": "Two-dimensional Yang-Mills on R^2",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-DIM4",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE"
+          ]
+        },
+        {
+          "witness": "ym_3d",
+          "title": "Three-dimensional Yang-Mills (hypothetical continuum theory)",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-DIM4",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE",
+            "YM-SPACETIME-INFINITE",
+            "YM-OS-REGULARITY",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-OS-CLUSTER",
+            "YM-CONTINUUM",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL"
+          ]
+        },
+        {
+          "witness": "ym_torus_4d",
+          "title": "Yang-Mills on a four-torus T^4",
+          "kind": "finite_volume",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-INFINITE",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-CLUSTER"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE",
+            "YM-OS-REGULARITY",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-CONTINUUM",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-SHORT-DISTANCE"
+          ]
+        },
+        {
+          "witness": "lattice_ym_4d",
+          "title": "Wilson lattice gauge theory on Z^4 at fixed spacing (strong coupling)",
+          "kind": "lattice_only",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-OS-EUCLIDEAN",
+            "YM-CONTINUUM",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE"
+          ]
+        },
+        {
+          "witness": "lattice_qcd_4d",
+          "title": "Lattice QCD with Wilson fermions at fixed spacing (strong coupling)",
+          "kind": "lattice_only",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-GROUP-COVERAGE",
+            "YM-OS-EUCLIDEAN",
+            "YM-CONTINUUM",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "subsequential_limit_4d",
+          "title": "Continuum limit point along a subsequence of one lattice action",
+          "kind": "weak_limit",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-CONTINUUM"
+          ],
+          "open_clauses": [
+            "YM-GROUP-COVERAGE",
+            "YM-OS-REGULARITY",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-OS-CLUSTER",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE"
+          ]
+        }
+      ]
+    },
+    "QCD": {
+      "statement": "checklist, claim QCD",
+      "checklist": "ym4-existence v1.0.0",
+      "checklist_sha256": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353",
+      "clauses": {
+        "YM-GROUP-NONABELIAN": "gauge_group in ('SU2', 'SU3', 'SUN_only', 'all_compact_simple')",
+        "YM-SPACETIME-DIM4": "dim == 4",
+        "YM-SPACETIME-INFINITE": "volume == 'infinite'",
+        "YM-OS-REGULARITY": "os_regularity",
+        "YM-OS-EUCLIDEAN": "os_euclidean_invariance",
+        "YM-OS-RP": "os_reflection_positivity",
+        "YM-OS-SYMMETRY": "os_symmetry",
+        "YM-OS-CLUSTER": "os_cluster",
+        "YM-CONTINUUM": "spacing == 0 and continuum_limit == 'lattice_independent'",
+        "YM-OBS-GAUGE-INVARIANT": "observables in ('local_and_loops', 'local_gauge_invariant', 'wilson_loops_only')",
+        "YM-OBS-LOCAL-CURVATURE": "observables in ('local_and_loops', 'local_gauge_invariant')",
+        "YM-NONTRIVIAL": "connected_4pt == 'nonzero'",
+        "YM-SHORT-DISTANCE": "short_distance == 'asymptotic_freedom'",
+        "QCD-FERMIONS": "fermions == 'quarks_fundamental'",
+        "QCD-GROUP-SU3": "gauge_group in ('SU3', 'SUN_only', 'all_compact_simple')"
+      },
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": [],
+      "witnesses": [
+        {
+          "witness": "zero_theory",
+          "title": "Zero theory (vacuum only)",
+          "kind": "trivial",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "YM-GROUP-NONABELIAN",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "free_scalar_4d",
+          "title": "Free (Gaussian) scalar field on R^4",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-GROUP-NONABELIAN",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS",
+            "QCD-GROUP-SU3"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "free_nonabelian_gaussian_4d",
+          "title": "Yang-Mills at zero coupling (dim G copies of Maxwell)",
+          "kind": "gaussian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "maxwell_u1_4d",
+          "title": "Abelian U(1) Maxwell theory on R^4",
+          "kind": "abelian",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-GROUP-NONABELIAN",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS",
+            "QCD-GROUP-SU3"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "ym_2d",
+          "title": "Two-dimensional Yang-Mills on R^2",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-DIM4",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "ym_3d",
+          "title": "Three-dimensional Yang-Mills (hypothetical continuum theory)",
+          "kind": "lower_dimension",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-DIM4",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "YM-SPACETIME-INFINITE",
+            "YM-OS-REGULARITY",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-OS-CLUSTER",
+            "YM-CONTINUUM",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL",
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "ym_torus_4d",
+          "title": "Yang-Mills on a four-torus T^4",
+          "kind": "finite_volume",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-SPACETIME-INFINITE",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-CLUSTER",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "YM-OS-REGULARITY",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-CONTINUUM",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-SHORT-DISTANCE",
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "lattice_ym_4d",
+          "title": "Wilson lattice gauge theory on Z^4 at fixed spacing (strong coupling)",
+          "kind": "lattice_only",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-OS-EUCLIDEAN",
+            "YM-CONTINUUM",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS"
+          ],
+          "open_clauses": [
+            "QCD-GROUP-SU3"
+          ]
+        },
+        {
+          "witness": "lattice_qcd_4d",
+          "title": "Lattice QCD with Wilson fermions at fixed spacing (strong coupling)",
+          "kind": "lattice_only",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-OS-EUCLIDEAN",
+            "YM-CONTINUUM",
+            "YM-SHORT-DISTANCE"
+          ],
+          "open_clauses": []
+        },
+        {
+          "witness": "subsequential_limit_4d",
+          "title": "Continuum limit point along a subsequence of one lattice action",
+          "kind": "weak_limit",
+          "result": "EXCLUDED",
+          "excluded_by": [
+            "YM-CONTINUUM"
+          ],
+          "open_clauses": [
+            "YM-OS-REGULARITY",
+            "YM-OS-EUCLIDEAN",
+            "YM-OS-RP",
+            "YM-OS-SYMMETRY",
+            "YM-OS-CLUSTER",
+            "YM-OBS-GAUGE-INVARIANT",
+            "YM-OBS-LOCAL-CURVATURE",
+            "YM-NONTRIVIAL",
+            "YM-SHORT-DISTANCE",
+            "QCD-FERMIONS",
+            "QCD-GROUP-SU3"
+          ]
+        }
+      ]
+    }
+  },
+  "barriers_per_witness": {
+    "zero_theory": [
+      "YM-NONTRIVIAL",
+      "YM-SHORT-DISTANCE"
+    ],
+    "free_scalar_4d": [
+      "YM-GROUP-NONABELIAN",
+      "YM-GROUP-COVERAGE",
+      "YM-OBS-GAUGE-INVARIANT",
+      "YM-OBS-LOCAL-CURVATURE",
+      "YM-NONTRIVIAL",
+      "YM-SHORT-DISTANCE"
+    ],
+    "free_nonabelian_gaussian_4d": [
+      "YM-NONTRIVIAL",
+      "YM-SHORT-DISTANCE"
+    ],
+    "maxwell_u1_4d": [
+      "YM-GROUP-NONABELIAN",
+      "YM-GROUP-COVERAGE",
+      "YM-NONTRIVIAL",
+      "YM-SHORT-DISTANCE"
+    ],
+    "ym_2d": [
+      "YM-SPACETIME-DIM4",
+      "YM-OBS-LOCAL-CURVATURE",
+      "YM-SHORT-DISTANCE"
+    ],
+    "ym_3d": [
+      "YM-SPACETIME-DIM4",
+      "YM-SHORT-DISTANCE"
+    ],
+    "ym_torus_4d": [
+      "YM-SPACETIME-INFINITE",
+      "YM-OS-EUCLIDEAN",
+      "YM-OS-CLUSTER"
+    ],
+    "lattice_ym_4d": [
+      "YM-OS-EUCLIDEAN",
+      "YM-CONTINUUM",
+      "YM-SHORT-DISTANCE"
+    ],
+    "lattice_qcd_4d": [
+      "YM-GROUP-COVERAGE",
+      "YM-OS-EUCLIDEAN",
+      "YM-CONTINUUM",
+      "YM-SHORT-DISTANCE"
+    ],
+    "subsequential_limit_4d": [
+      "YM-CONTINUUM"
+    ]
+  },
+  "single_barrier_obligations": {
+    "YM-GROUP-NONABELIAN": [],
+    "YM-GROUP-COVERAGE": [],
+    "YM-SPACETIME-DIM4": [],
+    "YM-SPACETIME-INFINITE": [],
+    "YM-OS-REGULARITY": [],
+    "YM-OS-EUCLIDEAN": [],
+    "YM-OS-RP": [],
+    "YM-OS-SYMMETRY": [],
+    "YM-OS-CLUSTER": [],
+    "YM-CONTINUUM": [
+      "subsequential_limit_4d"
+    ],
+    "YM-OBS-GAUGE-INVARIANT": [],
+    "YM-OBS-LOCAL-CURVATURE": [],
+    "YM-NONTRIVIAL": [],
+    "YM-SHORT-DISTANCE": []
+  },
+  "single_barrier_obligations_without_short_distance": {
+    "YM-GROUP-NONABELIAN": [],
+    "YM-GROUP-COVERAGE": [],
+    "YM-SPACETIME-DIM4": [
+      "ym_3d"
+    ],
+    "YM-SPACETIME-INFINITE": [],
+    "YM-OS-REGULARITY": [],
+    "YM-OS-EUCLIDEAN": [],
+    "YM-OS-RP": [],
+    "YM-OS-SYMMETRY": [],
+    "YM-OS-CLUSTER": [],
+    "YM-CONTINUUM": [
+      "subsequential_limit_4d"
+    ],
+    "YM-OBS-GAUGE-INVARIANT": [],
+    "YM-OBS-LOCAL-CURVATURE": [],
+    "YM-NONTRIVIAL": [
+      "zero_theory",
+      "free_nonabelian_gaussian_4d"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "no_short_distance",
+      "why": "Asymptotic freedom and the OPE are the hardest clauses to state in Lean; a formalization may omit them.",
+      "dropped": [
+        "YM-SHORT-DISTANCE"
+      ],
+      "kept": [],
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": []
+    },
+    {
+      "id": "no_short_distance_no_local_fields",
+      "why": "A Wilson-loop-only construction without short-distance clauses.",
+      "dropped": [
+        "YM-SHORT-DISTANCE",
+        "YM-OBS-LOCAL-CURVATURE"
+      ],
+      "kept": [],
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": []
+    },
+    {
+      "id": "os_and_group_only",
+      "why": "'An OS theory on R^4 labelled by a compact simple group': the shape most likely to be called 'Yang-Mills' without saying what makes it Yang-Mills.",
+      "dropped": [],
+      "kept": [
+        "YM-GROUP-NONABELIAN",
+        "YM-SPACETIME-DIM4",
+        "YM-SPACETIME-INFINITE",
+        "YM-OS-REGULARITY",
+        "YM-OS-EUCLIDEAN",
+        "YM-OS-RP",
+        "YM-OS-SYMMETRY",
+        "YM-OS-CLUSTER"
+      ],
+      "outcome": "VACUOUS_RELATIVE_TO_INTENT",
+      "satisfied_by": [
+        "free_nonabelian_gaussian_4d"
+      ],
+      "undetermined": [
+        "zero_theory",
+        "subsequential_limit_4d"
+      ]
+    },
+    {
+      "id": "no_nontriviality",
+      "why": "Non-triviality stated only in prose.",
+      "dropped": [
+        "YM-SHORT-DISTANCE",
+        "YM-NONTRIVIAL"
+      ],
+      "kept": [],
+      "outcome": "POSSIBLY_VACUOUS",
+      "satisfied_by": [],
+      "undetermined": [
+        "zero_theory",
+        "free_nonabelian_gaussian_4d"
+      ]
+    }
+  ]
+}

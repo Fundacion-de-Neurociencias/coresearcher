@@ -334,9 +334,18 @@ def _difference(spec: RangeSpec, inside: str, outside: str) -> tuple:
         method = "real relaxation" if relaxed else "exact"
         if model is None:
             return False, None, method, reasons
-        model = _rational_model(encoder, model, [encoder.bounds(), encoder.formula(spec.domain),
-                                                 encoder.formula(inside), z3.Not(encoder.formula(outside))])
+        constraints = [encoder.bounds(), encoder.formula(spec.domain), encoder.formula(inside)]
+        model = _rational_model(encoder, model, constraints + [z3.Not(encoder.formula(outside))])
+        irrational = [
+            name
+            for name, sym in encoder.table.symbols.items()
+            if z3.is_algebraic_value(model.eval(sym, model_completion=True))
+        ]
         witness = encoder.decode(model)
+        if irrational:
+            # The difference has points, but none with rational coordinates was found near this one; the decimal
+            # approximation printed for these parameters need not lie in the difference itself.
+            witness["approximate"] = irrational
         if relaxed and any(p.integer and not isinstance(witness[p.name], int) for p in spec.parameters):
             reasons.append(f"real relaxation found only a non-integral witness {witness}")
             return None, None, "undecided", reasons

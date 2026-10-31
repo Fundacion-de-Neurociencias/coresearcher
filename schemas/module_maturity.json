@@ -119,6 +119,13 @@
       "tests": true
     },
     {
+      "api": true,
+      "level": "Integrated",
+      "module": "cited_registry",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": false,
       "level": "Tested",
       "module": "cogentic_proof_orchestrator",

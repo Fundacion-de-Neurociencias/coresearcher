@@ -125,6 +125,11 @@ def main() -> None:
 
     formal.add_parser(subparsers)
 
+    # registry: cited results, conventions, premise retraction (ADR-DISCOVERY-083)
+    from python.cli import registry
+
+    registry.add_parser(subparsers)
+
     args = parser.parse_args()
     if not args.command:
         print(BANNER)
@@ -137,6 +142,7 @@ def main() -> None:
         "test": cmd_test,
         "info": cmd_info,
         "formal": formal.main,
+        "registry": registry.main,
     }
 
     exit_code = dispatch[args.command](args)

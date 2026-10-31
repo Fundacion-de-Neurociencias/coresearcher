@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 46 |
+| Tested | Covered by tests, not reachable from the API | 48 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -30,6 +30,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `biomacromolecular_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
+| `cited_import_ledger` | Tested | - | yes | yes |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |
@@ -67,7 +68,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
 | `latent_factor_discovery` | Exercised | - | - | yes |
 | `lean_formalization_engine` | Tested | - | yes | - |
-| `lean_junk_lint` | Tested | - | yes | - |
+| `lean_junk_lint` | Tested | - | yes | yes |
 | `limitation_resolution_engine` | Tested | - | yes | - |
 | `local_smoothing_case` | Tested | - | yes | yes |
 | `long_horizon_campaign_engine` | Exercised | - | - | yes |
@@ -79,6 +80,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `mahler_tail` | Tested | - | yes | yes |
 | `mahler_twovar` | Tested | - | yes | yes |
 | `manifold_detector` | Prototype | - | - | - |
+| `manuscript_checks` | Tested | - | yes | yes |
 | `marr_engine` | Prototype | - | - | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
@@ -108,7 +110,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_epistemic_bunker` | Tested | - | yes | - |
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
-| `statement_fidelity` | Tested | - | yes | - |
+| `statement_fidelity` | Tested | - | yes | yes |
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |

@@ -11,7 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 def _bench():
-    spec = importlib.util.spec_from_file_location("revision_bench", ROOT / "scripts/benchmarks/openai_math_revision_bench.py")
+    spec = importlib.util.spec_from_file_location(
+        "revision_bench", ROOT / "scripts/benchmarks/openai_math_revision_bench.py"
+    )
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -28,15 +30,18 @@ def _write(tmp_path, files):
 # ---------------------------------------------------------------- parser
 
 
-@pytest.mark.parametrize("latex,expected", [
-    (r"\frac{6}{4}", "3/2"),
-    (r"2^{4}", "16"),
-    (r"(n+1)^2", "(n + 1)**2"),
-    (r"\binom{5}{2}", "10"),
-    (r"24n^2+2", "24*n**2 + 2"),
-    (r"x_{1}+x_2", "x_1 + x_2"),
-    (r"\sqrt{2}\cdot\sqrt{8}", "4"),
-])
+@pytest.mark.parametrize(
+    "latex,expected",
+    [
+        (r"\frac{6}{4}", "3/2"),
+        (r"2^{4}", "16"),
+        (r"(n+1)^2", "(n + 1)**2"),
+        (r"\binom{5}{2}", "10"),
+        (r"24n^2+2", "24*n**2 + 2"),
+        (r"x_{1}+x_2", "x_1 + x_2"),
+        (r"\sqrt{2}\cdot\sqrt{8}", "4"),
+    ],
+)
 def test_fragment_parses(latex, expected):
     assert str(mc.to_sympy(latex)) == expected
 
@@ -84,11 +89,14 @@ def test_exponent_balance(tmp_path):
 
 
 def test_citation_resolution(tmp_path):
-    root = _write(tmp_path, {
-        "main.tex": "See \\cite{A,B} and \\cite[Thm.~2]{C}.\n"
-                    "\\href{https://x/preprints/Some-paper-October-1-2026/p.pdf}{x}\n",
-        "refs.bib": "@article{A, title={a}}\n@book{C,\n title={c}}\n",
-    })
+    root = _write(
+        tmp_path,
+        {
+            "main.tex": "See \\cite{A,B} and \\cite[Thm.~2]{C}.\n"
+            "\\href{https://x/preprints/Some-paper-October-1-2026/p.pdf}{x}\n",
+            "refs.bib": "@article{A, title={a}}\n@book{C,\n title={c}}\n",
+        },
+    )
     flags, cov, _ = mc.run_all(root, snapshot_manuscripts={"Other-paper-October-1-2026"})
     keys = sorted(f.key for f in flags if f.check == mc.CITATION)
     assert keys == ["cite:B", "link:Some-paper-October-1-2026"]

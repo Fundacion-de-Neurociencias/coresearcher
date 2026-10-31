@@ -8,9 +8,11 @@ checks CoResearcher can run today would have flagged each defect on the pre-fix 
 Usage:
     python scripts/benchmarks/openai_math_revision_bench.py dataset [--clone PATH]
     python scripts/benchmarks/openai_math_revision_bench.py run [--clone PATH]
+    python scripts/benchmarks/openai_math_revision_bench.py posthoc [--clone PATH]
 
 `dataset` builds docs/reference/benchmarks/openai_math_revision_dataset.json from git history alone (no check is
-run). `run` refuses to start unless the protocol's SHA-256 matches the frozen value in
+run). `posthoc` runs the import-obligation mechanisms of ADR-DISCOVERY-077, which were designed after the run, on the
+same frozen dataset and writes openai_math_revision_posthoc.json. It is an in-sample measurement, not a test. `run` refuses to start unless the protocol's SHA-256 matches the frozen value in
 OPENAI_MATH_REVISION_PROTOCOL.sha256, runs the checks and writes openai_math_revision_results.json.
 
 The clone is blobless and never fully checked out (openai/math has about 174k files, mostly Lean). Only the
@@ -32,7 +34,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
-from python.discovery import lean_junk_lint, manuscript_checks  # noqa: E402
+from python.discovery import cited_import_ledger, lean_junk_lint, manuscript_checks  # noqa: E402
 
 REPO = "https://github.com/openai/math.git"
 PRE = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"  # Initial commit: state before the October 7 fixes.
@@ -43,6 +45,7 @@ PROTOCOL = OUT_DIR / "OPENAI_MATH_REVISION_PROTOCOL.md"
 PROTOCOL_SHA = OUT_DIR / "OPENAI_MATH_REVISION_PROTOCOL.sha256"
 DATASET = OUT_DIR / "openai_math_revision_dataset.json"
 RESULTS = OUT_DIR / "openai_math_revision_results.json"
+POSTHOC = OUT_DIR / "openai_math_revision_posthoc.json"
 CONTROL_SEED = 20261030
 LOCATION_TOLERANCE = 2  # lines
 
@@ -470,9 +473,75 @@ def summarize(items: list) -> dict:
     return out
 
 
+def posthoc(clone: Path) -> dict:
+    """ADR-077 import obligations on the frozen dataset. In-sample: the mechanisms were designed after reading the
+    defects, so this measures where obligations land and what alarm load they create, not detection power."""
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    kinds = [cited_import_ledger.CONVENTION_TRANSFER, cited_import_ledger.HYPOTHESIS_MATCH,
+             cited_import_ledger.EFFECTIVE_CONSTANT]
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+
+    def sources(wt: Path, dirname: str) -> tuple:
+        root = long_path(wt / "preprints" / dirname / "build")
+        if not root.exists():
+            root = long_path(wt / "preprints" / dirname)
+        files = manuscript_checks.read_sources(root)
+        return files, sum(t.count("\n") + 1 for n, t in files.items() if n.endswith(".tex"))
+
+    items, links = [], {}
+    for item in data["items"]:
+        files, lines = sources(wt_pre, item["pre"]["dir"])
+        links[item["pre"]["dir"]] = cited_import_ledger.internal_links(files)
+        imports = [i.to_dict() for i in cited_import_ledger.scan(files)]
+        rec = {"id": item["id"], "group": item["group"], "tex_lines": lines,
+               "counts": {k: sum(i["kind"] == k for i in imports) for k in kinds}}
+        if item["group"] in ("revised", "withdrawn"):
+            at = [i for i in imports if in_location(i, item["locations"])]
+            loc_lines = sum(b - a + 1 + 2 * LOCATION_TOLERANCE for rs in item["locations"].values() for a, b in rs)
+            rec["at_location"] = at
+            rec["at_location_by_kind"] = {k: sum(i["kind"] == k for i in at) for k in kinds}
+            rec["expected_chance"] = {k: round(min(1.0, rec["counts"][k] * loc_lines / max(lines, 1)), 4)
+                                      for k in kinds}
+        if item["post"]:
+            post_files, _ = sources(wt_post, item["post"]["dir"])
+            post_keys = {(i.kind, i.key, i.locator) for i in cited_import_ledger.scan(post_files)}
+            rec["persistent"] = {k: sum(i["kind"] == k and (i["kind"], i["key"], i["locator"]) in post_keys
+                                        for i in imports) for k in kinds}
+        items.append(rec)
+        print(item["group"], item["id"][:60], rec.get("at_location_by_kind", ""), flush=True)
+
+    # Propagation: once a manuscript is known to be withdrawn or corrected, which manuscripts in the dataset rest on
+    # it? Only the 74 materialized directories are scanned, not the whole collection.
+    seeds = {"Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026": "withdrawn",
+             "Taming-implies-compatibility-on-four-manifolds-September-23-2026": "corrected"}
+    dependents = cited_import_ledger.propagate(links, seeds)
+    group_of = {i["pre"]["dir"]: i["group"] for i in data["items"]}
+    propagation = {dep: {"rests_on": chain, "group": group_of.get(dep)} for dep, chain in sorted(dependents.items())}
+
+    def load(group: str) -> dict:
+        sel = [r for r in items if r["group"] == group]
+        lines = sum(r["tex_lines"] for r in sel)
+        return {"manuscripts": len(sel), "tex_lines": lines,
+                "obligations": {k: sum(r["counts"][k] for r in sel) for k in kinds},
+                "per_1000_lines": {k: round(1000 * sum(r["counts"][k] for r in sel) / max(lines, 1), 3)
+                                   for k in kinds}}
+
+    defects = [r for r in items if "at_location" in r]
+    summary = {
+        "defects_with_obligation_at_location": {k: sorted(r["id"] for r in defects if r["at_location_by_kind"][k])
+                                                for k in kinds},
+        "defects_with_any_obligation_at_location": sorted(r["id"] for r in defects if r["at_location"]),
+        "propagation": propagation,
+        "load": {g: load(g) for g in ("withdrawn", "revised", "citation_update", "control")},
+    }
+    return {"in_sample": True, "dataset_sha256": hashlib.sha256(DATASET.read_bytes()).hexdigest(),
+            "seeds": seeds, "summary": summary, "items": items}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["dataset", "run"])
+    ap.add_argument("command", choices=["dataset", "run", "posthoc"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     args = ap.parse_args()
     CACHE.mkdir(parents=True, exist_ok=True)
@@ -481,6 +550,10 @@ def main() -> None:
         data = build_dataset(clone)
         DATASET.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {DATASET} ({len(data['items'])} items)")
+    elif args.command == "posthoc":
+        out = posthoc(clone)
+        POSTHOC.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(json.dumps(out["summary"], indent=2))
     else:
         results = run(clone)
         RESULTS.write_text(json.dumps(results, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")

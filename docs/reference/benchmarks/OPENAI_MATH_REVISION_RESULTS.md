@@ -226,7 +226,34 @@ negligible cost.
 - **Withdrawal locations.** They were set by hand from the withdrawal notices, as the protocol states, before
   any check was run.
 
-## 7. Reproduction
+## 7. Follow-up: mechanisms built from the misses
+
+[ADR-DISCOVERY-077](../../decisions/ADR-DISCOVERY-077-IMPORT-OBLIGATIONS.md) implements mechanisms 1, 2, 3 and 5
+as import obligations (`python/discovery/cited_import_ledger.py`). It also makes citation resolution a standing
+gate (`scripts/checks/citation_gate.py`).
+
+The mechanisms were run on the same frozen dataset with the `posthoc` command, which writes
+`openai_math_revision_posthoc.json`. This run is in-sample: the mechanisms were designed after reading the
+defects.
+
+**Where obligations land, beyond chance.**
+- An OPEN convention-transfer obligation sits at the stabilization-trace passage of all 3 withdrawals. The chance
+  expectation is 0.02–0.06 per manuscript.
+- A hypothesis-match obligation sits at the misapplied Li–Zhang citation in *Taming*.
+
+**Propagation.** From Weil and Taming, it flags exactly Kuga–Satake, products of K3 and Deforming.
+
+**Coverage.** With the citation gate, 6 of 17 defects are covered beyond chance.
+
+**Cost on controls, per 1000 lines.**
+- Hypothesis-match: 3.1
+- Convention-transfer: 0.85
+- Effective-constant: 0.68
+
+The narrative is in [OPENAI_MATH_TIME_TRAVEL.md](../cases/OPENAI_MATH_TIME_TRAVEL.md). ADR-077 pre-registers a
+prospective test on future corrections, with the code frozen.
+
+## 8. Reproduction
 
 ```bash
 python scripts/benchmarks/openai_math_revision_bench.py dataset   # rebuilds the dataset from git history

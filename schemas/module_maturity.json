@@ -114,6 +114,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "cited_import_ledger",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "cogentic_proof_orchestrator",
       "scripts": false,
       "tests": true
@@ -374,7 +381,7 @@
       "api": false,
       "level": "Tested",
       "module": "lean_junk_lint",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -453,6 +460,13 @@
       "module": "manifold_detector",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "manuscript_checks",
+      "scripts": true,
+      "tests": true
     },
     {
       "api": false,
@@ -661,7 +675,7 @@
       "api": false,
       "level": "Tested",
       "module": "statement_fidelity",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

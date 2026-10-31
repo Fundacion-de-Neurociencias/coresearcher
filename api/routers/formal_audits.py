@@ -634,7 +634,7 @@ def simulate_world_model_intervention(req: SimulateWorldModelInterventionRequest
             )
             constraints.append(
                 SafetyConstraintSpec(
-                    constraint_id=c.get("constraint_id", f"GUARD-{len(constraints)+1}"),
+                    constraint_id=c.get("constraint_id", f"GUARD-{len(constraints) + 1}"),
                     guardrail_type=g_type,
                     target_channel=c["target_channel"],
                     min_safe_value=c.get("min_safe_value"),

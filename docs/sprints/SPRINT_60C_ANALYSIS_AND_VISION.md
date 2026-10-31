@@ -74,7 +74,7 @@ Capas: FROZEN
 **Documentation**:
 - `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` ← Detailed plan
 - `docs/BRANCH_DETECTION_FEASIBILITY.md` ← H7/H8 Scan
-- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` ← Future vision
+- Einstein generator vision (private, not in this repository)
 
 ### Implementation Status
 
@@ -442,7 +442,7 @@ This is:
 - `docs/SPRINT_60C_TRAJECTORY_RECONSTRUCTION.md` - Execution plan
 - `docs/ARCHITECTURE_FREEZE.md` - Architectural constraints
 - `docs/BRANCH_DETECTION_FEASIBILITY.md` - H7/H8 scan
-- `docs/EINSTEIN_HYPOTHESIS_GENERATOR_V2_VISION.md` - Future vision
+- Einstein generator vision (private, not in this repository)
 - `schemas/evidence_graph.schema.json` - Current Schema
 - `scripts/extract_decisions.py` - Current implementation
 

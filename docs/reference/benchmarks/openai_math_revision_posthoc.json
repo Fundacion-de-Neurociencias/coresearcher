@@ -1,0 +1,1336 @@
+{
+  "in_sample": true,
+  "dataset_sha256": "257501b1813a0cc3ae08a754646ab482bf121c5e987144bd49ed9c8aeecd3a9f",
+  "seeds": {
+    "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026": "withdrawn",
+    "Taming-implies-compatibility-on-four-manifolds-September-23-2026": "corrected"
+  },
+  "summary": {
+    "defects_with_obligation_at_location": {
+      "CONVENTION_TRANSFER": [
+        "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+        "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+        "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+        "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+        "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+        "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice"
+      ],
+      "HYPOTHESIS_MATCH": [
+        "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+        "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+        "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+        "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+        "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+        "Taming-implies-compatibility-on-four-manifolds",
+        "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+        "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+        "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice"
+      ],
+      "EFFECTIVE_CONSTANT": [
+        "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+        "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents"
+      ]
+    },
+    "defects_with_any_obligation_at_location": [
+      "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+      "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+      "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+      "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+      "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+      "Taming-implies-compatibility-on-four-manifolds",
+      "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+      "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+      "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+      "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice"
+    ],
+    "propagation": {
+      "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces-October-3-2026": {
+        "rests_on": [
+          "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026"
+        ],
+        "group": "withdrawn"
+      },
+      "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples-September-23-2026": {
+        "rests_on": [
+          "Taming-implies-compatibility-on-four-manifolds-September-23-2026"
+        ],
+        "group": "revised"
+      },
+      "The-rational-Hodge-conjecture-for-products-of-K3-surfaces-October-4-2026": {
+        "rests_on": [
+          "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026"
+        ],
+        "group": "withdrawn"
+      }
+    },
+    "load": {
+      "withdrawn": {
+        "manuscripts": 3,
+        "tex_lines": 16736,
+        "obligations": {
+          "CONVENTION_TRANSFER": 33,
+          "HYPOTHESIS_MATCH": 55,
+          "EFFECTIVE_CONSTANT": 1
+        },
+        "per_1000_lines": {
+          "CONVENTION_TRANSFER": 1.972,
+          "HYPOTHESIS_MATCH": 3.286,
+          "EFFECTIVE_CONSTANT": 0.06
+        }
+      },
+      "revised": {
+        "manuscripts": 14,
+        "tex_lines": 88298,
+        "obligations": {
+          "CONVENTION_TRANSFER": 124,
+          "HYPOTHESIS_MATCH": 418,
+          "EFFECTIVE_CONSTANT": 61
+        },
+        "per_1000_lines": {
+          "CONVENTION_TRANSFER": 1.404,
+          "HYPOTHESIS_MATCH": 4.734,
+          "EFFECTIVE_CONSTANT": 0.691
+        }
+      },
+      "citation_update": {
+        "manuscripts": 13,
+        "tex_lines": 68578,
+        "obligations": {
+          "CONVENTION_TRANSFER": 137,
+          "HYPOTHESIS_MATCH": 337,
+          "EFFECTIVE_CONSTANT": 18
+        },
+        "per_1000_lines": {
+          "CONVENTION_TRANSFER": 1.998,
+          "HYPOTHESIS_MATCH": 4.914,
+          "EFFECTIVE_CONSTANT": 0.262
+        }
+      },
+      "control": {
+        "manuscripts": 17,
+        "tex_lines": 48350,
+        "obligations": {
+          "CONVENTION_TRANSFER": 41,
+          "HYPOTHESIS_MATCH": 151,
+          "EFFECTIVE_CONSTANT": 33
+        },
+        "per_1000_lines": {
+          "CONVENTION_TRANSFER": 0.848,
+          "HYPOTHESIS_MATCH": 3.123,
+          "EFFECTIVE_CONSTANT": 0.683
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "A-pointwise-2-converse-for-elliptic-curves-with-rational-two-torsion",
+      "group": "citation_update",
+      "tex_lines": 7154,
+      "counts": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 23,
+        "EFFECTIVE_CONSTANT": 2
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 23,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Abelian-covers-Gale-correspondences-and-the-Hodge-conjecture-for-powers",
+      "group": "citation_update",
+      "tex_lines": 3780,
+      "counts": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 5,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 5,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+      "group": "revised",
+      "tex_lines": 10946,
+      "counts": {
+        "CONVENTION_TRANSFER": 11,
+        "HYPOTHESIS_MATCH": 39,
+        "EFFECTIVE_CONSTANT": 13
+      },
+      "at_location": [
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "appendices/projective_exclusions.tex",
+          "line": 223,
+          "key": "Proj-Fujino2019Numerical",
+          "locator": "Section~3 and Theorem~3.2",
+          "context": "The required numerical dimension is \\(\\kappa_\\sigma\\), which is zero by the good model of \\(F\\); thus the numerical-dimension qualification, with the corrected convention discussed in \\cite[Section~3 and Theorem~3.2]{Proj-Fujino2019Numerical}, causes no issue. The induction hypothesis supplies the base good model, hence nonvanishing upstairs, contradicting \\eqref{proj:ex:counterexample}. \\end{p...",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "appendices/projective_exclusions.tex",
+          "line": 223,
+          "key": "Proj-Fujino2019Numerical",
+          "locator": "Section~3 and Theorem~3.2",
+          "context": "The required numerical dimension is \\(\\kappa_\\sigma\\), which is zero by the good model of \\(F\\); thus the numerical-dimension qualification, with the corrected convention discussed in \\cite[Section~3 and Theorem~3.2]{Proj-Fujino2019Numerical}, causes no issue. The induction hypothesis supplies the base good model, hence nonvanishing upstairs, contradicting \\eqref{proj:ex:counterexample}. \\end{p...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0553,
+        "HYPOTHESIS_MATCH": 0.196,
+        "EFFECTIVE_CONSTANT": 0.0653
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 11,
+        "HYPOTHESIS_MATCH": 39,
+        "EFFECTIVE_CONSTANT": 13
+      }
+    },
+    {
+      "id": "Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples",
+      "group": "revised",
+      "tex_lines": 6371,
+      "counts": {
+        "CONVENTION_TRANSFER": 20,
+        "HYPOTHESIS_MATCH": 50,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0534,
+        "HYPOTHESIS_MATCH": 0.1334,
+        "EFFECTIVE_CONSTANT": 0.0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 20,
+        "HYPOTHESIS_MATCH": 50,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank",
+      "group": "revised",
+      "tex_lines": 7514,
+      "counts": {
+        "CONVENTION_TRANSFER": 13,
+        "HYPOTHESIS_MATCH": 28,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0087,
+        "HYPOTHESIS_MATCH": 0.0186,
+        "EFFECTIVE_CONSTANT": 0.0007
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 13,
+        "HYPOTHESIS_MATCH": 28,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "tex_lines": 7168,
+      "counts": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 71,
+        "EFFECTIVE_CONSTANT": 2
+      },
+      "at_location": [
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1650,
+          "key": "HX2026",
+          "locator": "Lemma~2.42",
+          "context": "Lemma~\\ref{repair:lem:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX2026}, including the common-resolution step in its Claim~3.5. The uncorrected pullback $q^*\\eta_U$ is not being treated as a K\\\"ahler class. The exact sequences of multiplier ideals, relative vanishing, finite pushouts, and extension from sufficiently thickened $...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1859,
+          "key": "HX2026",
+          "locator": "Theorem~4.1, Claim~4.2",
+          "context": "The argument of \\cite[Theorem~4.1, Claim~4.2]{HX2026}, using projective relative semipositivity, gives $\\dim S<d$. The projective canonical bundle formula \\cite[Theorem~2.53]{HX2026} provides \\[ D_S=K_S+B_S+\\mathbf N_S+a\\alpha_S, \\qquad D_V=g^*D_S, \\] with a gklt pair on $S$ and modified-big nef data. The class $\\alpha_S$ is nef by descent of nefness through the surjective projective map $g$.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1862,
+          "key": "HX2026",
+          "locator": "Theorem~2.53",
+          "context": "The projective canonical bundle formula \\cite[Theorem~2.53]{HX2026} provides \\[ D_S=K_S+B_S+\\mathbf N_S+a\\alpha_S, \\qquad D_V=g^*D_S, \\] with a gklt pair on $S$ and modified-big nef data. The class $\\alpha_S$ is nef by descent of nefness through the surjective projective map $g$. Thus adding $a\\overline{\\alpha_S}$ to the nef datum preserves the gklt condition and modified bigness: on a common c...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1941,
+          "key": "HX2026",
+          "locator": "Section~6",
+          "context": "\\smallskip\\noindent \\emph{The non-big non-klt contraction in dimensions at most three.} Take the projective dlt modification used in \\cite[Section~6]{HX2026}; its source is globally strongly $\\Q$-factorial and its underlying space is klt. On this source \\[ Q=\\alpha-c_1(K_X)=B+\\mathbf M_X \\] is a Bott--Chern class. Its modified bigness therefore implies bigness, as in \\cite[Definition~2.8]{HX2026}.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1947,
+          "key": "HX2026",
+          "locator": "Definition~2.8",
+          "context": "Its modified bigness therefore implies bigness, as in \\cite[Definition~2.8]{HX2026}. Apply Lemma~\\ref{repair:lem:adaptive-nqc-program}. It gives a finite ordinary $K$-negative program, crepant for $\\alpha$, ending in an $\\alpha$-trivial Mori fibre space $f:X'\\to Z$.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/06-perturbation.tex",
+          "line": 1956,
+          "key": "HX2026",
+          "locator": "Section~6",
+          "context": "All remaining steps of \\cite[Section~6]{HX2026} concern this already projective map: relative vanishing transports the non-klt closed subspace; $\\alpha$ descends to a nef NQC class on $Z$; if the non-klt subspace dominates $Z$, its contraction descends by the equality $\\mathcal O_Z=f_*\\mathcal O_{\\operatorname{Nklt}}$; otherwise the projective canonical bundle formula and the multiplier-ideal c...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/08-resolutions.tex",
+          "line": 123,
+          "key": "KMMAbundance1994",
+          "locator": "Theorem~1.1",
+          "context": "The projective log abundance theorem \\cite[Theorem~1.1]{KMMAbundance1994}, with the correction \\cite[\\S6.1]{MatsukiCorrection2003}, gives a nonzero section of a multiple of the nef adjoint. Dimensions one and two use the classical log abundance theorem. The effective pullback comparison on a common resolution pulls this section back to a section of a multiple of the original adjoint.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 7,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.1465,
+        "HYPOTHESIS_MATCH": 1.0,
+        "EFFECTIVE_CONSTANT": 0.0419
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 67,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Fontaine-Mazur-modularity-at-the-prime-2",
+      "group": "citation_update",
+      "tex_lines": 5534,
+      "counts": {
+        "CONVENTION_TRANSFER": 8,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 8,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights",
+      "group": "revised",
+      "tex_lines": 5829,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0093,
+        "HYPOTHESIS_MATCH": 0.0,
+        "EFFECTIVE_CONSTANT": 0.0046
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "Goldfelds-analytic-density-conjecture-and-the-2-converse-for-elliptic-curves",
+      "group": "citation_update",
+      "tex_lines": 9463,
+      "counts": {
+        "CONVENTION_TRANSFER": 16,
+        "HYPOTHESIS_MATCH": 35,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 16,
+        "HYPOTHESIS_MATCH": 35,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "Hilberts-tenth-problem-over-the-rational-numbers",
+      "group": "citation_update",
+      "tex_lines": 4334,
+      "counts": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 15,
+        "EFFECTIVE_CONSTANT": 6
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 15,
+        "EFFECTIVE_CONSTANT": 6
+      }
+    },
+    {
+      "id": "Incompressible-Box-Transport-and-Finite-Computation",
+      "group": "revised",
+      "tex_lines": 5788,
+      "counts": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 17
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0081,
+        "HYPOTHESIS_MATCH": 0.0081,
+        "EFFECTIVE_CONSTANT": 0.138
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 17
+      }
+    },
+    {
+      "id": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+      "group": "revised",
+      "tex_lines": 11385,
+      "counts": {
+        "CONVENTION_TRANSFER": 23,
+        "HYPOTHESIS_MATCH": 118,
+        "EFFECTIVE_CONSTANT": 13
+      },
+      "at_location": [
+        {
+          "kind": "EFFECTIVE_CONSTANT",
+          "file": "sections/01-introduction.tex",
+          "line": 95,
+          "key": "effective",
+          "locator": "",
+          "context": "Höring and Peternell constructed minimal models for normal \\(\\Q\\)-factorial terminal compact Kähler threefolds with pseudo-effective canonical class \\cite{HoeringPeternell2016}. The abundance argument of Campana, Höring, and Peternell required a correction \\cite{CHP2016,CHP2023}, and Das and Ou established log abundance for compact Kähler log canonical threefolds \\cite[Corollary~1.3]{DasOu2026}...",
+          "environment": "text",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03c-restricted-induction.tex",
+          "line": 969,
+          "key": "HX",
+          "locator": "Lemma~2.42",
+          "context": "Lemma~\\ref{prog:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX}, including the common-resolution step in its Claim~3.5. The uncorrected pullback $q^*\\eta_U$ is not being treated as a K\\\"ahler class. The exact sequences of multiplier ideals, relative vanishing, finite pushouts, and extension from sufficiently thickened $\\operatorn...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03c-restricted-induction.tex",
+          "line": 1123,
+          "key": "HX",
+          "locator": "Theorem~2.53",
+          "context": "The projective canonical bundle formula \\cite[Theorem~2.53]{HX} provides \\[ D_S=K_S+B_S+\\mathbf N_S+a\\alpha_S, \\qquad D_V=g^*D_S, \\] with a gklt pair on $S$ and modified-big nef data. The class $\\alpha_S$ is nef by descent of nefness through the surjective projective map $g$. Thus adding $a\\overline{\\alpha_S}$ to the nef datum preserves the gklt condition and modified bigness: on a common carri...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03c-restricted-induction.tex",
+          "line": 1810,
+          "key": "HX",
+          "locator": "Section~6",
+          "context": "Take the projective dlt preparation in \\cite[Section~6]{HX}. Its underlying space is klt and globally strongly $\\mathbb Q$-factorial, and $\\alpha-c_1(K_X)$ is a big Bott--Chern class. Choose an NQC expression with positive coefficients and integral multiples of its rational degree-two summands.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03c-restricted-induction.tex",
+          "line": 1847,
+          "key": "HX",
+          "locator": "Lemma~2.23 and Section~6",
+          "context": "Make the adjoint-preserving modified-big replacement of \\cite[Lemma~2.23 and Section~6]{HX}, with a K\\\"ahler summand on the source, and restrict the given contraction to the resulting non-klt closed subspace, taking its Stein factor. If this non-klt subspace dominates $Z$, relative Nadel vanishing gives $\\mathcal O_Z=f_*\\mathcal O_{\\operatorname{Nklt}}$, and its given Moishezon contraction fact...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 4,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.2505,
+        "HYPOTHESIS_MATCH": 1.0,
+        "EFFECTIVE_CONSTANT": 0.1416
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 23,
+        "HYPOTHESIS_MATCH": 116,
+        "EFFECTIVE_CONSTANT": 13
+      }
+    },
+    {
+      "id": "Milnes-rationality-conjecture-for-abelian-varieties",
+      "group": "citation_update",
+      "tex_lines": 3074,
+      "counts": {
+        "CONVENTION_TRANSFER": 5,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 5,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds",
+      "group": "revised",
+      "tex_lines": 3810,
+      "counts": {
+        "CONVENTION_TRANSFER": 4,
+        "HYPOTHESIS_MATCH": 20,
+        "EFFECTIVE_CONSTANT": 5
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0388,
+        "HYPOTHESIS_MATCH": 0.1942,
+        "EFFECTIVE_CONSTANT": 0.0486
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 4,
+        "HYPOTHESIS_MATCH": 20,
+        "EFFECTIVE_CONSTANT": 5
+      }
+    },
+    {
+      "id": "Taming-implies-compatibility-on-four-manifolds",
+      "group": "revised",
+      "tex_lines": 1496,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 7,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/01-introduction.tex",
+          "line": 57,
+          "key": "LiZhang2009",
+          "locator": "Corollary~1.1",
+          "context": "Li and Zhang's four-dimensional cone comparison \\cite[Corollary~1.1]{LiZhang2009} therefore gives the cone identity and, when \\(b_2^+=1\\), equality of the two cones. This equality gives the claimed representative. \\end{proof}",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.131,
+        "HYPOTHESIS_MATCH": 0.4586,
+        "EFFECTIVE_CONSTANT": 0.0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 6,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "tex_lines": 1770,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 5,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0068,
+        "HYPOTHESIS_MATCH": 0.0169,
+        "EFFECTIVE_CONSTANT": 0.0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 5,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+      "group": "revised",
+      "tex_lines": 7502,
+      "counts": {
+        "CONVENTION_TRANSFER": 20,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 4
+      },
+      "at_location": [],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.032,
+        "HYPOTHESIS_MATCH": 0.064,
+        "EFFECTIVE_CONSTANT": 0.0064
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 20,
+        "HYPOTHESIS_MATCH": 40,
+        "EFFECTIVE_CONSTANT": 4
+      }
+    },
+    {
+      "id": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+      "group": "revised",
+      "tex_lines": 4755,
+      "counts": {
+        "CONVENTION_TRANSFER": 4,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/01-introduction.tex",
+          "line": 160,
+          "key": "OpenAIWeighted2026",
+          "locator": "Theorem~1.2",
+          "context": "A companion article proves the GFF limit for weighted integer Lipschitz heights with zero boundary, for each fixed edge weight $x\\in[1/\\sqrt2,1]$ \\cite[Theorem~1.2]{OpenAIWeighted2026}. Its weighted conditional laws and moment estimates are proved there. The present two-arc boundary theorem and normalization series are retained separately; neither field theorem is used as a premise for the other.",
+          "environment": "text",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/03-cuts.tex",
+          "line": 27,
+          "key": "GM2021",
+          "locator": "Theorem~1.2(iv), equations~(1.1)--(1.2)",
+          "context": "Glazman--Manolescu \\cite[Theorem~1.2(iv), equations~(1.1)--(1.2)]{GM2021} prove the following facts for the loop $O(2)$ model with edge weight one and empty exterior condition: \\begin{enumerate}[label=(\\roman*)] \\item A domain containing $\\Lambda_{2n}$ has probability at least $c_0>0$ of a loop contained in $\\Lambda_{2n}$ and surrounding $\\Lambda_n$. \\item There are $0<\\rho<1$ and $c_0>0$ such ...",
+          "environment": "text",
+          "outcome": "",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.1455,
+        "HYPOTHESIS_MATCH": 0.0,
+        "EFFECTIVE_CONSTANT": 0.0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "The-Selmer-converse-for-elliptic-curves-at-every-prime",
+      "group": "citation_update",
+      "tex_lines": 6083,
+      "counts": {
+        "CONVENTION_TRANSFER": 16,
+        "HYPOTHESIS_MATCH": 45,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 16,
+        "HYPOTHESIS_MATCH": 45,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+      "group": "revised",
+      "tex_lines": 7556,
+      "counts": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 27,
+        "EFFECTIVE_CONSTANT": 3
+      },
+      "at_location": [
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03-spatial.tex",
+          "line": 858,
+          "key": "DKLM2026",
+          "locator": "Section~19.1, especially Lemmas~19.1 and~19.4",
+          "context": "For item~2 we adapt the crossing exploration underlying \\cite[Section~19.1, especially Lemmas~19.1 and~19.4]{DKLM2026}. First fix the relative planar dual of the given restricted $N$ lattice quadrilateral. Its medial boundary follows the four sides of the rectangle.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03-spatial.tex",
+          "line": 915,
+          "key": "DKLM2026",
+          "locator": "Lemma~19.4 and the proof of Lemma~19.1",
+          "context": "In a central vertical strip with a buffer continuing above the rectangle, use the partial-circuit construction of \\cite[Lemma~19.4 and the proof of Lemma~19.1]{DKLM2026}. That lemma is stated for the plane: it allows arbitrary same-parity data in revealed even domains whose in-ball frontier is matching, and tests a circuit in the matching graph augmented by those domains. To transfer its bound ...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "EFFECTIVE_CONSTANT",
+          "file": "sections/08-local-kernel.tex",
+          "line": 569,
+          "key": "explicit",
+          "locator": "",
+          "context": "We make the rank and limit order explicit. Let \\(\\mathcal C_{r,n}\\) be the cable excursion supports in decreasing diameter order, with the ranking convention of \\cite{ALS2023}, and let \\(\\mathcal C_r\\) be their continuum limits. Theorems 3 and 28 of that paper give joint Hausdorff convergence for every fixed finite list of ranks. Theorem 1 gives finitely many positive-diameter supports above an...",
+          "environment": "text",
+          "outcome": "",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.349,
+        "HYPOTHESIS_MATCH": 1.0,
+        "EFFECTIVE_CONSTANT": 0.1163
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 25,
+        "EFFECTIVE_CONSTANT": 3
+      }
+    },
+    {
+      "id": "The-mean-analytic-rank-of-quadratic-twists-of-elliptic-curves",
+      "group": "citation_update",
+      "tex_lines": 3146,
+      "counts": {
+        "CONVENTION_TRANSFER": 8,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 4
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 8,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 4
+      }
+    },
+    {
+      "id": "The-p-adic-section-conjecture",
+      "group": "citation_update",
+      "tex_lines": 1776,
+      "counts": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 15,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 15,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "The-rational-Hodge-conjecture-for-CM-abelian-varieties",
+      "group": "citation_update",
+      "tex_lines": 4215,
+      "counts": {
+        "CONVENTION_TRANSFER": 4,
+        "HYPOTHESIS_MATCH": 14,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 4,
+        "HYPOTHESIS_MATCH": 14,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "The-two-primary-Birch-Swinnerton-Dyer-formula-in-Selmer-corank-at-most-one",
+      "group": "citation_update",
+      "tex_lines": 9542,
+      "counts": {
+        "CONVENTION_TRANSFER": 26,
+        "HYPOTHESIS_MATCH": 17,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 26,
+        "HYPOTHESIS_MATCH": 17,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+      "group": "revised",
+      "tex_lines": 6408,
+      "counts": {
+        "CONVENTION_TRANSFER": 6,
+        "HYPOTHESIS_MATCH": 12,
+        "EFFECTIVE_CONSTANT": 2
+      },
+      "at_location": [
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/geometry.tex",
+          "line": 874,
+          "key": "SSdiscrete",
+          "locator": "proof of Lemma~3.15, equations (3.40)--(3.42)",
+          "context": "To rule out a subsequent collapse at \\(3R\\), use the two mechanisms in \\cite[proof of Lemma~3.15, equations (3.40)--(3.42)]{SSdiscrete}. Condition on the first record at which that positive quality is attained, and reveal the external strands to radius \\(3R\\). If their tips are within \\(sR\\), their midpoint is now fixed.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/geometry.tex",
+          "line": 900,
+          "key": "SSdiscrete",
+          "locator": "Lemma 3.15",
+          "context": "The conditional records in these steps are exactly the two-sided exploration records used in \\cite[Lemma 3.15]{SSdiscrete}; their field part consists solely of specified oriented strands. \\end{proof} \\begin{proposition}[Comparison of sampled configurations] \\label{g:sample-comparison} There are \\(C<\\infty\\) and \\(R_0<\\infty\\) such that the following holds for \\(R\\geq R_0\\).",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/geometry.tex",
+          "line": 900,
+          "key": "SSdiscrete",
+          "locator": "Lemma 3.15",
+          "context": "The conditional records in these steps are exactly the two-sided exploration records used in \\cite[Lemma 3.15]{SSdiscrete}; their field part consists solely of specified oriented strands. \\end{proof} \\begin{proposition}[Comparison of sampled configurations] \\label{g:sample-comparison} There are \\(C<\\infty\\) and \\(R_0<\\infty\\) such that the following holds for \\(R\\geq R_0\\).",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/geometry.tex",
+          "line": 1084,
+          "key": "SSdiscrete",
+          "locator": "condition \\((\\partial)\\), Section 3.7",
+          "context": "The source's boundary condition \\cite[condition \\((\\partial)\\), Section 3.7]{SSdiscrete} is more permissive, allowing small wrong-sign heights; we do not need or invoke that additional Gaussian statement. \\begin{lemma}[Clearance from the original boundary] \\label{g:boundary-landing} Let \\(S\\) be an independent full walk from \\(v\\), stopped only on the original boundary at \\(\\tau_D\\), and let \\(...",
+          "environment": "text",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/geometry.tex",
+          "line": 1184,
+          "key": "SSdiscrete",
+          "locator": "Lemma~3.24",
+          "context": "\\begin{proof} The nested shielding argument follows \\cite[Lemma~3.24]{SSdiscrete}, using Proposition~\\ref{g:barriers}. Expose the first interface approach to the circles centered at \\(v\\) of radii \\(2^{-j-1}d\\). Given its exact sign transcript at one such circle, the circular clearance construction and Proposition~\\ref{g:barriers} give a fixed chance of protecting the next smaller disk.",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/geometry.tex",
+          "line": 1184,
+          "key": "SSdiscrete",
+          "locator": "Lemma~3.24",
+          "context": "\\begin{proof} The nested shielding argument follows \\cite[Lemma~3.24]{SSdiscrete}, using Proposition~\\ref{g:barriers}. Expose the first interface approach to the circles centered at \\(v\\) of radii \\(2^{-j-1}d\\). Given its exact sign transcript at one such circle, the circular clearance construction and Proposition~\\ref{g:barriers} give a fixed chance of protecting the next smaller disk.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/interface.tex",
+          "line": 845,
+          "key": "SSun",
+          "locator": "",
+          "context": "Corollary 1.8 of \\cite{SSun} applies to these two separate convergence-in-law statements for $\\kappa\\le4$; it does not require a previously constructed joint limit of the two drivers. Its conclusion is convergence of the entire curve, including its endpoints, in the uniform curve metric on the compactified reference domain. Uniform convergence of the marked Jordan boundary parametrizations to t...",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/interface.tex",
+          "line": 855,
+          "key": "Rado",
+          "locator": "Section 1, p.~182",
+          "context": "Uniform convergence of the marked Jordan boundary parametrizations to the smooth limit boundary gives uniform convergence of the normalized inverse conformal maps on the closed reference disk by Rad\\'o's theorem \\cite[Section 1, p.~182]{Rado}. One way to see the boundary part is to use uniform local connectivity of these parametrized Jordan boundaries to turn small reference crosscuts into unif...",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/interface.tex",
+          "line": 855,
+          "key": "Rado",
+          "locator": "Section 1, p.~182",
+          "context": "Uniform convergence of the marked Jordan boundary parametrizations to the smooth limit boundary gives uniform convergence of the normalized inverse conformal maps on the closed reference disk by Rad\\'o's theorem \\cite[Section 1, p.~182]{Rado}. One way to see the boundary part is to use uniform local connectivity of these parametrized Jordan boundaries to turn small reference crosscuts into unif...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 5,
+        "HYPOTHESIS_MATCH": 4,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 1.0,
+        "HYPOTHESIS_MATCH": 1.0,
+        "EFFECTIVE_CONSTANT": 0.348
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 3,
+        "HYPOTHESIS_MATCH": 11,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Unrestricted-pro-modularity-at-the-prime-two",
+      "group": "citation_update",
+      "tex_lines": 2191,
+      "counts": {
+        "CONVENTION_TRANSFER": 10,
+        "HYPOTHESIS_MATCH": 50,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 10,
+        "HYPOTHESIS_MATCH": 50,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Weil-classes-and-Hodge-classes-on-abelian-powers",
+      "group": "citation_update",
+      "tex_lines": 8286,
+      "counts": {
+        "CONVENTION_TRANSFER": 18,
+        "HYPOTHESIS_MATCH": 36,
+        "EFFECTIVE_CONSTANT": 2
+      },
+      "persistent": {
+        "CONVENTION_TRANSFER": 18,
+        "HYPOTHESIS_MATCH": 36,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+      "group": "withdrawn",
+      "tex_lines": 5397,
+      "counts": {
+        "CONVENTION_TRANSFER": 12,
+        "HYPOTHESIS_MATCH": 25,
+        "EFFECTIVE_CONSTANT": 1
+      },
+      "at_location": [
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "manuscript.tex",
+          "line": 1963,
+          "key": "Top:EEMS",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{Top:EEMS}. The trace from a Legendrian link to its loose stabilization has one double point of sign $(-1)^{l-1}$; the reversed trace has sign $(-1)^l$. Insert $m$ reverse traces in separated collars near the negative end, running outward from the $m$-fold stabilization to the original standard link.",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "manuscript.tex",
+          "line": 1963,
+          "key": "Top:EEMS",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{Top:EEMS}. The trace from a Legendrian link to its loose stabilization has one double point of sign $(-1)^{l-1}$; the reversed trace has sign $(-1)^l$. Insert $m$ reverse traces in separated collars near the negative end, running outward from the $m$-fold stabilization to the original standard link.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "manuscript.tex",
+          "line": 1976,
+          "key": "Top:EMcaps",
+          "locator": "Theorem~2.3",
+          "context": "The exact cancellation theorem of Eliashberg--Murphy \\cite[Theorem~2.3]{Top:EMcaps} applies with the following verified hypotheses. The target is a simply connected Liouville manifold with a negative end. The immersion is proper, self-transverse, cylindrical at its negative end, and has finitely many double points.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.04,
+        "HYPOTHESIS_MATCH": 0.0834,
+        "EFFECTIVE_CONSTANT": 0.0033
+      }
+    },
+    {
+      "id": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+      "group": "withdrawn",
+      "tex_lines": 6522,
+      "counts": {
+        "CONVENTION_TRANSFER": 6,
+        "HYPOTHESIS_MATCH": 8,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "sections/03-topology.tex",
+          "line": 480,
+          "key": "eems",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{eems}. In source dimension $2k$, a trace going outward from a Legendrian link $\\phi$ to its loose stabilization $\\phi_1$ has one double point of sign $(-1)^{k-1}$; the reverse trace has sign $(-1)^k$. For $k=4$ the signs are therefore \\begin{equation}\\label{top:trace-signs} \\phi\\longrightarrow\\phi_1:\\ -1, \\qquad \\phi_1\\l...",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "sections/03-topology.tex",
+          "line": 480,
+          "key": "eems",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{eems}. In source dimension $2k$, a trace going outward from a Legendrian link $\\phi$ to its loose stabilization $\\phi_1$ has one double point of sign $(-1)^{k-1}$; the reverse trace has sign $(-1)^k$. For $k=4$ the signs are therefore \\begin{equation}\\label{top:trace-signs} \\phi\\longrightarrow\\phi_1:\\ -1, \\qquad \\phi_1\\l...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0166,
+        "HYPOTHESIS_MATCH": 0.0221,
+        "EFFECTIVE_CONSTANT": 0.0
+      }
+    },
+    {
+      "id": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+      "group": "withdrawn",
+      "tex_lines": 4817,
+      "counts": {
+        "CONVENTION_TRANSFER": 15,
+        "HYPOTHESIS_MATCH": 22,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "at_location": [
+        {
+          "kind": "CONVENTION_TRANSFER",
+          "file": "manuscript/topology.tex",
+          "line": 503,
+          "key": "EEMS",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "The stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{EEMS} have signs \\begin{equation}\\label{topo:trace-signs} \\phi\\longrightarrow\\phi_1:\\ (-1)^{k-1}, \\qquad \\phi_1\\longrightarrow\\phi:\\ (-1)^k, \\end{equation} where $\\phi_1$ is a loose stabilization and the arrows run outward along the symplectization. Insert $d$ reverse traces in separated collars near the puncture, from the $d$-...",
+          "environment": "proof",
+          "outcome": "",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "manuscript/topology.tex",
+          "line": 503,
+          "key": "EEMS",
+          "locator": "Lemma~3.2 and proof of Lemma~3.4",
+          "context": "The stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{EEMS} have signs \\begin{equation}\\label{topo:trace-signs} \\phi\\longrightarrow\\phi_1:\\ (-1)^{k-1}, \\qquad \\phi_1\\longrightarrow\\phi:\\ (-1)^k, \\end{equation} where $\\phi_1$ is a loose stabilization and the arrows run outward along the symplectization. Insert $d$ reverse traces in separated collars near the puncture, from the $d$-...",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        },
+        {
+          "kind": "HYPOTHESIS_MATCH",
+          "file": "manuscript/topology.tex",
+          "line": 517,
+          "key": "EliashbergMurphyCaps",
+          "locator": "Theorem~2.3",
+          "context": "Eliashberg--Murphy's exact cancellation theorem \\cite[Theorem~2.3]{EliashbergMurphyCaps} now applies. The target is a simply connected Liouville manifold with a negative end; the immersion is proper, cylindrical there, self-transverse, and has finitely many double points. It is exact because $H^1(S^{n-1}\\times\\R;\\R)=0$.",
+          "environment": "proof",
+          "outcome": "NO_ENTRY",
+          "missing": []
+        }
+      ],
+      "at_location_by_kind": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 0
+      },
+      "expected_chance": {
+        "CONVENTION_TRANSFER": 0.0561,
+        "HYPOTHESIS_MATCH": 0.0822,
+        "EFFECTIVE_CONSTANT": 0.0
+      }
+    },
+    {
+      "id": "A-Conditional-Reduction-for-Algebraic-Kuga-Satake-Correspondences",
+      "group": "control",
+      "tex_lines": 1820,
+      "counts": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 6,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Algebraic-Kuga-Satake-correspondences-and-Hodge-conjectures-on-a-K3-quadratic-locus",
+      "group": "control",
+      "tex_lines": 5392,
+      "counts": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 34,
+        "EFFECTIVE_CONSTANT": 3
+      }
+    },
+    {
+      "id": "Relative-denominators-and-effective-systems-for-log-Calabi-Yau-fibrations",
+      "group": "control",
+      "tex_lines": 1786,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 16,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "A-Torsion-Free-Group-Algebra-That-Is-Not-Directly-Finite",
+      "group": "control",
+      "tex_lines": 2358,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "The-Blockwise-Alperin-Weight-Conjecture",
+      "group": "control",
+      "tex_lines": 4512,
+      "counts": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 4,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Termination-for-projective-log-canonical-fourfolds-with-rational-boundary",
+      "group": "control",
+      "tex_lines": 3016,
+      "counts": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 24,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Uniform-exclusion-of-Landau-Siegel-zeros",
+      "group": "control",
+      "tex_lines": 774,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Prefix-Instructions-and-Incompressible-Flows",
+      "group": "control",
+      "tex_lines": 3213,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 3,
+        "EFFECTIVE_CONSTANT": 15
+      }
+    },
+    {
+      "id": "Arithmetic-Stein-degree-bounds-for-log-Calabi-Yau-pairs",
+      "group": "control",
+      "tex_lines": 1180,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 3,
+        "EFFECTIVE_CONSTANT": 8
+      }
+    },
+    {
+      "id": "Minimal-models-in-numerical-dimension-one",
+      "group": "control",
+      "tex_lines": 1167,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 16,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "From-partial-permutation-information-to-Fourier-bounds",
+      "group": "control",
+      "tex_lines": 4711,
+      "counts": {
+        "CONVENTION_TRANSFER": 7,
+        "HYPOTHESIS_MATCH": 2,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Projective-Space-Bases-of-Lagrangian-Fibrations",
+      "group": "control",
+      "tex_lines": 7995,
+      "counts": {
+        "CONVENTION_TRANSFER": 9,
+        "HYPOTHESIS_MATCH": 31,
+        "EFFECTIVE_CONSTANT": 1
+      }
+    },
+    {
+      "id": "An-exponential-two-way-deterministic-state-lower-bound-for-one-way-liveness",
+      "group": "control",
+      "tex_lines": 1601,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "two-limit-cycles-for-quintic-lienard-systems",
+      "group": "control",
+      "tex_lines": 3258,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 0,
+        "EFFECTIVE_CONSTANT": 2
+      }
+    },
+    {
+      "id": "Anticanonical-nonvanishing-from-smooth-semipositivity",
+      "group": "control",
+      "tex_lines": 1899,
+      "counts": {
+        "CONVENTION_TRANSFER": 0,
+        "HYPOTHESIS_MATCH": 7,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "Beyond-the-Square-Root-Exponent-for-Depth-Three-Boolean-Circuits",
+      "group": "control",
+      "tex_lines": 1470,
+      "counts": {
+        "CONVENTION_TRANSFER": 2,
+        "HYPOTHESIS_MATCH": 1,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    },
+    {
+      "id": "A-power-saving-for-planar-halving-lines",
+      "group": "control",
+      "tex_lines": 2198,
+      "counts": {
+        "CONVENTION_TRANSFER": 1,
+        "HYPOTHESIS_MATCH": 4,
+        "EFFECTIVE_CONSTANT": 0
+      }
+    }
+  ]
+}

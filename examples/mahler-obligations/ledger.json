@@ -1,0 +1,718 @@
+{
+  "source": {
+    "repository": "https://github.com/openai/math",
+    "commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+    "paper": "preprints/The-Mahler-Conjecture-for-General-Convex-Bodies-September-22-2026/paper.pdf",
+    "statements": "build/sections/01-cones.tex (lem:profile-identities, prop:scalar-input)",
+    "author_programs": "verification/programs/*.py (not run here, by design)",
+    "lean": "not formalized; the Comparator targets in family 087 cover the symmetric case and its equality classification only (symmetric_mahler, symmetric_mahler_equality)"
+  },
+  "claim": {
+    "id": "mahler.general.scalar_input",
+    "statement": "Lemma 'Profile identities' and Proposition 'Scalar inequalities' hold for the stated profiles and exact parameters (input to the Mahler conjecture for general convex bodies)",
+    "source": "01-cones.tex: lem:profile-identities, prop:scalar-input",
+    "status": "CHECKED_NUMERIC",
+    "is_proved": false,
+    "obligations": [
+      {
+        "id": "identities",
+        "statement": "(N+2)g = d; d' = 2xd - v' - 2g'; Nd - v'' = -(N+2)(d + g'')",
+        "source": "lem:profile-identities, (2)",
+        "kind": "identity",
+        "status": "DISCHARGED_SYMBOLIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_SYMBOLIC",
+            "method": "sympy simplify",
+            "scope": "for any p with p' = phi; exact",
+            "by": "CoResearcher",
+            "margin": null,
+            "detail": {
+              "(N+2)g = d": true,
+              "d' = 2xd - v' - 2g'": true,
+              "Nd - v'' = -(N+2)(d + g'')": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: b - r^2 - d > 0 on |x| <= 8",
+        "statement": "b - r^2 - d > 0 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.06051271756755263,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: b - r^2 - d > 0 for |x| > 8",
+        "statement": "b - r^2 - d > 0 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.05482888943391684,
+            "detail": {
+              "at": -20.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.053599980363428855,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: |v' - x| <= .319 on |x| <= 8",
+        "statement": "|v' - x| <= .319 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 2.8055960436341156e-06,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: |v' - x| <= .319 for |x| > 8",
+        "statement": "|v' - x| <= .319 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.001032329856149039,
+            "detail": {
+              "at": -2.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.19693094549368378,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: C <= -.341 on |x| <= 8",
+        "statement": "C <= -.341 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 4.040625735093089e-07,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: C <= -.341 for |x| > 8",
+        "statement": "C <= -.341 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.0003411712057654337,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.1524093831806867,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: S_q > 0 on |x| <= 8",
+        "statement": "S_q > 0 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.000597345121062575,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: S_q > 0 for |x| > 8",
+        "statement": "S_q > 0 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.11648001086579518,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.504029383843862,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_-^2 + t_- C + K > 0 on |x| <= 8",
+        "statement": "lambda t_-^2 + t_- C + K > 0 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.0008924625127727207,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_-^2 + t_- C + K > 0 for |x| > 8",
+        "statement": "lambda t_-^2 + t_- C + K > 0 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.000908230395122972,
+            "detail": {
+              "at": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.011247907432508485,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_+^2 + t_+ C + K < 0 on |x| <= 8",
+        "statement": "lambda t_+^2 + t_+ C + K < 0 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 1.2884473560886445e-05,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: lambda t_+^2 + t_+ C + K < 0 for |x| > 8",
+        "statement": "lambda t_+^2 + t_+ C + K < 0 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.0007489788768987489,
+            "detail": {
+              "at": -3.36
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.010583429415629996,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: 2(-.37)C - .37^2 - 4 lambda K > m_*^2 on |x| <= 8",
+        "statement": "2(-.37)C - .37^2 - 4 lambda K > m_*^2 on |x| <= 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| <= 8 (evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.004493613140269262,
+            "detail": {
+              "certified_boxes": 4644
+            }
+          }
+        ]
+      },
+      {
+        "id": "pointwise: 2(-.37)C - .37^2 - 4 lambda K > m_*^2 for |x| > 8",
+        "statement": "2(-.37)C - .37^2 - 4 lambda K > m_*^2 for |x| > 8",
+        "source": "prop:scalar-input, first bullet",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "x in [-20.0, 20.0], step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.009034873030459134,
+            "detail": {
+              "at": -1.08
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "|x| >= 8 (Laurent-Taylor models in t = 1/x on [0, 1/8]; evenness for x < 0)",
+            "by": "CoResearcher",
+            "margin": 0.056654778673079886,
+            "detail": {
+              "certified_boxes": 16,
+              "method": "mahler_tail.py"
+            }
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) first on [-3, 3]^2",
+        "statement": "(3) first on [-3, 3]^2",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) in [-3, 3]^2",
+            "by": "CoResearcher",
+            "margin": 9.93210875543937e-07,
+            "detail": {
+              "certified_pairs": 167121
+            }
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) first outside [-3, 3]^2",
+        "statement": "(3) first outside [-3, 3]^2",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "(z, x) in [-12.0, 12.0]^2, step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.023968772306844688,
+            "detail": {
+              "min": 0.023968772306844688,
+              "at_z": 0.0,
+              "at_x": 0.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) outside [-3, 3]^2, every phase (mahler_twovar.py; t = 1/x models for |x| >= 6)",
+            "by": "CoResearcher",
+            "margin": 0.04003631714574873,
+            "detail": {
+              "pairs_checked": 7344616,
+              "boxes_1d": 2779
+            }
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) second on [-3, 3]^2",
+        "statement": "(3) second on [-3, 3]^2",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) in [-3, 3]^2",
+            "by": "CoResearcher",
+            "margin": 0.00018980175631719273,
+            "detail": {
+              "certified_pairs": 167121
+            }
+          }
+        ]
+      },
+      {
+        "id": "two-variable: (3) second outside [-3, 3]^2",
+        "statement": "(3) second outside [-3, 3]^2",
+        "source": "prop:scalar-input, (3)",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "(z, x) in [-12.0, 12.0]^2, step 0.02",
+            "by": "CoResearcher",
+            "margin": 1.021054806445651,
+            "detail": {
+              "min": 1.021054806445651,
+              "at_z": -12.0,
+              "at_x": -12.0
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          },
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "(z, x) outside [-3, 3]^2, every phase (mahler_twovar.py; t = 1/x models for |x| >= 6)",
+            "by": "CoResearcher",
+            "margin": 0.9756232384866005,
+            "detail": {
+              "pairs_checked": 7344616,
+              "boxes_1d": 2779
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: algebraic reduction of (4) to the budget (s0), and the short-width arithmetic",
+        "statement": "circle mean (A_h, B_h), A^2 + B^2 identity, f0* > 0, p_a +/- p_d, (4) <=> (s0), chord identities, exact short-width budget > .54 given the stated profile bounds",
+        "source": "08-segments.tex: subsec:segments-reduction, lem:segment-chord, subsec:segments-short",
+        "kind": "identity",
+        "status": "DISCHARGED_SYMBOLIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_SYMBOLIC",
+            "method": "sympy simplify and exact rationals (mahler_segment.py)",
+            "scope": "all segments; the profile bounds and the tail, middle and large regimes are not covered",
+            "by": "CoResearcher",
+            "margin": null,
+            "detail": {
+              "circle mean (A_h, B_h)": true,
+              "A_h^2 + B_h^2 identity": true,
+              "f0* formula and positivity": true,
+              "endpoint distances p_a +/- p_d": true,
+              "(4) <=> budget (s0)": true,
+              "variance decomposition": true,
+              "chord: trapezoid kernel": true,
+              "chord: W <= 3S/2 identity": true,
+              "chord: theta(1-theta) factorization": true,
+              "short-width budget > .54 (exact)": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: elementary inequalities of the short-width cost table",
+        "statement": "W <= 1.507, int W <= 1.012, sinh^2 h >= h^2 + h^4/3, sin^2 y bound, |sin y - y cos y| <= y^3/3, 0 <= coth h - 1/h <= h/3, avg beta^2 <= 1/3 + .05 h^2",
+        "source": "08-segments.tex: subsec:segments-short",
+        "kind": "identity",
+        "status": "DISCHARGED_SYMBOLIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_SYMBOLIC",
+            "method": "series sign arguments, coefficient comparison, interval arithmetic (mahler_segment.py)",
+            "scope": "h <= .16 (h <= .54 for the beta^2 bound), |y| <= 2",
+            "by": "CoResearcher",
+            "margin": null,
+            "detail": {
+              "W <= 1.507 and int W <= 1.012 at h <= .16": true,
+              "sinh^2 h >= h^2 + h^4/3": true,
+              "sin^2 y <= y^2 - y^4/3 + 2y^6/45 (|y| <= 2)": true,
+              "0 <= sin y - y cos y <= y^3/3 (0 <= y <= .736)": true,
+              "0 <= coth h - 1/h <= h/3": true,
+              "avg beta^2 <= 1/3 + .05 h^2 (h <= .54)": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: profile bounds |q-dot|, |C-dot|, |n_C|, |n_q|, U_* (lem:scalar-ranges)",
+        "statement": "|q-dot| <= .193, |C-dot| <= .247, |n_C| <= .79, |n_q| <= .53, U_* <= .54 r^2 w^2 for every real x",
+        "source": "07-scalar.tex: lem:scalar-ranges",
+        "kind": "pointwise inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "every real x: |x| <= 8 by interval branch and bound, |x| >= 8 by Laurent-Taylor models; evenness",
+            "by": "CoResearcher",
+            "margin": 2.244703183092425e-06,
+            "detail": {
+              "window_boxes": 48550,
+              "tail_boxes": 16
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: (4) on the middle and large widths (|l| <= 1.4, y <= 3.6, h >= .16)",
+        "statement": "e_K + Gamma + (X^2 + Y^2)/(4 lambda) + t_+ (p_a + b_a) < (1 + t_+) V_u on every segment with m >= 0, |l| <= 1.4, y <= 3.6, h >= .16 (t = asinh(x/s)); m < 0 by reflection",
+        "source": "08-segments.tex: subsec:segments-middle, subsec:segments-large (replaced by a direct check)",
+        "kind": "segment inequality",
+        "status": "DISCHARGED_INTERVAL",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "DISCHARGED_INTERVAL",
+            "method": "mpmath interval arithmetic, branch and bound (mahler_interval.py)",
+            "scope": "exact form of (4); rigorous segment averages from interval cell integrals in t; every pair of endpoint cells (width 1/1280, failing pairs refined to 1/10240) in float intervals rounded outward",
+            "by": "CoResearcher",
+            "margin": 3.46760578202876e-08,
+            "detail": {
+              "pairs": [
+                12534436,
+                1070056
+              ],
+              "max_left_over_right": 0.9999952654071974
+            }
+          }
+        ]
+      },
+      {
+        "id": "segment: (4) outside the middle and large widths",
+        "statement": "e_K + Gamma + ... < avg|u|^2 - |avg u|^2 on every segment with h <= .16 (short), or l <= -1.4, l >= 1.4 or y >= 3.6 (tails)",
+        "source": "prop:scalar-input, (4); prop:segment-estimate",
+        "kind": "segment inequality",
+        "status": "CHECKED_NUMERIC",
+        "independent": true,
+        "discharges": [
+          {
+            "status": "CHECKED_NUMERIC",
+            "method": "mpmath, 60 + 0.9 x^2 digits; exact symbolic derivatives",
+            "scope": "segments with endpoints in [-12.0, 12.0] every 0.04; trapezoid step 0.02",
+            "by": "CoResearcher",
+            "margin": 0.2696390986329139,
+            "detail": {
+              "segments": 180300,
+              "max_left_over_right": 0.7303609013670861,
+              "at": [
+                -3.36,
+                -0.92
+              ]
+            }
+          },
+          {
+            "status": "CERTIFIED_BY_AUTHOR",
+            "method": "Appendices 7-8 and verification/programs (not re-run)",
+            "scope": "all x, including tails",
+            "by": "author",
+            "margin": null,
+            "detail": {}
+          }
+        ]
+      }
+    ],
+    "counts": {
+      "DISCHARGED_FORMAL": 0,
+      "DISCHARGED_SYMBOLIC": 3,
+      "DISCHARGED_INTERVAL": 20,
+      "CHECKED_NUMERIC": 1,
+      "CERTIFIED_BY_AUTHOR": 0,
+      "OPEN": 0,
+      "REFUTED": 0
+    }
+  },
+  "seconds": 372.5
+}

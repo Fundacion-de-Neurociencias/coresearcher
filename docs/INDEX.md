@@ -16,6 +16,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [Mahler scalar obligations](reference/cases/MAHLER_SCALAR_OBLIGATIONS.md) | Obligation ledger pilot (ADR-076): identities and every pointwise inequality (first bullet on R, (3) on R^2) proved by interval arithmetic and Laurent-Taylor tail models; for the segment inequality, its reduction, the short-width inputs and the middle and large widths proved, the tails checked numerically; independent of the authors' programs |
 | [External results program](reference/EXTERNAL_RESULTS_PROGRAM.md) | What was done in response to Sakana, OASE and openai/math (Oct 2026), how, why and what for; lessons and next mechanisms |
 | [Proof pipeline](reference/PROOF_PIPELINE.md) | Reproducible obligation proofs: one-command rerun, SHA-256 manifest, fast audit that rejects stale or unverified proofs (ADR-076) |
+| [openai/math time travel](reference/cases/OPENAI_MATH_TIME_TRAVEL.md) | Would our checks have caught the 17 real corrections of the openai/math release? Pre-registered benchmark (1 real hit, citation resolution), and the import obligations and citation gate built from its misses (ADR-077) |
 
 ## Architecture
 

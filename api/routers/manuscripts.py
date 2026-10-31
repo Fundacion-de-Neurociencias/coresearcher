@@ -20,10 +20,15 @@ def audit_manuscript(req: ManuscriptAuditRequest):
     and line. Detection is lexical; obligations are never discharged here. `claim_trust` is a view beside the report:
     a prose claim stays CLAIMED.
     """
+    entries = [r.model_dump() for r in req.registry]
+    if req.use_registry:
+        from api.routers.registry import registry
+
+        entries += registry().as_import_list()
     try:
         report = manuscript_audit.audit(
             req.files,
-            [r.model_dump() for r in req.registry],
+            entries,
             req.manuscript_status,
             req.collection,
             req.claim,

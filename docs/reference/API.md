@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 120. Interactive documentation is served at `/docs` when the API runs.
+Operations: 127. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -127,6 +127,13 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/ontology/apply` | API key | Apply Ontology Plan |
 | `POST` | `/api/ontology/plan` | API key | Plan Ontology Change |
 | `POST` | `/api/ontology/rollback` | API key | Rollback Ontology Transaction |
+| `POST` | `/api/registry/cite-check` | API key | Cite Check |
+| `POST` | `/api/registry/dependencies` | API key | Add Dependency |
+| `POST` | `/api/registry/entries` | API key | Register Entry |
+| `GET` | `/api/registry/entries/{entry_id}` | Public | Get Entry |
+| `POST` | `/api/registry/entries/{entry_id}/retract` | API key | Retract Entry |
+| `POST` | `/api/registry/flags/{node}/reevaluated` | API key | Clear Flag |
+| `GET` | `/api/registry/impact/{node}` | Public | Impact |
 | `POST` | `/api/trust/assess` | API key | Assess Claim Trust |
 | `POST` | `/api/webhooks/github` | HMAC signature | Audit Pr Webhook |
 | `POST` | `/api/zenodo/publish` | API key | Publish To Zenodo |

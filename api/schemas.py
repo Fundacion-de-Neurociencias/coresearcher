@@ -841,11 +841,66 @@ class CitedResultModel(BaseModel):
     conventions: Dict[str, str] = Field(default_factory=dict)
 
 
+class RegistryHypothesisModel(BaseModel):
+    text: str = Field(min_length=1, max_length=2000)
+    # Predicate in the ADR-059 language over the citing context's variables; empty when not formalized.
+    formal: str = Field(default="", max_length=2000)
+    # Literal phrases for lexical presence in a citing text. Never regular expressions; never a discharge.
+    phrases: List[str] = Field(default_factory=list, max_length=20)
+
+
+class RegistryEntryRequest(BaseModel):
+    """A cited result or premise. `source` is provenance only and never decides validity (ADR-DISCOVERY-083)."""
+
+    id: str = Field(min_length=1, max_length=120)
+    source: str = Field(min_length=1, max_length=1000)
+    statement: str = Field(min_length=1, max_length=4000)
+    key: str = Field(default="", max_length=300)
+    locator: str = Field(default="", max_length=300)
+    kind: str = Field(default="result", max_length=40)
+    formal_statement: Optional[Dict[str, Any]] = None
+    hypotheses: List[RegistryHypothesisModel] = Field(default_factory=list, max_length=50)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    rung: str = "CLAIMED"
+
+
+class CitingContextModel(BaseModel):
+    """Where a registered result is used: declared variables, assumptions, conventions and optional text."""
+
+    variables: List[Dict[str, Any]] = Field(default_factory=list, max_length=50)
+    assumptions: List[str] = Field(default_factory=list, max_length=100)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    text: str = Field(default="", max_length=20000)
+
+
+class CiteCheckRequest(BaseModel):
+    entry_id: str = Field(min_length=1, max_length=120)
+    version: Optional[int] = Field(default=None, ge=1)
+    context: CitingContextModel
+
+
+class RegistryDependencyRequest(BaseModel):
+    node: str = Field(min_length=1, max_length=120)
+    depends_on: str = Field(min_length=1, max_length=120)
+
+
+class RegistryRetractRequest(BaseModel):
+    reason: str = Field(min_length=1, max_length=2000)
+    downgrade_to: Optional[str] = None
+    date: Optional[str] = Field(default=None, max_length=10)
+
+
+class RegistryReevaluatedRequest(BaseModel):
+    note: str = Field(min_length=1, max_length=2000)
+
+
 class ManuscriptAuditRequest(BaseModel):
     """LaTeX sources of one manuscript ({path: text}, .tex/.bib/.bbl) and optional context for the import checks."""
 
     files: Dict[str, str] = Field(min_length=1)
     registry: List[CitedResultModel] = Field(default_factory=list, max_length=500)
+    # Also use the stored cited-results registry (ADR-DISCOVERY-083) for the hypothesis-match obligations.
+    use_registry: bool = False
     manuscript_status: Dict[str, str] = Field(default_factory=dict)
     collection: Optional[List[str]] = Field(default=None, max_length=5000)
     claim: str = Field(default="", max_length=4000)

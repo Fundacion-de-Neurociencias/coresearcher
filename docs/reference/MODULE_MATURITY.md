@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 22 |
+| Integrated | Used by the API and covered by tests | 23 |
 | Tested | Covered by tests, not reachable from the API | 55 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
@@ -31,6 +31,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
 | `cited_import_ledger` | Tested | - | yes | yes |
+| `cited_registry` | Integrated | yes | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `constraint_box` | Prototype | - | - | - |
 | `constraint_court` | Prototype | - | - | - |

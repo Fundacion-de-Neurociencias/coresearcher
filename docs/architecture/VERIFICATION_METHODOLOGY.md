@@ -224,8 +224,8 @@ the weight lies (M10).
 
 | Block | Methods | Capability | State |
 | --- | --- | --- | --- |
-| A | M1, M4, M7 | Vacuity probe in the evaluator, trust ladder in reports and the evidence graph, fidelity compare and Lean lint as API/CLI services | In progress |
-| B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Next |
+| A | M1, M4, M7 | Vacuity probe in the evaluator, trust ladder in reports and the evidence graph, fidelity compare and Lean lint as API/CLI services | Done (ADR-080) |
+| B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Done (ADR-083) |
 | C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Next |
 | D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses | After B and C |
 | E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | After D |

@@ -953,6 +953,37 @@
         "title": "CherryPickClaimRequest",
         "type": "object"
       },
+      "CiteCheckRequest": {
+        "properties": {
+          "context": {
+            "$ref": "#/components/schemas/CitingContextModel"
+          },
+          "entry_id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Entry Id",
+            "type": "string"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          }
+        },
+        "required": [
+          "entry_id",
+          "context"
+        ],
+        "title": "CiteCheckRequest",
+        "type": "object"
+      },
       "CitedHypothesisModel": {
         "properties": {
           "phrases": {
@@ -1019,6 +1050,43 @@
           "locator"
         ],
         "title": "CitedResultModel",
+        "type": "object"
+      },
+      "CitingContextModel": {
+        "description": "Where a registered result is used: declared variables, assumptions, conventions and optional text.",
+        "properties": {
+          "assumptions": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 100,
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "conventions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Conventions",
+            "type": "object"
+          },
+          "text": {
+            "default": "",
+            "maxLength": 20000,
+            "title": "Text",
+            "type": "string"
+          },
+          "variables": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 50,
+            "title": "Variables",
+            "type": "array"
+          }
+        },
+        "title": "CitingContextModel",
         "type": "object"
       },
       "ClaimEvidenceAuditRequest": {
@@ -3268,6 +3336,11 @@
             "maxItems": 500,
             "title": "Registry",
             "type": "array"
+          },
+          "use_registry": {
+            "default": false,
+            "title": "Use Registry",
+            "type": "boolean"
           }
         },
         "required": [
@@ -3985,6 +4058,190 @@
           "discovery_value"
         ],
         "title": "RegisterForecastRequest",
+        "type": "object"
+      },
+      "RegistryDependencyRequest": {
+        "properties": {
+          "depends_on": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Depends On",
+            "type": "string"
+          },
+          "node": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Node",
+            "type": "string"
+          }
+        },
+        "required": [
+          "node",
+          "depends_on"
+        ],
+        "title": "RegistryDependencyRequest",
+        "type": "object"
+      },
+      "RegistryEntryRequest": {
+        "description": "A cited result or premise. `source` is provenance only and never decides validity (ADR-DISCOVERY-083).",
+        "properties": {
+          "conventions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Conventions",
+            "type": "object"
+          },
+          "formal_statement": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Formal Statement"
+          },
+          "hypotheses": {
+            "items": {
+              "$ref": "#/components/schemas/RegistryHypothesisModel"
+            },
+            "maxItems": 50,
+            "title": "Hypotheses",
+            "type": "array"
+          },
+          "id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "key": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Key",
+            "type": "string"
+          },
+          "kind": {
+            "default": "result",
+            "maxLength": 40,
+            "title": "Kind",
+            "type": "string"
+          },
+          "locator": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Locator",
+            "type": "string"
+          },
+          "rung": {
+            "default": "CLAIMED",
+            "title": "Rung",
+            "type": "string"
+          },
+          "source": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "statement": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "statement"
+        ],
+        "title": "RegistryEntryRequest",
+        "type": "object"
+      },
+      "RegistryHypothesisModel": {
+        "properties": {
+          "formal": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Formal",
+            "type": "string"
+          },
+          "phrases": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Phrases",
+            "type": "array"
+          },
+          "text": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "RegistryHypothesisModel",
+        "type": "object"
+      },
+      "RegistryReevaluatedRequest": {
+        "properties": {
+          "note": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "RegistryReevaluatedRequest",
+        "type": "object"
+      },
+      "RegistryRetractRequest": {
+        "properties": {
+          "date": {
+            "anyOf": [
+              {
+                "maxLength": 10,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date"
+          },
+          "downgrade_to": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Downgrade To"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "RegistryRetractRequest",
         "type": "object"
       },
       "ResultFamilyAuditRequest": {
@@ -9023,6 +9280,330 @@
           }
         ],
         "summary": "Rollback Ontology Transaction"
+      }
+    },
+    "/api/registry/cite-check": {
+      "post": {
+        "description": "Checks one use of a registered result: conventions match and hypotheses are entailed by the citing context.\n\n`outcome` is CLEAR (all discharged and matched, entry active), FINDINGS (a mismatch, an undischarged hypothesis\nwith counterexamples, or a retracted entry) or INCOMPLETE (nothing contradicts, but something is UNDECIDED or\nUNSPECIFIED). Only a formal entailment discharges a hypothesis; a phrase in the text is STATED_IN_TEXT.",
+        "operationId": "cite_check_api_registry_cite_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CiteCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Cite Check"
+      }
+    },
+    "/api/registry/dependencies": {
+      "post": {
+        "description": "Records that a claim or entry uses another. Edges that would close a cycle are refused.",
+        "operationId": "add_dependency_api_registry_dependencies_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistryDependencyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Add Dependency"
+      }
+    },
+    "/api/registry/entries": {
+      "post": {
+        "description": "Adds a cited result or premise, or a new version of one. The source is provenance, never evidence.",
+        "operationId": "register_entry_api_registry_entries_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistryEntryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Register Entry"
+      }
+    },
+    "/api/registry/entries/{entry_id}": {
+      "get": {
+        "description": "One entry (the latest version unless `version` is given), with its re-evaluation flag if any.",
+        "operationId": "get_entry_api_registry_entries__entry_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "title": "Entry Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Entry"
+      }
+    },
+    "/api/registry/entries/{entry_id}/retract": {
+      "post": {
+        "description": "Retracts an entry (or downgrades it to a lower rung) and flags every transitive dependent.\n\nA flagged dependent's rung is capped at CLAIMED until it is re-evaluated.",
+        "operationId": "retract_entry_api_registry_entries__entry_id__retract_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "title": "Entry Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistryRetractRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Retract Entry"
+      }
+    },
+    "/api/registry/flags/{node}/reevaluated": {
+      "post": {
+        "description": "Clears a dependent's re-evaluation flag; the note records how it was re-checked.",
+        "operationId": "clear_flag_api_registry_flags__node__reevaluated_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "node",
+            "required": true,
+            "schema": {
+              "title": "Node",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistryReevaluatedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Clear Flag"
+      }
+    },
+    "/api/registry/impact/{node}": {
+      "get": {
+        "description": "Every claim or entry that transitively depends on `node`, with any re-evaluation flags.",
+        "operationId": "impact_api_registry_impact__node__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "node",
+            "required": true,
+            "schema": {
+              "title": "Node",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Impact"
       }
     },
     "/api/trust/assess": {

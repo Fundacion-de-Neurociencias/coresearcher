@@ -1,0 +1,419 @@
+{
+  "id": "ym4-existence",
+  "version": "1.0.0",
+  "frozen_on": "2026-10-30",
+  "title": "Pre-registered acceptance checklist: existence of four-dimensional quantum Yang-Mills theory (and QCD)",
+  "purpose": "Fixes, before any formal statement or manuscript is public, what a formal statement must say for it to count as the existence of quantum Yang-Mills theory on R^4 in the sense of the Jaffe-Witten Clay problem statement and constructive QFT practice. The audit maps the claimant's statement onto these obligations. It never maps these obligations onto the claimant's definitions.",
+  "scope": "Formal statement fidelity only. This checklist does not assess whether a proof is correct, who deserves credit, or any announcement.",
+  "anchoring_rule": [
+    "The checklist is frozen by the SHA-256 in its lock file. A change makes a new version with its own lock; version 1.0.0 is never edited.",
+    "Every definition in the audited statement is translated into the vocabulary below, with the Lean text quoted next to each clause. An obligation is COVERED only when the translated statement entails its formal clause.",
+    "A definition named like a standard object (YangMills, OsterwalderSchrader, MassGap) is read by its body, never by its name.",
+    "The trivial-witness catalogue below is part of the frozen record: witnesses are not added or removed after the statement is seen, except by a new version."
+  ],
+  "claims": {
+    "YM": "There exists a non-trivial quantum Yang-Mills theory on R^4 for a compact simple gauge group G, with Euclidean correlation functions satisfying the Osterwalder-Schrader axioms, obtained as a continuum limit independent of the lattice, with gauge-invariant observables, and agreeing at short distances with asymptotic freedom.",
+    "QCD": "The YM claim for G = SU(3), with quark fields (Dirac fermions in the fundamental representation) coupled to the gauge field, and the OS axioms in their form for Fermi fields."
+  },
+  "references": {
+    "JW": {
+      "citation": "A. Jaffe and E. Witten, Quantum Yang-Mills Theory, official problem description, Clay Mathematics Institute (2000); reprinted in The Millennium Prize Problems, CMI/AMS (2006), 129-152.",
+      "url": "https://www.claymath.org/wp-content/uploads/2022/06/yangmills.pdf",
+      "sha256": "3558403ca14c11e382f73a09e548222708540bfdf478cf96aa11c52d43e23e09",
+      "retrieved": "2026-10-30",
+      "read": true
+    },
+    "SW": {
+      "citation": "R. Streater and A. Wightman, PCT, Spin and Statistics and All That, W. A. Benjamin (1964). Cited as [45] in JW.",
+      "read": false
+    },
+    "OS73": {
+      "citation": "K. Osterwalder and R. Schrader, Axioms for Euclidean Green's functions, Commun. Math. Phys. 31 (1973), 83-112. Cited as [35] in JW.",
+      "read": false
+    },
+    "OS75": {
+      "citation": "K. Osterwalder and R. Schrader, Axioms for Euclidean Green's functions II, Commun. Math. Phys. 42 (1975), 281-305. Adds the linear growth condition that the 1973 reconstruction needs.",
+      "read": false
+    },
+    "OSe78": {
+      "citation": "K. Osterwalder and E. Seiler, Gauge field theories on a lattice, Ann. Phys. 110 (1978), 440-471. Reflection positivity of the Wilson lattice action (with Wilson fermions); confinement and a mass gap at strong coupling. Cited as [36] in JW.",
+      "read": false
+    },
+    "Wilson74": {
+      "citation": "K. G. Wilson, Confinement of quarks, Phys. Rev. D 10 (1974), 2445-2459. Lattice gauge action and Wilson loops.",
+      "read": false
+    },
+    "GW73": {
+      "citation": "D. J. Gross and F. Wilczek, Ultraviolet behavior of non-abelian gauge theories, Phys. Rev. Lett. 30 (1973), 1343-1346.",
+      "read": false
+    },
+    "Pol73": {
+      "citation": "H. D. Politzer, Reliable perturbative results for strong interactions?, Phys. Rev. Lett. 30 (1973), 1346-1349. Cited as [38] in JW.",
+      "read": false
+    },
+    "Douglas26": {
+      "citation": "M. R. Douglas, The Yang-Mills Millennium problem, Nat. Rev. Phys. 8 (2026), 86-97. The review the committee statement points to.",
+      "read": false,
+      "note": "Not accessible in this session. Cited only as the committee's pointer; no obligation rests on its content."
+    },
+    "Committee26": {
+      "citation": "M. R. Douglas, D. J. Gross (chair), A. Jaffe, I. R. Klebanov, N. Nekrasov, Proof by OpenAI of the Existence of Quantum Yang-Mills theory: statement by the shepherding committee (October 2026).",
+      "url": "https://www.kitp.ucsb.edu/sites/default/files/YM_working_group.pdf",
+      "sha256": "dbab31f0f954ac8265a3fc1c1a29664c7fa0b7f16c616d58012e65896557bd12",
+      "retrieved": "2026-10-30",
+      "read": true
+    },
+    "Driver89": {
+      "citation": "B. K. Driver, YM2: continuum expectations, lattice convergence, and lassos, Commun. Math. Phys. 123 (1989), 575-616.",
+      "read": false
+    },
+    "Levy03": {
+      "citation": "T. Levy, Yang-Mills measure on compact surfaces, Mem. Amer. Math. Soc. 166 (2003), no. 790.",
+      "read": false
+    }
+  },
+  "vocabulary": {
+    "dim": {"domain": [2, 3, 4], "meaning": "Euclidean space-time dimension of the object the statement is about."},
+    "volume": {"domain": ["infinite", "torus", "finite_box"], "meaning": "infinite = all of R^d (or Z^d); torus = periodic box; finite_box = bounded region or finite graph."},
+    "spacing": {"continuous": true, "lower": 0, "meaning": "Lattice spacing of the object. 0 means a continuum object."},
+    "continuum_limit": {"domain": ["lattice_independent", "lattice_dependent", "subsequence_only", "none"], "meaning": "How the continuum object is obtained: a limit that does not depend on the lattice action or on a chosen subsequence (or a direct continuum construction); a limit tied to one lattice action; a limit point along some subsequence only; no limit."},
+    "gauge_group": {"domain": ["none", "U1", "SU2", "SU3", "SUN_only", "all_compact_simple"], "meaning": "Gauge group(s) the statement covers. SUN_only = SU(N) for every N but not every compact simple group."},
+    "os_regularity": {"domain": [true, false], "meaning": "OS regularity: Schwinger functions are tempered distributions with the OS 1975 linear growth bound."},
+    "os_euclidean_invariance": {"domain": [true, false], "meaning": "Invariance under the full Euclidean group E(d), not only lattice or torus symmetries."},
+    "os_reflection_positivity": {"domain": [true, false], "meaning": "Reflection positivity."},
+    "os_symmetry": {"domain": [true, false], "meaning": "Permutation symmetry of the Schwinger functions (antisymmetry in Fermi arguments)."},
+    "os_cluster": {"domain": [true, false], "meaning": "Cluster property under large space-like translations (equivalently a unique vacuum)."},
+    "observables": {"domain": ["local_and_loops", "local_gauge_invariant", "wilson_loops_only", "gauge_variant_only", "no_gauge_field"], "meaning": "Which observables carry the Schwinger functions."},
+    "connected_4pt": {"domain": ["zero", "nonzero"], "meaning": "Whether some truncated (connected) correlation of order >= 4 is nonzero, i.e. the theory is not Gaussian."},
+    "short_distance": {"domain": ["asymptotic_freedom", "free_field", "superrenormalizable", "not_established"], "meaning": "Short-distance behaviour that the statement establishes."},
+    "fermions": {"domain": ["none", "quarks_fundamental"], "meaning": "Fermion content coupled to the gauge field."},
+    "mass_gap": {"continuous": true, "lower": 0, "meaning": "Largest Delta with no spectrum of H in (0, Delta). Out of claim."},
+    "confinement": {"domain": ["area_law", "perimeter_law", "not_established"], "meaning": "Wilson-loop behaviour. Out of claim."}
+  },
+  "obligations": [
+    {
+      "id": "YM-GROUP-NONABELIAN",
+      "title": "Compact simple, non-abelian gauge group",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The gauge group is a compact simple Lie group. U(1) and the trivial group do not qualify.",
+      "formal_clause": "gauge_group in ('SU2', 'SU3', 'SUN_only', 'all_compact_simple')",
+      "sources": [{"ref": "JW", "locator": "Section 4, The Problem: 'for any compact simple gauge group G'"}],
+      "lean_markers": ["IsSimple", "LieGroup", "CompactSpace", "specialUnitaryGroup", "SU\\s*\\("],
+      "lean_counter_markers": ["\\bCircle\\b", "AddCircle", "unitary \\(Fin 1\\)", "U\\(1\\)"]
+    },
+    {
+      "id": "YM-GROUP-COVERAGE",
+      "title": "Every compact simple gauge group",
+      "category": "scope",
+      "applies_to": ["YM"],
+      "requirement": "The Clay statement asks for every compact simple G. A statement for one group or one family is a partial result. It is recorded as coverage, not as vacuity.",
+      "formal_clause": "gauge_group == 'all_compact_simple'",
+      "sources": [{"ref": "JW", "locator": "Section 4, The Problem: 'for any compact simple gauge group G'"}],
+      "lean_markers": ["∀\\s*\\{?\\(?\\s*G\\b", "\\[\\s*IsSimple"],
+      "lean_counter_markers": ["specialUnitaryGroup \\(Fin \\d\\)"]
+    },
+    {
+      "id": "YM-SPACETIME-DIM4",
+      "title": "Four-dimensional space-time",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The theory lives on Euclidean R^4 (Minkowski M^4 after reconstruction). Two- and three-dimensional theories do not qualify.",
+      "formal_clause": "dim == 4",
+      "sources": [
+        {"ref": "JW", "locator": "Section 4, The Problem: 'exists on R4'"},
+        {"ref": "JW", "locator": "Section 6: constructive results replace R4 by R2 or R3, or by a torus"}
+      ],
+      "lean_markers": ["Fin 4", "ℝ⁴", "EuclideanSpace ℝ \\(Fin 4\\)"],
+      "lean_counter_markers": ["Fin 2\\b", "Fin 3\\b", "ℤ × ℤ(?! ×)", "EuclideanSpace ℝ \\(Fin [23]\\)"]
+    },
+    {
+      "id": "YM-SPACETIME-INFINITE",
+      "title": "Infinite volume (R^4, not a torus or a box)",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The object is defined on all of R^4. A theory on a torus T^4 or in a bounded region does not qualify, however large.",
+      "formal_clause": "volume == 'infinite'",
+      "sources": [
+        {"ref": "JW", "locator": "Section 6: the infinite volume limit T4 -> R4 is not reached by present methods"},
+        {"ref": "Committee26", "locator": "page 2: in the infinite volume limit the theory must become translationally and rotationally invariant"}
+      ],
+      "lean_markers": ["EuclideanSpace ℝ \\(Fin 4\\)", "ℝ⁴", "Fin 4 → ℝ"],
+      "lean_counter_markers": ["AddCircle", "UnitAddTorus", "\\bZMod\\b", "[Tt]orus", "Finset", "Fintype"]
+    },
+    {
+      "id": "YM-OS-REGULARITY",
+      "title": "OS axiom: regularity (temperedness, linear growth)",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The Schwinger functions are tempered distributions and satisfy the linear growth condition of OS 1975 (needed for the reconstruction).",
+      "formal_clause": "os_regularity",
+      "sources": [
+        {"ref": "OS75", "locator": "linear growth condition"},
+        {"ref": "JW", "locator": "Section 4: 'axiomatic properties at least as strong as those cited in [45, 35]'"}
+      ],
+      "lean_markers": ["SchwartzMap", "[Tt]empered", "𝓢\\(", "[Ll]inearGrowth", "[Ff]actorial"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "YM-OS-EUCLIDEAN",
+      "title": "OS axiom: Euclidean invariance",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The Schwinger functions are invariant under the full Euclidean group E(4). Invariance under lattice translations and hypercubic rotations, or torus isometries, does not qualify.",
+      "formal_clause": "os_euclidean_invariance",
+      "sources": [
+        {"ref": "OS73", "locator": "Euclidean covariance axiom"},
+        {"ref": "Committee26", "locator": "page 2: translationally and rotationally invariant in the infinite volume limit"}
+      ],
+      "lean_markers": ["EuclideanGroup", "LinearIsometry", "orthogonalGroup", "[Ee]uclidean\\w*[Ii]nvarian", "[Rr]otation\\w*[Ii]nvarian"],
+      "lean_counter_markers": ["[Hh]ypercubic", "\\bZMod\\b"]
+    },
+    {
+      "id": "YM-OS-RP",
+      "title": "OS axiom: reflection positivity",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "Reflection positivity holds for the continuum Schwinger functions (for Fermi fields with the fermionic reflection).",
+      "formal_clause": "os_reflection_positivity",
+      "sources": [
+        {"ref": "OS73", "locator": "reflection positivity axiom"},
+        {"ref": "JW", "locator": "Section 3: Osterwalder and Schrader discovered the reflection-positivity condition"}
+      ],
+      "lean_markers": ["[Rr]eflection\\w*[Pp]ositiv", "timeReflection", "[Oo]sterwalder"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "YM-OS-SYMMETRY",
+      "title": "OS axiom: symmetry",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The Schwinger functions are symmetric under permutations of their arguments (antisymmetric in Fermi arguments).",
+      "formal_clause": "os_symmetry",
+      "sources": [{"ref": "OS73", "locator": "symmetry axiom"}],
+      "lean_markers": ["Equiv\\.Perm", "[Pp]ermut", "[Ss]ymmetric"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "YM-OS-CLUSTER",
+      "title": "OS axiom: cluster property",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "Schwinger functions factorize under large space-like translations, equivalently the vacuum is unique. A finite-volume object cannot satisfy it.",
+      "formal_clause": "os_cluster",
+      "sources": [
+        {"ref": "OS73", "locator": "cluster property axiom"},
+        {"ref": "JW", "locator": "Section 3: a vacuum vector unique up to a phase"}
+      ],
+      "lean_markers": ["[Cc]luster", "[Ee]rgodic", "[Uu]niqueVacuum", "unique vacuum"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "YM-CONTINUUM",
+      "title": "Continuum limit independent of the lattice",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The object is a continuum theory (spacing 0). If it is built from a lattice, the limit is taken as the spacing tends to 0 and does not depend on the lattice action or on a chosen subsequence. A theory at fixed lattice spacing does not qualify.",
+      "formal_clause": "spacing == 0 and continuum_limit == 'lattice_independent'",
+      "sources": [
+        {"ref": "JW", "locator": "Section 6, lattice gauge theory paragraph: existence of limits of gauge-invariant expectations as the spacing tends to zero and the volume to infinity"},
+        {"ref": "Committee26", "locator": "page 2: the continuum limit where the theory forgets the lattice regularization"}
+      ],
+      "lean_markers": ["𝓝\\[>\\] 0", "[Cc]ontinuumLimit", "Tendsto[^\\n]*spacing", "[Ll]atticeIndependent"],
+      "lean_counter_markers": ["latticeSpacing", "Fin 4 → ℤ", "ℤ × ℤ × ℤ × ℤ"]
+    },
+    {
+      "id": "YM-OBS-GAUGE-INVARIANT",
+      "title": "Gauge-invariant observables",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "The Schwinger functions are those of gauge-invariant observables (Wilson loops or local gauge-invariant fields). Correlations of gauge-dependent fields in a fixed gauge do not qualify on their own.",
+      "formal_clause": "observables in ('local_and_loops', 'local_gauge_invariant', 'wilson_loops_only')",
+      "sources": [
+        {"ref": "JW", "locator": "Section 4: local quantum field operators in correspondence with the gauge-invariant local polynomials in the curvature"},
+        {"ref": "Wilson74", "locator": "Wilson loops"}
+      ],
+      "lean_markers": ["[Ww]ilson", "[Hh]olonomy", "[Gg]augeInvariant", "Matrix\\.trace"],
+      "lean_counter_markers": ["[Gg]aufix", "[Gg]augeFix", "[Ll]andauGauge", "[Aa]xialGauge"]
+    },
+    {
+      "id": "YM-OBS-LOCAL-CURVATURE",
+      "title": "Local gauge-invariant fields (polynomials in the curvature)",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "Local quantum fields corresponding to gauge-invariant local polynomials in F and its covariant derivatives, such as Tr F_ij F_kl(x). A construction with Wilson loops only is weaker than the Clay statement.",
+      "formal_clause": "observables in ('local_and_loops', 'local_gauge_invariant')",
+      "sources": [{"ref": "JW", "locator": "Section 4, first paragraph, and footnote 1"}],
+      "lean_markers": ["[Cc]urvature", "[Ff]ieldStrength", "Tr\\s*\\(?\\s*F"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "YM-NONTRIVIAL",
+      "title": "Non-triviality (non-Gaussian)",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "Some truncated (connected) correlation of order at least four is nonzero. A Gaussian theory (free field, or Yang-Mills at zero coupling) does not qualify.",
+      "formal_clause": "connected_4pt == 'nonzero'",
+      "sources": [{"ref": "JW", "locator": "Section 4, The Problem: 'a non-trivial quantum Yang-Mills theory'"}],
+      "lean_markers": ["[Tt]runcated", "[Cc]onnected\\w*[Cc]orrelat", "[Cc]umulant", "[Uu]rsell", "[Nn]on[Gg]aussian", "¬\\s*IsGaussian"],
+      "lean_counter_markers": ["[Gg]aussian[Ff]ree", "IsGaussian"]
+    },
+    {
+      "id": "YM-SHORT-DISTANCE",
+      "title": "Short-distance agreement with asymptotic freedom",
+      "category": "core",
+      "applies_to": ["YM", "QCD"],
+      "requirement": "Correlation functions agree at short distances with asymptotic freedom and perturbative renormalization theory (running coupling, stress tensor, operator product expansion with the predicted singularities).",
+      "formal_clause": "short_distance == 'asymptotic_freedom'",
+      "sources": [
+        {"ref": "JW", "locator": "Section 4, first paragraph: agree at short distances with the predictions of asymptotic freedom"},
+        {"ref": "GW73", "locator": "asymptotic freedom"},
+        {"ref": "Pol73", "locator": "asymptotic freedom"}
+      ],
+      "lean_markers": ["[Aa]symptotic\\w*[Ff]reedom", "[Rr]unning\\w*[Cc]oupling", "[Oo]peratorProduct", "\\bOPE\\b", "[Pp]erturbati", "[Ss]tressTensor"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "QCD-FERMIONS",
+      "title": "Quark fields coupled to the gauge field",
+      "category": "qcd",
+      "applies_to": ["QCD"],
+      "requirement": "Dirac fermions in the fundamental representation are coupled to the gauge field, with the OS axioms in their form for Fermi fields (antisymmetry, fermionic reflection positivity).",
+      "formal_clause": "fermions == 'quarks_fundamental'",
+      "sources": [
+        {"ref": "Committee26", "locator": "page 1: 'including coupling to fermions'"},
+        {"ref": "JW", "locator": "Section 3: anti-commuting for two fermionic fields"},
+        {"ref": "OSe78", "locator": "Wilson fermions on the lattice"}
+      ],
+      "lean_markers": ["[Gg]rassmann", "[Ff]ermion", "[Dd]irac", "[Ss]pinor", "ExteriorAlgebra", "[Aa]nticommut"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "QCD-GROUP-SU3",
+      "title": "Gauge group SU(3) for QCD",
+      "category": "qcd",
+      "applies_to": ["QCD"],
+      "requirement": "The QCD claim covers G = SU(3).",
+      "formal_clause": "gauge_group in ('SU3', 'SUN_only', 'all_compact_simple')",
+      "sources": [{"ref": "Committee26", "locator": "page 1: YM with group SU(3) coupled to quarks is QCD"}],
+      "lean_markers": ["specialUnitaryGroup \\(Fin 3\\)", "SU\\s*\\(\\s*3\\s*\\)"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "OUT-MASS-GAP",
+      "title": "Mass gap (out of the claim)",
+      "category": "out_of_claim",
+      "applies_to": [],
+      "requirement": "H has no spectrum in (0, Delta) for some Delta > 0. The committee states it remains open; the audit must not count it, and its absence is not a defect of the existence claim.",
+      "formal_clause": "mass_gap > 0",
+      "sources": [
+        {"ref": "JW", "locator": "Section 4: definition of the mass gap"},
+        {"ref": "Committee26", "locator": "page 2: confinement and the mass gap remain open challenges"}
+      ],
+      "lean_markers": ["[Mm]ass[Gg]ap", "[Ss]pectralGap", "spectrum"],
+      "lean_counter_markers": []
+    },
+    {
+      "id": "OUT-CONFINEMENT",
+      "title": "Confinement (out of the claim)",
+      "category": "out_of_claim",
+      "applies_to": [],
+      "requirement": "Area law for Wilson loops. Stated open by the committee; not part of the existence claim.",
+      "formal_clause": "confinement == 'area_law'",
+      "sources": [{"ref": "Committee26", "locator": "page 2: confinement and the mass gap remain open challenges"}],
+      "lean_markers": ["[Aa]rea[Ll]aw", "[Cc]onfine"],
+      "lean_counter_markers": []
+    }
+  ],
+  "witnesses": [
+    {
+      "id": "zero_theory",
+      "title": "Zero theory (vacuum only)",
+      "kind": "trivial",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'lattice_independent'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "connected_4pt == 'zero'", "short_distance == 'not_established'", "fermions == 'none'"],
+      "note": "S_0 = 1 and S_n = 0 for n >= 1. Every OS axiom holds and the Hilbert space is the vacuum alone. Its gauge-group label and its observables are left free: a statement can attach any label to it. Any mass-gap bound holds vacuously because the vacuum complement is empty, so mass_gap is left free.",
+      "references": []
+    },
+    {
+      "id": "free_scalar_4d",
+      "title": "Free (Gaussian) scalar field on R^4",
+      "kind": "gaussian",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'lattice_independent'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group == 'none'", "observables == 'no_gauge_field'", "connected_4pt == 'zero'", "short_distance == 'free_field'", "fermions == 'none'", "confinement == 'not_established'"],
+      "note": "Massive or massless; mass_gap is left free.",
+      "references": ["JW"]
+    },
+    {
+      "id": "free_nonabelian_gaussian_4d",
+      "title": "Yang-Mills at zero coupling (dim G copies of Maxwell)",
+      "kind": "gaussian",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'lattice_independent'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group != 'none'", "gauge_group != 'U1'", "observables == 'local_gauge_invariant'", "connected_4pt == 'zero'", "short_distance == 'free_field'", "fermions == 'none'", "mass_gap == 0", "confinement == 'perimeter_law'"],
+      "note": "Carries a non-abelian group label and Wick-ordered local gauge-invariant fields, but is Gaussian and massless. It is the cheapest object a statement can call 'Yang-Mills for G'.",
+      "references": ["JW"]
+    },
+    {
+      "id": "maxwell_u1_4d",
+      "title": "Abelian U(1) Maxwell theory on R^4",
+      "kind": "abelian",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'lattice_independent'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group == 'U1'", "observables == 'local_and_loops'", "connected_4pt == 'zero'", "short_distance == 'free_field'", "fermions == 'none'", "mass_gap == 0", "confinement == 'perimeter_law'"],
+      "note": "Free electromagnetism: OS axioms hold for the field strength, Wilson loops are defined, the theory is Gaussian and massless.",
+      "references": ["JW"]
+    },
+    {
+      "id": "ym_2d",
+      "title": "Two-dimensional Yang-Mills on R^2",
+      "kind": "lower_dimension",
+      "facts": ["dim == 2", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'lattice_independent'", "os_regularity", "os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group != 'none'", "gauge_group != 'U1'", "observables == 'wilson_loops_only'", "connected_4pt == 'nonzero'", "short_distance == 'superrenormalizable'", "fermions == 'none'", "confinement == 'area_law'"],
+      "note": "Constructed rigorously through Wilson-loop expectations; non-Gaussian (area law). Euclidean invariance holds because the measure is invariant under area-preserving maps.",
+      "references": ["Driver89", "Levy03", "JW"]
+    },
+    {
+      "id": "ym_3d",
+      "title": "Three-dimensional Yang-Mills (hypothetical continuum theory)",
+      "kind": "lower_dimension",
+      "facts": ["dim == 3", "gauge_group != 'none'", "gauge_group != 'U1'", "short_distance == 'superrenormalizable'", "fermions == 'none'"],
+      "note": "Its existence is not established; every other feature is left free. It catches statements that do not fix the dimension. Only the dimension and the short-distance behaviour exclude it.",
+      "references": ["JW"]
+    },
+    {
+      "id": "ym_torus_4d",
+      "title": "Yang-Mills on a four-torus T^4",
+      "kind": "finite_volume",
+      "facts": ["dim == 4", "volume == 'torus'", "not os_euclidean_invariance", "not os_cluster", "gauge_group != 'none'", "gauge_group != 'U1'", "connected_4pt == 'nonzero'", "fermions == 'none'"],
+      "note": "JW Section 6: results are known on T^4 and the construction there is expected; the limit T^4 -> R^4 is the open part. Only translations and torus isometries act, and a compact translation group allows no clustering. The spacing and limit features are left free.",
+      "references": ["JW"]
+    },
+    {
+      "id": "lattice_ym_4d",
+      "title": "Wilson lattice gauge theory on Z^4 at fixed spacing (strong coupling)",
+      "kind": "lattice_only",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing > 0", "continuum_limit == 'none'", "os_regularity", "not os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group != 'none'", "gauge_group != 'U1'", "observables == 'local_and_loops'", "connected_4pt == 'nonzero'", "short_distance == 'not_established'", "fermions == 'none'", "mass_gap > 0", "confinement == 'area_law'"],
+      "note": "Reflection positive (Osterwalder-Seiler); at strong coupling it clusters, confines and has a gap. Only hypercubic symmetry. It satisfies every clause that does not require a continuum limit, full Euclidean invariance or asymptotic freedom.",
+      "references": ["OSe78", "Wilson74", "JW"]
+    },
+    {
+      "id": "lattice_qcd_4d",
+      "title": "Lattice QCD with Wilson fermions at fixed spacing (strong coupling)",
+      "kind": "lattice_only",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing > 0", "continuum_limit == 'none'", "os_regularity", "not os_euclidean_invariance", "os_reflection_positivity", "os_symmetry", "os_cluster", "gauge_group == 'SU3'", "observables == 'local_and_loops'", "connected_4pt == 'nonzero'", "short_distance == 'not_established'", "fermions == 'quarks_fundamental'"],
+      "note": "The lattice-only witness for the QCD claim.",
+      "references": ["OSe78"]
+    },
+    {
+      "id": "subsequential_limit_4d",
+      "title": "Continuum limit point along a subsequence of one lattice action",
+      "kind": "weak_limit",
+      "facts": ["dim == 4", "volume == 'infinite'", "spacing == 0", "continuum_limit == 'subsequence_only'", "gauge_group != 'none'", "gauge_group != 'U1'"],
+      "note": "A limit point obtained by compactness can be Gaussian and can depend on the lattice action. Its other features are left free. It catches statements that ask only for 'a continuum limit'.",
+      "references": ["JW"]
+    }
+  ],
+  "audit_protocol": [
+    "1. Pin the statement: repository, commit, SHA-256 of every file read. Move the claim record to STATEMENT_PUBLIC.",
+    "2. Run the Lean exclusion lint (trivial_witness.lint_exclusions) on the statement file with this checklist. Every witness without an excluding clause in the text goes to a human.",
+    "3. Transcribe each definition the main theorem uses into the vocabulary, quoting the Lean text next to each clause. Decide every obligation with preregistration.coverage (COVERED, OBJECT_DIFFERS, NOT_ADDRESSED).",
+    "4. Run the trivial-witness probe on the transcription. A satisfied witness makes the statement VACUOUS_RELATIVE_TO_INTENT.",
+    "5. Lint junk values (ADR-070) in every definition the main theorem uses.",
+    "6. Record the outcome and move the claim to STATEMENT_AUDITED. KERNEL_CHECKED needs a kernel check that ran here; INDEPENDENTLY_REPRODUCED needs a party other than the claimant.",
+    "7. Out-of-claim obligations are reported separately and never counted for or against the existence claim."
+  ]
+}

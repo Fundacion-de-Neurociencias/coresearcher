@@ -1,0 +1,8 @@
+{
+  "spec": "ym4_existence_checklist.v1.json",
+  "id": "ym4-existence",
+  "version": "1.0.0",
+  "frozen_on": "2026-10-30",
+  "sha256": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353",
+  "canonicalization": "json.dumps(sort_keys=True, separators=(',', ':'), ensure_ascii=False), UTF-8"
+}

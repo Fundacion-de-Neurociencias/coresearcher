@@ -485,6 +485,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "o3_continuum_case",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "obligation_ledger",
       "scripts": true,
       "tests": true
@@ -500,6 +507,13 @@
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "preregistration",
       "scripts": true,
       "tests": true
     },
@@ -687,6 +701,20 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "trivial_witness",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "trust_ladder",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Exercised",
       "module": "twin_gate_harness",
       "scripts": true,
@@ -718,6 +746,13 @@
       "level": "Integrated",
       "module": "world_model_adapter",
       "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "yang_mills_case",
+      "scripts": true,
       "tests": true
     }
   ]

@@ -152,12 +152,19 @@ def test_ladder_climbs_one_rung_at_a_time_with_evidence():
         record.climb(Rung.KERNEL_CHECKED, "2026-11-01", "skip", {})
     with pytest.raises(LadderError):
         record.climb(Rung.STATEMENT_PUBLIC, "2026-11-01", "no hash", {"statement_location": "x"})
-    record.climb(Rung.STATEMENT_PUBLIC, "2026-11-01", "released", {"statement_location": "x", "statement_sha256": "b" * 64})
+    record.climb(
+        Rung.STATEMENT_PUBLIC, "2026-11-01", "released", {"statement_location": "x", "statement_sha256": "b" * 64}
+    )
     record.climb(
         Rung.STATEMENT_AUDITED,
         "2026-11-02",
         "audited",
-        {"checklist": "ym4-existence v1.0.0", "checklist_sha256": YM_SHA256, "audit_report": "r.json", "audit_outcome": "VACUOUS_RELATIVE_TO_INTENT"},
+        {
+            "checklist": "ym4-existence v1.0.0",
+            "checklist_sha256": YM_SHA256,
+            "audit_report": "r.json",
+            "audit_outcome": "VACUOUS_RELATIVE_TO_INTENT",
+        },
     )
     record.climb(
         Rung.KERNEL_CHECKED,
@@ -168,17 +175,25 @@ def test_ladder_climbs_one_rung_at_a_time_with_evidence():
     assert record.formal_status == "DECIDED" and record.mandatory_relays == []
     with pytest.raises(LadderError):
         record.climb(
-            Rung.INDEPENDENTLY_REPRODUCED, "2026-11-04", "self", {"reproduced_by": "Claimant", "method": "m", "record_sha256": "d" * 64}
+            Rung.INDEPENDENTLY_REPRODUCED,
+            "2026-11-04",
+            "self",
+            {"reproduced_by": "Claimant", "method": "m", "record_sha256": "d" * 64},
         )
     record.climb(
-        Rung.INDEPENDENTLY_REPRODUCED, "2026-11-04", "other", {"reproduced_by": "Lab B", "method": "m", "record_sha256": "d" * 64}
+        Rung.INDEPENDENTLY_REPRODUCED,
+        "2026-11-04",
+        "other",
+        {"reproduced_by": "Lab B", "method": "m", "record_sha256": "d" * 64},
     )
     assert record.to_dict()["next_rung"] is None
 
 
 def test_ladder_descends_with_a_reason_and_replays_from_json():
     record = _record()
-    record.climb(Rung.STATEMENT_PUBLIC, "2026-11-01", "released", {"statement_location": "x", "statement_sha256": "b" * 64})
+    record.climb(
+        Rung.STATEMENT_PUBLIC, "2026-11-01", "released", {"statement_location": "x", "statement_sha256": "b" * 64}
+    )
     with pytest.raises(LadderError):
         record.descend(Rung.CLAIMED, "2026-11-02", " ")
     record.descend(Rung.CLAIMED, "2026-11-02", "statement withdrawn")

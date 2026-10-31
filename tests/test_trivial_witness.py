@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from python.discovery import preregistration as pr
 from python.discovery import o3_continuum_case as o3
+from python.discovery import preregistration as pr
 from python.discovery import yang_mills_case as ymc
 from python.discovery.trivial_witness import checklist_clauses, lint_exclusions, necessity, parse_declarations, probe
 
@@ -70,7 +70,11 @@ def test_adding_non_triviality_closes_the_gaussian_gap(ym):
 
 
 def test_a_lattice_statement_is_satisfied_by_the_lattice_witness(ym):
-    clauses = {"group": "gauge_group != 'none' and gauge_group != 'U1'", "dim": "dim == 4", "rp": "os_reflection_positivity"}
+    clauses = {
+        "group": "gauge_group != 'none' and gauge_group != 'U1'",
+        "dim": "dim == 4",
+        "rp": "os_reflection_positivity",
+    }
     report = probe(ym, clauses)
     assert {"lattice_ym_4d", "free_nonabelian_gaussian_4d"} <= set(report.satisfied_by)
 
@@ -173,8 +177,15 @@ def test_o3_coverage_map_shows_the_gap():
     assert {k for k, v in rows.items() if v == "COVERED"} == {"O3-FIELD", "O3-DIM2", "LAT-DECAY"}
     assert {k for k, v in rows.items() if v == "OBJECT_DIFFERS"} == {"O3-INFINITE-VOLUME", "O3-CONTINUUM"}
     os_and_more = {
-        "O3-OS-REGULARITY", "O3-OS-EUCLIDEAN", "O3-OS-RP", "O3-OS-SYMMETRY", "O3-OS-CLUSTER",
-        "O3-NONTRIVIAL", "O3-UNIQUE-VACUUM", "O3-MASS-GAP", "O3-INTERNAL-SYMMETRY",
+        "O3-OS-REGULARITY",
+        "O3-OS-EUCLIDEAN",
+        "O3-OS-RP",
+        "O3-OS-SYMMETRY",
+        "O3-OS-CLUSTER",
+        "O3-NONTRIVIAL",
+        "O3-UNIQUE-VACUUM",
+        "O3-MASS-GAP",
+        "O3-INTERNAL-SYMMETRY",
     }
     assert {k for k, v in rows.items() if v == "NOT_ADDRESSED"} == os_and_more
 
@@ -188,4 +199,6 @@ def test_o3_case_report_is_reproduced():
     assert "lattice_o3_high_temperature_finite" in report["probes"]["lean_covered_part_of_claim"]["satisfied_by"]
     assert report["exclusion_lint"]["flag"] == "POSSIBLY_VACUOUS_RELATIVE_TO_INTENT"
     statuses = {r["item"]: r["status"] for r in report["family_coverage"]}
-    assert [k for k, v in statuses.items() if v == "COMPARATOR"] == ["Exponential decay in classical O(n) models (September 23, 2026)"]
+    assert [k for k, v in statuses.items() if v == "COMPARATOR"] == [
+        "Exponential decay in classical O(n) models (September 23, 2026)"
+    ]

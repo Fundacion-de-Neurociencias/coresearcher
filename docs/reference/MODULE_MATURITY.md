@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 19 |
-| Tested | Covered by tests, not reachable from the API | 46 |
+| Tested | Covered by tests, not reachable from the API | 51 |
 | Exercised | Referenced only by benchmark or demo scripts | 17 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -83,9 +83,11 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
+| `o3_continuum_case` | Tested | - | yes | yes |
 | `obligation_ledger` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `preregistration` | Tested | - | yes | yes |
 | `proof_pipeline` | Tested | - | yes | yes |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
@@ -112,8 +114,11 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |
+| `trivial_witness` | Tested | - | yes | - |
+| `trust_ladder` | Tested | - | yes | - |
 | `twin_gate_harness` | Exercised | - | - | yes |
 | `universal_discovery_engine` | Exercised | - | - | yes |
 | `unknown_mechanism_benchmark` | Exercised | - | - | yes |
 | `vega_decision_engine` | Tested | - | yes | - |
 | `world_model_adapter` | Integrated | yes | yes | - |
+| `yang_mills_case` | Tested | - | yes | yes |

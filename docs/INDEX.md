@@ -13,6 +13,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [Module maturity](reference/MODULE_MATURITY.md) | How each discovery module is used: integrated, tested, exercised or prototype |
 | [Sakana ED polarity case](reference/cases/SAKANA_ED_POLARITY.md) | Showcase: an agentic-science rubric claim proved by z3 and Lean, with the necessity of each assumption |
 | [Local smoothing statement fidelity](reference/cases/LOCAL_SMOOTHING_STATEMENT_FIDELITY.md) | Do six Lean Comparator statements say what the paper claims? Range equivalence by z3, junk-value lint, coverage map (ADR-070) |
+| [Yang–Mills pre-registration](reference/cases/YANG_MILLS_PREREGISTRATION.md) | Frozen acceptance checklist for the announced 4D Yang–Mills existence proof, trivial-witness probe, trust ladder (CLAIMED), rehearsal on the O(3) continuum limit (ADR-081) |
 | [Mahler scalar obligations](reference/cases/MAHLER_SCALAR_OBLIGATIONS.md) | Obligation ledger pilot (ADR-076): identities and every pointwise inequality (first bullet on R, (3) on R^2) proved by interval arithmetic and Laurent-Taylor tail models; for the segment inequality, its reduction, the short-width inputs and the middle and large widths proved, the tails checked numerically; independent of the authors' programs |
 | [External results program](reference/EXTERNAL_RESULTS_PROGRAM.md) | What was done in response to Sakana, OASE and openai/math (Oct 2026), how, why and what for; lessons and next mechanisms |
 | [Proof pipeline](reference/PROOF_PIPELINE.md) | Reproducible obligation proofs: one-command rerun, SHA-256 manifest, fast audit that rejects stale or unverified proofs (ADR-076) |
@@ -23,6 +24,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | Document | Purpose |
 | --- | --- |
 | [Architecture specification](architecture/ARCHITECTURE.md) | Canonical description of layers, engines and data flows |
+| [Verification methodology](architecture/VERIFICATION_METHODOLOGY.md) | The eleven methods distilled from the October 2026 exercises, how they compose, and the integration roadmap |
 | [Ecosystem boundaries](architecture/ECOSYSTEM_BOUNDARIES.md) | Responsibilities of CoResearcher, DataAILab and EdiTXT |
 | [Observer and ledger](architecture/scientific-ledger.md) | Scientific activity ledger and provenance |
 | [Architecture folder](architecture/) | Supporting architecture notes |

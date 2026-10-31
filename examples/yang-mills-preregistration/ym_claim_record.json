@@ -1,0 +1,32 @@
+{
+  "id": "openai-ym4-existence-2026",
+  "claim": "Existence of quantum Yang-Mills theory, including coupling to fermions (committee statement, October 2026). The statement does not name the dimension or the gauge groups covered; it names SU(3) with quarks (QCD) as context and says the mass gap and confinement remain open.",
+  "claimant": "OpenAI",
+  "scope_note": "Formal statement fidelity only; not credit, news or correctness of the proof.",
+  "rung": "CLAIMED",
+  "formal_status": "NOT_KERNEL_CHECKED",
+  "mandatory_relays": [
+    {
+      "code": "LEAN_NOT_KERNEL_CHECKED",
+      "message": "A Lean 4 theorem was stated but no Lean kernel checked it here. Treat it as a claim, not a proof."
+    }
+  ],
+  "next_rung": "STATEMENT_PUBLIC",
+  "next_rung_needs": [
+    "statement_location",
+    "statement_sha256"
+  ],
+  "history": [
+    {
+      "rung": "CLAIMED",
+      "date": "2026-10-30",
+      "reason": "Statement not public: neither the 1147-page manuscript nor the Lean formalization has been released. The committee will release the Lean proof after checking that the definitions and problem statement match the standard ones.",
+      "evidence": {
+        "announcement": "https://www.kitp.ucsb.edu/sites/default/files/YM_working_group.pdf",
+        "announcement_sha256": "dbab31f0f954ac8265a3fc1c1a29664c7fa0b7f16c616d58012e65896557bd12",
+        "retrieved": "2026-10-30",
+        "checklist_frozen_before_statement": "ym4-existence v1.0.0"
+      }
+    }
+  ]
+}

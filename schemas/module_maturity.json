@@ -283,7 +283,7 @@
       "api": true,
       "level": "Integrated",
       "module": "formal_thresholds",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -492,6 +492,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "openai_math_coverage",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "openfoam_continuum_oracle",
       "scripts": false,
       "tests": true
@@ -684,6 +691,13 @@
       "module": "trajectory_evolution",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "trivial_witness_probe",
+      "scripts": true,
+      "tests": true
     },
     {
       "api": false,

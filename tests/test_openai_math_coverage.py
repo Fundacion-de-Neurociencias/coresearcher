@@ -417,3 +417,21 @@ def test_lint_reproduces_the_adr070_open_findings_and_flags_classical_on():
     classical = [f for f in lint["open_findings"] if f["file"] == "ClassicalON.lean"]
     assert {f["declaration"] for f in classical} == {"sphereProbability", "partition", "correlation"}
     assert all(f["families"] == ["215"] for f in classical)
+
+
+def test_parse_formalization_yaml_reads_the_fields_used_without_a_yaml_dependency():
+    text = (
+        '# comment\nversion: "v0.4"\n\nsources:\n  - title: "A: B"\n    id: ../preprints/A/paper.pdf\n'
+        '    type: article\n\nstatus:\n  scope: "Partial progress."\n  # note\n  main_results:\n'
+        "    - comparator_config: ComparatorChallenges/A.json\n      declaration: OAI.A.main\n"
+        "      file: OAI/A/Main.lean\n\nreview:\n  status: unchecked\n"
+    )
+    parsed = cov.parse_formalization_yaml(text)
+    assert parsed == {
+        "scope": "Partial progress.",
+        "review": "unchecked",
+        "sources": ["../preprints/A/paper.pdf"],
+        "main_results": [
+            {"comparator_config": "ComparatorChallenges/A.json", "declaration": "OAI.A.main", "file": "OAI/A/Main.lean"}
+        ],
+    }

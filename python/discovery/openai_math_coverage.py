@@ -229,17 +229,49 @@ def parse_scope_doc(text: str) -> ScopeDoc:
 
 
 def parse_formalization_yaml(text: str) -> Dict[str, Any]:
-    """Sources and main results of lean/formalization.yaml (safe loader: the file is data)."""
-    import yaml
+    """Sources and main results of lean/formalization.yaml.
 
-    data = yaml.safe_load(text) or {}
-    status = data.get("status") or {}
-    return {
-        "scope": status.get("scope"),
-        "review": (data.get("review") or {}).get("status"),
-        "sources": [s.get("id", "") for s in data.get("sources") or []],
-        "main_results": list(status.get("main_results") or []),
-    }
+    A line reader for the few fields used, not a YAML parser (no dependency, and nothing in the data is interpreted):
+    top-level sections, `status.scope`, `review.status`, `sources[].id` and `status.main_results[]` mappings.
+    """
+    out: Dict[str, Any] = {"scope": None, "review": None, "sources": [], "main_results": []}
+    section, subsection, item = "", "", None
+
+    def scalar(value: str) -> str:
+        value = value.strip()
+        return value[1:-1] if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'" else value
+
+    for raw in text.splitlines():
+        line = raw.split(" #", 1)[0].rstrip() if not raw.lstrip().startswith("#") else ""
+        if not line.strip():
+            continue
+        indent = len(line) - len(line.lstrip())
+        body = line.strip()
+        if indent == 0:
+            section, subsection, item = body.split(":", 1)[0], "", None
+            continue
+        if section == "status" and indent == 2 and not body.startswith("-"):
+            key, _, value = body.partition(":")
+            subsection = key
+            if key == "scope":
+                out["scope"] = scalar(value)
+            continue
+        if section == "review" and body.startswith("status:"):
+            out["review"] = scalar(body.partition(":")[2])
+        if body.startswith("- "):
+            item = {}
+            body = body[2:]
+            if section == "status" and subsection == "main_results":
+                out["main_results"].append(item)
+            elif section == "sources":
+                out["sources"].append(item)
+            else:
+                item = None
+        if item is not None and ":" in body:
+            key, _, value = body.partition(":")
+            item[key.strip()] = scalar(value)
+    out["sources"] = [s.get("id", "") for s in out["sources"]]
+    return out
 
 
 # ---------------------------------------------------------------------------

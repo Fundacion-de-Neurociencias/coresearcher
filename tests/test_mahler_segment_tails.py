@@ -22,16 +22,18 @@ def test_taylor_models_enclose_the_functions():
     iSh = ie.tm_reciprocal_one_plus(Sh - 1, 17)
     f = (1 - Sc * Sc * iSh * iSh).shift(2)
     for h in (0.003, 0.2, 0.7, 1.0):
-        with mp.workdps(50):  # the reference itself cancels as h -> 0
+        c, v = C.evaluate(h, h), f.evaluate(h, h)
+        # compare at 50 digits: the references cancel as h -> 0, and the interval endpoints may carry more than
+        # 53 bits, so converting them to floats would round
+        with mp.workdps(50):
             hh, ww = mp.mpf(h), mp.mpf(23) / 5
-            cref = mp.cos(ww * hh)
             ref = (1 - (mp.sin(ww * hh) / (ww * hh) / (mp.sinh(hh) / hh)) ** 2) / hh**2
-        assert mp.mpf(C.evaluate(h, h).a) <= cref <= mp.mpf(C.evaluate(h, h).b)
-        v = f.evaluate(h, h)
-        assert v.a <= ref <= v.b and v.b - v.a < 1e-6
+            assert mp.mpf(c.a) <= mp.cos(ww * hh) <= mp.mpf(c.b)
+            assert mp.mpf(v.a) <= ref <= mp.mpf(v.b) and mp.mpf(v.b) - mp.mpf(v.a) < 1e-6
     # the limit at h = 0 is exact: (w^2 + 1)/3
     v0 = f.evaluate(0, 0)
-    assert v0.a <= (float(w) ** 2 + 1) / 3 <= v0.b
+    with mp.workdps(50):
+        assert mp.mpf(v0.a) <= (mp.mpf(23) ** 2 / 25 + 1) / 3 <= mp.mpf(v0.b)
     with pytest.raises(ValueError):
         (1 - C).shift(3)  # 1 - cos(wh) = O(h^2), not O(h^3)
 

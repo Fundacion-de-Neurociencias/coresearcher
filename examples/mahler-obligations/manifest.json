@@ -5,7 +5,7 @@
     "mpmath": "1.3.0",
     "sympy": "1.13.3",
     "numpy": "2.4.6",
-    "git_commit": "3d0f609c35386e0450257210a7141f0f341538d6"
+    "git_commit": "557cafadb8cf6c1268d0c27e14dd2cdcdcaef408"
   },
   "steps": {
     "interval": {
@@ -94,7 +94,7 @@
         "examples/mahler-obligations/twovar_proof.json": "e82bb1f15b811b09a1fdbb336425ca35b8304dda574160c37853a36fc06470cf",
         "python/discovery/mahler_interval.py": "40b5704c62ca70eb7f38e55ee118a23ec6736fd9b19ec9abc49e4aa6c0dc6dd9",
         "python/discovery/mahler_obligations.py": "4740bd571b9478b243ef68c84d74c39c8332107cb7617ae0a9288098f5dc9a60",
-        "python/discovery/mahler_segment.py": "6e6b0848859bd851a8800784273b44e1995346128bb72d25548d5f2edbad888f",
+        "python/discovery/mahler_segment.py": "dfbb1d834bc369424b85d5eaf5d8b25b242545a6bd98f79d7b031511e9d0de85",
         "python/discovery/obligation_ledger.py": "5783c5810b8d2c1ad8358d62034ab655ae7712c43196b11e316334a39c21886b",
         "scripts/cases/mahler_obligations_report.py": "173b5495912f1685ec29d63baabc0384d029507914de42e1d60c882594ebcc84"
       }

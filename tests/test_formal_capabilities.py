@@ -541,3 +541,21 @@ def test_evidence_graph_carries_claim_trust_and_the_intent_gap():
     assert verdict["attributes"]["content_verdict"] == "VACUOUS_RELATIVE_TO_INTENT"
     assert verdict["attributes"]["intent_probe"]["declared_non_witnesses_satisfied"] == ["free theory"]
     assert "vacuous_relative_to_intent" in {g["kind"] for g in graph["gaps"]}
+
+
+def test_the_intent_probe_is_domain_neutral_on_a_biomedical_hypothesis():
+    # "High pTau217 predicts decline", formalized carelessly as "decline" alone: the prediction still holds when the
+    # biomarker is held at a constant with no signal, so the biomarker does no work in the claim.
+    careless = {
+        "hypothesis_id": "PTAU-DECLINE",
+        "variables": [{"name": "ptau", "domain": [0, 1, 2, 3]}, {"name": "decline", "domain": [0, 1]}],
+        "claims": ["decline == 1"],
+        "non_witnesses": [{"label": "biomarker constant at baseline", "state": {"ptau": 0, "decline": 1}}],
+    }
+    report = HypothesisEvaluator.evaluate(hypothesis_from_dict(careless)).to_dict()
+    assert report["content_verdict"] == "VACUOUS_RELATIVE_TO_INTENT"
+    assert report["intent_probe"]["probes"][0]["witness"] == {"ptau": 0, "decline": 1}
+    linked = dict(careless, claims=["ptau < 2 or decline == 1", "ptau >= 2 or decline == 0"])
+    report = HypothesisEvaluator.evaluate(hypothesis_from_dict(linked)).to_dict()
+    assert report["content_verdict"] == "FALSIFIABLE"
+    assert report["intent_probe"]["probes"][0]["outcome"] == "FORBIDDEN"

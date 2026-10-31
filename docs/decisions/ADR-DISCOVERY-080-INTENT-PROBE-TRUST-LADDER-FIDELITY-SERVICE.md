@@ -32,6 +32,25 @@ A pre-registration branch (ADR-077, `trust_ladder.ClaimRecord`, `trivial_witness
 announced result through a frozen checklist and a hand-kept, dated claim history. This record makes the generic
 mechanisms part of every formal report, the API and the CLI.
 
+### Methodology
+
+This record implements three methods of the verification methodology
+([`docs/architecture/VERIFICATION_METHODOLOGY.md`](../architecture/VERIFICATION_METHODOLOGY.md)):
+
+- **M1, check the question before the answer:** the fidelity services (section 3);
+- **M4, existence and generality claims can be vacuous:** the intent probe (section 1);
+- **M7, "formalized" and "verified" are per-claim states:** the trust ladder (section 2).
+
+It also follows M8 (a non-answer never becomes an answer): UNDECIDED fidelity stays a non-verdict, and
+NOT_KERNEL_CHECKED never counts as a kernel check.
+
+The October cases (local smoothing, Yang–Mills) were rehearsals. The capabilities are domain-neutral. The intent probe
+works on any formal hypothesis, with the same evaluator call. For a biomedical hypothesis such as "high pTau217
+predicts decline", the probe holds the biomarker at a constant with no signal. If the predicted effect still holds
+there, the biomarker does no work in the claim, and the verdict is VACUOUS_RELATIVE_TO_INTENT. A test covers this
+case. The trust ladder grades any statement with a digest. Only the fidelity services are specific to statements
+with a paper range and a Lean range.
+
 ## Decision
 
 ### 1. Intent probe in `HypothesisEvaluator`

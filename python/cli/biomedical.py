@@ -85,7 +85,7 @@ def main(args: argparse.Namespace) -> int:
             obligations, report = biomedical_domain.check(
                 request["hypothesis"], request.get("biomedical"), request.get("consequences"), backend
             )
-            result = {"formal_status": FormalStatus.DECIDED.value, "obligations": [o.to_dict() for o in obligations],
+            result = {"formal_status": FormalStatus.DECIDED.value, "obligations": [biomedical_domain.obligation_dict(o) for o in obligations],
                       "report": report}
             statuses = [o.status.value for o in obligations]
             lines = [f"{o.id}: {o.status.value}" for o in obligations]

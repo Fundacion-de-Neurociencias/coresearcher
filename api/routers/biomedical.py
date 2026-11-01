@@ -37,7 +37,7 @@ def check(req: BiomedicalCheckRequest):
         raise HTTPException(status_code=409, detail={"formal_status": status.value, "reason": str(exc)}) from exc
     return {
         "formal_status": formal_status.FormalStatus.DECIDED.value,
-        "obligations": [o.to_dict() for o in obligations],
+        "obligations": [biomedical_domain.obligation_dict(o) for o in obligations],
         "report": report,
     }
 

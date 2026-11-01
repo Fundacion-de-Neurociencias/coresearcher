@@ -39,6 +39,7 @@ right is never judged, and provenance never decides validity.
 from __future__ import annotations
 
 import ast
+from dataclasses import asdict
 from typing import Any, Dict, List, Optional, Tuple
 
 from python.discovery import biomedical_units, formal_status
@@ -49,6 +50,16 @@ SCHEMA = "coresearcher.biomedical_domain/v1"
 BY = "CoResearcher"
 _KEYS = {"units", "conventions", "probes"}
 _PROBES = {"null_biomarker", "untreated_arm", "population"}
+
+
+def obligation_dict(ob: Obligation) -> Dict[str, Any]:
+    """One obligation in the serialized form of an ADR-076 ledger (`Claim.to_dict`)."""
+    return {
+        **{k: v for k, v in asdict(ob).items() if k != "discharges"},
+        "status": ob.status.value,
+        "independent": ob.independent,
+        "discharges": [{**asdict(d), "status": d.status.value} for d in ob.discharges],
+    }
 
 
 class DomainSpecError(ValueError):
@@ -331,5 +342,5 @@ def check(hypothesis: Dict[str, Any], spec: Optional[Dict[str, Any]], consequenc
     return obligations, report
 
 
-__all__ = ["check", "validate", "fill_citations", "null_biomarker", "untreated_arm", "population",
+__all__ = ["check", "validate", "obligation_dict", "fill_citations", "null_biomarker", "untreated_arm", "population",
            "units_obligation", "DomainSpecError", "SCHEMA"]

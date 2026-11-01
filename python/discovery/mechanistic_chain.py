@@ -449,6 +449,12 @@ def obligations(compiled: Dict[str, Any], backend: str = "auto") -> Tuple[List[O
     return out, report
 
 
+def _obligation_dict(ob: Obligation) -> Dict[str, Any]:
+    from python.discovery.biomedical_domain import obligation_dict
+
+    return obligation_dict(ob)
+
+
 def check(mechanism: Dict[str, Any], backend: str = "auto") -> Dict[str, Any]:
     """Compiles a mechanism and decides its obligations. Prose outside the grammar is FORMALIZATION_FAILED."""
     try:
@@ -458,7 +464,7 @@ def check(mechanism: Dict[str, Any], backend: str = "auto") -> Dict[str, Any]:
                 "compiled": None, "obligations": [], "report": None}
     obs, report = obligations(compiled, backend)
     return {"schema": SCHEMA, "formal_status": FormalStatus.DECIDED.value, "reason": "", "compiled": compiled,
-            "obligations": [o.to_dict() for o in obs], "report": report,
+            "obligations": [_obligation_dict(o) for o in obs], "report": report,
             "scope_note": "Formal soundness of the stated mechanism; whether the mechanism holds is not judged."}
 
 

@@ -85,14 +85,6 @@ class Obligation:
         best = self.status
         return any(d.status == best and d.by != "author" for d in self.discharges)
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            **{k: v for k, v in asdict(self).items() if k != "discharges"},
-            "status": self.status.value,
-            "independent": self.independent,
-            "discharges": [{**asdict(d), "status": d.status.value} for d in self.discharges],
-        }
-
 
 @dataclass
 class Claim:
@@ -121,6 +113,14 @@ class Claim:
             "source": self.source,
             "status": self.status.value,
             "is_proved": self.is_proved,
-            "obligations": [o.to_dict() for o in self.obligations],
+            "obligations": [
+                {
+                    **{k: v for k, v in asdict(o).items() if k != "discharges"},
+                    "status": o.status.value,
+                    "independent": o.independent,
+                    "discharges": [{**asdict(d), "status": d.status.value} for d in o.discharges],
+                }
+                for o in self.obligations
+            ],
             "counts": {s.value: sum(o.status == s for o in self.obligations) for s in Status},
         }

@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 24 |
+| Integrated | Used by the API and covered by tests | 28 |
 | Tested | Covered by tests, not reachable from the API | 61 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
@@ -64,9 +64,12 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `formal_trust` | Integrated | yes | yes | - |
 | `formalization_gate` | Integrated | yes | yes | yes |
 | `formalizer` | Integrated | yes | yes | yes |
+| `freeze_service` | Integrated | yes | yes | - |
 | `frontier_math_flywheel` | Integrated | yes | yes | - |
 | `grounded_search_sensor` | Exercised | - | - | yes |
 | `hakken_dream_rsi_engine` | Integrated | yes | yes | - |
+| `hash_chain` | Tested | - | yes | - |
+| `hypothesis_ledger` | Integrated | yes | yes | - |
 | `hypothesis_tournament_arena` | Integrated | yes | yes | - |
 | `inference_time_scaling` | Tested | - | yes | - |
 | `interval_engine` | Tested | - | yes | - |
@@ -96,7 +99,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |
 | `o3_continuum_case` | Tested | - | yes | yes |
-| `obligation_ledger` | Tested | - | yes | - |
+| `obligation_ledger` | Integrated | yes | yes | - |
 | `openai_math_coverage` | Tested | - | yes | yes |
 | `openai_math_time_travel` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
@@ -136,5 +139,6 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `universal_discovery_engine` | Exercised | - | - | yes |
 | `unknown_mechanism_benchmark` | Exercised | - | - | yes |
 | `vega_decision_engine` | Tested | - | yes | - |
+| `verification_chain` | Integrated | yes | yes | - |
 | `world_model_adapter` | Integrated | yes | yes | - |
 | `yang_mills_case` | Tested | - | yes | yes |

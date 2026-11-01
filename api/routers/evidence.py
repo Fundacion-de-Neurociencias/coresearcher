@@ -99,6 +99,7 @@ READ_ONLY_POSTS = {
     "/api/manuscripts/audit",
     "/api/lifecycle/packages/inspect",
     "/api/regression/check",
+    "/api/freezes/{freeze_id}/verify",
 }
 
 

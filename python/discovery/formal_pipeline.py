@@ -41,11 +41,17 @@ def make_request(
     include_lean: bool = False,
     default_probes: bool = False,
     claim_evidence: Optional[Dict[str, Dict[str, Any]]] = None,
+    citations: Optional[List[Dict[str, Any]]] = None,
+    fidelity_spec: Optional[Dict[str, Any]] = None,
+    freeze: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """A formal request. Exactly one of `hypothesis` (a formal object) and `prose` must be given.
 
     `default_probes` and `claim_evidence` (ADR-DISCOVERY-080) are recorded only when set, so requests that do not use
-    them are byte-identical to earlier ones.
+    them are byte-identical to earlier ones. So are the ADR-DISCOVERY-085 fields: `citations` (resolved uses of cited
+    results, each with its registry entry inline, `hypothesis_ledger.resolve_citations`), `fidelity_spec` (paper range
+    vs formal range, ADR-070) and `freeze` (a frozen-criteria reference with its record, `FreezeStore.reference`), so
+    `formal analyze` can re-check all of them offline.
     """
     if (hypothesis is None) == (prose is None):
         raise ValueError("Give exactly one of a formal hypothesis and prose.")
@@ -54,6 +60,12 @@ def make_request(
         extra["default_probes"] = True
     if claim_evidence:
         extra["claim_evidence"] = claim_evidence
+    if citations:
+        extra["citations"] = citations
+    if fidelity_spec:
+        extra["fidelity_spec"] = fidelity_spec
+    if freeze:
+        extra["freeze"] = freeze
     return {
         "schema": REQUEST_SCHEMA,
         "input_kind": "formal" if hypothesis is not None else "prose",
@@ -155,6 +167,12 @@ def _formalize(request: Dict[str, Any], clients, raw_outputs, specs):
     return gate(samples, spec_objs, gate_request)
 
 
+def formalize(request: Dict[str, Any], clients=None, raw_outputs=None, specs=None):
+    """The formalizer gate alone (ADR-064) for a prose request: live clients, or stored raw outputs offline. Used by
+    the verification chain (ADR-085), which freezes the criteria of the accepted reading before evaluating it."""
+    return _formalize(request, clients, raw_outputs, specs)
+
+
 def compute(
     request: Dict[str, Any],
     clients: Optional[Dict[str, Any]] = None,
@@ -196,6 +214,14 @@ def compute(
                 return response
             response["formal_hypothesis"] = result.formalization.data
         hypothesis = _parse(response["formal_hypothesis"], "formal hypothesis")
+        if request.get("freeze"):
+            from python.discovery import freeze_service
+
+            response["freeze_check"] = freeze_service.check_reference(
+                request["freeze"], response["formal_hypothesis"], request["rivals"]
+            )
+            freeze_service.require_verified(response["freeze_check"])
+            relay_codes.append("CRITERIA_FROZEN")
         n, backend = request["max_examples"], request["backend"]
         evaluation = HypothesisEvaluator.evaluate(
             hypothesis,
@@ -225,6 +251,7 @@ def compute(
                     }
                 )
                 relay_codes.append("LEAN_NOT_KERNEL_CHECKED")
+        _seam_and_fidelity_reports(request, response)
     except Exception as exc:
         status = formal_status.classify(exc)  # Re-raises anything that is not a known non-verdict.
         response["formal_status"] = status.value
@@ -234,6 +261,20 @@ def compute(
         response["_exception"] = exc  # Removed before writing; lets the caller pick the exit code.
     response["mandatory_relays"] = formal_status.relays(relay_codes)
     return response
+
+
+def _seam_and_fidelity_reports(request: Dict[str, Any], response: Dict[str, Any]) -> None:
+    """ADR-085: each cited result's use (ADR-083 cite_check) and the prose fidelity (ADR-070), only when requested."""
+    if request.get("citations"):
+        from python.discovery import hypothesis_ledger
+
+        response["reports"]["citations"] = hypothesis_ledger.check_citations(
+            response["formal_hypothesis"], request["citations"]
+        )
+    if request.get("fidelity_spec"):
+        from python.discovery import fidelity_service
+
+        response["reports"]["prose_fidelity"] = fidelity_service.compare(request["fidelity_spec"])
 
 
 def _compute_statement_check(request: Dict[str, Any], response: Dict[str, Any]) -> Dict[str, Any]:
@@ -301,6 +342,12 @@ def verdict(response: Dict[str, Any]) -> Dict[str, Any]:
             "unresolved_citations": len(audit["citation_gate"]["unresolved"]),
             "open_obligations": audit["open_obligations"],
         }
+    if response.get("freeze_check"):  # ADR-085 fields appear only when requested, so earlier blocks are unchanged.
+        out["freeze"] = response["freeze_check"]["status"]
+    if reports.get("citations"):
+        out["citations"] = [c["outcome"] for c in reports["citations"]]
+    if reports.get("prose_fidelity"):
+        out["prose_fidelity"] = reports["prose_fidelity"]["relation"]
     if reports["comparisons"]:
         out["relations"] = {c["hypothesis_b"]: c["relation"] for c in reports["comparisons"]}
     if reports["consequences"]:
@@ -380,6 +427,9 @@ def report_digests(response: Dict[str, Any]) -> List[Dict[str, Any]]:
     named += [(f"comparison[{i}]", c) for i, c in enumerate(reports["comparisons"])]
     named += [(f"consequence[{i}]", c) for i, c in enumerate(reports["consequences"])]
     named += [(kind, reports[kind]) for kind in ("fidelity", "lean_lint", "manuscript_audit") if reports.get(kind)]
+    named += [(f"citation[{i}]", c) for i, c in enumerate(reports.get("citations") or [])]
+    if reports.get("prose_fidelity"):
+        named.append(("prose_fidelity", reports["prose_fidelity"]))
     for name, report in named:
         p = report["provenance"]
         out.append(

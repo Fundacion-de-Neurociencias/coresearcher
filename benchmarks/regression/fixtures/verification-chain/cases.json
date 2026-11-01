@@ -1,0 +1,90 @@
+{
+  "description": "Frozen inputs of the composed verification chain (ADR-DISCOVERY-085): one mathematical and one biomedical-style formal hypothesis. Each runs freeze -> formalize -> fidelity -> vacuity -> obligations -> seams -> discharge -> trust ladder, then the same freeze is checked against an edited hypothesis, which must be BLOCKED.",
+  "cases": {
+    "math_order_monotonicity": {
+      "note": "On the integers 0..6, the claim x <= y with three stated consequences: two follow (x*x <= x*y, x*x <= y*y) and one does not (x*y <= x). The reversed order is declared a non-witness. The fidelity spec compares the prose range with the formal one (EQUIVALENT).",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "ORDER",
+          "statement": "For integers 0 <= x, y <= 6, x is at most y.",
+          "variables": [
+            {"name": "x", "domain": [0, 1, 2, 3, 4, 5, 6]},
+            {"name": "y", "domain": [0, 1, 2, 3, 4, 5, 6]}
+          ],
+          "claims": ["x <= y"],
+          "non_witnesses": [{"label": "reversed order", "state": {"x": 3, "y": 1}}]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "REVERSED",
+            "variables": [
+              {"name": "x", "domain": [0, 1, 2, 3, 4, 5, 6]},
+              {"name": "y", "domain": [0, 1, 2, 3, 4, 5, 6]}
+            ],
+            "claims": ["y <= x"]
+          }
+        ],
+        "consequences": ["x * x <= x * y", "x * x <= y * y", "x * y <= x"],
+        "fidelity_spec": {
+          "theorem": "order",
+          "parameters": [
+            {"name": "x", "integer": true, "lower": 0, "upper": 6},
+            {"name": "y", "integer": true, "lower": 0, "upper": 6}
+          ],
+          "paper": "x <= y",
+          "lean": "x <= y",
+          "paper_source": "statement",
+          "lean_source": "formal object"
+        },
+        "author": "capability-regression"
+      },
+      "edited_claims": ["x < y"]
+    },
+    "biomedical_ptau217_decline": {
+      "note": "Illustrative, not clinical: 'in people aged 60 or more, high plasma pTau217 (level >= 2 of 0..3) predicts cognitive decline, and low pTau217 predicts no decline'. A constant, low biomarker with decline is declared a non-witness. The cutoff is cited from a registry entry validated under assay A and applied under assay B, a seam error (ADR-083) that keeps the import obligation OPEN.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "PTAU217-DECLINE",
+          "statement": "In people aged 60 or more, high plasma pTau217 predicts decline and low pTau217 predicts none.",
+          "variables": [
+            {"name": "ptau", "domain": [0, 1, 2, 3]},
+            {"name": "decline", "domain": [0, 1]},
+            {"name": "age", "domain": [40, 60, 80]}
+          ],
+          "scope": "age >= 60",
+          "claims": ["ptau < 2 or decline == 1", "ptau >= 2 or decline == 0"],
+          "non_witnesses": [{"label": "biomarker constant and low, decline anyway", "state": {"ptau": 0, "decline": 1}}]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "AGE-ONLY",
+            "variables": [
+              {"name": "ptau", "domain": [0, 1, 2, 3]},
+              {"name": "decline", "domain": [0, 1]},
+              {"name": "age", "domain": [40, 60, 80]}
+            ],
+            "scope": "age >= 60",
+            "claims": ["age < 80 or decline == 1", "age >= 80 or decline == 0"]
+          }
+        ],
+        "consequences": ["ptau < 2 or decline == 1", "decline == 1"],
+        "citations": [
+          {
+            "entry": {
+              "id": "ptau217-cutoff-illustrative",
+              "source": "illustrative registry entry (provenance only)",
+              "statement": "plasma pTau217 at or above level 2 classifies amyloid positivity",
+              "kind": "threshold",
+              "hypotheses": [{"text": "validated in people aged 50 or more", "formal": "age >= 50"}],
+              "conventions": {"validated_assay": "assay A", "units": "pg/mL"}
+            },
+            "conventions": {"validated_assay": "assay B", "units": "pg/mL"},
+            "source": "pTau217 cutoff (level 2)"
+          }
+        ],
+        "author": "capability-regression"
+      },
+      "edited_claims": ["ptau < 3 or decline == 1", "ptau >= 3 or decline == 0"]
+    }
+  }
+}

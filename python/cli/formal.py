@@ -28,7 +28,12 @@ the citation gate and the import obligations of ADR-077, with the same three rec
 
 Exit codes: 0 decided; 3 artifact missing, malformed or checksum mismatch; 4 threshold unresolved; 7 formalizer
 endpoint unreachable; 8 capability missing; 9 invalid input or refusal to overwrite; 10 UNDECIDED (solver);
-11 formalization ambiguous or failed; 12 analysis does not reproduce the run.
+11 formalization ambiguous or failed; 12 analysis does not reproduce the run; 13 BLOCKED because the frozen
+acceptance criteria (`--freeze`) or the evaluated hypothesis changed since the freeze (ADR-DISCOVERY-085).
+
+Every hypothesis run and analysis also carries `obligation_ledger` in its sidecar and analysis record: the ADR-076
+ledger of the evaluation (fidelity, vacuity, each claim, each cited result's use, each consequence), rolled up by the
+weakest link onto the trust ladder (ADR-DISCOVERY-085).
 """
 
 from __future__ import annotations
@@ -209,15 +214,55 @@ def _request_from_args(args: argparse.Namespace) -> Dict[str, Any]:
             include_lean=args.lean,
             default_probes=args.default_probes,
             claim_evidence=_read_json(Path(args.claim_evidence), "claim evidence") if args.claim_evidence else None,
+            citations=_citations_from_args(args),
+            fidelity_spec=_read_json(Path(args.fidelity_spec), "fidelity spec") if args.fidelity_spec else None,
+            freeze=_freeze_from_args(args),
         )
     except ValueError as exc:
         raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
 
 
+def _citations_from_args(args: argparse.Namespace) -> Optional[List[Dict[str, Any]]]:
+    """Uses of cited results (ADR-083), resolved against the registry store now and stored inline in the request."""
+    if not getattr(args, "citations", None):
+        return None
+    from python.cli.registry import DEFAULT_STORE
+    from python.discovery import cited_registry, hypothesis_ledger
+
+    items = _read_json(Path(args.citations), "citations")
+    if not isinstance(items, list):
+        raise CliError("--citations expects a JSON list.", formal_status.EXIT_REFUSAL)
+    try:
+        store = Path(args.registry) if args.registry else cited_registry.default_store() or DEFAULT_STORE
+        registry = cited_registry.Registry(store) if any("entry" not in i for i in items) else None
+        return hypothesis_ledger.resolve_citations(items, registry)
+    except (cited_registry.RegistryError, ValueError, TypeError) as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+
+
+def _freeze_from_args(args: argparse.Namespace) -> Optional[Dict[str, Any]]:
+    """A frozen-criteria reference (ADR-085) with its record, so `formal analyze` re-verifies it offline."""
+    if not getattr(args, "freeze", None):
+        return None
+    from python.cli.freeze import DEFAULT_STORE
+    from python.discovery import freeze_service
+
+    try:
+        store = freeze_service.FreezeStore(Path(args.freeze_store) if args.freeze_store else
+                                           freeze_service.default_store() or DEFAULT_STORE)
+        return store.reference(args.freeze, args.freeze_sha256)
+    except freeze_service.FreezeError as exc:
+        raise CliError(str(exc), formal_status.EXIT_REFUSAL) from exc
+
+
 def _trust_block(request: Dict[str, Any], response: Dict[str, Any]) -> Dict[str, Any]:
-    """Per-claim trust rungs and their relay, for the sidecar and the analysis record (never inside the response)."""
+    """Per-claim trust rungs, their relay and the obligation ledger (ADR-085), for the sidecar and the analysis record
+    (never inside the response)."""
+    from python.discovery import hypothesis_ledger
+
     claim_trust = formal_trust.for_response(request, response)
-    return {"claim_trust": claim_trust, "relays": formal_trust.relays(claim_trust)}
+    ledger = hypothesis_ledger.for_response(request, response, claim_trust)
+    return {"claim_trust": claim_trust, "relays": formal_trust.relays(claim_trust), "obligation_ledger": ledger}
 
 
 def run(args: argparse.Namespace, clients: Optional[Dict[str, Any]] = None) -> int:
@@ -341,7 +386,19 @@ def _record_run(
             k: v
             for k, v in request.items()
             if k
-            not in ("hypothesis", "rivals", "formalizer_messages", "source", "spec", "claim_evidence", "files", "registry")
+            not in (
+                "hypothesis",
+                "rivals",
+                "formalizer_messages",
+                "source",
+                "spec",
+                "claim_evidence",
+                "files",
+                "registry",
+                "citations",
+                "fidelity_spec",
+                "freeze",
+            )
         },
         **threshold_record,
         "timestamp": started,
@@ -353,6 +410,8 @@ def _record_run(
         "claim_trust": trust_block["claim_trust"],
         "capability_state": capability_state(),
     }
+    if trust_block["obligation_ledger"] is not None:
+        sidecar["obligation_ledger"] = trust_block["obligation_ledger"]
     _write_json(paths["meta"], sidecar)
     for kind in ("request", "response", "meta"):
         print(paths[kind])
@@ -487,6 +546,7 @@ def analyze(args: argparse.Namespace) -> int:
         },
         "mandatory_relays": response["mandatory_relays"] + trust_block["relays"],
         "claim_trust": trust_block["claim_trust"],
+        **({"obligation_ledger": trust_block["obligation_ledger"]} if trust_block["obligation_ledger"] else {}),
         "reports": response["reports"],
         "formalization_gate": response["formalization_gate"],
         "lean": response["lean"],
@@ -634,6 +694,15 @@ def add_parser(subparsers) -> None:
         help="Also probe generic trivial witnesses (variables at zero or at a bound); advisory, never a verdict",
     )
     p_run.add_argument("--claim-evidence", help="JSON file mapping a claim to its audit, kernel check, reproductions")
+    p_run.add_argument(
+        "--citations",
+        help="JSON list of cited-result uses: {entry_id | entry, version, conventions, context, source} (ADR-083)",
+    )
+    p_run.add_argument("--registry", help="Registry store for --citations (default: CORESEARCHER_REGISTRY_PATH)")
+    p_run.add_argument("--fidelity-spec", help="Fidelity spec JSON: the prose's range vs the formal range (ADR-070)")
+    p_run.add_argument("--freeze", help="Id of the frozen acceptance criteria this run must match (ADR-085)")
+    p_run.add_argument("--freeze-sha256", help="The SHA-256 the freeze must have (default: the stored one)")
+    p_run.add_argument("--freeze-store", help="Freeze store (default: CORESEARCHER_FREEZE_PATH or .coresearcher/)")
     p_run.add_argument("--threshold", action="append", help="Override a threshold for this run: KEY=VALUE")
     p_run.add_argument("--out", default=os.path.join("raw", "formal"), help="Output directory")
     p_run.add_argument("--name", default=None, help="Artifact base name (default: digest of the request)")

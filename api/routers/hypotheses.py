@@ -12,7 +12,15 @@ from api.schemas import (
     FormalizeHypothesisRequest,
 )
 from api.security import require_api_key
-from python.discovery import alzheimer_formal_scenario, formal_thresholds, formal_trust
+from python.discovery import (
+    alzheimer_formal_scenario,
+    cited_registry,
+    fidelity_service,
+    formal_thresholds,
+    formal_trust,
+    freeze_service,
+    hypothesis_ledger,
+)
 from python.discovery.formal_hypothesis import (
     FormalHypothesisError,
     Hypothesis,
@@ -42,23 +50,84 @@ def evaluate_formal_hypothesis(req: EvaluateFormalHypothesisRequest):
     With `hypothesis.non_witnesses`, each declared non-witness is probed; if one satisfies the claims, the verdict is
     VACUOUS_RELATIVE_TO_INTENT and `intent_probe` carries the witness. `default_probes` adds generic trivial witnesses,
     which are advisory. `claim_trust` gives each claim's trust-ladder rung (ADR-080).
+
+    `obligation_ledger` (ADR-085) is the ADR-076 ledger of the evaluation: fidelity, vacuity, each claim, each cited
+    result's use and each prediction, with the weakest-link roll-up on the trust ladder. With `freeze`, the frozen
+    criteria are verified first and a mismatch is refused with 409 and formal_status BLOCKED.
     """
+    hypothesis_data = req.hypothesis.model_dump()
+    rival_data = [r.model_dump() for r in req.rivals]
+    freeze_check = _verify_freeze(req, hypothesis_data, rival_data)
     try:
         hypothesis = _to_hypothesis(req.hypothesis)
+        n = _bounded(req.max_examples)
         report = HypothesisEvaluator.evaluate(
-            hypothesis,
-            req.observations,
-            max_examples=_bounded(req.max_examples),
-            default_probes=req.default_probes,
+            hypothesis, req.observations, max_examples=n, default_probes=req.default_probes
         )
-        payload = report.to_dict()
+        evaluation = report.to_dict()
+        payload = dict(evaluation)
         evidence = {claim: e.model_dump(exclude_none=True) for claim, e in req.claim_evidence.items()}
         location = f"API request, input_sha256 {payload['provenance']['input_sha256']}"
         payload["claim_trust"] = formal_trust.for_claims(list(hypothesis.claims), location, evidence)
         payload["mandatory_relays"] = payload["mandatory_relays"] + formal_trust.relays(payload["claim_trust"])
+        extras = _ledger_inputs(req, hypothesis, hypothesis_data, n)
     except FormalHypothesisError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    payload.update({k: v for k, v in extras.items() if v})
+    if freeze_check is not None:
+        payload["freeze_check"] = freeze_check
+        payload["mandatory_relays"] = payload["mandatory_relays"] + [relay("CRITERIA_FROZEN")]
+    payload["obligation_ledger"] = hypothesis_ledger.build(
+        hypothesis_data,
+        evaluation,
+        extras["consequences"],
+        extras["citations"],
+        [c.source or f"citation {i}" for i, c in enumerate(req.citations)],
+        extras["prose_fidelity"],
+        payload["claim_trust"],
+    )
     return payload
+
+
+def _verify_freeze(req: EvaluateFormalHypothesisRequest, hypothesis: dict, rivals: list):
+    """ADR-085: a referenced freeze must hold before anything is evaluated; otherwise 409 with BLOCKED."""
+    if req.freeze is None:
+        return None
+    from api.routers.freezes import store
+
+    check = store().verify_reference(req.freeze.freeze_id, req.freeze.expected_sha256, hypothesis, rivals)
+    if check["status"] != freeze_service.VERIFIED:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "formal_status": FormalStatus.BLOCKED.value,
+                "reason": "the frozen acceptance criteria do not hold: " + "; ".join(check["problems"]),
+                "freeze_check": check,
+            },
+        )
+    return check
+
+
+def _ledger_inputs(req: EvaluateFormalHypothesisRequest, hypothesis: Hypothesis, data: dict, n: int) -> dict:
+    """Rival comparisons, entailed predictions, citation checks and prose fidelity, when requested (ADR-085)."""
+    from api.routers.registry import registry
+
+    comparisons = [HypothesisEvaluator.compare(hypothesis, _to_hypothesis(r), n).to_dict() for r in req.rivals]
+    consequences = [HypothesisEvaluator.entails(hypothesis, c, n).to_dict() for c in req.consequences]
+    try:
+        uses = hypothesis_ledger.resolve_citations([c.model_dump(exclude_none=True) for c in req.citations], registry())
+    except (cited_registry.RegistryError, TypeError) as exc:
+        raise HTTPException(status_code=422, detail=f"citations: {exc}") from exc
+    except ValueError as exc:
+        if isinstance(exc, FormalHypothesisError):
+            raise
+        raise HTTPException(status_code=422, detail=f"citations: {exc}") from exc
+    return {
+        "comparisons": comparisons,
+        "consequences": consequences,
+        "citations": hypothesis_ledger.check_citations(data, uses),
+        "prose_fidelity": fidelity_service.compare(req.fidelity_spec) if req.fidelity_spec else None,
+    }
 
 
 @router.post("/api/hypotheses/compare", dependencies=[Depends(require_api_key)])

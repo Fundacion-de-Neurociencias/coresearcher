@@ -232,6 +232,9 @@ def _oase_code(coresearcher_code: str) -> str:
         "IMPORTS_ARE_LEXICAL": "formal.imports_are_lexical",
         "IMPORT_OBLIGATIONS_OPEN": "formal.import_obligations_open",
         "CITATIONS_UNRESOLVED": "formal.citations_unresolved",
+        "CRITERIA_FROZEN": "formal.criteria_frozen",
+        "CRITERIA_FROZEN_IN_SAME_RUN": "formal.criteria_frozen_in_same_run",
+        "LEDGER_NOT_PROVED": "formal.ledger_not_proved",
     }
     if coresearcher_code not in mapping:
         raise SchemaError(
@@ -511,9 +514,11 @@ def _run_http(
         return out, exchanges
     for kind, body in calls:
         if kind == "evaluation":
-            # API-only view (ADR-DISCOVERY-080): the pipeline report carries no
-            # trust rungs, so they are dropped to keep run and analyze comparable.
+            # API-only views (ADR-DISCOVERY-080, ADR-DISCOVERY-085): the pipeline
+            # report carries no trust rungs and no obligation ledger, so they are
+            # dropped to keep run and analyze comparable.
             body.pop("claim_trust", None)
+            body.pop("obligation_ledger", None)
             body["mandatory_relays"] = [
                 r
                 for r in body.get("mandatory_relays") or []

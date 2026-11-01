@@ -1195,6 +1195,241 @@
    },
    "title": "Sakana Error Diffusion polarity case"
   },
+  "verification_chain": {
+   "adr": "ADR-DISCOVERY-085",
+   "fixtures": {
+    "benchmarks/regression/fixtures/verification-chain/cases.json": "1380b8cb8ea6c4d5e53f8b0b186a0a47ac9752522a3c513f7b359499c6b52c4c"
+   },
+   "notes": "Freeze, formalize, fidelity, vacuity, obligations, seams, discharge, trust ladder; an edited hypothesis against the freeze must be BLOCKED.",
+   "observations": {
+    "biomedical_ptau217_decline/edited/formal_status": {
+     "better": "exact",
+     "value": "BLOCKED"
+    },
+    "biomedical_ptau217_decline/edited/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "BLOCKED"
+      ],
+      [
+       "formalize",
+       "NOT_RUN"
+      ],
+      [
+       "fidelity",
+       "NOT_RUN"
+      ],
+      [
+       "vacuity",
+       "NOT_RUN"
+      ],
+      [
+       "obligations",
+       "NOT_RUN"
+      ],
+      [
+       "seams",
+       "NOT_RUN"
+      ],
+      [
+       "discharge",
+       "NOT_RUN"
+      ],
+      [
+       "trust_ladder",
+       "NOT_RUN"
+      ]
+     ]
+    },
+    "biomedical_ptau217_decline/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "biomedical_ptau217_decline/freeze_sha256": {
+     "better": "exact",
+     "value": "5fa5f9fcc4574829ada45b68c9b24a0572788ba999634b45cd2f6535bb19d2d6"
+    },
+    "biomedical_ptau217_decline/obligations": {
+     "better": "exact",
+     "value": {
+      "cite[0]": "OPEN",
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[1]": "REFUTED",
+      "fidelity": "OPEN",
+      "vacuity": "DISCHARGED_SYMBOLIC"
+     }
+    },
+    "biomedical_ptau217_decline/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "biomedical_ptau217_decline/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "DONE",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "7 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "DONE",
+       "FINDINGS"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "4 DISCHARGED_SYMBOLIC, 2 OPEN, 1 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "math_order_monotonicity/edited/formal_status": {
+     "better": "exact",
+     "value": "BLOCKED"
+    },
+    "math_order_monotonicity/edited/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "BLOCKED"
+      ],
+      [
+       "formalize",
+       "NOT_RUN"
+      ],
+      [
+       "fidelity",
+       "NOT_RUN"
+      ],
+      [
+       "vacuity",
+       "NOT_RUN"
+      ],
+      [
+       "obligations",
+       "NOT_RUN"
+      ],
+      [
+       "seams",
+       "NOT_RUN"
+      ],
+      [
+       "discharge",
+       "NOT_RUN"
+      ],
+      [
+       "trust_ladder",
+       "NOT_RUN"
+      ]
+     ]
+    },
+    "math_order_monotonicity/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "math_order_monotonicity/freeze_sha256": {
+     "better": "exact",
+     "value": "6458020bc0f1675f06fb1144ba754ae22762c16a8e280edc5bd23230f8a85c9c"
+    },
+    "math_order_monotonicity/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[1]": "DISCHARGED_SYMBOLIC",
+      "consequence[2]": "REFUTED",
+      "fidelity": "DISCHARGED_SYMBOLIC",
+      "vacuity": "DISCHARGED_SYMBOLIC"
+     }
+    },
+    "math_order_monotonicity/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "math_order_monotonicity/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "DONE",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "vacuity",
+       "DONE",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "6 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "5 DISCHARGED_SYMBOLIC, 1 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    }
+   },
+   "title": "Composed verification chain on a math and a biomedical-style hypothesis"
+  },
   "yang_mills_o3_rehearsal": {
    "adr": "ADR-DISCOVERY-081",
    "fixtures": {
@@ -1374,8 +1609,21 @@
    "date": "2026-11-01",
    "reason": "Initial freeze (block C): the October 2026 benchmarks and calibrations as regression tests; the time-travel replay equals the full run of openai_math_revision_results.json.",
    "version": 1
+  },
+  {
+   "changes": {
+    "verification_chain": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "Block D (ADR-DISCOVERY-085): add the composed verification chain on a math and a biomedical-style formal hypothesis, with frozen criteria and the BLOCKED edit",
+   "version": 2
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 1
+ "version": 2
 }

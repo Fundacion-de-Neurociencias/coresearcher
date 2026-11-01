@@ -353,6 +353,34 @@ def _cited_registry() -> Dict[str, Dict[str, Any]]:
     return out
 
 
+VC_FIXTURE = "benchmarks/regression/fixtures/verification-chain/cases.json"
+
+
+def _verification_chain() -> Dict[str, Dict[str, Any]]:
+    """The composed chain (ADR-085) end to end on a math and a biomedical-style hypothesis, then the freeze against an
+    edited hypothesis, which must be BLOCKED with every later step NOT_RUN."""
+    from python.discovery import freeze_service, verification_chain
+
+    out: Dict[str, Dict[str, Any]] = {}
+    for name, case in sorted(_read_json(VC_FIXTURE)["cases"].items()):
+        store = freeze_service.FreezeStore(None)
+        result = verification_chain.run(copy.deepcopy(case["request"]), store)
+        out[f"{name}/formal_status"] = obs(result["formal_status"])
+        out[f"{name}/steps"] = obs([[s["name"], s["state"], s["outcome"]] for s in result["steps"]])
+        ledger = result["obligation_ledger"]
+        out[f"{name}/obligations"] = obs({o["id"]: o["status"] for o in ledger["claim"]["obligations"]})
+        out[f"{name}/rollup"] = obs([ledger["rollup"]["status"], ledger["rollup"]["trust_rung"]])
+        out[f"{name}/freeze_sha256"] = obs(result["freeze"]["record"]["sha256"])
+        edited = copy.deepcopy(case["request"])
+        edited["hypothesis"]["claims"] = case["edited_claims"]
+        edited.pop("author")
+        edited["freeze"] = {"freeze_id": result["freeze"]["freeze_id"]}
+        blocked = verification_chain.run(edited, store)
+        out[f"{name}/edited/steps"] = obs([[s["name"], s["state"]] for s in blocked["steps"]])
+        out[f"{name}/edited/formal_status"] = obs(blocked["formal_status"])
+    return out
+
+
 CASES: Dict[str, Case] = {
     c.id: c
     for c in (
@@ -382,6 +410,10 @@ CASES: Dict[str, Case] = {
              _manuscript_audit),
         Case("cited_registry_calibration", "Cited-results registry calibrations", "ADR-DISCOVERY-083", [CR_FIXTURE],
              _cited_registry),
+        Case("verification_chain", "Composed verification chain on a math and a biomedical-style hypothesis",
+             "ADR-DISCOVERY-085", [VC_FIXTURE], _verification_chain,
+             "Freeze, formalize, fidelity, vacuity, obligations, seams, discharge, trust ladder; an edited hypothesis "
+             "against the freeze must be BLOCKED."),
     )
 }
 

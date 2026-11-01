@@ -11,7 +11,7 @@ a verdict:
 |---------------------------|----------------------------------------------------------------------|----------|
 | DECIDED                   | The question was decided exactly; the report holds the verdict.      | 0        |
 | UNDECIDED                 | z3 returned unknown (timeout, resource limit, incompleteness).        | 10       |
-| BLOCKED                   | A required capability or setting is missing (z3, the formalizer      | 4 / 7 / 8|
+| BLOCKED                   | A required capability or setting is missing (z3, the formalizer      | 4/7/8/13 |
 |                           | model or endpoint, a threshold), or the question exceeds a threshold |          |
 |                           | (max_states). Nothing was decided.                                   |          |
 | INVALID_INPUT             | The formal object or request is malformed; the engine will not guess. | 9        |
@@ -64,6 +64,17 @@ class CapabilityUnavailable(RuntimeError):
         super().__init__(f"{capability} is unavailable{': ' + detail if detail else ''}.")
 
 
+class FrozenCriteriaChanged(RuntimeError):
+    """An evaluation references frozen acceptance criteria that no longer match (ADR-DISCOVERY-085). BLOCKED.
+
+    `check` is the freeze service's verification record: which freeze, what was expected, what changed.
+    """
+
+    def __init__(self, message: str, check: Optional[Dict[str, Any]] = None):
+        self.check = check or {}
+        super().__init__(message)
+
+
 # Exit codes. 0-9 follow OASE's taxonomy (core/errors.py); 10 and 11 are the formal layer's own non-verdicts.
 EXIT_CODES: Dict[FormalStatus, int] = {
     FormalStatus.DECIDED: 0,
@@ -78,6 +89,7 @@ EXIT_ENDPOINT = 7  # BLOCKED: the formalizer endpoint is configured but unreacha
 EXIT_DEPENDENCY = 8  # BLOCKED by a missing capability (OASE DependencyError).
 EXIT_REFUSAL = 9  # Refusal, including a refusal to overwrite a differing record.
 EXIT_NOT_REPRODUCED = 12  # `formal analyze` recomputed a different result under the same thresholds.
+EXIT_FREEZE_CHANGED = 13  # BLOCKED: the frozen acceptance criteria or the evaluated subject changed (ADR-085).
 
 
 def classify(exc: BaseException) -> FormalStatus:
@@ -86,7 +98,7 @@ def classify(exc: BaseException) -> FormalStatus:
 
     if isinstance(exc, SolverUndecided):
         return FormalStatus.UNDECIDED
-    if isinstance(exc, (ThresholdError, ThresholdExceeded, CapabilityUnavailable)):
+    if isinstance(exc, (ThresholdError, ThresholdExceeded, CapabilityUnavailable, FrozenCriteriaChanged)):
         return FormalStatus.BLOCKED
     if isinstance(exc, ImportError) and (exc.name or "").split(".")[0] == "z3":
         return FormalStatus.BLOCKED
@@ -101,6 +113,8 @@ def exit_code(status: FormalStatus, exc: Optional[BaseException] = None) -> int:
 
         if isinstance(exc, (ThresholdError, ThresholdExceeded)):
             return EXIT_THRESHOLD
+        if isinstance(exc, FrozenCriteriaChanged):
+            return EXIT_FREEZE_CHANGED
         return EXIT_ENDPOINT if getattr(exc, "endpoint", False) else EXIT_DEPENDENCY
     return EXIT_CODES[status]
 
@@ -175,6 +189,20 @@ RELAY_CODES: Dict[str, str] = {
     "IMPORT_OBLIGATIONS_OPEN": (
         "The manuscript has OPEN import obligations. Its claims are not verified until each one is discharged "
         "(ADR-076): a claim is never stronger than its weakest obligation."
+    ),
+    "CRITERIA_FROZEN": (
+        "The acceptance criteria were frozen before this evaluation, and the freeze's SHA-256, time and author were "
+        "verified (see freeze_check). A freeze fixes what counts as support or refutation; it does not make the "
+        "criteria right."
+    ),
+    "CRITERIA_FROZEN_IN_SAME_RUN": (
+        "The criteria were frozen in this run, before the evaluation and without observations. That rules out tuning "
+        "them on this result, not on data seen earlier; a freeze recorded on an earlier date is stronger evidence of "
+        "pre-registration."
+    ),
+    "LEDGER_NOT_PROVED": (
+        "The obligation ledger has at least one obligation that is not proved (OPEN, numeric, author-certified or "
+        "REFUTED). The hypothesis is never stronger than its weakest obligation (ADR-076); see obligation_ledger."
     ),
     "CITATIONS_UNRESOLVED": (
         "At least one citation key has no bibliography entry, or a collection link names a manuscript that does not "

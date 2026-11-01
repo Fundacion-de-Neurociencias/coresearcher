@@ -111,6 +111,9 @@ be acted on:
 | `formal.imports_are_lexical` | Treat each import obligation as a line to check, not a defect. |
 | `formal.import_obligations_open` | Never call the manuscript's claims verified while an import obligation is OPEN. |
 | `formal.citations_unresolved` | Report each unresolved citation with file and line. |
+| `formal.criteria_frozen` | Name the freeze (id, SHA-256, time, author) with the verdict. |
+| `formal.criteria_frozen_in_same_run` | Say the criteria were frozen in this run, not pre-registered earlier. |
+| `formal.ledger_not_proved` | Never call the hypothesis verified while a ledger obligation is not proved. |
 
 **Consequence rules.** A DECIDED defect stops the hypothesis from entering a
 tournament as written: return it to its author with the verdict and, for

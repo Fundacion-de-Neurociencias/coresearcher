@@ -159,6 +159,54 @@
       },
       "prev": "781e4eb4eb55e6a0d788396b8b80c6fcaa6115efc77abbdccad3c23826a89260",
       "seq": 10
+    },
+    {
+      "at": "2026-11-01T20:03:19Z",
+      "hash": "05d519155138552c269c45e0f02945dae10f3cb47354ce9ec9bf9a96fe70e483",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-01T20:03:19Z",
+        "id": "FZ-f333326a354345dc",
+        "kind": "document",
+        "label": "OPENAI_MATH_CONSTRAINED_PROTOCOL.md",
+        "lifecycle": null,
+        "sha256": "f333326a354345dce50570fc790e07aa7b40cb657846daba0c4acf7a4325b9a3"
+      },
+      "prev": "1d66810d957c257f7c9c95ac343df6b615ffdc3fe876c65e66aff320411ef485",
+      "seq": 11
+    },
+    {
+      "at": "2026-11-01T20:03:22Z",
+      "hash": "90e0e4a3061be41781cffccc3e91b4e6462d47e35b6341dd51de6186c324e50c",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-01T20:03:22Z",
+        "id": "FZ-c880e115356a1e0d",
+        "kind": "document",
+        "label": "CONSTRAINED_ENTRY_INSTRUCTIONS.md",
+        "lifecycle": null,
+        "sha256": "c880e115356a1e0d5bddbff10f7970d404bb86b18b465ca5b84d8649e3551a87"
+      },
+      "prev": "05d519155138552c269c45e0f02945dae10f3cb47354ce9ec9bf9a96fe70e483",
+      "seq": 12
+    },
+    {
+      "at": "2026-11-01T20:03:26Z",
+      "hash": "df2ee687a49a734c68bc9b0896e83a0d07297b38f1192609027ac3fd04885a11",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-01T20:03:26Z",
+        "id": "FZ-7b22bba9b0cda303",
+        "kind": "document",
+        "label": "CONSTRAINED_CONTEXT_INSTRUCTIONS.md",
+        "lifecycle": null,
+        "sha256": "7b22bba9b0cda303fedcd18968bba263322e80ad044961ba0bef3f6694dc2d5f"
+      },
+      "prev": "90e0e4a3061be41781cffccc3e91b4e6462d47e35b6341dd51de6186c324e50c",
+      "seq": 13
     }
   ],
   "freezes": {
@@ -246,6 +294,20 @@
       "lifecycle": null,
       "sha256": "7143c53aad23905cb46bf081ec519de781a1b42671a9b725b958d1ffa1d1a8e1"
     },
+    "FZ-7b22bba9b0cda303": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 2476,
+        "name": "CONSTRAINED_CONTEXT_INSTRUCTIONS.md",
+        "text": "# Typing instructions for citing conventions, with constraints and cases (given verbatim to each typist)\n\nYou will receive packets. Each packet is one place where a mathematical paper uses a cited result:\n\n- `cited_key`, `cited_locator`, `result_used`;\n- `passage`: the numbered lines of the citing file around the citation (`citation_line`);\n- `registry_entry`: the cited work's statement, hypotheses and **typed conventions**. Each convention tag has:\n  - `text`;\n  - `fields`: named choices with the cited work's value;\n  - `signs`: sign quantities as integer formulas, with `params` and their ranges, and `where` conditions;\n  - `cases`: the cases of the cited result a user can pick from.\n\nFor each packet, give the **citing passage's own conventions**, typed with the same names. For each tag of the\nentry:\n\n- **A field.** If the passage itself states or fixes the same choice, give the passage's value as a short atom of the\n  same kind (for example `\"matching\"` or `\"opposite\"`, `\"forward\"` or `\"reverse\"`). Leave the field out if the passage\n  does not fix it.\n- **A sign quantity.** If the passage states or uses a value for the same quantity, give it as an integer formula in\n  the same parameter names, with `params` for their ranges as the passage allows them (at most 0 to 40). Leave it out\n  if the passage does not fix it.\n- **`where`.** The conditions the passage puts on those parameters, in the same syntax plus comparisons and\n  `and`, `or`, `not`. For example, `n % 2 == 0` when the passage writes n = 2k, or `k == 4` when it fixes k = 4.\n- **`case`.** For each name in the entry's `cases`, the case the passage uses, as `{\"<name>\": \"<case>\"}`, only if the\n  passage makes it clear. The case is not a field.\n- **`text`.** One sentence quoting or paraphrasing what the passage says about this convention. Leave it empty if\n  the passage says nothing.\n- **A tag the passage says nothing about** is left out entirely.\n\nEncode only what the passage states, explicitly or by a definition visible in the passage. Do not infer from outside\nthe passage, do not use what you know about the subject, and do not judge whether the use is correct. Do not open any\nfile, web page or repository other than your packet file and these instructions.\n\nReturn a JSON list, one object per packet:\n\n```json\n{\"id\": \"<packet id>\", \"conventions\": {\"<tag>\": {\"text\": \"...\", \"fields\": {}, \"signs\": {}, \"params\": {}, \"where\": [],\n \"case\": {}}},\n \"notes\": \"<anything uncertain>\"}\n```\n"
+      },
+      "frozen_at": "2026-11-01T20:03:26Z",
+      "id": "FZ-7b22bba9b0cda303",
+      "kind": "document",
+      "label": "CONSTRAINED_CONTEXT_INSTRUCTIONS.md",
+      "lifecycle": null,
+      "sha256": "7b22bba9b0cda303fedcd18968bba263322e80ad044961ba0bef3f6694dc2d5f"
+    },
     "FZ-95e1abe4b0860dad": {
       "author": "openai-math-chain-benchmark",
       "content": {
@@ -259,6 +321,20 @@
       "label": "ENCODER_INSTRUCTIONS.md",
       "lifecycle": null,
       "sha256": "95e1abe4b0860dad1d3c07f777cfa6738fa2755e621626e9f33b5df78962109b"
+    },
+    "FZ-c880e115356a1e0d": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 3572,
+        "name": "CONSTRAINED_ENTRY_INSTRUCTIONS.md",
+        "text": "# Typing instructions for registry conventions, with constraints and cases (given verbatim to each typist)\n\nYou will receive registry entries. Each entry records a published mathematical result: its source and locator, its\nstatement, its hypotheses, and its conventions as text tags (for example `sign`, `normalization`, `indexing`), plus\nnotes from the person who wrote it from the source.\n\nYour task is to make each convention **typed**, so that a checker can compare it with another paper's convention by\nmeaning rather than by wording. For each entry, return its conventions as an object `{tag: typed value}`, where a\ntyped value is:\n\n```json\n{\n  \"text\": \"<the existing text of the convention, unchanged>\",\n  \"fields\": {\"<name>\": \"<short atom: a word, number or boolean>\"},\n  \"signs\": {\"<quantity>\": \"<integer formula over the params, e.g. (-1)**(k-1)>\"},\n  \"params\": {\"<name>\": [low, high]},\n  \"where\": [\"<condition on the params, e.g. n % 2 == 0>\"],\n  \"cases\": {\"<name>\": [\"<each case the statement covers>\"]}\n}\n```\n\n- **`fields`.** One per named choice the statement depends on, with the source's value, written as a short\n  lower-case atom. Examples:\n  - orientation of a branch or of a boundary;\n  - the direction in which a homotopy or trace runs;\n  - inward or outward normal;\n  - which factor carries a sign;\n  - the lattice or distance normalization.\n\n  Use atoms another paper could state about the same choice (`\"matching\"` or `\"opposite\"`, `\"outward\"` or `\"inward\"`,\n  `\"forward\"` or `\"reverse\"`), not sentences.\n- **`signs`.** One per sign or normalization the statement fixes as a function of integer parameters, as an\n  arithmetic formula. Allowed: integers, the parameter names, `+ - * // % **` and parentheses. A sign that the\n  source leaves undetermined is not a sign entry; record it as a field (e.g. `\"global_sign\": \"undetermined\"`).\n- **`params`.** For each parameter used in `signs`, the integer range the statement covers. Use at most 0 to 40.\n- **`where`.** Every condition the statement puts on those parameters besides the range, as a condition in the same\n  syntax plus comparisons and `and`, `or`, `not`. Examples: `n % 2 == 0` when the sign is stated for even n only,\n  `k >= 2`. A sign that holds only under a condition must carry that condition.\n- **`cases`.** When the statement covers several cases of one choice that a user picks from (for example a\n  homotopy and its reverse, the forward and the backward trace, part (1) and part (2)), list the cases covered under\n  a name. **Which case a user picks is not a convention.** Do not record a case as a field.\n- **`notes`.** Name every field and sign quantity with a one-line meaning, so that someone typing a citing paper can\n  use the same names.\n\nRules:\n\n- **Keep `text` exactly as given.**\n- **Add a tag** only if the cited statement depends on a convention the text tags missed.\n- **Do not change** the statement or the hypotheses.\n- **A tag with nothing to type** keeps only its `text`.\n- **Sources.** You may re-read the cited work through the arXiv or author link in `source`, to check a sign. Put\n  downloads in a new empty directory and never execute anything from them. Do not read anything about papers that\n  cite these results, about the `openai/math` collection, or about corrections or withdrawals. Do not open files of\n  the CoResearcher repository.\n\nReturn a JSON list with one object per entry:\n\n```json\n{\"id\": \"<entry id>\", \"conventions\": {\"<tag>\": {\"text\": \"...\", \"fields\": {}, \"signs\": {}, \"params\": {}}},\n \"notes\": \"<meaning of every field and sign name>\"}\n```\n"
+      },
+      "frozen_at": "2026-11-01T20:03:22Z",
+      "id": "FZ-c880e115356a1e0d",
+      "kind": "document",
+      "label": "CONSTRAINED_ENTRY_INSTRUCTIONS.md",
+      "lifecycle": null,
+      "sha256": "c880e115356a1e0d5bddbff10f7970d404bb86b18b465ca5b84d8649e3551a87"
     },
     "FZ-ca6a82fdb58f74fa": {
       "author": "openai-math-chain-benchmark",
@@ -287,6 +363,20 @@
       "label": "openai_math_typed_registry.json",
       "lifecycle": null,
       "sha256": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994"
+    },
+    "FZ-f333326a354345dc": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 3301,
+        "name": "OPENAI_MATH_CONSTRAINED_PROTOCOL.md",
+        "text": "# openai/math time-travel benchmark: constrained parameters and cases (ADR-088), pre-registered protocol\n\nStatus: frozen before any convention was typed under it. Its SHA-256 is stored in\n`OPENAI_MATH_CONSTRAINED_PROTOCOL.sha256` and in the ADR-085 freeze log `openai_math_chain_freezes.json`. The runner\n(`scripts/benchmarks/openai_math_revision_bench.py typed --variant constrained`) refuses to start if the file has\nchanged.\n\n## 1. Question\n\nThe typed re-measure (`OPENAI_MATH_TYPED_RESULTS.md`) left decided mismatches at the three withdrawals that were\nartefacts:\n\n- a sign compared outside the citing passage's domain (n odd, where the passage has n = 2k);\n- a field that recorded which case of a lemma was used, not a convention.\n\nADR-088 adds two things to a typed convention:\n\n- `where`: conditions on the parameters. Signs are compared only where both sides' conditions hold.\n- `cases` and `case`: the cases a cited result covers, and the case a citation uses. A case the cited result does not\n  cover is a decided MISMATCH.\n\n**Questions.**\n\n1. Typed blind again under the new schema, are the artefacts gone?\n2. What decided mismatches remain, and do any of them reflect a corrected defect?\n\nThe typed re-measure found that the withdrawals' error lies in the citing construction, not in a convention of the\ncited lemma. This protocol tests that conclusion: if it holds, no decided mismatch should remain at the withdrawals.\n\nScope: formal soundness only.\n\n## 2. What is unchanged\n\n- **Reused unchanged.** The scoring, encodability and adjudication rules of `OPENAI_MATH_CHAIN_PROTOCOL.md` and\n  `OPENAI_MATH_TYPED_PROTOCOL.md`.\n- **The base inputs.** The selection, the registry statements and hypotheses, and the citing contexts' variables and\n  assumptions of the chain re-run.\n- **Typing starts again from the untyped conventions.** The base for both sides is the chain re-run's text\n  conventions. The typed re-measure's typed records are not shown to anyone.\n\n## 3. Blind typing\n\n- **The process.** As in sections 3.1 and 3.2 of `OPENAI_MATH_TYPED_PROTOCOL.md`, with fresh agent sessions and the\n  instructions recorded in:\n  - `openai_math_chain_procedure/CONSTRAINED_ENTRY_INSTRUCTIONS.md`;\n  - `openai_math_chain_procedure/CONSTRAINED_CONTEXT_INSTRUCTIONS.md`.\n\n  Both are recorded before any typist starts.\n- **Entries.** Split in registry order between two typists.\n- **Citing packets.** The same 69 opaque, shuffled packets, with every third packet going to the same typist.\n- **Freezing.** Merged into `openai_math_constrained_registry.json` and `openai_math_constrained_contexts.json`. Each\n  file is frozen before the next step.\n\n## 4. Run, scoring and reporting\n\n- **The run.** `typed --variant constrained` writes `openai_math_constrained_results.json`.\n- **Reporting.** Results are reported next to the chain re-run (strings), ADR-087 on untyped inputs, and the typed\n  re-measure.\n- **Adjudication.** Every decided MISMATCH at a defect location and elsewhere is read by hand and labelled *reflects the\n  defect*, *decided but not the defect*, or *artefact* (with its cause).\n- **Regression.** The regression case replays this run, and its expectations are updated in the same pull request.\n- **Counts.** With 17 defects, every rate is a count with its Wilson 95% interval.\n"
+      },
+      "frozen_at": "2026-11-01T20:03:19Z",
+      "id": "FZ-f333326a354345dc",
+      "kind": "document",
+      "label": "OPENAI_MATH_CONSTRAINED_PROTOCOL.md",
+      "lifecycle": null,
+      "sha256": "f333326a354345dce50570fc790e07aa7b40cb657846daba0c4acf7a4325b9a3"
     },
     "FZ-fa2a803899e04d71": {
       "author": "openai-math-chain-benchmark",

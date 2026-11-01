@@ -57,3 +57,38 @@ def test_malformed_or_unsafe_values_are_refused(value):
 def test_describe_is_one_line():
     line = tc.describe({"text": "t", "fields": {"a": "x"}, "signs": {"s": "-1"}})
     assert line == "t; a=x; s: -1"
+
+
+def test_where_restricts_the_comparison_to_the_shared_domain():
+    """ADR-088: a counterexample outside the citing domain (n odd where the passage has n = 2k) is not a mismatch."""
+    cited = {"signs": {"reversal_sign": "(-1)**(n+1)"}, "params": {"n": [2, 40]}}
+    unconstrained = tc.compare(cited, {"signs": {"reversal_sign": "-1"}})
+    assert unconstrained["outcome"] == tc.MISMATCH
+    assert unconstrained["items"][0]["counterexample"]["at"] == {"n": 3}
+    even = tc.compare(cited, {"signs": {"reversal_sign": "-1"}, "where": ["n % 2 == 0"]})
+    assert even["outcome"] == tc.MATCH and even["items"][0]["points"] == 20
+    empty = tc.compare(
+        {"signs": {"s": "(-1)**n"}, "params": {"n": [0, 3]}}, {"signs": {"s": "(-1)**n"}, "params": {"n": [5, 9]}}
+    )
+    assert empty["outcome"] == tc.UNCOMPARED
+
+
+def test_case_used_is_checked_against_the_cases_covered():
+    cited = {"cases": {"homotopy_direction": ["forward", "reverse"]}, "fields": {"index": "whitney"}}
+    covered = tc.compare(cited, {"case": {"homotopy_direction": "Reverse"}, "fields": {"index": "whitney"}})
+    assert covered["outcome"] == tc.MATCH
+    narrow = {"cases": {"homotopy_direction": ["forward"]}}
+    out = tc.compare(narrow, {"case": {"homotopy_direction": "reverse"}})
+    assert out["outcome"] == tc.MISMATCH and out["items"][0]["detail"].startswith("the cited result does not cover")
+    silent = tc.compare({"text": "t"}, {"text": "u", "case": {"homotopy_direction": "reverse"}})
+    assert silent["outcome"] == tc.UNCOMPARED
+    assert silent["unspecified"] == ["case homotopy_direction (cited side lists no cases)"]
+
+
+@pytest.mark.parametrize(
+    "value",
+    [{"where": ["n == 2 or __import__('os')"]}, {"where": ["n == 1.5"]}, {"cases": {"d": []}}, {"case": {"d": [1]}}],
+)
+def test_malformed_conditions_and_cases_are_refused(value):
+    with pytest.raises(tc.ConventionError):
+        tc.validate(value)

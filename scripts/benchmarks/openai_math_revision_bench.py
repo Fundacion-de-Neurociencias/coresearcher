@@ -523,11 +523,12 @@ def posthoc(clone: Path) -> dict:
 CHAIN_ENCODABLE = omc.ENCODABLE
 
 
-def chain_protocol_frozen() -> str:
-    digest = hashlib.sha256(_lf(CHAIN_PROTOCOL)).hexdigest()
-    frozen = CHAIN_PROTOCOL_SHA.read_text(encoding="utf-8").split()[0]
+def chain_protocol_frozen(protocol: Path = None) -> str:
+    protocol = protocol or CHAIN_PROTOCOL
+    digest = hashlib.sha256(_lf(protocol)).hexdigest()
+    frozen = protocol.with_suffix(".sha256").read_text(encoding="utf-8").split()[0]
     if digest != frozen:
-        raise SystemExit(f"chain protocol changed after freezing: {digest} != {frozen}")
+        raise SystemExit(f"{protocol.name} changed after freezing: {digest} != {frozen}")
     return digest
 
 
@@ -643,13 +644,13 @@ def chain_freeze(path: Path, label: str) -> dict:
     return store.freeze_document(_lf(path), "openai-math-chain-benchmark", label, name=path.name)
 
 
-def chain_verify_freezes() -> dict:
+def chain_verify_freezes(paths=None) -> dict:
     """Every input must match its freeze; anything else stops the run (a non-answer never becomes an answer)."""
     from python.discovery import freeze_service
 
     store = freeze_service.FreezeStore(CHAIN_FREEZES)
     out = {}
-    for path in (CHAIN_PROTOCOL, CHAIN_REGISTRY, CHAIN_CONTEXTS):
+    for path in paths or (CHAIN_PROTOCOL, CHAIN_REGISTRY, CHAIN_CONTEXTS):
         sha = hashlib.sha256(_lf(path)).hexdigest()
         fid = freeze_service.freeze_id(sha)
         check = store.verify_reference(fid, sha, document=_lf(path))
@@ -659,20 +660,24 @@ def chain_verify_freezes() -> dict:
     return out
 
 
-def chain_run(clone: Path) -> dict:
+def chain_run(clone: Path, protocol: Path = None, registry_path: Path = None, contexts_path: Path = None) -> dict:
     """Section 4 of the chain protocol: the manuscript audit with the registry on every version that uses a registered
-    result, and the 8-step chain on every encoded occurrence. Then the scoring of section 6."""
+    result, and the 8-step chain on every encoded occurrence. Then the scoring of section 6. The typed re-measure
+    (OPENAI_MATH_TYPED_PROTOCOL.md) runs the same flow on its own protocol, registry and contexts."""
     import tempfile
 
     from python.discovery import cited_registry, freeze_service, manuscript_audit, verification_chain
 
-    digest = chain_protocol_frozen()
-    frozen = chain_verify_freezes()
+    protocol = protocol or CHAIN_PROTOCOL
+    registry_path = registry_path or CHAIN_REGISTRY
+    contexts_path = contexts_path or CHAIN_CONTEXTS
+    digest = chain_protocol_frozen(protocol)
+    frozen = chain_verify_freezes((protocol, registry_path, contexts_path))
     data = json.loads(DATASET.read_text(encoding="utf-8"))
     items = {i["id"]: i for i in data["items"]}
     selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
-    registry = json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8"))
-    contexts = {c["id"]: c for c in json.loads(CHAIN_CONTEXTS.read_text(encoding="utf-8"))["contexts"]}
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    contexts = {c["id"]: c for c in json.loads(contexts_path.read_text(encoding="utf-8"))["contexts"]}
     written = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
     keys_of: dict = {}
     for o in selection["occurrences"]:
@@ -851,11 +856,79 @@ def chain_fixture(clone: Path) -> dict:
     }
 
 
+TYPED_PROTOCOL = OUT_DIR / "OPENAI_MATH_TYPED_PROTOCOL.md"
+TYPED_REGISTRY = OUT_DIR / "openai_math_typed_registry.json"
+TYPED_CONTEXTS = OUT_DIR / "openai_math_typed_contexts.json"
+TYPED_RESULTS = OUT_DIR / "openai_math_typed_results.json"
+
+
+def typed_merge(kind: str, records_dir: Path) -> dict:
+    """The typed re-measure's inputs: the frozen chain registry or contexts with only their conventions replaced by
+    the blind typed records (OPENAI_MATH_TYPED_PROTOCOL.md, section 3). Nothing else changes."""
+    from python.discovery import typed_conventions
+
+    records = {}
+    for path in sorted(records_dir.glob(f"{kind}*_typed.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["id"]] = dict(rec, typist=path.name.split("_")[0])
+    for rec in records.values():
+        for value in (rec.get("conventions") or {}).values():
+            typed_conventions.validate(value)
+    if kind == "t":
+        base = json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8"))
+        missing = [w["entry_id"] for w in base["written"] if w["status"] == "WRITTEN" and w["entry_id"] not in records]
+        written = []
+        for w in base["written"]:
+            if w["status"] == "WRITTEN":
+                rec = records[w["entry_id"]]
+                w = dict(w, entry=dict(w["entry"], conventions=rec["conventions"]), typing_notes=rec.get("notes", ""))
+            written.append(w)
+        out = dict(base, written=written, procedure="OPENAI_MATH_TYPED_PROTOCOL.md section 3.1",
+                   base_sha256=hashlib.sha256(_lf(CHAIN_REGISTRY)).hexdigest())
+    else:
+        base = json.loads(CHAIN_CONTEXTS.read_text(encoding="utf-8"))
+        missing = [c["id"] for c in base["contexts"] if c["id"] not in records]
+        contexts = [dict(c, conventions=records[c["id"]]["conventions"],
+                         typing_notes=records[c["id"]].get("notes", "")) for c in base["contexts"]]
+        out = dict(base, contexts=contexts, procedure="OPENAI_MATH_TYPED_PROTOCOL.md section 3.2",
+                   base_sha256=hashlib.sha256(_lf(CHAIN_CONTEXTS)).hexdigest(),
+                   registry_sha256=hashlib.sha256(_lf(TYPED_REGISTRY)).hexdigest())
+    if missing:
+        raise SystemExit(f"no typed record for {missing}")
+    return out
+
+
+def typed_packets() -> None:
+    """Packets for the blind typists. Entries: each registry entry alone (no citing text). Contexts: the chain run's
+    opaque packets with the entry's typed conventions in place of its text conventions."""
+    registry = json.loads(TYPED_REGISTRY.read_text(encoding="utf-8")) if TYPED_REGISTRY.exists() else None
+    base = json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8"))
+    entries = [{"id": w["entry_id"], "source": w["source"], "ref": w["ref"],
+                "statement": w["entry"]["statement"], "hypotheses": w["entry"]["hypotheses"],
+                "conventions": w["entry"]["conventions"], "writer_notes": w.get("notes", "")}
+               for w in base["written"] if w["status"] == "WRITTEN"]
+    (CHAIN_WORK / "typed_entry_packets.json").write_text(json.dumps(entries, indent=1, ensure_ascii=False),
+                                                         encoding="utf-8")
+    if registry is None:
+        print(f"{len(entries)} entry packets")
+        return
+    typed = {w["entry_id"]: w["entry"]["conventions"] for w in registry["written"] if w["status"] == "WRITTEN"}
+    by_text = {json.dumps(w["entry"]["statement"]): w["entry_id"] for w in base["written"] if w["status"] == "WRITTEN"}
+    packets = json.loads((CHAIN_WORK / "encoder_packets.json").read_text(encoding="utf-8"))
+    for p in packets:
+        entry_id = by_text[json.dumps(p["registry_entry"]["statement"])]
+        p["registry_entry"] = dict(p["registry_entry"], conventions=typed[entry_id])
+    (CHAIN_WORK / "typed_context_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False),
+                                                           encoding="utf-8")
+    print(f"{len(packets)} context packets")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
                                         "chain-registry", "chain-packets", "chain-contexts", "chain",
-                                        "chain-fixture"])
+                                        "chain-fixture", "typed-packets", "typed-registry", "typed-contexts",
+                                        "typed"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     ap.add_argument("--file", type=Path, help="chain-freeze: the input to freeze; chain-registry, "
                                               "chain-contexts: the directory of the blind records")
@@ -866,6 +939,15 @@ def main() -> None:
         target = CHAIN_REGISTRY if args.command == "chain-registry" else CHAIN_CONTEXTS
         target.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {target}")
+        return
+    if args.command in ("typed-registry", "typed-contexts"):
+        out = typed_merge("t" if args.command == "typed-registry" else "c", args.file)
+        target = TYPED_REGISTRY if args.command == "typed-registry" else TYPED_CONTEXTS
+        target.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(f"wrote {target}")
+        return
+    if args.command == "typed-packets":
+        typed_packets()
         return
     if args.command == "chain-freeze":
         record = chain_freeze(args.file, args.file.name)
@@ -892,6 +974,10 @@ def main() -> None:
     elif args.command == "chain-packets":
         chain_encoder_packets(clone, json.loads(CHAIN_SELECTION.read_text(encoding="utf-8")),
                               json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8")))
+    elif args.command == "typed":
+        out = chain_run(clone, TYPED_PROTOCOL, TYPED_REGISTRY, TYPED_CONTEXTS)
+        TYPED_RESULTS.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(json.dumps(out["summary"], indent=2))
     elif args.command == "chain-fixture":
         out = chain_fixture(clone)
         payload = (json.dumps(out, indent=1, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")

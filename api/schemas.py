@@ -1,6 +1,6 @@
 """Request models for the CoResearcher API."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -734,7 +734,7 @@ class CitingContextModel(BaseModel):
 
     variables: List[Dict[str, Any]] = Field(default_factory=list, max_length=50)
     assumptions: List[str] = Field(default_factory=list, max_length=100)
-    conventions: Dict[str, str] = Field(default_factory=dict)
+    conventions: Dict[str, Union[str, Dict[str, Any]]] = Field(default_factory=dict)  # ADR-087
     text: str = Field(default="", max_length=20000)
 
 
@@ -755,7 +755,7 @@ class CitationUseModel(BaseModel):
     entry_id: Optional[str] = Field(default=None, max_length=120)
     version: Optional[int] = Field(default=None, ge=1)
     entry: Optional[Dict[str, Any]] = None
-    conventions: Dict[str, str] = Field(default_factory=dict)
+    conventions: Dict[str, Union[str, Dict[str, Any]]] = Field(default_factory=dict)  # ADR-087
     context: Optional[CitingContextModel] = None
     source: Optional[str] = Field(default=None, max_length=500)
     # The hypothesis variable the cited result applies to: the use inherits its unit (ADR-DISCOVERY-086).
@@ -901,7 +901,8 @@ class RegistryEntryRequest(BaseModel):
     kind: str = Field(default="result", max_length=40)
     formal_statement: Optional[Dict[str, Any]] = None
     hypotheses: List[RegistryHypothesisModel] = Field(default_factory=list, max_length=50)
-    conventions: Dict[str, str] = Field(default_factory=dict)
+    # A string, or a typed convention {text, fields, signs, params} compared by meaning (ADR-DISCOVERY-087).
+    conventions: Dict[str, Union[str, Dict[str, Any]]] = Field(default_factory=dict)
     rung: str = "CLAIMED"
 
 

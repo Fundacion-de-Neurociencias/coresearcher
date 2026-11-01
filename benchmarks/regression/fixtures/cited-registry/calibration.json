@@ -7,11 +7,11 @@
       "statement": "A reverse stabilization trace contributes sign (-1)^k to the signed double-point count",
       "key": "TraceLemma",
       "locator": "Lemma 2.3",
-      "conventions": {"sign": "cusp branches with matching source orientations"},
+      "conventions": {"sign": {"text": "cusp branches with matching source orientations", "fields": {"cusp_branch_source_orientations": "matching"}}},
       "hypotheses": [{"text": "the cusp branches have matching source orientations", "phrases": ["matching source orientations"]}]
     },
     "opposite_context": {
-      "conventions": {"sign": "cusp branches with opposite source orientations"},
+      "conventions": {"sign": {"fields": {"cusp_branch_source_orientations": "opposite"}}},
       "text": "with the opposite source orientations of the cusp branches, by Lemma 2.3 ..."
     },
     "matching_context": {

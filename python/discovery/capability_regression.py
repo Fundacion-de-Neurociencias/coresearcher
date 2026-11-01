@@ -110,6 +110,10 @@ TT_CHAIN = [
     "docs/reference/benchmarks/openai_math_chain_contexts.json",
     "benchmarks/regression/fixtures/openai_math_chain.json.gz",
 ]
+TT_TYPED = [  # The typed re-measure (OPENAI_MATH_TYPED_PROTOCOL.md, ADR-087): same selection and fixture.
+    "docs/reference/benchmarks/openai_math_typed_registry.json",
+    "docs/reference/benchmarks/openai_math_typed_contexts.json",
+]
 
 
 def _time_travel() -> Dict[str, Dict[str, Any]]:
@@ -152,6 +156,16 @@ def _time_travel() -> Dict[str, Dict[str, Any]]:
     for check, buckets in sorted(chain["alarm_load"].items()):
         for bucket, row in sorted(buckets.items()):
             out[f"chain/alarms/{bucket}/flags/{check}"] = obs(row["flags"], LOWER)
+    typed = omc.replay(_read_json(TT_CHAIN[0]), *[_read_json(f) for f in TT_TYPED], _read_json(TT_CHAIN[3]), items,
+                       omc.ENCODABLE)
+    for item_id, rec in sorted(typed["defects"].items()):
+        out[f"typed/defect/{item_id}/CHAIN_SEAMS"] = obs(rec["per_check"]["CHAIN_SEAMS"]["verdict"], VERDICT)
+    for bucket, row in sorted(typed["alarm_load"]["CHAIN_SEAMS"].items()):
+        out[f"typed/alarms/{bucket}/flags/CHAIN_SEAMS"] = obs(row["flags"], LOWER)
+    mismatches = [o for o in typed["occurrences"]
+                  if any(f.startswith("convention") for f in (o.get("chain") or {}).get("findings", []))]
+    out["typed/convention_mismatches/at_location"] = obs(sum(o["at_location"] for o in mismatches), HIGHER)
+    out["typed/convention_mismatches/elsewhere"] = obs(sum(not o["at_location"] for o in mismatches), LOWER)
     return out
 
 
@@ -456,7 +470,7 @@ CASES: Dict[str, Case] = {
     c.id: c
     for c in (
         Case("openai_math_time_travel", "openai/math time-travel benchmark: real corrected defects and false alarms",
-             "ADR-DISCOVERY-077", [TT_DATASET, TT_FIXTURE] + TT_CHAIN, _time_travel,
+             "ADR-DISCOVERY-077", [TT_DATASET, TT_FIXTURE] + TT_CHAIN + TT_TYPED, _time_travel,
              "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain "
              "re-run from its blind registry entries and citing contexts."),
         Case("openai_math_coverage_calibration", "Coverage-map calibration, families 079 and 215",

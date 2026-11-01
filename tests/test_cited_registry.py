@@ -32,7 +32,12 @@ def _trace_lemma(reg):
             "statement": "A reverse stabilization trace contributes sign (-1)^k to the signed double-point count",
             "key": "TraceLemma",
             "locator": "Lemma 2.3",
-            "conventions": {"sign": "cusp branches with matching source orientations"},
+            "conventions": {
+                "sign": {
+                    "text": "cusp branches with matching source orientations",
+                    "fields": {"cusp_branch_source_orientations": "matching"},
+                }
+            },
             "hypotheses": [
                 {
                     "text": "the cusp branches have matching source orientations",
@@ -49,15 +54,49 @@ def _trace_lemma(reg):
 def test_withdrawal_pattern_sign_convention_mismatch_is_a_finding(reg):
     entry = _trace_lemma(reg)
     context = {
-        "conventions": {"sign": "cusp branches with opposite source orientations"},
+        "conventions": {"sign": {"fields": {"cusp_branch_source_orientations": "opposite"}}},
         "text": "with the opposite source orientations of the cusp branches, by Lemma 2.3 ...",
     }
     check = cr.cite_check(entry, context)
     assert check["outcome"] == cr.FINDINGS
     assert check["conventions"][0]["outcome"] == cr.MISMATCH
-    assert any("convention 'sign' differs" in f for f in check["findings"])
+    assert any("field cusp_branch_source_orientations" in f for f in check["findings"])
     # The phrase is absent, so the hypothesis is not even stated; it is never treated as discharged.
     assert check["hypotheses"][0]["outcome"] == cr.H_UNDECIDED
+
+
+def test_untyped_convention_texts_that_differ_are_uncompared_not_findings(reg):
+    """ADR-087: a different wording is not evidence of a different convention."""
+    entry = _trace_lemma(reg)
+    context = {"conventions": {"sign": "the branches of the cusp are oriented oppositely at the source"}}
+    check = cr.cite_check(entry, context)
+    assert check["conventions"][0]["outcome"] == cr.UNCOMPARED
+    assert check["outcome"] == cr.INCOMPLETE and not check["findings"]
+    assert "sign" in check["open"]
+
+
+def test_sign_formulas_are_compared_exhaustively(reg):
+    entry = reg.register(
+        {
+            "id": "trace-sign",
+            "source": "s",
+            "statement": "t",
+            "conventions": {"sign": {"signs": {"reverse_trace": "(-1)**k"}, "params": {"k": [1, 12]}}},
+        }
+    )
+    same = cr.cite_check(entry, {"conventions": {"sign": {"signs": {"reverse_trace": "-(-1)**(k-1)"}}}})
+    assert same["conventions"][0]["outcome"] == cr.MATCH and same["outcome"] == cr.CLEAR
+    other = cr.cite_check(entry, {"conventions": {"sign": {"signs": {"reverse_trace": "1"}}}})
+    assert other["outcome"] == cr.FINDINGS
+    item = other["conventions"][0]["items"][0]
+    assert item["counterexample"]["at"] == {"k": 1} and item["counterexample"]["cited"] == -1
+
+
+def test_malformed_typed_convention_is_refused(reg):
+    with pytest.raises(cr.RegistryError):
+        reg.register(
+            {"id": "bad", "source": "s", "statement": "t", "conventions": {"sign": {"signs": {"a": "2**x()"}}}}
+        )
 
 
 def test_matching_convention_with_only_a_phrase_is_incomplete_not_clear(reg):
@@ -278,7 +317,7 @@ def test_api_register_check_retract_impact(api_client):
             "source": "s",
             "statement": "t",
             "hypotheses": [{"text": "pos", "formal": "x > 0"}],
-            "conventions": {"sign": "+"},
+            "conventions": {"sign": {"signs": {"orientation": "1"}}},
         },
     )
     assert r.status_code == 200, r.text
@@ -286,7 +325,11 @@ def test_api_register_check_retract_impact(api_client):
         "/api/registry/cite-check",
         json={
             "entry_id": "api-lemma",
-            "context": {"variables": X, "assumptions": ["x > 2"], "conventions": {"sign": "-"}},
+            "context": {
+                "variables": X,
+                "assumptions": ["x > 2"],
+                "conventions": {"sign": {"signs": {"orientation": "-1"}}},
+            },
         },
     )
     assert r.status_code == 200 and r.json()["outcome"] == "FINDINGS"

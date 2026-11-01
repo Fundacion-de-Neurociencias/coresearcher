@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 31 |
-| Tested | Covered by tests, not reachable from the API | 63 |
+| Tested | Covered by tests, not reachable from the API | 64 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -141,6 +141,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `trivial_witness_probe` | Tested | - | yes | yes |
 | `trust_ladder` | Tested | - | yes | - |
 | `twin_gate_harness` | Exercised | - | - | yes |
+| `typed_conventions` | Tested | - | yes | yes |
 | `universal_discovery_engine` | Exercised | - | - | yes |
 | `unknown_mechanism_benchmark` | Exercised | - | - | yes |
 | `vega_decision_engine` | Tested | - | yes | - |

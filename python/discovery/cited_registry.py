@@ -35,7 +35,14 @@ from datetime import date as _date
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence
 
-from python.discovery import biomedical_conventions, formal_provenance, formal_status, hash_chain, obligation_ledger
+from python.discovery import (
+    biomedical_conventions,
+    formal_provenance,
+    formal_status,
+    hash_chain,
+    obligation_ledger,
+    typed_conventions,
+)
 from python.discovery.formal_hypothesis import FormalHypothesisError, HypothesisEvaluator, hypothesis_from_dict
 
 STORE_ENV = "CORESEARCHER_REGISTRY_PATH"
@@ -66,6 +73,7 @@ H_UNDECIDED = "UNDECIDED"  # no formal predicate, no context variables, contradi
 MATCH = "MATCH"
 MISMATCH = "MISMATCH"
 UNSPECIFIED = "UNSPECIFIED"
+UNCOMPARED = typed_conventions.UNCOMPARED  # two untyped texts that differ (ADR-087): a non-verdict
 
 # Citation-check outcomes.
 CLEAR = "CLEAR"  # entry active, every hypothesis discharged, every convention matched
@@ -96,7 +104,7 @@ class RegistryEntry:
     kind: str = "result"  # result | premise | threshold | definition
     formal_statement: Optional[Dict[str, Any]] = None  # an ADR-059 hypothesis object, if available
     hypotheses: List[CitedHypothesis] = field(default_factory=list)
-    conventions: Dict[str, str] = field(default_factory=dict)
+    conventions: Dict[str, Any] = field(default_factory=dict)  # strings or typed conventions (ADR-087)
     rung: str = "CLAIMED"
     status: str = ACTIVE
     version: int = 1
@@ -110,27 +118,48 @@ class RegistryEntry:
         if self.status not in (ACTIVE, DOWNGRADED, RETRACTED):
             raise RegistryError(f"Unknown status {self.status!r}.")
         self.hypotheses = [h if isinstance(h, CitedHypothesis) else CitedHypothesis(**h) for h in self.hypotheses]
-        self.conventions = {str(k): str(v) for k, v in self.conventions.items()}
+        try:
+            self.conventions = {str(k): typed_conventions.validate(v) for k, v in self.conventions.items()}
+        except typed_conventions.ConventionError as exc:
+            raise RegistryError(str(exc)) from exc
 
 
-def check_conventions(entry: RegistryEntry, context: Dict[str, str]) -> List[Dict[str, str]]:
+def check_conventions(entry: RegistryEntry, context: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Compares each convention of the entry with the citing context. Absent in the context is UNSPECIFIED.
 
-    Tags are compared under their canonical names (`assay` is `validated_assay`), units by unit algebra and the
-    biomedical kinds by canonical value (ADR-DISCOVERY-086); everything else by normalized string.
+    Tags are compared under their canonical names (`assay` is `validated_assay`). Units are compared by unit
+    algebra, and the biomedical kinds by canonical value (ADR-DISCOVERY-086). Every other tag is compared by meaning
+    (ADR-DISCOVERY-087): typed fields and sign formulas decide MATCH or MISMATCH; two untyped texts that differ are
+    UNCOMPARED, a non-verdict, because a different wording is not evidence of a different convention.
     """
     out = []
-    citing = biomedical_conventions.canonical_tags(context)
-    for tag, value in sorted(biomedical_conventions.canonical_tags(entry.conventions).items()):
+    citing = {biomedical_conventions.canonical_tag(k): v for k, v in (context or {}).items()}
+    cited = {biomedical_conventions.canonical_tag(k): v for k, v in entry.conventions.items()}
+    for tag, value in sorted(cited.items()):
         if tag not in citing:
-            out.append({"tag": tag, "cited": value, "citing": "", "outcome": UNSPECIFIED})
+            out.append({"tag": tag, "cited": typed_conventions.describe(value), "citing": "", "outcome": UNSPECIFIED})
+        elif tag in biomedical_conventions.KINDS:
+            compared = biomedical_conventions.compare(tag, typed_conventions.text_of(value),
+                                                      typed_conventions.text_of(citing[tag]))
+            row = {"tag": tag, "cited": typed_conventions.text_of(value),
+                   "citing": typed_conventions.text_of(citing[tag]), "outcome": compared["outcome"],
+                   "compared_by": compared["compared_by"]}
+            if "unit" in compared:
+                row["detail"] = compared["unit"]["detail"]
+            out.append(row)
         else:
-            compared = biomedical_conventions.compare(tag, value, citing[tag])
-            row = {"tag": tag, "cited": value, "citing": str(citing[tag]), "outcome": compared["outcome"]}
-            if compared["compared_by"] != "normalized string":
-                row["compared_by"] = compared["compared_by"]
-                if "unit" in compared:
-                    row["detail"] = compared["unit"]["detail"]
+            try:
+                compared = typed_conventions.compare(value, citing[tag])
+            except typed_conventions.ConventionError as exc:
+                compared = {"outcome": UNCOMPARED, "compared_by": f"not comparable: {exc}", "items": [],
+                            "unspecified": []}
+            row = {"tag": tag, "cited": typed_conventions.describe(value),
+                   "citing": typed_conventions.describe(citing[tag]), "outcome": compared["outcome"],
+                   "compared_by": compared["compared_by"]}
+            if compared["items"]:
+                row["items"] = compared["items"]
+            if compared["unspecified"]:
+                row["unspecified"] = compared["unspecified"]
             out.append(row)
     return out
 
@@ -176,6 +205,20 @@ def check_hypothesis(hyp: CitedHypothesis, context: Dict[str, Any]) -> Dict[str,
     return result
 
 
+def _mismatch(c: Dict[str, Any]) -> str:
+    differing = [i for i in c.get("items", []) if i["outcome"] == MISMATCH]
+    if not differing:
+        return f"convention '{c['tag']}' differs: cited {c['cited']!r}, citing {c['citing']!r}"
+    parts = []
+    for i in differing:
+        detail = f"cited {i['cited']!r}, citing {i['citing']!r}"
+        if i.get("counterexample"):
+            ce = i["counterexample"]
+            detail += f" (at {ce['at']}: {ce['cited']} vs {ce['citing']})"
+        parts.append(f"{i['item']}: {detail}")
+    return f"convention '{c['tag']}' differs: " + "; ".join(parts)
+
+
 def cite_check(entry: RegistryEntry, context: Dict[str, Any]) -> Dict[str, Any]:
     """Checks one use of a registered result. The outcome is CLEAR, FINDINGS or INCOMPLETE, with provenance."""
     conventions = check_conventions(entry, context.get("conventions") or {})
@@ -183,10 +226,9 @@ def cite_check(entry: RegistryEntry, context: Dict[str, Any]) -> Dict[str, Any]:
     findings: List[str] = []
     if entry.status != ACTIVE:
         findings.append(f"cited entry is {entry.status}: {entry.status_reason or 'no reason recorded'}")
-    findings += [f"convention '{c['tag']}' differs: cited {c['cited']!r}, citing {c['citing']!r}"
-                 for c in conventions if c["outcome"] == MISMATCH]
+    findings += [_mismatch(c) for c in conventions if c["outcome"] == MISMATCH]
     findings += [f"hypothesis not discharged: {h['text']}" for h in hypotheses if h["outcome"] == NOT_DISCHARGED]
-    open_items = [c["tag"] for c in conventions if c["outcome"] == UNSPECIFIED]
+    open_items = [c["tag"] for c in conventions if c["outcome"] in (UNSPECIFIED, UNCOMPARED)]
     open_items += [h["text"] for h in hypotheses if h["outcome"] in (H_UNDECIDED, STATED_IN_TEXT)]
     if findings:
         outcome = FINDINGS

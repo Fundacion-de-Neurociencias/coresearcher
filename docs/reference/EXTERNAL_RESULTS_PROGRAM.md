@@ -175,6 +175,23 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
 - **Regression.** The block C regression case now replays this run offline and freezes its verdicts and alarm
   counts.
 
+### 2.12 Addendum (2026-11-01): typed conventions, measured on the same real errors
+
+- **What.** Conventions became typed ([ADR-087](../decisions/ADR-DISCOVERY-087-TYPED-CONVENTIONS.md)):
+  - named fields, compared as atoms;
+  - sign formulas, compared exhaustively over integer parameters.
+
+  Two texts that differ are now a non-verdict, not a mismatch. Both sides were typed blind, under a pre-registered
+  protocol. ([`OPENAI_MATH_TYPED_RESULTS.md`](benchmarks/OPENAI_MATH_TYPED_RESULTS.md))
+- **Result.** Chain flags fell from 39% of the citations at defect locations and 27% elsewhere, to 21% and 15%. Every
+  remaining flag names the field or the counterexample, so a reviewer can rule it out in seconds. Decided detections
+  are still 1/17.
+- **What it taught.**
+  - The withdrawals' sign error comes from the citing paper's own construction: the orientations of the two cusp
+    branches. It does not come from a convention of the cited lemma, which agrees with the citing signs on the shared
+    domain. Catching it needs a local formal check of that sign computation.
+  - Typed parameters need constraints such as parity, not only ranges.
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

@@ -1107,7 +1107,7 @@
   "cited_registry_calibration": {
    "adr": "ADR-DISCOVERY-083",
    "fixtures": {
-    "benchmarks/regression/fixtures/cited-registry/calibration.json": "23343dfbf6ec5fe1c071be5269bbd3cae70acda6f74f4ccf6f9b56e21c8fe556"
+    "benchmarks/regression/fixtures/cited-registry/calibration.json": "154af3eb6679b7d2762f325151ed2129250dac6cec1edc6f2e122719967de752"
    },
    "notes": "",
    "observations": {
@@ -1560,13 +1560,15 @@
     "docs/reference/benchmarks/openai_math_chain_contexts.json": "7143c53aad23905cb46bf081ec519de781a1b42671a9b725b958d1ffa1d1a8e1",
     "docs/reference/benchmarks/openai_math_chain_registry.json": "57f1fa28cb8331f9ef575ee72ccf634d690cd16b2d65e82622231790acf911c7",
     "docs/reference/benchmarks/openai_math_chain_selection.json": "3dbcd160c970695b570f118352e3c1d348e7653d4846d9a8b53a9f507f7b7f0c",
-    "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5"
+    "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5",
+    "docs/reference/benchmarks/openai_math_typed_contexts.json": "6a5a765af95997abea2d898c9a8adf0f13b8caddb079453698baeda6c93e645d",
+    "docs/reference/benchmarks/openai_math_typed_registry.json": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994"
    },
    "notes": "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain re-run from its blind registry entries and citing contexts.",
    "observations": {
     "chain/alarms/corrected/flags/CHAIN_SEAMS": {
      "better": "lower",
-     "value": 5
+     "value": 2
     },
     "chain/alarms/corrected/flags/REGISTRY_AUDIT": {
      "better": "lower",
@@ -1574,7 +1576,7 @@
     },
     "chain/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
      "better": "lower",
-     "value": 6
+     "value": 2
     },
     "chain/alarms/defect_manuscripts_off_location/flags/REGISTRY_AUDIT": {
      "better": "lower",
@@ -1598,7 +1600,7 @@
     },
     "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/REGISTRY_AUDIT": {
      "better": "verdict",
@@ -1606,11 +1608,11 @@
     },
     "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/REGISTRY_AUDIT": {
      "better": "verdict",
@@ -1706,7 +1708,7 @@
     },
     "chain/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/Taming-implies-compatibility-on-four-manifolds/REGISTRY_AUDIT": {
      "better": "verdict",
@@ -1738,11 +1740,11 @@
     },
     "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
      "better": "verdict",
-     "value": "HIT"
+     "value": "MISS"
     },
     "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/REGISTRY_AUDIT": {
      "better": "verdict",
@@ -2439,6 +2441,90 @@
     "imports_at_location/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/HYPOTHESIS_MATCH": {
      "better": "higher",
      "value": 4
+    },
+    "typed/alarms/corrected/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 3
+    },
+    "typed/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 3
+    },
+    "typed/convention_mismatches/at_location": {
+     "better": "higher",
+     "value": 3
+    },
+    "typed/convention_mismatches/elsewhere": {
+     "better": "lower",
+     "value": 2
+    },
+    "typed/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "typed/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "typed/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "typed/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "typed/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "typed/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "typed/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "typed/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
     }
    },
    "title": "openai/math time-travel benchmark: real corrected defects and false alarms"
@@ -3208,8 +3294,147 @@
    "date": "2026-11-01",
    "reason": "Full-chain re-run (OPENAI_MATH_CHAIN_PROTOCOL.md): REGISTRY_AUDIT and CHAIN_SEAMS on blind registry entries and citing contexts; protocol HITs on 10 defects (11 with the baseline), adjudicated in OPENAI_MATH_CHAIN_RESULTS.md as lexical seam flags or coincidences; alarm loads frozen",
    "version": 4
+  },
+  {
+   "changes": {
+    "cited_registry_calibration": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:benchmarks/regression/fixtures/cited-registry/calibration.json"
+     }
+    ],
+    "openai_math_time_travel": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_typed_contexts.json"
+     },
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_typed_registry.json"
+     },
+     {
+      "class": "IMPROVEMENT",
+      "key": "chain/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "IMPROVEMENT",
+      "key": "chain/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data"
+     },
+     {
+      "class": "REGRESSION",
+      "key": "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/convention_mismatches/at_location"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/convention_mismatches/elsewhere"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "ADR-087 typed conventions: untyped convention texts that differ are UNCOMPARED (non-verdict), not MISMATCH; withdrawal calibration now typed (field cusp_branch_source_orientations). Chain re-run replays under the new semantics (lexical HITs on Weil, Taming, conditional good minimal models, two-arc GFF become MISS; alarms 6->2 off-location, 5->2 corrected). Adds the pre-registered typed re-measure (OPENAI_MATH_TYPED_RESULTS.md)",
+   "version": 5
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 4
+ "version": 5
 }

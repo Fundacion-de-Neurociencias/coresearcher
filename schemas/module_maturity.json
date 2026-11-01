@@ -890,6 +890,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "typed_conventions",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Exercised",
       "module": "universal_discovery_engine",
       "scripts": true,

@@ -252,6 +252,12 @@ Flags on uses away from any defect location are unconfirmed alarms.
 
 Keep the citation gate. It is still the only decided detection on this corpus.
 
+**Follow-up.** Gap 1 was built as [ADR-087](../../decisions/ADR-DISCOVERY-087-TYPED-CONVENTIONS.md) and measured
+under its own pre-registered protocol in [`OPENAI_MATH_TYPED_RESULTS.md`](OPENAI_MATH_TYPED_RESULTS.md). It removed
+most lexical noise and decided nothing new. The withdrawals' sign error lies in the citing construction, not in a
+convention of the cited lemma. Since ADR-087, the regression replay of this run uses the new semantics (expectations
+version 5).
+
 ## 8. Deviations from the protocol
 
 - **Code added after the freeze.** The commands `chain-registry`, `chain-contexts` and `chain-fixture`, the offline

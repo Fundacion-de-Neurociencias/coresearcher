@@ -514,9 +514,11 @@ def _run_http(
         return out, exchanges
     for kind, body in calls:
         if kind == "evaluation":
-            # API-only view (ADR-DISCOVERY-080): the pipeline report carries no
-            # trust rungs, so they are dropped to keep run and analyze comparable.
+            # API-only views (ADR-DISCOVERY-080, ADR-DISCOVERY-085): the pipeline
+            # report carries no trust rungs and no obligation ledger, so they are
+            # dropped to keep run and analyze comparable.
             body.pop("claim_trust", None)
+            body.pop("obligation_ledger", None)
             body["mandatory_relays"] = [
                 r
                 for r in body.get("mandatory_relays") or []

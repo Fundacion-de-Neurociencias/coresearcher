@@ -36,6 +36,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from python.discovery import cited_import_ledger, lean_junk_lint, manuscript_checks  # noqa: E402
+from python.discovery import openai_math_chain as omc  # noqa: E402
 from python.discovery import openai_math_time_travel as tt  # noqa: E402
 from python.discovery.openai_math_time_travel import (  # noqa: E402
     CHECKS, LEAN_SCOPE, LOCATION_TOLERANCE, in_location, score, summarize)
@@ -52,6 +53,16 @@ RESULTS = OUT_DIR / "openai_math_revision_results.json"
 POSTHOC = OUT_DIR / "openai_math_revision_posthoc.json"
 FIXTURE = ROOT / "benchmarks" / "regression" / "fixtures" / "openai_math_time_travel.json.gz"
 CONTROL_SEED = 20261030
+CHAIN_PROTOCOL = OUT_DIR / "OPENAI_MATH_CHAIN_PROTOCOL.md"
+CHAIN_PROTOCOL_SHA = OUT_DIR / "OPENAI_MATH_CHAIN_PROTOCOL.sha256"
+CHAIN_SELECTION = OUT_DIR / "openai_math_chain_selection.json"
+CHAIN_REGISTRY = OUT_DIR / "openai_math_chain_registry.json"
+CHAIN_CONTEXTS = OUT_DIR / "openai_math_chain_contexts.json"
+CHAIN_RESULTS = OUT_DIR / "openai_math_chain_results.json"
+CHAIN_WORK = CACHE / "chain"  # Packets for the blind writers and encoders; they quote openai/math sources.
+DECOY_SEED = 20261101
+DECOY_DRAW = 12
+DECOYS_WANTED = 8
 
 _DATE = re.compile(r"-(?:January|February|March|April|May|June|July|August|September|October|November|December)"
                    r"-\d{1,2}-\d{4}$")
@@ -507,12 +518,359 @@ def posthoc(clone: Path) -> dict:
             "seeds": seeds, "summary": summary, "items": items}
 
 
+# ---------------------------------------------------------------- full chain (OPENAI_MATH_CHAIN_PROTOCOL.md)
+
+CHAIN_ENCODABLE = omc.ENCODABLE
+
+
+def chain_protocol_frozen() -> str:
+    digest = hashlib.sha256(_lf(CHAIN_PROTOCOL)).hexdigest()
+    frozen = CHAIN_PROTOCOL_SHA.read_text(encoding="utf-8").split()[0]
+    if digest != frozen:
+        raise SystemExit(f"chain protocol changed after freezing: {digest} != {frozen}")
+    return digest
+
+
+def _version_sources(wt_pre: Path, wt_post: Path, item: dict, version: str) -> dict:
+    wt = wt_pre if version == "pre" else wt_post
+    root = long_path(wt / "preprints" / item[version]["dir"] / "build")
+    if not root.exists():
+        root = long_path(wt / "preprints" / item[version]["dir"])
+    return manuscript_checks.read_sources(root)
+
+
+def _units(data: dict):
+    for item in data["items"]:
+        for version in ("pre", "post"):
+            if item[version]:
+                yield item, version
+
+
+def chain_select(clone: Path) -> dict:
+    """Section 3 of the chain protocol: the cited results to register and every occurrence of them. No check runs."""
+    chain_protocol_frozen()
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+    per_unit, bib = {}, {}
+    for item, version in _units(data):
+        files = _version_sources(wt_pre, wt_post, item, version)
+        titles = omc.bibliography_titles(files)
+        occs = omc.occurrences(files)
+        for o in occs:
+            bib.setdefault(o["result"], {}).setdefault(o["key"], titles[o["key"]][1])
+        per_unit[(item["id"], version)] = occs
+    defects = [i for i in data["items"] if i["group"] in ("revised", "withdrawn")]
+    involved = sorted({o["result"] for i in defects for o in per_unit[(i["id"], "pre")]
+                       if in_location(o, i["locations"])})
+    pool = sorted({o["result"] for i in defects for o in per_unit[(i["id"], "pre")]} - set(involved))
+    decoys = random.Random(DECOY_SEED).sample(pool, DECOY_DRAW)
+    candidates = involved + decoys
+    occurrences = []
+    for item, version in _units(data):
+        for o in per_unit[(item["id"], version)]:
+            if o["result"] in candidates:
+                at = (item["group"] in ("revised", "withdrawn") and version == "pre"
+                      and in_location(o, item["locations"]))
+                occurrences.append({"item": item["id"], "group": item["group"], "version": version, **o,
+                                    "at_location": at})
+    for n, o in enumerate(occurrences):
+        o["occ"] = "o" + hashlib.sha256(f"{DECOY_SEED}|{o['item']}|{o['version']}|{o['file']}|{o['line']}|"
+                                        f"{o['key']}|{o['ref']}".encode()).hexdigest()[:10]
+    return {
+        "protocol_sha256": chain_protocol_frozen(),
+        "dataset_sha256": hashlib.sha256(_lf(DATASET)).hexdigest(),
+        "decoy_seed": DECOY_SEED, "decoy_pool_size": len(pool),
+        "involved": involved, "decoys_in_draw_order": decoys,
+        "results": {r: {"ref": r.split("|", 1)[1], "role": "involved" if r in involved else "decoy",
+                        "bibliography": bib[r]} for r in candidates},
+        "occurrences": occurrences,
+    }
+
+
+def chain_writer_packets(selection: dict) -> None:
+    """One packet per candidate result for the blind registry writers: the bibliography entries and the locator.
+    Nothing about the citing manuscripts is included."""
+    CHAIN_WORK.mkdir(parents=True, exist_ok=True)
+    packets = []
+    for r, spec in selection["results"].items():
+        packets.append({"result": r, "ref": spec["ref"],
+                        "bibliography_entries": sorted(set(spec["bibliography"].values()))})
+    (CHAIN_WORK / "writer_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False), encoding="utf-8")
+
+
+def chain_encoder_packets(clone: Path, selection: dict, registry: dict) -> None:
+    """Shuffled, opaque packets for the blind context encoders: the passage around each occurrence of a registered
+    result and that result's registry entry. No manuscript name, version or role."""
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    items = {i["id"]: i for i in data["items"]}
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+    entries = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
+    cache: dict = {}
+    packets = []
+    for o in selection["occurrences"]:
+        if o["result"] not in entries:
+            continue
+        k = (o["item"], o["version"])
+        if k not in cache:
+            cache = {k: _version_sources(wt_pre, wt_post, items[o["item"]], o["version"])}
+        text = cache[k][o["file"]]
+        w = entries[o["result"]]
+        packets.append({"id": o["occ"], "cited_key": o["key"], "cited_locator": o["locator"],
+                        "result_used": o["ref"], "citation_line": o["line"],
+                        "passage": omc.passage(manuscript_checks.strip_tex_comments(text), o["line"]),
+                        "registry_entry": {k2: w["entry"].get(k2)
+                                           for k2 in ("statement", "hypotheses", "conventions")}})
+    random.Random(DECOY_SEED + 1).shuffle(packets)
+    (CHAIN_WORK / "encoder_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False),
+                                                     encoding="utf-8")
+    print(f"{len(packets)} encoder packets")
+
+
+CHAIN_FREEZES = OUT_DIR / "openai_math_chain_freezes.json"
+
+
+def _lf(path: Path) -> bytes:
+    return path.read_bytes().replace(b"\r\n", b"\n")
+
+
+def chain_freeze(path: Path, label: str) -> dict:
+    """Freezes an input of the chain run (protocol, registry, contexts) in the ADR-085 freeze log."""
+    from python.discovery import freeze_service
+
+    store = freeze_service.FreezeStore(CHAIN_FREEZES)
+    return store.freeze_document(_lf(path), "openai-math-chain-benchmark", label, name=path.name)
+
+
+def chain_verify_freezes() -> dict:
+    """Every input must match its freeze; anything else stops the run (a non-answer never becomes an answer)."""
+    from python.discovery import freeze_service
+
+    store = freeze_service.FreezeStore(CHAIN_FREEZES)
+    out = {}
+    for path in (CHAIN_PROTOCOL, CHAIN_REGISTRY, CHAIN_CONTEXTS):
+        sha = hashlib.sha256(_lf(path)).hexdigest()
+        fid = freeze_service.freeze_id(sha)
+        check = store.verify_reference(fid, sha, document=_lf(path))
+        if check["status"] != freeze_service.VERIFIED:
+            raise SystemExit(f"{path.name} does not match a freeze: {check['problems']}")
+        out[path.name] = {"freeze_id": fid, "sha256": sha, "frozen_at": check["frozen_at"]}
+    return out
+
+
+def chain_run(clone: Path) -> dict:
+    """Section 4 of the chain protocol: the manuscript audit with the registry on every version that uses a registered
+    result, and the 8-step chain on every encoded occurrence. Then the scoring of section 6."""
+    import tempfile
+
+    from python.discovery import cited_registry, freeze_service, manuscript_audit, verification_chain
+
+    digest = chain_protocol_frozen()
+    frozen = chain_verify_freezes()
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    items = {i["id"]: i for i in data["items"]}
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    registry = json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8"))
+    contexts = {c["id"]: c for c in json.loads(CHAIN_CONTEXTS.read_text(encoding="utf-8"))["contexts"]}
+    written = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
+    keys_of: dict = {}
+    for o in selection["occurrences"]:
+        keys_of.setdefault(o["result"], set()).add(o["key"])
+    entries = omc.registry_entries(written.values(), {r: sorted(k) for r, k in keys_of.items()})
+    work = Path(tempfile.mkdtemp(prefix="omc-"))
+    reg = cited_registry.Registry(work / "registry.json")
+    for e in entries:
+        reg.register(json.loads(json.dumps(e)))
+    freezes = freeze_service.FreezeStore(work / "freezes.json")
+    audit_registry = []
+    for e in entries:  # The manuscript audit takes hypotheses as literal phrases only (ADR-082).
+        if e.get("key"):
+            audit_registry.append(dict(e, hypotheses=[h for h in e.get("hypotheses", []) if h.get("phrases")]))
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+    occs = [dict(o) for o in selection["occurrences"] if o["result"] in written]
+    by_unit: dict = {}
+    for o in occs:
+        by_unit.setdefault((o["item"], o["version"]), []).append(o)
+    lines, audits = {}, {}
+    for (item_id, version), unit_occs in sorted(by_unit.items()):
+        files = _version_sources(wt_pre, wt_post, items[item_id], version)
+        report = manuscript_audit.audit(files, registry=audit_registry)
+        lines[(item_id, version)] = report["source_lines"]
+        audits[f"{item_id}/{version}"] = {"ledger_status": report["ledger_status"],
+                                          "open_obligations": report["open_obligations"],
+                                          "hypothesis_outcomes": report["hypothesis_outcomes"],
+                                          "citation_gate": report["citation_gate"]["status"]}
+        hm = {(i["file"], i["line"], i["key"]): i for i in report["imports"]
+              if i["kind"] == cited_import_ledger.HYPOTHESIS_MATCH}
+        for o in unit_occs:
+            imp = hm.get((o["file"], o["line"], o["key"]))
+            o["audit_outcome"] = imp["outcome"] if imp else None
+            o["audit_missing"] = imp["missing"] if imp else []
+            ctx = contexts.get(o["occ"])
+            if ctx is None:
+                o["chain"] = None
+                continue
+            request = omc.chain_request(ctx, written[o["result"]]["entry_id"], ctx.get("citing_text", ""))
+            try:
+                o["chain"] = omc.chain_record(verification_chain.run(request, freezes, reg))
+            except verification_chain.ChainInputError as exc:
+                o["chain"] = {"formal_status": "INVALID_INPUT", "reason": str(exc), "seams_outcome": None}
+        print(item_id[:60], version, len(unit_occs), flush=True)
+    defects = {}
+    for item in data["items"]:
+        if item["group"] in ("revised", "withdrawn"):
+            defects[item["id"]] = omc.score_defect(item, occs, sorted(CHAIN_ENCODABLE.get(item["id"], ())),
+                                                   lines.get((item["id"], "pre"), 0))
+    baseline = json.loads(RESULTS.read_text(encoding="utf-8"))
+    base = {r["id"]: r["score"] for r in baseline["items"] if "score" in r}
+    combined = {}
+    for item_id, sc in defects.items():
+        verdicts = [base[item_id]["verdict"], sc["verdict"]]
+        combined[item_id] = {"baseline": base[item_id]["verdict"], "chain": sc["verdict"],
+                             "combined": "HIT" if "HIT" in verdicts else "MISS" if "MISS" in verdicts
+                             else "NOT_ENCODABLE"}
+    summary = {
+        "defects": {v: sorted(k for k, c in combined.items() if c["combined"] == v)
+                    for v in ("HIT", "MISS", "NOT_ENCODABLE")},
+        "chain_only": {v: sorted(k for k, c in defects.items() if c["verdict"] == v)
+                       for v in ("HIT", "MISS", "NOT_ENCODABLE")},
+        "hits_by_check": {c: sorted(k for k, d in defects.items() if d["per_check"][c]["verdict"] == "HIT")
+                          for c in omc.CHAIN_CHECKS},
+        "alarm_load": omc.alarm_load(occs, items),
+        "registered_results": len(written),
+        "unavailable_results": sorted(w["result"] for w in registry["written"] if w["status"] != "WRITTEN"),
+        "occurrences": len(occs),
+        "encoded_occurrences": sum(o.get("chain") is not None for o in occs),
+        "seams_outcomes": {str(k): sum((o.get("chain") or {}).get("seams_outcome") == k for o in occs)
+                           for k in ("CLEAR", "FINDINGS", "INCOMPLETE", None)},
+    }
+    # Premise retraction, reported apart (protocol, section 5): seeds are pre-fix manuscripts where CHAIN_SEAMS raised
+    # a flag anywhere, never the ground truth; dependents are reached through collection links among the units.
+    seeds = {items[o["item"]]["pre"]["dir"]: "flagged" for o in occs
+             if o["version"] == "pre" and (o.get("chain") or {}).get("seams_outcome") == "FINDINGS"}
+    links = {i["pre"]["dir"]: cited_import_ledger.internal_links(_version_sources(wt_pre, wt_post, i, "pre"))
+             for i in data["items"]}
+    group_of = {i["pre"]["dir"]: i["group"] for i in data["items"]}
+    summary["propagation"] = {
+        "seeds": sorted(seeds),
+        "dependents": {d: {"rests_on": chain, "group": group_of.get(d)}
+                       for d, chain in sorted(cited_import_ledger.propagate(links, seeds).items())},
+    }
+    return {"protocol_sha256": digest, "frozen_inputs": frozen,
+            "dataset_sha256": hashlib.sha256(_lf(DATASET)).hexdigest(),
+            "summary": summary, "combined": combined, "defects": defects, "audits": audits, "occurrences": occs}
+
+
+def chain_registry(entries_dir: Path) -> dict:
+    """Assembles the blind writers' records (section 4.1). Involved results are registered when WRITTEN; decoys in
+    draw order until DECOYS_WANTED are WRITTEN, the rest are recorded as NOT_USED. Content is never edited."""
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    records = {}
+    for path in sorted(entries_dir.glob("w*_entries.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["result"]] = dict(rec, writer=path.name.split("_")[0])
+    missing = [r for r in selection["results"] if r not in records]
+    if missing:
+        raise SystemExit(f"no writer record for {missing}")
+    written, decoys_used = [], 0
+    for r in selection["involved"] + selection["decoys_in_draw_order"]:
+        rec = dict(records[r], role=selection["results"][r]["role"])
+        if rec["role"] == "decoy" and rec["status"] == "WRITTEN":
+            if decoys_used >= DECOYS_WANTED:
+                rec["status"] = "NOT_USED"
+            else:
+                decoys_used += 1
+        written.append(rec)
+    return {"procedure": "OPENAI_MATH_CHAIN_PROTOCOL.md section 4.1; writers' instructions in "
+                         "openai_math_chain_procedure/WRITER_INSTRUCTIONS.md",
+            "selection_sha256": hashlib.sha256(_lf(CHAIN_SELECTION)).hexdigest(),
+            "repairs": [], "written": written}
+
+
+def chain_contexts(encodings_dir: Path) -> dict:
+    """Assembles the blind encoders' records (section 4.2). Content is never edited."""
+    contexts = []
+    for path in sorted(encodings_dir.glob("e*_contexts.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            contexts.append(dict(rec, encoder=path.name.split("_")[0]))
+    return {"procedure": "OPENAI_MATH_CHAIN_PROTOCOL.md section 4.2; encoders' instructions in "
+                         "openai_math_chain_procedure/ENCODER_INSTRUCTIONS.md",
+            "registry_sha256": hashlib.sha256(_lf(CHAIN_REGISTRY)).hexdigest(),
+            "repairs": [], "contexts": sorted(contexts, key=lambda c: c["id"])}
+
+
+CHAIN_FIXTURE = ROOT / "benchmarks" / "regression" / "fixtures" / "openai_math_chain.json.gz"
+
+
+def chain_fixture(clone: Path) -> dict:
+    """Excerpts for the offline replay of the chain run (ADR-084): for every version that uses a registered result,
+    the environments the manuscript audit reads at each occurrence. The builder refuses to write the fixture unless
+    the audit on each excerpt gives the full sources' outcome at every occurrence."""
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    items = {i["id"]: i for i in data["items"]}
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    registry = json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8"))
+    written = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
+    keys_of: dict = {}
+    for o in selection["occurrences"]:
+        keys_of.setdefault(o["result"], set()).add(o["key"])
+    audit_reg = omc.audit_registry(omc.registry_entries(written.values(), {r: sorted(k) for r, k in keys_of.items()}))
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+    by_unit: dict = {}
+    for o in selection["occurrences"]:
+        if o["result"] in written:
+            by_unit.setdefault((o["item"], o["version"]), []).append(o)
+    units, pre_lines = {}, {}
+    for (item_id, version), occs in sorted(by_unit.items()):
+        files = _version_sources(wt_pre, wt_post, items[item_id], version)
+        if version == "pre":
+            pre_lines[item_id] = sum(t.count("\n") + 1 for n, t in files.items() if n.endswith(".tex"))
+        excerpt = {}
+        for name in sorted({o["file"] for o in occs}):
+            excerpt[name] = omc.excerpt(files[name], omc.audit_lines(files[name], [o["line"] for o in occs
+                                                                                    if o["file"] == name]))
+        full = omc.audit_outcomes(files, audit_reg)
+        replayed = omc.audit_outcomes({n: omc.unexcerpt(b) for n, b in excerpt.items()}, audit_reg)
+        for o in occs:
+            k = (o["file"], o["line"], o["key"])
+            if full.get(k) != replayed.get(k):
+                raise SystemExit(f"excerpt of {item_id}/{version} does not reproduce the audit at {k}: "
+                                 f"{full.get(k)} != {replayed.get(k)}")
+        units[f"{item_id}/{version}"] = excerpt
+        print(item_id[:60], version, flush=True)
+    return {
+        "source": {"repository": REPO, "license": "Apache-2.0", "pre_commit": PRE, "post_commit": POST,
+                   "note": "Excerpts of openai/math manuscript sources (Apache-2.0): the environments around each "
+                           "use of a registered cited result. Built by `openai_math_revision_bench.py chain-fixture`."},
+        "registry_sha256": hashlib.sha256(_lf(CHAIN_REGISTRY)).hexdigest(),
+        "pre_lines": pre_lines,
+        "units": units,
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture"])
+    ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
+                                        "chain-registry", "chain-packets", "chain-contexts", "chain",
+                                        "chain-fixture"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
+    ap.add_argument("--file", type=Path, help="chain-freeze: the input to freeze; chain-registry, "
+                                              "chain-contexts: the directory of the blind records")
     args = ap.parse_args()
     CACHE.mkdir(parents=True, exist_ok=True)
+    if args.command in ("chain-registry", "chain-contexts"):
+        out = chain_registry(args.file) if args.command == "chain-registry" else chain_contexts(args.file)
+        target = CHAIN_REGISTRY if args.command == "chain-registry" else CHAIN_CONTEXTS
+        target.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(f"wrote {target}")
+        return
+    if args.command == "chain-freeze":
+        record = chain_freeze(args.file, args.file.name)
+        print(record["id"], record["sha256"], record["frozen_at"])
+        return
     clone = ensure_clone(args.clone)
     if args.command == "dataset":
         data = build_dataset(clone)
@@ -524,6 +882,26 @@ def main() -> None:
         FIXTURE.parent.mkdir(parents=True, exist_ok=True)
         FIXTURE.write_bytes(gzip.compress(payload, mtime=0))
         print(f"wrote {FIXTURE} ({len(payload)} bytes before compression)")
+    elif args.command == "chain-select":
+        out = chain_select(clone)
+        CHAIN_SELECTION.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                   newline="\n")
+        chain_writer_packets(out)
+        print(f"{len(out['involved'])} involved, {len(out['decoys_in_draw_order'])} decoys drawn, "
+              f"{len(out['occurrences'])} occurrences")
+    elif args.command == "chain-packets":
+        chain_encoder_packets(clone, json.loads(CHAIN_SELECTION.read_text(encoding="utf-8")),
+                              json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8")))
+    elif args.command == "chain-fixture":
+        out = chain_fixture(clone)
+        payload = (json.dumps(out, indent=1, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
+        CHAIN_FIXTURE.write_bytes(gzip.compress(payload, mtime=0))
+        print(f"wrote {CHAIN_FIXTURE} ({len(payload)} bytes before compression)")
+    elif args.command == "chain":
+        out = chain_run(clone)
+        CHAIN_RESULTS.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                 newline="\n")
+        print(json.dumps(out["summary"], indent=2))
     elif args.command == "posthoc":
         out = posthoc(clone)
         POSTHOC.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")

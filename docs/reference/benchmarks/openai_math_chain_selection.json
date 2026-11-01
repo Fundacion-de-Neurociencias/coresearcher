@@ -1,0 +1,1658 @@
+{
+ "protocol_sha256": "0a0dc18aeda0b56ccc94a30b8f180ae368e5cc1cdce4c76ad9f36a87f303ae83",
+ "dataset_sha256": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5",
+ "decoy_seed": 20261101,
+ "decoy_pool_size": 374,
+ "involved": [
+  "comparingtamedandcompatiblesymplecticconesandcohomologicalpr|Corollary 1.1",
+  "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.2",
+  "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.4",
+  "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15",
+  "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.24",
+  "corrigendumtoonsubadditivityofthelogarithmickodairadimension|Theorem 3.2",
+  "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.1",
+  "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.4",
+  "gaussianfreefieldlimitsofweightedintegerlipschitzheights|Theorem 1.2",
+  "lagrangiancaps|Theorem 2.3",
+  "logabundancetheoremforthreefolds|Theorem 1.1",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Claim 4.2",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Definition 2.8",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 2.53",
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+  "uniformlipschitzfunctionsonthetriangularlatticehavelogarithm|Theorem 1.2"
+ ],
+ "decoys_in_draw_order": [
+  "birationalgeometryofalgebraicvarieties|Proposition 4.18",
+  "complexanalyticanddifferentialgeometry|Corollary 2.11",
+  "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2",
+  "algebraicityofweilclassesonsplitabelianeightfolds|Lemma 9.1",
+  "theselmerconverseforellipticcurvesateveryprime|Lemma 7.3",
+  "aconditionalreductionforalgebraickugasatakecorrespondences|Corollary 1.3",
+  "addendumtoterminationof4foldcanonicalflips|Theorem 5.1",
+  "theglobalmodulitheoryofsymplecticvarieties|Lemma 5.3",
+  "firstpassagesetsofthe2dcontinuumgaussianfreefield|Proposition 4.4",
+  "introductiontotheminimalmodelproblem|Theorem 5",
+  "logpluricanonicalrepresentationsandtheabundanceconjecture|Theorem 1.5",
+  "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8"
+ ],
+ "results": {
+  "comparingtamedandcompatiblesymplecticconesandcohomologicalpr|Corollary 1.1": {
+   "ref": "Corollary 1.1",
+   "role": "involved",
+   "bibliography": {
+    "LiZhang2009": "@article{LiZhang2009,\n  author  = {Li, Tian-Jun and Zhang, Weiyi},\n  title   = {Comparing tamed and compatible symplectic cones and\n             cohomological properties of almost complex manifolds},\n  journal = {Communications in Analysis and Geometry},\n  volume  = {17},\n  number  = {4},\n  pages   = {651--683},\n  year    = {2009},\n  doi     = {10.4310/CAG.2009.v17.n4.a4},\n  url     = {https://www.intlpress.com/site/pub/files/_fulltext/journals/cag/2009/0017/0004/CAG-2009-0017-0004-a004.pdf}\n}"
+   }
+  },
+  "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.2": {
+   "ref": "Lemma 3.2",
+   "role": "involved",
+   "bibliography": {
+    "Top:EEMS": "\\bibitem[EEMS13]{Top:EEMS}\nTobias Ekholm, Yakov Eliashberg, Emmy Murphy, and Ivan Smith.\n\\newblock Constructing exact {Lagrangian} immersions with few double points.\n\\newblock {\\em Geometric and Functional Analysis}, 23(6):1772--1803, 2013.\n\\newblock Theorem numbering as in arXiv:1303.0588v2.\n\n",
+    "eems": "\\bibitem{eems}\nT. Ekholm, Y. Eliashberg, E. Murphy, and I. Smith,\n\\emph{Constructing exact Lagrangian immersions with few double points},\nGeom. Funct. Anal. \\textbf{23} (2013), no.~6, 1772--1803.\nNumbering follows \\href{https://arxiv.org/abs/1303.0588v2}{arXiv:1303.0588v2}.\n\n",
+    "EEMS": "@article{EEMS,\n  author = {Ekholm, Tobias and Eliashberg, Yakov and Murphy, Emmy and Smith, Ivan},\n  title = {Constructing exact {Lagrangian} immersions with few double points},\n  journal = {Geometric and Functional Analysis},\n  volume = {23},\n  number = {6},\n  pages = {1772--1803},\n  year = {2013},\n  doi = {10.1007/s00039-013-0243-6},\n  eprint = {1303.0588},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/1303.0588}\n}"
+   }
+  },
+  "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.4": {
+   "ref": "Lemma 3.4",
+   "role": "involved",
+   "bibliography": {
+    "Top:EEMS": "\\bibitem[EEMS13]{Top:EEMS}\nTobias Ekholm, Yakov Eliashberg, Emmy Murphy, and Ivan Smith.\n\\newblock Constructing exact {Lagrangian} immersions with few double points.\n\\newblock {\\em Geometric and Functional Analysis}, 23(6):1772--1803, 2013.\n\\newblock Theorem numbering as in arXiv:1303.0588v2.\n\n",
+    "eems": "\\bibitem{eems}\nT. Ekholm, Y. Eliashberg, E. Murphy, and I. Smith,\n\\emph{Constructing exact Lagrangian immersions with few double points},\nGeom. Funct. Anal. \\textbf{23} (2013), no.~6, 1772--1803.\nNumbering follows \\href{https://arxiv.org/abs/1303.0588v2}{arXiv:1303.0588v2}.\n\n",
+    "EEMS": "@article{EEMS,\n  author = {Ekholm, Tobias and Eliashberg, Yakov and Murphy, Emmy and Smith, Ivan},\n  title = {Constructing exact {Lagrangian} immersions with few double points},\n  journal = {Geometric and Functional Analysis},\n  volume = {23},\n  number = {6},\n  pages = {1772--1803},\n  year = {2013},\n  doi = {10.1007/s00039-013-0243-6},\n  eprint = {1303.0588},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/1303.0588}\n}"
+   }
+  },
+  "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15": {
+   "ref": "Lemma 3.15",
+   "role": "involved",
+   "bibliography": {
+    "SSdiscrete": "\\bibitem{SSdiscrete} O. Schramm and S. Sheffield,\n\\emph{Contour lines of the two-dimensional discrete Gaussian free field},\nActa Mathematica \\textbf{202} (2009), 21--137.\nDetailed locators refer to arXiv:math/0605337v3 (2008).\n\\url{https://doi.org/10.1007/s11511-009-0034-y}.\n\\url{https://arxiv.org/abs/math/0605337v3}.\n"
+   }
+  },
+  "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.24": {
+   "ref": "Lemma 3.24",
+   "role": "involved",
+   "bibliography": {
+    "SSdiscrete": "\\bibitem{SSdiscrete} O. Schramm and S. Sheffield,\n\\emph{Contour lines of the two-dimensional discrete Gaussian free field},\nActa Mathematica \\textbf{202} (2009), 21--137.\nDetailed locators refer to arXiv:math/0605337v3 (2008).\n\\url{https://doi.org/10.1007/s11511-009-0034-y}.\n\\url{https://arxiv.org/abs/math/0605337v3}.\n"
+   }
+  },
+  "corrigendumtoonsubadditivityofthelogarithmickodairadimension|Theorem 3.2": {
+   "ref": "Theorem 3.2",
+   "role": "involved",
+   "bibliography": {
+    "Proj-Fujino2019Numerical": "@article{Proj-Fujino2019Numerical,\n  author = {Fujino, Osamu},\n  title = {Corrigendum to ``{On} subadditivity of the logarithmic {Kodaira} dimension''},\n  journal = {Journal of the Mathematical Society of Japan},\n  year = {2020}, volume = {72}, number = {4}, pages = {1181--1187},\n  doi = {10.2969/jmsj/82568256},\n  eprint = {1904.11639}, archivePrefix = {arXiv}, primaryClass = {math.AG},\n  url = {https://www.jstage.jst.go.jp/article/jmath/72/4/72_1181/_article/-char/ja},\n  note = {Accepted author version: \\url{https://www.math.kyoto-u.ac.jp/~fujino/corrigendum-fujino.pdf}}\n}"
+   }
+  },
+  "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.1": {
+   "ref": "Lemma 19.1",
+   "role": "involved",
+   "bibliography": {
+    "DKLM2026": "@misc{DKLM2026,\n  author = {Duminil-Copin, Hugo and Kozlowski, Karol Kajetan and\n            Lammers, Piet and Manolescu, Ioan},\n  title = {{Gaussian} free field convergence of the six-vertex model with\n           {$-1\\leq\\Delta\\leq-\\frac12$}},\n  year = {2026},\n  howpublished = {arXiv:2603.06268v1},\n  note = {Version of 6 March 2026},\n  url = {https://arxiv.org/abs/2603.06268v1}\n}"
+   }
+  },
+  "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.4": {
+   "ref": "Lemma 19.4",
+   "role": "involved",
+   "bibliography": {
+    "DKLM2026": "@misc{DKLM2026,\n  author = {Duminil-Copin, Hugo and Kozlowski, Karol Kajetan and\n            Lammers, Piet and Manolescu, Ioan},\n  title = {{Gaussian} free field convergence of the six-vertex model with\n           {$-1\\leq\\Delta\\leq-\\frac12$}},\n  year = {2026},\n  howpublished = {arXiv:2603.06268v1},\n  note = {Version of 6 March 2026},\n  url = {https://arxiv.org/abs/2603.06268v1}\n}"
+   }
+  },
+  "gaussianfreefieldlimitsofweightedintegerlipschitzheights|Theorem 1.2": {
+   "ref": "Theorem 1.2",
+   "role": "involved",
+   "bibliography": {
+    "OpenAIWeighted2026": "@misc{OpenAIWeighted2026,\n  author = {{OpenAI}},\n  title = {{Gaussian free-field limits of weighted integer Lipschitz heights}},\n  howpublished = {OpenAI Math Release preprint\n                  \\href{https://github.com/openai/math/blob/main/preprints/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights-September-25-2026/paper.pdf}{OAI:Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights-September-25-2026}},\n  year = {2026}\n}"
+   }
+  },
+  "lagrangiancaps|Theorem 2.3": {
+   "ref": "Theorem 2.3",
+   "role": "involved",
+   "bibliography": {
+    "Top:EMcaps": "\\bibitem[EM13]{Top:EMcaps}\nYakov Eliashberg and Emmy Murphy.\n\\newblock Lagrangian caps.\n\\newblock {\\em Geometric and Functional Analysis}, 23(5):1483--1514, 2013.\n\\newblock Theorem numbering as in arXiv:1303.0586v1.\n\n",
+    "em-caps": "\\bibitem{em-caps}\nY. Eliashberg and E. Murphy,\n\\emph{Lagrangian caps},\npreprint (2013), \\href{https://arxiv.org/abs/1303.0586v1}{arXiv:1303.0586v1}.\n\n",
+    "EliashbergMurphyCaps": "@article{EliashbergMurphyCaps,\n  author = {Eliashberg, Yakov and Murphy, Emmy},\n  title = {Lagrangian caps},\n  journal = {Geometric and Functional Analysis},\n  volume = {23},\n  number = {5},\n  pages = {1483--1514},\n  year = {2013},\n  doi = {10.1007/s00039-013-0239-2},\n  eprint = {1303.0586},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/1303.0586}\n}"
+   }
+  },
+  "logabundancetheoremforthreefolds|Theorem 1.1": {
+   "ref": "Theorem 1.1",
+   "role": "involved",
+   "bibliography": {
+    "KMMAbundance1994": "@article{KMMAbundance1994,\n  author  = {Keel, Sean and Matsuki, Kenji and McKernan, James},\n  title   = {Log abundance theorem for threefolds},\n  journal = {Duke Mathematical Journal},\n  year    = {1994},\n  volume  = {75},\n  number  = {1},\n  pages   = {99--119},\n  doi     = {10.1215/S0012-7094-94-07504-2},\n  url     = {https://mathweb.ucsd.edu/~jmckerna/Papers/abu.pdf}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Claim 4.2": {
+   "ref": "Claim 4.2",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Definition 2.8": {
+   "ref": "Definition 2.8",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}",
+    "HX": "@misc{HX,\n  author = {Hacon, Christopher and Xie, Lingyao},\n  title = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year = {2026},\n  eprint = {2607.24986},\n  archivePrefix = {arXiv},\n  primaryClass = {math.AG},\n  note = {arXiv:2607.24986v1},\n  doi = {10.48550/arXiv.2607.24986},\n  url = {https://arxiv.org/abs/2607.24986v1}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23": {
+   "ref": "Lemma 2.23",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}",
+    "HX": "@misc{HX,\n  author = {Hacon, Christopher and Xie, Lingyao},\n  title = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year = {2026},\n  eprint = {2607.24986},\n  archivePrefix = {arXiv},\n  primaryClass = {math.AG},\n  note = {arXiv:2607.24986v1},\n  doi = {10.48550/arXiv.2607.24986},\n  url = {https://arxiv.org/abs/2607.24986v1}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42": {
+   "ref": "Lemma 2.42",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}",
+    "HX": "@misc{HX,\n  author = {Hacon, Christopher and Xie, Lingyao},\n  title = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year = {2026},\n  eprint = {2607.24986},\n  archivePrefix = {arXiv},\n  primaryClass = {math.AG},\n  note = {arXiv:2607.24986v1},\n  doi = {10.48550/arXiv.2607.24986},\n  url = {https://arxiv.org/abs/2607.24986v1}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 2.53": {
+   "ref": "Theorem 2.53",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}",
+    "HX": "@misc{HX,\n  author = {Hacon, Christopher and Xie, Lingyao},\n  title = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year = {2026},\n  eprint = {2607.24986},\n  archivePrefix = {arXiv},\n  primaryClass = {math.AG},\n  note = {arXiv:2607.24986v1},\n  doi = {10.48550/arXiv.2607.24986},\n  url = {https://arxiv.org/abs/2607.24986v1}\n}"
+   }
+  },
+  "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1": {
+   "ref": "Theorem 4.1",
+   "role": "involved",
+   "bibliography": {
+    "HX2026": "@misc{HX2026,\n  author        = {Hacon, Christopher and Xie, Lingyao},\n  title         = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year          = {2026},\n  eprint        = {2607.24986v1},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.AG},\n  doi           = {10.48550/arXiv.2607.24986},\n  url           = {https://arxiv.org/abs/2607.24986v1},\n  note          = {Preprint, \\href{https://arxiv.org/abs/2607.24986v1}{arXiv:2607.24986v1}, 27 July 2026}\n}",
+    "HX": "@misc{HX,\n  author = {Hacon, Christopher and Xie, Lingyao},\n  title = {On the {K{\\\"a}hler} {MMP} and the transcendental base-point-free theorem},\n  year = {2026},\n  eprint = {2607.24986},\n  archivePrefix = {arXiv},\n  primaryClass = {math.AG},\n  note = {arXiv:2607.24986v1},\n  doi = {10.48550/arXiv.2607.24986},\n  url = {https://arxiv.org/abs/2607.24986v1}\n}"
+   }
+  },
+  "uniformlipschitzfunctionsonthetriangularlatticehavelogarithm|Theorem 1.2": {
+   "ref": "Theorem 1.2",
+   "role": "involved",
+   "bibliography": {
+    "GM2021": "@article{GM2021,\n  author = {Glazman, Alexander and Manolescu, Ioan},\n  title = {Uniform {Lipschitz} functions on the triangular lattice have logarithmic variations},\n  journal = {Communications in Mathematical Physics},\n  volume = {381},\n  number = {3},\n  year = {2021},\n  pages = {1153--1221},\n  doi = {10.1007/s00220-020-03920-z},\n  note = {Revised version: \\href{https://arxiv.org/abs/1810.05592v3}{arXiv:1810.05592v3} (2023)}\n}"
+   }
+  },
+  "birationalgeometryofalgebraicvarieties|Proposition 4.18": {
+   "ref": "Proposition 4.18",
+   "role": "decoy",
+   "bibliography": {
+    "KM1998": "@book{KM1998,\n  author    = {Koll{\\'a}r, J{\\'a}nos and Mori, Shigefumi},\n  title     = {Birational Geometry of Algebraic Varieties},\n  series    = {Cambridge Tracts in Mathematics},\n  volume    = {134},\n  publisher = {Cambridge University Press},\n  address   = {Cambridge},\n  year      = {1998},\n  note      = {With the collaboration of C. H. Clemens and A. Corti},\n  doi       = {10.1017/CBO9780511662560}\n}"
+   }
+  },
+  "complexanalyticanddifferentialgeometry|Corollary 2.11": {
+   "ref": "Corollary 2.11",
+   "role": "decoy",
+   "bibliography": {
+    "DemaillyCADG2012": "@misc{DemaillyCADG2012,\n  author       = {Demailly, Jean-Pierre},\n  title        = {Complex Analytic and Differential Geometry},\n  year         = {2012},\n  howpublished = {\\href{https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf}{Author's online book}},\n  note         = {Version of 21 June 2012},\n  url          = {https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf}\n}"
+   }
+  },
+  "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2": {
+   "ref": "Proposition 2",
+   "role": "decoy",
+   "bibliography": {
+    "ASW2017": "@article{ASW2017,\n  author = {Aru, Juhan and Sep{\\'u}lveda, Avelio and Werner, Wendelin},\n  title = {On bounded-type thin local sets of the two-dimensional {Gaussian} free field},\n  journal = {Journal of the Institute of Mathematics of Jussieu},\n  volume = {18},\n  number = {3},\n  pages = {591--618},\n  year = {2019},\n  doi = {10.1017/S1474748017000160},\n  note = {Versioned source: arXiv:1603.03362v3, 12 April 2017},\n  url = {https://arxiv.org/abs/1603.03362v3}\n}"
+   }
+  },
+  "algebraicityofweilclassesonsplitabelianeightfolds|Lemma 9.1": {
+   "ref": "Lemma 9.1",
+   "role": "decoy",
+   "bibliography": {
+    "A8": "@misc{A8,\n  author = {{OpenAI}},\n  title = {{Algebraicity of Weil classes on split abelian eightfolds}},\n  howpublished = {OpenAI Math Release preprint\n                  \\href{https://github.com/openai/math/blob/main/preprints/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026/paper.pdf}{OAI:Algebraicity-of-Weil-classes-on-split-abelian-eightfolds-September-18-2026}},\n  year = {2026}\n}"
+   }
+  },
+  "theselmerconverseforellipticcurvesateveryprime|Lemma 7.3": {
+   "ref": "Lemma 7.3",
+   "role": "decoy",
+   "bibliography": {
+    "C": "\\bibitem{C}\nOpenAI,\n\\emph{The Selmer converse for elliptic curves at every prime},\nOpenAI Math Release preprint\n\\href{https://github.com/openai/math/blob/main/preprints/The-Selmer-converse-for-elliptic-curves-at-every-prime-September-24-2026/main.pdf}{OAI:The-Selmer-converse-for-elliptic-curves-at-every-prime-September-24-2026},\n2026.\n\n"
+   }
+  },
+  "aconditionalreductionforalgebraickugasatakecorrespondences|Corollary 1.3": {
+   "ref": "Corollary 1.3",
+   "role": "decoy",
+   "bibliography": {
+    "R": "\\bibitem[{Ope}b]{R}\nOpenAI.\n\\newblock A Conditional Reduction for Algebraic Kuga--Satake Correspondences.\n\\newblock OpenAI Math Release preprint\n\\href{https://github.com/openai/math/blob/main/preprints/A-Conditional-Reduction-for-Algebraic-Kuga-Satake-Correspondences-September-10-2026/paper.pdf}{OAI:A-Conditional-Reduction-for-Algebraic-Kuga-Satake-Correspondences-September-10-2026},\n2026.\n\n"
+   }
+  },
+  "addendumtoterminationof4foldcanonicalflips|Theorem 5.1": {
+   "ref": "Theorem 5.1",
+   "role": "decoy",
+   "bibliography": {
+    "Fujino2005Addendum": "\\bibitem{Fujino2005Addendum}\nOsamu Fujino,\n\\emph{Addendum to \\textquotedblleft Termination of 4-fold canonical flips\\textquotedblright},\nPubl. Res. Inst. Math. Sci. \\textbf{41} (2005), no.~1, 251--257.\n\\url{https://doi.org/10.2977/PRIMS/1145475410}.\n\n"
+   }
+  },
+  "theglobalmodulitheoryofsymplecticvarieties|Lemma 5.3": {
+   "ref": "Lemma 5.3",
+   "role": "decoy",
+   "bibliography": {
+    "BakkerLehn": "@article{BakkerLehn,\n  author = {Bakker, Benjamin and Lehn, Christian},\n  title = {The global moduli theory of symplectic varieties},\n  journal = {Journal f{\\\"u}r die reine und angewandte Mathematik},\n  volume = {790},\n  year = {2022},\n  pages = {223--265},\n  doi = {10.1515/crelle-2022-0033},\n  eprint = {1812.09748},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/1812.09748v4}\n}"
+   }
+  },
+  "firstpassagesetsofthe2dcontinuumgaussianfreefield|Proposition 4.4": {
+   "ref": "Proposition 4.4",
+   "role": "decoy",
+   "bibliography": {
+    "ALS2017": "@article{ALS2017,\n  author = {Aru, Juhan and Lupu, Titus and Sep{\\'u}lveda, Avelio},\n  title = {First passage sets of the {2D} continuum {Gaussian} free field},\n  journal = {Probability Theory and Related Fields},\n  volume = {176},\n  number = {3--4},\n  pages = {1303--1355},\n  year = {2020},\n  doi = {10.1007/s00440-019-00941-1},\n  note = {Versioned source: arXiv:1706.07737v3, 26 August 2019},\n  url = {https://arxiv.org/abs/1706.07737v3}\n}"
+   }
+  },
+  "introductiontotheminimalmodelproblem|Theorem 5": {
+   "ref": "Theorem 5",
+   "role": "decoy",
+   "bibliography": {
+    "KawamataMatsudaMatsuki1987": "\\bibitem{KawamataMatsudaMatsuki1987}\nYujiro Kawamata, Katsumi Matsuda, and Kenji Matsuki,\n\\emph{Introduction to the minimal model problem},\nin \\emph{Algebraic Geometry, Sendai, 1985}, Tadao Oda (ed.),\nAdvanced Studies in Pure Mathematics \\textbf{10},\nNorth-Holland, Amsterdam, 1987, 283--360.\n\\url{https://doi.org/10.2969/aspm/01010283}.\n\n"
+   }
+  },
+  "logpluricanonicalrepresentationsandtheabundanceconjecture|Theorem 1.5": {
+   "ref": "Theorem 1.5",
+   "role": "decoy",
+   "bibliography": {
+    "FujinoGongyoPluricanonical": "@article{FujinoGongyoPluricanonical,\n  author = {Fujino, Osamu and Gongyo, Yoshinori},\n  title = {Log pluricanonical representations and the abundance conjecture},\n  journal = {Compositio Mathematica},\n  volume = {150},\n  number = {4},\n  year = {2014},\n  pages = {593--620},\n  doi = {10.1112/S0010437X13007495},\n  url = {https://www.math.kyoto-u.ac.jp/~fujino/fg-comp-final.pdf},\n  note = {Theorem 1.1 (finiteness of log pluricanonical representations); Theorem 1.5, restated as Theorem 4.3 (projective slc gluing). Final author version: \\url{https://www.math.kyoto-u.ac.jp/~fujino/fg-comp-final.pdf}}\n}"
+   }
+  },
+  "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8": {
+   "ref": "Lemma 7.8",
+   "role": "decoy",
+   "bibliography": {
+    "CB": "@misc{CB,\n  author = {{OpenAI}},\n  title = {{Conditional good minimal models for compact K{\\\"a}hler fourfolds}},\n  howpublished = {OpenAI Math Release preprint\n                  \\href{https://github.com/openai/math/blob/main/preprints/Conditional-good-minimal-models-for-compact-Kahler-fourfolds-October-5-2026/paper.pdf}{OAI:Conditional-good-minimal-models-for-compact-Kahler-fourfolds-October-5-2026}},\n  year = {2026}\n}"
+   }
+  }
+ },
+ "occurrences": [
+  {
+   "item": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "appendices/projective_exclusions.tex",
+   "line": 223,
+   "key": "Proj-Fujino2019Numerical",
+   "locator": "Section~3 and Theorem~3.2",
+   "ref": "Theorem 3.2",
+   "result": "corrigendumtoonsubadditivityofthelogarithmickodairadimension|Theorem 3.2",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o71d7597993"
+  },
+  {
+   "item": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "appendices/projective_induction.tex",
+   "line": 107,
+   "key": "FujinoGongyoPluricanonical",
+   "locator": "Theorem~1.5, equivalently Theorem~4.3",
+   "ref": "Theorem 1.5",
+   "result": "logpluricanonicalrepresentationsandtheabundanceconjecture|Theorem 1.5",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "ob29154d22b"
+  },
+  {
+   "item": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "appendices/projective_exclusions.tex",
+   "line": 221,
+   "key": "Proj-Fujino2019Numerical",
+   "locator": "Section~3 and Theorem~3.2",
+   "ref": "Theorem 3.2",
+   "result": "corrigendumtoonsubadditivityofthelogarithmickodairadimension|Theorem 3.2",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o83ac3e8b69"
+  },
+  {
+   "item": "Conditional-good-minimal-models-for-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "appendices/projective_induction.tex",
+   "line": 107,
+   "key": "FujinoGongyoPluricanonical",
+   "locator": "Theorem~1.5, equivalently Theorem~4.3",
+   "ref": "Theorem 1.5",
+   "result": "logpluricanonicalrepresentationsandtheabundanceconjecture|Theorem 1.5",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o1dfcd47000"
+  },
+  {
+   "item": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/08-extraction.tex",
+   "line": 441,
+   "key": "C",
+   "locator": "Lemma~7.3",
+   "ref": "Lemma 7.3",
+   "result": "theselmerconverseforellipticcurvesateveryprime|Lemma 7.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o7bdbf36615"
+  },
+  {
+   "item": "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/08-extraction.tex",
+   "line": 441,
+   "key": "C",
+   "locator": "Lemma~7.3",
+   "ref": "Lemma 7.3",
+   "result": "theselmerconverseforellipticcurvesateveryprime|Lemma 7.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "ob77534b8fc"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/02-analytic.tex",
+   "line": 409,
+   "key": "DemaillyCADG2012",
+   "locator": "Chapter~III, Corollary~2.11",
+   "ref": "Corollary 2.11",
+   "result": "complexanalyticanddifferentialgeometry|Corollary 2.11",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o262e5d8ba0"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1650,
+   "key": "HX2026",
+   "locator": "Lemma~2.42",
+   "ref": "Lemma 2.42",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "of3fa642756"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1665,
+   "key": "HX2026",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oc0554c8416"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1710,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.1",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o9bd56717c3"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1859,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.2",
+   "ref": "Claim 4.2",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Claim 4.2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o325d010b8a"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1859,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.2",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o77255ec353"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1862,
+   "key": "HX2026",
+   "locator": "Theorem~2.53",
+   "ref": "Theorem 2.53",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 2.53",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o597a7b8f11"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/06-perturbation.tex",
+   "line": 1947,
+   "key": "HX2026",
+   "locator": "Definition~2.8",
+   "ref": "Definition 2.8",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Definition 2.8",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o90c8dc6b02"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/08-resolutions.tex",
+   "line": 123,
+   "key": "KMMAbundance1994",
+   "locator": "Theorem~1.1",
+   "ref": "Theorem 1.1",
+   "result": "logabundancetheoremforthreefolds|Theorem 1.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o4a5b2ebc9a"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/10-special.tex",
+   "line": 186,
+   "key": "KM1998",
+   "locator": "Theorem~4.15(1),(3), pp.~119--120, and Proposition~4.18",
+   "ref": "Proposition 4.18",
+   "result": "birationalgeometryofalgebraicvarieties|Proposition 4.18",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o79b3205a96"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/02-analytic.tex",
+   "line": 409,
+   "key": "DemaillyCADG2012",
+   "locator": "Chapter~III, Corollary~2.11",
+   "ref": "Corollary 2.11",
+   "result": "complexanalyticanddifferentialgeometry|Corollary 2.11",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oeaa53b1369"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/06-perturbation.tex",
+   "line": 1957,
+   "key": "HX2026",
+   "locator": "Lemma~2.42",
+   "ref": "Lemma 2.42",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o3bd013abf2"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/06-perturbation.tex",
+   "line": 1972,
+   "key": "HX2026",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o4e74053004"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/06-perturbation.tex",
+   "line": 2017,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.1",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o18d7ee389c"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/06-perturbation.tex",
+   "line": 2166,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.2",
+   "ref": "Claim 4.2",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Claim 4.2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o582860a096"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/06-perturbation.tex",
+   "line": 2166,
+   "key": "HX2026",
+   "locator": "Theorem~4.1, Claim~4.2",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o9e3e3a3353"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/08-resolutions.tex",
+   "line": 123,
+   "key": "KMMAbundance1994",
+   "locator": "Theorem~1.1",
+   "ref": "Theorem 1.1",
+   "result": "logabundancetheoremforthreefolds|Theorem 1.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oc8321a0b60"
+  },
+  {
+   "item": "Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/10-special.tex",
+   "line": 186,
+   "key": "KM1998",
+   "locator": "Theorem~4.15(1),(3), pp.~119--120, and Proposition~4.18",
+   "ref": "Proposition 4.18",
+   "result": "birationalgeometryofalgebraicvarieties|Proposition 4.18",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o55396ceacc"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-programs.tex",
+   "line": 130,
+   "key": "HX",
+   "locator": "Definition~2.8",
+   "ref": "Definition 2.8",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Definition 2.8",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "oc2db289c25"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-programs.tex",
+   "line": 1284,
+   "key": "CB",
+   "locator": "Lemma~7.8",
+   "ref": "Lemma 7.8",
+   "result": "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o3d7f51ed3b"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-programs.tex",
+   "line": 1346,
+   "key": "CB",
+   "locator": "Lemma~7.8",
+   "ref": "Lemma 7.8",
+   "result": "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o255c7d7c05"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 969,
+   "key": "HX",
+   "locator": "Lemma~2.42",
+   "ref": "Lemma 2.42",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o36c9deda85"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 984,
+   "key": "HX",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oef3adf5008"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1032,
+   "key": "HX",
+   "locator": "Theorem~4.1, Claim~4.1",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o6c07ffd96a"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1123,
+   "key": "HX",
+   "locator": "Theorem~2.53",
+   "ref": "Theorem 2.53",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 2.53",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o92af27012f"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1691,
+   "key": "HX",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o27a44715a8"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1847,
+   "key": "HX",
+   "locator": "Lemma~2.23 and Section~6",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o6604139e9c"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/04-boundary.tex",
+   "line": 822,
+   "key": "BakkerLehn",
+   "locator": "Lemma~2.1, Definition~5.2, and\nLemmas~5.3 and~5.7",
+   "ref": "Lemma 5.3",
+   "result": "theglobalmodulitheoryofsymplecticvarieties|Lemma 5.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oc50d0e7028"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03-programs.tex",
+   "line": 130,
+   "key": "HX",
+   "locator": "Definition~2.8",
+   "ref": "Definition 2.8",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Definition 2.8",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o26df32a87b"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03-programs.tex",
+   "line": 1284,
+   "key": "CB",
+   "locator": "Lemma~7.8",
+   "ref": "Lemma 7.8",
+   "result": "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "of8a6bfd7c5"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03-programs.tex",
+   "line": 1346,
+   "key": "CB",
+   "locator": "Lemma~7.8",
+   "ref": "Lemma 7.8",
+   "result": "conditionalgoodminimalmodelsforcompactkahlerfourfolds|Lemma 7.8",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oe574aedb14"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 972,
+   "key": "HX",
+   "locator": "Lemma~2.42",
+   "ref": "Lemma 2.42",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.42",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "ob238f25d6d"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 987,
+   "key": "HX",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o3094a8fd23"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1035,
+   "key": "HX",
+   "locator": "Theorem~4.1, Claim~4.1",
+   "ref": "Theorem 4.1",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Theorem 4.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oeb2a7e0cc7"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03c-restricted-induction.tex",
+   "line": 1714,
+   "key": "HX",
+   "locator": "Lemma~2.23",
+   "ref": "Lemma 2.23",
+   "result": "onthekahlermmpandthetranscendentalbasepointfreetheorem|Lemma 2.23",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o85761f8bd5"
+  },
+  {
+   "item": "Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/04-boundary.tex",
+   "line": 822,
+   "key": "BakkerLehn",
+   "locator": "Lemma~2.1, Definition~5.2, and\nLemmas~5.3 and~5.7",
+   "ref": "Lemma 5.3",
+   "result": "theglobalmodulitheoryofsymplecticvarieties|Lemma 5.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o5186329816"
+  },
+  {
+   "item": "Taming-implies-compatibility-on-four-manifolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/01-introduction.tex",
+   "line": 57,
+   "key": "LiZhang2009",
+   "locator": "Corollary~1.1",
+   "ref": "Corollary 1.1",
+   "result": "comparingtamedandcompatiblesymplecticconesandcohomologicalpr|Corollary 1.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o92cca64041"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/01-introduction.tex",
+   "line": 5,
+   "key": "Fujino2005Addendum",
+   "locator": "Example~2.1 and Theorems~5.1--5.2",
+   "ref": "Theorem 5.1",
+   "result": "addendumtoterminationof4foldcanonicalflips|Theorem 5.1",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "ocd42d2b82f"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/01-introduction.tex",
+   "line": 5,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "oeb663bc792"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-comparisons.tex",
+   "line": 453,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15 and Lemma~5-1-17",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "ocba77e1e00"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 64,
+   "key": "Fujino2005Addendum",
+   "locator": "Example~2.1 and Theorems~5.1--5.2",
+   "ref": "Theorem 5.1",
+   "result": "addendumtoterminationof4foldcanonicalflips|Theorem 5.1",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o0b217accde"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 64,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "ob7de29c327"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "pre",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 813,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15 and Lemma~5-1-17",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o4f8787a65b"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/01-introduction.tex",
+   "line": 5,
+   "key": "Fujino2005Addendum",
+   "locator": "Example~2.1 and Theorems~5.1--5.2",
+   "ref": "Theorem 5.1",
+   "result": "addendumtoterminationof4foldcanonicalflips|Theorem 5.1",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "of90183edbd"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/01-introduction.tex",
+   "line": 5,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "oa848fd0f88"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03-comparisons.tex",
+   "line": 453,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15 and Lemma~5-1-17",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o29862e2609"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 64,
+   "key": "Fujino2005Addendum",
+   "locator": "Example~2.1 and Theorems~5.1--5.2",
+   "ref": "Theorem 5.1",
+   "result": "addendumtoterminationof4foldcanonicalflips|Theorem 5.1",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o5ef94ee0a0"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 64,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "oc5f3f71aa1"
+  },
+  {
+   "item": "Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds",
+   "group": "revised",
+   "version": "post",
+   "file": "termination-generalized-lc-kahler-fourfolds.tex",
+   "line": 837,
+   "key": "KawamataMatsudaMatsuki1987",
+   "locator": "Theorem~5-1-15 and Lemma~5-1-17",
+   "ref": "Theorem 5",
+   "result": "introductiontotheminimalmodelproblem|Theorem 5",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": false,
+   "occ": "o8fc75deba7"
+  },
+  {
+   "item": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/01-introduction.tex",
+   "line": 160,
+   "key": "OpenAIWeighted2026",
+   "locator": "Theorem~1.2",
+   "ref": "Theorem 1.2",
+   "result": "gaussianfreefieldlimitsofweightedintegerlipschitzheights|Theorem 1.2",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": true,
+   "occ": "o998d35eeb0"
+  },
+  {
+   "item": "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-cuts.tex",
+   "line": 27,
+   "key": "GM2021",
+   "locator": "Theorem~1.2(iv), equations~(1.1)--(1.2)",
+   "ref": "Theorem 1.2",
+   "result": "uniformlipschitzfunctionsonthetriangularlatticehavelogarithm|Theorem 1.2",
+   "kinds": [
+    "CONVENTION_TRANSFER"
+   ],
+   "at_location": true,
+   "occ": "o7da6f2cc5d"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-spatial.tex",
+   "line": 858,
+   "key": "DKLM2026",
+   "locator": "Section~19.1, especially Lemmas~19.1 and~19.4",
+   "ref": "Lemma 19.1",
+   "result": "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o1cecb241e7"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-spatial.tex",
+   "line": 858,
+   "key": "DKLM2026",
+   "locator": "Section~19.1, especially Lemmas~19.1 and~19.4",
+   "ref": "Lemma 19.4",
+   "result": "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.4",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o717cd516f2"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-spatial.tex",
+   "line": 915,
+   "key": "DKLM2026",
+   "locator": "Lemma~19.4 and the proof of Lemma~19.1",
+   "ref": "Lemma 19.1",
+   "result": "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "odd0a04851b"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/03-spatial.tex",
+   "line": 915,
+   "key": "DKLM2026",
+   "locator": "Lemma~19.4 and the proof of Lemma~19.1",
+   "ref": "Lemma 19.4",
+   "result": "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.4",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o9b33370433"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/07-local-sets.tex",
+   "line": 500,
+   "key": "ASW2017",
+   "locator": "Proposition~2",
+   "ref": "Proposition 2",
+   "result": "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "ofece718bde"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/07-local-sets.tex",
+   "line": 689,
+   "key": "ASW2017",
+   "locator": "Proposition~2",
+   "ref": "Proposition 2",
+   "result": "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o09a98eb43b"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/07-local-sets.tex",
+   "line": 818,
+   "key": "ALS2017",
+   "locator": "Remark~4.2 and Proposition~4.4",
+   "ref": "Proposition 4.4",
+   "result": "firstpassagesetsofthe2dcontinuumgaussianfreefield|Proposition 4.4",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oe081a4ace3"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/03-spatial.tex",
+   "line": 967,
+   "key": "DKLM2026",
+   "locator": "Lemma~19.4",
+   "ref": "Lemma 19.4",
+   "result": "gaussianfreefieldconvergenceofthesixvertexmodelwith112|Lemma 19.4",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o6b7c3b5c0a"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/07-local-sets.tex",
+   "line": 500,
+   "key": "ASW2017",
+   "locator": "Proposition~2",
+   "ref": "Proposition 2",
+   "result": "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o49ece7f2bf"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/07-local-sets.tex",
+   "line": 689,
+   "key": "ASW2017",
+   "locator": "Proposition~2",
+   "ref": "Proposition 2",
+   "result": "onboundedtypethinlocalsetsofthetwodimensionalgaussianfreefie|Proposition 2",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o4ddb0f5855"
+  },
+  {
+   "item": "The-joint-scaling-limit-of-critical-Ashkin-Teller-currents",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/07-local-sets.tex",
+   "line": 818,
+   "key": "ALS2017",
+   "locator": "Remark~4.2 and Proposition~4.4",
+   "ref": "Proposition 4.4",
+   "result": "firstpassagesetsofthe2dcontinuumgaussianfreefield|Proposition 4.4",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o45158b8ec1"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/geometry.tex",
+   "line": 874,
+   "key": "SSdiscrete",
+   "locator": "proof of Lemma~3.15, equations (3.40)--(3.42)",
+   "ref": "Lemma 3.15",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o7fd0254143"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/geometry.tex",
+   "line": 900,
+   "key": "SSdiscrete",
+   "locator": "Lemma 3.15",
+   "ref": "Lemma 3.15",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "ofe497fb490"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "pre",
+   "file": "sections/geometry.tex",
+   "line": 1184,
+   "key": "SSdiscrete",
+   "locator": "Lemma~3.24",
+   "ref": "Lemma 3.24",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.24",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "odabd5d480d"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/geometry.tex",
+   "line": 1803,
+   "key": "SSdiscrete",
+   "locator": "proof of Lemma~3.15, pp.~65--66",
+   "ref": "Lemma 3.15",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o2aa046c615"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/geometry.tex",
+   "line": 2370,
+   "key": "SSdiscrete",
+   "locator": "proof of Lemma~3.15, equations (3.40)--(3.42)",
+   "ref": "Lemma 3.15",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.15",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "oa4ff6066a8"
+  },
+  {
+   "item": "Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice",
+   "group": "revised",
+   "version": "post",
+   "file": "sections/geometry.tex",
+   "line": 2722,
+   "key": "SSdiscrete",
+   "locator": "Lemma~3.24",
+   "ref": "Lemma 3.24",
+   "result": "contourlinesofthetwodimensionaldiscretegaussianfreefield|Lemma 3.24",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "od6b791d31f"
+  },
+  {
+   "item": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript.tex",
+   "line": 1963,
+   "key": "Top:EEMS",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.2",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.2",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o7bbdf7fb88"
+  },
+  {
+   "item": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript.tex",
+   "line": 1963,
+   "key": "Top:EEMS",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.4",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.4",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "oaacce9f7ec"
+  },
+  {
+   "item": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript.tex",
+   "line": 1976,
+   "key": "Top:EMcaps",
+   "locator": "Theorem~2.3",
+   "ref": "Theorem 2.3",
+   "result": "lagrangiancaps|Theorem 2.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o9523ef40f4"
+  },
+  {
+   "item": "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript.tex",
+   "line": 5051,
+   "key": "R",
+   "locator": "Corollary~1.3",
+   "ref": "Corollary 1.3",
+   "result": "aconditionalreductionforalgebraickugasatakecorrespondences|Corollary 1.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o87c42cd9a9"
+  },
+  {
+   "item": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "sections/03-topology.tex",
+   "line": 480,
+   "key": "eems",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.2",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.2",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o857dcbd2ca"
+  },
+  {
+   "item": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "sections/03-topology.tex",
+   "line": 480,
+   "key": "eems",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.4",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.4",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o95322d14f0"
+  },
+  {
+   "item": "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "sections/03-topology.tex",
+   "line": 496,
+   "key": "em-caps",
+   "locator": "Theorem~2.3",
+   "ref": "Theorem 2.3",
+   "result": "lagrangiancaps|Theorem 2.3",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o1c9e78dd4e"
+  },
+  {
+   "item": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript/setup.tex",
+   "line": 219,
+   "key": "A8",
+   "locator": "Lemma~9.1",
+   "ref": "Lemma 9.1",
+   "result": "algebraicityofweilclassesonsplitabelianeightfolds|Lemma 9.1",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "obacdbbee12"
+  },
+  {
+   "item": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript/topology.tex",
+   "line": 503,
+   "key": "EEMS",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.2",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.2",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "oa257495dce"
+  },
+  {
+   "item": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript/topology.tex",
+   "line": 503,
+   "key": "EEMS",
+   "locator": "Lemma~3.2 and proof of Lemma~3.4",
+   "ref": "Lemma 3.4",
+   "result": "constructingexactlagrangianimmersionswithfewdoublepoints|Lemma 3.4",
+   "kinds": [
+    "CONVENTION_TRANSFER",
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "oa7b02b7b93"
+  },
+  {
+   "item": "The-rational-Hodge-conjecture-for-products-of-K3-surfaces",
+   "group": "withdrawn",
+   "version": "pre",
+   "file": "manuscript/topology.tex",
+   "line": 517,
+   "key": "EliashbergMurphyCaps",
+   "locator": "Theorem~2.3",
+   "ref": "Theorem 2.3",
+   "result": "lagrangiancaps|Theorem 2.3",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": true,
+   "occ": "o5554af2ef1"
+  },
+  {
+   "item": "Arithmetic-Stein-degree-bounds-for-log-Calabi-Yau-pairs",
+   "group": "control",
+   "version": "pre",
+   "file": "paper.tex",
+   "line": 821,
+   "key": "KM1998",
+   "locator": "Proposition~4.18",
+   "ref": "Proposition 4.18",
+   "result": "birationalgeometryofalgebraicvarieties|Proposition 4.18",
+   "kinds": [
+    "HYPOTHESIS_MATCH"
+   ],
+   "at_location": false,
+   "occ": "o88c6c33089"
+  }
+ ]
+}

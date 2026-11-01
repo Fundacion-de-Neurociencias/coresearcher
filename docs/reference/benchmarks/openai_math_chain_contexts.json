@@ -1,0 +1,1180 @@
+{
+ "procedure": "OPENAI_MATH_CHAIN_PROTOCOL.md section 4.2; encoders' instructions in openai_math_chain_procedure/ENCODER_INSTRUCTIONS.md",
+ "registry_sha256": "57f1fa28cb8331f9ef575ee72ccf634d690cd16b2d65e82622231790acf911c7",
+ "repairs": [],
+ "contexts": [
+  {
+   "id": "o09a98eb43b",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Uniqueness in \\cite[Proposition~2]{ASW2017} identifies the union with \\(\\TVS{p}{q}(f)\\).",
+   "notes": "The passage's p, q (hole values -p or q) play the role of the entry's a, b, but the passage does not state their signs or that p+q >= 2*lambda at this point (only the later nested-interval rule states U-L >= 2*lambda), so nothing is declared.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o0b217accde",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      4
+     ]
+    }
+   ],
+   "assumptions": [
+    "n == 4"
+   ],
+   "conventions": {},
+   "citing_text": "For boundaries, Fujino's corrected argument for canonical fourfold pairs exhibits the recurring contributions from successive blowups over a codimension-two center \\cite[Example~2.1 and Theorems~5.1--5.2]{Fujino2005Addendum}.",
+   "notes": "Introductory attribution describing the cited work's setting (canonical fourfold pairs) rather than an application; the entry has no conventions.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o18d7ee389c",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Write, as in \\cite[Theorem~4.1, Claim~4.1]{HX2026}, \\[ D_U(a)=K_U+\\Delta_U+\\mathbf M_U+a\\alpha_U =(a+1)\\alpha_U+F_U, \\quad \\alpha_U=\\mu^*\\alpha,\\quad \\Delta_U,F_U\\geq0, \\] where $\\Delta_U$ is klt and $F_U$ is $\\mu$-exceptional.",
+   "notes": "No entry hypothesis has a formal predicate; the passage cites a claim inside the proof for a decomposition, and states no convention for semiampleness or theorem indexing.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o1c9e78dd4e",
+   "variables": [
+    {
+     "name": "I_f",
+     "domain": [
+      0
+     ]
+    },
+    {
+     "name": "n",
+     "domain": [
+      8
+     ]
+    }
+   ],
+   "assumptions": [
+    "I_f == 0",
+    "n == 8"
+   ],
+   "conventions": {
+    "sign": "Signed double count; in source dimension 2k a trace outward from phi to its loose stabilization phi_1 has one double point of sign (-1)^{k-1} and the reverse trace (-1)^k; for k = 4 these are -1 and +1."
+   },
+   "citing_text": "Apply Eliashberg--Murphy's exact cancellation theorem \\cite[Theorem~2.3]{em-caps}.",
+   "notes": "The passage states the connected source has dimension eight (S^7 x R) and the signed double count is I(f_1)+m = 0. No Liouville-end or Hamiltonian normalization is stated.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o1cecb241e7",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "For item~2 we adapt the crossing exploration underlying \\cite[Section~19.1, especially Lemmas~19.1 and~19.4]{DKLM2026}.",
+   "notes": "The passage adapts the exploration and does not fix c, n, w, rho or L of Lemma 19.1.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o262e5d8ba0",
+   "variables": [
+    {
+     "name": "p",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    {
+     "name": "dimA",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimA < p"
+   ],
+   "conventions": {},
+   "citing_text": "Such a current vanishes: after a local embedding it has bidimension $(\\dim T-1,\\dim T-1)$, whereas its support has smaller dimension \\cite[Chapter~III, Corollary~2.11]{DemaillyCADG2012}.",
+   "notes": "The passage has p = dim T - 1 and support in codimension at least two, hence of smaller dimension; dim T is unbounded so representative ranges 0 to 12 are used for p and dimA.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o26df32a87b",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "modified_big": "Modified big means the pushforward f_* alpha of a big class alpha under a birational morphism f of normal varieties (not necessarily a Bott-Chern class on Y)."
+   },
+   "citing_text": "We use the convention of \\cite[Definition~2.8]{HX}: a modified-big trace is the pushforward of a big Bott--Chern class on a modification.",
+   "notes": "The passage explicitly adopts the cited modified-big convention; it does not separately define bigness.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o27a44715a8",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big preparation \\cite[Lemma~2.23]{HX} gives, on a fixed projective smooth carrier $a:W\\to X$, an effective klt boundary $\\Gamma$, a K\\\"ahler class $\\gamma_0$, and an effective $a$-exceptional real divisor $F$ such that [K_W+\\Gamma]+\\gamma_0=a^*A_{u_0}+[F].",
+   "notes": "No formal predicates in the entry; the passage states the boundary plus nef part is globally modified big by hypothesis but defines no equivalence or multiplier-ideal convention.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o2aa046c615",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "For \\(L\\le20\\) use the deterministic triangular/hexagonal routing in \\cite[proof of Lemma~3.15, pp.~65--66]{SSdiscrete}.",
+   "notes": "The passage uses only the routing construction from the proof, for bounded lattice scales L <= 20; it does not fix the lemma's p, R or c.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o3094a8fd23",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big perturbation \\cite[Lemma~2.23]{HX} supplies a nef datum that dominates a K\\\"ahler class on its carrier.",
+   "notes": "No entry hypothesis has a formal predicate. The passage does not state its own convention for Bott-Chern equivalence or for multiplier ideals/NKLT of generalized pairs.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o325d010b8a",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The argument of \\cite[Theorem~4.1, Claim~4.2]{HX2026}, using projective relative semipositivity, gives $\\dim S<d$.",
+   "notes": "No formal predicates; the passage states no convention on bigness over the base or divisor decomposition.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o36c9deda85",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Lemma~\\ref{prog:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX}, including the common-resolution step in its Claim~3.5.",
+   "notes": "The passage uses the cited lemma's role only, replacing it by its own Lemma; no formal variables are involved and no Moishezon or Q-factoriality convention is defined in the passage.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o3bd013abf2",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Lemma~\\ref{repair:lem:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX2026}, including the common-resolution step in its Claim~3.5.",
+   "notes": "The passage cites the lemma as the step being replaced by its own Lemma, not as an applied result. No formal predicates; no convention for Moishezon morphisms or strong Q-factoriality is stated.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o45158b8ec1",
+   "variables": [
+    {
+     "name": "n",
+     "continuous": true,
+     "lower": 0,
+     "upper": 100
+    }
+   ],
+   "assumptions": [
+    "n > 2*lam"
+   ],
+   "conventions": {
+    "sign": "The passage uses the upper FPS of f at level 2a (stopped from above), obtained by reflection of the FPS construction."
+   },
+   "citing_text": "As \\(R\\uparrow\\infty\\) through a deterministic sequence, reflection of the FPS construction \\cite[Remark~4.2 and Proposition~4.4]{ALS2017} identifies the closed increasing union as the upper FPS of \\(f\\) at \\(2a\\).",
+   "notes": "The passage's truncation level R (with R > 2*lambda, R increasing to infinity) is encoded as the entry's n; the representative upper bound 100 is arbitrary. The passage's a (with a > lambda) gives level 2a for the upper FPS, which does not match the entry's a directly, so a is not declared; lam is not given a value in the passage.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o49ece7f2bf",
+   "variables": [
+    {
+     "name": "a",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "b",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "lam",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    }
+   ],
+   "assumptions": [
+    "a == b",
+    "a + b > 2*lam"
+   ],
+   "conventions": {},
+   "citing_text": "The uniqueness theorem of \\cite[Proposition~2]{ASW2017} identifies the two limits as \\(\\TVS{a}{a}\\) and \\(\\TVS{2a}{2a}\\), since \\(2a>2\\lambda\\) and \\(4a>2\\lambda\\).",
+   "notes": "Two applications: TVS{a}{a} (entry a = b = passage a, a+b = 2a > 2*lam) and TVS{2a}{2a} (entry a = b = 2a, a+b = 4a > 2*lam); encoded as the symmetric case a == b. The passage does not fix the value of lambda, so the upper bounds 10 are representative.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o4a5b2ebc9a",
+   "variables": [
+    {
+     "name": "dimX",
+     "domain": [
+      3
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimX == 3"
+   ],
+   "conventions": {},
+   "citing_text": "The projective log abundance theorem \\cite[Theorem~1.1]{KMMAbundance1994}, with the correction \\cite[\\S6.1]{MatsukiCorrection2003}, gives a nonzero section of a multiple of the nef adjoint.",
+   "notes": "Applied to the nef model of a projective klt pair in dimension three (dimensions one and two use classical results). The passage states no boundary-coefficient or semiample convention.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o4ddb0f5855",
+   "variables": [
+    {
+     "name": "a",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "b",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "lam",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    }
+   ],
+   "assumptions": [
+    "a > 0",
+    "b > 0",
+    "a + b >= 2*lam"
+   ],
+   "conventions": {},
+   "citing_text": "Uniqueness in \\cite[Proposition~2]{ASW2017} identifies the union with \\(\\TVS{p}{q}(f)\\).",
+   "notes": "Entry a, b correspond to the passage's p, q (hole values -p or q). The conditions are taken from the following sentence's nested-interval rule (L<0<U, U-L>=2*lambda, read as L=-p, U=q); the passage does not restate them at the citation itself. Upper bounds are representative.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o4e74053004",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big perturbation \\cite[Lemma~2.23]{HX2026} supplies a nef datum that dominates a K\\\"ahler class on its carrier.",
+   "notes": "No formal predicates; the passage states no convention on Bott-Chern equivalence or multiplier ideals.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o5186329816",
+   "variables": [
+    {
+     "name": "dimX",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    {
+     "name": "n",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimX == 2*n"
+   ],
+   "conventions": {
+    "normalization": "Rational Beauville-Bogomolov form q_Y on H^2(Y,Q), up to positive rational scale.",
+    "sign": "The form is positive on the real symplectic plane and Lorentzian on H^{1,1}(Y,R)."
+   },
+   "citing_text": "This form is positive on the real symplectic plane and Lorentzian on \\(H^{1,1}(Y,\\R)\\); see \\cite[Lemma~2.1, Definition~5.2, and Lemmas~5.3 and~5.7]{BakkerLehn}.",
+   "notes": "The passage's space Y has dimension 2e (entry's n corresponds to the passage's e; the passage's own n is a different quantity with 2e<n); 0..12 is a representative range. Normalization of sigma is not stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o5554af2ef1",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+     ]
+    },
+    {
+     "name": "I_f",
+     "domain": [
+      0
+     ]
+    }
+   ],
+   "assumptions": [
+    "n % 2 == 0",
+    "I_f == 0"
+   ],
+   "conventions": {},
+   "citing_text": "Eliashberg--Murphy's exact cancellation theorem \\cite[Theorem~2.3]{EliashbergMurphyCaps} now applies.",
+   "notes": "The passage writes n=2k with k unspecified, so n is given a representative range of even values 0 to 12; it states the theorem's n=3 width condition is irrelevant. I_f refers to the modified immersion, whose total signed double count the passage says is zero (the original I(f) is nonzero).",
+   "encoder": "e1"
+  },
+  {
+   "id": "o582860a096",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The argument of \\cite[Theorem~4.1, Claim~4.2]{HX2026}, using projective relative semipositivity, gives $\\dim S<d$.",
+   "notes": "No formal predicates in the entry; the passage does not define bigness over a base or the D^{>=0}/D^{<=0} decomposition.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o597a7b8f11",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The projective canonical bundle formula \\cite[Theorem~2.53]{HX2026} provides \\[ D_S=K_S+B_S+\\mathbf N_S+a\\alpha_S, \\qquad D_V=g^*D_S, \\] with a gklt pair on $S$ and modified-big nef data.",
+   "notes": "No formal predicates in the entry. The passage notes an equality of Bott-Chern classes nearby but does not define the equivalence symbol, discriminant or moduli part.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o5ef94ee0a0",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      4
+     ]
+    }
+   ],
+   "assumptions": [
+    "n == 4"
+   ],
+   "conventions": {},
+   "citing_text": "For boundaries, Fujino's corrected argument for canonical fourfold pairs exhibits the recurring contributions from successive blowups over a codimension-two center \\cite[Example~2.1 and Theorems~5.1--5.2]{Fujino2005Addendum}.",
+   "notes": "The passage only describes the cited result (canonical fourfold pairs) in the introduction; dimension four is the only quantity it fixes.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o6604139e9c",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Make the adjoint-preserving modified-big replacement of \\cite[Lemma~2.23 and Section~6]{HX}, with a K\\\"ahler summand on the source, and restrict the given contraction to the resulting non-klt closed subspace, taking its Stein factor.",
+   "notes": "No formal predicates. The passage mentions Bott-Chern descent and a multiplier ideal defining the non-klt subspace but states no convention for them.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o6b7c3b5c0a",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "This argument uses only the ordinary full-circuit estimate, not the arbitrary-history partial-circuit assertion of \\cite[Lemma~19.4]{DKLM2026}.",
+   "notes": "The passage explicitly disclaims using the cited lemma; it fixes neither c nor r at the citation.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o6c07ffd96a",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Write, as in \\cite[Theorem~4.1, Claim~4.1]{HX}, \\[ D_U(a)=K_U+\\Delta_U+\\mathbf M_U+a\\alpha_U =(a+1)\\alpha_U+F_U, \\quad \\alpha_U=\\mu^*\\alpha,\\quad \\Delta_U,F_U\\geq0, \\] where $\\Delta_U$ is klt and $F_U$ is $\\mu$-exceptional.",
+   "notes": "No entry hypothesis has a formal predicate; the passage states no convention on the entry's tags (semiample definition, indexing).",
+   "encoder": "e3"
+  },
+  {
+   "id": "o717cd516f2",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "For item~2 we adapt the crossing exploration underlying \\cite[Section~19.1, especially Lemmas~19.1 and~19.4]{DKLM2026}.",
+   "notes": "The passage states nothing about the six-vertex weight c or the scale r, and no box/annulus or numbering convention; the result is 'adapted', not applied verbatim.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o71d7597993",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "numerical_dimension": "The required numerical dimension is kappa_sigma, with the corrected convention discussed in the cited source."
+   },
+   "citing_text": "The required numerical dimension is \\(\\kappa_\\sigma\\), which is zero by the good model of \\(F\\); thus the numerical-dimension qualification, with the corrected convention discussed in \\cite[Section~3 and Theorem~3.2]{Proj-Fujino2019Numerical}, causes no issue.",
+   "notes": "The passage names kappa_sigma as the required numerical dimension but does not say it is Nakayama's; the ground field is not stated.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o77255ec353",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The argument of \\cite[Theorem~4.1, Claim~4.2]{HX2026}, using projective relative semipositivity, gives $\\dim S<d$.",
+   "notes": "No entry hypothesis has a formal predicate; the passage states no convention on the entry's tags (semiample definition, indexing).",
+   "encoder": "e3"
+  },
+  {
+   "id": "o7bbdf7fb88",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "sign": "Double points carry oriented intersection signs; with l = n/2, the trace from a Legendrian link to its loose stabilization has one double point of sign (-1)^{l-1}, and the reversed trace has sign (-1)^l.",
+    "dimension": "The Lagrangian source is S^{n-1} x R in a 2n-dimensional target (2n > 2), with the standard Legendrian link of a real plane at the negative end."
+   },
+   "citing_text": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{Top:EEMS}.",
+   "notes": "No formal predicates in the entry. The sign and dimension conventions are read from the sentences following the citation; the passage does not state the symplectization normalization.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o7bdbf36615",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The differential scalings have lower bounds $\\lambda'_3+\\lambda'_4$ for $j=2$ and $\\lambda'_4$ for $j=3$, exactly as in \\cite[Lemma~7.3]{C}.",
+   "notes": "The passage uses weights lambda'_i=(m_i+H_i,m_i+H_i,1+H_i;-1-H_i) but never states the entry's d, so d == m - 1 cannot be encoded; no valuation or dual-basis normalization is stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o7da6f2cc5d",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24
+     ]
+    }
+   ],
+   "assumptions": [
+    "n % 2 == 0"
+   ],
+   "conventions": {
+    "normalization": "Honeycomb lattice H = T^*, hexagonal faces identified with the vertices of T; face distance is graph distance in T, and all radii use this face-graph convention, which the passage says differs from the source's contour-distance convention by a bounded additive offset. Loop O(2) model with edge weight one and empty exterior condition."
+   },
+   "citing_text": "Glazman--Manolescu \\cite[Theorem~1.2(iv), equations~(1.1)--(1.2)]{GM2021} prove the following facts for the loop $O(2)$ model with edge weight one and empty exterior condition:",
+   "notes": "The entry's n (radius of the box the domain contains) appears in the passage as 2n for a sufficiently large integer n, hence even; the unbounded range is represented by even values 0..24. The passage's radius convention is explicitly said to differ from the source's by a bounded offset.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o7fd0254143",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "To rule out a subsequent collapse at \\(3R\\), use the two mechanisms in \\cite[proof of Lemma~3.15, equations (3.40)--(3.42)]{SSdiscrete}.",
+   "notes": "The passage works at radii 4R, 3R with probability targets 1-eps/3 but does not state bounds on p, R or c in the lemma's sense; only mechanisms from the proof are used.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o83ac3e8b69",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "numerical_dimension": "kappa_sigma is Nakayama's numerical Kodaira dimension (as in Nakayama, Zariski-decomposition and abundance), which by Lesieutre's example can differ from kappa_nu."
+   },
+   "citing_text": "The required numerical dimension is \\(\\kappa_\\sigma\\), following the convention in \\cite[Section~3 and Theorem~3.2]{Proj-Fujino2019Numerical}.",
+   "notes": "The passage explicitly adopts kappa_sigma following the cited convention; it states no ground field.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o85761f8bd5",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big preparation \\cite[Lemma~2.23]{HX} gives, on a fixed projective smooth carrier $a:W\\to X$, an effective klt boundary $\\Gamma$, a K\\\"ahler class $\\gamma_0$, and an effective $a$-exceptional real divisor $F$ such that \\begin{equation}\\label{prog:eq:uniform-preparation} [K_W+\\Gamma]+\\gamma_0=a^*A_{u_0}+[F]. \\end{equation}",
+   "notes": "No entry hypothesis has a formal predicate. The passage writes an equality of classes but does not state what equivalence or multiplier-ideal convention it uses.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o857dcbd2ca",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "sign": "In source dimension 2k, a trace going outward from a Legendrian link phi to its loose stabilization phi_1 has one double point of sign (-1)^{k-1}; the reverse trace has sign (-1)^k (for k=4: phi->phi_1: -1, phi_1->phi: +1).",
+    "dimension": "Source dimension 2k with k=4: source annulus S^7 x R, Legendrian link phi_0 in S^{15}, ambient sixteen-manifold."
+   },
+   "citing_text": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{eems}.",
+   "notes": "No formal predicates in the entry. The passage's dimension convention (source dimension 2k=8, link in S^15) differs in parametrization from the entry's (Y of dimension 2n-1, Lambda of dimension n-1).",
+   "encoder": "e3"
+  },
+  {
+   "id": "o87c42cd9a9",
+   "variables": [
+    {
+     "name": "d",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [],
+   "conventions": {
+    "lattice": "T(S') = (h')^perp for Picard-rank-one S' (and likewise for S'').",
+    "normalization": "The conclusion retains the full ordered even-Clifford construction, the chosen rational polarizations and standard data, and transport to the stipulated isogenous model."
+   },
+   "citing_text": "Since $d$ was arbitrary, \\cite[Corollary~1.3]{R} applies.",
+   "notes": "The passage says d (degree 2d) was arbitrary without stating d >= 1 explicitly, so the representative range 0 to 12 is used.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o90c8dc6b02",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Its modified bigness therefore implies bigness, as in \\cite[Definition~2.8]{HX2026}.",
+   "notes": "The passage uses 'big' and 'modified big' for a Bott-Chern class Q but does not define them.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o92af27012f",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The projective canonical bundle formula \\cite[Theorem~2.53]{HX} provides \\[ D_S=K_S+B_S+\\mathbf N_S+a\\alpha_S, \\qquad D_V=g^*D_S, \\] with a gklt pair on $S$ and modified-big nef data.",
+   "notes": "No entry hypothesis has a formal predicate. The passage states that alpha_V = g^*alpha_S is an equality of Bott-Chern classes, but does not define the discriminant, moduli part, or the meaning of equivalence used for the formula.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o92cca64041",
+   "variables": [
+    {
+     "name": "dimM",
+     "domain": [
+      4
+     ]
+    },
+    {
+     "name": "bplus",
+     "domain": [
+      1
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimM == 4",
+    "bplus == 1"
+   ],
+   "conventions": {
+    "orientation": "X is given the orientation induced by J.",
+    "grading": "H_J^- is the subspace represented by smooth closed real two-forms alpha with alpha(Ju,Jv) = -alpha(u,v)."
+   },
+   "citing_text": "Li and Zhang's four-dimensional cone comparison \\cite[Corollary~1.1]{LiZhang2009} therefore gives the cone identity and, when \\(b_2^+=1\\), equality of the two cones.",
+   "notes": "bplus == 1 holds only for the cone-equality part; the cone identity is used without any condition on b_2^+. Taming is used but not defined in the passage.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o9523ef40f4",
+   "variables": [
+    {
+     "name": "I_f",
+     "domain": [
+      0
+     ]
+    },
+    {
+     "name": "n",
+     "domain": [
+      514
+     ]
+    }
+   ],
+   "assumptions": [
+    "I_f == 0",
+    "n == 514"
+   ],
+   "conventions": {
+    "sign": "Double points carry oriented intersection signs and I is their total signed count; with l = n/2, the trace to a loose stabilization has one double point of sign (-1)^{l-1} and the reversed trace sign (-1)^l, giving I + m(-1)^l = 0."
+   },
+   "citing_text": "The exact cancellation theorem of Eliashberg--Murphy \\cite[Theorem~2.3]{Top:EMcaps} applies with the following verified hypotheses.",
+   "notes": "The passage states n = 514 and signed intersection count zero; it also states the target is simply connected with a negative end and the negative component is loose. No Hamiltonian or Liouville-end normalization is stated.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o95322d14f0",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      8
+     ]
+    }
+   ],
+   "assumptions": [
+    "n == 8"
+   ],
+   "conventions": {
+    "sign": "In source dimension 2k, the outward trace from phi to its loose stabilization phi_1 has one double point of sign (-1)^{k-1}; the reverse trace has sign (-1)^k; for k=4: phi->phi_1: -1, phi_1->phi: +1."
+   },
+   "citing_text": "We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{eems}.",
+   "notes": "n=8 read from source dimension 2k with k=4 (source S^7 x R, link in S^15); the cone constant c is not stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "o998d35eeb0",
+   "variables": [
+    {
+     "name": "x",
+     "continuous": true,
+     "lower": 0.7071067811865476,
+     "upper": 1
+    }
+   ],
+   "assumptions": [
+    "x >= 2**-0.5",
+    "x <= 1"
+   ],
+   "conventions": {},
+   "citing_text": "A companion article proves the GFF limit for weighted integer Lipschitz heights with zero boundary, for each fixed edge weight $x\\in[1/\\sqrt2,1]$ \\cite[Theorem~1.2]{OpenAIWeighted2026}.",
+   "notes": "Descriptive citation; the passage says the cited theorem is not used as a premise. k is not fixed by the passage, and no GFF normalization is stated at the citation.",
+   "encoder": "e2"
+  },
+  {
+   "id": "o9b33370433",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "In a central vertical strip with a buffer continuing above the rectangle, use the partial-circuit construction of \\cite[Lemma~19.4 and the proof of Lemma~19.1]{DKLM2026}.",
+   "notes": "The passage fixes neither the six-vertex parameter c nor the scale r of the cited lemma; it only describes the cited lemma as stated for the plane with revealed even domains whose in-ball frontier is matching.",
+   "encoder": "e1"
+  },
+  {
+   "id": "o9bd56717c3",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Write, as in \\cite[Theorem~4.1, Claim~4.1]{HX2026}, \\[ D_U(a)=K_U+\\Delta_U+\\mathbf M_U+a\\alpha_U =(a+1)\\alpha_U+F_U, \\quad \\alpha_U=\\mu^*\\alpha,\\quad \\Delta_U,F_U\\geq0, \\] where $\\Delta_U$ is klt and $F_U$ is $\\mu$-exceptional.",
+   "notes": "No entry hypothesis has a formal predicate; the passage states no convention on the entry's tags (semiample definition, indexing).",
+   "encoder": "e3"
+  },
+  {
+   "id": "o9e3e3a3353",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The argument of \\cite[Theorem~4.1, Claim~4.2]{HX2026}, using projective relative semipositivity, gives $\\dim S<d$.",
+   "notes": "The passage uses the argument of a claim inside the proof, not the theorem's statement. No formal predicates and no conventions stated.",
+   "encoder": "e2"
+  },
+  {
+   "id": "oa257495dce",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "sign": "With n = 2k, the trace phi -> phi_1 to a loose stabilization has sign (-1)^{k-1} and the reverse trace phi_1 -> phi has sign (-1)^k, the arrows running outward along the symplectization.",
+    "dimension": "n = 2k; the source is S^{n-1} x R in a 2n-dimensional target, with a Legendrian sphere at the negative end."
+   },
+   "citing_text": "The stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{EEMS} have signs \\begin{equation}\\label{topo:trace-signs} \\phi\\longrightarrow\\phi_1:\\ (-1)^{k-1}, \\qquad \\phi_1\\longrightarrow\\phi:\\ (-1)^k, \\end{equation} where $\\phi_1$ is a loose stabilization and the arrows run outward along the symplectization.",
+   "notes": "No formal predicates in the entry. The symplectization form is not stated in the passage.",
+   "encoder": "e2"
+  },
+  {
+   "id": "oa4ff6066a8",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The argument in \\cite[proof of Lemma~3.15, equations (3.40)--(3.42)]{SSdiscrete} applies with these fixed buffers.",
+   "notes": "The passage's p (a quality with p wedge p_* >= a_0, a_0 <= 1e-3) and R (a radius) do not clearly correspond to the entry's p<1 and R>1/c, so no variables are declared.",
+   "encoder": "e3"
+  },
+  {
+   "id": "oa7b02b7b93",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [
+    "n % 2 == 0"
+   ],
+   "conventions": {
+    "sign": "Writing n=2k, stabilization traces have signs phi->phi_1: (-1)^{k-1} and phi_1->phi: (-1)^k, where phi_1 is a loose stabilization and the arrows run outward along the symplectization; self-intersection formula 2I(f)=f_*[L_0].f_*[L_0]-(-1)^k chi(L_0)."
+   },
+   "citing_text": "The stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{EEMS} have signs \\begin{equation}\\label{topo:trace-signs} \\phi\\longrightarrow\\phi_1:\\ (-1)^{k-1}, \\qquad \\phi_1\\longrightarrow\\phi:\\ (-1)^k, \\end{equation} where $\\phi_1$ is a loose stabilization and the arrows run outward along the symplectization.",
+   "notes": "n is only stated to be even (n=2k); 0..12 is a representative range. The cone constant c is not stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "oaacce9f7ec",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [
+    "n % 2 == 0",
+    "n > 1"
+   ],
+   "conventions": {
+    "sign": "With l=n/2, the trace from a Legendrian link to its loose stabilization has one double point of sign (-1)^{l-1}; the reversed trace has sign (-1)^l; double points carry oriented intersection signs."
+   },
+   "citing_text": "Set $l=n/2$ and $m=|I|>0$.  We use the stabilization traces of \\cite[Lemma~3.2 and proof of Lemma~3.4]{Top:EEMS}.",
+   "notes": "n unbounded in the passage; 0..12 is a representative range. Evenness is implicit from l=n/2 and the sign (-1)^{n/2-1}; n>1 from the stated 2n>2. The cone constant c is not stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "ob238f25d6d",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Lemma~\\ref{prog:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX}, including the common-resolution step in its Claim~3.5.",
+   "notes": "The passage replaces the cited lemma by its own Lemma; no formal variables are involved and no Moishezon or Q-factoriality convention is defined.",
+   "encoder": "e1"
+  },
+  {
+   "id": "ob77534b8fc",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The differential scalings have lower bounds $\\lambda'_3+\\lambda'_4$ for $j=2$ and $\\lambda'_4$ for $j=3$, exactly as in \\cite[Lemma~7.3]{C}.",
+   "notes": "The passage uses weights (m_i+H_i, m_i+H_i, 1+H_i; -1-H_i) but does not state d or bound m; no valuation normalization is stated.",
+   "encoder": "e1"
+  },
+  {
+   "id": "obacdbbee12",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "sign": "The image of G_M has numerical type epsilon M for one common sign epsilon in {1,-1}, left undetermined; the period multiplier is j_M(b,z)=c_b z^{-epsilon M b}.",
+    "normalization": "Period multiplier of the graph image is j_M(b,z)=c_b z^{-epsilon M b}, b in Z^g, c_b in Lambda^* (unspecified scalars c_b); mirror (E^g)^an with periods z -> q^b z.",
+    "grading": "The image is a line bundle up to shift; after fixing the variance convention all shifts can be made equal.",
+    "functor": "Variance convention to be fixed; a change of variance by perfect duality changes all numerical signs together."
+   },
+   "citing_text": "We recall the numerical calculation of \\cite[Lemma~9.1]{A8}, including its extension to non-diagonal slopes.",
+   "notes": "The passage applies the result to arbitrary integral symmetric slope matrices M (explicitly including non-diagonal slopes) in genus g, so the entry's scalar k is not fixed; variables left undeclared.",
+   "encoder": "e3"
+  },
+  {
+   "id": "oc0554c8416",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big perturbation \\cite[Lemma~2.23]{HX2026} supplies a nef datum that dominates a K\\\"ahler class on its carrier.",
+   "notes": "No entry hypothesis has a formal predicate. The passage does not state its own convention for Bott-Chern equivalence or for multiplier ideals/NKLT of generalized pairs.",
+   "encoder": "e2"
+  },
+  {
+   "id": "oc2db289c25",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {
+    "modified_big": "Modified big means the pushforward f_* alpha of a big class alpha under a birational morphism f of normal varieties (not necessarily a Bott-Chern class on Y)."
+   },
+   "citing_text": "We use the convention of \\cite[Definition~2.8]{HX}: a modified-big trace is the pushforward of a big Bott--Chern class on a modification.",
+   "notes": "The passage explicitly adopts the cited modified-big convention; it does not separately define bigness.",
+   "encoder": "e1"
+  },
+  {
+   "id": "oc50d0e7028",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    {
+     "name": "dimX",
+     "domain": [
+      0,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      22,
+      24
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimX == 2*n"
+   ],
+   "conventions": {
+    "normalization": "Rational Beauville--Bogomolov form q_Y on H^2(Y,Q), taken up to positive rational scale.",
+    "sign": "The form is positive on the real symplectic plane and Lorentzian on H^{1,1}(Y,R)."
+   },
+   "citing_text": "This form is positive on the real symplectic plane and Lorentzian on \\(H^{1,1}(Y,\\R)\\); see \\cite[Lemma~2.1, Definition~5.2, and Lemmas~5.3 and~5.7]{BakkerLehn}.",
+   "notes": "The passage's Y has dimension 2e with 2e < n (passage's own n, a different quantity); the entry's n is encoded as e, unbounded, so a representative range 0 to 12 is used. The normalization of sigma is not stated; the form is taken only up to positive rational scale.",
+   "encoder": "e1"
+  },
+  {
+   "id": "oc8321a0b60",
+   "variables": [
+    {
+     "name": "dimX",
+     "domain": [
+      3
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimX <= 3"
+   ],
+   "conventions": {
+    "boundary": "Gamma restricted to the fiber F_t is an effective SNC boundary with coefficients less than one (a klt pair), and r(K_Z+Gamma) is a line bundle for some r > 0."
+   },
+   "citing_text": "The projective log abundance theorem \\cite[Theorem~1.1]{KMMAbundance1994}, together with \\cite[\\S6.1]{MatsukiCorrection2003}, gives a nonzero section of a multiple of the nef adjoint.",
+   "notes": "The passage treats fibers of dimension at most three and assigns dimensions one and two to the classical log abundance theorem, so the cited theorem is read as used in dimension three. The passage does not define semiampleness; it only claims a nonzero section of a multiple.",
+   "encoder": "e2"
+  },
+  {
+   "id": "ocd42d2b82f",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      4
+     ]
+    }
+   ],
+   "assumptions": [
+    "n == 4"
+   ],
+   "conventions": {},
+   "citing_text": "For boundaries, Fujino's corrected argument for canonical fourfold pairs exhibits the recurring contributions from successive blowups over a codimension-two center \\cite[Example~2.1 and Theorems~5.1--5.2]{Fujino2005Addendum}.",
+   "notes": "The passage only describes the cited result (canonical fourfold pairs) in the introduction; dimension four is the only quantity it fixes.",
+   "encoder": "e1"
+  },
+  {
+   "id": "od6b791d31f",
+   "variables": [
+    {
+     "name": "delta",
+     "continuous": true,
+     "lower": 0,
+     "upper": 1
+    }
+   ],
+   "assumptions": [
+    "delta > 0"
+   ],
+   "conventions": {},
+   "citing_text": "The nested shielding argument follows \\cite[Lemma~3.24]{SSdiscrete}, using Proposition~\\ref{g:barriers}.",
+   "notes": "The passage's eta (in dist(v,gamma) < eta d, eta decreasing to 0) is encoded as delta; positivity is implied by the limit eta down to 0, and the upper bound 1 is a representative choice. Whether d equals dist(v,boundary of D) is not stated.",
+   "encoder": "e1"
+  },
+  {
+   "id": "odabd5d480d",
+   "variables": [
+    {
+     "name": "delta",
+     "continuous": true,
+     "lower": 0,
+     "upper": 1
+    }
+   ],
+   "assumptions": [
+    "delta > 0"
+   ],
+   "conventions": {},
+   "citing_text": "The nested shielding argument follows \\cite[Lemma~3.24]{SSdiscrete}, using Proposition~\\ref{g:barriers}.",
+   "notes": "The passage's eta (with eta -> 0 from above) plays the role of delta, but measured against a scale d rather than explicitly dist(v_0, boundary); the upper bound 1 is representative. The passage follows the argument rather than applying the statement.",
+   "encoder": "e2"
+  },
+  {
+   "id": "odd0a04851b",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "In a central vertical strip with a buffer continuing above the rectangle, use the partial-circuit construction of \\cite[Lemma~19.4 and the proof of Lemma~19.1]{DKLM2026}.",
+   "notes": "The passage fixes none of c, n, w, rho or L of the cited Lemma 19.1; it uses only the proof's partial-circuit construction.",
+   "encoder": "e1"
+  },
+  {
+   "id": "oe081a4ace3",
+   "variables": [
+    {
+     "name": "lam",
+     "continuous": true,
+     "lower": 0,
+     "upper": 12
+    },
+    {
+     "name": "a",
+     "continuous": true,
+     "lower": 0,
+     "upper": 12
+    },
+    {
+     "name": "n",
+     "continuous": true,
+     "lower": 0,
+     "upper": 12
+    }
+   ],
+   "assumptions": [
+    "a > lam",
+    "n > 2*lam"
+   ],
+   "conventions": {
+    "sign": "Uses the upper FPS of f at level 2a, obtained by reflection of the FPS construction (sets stopped from above); relative labels in {-2lambda, 0, 2lambda, 2a}."
+   },
+   "citing_text": "As \\(R\\uparrow\\infty\\) through a deterministic sequence, reflection of the FPS construction \\cite[Remark~4.2 and Proposition~4.4]{ALS2017} identifies the closed increasing union as the upper FPS of \\(f\\) at \\(2a\\).",
+   "notes": "The entry's barrier index n is played by the passage's real barrier R with R>2lambda, R increasing to infinity; ranges 0..12 are finite representatives of unbounded ranges. lambda>0 and a>0 are only implicit (0 is said to lie strictly between -R and 2a); lambda's value is not stated.",
+   "encoder": "e3"
+  },
+  {
+   "id": "oeaa53b1369",
+   "variables": [
+    {
+     "name": "p",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    {
+     "name": "dimA",
+     "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    }
+   ],
+   "assumptions": [
+    "dimA <= p - 1"
+   ],
+   "conventions": {
+    "grading": "Currents indexed by bidimension: after a local embedding the closed current of order zero has bidimension (dim T-1, dim T-1)."
+   },
+   "citing_text": "Such a current vanishes: after a local embedding it has bidimension $(\\dim T-1,\\dim T-1)$, whereas its support has smaller dimension \\cite[Chapter~III, Corollary~2.11]{DemaillyCADG2012}.",
+   "notes": "p = dim T - 1 and the support lies in codimension at least two in T, so dimA <= dim T - 2 = p - 1; dim T is unbounded in the passage, so 0..12 is a representative range. The passage says closed of order zero, not explicitly normal.",
+   "encoder": "e2"
+  },
+  {
+   "id": "oeb2a7e0cc7",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Write, as in \\cite[Theorem~4.1, Claim~4.1]{HX}, \\[ D_U(a)=K_U+\\Delta_U+\\mathbf M_U+a\\alpha_U =(a+1)\\alpha_U+F_U, \\quad \\alpha_U=\\mu^*\\alpha,\\quad \\Delta_U,F_U\\geq0, \\] where $\\Delta_U$ is klt and $F_U$ is $\\mu$-exceptional.",
+   "notes": "No entry hypothesis has a formal predicate; the passage states no convention on the entry's tags (semiample definition, indexing).",
+   "encoder": "e3"
+  },
+  {
+   "id": "oef3adf5008",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The modified-big perturbation \\cite[Lemma~2.23]{HX} supplies a nef datum that dominates a K\\\"ahler class on its carrier.",
+   "notes": "No entry hypothesis has a formal predicate. The passage does not state its own convention for Bott-Chern equivalence or for multiplier ideals/NKLT of generalized pairs.",
+   "encoder": "e2"
+  },
+  {
+   "id": "of3fa642756",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "Lemma~\\ref{repair:lem:actual-line-polarization} then supplies precisely the relative ampleness needed in place of \\cite[Lemma~2.42]{HX2026}, including the common-resolution step in its Claim~3.5.",
+   "notes": "The passage replaces the cited lemma by its own Lemma; no formal variables are involved and no Moishezon or Q-factoriality convention is defined.",
+   "encoder": "e1"
+  },
+  {
+   "id": "of90183edbd",
+   "variables": [
+    {
+     "name": "n",
+     "domain": [
+      4
+     ]
+    }
+   ],
+   "assumptions": [
+    "n == 4"
+   ],
+   "conventions": {},
+   "citing_text": "For boundaries, Fujino's corrected argument for canonical fourfold pairs exhibits the recurring contributions from successive blowups over a codimension-two center \\cite[Example~2.1 and Theorems~5.1--5.2]{Fujino2005Addendum}.",
+   "notes": "n=4 from 'canonical fourfold pairs'; the citation is descriptive (literature review), not an application.",
+   "encoder": "e3"
+  },
+  {
+   "id": "ofe497fb490",
+   "variables": [],
+   "assumptions": [],
+   "conventions": {},
+   "citing_text": "The conditional records in these steps are exactly the two-sided exploration records used in \\cite[Lemma 3.15]{SSdiscrete}; their field part consists solely of specified oriented strands.",
+   "notes": "The passage's p is a barrier breach constant (bound 1-p), not the lemma's p, and R is not explicitly bounded at the citation, so no variables are declared. The citation refers to the records used in the lemma rather than its statement.",
+   "encoder": "e2"
+  },
+  {
+   "id": "ofece718bde",
+   "variables": [
+    {
+     "name": "a",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "b",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    },
+    {
+     "name": "lam",
+     "continuous": true,
+     "lower": 0,
+     "upper": 10
+    }
+   ],
+   "assumptions": [
+    "a == b",
+    "a + b > 2*lam"
+   ],
+   "conventions": {},
+   "citing_text": "The uniqueness theorem of \\cite[Proposition~2]{ASW2017} identifies the two limits as \\(\\TVS{a}{a}\\) and \\(\\TVS{2a}{2a}\\), since \\(2a>2\\lambda\\) and \\(4a>2\\lambda\\).",
+   "notes": "Two applications: TVS{a}{a} (entry a = b = passage a, a+b = 2a > 2*lam) and TVS{2a}{2a} (entry a = b = 2a, a+b = 4a > 2*lam); encoded as the symmetric case a == b. The passage does not fix the value of lambda, so the upper bounds 10 are representative.",
+   "encoder": "e2"
+  }
+ ]
+}

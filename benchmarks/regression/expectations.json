@@ -1555,11 +1555,235 @@
   "openai_math_time_travel": {
    "adr": "ADR-DISCOVERY-077",
    "fixtures": {
+    "benchmarks/regression/fixtures/openai_math_chain.json.gz": "bb760c39851dd07948923534919000626b623913378641c7f573e12155d76ca7",
     "benchmarks/regression/fixtures/openai_math_time_travel.json.gz": "27767d5a3ccda4536619d210250c8279621c8b39de247d989bb7a6d04d94e98b",
+    "docs/reference/benchmarks/openai_math_chain_contexts.json": "7143c53aad23905cb46bf081ec519de781a1b42671a9b725b958d1ffa1d1a8e1",
+    "docs/reference/benchmarks/openai_math_chain_registry.json": "57f1fa28cb8331f9ef575ee72ccf634d690cd16b2d65e82622231790acf911c7",
+    "docs/reference/benchmarks/openai_math_chain_selection.json": "3dbcd160c970695b570f118352e3c1d348e7653d4846d9a8b53a9f507f7b7f0c",
     "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5"
    },
-   "notes": "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags.",
+   "notes": "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain re-run from its blind registry entries and citing contexts.",
    "observations": {
+    "chain/alarms/corrected/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 5
+    },
+    "chain/alarms/corrected/flags/REGISTRY_AUDIT": {
+     "better": "lower",
+     "value": 18
+    },
+    "chain/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 6
+    },
+    "chain/alarms/defect_manuscripts_off_location/flags/REGISTRY_AUDIT": {
+     "better": "lower",
+     "value": 10
+    },
+    "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Incompressible-Box-Transport-and-Finite-Computation": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Incompressible-Box-Transport-and-Finite-Computation/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Taming-implies-compatibility-on-four-manifolds": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Taming-implies-compatibility-on-four-manifolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
     "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
@@ -2739,8 +2963,253 @@
    "date": "2026-11-01",
    "reason": "Block E (ADR-DISCOVERY-086): the verification chain on biomedical hypotheses (pTau217 cutoff and variants, Alzheimer rivals, mechanistic chain and variants); first freeze.",
    "version": 3
+  },
+  {
+   "changes": {
+    "openai_math_time_travel": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:benchmarks/regression/fixtures/openai_math_chain.json.gz"
+     },
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_chain_contexts.json"
+     },
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_chain_registry.json"
+     },
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_chain_selection.json"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/alarms/corrected/flags/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/alarms/defect_manuscripts_off_location/flags/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Incompressible-Box-Transport-and-Finite-Computation"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Incompressible-Box-Transport-and-Finite-Computation/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Taming-implies-compatibility-on-four-manifolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Taming-implies-compatibility-on-four-manifolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/REGISTRY_AUDIT"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/REGISTRY_AUDIT"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "Full-chain re-run (OPENAI_MATH_CHAIN_PROTOCOL.md): REGISTRY_AUDIT and CHAIN_SEAMS on blind registry entries and citing contexts; protocol HITs on 10 defects (11 with the baseline), adjudicated in OPENAI_MATH_CHAIN_RESULTS.md as lexical seam flags or coincidences; alarm loads frozen",
+   "version": 4
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 3
+ "version": 4
 }

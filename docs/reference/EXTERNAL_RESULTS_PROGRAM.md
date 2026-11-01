@@ -149,6 +149,32 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
   statement that the free or the zero theory satisfies is vacuous relative to its intent. The claim is recorded at
   the first rung of the trust ladder below (CLAIMED), because no statement is public.
 
+### 2.11 Addendum (2026-11-01): the time-travel benchmark re-run after blocks A–E
+
+- **What.** The 17 real openai/math corrections were measured again with the full chain of
+  [`VERIFICATION_METHODOLOGY.md`](../architecture/VERIFICATION_METHODOLOGY.md):
+  - the manuscript audit with a cited-results registry;
+  - the obligation ledger;
+  - the 8-step chain.
+
+  The registry entries for the cited results at each defect location were written by agents that saw only the
+  bibliography entry and read the cited work. The citing contexts were encoded by other agents from shuffled, opaque
+  passages. The procedure was pre-registered, and each input was frozen before the next step.
+  ([`OPENAI_MATH_CHAIN_RESULTS.md`](benchmarks/OPENAI_MATH_CHAIN_RESULTS.md))
+- **Result.** The protocol count rose from 2/17 to 11/17. Read by hand, the gain is small:
+  - **Decided detections are still 1/17**, the unresolved citation.
+  - **For the three withdrawals, the chain now shows the cited and the citing sign conventions side by side**, at the
+    passage the withdrawal notice names. It compares them as strings, so it does not decide the sign.
+  - **The other new hits are coincidences.** The chain flags about a third of all citations wherever they are, and
+    the phrase-based registry audit flags most of them.
+- **What it taught.** In order:
+  1. **Conventions must be compared semantically, not as text.**
+  2. **The chain needs an input kind for a citation inside a proof.**
+  3. **A cited result can itself be the error.** The blind Li–Zhang entry supports the pre-fix *Taming* claim, so
+     only premise status (M11) could flag that use.
+- **Regression.** The block C regression case now replays this run offline and freezes its verdicts and alarm
+  counts.
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

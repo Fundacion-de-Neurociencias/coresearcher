@@ -2,7 +2,7 @@
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # Request Models
@@ -758,6 +758,8 @@ class CitationUseModel(BaseModel):
     conventions: Dict[str, str] = Field(default_factory=dict)
     context: Optional[CitingContextModel] = None
     source: Optional[str] = Field(default=None, max_length=500)
+    # The hypothesis variable the cited result applies to: the use inherits its unit (ADR-DISCOVERY-086).
+    variable: Optional[str] = Field(default=None, max_length=120)
 
 
 class EvaluateFormalHypothesisRequest(BaseModel):
@@ -963,12 +965,92 @@ class FreezeVerifyRequest(BaseModel):
     expected_sha256: Optional[str] = Field(default=None, pattern=r"^[0-9a-f]{64}$")
 
 
+class UntreatedArmProbeModel(BaseModel):
+    """The untreated arm and the outcome predicted for the treated arm, as predicates (ADR-DISCOVERY-086)."""
+
+    untreated: str = Field(min_length=1, max_length=2000)
+    outcome: str = Field(min_length=1, max_length=2000)
+    label: str = Field(default="", max_length=300)
+
+
+class PopulationProbeModel(BaseModel):
+    """The validated population as a predicate over the hypothesis variables (ADR-DISCOVERY-086)."""
+
+    validated: str = Field(min_length=1, max_length=2000)
+    label: str = Field(default="", max_length=300)
+
+
+class BiomedicalProbesModel(BaseModel):
+    null_biomarker: List[str] = Field(default_factory=list, max_length=20)
+    untreated_arm: Optional[UntreatedArmProbeModel] = None
+    population: Optional[PopulationProbeModel] = None
+
+
+class BiomedicalSpecModel(BaseModel):
+    """Units per variable, the hypothesis's conventions and the domain probes (ADR-DISCOVERY-086)."""
+
+    units: Dict[str, str] = Field(default_factory=dict)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    probes: BiomedicalProbesModel = Field(default_factory=BiomedicalProbesModel)
+
+
+class MechanismNodeModel(BaseModel):
+    """A quantity of a mechanism: ordered `levels`, or a continuous range (`lower`, `upper`)."""
+
+    name: str = Field(min_length=1, max_length=60)
+    levels: Optional[List[Any]] = Field(default=None, max_length=50)
+    lower: Optional[float] = None
+    upper: Optional[float] = None
+    unit: Optional[str] = Field(default=None, max_length=60)
+    scale_direction: Optional[str] = Field(default=None, max_length=60)
+    aliases: List[str] = Field(default_factory=list, max_length=20)
+
+
+class MechanismLinkModel(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    from_: str = Field(alias="from", max_length=60)
+    to: str = Field(max_length=60)
+    sign: Optional[str] = Field(default=None, pattern=r"^[+-]$")
+    effect: Optional[str] = Field(default=None, pattern="^(raises|lowers|worsens|improves)$")
+
+
+class MechanismPredictionModel(MechanismLinkModel):
+    pass
+
+
+class MechanismModel(BaseModel):
+    """A mechanistic chain (ADR-DISCOVERY-086): nodes and signed links, or controlled prose such as
+    "A raises B, which drives C, which predicts D." with every noun phrase declared as a node name or alias."""
+
+    hypothesis_id: str = Field(default="MECHANISM", max_length=120)
+    statement: str = Field(default="", max_length=5000)
+    prose: Optional[str] = Field(default=None, max_length=5000)
+    nodes: List[MechanismNodeModel] = Field(min_length=1, max_length=12)
+    links: List[MechanismLinkModel] = Field(default_factory=list, max_length=30)
+    prediction: Optional[MechanismPredictionModel] = None
+
+
+class BiomedicalCheckRequest(BaseModel):
+    hypothesis: FormalHypothesisModel
+    consequences: List[str] = Field(default_factory=list, max_length=50)
+    biomedical: BiomedicalSpecModel
+    backend: str = Field(default="auto", pattern="^(auto|enumeration|smt)$")
+
+
+class MechanismCheckRequest(BaseModel):
+    mechanism: MechanismModel
+    backend: str = Field(default="auto", pattern="^(auto|enumeration|smt)$")
+
+
 class VerificationChainRequest(BaseModel):
-    """The composed verification chain (ADR-085): exactly one of `hypothesis` and `prose`, and either `freeze`
-    (criteria frozen earlier) or `author` (the chain freezes them first)."""
+    """The composed verification chain (ADR-085): exactly one of `hypothesis`, `prose` and `mechanism`
+    (ADR-086), and either `freeze` (criteria frozen earlier) or `author` (the chain freezes them first)."""
 
     hypothesis: Optional[FormalHypothesisModel] = None
     prose: Optional[str] = Field(default=None, min_length=1, max_length=5000)
+    mechanism: Optional[MechanismModel] = None
+    biomedical: Optional[BiomedicalSpecModel] = None
     hypothesis_id: str = Field(default="H", max_length=120)
     variable_schema: Optional[List[FormalVariableModel]] = None
     samples: Optional[int] = Field(default=None, ge=1, le=7)

@@ -17,8 +17,9 @@ suite (`tests/test_capability_regression.py`), on every change.
 | `manuscript_audit_calibration` | Citation gate, import counts and registry phrase matching | ADR-082 |
 | `cited_registry_calibration` | Withdrawal sign mismatch, ETH retraction impact, biomarker cutoff outside validation | ADR-083 |
 | `verification_chain` | The composed chain end to end on a math hypothesis (order and three predictions) and a biomedical-style one (pTau217 and decline, a cutoff cited outside its validated assay): every step's state, the ledger, the roll-up, the freeze digest, and BLOCKED for each hypothesis edited after its freeze | ADR-085 |
+| `biomedical_chain` | The chain on biomedical hypotheses: the pTau217 two-cutoff rule (restated, as submitted, without the renal assumption, with a unit seam), the three Alzheimer rivals with null-biomarker probes, and a mechanistic chain from prose (coherent, sign seam, saturated node, outside the grammar). Steps, obligations, roll-ups, unit, probe, mechanism and citation outcomes; freeze digests for enumerated hypotheses; BLOCKED after an edit. Illustrative values only | ADR-086 |
 
-The whole set takes about 25 s on a laptop. The time-travel case dominates.
+The whole set takes about 35 s on a laptop. The time-travel case dominates.
 
 ## Where things live
 

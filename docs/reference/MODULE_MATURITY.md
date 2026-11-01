@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 28 |
-| Tested | Covered by tests, not reachable from the API | 61 |
+| Integrated | Used by the API and covered by tests | 31 |
+| Tested | Covered by tests, not reachable from the API | 62 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -29,6 +29,9 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `bayesian_surprise_engine` | Exercised | - | - | yes |
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
+| `biomedical_conventions` | Integrated | yes | yes | - |
+| `biomedical_domain` | Integrated | yes | yes | - |
+| `biomedical_units` | Tested | - | yes | - |
 | `capability_regression` | Integrated | yes | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
@@ -95,6 +98,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `manuscript_audit` | Integrated | yes | yes | - |
 | `manuscript_checks` | Tested | - | yes | yes |
 | `marr_engine` | Prototype | - | - | - |
+| `mechanistic_chain` | Integrated | yes | yes | - |
 | `membrane_dynamics_auditor` | Exercised | - | - | yes |
 | `multiscale_abstraction_engine` | Tested | - | yes | - |
 | `novelty_detector` | Prototype | - | - | - |

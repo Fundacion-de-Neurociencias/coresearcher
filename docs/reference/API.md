@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 136. Interactive documentation is served at `/docs` when the API runs.
+Operations: 139. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -11,6 +11,9 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | Method | Path | Auth | Operation |
 | --- | --- | --- | --- |
 | `POST` | `/api/audit/evidence` | API key | Audit Empirical Evidence |
+| `POST` | `/api/biomedical/check` | API key | Check |
+| `POST` | `/api/biomedical/mechanism` | API key | Mechanism |
+| `GET` | `/api/biomedical/vocabulary` | Public | Vocabulary |
 | `GET` | `/api/capabilities` | Public | Capabilities |
 | `POST` | `/api/chain/run` | API key | Run Verification Chain |
 | `POST` | `/api/discovery/ablation-rebuttal/run` | API key | Run Ablation And Rebuttal |

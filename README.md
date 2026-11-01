@@ -17,6 +17,7 @@ it, the evidence it used, and a cryptographic hash that lets anyone reproduce th
 - **Formal hypotheses.** Exact evaluation over a finite state space: vacuous, unfalsifiable or self-contradictory hypotheses, conflicting assumptions, counterexamples and logical relations between rivals ([ADR-059](docs/decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md)).
 - **Auditable formal verdicts.** Every formal report records the engine, z3 version, thresholds and input/output digests, carries mandatory caveats, and names its non-verdicts (UNDECIDED, BLOCKED, ...); `coresearcher formal run` / `analyze` recompute a stored verdict offline and refuse to overwrite a differing one ([ADR-068](docs/decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md)).
 - **Formal verifier for OASE.** `integrations/oase` installs `oase formal run` / `analyze` into Google's Open Agentic Science Engine, so its hypex hypotheses and Stage 1 gates get exact vacuity, contradiction, falsifiability and rival checks with OASE's own provenance, thresholds and relays ([ADR-069](docs/decisions/ADR-DISCOVERY-069-OASE-FORMAL-ADAPTER.md)).
+- **Biomedical verification chain.** The composed chain (freeze, formalize, fidelity, vacuity, obligations, seams, discharge, trust ladder) checks biomedical hypotheses for unit homogeneity, imported conventions (assay, matrix, units, population, reference standard, scale direction, cutoff derivation), idle biomarkers, outcomes the untreated arm already shows, and the links and signs of mechanistic chains such as "A raises B, which drives C" ([ADR-086](docs/decisions/ADR-DISCOVERY-086-BIOMEDICAL-DOMAIN-TRANSFER.md)).
 - **Stage gates.** Research projects pass checklist gates from question to report; an agent cannot certify its own work, versions are hash-chained, and releases list every criterion not met ([ADR-063](docs/decisions/ADR-DISCOVERY-063-RESEARCH-LIFECYCLE-STAGE-GATES.md)).
 - **Evidence for EdiTXT.** An EvidenceRequest about a lifecycle project, research package, registered claim, formal hypothesis or formal case returns a content-addressed EvidenceGraph with every gap listed; a capability catalogue describes every endpoint ([ADR-067](docs/decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md)).
 - **Research packages.** One `.crpkg` file carries a project's history and artifacts to another machine, verified on import and read-only until forked ([ADR-065](docs/decisions/ADR-DISCOVERY-065-RESEARCH-PACKAGES.md)).
@@ -35,7 +36,7 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 | --- | --- | --- |
 | Test suite | 210 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 28 integrated, 61 tested, 18 exercised, 20 prototypes (of 127) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 31 integrated, 62 tested, 18 exercised, 20 prototypes (of 131) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 
 Claims are listed with their supporting script, data origin and last result in the

@@ -19,6 +19,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.routers import (
+    biomedical,
     discovery,
     evidence,
     fidelity,
@@ -64,6 +65,7 @@ app.add_middleware(
 )
 
 for _module in (
+    biomedical,
     discovery,
     evidence,
     fidelity,

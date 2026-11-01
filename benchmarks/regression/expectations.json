@@ -1,5 +1,1109 @@
 {
  "cases": {
+  "biomedical_chain": {
+   "adr": "ADR-DISCOVERY-086",
+   "fixtures": {
+    "benchmarks/regression/fixtures/biomedical-chain/cases.json": "4e9345f6515557321ceee3195393291c2fa74b05743467a71c78b41a2d105689"
+   },
+   "notes": "Units, conventions, null-biomarker, untreated-arm and population probes, mechanism links and signs. Illustrative values only, not clinical values.",
+   "observations": {
+    "alzheimer_hyp_null_nonspecific/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "alzheimer_hyp_null_nonspecific/freeze_sha256": {
+     "better": "exact",
+     "value": "3c1533d60d7a1305cf1530041efb4f88e1c954713771bbf69a363e8be1e96100"
+    },
+    "alzheimer_hyp_null_nonspecific/null_biomarker/tau": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "alzheimer_hyp_null_nonspecific/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[tau]": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "alzheimer_hyp_null_nonspecific/rollup": {
+     "better": "exact",
+     "value": [
+      "OPEN",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "alzheimer_hyp_null_nonspecific/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:null_biomarker[tau] DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "4 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "2 DISCHARGED_SYMBOLIC, 2 OPEN"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "OPEN at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "alzheimer_hyp_tau_connectome/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "alzheimer_hyp_tau_connectome/freeze_sha256": {
+     "better": "exact",
+     "value": "47bb9f9dbebc062a9836eff46d2f1e11f8be6ddd2a67d3b2a0ad274756b74ba4"
+    },
+    "alzheimer_hyp_tau_connectome/null_biomarker/hub": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "alzheimer_hyp_tau_connectome/null_biomarker/tau": {
+     "better": "exact",
+     "value": "BIOMARKER_IDLE"
+    },
+    "alzheimer_hyp_tau_connectome/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[hub]": "DISCHARGED_SYMBOLIC",
+      "probe:null_biomarker[tau]": "REFUTED",
+      "vacuity": "OPEN"
+     }
+    },
+    "alzheimer_hyp_tau_connectome/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "alzheimer_hyp_tau_connectome/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "DONE",
+       "vacuity OPEN; probe:null_biomarker[hub] DISCHARGED_SYMBOLIC; probe:null_biomarker[tau] REFUTED"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "6 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "3 DISCHARGED_SYMBOLIC, 2 OPEN, 1 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "alzheimer_hyp_vascular_wmh/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "alzheimer_hyp_vascular_wmh/freeze_sha256": {
+     "better": "exact",
+     "value": "40aaeb829235145872b7245f1694a32e44b9ff63e477310d95656a16cbf98fa0"
+    },
+    "alzheimer_hyp_vascular_wmh/null_biomarker/wmh": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "alzheimer_hyp_vascular_wmh/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[wmh]": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "alzheimer_hyp_vascular_wmh/rollup": {
+     "better": "exact",
+     "value": [
+      "OPEN",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "alzheimer_hyp_vascular_wmh/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:null_biomarker[wmh] DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "5 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "3 DISCHARGED_SYMBOLIC, 2 OPEN"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "OPEN at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "mechanism_amyloid_ptau_tau_cognition/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "mechanism_amyloid_ptau_tau_cognition/freeze_sha256": {
+     "better": "exact",
+     "value": "85fbffa1d9771d830cefde9e9c53d86ffab75db07a94b8cc6fd2c426f305ce06"
+    },
+    "mechanism_amyloid_ptau_tau_cognition/mechanism/compatibility": {
+     "better": "exact",
+     "value": "DISCHARGED_SYMBOLIC"
+    },
+    "mechanism_amyloid_ptau_tau_cognition/mechanism/links": {
+     "better": "exact",
+     "value": [
+      [
+       "amyloid -> ptau217",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "ptau217 -> tau_spread",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "tau_spread -> cognition",
+       "-",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ]
+     ]
+    },
+    "mechanism_amyloid_ptau_tau_cognition/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "claim[2]": "DISCHARGED_SYMBOLIC",
+      "claim[3]": "DISCHARGED_SYMBOLIC",
+      "claim[4]": "DISCHARGED_SYMBOLIC",
+      "claim[5]": "DISCHARGED_SYMBOLIC",
+      "claim[6]": "DISCHARGED_SYMBOLIC",
+      "claim[7]": "DISCHARGED_SYMBOLIC",
+      "claim[8]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "link[0]": "DISCHARGED_SYMBOLIC",
+      "link[1]": "DISCHARGED_SYMBOLIC",
+      "link[2]": "DISCHARGED_SYMBOLIC",
+      "link_sign[0]": "DISCHARGED_SYMBOLIC",
+      "link_sign[1]": "DISCHARGED_SYMBOLIC",
+      "link_sign[2]": "DISCHARGED_SYMBOLIC",
+      "mechanism:compatibility": "DISCHARGED_SYMBOLIC",
+      "probe:untreated_arm": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "mechanism_amyloid_ptau_tau_cognition/rollup": {
+     "better": "exact",
+     "value": [
+      "OPEN",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "mechanism_amyloid_ptau_tau_cognition/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "COMPILED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:untreated_arm DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "20 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "18 DISCHARGED_SYMBOLIC, 2 OPEN"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "OPEN at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "mechanism_amyloid_ptau_tau_cognition/untreated_arm": {
+     "better": "exact",
+     "value": "FORBIDDEN_IN_UNTREATED_ARM"
+    },
+    "mechanism_outside_grammar/formal_status": {
+     "better": "exact",
+     "value": "FORMALIZATION_FAILED"
+    },
+    "mechanism_outside_grammar/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "FORMALIZATION_FAILED",
+       "NOT_IN_GRAMMAR"
+      ],
+      [
+       "fidelity",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ],
+      [
+       "vacuity",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ],
+      [
+       "obligations",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ],
+      [
+       "seams",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ],
+      [
+       "discharge",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ],
+      [
+       "trust_ladder",
+       "NOT_RUN",
+       "not run: an earlier step is FORMALIZATION_FAILED"
+      ]
+     ]
+    },
+    "mechanism_saturated_link/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "mechanism_saturated_link/freeze_sha256": {
+     "better": "exact",
+     "value": "0635b5bf15f91a00fb04adea0b8093b3274387e805986dc7845509e6e7ffceea"
+    },
+    "mechanism_saturated_link/mechanism/compatibility": {
+     "better": "exact",
+     "value": "REFUTED"
+    },
+    "mechanism_saturated_link/mechanism/links": {
+     "better": "exact",
+     "value": [
+      [
+       "amyloid -> ptau217",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "ptau217 -> tau_spread",
+       "+",
+       "REFUTED",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "tau_spread -> cognition",
+       "-",
+       "REFUTED",
+       "DISCHARGED_SYMBOLIC"
+      ]
+     ]
+    },
+    "mechanism_saturated_link/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "claim[2]": "DISCHARGED_SYMBOLIC",
+      "claim[3]": "REFUTED",
+      "claim[4]": "DISCHARGED_SYMBOLIC",
+      "claim[5]": "DISCHARGED_SYMBOLIC",
+      "claim[6]": "DISCHARGED_SYMBOLIC",
+      "claim[7]": "REFUTED",
+      "claim[8]": "REFUTED",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "link[0]": "DISCHARGED_SYMBOLIC",
+      "link[1]": "REFUTED",
+      "link[2]": "REFUTED",
+      "link_sign[0]": "DISCHARGED_SYMBOLIC",
+      "link_sign[1]": "DISCHARGED_SYMBOLIC",
+      "link_sign[2]": "DISCHARGED_SYMBOLIC",
+      "mechanism:compatibility": "REFUTED",
+      "probe:untreated_arm": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "mechanism_saturated_link/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "mechanism_saturated_link/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "COMPILED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:untreated_arm DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "20 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "12 DISCHARGED_SYMBOLIC, 2 OPEN, 6 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "mechanism_saturated_link/untreated_arm": {
+     "better": "exact",
+     "value": "FORBIDDEN_IN_UNTREATED_ARM"
+    },
+    "mechanism_sign_seam/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "mechanism_sign_seam/freeze_sha256": {
+     "better": "exact",
+     "value": "92b3e0d805237b2ac85dbeb5cec232a900d28ad66914759413d303cd398adaed"
+    },
+    "mechanism_sign_seam/mechanism/compatibility": {
+     "better": "exact",
+     "value": "REFUTED"
+    },
+    "mechanism_sign_seam/mechanism/links": {
+     "better": "exact",
+     "value": [
+      [
+       "amyloid -> ptau217",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "ptau217 -> tau_spread",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "tau_spread -> cognition",
+       "+",
+       "DISCHARGED_SYMBOLIC",
+       "REFUTED"
+      ]
+     ]
+    },
+    "mechanism_sign_seam/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "claim[1]": "DISCHARGED_SYMBOLIC",
+      "claim[2]": "DISCHARGED_SYMBOLIC",
+      "claim[3]": "DISCHARGED_SYMBOLIC",
+      "claim[4]": "DISCHARGED_SYMBOLIC",
+      "claim[5]": "DISCHARGED_SYMBOLIC",
+      "claim[6]": "DISCHARGED_SYMBOLIC",
+      "claim[7]": "DISCHARGED_SYMBOLIC",
+      "claim[8]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "REFUTED",
+      "fidelity": "OPEN",
+      "link[0]": "DISCHARGED_SYMBOLIC",
+      "link[1]": "DISCHARGED_SYMBOLIC",
+      "link[2]": "DISCHARGED_SYMBOLIC",
+      "link_sign[0]": "DISCHARGED_SYMBOLIC",
+      "link_sign[1]": "DISCHARGED_SYMBOLIC",
+      "link_sign[2]": "REFUTED",
+      "mechanism:compatibility": "REFUTED",
+      "probe:untreated_arm": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "mechanism_sign_seam/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "mechanism_sign_seam/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "COMPILED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:untreated_arm DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "20 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "15 DISCHARGED_SYMBOLIC, 2 OPEN, 3 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "mechanism_sign_seam/untreated_arm": {
+     "better": "exact",
+     "value": "FORBIDDEN_IN_UNTREATED_ARM"
+    },
+    "ptau217_cutoff/citations": {
+     "better": "exact",
+     "value": [
+      [
+       "CLEAR",
+       [
+        [
+         "cutoff_derivation",
+         "MATCH"
+        ],
+        [
+         "matrix",
+         "MATCH"
+        ],
+        [
+         "reference_standard",
+         "MATCH"
+        ],
+        [
+         "units",
+         "MATCH"
+        ],
+        [
+         "validated_assay",
+         "MATCH"
+        ]
+       ],
+       [
+        "DISCHARGED"
+       ]
+      ]
+     ]
+    },
+    "ptau217_cutoff/edited/formal_status": {
+     "better": "exact",
+     "value": "BLOCKED"
+    },
+    "ptau217_cutoff/edited/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "BLOCKED"
+      ],
+      [
+       "formalize",
+       "NOT_RUN"
+      ],
+      [
+       "fidelity",
+       "NOT_RUN"
+      ],
+      [
+       "vacuity",
+       "NOT_RUN"
+      ],
+      [
+       "obligations",
+       "NOT_RUN"
+      ],
+      [
+       "seams",
+       "NOT_RUN"
+      ],
+      [
+       "discharge",
+       "NOT_RUN"
+      ],
+      [
+       "trust_ladder",
+       "NOT_RUN"
+      ]
+     ]
+    },
+    "ptau217_cutoff/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "ptau217_cutoff/null_biomarker/ptau_val": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "ptau217_cutoff/obligations": {
+     "better": "exact",
+     "value": {
+      "cite[0]": "DISCHARGED_SYMBOLIC",
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[1]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[ptau_val]": "DISCHARGED_SYMBOLIC",
+      "probe:population": "DISCHARGED_SYMBOLIC",
+      "units": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "ptau217_cutoff/population": {
+     "better": "exact",
+     "value": "INSIDE_VALIDATED_POPULATION"
+    },
+    "ptau217_cutoff/rollup": {
+     "better": "exact",
+     "value": [
+      "OPEN",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "ptau217_cutoff/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:null_biomarker[ptau_val] DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "9 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "DONE",
+       "CLEAR, units HOMOGENEOUS, population INSIDE_VALIDATED_POPULATION"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "7 DISCHARGED_SYMBOLIC, 2 OPEN"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "OPEN at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "ptau217_cutoff/units": {
+     "better": "exact",
+     "value": {
+      "assumptions[0]": "HOMOGENEOUS",
+      "assumptions[1]": "NOT_APPLICABLE",
+      "claims[0]": "HOMOGENEOUS",
+      "consequences[0]": "HOMOGENEOUS",
+      "consequences[1]": "HOMOGENEOUS",
+      "scope": "NOT_APPLICABLE"
+     }
+    },
+    "ptau217_cutoff_as_submitted/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "ptau217_cutoff_as_submitted/obligations": {
+     "better": "exact",
+     "value": {
+      "claim[0]": "REFUTED",
+      "claim[1]": "REFUTED",
+      "fidelity": "OPEN",
+      "vacuity": "OPEN"
+     }
+    },
+    "ptau217_cutoff_as_submitted/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "ptau217_cutoff_as_submitted/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "4 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "NOT_APPLICABLE",
+       "no cited results declared"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "2 OPEN, 2 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "ptau217_cutoff_unit_seam/citations": {
+     "better": "exact",
+     "value": [
+      [
+       "FINDINGS",
+       [
+        [
+         "cutoff_derivation",
+         "MATCH"
+        ],
+        [
+         "matrix",
+         "MATCH"
+        ],
+        [
+         "reference_standard",
+         "MATCH"
+        ],
+        [
+         "units",
+         "MISMATCH"
+        ],
+        [
+         "validated_assay",
+         "MATCH"
+        ]
+       ],
+       [
+        "DISCHARGED"
+       ]
+      ]
+     ]
+    },
+    "ptau217_cutoff_unit_seam/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "ptau217_cutoff_unit_seam/null_biomarker/ptau_val": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "ptau217_cutoff_unit_seam/obligations": {
+     "better": "exact",
+     "value": {
+      "cite[0]": "OPEN",
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[1]": "DISCHARGED_SYMBOLIC",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[ptau_val]": "DISCHARGED_SYMBOLIC",
+      "probe:population": "DISCHARGED_SYMBOLIC",
+      "units": "REFUTED",
+      "vacuity": "OPEN"
+     }
+    },
+    "ptau217_cutoff_unit_seam/population": {
+     "better": "exact",
+     "value": "INSIDE_VALIDATED_POPULATION"
+    },
+    "ptau217_cutoff_unit_seam/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "ptau217_cutoff_unit_seam/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:null_biomarker[ptau_val] DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "9 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "DONE",
+       "FINDINGS, units FINDINGS, population INSIDE_VALIDATED_POPULATION"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "5 DISCHARGED_SYMBOLIC, 3 OPEN, 1 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "ptau217_cutoff_unit_seam/units": {
+     "better": "exact",
+     "value": {
+      "assumptions[0]": "SCALE_MISMATCH",
+      "assumptions[1]": "NOT_APPLICABLE",
+      "claims[0]": "SCALE_MISMATCH",
+      "consequences[0]": "HOMOGENEOUS",
+      "consequences[1]": "SCALE_MISMATCH",
+      "scope": "NOT_APPLICABLE"
+     }
+    },
+    "ptau217_cutoff_without_renal_assumption/citations": {
+     "better": "exact",
+     "value": [
+      [
+       "FINDINGS",
+       [
+        [
+         "cutoff_derivation",
+         "MATCH"
+        ],
+        [
+         "matrix",
+         "MATCH"
+        ],
+        [
+         "reference_standard",
+         "MATCH"
+        ],
+        [
+         "units",
+         "MATCH"
+        ],
+        [
+         "validated_assay",
+         "MATCH"
+        ]
+       ],
+       [
+        "NOT_DISCHARGED"
+       ]
+      ]
+     ]
+    },
+    "ptau217_cutoff_without_renal_assumption/formal_status": {
+     "better": "exact",
+     "value": "DECIDED"
+    },
+    "ptau217_cutoff_without_renal_assumption/null_biomarker/ptau_val": {
+     "better": "exact",
+     "value": "BIOMARKER_DOES_WORK"
+    },
+    "ptau217_cutoff_without_renal_assumption/obligations": {
+     "better": "exact",
+     "value": {
+      "cite[0]": "OPEN",
+      "claim[0]": "DISCHARGED_SYMBOLIC",
+      "consequence[0]": "REFUTED",
+      "consequence[1]": "REFUTED",
+      "fidelity": "OPEN",
+      "probe:null_biomarker[ptau_val]": "DISCHARGED_SYMBOLIC",
+      "probe:population": "OPEN",
+      "units": "DISCHARGED_SYMBOLIC",
+      "vacuity": "OPEN"
+     }
+    },
+    "ptau217_cutoff_without_renal_assumption/population": {
+     "better": "exact",
+     "value": "APPLIES_OUTSIDE_VALIDATED_POPULATION"
+    },
+    "ptau217_cutoff_without_renal_assumption/rollup": {
+     "better": "exact",
+     "value": [
+      "REFUTED",
+      "STATEMENT_PUBLIC"
+     ]
+    },
+    "ptau217_cutoff_without_renal_assumption/steps": {
+     "better": "exact",
+     "value": [
+      [
+       "freeze",
+       "DONE",
+       "FROZEN"
+      ],
+      [
+       "formalize",
+       "DONE",
+       "SUPPLIED"
+      ],
+      [
+       "fidelity",
+       "OPEN",
+       "OPEN"
+      ],
+      [
+       "vacuity",
+       "OPEN",
+       "vacuity OPEN; probe:null_biomarker[ptau_val] DISCHARGED_SYMBOLIC"
+      ],
+      [
+       "obligations",
+       "DONE",
+       "9 obligations; DAG acyclic, no missing premise"
+      ],
+      [
+       "seams",
+       "DONE",
+       "FINDINGS, units HOMOGENEOUS, population APPLIES_OUTSIDE_VALIDATED_POPULATION"
+      ],
+      [
+       "discharge",
+       "DONE",
+       "3 DISCHARGED_SYMBOLIC, 4 OPEN, 2 REFUTED"
+      ],
+      [
+       "trust_ladder",
+       "DONE",
+       "REFUTED at STATEMENT_PUBLIC"
+      ]
+     ]
+    },
+    "ptau217_cutoff_without_renal_assumption/units": {
+     "better": "exact",
+     "value": {
+      "assumptions[0]": "HOMOGENEOUS",
+      "claims[0]": "HOMOGENEOUS",
+      "consequences[0]": "HOMOGENEOUS",
+      "consequences[1]": "HOMOGENEOUS",
+      "scope": "NOT_APPLICABLE"
+     }
+    }
+   },
+   "title": "Composed chain on biomedical hypotheses: pTau217 cutoff, Alzheimer rivals, a mechanistic chain"
+  },
   "cited_registry_calibration": {
    "adr": "ADR-DISCOVERY-083",
    "fixtures": {
@@ -1622,8 +2726,21 @@
    "date": "2026-11-01",
    "reason": "Block D (ADR-DISCOVERY-085): add the composed verification chain on a math and a biomedical-style formal hypothesis, with frozen criteria and the BLOCKED edit",
    "version": 2
+  },
+  {
+   "changes": {
+    "biomedical_chain": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "Block E (ADR-DISCOVERY-086): the verification chain on biomedical hypotheses (pTau217 cutoff and variants, Alzheimer rivals, mechanistic chain and variants); first freeze.",
+   "version": 3
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 2
+ "version": 3
 }

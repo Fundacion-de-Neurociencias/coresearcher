@@ -107,6 +107,27 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "biomedical_conventions",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "biomedical_domain",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "biomedical_units",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "capability_regression",
       "scripts": false,
       "tests": true
@@ -565,6 +586,13 @@
       "module": "marr_engine",
       "scripts": false,
       "tests": false
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "mechanistic_chain",
+      "scripts": false,
+      "tests": true
     },
     {
       "api": false,

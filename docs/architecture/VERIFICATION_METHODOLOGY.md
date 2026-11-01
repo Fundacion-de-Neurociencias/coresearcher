@@ -72,7 +72,9 @@ domain-neutral.
 - **How.** Probe the claim with cheap witnesses: the zero or null model, a free or degenerate model, the boundary
   values, an empty scope. A claim that a declared non-witness satisfies is *vacuous relative to intent*.
 - **Came from.** Yang–Mills ("a free theory does not count").
-- **Integration.** Block A adds it to the evaluator.
+- **Integration.** Block A adds it to the evaluator. Block E adds the biomedical probes (ADR-086): a null biomarker
+  (the claims treat no two states that differ only in the biomarker differently), the untreated arm, and a population
+  outside the validated one.
 - **Beyond.** In biomedicine, a hypothesis that a null model already satisfies is the same failure. One example is
   a predicted effect that also holds when the biomarker is replaced by a constant. Another is a mechanism whose
   predictions are met by the untreated arm.
@@ -90,7 +92,8 @@ domain-neutral.
 - **Integration.** Done (ADR-085). Every hypothesis evaluation (API, `formal run` and `formal analyze`, the chain)
   returns an ADR-076 ledger beside its report, rolled up by the weakest link onto the trust ladder.
 - **Beyond.** A mechanistic hypothesis ("A raises B, which drives C, which predicts D") is an obligation chain. Each
-  link can be checked for consistency, dimensional homogeneity and compatibility with the others.
+  link can be checked for consistency, dimensional homogeneity and compatibility with the others. Block E does this
+  (ADR-086): `link[i]`, `link_sign[i]` and `mechanism:compatibility` are ledger obligations of a compiled mechanism.
 
 ### M6. Errors live at the seams
 
@@ -108,7 +111,9 @@ domain-neutral.
   - The citation gate and the import obligations of ADR-077 are a service: `POST /api/manuscripts/audit` and
     `coresearcher formal manuscript`.
   - The registry holds cited results with hypotheses as literal phrases and conventions as typed fields.
-  - Still to do in block B: comparing typed conventions automatically, and premises beyond manuscripts.
+  - Block B compares typed conventions at each use and covers premises beyond manuscripts (ADR-083).
+  - Block E adds a biomedical convention vocabulary, units compared by unit algebra, and dimensional homogeneity of
+    every predicate (ADR-086).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.
@@ -222,7 +227,9 @@ A hypothesis submitted to CoResearcher should pass through all of them in order:
 8. Report every claim on the trust ladder. (M7)
 
 `POST /api/chain/run` and `coresearcher chain run` run these steps as one flow (ADR-085), with each step's state
-visible. The whole chain is regression-tested on real corrected errors (M9), and the chain itself is a regression case. Checks are placed where the move catalogue says
+visible. A biomedical request adds units, conventions and domain probes, and a mechanistic chain can be submitted as
+signed links or controlled prose (ADR-086). The whole chain is regression-tested on real corrected errors (M9), and
+the chain itself is a regression case, on mathematical and on biomedical hypotheses. Checks are placed where the move catalogue says
 the weight lies (M10).
 
 ## 4. Integration roadmap
@@ -233,7 +240,7 @@ the weight lies (M10).
 | B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Done (ADR-083) |
 | C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Done (ADR-084) |
 | D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses; the composed chain of section 3 as one API/CLI flow | Done (ADR-085) |
-| E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | Next |
+| E | all | Domain transfer: the full chain on biomedical hypotheses (the pTau217 cutoff, the Alzheimer formal scenario, a mechanistic chain), with units, a convention vocabulary, domain probes and mechanism templates built from the gaps it revealed | Done (ADR-086) |
 
 Blocks run one at a time. Each one lands as a module wired into the API and CLI, with tests and an ADR. It does not
 land as a case study.

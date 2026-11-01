@@ -110,12 +110,16 @@ def run_verification_chain(req: VerificationChainRequest):
 
     freeze (M3) -> formalize (M2) -> fidelity (M1) -> vacuity (M4) -> obligations (M5) -> seams (M6) -> discharge
     (M8) -> trust ladder (M7). A non-verdict stops the chain: later steps are NOT_RUN and `formal_status` is that
-    non-verdict; nothing undecided is reported as decided. Prose needs the configured formalizer model.
+    non-verdict; nothing undecided is reported as decided. Prose needs the configured formalizer model. A
+    `mechanism` is compiled without a model, and a `biomedical` block adds units, conventions and domain probes
+    (ADR-086).
     """
     from api.routers.registry import registry
 
     spec = req.model_dump(exclude_none=True)
     spec["citations"] = [c.model_dump(exclude_none=True) for c in req.citations]
+    if req.mechanism is not None:  # Links use the key "from" (ADR-086).
+        spec["mechanism"] = req.mechanism.model_dump(by_alias=True, exclude_none=True)
     spec["claim_evidence"] = {k: v.model_dump(exclude_none=True) for k, v in req.claim_evidence.items()}
     clients = None
     if req.prose is not None:

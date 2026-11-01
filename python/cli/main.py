@@ -8,6 +8,7 @@ Provides unified commands:
     coresearcher info
     coresearcher formal run | analyze | doctor   (ADR-DISCOVERY-068)
     coresearcher freeze | chain run              (ADR-DISCOVERY-085)
+    coresearcher biomedical check | mechanism    (ADR-DISCOVERY-086)
 """
 
 from __future__ import annotations
@@ -142,6 +143,11 @@ def main() -> None:
     freeze.add_parser(subparsers)
     chain.add_parser(subparsers)
 
+    # biomedical: units, conventions, domain probes and mechanistic chains (ADR-DISCOVERY-086)
+    from python.cli import biomedical
+
+    biomedical.add_parser(subparsers)
+
     args = parser.parse_args()
     if not args.command:
         print(BANNER)
@@ -158,6 +164,7 @@ def main() -> None:
         "regression": regression.main,
         "freeze": freeze.main,
         "chain": chain.main,
+        "biomedical": biomedical.main,
     }
 
     exit_code = dispatch[args.command](args)

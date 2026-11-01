@@ -663,6 +663,94 @@
         "title": "BiomacromolecularAuditRequest",
         "type": "object"
       },
+      "BiomedicalCheckRequest": {
+        "properties": {
+          "backend": {
+            "default": "auto",
+            "pattern": "^(auto|enumeration|smt)$",
+            "title": "Backend",
+            "type": "string"
+          },
+          "biomedical": {
+            "$ref": "#/components/schemas/BiomedicalSpecModel"
+          },
+          "consequences": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Consequences",
+            "type": "array"
+          },
+          "hypothesis": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "biomedical"
+        ],
+        "title": "BiomedicalCheckRequest",
+        "type": "object"
+      },
+      "BiomedicalProbesModel": {
+        "properties": {
+          "null_biomarker": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Null Biomarker",
+            "type": "array"
+          },
+          "population": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PopulationProbeModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "untreated_arm": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UntreatedArmProbeModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "title": "BiomedicalProbesModel",
+        "type": "object"
+      },
+      "BiomedicalSpecModel": {
+        "description": "Units per variable, the hypothesis's conventions and the domain probes (ADR-DISCOVERY-086).",
+        "properties": {
+          "conventions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Conventions",
+            "type": "object"
+          },
+          "probes": {
+            "$ref": "#/components/schemas/BiomedicalProbesModel"
+          },
+          "units": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Units",
+            "type": "object"
+          }
+        },
+        "title": "BiomedicalSpecModel",
+        "type": "object"
+      },
       "CandidateEvidenceItemRequest": {
         "properties": {
           "confounding_risk": {
@@ -1008,6 +1096,18 @@
               }
             ],
             "title": "Source"
+          },
+          "variable": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variable"
           },
           "version": {
             "anyOf": [
@@ -3724,6 +3824,256 @@
         "title": "MathematicalFlywheelCycleRequest",
         "type": "object"
       },
+      "MechanismCheckRequest": {
+        "properties": {
+          "backend": {
+            "default": "auto",
+            "pattern": "^(auto|enumeration|smt)$",
+            "title": "Backend",
+            "type": "string"
+          },
+          "mechanism": {
+            "$ref": "#/components/schemas/MechanismModel"
+          }
+        },
+        "required": [
+          "mechanism"
+        ],
+        "title": "MechanismCheckRequest",
+        "type": "object"
+      },
+      "MechanismLinkModel": {
+        "properties": {
+          "effect": {
+            "anyOf": [
+              {
+                "pattern": "^(raises|lowers|worsens|improves)$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effect"
+          },
+          "from": {
+            "maxLength": 60,
+            "title": "From",
+            "type": "string"
+          },
+          "sign": {
+            "anyOf": [
+              {
+                "pattern": "^[+-]$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sign"
+          },
+          "to": {
+            "maxLength": 60,
+            "title": "To",
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "title": "MechanismLinkModel",
+        "type": "object"
+      },
+      "MechanismModel": {
+        "description": "A mechanistic chain (ADR-DISCOVERY-086): nodes and signed links, or controlled prose such as\n\"A raises B, which drives C, which predicts D.\" with every noun phrase declared as a node name or alias.",
+        "properties": {
+          "hypothesis_id": {
+            "default": "MECHANISM",
+            "maxLength": 120,
+            "title": "Hypothesis Id",
+            "type": "string"
+          },
+          "links": {
+            "items": {
+              "$ref": "#/components/schemas/MechanismLinkModel"
+            },
+            "maxItems": 30,
+            "title": "Links",
+            "type": "array"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/MechanismNodeModel"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "Nodes",
+            "type": "array"
+          },
+          "prediction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MechanismPredictionModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "prose": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prose"
+          },
+          "statement": {
+            "default": "",
+            "maxLength": 5000,
+            "title": "Statement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "nodes"
+        ],
+        "title": "MechanismModel",
+        "type": "object"
+      },
+      "MechanismNodeModel": {
+        "description": "A quantity of a mechanism: ordered `levels`, or a continuous range (`lower`, `upper`).",
+        "properties": {
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Aliases",
+            "type": "array"
+          },
+          "levels": {
+            "anyOf": [
+              {
+                "items": {},
+                "maxItems": 50,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Levels"
+          },
+          "lower": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lower"
+          },
+          "name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "scale_direction": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scale Direction"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "upper": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upper"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "MechanismNodeModel",
+        "type": "object"
+      },
+      "MechanismPredictionModel": {
+        "properties": {
+          "effect": {
+            "anyOf": [
+              {
+                "pattern": "^(raises|lowers|worsens|improves)$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effect"
+          },
+          "from": {
+            "maxLength": 60,
+            "title": "From",
+            "type": "string"
+          },
+          "sign": {
+            "anyOf": [
+              {
+                "pattern": "^[+-]$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sign"
+          },
+          "to": {
+            "maxLength": 60,
+            "title": "To",
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "title": "MechanismPredictionModel",
+        "type": "object"
+      },
       "MetabolicComponentInput": {
         "properties": {
           "component_id": {
@@ -4182,6 +4532,28 @@
           "topic"
         ],
         "title": "PaperAgentQueryRequest",
+        "type": "object"
+      },
+      "PopulationProbeModel": {
+        "description": "The validated population as a predicate over the hypothesis variables (ADR-DISCOVERY-086).",
+        "properties": {
+          "label": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Label",
+            "type": "string"
+          },
+          "validated": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Validated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "validated"
+        ],
+        "title": "PopulationProbeModel",
         "type": "object"
       },
       "PotentialValleyInput": {
@@ -5208,6 +5580,35 @@
         "title": "TrustStatementModel",
         "type": "object"
       },
+      "UntreatedArmProbeModel": {
+        "description": "The untreated arm and the outcome predicted for the treated arm, as predicates (ADR-DISCOVERY-086).",
+        "properties": {
+          "label": {
+            "default": "",
+            "maxLength": 300,
+            "title": "Label",
+            "type": "string"
+          },
+          "outcome": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Outcome",
+            "type": "string"
+          },
+          "untreated": {
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Untreated",
+            "type": "string"
+          }
+        },
+        "required": [
+          "untreated",
+          "outcome"
+        ],
+        "title": "UntreatedArmProbeModel",
+        "type": "object"
+      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -5305,7 +5706,7 @@
         "type": "object"
       },
       "VerificationChainRequest": {
-        "description": "The composed verification chain (ADR-085): exactly one of `hypothesis` and `prose`, and either `freeze`\n(criteria frozen earlier) or `author` (the chain freezes them first).",
+        "description": "The composed verification chain (ADR-085): exactly one of `hypothesis`, `prose` and `mechanism`\n(ADR-086), and either `freeze` (criteria frozen earlier) or `author` (the chain freezes them first).",
         "properties": {
           "author": {
             "default": "",
@@ -5318,6 +5719,16 @@
             "pattern": "^(auto|enumeration|smt)$",
             "title": "Backend",
             "type": "string"
+          },
+          "biomedical": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BiomedicalSpecModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "citations": {
             "items": {
@@ -5397,6 +5808,16 @@
             "minimum": 1.0,
             "title": "Max Examples",
             "type": "integer"
+          },
+          "mechanism": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MechanismModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "observations": {
             "items": {
@@ -5590,6 +6011,107 @@
         "summary": "Audit Empirical Evidence"
       }
     },
+    "/api/biomedical/check": {
+      "post": {
+        "description": "Units, null-biomarker, untreated-arm and population probes of one formal hypothesis, as ADR-076 obligations.\n\nEvery obligation is decided exactly (enumeration or z3) or left OPEN with its reason. Scope: formal soundness;\nwhether a unit, a cutoff or a population is clinically right is not judged.",
+        "operationId": "check_api_biomedical_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BiomedicalCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Check"
+      }
+    },
+    "/api/biomedical/mechanism": {
+      "post": {
+        "description": "Compiles a mechanistic chain (nodes and signed links, or controlled prose) to a two-world hypothesis and decides\neach link, each link's sign and the compatibility of the links with the end-to-end prediction.\n\nProse outside the controlled language returns `formal_status` FORMALIZATION_FAILED, never a guess.",
+        "operationId": "mechanism_api_biomedical_mechanism_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MechanismCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Mechanism"
+      }
+    },
+    "/api/biomedical/vocabulary": {
+      "get": {
+        "description": "The convention kinds of the cited-results registry (assay, platform, matrix, units, population, reference\nstandard, scale direction, cutoff derivation), their aliases and their canonical values.",
+        "operationId": "vocabulary_api_biomedical_vocabulary_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Vocabulary"
+      }
+    },
     "/api/capabilities": {
       "get": {
         "description": "Every endpoint as an OnTrack CapabilityContract: input and output schemas, determinism, operation class,\nwhether it needs the API key, and the maturity of the modules behind it (docs/reference/MODULE_MATURITY.md).",
@@ -5609,7 +6131,7 @@
     },
     "/api/chain/run": {
       "post": {
-        "description": "The composed chain of the verification methodology, end to end, with every step's state.\n\nfreeze (M3) -> formalize (M2) -> fidelity (M1) -> vacuity (M4) -> obligations (M5) -> seams (M6) -> discharge\n(M8) -> trust ladder (M7). A non-verdict stops the chain: later steps are NOT_RUN and `formal_status` is that\nnon-verdict; nothing undecided is reported as decided. Prose needs the configured formalizer model.",
+        "description": "The composed chain of the verification methodology, end to end, with every step's state.\n\nfreeze (M3) -> formalize (M2) -> fidelity (M1) -> vacuity (M4) -> obligations (M5) -> seams (M6) -> discharge\n(M8) -> trust ladder (M7). A non-verdict stops the chain: later steps are NOT_RUN and `formal_status` is that\nnon-verdict; nothing undecided is reported as decided. Prose needs the configured formalizer model. A\n`mechanism` is compiled without a model, and a `biomedical` block adds units, conventions and domain probes\n(ADR-086).",
         "operationId": "run_verification_chain_api_chain_run_post",
         "requestBody": {
           "content": {

@@ -20,6 +20,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [External results program](reference/EXTERNAL_RESULTS_PROGRAM.md) | What was done in response to Sakana, OASE and openai/math (Oct 2026), how, why and what for; lessons and next mechanisms |
 | [Proof pipeline](reference/PROOF_PIPELINE.md) | Reproducible obligation proofs: one-command rerun, SHA-256 manifest, fast audit that rejects stale or unverified proofs (ADR-076) |
 | [openai/math time travel](reference/cases/OPENAI_MATH_TIME_TRAVEL.md) | Would our checks have caught the 17 real corrections of the openai/math release? Pre-registered benchmark (1 real hit, citation resolution), and the import obligations and citation gate built from its misses (ADR-077) |
+| [Biomedical verification chain](reference/cases/BIOMEDICAL_CHAIN.md) | The eight-step chain on biomedical hypotheses (pTau217 two-cutoff rule, the Alzheimer rivals, a mechanistic chain from prose), step by step; the units, conventions, domain probes and mechanism templates built from its gaps (ADR-086). Illustrative values only |
 | [Manuscript audit service (ADR-082)](decisions/ADR-DISCOVERY-082-MANUSCRIPT-AUDIT-SERVICE.md) | Citation gate and import obligations as a capability: `POST /api/manuscripts/audit` and `coresearcher formal manuscript`, with non-verdict statuses, relays, provenance and the trust-ladder view |
 
 ## Architecture

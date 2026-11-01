@@ -381,6 +381,59 @@ def _verification_chain() -> Dict[str, Dict[str, Any]]:
     return out
 
 
+BC_FIXTURE = "benchmarks/regression/fixtures/biomedical-chain/cases.json"
+
+
+def _biomedical_chain() -> Dict[str, Dict[str, Any]]:
+    """Block E (ADR-086): the chain on biomedical hypotheses, the pTau217 cutoff rule, the Alzheimer rivals and a
+    mechanistic chain from prose, each with its variants. Every step's state, every obligation, the roll-up and the
+    domain outcomes are frozen; a case with `edited_claims` is also checked BLOCKED against its own freeze."""
+    from python.discovery import freeze_service, verification_chain
+
+    out: Dict[str, Dict[str, Any]] = {}
+    for name, case in sorted(_read_json(BC_FIXTURE)["cases"].items()):
+        store = freeze_service.FreezeStore(None)
+        result = verification_chain.run(copy.deepcopy(case["request"]), store)
+        out[f"{name}/formal_status"] = obs(result["formal_status"])
+        out[f"{name}/steps"] = obs([[s["name"], s["state"], s["outcome"]] for s in result["steps"]])
+        ledger = result["obligation_ledger"]
+        if ledger is not None:
+            out[f"{name}/obligations"] = obs({o["id"]: o["status"] for o in ledger["claim"]["obligations"]})
+            out[f"{name}/rollup"] = obs([ledger["rollup"]["status"], ledger["rollup"]["trust_rung"]])
+        domain = result.get("domain") or {}
+        if "units" in domain:
+            out[f"{name}/units"] = obs({p["where"]: p["outcome"] for p in domain["units"]["predicates"]})
+        for rep in domain.get("null_biomarker") or []:
+            out[f"{name}/null_biomarker/{rep['biomarker']}"] = obs(rep.get("outcome"))
+        if "population" in domain:
+            out[f"{name}/population"] = obs(domain["population"].get("outcome"))
+        if "untreated_arm" in domain:
+            out[f"{name}/untreated_arm"] = obs(domain["untreated_arm"].get("outcome_status"))
+        if "mechanism" in domain:
+            mech = domain["mechanism"]
+            out[f"{name}/mechanism/links"] = obs([[r["link"], r["sign"], r["status"], r["sign_status"]]
+                                                  for r in mech["links"]])
+            out[f"{name}/mechanism/compatibility"] = obs(mech["compatibility"]["status"])
+        cites = (result.get("response") or {}).get("reports", {}).get("citations") or []
+        if cites:
+            out[f"{name}/citations"] = obs([[c["outcome"], [[k["tag"], k["outcome"]] for k in c["conventions"]],
+                                             [h["outcome"] for h in c["hypotheses"]]] for c in cites])
+        hypothesis = (result.get("response") or {}).get("formal_hypothesis") or {}
+        if result.get("freeze") and not any(v.get("continuous") for v in hypothesis.get("variables") or []):
+            # Under z3 the frozen witnesses are the solver's choice, which may differ between platforms; the digest
+            # is frozen for enumerated hypotheses only. The BLOCKED check below covers every case.
+            out[f"{name}/freeze_sha256"] = obs(result["freeze"]["record"]["sha256"])
+        if case.get("edited_claims"):
+            edited = copy.deepcopy(case["request"])
+            edited["hypothesis"]["claims"] = case["edited_claims"]
+            edited.pop("author")
+            edited["freeze"] = {"freeze_id": result["freeze"]["freeze_id"]}
+            blocked = verification_chain.run(edited, store)
+            out[f"{name}/edited/steps"] = obs([[s["name"], s["state"]] for s in blocked["steps"]])
+            out[f"{name}/edited/formal_status"] = obs(blocked["formal_status"])
+    return out
+
+
 CASES: Dict[str, Case] = {
     c.id: c
     for c in (
@@ -414,6 +467,10 @@ CASES: Dict[str, Case] = {
              "ADR-DISCOVERY-085", [VC_FIXTURE], _verification_chain,
              "Freeze, formalize, fidelity, vacuity, obligations, seams, discharge, trust ladder; an edited hypothesis "
              "against the freeze must be BLOCKED."),
+        Case("biomedical_chain", "Composed chain on biomedical hypotheses: pTau217 cutoff, Alzheimer rivals, a "
+             "mechanistic chain", "ADR-DISCOVERY-086", [BC_FIXTURE], _biomedical_chain,
+             "Units, conventions, null-biomarker, untreated-arm and population probes, mechanism links and signs. "
+             "Illustrative values only, not clinical values."),
     )
 }
 

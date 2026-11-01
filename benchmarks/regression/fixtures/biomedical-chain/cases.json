@@ -1,0 +1,1264 @@
+{
+  "description": "Block E (ADR-DISCOVERY-086): the verification chain (ADR-085) on biomedical hypotheses: (a) the pTau217 two-cutoff rule and three variants, (b) the three rivals of the Alzheimer formal scenario, (c) a mechanistic chain from prose and three variants. Illustrative values only, not clinical values. Every number is a placeholder chosen to exercise a check; none is a clinical value.",
+  "cases": {
+    "ptau217_cutoff": {
+      "note": "(a) The pTau217 two-cutoff rule, restated for the chain: the separation of the biomarker is the claim (the empirical premise), ordered cutoffs and preserved renal clearance are assumptions, and the rule-out and rule-in guarantees are consequences. Units in ng/L; the cited cutoff entry is in pg/mL (the same unit). Illustrative values only, not clinical values.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "PTAU217-TWO-CUTOFF",
+          "statement": "With preserved renal clearance and ordered cutoffs, plasma pTau217 separates amyloid-PET negative from positive people, so the two-cutoff rule rules out below c_low and rules in above c_high.",
+          "variables": [
+            {
+              "name": "c_low",
+              "continuous": true
+            },
+            {
+              "name": "c_high",
+              "continuous": true
+            },
+            {
+              "name": "ptau_val",
+              "continuous": true
+            },
+            {
+              "name": "amyloid_pet",
+              "continuous": true
+            },
+            {
+              "name": "egfr",
+              "continuous": true
+            },
+            {
+              "name": "true_pathology",
+              "continuous": true
+            },
+            {
+              "name": "clearance_factor",
+              "continuous": true
+            }
+          ],
+          "scope": "(c_low > 0) and (c_high > 0) and (ptau_val >= 0) and (amyloid_pet == 0 or amyloid_pet == 1) and (egfr > 0) and (clearance_factor > 0) and ((egfr >= 60) or (clearance_factor > 1.0))",
+          "assumptions": [
+            "c_low < c_high",
+            "clearance_factor == 1"
+          ],
+          "claims": [
+            "((amyloid_pet != 0) or ((ptau_val / clearance_factor) <= c_low)) and ((amyloid_pet != 1) or ((ptau_val / clearance_factor) >= c_high))"
+          ]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "PTAU217-SEPARATION-WITHOUT-CLEARANCE",
+            "statement": "The same separation, on the measured value, ignoring renal clearance.",
+            "variables": [
+              {
+                "name": "c_low",
+                "continuous": true
+              },
+              {
+                "name": "c_high",
+                "continuous": true
+              },
+              {
+                "name": "ptau_val",
+                "continuous": true
+              },
+              {
+                "name": "amyloid_pet",
+                "continuous": true
+              },
+              {
+                "name": "egfr",
+                "continuous": true
+              },
+              {
+                "name": "true_pathology",
+                "continuous": true
+              },
+              {
+                "name": "clearance_factor",
+                "continuous": true
+              }
+            ],
+            "scope": "(c_low > 0) and (c_high > 0) and (ptau_val >= 0) and (amyloid_pet == 0 or amyloid_pet == 1) and (egfr > 0) and (clearance_factor > 0) and ((egfr >= 60) or (clearance_factor > 1.0))",
+            "claims": [
+              "((amyloid_pet != 0) or (ptau_val <= c_low)) and ((amyloid_pet != 1) or (ptau_val >= c_high))"
+            ],
+            "assumptions": [
+              "c_low < c_high"
+            ]
+          }
+        ],
+        "consequences": [
+          "(ptau_val > c_low) or (amyloid_pet == 0)",
+          "(ptau_val < c_high) or (amyloid_pet == 1)"
+        ],
+        "citations": [
+          {
+            "entry": {
+              "id": "ptau217-two-cutoff-illustrative",
+              "source": "illustrative registry entry (provenance only, not a clinical cutoff)",
+              "statement": "an illustrative pair of plasma pTau217 cutoffs (c_low, c_high) for amyloid PET status",
+              "kind": "threshold",
+              "hypotheses": [
+                {
+                  "text": "validated with preserved renal function (eGFR >= 60)",
+                  "formal": "egfr >= 60"
+                }
+              ],
+              "conventions": {
+                "validated_assay": "assay A (illustrative)",
+                "matrix": "plasma",
+                "units": "pg/mL",
+                "reference_standard": "amyloid PET",
+                "cutoff_derivation": "Youden index"
+              }
+            },
+            "variable": "c_high",
+            "source": "two-cutoff rule (illustrative)"
+          }
+        ],
+        "biomedical": {
+          "units": {
+            "c_low": "ng/L",
+            "c_high": "ng/L",
+            "ptau_val": "ng/L",
+            "egfr": "mL/min/1.73m^2",
+            "clearance_factor": "1"
+          },
+          "conventions": {
+            "assay": "assay A (illustrative)",
+            "matrix": "blood plasma",
+            "reference_standard": "Aβ PET",
+            "cutoff_derivation": "maximal Youden index"
+          },
+          "probes": {
+            "null_biomarker": [
+              "ptau_val"
+            ],
+            "population": {
+              "validated": "egfr >= 60",
+              "label": "eGFR >= 60 (illustrative)"
+            }
+          }
+        },
+        "author": "capability-regression"
+      },
+      "edited_claims": [
+        "((amyloid_pet != 0) or (ptau_val <= c_low)) and ((amyloid_pet != 1) or (ptau_val >= c_high))"
+      ]
+    },
+    "ptau217_cutoff_as_submitted": {
+      "note": "(a) The case module's own form: the rule's guarantees as claims and every premise as an assumption. The guarantees follow from the assumptions, so the claims forbid nothing and the ledger refutes them as claims: the gap that motivated the restatement above. Illustrative values only, not clinical values.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "PTAU217-CUTOFF-RULE-AS-SUBMITTED",
+          "statement": "With preserved renal clearance and ordered cutoffs, plasma pTau217 separates amyloid-PET negative from positive people, so the two-cutoff rule rules out below c_low and rules in above c_high.",
+          "variables": [
+            {
+              "name": "c_low",
+              "continuous": true
+            },
+            {
+              "name": "c_high",
+              "continuous": true
+            },
+            {
+              "name": "ptau_val",
+              "continuous": true
+            },
+            {
+              "name": "amyloid_pet",
+              "continuous": true
+            },
+            {
+              "name": "egfr",
+              "continuous": true
+            },
+            {
+              "name": "true_pathology",
+              "continuous": true
+            },
+            {
+              "name": "clearance_factor",
+              "continuous": true
+            }
+          ],
+          "scope": "(c_low > 0) and (c_high > 0) and (ptau_val >= 0) and (amyloid_pet == 0 or amyloid_pet == 1) and (egfr > 0) and (clearance_factor > 0) and ((egfr >= 60) or (clearance_factor > 1.0))",
+          "assumptions": [
+            "((amyloid_pet != 0) or ((ptau_val / clearance_factor) <= c_low)) and ((amyloid_pet != 1) or ((ptau_val / clearance_factor) >= c_high))",
+            "clearance_factor == 1",
+            "c_low < c_high"
+          ],
+          "claims": [
+            "(ptau_val > c_low) or (amyloid_pet == 0)",
+            "(ptau_val < c_high) or (amyloid_pet == 1)"
+          ]
+        },
+        "author": "capability-regression"
+      }
+    },
+    "ptau217_cutoff_without_renal_assumption": {
+      "note": "(a) The restated rule without the preserved-renal-function assumption: the scope then admits eGFR below 60 with a raised clearance factor, so the guarantees fail (z3 counterexamples), the cited cutoff's eGFR hypothesis is not discharged and the population probe finds states outside the validated one. Illustrative values only, not clinical values.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "PTAU217-TWO-CUTOFF-WITHOUT-RENAL-ASSUMPTION",
+          "statement": "With preserved renal clearance and ordered cutoffs, plasma pTau217 separates amyloid-PET negative from positive people, so the two-cutoff rule rules out below c_low and rules in above c_high.",
+          "variables": [
+            {
+              "name": "c_low",
+              "continuous": true
+            },
+            {
+              "name": "c_high",
+              "continuous": true
+            },
+            {
+              "name": "ptau_val",
+              "continuous": true
+            },
+            {
+              "name": "amyloid_pet",
+              "continuous": true
+            },
+            {
+              "name": "egfr",
+              "continuous": true
+            },
+            {
+              "name": "true_pathology",
+              "continuous": true
+            },
+            {
+              "name": "clearance_factor",
+              "continuous": true
+            }
+          ],
+          "scope": "(c_low > 0) and (c_high > 0) and (ptau_val >= 0) and (amyloid_pet == 0 or amyloid_pet == 1) and (egfr > 0) and (clearance_factor > 0) and ((egfr >= 60) or (clearance_factor > 1.0))",
+          "assumptions": [
+            "c_low < c_high"
+          ],
+          "claims": [
+            "((amyloid_pet != 0) or ((ptau_val / clearance_factor) <= c_low)) and ((amyloid_pet != 1) or ((ptau_val / clearance_factor) >= c_high))"
+          ]
+        },
+        "rivals": [],
+        "consequences": [
+          "(ptau_val > c_low) or (amyloid_pet == 0)",
+          "(ptau_val < c_high) or (amyloid_pet == 1)"
+        ],
+        "citations": [
+          {
+            "entry": {
+              "id": "ptau217-two-cutoff-illustrative",
+              "source": "illustrative registry entry (provenance only, not a clinical cutoff)",
+              "statement": "an illustrative pair of plasma pTau217 cutoffs (c_low, c_high) for amyloid PET status",
+              "kind": "threshold",
+              "hypotheses": [
+                {
+                  "text": "validated with preserved renal function (eGFR >= 60)",
+                  "formal": "egfr >= 60"
+                }
+              ],
+              "conventions": {
+                "validated_assay": "assay A (illustrative)",
+                "matrix": "plasma",
+                "units": "pg/mL",
+                "reference_standard": "amyloid PET",
+                "cutoff_derivation": "Youden index"
+              }
+            },
+            "variable": "c_high",
+            "source": "two-cutoff rule (illustrative)"
+          }
+        ],
+        "biomedical": {
+          "units": {
+            "c_low": "ng/L",
+            "c_high": "ng/L",
+            "ptau_val": "ng/L",
+            "egfr": "mL/min/1.73m^2",
+            "clearance_factor": "1"
+          },
+          "conventions": {
+            "assay": "assay A (illustrative)",
+            "matrix": "blood plasma",
+            "reference_standard": "Aβ PET",
+            "cutoff_derivation": "maximal Youden index"
+          },
+          "probes": {
+            "null_biomarker": [
+              "ptau_val"
+            ],
+            "population": {
+              "validated": "egfr >= 60",
+              "label": "eGFR >= 60 (illustrative)"
+            }
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "ptau217_cutoff_unit_seam": {
+      "note": "(a) The restated rule with c_high declared in ng/mL while ptau_val is in ng/L: comparing them is a scale mismatch of 1000, and the cited cutoff (pg/mL) no longer matches the unit of c_high. Illustrative values only, not clinical values.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "PTAU217-TWO-CUTOFF-UNIT-SEAM",
+          "statement": "With preserved renal clearance and ordered cutoffs, plasma pTau217 separates amyloid-PET negative from positive people, so the two-cutoff rule rules out below c_low and rules in above c_high.",
+          "variables": [
+            {
+              "name": "c_low",
+              "continuous": true
+            },
+            {
+              "name": "c_high",
+              "continuous": true
+            },
+            {
+              "name": "ptau_val",
+              "continuous": true
+            },
+            {
+              "name": "amyloid_pet",
+              "continuous": true
+            },
+            {
+              "name": "egfr",
+              "continuous": true
+            },
+            {
+              "name": "true_pathology",
+              "continuous": true
+            },
+            {
+              "name": "clearance_factor",
+              "continuous": true
+            }
+          ],
+          "scope": "(c_low > 0) and (c_high > 0) and (ptau_val >= 0) and (amyloid_pet == 0 or amyloid_pet == 1) and (egfr > 0) and (clearance_factor > 0) and ((egfr >= 60) or (clearance_factor > 1.0))",
+          "assumptions": [
+            "c_low < c_high",
+            "clearance_factor == 1"
+          ],
+          "claims": [
+            "((amyloid_pet != 0) or ((ptau_val / clearance_factor) <= c_low)) and ((amyloid_pet != 1) or ((ptau_val / clearance_factor) >= c_high))"
+          ]
+        },
+        "rivals": [],
+        "consequences": [
+          "(ptau_val > c_low) or (amyloid_pet == 0)",
+          "(ptau_val < c_high) or (amyloid_pet == 1)"
+        ],
+        "citations": [
+          {
+            "entry": {
+              "id": "ptau217-two-cutoff-illustrative",
+              "source": "illustrative registry entry (provenance only, not a clinical cutoff)",
+              "statement": "an illustrative pair of plasma pTau217 cutoffs (c_low, c_high) for amyloid PET status",
+              "kind": "threshold",
+              "hypotheses": [
+                {
+                  "text": "validated with preserved renal function (eGFR >= 60)",
+                  "formal": "egfr >= 60"
+                }
+              ],
+              "conventions": {
+                "validated_assay": "assay A (illustrative)",
+                "matrix": "plasma",
+                "units": "pg/mL",
+                "reference_standard": "amyloid PET",
+                "cutoff_derivation": "Youden index"
+              }
+            },
+            "variable": "c_high",
+            "source": "two-cutoff rule (illustrative)"
+          }
+        ],
+        "biomedical": {
+          "units": {
+            "c_low": "ng/L",
+            "c_high": "ng/mL",
+            "ptau_val": "ng/L",
+            "egfr": "mL/min/1.73m^2",
+            "clearance_factor": "1"
+          },
+          "conventions": {
+            "assay": "assay A (illustrative)",
+            "matrix": "blood plasma",
+            "reference_standard": "Aβ PET",
+            "cutoff_derivation": "maximal Youden index"
+          },
+          "probes": {
+            "null_biomarker": [
+              "ptau_val"
+            ],
+            "population": {
+              "validated": "egfr >= 60",
+              "label": "eGFR >= 60 (illustrative)"
+            }
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "alzheimer_hyp_tau_connectome": {
+      "note": "(b) A rival of the Alzheimer formal scenario (ADR-061, DRAFT pending scientist review), with the other two as rivals. The null-biomarker probe is run on the variable(s) the rival's prose makes explanatory.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "HYP-TAU-CONNECTOME",
+          "statement": "Tau spreading rates and cognitive decline are governed by connectome hub vulnerability and synaptic flux.",
+          "variables": [
+            {
+              "name": "amyloid",
+              "domain": [
+                "A-",
+                "A+"
+              ]
+            },
+            {
+              "name": "tau",
+              "domain": [
+                "T-",
+                "T+"
+              ]
+            },
+            {
+              "name": "neurodegeneration",
+              "domain": [
+                "N-",
+                "N+"
+              ]
+            },
+            {
+              "name": "hub",
+              "domain": [
+                "low",
+                "medium",
+                "high"
+              ]
+            },
+            {
+              "name": "inflammation",
+              "domain": [
+                "normal",
+                "reactive"
+              ]
+            },
+            {
+              "name": "outcome",
+              "domain": [
+                "stable_mci",
+                "accelerated_dementia"
+              ]
+            },
+            {
+              "name": "wmh",
+              "domain": [
+                "low",
+                "high"
+              ]
+            }
+          ],
+          "scope": "tau == 'T+'",
+          "assumptions": [],
+          "claims": [
+            "hub != 'high' or outcome == 'accelerated_dementia'",
+            "hub != 'low' or outcome == 'stable_mci'"
+          ]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "HYP-VASCULAR-WMH",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": null,
+            "assumptions": [],
+            "claims": [
+              "wmh != 'high' or outcome == 'accelerated_dementia'",
+              "wmh != 'low' or outcome == 'stable_mci'"
+            ]
+          },
+          {
+            "hypothesis_id": "HYP-NULL-NONSPECIFIC",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": null,
+            "assumptions": [],
+            "claims": [
+              "tau != 'T+' or neurodegeneration == 'N+'"
+            ]
+          }
+        ],
+        "biomedical": {
+          "probes": {
+            "null_biomarker": [
+              "hub",
+              "tau"
+            ]
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "alzheimer_hyp_vascular_wmh": {
+      "note": "(b) A rival of the Alzheimer formal scenario (ADR-061, DRAFT pending scientist review), with the other two as rivals. The null-biomarker probe is run on the variable(s) the rival's prose makes explanatory.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "HYP-VASCULAR-WMH",
+          "statement": "Longitudinal cognitive decline is primarily driven by microvascular ischemic damage (WMH), pTau is a co-occurring byproduct.",
+          "variables": [
+            {
+              "name": "amyloid",
+              "domain": [
+                "A-",
+                "A+"
+              ]
+            },
+            {
+              "name": "tau",
+              "domain": [
+                "T-",
+                "T+"
+              ]
+            },
+            {
+              "name": "neurodegeneration",
+              "domain": [
+                "N-",
+                "N+"
+              ]
+            },
+            {
+              "name": "hub",
+              "domain": [
+                "low",
+                "medium",
+                "high"
+              ]
+            },
+            {
+              "name": "inflammation",
+              "domain": [
+                "normal",
+                "reactive"
+              ]
+            },
+            {
+              "name": "outcome",
+              "domain": [
+                "stable_mci",
+                "accelerated_dementia"
+              ]
+            },
+            {
+              "name": "wmh",
+              "domain": [
+                "low",
+                "high"
+              ]
+            }
+          ],
+          "scope": null,
+          "assumptions": [],
+          "claims": [
+            "wmh != 'high' or outcome == 'accelerated_dementia'",
+            "wmh != 'low' or outcome == 'stable_mci'"
+          ]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "HYP-TAU-CONNECTOME",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": "tau == 'T+'",
+            "assumptions": [],
+            "claims": [
+              "hub != 'high' or outcome == 'accelerated_dementia'",
+              "hub != 'low' or outcome == 'stable_mci'"
+            ]
+          },
+          {
+            "hypothesis_id": "HYP-NULL-NONSPECIFIC",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": null,
+            "assumptions": [],
+            "claims": [
+              "tau != 'T+' or neurodegeneration == 'N+'"
+            ]
+          }
+        ],
+        "biomedical": {
+          "probes": {
+            "null_biomarker": [
+              "wmh"
+            ]
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "alzheimer_hyp_null_nonspecific": {
+      "note": "(b) A rival of the Alzheimer formal scenario (ADR-061, DRAFT pending scientist review), with the other two as rivals. The null-biomarker probe is run on the variable(s) the rival's prose makes explanatory.",
+      "request": {
+        "hypothesis": {
+          "hypothesis_id": "HYP-NULL-NONSPECIFIC",
+          "statement": "pTau217 elevation is an unspecific passive leakage marker of general cortical death with no topological pattern.",
+          "variables": [
+            {
+              "name": "amyloid",
+              "domain": [
+                "A-",
+                "A+"
+              ]
+            },
+            {
+              "name": "tau",
+              "domain": [
+                "T-",
+                "T+"
+              ]
+            },
+            {
+              "name": "neurodegeneration",
+              "domain": [
+                "N-",
+                "N+"
+              ]
+            },
+            {
+              "name": "hub",
+              "domain": [
+                "low",
+                "medium",
+                "high"
+              ]
+            },
+            {
+              "name": "inflammation",
+              "domain": [
+                "normal",
+                "reactive"
+              ]
+            },
+            {
+              "name": "outcome",
+              "domain": [
+                "stable_mci",
+                "accelerated_dementia"
+              ]
+            },
+            {
+              "name": "wmh",
+              "domain": [
+                "low",
+                "high"
+              ]
+            }
+          ],
+          "scope": null,
+          "assumptions": [],
+          "claims": [
+            "tau != 'T+' or neurodegeneration == 'N+'"
+          ]
+        },
+        "rivals": [
+          {
+            "hypothesis_id": "HYP-TAU-CONNECTOME",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": "tau == 'T+'",
+            "assumptions": [],
+            "claims": [
+              "hub != 'high' or outcome == 'accelerated_dementia'",
+              "hub != 'low' or outcome == 'stable_mci'"
+            ]
+          },
+          {
+            "hypothesis_id": "HYP-VASCULAR-WMH",
+            "variables": [
+              {
+                "name": "amyloid",
+                "domain": [
+                  "A-",
+                  "A+"
+                ]
+              },
+              {
+                "name": "tau",
+                "domain": [
+                  "T-",
+                  "T+"
+                ]
+              },
+              {
+                "name": "neurodegeneration",
+                "domain": [
+                  "N-",
+                  "N+"
+                ]
+              },
+              {
+                "name": "hub",
+                "domain": [
+                  "low",
+                  "medium",
+                  "high"
+                ]
+              },
+              {
+                "name": "inflammation",
+                "domain": [
+                  "normal",
+                  "reactive"
+                ]
+              },
+              {
+                "name": "outcome",
+                "domain": [
+                  "stable_mci",
+                  "accelerated_dementia"
+                ]
+              },
+              {
+                "name": "wmh",
+                "domain": [
+                  "low",
+                  "high"
+                ]
+              }
+            ],
+            "scope": null,
+            "assumptions": [],
+            "claims": [
+              "wmh != 'high' or outcome == 'accelerated_dementia'",
+              "wmh != 'low' or outcome == 'stable_mci'"
+            ]
+          }
+        ],
+        "biomedical": {
+          "probes": {
+            "null_biomarker": [
+              "tau"
+            ]
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "mechanism_amyloid_ptau_tau_cognition": {
+      "note": "(c) A mechanistic chain written from prose in the controlled language and compiled to a two-world hypothesis. Levels 0..2 are ordinal and illustrative. The cognitive score is higher_is_better, so 'worsens' is sign '-', and the end-to-end prediction is that raising amyloid lowers cognition. Illustrative values only, not clinical values.",
+      "request": {
+        "mechanism": {
+          "hypothesis_id": "MECH-AMYLOID-COGNITION",
+          "prose": "Amyloid raises plasma pTau217, which drives tau spread, which worsens cognition.",
+          "nodes": [
+            {
+              "name": "amyloid",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "amyloid",
+                "amyloid burden"
+              ]
+            },
+            {
+              "name": "ptau217",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "plasma ptau217",
+                "ptau217"
+              ]
+            },
+            {
+              "name": "tau_spread",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "tau spread",
+                "cortical tau spread"
+              ]
+            },
+            {
+              "name": "cognition",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "cognition",
+                "the cognitive score"
+              ],
+              "scale_direction": "higher is better"
+            }
+          ]
+        },
+        "author": "capability-regression"
+      }
+    },
+    "mechanism_sign_seam": {
+      "note": "(c) The same chain with structured links, where the last link is written with sign '+' for 'worsens' on a higher_is_better score, and the prediction states that raising amyloid worsens cognition. The link's sign is REFUTED, and the links as written (sign '+') do not entail the predicted fall in cognition. Illustrative values only, not clinical values.",
+      "request": {
+        "mechanism": {
+          "hypothesis_id": "MECH-SIGN-SEAM",
+          "nodes": [
+            {
+              "name": "amyloid",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "amyloid",
+                "amyloid burden"
+              ]
+            },
+            {
+              "name": "ptau217",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "plasma ptau217",
+                "ptau217"
+              ]
+            },
+            {
+              "name": "tau_spread",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "tau spread",
+                "cortical tau spread"
+              ]
+            },
+            {
+              "name": "cognition",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "cognition",
+                "the cognitive score"
+              ],
+              "scale_direction": "higher is better"
+            }
+          ],
+          "links": [
+            {
+              "from": "amyloid",
+              "to": "ptau217",
+              "sign": "+"
+            },
+            {
+              "from": "ptau217",
+              "to": "tau_spread",
+              "sign": "+"
+            },
+            {
+              "from": "tau_spread",
+              "to": "cognition",
+              "sign": "+",
+              "effect": "worsens"
+            }
+          ],
+          "prediction": {
+            "from": "amyloid",
+            "to": "cognition",
+            "effect": "worsens"
+          }
+        },
+        "author": "capability-regression"
+      }
+    },
+    "mechanism_saturated_link": {
+      "note": "(c) The chain with tau spread given a single level: the link pTau217 -> tau spread cannot move its target, so it forbids every change of pTau217, and the chain cannot carry the intervention. Illustrative values only, not clinical values.",
+      "request": {
+        "mechanism": {
+          "hypothesis_id": "MECH-SATURATED",
+          "prose": "Amyloid raises plasma pTau217, which drives tau spread, which worsens cognition.",
+          "nodes": [
+            {
+              "name": "amyloid",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "amyloid",
+                "amyloid burden"
+              ]
+            },
+            {
+              "name": "ptau217",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "plasma ptau217",
+                "ptau217"
+              ]
+            },
+            {
+              "name": "tau_spread",
+              "levels": [
+                0
+              ],
+              "aliases": [
+                "tau spread",
+                "cortical tau spread"
+              ]
+            },
+            {
+              "name": "cognition",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "cognition",
+                "the cognitive score"
+              ],
+              "scale_direction": "higher is better"
+            }
+          ]
+        },
+        "author": "capability-regression"
+      }
+    },
+    "mechanism_outside_grammar": {
+      "note": "(c) Prose outside the controlled language: FORMALIZATION_FAILED, never a guess.",
+      "request": {
+        "mechanism": {
+          "hypothesis_id": "MECH-UNREAD",
+          "prose": "Amyloid somehow modulates plasma pTau217.",
+          "nodes": [
+            {
+              "name": "amyloid",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "amyloid",
+                "amyloid burden"
+              ]
+            },
+            {
+              "name": "ptau217",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "plasma ptau217",
+                "ptau217"
+              ]
+            },
+            {
+              "name": "tau_spread",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "tau spread",
+                "cortical tau spread"
+              ]
+            },
+            {
+              "name": "cognition",
+              "levels": [
+                0,
+                1,
+                2
+              ],
+              "aliases": [
+                "cognition",
+                "the cognitive score"
+              ],
+              "scale_direction": "higher is better"
+            }
+          ]
+        },
+        "author": "capability-regression"
+      }
+    }
+  }
+}

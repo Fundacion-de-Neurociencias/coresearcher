@@ -180,7 +180,9 @@ def _claims(hypothesis: Dict[str, Any], evaluation: Dict[str, Any]) -> List[Obli
         elif claim not in (evaluation.get("claims_with_content") or []):
             ob.discharges.append(_discharge(Status.REFUTED, "exact evaluation", _scope(evaluation), evaluation,
                                             reason="the claim forbids no applicable state: no observation could "
-                                            "refute it"))
+                                            "refute it. It holds wherever the scope and assumptions hold, so it "
+                                            "follows from them; a guarantee derived from premises belongs in "
+                                            "`consequences`, with the premises as claims"))
         else:
             ob.discharges.append(_discharge(Status.DISCHARGED_SYMBOLIC, "exact evaluation", _scope(evaluation),
                                             evaluation, forbids=(evaluation.get("claim_exclusions") or {}).get(claim)))
@@ -244,8 +246,11 @@ def dag(obligations: List[Obligation]) -> Dict[str, Any]:
     """Dependency edges between obligations, checked acyclic with no missing premise (M5)."""
     ids = [o.id for o in obligations]
     claims = [i for i in ids if i.startswith("claim[")]
-    edges = [[o, c] for o in ids if o == "vacuity" or o == "observations" or o.startswith("consequence[")
+    edges = [[o, c] for o in ids if o == "vacuity" or o == "observations" or o.startswith(("consequence[", "probe:"))
              for c in claims]
+    # A mechanistic chain (ADR-086): compatibility rests on every link and every link's sign.
+    edges += [["mechanism:compatibility", i] for i in ids if i.startswith(("link[", "link_sign["))
+              and "mechanism:compatibility" in ids]
     missing = sorted({b for _, b in edges if b not in ids})
     indegree = {i: 0 for i in ids}
     for a, _ in edges:
@@ -289,9 +294,11 @@ def build(
     status: str = formal_status.FormalStatus.DECIDED.value,
     reason: str = "",
     requested_consequences: Optional[List[str]] = None,
+    extra: Optional[List[Obligation]] = None,
 ) -> Dict[str, Any]:
     """The ADR-076 ledger of one hypothesis evaluation, with its weakest-link roll-up on the trust ladder.
 
+    `extra` holds domain obligations decided elsewhere (the biomedical checks and mechanism links of ADR-086).
     With a non-verdict `status` (or no evaluation), every obligation is OPEN with that reason: nothing that was not
     decided is recorded as decided.
     """
@@ -309,6 +316,7 @@ def build(
             obligations.append(observed)
         obligations += [_citation(i, c, sources[i]) for i, c in enumerate(citations)]
         obligations += [_consequence(i, r) for i, r in enumerate(consequences)]
+        obligations += list(extra or [])
     else:
         why = f"not evaluated: {status}" + (f" ({reason})" if reason else "")
         ids = [("fidelity", "The formal object says what the scientist's prose says (ADR-080)"),
@@ -318,6 +326,7 @@ def build(
         ids += [(f"cite[{i}]", f"Use of {source} is valid") for i, source in enumerate(sources)]
         ids += [(f"consequence[{i}]", f"The prediction {c!r} is entailed by the hypothesis")
                 for i, c in enumerate(requested_consequences or [])]
+        ids += [(o.id, o.statement) for o in extra or []]
         obligations = _open_all(ids, why)
     claim = Claim(f"{hypothesis.get('hypothesis_id') or 'H'}:sound", SOUND_CLAIM, "the submitted hypothesis",
                   obligations)
@@ -349,7 +358,8 @@ def build(
 
 
 def for_response(request: Dict[str, Any], response: Dict[str, Any],
-                 claim_trust: Optional[List[Dict[str, Any]]] = None) -> Optional[Dict[str, Any]]:
+                 claim_trust: Optional[List[Dict[str, Any]]] = None,
+                 extra: Optional[List[Obligation]] = None) -> Optional[Dict[str, Any]]:
     """The ledger of a formal pipeline response (`formal run`, `formal analyze`); None for statement checks."""
     if request.get("input_kind") not in ("formal", "prose"):
         return None
@@ -367,6 +377,7 @@ def for_response(request: Dict[str, Any], response: Dict[str, Any],
         response.get("formal_status", formal_status.FormalStatus.DECIDED.value),
         response.get("reason", ""),
         request.get("consequences"),
+        extra,
     )
 
 __all__ = ["build", "for_response", "check_citations", "resolve_citations", "citing_context", "dag", "SCHEMA"]

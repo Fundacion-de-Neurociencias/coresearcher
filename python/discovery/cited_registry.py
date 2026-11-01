@@ -35,21 +35,20 @@ from datetime import date as _date
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence
 
-from python.discovery import formal_provenance, formal_status, hash_chain, obligation_ledger
+from python.discovery import biomedical_conventions, formal_provenance, formal_status, hash_chain, obligation_ledger
 from python.discovery.formal_hypothesis import FormalHypothesisError, HypothesisEvaluator, hypothesis_from_dict
 
 STORE_ENV = "CORESEARCHER_REGISTRY_PATH"
 SCHEMA = "coresearcher.cited-registry/v1"
 
-# Convention kinds with a fixed meaning. Other tags are allowed and compared the same way.
+# Convention kinds with a fixed meaning. Other tags are allowed and compared the same way. The biomedical kinds
+# (assay, platform, matrix, units, population, reference standard, scale direction, cutoff derivation) have aliases,
+# canonical values and unit algebra in `biomedical_conventions` (ADR-DISCOVERY-086).
 CONVENTION_KINDS = {
     "sign": "Sign or orientation convention (e.g. 'D = d + d^*' vs 'D = d - d^*', outward vs inward normal)",
     "normalization": "Normalization of a transform, measure or constant (e.g. Fourier 'e^{-2 pi i x xi}')",
-    "units": "Units of a quantity (e.g. 'pg/mL')",
-    "scale_direction": "Direction of a scale (e.g. 'higher is worse')",
-    "validated_assay": "Assay or instrument under which a threshold or result was validated",
-    "validated_population": "Population under which a threshold or result was validated",
     "computation_model": "Model of computation for a complexity statement (e.g. 'deterministic multitape TM')",
+    **{kind: spec["description"] for kind, spec in biomedical_conventions.KINDS.items()},
 }
 
 # Entry status. Only ACTIVE entries can support a CLEAR citation check.
@@ -114,19 +113,25 @@ class RegistryEntry:
         self.conventions = {str(k): str(v) for k, v in self.conventions.items()}
 
 
-def _norm(value: str) -> str:
-    return re.sub(r"\s+", " ", str(value)).strip().lower()
-
-
 def check_conventions(entry: RegistryEntry, context: Dict[str, str]) -> List[Dict[str, str]]:
-    """Compares each convention of the entry with the citing context. Absent in the context is UNSPECIFIED."""
+    """Compares each convention of the entry with the citing context. Absent in the context is UNSPECIFIED.
+
+    Tags are compared under their canonical names (`assay` is `validated_assay`), units by unit algebra and the
+    biomedical kinds by canonical value (ADR-DISCOVERY-086); everything else by normalized string.
+    """
     out = []
-    for tag, value in sorted(entry.conventions.items()):
-        if tag not in context:
+    citing = biomedical_conventions.canonical_tags(context)
+    for tag, value in sorted(biomedical_conventions.canonical_tags(entry.conventions).items()):
+        if tag not in citing:
             out.append({"tag": tag, "cited": value, "citing": "", "outcome": UNSPECIFIED})
         else:
-            outcome = MATCH if _norm(value) == _norm(context[tag]) else MISMATCH
-            out.append({"tag": tag, "cited": value, "citing": str(context[tag]), "outcome": outcome})
+            compared = biomedical_conventions.compare(tag, value, citing[tag])
+            row = {"tag": tag, "cited": value, "citing": str(citing[tag]), "outcome": compared["outcome"]}
+            if compared["compared_by"] != "normalized string":
+                row["compared_by"] = compared["compared_by"]
+                if "unit" in compared:
+                    row["detail"] = compared["unit"]["detail"]
+            out.append(row)
     return out
 
 

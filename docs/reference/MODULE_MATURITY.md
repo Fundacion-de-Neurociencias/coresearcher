@@ -8,8 +8,8 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 23 |
-| Tested | Covered by tests, not reachable from the API | 59 |
+| Integrated | Used by the API and covered by tests | 24 |
+| Tested | Covered by tests, not reachable from the API | 61 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -21,6 +21,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `alzheimer_formal_scenario` | Integrated | yes | yes | - |
 | `anomaly_discovery_engine` | Prototype | - | - | - |
 | `asymptotic_barrier_auditor` | Tested | - | yes | - |
+| `asymptotic_forms` | Tested | - | yes | - |
 | `audited_human_oversight` | Tested | - | yes | - |
 | `auto_explicability` | Prototype | - | - | - |
 | `autopoietic_closure_auditor` | Tested | - | yes | - |
@@ -28,6 +29,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `bayesian_surprise_engine` | Exercised | - | - | yes |
 | `biological_programs_catalog` | Prototype | - | - | - |
 | `biomacromolecular_auditor` | Tested | - | yes | - |
+| `capability_regression` | Integrated | yes | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
 | `cited_import_ledger` | Tested | - | yes | yes |
@@ -96,6 +98,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `o3_continuum_case` | Tested | - | yes | yes |
 | `obligation_ledger` | Tested | - | yes | - |
 | `openai_math_coverage` | Tested | - | yes | yes |
+| `openai_math_time_travel` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
 | `preregistration` | Tested | - | yes | yes |

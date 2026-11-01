@@ -30,6 +30,7 @@ from api.routers import (
     ontology,
     provenance,
     registry,
+    regression,
     webhooks,
 )
 from api.security import RateLimitMiddleware
@@ -73,6 +74,7 @@ for _module in (
     provenance,
     ontology,
     registry,
+    regression,
     webhooks,
 ):
     app.include_router(_module.router)

@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 129. Interactive documentation is served at `/docs` when the API runs.
+Operations: 131. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -136,6 +136,8 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `POST` | `/api/registry/entries/{entry_id}/retract` | API key | Retract Entry |
 | `POST` | `/api/registry/flags/{node}/reevaluated` | API key | Clear Flag |
 | `GET` | `/api/registry/impact/{node}` | Public | Impact |
+| `GET` | `/api/regression/cases` | Public | Regression Cases |
+| `POST` | `/api/regression/check` | API key | Regression Check |
 | `POST` | `/api/trust/assess` | API key | Assess Claim Trust |
 | `POST` | `/api/webhooks/github` | HMAC signature | Audit Pr Webhook |
 | `POST` | `/api/zenodo/publish` | API key | Publish To Zenodo |

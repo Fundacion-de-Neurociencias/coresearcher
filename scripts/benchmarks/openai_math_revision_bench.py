@@ -22,6 +22,7 @@ Downloaded content is data: nothing from it is executed.
 
 import argparse
 import difflib
+import gzip
 import hashlib
 import json
 import os
@@ -35,6 +36,9 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
 
 from python.discovery import cited_import_ledger, lean_junk_lint, manuscript_checks  # noqa: E402
+from python.discovery import openai_math_time_travel as tt  # noqa: E402
+from python.discovery.openai_math_time_travel import (  # noqa: E402
+    CHECKS, LEAN_SCOPE, LOCATION_TOLERANCE, in_location, score, summarize)
 
 REPO = "https://github.com/openai/math.git"
 PRE = "adc7f1241b42e322a6451854ab7e4b4c146bf78a"  # Initial commit: state before the October 7 fixes.
@@ -46,13 +50,11 @@ PROTOCOL_SHA = OUT_DIR / "OPENAI_MATH_REVISION_PROTOCOL.sha256"
 DATASET = OUT_DIR / "openai_math_revision_dataset.json"
 RESULTS = OUT_DIR / "openai_math_revision_results.json"
 POSTHOC = OUT_DIR / "openai_math_revision_posthoc.json"
+FIXTURE = ROOT / "benchmarks" / "regression" / "fixtures" / "openai_math_time_travel.json.gz"
 CONTROL_SEED = 20261030
-LOCATION_TOLERANCE = 2  # lines
 
 _DATE = re.compile(r"-(?:January|February|March|April|May|June|July|August|September|October|November|December)"
                    r"-\d{1,2}-\d{4}$")
-
-CHECKS = ["statement_fidelity", "lean_junk_lint", "CITATION", "IDENTITY_STRICT", "IDENTITY_CONTEXT", "EXPONENT"]
 
 # Defects of the October 7 release, from history.md, the version notes and the diffs. `encodable` is the
 # pre-registered judgement of whether the defect, as the authors describe it, lies inside the language of each
@@ -124,16 +126,6 @@ REVISED = {
 
 # Pre-registered encodability (see the protocol, section 5). statement_fidelity and lean_junk_lint need a Lean
 # statement; none of these families had one at PRE, so they are recorded per item from CONTENTS.md, not here.
-# Families of two revised manuscripts have a Lean note at PRE. What the Lean statement covers, from lean/docs:
-LEAN_SCOPE = {
-    "Taming-implies-compatibility-on-four-manifolds":
-        "Lean note 342 formalizes only the main theorem (taming implies compatibility); the defect is in the "
-        "cone corollary, which has no Lean statement",
-    "Incompressible-Box-Transport-and-Finite-Computation":
-        "Lean note 376 formalizes the sheet-program and halting-detection statements; the defect is in the "
-        "prose proof of the projection and decay estimates, not in a formal statement",
-}
-
 ENCODABLE = {
     "Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank": {"CITATION"},
 }
@@ -364,47 +356,6 @@ def run_version(clone: Path, wt: Path, commit: str, dirname: str, snapshot: set)
     return {"flags": [f.to_dict() for f in flags], "coverage": coverage.__dict__, "tex_lines": lines}
 
 
-def in_location(flag: dict, locations: dict) -> bool:
-    for f, rs in locations.items():
-        if flag["file"] != f:
-            continue
-        for a, b in rs:
-            if a - LOCATION_TOLERANCE <= flag["line"] <= b + LOCATION_TOLERANCE:
-                return True
-    return False
-
-
-def score(item: dict, pre: dict, post: dict | None) -> dict:
-    post_keys = {(f["check"], f["key"]) for f in post["flags"]} if post else set()
-    per_check = {}
-    hits = []
-    for check in CHECKS[2:]:
-        at_loc = [f for f in pre["flags"] if f["check"] == check and in_location(f, item["locations"])]
-        resolved = [f for f in at_loc if (f["check"], f["key"]) not in post_keys]
-        if resolved:
-            verdict = "HIT"
-            hits += resolved
-        elif check in item["encodable"]:
-            verdict = "MISS"
-        else:
-            verdict = "NOT_ENCODABLE"
-        per_check[check] = {"verdict": verdict, "flags_at_location": len(at_loc), "resolved_at_location": len(resolved)}
-    for check in CHECKS[:2]:
-        # Lean checks see only the Comparator statement; a defect in the prose can never sit at a .tex location.
-        reason = LEAN_SCOPE.get(item.get("id"), "no Lean note for the family at PRE")
-        per_check[check] = {"verdict": "HIT" if check in item.get("lean_hits", []) else "NOT_ENCODABLE",
-                            "reason": reason}
-    verdicts = [v["verdict"] for v in per_check.values()]
-    overall = "HIT" if "HIT" in verdicts else "MISS" if "MISS" in verdicts else "NOT_ENCODABLE"
-    loc_lines = sum(b - a + 1 + 2 * LOCATION_TOLERANCE for rs in item["locations"].values() for a, b in rs)
-    chance = {}
-    for check in CHECKS[2:]:
-        n = sum(f["check"] == check for f in pre["flags"])
-        chance[check] = round(min(1.0, n * loc_lines / max(pre["tex_lines"], 1)), 4)
-    return {"verdict": overall, "per_check": per_check, "hits": hits, "location_lines": loc_lines,
-            "expected_chance_hits": chance}
-
-
 def protocol_frozen() -> str:
     digest = hashlib.sha256(PROTOCOL.read_bytes()).hexdigest()
     frozen = PROTOCOL_SHA.read_text(encoding="utf-8").split()[0]
@@ -442,35 +393,52 @@ def run(clone: Path) -> dict:
             "summary": summarize(out_items), "items": out_items}
 
 
-def summarize(items: list) -> dict:
-    out = {"defects": {}, "false_alarms": {}}
-    defects = [i for i in items if "score" in i]
-    for v in ("HIT", "MISS", "NOT_ENCODABLE"):
-        out["defects"][v] = sorted(i["id"] for i in defects if i["score"]["verdict"] == v)
-    for check in CHECKS[2:]:
-        out["defects"][f"hits_{check}"] = sum(i["score"]["per_check"][check]["verdict"] == "HIT" for i in defects)
+def fixture(clone: Path) -> dict:
+    """Excerpts for the offline regression replay (ADR-DISCOVERY-084). Each excerpt is verified to reproduce the
+    full run's flags exactly; a mismatch stops the build instead of writing a fixture that would drift."""
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    snap_pre, snap_post = set(manuscript_dirs(clone, PRE)), set(manuscript_dirs(clone, POST))
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
 
-    def rate(group_items, key):
-        flags = lines = 0
-        per_ms = []
-        for i in group_items:
-            fs = i[key] if key == "persistent" else i["pre"]["flags"]
-            n = {c: sum(f["check"] == c for f in fs) for c in CHECKS[2:]}
-            per_ms.append(n)
-            lines += i["pre"]["tex_lines"]
-        totals = {c: sum(n[c] for n in per_ms) for c in CHECKS[2:]}
-        return {
-            "manuscripts": len(group_items), "tex_lines": lines, "flags": totals,
-            "flags_per_1000_lines": {c: round(1000 * totals[c] / max(lines, 1), 3) for c in CHECKS[2:]},
-            "manuscripts_with_flag": {c: sum(n[c] > 0 for n in per_ms) for c in CHECKS[2:]},
+    def version(wt: Path, dirname: str, snapshot: set, locations) -> dict:
+        root = long_path(wt / "preprints" / dirname / "build")
+        if not root.exists():
+            root = long_path(wt / "preprints" / dirname)
+        files = manuscript_checks.read_sources(root)
+        full = tt.check_files(files, snapshot)
+        lines = sum(t.count("\n") + 1 for n, t in files.items() if n.endswith(".tex"))
+        out = tt.excerpt_version(files, full, locations, snapshot, lines)
+        replayed = tt.replay_version(out)["flags"]
+        if tt.flag_signature(replayed) != tt.flag_signature(full):
+            missing = set(tt.flag_signature(full)) - set(tt.flag_signature(replayed))
+            extra = set(tt.flag_signature(replayed)) - set(tt.flag_signature(full))
+            raise SystemExit(f"excerpt of {dirname} does not reproduce the full run: missing {sorted(missing)[:5]}, "
+                             f"extra {sorted(extra)[:5]}")
+        if locations:
+            full_imports, excerpt_imports = tt.imports_at(files, locations), tt.imports_at(tt.excerpt_files(out), locations)
+            if full_imports != excerpt_imports:
+                raise SystemExit(f"excerpt of {dirname} does not reproduce the import obligations at the location: "
+                                 f"{full_imports} != {excerpt_imports}")
+        return out
+
+    items = {}
+    for item in data["items"]:
+        locations = item.get("locations")
+        items[item["id"]] = {
+            "group": item["group"],
+            "pre": version(wt_pre, item["pre"]["dir"], snap_pre, locations),
+            "post": version(wt_post, item["post"]["dir"], snap_post, None) if item["post"] else None,
         }
-
-    revised = [i for i in items if i["group"] == "revised"]
-    out["false_alarms"]["persistent_on_corrected"] = rate(revised, "persistent")
-    out["false_alarms"]["citation_update_persistent"] = rate([i for i in items if i["group"] == "citation_update"],
-                                                             "persistent")
-    out["false_alarms"]["never_revised_controls"] = rate([i for i in items if i["group"] == "control"], "pre")
-    return out
+        print(item["group"], item["id"][:70], flush=True)
+    dataset_bytes = DATASET.read_bytes().replace(b"\r\n", b"\n")
+    return {
+        "source": {"repository": REPO, "license": "Apache-2.0", "pre_commit": PRE, "post_commit": POST,
+                   "note": "Excerpts of openai/math manuscript sources (Apache-2.0); lines keep their original "
+                           "numbers, everything else is blank. Built by `openai_math_revision_bench.py fixture`."},
+        "dataset_sha256": hashlib.sha256(dataset_bytes).hexdigest(),
+        "items": items,
+    }
 
 
 def posthoc(clone: Path) -> dict:
@@ -541,7 +509,7 @@ def posthoc(clone: Path) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["dataset", "run", "posthoc"])
+    ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     args = ap.parse_args()
     CACHE.mkdir(parents=True, exist_ok=True)
@@ -550,6 +518,12 @@ def main() -> None:
         data = build_dataset(clone)
         DATASET.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {DATASET} ({len(data['items'])} items)")
+    elif args.command == "fixture":
+        out = fixture(clone)
+        payload = (json.dumps(out, indent=1, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
+        FIXTURE.parent.mkdir(parents=True, exist_ok=True)
+        FIXTURE.write_bytes(gzip.compress(payload, mtime=0))
+        print(f"wrote {FIXTURE} ({len(payload)} bytes before compression)")
     elif args.command == "posthoc":
         out = posthoc(clone)
         POSTHOC.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")

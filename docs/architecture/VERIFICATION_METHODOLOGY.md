@@ -147,7 +147,8 @@ domain-neutral.
   NOT_ENCODABLE, along with false alarms on the corrected version. Rank new mechanisms by the defects they would have
   caught.
 - **Came from.** The time-travel benchmark.
-- **Integration.** Block C turns benchmarks into regression tests.
+- **Integration.** Done (ADR-084): every benchmark is a regression test in CI, and gains as well as losses fail
+  until the frozen expectations are updated.
 - **Beyond.** Retracted or corrected biomedical claims are the same kind of ground truth for formal checks. This is
   limited to defects in internal consistency or formal structure, never to judging the evidence itself.
 
@@ -226,8 +227,8 @@ the weight lies (M10).
 | --- | --- | --- | --- |
 | A | M1, M4, M7 | Vacuity probe in the evaluator, trust ladder in reports and the evidence graph, fidelity compare and Lean lint as API/CLI services | Done (ADR-080) |
 | B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Done (ADR-083) |
-| C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Next |
-| D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses | After B and C |
+| C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Done (ADR-084) |
+| D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses | Next |
 | E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | After D |
 
 Blocks run one at a time. Each one lands as a module wired into the API and CLI, with tests and an ADR. It does not

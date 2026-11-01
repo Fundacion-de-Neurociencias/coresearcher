@@ -1,0 +1,22 @@
+{
+  "description": "ADR-DISCOVERY-082 calibration: a trace-sign import inside a proof, a cited corollary applied in a proof, and a citation with no bibliography entry. The second variant states the cited hypothesis; the third gives a phrase that looks like a regular expression.",
+  "files": {
+    "main.tex": "\n\\begin{corollary}\\label{cor:cones}\nLet $X,J$ be as above. Then $K^t = K^c + H^-$.\n\\end{corollary}\n\\begin{proof}\nThe cone comparison \\cite[Corollary~1.1]{LZ} gives the cone identity.\n\\end{proof}\n\n\\begin{proof}\nWe use the stabilization traces of \\cite[Lemma~3.2]{eems}. In source dimension $2k$, a trace\nhas one double point of sign $(-1)^{k-1}$; the reverse trace has sign $(-1)^k$.\n\\end{proof}\nThe starting constructions are in \\cite{B,Dv}.\n",
+    "refs.bib": "@article{LZ, title={a}}\n@article{eems, title={b}}\n@article{B, title={c}}\n"
+  },
+  "stated_hypothesis": {"replace": "as above.", "with": "as above with $h_J^- = b^+ - 1$."},
+  "registry": [
+    {
+      "key": "LZ",
+      "locator": "Corollary 1.1",
+      "statement": "K^t = K^c + H^- for tamed J",
+      "hypotheses": [{"text": "h_J^- = b^+ - 1", "phrases": ["h_J^- = b^+ - 1", "h_J^-=b^+-1"]}]
+    }
+  ],
+  "regex_like_phrase": "(a+)+$",
+  "dependency": {
+    "files": {"main.tex": "x\n", "refs.bib": "@misc{w, howpublished={OAI:Weil-paper-May-1-2026}}\n"},
+    "manuscript_status": {"Weil-paper-May-1-2026": "withdrawn"},
+    "collection_without_target": ["Other-paper-May-2-2026"]
+  }
+}

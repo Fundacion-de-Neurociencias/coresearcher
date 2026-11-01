@@ -51,6 +51,13 @@
     {
       "api": false,
       "level": "Tested",
+      "module": "asymptotic_forms",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
       "module": "audited_human_oversight",
       "scripts": false,
       "tests": true
@@ -94,6 +101,13 @@
       "api": false,
       "level": "Tested",
       "module": "biomacromolecular_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "capability_regression",
       "scripts": false,
       "tests": true
     },
@@ -570,6 +584,13 @@
       "api": false,
       "level": "Tested",
       "module": "openai_math_coverage",
+      "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "openai_math_time_travel",
       "scripts": true,
       "tests": true
     },

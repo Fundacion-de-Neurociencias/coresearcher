@@ -757,14 +757,59 @@ def chain_run(clone: Path) -> dict:
             "summary": summary, "combined": combined, "defects": defects, "audits": audits, "occurrences": occs}
 
 
+def chain_registry(entries_dir: Path) -> dict:
+    """Assembles the blind writers' records (section 4.1). Involved results are registered when WRITTEN; decoys in
+    draw order until DECOYS_WANTED are WRITTEN, the rest are recorded as NOT_USED. Content is never edited."""
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    records = {}
+    for path in sorted(entries_dir.glob("w*_entries.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["result"]] = dict(rec, writer=path.name.split("_")[0])
+    missing = [r for r in selection["results"] if r not in records]
+    if missing:
+        raise SystemExit(f"no writer record for {missing}")
+    written, decoys_used = [], 0
+    for r in selection["involved"] + selection["decoys_in_draw_order"]:
+        rec = dict(records[r], role=selection["results"][r]["role"])
+        if rec["role"] == "decoy" and rec["status"] == "WRITTEN":
+            if decoys_used >= DECOYS_WANTED:
+                rec["status"] = "NOT_USED"
+            else:
+                decoys_used += 1
+        written.append(rec)
+    return {"procedure": "OPENAI_MATH_CHAIN_PROTOCOL.md section 4.1; writers' instructions in "
+                         "openai_math_chain_procedure/WRITER_INSTRUCTIONS.md",
+            "selection_sha256": hashlib.sha256(_lf(CHAIN_SELECTION)).hexdigest(),
+            "repairs": [], "written": written}
+
+
+def chain_contexts(encodings_dir: Path) -> dict:
+    """Assembles the blind encoders' records (section 4.2). Content is never edited."""
+    contexts = []
+    for path in sorted(encodings_dir.glob("e*_contexts.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            contexts.append(dict(rec, encoder=path.name.split("_")[0]))
+    return {"procedure": "OPENAI_MATH_CHAIN_PROTOCOL.md section 4.2; encoders' instructions in "
+                         "openai_math_chain_procedure/ENCODER_INSTRUCTIONS.md",
+            "registry_sha256": hashlib.sha256(_lf(CHAIN_REGISTRY)).hexdigest(),
+            "repairs": [], "contexts": sorted(contexts, key=lambda c: c["id"])}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
-                                        "chain-packets", "chain"])
+                                        "chain-registry", "chain-packets", "chain-contexts", "chain"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
-    ap.add_argument("--file", type=Path, help="chain-freeze: the input to freeze")
+    ap.add_argument("--file", type=Path, help="chain-freeze: the input to freeze; chain-registry, "
+                                              "chain-contexts: the directory of the blind records")
     args = ap.parse_args()
     CACHE.mkdir(parents=True, exist_ok=True)
+    if args.command in ("chain-registry", "chain-contexts"):
+        out = chain_registry(args.file) if args.command == "chain-registry" else chain_contexts(args.file)
+        target = CHAIN_REGISTRY if args.command == "chain-registry" else CHAIN_CONTEXTS
+        target.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        print(f"wrote {target}")
+        return
     if args.command == "chain-freeze":
         record = chain_freeze(args.file, args.file.name)
         print(record["id"], record["sha256"], record["frozen_at"])

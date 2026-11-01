@@ -118,6 +118,10 @@ domain-neutral.
     non-verdict. Measured on the real errors, this removed most lexical alarms and decided no defect: the withdrawals'
     sign error lies in the citing construction, not in a convention of the cited lemma
     ([`OPENAI_MATH_TYPED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_TYPED_RESULTS.md)).
+  - Typed parameters carry conditions, the case a citation uses is checked against the cases a result covers, and a
+    partial comparison stays open (ADR-088). The imported signs at the withdrawals are then decided MATCHes. What
+    remains open is the branch orientation the citing passages never state
+    ([`OPENAI_MATH_CONSTRAINED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_CONSTRAINED_RESULTS.md)).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

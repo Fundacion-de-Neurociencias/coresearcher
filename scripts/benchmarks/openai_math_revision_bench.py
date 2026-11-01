@@ -860,6 +860,21 @@ TYPED_PROTOCOL = OUT_DIR / "OPENAI_MATH_TYPED_PROTOCOL.md"
 TYPED_REGISTRY = OUT_DIR / "openai_math_typed_registry.json"
 TYPED_CONTEXTS = OUT_DIR / "openai_math_typed_contexts.json"
 TYPED_RESULTS = OUT_DIR / "openai_math_typed_results.json"
+# Re-measures that type conventions blind, each under its own frozen protocol: `typed` (ADR-087) and `constrained`
+# (ADR-088: conditions on parameters, and the case of a cited result kept apart from its conventions).
+VARIANTS = {
+    "typed": ("OPENAI_MATH_TYPED_PROTOCOL.md", "openai_math_typed"),
+    "constrained": ("OPENAI_MATH_CONSTRAINED_PROTOCOL.md", "openai_math_constrained"),
+}
+
+
+def use_variant(name: str) -> None:
+    global TYPED_PROTOCOL, TYPED_REGISTRY, TYPED_CONTEXTS, TYPED_RESULTS
+    protocol, stem = VARIANTS[name]
+    TYPED_PROTOCOL = OUT_DIR / protocol
+    TYPED_REGISTRY = OUT_DIR / f"{stem}_registry.json"
+    TYPED_CONTEXTS = OUT_DIR / f"{stem}_contexts.json"
+    TYPED_RESULTS = OUT_DIR / f"{stem}_results.json"
 
 
 def typed_merge(kind: str, records_dir: Path) -> dict:
@@ -883,14 +898,14 @@ def typed_merge(kind: str, records_dir: Path) -> dict:
                 rec = records[w["entry_id"]]
                 w = dict(w, entry=dict(w["entry"], conventions=rec["conventions"]), typing_notes=rec.get("notes", ""))
             written.append(w)
-        out = dict(base, written=written, procedure="OPENAI_MATH_TYPED_PROTOCOL.md section 3.1",
+        out = dict(base, written=written, procedure=f"{TYPED_PROTOCOL.name} section 3.1",
                    base_sha256=hashlib.sha256(_lf(CHAIN_REGISTRY)).hexdigest())
     else:
         base = json.loads(CHAIN_CONTEXTS.read_text(encoding="utf-8"))
         missing = [c["id"] for c in base["contexts"] if c["id"] not in records]
         contexts = [dict(c, conventions=records[c["id"]]["conventions"],
                          typing_notes=records[c["id"]].get("notes", "")) for c in base["contexts"]]
-        out = dict(base, contexts=contexts, procedure="OPENAI_MATH_TYPED_PROTOCOL.md section 3.2",
+        out = dict(base, contexts=contexts, procedure=f"{TYPED_PROTOCOL.name} section 3.2",
                    base_sha256=hashlib.sha256(_lf(CHAIN_CONTEXTS)).hexdigest(),
                    registry_sha256=hashlib.sha256(_lf(TYPED_REGISTRY)).hexdigest())
     if missing:
@@ -907,7 +922,7 @@ def typed_packets() -> None:
                 "statement": w["entry"]["statement"], "hypotheses": w["entry"]["hypotheses"],
                 "conventions": w["entry"]["conventions"], "writer_notes": w.get("notes", "")}
                for w in base["written"] if w["status"] == "WRITTEN"]
-    (CHAIN_WORK / "typed_entry_packets.json").write_text(json.dumps(entries, indent=1, ensure_ascii=False),
+    (CHAIN_WORK / f"{TYPED_REGISTRY.stem}_entry_packets.json").write_text(json.dumps(entries, indent=1, ensure_ascii=False),
                                                          encoding="utf-8")
     if registry is None:
         print(f"{len(entries)} entry packets")
@@ -918,7 +933,7 @@ def typed_packets() -> None:
     for p in packets:
         entry_id = by_text[json.dumps(p["registry_entry"]["statement"])]
         p["registry_entry"] = dict(p["registry_entry"], conventions=typed[entry_id])
-    (CHAIN_WORK / "typed_context_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False),
+    (CHAIN_WORK / f"{TYPED_REGISTRY.stem}_context_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False),
                                                            encoding="utf-8")
     print(f"{len(packets)} context packets")
 
@@ -930,9 +945,12 @@ def main() -> None:
                                         "chain-fixture", "typed-packets", "typed-registry", "typed-contexts",
                                         "typed"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
+    ap.add_argument("--variant", choices=sorted(VARIANTS), default="typed",
+                    help="typed-*, typed: which blind typing re-measure")
     ap.add_argument("--file", type=Path, help="chain-freeze: the input to freeze; chain-registry, "
                                               "chain-contexts: the directory of the blind records")
     args = ap.parse_args()
+    use_variant(args.variant)
     CACHE.mkdir(parents=True, exist_ok=True)
     if args.command in ("chain-registry", "chain-contexts"):
         out = chain_registry(args.file) if args.command == "chain-registry" else chain_contexts(args.file)

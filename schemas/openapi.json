@@ -4878,6 +4878,16 @@
       },
       "RegistryHypothesisModel": {
         "properties": {
+          "case": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": "Case",
+            "type": "object"
+          },
           "formal": {
             "default": "",
             "maxLength": 2000,

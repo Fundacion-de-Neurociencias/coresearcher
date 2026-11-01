@@ -103,6 +103,10 @@ here apart.
 4. **A chain input kind for a citation inside a proof**, and **a premise-status feed** (unchanged).
 5. **Unbounded integer ranges in citing contexts** (unchanged; the "n > 2" artefacts).
 
+**Follow-up.** Gaps 1 and 2 were addressed by
+[ADR-089](../../decisions/ADR-DISCOVERY-089-CASE-SCOPED-HYPOTHESES.md) and measured in
+[`OPENAI_MATH_CASES_RESULTS.md`](OPENAI_MATH_CASES_RESULTS.md).
+
 ## 5. Deviations
 
 - **The PARTIAL outcome** was added after the run (section 3). It does not change any pre-registered result.

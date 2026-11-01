@@ -212,6 +212,23 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
 
   After those, a local formal check of the orientation computation in the citing construction.
 
+### 2.14 Addendum (2026-11-02): case-scoped hypotheses
+
+- **What.**
+  - A cited hypothesis can be scoped to a case of the result, so a citation of part (2) is not held to part (1).
+  - A typed field that hides a condition is a non-verdict, not a mismatch.
+
+  ([ADR-089](../decisions/ADR-DISCOVERY-089-CASE-SCOPED-HYPOTHESES.md),
+  [`OPENAI_MATH_CASES_RESULTS.md`](benchmarks/OPENAI_MATH_CASES_RESULTS.md))
+- **Result.**
+  - Chain FINDINGS over the 69 citations fall from 15 to 12.
+  - Away from the defect locations, from 8 to 5.
+  - No decided detection is gained or lost (still 1/17).
+- **Next.**
+  - Unbounded integer variables in citing contexts. Representative ranges are now the largest source of remaining
+    findings at defect locations.
+  - Then the local orientation check in the citing construction.
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

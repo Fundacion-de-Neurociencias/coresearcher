@@ -25,6 +25,7 @@ The parser is a static pass, not a reader: a skipped formula is reported as unpa
 
 from __future__ import annotations
 
+import functools
 import random
 import re
 from dataclasses import asdict, dataclass
@@ -494,6 +495,13 @@ def _numeric_differs(a: sympy.Expr, b: sympy.Expr, rng: random.Random) -> Option
     return False if seen_defined else None
 
 
+@functools.lru_cache(maxsize=4096)
+def _simplifies_to_zero(difference: sympy.Expr) -> bool:
+    """sympy.simplify(difference) == 0, memoized: a corrected manuscript repeats most identities of its earlier
+    version, and simplify dominates the cost of the checks."""
+    return sympy.simplify(difference) == 0
+
+
 def _is_definition(side: sympy.Expr) -> bool:
     return isinstance(side, sympy.Symbol)
 
@@ -550,7 +558,7 @@ def check_math(files: Dict[str, str], coverage: Coverage) -> List[Flag]:
                     differs = _numeric_differs(a, b, rng)
                     if differs:
                         try:
-                            if sympy.count_ops(a - b) <= _MAX_SIMPLIFY_OPS and sympy.simplify(a - b) == 0:
+                            if sympy.count_ops(a - b) <= _MAX_SIMPLIFY_OPS and _simplifies_to_zero(a - b):
                                 continue
                         except Exception:
                             pass

@@ -130,6 +130,11 @@ def main() -> None:
 
     registry.add_parser(subparsers)
 
+    # regression: benchmarks as regression tests (ADR-DISCOVERY-084)
+    from python.cli import regression
+
+    regression.add_parser(subparsers)
+
     args = parser.parse_args()
     if not args.command:
         print(BANNER)
@@ -143,6 +148,7 @@ def main() -> None:
         "info": cmd_info,
         "formal": formal.main,
         "registry": registry.main,
+        "regression": regression.main,
     }
 
     exit_code = dispatch[args.command](args)

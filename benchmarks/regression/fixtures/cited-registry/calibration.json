@@ -1,0 +1,52 @@
+{
+  "description": "ADR-DISCOVERY-083 calibrations: the openai/math withdrawal pattern (a trace sign imported under the opposite orientation convention), ETH as a fallen premise (openai/math family 378), and an illustrative biomarker cutoff applied outside its validation.",
+  "withdrawal": {
+    "entry": {
+      "id": "trace-lemma",
+      "source": "cited trace lemma used by the Weil-eightfold manuscript (openai/math, withdrawn 2026-10-06)",
+      "statement": "A reverse stabilization trace contributes sign (-1)^k to the signed double-point count",
+      "key": "TraceLemma",
+      "locator": "Lemma 2.3",
+      "conventions": {"sign": "cusp branches with matching source orientations"},
+      "hypotheses": [{"text": "the cusp branches have matching source orientations", "phrases": ["matching source orientations"]}]
+    },
+    "opposite_context": {
+      "conventions": {"sign": "cusp branches with opposite source orientations"},
+      "text": "with the opposite source orientations of the cusp branches, by Lemma 2.3 ..."
+    },
+    "matching_context": {
+      "conventions": {"sign": "Cusp branches with  matching source orientations"},
+      "text": "the branches have matching source orientations, so Lemma 2.3 applies"
+    },
+    "dependencies": [["Weil-eightfolds", "trace-lemma"], ["Kuga-Satake-K3", "Weil-eightfolds"], ["Hodge-products-K3", "Weil-eightfolds"]],
+    "retraction": "sign of reverse traces is -1 under the opposite source orientation"
+  },
+  "eth": {
+    "entry": {
+      "id": "ETH",
+      "source": "Impagliazzo-Paturi 2001",
+      "kind": "premise",
+      "statement": "3-SAT on n variables needs 2^{Omega(n)} time",
+      "rung": "STATEMENT_PUBLIC"
+    },
+    "dependencies": [["hardness-of-X", "ETH"], ["corollary-of-X", "hardness-of-X"], ["unrelated", "other-premise"]],
+    "retraction": "openai/math family 378: deterministic 2^{o(n)} exact #k-SAT",
+    "when": "2026-10-25"
+  },
+  "biomarker": {
+    "entry": {
+      "id": "ptau217-cutoff",
+      "source": "illustrative threshold entry (not a clinical value)",
+      "kind": "threshold",
+      "statement": "plasma pTau217 above the cutoff classifies amyloid positivity",
+      "conventions": {"validated_assay": "assay A", "validated_population": "memory clinic, 55-80 y", "units": "pg/mL"},
+      "hypotheses": [{"text": "age within the validated range", "formal": "age >= 55 and age <= 80"}]
+    },
+    "citing": {
+      "conventions": {"validated_assay": "assay B", "validated_population": "memory clinic, 55-80 y", "units": "pg/mL"},
+      "variables": [{"name": "age", "continuous": true, "lower": 40, "upper": 95}],
+      "assumptions": ["age >= 60", "age <= 75"]
+    },
+    "wider_assumptions": ["age >= 50"]
+  }
+}

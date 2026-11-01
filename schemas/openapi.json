@@ -4244,6 +4244,20 @@
         "title": "RegistryRetractRequest",
         "type": "object"
       },
+      "RegressionCheckRequest": {
+        "properties": {
+          "case_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Case Ids",
+            "type": "array"
+          }
+        },
+        "title": "RegressionCheckRequest",
+        "type": "object"
+      },
       "ResultFamilyAuditRequest": {
         "properties": {
           "discipline": {
@@ -9659,6 +9673,65 @@
           }
         },
         "summary": "Impact"
+      }
+    },
+    "/api/regression/cases": {
+      "get": {
+        "description": "The regression cases, with the version and SHA-256 of the frozen expectations and each case's frozen\nobservations. Expectations change only through `coresearcher regression update`, never through the API.",
+        "operationId": "regression_cases_api_regression_cases_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Regression Cases"
+      }
+    },
+    "/api/regression/check": {
+      "post": {
+        "description": "Runs the selected cases (all when `case_ids` is empty) offline and compares them with the frozen expectations.\n\n`status` is PASS only when every observation equals its expectation. Otherwise it is the worst of ERROR (a case\ncould not run), REGRESSION, FIXTURE_CHANGED, CHANGED and IMPROVEMENT (better, but not yet frozen).",
+        "operationId": "regression_check_api_regression_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegressionCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Regression Check"
       }
     },
     "/api/trust/assess": {

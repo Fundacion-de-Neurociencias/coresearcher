@@ -13,3 +13,7 @@ examples/o3-continuum-rehearsal/ClassicalON.json -text
 
 # Demo artifacts carry sha256 checksums of their own bytes; never convert line endings.
 integrations/oase/demo/** -text
+
+# Regression expectations and fixtures are pinned by SHA-256 (ADR-DISCOVERY-084).
+benchmarks/regression/** text eol=lf
+benchmarks/regression/**/*.gz binary

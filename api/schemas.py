@@ -894,6 +894,11 @@ class RegistryReevaluatedRequest(BaseModel):
     note: str = Field(min_length=1, max_length=2000)
 
 
+class RegressionCheckRequest(BaseModel):
+    # Regression case ids (ADR-DISCOVERY-084); empty runs every case.
+    case_ids: List[str] = Field(default_factory=list, max_length=50)
+
+
 class ManuscriptAuditRequest(BaseModel):
     """LaTeX sources of one manuscript ({path: text}, .tex/.bib/.bbl) and optional context for the import checks."""
 

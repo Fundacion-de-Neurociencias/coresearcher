@@ -1,0 +1,1381 @@
+{
+ "cases": {
+  "cited_registry_calibration": {
+   "adr": "ADR-DISCOVERY-083",
+   "fixtures": {
+    "benchmarks/regression/fixtures/cited-registry/calibration.json": "23343dfbf6ec5fe1c071be5269bbd3cae70acda6f74f4ccf6f9b56e21c8fe556"
+   },
+   "notes": "",
+   "observations": {
+    "biomarker/age_hypothesis": {
+     "better": "exact",
+     "value": "DISCHARGED"
+    },
+    "biomarker/mismatched_conventions": {
+     "better": "exact",
+     "value": [
+      "validated_assay"
+     ]
+    },
+    "biomarker/outcome": {
+     "better": "exact",
+     "value": "FINDINGS"
+    },
+    "biomarker/wider_age_hypothesis": {
+     "better": "exact",
+     "value": "NOT_DISCHARGED"
+    },
+    "eth/cite_after_retraction": {
+     "better": "exact",
+     "value": "FINDINGS"
+    },
+    "eth/effective_rung/dependent": {
+     "better": "exact",
+     "value": "CLAIMED"
+    },
+    "eth/effective_rung/unrelated": {
+     "better": "exact",
+     "value": "KERNEL_CHECKED"
+    },
+    "eth/impact": {
+     "better": "exact",
+     "value": [
+      "corollary-of-X",
+      "hardness-of-X"
+     ]
+    },
+    "eth/retraction_flags": {
+     "better": "exact",
+     "value": [
+      "corollary-of-X",
+      "hardness-of-X"
+     ]
+    },
+    "withdrawal/matching/hypotheses": {
+     "better": "exact",
+     "value": [
+      "STATED_IN_TEXT"
+     ]
+    },
+    "withdrawal/matching/outcome": {
+     "better": "exact",
+     "value": "INCOMPLETE"
+    },
+    "withdrawal/opposite/conventions": {
+     "better": "exact",
+     "value": [
+      "MISMATCH"
+     ]
+    },
+    "withdrawal/opposite/hypotheses": {
+     "better": "exact",
+     "value": [
+      "UNDECIDED"
+     ]
+    },
+    "withdrawal/opposite/outcome": {
+     "better": "exact",
+     "value": "FINDINGS"
+    },
+    "withdrawal/retraction_flags": {
+     "better": "exact",
+     "value": [
+      "Hodge-products-K3",
+      "Kuga-Satake-K3",
+      "Weil-eightfolds"
+     ]
+    },
+    "withdrawal/silent/outcome": {
+     "better": "exact",
+     "value": "INCOMPLETE"
+    }
+   },
+   "title": "Cited-results registry calibrations"
+  },
+  "eth_statement_fidelity": {
+   "adr": "ADR-DISCOVERY-084",
+   "fixtures": {
+    "benchmarks/regression/fixtures/eth-378/SubexponentialSAT.json": "debbfdc9c01104d2369be80da5180978275106df8b685f693fba7ce7da7c5b19",
+    "benchmarks/regression/fixtures/eth-378/SubexponentialSAT.lean": "4183b2057cff350d66848215ff7167196dfc20e1891b598fdddea59077a76685",
+    "examples/openai-math-coverage/coverage_map.json": "b8f11279bfc7338a37940cf2a3171e660a784ea5dcf086eca4cc42e0eb304b12"
+   },
+   "notes": "Includes the o(1) sign subtlety: the Lean bound fits n/(log n)^{1/2+o(1)} only with a signed o(1).",
+   "observations": {
+    "auto_range/paper": {
+     "better": "exact",
+     "value": "k >= 2"
+    },
+    "auto_range/relation": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "lint/open": {
+     "better": "exact",
+     "value": [
+      "DIVISION:runtimeScale",
+      "RPOW:runtimeBound"
+     ]
+    },
+    "o1/lean/implied_o1_limit": {
+     "better": "exact",
+     "value": "0"
+    },
+    "o1/lean/nonnegative_reading": {
+     "better": "exact",
+     "value": "DOES_NOT_FIT"
+    },
+    "o1/lean/signed_reading": {
+     "better": "exact",
+     "value": "FITS"
+    },
+    "o1/manuscript/implied_o1_limit": {
+     "better": "exact",
+     "value": "0"
+    },
+    "o1/manuscript/nonnegative_reading": {
+     "better": "exact",
+     "value": "DOES_NOT_FIT"
+    },
+    "o1/manuscript/signed_reading": {
+     "better": "exact",
+     "value": "FITS"
+    },
+    "space_bound/at_every_prefix": {
+     "better": "exact",
+     "value": true
+    },
+    "targets": {
+     "better": "exact",
+     "value": 1
+    },
+    "uniformity/binders": {
+     "better": "exact",
+     "value": [
+      "∃",
+      "∀",
+      "∃",
+      "∀"
+     ]
+    },
+    "uniformity/machine_before_inputs": {
+     "better": "exact",
+     "value": "UNIFORM"
+    }
+   },
+   "title": "ETH refutation statement (family 378) as a positive fidelity control"
+  },
+  "local_smoothing_fidelity": {
+   "adr": "ADR-DISCOVERY-070",
+   "fixtures": {
+    "examples/local-smoothing-fidelity/LocalSmoothing.lean": "58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd"
+   },
+   "notes": "",
+   "observations": {
+    "development/logarithmic_refinement (Theorem 1.2)": {
+     "better": "exact",
+     "value": "WEAKER"
+    },
+    "development/logarithmic_sobolev (Corollary 7.1, C = 0 slice)": {
+     "better": "exact",
+     "value": "WEAKER"
+    },
+    "lint/kinds": {
+     "better": "exact",
+     "value": [
+      "BOCHNER_INTEGRAL",
+      "DERIV",
+      "DIVISION",
+      "INFINITE_RHS",
+      "INVERSE",
+      "RPOW",
+      "SUPREMUM",
+      "TO_REAL"
+     ]
+    },
+    "lint/open": {
+     "better": "exact",
+     "value": [
+      "stein_square:DERIV:76",
+      "stein_square:DIVISION:49",
+      "stein_square:RPOW:49"
+     ]
+    },
+    "mutant/(n-1) for n": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/Tomas-Stein exponent 2(n+1)/(n-1) for pc": {
+     "better": "exact",
+     "value": "WEAKER"
+    },
+    "mutant/dropped 1/2 floor": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/dropped mixed condition": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/missing abs": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/no p = 2 endpoint": {
+     "better": "exact",
+     "value": "WEAKER"
+    },
+    "mutant/non-strict alpha": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/non-strict delta (admits delta = 0, where 0^0 = 1 makes the symbol 1)": {
+     "better": "exact",
+     "value": "STRONGER"
+    },
+    "mutant/unguarded toReal (a = ∞ gives conjugate 0/(0-1) = 0)": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "mutants_caught": {
+     "better": "higher",
+     "value": 8
+    },
+    "range/bochner_riesz": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/euclidean_local_smoothing": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/kakeya": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/kakeya_maximal": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/spherical_restriction": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/stein_square": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "range/stein_square (paper §1.1 form)": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    }
+   },
+   "title": "Local smoothing statement fidelity"
+  },
+  "manuscript_audit_calibration": {
+   "adr": "ADR-DISCOVERY-082",
+   "fixtures": {
+    "benchmarks/regression/fixtures/manuscript-audit/calibration.json": "9e5ab085492e430bce0ffe2d8384077fc168ec9056ae0a164a1ac8416cd402b7"
+   },
+   "notes": "",
+   "observations": {
+    "dependency/link_outside_collection": {
+     "better": "exact",
+     "value": "FAIL"
+    },
+    "dependency/withdrawn": {
+     "better": "exact",
+     "value": [
+      [
+       "DEPENDENCY",
+       "withdrawn"
+      ]
+     ]
+    },
+    "gate": {
+     "better": "exact",
+     "value": "FAIL"
+    },
+    "hypothesis_outcomes": {
+     "better": "exact",
+     "value": {
+      "MATCHED": 0,
+      "NO_ENTRY": 2,
+      "UNMATCHED": 0
+     }
+    },
+    "import_counts": {
+     "better": "exact",
+     "value": {
+      "CONVENTION_TRANSFER": 1,
+      "DEPENDENCY": 0,
+      "EFFECTIVE_CONSTANT": 0,
+      "HYPOTHESIS_MATCH": 2
+     }
+    },
+    "ledger_status": {
+     "better": "exact",
+     "value": "OPEN"
+    },
+    "no_bibliography": {
+     "better": "exact",
+     "value": "NO_BIBLIOGRAPHY"
+    },
+    "registry/regex_like_phrase": {
+     "better": "exact",
+     "value": "UNMATCHED"
+    },
+    "registry/stated": {
+     "better": "exact",
+     "value": "MATCHED"
+    },
+    "registry/unstated": {
+     "better": "exact",
+     "value": {
+      "missing": [
+       "h_J^- = b^+ - 1"
+      ],
+      "outcome": "UNMATCHED"
+     }
+    },
+    "relays": {
+     "better": "exact",
+     "value": [
+      "CITATIONS_UNRESOLVED",
+      "IMPORTS_ARE_LEXICAL",
+      "IMPORT_OBLIGATIONS_OPEN"
+     ]
+    },
+    "unresolved": {
+     "better": "exact",
+     "value": [
+      "cite:Dv"
+     ]
+    }
+   },
+   "title": "Manuscript audit calibration"
+  },
+  "openai_math_coverage_calibration": {
+   "adr": "ADR-DISCOVERY-070",
+   "fixtures": {
+    "examples/local-smoothing-fidelity/LocalSmoothing.json": "73392b548f23dd8b1b0b459fae548212b58aab280fdcd0120d06f856c18daa91",
+    "examples/local-smoothing-fidelity/LocalSmoothing.lean": "58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd",
+    "examples/o3-continuum-rehearsal/ClassicalON.json": "47cb3623915c8cfcc35099fabd0c44173afa72b706eb0526c4b8d3855e789252",
+    "examples/o3-continuum-rehearsal/ClassicalON.lean": "c2f5f88455b811eb6b56c1ae80ff91f4e398e18e7c7fbeee6daca8da4122d696",
+    "examples/openai-math-coverage/coverage_map.json": "b8f11279bfc7338a37940cf2a3171e660a784ea5dcf086eca4cc42e0eb304b12"
+   },
+   "notes": "",
+   "observations": {
+    "auto_range/079.1": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "auto_range/079.2": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "auto_range/079.3": {
+     "better": "exact",
+     "value": null
+    },
+    "auto_range/079.4": {
+     "better": "exact",
+     "value": null
+    },
+    "auto_range/079.5": {
+     "better": "exact",
+     "value": null
+    },
+    "auto_range/215.1": {
+     "better": "exact",
+     "value": null
+    },
+    "auto_range/215.2": {
+     "better": "exact",
+     "value": null
+    },
+    "auto_range/215.3": {
+     "better": "exact",
+     "value": null
+    },
+    "hand_spec/079.1/decides": {
+     "better": "exact",
+     "value": true
+    },
+    "hand_spec/079.1/relation": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "hand_spec/215.3/decides": {
+     "better": "exact",
+     "value": false
+    },
+    "hand_spec/215.3/relation": {
+     "better": "exact",
+     "value": "EQUIVALENT"
+    },
+    "lint/079/findings": {
+     "better": "exact",
+     "value": 48
+    },
+    "lint/079/open": {
+     "better": "exact",
+     "value": 3
+    },
+    "lint/215/findings": {
+     "better": "exact",
+     "value": 4
+    },
+    "lint/215/open": {
+     "better": "exact",
+     "value": 4
+    },
+    "paper_item/logarithmic_refinement (Theorem 1.2)/has_paper_only_witness": {
+     "better": "exact",
+     "value": true
+    },
+    "paper_item/logarithmic_refinement (Theorem 1.2)/strength": {
+     "better": "exact",
+     "value": "WEAKER"
+    },
+    "paper_item/logarithmic_sobolev (Corollary 7.1, C = 0 slice)/has_paper_only_witness": {
+     "better": "exact",
+     "value": true
+    },
+    "paper_item/logarithmic_sobolev (Corollary 7.1, C = 0 slice)/strength": {
+     "better": "exact",
+     "value": "WEAKER"
+    }
+   },
+   "title": "Coverage-map calibration, families 079 and 215"
+  },
+  "openai_math_time_travel": {
+   "adr": "ADR-DISCOVERY-077",
+   "fixtures": {
+    "benchmarks/regression/fixtures/openai_math_time_travel.json.gz": "27767d5a3ccda4536619d210250c8279621c8b39de247d989bb7a6d04d94e98b",
+    "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5"
+   },
+   "notes": "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags.",
+   "observations": {
+    "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CITATION": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Incompressible-Box-Transport-and-Finite-Computation": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Incompressible-Box-Transport-and-Finite-Computation/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Incompressible-Box-Transport-and-Finite-Computation/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Incompressible-Box-Transport-and-Finite-Computation/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Incompressible-Box-Transport-and-Finite-Computation/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Taming-implies-compatibility-on-four-manifolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Taming-implies-compatibility-on-four-manifolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Taming-implies-compatibility-on-four-manifolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Taming-implies-compatibility-on-four-manifolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Taming-implies-compatibility-on-four-manifolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CITATION": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/EXPONENT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/IDENTITY_CONTEXT": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/IDENTITY_STRICT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "false_alarms/citation_update_persistent/flags/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/citation_update_persistent/flags/EXPONENT": {
+     "better": "lower",
+     "value": 11
+    },
+    "false_alarms/citation_update_persistent/flags/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 435
+    },
+    "false_alarms/citation_update_persistent/flags/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 11
+    },
+    "false_alarms/citation_update_persistent/manuscripts_with_flag/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/citation_update_persistent/manuscripts_with_flag/EXPONENT": {
+     "better": "lower",
+     "value": 6
+    },
+    "false_alarms/citation_update_persistent/manuscripts_with_flag/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 13
+    },
+    "false_alarms/citation_update_persistent/manuscripts_with_flag/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 5
+    },
+    "false_alarms/never_revised_controls/flags/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/never_revised_controls/flags/EXPONENT": {
+     "better": "lower",
+     "value": 7
+    },
+    "false_alarms/never_revised_controls/flags/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 237
+    },
+    "false_alarms/never_revised_controls/flags/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 3
+    },
+    "false_alarms/never_revised_controls/manuscripts_with_flag/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/never_revised_controls/manuscripts_with_flag/EXPONENT": {
+     "better": "lower",
+     "value": 3
+    },
+    "false_alarms/never_revised_controls/manuscripts_with_flag/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 17
+    },
+    "false_alarms/never_revised_controls/manuscripts_with_flag/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 3
+    },
+    "false_alarms/persistent_on_corrected/flags/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/persistent_on_corrected/flags/EXPONENT": {
+     "better": "lower",
+     "value": 11
+    },
+    "false_alarms/persistent_on_corrected/flags/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 324
+    },
+    "false_alarms/persistent_on_corrected/flags/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 5
+    },
+    "false_alarms/persistent_on_corrected/manuscripts_with_flag/CITATION": {
+     "better": "lower",
+     "value": 0
+    },
+    "false_alarms/persistent_on_corrected/manuscripts_with_flag/EXPONENT": {
+     "better": "lower",
+     "value": 5
+    },
+    "false_alarms/persistent_on_corrected/manuscripts_with_flag/IDENTITY_CONTEXT": {
+     "better": "lower",
+     "value": 14
+    },
+    "false_alarms/persistent_on_corrected/manuscripts_with_flag/IDENTITY_STRICT": {
+     "better": "lower",
+     "value": 2
+    },
+    "hits/CITATION": {
+     "better": "higher",
+     "value": 1
+    },
+    "hits/EXPONENT": {
+     "better": "higher",
+     "value": 0
+    },
+    "hits/IDENTITY_CONTEXT": {
+     "better": "higher",
+     "value": 1
+    },
+    "hits/IDENTITY_STRICT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 2
+    },
+    "imports_at_location/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 7
+    },
+    "imports_at_location/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Incompressible-Box-Transport-and-Finite-Computation/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Incompressible-Box-Transport-and-Finite-Computation/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Incompressible-Box-Transport-and-Finite-Computation/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 4
+    },
+    "imports_at_location/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Taming-implies-compatibility-on-four-manifolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Taming-implies-compatibility-on-four-manifolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Taming-implies-compatibility-on-four-manifolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 2
+    },
+    "imports_at_location/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 2
+    },
+    "imports_at_location/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 1
+    },
+    "imports_at_location/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 2
+    },
+    "imports_at_location/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CONVENTION_TRANSFER": {
+     "better": "higher",
+     "value": 5
+    },
+    "imports_at_location/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/EFFECTIVE_CONSTANT": {
+     "better": "higher",
+     "value": 0
+    },
+    "imports_at_location/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/HYPOTHESIS_MATCH": {
+     "better": "higher",
+     "value": 4
+    }
+   },
+   "title": "openai/math time-travel benchmark: real corrected defects and false alarms"
+  },
+  "sakana_ed_polarity": {
+   "adr": "ADR-DISCOVERY-059",
+   "fixtures": {},
+   "notes": "",
+   "observations": {
+    "decide/1x1": {
+     "better": "exact",
+     "value": "PROVED"
+    },
+    "decide/2x1": {
+     "better": "exact",
+     "value": "PROVED"
+    },
+    "decide/2x2": {
+     "better": "exact",
+     "value": "PROVED"
+    },
+    "decide/3x1": {
+     "better": "exact",
+     "value": "PROVED"
+    },
+    "drop/fprime": {
+     "better": "exact",
+     "value": "REFUTED"
+    },
+    "drop/weights": {
+     "better": "exact",
+     "value": "REFUTED"
+    },
+    "necessity/depth1": {
+     "better": "exact",
+     "value": {
+      "Wnn>=0": "REDUNDANT",
+      "Wnp>=0": "REDUNDANT",
+      "Wpn>=0": "REDUNDANT",
+      "Wpp>=0": "REDUNDANT",
+      "fprime_n>=0": "REDUNDANT",
+      "fprime_p>=0": "REDUNDANT"
+     }
+    },
+    "necessity/depth2": {
+     "better": "exact",
+     "value": {
+      "Wnn>=0": "REDUNDANT",
+      "Wnp>=0": "NECESSARY",
+      "Wpn>=0": "REDUNDANT",
+      "Wpp>=0": "NECESSARY",
+      "fprime_n>=0": "REDUNDANT",
+      "fprime_p>=0": "NECESSARY"
+     }
+    },
+    "necessity/depth3": {
+     "better": "exact",
+     "value": {
+      "Wnn>=0": "NECESSARY",
+      "Wnp>=0": "NECESSARY",
+      "Wpn>=0": "NECESSARY",
+      "Wpp>=0": "NECESSARY",
+      "fprime_n>=0": "NECESSARY",
+      "fprime_p>=0": "NECESSARY"
+     }
+    },
+    "replay/decreasing_activation": {
+     "better": "exact",
+     "value": 4
+    },
+    "replay/negative_weight": {
+     "better": "exact",
+     "value": [
+      "Wnp_1_0_0",
+      "Wpp_1_0_0"
+     ]
+    },
+    "transport_rival": {
+     "better": "exact",
+     "value": "REFUTED"
+    }
+   },
+   "title": "Sakana Error Diffusion polarity case"
+  },
+  "yang_mills_o3_rehearsal": {
+   "adr": "ADR-DISCOVERY-081",
+   "fixtures": {
+    "examples/o3-continuum-rehearsal/ClassicalON.lean": "c2f5f88455b811eb6b56c1ae80ff91f4e398e18e7c7fbeee6daca8da4122d696",
+    "examples/o3-continuum-rehearsal/o3_continuum_claim.v1.json": "961f3ca5e03245188604241d395311233091a85bbeccaf7a55bc52e9b0410c8d",
+    "examples/yang-mills-preregistration/ym4_existence_checklist.v1.json": "e4334cda4d4bb516e33fa4a352e754bd39f0bc2064fa587ec776c3f5a638b694"
+   },
+   "notes": "",
+   "observations": {
+    "o3/checklist_sha256": {
+     "better": "exact",
+     "value": "1e699e44697e43a8b18aefecc8d2b9ba78f4e2a9f8425d8abd42a05e06cf5210"
+    },
+    "o3/coverage_counts": {
+     "better": "exact",
+     "value": {
+      "COVERED": 3,
+      "NOT_ADDRESSED": 9,
+      "OBJECT_DIFFERS": 2
+     }
+    },
+    "o3/exclusion_lint": {
+     "better": "exact",
+     "value": "POSSIBLY_VACUOUS_RELATIVE_TO_INTENT"
+    },
+    "o3/probe/lean_covered_part_of_claim": {
+     "better": "exact",
+     "value": {
+      "outcome": "VACUOUS_RELATIVE_TO_INTENT",
+      "satisfied_by": [
+       "lattice_o3_high_temperature_finite",
+       "lattice_o3_torus",
+       "subsequential_limit_2d"
+      ]
+     }
+    },
+    "o3/probe/paper_claim": {
+     "better": "exact",
+     "value": {
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": []
+     }
+    },
+    "ym/checklist_sha256": {
+     "better": "exact",
+     "value": "2f899469928cf85a9c34ab19dd1dc73be45624a60b54253e727f61903bf3b353"
+    },
+    "ym/claim_record_rung": {
+     "better": "exact",
+     "value": "CLAIMED"
+    },
+    "ym/scenario/no_nontriviality": {
+     "better": "exact",
+     "value": {
+      "outcome": "POSSIBLY_VACUOUS",
+      "satisfied_by": [],
+      "undetermined": [
+       "zero_theory",
+       "free_nonabelian_gaussian_4d"
+      ]
+     }
+    },
+    "ym/scenario/no_short_distance": {
+     "better": "exact",
+     "value": {
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": []
+     }
+    },
+    "ym/scenario/no_short_distance_no_local_fields": {
+     "better": "exact",
+     "value": {
+      "outcome": "EXCLUDES_ALL_CATALOGUED",
+      "satisfied_by": [],
+      "undetermined": []
+     }
+    },
+    "ym/scenario/os_and_group_only": {
+     "better": "exact",
+     "value": {
+      "outcome": "VACUOUS_RELATIVE_TO_INTENT",
+      "satisfied_by": [
+       "free_nonabelian_gaussian_4d"
+      ],
+      "undetermined": [
+       "zero_theory",
+       "subsequential_limit_4d"
+      ]
+     }
+    },
+    "ym/self_probe/QCD": {
+     "better": "exact",
+     "value": "EXCLUDES_ALL_CATALOGUED"
+    },
+    "ym/self_probe/YM": {
+     "better": "exact",
+     "value": "EXCLUDES_ALL_CATALOGUED"
+    },
+    "ym/single_barrier_obligations": {
+     "better": "exact",
+     "value": {
+      "YM-CONTINUUM": [
+       "subsequential_limit_4d"
+      ],
+      "YM-GROUP-COVERAGE": [],
+      "YM-GROUP-NONABELIAN": [],
+      "YM-NONTRIVIAL": [],
+      "YM-OBS-GAUGE-INVARIANT": [],
+      "YM-OBS-LOCAL-CURVATURE": [],
+      "YM-OS-CLUSTER": [],
+      "YM-OS-EUCLIDEAN": [],
+      "YM-OS-REGULARITY": [],
+      "YM-OS-RP": [],
+      "YM-OS-SYMMETRY": [],
+      "YM-SHORT-DISTANCE": [],
+      "YM-SPACETIME-DIM4": [],
+      "YM-SPACETIME-INFINITE": []
+     }
+    }
+   },
+   "title": "Yang-Mills pre-registration and the O(3) rehearsal"
+  }
+ },
+ "history": [
+  {
+   "changes": {
+    "cited_registry_calibration": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "eth_statement_fidelity": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "local_smoothing_fidelity": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "manuscript_audit_calibration": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "openai_math_coverage_calibration": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "openai_math_time_travel": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "sakana_ed_polarity": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ],
+    "yang_mills_o3_rehearsal": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "Initial freeze (block C): the October 2026 benchmarks and calibrations as regression tests; the time-travel replay equals the full run of openai_math_revision_results.json.",
+   "version": 1
+  }
+ ],
+ "schema": "coresearcher.capability_regression/v1",
+ "version": 1
+}

@@ -98,6 +98,7 @@ READ_ONLY_POSTS = {
     "/api/trust/assess",
     "/api/manuscripts/audit",
     "/api/lifecycle/packages/inspect",
+    "/api/regression/check",
 }
 
 

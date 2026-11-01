@@ -157,7 +157,7 @@
       "api": true,
       "level": "Integrated",
       "module": "cited_registry",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -339,7 +339,7 @@
       "api": true,
       "level": "Integrated",
       "module": "formal_status",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -374,7 +374,7 @@
       "api": true,
       "level": "Integrated",
       "module": "freeze_service",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -570,7 +570,7 @@
       "api": true,
       "level": "Integrated",
       "module": "manuscript_audit",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -627,6 +627,13 @@
       "level": "Integrated",
       "module": "obligation_ledger",
       "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "openai_math_chain",
+      "scripts": true,
       "tests": true
     },
     {
@@ -906,7 +913,7 @@
       "api": true,
       "level": "Integrated",
       "module": "verification_chain",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {

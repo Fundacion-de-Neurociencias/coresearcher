@@ -37,6 +37,18 @@ PLACEHOLDER = "cited_use"  # The chain needs one variable; a context that declar
 # phrases). CHAIN_SEAMS: the seams step (ADR-083 cite_check) of the ADR-085 chain on each occurrence.
 CHAIN_CHECKS = ["REGISTRY_AUDIT", "CHAIN_SEAMS"]
 
+# Pre-registered encodability of the two new checks (protocol, section 5), judged from history.md and the version
+# notes before any entry was written: the defect is an imported convention or a hypothesis of a cited result, and a
+# numbered cited result is used at the defect location.
+ENCODABLE = {
+    "Algebraicity-of-Weil-classes-on-split-abelian-eightfolds": set(CHAIN_CHECKS),
+    "Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces": set(CHAIN_CHECKS),
+    "The-rational-Hodge-conjecture-for-products-of-K3-surfaces": set(CHAIN_CHECKS),
+    "Taming-implies-compatibility-on-four-manifolds": set(CHAIN_CHECKS),
+    "Conditional-good-minimal-models-for-compact-Kahler-fourfolds": set(CHAIN_CHECKS),
+    "The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data": set(CHAIN_CHECKS),
+}
+
 
 def normalize_title(title: str) -> str:
     text = re.sub(r"\\[a-zA-Z]+|[{}\"$]", "", title.lower())
@@ -162,6 +174,117 @@ def chain_record(result: Dict[str, Any]) -> Dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Offline replay (ADR-084)
+# ---------------------------------------------------------------------------
+
+
+def audit_lines(text: str, lines: Iterable[int]) -> List[int]:
+    """Lines the ADR-082 hypothesis match reads for citations on `lines`: the enclosing proof or result environment
+    and, for a proof, the result statement that precedes it (whole environments, begin and end lines included)."""
+    body = cil.strip_tex_comments(text)
+    envs = cil._environments(body)
+    keep = set()
+
+    def span(start: int, end: int) -> None:
+        a = body.count("\n", 0, start) + 1
+        b = body.count("\n", 0, end) + 1
+        keep.update(range(a, b + 1))
+
+    for line in lines:
+        offset = len("\n".join(body.split("\n")[: line - 1])) + 1
+        env, start, end = cil._enclosing(envs, offset)
+        if env == "text":
+            continue
+        span(start, end)
+        if env == "proof":
+            prev = [e for e in envs if e[1] <= start and e[2] in cil._RESULT_ENVS]
+            if prev:
+                span(prev[-1][0], prev[-1][1])
+    return sorted(keep)
+
+
+def excerpt(text: str, lines: Iterable[int]) -> List[List[Any]]:
+    """[[first line, text], ...] blocks of the kept lines; everything else is blank in the replay."""
+    src = text.split("\n")
+    blocks: List[List[Any]] = []
+    for n in sorted(set(lines)):
+        if n > len(src):
+            continue
+        if blocks and blocks[-1][0] + blocks[-1][1].count("\n") + 1 == n:
+            blocks[-1][1] += "\n" + src[n - 1]
+        else:
+            blocks.append([n, src[n - 1]])
+    return blocks
+
+
+def unexcerpt(blocks: List[List[Any]]) -> str:
+    out: List[str] = []
+    for first, text in blocks:
+        out += [""] * (first - 1 - len(out))
+        out += text.split("\n")
+    return "\n".join(out)
+
+
+def audit_outcomes(files: Dict[str, str], registry: List[Dict[str, Any]]) -> Dict[Tuple[str, int, str], Tuple]:
+    """(file, line, key) -> (outcome, missing) of every HYPOTHESIS_MATCH import of the ADR-082 audit."""
+    from python.discovery import manuscript_audit
+
+    report = manuscript_audit.audit(files, registry=registry)
+    return {(i["file"], i["line"], i["key"]): (i["outcome"], tuple(i["missing"])) for i in report["imports"]
+            if i["kind"] == cil.HYPOTHESIS_MATCH}
+
+
+def audit_registry(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """The registry as the manuscript audit takes it: keyed copies, hypotheses with literal phrases only."""
+    return [dict(e, hypotheses=[h for h in e.get("hypotheses", []) if h.get("phrases")]) for e in entries
+            if e.get("key")]
+
+
+def replay(selection: Dict[str, Any], registry: Dict[str, Any], contexts: Dict[str, Any], fixture: Dict[str, Any],
+           items: Dict[str, Dict[str, Any]], encodable: Dict[str, Sequence[str]]) -> Dict[str, Any]:
+    """The chain run, offline: the audit on the vendored excerpts and the 8-step chain on every encoded context."""
+    import tempfile
+    from pathlib import Path
+
+    from python.discovery import cited_registry, freeze_service, verification_chain
+
+    written = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
+    keys_of: Dict[str, set] = {}
+    for o in selection["occurrences"]:
+        keys_of.setdefault(o["result"], set()).add(o["key"])
+    entries = registry_entries(written.values(), {r: sorted(k) for r, k in keys_of.items()})
+    ctx = {c["id"]: c for c in contexts["contexts"]}
+    with tempfile.TemporaryDirectory() as tmp:
+        reg = cited_registry.Registry(Path(tmp) / "registry.json")
+        for e in entries:
+            reg.register(dict(e))
+        freezes = freeze_service.FreezeStore(Path(tmp) / "freezes.json")
+        occs = []
+        audits: Dict[str, Dict] = {}
+        for o in selection["occurrences"]:
+            if o["result"] not in written:
+                continue
+            o = dict(o)
+            unit = f"{o['item']}/{o['version']}"
+            if unit not in audits:
+                files = {n: unexcerpt(b) for n, b in fixture["units"][unit].items()}
+                audits[unit] = audit_outcomes(files, audit_registry(entries))
+            o["audit_outcome"], missing = audits[unit].get((o["file"], o["line"], o["key"]), (None, ()))
+            o["audit_missing"] = list(missing)
+            c = ctx.get(o["occ"])
+            if c is not None:
+                request = chain_request(c, written[o["result"]]["entry_id"], c.get("citing_text", ""))
+                try:
+                    o["chain"] = chain_record(verification_chain.run(request, freezes, reg))
+                except verification_chain.ChainInputError as exc:
+                    o["chain"] = {"formal_status": "INVALID_INPUT", "reason": str(exc), "seams_outcome": None}
+            occs.append(o)
+    defects = {i: score_defect(item, occs, sorted(encodable.get(i, ())), fixture["pre_lines"].get(i, 0))
+               for i, item in items.items() if item["group"] in ("revised", "withdrawn")}
+    return {"defects": defects, "alarm_load": alarm_load(occs, items), "occurrences": occs}
+
+
+# ---------------------------------------------------------------------------
 # Scoring
 # ---------------------------------------------------------------------------
 
@@ -236,5 +359,6 @@ def alarm_load(occs: List[Dict[str, Any]], items: Dict[str, Dict[str, Any]]) -> 
     return out
 
 
-__all__ = ["normalize_title", "bibliography_titles", "results_in", "occurrences", "passage", "registry_entries",
+__all__ = ["replay", "excerpt", "unexcerpt", "audit_lines", "audit_outcomes", "audit_registry", "normalize_title",
+           "bibliography_titles", "results_in", "occurrences", "passage", "registry_entries",
            "chain_request", "chain_record", "flag_of", "score_defect", "alarm_load", "CHAIN_CHECKS", "RESULT_KINDS"]

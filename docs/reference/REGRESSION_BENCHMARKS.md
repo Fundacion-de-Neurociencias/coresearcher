@@ -8,7 +8,7 @@ suite (`tests/test_capability_regression.py`), on every change.
 
 | Case | What it re-runs | Source |
 | --- | --- | --- |
-| `openai_math_time_travel` | HIT / MISS / NOT_ENCODABLE for each of the 17 real openai/math corrections, per check; false alarms on corrected, citation-update and never-revised manuscripts; ADR-077 import obligations at each defect location | ADR-077, [`OPENAI_MATH_REVISION_RESULTS.md`](benchmarks/OPENAI_MATH_REVISION_RESULTS.md) |
+| `openai_math_time_travel` | HIT / MISS / NOT_ENCODABLE for each of the 17 real openai/math corrections, per check; false alarms on corrected, citation-update and never-revised manuscripts; ADR-077 import obligations at each defect location; the full-chain re-run (registry audit and chain seams on blind entries and contexts, verdicts and alarm counts) | ADR-077, [`OPENAI_MATH_REVISION_RESULTS.md`](benchmarks/OPENAI_MATH_REVISION_RESULTS.md), [`OPENAI_MATH_CHAIN_RESULTS.md`](benchmarks/OPENAI_MATH_CHAIN_RESULTS.md) |
 | `openai_math_coverage_calibration` | Range comparisons and automatic range checks for families 079 and 215; junk-value lint counts | ADR-070, coverage map |
 | `eth_statement_fidelity` | Family 378 as a positive fidelity control: range EQUIVALENT, machine bound before inputs, space bound at every prefix, and the o(1) sign subtlety | ADR-084 |
 | `sakana_ed_polarity` | The Error Diffusion polarity verdicts, necessity tables, rivals and replay witnesses | `ed_polarity_case` |

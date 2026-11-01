@@ -6,6 +6,7 @@ Inputs of the offline regression cases. Each file's SHA-256 (of its LF bytes, ra
 | Path | Content | Source and licence |
 | --- | --- | --- |
 | `openai_math_time_travel.json.gz` | Excerpts of 47 manuscripts, pre-fix and corrected, at the benchmark commits `adc7f124` and `30148886`. Lines keep their original numbers. Bibliographies are reduced to their keys. | [openai/math](https://github.com/openai/math), Apache-2.0. Built by `scripts/benchmarks/openai_math_revision_bench.py fixture`. |
+| `openai_math_chain.json.gz` | Excerpts of the 19 manuscript versions that use a registered cited result: the proof and result environments the manuscript audit reads at each use. Lines keep their original numbers. | [openai/math](https://github.com/openai/math), Apache-2.0. Built by `scripts/benchmarks/openai_math_revision_bench.py chain-fixture`. The registry entries and citing contexts it is replayed with are `docs/reference/benchmarks/openai_math_chain_{registry,contexts}.json`. |
 | `eth-378/SubexponentialSAT.lean`, `eth-378/SubexponentialSAT.json` | Comparator statement and configuration of family 378 (the ETH refutation), unmodified | openai/math at `4eaee87548250b2682affda7d05d947c05554bae`, `lean/ComparatorChallenges/`, Apache-2.0 |
 | `manuscript-audit/calibration.json` | The ADR-082 calibration manuscript | Written for CoResearcher |
 | `cited-registry/calibration.json` | The ADR-083 calibration entries and contexts | Written for CoResearcher |

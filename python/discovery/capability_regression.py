@@ -104,6 +104,12 @@ def _read_text(rel: str) -> str:
 
 TT_DATASET = "docs/reference/benchmarks/openai_math_revision_dataset.json"
 TT_FIXTURE = "benchmarks/regression/fixtures/openai_math_time_travel.json.gz"
+TT_CHAIN = [
+    "docs/reference/benchmarks/openai_math_chain_selection.json",
+    "docs/reference/benchmarks/openai_math_chain_registry.json",
+    "docs/reference/benchmarks/openai_math_chain_contexts.json",
+    "benchmarks/regression/fixtures/openai_math_chain.json.gz",
+]
 
 
 def _time_travel() -> Dict[str, Dict[str, Any]]:
@@ -134,6 +140,18 @@ def _time_travel() -> Dict[str, Dict[str, Any]]:
         found = tt.imports_at(tt.excerpt_files(entry["pre"]), item["locations"])
         for kind in ("CONVENTION_TRANSFER", "HYPOTHESIS_MATCH", "EFFECTIVE_CONSTANT"):
             out[f"imports_at_location/{item_id}/{kind}"] = obs(sum(f[0] == kind for f in found), HIGHER)
+    # The re-run with the full chain (OPENAI_MATH_CHAIN_PROTOCOL.md): the manuscript audit with the blind registry
+    # entries, and the 8-step chain on every blindly encoded citing context.
+    from python.discovery import openai_math_chain as omc
+
+    chain = omc.replay(*[_read_json(f) for f in TT_CHAIN[:3]], _read_json(TT_CHAIN[3]), items, omc.ENCODABLE)
+    for item_id, rec in sorted(chain["defects"].items()):
+        out[f"chain/defect/{item_id}"] = obs(rec["verdict"], VERDICT)
+        for check in omc.CHAIN_CHECKS:
+            out[f"chain/defect/{item_id}/{check}"] = obs(rec["per_check"][check]["verdict"], VERDICT)
+    for check, buckets in sorted(chain["alarm_load"].items()):
+        for bucket, row in sorted(buckets.items()):
+            out[f"chain/alarms/{bucket}/flags/{check}"] = obs(row["flags"], LOWER)
     return out
 
 
@@ -438,8 +456,9 @@ CASES: Dict[str, Case] = {
     c.id: c
     for c in (
         Case("openai_math_time_travel", "openai/math time-travel benchmark: real corrected defects and false alarms",
-             "ADR-DISCOVERY-077", [TT_DATASET, TT_FIXTURE], _time_travel,
-             "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags."),
+             "ADR-DISCOVERY-077", [TT_DATASET, TT_FIXTURE] + TT_CHAIN, _time_travel,
+             "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain "
+             "re-run from its blind registry entries and citing contexts."),
         Case("openai_math_coverage_calibration", "Coverage-map calibration, families 079 and 215",
              "ADR-DISCOVERY-070",
              ["examples/openai-math-coverage/coverage_map.json",

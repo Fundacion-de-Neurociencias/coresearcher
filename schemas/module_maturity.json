@@ -890,10 +890,10 @@
     },
     {
       "api": false,
-      "level": "Prototype",
+      "level": "Tested",
       "module": "typed_conventions",
-      "scripts": false,
-      "tests": false
+      "scripts": true,
+      "tests": true
     },
     {
       "api": false,

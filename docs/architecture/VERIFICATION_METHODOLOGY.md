@@ -114,6 +114,10 @@ domain-neutral.
   - Block B compares typed conventions at each use and covers premises beyond manuscripts (ADR-083).
   - Block E adds a biomedical convention vocabulary, units compared by unit algebra, and dimensional homogeneity of
     every predicate (ADR-086).
+  - Conventions are compared by meaning (ADR-087): typed fields and sign formulas decide; two texts that differ are a
+    non-verdict. Measured on the real errors, this removed most lexical alarms and decided no defect: the withdrawals'
+    sign error lies in the citing construction, not in a convention of the cited lemma
+    ([`OPENAI_MATH_TYPED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_TYPED_RESULTS.md)).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

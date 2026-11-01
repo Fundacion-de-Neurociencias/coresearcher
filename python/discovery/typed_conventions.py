@@ -63,6 +63,14 @@ def _norm(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value).strip().lower().replace("_", " "))
 
 
+_CONDITIONAL = re.compile(r"\b(if|unless|when|otherwise|else|iff)\b")
+
+
+def is_conditional(atom: Any) -> bool:
+    """A field value that hides a condition ("z if n even else z2"): not an atom (ADR-089)."""
+    return isinstance(atom, str) and bool(_CONDITIONAL.search(_norm(atom)))
+
+
 def is_typed(value: Any) -> bool:
     return isinstance(value, dict)
 
@@ -215,8 +223,14 @@ def compare(cited: Any, citing: Any) -> Dict[str, Any]:
         for k in sorted(set(a["fields"]) | set(b["fields"])):
             if k in a["fields"] and k in b["fields"]:
                 same = _norm(a["fields"][k]) == _norm(b["fields"][k])
-                items.append({"item": f"field {k}", "outcome": MATCH if same else MISMATCH,
-                              "cited": a["fields"][k], "citing": b["fields"][k]})
+                conditional = [v for v in (a["fields"][k], b["fields"][k]) if is_conditional(v)]
+                item = {"item": f"field {k}", "outcome": MATCH if same else MISMATCH, "cited": a["fields"][k],
+                        "citing": b["fields"][k]}
+                if conditional and not same:
+                    # ADR-089: "Z if n even, else Z/2" is a condition written as an atom; comparing it with the value
+                    # of one branch is not a decision. Conditions belong in `where`.
+                    item.update(outcome=UNCOMPARED, detail="a field value encodes a condition; use `where`")
+                items.append(item)
             else:
                 unspecified.append(f"field {k} ({'citing' if k in a['fields'] else 'cited'} side silent)")
         for k in sorted(set(a["signs"]) | set(b["signs"])):
@@ -275,5 +289,6 @@ def schema() -> Dict[str, Any]:
     }
 
 
-__all__ = ["compare", "compare_formulas", "validate", "is_typed", "text_of", "describe", "schema", "ConventionError",
+__all__ = ["is_conditional",
+           "compare", "compare_formulas", "validate", "is_typed", "text_of", "describe", "schema", "ConventionError",
            "MATCH", "MISMATCH", "UNCOMPARED", "PARTIAL"]

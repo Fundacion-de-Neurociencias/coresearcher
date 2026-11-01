@@ -122,6 +122,7 @@ domain-neutral.
     partial comparison stays open (ADR-088). The imported signs at the withdrawals are then decided MATCHes. What
     remains open is the branch orientation the citing passages never state
     ([`OPENAI_MATH_CONSTRAINED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_CONSTRAINED_RESULTS.md)).
+  - Cited hypotheses can be scoped to cases, and a field that hides a condition is a non-verdict (ADR-089).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

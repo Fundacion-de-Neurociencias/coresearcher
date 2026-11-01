@@ -94,3 +94,11 @@ def test_case_used_is_checked_against_the_cases_covered():
 def test_malformed_conditions_and_cases_are_refused(value):
     with pytest.raises(tc.ConventionError):
         tc.validate(value)
+
+
+def test_conditional_atoms_are_not_compared_as_values():
+    """ADR-089: "z if n even else z2" hides a condition; against "z" it is not a decided mismatch."""
+    out = tc.compare({"fields": {"index_group": "z_if_n_even_else_z2"}}, {"fields": {"index_group": "z"}})
+    assert out["outcome"] == tc.UNCOMPARED
+    assert out["items"][0]["detail"].startswith("a field value encodes a condition")
+    assert tc.is_conditional("Z unless n is odd") and not tc.is_conditional("ifinite") and not tc.is_conditional("z")

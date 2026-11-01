@@ -865,6 +865,8 @@ TYPED_RESULTS = OUT_DIR / "openai_math_typed_results.json"
 VARIANTS = {
     "typed": ("OPENAI_MATH_TYPED_PROTOCOL.md", "openai_math_typed"),
     "constrained": ("OPENAI_MATH_CONSTRAINED_PROTOCOL.md", "openai_math_constrained"),
+    # ADR-089: case-scoped hypotheses. Only the registry changes; the citing contexts are the constrained ones.
+    "cases": ("OPENAI_MATH_CASES_PROTOCOL.md", "openai_math_cases"),
 }
 
 
@@ -873,7 +875,7 @@ def use_variant(name: str) -> None:
     protocol, stem = VARIANTS[name]
     TYPED_PROTOCOL = OUT_DIR / protocol
     TYPED_REGISTRY = OUT_DIR / f"{stem}_registry.json"
-    TYPED_CONTEXTS = OUT_DIR / f"{stem}_contexts.json"
+    TYPED_CONTEXTS = OUT_DIR / f"{stem if name != 'cases' else 'openai_math_constrained'}_contexts.json"
     TYPED_RESULTS = OUT_DIR / f"{stem}_results.json"
 
 
@@ -913,6 +915,45 @@ def typed_merge(kind: str, records_dir: Path) -> dict:
     return out
 
 
+def cases_packets() -> None:
+    """Packets for the blind case tagging (OPENAI_MATH_CASES_PROTOCOL.md): every constrained registry entry that
+    declares cases, with its statement, hypotheses and cases. No citing text."""
+    base = json.loads((OUT_DIR / "openai_math_constrained_registry.json").read_text(encoding="utf-8"))
+    packets = []
+    for w in base["written"]:
+        if w["status"] != "WRITTEN":
+            continue
+        cases = {k: v for value in w["entry"]["conventions"].values() if isinstance(value, dict)
+                 for k, v in (value.get("cases") or {}).items()}
+        if cases:
+            packets.append({"id": w["entry_id"], "statement": w["entry"]["statement"], "cases": cases,
+                            "hypotheses": [h["text"] for h in w["entry"]["hypotheses"]]})
+    (CHAIN_WORK / "cases_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(f"{len(packets)} entries declare cases")
+
+
+def cases_merge(records_dir: Path) -> dict:
+    """The constrained registry with each tagged hypothesis's `case` scope; nothing else changes."""
+    base_path = OUT_DIR / "openai_math_constrained_registry.json"
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    records = {}
+    for path in sorted(records_dir.glob("k*_cases.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["id"]] = rec
+    written = []
+    for w in base["written"]:
+        rec = records.get(w.get("entry_id"))
+        if rec is not None:
+            scopes = rec["hypothesis_cases"]
+            if len(scopes) != len(w["entry"]["hypotheses"]):
+                raise SystemExit(f"{rec['id']}: {len(scopes)} scopes for {len(w['entry']['hypotheses'])} hypotheses")
+            hyps = [dict(h, case=scope) if scope else dict(h) for h, scope in zip(w["entry"]["hypotheses"], scopes)]
+            w = dict(w, entry=dict(w["entry"], hypotheses=hyps), case_notes=rec.get("notes", ""))
+        written.append(w)
+    return dict(base, written=written, procedure="OPENAI_MATH_CASES_PROTOCOL.md section 3",
+                base_sha256=hashlib.sha256(_lf(base_path)).hexdigest())
+
+
 def typed_packets() -> None:
     """Packets for the blind typists. Entries: each registry entry alone (no citing text). Contexts: the chain run's
     opaque packets with the entry's typed conventions in place of its text conventions."""
@@ -943,6 +984,7 @@ def main() -> None:
     ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
                                         "chain-registry", "chain-packets", "chain-contexts", "chain",
                                         "chain-fixture", "typed-packets", "typed-registry", "typed-contexts",
+                                        "cases-registry",
                                         "typed"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     ap.add_argument("--variant", choices=sorted(VARIANTS), default="typed",
@@ -965,7 +1007,13 @@ def main() -> None:
         print(f"wrote {target}")
         return
     if args.command == "typed-packets":
-        typed_packets()
+        cases_packets() if args.variant == "cases" else typed_packets()
+        return
+    if args.command == "cases-registry":
+        out = cases_merge(args.file)
+        TYPED_REGISTRY.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                  newline="\n")
+        print(f"wrote {TYPED_REGISTRY}")
         return
     if args.command == "chain-freeze":
         record = chain_freeze(args.file, args.file.name)

@@ -67,6 +67,7 @@ RETRACTED = "RETRACTED"
 DISCHARGED = "DISCHARGED"  # the citing context's assumptions formally entail it
 NOT_DISCHARGED = "NOT_DISCHARGED"  # a counterexample satisfies the context but violates the hypothesis
 STATED_IN_TEXT = "STATED_IN_TEXT"  # only a lexical match; not a discharge
+H_NOT_APPLICABLE = "NOT_APPLICABLE"  # scoped to a case the citation does not use (ADR-089)
 H_UNDECIDED = "UNDECIDED"  # no formal predicate, no context variables, contradictory context or solver failure
 
 # Per-convention outcomes.
@@ -93,6 +94,9 @@ class CitedHypothesis:
     text: str
     formal: str = ""  # predicate in the ADR-059 language over the citing context's variables
     phrases: List[str] = field(default_factory=list)  # literal phrases, as the manuscript audit expects (ADR-082)
+    # ADR-089: the hypothesis applies only to these cases of the result, e.g. {"part": ["1"]}. A citation that names
+    # another case of the same name (a typed convention's `case`) does not need it.
+    case: Dict[str, List[str]] = field(default_factory=dict)
 
 
 @dataclass
@@ -165,9 +169,29 @@ def check_conventions(entry: RegistryEntry, context: Dict[str, Any]) -> List[Dic
     return out
 
 
+def cases_used(context: Dict[str, Any]) -> Dict[str, str]:
+    """The cases of the cited result that the citing context names, from its typed conventions (ADR-088)."""
+    out: Dict[str, str] = {}
+    for value in (context.get("conventions") or {}).values():
+        if typed_conventions.is_typed(value):
+            for name, case in (value.get("case") or {}).items():
+                out.setdefault(str(name), str(case))
+    return out
+
+
+def _norm_case(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value).strip().lower().replace("_", " "))
+
+
 def check_hypothesis(hyp: CitedHypothesis, context: Dict[str, Any]) -> Dict[str, Any]:
     """Is the cited hypothesis implied by the citing context? Only a formal entailment counts."""
     result: Dict[str, Any] = {"text": hyp.text, "formal": hyp.formal, "outcome": H_UNDECIDED, "detail": ""}
+    used = cases_used(context)
+    for name, scope in (hyp.case or {}).items():
+        if name in used and _norm_case(used[name]) not in {_norm_case(c) for c in scope}:
+            result["outcome"] = H_NOT_APPLICABLE
+            result["detail"] = f"applies only to {name} in {scope}; the citation uses {used[name]!r}"
+            return result
     variables = context.get("variables") or []
     if hyp.formal and variables:
         assumptions = list(context.get("assumptions") or [])
@@ -270,7 +294,7 @@ def to_obligation(check: Dict[str, Any], obligation_id: str, source: str) -> obl
         source=source,
         kind="import",
     )
-    if check["outcome"] == CLEAR and all(h["outcome"] == DISCHARGED for h in check["hypotheses"]):
+    if check["outcome"] == CLEAR and all(h["outcome"] in (DISCHARGED, H_NOT_APPLICABLE) for h in check["hypotheses"]):
         obligation.discharges.append(obligation_ledger.Discharge(
             status=obligation_ledger.Status.DISCHARGED_SYMBOLIC,
             method="formal entailment of every cited hypothesis; every convention matched",

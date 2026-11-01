@@ -239,6 +239,38 @@
       },
       "prev": "67fce83e82041a37f4cb3ef9f5739615080738e06609eb2961f7fb6beaec7962",
       "seq": 15
+    },
+    {
+      "at": "2026-11-01T21:43:45Z",
+      "hash": "34e76e27738fb35e57ad057ab53c9ca265dbb87add5bbb62f16b21261d03bf0b",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-01T21:43:45Z",
+        "id": "FZ-af694c6b9ab1aa4d",
+        "kind": "document",
+        "label": "OPENAI_MATH_CASES_PROTOCOL.md",
+        "lifecycle": null,
+        "sha256": "af694c6b9ab1aa4dafa18c1bacb78e8e96a035fee876f99799b0e2902057428f"
+      },
+      "prev": "428f981f84d8a26b60271f57943119ff0ede6631eba398c856076e2d039e7908",
+      "seq": 16
+    },
+    {
+      "at": "2026-11-01T21:43:47Z",
+      "hash": "5b5612bb033e827aae8fcd141f015f20c5edeb92fc9e6d17e5a67272ff6c2e74",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-01T21:43:47Z",
+        "id": "FZ-951445266b480e30",
+        "kind": "document",
+        "label": "CASES_INSTRUCTIONS.md",
+        "lifecycle": null,
+        "sha256": "951445266b480e304632e4eee920d5b6c242c034f1c5b2dca66638df9a3d8ab5"
+      },
+      "prev": "34e76e27738fb35e57ad057ab53c9ca265dbb87add5bbb62f16b21261d03bf0b",
+      "seq": 17
     }
   ],
   "freezes": {
@@ -354,6 +386,20 @@
       "lifecycle": null,
       "sha256": "7b22bba9b0cda303fedcd18968bba263322e80ad044961ba0bef3f6694dc2d5f"
     },
+    "FZ-951445266b480e30": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 1188,
+        "name": "CASES_INSTRUCTIONS.md",
+        "text": "# Case-scoping instructions for cited hypotheses (given verbatim to the tagger)\n\nYou will receive registry entries for published mathematical results. Each entry has:\n\n- `statement`;\n- `cases`: named choices a user of the result picks from (for example part (1) and part (2), or two options for a\n  sign);\n- `hypotheses`: the list of the result's hypotheses, in order.\n\nFor each entry, say to which cases each hypothesis applies.\n\n- **A scoped hypothesis.** If a hypothesis is needed only for some cases, give `{\"<case name>\": [\"<case>\", ...]}`.\n  Use the case names and the case strings exactly as listed in `cases`.\n- **A general hypothesis.** If it is needed whatever case is used, give `{}`.\n- **Reading the scope.** Decide only from the statement and the hypothesis texts. Wording such as \"for part (1)\",\n  \"for the option …\" or \"in case …\" marks a scoped hypothesis.\n\nDo not open any file, web page or repository other than your packet file and these instructions.\n\nReturn a JSON list, one object per entry, with exactly one scope per hypothesis, in the same order:\n\n```json\n{\"id\": \"<entry id>\", \"hypothesis_cases\": [{}, {\"part\": [\"...\"]}], \"notes\": \"<anything uncertain>\"}\n```\n"
+      },
+      "frozen_at": "2026-11-01T21:43:47Z",
+      "id": "FZ-951445266b480e30",
+      "kind": "document",
+      "label": "CASES_INSTRUCTIONS.md",
+      "lifecycle": null,
+      "sha256": "951445266b480e304632e4eee920d5b6c242c034f1c5b2dca66638df9a3d8ab5"
+    },
     "FZ-95e1abe4b0860dad": {
       "author": "openai-math-chain-benchmark",
       "content": {
@@ -367,6 +413,20 @@
       "label": "ENCODER_INSTRUCTIONS.md",
       "lifecycle": null,
       "sha256": "95e1abe4b0860dad1d3c07f777cfa6738fa2755e621626e9f33b5df78962109b"
+    },
+    "FZ-af694c6b9ab1aa4d": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 2672,
+        "name": "OPENAI_MATH_CASES_PROTOCOL.md",
+        "text": "# openai/math time-travel benchmark: case-scoped hypotheses (ADR-089), pre-registered protocol\n\nStatus: frozen before any hypothesis was tagged. Its SHA-256 is stored in `OPENAI_MATH_CASES_PROTOCOL.sha256` and in\nthe ADR-085 freeze log. The runner (`openai_math_revision_bench.py typed --variant cases`) refuses to start if the\nfile has changed.\n\n## 1. Question\n\nThe constrained re-measure (`OPENAI_MATH_CONSTRAINED_RESULTS.md`) left two kinds of artefacts.\n\n- **Hypotheses from another case.** Three uses of a cited proposition that name its part (2) were still held to the\n  hypothesis of its part (1), and flagged as \"not discharged\".\n- **Conditions written as atoms.** A field value that encodes a condition (\"Z if n even and orientable, else Z/2\") was\n  compared with the value of one branch and gave a decided MISMATCH.\n\nADR-089 changes two things:\n\n1. **Case-scoped hypotheses.** A hypothesis can be scoped to cases of the result. A citation that names another case\n   does not need it (NOT_APPLICABLE).\n2. **Conditional atoms.** A field value that encodes a condition is not compared as an atom (UNCOMPARED). This rule\n   was written after reading the constrained results. Its effect on the frozen constrained inputs is reported apart, as\n   a post-hoc effect.\n\n**Questions.**\n\n1. With hypotheses scoped blind, do the other-case findings disappear?\n2. Does anything else change: a decided finding gained or lost at a defect location, or in the alarm load?\n\nScope: formal soundness only.\n\n## 2. Inputs\n\n- **Unchanged.** Everything frozen for the constrained re-measure, including its citing contexts and the `case` each\n  of them names.\n- **The only new input.** For every constrained registry entry that declares `cases`, the case scope of each of its\n  hypotheses.\n\n## 3. Blind tagging\n\n- **The tagger.** One fresh agent session. Its instructions are recorded verbatim in\n  `openai_math_chain_procedure/CASES_INSTRUCTIONS.md` before it starts.\n- **What it receives.** Each entry's statement, its declared cases and the list of its hypotheses. No citing text.\n- **What it returns.** For each hypothesis, the cases it applies to (`{name: [cases]}`), or `{}` when it applies to\n  every case.\n- **Assembly.** `cases-registry` merges the tags into `openai_math_cases_registry.json`, which is frozen before the\n  run. The coordinator may repair JSON syntax only.\n\n## 4. Run and scoring\n\n- **The run.** `typed --variant cases` writes `openai_math_cases_results.json`.\n- **Scoring and adjudication.** As in the earlier protocols. Results are reported next to the constrained re-measure.\n- **Regression.** The regression expectations are updated in the same pull request.\n"
+      },
+      "frozen_at": "2026-11-01T21:43:45Z",
+      "id": "FZ-af694c6b9ab1aa4d",
+      "kind": "document",
+      "label": "OPENAI_MATH_CASES_PROTOCOL.md",
+      "lifecycle": null,
+      "sha256": "af694c6b9ab1aa4dafa18c1bacb78e8e96a035fee876f99799b0e2902057428f"
     },
     "FZ-bc739699714945a9": {
       "author": "openai-math-chain-benchmark",

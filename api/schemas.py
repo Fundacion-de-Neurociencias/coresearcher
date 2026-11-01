@@ -888,6 +888,8 @@ class RegistryHypothesisModel(BaseModel):
     formal: str = Field(default="", max_length=2000)
     # Literal phrases for lexical presence in a citing text. Never regular expressions; never a discharge.
     phrases: List[str] = Field(default_factory=list, max_length=20)
+    # ADR-089: cases of the result this hypothesis is scoped to, e.g. {"part": ["1"]}.
+    case: Dict[str, List[str]] = Field(default_factory=dict)
 
 
 class RegistryEntryRequest(BaseModel):

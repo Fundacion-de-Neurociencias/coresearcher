@@ -110,6 +110,28 @@ def test_partial_typed_match_is_open_not_clear(reg):
     assert "sign: field branch_orientations (citing side silent)" in check["open"]
 
 
+def test_case_scoped_hypothesis_applies_only_to_its_case(reg):
+    """ADR-089: a citation that uses part (2) of a result is not held to the hypothesis of part (1)."""
+    entry = reg.register(
+        {
+            "id": "two-part",
+            "source": "s",
+            "statement": "t",
+            "conventions": {"indexing": {"text": "parts", "cases": {"part": ["1", "2"]}}},
+            "hypotheses": [
+                {"text": "part (1) needs x < 0", "formal": "x < 0", "case": {"part": ["1"]}},
+                {"text": "x is bounded", "formal": "x <= 10"},
+            ],
+        }
+    )
+    context = {"variables": X, "assumptions": ["x > 2"], "conventions": {"indexing": {"case": {"part": "2"}}}}
+    check = cr.cite_check(entry, context)
+    assert [h["outcome"] for h in check["hypotheses"]] == [cr.H_NOT_APPLICABLE, cr.DISCHARGED]
+    assert check["outcome"] == cr.CLEAR
+    silent = cr.cite_check(entry, {"variables": X, "assumptions": ["x > 2"]})
+    assert silent["hypotheses"][0]["outcome"] == cr.NOT_DISCHARGED  # no case named: the hypothesis is checked
+
+
 def test_malformed_typed_convention_is_refused(reg):
     with pytest.raises(cr.RegistryError):
         reg.register(

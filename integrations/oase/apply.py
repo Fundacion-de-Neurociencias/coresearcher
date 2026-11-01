@@ -119,6 +119,18 @@ RELAYS = {
         "Report each unresolved citation with file and line; the cited result "
         "cannot be checked until it resolves."
     ),
+    "formal.criteria_frozen": (
+        "Name the freeze (id, SHA-256, time, author) when reporting the verdict; "
+        "a freeze fixes the criteria, it does not make them right."
+    ),
+    "formal.criteria_frozen_in_same_run": (
+        "Say that the criteria were frozen in the same run as the evaluation; "
+        "do not present this as a pre-registration on an earlier date."
+    ),
+    "formal.ledger_not_proved": (
+        "Do not call the hypothesis verified while any obligation of its ledger "
+        "is not proved; name the weakest obligations."
+    ),
 }
 
 

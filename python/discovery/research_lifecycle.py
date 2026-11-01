@@ -466,6 +466,28 @@ def _canonical(data: Any) -> bytes:
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
 
 
+# Public digests of the lifecycle. Gate versions, artifact checks and freezes (ADR-DISCOVERY-085) share them, so a
+# frozen protocol's digest is the digest an ARTIFACT check records and the watcher re-checks.
+def canonical_bytes(data: Any) -> bytes:
+    """Canonical JSON bytes; `content_sha256` is their SHA-256."""
+    return _canonical(data)
+
+
+def content_sha256(data: Any) -> str:
+    """SHA-256 of canonical JSON (sorted keys, no whitespace, UTF-8), as gate digests are computed."""
+    return hashlib.sha256(_canonical(data)).hexdigest()
+
+
+def bytes_sha256(data: bytes) -> str:
+    """SHA-256 of raw bytes, as an ARTIFACT check records a file."""
+    return hashlib.sha256(data).hexdigest()
+
+
+def is_sha256(value: Any) -> bool:
+    """A lowercase 64-hex SHA-256, the only form an ARTIFACT result accepts."""
+    return isinstance(value, str) and bool(_SHA256.match(value))
+
+
 class LifecycleService:
     """Event-sourced store of research projects. Every change goes through `_record`, so replay rebuilds the state."""
 
@@ -807,7 +829,8 @@ class Finding:
         return {"project_id": self.project_id, "kind": self.kind.value, "detail": self.detail}
 
 
-def _sha256_file(path: Path) -> str:
+def sha256_file(path: Path) -> str:
+    """SHA-256 of a file's raw bytes, read in chunks (ARTIFACT checks, the watcher, document freezes)."""
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1 << 20), b""):
@@ -872,7 +895,7 @@ class LifecycleWatcher:
                 )
             elif not path.is_file():
                 out.append(Finding(project.project_id, FindingKind.ARTIFACT_MISSING, f"{check_id}: {rel} not found"))
-            elif _sha256_file(path) != sha:
+            elif sha256_file(path) != sha:
                 out.append(
                     Finding(
                         project.project_id,

@@ -16,6 +16,7 @@ suite (`tests/test_capability_regression.py`), on every change.
 | `yang_mills_o3_rehearsal` | Yang–Mills checklist probes and scenarios; O(3) coverage, probes and exclusion lint | ADR-081 |
 | `manuscript_audit_calibration` | Citation gate, import counts and registry phrase matching | ADR-082 |
 | `cited_registry_calibration` | Withdrawal sign mismatch, ETH retraction impact, biomarker cutoff outside validation | ADR-083 |
+| `verification_chain` | The composed chain end to end on a math hypothesis (order and three predictions) and a biomedical-style one (pTau217 and decline, a cutoff cited outside its validated assay): every step's state, the ledger, the roll-up, the freeze digest, and BLOCKED for each hypothesis edited after its freeze | ADR-085 |
 
 The whole set takes about 25 s on a laptop. The time-travel case dominates.
 

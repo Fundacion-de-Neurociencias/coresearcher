@@ -35,7 +35,7 @@ from datetime import date as _date
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence
 
-from python.discovery import formal_provenance, formal_status, obligation_ledger
+from python.discovery import formal_provenance, formal_status, hash_chain, obligation_ledger
 from python.discovery.formal_hypothesis import FormalHypothesisError, HypothesisEvaluator, hypothesis_from_dict
 
 STORE_ENV = "CORESEARCHER_REGISTRY_PATH"
@@ -265,21 +265,11 @@ class Registry:
         os.replace(tmp, self.path)
 
     def _event(self, kind: str, payload: Dict[str, Any]) -> Dict[str, Any]:
-        prev = self.events[-1]["hash"] if self.events else ""
-        event = {"seq": len(self.events) + 1, "kind": kind, "payload": payload, "at": formal_provenance.utc_now(),
-                 "prev": prev}
-        event["hash"] = formal_provenance.sha256_canonical({k: v for k, v in event.items() if k != "at"})
-        self.events.append(event)
-        return event
+        return hash_chain.append(self.events, kind, payload)
 
     def verify_log(self) -> None:
         """Refuses a store whose event chain was edited."""
-        prev = ""
-        for i, event in enumerate(self.events, start=1):
-            expected = formal_provenance.sha256_canonical({k: v for k, v in event.items() if k not in ("at", "hash")})
-            if event.get("seq") != i or event.get("prev") != prev or event.get("hash") != expected:
-                raise RegistryError(f"Event log broken at event {i}; the store was edited outside the registry.")
-            prev = event["hash"]
+        hash_chain.verify(self.events, RegistryError, "store")
 
     def to_dict(self) -> Dict[str, Any]:
         return {"schema": SCHEMA, "entries": self.entries, "depends_on": self.depends_on, "flags": self.flags,

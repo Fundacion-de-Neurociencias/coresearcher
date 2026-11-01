@@ -7,6 +7,7 @@ Provides unified commands:
     coresearcher test
     coresearcher info
     coresearcher formal run | analyze | doctor   (ADR-DISCOVERY-068)
+    coresearcher freeze | chain run              (ADR-DISCOVERY-085)
 """
 
 from __future__ import annotations
@@ -135,6 +136,12 @@ def main() -> None:
 
     regression.add_parser(subparsers)
 
+    # freeze and chain: acceptance criteria and the composed verification chain (ADR-DISCOVERY-085)
+    from python.cli import chain, freeze
+
+    freeze.add_parser(subparsers)
+    chain.add_parser(subparsers)
+
     args = parser.parse_args()
     if not args.command:
         print(BANNER)
@@ -149,6 +156,8 @@ def main() -> None:
         "formal": formal.main,
         "registry": registry.main,
         "regression": regression.main,
+        "freeze": freeze.main,
+        "chain": chain.main,
     }
 
     exit_code = dispatch[args.command](args)

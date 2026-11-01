@@ -59,7 +59,9 @@ domain-neutral.
 - **How.** Pre-register the protocol and the expected definitions, freeze them with a SHA-256 and a date, refuse to
   run if the hash changes, and count failures as failures.
 - **Came from.** The formalizer benchmark, the time-travel benchmark and the Yang–Mills checklist.
-- **Integration.** Partial. Lifecycle hashes exist (ADR-063). Freezing should be a reusable service.
+- **Integration.** Done (ADR-085). The freeze service records each freeze with a SHA-256, a time and an author in a
+  hash-chained log, using the lifecycle digests (ADR-063). An evaluation that references a freeze is BLOCKED if the
+  freeze or the hypothesis changed.
 - **Beyond.** Before evaluating a scientist's hypothesis, CoResearcher can freeze what would count as support or
   refutation (the discriminating states between rivals) before any data is examined.
 
@@ -85,7 +87,8 @@ domain-neutral.
     kernel.
   - Record a manifest with hashes and reject stale proofs.
 - **Came from.** Proof anatomy (PR #15) and the Mahler ledger (ADR-076).
-- **Integration.** The ledger exists. It is not yet the standard path for a submitted hypothesis.
+- **Integration.** Done (ADR-085). Every hypothesis evaluation (API, `formal run` and `formal analyze`, the chain)
+  returns an ADR-076 ledger beside its report, rolled up by the weakest link onto the trust ladder.
 - **Beyond.** A mechanistic hypothesis ("A raises B, which drives C, which predicts D") is an obligation chain. Each
   link can be checked for consistency, dimensional homogeneity and compatibility with the others.
 
@@ -218,7 +221,8 @@ A hypothesis submitted to CoResearcher should pass through all of them in order:
 7. Discharge each obligation with the strongest tool available, never converting a non-answer into an answer. (M8)
 8. Report every claim on the trust ladder. (M7)
 
-The whole chain is regression-tested on real corrected errors (M9). Checks are placed where the move catalogue says
+`POST /api/chain/run` and `coresearcher chain run` run these steps as one flow (ADR-085), with each step's state
+visible. The whole chain is regression-tested on real corrected errors (M9), and the chain itself is a regression case. Checks are placed where the move catalogue says
 the weight lies (M10).
 
 ## 4. Integration roadmap
@@ -228,8 +232,8 @@ the weight lies (M10).
 | A | M1, M4, M7 | Vacuity probe in the evaluator, trust ladder in reports and the evidence graph, fidelity compare and Lean lint as API/CLI services | Done (ADR-080) |
 | B | M6, M11 | Registry of cited results and premises with typed hypotheses and conventions, checked at each use, with dependency edges so a retracted premise flags every dependent claim | Done (ADR-083) |
 | C | M9 | Benchmarks (time travel, coverage calibration, Sakana ED, local smoothing, the ETH statement as a positive fidelity control) as regression tests in CI | Done (ADR-084) |
-| D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses | Next |
-| E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | After D |
+| D | M3, M5 | Freeze service, and the obligation ledger as the standard path for submitted hypotheses; the composed chain of section 3 as one API/CLI flow | Done (ADR-085) |
+| E | all | Domain transfer: run the full chain on biomedical hypotheses, starting with the pTau217 cutoff and the Alzheimer formal scenario | Next |
 
 Blocks run one at a time. Each one lands as a module wired into the API and CLI, with tests and an ADR. It does not
 land as a case study.

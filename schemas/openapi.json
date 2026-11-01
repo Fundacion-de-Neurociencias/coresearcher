@@ -953,6 +953,78 @@
         "title": "CherryPickClaimRequest",
         "type": "object"
       },
+      "CitationUseModel": {
+        "description": "One use of a cited result (ADR-083): a registry entry id (or an inline entry) and the conventions of this use.\n\nWithout `context`, the citing context is the hypothesis itself: its variables, assumptions and scope.",
+        "properties": {
+          "context": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CitingContextModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "conventions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Conventions",
+            "type": "object"
+          },
+          "entry": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entry"
+          },
+          "entry_id": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Entry Id"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          }
+        },
+        "title": "CitationUseModel",
+        "type": "object"
+      },
       "CiteCheckRequest": {
         "properties": {
           "context": {
@@ -1905,6 +1977,14 @@
       },
       "EvaluateFormalHypothesisRequest": {
         "properties": {
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/CitationUseModel"
+            },
+            "maxItems": 50,
+            "title": "Citations",
+            "type": "array"
+          },
           "claim_evidence": {
             "additionalProperties": {
               "$ref": "#/components/schemas/ClaimEvidenceModel"
@@ -1912,10 +1992,40 @@
             "title": "Claim Evidence",
             "type": "object"
           },
+          "consequences": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Consequences",
+            "type": "array"
+          },
           "default_probes": {
             "default": false,
             "title": "Default Probes",
             "type": "boolean"
+          },
+          "fidelity_spec": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fidelity Spec"
+          },
+          "freeze": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FreezeReferenceModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "hypothesis": {
             "$ref": "#/components/schemas/FormalHypothesisModel"
@@ -1932,6 +2042,14 @@
               "type": "object"
             },
             "title": "Observations",
+            "type": "array"
+          },
+          "rivals": {
+            "items": {
+              "$ref": "#/components/schemas/FormalHypothesisModel"
+            },
+            "maxItems": 10,
+            "title": "Rivals",
             "type": "array"
           }
         },
@@ -2630,6 +2748,206 @@
           "prose"
         ],
         "title": "FormalizeHypothesisRequest",
+        "type": "object"
+      },
+      "FreezeDocumentRequest": {
+        "description": "Freeze a protocol or checklist by the SHA-256 of its UTF-8 bytes (ADR-085).",
+        "properties": {
+          "author": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Author",
+            "type": "string"
+          },
+          "label": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Label",
+            "type": "string"
+          },
+          "lifecycle": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FreezeLifecycleAnchorModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "default": "",
+            "maxLength": 500,
+            "title": "Name",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 2000000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "author"
+        ],
+        "title": "FreezeDocumentRequest",
+        "type": "object"
+      },
+      "FreezeHypothesisRequest": {
+        "description": "Freeze the discriminating states of a hypothesis against its rivals, before any evaluation (ADR-085).",
+        "properties": {
+          "author": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Author",
+            "type": "string"
+          },
+          "hypothesis": {
+            "$ref": "#/components/schemas/FormalHypothesisModel"
+          },
+          "label": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Label",
+            "type": "string"
+          },
+          "lifecycle": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FreezeLifecycleAnchorModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_examples": {
+            "default": 5,
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Max Examples",
+            "type": "integer"
+          },
+          "rivals": {
+            "items": {
+              "$ref": "#/components/schemas/FormalHypothesisModel"
+            },
+            "maxItems": 10,
+            "title": "Rivals",
+            "type": "array"
+          },
+          "stated_criteria": {
+            "additionalProperties": true,
+            "title": "Stated Criteria",
+            "type": "object"
+          }
+        },
+        "required": [
+          "hypothesis",
+          "author"
+        ],
+        "title": "FreezeHypothesisRequest",
+        "type": "object"
+      },
+      "FreezeLifecycleAnchorModel": {
+        "description": "A research lifecycle check (ADR-063) whose recorded SHA-256 the freeze must equal.",
+        "properties": {
+          "check_id": {
+            "default": "protocol.document",
+            "maxLength": 120,
+            "title": "Check Id",
+            "type": "string"
+          },
+          "project_id": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Project Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id"
+        ],
+        "title": "FreezeLifecycleAnchorModel",
+        "type": "object"
+      },
+      "FreezeReferenceModel": {
+        "description": "Acceptance criteria frozen earlier (ADR-DISCOVERY-085). The evaluation is refused (BLOCKED) unless they hold.",
+        "properties": {
+          "expected_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Sha256"
+          },
+          "freeze_id": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Freeze Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "freeze_id"
+        ],
+        "title": "FreezeReferenceModel",
+        "type": "object"
+      },
+      "FreezeVerifyRequest": {
+        "description": "What an evaluation is about to use: a hypothesis and its rivals, or a document's text.",
+        "properties": {
+          "expected_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Sha256"
+          },
+          "hypothesis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FormalHypothesisModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rivals": {
+            "items": {
+              "$ref": "#/components/schemas/FormalHypothesisModel"
+            },
+            "maxItems": 10,
+            "title": "Rivals",
+            "type": "array"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "maxLength": 2000000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "title": "FreezeVerifyRequest",
         "type": "object"
       },
       "FrontierMathTaskInput": {
@@ -4986,6 +5304,166 @@
         "title": "VegaDecisionRequest",
         "type": "object"
       },
+      "VerificationChainRequest": {
+        "description": "The composed verification chain (ADR-085): exactly one of `hypothesis` and `prose`, and either `freeze`\n(criteria frozen earlier) or `author` (the chain freezes them first).",
+        "properties": {
+          "author": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Author",
+            "type": "string"
+          },
+          "backend": {
+            "default": "auto",
+            "pattern": "^(auto|enumeration|smt)$",
+            "title": "Backend",
+            "type": "string"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/CitationUseModel"
+            },
+            "maxItems": 50,
+            "title": "Citations",
+            "type": "array"
+          },
+          "claim_evidence": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ClaimEvidenceModel"
+            },
+            "title": "Claim Evidence",
+            "type": "object"
+          },
+          "consequences": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "title": "Consequences",
+            "type": "array"
+          },
+          "default_probes": {
+            "default": false,
+            "title": "Default Probes",
+            "type": "boolean"
+          },
+          "fidelity_spec": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fidelity Spec"
+          },
+          "freeze": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FreezeReferenceModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hypothesis": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FormalHypothesisModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hypothesis_id": {
+            "default": "H",
+            "maxLength": 120,
+            "title": "Hypothesis Id",
+            "type": "string"
+          },
+          "label": {
+            "default": "",
+            "maxLength": 200,
+            "title": "Label",
+            "type": "string"
+          },
+          "max_examples": {
+            "default": 5,
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Max Examples",
+            "type": "integer"
+          },
+          "observations": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 1000,
+            "title": "Observations",
+            "type": "array"
+          },
+          "prose": {
+            "anyOf": [
+              {
+                "maxLength": 5000,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prose"
+          },
+          "rivals": {
+            "items": {
+              "$ref": "#/components/schemas/FormalHypothesisModel"
+            },
+            "maxItems": 10,
+            "title": "Rivals",
+            "type": "array"
+          },
+          "samples": {
+            "anyOf": [
+              {
+                "maximum": 7.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Samples"
+          },
+          "stated_criteria": {
+            "additionalProperties": true,
+            "title": "Stated Criteria",
+            "type": "object"
+          },
+          "variable_schema": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FormalVariableModel"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variable Schema"
+          }
+        },
+        "title": "VerificationChainRequest",
+        "type": "object"
+      },
       "VerifyMembraneInvariantsRequest": {
         "properties": {
           "contract_id": {
@@ -5127,6 +5605,48 @@
           }
         },
         "summary": "Capabilities"
+      }
+    },
+    "/api/chain/run": {
+      "post": {
+        "description": "The composed chain of the verification methodology, end to end, with every step's state.\n\nfreeze (M3) -> formalize (M2) -> fidelity (M1) -> vacuity (M4) -> obligations (M5) -> seams (M6) -> discharge\n(M8) -> trust ladder (M7). A non-verdict stops the chain: later steps are NOT_RUN and `formal_status` is that\nnon-verdict; nothing undecided is reported as decided. Prose needs the configured formalizer model.",
+        "operationId": "run_verification_chain_api_chain_run_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificationChainRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Run Verification Chain"
       }
     },
     "/api/discovery/ablation-rebuttal/run": {
@@ -8367,6 +8887,181 @@
         "summary": "Lint Lean Statement"
       }
     },
+    "/api/freezes/document": {
+      "post": {
+        "description": "Freezes a protocol or checklist by the SHA-256 of its UTF-8 bytes, the digest a lifecycle ARTIFACT records.",
+        "operationId": "freeze_document_api_freezes_document_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreezeDocumentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Freeze Document"
+      }
+    },
+    "/api/freezes/hypothesis": {
+      "post": {
+        "description": "Freezes what would count as support or refutation of a hypothesis against its rivals, before any evaluation.\n\nThe criteria are the discriminating states, computed from the formal objects alone (no observations). The freeze\nhas a SHA-256, a time and an author, recorded in a hash-chained log. Freezing the same content again returns the\nearliest freeze (`already_frozen`).",
+        "operationId": "freeze_hypothesis_api_freezes_hypothesis_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreezeHypothesisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Freeze Hypothesis"
+      }
+    },
+    "/api/freezes/{freeze_id}": {
+      "get": {
+        "description": "One freeze record: kind, SHA-256, author, time, the frozen content and any lifecycle anchor.",
+        "operationId": "get_freeze_api_freezes__freeze_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "freeze_id",
+            "required": true,
+            "schema": {
+              "title": "Freeze Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Freeze"
+      }
+    },
+    "/api/freezes/{freeze_id}/verify": {
+      "post": {
+        "description": "VERIFIED (DECIDED) or CHANGED/UNKNOWN (BLOCKED): does the freeze still hold for what is about to be used?",
+        "operationId": "verify_freeze_api_freezes__freeze_id__verify_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "freeze_id",
+            "required": true,
+            "schema": {
+              "title": "Freeze Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreezeVerifyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Verify Freeze"
+      }
+    },
     "/api/health": {
       "get": {
         "operationId": "health_check_api_health_get",
@@ -8469,7 +9164,7 @@
     },
     "/api/hypotheses/evaluate": {
       "post": {
-        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.\n\nWith `hypothesis.non_witnesses`, each declared non-witness is probed; if one satisfies the claims, the verdict is\nVACUOUS_RELATIVE_TO_INTENT and `intent_probe` carries the witness. `default_probes` adds generic trivial witnesses,\nwhich are advisory. `claim_trust` gives each claim's trust-ladder rung (ADR-080).",
+        "description": "Exact evaluation (enumeration, or SMT when a variable is continuous): content, conflicts, counterexamples.\n\nWith `hypothesis.non_witnesses`, each declared non-witness is probed; if one satisfies the claims, the verdict is\nVACUOUS_RELATIVE_TO_INTENT and `intent_probe` carries the witness. `default_probes` adds generic trivial witnesses,\nwhich are advisory. `claim_trust` gives each claim's trust-ladder rung (ADR-080).\n\n`obligation_ledger` (ADR-085) is the ADR-076 ledger of the evaluation: fidelity, vacuity, each claim, each cited\nresult's use and each prediction, with the weakest-link roll-up on the trust ladder. With `freeze`, the frozen\ncriteria are verified first and a mismatch is refused with 409 and formal_status BLOCKED.",
         "operationId": "evaluate_formal_hypothesis_api_hypotheses_evaluate_post",
         "requestBody": {
           "content": {

@@ -729,6 +729,37 @@ class ClaimEvidenceModel(BaseModel):
     reproductions: List[Dict[str, Any]] = Field(default_factory=list, max_length=20)
 
 
+class CitingContextModel(BaseModel):
+    """Where a registered result is used: declared variables, assumptions, conventions and optional text."""
+
+    variables: List[Dict[str, Any]] = Field(default_factory=list, max_length=50)
+    assumptions: List[str] = Field(default_factory=list, max_length=100)
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    text: str = Field(default="", max_length=20000)
+
+
+class FreezeReferenceModel(BaseModel):
+    """Acceptance criteria frozen earlier (ADR-DISCOVERY-085). The evaluation is refused (BLOCKED) unless they hold."""
+
+    freeze_id: str = Field(min_length=1, max_length=40)
+    # When given, the freeze must have exactly this SHA-256.
+    expected_sha256: Optional[str] = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+
+
+class CitationUseModel(BaseModel):
+    """One use of a cited result (ADR-083): a registry entry id (or an inline entry) and the conventions of this use.
+
+    Without `context`, the citing context is the hypothesis itself: its variables, assumptions and scope.
+    """
+
+    entry_id: Optional[str] = Field(default=None, max_length=120)
+    version: Optional[int] = Field(default=None, ge=1)
+    entry: Optional[Dict[str, Any]] = None
+    conventions: Dict[str, str] = Field(default_factory=dict)
+    context: Optional[CitingContextModel] = None
+    source: Optional[str] = Field(default=None, max_length=500)
+
+
 class EvaluateFormalHypothesisRequest(BaseModel):
     hypothesis: FormalHypothesisModel
     observations: List[Dict[str, Any]] = []
@@ -737,6 +768,14 @@ class EvaluateFormalHypothesisRequest(BaseModel):
     default_probes: bool = False
     # ADR-080: evidence that can lift a claim above STATEMENT_PUBLIC, keyed by the claim's predicate text.
     claim_evidence: Dict[str, ClaimEvidenceModel] = Field(default_factory=dict)
+    # ADR-085, all optional: rivals (compared, and part of a freeze's subject), predictions to check for entailment,
+    # uses of cited results, the prose-vs-formal fidelity spec, and a freeze the evaluation must match. Each one adds
+    # obligations to `obligation_ledger` and a field to the response; the existing fields are unchanged.
+    rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+    consequences: List[str] = Field(default_factory=list, max_length=50)
+    citations: List[CitationUseModel] = Field(default_factory=list, max_length=50)
+    fidelity_spec: Optional[Dict[str, Any]] = None
+    freeze: Optional[FreezeReferenceModel] = None
 
 
 class CompareFormalHypothesesRequest(BaseModel):
@@ -864,15 +903,6 @@ class RegistryEntryRequest(BaseModel):
     rung: str = "CLAIMED"
 
 
-class CitingContextModel(BaseModel):
-    """Where a registered result is used: declared variables, assumptions, conventions and optional text."""
-
-    variables: List[Dict[str, Any]] = Field(default_factory=list, max_length=50)
-    assumptions: List[str] = Field(default_factory=list, max_length=100)
-    conventions: Dict[str, str] = Field(default_factory=dict)
-    text: str = Field(default="", max_length=20000)
-
-
 class CiteCheckRequest(BaseModel):
     entry_id: str = Field(min_length=1, max_length=120)
     version: Optional[int] = Field(default=None, ge=1)
@@ -892,6 +922,69 @@ class RegistryRetractRequest(BaseModel):
 
 class RegistryReevaluatedRequest(BaseModel):
     note: str = Field(min_length=1, max_length=2000)
+
+
+class FreezeLifecycleAnchorModel(BaseModel):
+    """A research lifecycle check (ADR-063) whose recorded SHA-256 the freeze must equal."""
+
+    project_id: str = Field(min_length=1, max_length=120)
+    check_id: str = Field(default="protocol.document", max_length=120)
+
+
+class FreezeHypothesisRequest(BaseModel):
+    """Freeze the discriminating states of a hypothesis against its rivals, before any evaluation (ADR-085)."""
+
+    hypothesis: FormalHypothesisModel
+    rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+    author: str = Field(min_length=1, max_length=200)
+    label: str = Field(default="", max_length=200)
+    # Criteria the author states in addition (free JSON, frozen verbatim).
+    stated_criteria: Dict[str, Any] = Field(default_factory=dict)
+    max_examples: int = Field(default=5, ge=1, le=50)
+    lifecycle: Optional[FreezeLifecycleAnchorModel] = None
+
+
+class FreezeDocumentRequest(BaseModel):
+    """Freeze a protocol or checklist by the SHA-256 of its UTF-8 bytes (ADR-085)."""
+
+    text: str = Field(min_length=1, max_length=2_000_000)
+    author: str = Field(min_length=1, max_length=200)
+    label: str = Field(default="", max_length=200)
+    name: str = Field(default="", max_length=500)
+    lifecycle: Optional[FreezeLifecycleAnchorModel] = None
+
+
+class FreezeVerifyRequest(BaseModel):
+    """What an evaluation is about to use: a hypothesis and its rivals, or a document's text."""
+
+    hypothesis: Optional[FormalHypothesisModel] = None
+    rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+    text: Optional[str] = Field(default=None, max_length=2_000_000)
+    expected_sha256: Optional[str] = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+
+
+class VerificationChainRequest(BaseModel):
+    """The composed verification chain (ADR-085): exactly one of `hypothesis` and `prose`, and either `freeze`
+    (criteria frozen earlier) or `author` (the chain freezes them first)."""
+
+    hypothesis: Optional[FormalHypothesisModel] = None
+    prose: Optional[str] = Field(default=None, min_length=1, max_length=5000)
+    hypothesis_id: str = Field(default="H", max_length=120)
+    variable_schema: Optional[List[FormalVariableModel]] = None
+    samples: Optional[int] = Field(default=None, ge=1, le=7)
+    rivals: List[FormalHypothesisModel] = Field(default_factory=list, max_length=10)
+    consequences: List[str] = Field(default_factory=list, max_length=50)
+    observations: List[Dict[str, Any]] = Field(default_factory=list, max_length=1000)
+    citations: List[CitationUseModel] = Field(default_factory=list, max_length=50)
+    fidelity_spec: Optional[Dict[str, Any]] = None
+    claim_evidence: Dict[str, ClaimEvidenceModel] = Field(default_factory=dict)
+    default_probes: bool = False
+    max_examples: int = Field(default=5, ge=1, le=50)
+    backend: str = Field(default="auto", pattern="^(auto|enumeration|smt)$")
+    freeze: Optional[FreezeReferenceModel] = None
+    author: str = Field(default="", max_length=200)
+    label: str = Field(default="", max_length=200)
+    stated_criteria: Dict[str, Any] = Field(default_factory=dict)
 
 
 class RegressionCheckRequest(BaseModel):

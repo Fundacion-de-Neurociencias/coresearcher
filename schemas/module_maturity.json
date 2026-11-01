@@ -352,6 +352,13 @@
     {
       "api": true,
       "level": "Integrated",
+      "module": "freeze_service",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
       "module": "frontier_math_flywheel",
       "scripts": false,
       "tests": true
@@ -367,6 +374,20 @@
       "api": true,
       "level": "Integrated",
       "module": "hakken_dream_rsi_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "hash_chain",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "hypothesis_ledger",
       "scripts": false,
       "tests": true
     },
@@ -574,8 +595,8 @@
       "tests": true
     },
     {
-      "api": false,
-      "level": "Tested",
+      "api": true,
+      "level": "Integrated",
       "module": "obligation_ledger",
       "scripts": false,
       "tests": true
@@ -850,6 +871,13 @@
       "api": false,
       "level": "Tested",
       "module": "vega_decision_engine",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "verification_chain",
       "scripts": false,
       "tests": true
     },

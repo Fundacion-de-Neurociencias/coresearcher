@@ -232,6 +232,9 @@ def _oase_code(coresearcher_code: str) -> str:
         "IMPORTS_ARE_LEXICAL": "formal.imports_are_lexical",
         "IMPORT_OBLIGATIONS_OPEN": "formal.import_obligations_open",
         "CITATIONS_UNRESOLVED": "formal.citations_unresolved",
+        "CRITERIA_FROZEN": "formal.criteria_frozen",
+        "CRITERIA_FROZEN_IN_SAME_RUN": "formal.criteria_frozen_in_same_run",
+        "LEDGER_NOT_PROVED": "formal.ledger_not_proved",
     }
     if coresearcher_code not in mapping:
         raise SchemaError(

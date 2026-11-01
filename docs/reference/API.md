@@ -2,7 +2,7 @@
 
 > Generated from [`schemas/openapi.json`](../../schemas/openapi.json). Do not edit by hand.
 
-Operations: 131. Interactive documentation is served at `/docs` when the API runs.
+Operations: 136. Interactive documentation is served at `/docs` when the API runs.
 
 Authentication: write operations (`POST`, `PUT`, `DELETE`) require the `X-API-Key` header
 matching `CORESEARCHER_API_KEY`. Read operations are public on the bound interface.
@@ -12,6 +12,7 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | --- | --- | --- | --- |
 | `POST` | `/api/audit/evidence` | API key | Audit Empirical Evidence |
 | `GET` | `/api/capabilities` | Public | Capabilities |
+| `POST` | `/api/chain/run` | API key | Run Verification Chain |
 | `POST` | `/api/discovery/ablation-rebuttal/run` | API key | Run Ablation And Rebuttal |
 | `POST` | `/api/discovery/adversarial/run-destruction-test` | API key | Run Adversarial Destruction Test |
 | `POST` | `/api/discovery/anomalies/detect-and-cluster` | API key | Detect And Cluster Anomalies |
@@ -101,6 +102,10 @@ Webhooks are verified with the `X-Hub-Signature-256` header.
 | `GET` | `/api/evidence/targets` | Public | Evidence Targets |
 | `POST` | `/api/fidelity/compare` | API key | Compare Statement Ranges |
 | `POST` | `/api/fidelity/lean-lint` | API key | Lint Lean Statement |
+| `POST` | `/api/freezes/document` | API key | Freeze Document |
+| `POST` | `/api/freezes/hypothesis` | API key | Freeze Hypothesis |
+| `GET` | `/api/freezes/{freeze_id}` | Public | Get Freeze |
+| `POST` | `/api/freezes/{freeze_id}/verify` | API key | Verify Freeze |
 | `GET` | `/api/health` | Public | Health Check |
 | `POST` | `/api/hypotheses/compare` | API key | Compare Formal Hypotheses |
 | `POST` | `/api/hypotheses/entails` | API key | Check Formal Consequence |

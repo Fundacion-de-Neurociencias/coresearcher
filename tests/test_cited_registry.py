@@ -92,6 +92,24 @@ def test_sign_formulas_are_compared_exhaustively(reg):
     assert item["counterexample"]["at"] == {"k": 1} and item["counterexample"]["cited"] == -1
 
 
+def test_partial_typed_match_is_open_not_clear(reg):
+    """ADR-088: the compared items agree, but the cited side states an orientation the citing side is silent on."""
+    entry = reg.register(
+        {
+            "id": "trace-sign-orient",
+            "source": "s",
+            "statement": "t",
+            "conventions": {
+                "sign": {"signs": {"reverse_trace": "(-1)**k"}, "fields": {"branch_orientations": "matching"}}
+            },
+        }
+    )
+    check = cr.cite_check(entry, {"conventions": {"sign": {"signs": {"reverse_trace": "(-1)**k"}}}})
+    assert check["conventions"][0]["outcome"] == cr.PARTIAL
+    assert check["outcome"] == cr.INCOMPLETE
+    assert "sign: field branch_orientations (citing side silent)" in check["open"]
+
+
 def test_malformed_typed_convention_is_refused(reg):
     with pytest.raises(cr.RegistryError):
         reg.register(

@@ -192,6 +192,26 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
     domain. Catching it needs a local formal check of that sign computation.
   - Typed parameters need constraints such as parity, not only ranges.
 
+### 2.13 Addendum (2026-11-01): constrained parameters and cases
+
+- **What.** Typed conventions gained:
+  - conditions on their parameters (parity, side conditions);
+  - a slot for which case of a cited result a citation uses, checked against the cases the result covers;
+  - PARTIAL, a non-verdict for a comparison that leaves a typed item silent on one side.
+
+  ([ADR-088](../decisions/ADR-DISCOVERY-088-CONSTRAINED-CONVENTIONS.md),
+  [`OPENAI_MATH_CONSTRAINED_RESULTS.md`](benchmarks/OPENAI_MATH_CONSTRAINED_RESULTS.md))
+- **Result.**
+  - Every sign imported from a cited lemma at the three withdrawals is now a decided MATCH on the citing domain.
+  - What remains open there, as PARTIAL, is the branch order and orientation that the cited lemma fixes and the
+    citing passages never state. The withdrawal notices put the error in exactly that place.
+  - Decided detections are still 1/17.
+- **Next.** Two changes come first:
+  - cases that select hypotheses;
+  - refusing typed inputs that hide a case or a condition in a field.
+
+  After those, a local formal check of the orientation computation in the citing construction.
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

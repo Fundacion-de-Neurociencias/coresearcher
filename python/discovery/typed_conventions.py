@@ -24,7 +24,10 @@ A convention value can now be typed. Besides its text, it may carry:
 
 Outcomes for one convention:
 
-- MATCH: at least one typed item was compared and all agreed, or the two texts are equal after normalization.
+- MATCH: at least one typed item was compared, all agreed and nothing typed is silent on either side; or the two
+  texts are equal after normalization.
+- PARTIAL (ADR-088): the typed items compared agree, but an item stated on one side is silent on the other. A
+  non-verdict: the citation check lists the silent items as open.
 - MISMATCH: a typed item differs. This is decided, with the item and the values (or the counterexample).
 - UNCOMPARED: the two sides have nothing typed in common and their texts differ. A different wording is not
   evidence of a different convention, so this is a non-verdict: the citation check is INCOMPLETE, not FINDINGS.
@@ -41,7 +44,7 @@ import operator
 import re
 from typing import Any, Dict, List, Sequence
 
-MATCH, MISMATCH, UNCOMPARED = "MATCH", "MISMATCH", "UNCOMPARED"
+MATCH, MISMATCH, UNCOMPARED, PARTIAL = "MATCH", "MISMATCH", "UNCOMPARED", "PARTIAL"
 DEFAULT_RANGE = (0, 16)
 MAX_POINTS = 20_000
 MAX_EXPONENT = 512
@@ -236,7 +239,9 @@ def compare(cited: Any, citing: Any) -> Dict[str, Any]:
     if any(i["outcome"] == MISMATCH for i in items):
         outcome, by = MISMATCH, "typed items"
     elif decided:
-        outcome, by = MATCH, "typed items"
+        # ADR-088: what was compared agrees, but a typed item one side states is silent on the other. That is not a
+        # full match (M8): the silent item may be exactly where the conventions differ.
+        outcome, by = (PARTIAL if unspecified else MATCH), "typed items"
     elif _norm(text_of(a)) and _norm(text_of(a)) == _norm(text_of(b)):
         outcome, by = MATCH, "normalized string"
     else:
@@ -266,9 +271,9 @@ def schema() -> Dict[str, Any]:
         "where": "[condition, ...] on the params; signs are compared where both sides' conditions hold",
         "cases": "cited side: {name: [cases the result covers]}",
         "case": "citing side: {name: the case used}; a case not covered is a MISMATCH",
-        "outcomes": [MATCH, MISMATCH, UNCOMPARED],
+        "outcomes": [MATCH, MISMATCH, UNCOMPARED, PARTIAL],
     }
 
 
 __all__ = ["compare", "compare_formulas", "validate", "is_typed", "text_of", "describe", "schema", "ConventionError",
-           "MATCH", "MISMATCH", "UNCOMPARED"]
+           "MATCH", "MISMATCH", "UNCOMPARED", "PARTIAL"]

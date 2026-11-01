@@ -1560,6 +1560,8 @@
     "docs/reference/benchmarks/openai_math_chain_contexts.json": "7143c53aad23905cb46bf081ec519de781a1b42671a9b725b958d1ffa1d1a8e1",
     "docs/reference/benchmarks/openai_math_chain_registry.json": "57f1fa28cb8331f9ef575ee72ccf634d690cd16b2d65e82622231790acf911c7",
     "docs/reference/benchmarks/openai_math_chain_selection.json": "3dbcd160c970695b570f118352e3c1d348e7653d4846d9a8b53a9f507f7b7f0c",
+    "docs/reference/benchmarks/openai_math_constrained_contexts.json": "bc739699714945a9820337951f3d5fbc9a7f1149ef39eeb601565936580ccb9a",
+    "docs/reference/benchmarks/openai_math_constrained_registry.json": "0ac377e3c9811a50f2731f3fd5cecc06de40bb23af3989c5f04eaec181eb7be6",
     "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5",
     "docs/reference/benchmarks/openai_math_typed_contexts.json": "6a5a765af95997abea2d898c9a8adf0f13b8caddb079453698baeda6c93e645d",
     "docs/reference/benchmarks/openai_math_typed_registry.json": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994"
@@ -1783,6 +1785,90 @@
      "value": "NOT_ENCODABLE"
     },
     "chain/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/REGISTRY_AUDIT": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/alarms/corrected/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "constrained/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "constrained/convention_mismatches/at_location": {
+     "better": "higher",
+     "value": 5
+    },
+    "constrained/convention_mismatches/elsewhere": {
+     "better": "lower",
+     "value": 5
+    },
+    "constrained/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "constrained/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "constrained/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "constrained/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "constrained/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "constrained/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "constrained/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "constrained/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
     },
@@ -3433,8 +3519,109 @@
    "date": "2026-11-01",
    "reason": "ADR-087 typed conventions: untyped convention texts that differ are UNCOMPARED (non-verdict), not MISMATCH; withdrawal calibration now typed (field cusp_branch_source_orientations). Chain re-run replays under the new semantics (lexical HITs on Weil, Taming, conditional good minimal models, two-arc GFF become MISS; alarms 6->2 off-location, 5->2 corrected). Adds the pre-registered typed re-measure (OPENAI_MATH_TYPED_RESULTS.md)",
    "version": 5
+  },
+  {
+   "changes": {
+    "openai_math_time_travel": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_constrained_contexts.json"
+     },
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_constrained_registry.json"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/convention_mismatches/at_location"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/convention_mismatches/elsewhere"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS"
+     }
+    ]
+   },
+   "date": "2026-11-01",
+   "reason": "ADR-088: constrained re-measure (OPENAI_MATH_CONSTRAINED_RESULTS.md) replayed and frozen; typed and chain observations unchanged by where/cases/PARTIAL",
+   "version": 6
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 5
+ "version": 6
 }

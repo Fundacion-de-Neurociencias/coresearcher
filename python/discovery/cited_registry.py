@@ -74,6 +74,7 @@ MATCH = "MATCH"
 MISMATCH = "MISMATCH"
 UNSPECIFIED = "UNSPECIFIED"
 UNCOMPARED = typed_conventions.UNCOMPARED  # two untyped texts that differ (ADR-087): a non-verdict
+PARTIAL = typed_conventions.PARTIAL  # typed items agree, others silent on one side (ADR-088): a non-verdict
 
 # Citation-check outcomes.
 CLEAR = "CLEAR"  # entry active, every hypothesis discharged, every convention matched
@@ -229,6 +230,7 @@ def cite_check(entry: RegistryEntry, context: Dict[str, Any]) -> Dict[str, Any]:
     findings += [_mismatch(c) for c in conventions if c["outcome"] == MISMATCH]
     findings += [f"hypothesis not discharged: {h['text']}" for h in hypotheses if h["outcome"] == NOT_DISCHARGED]
     open_items = [c["tag"] for c in conventions if c["outcome"] in (UNSPECIFIED, UNCOMPARED)]
+    open_items += [f"{c['tag']}: {u}" for c in conventions if c["outcome"] == PARTIAL for u in c.get("unspecified", [])]
     open_items += [h["text"] for h in hypotheses if h["outcome"] in (H_UNDECIDED, STATED_IN_TEXT)]
     if findings:
         outcome = FINDINGS

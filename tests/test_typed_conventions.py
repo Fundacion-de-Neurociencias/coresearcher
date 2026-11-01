@@ -14,8 +14,10 @@ def test_untyped_texts_match_only_when_equal_after_normalization():
 def test_fields_decide_and_name_the_differing_field():
     cited = {"text": "a", "fields": {"normal": "outward", "branches": "matching"}}
     same = tc.compare(cited, {"fields": {"normal": "Outward"}})
-    assert same["outcome"] == tc.MATCH
+    assert same["outcome"] == tc.PARTIAL  # ADR-088: a silent item keeps the comparison open
     assert same["unspecified"] == ["field branches (citing side silent)"]
+    full = tc.compare(cited, {"fields": {"normal": "Outward", "branches": "matching"}})
+    assert full["outcome"] == tc.MATCH
     other = tc.compare(cited, {"fields": {"branches": "opposite"}})
     assert other["outcome"] == tc.MISMATCH
     assert other["items"][0]["item"] == "field branches"

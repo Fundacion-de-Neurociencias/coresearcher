@@ -130,6 +130,9 @@ None of the six is a defect the authors corrected.
 4. **A premise-status feed for cited results** (unchanged; *Taming*).
 5. **Unbounded integer ranges in citing contexts.** This removes the "n > 2" artefacts.
 
+**Follow-up.** Gap 1 was built as [ADR-088](../../decisions/ADR-DISCOVERY-088-CONSTRAINED-CONVENTIONS.md) and
+measured in [`OPENAI_MATH_CONSTRAINED_RESULTS.md`](OPENAI_MATH_CONSTRAINED_RESULTS.md).
+
 ## 6. Deviations
 
 - **Entry packets.** Split in registry order between the two entry typists, not shuffled. The entries carry no

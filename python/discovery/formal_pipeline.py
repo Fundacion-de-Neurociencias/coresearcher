@@ -139,13 +139,13 @@ def _formalize(request: Dict[str, Any], clients, raw_outputs, specs):
     """The gate, from live clients (phase 1) or from stored raw outputs (phase 2)."""
     from python.discovery import formal_thresholds
     from python.discovery.formalization_gate import SampleSpec, gate, sampling_schedule
-    from python.discovery.formalizer import parse_formalization
+    from python.discovery.formalizer import draw, rederive
 
     hid, schema = request["hypothesis_id"], request["variable_schema"]
     gate_request = {"prose": request["prose"], "hypothesis_id": hid, "variable_schema": schema}
     if raw_outputs is not None:
         spec_objs = [SampleSpec(**s) for s in specs]
-        samples = [parse_formalization(text, hid, schema) for text in raw_outputs]
+        samples = [rederive(text, hid, schema) for text in raw_outputs]
         return gate(samples, spec_objs, gate_request)
     if not clients:
         raise CapabilityUnavailable(
@@ -154,16 +154,12 @@ def _formalize(request: Dict[str, Any], clients, raw_outputs, specs):
     n = request["samples"] if request["samples"] is not None else formal_thresholds.get("gate_samples")
     n = max(1, min(formal_thresholds.get("gate_max_samples"), int(n)))
     spec_objs = sampling_schedule(list(clients), n)
-    from python.discovery.formalizer import build_messages
-
-    messages = build_messages(request["prose"], schema)
     samples = []
     for spec in spec_objs:
         try:
-            text = clients[spec.model].complete(messages, temperature=spec.temperature, seed=spec.seed)
+            samples.append(draw(request["prose"], clients[spec.model], hid, schema, spec.temperature, spec.seed))
         except Exception as exc:  # Transport and HTTP errors from the model endpoint.
             raise CapabilityUnavailable("formalizer endpoint", type(exc).__name__, endpoint=True) from exc
-        samples.append(parse_formalization(text, hid, schema))
     return gate(samples, spec_objs, gate_request)
 
 

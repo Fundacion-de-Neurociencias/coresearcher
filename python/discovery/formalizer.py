@@ -215,7 +215,7 @@ def formalize_and_evaluate(
     variable_schema: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """The end-to-end path: prose -> formal object -> exact evaluation. The evaluation only covers the object."""
-    result = formalize(prose, client, hypothesis_id, variable_schema)
+    result = draw(prose, client, hypothesis_id, variable_schema)
     payload: Dict[str, Any] = {"status": result.status.value, "error": result.error, "formal_hypothesis": result.data}
     if result.hypothesis is not None and result.status == FormalizationStatus.PARSED:
         payload["evaluation"] = HypothesisEvaluator.evaluate(result.hypothesis).to_dict()
@@ -418,6 +418,64 @@ class FormalizationV2(Formalization):
     final_text: str = ""
 
 
+def _complete(client: Any, messages: List[Dict[str, str]], temperature: float, seed: int, json_mode: bool) -> str:
+    """Calls the client, asking for JSON mode when it accepts the keyword (test doubles may not)."""
+    try:
+        return client.complete(messages, temperature=temperature, seed=seed, json_mode=json_mode)
+    except TypeError:
+        try:
+            return client.complete(messages, temperature=temperature, seed=seed)
+        except TypeError:
+            return client.complete(messages)
+
+
+def parse_v2(text: str, hypothesis_id: str = "H",
+             variable_schema: Optional[List[Dict[str, Any]]] = None) -> Formalization:
+    """Offline re-derivation of a v2 sample from its stored raw output: the same surface repair, then validation."""
+    data = extract_json(text)
+    if data is None:
+        return parse_formalization(text, hypothesis_id, variable_schema)
+    fixed = parse_formalization(json.dumps(repair_data(data, variable_schema), ensure_ascii=False), hypothesis_id,
+                                variable_schema)
+    fixed.raw_output = text
+    return fixed
+
+
+PIPELINES = ("v1", "v2")
+
+
+def active_pipeline() -> str:
+    """The formalizer path in force: v2 by default (ADR-093); FORMALIZER_PIPELINE=v1 reproduces round 0."""
+    value = (os.getenv("FORMALIZER_PIPELINE") or "v2").strip().lower()
+    if value not in PIPELINES:
+        raise ValueError(f"FORMALIZER_PIPELINE must be one of {PIPELINES}, not {value!r}.")
+    return value
+
+
+def prompt_fingerprint(pipeline: Optional[str] = None) -> Dict[str, str]:
+    pipeline = pipeline or active_pipeline()
+    if pipeline == "v2":
+        return {"pipeline": "v2", "prompt_version": PROMPT_VERSION_V2, "prompt_sha256": prompt_sha256_v2()}
+    return {"pipeline": "v1", "prompt_version": PROMPT_VERSION, "prompt_sha256": prompt_sha256()}
+
+
+def draw(prose: str, client: Any, hypothesis_id: str = "H", variable_schema: Optional[List[Dict[str, Any]]] = None,
+         temperature: float = 0.0, seed: int = 0, pipeline: Optional[str] = None) -> Formalization:
+    """One formalization by the active pipeline. Its `raw_output` is what `rederive()` needs offline."""
+    if (pipeline or active_pipeline()) == "v2":
+        return formalize_v2(prose, client, hypothesis_id, variable_schema, temperature=temperature, seed=seed)
+    text = client.complete(build_messages(prose, variable_schema), temperature=temperature, seed=seed)
+    return parse_formalization(text, hypothesis_id, variable_schema)
+
+
+def rederive(text: str, hypothesis_id: str = "H", variable_schema: Optional[List[Dict[str, Any]]] = None,
+             pipeline: Optional[str] = None) -> Formalization:
+    """Phase-2 re-derivation of a stored raw output under the pipeline that produced it."""
+    if (pipeline or active_pipeline()) == "v2":
+        return parse_v2(text, hypothesis_id, variable_schema)
+    return parse_formalization(text, hypothesis_id, variable_schema)
+
+
 def formalize_v2(
     prose: str,
     client: "ChatClient",
@@ -432,7 +490,7 @@ def formalize_v2(
     messages = build_messages_v2(prose, variable_schema)
     result: Optional[FormalizationV2] = None
     for attempt in range(1, max_self_repairs + 2):
-        output = client.complete(messages, temperature=temperature, seed=seed, json_mode=json_mode)
+        output = _complete(client, messages, temperature, seed, json_mode)
         data = extract_json(output)
         repaired: List[str] = []
         text = output
@@ -441,6 +499,7 @@ def formalize_v2(
             repaired = [k for k in ("variables", "scope", "assumptions", "claims") if fixed.get(k) != data.get(k)]
             text = json.dumps(fixed, ensure_ascii=False)
         base = parse_formalization(text, hypothesis_id, variable_schema)
+        # raw_output keeps the model's last answer: rederive() turns it into the same object offline.
         result = FormalizationV2(base.status, base.hypothesis, base.error, output, base.data, attempt, repaired, text)
         if result.status == FormalizationStatus.PARSED or attempt > max_self_repairs:
             break

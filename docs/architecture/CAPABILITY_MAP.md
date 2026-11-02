@@ -154,14 +154,14 @@ Represents a hypothesis as variables, constraints and claims over a declared sta
 
 ### Formalizer and self-consistency gate
 
-Turns a hypothesis written in prose into the formal object, using a local language model as a translator only. The gate draws several independent formalizations and accepts one only when a strict majority are exactly equivalent (decided by z3 or enumeration); otherwise it returns FORMALIZATION_AMBIGUOUS or FORMALIZATION_FAILED. Accepted results are drafts pending the scientist's review.
+Turns a hypothesis written in prose into the formal object, using a local language model as a translator only. The default path is formalizer v2 (ADR-093): translation rules and worked examples, JSON mode, a surface-syntax repair that never changes meaning, and one self-repair round fed with the validator's error. The gate draws several independent formalizations and accepts one only when a strict majority are exactly equivalent (decided by z3 or enumeration); otherwise it returns FORMALIZATION_AMBIGUOUS or FORMALIZATION_FAILED. Accepted results are drafts pending the scientist's review.
 
 **Verification chain (ADR-085):** Step 2, formalize (M2): independent readings that must agree (ADR-064).
 
 **Caveats:**
 
 - Needs a configured local model (OpenAI-compatible endpoint); without one the endpoint reports BLOCKED.
-- Fidelity of prose-to-formal translation is not established: claims register row 24 is NOT MET on a 20-item exploratory seed set, and the gate keeps unstable formalizations out but lets consistent, systematic errors through (row 29).
+- Fidelity of prose-to-formal translation is measured, not established: under a frozen protocol v2 reached 67-100% equivalence to gold on a 12-item held-out set across four local models (v1: 17-92%), with named remaining failure kinds (FORMALIZER_V2_RESULTS.md). The gate keeps unstable formalizations out but lets consistent, systematic errors through (claims register row 29).
 
 | Module | Maturity | Endpoints using it |
 | --- | --- | --- |

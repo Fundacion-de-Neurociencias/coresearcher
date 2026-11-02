@@ -1268,6 +1268,82 @@
    },
    "title": "ETH refutation statement (family 378) as a positive fidelity control"
   },
+  "formalizer_v2": {
+   "adr": "ADR-DISCOVERY-093",
+   "fixtures": {
+    "benchmarks/regression/fixtures/formalizer/formalizer_outputs.json": "70c59491d419a2fe2b319eca916e0a3d44658a44202b058456a70557681fad5d",
+    "docs/reference/benchmarks/formalizer_dataset.json": "76d10aeda543b74372583318bb5384162b40552b4f744b35870ed49bcb5c7b4d",
+    "docs/reference/benchmarks/formalizer_dataset_heldout_v2.json": "6f0f06e4507dfa73c313f69d693ef80368babf1fa1317bb656116e71ebfc6008"
+   },
+   "notes": "Raw outputs of the 2026-11-02 sweep re-derived offline; equivalence to gold decided by the evaluator.",
+   "observations": {
+    "equivalent/v1_carbon-x_14b_heldout": {
+     "better": "higher",
+     "value": 7
+    },
+    "equivalent/v1_carbon-x_14b_main": {
+     "better": "higher",
+     "value": 10
+    },
+    "equivalent/v1_llama3_2_3b_heldout": {
+     "better": "higher",
+     "value": 2
+    },
+    "equivalent/v1_llama3_2_3b_main": {
+     "better": "higher",
+     "value": 3
+    },
+    "equivalent/v1_qwen2_5-coder_32b_heldout": {
+     "better": "higher",
+     "value": 11
+    },
+    "equivalent/v1_qwen2_5-coder_32b_main": {
+     "better": "higher",
+     "value": 14
+    },
+    "equivalent/v1_qwen2_5_14b-instruct-q4_K_M_heldout": {
+     "better": "higher",
+     "value": 8
+    },
+    "equivalent/v1_qwen2_5_14b-instruct-q4_K_M_main": {
+     "better": "higher",
+     "value": 12
+    },
+    "equivalent/v2_carbon-x_14b_heldout": {
+     "better": "higher",
+     "value": 11
+    },
+    "equivalent/v2_carbon-x_14b_main": {
+     "better": "higher",
+     "value": 11
+    },
+    "equivalent/v2_llama3_2_3b_heldout": {
+     "better": "higher",
+     "value": 8
+    },
+    "equivalent/v2_llama3_2_3b_main": {
+     "better": "higher",
+     "value": 13
+    },
+    "equivalent/v2_qwen2_5-coder_32b_heldout": {
+     "better": "higher",
+     "value": 12
+    },
+    "equivalent/v2_qwen2_5-coder_32b_main": {
+     "better": "higher",
+     "value": 17
+    },
+    "equivalent/v2_qwen2_5_14b-instruct-q4_K_M_heldout": {
+     "better": "higher",
+     "value": 11
+    },
+    "equivalent/v2_qwen2_5_14b-instruct-q4_K_M_main": {
+     "better": "higher",
+     "value": 17
+    }
+   },
+   "title": "Formalizer v1 vs v2 on the round-0 and held-out sets, four local models"
+  },
   "local_smoothing_fidelity": {
    "adr": "ADR-DISCOVERY-070",
    "fixtures": {
@@ -4250,8 +4326,21 @@
    "date": "2026-11-02",
    "reason": "ADR-091: standing assumptions per manuscript; the standing re-measure (OPENAI_MATH_STANDING_RESULTS.md) replayed and frozen; hypothesis discharge counts added for every typed variant",
    "version": 9
+  },
+  {
+   "changes": {
+    "formalizer_v2": [
+     {
+      "class": "CHANGED",
+      "key": "*"
+     }
+    ]
+   },
+   "date": "2026-11-02",
+   "reason": "ADR-093: add the formalizer v1-vs-v2 case from the 2026-11-02 sweep",
+   "version": 10
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 9
+ "version": 10
 }

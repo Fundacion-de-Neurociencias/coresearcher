@@ -1105,6 +1105,18 @@
             ],
             "title": "Source"
           },
+          "standing": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Standing"
+          },
           "variable": {
             "anyOf": [
               {
@@ -1257,6 +1269,18 @@
             },
             "title": "Conventions",
             "type": "object"
+          },
+          "standing": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Standing"
           },
           "text": {
             "default": "",

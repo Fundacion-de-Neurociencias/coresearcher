@@ -384,3 +384,19 @@ def test_api_register_check_retract_impact(api_client):
     assert api_client.get("/api/registry/entries/nope").status_code == 404
     r = api_client.post("/api/registry/flags/api-claim/reevaluated", json={"note": "re-checked"})
     assert r.status_code == 200
+
+
+def test_standing_assumptions_are_inherited_by_each_use(reg):
+    """ADR-091: "throughout, n = 2k with k >= 2" discharges n >= 3 at a passage that only says "n even"."""
+    entry = reg.register(
+        {"id": "dim3", "source": "s", "statement": "t", "hypotheses": [{"text": "n >= 3", "formal": "n >= 3"}]}
+    )
+    passage = {"variables": [{"name": "n", "integer": True}], "assumptions": ["n % 2 == 0"]}
+    alone = cr.cite_check(entry, passage)
+    assert alone["hypotheses"][0]["outcome"] == cr.NOT_DISCHARGED
+    standing = {"variables": [{"name": "k", "integer": True}], "assumptions": ["n == 2 * k", "k >= 2", "m > 0"]}
+    with_standing = cr.cite_check(entry, dict(passage, standing=standing))
+    assert with_standing["hypotheses"][0]["outcome"] == cr.DISCHARGED
+    merged = cr.with_standing(dict(passage, standing=standing))
+    assert merged["standing_inherited"] == {"assumptions": ["n == 2 * k", "k >= 2"], "variables": ["k"]}
+    assert "m > 0" not in merged["assumptions"]  # m is not a variable of the use: never introduced

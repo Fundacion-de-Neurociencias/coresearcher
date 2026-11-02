@@ -241,6 +241,21 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
   - Decided detections are still 1/17.
 - **Next.** Standing assumptions per manuscript, extracted blind and inherited by every citation of that manuscript.
 
+### 2.16 Addendum (2026-11-02): standing assumptions per manuscript
+
+- **What.** A citation inherits the standing variables and assumptions of its manuscript. The passage wins where both
+  speak. A standing fact never introduces a new name.
+  ([ADR-091](../decisions/ADR-DISCOVERY-091-STANDING-ASSUMPTIONS.md),
+  [`OPENAI_MATH_STANDING_RESULTS.md`](benchmarks/OPENAI_MATH_STANDING_RESULTS.md))
+- **Result.**
+  - With standing contexts extracted blind, discharged cited hypotheses go from 28 to 35.
+  - Flags at defect locations go from 7/28 to 5/28.
+  - Nothing moved the other way.
+  - Decided detections are still 1/17.
+- **Status.** This line of work is paused (2026-11-02). Decided detections are still 1/17 after six measured pull
+  requests. The remaining defects sit in reasoning the passages never state. The ranked gaps for anyone who resumes it
+  are recorded at the end of [`OPENAI_MATH_STANDING_RESULTS.md`](benchmarks/OPENAI_MATH_STANDING_RESULTS.md).
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

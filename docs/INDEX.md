@@ -10,6 +10,7 @@ Start with the [README](../README.md). This page maps the rest of the documentat
 | [OpenAPI contract](../schemas/openapi.json) | Machine-readable contract shared with the TypeScript packages |
 | [Claims register](reference/CLAIMS_REGISTER.md) | Each claim, its supporting script or test, data origin and last result |
 | [Confidence intervals](reference/CONFIDENCE_INTERVALS.md) | 95% intervals for every benchmark proportion with printed counts |
+| [Capability map](architecture/CAPABILITY_MAP.md) | Every functionality in plain words: entry points, maturity, ADRs, tests, verification-chain role and caveats; generated and checked in CI |
 | [Module maturity](reference/MODULE_MATURITY.md) | How each discovery module is used: integrated, tested, exercised or prototype |
 | [Sakana ED polarity case](reference/cases/SAKANA_ED_POLARITY.md) | Showcase: an agentic-science rubric claim proved by z3 and Lean, with the necessity of each assumption |
 | [Local smoothing statement fidelity](reference/cases/LOCAL_SMOOTHING_STATEMENT_FIDELITY.md) | Do six Lean Comparator statements say what the paper claims? Range equivalence by z3, junk-value lint, coverage map (ADR-070) |

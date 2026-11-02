@@ -1,47 +1,1825 @@
 {
-  "registrations": {
-    "reg_1": {
-      "id": "reg_1",
-      "capability": "KnowledgeRetrieval",
-      "pack_id": "connectors",
-      "workflow_ids": [
-        "multi_source_search"
-      ],
-      "agent_ids": [
-        "connectors"
-      ],
-      "priority": 50,
-      "config": {},
-      "registered_at": "2026-07-12T07:49:32.179001"
+  "schema": "coresearcher.capability-registry/v2",
+  "generated_by": "scripts/generate_capability_map.py",
+  "map": "docs/architecture/CAPABILITY_MAP.md",
+  "groups": [
+    {
+      "id": "formal-core",
+      "title": "Formal core"
     },
-    "reg_2": {
-      "id": "reg_2",
-      "capability": "KnowledgeRetrieval",
-      "pack_id": "connectors",
-      "workflow_ids": [
-        "multi_source_search"
-      ],
-      "agent_ids": [
-        "connectors"
-      ],
-      "priority": 50,
-      "config": {},
-      "registered_at": "2026-07-12T07:50:30.152766"
+    {
+      "id": "verification-chain",
+      "title": "Verification chain"
     },
-    "reg_3": {
-      "id": "reg_3",
-      "capability": "KnowledgeRetrieval",
-      "pack_id": "connectors",
-      "workflow_ids": [
-        "multi_source_search"
-      ],
-      "agent_ids": [
-        "connectors"
-      ],
-      "priority": 50,
-      "config": {},
-      "registered_at": "2026-07-12T07:52:43.211298"
+    {
+      "id": "statement-audits",
+      "title": "Statement and manuscript audits"
+    },
+    {
+      "id": "registry-ledger",
+      "title": "Registry and ledgers"
+    },
+    {
+      "id": "biomedical",
+      "title": "Biomedical domain"
+    },
+    {
+      "id": "case-studies",
+      "title": "Case studies"
+    },
+    {
+      "id": "discovery-engines",
+      "title": "Discovery engines (earlier phases)"
+    },
+    {
+      "id": "observer",
+      "title": "Observer, ledger and provenance"
+    },
+    {
+      "id": "ecosystem",
+      "title": "Ecosystem and integrations"
+    },
+    {
+      "id": "benchmarks",
+      "title": "Benchmarks and regression"
+    },
+    {
+      "id": "infrastructure",
+      "title": "Infrastructure"
     }
-  },
-  "next_id": 4
+  ],
+  "capabilities": [
+    {
+      "id": "formal-hypotheses",
+      "title": "Formal hypotheses and exact evaluation",
+      "group": "formal-core",
+      "description": "Represents a hypothesis as variables, constraints and claims over a declared state space, and decides questions about it exactly: whether it forbids anything (falsifiability), whether its assumptions conflict, which states refute it, how it relates to a rival (equivalent, stronger, weaker, compatible, incompatible) and whether a consequence follows. Finite spaces are enumerated; continuous and unbounded integer variables go to z3 (ADR-060, ADR-090). Every result carries a status from a shared vocabulary (decided, open, blocked, undecided, invalid input), named and versioned thresholds, and a provenance block saying which engine and solver produced it (ADR-068). Hypotheses can be case-scoped (ADR-089).",
+      "status": "",
+      "verification_chain": "Step 7, discharge (M8): obligations that are formal consequences are decided here by z3 or enumeration, never turning an unknown into a verdict. Step 4, vacuity (M4): the evaluator's declared non-witness probe (ADR-080).",
+      "caveats": [
+        "Verdicts are exact only for the variables and constraints as declared; whether the declaration matches the scientist's intent is the job of the fidelity and formalization checks.",
+        "z3 runs under a timeout (formal_thresholds); a timeout is reported as UNDECIDED, never as a verdict."
+      ],
+      "maturity": {
+        "python/discovery/formal_hypothesis.py": "Integrated",
+        "python/discovery/formal_provenance.py": "Tested",
+        "python/discovery/formal_smt.py": "Tested",
+        "python/discovery/formal_status.py": "Integrated",
+        "python/discovery/formal_thresholds.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/hypotheses/compare",
+        "POST /api/hypotheses/entails",
+        "POST /api/hypotheses/evaluate"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-006",
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-060",
+        "ADR-DISCOVERY-064",
+        "ADR-DISCOVERY-067",
+        "ADR-DISCOVERY-068"
+      ]
+    },
+    {
+      "id": "formalizer-gate",
+      "title": "Formalizer and self-consistency gate",
+      "group": "formal-core",
+      "description": "Turns a hypothesis written in prose into the formal object, using a local language model as a translator only. The gate draws several independent formalizations and accepts one only when a strict majority are exactly equivalent (decided by z3 or enumeration); otherwise it returns FORMALIZATION_AMBIGUOUS or FORMALIZATION_FAILED. Accepted results are drafts pending the scientist's review.",
+      "status": "",
+      "verification_chain": "Step 2, formalize (M2): independent readings that must agree (ADR-064).",
+      "caveats": [
+        "Needs a configured local model (OpenAI-compatible endpoint); without one the endpoint reports BLOCKED.",
+        "Fidelity of prose-to-formal translation is not established: claims register row 24 is NOT MET on a 20-item exploratory seed set, and the gate keeps unstable formalizations out but lets consistent, systematic errors through (row 29)."
+      ],
+      "maturity": {
+        "python/discovery/formalization_gate.py": "Integrated",
+        "python/discovery/formalizer.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/hypotheses/formalize"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/formalizer_bench.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-002",
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-061",
+        "ADR-DISCOVERY-064"
+      ]
+    },
+    {
+      "id": "formal-pipeline",
+      "title": "Two-phase formal runs with provenance (formal run / analyze)",
+      "group": "formal-core",
+      "description": "The whole formal layer as one reproducible computation: phase 1 (`formal run`) formalizes if needed, evaluates, and writes the request, the response and a provenance sidecar; phase 2 (`formal analyze`) re-analyses a stored run offline and deterministically. `formal doctor` reports whether z3, Lean and the formalizer are available and which thresholds are in force. The design follows the tool guidance of Google's OASE (ADR-068).",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/cli/formal.py": "outside register",
+        "python/discovery/formal_pipeline.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher formal analyze",
+        "coresearcher formal doctor",
+        "coresearcher formal run"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-077",
+        "ADR-DISCOVERY-080",
+        "ADR-DISCOVERY-082",
+        "ADR-DISCOVERY-085"
+      ]
+    },
+    {
+      "id": "lean-export",
+      "title": "Lean 4 export and kernel cross-check",
+      "group": "formal-core",
+      "description": "States a consequence that z3 has decided as a Lean 4 theorem over the reals, so an independent proof kernel can re-check it. The offline benchmark script runs the Lean kernel on those theorems on a machine with Mathlib; the setup scripts provision Lean and the remote Lean oracle machine.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "The API returns Lean source marked NOT_KERNEL_CHECKED; the running service never calls the Lean kernel. Kernel checks run offline (scripts/benchmarks/formal_lean_check.py on a machine with Mathlib) or in the Lean kernel checks workflow, whose records are the only way to KERNEL_CHECKED (see recorded kernel checks)."
+      ],
+      "maturity": {
+        "python/discovery/formal_lean.py": "Integrated"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/formal_lean_check.py",
+        "scripts/benchmarks/legion/oracle_setup.sh",
+        "scripts/benchmarks/legion_lean_oracle_setup.sh",
+        "scripts/setup_lean4_environment.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-047",
+        "ADR-DISCOVERY-060"
+      ]
+    },
+    {
+      "id": "kernel-records",
+      "title": "Recorded Lean kernel checks",
+      "group": "formal-core",
+      "description": "A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux runner, on our Lean files and on openai/math Comparator challenges, and writes a kernel record next to the full run log: what was checked (file hash, toolchain, Mathlib commit), the axioms each theorem uses, the wall time and the result. The result is recomputed from the log, never trusted from the record. A hash-verified PASS record is the only way a claim reaches KERNEL_CHECKED; the climb for a registry entry is `POST /api/registry/entries/{entry_id}/kernel-check` (listed under the registry).",
+      "status": "",
+      "verification_chain": "Feeds step 8, trust ladder (M7): the top rung needs a verified kernel record (ADR-092).",
+      "caveats": [
+        "BLOCKED (the kernel did not run or did not finish) is a non-verdict and never climbs.",
+        "Records exist only for the targets the workflow has run (records/kernel/); everything else stays below KERNEL_CHECKED."
+      ],
+      "maturity": {
+        "python/discovery/kernel_records.py": "Integrated"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/lean/comparator_preflight.sh",
+        "scripts/lean/kernel_check.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-092"
+      ]
+    },
+    {
+      "id": "verification-chain",
+      "title": "Composed verification chain",
+      "group": "verification-chain",
+      "description": "Runs a submitted hypothesis (formal, prose, or a biomedical mechanism) through the eight steps of the methodology in one call and reports each step's state: DONE, OPEN, NOT_APPLICABLE, NOT_RUN or a non-verdict. A non-verdict stops the chain, and later steps are NOT_RUN. The final report grades every claim on the trust ladder.",
+      "status": "",
+      "verification_chain": "The chain itself (ADR-085): freeze, formalize, fidelity, vacuity, obligations, seams, discharge, trust ladder.",
+      "caveats": [
+        "Fidelity stays OPEN unless the scientist supplies a fidelity specification, and vacuity stays OPEN unless non-witnesses are declared: there is no independent formal reading of the prose to compare against.",
+        "On the openai/math time-travel corpus the full chain decided 1 of 17 corrected defects, the same unresolved citation the first run found (OPENAI_MATH_CHAIN_RESULTS.md)."
+      ],
+      "maturity": {
+        "python/cli/chain.py": "outside register",
+        "python/discovery/verification_chain.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/chain/run"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher chain run"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-064",
+        "ADR-DISCOVERY-070",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-080",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-085",
+        "ADR-DISCOVERY-086"
+      ]
+    },
+    {
+      "id": "freeze-service",
+      "title": "Freeze service (acceptance criteria fixed in advance)",
+      "group": "verification-chain",
+      "description": "Records, before anything is evaluated, what would count as support or refutation: the discriminating states of a hypothesis against its rivals, or the SHA-256 of a protocol or checklist. A later verification says whether the freeze still holds for what is about to be evaluated; a mismatch blocks the evaluation. Freezes go to a hash-chained log and can be anchored in a lifecycle project.",
+      "status": "",
+      "verification_chain": "Step 1, freeze (M3). A freeze made in the same run is reported with the weaker relay CRITERIA_FROZEN_IN_SAME_RUN.",
+      "caveats": [],
+      "maturity": {
+        "python/cli/freeze.py": "outside register",
+        "python/discovery/freeze_service.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/freezes/document",
+        "POST /api/freezes/hypothesis",
+        "GET /api/freezes/{freeze_id}",
+        "POST /api/freezes/{freeze_id}/verify"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher freeze document",
+        "coresearcher freeze hypothesis",
+        "coresearcher freeze show",
+        "coresearcher freeze verify"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-063",
+        "ADR-DISCOVERY-066",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-085"
+      ]
+    },
+    {
+      "id": "hypothesis-ledger",
+      "title": "Obligation ledger for submitted hypotheses",
+      "group": "verification-chain",
+      "description": "Decomposes a submitted hypothesis into named obligations (each claim, each consequence, each imported result), checks that their dependency graph is acyclic, and discharges each one with the strongest exact tool available, leaving the rest OPEN. It is the standard path behind hypothesis evaluation and the chain.",
+      "status": "",
+      "verification_chain": "Step 5, obligations (M5), and the bookkeeping of step 7, discharge.",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/hypothesis_ledger.py": "Integrated"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-080",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-085"
+      ]
+    },
+    {
+      "id": "trust-ladder",
+      "title": "Trust ladder",
+      "group": "verification-chain",
+      "description": "Grades each claim on five rungs, by mechanical rules over recorded evidence: from stated, through formalized and fidelity-checked, to kernel-checked. A paper is not \"formalized\" as a whole; each claim has its own rung, and a roll-up takes the weakest link.",
+      "status": "",
+      "verification_chain": "Step 8, trust ladder (M7).",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/formal_trust.py": "Integrated",
+        "python/discovery/trust_ladder.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/trust/assess"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher formal trust"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-070",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-080",
+        "ADR-DISCOVERY-081",
+        "ADR-DISCOVERY-092"
+      ]
+    },
+    {
+      "id": "statement-fidelity",
+      "title": "Statement fidelity and Lean junk-value lint",
+      "group": "statement-audits",
+      "description": "Asks whether a formal statement asserts what the paper claims. `compare` decides with z3 whether the formal range of a theorem is stronger, weaker or equal to the paper's range. `lean-lint` lists every place in a Lean statement where Mathlib's convention of returning a default (\"junk\") value for undefined operations could make the statement weaker than it reads. The vacuity probe looks for trivial witnesses that would make a statement say less than its title.",
+      "status": "",
+      "verification_chain": "Step 3, fidelity (M1), when a fidelity specification is supplied.",
+      "caveats": [
+        "Needs the paper's intended range or statement as input; it cannot read the paper itself.",
+        "The lint is syntactic: it lists sites to inspect, not proven defects."
+      ],
+      "maturity": {
+        "python/discovery/fidelity_service.py": "Integrated",
+        "python/discovery/lean_junk_lint.py": "Tested",
+        "python/discovery/statement_fidelity.py": "Tested",
+        "python/discovery/trivial_witness_probe.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/fidelity/compare",
+        "POST /api/fidelity/lean-lint"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher formal fidelity",
+        "coresearcher formal lean-lint"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-070",
+        "ADR-DISCOVERY-080"
+      ]
+    },
+    {
+      "id": "existence-audits",
+      "title": "Pre-registered existence audits",
+      "group": "statement-audits",
+      "description": "Fixes, before a claimant's formal statement is public, what that statement must say to support an announced existence result (a frozen checklist), and probes existence statements for trivial witnesses: cheap objects that satisfy the statement and show it proves less than its title.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/preregistration.py": "Tested",
+        "python/discovery/trivial_witness.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-081"
+      ]
+    },
+    {
+      "id": "manuscript-audit",
+      "title": "Manuscript audit (citation gate and import obligations)",
+      "group": "statement-audits",
+      "description": "Static checks on LaTeX manuscript sources: citations that do not resolve, and every result imported from a cited source turned into an OPEN obligation with its location, so the seams between a paper and the work it cites become visible. The citation gate also runs standalone in CI-style use.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "The import obligations are found by pattern matching on LaTeX; they are left OPEN for a person or a later check, not decided.",
+        "On the openai/math time-travel corpus the citation gate is the only decided detection (1 of 17 corrected defects)."
+      ],
+      "maturity": {
+        "python/discovery/cited_import_ledger.py": "Tested",
+        "python/discovery/manuscript_audit.py": "Integrated",
+        "python/discovery/manuscript_checks.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/manuscripts/audit"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher formal manuscript"
+      ],
+      "files": [
+        "scripts/checks/citation_gate.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-077",
+        "ADR-DISCOVERY-082"
+      ]
+    },
+    {
+      "id": "asymptotic-forms",
+      "title": "Asymptotic notation as explicit quantified forms",
+      "group": "statement-audits",
+      "description": "Rewrites asymptotic notation (O, o, Omega, Theta) as explicit quantified statements, so the direction that the notation hides can be checked before the answer is (method M1, check the question before the answer).",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/asymptotic_forms.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-084"
+      ]
+    },
+    {
+      "id": "cited-registry",
+      "title": "Registry of cited results and premises",
+      "group": "registry-ledger",
+      "description": "Keeps versioned entries for results a hypothesis imports from other papers, with their typed hypotheses and conventions (assay, units, population, sign conventions). Each use is checked: the conventions must match by meaning, not by wording (ADR-087, ADR-088), and the entry's hypotheses must be entailed at the point of use. Dependency edges let a retracted or downgraded premise flag every claim built on it for re-evaluation. Events go to a hash-chained log.",
+      "status": "",
+      "verification_chain": "Step 6, seams (M6): each cited result's use is checked with cite-check. M11 (premise retraction) runs outside the chain.",
+      "caveats": [
+        "Entries are written by people or agents from the cited source; the registry checks uses against what an entry says, not whether the entry is faithful to the source."
+      ],
+      "maturity": {
+        "python/cli/registry.py": "outside register",
+        "python/discovery/cited_registry.py": "Integrated",
+        "python/discovery/hash_chain.py": "Tested",
+        "python/discovery/typed_conventions.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/registry/cite-check",
+        "POST /api/registry/dependencies",
+        "POST /api/registry/entries",
+        "GET /api/registry/entries/{entry_id}",
+        "POST /api/registry/entries/{entry_id}/kernel-check",
+        "POST /api/registry/entries/{entry_id}/retract",
+        "POST /api/registry/flags/{node}/reevaluated",
+        "GET /api/registry/impact/{node}"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher registry cite-check",
+        "coresearcher registry depend",
+        "coresearcher registry impact",
+        "coresearcher registry reevaluated",
+        "coresearcher registry register",
+        "coresearcher registry retract",
+        "coresearcher registry show"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-066",
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-080",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-085",
+        "ADR-DISCOVERY-086",
+        "ADR-DISCOVERY-087",
+        "ADR-DISCOVERY-088",
+        "ADR-DISCOVERY-092"
+      ]
+    },
+    {
+      "id": "obligation-ledger",
+      "title": "Obligation ledger and machine-checked proof cases",
+      "group": "registry-ledger",
+      "description": "Records the obligations a claimed mathematical result rests on (identities, inequalities, analytic steps, imported theorems), how each was discharged, and the weakest-link status of the claim. A proof case is a list of steps, each a script that writes one report; the pipeline reproduces or audits the whole case against its manifest. Interval arithmetic and Taylor models supply rigorous bounds.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/interval_engine.py": "Tested",
+        "python/discovery/obligation_ledger.py": "Integrated",
+        "python/discovery/proof_cases.py": "Exercised",
+        "python/discovery/proof_pipeline.py": "Tested"
+      },
+      "endpoints": [
+        "GET /api/obligations/cases",
+        "GET /api/obligations/cases/{case_id}"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-076"
+      ]
+    },
+    {
+      "id": "biomedical-checks",
+      "title": "Biomedical checks: units, conventions and domain probes",
+      "group": "biomedical",
+      "description": "Checks a formal biomedical hypothesis for things the generic chain missed: dimensional consistency of every predicate under a unit algebra (pg/mL equals ng/L), a controlled vocabulary of conventions (assay, platform, matrix, units, population), and domain probes: whether the biomarker does any work (null biomarker), whether an untreated arm is accounted for, and whether the population matches the cited validation.",
+      "status": "",
+      "verification_chain": "Adds to step 4 (the probes are reported beside vacuity) and step 6 (units and validated population as seams).",
+      "caveats": [
+        "Values in examples and tests are illustrative, never clinical.",
+        "The probes check the hypothesis as declared; they do not look at patient data."
+      ],
+      "maturity": {
+        "python/cli/biomedical.py": "outside register",
+        "python/discovery/biomedical_conventions.py": "Integrated",
+        "python/discovery/biomedical_domain.py": "Integrated",
+        "python/discovery/biomedical_units.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/biomedical/check",
+        "GET /api/biomedical/vocabulary"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher biomedical check",
+        "coresearcher biomedical units",
+        "coresearcher biomedical vocabulary"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-085",
+        "ADR-DISCOVERY-086"
+      ]
+    },
+    {
+      "id": "mechanistic-chains",
+      "title": "Mechanistic chains",
+      "group": "biomedical",
+      "description": "Compiles a mechanism (\"A raises B, which drives C, which predicts D\"), given as signed links or in a small controlled language, into a two-world formal hypothesis whose end-to-end prediction is a consequence, with one obligation per link and per sign. A sentence outside the grammar is reported as FORMALIZATION_FAILED, not guessed.",
+      "status": "",
+      "verification_chain": "Step 2 (formalize: COMPILED) and step 5 (one obligation per link).",
+      "caveats": [
+        "The controlled grammar is small by design; free prose still needs the formalizer."
+      ],
+      "maturity": {
+        "python/discovery/mechanistic_chain.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/biomedical/mechanism"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher biomedical mechanism"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-076",
+        "ADR-DISCOVERY-086"
+      ]
+    },
+    {
+      "id": "alzheimer-scenario",
+      "title": "Alzheimer formal scenario",
+      "group": "biomedical",
+      "description": "The three rival Alzheimer hypotheses of the demo scenario, rewritten as formal hypotheses over seven finite axes and evaluated and compared exactly.",
+      "status": "Fixture (claims register row 25, DRAFT): the rivals are the maintainers' illustration, pending scientist review.",
+      "verification_chain": "",
+      "caveats": [
+        "Re-declares the axes by hand instead of deriving them from state_space.py, and the labels differ.",
+        "Through the chain, fidelity and vacuity stay OPEN and nothing domain-specific is checked unless the biomedical block is supplied."
+      ],
+      "maturity": {
+        "python/discovery/alzheimer_formal_scenario.py": "Integrated"
+      },
+      "endpoints": [
+        "GET /api/hypotheses/scenarios/alzheimer"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-061"
+      ]
+    },
+    {
+      "id": "ptau217-case",
+      "title": "Plasma p-tau217 two-cutoff case",
+      "group": "biomedical",
+      "description": "A biomedical showcase: the two-cutoff triage rule for plasma p-tau217 as a formal hypothesis, with its physiological assumptions (separation, monotonicity, normal renal clearance), counterexamples when an assumption is dropped, and a Lean file.",
+      "status": "Showcase with known defects; used as an input to the biomedical regression case.",
+      "verification_chain": "",
+      "caveats": [
+        "As written, the rule's guarantees follow from its own assumptions, so the claims forbid nothing: the chain reports them REFUTED for lack of content (Block E findings). The functional review called the proof circular.",
+        "The cohort simulator is random and does not reproduce the kidney-disease effect it describes. Not clinical evidence."
+      ],
+      "maturity": {
+        "python/discovery/ptau217_cutoff_case.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/ptau217-cutoff"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-086"
+      ]
+    },
+    {
+      "id": "biophysics-auditors",
+      "title": "Biophysics auditors (membrane, complexes, closure)",
+      "group": "biomedical",
+      "description": "Three older auditors: membrane simulation contracts and failure attribution, ternary-complex coordination checks, and an autopoietic-closure check on a reaction network.",
+      "status": "Earlier phase; threshold checks behind large claims.",
+      "verification_chain": "",
+      "caveats": [
+        "No simulation is run: the auditors apply thresholds to numbers the caller supplies (clashes, coordination counts, ratios, energy drift).",
+        "Membrane failure attribution normalises hand-set rule weights and calls them probabilities; claims register row 14 is a simulation contract only.",
+        "The closure check is a set difference of catalysts and products; the categorical engine it imports is not used."
+      ],
+      "maturity": {
+        "python/discovery/autopoietic_closure_auditor.py": "Tested",
+        "python/discovery/biomacromolecular_auditor.py": "Tested",
+        "python/discovery/membrane_dynamics_auditor.py": "Exercised"
+      },
+      "endpoints": [
+        "POST /api/discovery/autopoietic/audit-closure",
+        "POST /api/discovery/biomacromolecular/audit-complex",
+        "POST /api/discovery/membrane/audit-duhem-quine",
+        "POST /api/discovery/membrane/create-simulation-contract",
+        "POST /api/discovery/membrane/verify-physical-invariants"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_membrane_dynamics_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-051",
+        "ADR-DISCOVERY-052"
+      ]
+    },
+    {
+      "id": "case-mahler",
+      "title": "Mahler conjecture scalar input (obligation ledger pilot)",
+      "group": "case-studies",
+      "description": "The scalar inequalities behind \"The Mahler Conjecture for General Convex Bodies\" (openai/math), proved rigorously by interval arithmetic on bounded windows and by analytic arguments on the tails, recorded in the obligation ledger and reproducible step by step.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/mahler_interval.py": "Tested",
+        "python/discovery/mahler_obligations.py": "Tested",
+        "python/discovery/mahler_ranges.py": "Tested",
+        "python/discovery/mahler_segment.py": "Tested",
+        "python/discovery/mahler_segment_box.py": "Tested",
+        "python/discovery/mahler_segment_tails.py": "Tested",
+        "python/discovery/mahler_tail.py": "Tested",
+        "python/discovery/mahler_twovar.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/mahler-obligations",
+        "scripts/cases/mahler_interval_report.py",
+        "scripts/cases/mahler_obligations_report.py",
+        "scripts/cases/mahler_ranges_report.py",
+        "scripts/cases/mahler_reproduce.py",
+        "scripts/cases/mahler_segment_box_report.py",
+        "scripts/cases/mahler_segment_tails_report.py",
+        "scripts/cases/mahler_tail_report.py",
+        "scripts/cases/mahler_twovar_report.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-076"
+      ]
+    },
+    {
+      "id": "case-local-smoothing",
+      "title": "Local smoothing for the wave equation (fidelity and proof anatomy)",
+      "group": "case-studies",
+      "description": "Statement fidelity of OpenAI's local smoothing paper against its Lean reference statements, and a proof anatomy: the lemma dependency graph with symbolic checks of the elementary identities it relies on.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/local_smoothing_anatomy.py": "Tested",
+        "python/discovery/local_smoothing_case.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/local-smoothing-anatomy",
+        "examples/local-smoothing-fidelity",
+        "scripts/cases/local_smoothing_anatomy_report.py",
+        "scripts/cases/local_smoothing_fidelity_report.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-070"
+      ]
+    },
+    {
+      "id": "case-existence",
+      "title": "Yang-Mills and O(3) existence audits",
+      "group": "case-studies",
+      "description": "The pre-registered audit of the announced existence proof of four-dimensional quantum Yang-Mills theory (frozen checklist, published before the formal statement), and its rehearsal on the openai/math O(3) continuum-limit paper.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/o3_continuum_case.py": "Tested",
+        "python/discovery/yang_mills_case.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/o3-continuum-rehearsal",
+        "examples/yang-mills-preregistration",
+        "scripts/cases/o3_rehearsal_report.py",
+        "scripts/cases/ym_preregistration_report.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-081"
+      ]
+    },
+    {
+      "id": "case-ed-polarity",
+      "title": "Sakana Error Diffusion polarity claim",
+      "group": "case-studies",
+      "description": "A claim that Sakana's Agentic Scientist judged with a natural-language rubric, restated as a formal hypothesis and decided by z3 at fixed depths and widths, with a finite-difference replay and a Lean proof of the general case.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "The Lean proof of the general case is hand-written, not produced by formal_lean."
+      ],
+      "maturity": {
+        "python/discovery/ed_polarity_case.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/sakana-ed-polarity",
+        "scripts/cases/ed_polarity_report.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-059"
+      ]
+    },
+    {
+      "id": "case-collatz",
+      "title": "Collatz: what is mechanically checkable",
+      "group": "case-studies",
+      "description": "Records what can be checked mechanically about the Collatz conjecture: a graph of known partial results and finite checks. It does not attempt a proof and claims no progress on the conjecture.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/collatz_case.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/collatz-checkable",
+        "scripts/cases/collatz_report.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "demo-state",
+      "title": "Demo state model (Alzheimer omega, rivals, programs)",
+      "group": "discovery-engines",
+      "description": "The shared in-memory state the older endpoints read: a discretised neurodegeneration state space and its excluded fraction, a ledger of alternative representations and rival hypotheses, four biological programs, and the canned \"explicability\" prose added to several responses.",
+      "status": "Demo data.",
+      "verification_chain": "",
+      "caveats": [
+        "The state space is the single canonical hub/dementia example; formal_hypothesis computes the same excluded fraction for any declared space.",
+        "auto_explicability returns canned prose that can state rivals were refuted, or give clinical advice, regardless of the computed state.",
+        "The biological programs are hard-coded with unsourced transferability scores. trajectory_evolution scripts an H0-fails, H1-fails, H2-passes story with invented statistics."
+      ],
+      "maturity": {
+        "api/state.py": "outside register",
+        "python/discovery/auto_explicability.py": "Prototype",
+        "python/discovery/biological_programs_catalog.py": "Prototype",
+        "python/discovery/epistemic_trajectory.py": "Prototype",
+        "python/discovery/state_space.py": "Integrated",
+        "python/discovery/trajectory_evolution.py": "Prototype"
+      },
+      "endpoints": [
+        "GET /api/discovery/biological-programs",
+        "GET /api/discovery/questions",
+        "GET /api/discovery/representations",
+        "GET /api/discovery/state-space",
+        "GET /api/discovery/trajectory-evolution"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-001",
+        "ADR-DISCOVERY-006",
+        "ADR-MECH-001"
+      ]
+    },
+    {
+      "id": "failure-logic",
+      "title": "Scientific logic, failure attribution and the graveyard",
+      "group": "discovery-engines",
+      "description": "Modus tollens with labelled auxiliary assumptions (which premise to blame when a prediction fails), a failure diagnosis endpoint, and a registry of defeated hypotheses.",
+      "status": "Earlier phase; partly canned.",
+      "verification_chain": "",
+      "caveats": [
+        "failure_engine picks the blamed premise from a substring of the hypothesis id (NFL, GFAP, APOE4) with canned counterexamples; evidence is ignored.",
+        "POST /api/audit/evidence returns a literal verdict and signature; only `empirical_outcome == survived` affects it.",
+        "The graveyard is seeded with three invented records and no route adds to it."
+      ],
+      "maturity": {
+        "python/discovery/defeated_hypotheses_graveyard.py": "Prototype",
+        "python/discovery/failure_engine.py": "Exercised",
+        "python/discovery/scientific_logic.py": "Prototype"
+      },
+      "endpoints": [
+        "POST /api/audit/evidence",
+        "POST /api/discovery/failure/diagnose-root-cause",
+        "GET /api/discovery/graveyard/list"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-006"
+      ]
+    },
+    {
+      "id": "campaigns-workbench",
+      "title": "Discovery campaigns and the workbench",
+      "group": "discovery-engines",
+      "description": "Multi-agent discovery campaigns: nine \"agents\" around an Alzheimer question, an eleven-step workbench, inference-time tree search, long-horizon campaigns under a research budget, a lab-in-the-loop recipe adapter and a reliability audit. The workbench also runs a real formal block (formalizer gate and comparison with the formal Alzheimer rivals).",
+      "status": "Scripted demo, apart from the workbench's formal block.",
+      "verification_chain": "",
+      "caveats": [
+        "The agents return hand-written Alzheimer objects and a constant empirical result; the workbench returns CORROBORATED_INVARIANT from a fabricated measurement of 0.68.",
+        "Inference-time scaling has four fixed branches and branch 3 always wins; the long-horizon campaign runs four fixed cycles and ignores target_cycles.",
+        "The reliability audit's four rule checks effectively always pass and recommend publication. The budget engine's arithmetic is correct but never refuses a charge."
+      ],
+      "maturity": {
+        "python/discovery/discovery_teams.py": "Exercised",
+        "python/discovery/discovery_workbench.py": "Prototype",
+        "python/discovery/inference_time_scaling.py": "Tested",
+        "python/discovery/lab_in_the_loop_adapter.py": "Prototype",
+        "python/discovery/long_horizon_campaign_engine.py": "Exercised",
+        "python/discovery/reliability_auditor.py": "Prototype",
+        "python/discovery/research_budget_engine.py": "Prototype"
+      },
+      "endpoints": [
+        "POST /api/discovery/campaign/run",
+        "POST /api/discovery/campaigns/long-horizon-run",
+        "POST /api/discovery/inference-scaling/search",
+        "POST /api/discovery/lab-in-the-loop/ground-recipe",
+        "POST /api/discovery/reliability/audit",
+        "POST /api/discovery/workbench/launch",
+        "GET /api/discovery/workbench/{workbench_id}"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmark_10_campaigns.py",
+        "scripts/demo_deepmind_synergy.py",
+        "scripts/demo_discovery_campaign.py",
+        "scripts/demo_epistemic_run.py",
+        "scripts/run_synergistic_discovery_campaign.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-007",
+        "ADR-DISCOVERY-008",
+        "ADR-DISCOVERY-009"
+      ]
+    },
+    {
+      "id": "tournament",
+      "title": "Hypothesis tournament (Elo)",
+      "group": "discovery-engines",
+      "description": "Ranks hypotheses by pairwise matches and Elo ratings.",
+      "status": "Claims register row 22: NOT VALIDATED.",
+      "verification_chain": "",
+      "caveats": [
+        "A match is a weighted difference of four scores the caller supplies; there is no debate and no evidence lookup."
+      ],
+      "maturity": {
+        "python/discovery/hypothesis_tournament_arena.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/discovery/tournament/debate-match",
+        "POST /api/discovery/tournament/run-tournament"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-058"
+      ]
+    },
+    {
+      "id": "constraint-mining",
+      "title": "Constraint mining, constraint court and grounded search",
+      "group": "discovery-engines",
+      "description": "Mining invariant constraints from multi-cohort data, adjudicating between rival constraints, ingesting structured sources with hashed lineage, and querying \"paper agents\".",
+      "status": "Canned.",
+      "verification_chain": "",
+      "caveats": [
+        "The cohorts are synthetic and built to satisfy the rule being mined; p-values are literals.",
+        "The constraint court takes no input: three built-in litigants with fixed likelihoods and a fixed winner.",
+        "The grounded search sensor returns three hard-coded records and fake agent endpoints; nothing external is queried (claims register row 10 is constructed)."
+      ],
+      "maturity": {
+        "python/discovery/constraint_court.py": "Prototype",
+        "python/discovery/constraint_discovery_engine.py": "Prototype",
+        "python/discovery/grounded_search_sensor.py": "Exercised"
+      },
+      "endpoints": [
+        "POST /api/discovery/constraints/mine-and-verify",
+        "POST /api/discovery/court/adjudicate",
+        "POST /api/discovery/paper-agent/execute",
+        "POST /api/discovery/paper-agent/query",
+        "POST /api/discovery/search/grounded-ingest"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/demo_epistemic_discovery_engine.py",
+        "scripts/demo_grounded_search_sensor.py",
+        "scripts/run_paper_agent_mcp_suite.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "anomaly-latent",
+      "title": "Anomaly, surprise and latent-structure engines",
+      "group": "discovery-engines",
+      "description": "Bayesian surprise (KL divergence between prior and posterior), latent factors from residuals by SVD, a cross-domain latent-invariant circuit, anomaly clustering, novelty and manifold detectors, a multiscale predictor and an energy-based auditor.",
+      "status": "Mixed: two engines compute, the rest are canned.",
+      "verification_chain": "",
+      "caveats": [
+        "bayesian_surprise_engine and latent_factor_discovery compute from their input, but the first ignores effect size and n and the second calls a post-hoc correlation causal.",
+        "The cross-domain engine fits thresholds on all data before its hold-out split, so hold-out violations are zero by construction; three of four domains are synthetic (claims register row 9, exit code only).",
+        "anomaly_discovery_engine returns two fixed clusters; manifold_detector returns REVOLUTIONARY for every input; multiscale and energy-based auditors use hand-written formulas with no learned model."
+      ],
+      "maturity": {
+        "python/discovery/anomaly_discovery_engine.py": "Prototype",
+        "python/discovery/bayesian_surprise_engine.py": "Exercised",
+        "python/discovery/energy_predictive_auditor.py": "Tested",
+        "python/discovery/latent_factor_discovery.py": "Exercised",
+        "python/discovery/manifold_detector.py": "Prototype",
+        "python/discovery/multiscale_abstraction_engine.py": "Tested",
+        "python/discovery/novelty_detector.py": "Prototype",
+        "python/discovery/test_manifold_detector.py": "Prototype",
+        "python/discovery/universal_discovery_engine.py": "Exercised"
+      },
+      "endpoints": [
+        "POST /api/discovery/anomalies/detect-and-cluster",
+        "POST /api/discovery/bayesian-surprise/evaluate",
+        "POST /api/discovery/energy-ebm/audit",
+        "POST /api/discovery/multiscale/predict",
+        "POST /api/discovery/universal/cross-domain-benchmark"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_universal_cross_domain_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-039",
+        "ADR-EPISTEMIC-040"
+      ]
+    },
+    {
+      "id": "evidence-weighting",
+      "title": "Evidence weighting and reality-contact scores",
+      "group": "discovery-engines",
+      "description": "Weights caller-supplied studies by design, confounding, pre-registration and size into a verdict; grades how much \"reality\" a hypothesis has touched on a 0 to 4 ladder; and a promotion firewall used by `coresearcher verify`.",
+      "status": "Partly real: the weighting computes from what the caller supplies.",
+      "verification_chain": "",
+      "caveats": [
+        "Study design and effect polarity are not parsed from sources; one strong trial can be outvoted by five observational studies.",
+        "The reality-contact ladder only checks which evidence lists are non-empty, never their content; reality_distance invents wet-lab records when given none.",
+        "`coresearcher verify` passes any claim whose caller-declared RCS level is at least 2 and that names any anchor string; the claim text is only hashed (claims register row 15, exit code only)."
+      ],
+      "maturity": {
+        "python/discovery/epistemic_stigmergy.py": "Tested",
+        "python/discovery/reality_contact_score.py": "Tested",
+        "python/discovery/reality_distance.py": "Prototype",
+        "python/discovery/sovereign_evidence_engine.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/evidence/audit",
+        "POST /api/discovery/reality-contact/evaluate",
+        "POST /api/discovery/reality-distance/evaluate",
+        "POST /api/discovery/stigmergy/audit-reality-firewall",
+        "POST /api/discovery/stigmergy/compile-instrument",
+        "POST /api/discovery/stigmergy/query-pheromone-field"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher verify"
+      ],
+      "files": [
+        "scripts/demo_reality_contact_score.py",
+        "scripts/run_epistemic_stigmergy_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-044"
+      ]
+    },
+    {
+      "id": "real-cohort",
+      "title": "Real-cohort discovery pipeline",
+      "group": "discovery-engines",
+      "description": "Ordinary least squares, residual anomalies and hold-out error on a cohort CSV on disk (MetaboAD), and a multi-cohort campaign runner.",
+      "status": "Claims register row 3 reports 0.0% gain; row 16 is NOT A CLAIM (scripted demo).",
+      "verification_chain": "",
+      "caveats": [
+        "The regression is real, but the verdict, violations, Bayes factor and RCS level are hard-coded whatever the error.",
+        "The campaign runner returns six literal outcomes and reads no data.",
+        "The pipeline reads a CSV path from the request on the server's disk."
+      ],
+      "maturity": {
+        "python/discovery/real_cohort_campaign_runner.py": "Exercised",
+        "python/discovery/real_cohort_empirical_pipeline.py": "Prototype"
+      },
+      "endpoints": [
+        "POST /api/discovery/campaigns/run-heterogeneous-suite",
+        "POST /api/discovery/real-cohort/run-empirical-discovery"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_empirical_cohort_discovery.py",
+        "scripts/run_real_cohort_discovery_suite.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "typed-decisions",
+      "title": "Typed fast decisions (System One, Vega, twin-gate harness)",
+      "group": "discovery-engines",
+      "description": "Fast \"System 1\" classification of hypotheses into Marr's three levels and triage of code diffs, a one-dimensional dynamical \"decision landscape\", and a harness of five gates (evidence path perturbation, failure classification, in-turn goal checks, executable invariant checks).",
+      "status": "Canned.",
+      "verification_chain": "",
+      "caveats": [
+        "Classification is keyword counts fed into a one-dimensional toy dynamics; no model is called and the speed-up figures are unmeasured.",
+        "The twin-gate harness executes nothing: the ScienceIDE check searches patch text for 'SyntaxError', and failures default to 'repairable' (claims register rows 12 and 13, synthetic)."
+      ],
+      "maturity": {
+        "python/discovery/fast_system_one_classifier.py": "Tested",
+        "python/discovery/marr_engine.py": "Prototype",
+        "python/discovery/twin_gate_harness.py": "Exercised",
+        "python/discovery/vega_decision_engine.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/harness/dream-classify-failure",
+        "POST /api/discovery/harness/hakken-evidence-audit",
+        "POST /api/discovery/harness/verify-in-turn-goal",
+        "POST /api/discovery/science-ide/execute-invariant-check",
+        "POST /api/discovery/system-one/classify-marr",
+        "POST /api/discovery/system-one/triage-pr",
+        "POST /api/discovery/vega/simulate-decision"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_fast_system_one_suite.py",
+        "scripts/run_twin_gate_harness_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-053"
+      ]
+    },
+    {
+      "id": "empirical-generation",
+      "title": "Empirical search, backward synthesis and refinement engines",
+      "group": "discovery-engines",
+      "description": "Random search over forecasting formulas on caller data (ERA), backward synthesis of a prediction contract from a CSV by least squares (ToolGrad-style), evidence-chain scoring and replay (Hakken, Dream-RSI), term ablation with simulated rebuttals, limitation extraction, and a Socratic audit of research questions.",
+      "status": "Mixed.",
+      "verification_chain": "",
+      "caveats": [
+        "ERA mutates no code, leaks future data into features, selects in-sample and is unseeded.",
+        "The backward synthesizer derives its contract from the data that would test it, yet labels it guaranteed; it reads a CSV path from the request (claims register row 5, small samples).",
+        "The ablation engine discards its real Euler-Lagrange result: every term is reported necessary and every rebuttal accepted. Limitation extraction is keyword matching to templates.",
+        "The Socratic auditor uses regex heuristics; no language model despite ADR-056."
+      ],
+      "maturity": {
+        "python/discovery/ablation_rebuttal_engine.py": "Integrated",
+        "python/discovery/backward_execution_synthesizer.py": "Exercised",
+        "python/discovery/era_empirical_engine.py": "Tested",
+        "python/discovery/hakken_dream_rsi_engine.py": "Integrated",
+        "python/discovery/limitation_resolution_engine.py": "Tested",
+        "python/discovery/socratic_question_auditor.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/ablation-rebuttal/run",
+        "POST /api/discovery/contracts/synthesize-backward",
+        "POST /api/discovery/dream-rsi/replay-policy",
+        "POST /api/discovery/era/mutate-code",
+        "POST /api/discovery/era/run-search-campaign",
+        "POST /api/discovery/hakken/predict-links",
+        "POST /api/discovery/limitations/extract"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_toolgrad_backward_synthesis_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-037",
+        "ADR-DISCOVERY-042",
+        "ADR-DISCOVERY-054",
+        "ADR-DISCOVERY-056",
+        "ADR-DISCOVERY-057"
+      ]
+    },
+    {
+      "id": "symbolic-courts",
+      "title": "Symbolic, Lean and categorical courts (earlier phase)",
+      "group": "discovery-engines",
+      "description": "Older formal checks: symbolic identity checks with SymPy, a Lean runner that scans for `sorry` and runs bare `lean`, a claim-to-formal \"bijectivity\" gate, result-family tiers, commutative-diagram audits, and Euler-Lagrange derivation from a Lagrangian.",
+      "status": "Partly real; superseded by the formal core and the statement audits.",
+      "verification_chain": "",
+      "caveats": [
+        "The SymPy identity check and the Euler-Lagrange derivation are real; SymPy parses request text with sympify.",
+        "The Lean runner cannot load Mathlib, and axiom or admit do not block 'verified'.",
+        "The bijectivity gate is a keyword match on four features; claims register row 19 is NOT SUPPORTED. Statement fidelity replaces it.",
+        "Diagram holonomy is always zero because morphisms default to the identity; the adjunction check returns constants (claims register row 1, constructed)."
+      ],
+      "maturity": {
+        "python/discovery/categorical_epistemic_engine.py": "Exercised",
+        "python/discovery/exact_symbolic_court.py": "Tested",
+        "python/discovery/lagrangian_epistemic_engine.py": "Integrated",
+        "python/discovery/lean_formalization_engine.py": "Tested",
+        "python/discovery/result_family_orchestrator.py": "Tested",
+        "python/discovery/semantic_bijectivity_auditor.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/categorical/audit-diagram",
+        "POST /api/discovery/exact-symbolic/audit",
+        "POST /api/discovery/families/audit",
+        "POST /api/discovery/lagrangian/audit",
+        "POST /api/discovery/lean/audit",
+        "POST /api/discovery/lean/audit-bijectivity"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_categorical_reasoning_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-036",
+        "ADR-DISCOVERY-043",
+        "ADR-DISCOVERY-047",
+        "ADR-DISCOVERY-048",
+        "ADR-EPISTEMIC-034"
+      ]
+    },
+    {
+      "id": "frontier-math-engines",
+      "title": "Frontier-math engines (flywheel, prove-verify, barriers, Rule 30)",
+      "group": "discovery-engines",
+      "description": "A closed-loop \"flywheel\" for frontier mathematics, a multi-agent prove-verify harness, an algebraic structure compiler, a barrier auditor against known no-go theorems, a four-layer Quasi-Riemann auditor, and the Rule 30 engines (barrier auditor, periodic-word exclusion, Python-to-Lean reasoning bridge).",
+      "status": "Mostly canned; some issue false proofs.",
+      "verification_chain": "",
+      "caveats": [
+        "The prove-verify harness reports a conjecture fully proven once two built-in lemmas are verified, without any model call; the functional review got is_fully_proven=True for the Riemann hypothesis.",
+        "The flywheel fabricates a lemma marked kernel-proved and grades by substring with hand-set rewards.",
+        "The structure compiler picks fixed matrices by keyword; the barrier auditor answers UNOBSTRUCTED for any target in three of four families.",
+        "The Rule 30 and Quasi-Riemann auditors are tested only on their own constructed inputs; no external result backs them."
+      ],
+      "maturity": {
+        "python/discovery/algebraic_structure_compiler.py": "Tested",
+        "python/discovery/asymptotic_barrier_auditor.py": "Tested",
+        "python/discovery/cellular_automata_barrier_auditor.py": "Tested",
+        "python/discovery/cogentic_proof_orchestrator.py": "Tested",
+        "python/discovery/frontier_math_flywheel.py": "Integrated",
+        "python/discovery/quasi_riemann_synergistic_auditor.py": "Tested",
+        "python/discovery/rule30_reasoning_bridge.py": "Tested",
+        "python/discovery/rule30_word_exclusion.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/barriers/audit",
+        "POST /api/discovery/cogentic/run-proof-discovery",
+        "POST /api/discovery/flywheel/cycle",
+        "POST /api/discovery/math-flywheel/audit-admissibility",
+        "POST /api/discovery/math-flywheel/run-cycle"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-043",
+        "ADR-DISCOVERY-045",
+        "ADR-DISCOVERY-046",
+        "ADR-DISCOVERY-048",
+        "ADR-DISCOVERY-050",
+        "ADR-DISCOVERY-054",
+        "ADR-DISCOVERY-055",
+        "ADR-DISCOVERY-070",
+        "ADR-DISCOVERY-071",
+        "ADR-DISCOVERY-072",
+        "ADR-DISCOVERY-073"
+      ]
+    },
+    {
+      "id": "physics-oracles",
+      "title": "Physical theorem court and physics oracles",
+      "group": "discovery-engines",
+      "description": "A proof-graph audit for physical theorems (cycle check and inequality checks), an OpenFOAM continuum-mechanics oracle, an NVIDIA Isaac Sim grounding adapter and a world-model adapter.",
+      "status": "Partly real (the cycle check); the oracles are interfaces.",
+      "verification_chain": "",
+      "caveats": [
+        "Missing premises do not fail the theorem verdict; the 'adversarial singularity search' is a toy formula decided by a caller flag (claims register row 4, exit code only).",
+        "The OpenFOAM and Isaac Sim adapters are tested on their own fixtures; no solver run is part of CI.",
+        "The world-model adapter adds to dictionary entries and checks bounds; it never calls the external H-JEPA repository ADR-038 describes."
+      ],
+      "maturity": {
+        "python/discovery/isaac_sim_grounding_adapter.py": "Tested",
+        "python/discovery/openfoam_continuum_oracle.py": "Tested",
+        "python/discovery/physical_theorem_court.py": "Integrated",
+        "python/discovery/world_model_adapter.py": "Integrated"
+      },
+      "endpoints": [
+        "POST /api/discovery/physical-court/audit-theorem",
+        "POST /api/discovery/world-model/simulate"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_physical_coherence_suite.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-038",
+        "ADR-DISCOVERY-074",
+        "ADR-DISCOVERY-075"
+      ]
+    },
+    {
+      "id": "governance-auditors",
+      "title": "Oversight, forecast, sovereignty and PR auditors",
+      "group": "discovery-engines",
+      "description": "An audit of human review telemetry against rubber-stamping, a registry of sealed prospective forecasts, an \"air-gap\" perimeter check and notarisation, and a scientific auditor for pull requests reachable from a GitHub webhook.",
+      "status": "Partly real.",
+      "verification_chain": "",
+      "caveats": [
+        "The oversight audit is rule arithmetic on self-reported telemetry; lifecycle sign-offs do not consult it.",
+        "Forecast seals are SHA-256 in a JSON file with a caller-supplied timestamp; there is no external (RFC-3161) timestamp.",
+        "The sovereignty perimeter classifies a list of URL strings the caller supplies; it intercepts no traffic.",
+        "The PR auditor matches a handful of literal strings and calls an unmatched PR approved (claims register row 2, exit code only)."
+      ],
+      "maturity": {
+        "python/discovery/audited_human_oversight.py": "Tested",
+        "python/discovery/discovery_forecast_registry.py": "Exercised",
+        "python/discovery/epistemic_pr_auditor.py": "Integrated",
+        "python/discovery/sovereign_epistemic_bunker.py": "Tested"
+      },
+      "endpoints": [
+        "GET /api/discovery/forecasts/audit-integrity",
+        "GET /api/discovery/forecasts/list",
+        "POST /api/discovery/forecasts/register",
+        "POST /api/discovery/oversight/audit",
+        "POST /api/discovery/sovereignty/audit-perimeter",
+        "POST /api/discovery/sovereignty/notarize",
+        "POST /api/webhooks/github"
+      ],
+      "hidden_endpoints": [
+        "POST /api/discovery/github/audit-pr-webhook"
+      ],
+      "cli": [],
+      "files": [
+        "scripts/run_epistemic_pr_auditor_suite.py",
+        "scripts/run_prospective_forecast_registry.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-049",
+        "ADR-SOVEREIGNTY-041"
+      ]
+    },
+    {
+      "id": "agora-history",
+      "title": "Agora shared memory (scientific git history)",
+      "group": "discovery-engines",
+      "description": "An in-memory commit graph of theories and constraints with branches, cherry-picks, verified claims and dead ends, shared by agents.",
+      "status": "Claims register row 11: PASS (exit code only).",
+      "verification_chain": "",
+      "caveats": [
+        "Not persisted: the history is lost when the server restarts.",
+        "Constraints are auto-registered as verified at RCS 2, and no route records a dead end."
+      ],
+      "maturity": {
+        "python/discovery/scientific_git_history.py": "Tested"
+      },
+      "endpoints": [
+        "POST /api/discovery/git/branch/cherry-pick",
+        "POST /api/discovery/git/branch/create",
+        "GET /api/discovery/git/dead-ends",
+        "GET /api/discovery/git/open-branches",
+        "GET /api/discovery/git/verified-claims",
+        "GET /api/discovery/history/commits"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/run_agora_shared_memory_suite.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "ontology-control",
+      "title": "Ontology change control",
+      "group": "discovery-engines",
+      "description": "Plan, apply and roll back changes to a small ontology, with a forward-chaining reasoner that computes the \"blast radius\" of a change before it is applied (ADR-ONTOLOGY-035).",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "No other capability consumes the ontology; the range rule is unused."
+      ],
+      "maturity": {
+        "python/knowledge/ontology_plan_engine.py": "outside register"
+      },
+      "endpoints": [
+        "POST /api/ontology/apply",
+        "POST /api/ontology/plan",
+        "POST /api/ontology/rollback"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-ONTOLOGY-035"
+      ]
+    },
+    {
+      "id": "scientific-ledger",
+      "title": "Scientific ledger, git scanner and Zenodo publication",
+      "group": "observer",
+      "description": "Reconstructs a project's scientific history from git commits, keeps a ledger of hashed events, normalises it into Zenodo metadata and publishes it through Zenodo's REST API.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "POST /api/zenodo/publish with the default use_sandbox=true does not contact Zenodo: it returns a simulated DOI. With use_sandbox=false it publishes to production Zenodo.",
+        "The ledger is an in-memory list, not append-only and not persisted. The git scanner stamps events with the current time."
+      ],
+      "maturity": {
+        "python/observer/git_scanner.py": "outside register",
+        "python/observer/ledger_normalizer.py": "outside register",
+        "python/observer/scientific_ledger.py": "outside register",
+        "python/observer/zenodo_publisher.py": "outside register"
+      },
+      "endpoints": [
+        "GET /api/observer/ledger",
+        "POST /api/zenodo/publish"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/fetch_zenodo_links.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "trajectory-reconstruction",
+      "title": "Trajectory reconstruction scripts (sprints 15 to 60)",
+      "group": "observer",
+      "description": "Scripts that extract decisions from public GitHub repositories (LangGraph and others), link them into a trajectory graph, build an evidence graph from it, and audit the precision of the result.",
+      "status": "Legacy scripts; no module, endpoint or test uses them.",
+      "verification_chain": "",
+      "caveats": [
+        "Several print Spanish messages and run on mock data; atlas_extractor.py and build_evidence_graph_v0.py do not parse under current Python."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/decision_trajectory_example.json",
+        "examples/langgraph_evidence_graph.json",
+        "examples/langgraph_evidence_request.json",
+        "scripts/advanced_claim_reconstruction.py",
+        "scripts/atlas_extractor.py",
+        "scripts/audit_evidence_anchoring.py",
+        "scripts/audit_paradigm_residues.py",
+        "scripts/audit_trajectory_precision.py",
+        "scripts/build_evidence_graph_v0.py",
+        "scripts/classify_decisions.py",
+        "scripts/evaluate_extraction.py",
+        "scripts/extract_decisions.py",
+        "scripts/fetch_langgraph_trajectory.py",
+        "scripts/generate_evidence_anchored_report.py",
+        "scripts/link_decisions.py",
+        "scripts/reconstruct_trajectory.py",
+        "scripts/run_cross_repo_benchmark.py",
+        "scripts/test_evidence_graph_scalability.py",
+        "scripts/verify_claim_reconstruction.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "evidence-contract",
+      "title": "Evidence contract for EdiTXT",
+      "group": "ecosystem",
+      "description": "EdiTXT sends an EvidenceRequest for a claim in a manuscript; CoResearcher answers with a content-addressed EvidenceGraph built only from what it actually holds (lifecycle projects, research packages, claims-register rows, formal verdicts), with every gap listed. The schemas and the list of possible targets are published.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "It reports what CoResearcher holds; it does not search the literature or judge sources."
+      ],
+      "maturity": {
+        "python/discovery/evidence_service.py": "Integrated"
+      },
+      "endpoints": [
+        "GET /api/evidence/graphs/{graph_id}",
+        "POST /api/evidence/requests",
+        "GET /api/evidence/schema",
+        "GET /api/evidence/targets"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-059",
+        "ADR-DISCOVERY-063",
+        "ADR-DISCOVERY-065",
+        "ADR-DISCOVERY-067"
+      ]
+    },
+    {
+      "id": "oase-adapter",
+      "title": "OASE formal adapter",
+      "group": "ecosystem",
+      "description": "Installs an `oase formal` tool into a checkout of Google's Open Agentic Science Engine (Apache 2.0): CoResearcher's formal soundness checks, run in OASE's two-phase tool style, with an evidence-assessment gate. A CI job applies it to OASE at a pinned commit and runs OASE's own checks and conformance tests before and after.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "POSIX only (OASE imports fcntl); it runs in the oase-conformance CI job, not on Windows."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "integrations/oase/README.md",
+        "integrations/oase/apply.py",
+        "integrations/oase/apply.sh",
+        "integrations/oase/ci",
+        "integrations/oase/demo",
+        "integrations/oase/formal.py",
+        "integrations/oase/gate",
+        "integrations/oase/skills",
+        "integrations/oase/tests"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-069"
+      ]
+    },
+    {
+      "id": "capability-regression",
+      "title": "Benchmarks as regression tests",
+      "group": "benchmarks",
+      "description": "Each October 2026 benchmark or calibration is a regression case: it re-runs offline on committed fixtures and its observations are compared with frozen expectations (versioned, with a SHA-256). A change in what a capability catches fails the check until the expectations are deliberately re-frozen. The verification chain itself is a case, on mathematical and biomedical hypotheses.",
+      "status": "",
+      "verification_chain": "Method M9: the chain is regression-tested on real corrected errors.",
+      "caveats": [],
+      "maturity": {
+        "python/cli/regression.py": "outside register",
+        "python/discovery/capability_regression.py": "Integrated"
+      },
+      "endpoints": [
+        "GET /api/regression/cases",
+        "POST /api/regression/check"
+      ],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher regression check",
+        "coresearcher regression list",
+        "coresearcher regression update"
+      ],
+      "files": [
+        "benchmarks/regression"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-084"
+      ]
+    },
+    {
+      "id": "openai-math-benchmarks",
+      "title": "openai/math benchmarks (time travel, chain re-run, coverage, pilot)",
+      "group": "benchmarks",
+      "description": "Measurements on the openai/math corpus: the time-travel benchmark (would our checks have caught the defects later corrected in revised papers?), its re-runs with the full chain and with typed, constrained, case-scoped and unbounded conventions, a corpus-wide map of which paper claims have formal counterparts, a trivial-witness probe over every Comparator target, and the statement-fidelity pilot with its Lean label oracle.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "Decided detections stay at 1 of 17 corrected defects across the re-runs (the unresolved citation); the other candidates are coincidences or need premise-status information (OPENAI_MATH_CHAIN_RESULTS.md and the typed, constrained, case-scoped and unbounded result files).",
+        "The pilot measured the semantic bijectivity gate as NOT SUPPORTED (claims register row 19)."
+      ],
+      "maturity": {
+        "python/discovery/openai_math_chain.py": "Tested",
+        "python/discovery/openai_math_coverage.py": "Tested",
+        "python/discovery/openai_math_time_travel.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/openai-math-coverage",
+        "scripts/benchmarks/openai_math_lean_oracle.py",
+        "scripts/benchmarks/openai_math_oracle_sensitivity.py",
+        "scripts/benchmarks/openai_math_pilot.py",
+        "scripts/benchmarks/openai_math_revision_bench.py",
+        "scripts/cases/openai_math_coverage_report.py",
+        "scripts/cases/trivial_witness_probe_report.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-070",
+        "ADR-DISCOVERY-077",
+        "ADR-DISCOVERY-082",
+        "ADR-DISCOVERY-083",
+        "ADR-DISCOVERY-084",
+        "ADR-DISCOVERY-085"
+      ]
+    },
+    {
+      "id": "concordance-benchmark",
+      "title": "Hypothesis verification concordance benchmark",
+      "group": "benchmarks",
+      "description": "Compares CoResearcher's formal verdicts with an expert arm and a local-model arm on the same hypotheses, scored after the predictions are frozen.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "The expert arm is Claude Science, so the result is AI-expert concordance, not agreement with researchers."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/concordance_llm_arm.py",
+        "scripts/benchmarks/concordance_score.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "unknown-mechanism-v2-v4",
+      "title": "Unknown-mechanism benchmarks v2 to v4 (pre-registered)",
+      "group": "benchmarks",
+      "description": "Pre-registered successors of the withdrawn v1: recovering a hidden law from data against tuned ridge regression and PySR, with a permutation null (v2), a null gate (v3) and laws outside every arm's hypothesis space tested by extrapolation (v4).",
+      "status": "Claims register row 18 (v2): MIXED; see the v3 and v4 reports.",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/run_unknown_mechanism_v2.py",
+        "scripts/benchmarks/run_unknown_mechanism_v3.py",
+        "scripts/benchmarks/run_unknown_mechanism_v4.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "legacy-benchmark-harnesses",
+      "title": "Legacy benchmark harnesses (withdrawn or scripted)",
+      "group": "benchmarks",
+      "description": "Earlier benchmark harnesses: the 100-world unknown-mechanism benchmark (v1), a retrospective time split at 2018, a 50-case adversarial stress suite, ConstraintBox, and the TRACES meta-evaluation adapter.",
+      "status": "Withdrawn or scripted. Do not cite.",
+      "verification_chain": "",
+      "caveats": [
+        "v1 of the unknown-mechanism benchmark is WITHDRAWN (claims register row 7): selection on the test split, and its candidate library contained the true laws. The route still serves it.",
+        "The retrospective time split writes the post-2018 answers in an if-ladder; the engines it imports are never called (row 6, exit code only).",
+        "The adversarial suite sets detected = True in each loop; its one miss is scripted (row 8).",
+        "ConstraintBox inference already knows the hidden rules; TRACES returns AUTHENTIC with every TRACES score at zero."
+      ],
+      "maturity": {
+        "python/discovery/adversarial_destruction_test.py": "Exercised",
+        "python/discovery/constraint_box.py": "Prototype",
+        "python/discovery/retrospective_time_split_benchmark.py": "Exercised",
+        "python/discovery/traces_epistemic_adapter.py": "Exercised",
+        "python/discovery/unknown_mechanism_benchmark.py": "Exercised"
+      },
+      "endpoints": [
+        "POST /api/discovery/adversarial/run-destruction-test",
+        "POST /api/discovery/constraint-box/run-benchmark",
+        "POST /api/discovery/retrospective/run-time-split-benchmark",
+        "POST /api/discovery/traces/evaluate-epistemic-rigor",
+        "POST /api/discovery/unknown-mechanism/run-100-worlds-benchmark"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/demo_constraint_box_benchmark.py",
+        "scripts/run_adversarial_destruction_suite.py",
+        "scripts/run_retrospective_discovery_benchmark.py",
+        "scripts/run_traces_epistemic_benchmark.py",
+        "scripts/run_unknown_mechanism_benchmark.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "benchmark-statistics",
+      "title": "Benchmark confidence intervals",
+      "group": "benchmarks",
+      "description": "Computes 95% Wilson score intervals for the benchmark proportions and writes the confidence-interval table.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/compute_confidence_intervals.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "domain-seeds",
+      "title": "Domain question seeds",
+      "group": "benchmarks",
+      "description": "JSON seeds for fourteen research domains (questions, entities, known contradictions) and a page of example discovery-level hypotheses, from the early \"discovery OS\" phase.",
+      "status": "Legacy data: no current code reads these files.",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "benchmarks/als.json",
+        "benchmarks/alzheimer.json",
+        "benchmarks/autoimmune.json",
+        "benchmarks/cardiovascular.json",
+        "benchmarks/drug_repurposing.json",
+        "benchmarks/glioblastoma.json",
+        "benchmarks/huntington.json",
+        "benchmarks/longevity.json",
+        "benchmarks/metastasis.json",
+        "benchmarks/neurodevelopment.json",
+        "benchmarks/neuroinflammation.json",
+        "benchmarks/parkinson.json",
+        "benchmarks/rare_diseases.json",
+        "benchmarks/sleep_memory.json",
+        "benchmarks/type_d_examples.md"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "api-server",
+      "title": "API server, security and request schemas",
+      "group": "infrastructure",
+      "description": "Assembles the FastAPI application from the routers: CORS, rate limiting, API-key authentication for state-modifying endpoints, HMAC verification of webhooks, and the request models. `/api/health` reports the service and the demo state's size.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "api/schemas.py": "outside register",
+        "api/security.py": "outside register",
+        "api/server.py": "outside register",
+        "api/testing.py": "outside register"
+      },
+      "endpoints": [
+        "GET /api/health"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-009"
+      ]
+    },
+    {
+      "id": "cli-shell",
+      "title": "CLI shell",
+      "group": "infrastructure",
+      "description": "The `coresearcher` command: `serve` starts the API, `test` runs the test suite, `info` prints the configuration.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "`info` lists older engines (holonomy auditor, reality firewall, adversarial engine) as 'core engines active'; see their caveats above."
+      ],
+      "maturity": {
+        "python/cli/main.py": "outside register"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [
+        "coresearcher info",
+        "coresearcher serve",
+        "coresearcher test"
+      ],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-068",
+        "ADR-DISCOVERY-085",
+        "ADR-DISCOVERY-086"
+      ]
+    },
+    {
+      "id": "research-lifecycle",
+      "title": "Research lifecycle and stage gates",
+      "group": "infrastructure",
+      "description": "Moves a research project through fixed stages (question, hypothesis, protocol, execution, controls, analysis, report), each closed by a gate whose checks are of four kinds: verifier, human, artifact and rubric. Whoever produced a result cannot certify it. Events are hash-chained and replayable; a watcher reports stalled stages and changed artifacts; a release says whether the work was pre-registered or exploratory; OnTrack ingests the projects.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "The verifier role is declared by the caller over the API; no module submits verifier results by itself yet.",
+        "Human sign-offs are optional since 2026-10-17 and reported in release notes (claims register row 26)."
+      ],
+      "maturity": {
+        "python/discovery/research_lifecycle.py": "Integrated"
+      },
+      "endpoints": [
+        "GET /api/lifecycle/ontrack",
+        "GET /api/lifecycle/projects",
+        "POST /api/lifecycle/projects",
+        "GET /api/lifecycle/projects/{project_id}",
+        "GET /api/lifecycle/projects/{project_id}/gate",
+        "POST /api/lifecycle/projects/{project_id}/gate/pass",
+        "POST /api/lifecycle/projects/{project_id}/release",
+        "POST /api/lifecycle/projects/{project_id}/results",
+        "POST /api/lifecycle/projects/{project_id}/rework",
+        "GET /api/lifecycle/template",
+        "GET /api/lifecycle/watch"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-063"
+      ]
+    },
+    {
+      "id": "research-packages",
+      "title": "Research packages",
+      "group": "infrastructure",
+      "description": "One file that carries a lifecycle project to another machine: its event log, every artifact, a README and RO-Crate metadata. Packages can be exported, verified without importing, and forked; tampering, silent omissions and forged gates are refused. Published packages are served byte for byte.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {
+        "python/discovery/research_package.py": "Integrated"
+      },
+      "endpoints": [
+        "GET /api/lifecycle/packages",
+        "POST /api/lifecycle/packages/inspect",
+        "GET /api/lifecycle/packages/{name}",
+        "GET /api/lifecycle/projects/{project_id}/package"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/packages/build_oracle_package.py",
+        "scripts/research_package.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-063",
+        "ADR-DISCOVERY-065"
+      ]
+    },
+    {
+      "id": "capability-catalogue",
+      "title": "Capability catalogue, contracts and documentation checks",
+      "group": "infrastructure",
+      "description": "Keeps documentation and contracts in step with the code: the OpenAPI contract and the API reference, the module register, this capability map and its registry file, the confidence-interval table, consistency between README, configuration and code, and the English-language policy. `GET /api/capabilities` serves every endpoint as an OnTrack capability contract with its schemas, determinism, operation class and module maturity (ADR-067).",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [],
+      "maturity": {},
+      "endpoints": [
+        "GET /api/capabilities"
+      ],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/check_repo_consistency.py",
+        "scripts/enforce_english_policy.py",
+        "scripts/export_openapi.py",
+        "scripts/generate_api_reference.py",
+        "scripts/generate_capability_map.py",
+        "scripts/generate_module_maturity.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-067",
+        "ADR-DISCOVERY-085"
+      ]
+    },
+    {
+      "id": "legacy-scaffolding",
+      "title": "Legacy scaffolding (bootstrap, constitution, early examples)",
+      "group": "infrastructure",
+      "description": "Files from the \"Scientific OS\" phase: a Node bootstrap script, a Neo4j schema, constitution validation and chaos tests over schemas/constitution_rules.yaml, a script that archived observer modules, and the first protocol examples.",
+      "status": "Legacy; nothing in the maintained surface uses these files.",
+      "verification_chain": "",
+      "caveats": [
+        "bootstrap.mjs builds TypeScript packages that are no longer in the repository (there is no package.json).",
+        "The GitHub workflows research-agent, review-agent and publish run no CoResearcher engine and no model; they write fixed text, and publish never contacts Zenodo."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "examples/alzheimer-biomarker-study",
+        "examples/neurodegeneration-workflow.md",
+        "scripts/archive_programs.py",
+        "scripts/bootstrap.mjs",
+        "scripts/neo4j-schema.cypher",
+        "scripts/run_constitution_chaos_tests.py",
+        "scripts/validate_constitution.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-062"
+      ]
+    }
+  ]
 }

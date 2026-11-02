@@ -118,6 +118,10 @@ TT_CONSTRAINED = [  # The constrained re-measure (OPENAI_MATH_CONSTRAINED_PROTOC
     "docs/reference/benchmarks/openai_math_constrained_registry.json",
     "docs/reference/benchmarks/openai_math_constrained_contexts.json",
 ]
+TT_UNBOUNDED = [  # Unbounded integer variables (OPENAI_MATH_UNBOUNDED_PROTOCOL.md, ADR-090), case-scoped registry.
+    "docs/reference/benchmarks/openai_math_cases_registry.json",
+    "docs/reference/benchmarks/openai_math_unbounded_contexts.json",
+]
 TT_CASES = [  # Case-scoped hypotheses (OPENAI_MATH_CASES_PROTOCOL.md, ADR-089), on the constrained contexts.
     "docs/reference/benchmarks/openai_math_cases_registry.json",
     "docs/reference/benchmarks/openai_math_constrained_contexts.json",
@@ -164,7 +168,8 @@ def _time_travel() -> Dict[str, Dict[str, Any]]:
     for check, buckets in sorted(chain["alarm_load"].items()):
         for bucket, row in sorted(buckets.items()):
             out[f"chain/alarms/{bucket}/flags/{check}"] = obs(row["flags"], LOWER)
-    for prefix, files in (("typed", TT_TYPED), ("constrained", TT_CONSTRAINED), ("cases", TT_CASES)):
+    for prefix, files in (("typed", TT_TYPED), ("constrained", TT_CONSTRAINED), ("cases", TT_CASES),
+                          ("unbounded", TT_UNBOUNDED)):
         typed = omc.replay(_read_json(TT_CHAIN[0]), *[_read_json(f) for f in files], _read_json(TT_CHAIN[3]), items,
                            omc.ENCODABLE)
         for item_id, rec in sorted(typed["defects"].items()):
@@ -480,7 +485,8 @@ CASES: Dict[str, Case] = {
     for c in (
         Case("openai_math_time_travel", "openai/math time-travel benchmark: real corrected defects and false alarms",
              "ADR-DISCOVERY-077",
-             [TT_DATASET, TT_FIXTURE] + TT_CHAIN + TT_TYPED + TT_CONSTRAINED + TT_CASES[:1], _time_travel,
+             [TT_DATASET, TT_FIXTURE] + TT_CHAIN + TT_TYPED + TT_CONSTRAINED + TT_CASES[:1] + TT_UNBOUNDED[1:],
+             _time_travel,
              "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain "
              "re-run from its blind registry entries and citing contexts."),
         Case("openai_math_coverage_calibration", "Coverage-map calibration, families 079 and 215",

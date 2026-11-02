@@ -151,7 +151,7 @@
       "status": "",
       "verification_chain": "",
       "caveats": [
-        "The API returns Lean source marked NOT_KERNEL_CHECKED; nothing in the running service calls the Lean kernel. Kernel checks happen only in scripts/benchmarks/formal_lean_check.py on a machine with Mathlib."
+        "The API returns Lean source marked NOT_KERNEL_CHECKED; the running service never calls the Lean kernel. Kernel checks run offline (scripts/benchmarks/formal_lean_check.py on a machine with Mathlib) or in the Lean kernel checks workflow, whose records are the only way to KERNEL_CHECKED (see recorded kernel checks)."
       ],
       "maturity": {
         "python/discovery/formal_lean.py": "Integrated"
@@ -168,6 +168,31 @@
       "adrs": [
         "ADR-DISCOVERY-047",
         "ADR-DISCOVERY-060"
+      ]
+    },
+    {
+      "id": "kernel-records",
+      "title": "Recorded Lean kernel checks",
+      "group": "formal-core",
+      "description": "A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux runner, on our Lean files and on openai/math Comparator challenges, and writes a kernel record next to the full run log: what was checked (file hash, toolchain, Mathlib commit), the axioms each theorem uses, the wall time and the result. The result is recomputed from the log, never trusted from the record. A hash-verified PASS record is the only way a claim reaches KERNEL_CHECKED; the climb for a registry entry is `POST /api/registry/entries/{entry_id}/kernel-check` (listed under the registry).",
+      "status": "",
+      "verification_chain": "Feeds step 8, trust ladder (M7): the top rung needs a verified kernel record (ADR-092).",
+      "caveats": [
+        "BLOCKED (the kernel did not run or did not finish) is a non-verdict and never climbs.",
+        "Records exist only for the targets the workflow has run (records/kernel/); everything else stays below KERNEL_CHECKED."
+      ],
+      "maturity": {
+        "python/discovery/kernel_records.py": "Integrated"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/lean/comparator_preflight.sh",
+        "scripts/lean/kernel_check.py"
+      ],
+      "adrs": [
+        "ADR-DISCOVERY-092"
       ]
     },
     {
@@ -284,7 +309,8 @@
         "ADR-DISCOVERY-070",
         "ADR-DISCOVERY-076",
         "ADR-DISCOVERY-080",
-        "ADR-DISCOVERY-081"
+        "ADR-DISCOVERY-081",
+        "ADR-DISCOVERY-092"
       ]
     },
     {
@@ -414,6 +440,7 @@
         "POST /api/registry/dependencies",
         "POST /api/registry/entries",
         "GET /api/registry/entries/{entry_id}",
+        "POST /api/registry/entries/{entry_id}/kernel-check",
         "POST /api/registry/entries/{entry_id}/retract",
         "POST /api/registry/flags/{node}/reevaluated",
         "GET /api/registry/impact/{node}"
@@ -437,7 +464,8 @@
         "ADR-DISCOVERY-085",
         "ADR-DISCOVERY-086",
         "ADR-DISCOVERY-087",
-        "ADR-DISCOVERY-088"
+        "ADR-DISCOVERY-088",
+        "ADR-DISCOVERY-092"
       ]
     },
     {

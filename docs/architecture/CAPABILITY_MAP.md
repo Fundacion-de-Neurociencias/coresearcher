@@ -27,7 +27,7 @@ supplies. They are listed here with those caveats, so nobody mistakes them for w
 the product today are the formal core, the verification chain, the statement and manuscript audits, the registry
 and ledgers, the biomedical checks, the regression benchmarks and the research lifecycle.
 
-The map covers **57 capabilities** in 11 groups: 140 REST endpoints, 30 CLI commands and 150 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
+The map covers **58 capabilities** in 11 groups: 141 REST endpoints, 30 CLI commands and 151 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
 
 ## How to read an entry
 
@@ -56,6 +56,7 @@ Each capability lists:
 | [Formalizer and self-consistency gate](#formalizer-gate) | Formal core | 1 | 0 | 2 integrated | yes | 2 |
 | [Two-phase formal runs with provenance (formal run / analyze)](#formal-pipeline) | Formal core | 0 | 3 | 1 tested, 1 outside register | - | - |
 | [Lean 4 export and kernel cross-check](#lean-export) | Formal core | 0 | 0 | 1 integrated | - | 1 |
+| [Recorded Lean kernel checks](#kernel-records) | Formal core | 0 | 0 | 1 integrated | yes | 2 |
 | [Composed verification chain](#verification-chain) | Verification chain | 1 | 1 | 1 integrated, 1 outside register | yes | 2 |
 | [Freeze service (acceptance criteria fixed in advance)](#freeze-service) | Verification chain | 4 | 4 | 1 integrated, 1 outside register | yes | - |
 | [Obligation ledger for submitted hypotheses](#hypothesis-ledger) | Verification chain | 0 | 0 | 1 integrated | yes | - |
@@ -64,7 +65,7 @@ Each capability lists:
 | [Pre-registered existence audits](#existence-audits) | Statement and manuscript audits | 0 | 0 | 2 tested | - | - |
 | [Manuscript audit (citation gate and import obligations)](#manuscript-audit) | Statement and manuscript audits | 1 | 1 | 1 integrated, 2 tested | - | 2 |
 | [Asymptotic notation as explicit quantified forms](#asymptotic-forms) | Statement and manuscript audits | 0 | 0 | 1 tested | - | - |
-| [Registry of cited results and premises](#cited-registry) | Registry and ledgers | 7 | 7 | 1 integrated, 2 tested, 1 outside register | yes | 1 |
+| [Registry of cited results and premises](#cited-registry) | Registry and ledgers | 8 | 7 | 1 integrated, 2 tested, 1 outside register | yes | 1 |
 | [Obligation ledger and machine-checked proof cases](#obligation-ledger) | Registry and ledgers | 2 | 0 | 1 integrated, 2 tested, 1 exercised | - | - |
 | [Biomedical checks: units, conventions and domain probes](#biomedical-checks) | Biomedical domain | 2 | 3 | 2 integrated, 1 tested, 1 outside register | yes | 2 |
 | [Mechanistic chains](#mechanistic-chains) | Biomedical domain | 1 | 1 | 1 integrated | yes | 1 |
@@ -147,7 +148,7 @@ Represents a hypothesis as variables, constraints and claims over a declared sta
 
 **ADRs:** [ADR-006](../decisions/ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md), [ADR-059](../decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md), [ADR-060](../decisions/ADR-DISCOVERY-060-SMT-BACKEND-AND-CONSEQUENCES.md), [ADR-064](../decisions/ADR-DISCOVERY-064-FORMALIZER-SELF-CONSISTENCY-GATE.md), [ADR-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md), [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_integer_variables.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
 
 <a id="formalizer-gate"></a>
 
@@ -206,7 +207,7 @@ States a consequence that z3 has decided as a Lean 4 theorem over the reals, so 
 
 **Caveats:**
 
-- The API returns Lean source marked NOT_KERNEL_CHECKED; nothing in the running service calls the Lean kernel. Kernel checks happen only in scripts/benchmarks/formal_lean_check.py on a machine with Mathlib.
+- The API returns Lean source marked NOT_KERNEL_CHECKED; the running service never calls the Lean kernel. Kernel checks run offline (scripts/benchmarks/formal_lean_check.py on a machine with Mathlib) or in the Lean kernel checks workflow, whose records are the only way to KERNEL_CHECKED (see recorded kernel checks).
 
 | Module | Maturity | Endpoints using it |
 | --- | --- | --- |
@@ -217,6 +218,29 @@ States a consequence that z3 has decided as a Lean 4 theorem over the reals, so 
 **ADRs:** [ADR-047](../decisions/ADR-DISCOVERY-047-LEAN4-THEOREM-PROVER-GATE.md), [ADR-060](../decisions/ADR-DISCOVERY-060-SMT-BACKEND-AND-CONSEQUENCES.md)
 
 **Tests:** `test_formal_smt.py`, `test_quasi_riemann_synergistic_auditor.py`
+
+<a id="kernel-records"></a>
+
+### Recorded Lean kernel checks
+
+A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux runner, on our Lean files and on openai/math Comparator challenges, and writes a kernel record next to the full run log: what was checked (file hash, toolchain, Mathlib commit), the axioms each theorem uses, the wall time and the result. The result is recomputed from the log, never trusted from the record. A hash-verified PASS record is the only way a claim reaches KERNEL_CHECKED; the climb for a registry entry is `POST /api/registry/entries/{entry_id}/kernel-check` (listed under the registry).
+
+**Verification chain (ADR-085):** Feeds step 8, trust ladder (M7): the top rung needs a verified kernel record (ADR-092).
+
+**Caveats:**
+
+- BLOCKED (the kernel did not run or did not finish) is a non-verdict and never climbs.
+- Records exist only for the targets the workflow has run (records/kernel/); everything else stays below KERNEL_CHECKED.
+
+| Module | Maturity | Endpoints using it |
+| --- | --- | --- |
+| [`python/discovery/kernel_records.py`](../../python/discovery/kernel_records.py) | Integrated | 1 |
+
+**Scripts, examples and data:** [`scripts/lean/comparator_preflight.sh`](../../scripts/lean/comparator_preflight.sh), [`scripts/lean/kernel_check.py`](../../scripts/lean/kernel_check.py)
+
+**ADRs:** [ADR-092](../decisions/ADR-DISCOVERY-092-RECORDED-KERNEL-CHECKS.md)
+
+**Tests:** `test_formal_capabilities.py`, `test_kernel_records.py`, `test_local_smoothing_case.py`, `test_preregistration.py`
 
 ## Verification chain
 
@@ -323,9 +347,9 @@ Grades each claim on five rungs, by mechanical rules over recorded evidence: fro
 
 **CLI:** `coresearcher formal trust`
 
-**ADRs:** [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md), [ADR-070](../decisions/ADR-DISCOVERY-070-CELLULAR-AUTOMATA-BARRIER-AUDITOR.md), [ADR-070](../decisions/ADR-DISCOVERY-070-STATEMENT-FIDELITY-AUDIT.md), [ADR-076](../decisions/ADR-DISCOVERY-076-OBLIGATION-LEDGER.md), [ADR-080](../decisions/ADR-DISCOVERY-080-INTENT-PROBE-TRUST-LADDER-FIDELITY-SERVICE.md), [ADR-081](../decisions/ADR-DISCOVERY-081-PREREGISTERED-EXISTENCE-AUDIT.md)
+**ADRs:** [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md), [ADR-070](../decisions/ADR-DISCOVERY-070-CELLULAR-AUTOMATA-BARRIER-AUDITOR.md), [ADR-070](../decisions/ADR-DISCOVERY-070-STATEMENT-FIDELITY-AUDIT.md), [ADR-076](../decisions/ADR-DISCOVERY-076-OBLIGATION-LEDGER.md), [ADR-080](../decisions/ADR-DISCOVERY-080-INTENT-PROBE-TRUST-LADDER-FIDELITY-SERVICE.md), [ADR-081](../decisions/ADR-DISCOVERY-081-PREREGISTERED-EXISTENCE-AUDIT.md), [ADR-092](../decisions/ADR-DISCOVERY-092-RECORDED-KERNEL-CHECKS.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_formal_capabilities.py`, `test_preregistration.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_formal_capabilities.py`, `test_kernel_records.py`, `test_preregistration.py`
 
 ## Statement and manuscript audits
 
@@ -447,11 +471,11 @@ Keeps versioned entries for results a hypothesis imports from other papers, with
 | Module | Maturity | Endpoints using it |
 | --- | --- | --- |
 | [`python/cli/registry.py`](../../python/cli/registry.py) | outside register | - |
-| [`python/discovery/cited_registry.py`](../../python/discovery/cited_registry.py) | Integrated | 6 |
+| [`python/discovery/cited_registry.py`](../../python/discovery/cited_registry.py) | Integrated | 7 |
 | [`python/discovery/hash_chain.py`](../../python/discovery/hash_chain.py) | Tested | - |
 | [`python/discovery/typed_conventions.py`](../../python/discovery/typed_conventions.py) | Tested | - |
 
-<details><summary>7 endpoint(s)</summary>
+<details><summary>8 endpoint(s)</summary>
 
 | Method | Path | Summary |
 | --- | --- | --- |
@@ -459,6 +483,7 @@ Keeps versioned entries for results a hypothesis imports from other papers, with
 | POST | `/api/registry/dependencies` | Records that a claim or entry uses another. Edges that would close a cycle are refused. |
 | POST | `/api/registry/entries` | Adds a cited result or premise, or a new version of one. The source is provenance, never evidence. |
 | GET | `/api/registry/entries/{entry_id}` | One entry (the latest version unless `version` is given), with its re-evaluation flag if any. |
+| POST | `/api/registry/entries/{entry_id}/kernel-check` | Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with a recorded kernel run (ADR-DISCOVERY-092). |
 | POST | `/api/registry/entries/{entry_id}/retract` | Retracts an entry (or downgrades it to a lower rung) and flags every transitive dependent. |
 | POST | `/api/registry/flags/{node}/reevaluated` | Clears a dependent's re-evaluation flag; the note records how it was re-checked. |
 | GET | `/api/registry/impact/{node}` | Every claim or entry that transitively depends on `node`, with any re-evaluation flags. |
@@ -467,9 +492,9 @@ Keeps versioned entries for results a hypothesis imports from other papers, with
 
 **CLI:** `coresearcher registry cite-check`, `coresearcher registry depend`, `coresearcher registry impact`, `coresearcher registry reevaluated`, `coresearcher registry register`, `coresearcher registry retract`, `coresearcher registry show`
 
-**ADRs:** [ADR-066](../decisions/ADR-DISCOVERY-066-FORMAL-CLAIM-AUDIT.md), [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md), [ADR-080](../decisions/ADR-DISCOVERY-080-INTENT-PROBE-TRUST-LADDER-FIDELITY-SERVICE.md), [ADR-083](../decisions/ADR-DISCOVERY-083-CITED-RESULTS-REGISTRY.md), [ADR-085](../decisions/ADR-DISCOVERY-085-FREEZE-LEDGER-CHAIN.md), [ADR-086](../decisions/ADR-DISCOVERY-086-BIOMEDICAL-DOMAIN-TRANSFER.md), [ADR-087](../decisions/ADR-DISCOVERY-087-TYPED-CONVENTIONS.md), [ADR-088](../decisions/ADR-DISCOVERY-088-CONSTRAINED-CONVENTIONS.md)
+**ADRs:** [ADR-066](../decisions/ADR-DISCOVERY-066-FORMAL-CLAIM-AUDIT.md), [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md), [ADR-080](../decisions/ADR-DISCOVERY-080-INTENT-PROBE-TRUST-LADDER-FIDELITY-SERVICE.md), [ADR-083](../decisions/ADR-DISCOVERY-083-CITED-RESULTS-REGISTRY.md), [ADR-085](../decisions/ADR-DISCOVERY-085-FREEZE-LEDGER-CHAIN.md), [ADR-086](../decisions/ADR-DISCOVERY-086-BIOMEDICAL-DOMAIN-TRANSFER.md), [ADR-087](../decisions/ADR-DISCOVERY-087-TYPED-CONVENTIONS.md), [ADR-088](../decisions/ADR-DISCOVERY-088-CONSTRAINED-CONVENTIONS.md), [ADR-092](../decisions/ADR-DISCOVERY-092-RECORDED-KERNEL-CHECKS.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_integer_variables.py`, `test_openai_math_chain.py`, `test_typed_conventions.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_openai_math_chain.py`, `test_typed_conventions.py`
 
 <a id="obligation-ledger"></a>
 

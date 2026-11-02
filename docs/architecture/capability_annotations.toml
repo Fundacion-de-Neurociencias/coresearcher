@@ -245,7 +245,7 @@ re-check it. The offline benchmark script runs the Lean kernel on those theorems
 scripts provision Lean and the remote Lean oracle machine.
 """
 caveats = [
-  "The API returns Lean source marked NOT_KERNEL_CHECKED; nothing in the running service calls the Lean kernel. Kernel checks happen only in scripts/benchmarks/formal_lean_check.py on a machine with Mathlib.",
+  "The API returns Lean source marked NOT_KERNEL_CHECKED; the running service never calls the Lean kernel. Kernel checks run offline (scripts/benchmarks/formal_lean_check.py on a machine with Mathlib) or in the Lean kernel checks workflow, whose records are the only way to KERNEL_CHECKED (see recorded kernel checks).",
 ]
 files = [
   "python/discovery/formal_lean.py",
@@ -253,6 +253,24 @@ files = [
   "scripts/setup_lean4_environment.py",
   "scripts/benchmarks/legion*",
 ]
+
+[[capability]]
+id = "kernel-records"
+title = "Recorded Lean kernel checks"
+group = "formal-core"
+what = """
+A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux runner, on our Lean files and on
+openai/math Comparator challenges, and writes a kernel record next to the full run log: what was checked (file hash,
+toolchain, Mathlib commit), the axioms each theorem uses, the wall time and the result. The result is recomputed from
+the log, never trusted from the record. A hash-verified PASS record is the only way a claim reaches KERNEL_CHECKED;
+the climb for a registry entry is `POST /api/registry/entries/{entry_id}/kernel-check` (listed under the registry).
+"""
+chain = "Feeds step 8, trust ladder (M7): the top rung needs a verified kernel record (ADR-092)."
+caveats = [
+  "BLOCKED (the kernel did not run or did not finish) is a non-verdict and never climbs.",
+  "Records exist only for the targets the workflow has run (records/kernel/); everything else stays below KERNEL_CHECKED.",
+]
+files = ["python/discovery/kernel_records.py", "scripts/lean/*"]
 
 # --------------------------------------------------------------------------------------------- verification chain
 

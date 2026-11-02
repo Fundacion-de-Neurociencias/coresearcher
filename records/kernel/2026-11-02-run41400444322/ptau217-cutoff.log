@@ -1,0 +1,8 @@
+# kernel-check lean_file ptau217-cutoff
+# file: examples/ptau217-cutoff/Ptau217Cutoff.lean
+# file_sha256: acc075ca39d955e25c3dffc43b29f82dbf0870e52520e5617d24898c683f2e3c
+# command: lake env lean KernelCheck_ptau217_cutoff.lean
+# #print axioms appended for: Ptau217Cutoff.rule_out_sound, Ptau217Cutoff.rule_in_sound
+'Ptau217Cutoff.rule_out_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Ptau217Cutoff.rule_in_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+# kernel-check: exit_code=0

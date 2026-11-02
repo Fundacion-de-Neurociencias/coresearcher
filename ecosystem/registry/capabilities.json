@@ -1543,6 +1543,7 @@
       "hidden_endpoints": [],
       "cli": [],
       "files": [
+        "scripts/benchmarks/concordance_ai_round.py",
         "scripts/benchmarks/concordance_llm_arm.py",
         "scripts/benchmarks/concordance_score.py"
       ],

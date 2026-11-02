@@ -1,0 +1,80 @@
+{
+  "task_id": "AIR1-03",
+  "source_item": "H03",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "pharmacology",
+    "statement": "Drug clearance never increases with age: an older patient's clearance is at most that of a younger patient.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "cl_old": "real number in [0, 10]",
+        "cl_young": "real number in [0, 10]"
+      },
+      "rows": [
+        {
+          "cl_old": 0,
+          "cl_young": 0
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "An older patient's drug clearance is strictly lower than a younger patient's."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "cl_old",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        },
+        {
+          "name": "cl_young",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "cl_old <= cl_young"
+      ],
+      "hypothesis_id": "AIR1-03-H"
+    },
+    "observations": [
+      {
+        "cl_old": 0,
+        "cl_young": 0
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-03-R",
+      "variables": [
+        {
+          "name": "cl_old",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        },
+        {
+          "name": "cl_young",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "cl_old < cl_young"
+      ]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "task_id": "AIR1-16",
+  "source_item": "F05",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "clinical",
+    "statement": "In patients who are younger than 40 years and also older than 80 years, the drug at least halves the relapse rate (relapse ratio at most 0.5).",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {
+      "P1": "It is taken as given that age < 40.",
+      "P2": "It is taken as given that age > 80."
+    },
+    "observations_table": {
+      "columns": {
+        "age": "real number in [0, 120]",
+        "relapse_ratio": "real number in [0, None]"
+      },
+      "rows": [],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "age",
+          "continuous": true,
+          "lower": 0,
+          "upper": 120
+        },
+        {
+          "name": "relapse_ratio",
+          "continuous": true,
+          "lower": 0,
+          "upper": null
+        }
+      ],
+      "scope": null,
+      "assumptions": [
+        "age < 40",
+        "age > 80"
+      ],
+      "claims": [
+        "relapse_ratio <= 0.5"
+      ],
+      "hypothesis_id": "AIR1-16-H"
+    },
+    "observations": [],
+    "assumption_labels": [
+      "P1",
+      "P2"
+    ]
+  }
+}

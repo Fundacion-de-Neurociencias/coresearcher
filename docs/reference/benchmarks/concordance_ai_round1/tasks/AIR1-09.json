@@ -1,0 +1,90 @@
+{
+  "task_id": "AIR1-09",
+  "source_item": "H09",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "fire ecology",
+    "statement": "A forest fire spreads only if wind speed exceeds 20 km/h.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "spreads": "one of [True, False]",
+        "wind": "real number in [0, 150]"
+      },
+      "rows": [
+        {
+          "spreads": true,
+          "wind": 0
+        },
+        {
+          "spreads": true,
+          "wind": 37.5
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "Whenever wind speed exceeds 20 km/h, a forest fire spreads."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "spreads",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "wind",
+          "continuous": true,
+          "lower": 0,
+          "upper": 150
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "not spreads or wind > 20"
+      ],
+      "hypothesis_id": "AIR1-09-H"
+    },
+    "observations": [
+      {
+        "spreads": true,
+        "wind": 0
+      },
+      {
+        "spreads": true,
+        "wind": 37.5
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-09-R",
+      "variables": [
+        {
+          "name": "spreads",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "wind",
+          "continuous": true,
+          "lower": 0,
+          "upper": 150
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "wind <= 20 or spreads"
+      ]
+    }
+  }
+}

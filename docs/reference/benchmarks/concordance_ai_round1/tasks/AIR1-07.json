@@ -1,0 +1,50 @@
+{
+  "task_id": "AIR1-07",
+  "source_item": "H07",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "biochemistry",
+    "statement": "The protein is always phosphorylated, and it is never phosphorylated.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "phosphorylated": "one of [True, False]"
+      },
+      "rows": [
+        {
+          "phosphorylated": true
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "phosphorylated",
+          "domain": [
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "phosphorylated",
+        "not phosphorylated"
+      ],
+      "hypothesis_id": "AIR1-07-H"
+    },
+    "observations": [
+      {
+        "phosphorylated": true
+      }
+    ],
+    "assumption_labels": []
+  }
+}

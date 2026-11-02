@@ -17,16 +17,22 @@ from __future__ import annotations
 
 import argparse
 import json
+import platform
+import re
+import shlex
 import subprocess
 import sys
 import time
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict
 from pathlib import Path
+from typing import Any, Dict
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+from python.discovery import formal_provenance, kernel_records  # noqa: E402
 from python.discovery import openai_math_coverage as cov  # noqa: E402
 from python.discovery import trivial_witness_probe as probe  # noqa: E402
 
@@ -104,52 +110,128 @@ def prepare(math_root: Path) -> None:
     print(f"wrote {len(probes)} probe files under {lean / PROBE_DIR}")
 
 
-def run(math_root: Path, only: str, timeout: int) -> None:
+def _probe_target(probe_id: str) -> str:
+    """A record target name: lower-case, `-` separated, prefixed like the other openai/math records."""
+    return "openai-math-probe-" + re.sub(r"[^a-z0-9]+", "-", probe_id.lower()).strip("-")
+
+
+def _qualified(entry: Dict[str, Any]) -> str:
+    """The probe declaration's full name, as `#print axioms` prints it (the target's namespace plus the name)."""
+    namespace = entry["theorem"].rsplit(".", 1)[0]
+    return f"{namespace}.{entry['declaration']}"
+
+
+def _check_one(entry: Dict[str, Any], lean: Path, out: Path, timeout: int, env: Dict[str, str]) -> str:
+    """Elaborates one probe file and writes its kernel record and log (ADR-DISCOVERY-092 format)."""
+    target = _probe_target(entry["probe_id"])
+    path = lean / entry["module_path"]
+    cmd = ["lake", "env", "lean", entry["module_path"]]
+    started = time.monotonic()
+    try:
+        proc = subprocess.run(
+            cmd, cwd=lean, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=timeout, check=False
+        )
+        output, code = proc.stdout.decode("utf-8", errors="replace"), proc.returncode
+    except subprocess.TimeoutExpired as exc:
+        output, code = (exc.stdout or b"").decode("utf-8", errors="replace"), None
+    wall = time.monotonic() - started
+    blocked = f"the kernel run did not finish within {timeout} s" if code is None else ""
+    declaration = _qualified(entry)
+    log = (
+        f"# kernel-check lean_file {target}\n# file: {entry['module_path']} (generated probe, mode {entry['mode']})\n"
+        f"# file_sha256: {kernel_records.sha256_file(path)}\n# command: {shlex.join(cmd)}\n"
+        f"# probe of: {entry['theorem']}; checked declaration: {declaration}\n"
+        f"{output}{kernel_records.FOOTER}{-1 if code is None else code}\n"
+    )
+    record = kernel_records.build(
+        target=target,
+        kind="lean_file",
+        source={
+            "repository": "openai/math",
+            "commit": cov.SOURCE_COMMIT,
+            "path": f"lean/{entry['module_path']}",
+            "generated_by": "scripts/cases/trivial_witness_probe_report.py",
+        },
+        file_sha256=kernel_records.sha256_file(path),
+        toolchain=env["toolchain"],
+        lean_version=env["lean_version"],
+        mathlib_rev=env["mathlib_rev"],
+        theorems=[declaration],
+        log=log,
+        kernel_log=f"{target}.log",
+        wall_time_s=wall,
+        checked_by=f"local:{platform.node()}",
+        date=formal_provenance.utc_now(),
+        blocked_reason=blocked,
+        extra={
+            "probe": {
+                "probe_id": entry["probe_id"],
+                "mode": entry["mode"],
+                "target_theorem": entry["theorem"],
+                "meaning": probe.meaning(entry["mode"]),
+            }
+        },
+    )
+    (out / f"{target}.log").write_bytes(log.encode("utf-8"))
+    (out / f"{target}.json").write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return f"{entry['probe_id']}: {record['result']} ({record['wall_time_s']} s)"
+
+
+def run(math_root: Path, out: Path, only: str, timeout: int, jobs: int) -> None:
+    """Elaborates the probes `jobs` at a time; a probe that already has a record in `out` is skipped (resumable)."""
     lean = Path(math_root) / "lean"
+    out.mkdir(parents=True, exist_ok=True)
     manifest = json.loads((lean / PROBE_DIR / "manifest.json").read_text(encoding="utf-8"))
-    results_path = lean / PROBE_DIR / "results.jsonl"
-    done = set()
-    if results_path.exists():
-        done = {json.loads(line)["probe_id"] for line in results_path.read_text(encoding="utf-8").splitlines() if line}
-    for entry in manifest:
-        if entry["probe_id"] in done or (only and only not in entry["probe_id"]):
-            continue
-        started = time.time()
-        try:
-            proc = subprocess.run(["lake", "env", "lean", entry["module_path"]], cwd=lean, capture_output=True,
-                                  text=True, timeout=timeout)
-            output = proc.stdout + proc.stderr
-            outcome = probe.parse_lean_output(output, entry["declaration"]).value
-        except subprocess.TimeoutExpired:
-            output, outcome = "", "TIMEOUT"
-        record = {"probe_id": entry["probe_id"], "outcome": outcome, "seconds": round(time.time() - started, 1),
-                  "output_tail": output[-2000:]}
-        with results_path.open("a", encoding="utf-8") as fh:
-            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
-        print(f"{entry['probe_id']}: {outcome} ({record['seconds']} s)", flush=True)
+    todo = [
+        e
+        for e in manifest
+        if (not only or only in e["probe_id"]) and not (out / f"{_probe_target(e['probe_id'])}.json").exists()
+    ]
+    version = subprocess.run(["lake", "env", "lean", "--version"], cwd=lean, capture_output=True, text=True)
+    packages = json.loads((lean / "lake-manifest.json").read_text(encoding="utf-8")).get("packages", [])
+    env = {
+        "toolchain": (lean / "lean-toolchain").read_text(encoding="utf-8").strip(),
+        "lean_version": version.stdout.strip().splitlines()[-1] if version.returncode == 0 else "",
+        "mathlib_rev": next((p.get("rev", "") for p in packages if p.get("name") == "mathlib"), ""),
+    }
+    print(f"{len(todo)} probes to run, {jobs} at a time; {env}", flush=True)
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        for line in pool.map(lambda e: _check_one(e, lean, out, timeout, env), todo):
+            print(line, flush=True)
 
 
-def report(math_root: Path) -> None:
-    results_path = Path(math_root) / "lean" / PROBE_DIR / "results.jsonl"
-    results = {}
-    for line in results_path.read_text(encoding="utf-8").splitlines():
-        if line:
-            record = json.loads(line)
-            results[record["probe_id"]] = record
+def report(records: Path) -> None:
+    """Folds the kernel records of a probe run into vacuity_probe.json, each verified against its log first."""
+    by_probe = {}
+    for path in sorted(Path(records).glob("openai-math-probe-*.json")):
+        record = kernel_records.load(path)  # Raises when a record does not match its log.
+        by_probe[record["probe"]["probe_id"]] = (path.resolve(), record)
     data = json.loads(OUT.read_text(encoding="utf-8"))
     for row in data["lean_probes"]["probes"]:
-        if row["probe_id"] in results:
-            row["outcome"] = results[row["probe_id"]]["outcome"]
-            row["seconds"] = results[row["probe_id"]]["seconds"]
-            row["output_tail"] = results[row["probe_id"]]["output_tail"][-600:]
-    data["lean_probes"]["summary"] = dict(Counter(r["outcome"] for r in data["lean_probes"]["probes"]))
+        found = by_probe.get(row["probe_id"])
+        if found is None:
+            row["outcome"] = probe.LeanOutcome.NOT_RUN.value
+            continue
+        path, record = found
+        row["kernel_result"] = record["result"]
+        row["outcome"] = probe.outcome_from_kernel(record["result"]).value
+        row["kernel_record"] = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path)
+        row["wall_time_s"] = record["wall_time_s"]
+        row["reasons"] = record["reasons"]
+    probes = data["lean_probes"]["probes"]
+    data["lean_probes"]["summary"] = dict(Counter(r["outcome"] for r in probes))
+    data["lean_probes"]["by_mode"] = {
+        mode: dict(Counter(r["outcome"] for r in probes if r["mode"] == mode)) for mode in sorted({r["mode"] for r in probes})
+    }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(data["lean_probes"]["summary"])
+    print(data["lean_probes"]["summary"], data["lean_probes"]["by_mode"])
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("command", choices=["static", "prepare", "run", "report"])
+    parser.add_argument("--out", type=Path, help="directory for the kernel records of a probe run")
+    parser.add_argument("--jobs", type=int, default=6)
     parser.add_argument("--corpus", type=Path)
     parser.add_argument("--math-root", type=Path)
     parser.add_argument("--only", default="")
@@ -160,9 +242,9 @@ def main() -> None:
     elif args.command == "prepare":
         prepare(args.math_root)
     elif args.command == "run":
-        run(args.math_root, args.only, args.timeout)
+        run(args.math_root, args.out, args.only, args.timeout, args.jobs)
     else:
-        report(args.math_root)
+        report(args.out)
 
 
 if __name__ == "__main__":

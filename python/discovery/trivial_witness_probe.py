@@ -45,6 +45,28 @@ class LeanOutcome(str, Enum):
     PROVED = "PROVED"  # Elaborated without error and without sorryAx.
     NOT_PROVED = "NOT_PROVED"  # An error in the probe declaration: the menu did not close it (inconclusive).
     NOT_RUN = "NOT_RUN"
+    BLOCKED = "BLOCKED"  # The run did not finish (timeout, environment): a non-verdict, never read as either side.
+
+
+# What a PASS (kernel accepts the probe declaration with standard axioms only) means for each probe mode. A probe
+# record's PASS is about the probe, not the target: for `trivial` and `inconsistent` it is a vacuity finding.
+MEANING = {
+    "trivial": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says "
+    "(vacuity finding). FAIL: the menu did not close it, which is no evidence either way.",
+    "inconsistent": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no "
+    "contradiction found by the menu.",
+    "degenerate": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under "
+    "the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open.",
+}
+
+
+def meaning(mode: str) -> str:
+    return MEANING.get(mode, MEANING["degenerate"])
+
+
+def outcome_from_kernel(result: str) -> LeanOutcome:
+    """Kernel record result (ADR-092) to probe outcome: PASS proved, FAIL not proved, BLOCKED blocked."""
+    return {"PASS": LeanOutcome.PROVED, "FAIL": LeanOutcome.NOT_PROVED}.get(result, LeanOutcome.BLOCKED)
 
 
 TACTIC_MENU = [

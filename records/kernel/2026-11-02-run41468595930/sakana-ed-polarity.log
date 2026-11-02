@@ -1,0 +1,13 @@
+# kernel-check lean_file sakana-ed-polarity
+# file: examples/sakana-ed-polarity/EdPolarity.lean
+# file_sha256: 986badf4e4ee35bda3179da4eca4253c3272ecfd38987fbec60ead0ea8606a1a
+# command: lake env lean KernelCheck_sakana_ed_polarity.lean
+# #print axioms appended for: EdPolarity.outputTop_polarized, EdPolarity.back_polarized, EdPolarity.sens_polarized, EdPolarity.sign_mul_nonneg, EdPolarity.ed_descent_p, EdPolarity.ed_descent_n, EdPolarity.ed_sign_sufficiency
+'EdPolarity.outputTop_polarized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.back_polarized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.sens_polarized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.sign_mul_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.ed_descent_p' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.ed_descent_n' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EdPolarity.ed_sign_sufficiency' depends on axioms: [propext, Classical.choice, Quot.sound]
+# kernel-check: exit_code=0

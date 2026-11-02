@@ -1,0 +1,180 @@
+# kernel-check comparator openai-math-classical-on
+# repository: openai/math @ 4eaee87548250b2682affda7d05d947c05554bae
+# config: ComparatorChallenges/ClassicalON.json (sha256 47cb3623915c8cfcc35099fabd0c44173afa72b706eb0526c4b8d3855e789252)
+# challenge: ComparatorChallenges/ClassicalON.lean (sha256 c2f5f88455b811eb6b56c1ae80ff91f4e398e18e7c7fbeee6daca8da4122d696)
+# command: systemd-run --user --pipe --wait --collect --quiet '--property=RestrictAddressFamilies=~AF_UNIX' -E PATH=/home/runner/.elan/bin:/home/runner/work/coresearcher/coresearcher/../kernel-work/bin:/home/runner/go/bin:/opt/hostedtoolcache/go/1.24.13/x64/bin:/opt/hostedtoolcache/Python/3.12.15/x64/bin:/opt/hostedtoolcache/Python/3.12.15/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin --working-directory /home/runner/work/coresearcher/kernel-work/math/lean -- lake env comparator ComparatorChallenges/ClassicalON.json
+warning: belyi: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/iut' has local changes
+Building ComparatorChallenges.ClassicalON
+warning: belyi: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/iut' has local changes
+⚠ [8924/8924] Built ComparatorChallenges.ClassicalON (8.1s)
+warning: ComparatorChallenges/ClassicalON.lean:53:8: declaration uses `sorry`
+Build completed successfully (8924 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OAI.ClassicalON.main, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from ComparatorChallenges.ClassicalON
+Building OAI.Probability.ClassicalON.Main
+warning: belyi: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/iut' has local changes
+✔ [8924/9040] Built OAI.Probability.ClassicalON.Model (6.6s)
+✔ [8925/9040] Built OAI.Probability.ClassicalON.FiniteVolume (49s)
+✔ [8926/9040] Built OAI.Probability.ClassicalON.TorusFourier (4.4s)
+✔ [8927/9040] Built OAI.Probability.ClassicalON.DyadicFourier (4.2s)
+✔ [8928/9040] Built OAI.Probability.ClassicalON.SmoothProfiles (4.0s)
+✔ [8929/9040] Built OAI.Probability.ClassicalON.SmoothBounds (4.6s)
+✔ [8930/9040] Built OAI.Probability.ClassicalON.ProfileEstimates (4.7s)
+✔ [8931/9040] Built OAI.Probability.ClassicalON.LatticeGeometry (4.3s)
+✔ [8932/9040] Built OAI.Probability.ClassicalON.LatticeRestriction (4.1s)
+✔ [8933/9040] Built OAI.Probability.ClassicalON.LatticeRadius (4.2s)
+✔ [8934/9040] Built OAI.Probability.ClassicalON.AnnulusLabels (4.0s)
+✔ [8935/9040] Built OAI.Probability.ClassicalON.CoarseGeometry (4.3s)
+✔ [8936/9040] Built OAI.Probability.ClassicalON.CoarseCodes (4.1s)
+✔ [8937/9040] Built OAI.Probability.ClassicalON.AssociationCore (4.4s)
+✔ [8938/9040] Built OAI.Probability.ClassicalON.GibbsDerivative (4.2s)
+✔ [8939/9040] Built OAI.Probability.ClassicalON.WeightedLinear (4.0s)
+✔ [8940/9040] Built OAI.Probability.ClassicalON.FerromagneticMean (4.3s)
+✔ [8941/9040] Built OAI.Probability.ClassicalON.WeightedTilt (4.3s)
+✔ [8942/9040] Built OAI.Probability.ClassicalON.ProductFKG (4.0s)
+✔ [8943/9040] Built OAI.Probability.ClassicalON.AmplitudePartition (4.3s)
+✔ [8944/9040] Built OAI.Probability.ClassicalON.AmplitudeModular (4.1s)
+✔ [8945/9040] Built OAI.Probability.ClassicalON.IsingReference (4.4s)
+✔ [8946/9040] Built OAI.Probability.ClassicalON.ExpMoments (4.1s)
+✔ [8947/9040] Built OAI.Probability.ClassicalON.MomentCone (4.5s)
+✔ [8948/9040] Built OAI.Probability.ClassicalON.ProductMoments (4.1s)
+✔ [8949/9040] Built OAI.Probability.ClassicalON.GibbsCovariance (4.3s)
+✔ [8950/9040] Built OAI.Probability.ClassicalON.IsingGinibre (4.3s)
+✔ [8951/9040] Built OAI.Probability.ClassicalON.IsingPositive (4.1s)
+✔ [8952/9040] Built OAI.Probability.ClassicalON.TorusDouble (4.4s)
+✔ [8953/9040] Built OAI.Probability.ClassicalON.PlanarAlgebra (4.1s)
+✔ [8954/9040] Built OAI.Probability.ClassicalON.PositiveKernel (4.0s)
+✔ [8955/9040] Built OAI.Probability.ClassicalON.PlanarGinibre (4.3s)
+✔ [8956/9040] Built OAI.Probability.ClassicalON.PlanarPositive (4.3s)
+✔ [8957/9040] Built OAI.Probability.ClassicalON.FinFKG (4.4s)
+✔ [8958/9040] Built OAI.Probability.ClassicalON.AmplitudeLaw (4.3s)
+✔ [8959/9040] Built OAI.Probability.ClassicalON.CylindricalGeometry (4.8s)
+✔ [8960/9040] Built OAI.Probability.ClassicalON.CylindricalFiber (4.8s)
+✔ [8961/9040] Built OAI.Probability.ClassicalON.CylindricalLaw (4.8s)
+✔ [8962/9040] Built OAI.Probability.ClassicalON.CylindricalConfiguration (4.7s)
+✔ [8963/9040] Built OAI.Probability.ClassicalON.UpperEndpoint (4.2s)
+✔ [8964/9040] Built OAI.Probability.ClassicalON.AmplitudeSplit (4.1s)
+✔ [8965/9040] Built OAI.Probability.ClassicalON.PinnedReference (4.2s)
+✔ [8966/9040] Built OAI.Probability.ClassicalON.PinnedCylinder (4.1s)
+✔ [8967/9040] Built OAI.Probability.ClassicalON.BondSubspace (4.1s)
+✔ [8968/9040] Built OAI.Probability.ClassicalON.BondLaw (4.2s)
+✔ [8969/9040] Built OAI.Probability.ClassicalON.BondSigns (4.4s)
+✔ [8970/9040] Built OAI.Probability.ClassicalON.DiscreteReference (4.1s)
+✔ [8971/9040] Built OAI.Probability.ClassicalON.BondExpansion (4.1s)
+✔ [8972/9040] Built OAI.Probability.ClassicalON.SpinBondKernel (4.2s)
+✔ [8973/9040] Built OAI.Probability.ClassicalON.JointBond (4.1s)
+✔ [8974/9040] Built OAI.Probability.ClassicalON.BondMoments (4.2s)
+✔ [8975/9040] Built OAI.Probability.ClassicalON.RawBond (4.1s)
+✔ [8976/9040] Built OAI.Probability.ClassicalON.SpinBonds (4.2s)
+✔ [8977/9040] Built OAI.Probability.ClassicalON.BondPin (4.4s)
+✔ [8978/9040] Built OAI.Probability.ClassicalON.PinnedSigns (3.0s)
+✔ [8979/9040] Built OAI.Probability.ClassicalON.BondConnectivity (4.1s)
+✔ [8980/9040] Built OAI.Probability.ClassicalON.SignedSigns (4.2s)
+✔ [8981/9040] Built OAI.Probability.ClassicalON.BondAssociation (4.1s)
+✔ [8982/9040] Built OAI.Probability.ClassicalON.PinComparison (4.3s)
+✔ [8983/9040] Built OAI.Probability.ClassicalON.PinnedBonds (4.0s)
+✔ [8984/9040] Built OAI.Probability.ClassicalON.ProductGrouping (4.2s)
+✔ [8985/9040] Built OAI.Probability.ClassicalON.WeightedProduct (4.0s)
+✔ [8986/9040] Built OAI.Probability.ClassicalON.PinnedBlocks (4.3s)
+✔ [8987/9040] Built OAI.Probability.ClassicalON.ReindexIntegral (3.9s)
+✔ [8988/9040] Built OAI.Probability.ClassicalON.SpinReindex (4.2s)
+✔ [8989/9040] Built OAI.Probability.ClassicalON.BlockLocal (4.2s)
+✔ [8990/9040] Built OAI.Probability.ClassicalON.AnnulusBlocks (4.1s)
+✔ [8991/9040] Built OAI.Probability.ClassicalON.DyadicSine (4.4s)
+✔ [8992/9040] Built OAI.Probability.ClassicalON.DyadicModes (3.0s)
+✔ [8993/9040] Built OAI.Probability.ClassicalON.MatrixSquare (4.0s)
+✔ [8994/9040] Built OAI.Probability.ClassicalON.FourierOperator (9.4s)
+✔ [8995/9040] Built OAI.Probability.ClassicalON.EdgeOperators (4.1s)
+✔ [8996/9040] Built OAI.Probability.ClassicalON.SquareEstimates (3.9s)
+✔ [8997/9040] Built OAI.Probability.ClassicalON.LatticeModes (4.2s)
+✔ [8998/9040] Built OAI.Probability.ClassicalON.DyadicSums (4.0s)
+✔ [8999/9040] Built OAI.Probability.ClassicalON.ModeBounds (3.8s)
+✔ [9000/9040] Built OAI.Probability.ClassicalON.RotationWork (6.2s)
+✔ [9001/9040] Built OAI.Probability.ClassicalON.MixedWard (5.8s)
+✔ [9002/9040] Built OAI.Probability.ClassicalON.ComplexWard (4.0s)
+✔ [9003/9040] Built OAI.Probability.ClassicalON.FamilyAlgebra (4.2s)
+✔ [9004/9040] Built OAI.Probability.ClassicalON.GradientComplex (5.0s)
+✔ [9005/9040] Built OAI.Probability.ClassicalON.ObservableBounds (3.9s)
+✔ [9006/9040] Built OAI.Probability.ClassicalON.FamilyKernel (3.9s)
+✔ [9007/9040] Built OAI.Probability.ClassicalON.ModeCosts (4.2s)
+✔ [9008/9040] Built OAI.Probability.ClassicalON.ModeCommutator (5.1s)
+✔ [9009/9040] Built OAI.Probability.ClassicalON.SecondGauge (4.3s)
+✔ [9010/9040] Built OAI.Probability.ClassicalON.SecondBound (3.0s)
+✔ [9011/9040] Built OAI.Probability.ClassicalON.ResponseTransfer (4.1s)
+✔ [9012/9040] Built OAI.Probability.ClassicalON.ThetaEstimates (4.2s)
+✔ [9013/9040] Built OAI.Probability.ClassicalON.FamilyBound (6.2s)
+✔ [9014/9040] Built OAI.Probability.ClassicalON.FamilyEstimate (3.8s)
+✔ [9015/9040] Built OAI.Probability.ClassicalON.FamilyLower (4.3s)
+✔ [9016/9040] Built OAI.Probability.ClassicalON.RotationInequality (4.2s)
+✔ [9017/9040] Built OAI.Probability.ClassicalON.AnnulusResponse (5.0s)
+✔ [9018/9040] Built OAI.Probability.ClassicalON.AnnulusSmall (4.9s)
+✔ [9019/9040] Built OAI.Probability.ClassicalON.AxisRotation (7.8s)
+✔ [9020/9040] Built OAI.Probability.ClassicalON.PotentialRotation (4.8s)
+✔ [9021/9040] Built OAI.Probability.ClassicalON.PeriodicODE (4.1s)
+✔ [9022/9040] Built OAI.Probability.ClassicalON.PeriodicPartition (3.0s)
+✔ [9023/9040] Built OAI.Probability.ClassicalON.AnnulusPartition (3.7s)
+✔ [9024/9040] Built OAI.Probability.ClassicalON.PoleCrossing (4.2s)
+✔ [9025/9040] Built OAI.Probability.ClassicalON.AnnulusCrossing (4.1s)
+✔ [9026/9040] Built OAI.Probability.ClassicalON.CenteredAnnulus (3.0s)
+✔ [9027/9040] Built OAI.Probability.ClassicalON.SpinCorrelation (3.8s)
+✔ [9028/9040] Built OAI.Probability.ClassicalON.BondMeanOrder (3.8s)
+✔ [9029/9040] Built OAI.Probability.ClassicalON.SeparatedAnnuli (3.7s)
+✔ [9030/9040] Built OAI.Probability.ClassicalON.AnnulusCut (3.9s)
+✔ [9031/9040] Built OAI.Probability.ClassicalON.CoarsePaths (3.9s)
+✔ [9032/9040] Built OAI.Probability.ClassicalON.CoarseTail (4.3s)
+✔ [9033/9040] Built OAI.Probability.ClassicalON.CoarseExponential (4.6s)
+✔ [9034/9040] Built OAI.Probability.ClassicalON.SpinIsotropy (4.2s)
+✔ [9035/9040] Built OAI.Probability.ClassicalON.OrthogonalAverage (12s)
+✔ [9036/9040] Built OAI.Probability.ClassicalON.BlockGeometry (5.3s)
+✔ [9037/9040] Built OAI.Probability.ClassicalON.BlockOrbit (6.2s)
+✔ [9038/9040] Built OAI.Probability.ClassicalON.BlockKernel (3.8s)
+✔ [9039/9040] Built OAI.Probability.ClassicalON.BlockReduction (3.8s)
+✔ [9040/9040] Built OAI.Probability.ClassicalON.Main (3.6s)
+Build completed successfully (9040 jobs).
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, OAI.ClassicalON.main, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from OAI.Probability.ClassicalON.Main
+Running Lean default kernel on solution.
+Lean default kernel accepts the solution
+Your solution is okay!
+# command: lake env lean KernelAxioms_openai_math_classical_on.lean
+warning: belyi: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/runner/work/coresearcher/kernel-work/math/lean/.lake/packages/iut' has local changes
+'OAI.ClassicalON.main' depends on axioms: [propext, Classical.choice, Quot.sound]
+# kernel-check: exit_code=0

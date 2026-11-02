@@ -1,0 +1,49 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "ptau217-cutoff",
+  "kind": "lean_file",
+  "source": {
+    "repository": "Fundacion-de-Neurociencias/coresearcher",
+    "commit": "c2cb74c451be1dd9dae55b8b2b3a8cfae8ea09aa",
+    "path": "examples/ptau217-cutoff/Ptau217Cutoff.lean"
+  },
+  "file_sha256": "acc075ca39d955e25c3dffc43b29f82dbf0870e52520e5617d24898c683f2e3c",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_rev": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "theorems": [
+    "Ptau217Cutoff.rule_out_sound",
+    "Ptau217Cutoff.rule_in_sound"
+  ],
+  "axioms_by_theorem": {
+    "Ptau217Cutoff.rule_out_sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "Ptau217Cutoff.rule_in_sound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.0,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "ptau217-cutoff.log",
+  "kernel_log_sha256": "7fd4dbeadb8d01e21aaf32c6d3892a80c72e5b888a71c1a5aca5bc5c344b2203",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/41400444322",
+  "date": "2026-11-02T06:33:45Z"
+}

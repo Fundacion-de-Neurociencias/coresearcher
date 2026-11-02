@@ -1,0 +1,80 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-local-smoothing",
+  "kind": "comparator",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/LocalSmoothing.lean",
+    "config": "lean/ComparatorChallenges/LocalSmoothing.json",
+    "config_sha256": "73392b548f23dd8b1b0b459fae548212b58aab280fdcd0120d06f856c18daa91",
+    "solution_module": "OAI.Analysis.Fourier.LocalSmoothing.Comparator"
+  },
+  "file_sha256": "58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8447.6,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "openai-math-local-smoothing.log",
+  "kernel_log_sha256": "d65d370f2c7917d4933df22201d11543017d1f6c17c20f0db967c1c21552f712",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/41400444322",
+  "date": "2026-11-02T08:59:19Z",
+  "sandbox": {
+    "landrun": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+    "systemd_run_guard": true
+  }
+}

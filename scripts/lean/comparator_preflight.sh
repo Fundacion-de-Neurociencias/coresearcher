@@ -80,8 +80,13 @@ clone https://github.com/openai/math "$OPENAI_MATH_COMMIT" "$WORK/math" || {
 echo "toolchain: $(cat "$WORK/math/lean/lean-toolchain")"
 end_step
 
-step "lean4export at $LEAN4EXPORT_COMMIT"
+step "lean4export at $LEAN4EXPORT_COMMIT, built with the toolchain of openai/math"
+# lean4export reads the project's .olean files, whose header names the exact Lean version: built with its own
+# v4.34.0 toolchain it refuses the v4.34.1 oleans of openai/math ("incompatible header"). So it is built with the
+# project's toolchain (a patch release apart from the tag's).
 clone https://github.com/leanprover/lean4export "$LEAN4EXPORT_COMMIT" "$WORK/lean4export" \
+  && cp "$WORK/math/lean/lean-toolchain" "$WORK/lean4export/lean-toolchain" \
+  && echo "lean4export toolchain: $(cat "$WORK/lean4export/lean-toolchain")" \
   && (cd "$WORK/lean4export" && lake build lean4export) || {
   end_step
   blocked "lean4export at $LEAN4EXPORT_COMMIT did not build"

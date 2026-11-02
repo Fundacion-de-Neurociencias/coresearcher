@@ -1,6 +1,6 @@
 name: Lean kernel checks
 
-# Real Lean kernel checks on a Linux runner (ADR-DISCOVERY-091). Not run on pull requests: it installs Lean and
+# Real Lean kernel checks on a Linux runner (ADR-DISCOVERY-092). Not run on pull requests: it installs Lean and
 # Mathlib and can build for hours. Every check writes a kernel record (python/discovery/kernel_records.py) and its
 # log; the records are uploaded as artifacts and proposed for records/kernel/ through a pull request. Only a
 # hash-verified PASS record lets a claim climb to KERNEL_CHECKED. A check that cannot run is recorded as BLOCKED.
@@ -209,7 +209,7 @@ jobs:
           git push -q origin "$BRANCH"
           cd ..
           {
-            echo "Kernel records written by [this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) (ADR-DISCOVERY-091)."
+            echo "Kernel records written by [this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) (ADR-DISCOVERY-092)."
             echo
             python scripts/lean/kernel_check.py verify "$DEST"
             echo

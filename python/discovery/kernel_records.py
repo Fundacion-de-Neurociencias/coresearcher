@@ -1,5 +1,5 @@
 """
-python/discovery/kernel_records.py - Recorded Lean kernel runs, the only way into KERNEL_CHECKED (ADR-DISCOVERY-091).
+python/discovery/kernel_records.py - Recorded Lean kernel runs, the only way into KERNEL_CHECKED (ADR-DISCOVERY-092).
 
 A kernel record is written by the run that checked a Lean file (`scripts/lean/kernel_check.py`, run by the
 `Lean kernel checks` workflow on a Linux runner). It pins what ran and what came out:

@@ -12,7 +12,7 @@ Two methods of docs/architecture/VERIFICATION_METHODOLOGY.md meet here:
   results and premises they use. Retracting or downgrading a premise flags every transitive dependent for
   re-evaluation and caps its trust-ladder rung (ADR-080) until it is re-checked.
 - An entry stands at KERNEL_CHECKED or above only with the evidence of a recorded, hash-verified PASS kernel run
-  (ADR-DISCOVERY-091, `kernel_records`). A FAIL or BLOCKED record, or one that does not match its log, is refused.
+  (ADR-DISCOVERY-092, `kernel_records`). A FAIL or BLOCKED record, or one that does not match its log, is refused.
 
 Rules:
 - The source reference is provenance. It never decides validity (ADR-066).
@@ -117,7 +117,7 @@ class RegistryEntry:
     status: str = ACTIVE
     version: int = 1
     status_reason: str = ""
-    # ADR-091: the KERNEL_CHECKED step's evidence (`kernel_records.ladder_evidence`); required at that rung and above.
+    # ADR-092: the KERNEL_CHECKED step's evidence (`kernel_records.ladder_evidence`); required at that rung and above.
     kernel_evidence: Optional[Dict[str, Any]] = None
 
     def __post_init__(self) -> None:

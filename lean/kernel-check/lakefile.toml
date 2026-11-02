@@ -1,4 +1,4 @@
-# Lake project the `Lean kernel checks` workflow compiles our own Lean files in (ADR-DISCOVERY-091).
+# Lake project the `Lean kernel checks` workflow compiles our own Lean files in (ADR-DISCOVERY-092).
 # Mathlib is pinned by tag; the resolved commit is written to every kernel record (mathlib_rev).
 name = "kernelcheck"
 

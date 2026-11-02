@@ -1,4 +1,4 @@
-"""Kernel records and the KERNEL_CHECKED rung (ADR-DISCOVERY-091), on synthetic records.
+"""Kernel records and the KERNEL_CHECKED rung (ADR-DISCOVERY-092), on synthetic records.
 
 The records here are built from hand-written logs in the shape `scripts/lean/kernel_check.py` writes: Lean output,
 `#print axioms` lines and the runner's exit-code footer. No Lean runs in these tests.

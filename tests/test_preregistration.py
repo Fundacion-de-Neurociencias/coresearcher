@@ -179,7 +179,7 @@ def test_ladder_climbs_one_rung_at_a_time_with_evidence(tmp_path):
             "audit_outcome": "VACUOUS_RELATIVE_TO_INTENT",
         },
     )
-    # Hand-written kernel evidence is refused: KERNEL_CHECKED needs a recorded, hash-verified run (ADR-091).
+    # Hand-written kernel evidence is refused: KERNEL_CHECKED needs a recorded, hash-verified run (ADR-092).
     with pytest.raises(LadderError):
         record.climb(
             Rung.KERNEL_CHECKED,

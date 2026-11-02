@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Prepares an openai/math Comparator check on a Linux runner (ADR-DISCOVERY-091).
+# Prepares an openai/math Comparator check on a Linux runner (ADR-DISCOVERY-092).
 #
 # Installs landrun, checks that Landlock really confines it, installs elan, checks out openai/math at the pinned
 # commit, builds lean4export and comparator, and fetches the Mathlib cache. On the first failing step it writes

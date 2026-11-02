@@ -932,7 +932,7 @@ class RegistryReevaluatedRequest(BaseModel):
 
 
 class RegistryKernelCheckRequest(BaseModel):
-    """A kernel record under records/kernel/ (ADR-DISCOVERY-091), as a path relative to that directory."""
+    """A kernel record under records/kernel/ (ADR-DISCOVERY-092), as a path relative to that directory."""
 
     record: str = Field(min_length=1, max_length=300)
 

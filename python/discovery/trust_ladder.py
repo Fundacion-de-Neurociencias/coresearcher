@@ -15,7 +15,7 @@ whether the result is important or who deserves credit:
 Rules:
 - A claim climbs one rung at a time, and each step needs its evidence (`REQUIRED_EVIDENCE`). Missing evidence is
   refused, not defaulted.
-- KERNEL_CHECKED is reached only from a recorded, hash-verified PASS run (ADR-DISCOVERY-091): the step embeds the
+- KERNEL_CHECKED is reached only from a recorded, hash-verified PASS run (ADR-DISCOVERY-092): the step embeds the
   kernel record (`kernel_records`), cites its digest and its path, and the record is re-read and checked against its
   log when the step is taken. A FAIL or BLOCKED record, or one that does not match its log, is refused. Use
   `kernel_records.climb` to take the step. On replay from JSON the embedded record is re-checked, not its log.

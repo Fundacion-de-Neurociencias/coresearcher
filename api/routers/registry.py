@@ -89,7 +89,7 @@ def retract_entry(entry_id: str, req: RegistryRetractRequest):
 
 @router.post("/api/registry/entries/{entry_id}/kernel-check", dependencies=[Depends(require_api_key)])
 def record_kernel_check(entry_id: str, req: RegistryKernelCheckRequest):
-    """Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with a recorded kernel run (ADR-DISCOVERY-091).
+    """Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with a recorded kernel run (ADR-DISCOVERY-092).
 
     `record` names a kernel record under records/kernel/. It is re-read and checked against its stored log; only a
     hash-verified PASS record climbs. A FAIL or BLOCKED record, or one whose hashes do not match, is refused (422).

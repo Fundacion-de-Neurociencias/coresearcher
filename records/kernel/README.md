@@ -1,6 +1,6 @@
 # Kernel records
 
-Records written by the `Lean kernel checks` workflow (`.github/workflows/lean-kernel.yml`, ADR-DISCOVERY-091). Each run
+Records written by the `Lean kernel checks` workflow (`.github/workflows/lean-kernel.yml`, ADR-DISCOVERY-092). Each run
 adds a directory `<date>-run<id>/` with one `<target>.json` record and its `<target>.log` per check.
 
 - A record's `result` is PASS, FAIL or BLOCKED, computed from its log by `python/discovery/kernel_records.py`.

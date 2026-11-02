@@ -1,4 +1,4 @@
-"""Runs a Lean kernel check and writes its kernel record and log (ADR-DISCOVERY-091).
+"""Runs a Lean kernel check and writes its kernel record and log (ADR-DISCOVERY-092).
 
 Runs on the Linux runner of the `Lean kernel checks` workflow (.github/workflows/lean-kernel.yml), not on the dev
 box. Each subcommand writes <out>/<target>.json and <out>/<target>.log; the record's result is computed from the log

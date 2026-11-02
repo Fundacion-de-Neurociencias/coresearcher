@@ -242,7 +242,7 @@ def test_withdrawal_propagates_to_manuscripts_that_adapted_the_step(reg):
 
 
 def test_downgrade_must_go_down_and_needs_a_reason(reg):
-    # KERNEL_CHECKED itself needs a recorded kernel run (ADR-091, tests/test_kernel_records.py); a lower rung is enough.
+    # KERNEL_CHECKED itself needs a recorded kernel run (ADR-092, tests/test_kernel_records.py); a lower rung is enough.
     reg.register({"id": "T", "source": "s", "statement": "t", "rung": "STATEMENT_AUDITED"})
     with pytest.raises(cr.RegistryError):
         reg.retract("T", "  ")

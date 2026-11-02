@@ -1,4 +1,4 @@
-# ADR-DISCOVERY-091: Recorded Lean kernel checks, the only way into KERNEL_CHECKED
+# ADR-DISCOVERY-092: Recorded Lean kernel checks, the only way into KERNEL_CHECKED
 
 **Status:** Accepted
 **Date:** 2026-11-02
@@ -89,6 +89,11 @@ registered at that rung with no evidence at all.
    - It pushes the records to `records/kernel/<date>-run<id>/` on a new branch, based on the default branch, and
      opens a pull request.
    - A test re-verifies every committed record against its log.
+   - This repository does not allow the workflow token to open pull requests ("Allow GitHub Actions to create and
+     approve pull requests" is off). The job then still pushes the `kernel-records/run-<id>` branch and warns, and
+     the pull request is opened from that branch with a person's or a session's credentials, which also triggers
+     the PR checks (a PR opened by the workflow token would not). That setting is left as it is: it also lets
+     workflows approve pull requests, and it belongs to the repository's administrators.
 
 ## Consequences
 

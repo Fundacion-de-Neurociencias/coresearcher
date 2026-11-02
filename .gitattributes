@@ -17,3 +17,6 @@ integrations/oase/demo/** -text
 # Regression expectations and fixtures are pinned by SHA-256 (ADR-DISCOVERY-084).
 benchmarks/regression/** text eol=lf
 benchmarks/regression/**/*.gz binary
+
+# Kernel records and logs are hashed byte for byte (ADR-DISCOVERY-092): never convert line endings.
+records/kernel/** -text

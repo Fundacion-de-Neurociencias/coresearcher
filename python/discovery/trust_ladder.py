@@ -15,6 +15,10 @@ whether the result is important or who deserves credit:
 Rules:
 - A claim climbs one rung at a time, and each step needs its evidence (`REQUIRED_EVIDENCE`). Missing evidence is
   refused, not defaulted.
+- KERNEL_CHECKED is reached only from a recorded, hash-verified PASS run (ADR-DISCOVERY-092): the step embeds the
+  kernel record (`kernel_records`), cites its digest and its path, and the record is re-read and checked against its
+  log when the step is taken. A FAIL or BLOCKED record, or one that does not match its log, is refused. Use
+  `kernel_records.climb` to take the step. On replay from JSON the embedded record is re-checked, not its log.
 - STATEMENT_AUDITED records that the audit ran, not that it passed. Its outcome (for example
   VACUOUS_RELATIVE_TO_INTENT, or coverage rows marked OBJECT_DIFFERS) travels with the step.
 - Below KERNEL_CHECKED the ADR-068 relay LEAN_NOT_KERNEL_CHECKED applies to any Lean theorem attached to the claim.
@@ -30,7 +34,7 @@ from dataclasses import asdict, dataclass, field
 from enum import Enum
 from typing import Any, Dict, List
 
-from python.discovery import formal_status
+from python.discovery import formal_status, kernel_records
 
 
 class Rung(str, Enum):
@@ -47,7 +51,7 @@ REQUIRED_EVIDENCE: Dict[Rung, List[str]] = {
     Rung.CLAIMED: ["announcement", "announcement_sha256"],
     Rung.STATEMENT_PUBLIC: ["statement_location", "statement_sha256"],
     Rung.STATEMENT_AUDITED: ["checklist", "checklist_sha256", "audit_report", "audit_outcome"],
-    Rung.KERNEL_CHECKED: ["toolchain", "axioms", "kernel_log_sha256", "checked_by"],
+    Rung.KERNEL_CHECKED: ["toolchain", "axioms", "kernel_log_sha256", "checked_by", *kernel_records.EVIDENCE_KEYS],
     Rung.INDEPENDENTLY_REPRODUCED: ["reproduced_by", "method", "record_sha256"],
 }
 
@@ -91,10 +95,15 @@ class ClaimRecord:
             return [formal_status.relay("LEAN_NOT_KERNEL_CHECKED")]
         return []
 
-    def _check_evidence(self, rung: Rung, evidence: Dict[str, Any]) -> None:
-        missing = [k for k in REQUIRED_EVIDENCE[rung] if not evidence.get(k)]
+    def _check_evidence(self, rung: Rung, evidence: Dict[str, Any], replay: bool = False) -> None:
+        # `axioms` may be an empty list (a theorem that uses no axiom), so only None counts as missing there.
+        missing = [k for k in REQUIRED_EVIDENCE[rung] if (evidence.get(k) is None if k == "axioms" else not evidence.get(k))]
         if missing:
             raise LadderError(f"{rung.value} needs evidence {missing}.")
+        if rung is Rung.KERNEL_CHECKED:
+            problems = kernel_records.evidence_reasons(evidence, verify_log=not replay)
+            if problems:
+                raise LadderError("KERNEL_CHECKED needs a recorded, hash-verified PASS run: " + "; ".join(problems))
         if rung is Rung.INDEPENDENTLY_REPRODUCED and evidence["reproduced_by"].strip() == self.claimant.strip():
             raise LadderError("Reproduction by the claimant is not independent.")
 
@@ -105,10 +114,12 @@ class ClaimRecord:
         self.history.append(Step(Rung.CLAIMED.value, date, reason, dict(evidence)))
         return self
 
-    def climb(self, rung: Rung, date: str, reason: str, evidence: Dict[str, Any]) -> "ClaimRecord":
+    def climb(
+        self, rung: Rung, date: str, reason: str, evidence: Dict[str, Any], replay: bool = False
+    ) -> "ClaimRecord":
         if ORDER.index(rung) != ORDER.index(self.rung) + 1:
             raise LadderError(f"From {self.rung.value} the next rung is not {rung.value}; rungs are not skipped.")
-        self._check_evidence(rung, evidence)
+        self._check_evidence(rung, evidence, replay)
         self.history.append(Step(rung.value, date, reason, dict(evidence)))
         return self
 
@@ -145,5 +156,5 @@ class ClaimRecord:
             elif ORDER.index(rung) < ORDER.index(record.rung):
                 record.descend(rung, step["date"], step["reason"])
             else:
-                record.climb(rung, step["date"], step["reason"], step["evidence"])
+                record.climb(rung, step["date"], step["reason"], step["evidence"], replay=True)
         return record

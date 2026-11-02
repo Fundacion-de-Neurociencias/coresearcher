@@ -1,0 +1,8 @@
+# Lake project the `Lean kernel checks` workflow compiles our own Lean files in (ADR-DISCOVERY-092).
+# Mathlib is pinned by tag; the resolved commit is written to every kernel record (mathlib_rev).
+name = "kernelcheck"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.35.0"

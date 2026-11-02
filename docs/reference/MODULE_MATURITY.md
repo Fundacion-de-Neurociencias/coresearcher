@@ -8,7 +8,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 
 | Level | Meaning | Modules |
 | --- | --- | --- |
-| Integrated | Used by the API and covered by tests | 31 |
+| Integrated | Used by the API and covered by tests | 32 |
 | Tested | Covered by tests, not reachable from the API | 64 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
@@ -60,7 +60,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `formal_hypothesis` | Integrated | yes | yes | yes |
 | `formal_lean` | Integrated | yes | yes | yes |
 | `formal_pipeline` | Tested | - | yes | - |
-| `formal_provenance` | Tested | - | yes | - |
+| `formal_provenance` | Tested | - | yes | yes |
 | `formal_smt` | Tested | - | yes | - |
 | `formal_status` | Integrated | yes | yes | yes |
 | `formal_thresholds` | Integrated | yes | yes | yes |
@@ -77,6 +77,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `inference_time_scaling` | Tested | - | yes | - |
 | `interval_engine` | Tested | - | yes | - |
 | `isaac_sim_grounding_adapter` | Tested | - | yes | - |
+| `kernel_records` | Integrated | yes | yes | yes |
 | `lab_in_the_loop_adapter` | Prototype | - | - | - |
 | `lagrangian_epistemic_engine` | Integrated | yes | yes | - |
 | `latent_factor_discovery` | Exercised | - | - | yes |

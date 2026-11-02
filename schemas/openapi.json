@@ -4926,6 +4926,22 @@
         "title": "RegistryHypothesisModel",
         "type": "object"
       },
+      "RegistryKernelCheckRequest": {
+        "description": "A kernel record under records/kernel/ (ADR-DISCOVERY-091), as a path relative to that directory.",
+        "properties": {
+          "record": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Record",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record"
+        ],
+        "title": "RegistryKernelCheckRequest",
+        "type": "object"
+      },
       "RegistryReevaluatedRequest": {
         "properties": {
           "note": {
@@ -10791,6 +10807,59 @@
           }
         },
         "summary": "Get Entry"
+      }
+    },
+    "/api/registry/entries/{entry_id}/kernel-check": {
+      "post": {
+        "description": "Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with a recorded kernel run (ADR-DISCOVERY-091).\n\n`record` names a kernel record under records/kernel/. It is re-read and checked against its stored log; only a\nhash-verified PASS record climbs. A FAIL or BLOCKED record, or one whose hashes do not match, is refused (422).",
+        "operationId": "record_kernel_check_api_registry_entries__entry_id__kernel_check_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "title": "Entry Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistryKernelCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "summary": "Record Kernel Check"
       }
     },
     "/api/registry/entries/{entry_id}/retract": {

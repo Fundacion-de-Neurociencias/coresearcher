@@ -143,6 +143,9 @@ domain-neutral.
   5. INDEPENDENTLY_REPRODUCED
 
   Each rung has a mechanical promotion rule. Keep a coverage map from claims to formal targets.
+  KERNEL_CHECKED is reached only from a kernel record that a real run wrote and that matches its stored log
+  (ADR-DISCOVERY-091). The `Lean kernel checks` workflow writes these records on a Linux runner, into
+  `records/kernel/`.
 - **Came from.** The coverage maps (local smoothing, O(3), the whole corpus in PR #21).
 - **Integration.** Block A adds the ladder to reports and to the evidence graph.
 - **Beyond.** Every hypothesis report shows which of its claims reached which rung, so a scientist sees exactly what
@@ -223,8 +226,9 @@ There is also one subtlety, which teaches M1:
 
 The ETH case also exercises the top rungs of the trust ladder. Two independent AI systems reached the result, and a
 human working group led by the hypothesis's authors (Impagliazzo, Paturi, with Williams) is reviewing it. Each of
-these is a separate signal of independent reproduction, and none is a kernel check. Our own Comparator run is
-recorded at NOT_RUN until it is executed.
+these is a separate signal of independent reproduction, and none is a kernel check. Our own Comparator run is the
+`openai-math-eth-378-subexponential-sat` target of the `Lean kernel checks` workflow (ADR-DISCOVERY-091). Its
+kernel record in `records/kernel/` says PASS, FAIL or BLOCKED, and only a PASS counts.
 
 ## 3. How the methods compose
 

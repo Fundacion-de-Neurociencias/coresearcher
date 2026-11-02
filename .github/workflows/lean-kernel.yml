@@ -1,0 +1,220 @@
+name: Lean kernel checks
+
+# Real Lean kernel checks on a Linux runner (ADR-DISCOVERY-091). Not run on pull requests: it installs Lean and
+# Mathlib and can build for hours. Every check writes a kernel record (python/discovery/kernel_records.py) and its
+# log; the records are uploaded as artifacts and proposed for records/kernel/ through a pull request. Only a
+# hash-verified PASS record lets a claim climb to KERNEL_CHECKED. A check that cannot run is recorded as BLOCKED.
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Open a pull request that adds the records to records/kernel/"
+        type: boolean
+        default: true
+  schedule:
+    - cron: "17 3 * * 1"  # Mondays 03:17 UTC
+  # A push to a lean-kernel/* branch runs the workflow as committed there, to try a change to it before merging.
+  push:
+    branches: ["lean-kernel/**"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-kernel
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: "3.12"
+  # openai/math at the commit the O(3) and ETH cases audit (examples/o3-continuum-rehearsal, eth-378); its
+  # lean/lean-toolchain is v4.34.1 and its Mathlib d13f23b723b8a846827a245b89c10fc7d3f11612.
+  OPENAI_MATH_COMMIT: 4eaee87548250b2682affda7d05d947c05554bae
+  # Tags v4.34.0 of comparator and lean4export, the releases that match the v4.34 toolchain of openai/math.
+  COMPARATOR_COMMIT: d03acab154d269c06e60e4de7e4cc85deebff94b
+  LEAN4EXPORT_COMMIT: 076e8e57707e813375e8f9da8bf989799ace9680
+  # landrun main when comparator v4.34.0 was tagged (Comparator asks for landrun built from main).
+  LANDRUN_COMMIT: 811cfff51ceaf3d9843708aa6d22e9b84ccac8b4
+  ELAN_COMMIT: 9605b24b08cf68b78dce0014b6fa01be1f8e2cee
+
+jobs:
+  own-files:
+    name: Our Lean files (lake env lean + #print axioms)
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Install elan
+        run: |
+          curl -sSfL "https://raw.githubusercontent.com/leanprover/elan/$ELAN_COMMIT/elan-init.sh" -o "$RUNNER_TEMP/elan-init.sh"
+          sh "$RUNNER_TEMP/elan-init.sh" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve Mathlib and fetch its cache
+        id: deps
+        continue-on-error: true
+        working-directory: lean/kernel-check
+        run: |
+          set -o pipefail
+          (lake update && lake exe cache get) 2>&1 | tee "$RUNNER_TEMP/deps.log"
+      - name: Kernel-check each file
+        run: |
+          set -u
+          OUT="$RUNNER_TEMP/records"
+          check() {  # check <target> <file>
+            if [ "${{ steps.deps.outcome }}" != "success" ]; then
+              python scripts/lean/kernel_check.py blocked --kind lean_file --target "$1" --out "$OUT" \
+                --reason "Mathlib could not be resolved or its cache fetched, so $2 was not compiled" \
+                --log "$RUNNER_TEMP/deps.log" --source "{\"path\": \"$2\"}" --toolchain "$(cat lean/kernel-check/lean-toolchain)"
+            else
+              python scripts/lean/kernel_check.py lean-file --project lean/kernel-check --file "$2" --target "$1" \
+                --out "$OUT" --timeout 2400
+            fi
+          }
+          check sakana-ed-polarity examples/sakana-ed-polarity/EdPolarity.lean
+          check ptau217-cutoff examples/ptau217-cutoff/Ptau217Cutoff.lean
+          check local-smoothing-statements examples/local-smoothing-fidelity/LocalSmoothing.lean
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kernel-records-own-files
+          path: ${{ runner.temp }}/records/
+          if-no-files-found: warn
+
+  comparator:
+    name: openai/math Comparator (${{ matrix.target }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: openai-math-local-smoothing
+            config: ComparatorChallenges/LocalSmoothing.json
+          - target: openai-math-eth-378-subexponential-sat
+            config: ComparatorChallenges/SubexponentialSAT.json
+          - target: openai-math-classical-on
+            config: ComparatorChallenges/ClassicalON.json
+    env:
+      WORK: ${{ github.workspace }}/../kernel-work
+      BLOCKED_FILE: ${{ github.workspace }}/../kernel-work/blocked.txt
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+          cache: false
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Free disk space for Mathlib and the openai/math dependencies
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+          df -h / | tail -1
+      - name: Prepare comparator, landrun and openai/math
+        id: pre
+        run: bash scripts/lean/comparator_preflight.sh 2>&1 | tee "$RUNNER_TEMP/preflight.log"
+      - name: Run Comparator
+        run: |
+          set -u
+          OUT="$RUNNER_TEMP/records"
+          SOURCE="{\"repository\": \"openai/math\", \"commit\": \"$OPENAI_MATH_COMMIT\", \"config\": \"lean/${{ matrix.config }}\"}"
+          if [ -f "$BLOCKED_FILE" ]; then
+            python scripts/lean/kernel_check.py blocked --kind comparator --target "${{ matrix.target }}" --out "$OUT" \
+              --reason "$(cat "$BLOCKED_FILE")" --log "$RUNNER_TEMP/preflight.log" --source "$SOURCE"
+            exit 0
+          fi
+          GUARD=""
+          if [ "${{ steps.pre.outputs.systemd_run }}" = "true" ]; then GUARD="--systemd-run"; fi
+          # 255 minutes for Comparator itself, so the record is written well before the job's time limit.
+          python scripts/lean/kernel_check.py comparator --project "$WORK/math/lean" --config "${{ matrix.config }}" \
+            --target "${{ matrix.target }}" --out "$OUT" --commit "$OPENAI_MATH_COMMIT" \
+            --landrun "$LANDRUN_COMMIT" --timeout 15300 $GUARD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kernel-records-${{ matrix.target }}
+          path: ${{ runner.temp }}/records/
+          if-no-files-found: warn
+
+  publish:
+    name: Verify and propose the records
+    needs: [own-files, comparator]
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out the default branch, which the records are proposed to
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          path: base
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: kernel-records-*
+          merge-multiple: true
+          path: incoming
+      - name: Record every expected check that left no record as BLOCKED
+        run: |
+          mkdir -p incoming
+          for t in sakana-ed-polarity ptau217-cutoff local-smoothing-statements \
+                   openai-math-local-smoothing openai-math-eth-378-subexponential-sat openai-math-classical-on; do
+            if [ ! -f "incoming/$t.json" ]; then
+              python scripts/lean/kernel_check.py blocked --kind "$(case $t in openai-*) echo comparator;; *) echo lean_file;; esac)" \
+                --target "$t" --out incoming \
+                --reason "the job ended (cancelled or out of time) before it wrote a record; no verdict on the proof"
+            fi
+          done
+      - name: Verify every record against its log
+        run: |
+          {
+            echo "## Lean kernel records (run ${{ github.run_id }})"
+            echo
+            python scripts/lean/kernel_check.py verify incoming
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Open a pull request with the records
+        if: github.event_name != 'workflow_dispatch' || inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REL="records/kernel/$(date -u +%F)-run${{ github.run_id }}"
+          DEST="base/$REL"
+          BRANCH="kernel-records/run-${{ github.run_id }}"
+          mkdir -p "$DEST"
+          cp incoming/*.json incoming/*.log "$DEST/"
+          python scripts/lean/kernel_check.py verify "$DEST" > /dev/null
+          cd base
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "$REL"
+          git commit -q -m "Kernel records from Lean kernel checks run ${{ github.run_id }}"
+          git push -q origin "$BRANCH"
+          cd ..
+          {
+            echo "Kernel records written by [this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) (ADR-DISCOVERY-091)."
+            echo
+            python scripts/lean/kernel_check.py verify "$DEST"
+            echo
+            echo "Only PASS records can lift a claim to KERNEL_CHECKED; FAIL and BLOCKED records never do."
+          } > "$RUNNER_TEMP/body.md"
+          gh pr create --repo "${{ github.repository }}" --base "${{ github.event.repository.default_branch }}" --head "$BRANCH" \
+            --title "Kernel records: Lean kernel checks run ${{ github.run_id }}" --body-file "$RUNNER_TEMP/body.md" \
+            || echo "::warning::The branch $BRANCH was pushed, but a pull request could not be opened with the workflow token."

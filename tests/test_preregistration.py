@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from python.discovery import kernel_records
 from python.discovery import preregistration as pr
 from python.discovery.formal_hypothesis import FormalHypothesisError
 from python.discovery.trust_ladder import ClaimRecord, LadderError, Rung
@@ -143,7 +144,19 @@ def _record() -> ClaimRecord:
     return ClaimRecord("c", "a claim", "Claimant").start("2026-10-30", "announced", CLAIMED)
 
 
-def test_ladder_climbs_one_rung_at_a_time_with_evidence():
+def _pass_record(tmp_path):
+    log = "'T.main' depends on axioms: [propext]\n" + kernel_records.FOOTER + "0\n"
+    record = kernel_records.build(
+        target="t", kind="lean_file", source={}, file_sha256="e" * 64, toolchain="leanprover/lean4:v4.35.0",
+        lean_version="", mathlib_rev="", theorems=["T.main"], log=log, kernel_log="t.log", wall_time_s=1,
+        checked_by="CoResearcher CI", date="2026-11-03",
+    )  # fmt: skip
+    (tmp_path / "t.log").write_text(log, encoding="utf-8", newline="")
+    (tmp_path / "t.json").write_text(json.dumps(record), encoding="utf-8")
+    return tmp_path / "t.json"
+
+
+def test_ladder_climbs_one_rung_at_a_time_with_evidence(tmp_path):
     record = _record()
     assert record.rung is Rung.CLAIMED
     assert record.formal_status == "NOT_KERNEL_CHECKED"
@@ -166,12 +179,15 @@ def test_ladder_climbs_one_rung_at_a_time_with_evidence():
             "audit_outcome": "VACUOUS_RELATIVE_TO_INTENT",
         },
     )
-    record.climb(
-        Rung.KERNEL_CHECKED,
-        "2026-11-03",
-        "kernel",
-        {"toolchain": "lean4 v4.x", "axioms": ["propext"], "kernel_log_sha256": "c" * 64, "checked_by": "CoResearcher"},
-    )
+    # Hand-written kernel evidence is refused: KERNEL_CHECKED needs a recorded, hash-verified run (ADR-091).
+    with pytest.raises(LadderError):
+        record.climb(
+            Rung.KERNEL_CHECKED,
+            "2026-11-03",
+            "kernel",
+            {"toolchain": "lean4 v4.x", "axioms": ["propext"], "kernel_log_sha256": "c" * 64, "checked_by": "Lab"},
+        )
+    kernel_records.climb(record, _pass_record(tmp_path), "2026-11-03", "kernel")
     assert record.formal_status == "DECIDED" and record.mandatory_relays == []
     with pytest.raises(LadderError):
         record.climb(

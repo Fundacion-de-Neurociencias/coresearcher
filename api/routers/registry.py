@@ -9,11 +9,12 @@ from api.schemas import (
     CiteCheckRequest,
     RegistryDependencyRequest,
     RegistryEntryRequest,
+    RegistryKernelCheckRequest,
     RegistryReevaluatedRequest,
     RegistryRetractRequest,
 )
 from api.security import require_api_key
-from python.discovery import cited_registry
+from python.discovery import cited_registry, kernel_records
 from python.discovery.formal_hypothesis import FormalHypothesisError
 
 router = APIRouter()
@@ -84,6 +85,21 @@ def retract_entry(entry_id: str, req: RegistryRetractRequest):
         return registry().retract(entry_id, req.reason, req.downgrade_to, req.date)
     except cited_registry.RegistryError as exc:
         _fail(exc)
+
+
+@router.post("/api/registry/entries/{entry_id}/kernel-check", dependencies=[Depends(require_api_key)])
+def record_kernel_check(entry_id: str, req: RegistryKernelCheckRequest):
+    """Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with a recorded kernel run (ADR-DISCOVERY-091).
+
+    `record` names a kernel record under records/kernel/. It is re-read and checked against its stored log; only a
+    hash-verified PASS record climbs. A FAIL or BLOCKED record, or one whose hashes do not match, is refused (422).
+    """
+    try:
+        path = kernel_records.in_records_dir(req.record)
+        entry = registry().record_kernel_check(entry_id, str(path))
+    except (cited_registry.RegistryError, kernel_records.KernelRecordError) as exc:
+        _fail(exc)
+    return {"entry": asdict(entry)}
 
 
 @router.get("/api/registry/impact/{node}")

@@ -931,6 +931,12 @@ class RegistryReevaluatedRequest(BaseModel):
     note: str = Field(min_length=1, max_length=2000)
 
 
+class RegistryKernelCheckRequest(BaseModel):
+    """A kernel record under records/kernel/ (ADR-DISCOVERY-091), as a path relative to that directory."""
+
+    record: str = Field(min_length=1, max_length=300)
+
+
 class FreezeLifecycleAnchorModel(BaseModel):
     """A research lifecycle check (ADR-063) whose recorded SHA-256 the freeze must equal."""
 

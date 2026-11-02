@@ -242,13 +242,14 @@ def test_withdrawal_propagates_to_manuscripts_that_adapted_the_step(reg):
 
 
 def test_downgrade_must_go_down_and_needs_a_reason(reg):
-    reg.register({"id": "T", "source": "s", "statement": "t", "rung": "KERNEL_CHECKED"})
+    # KERNEL_CHECKED itself needs a recorded kernel run (ADR-091, tests/test_kernel_records.py); a lower rung is enough.
+    reg.register({"id": "T", "source": "s", "statement": "t", "rung": "STATEMENT_AUDITED"})
     with pytest.raises(cr.RegistryError):
         reg.retract("T", "  ")
     with pytest.raises(cr.RegistryError):
-        reg.retract("T", "why", downgrade_to="INDEPENDENTLY_REPRODUCED")
-    out = reg.retract("T", "kernel log lost", downgrade_to="STATEMENT_AUDITED")
-    assert out["entry"]["status"] == cr.DOWNGRADED and out["entry"]["rung"] == "STATEMENT_AUDITED"
+        reg.retract("T", "why", downgrade_to="KERNEL_CHECKED")
+    out = reg.retract("T", "audit withdrawn", downgrade_to="STATEMENT_PUBLIC")
+    assert out["entry"]["status"] == cr.DOWNGRADED and out["entry"]["rung"] == "STATEMENT_PUBLIC"
 
 
 def test_cycles_are_refused(reg):

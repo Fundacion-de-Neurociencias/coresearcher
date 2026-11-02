@@ -65,6 +65,9 @@ One context is still INVALID_INPUT, and the chain refuses it (M8).
    withdrawals).
 4. **A chain input kind for a citation inside a proof**, and **a premise-status feed** (unchanged).
 
+**Follow-up.** Gap 1 was built as [ADR-091](../../decisions/ADR-DISCOVERY-091-STANDING-ASSUMPTIONS.md) and measured
+in [`OPENAI_MATH_STANDING_RESULTS.md`](OPENAI_MATH_STANDING_RESULTS.md).
+
 ## 4. Deviations
 
 None. The re-encoding replaced only `variables` and `assumptions`. Conventions and cases are the frozen constrained

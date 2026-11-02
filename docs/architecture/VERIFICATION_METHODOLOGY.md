@@ -127,6 +127,9 @@ domain-neutral.
     undischarged hypotheses are decided relative to the passage window, so the next capability is a manuscript's
     standing assumptions
     ([`OPENAI_MATH_UNBOUNDED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_UNBOUNDED_RESULTS.md)).
+  - A citation inherits its manuscript's standing assumptions (ADR-091). Measured, this discharged 7 more cited
+    hypotheses, with nothing moving the other way
+    ([`OPENAI_MATH_STANDING_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_STANDING_RESULTS.md)).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

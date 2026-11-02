@@ -1564,6 +1564,7 @@
     "docs/reference/benchmarks/openai_math_constrained_contexts.json": "bc739699714945a9820337951f3d5fbc9a7f1149ef39eeb601565936580ccb9a",
     "docs/reference/benchmarks/openai_math_constrained_registry.json": "0ac377e3c9811a50f2731f3fd5cecc06de40bb23af3989c5f04eaec181eb7be6",
     "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5",
+    "docs/reference/benchmarks/openai_math_standing_contexts.json": "6be76eef58c620642e4d81b21becbb0aa9bcfab3cb46477b464172c12548e0d0",
     "docs/reference/benchmarks/openai_math_typed_contexts.json": "6a5a765af95997abea2d898c9a8adf0f13b8caddb079453698baeda6c93e645d",
     "docs/reference/benchmarks/openai_math_typed_registry.json": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994",
     "docs/reference/benchmarks/openai_math_unbounded_contexts.json": "e024578e4b64ca23523d2946b49e62d48ad798251dff333d311c2652a7c90ef1"
@@ -1653,6 +1654,14 @@
     "cases/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
+    },
+    "cases/hypotheses/discharged": {
+     "better": "higher",
+     "value": 32
+    },
+    "cases/hypotheses/not_discharged": {
+     "better": "lower",
+     "value": 4
     },
     "chain/alarms/corrected/flags/CHAIN_SEAMS": {
      "better": "lower",
@@ -1957,6 +1966,14 @@
     "constrained/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
+    },
+    "constrained/hypotheses/discharged": {
+     "better": "higher",
+     "value": 32
+    },
+    "constrained/hypotheses/not_discharged": {
+     "better": "lower",
+     "value": 7
     },
     "defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces": {
      "better": "verdict",
@@ -2614,6 +2631,98 @@
      "better": "higher",
      "value": 4
     },
+    "standing/alarms/corrected/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "standing/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "standing/convention_mismatches/at_location": {
+     "better": "higher",
+     "value": 4
+    },
+    "standing/convention_mismatches/elsewhere": {
+     "better": "lower",
+     "value": 6
+    },
+    "standing/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "standing/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "standing/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "standing/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "standing/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "standing/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "standing/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "standing/hypotheses/discharged": {
+     "better": "higher",
+     "value": 35
+    },
+    "standing/hypotheses/not_discharged": {
+     "better": "lower",
+     "value": 6
+    },
     "typed/alarms/corrected/flags/CHAIN_SEAMS": {
      "better": "lower",
      "value": 3
@@ -2698,6 +2807,14 @@
      "better": "verdict",
      "value": "NOT_ENCODABLE"
     },
+    "typed/hypotheses/discharged": {
+     "better": "higher",
+     "value": 32
+    },
+    "typed/hypotheses/not_discharged": {
+     "better": "lower",
+     "value": 7
+    },
     "unbounded/alarms/corrected/flags/CHAIN_SEAMS": {
      "better": "lower",
      "value": 4
@@ -2781,6 +2898,14 @@
     "unbounded/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
+    },
+    "unbounded/hypotheses/discharged": {
+     "better": "higher",
+     "value": 28
+    },
+    "unbounded/hypotheses/not_discharged": {
+     "better": "lower",
+     "value": 8
     }
    },
    "title": "openai/math time-travel benchmark: real corrected defects and false alarms"
@@ -3988,8 +4113,145 @@
    "date": "2026-11-02",
    "reason": "ADR-090: unbounded integer variables; the unbounded re-measure (OPENAI_MATH_UNBOUNDED_RESULTS.md) replayed and frozen",
    "version": 8
+  },
+  {
+   "changes": {
+    "openai_math_time_travel": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_standing_contexts.json"
+     },
+     {
+      "class": "CHANGED",
+      "key": "cases/hypotheses/discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "cases/hypotheses/not_discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/hypotheses/discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "constrained/hypotheses/not_discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/convention_mismatches/at_location"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/convention_mismatches/elsewhere"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/hypotheses/discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "standing/hypotheses/not_discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/hypotheses/discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "typed/hypotheses/not_discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/hypotheses/discharged"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/hypotheses/not_discharged"
+     }
+    ]
+   },
+   "date": "2026-11-02",
+   "reason": "ADR-091: standing assumptions per manuscript; the standing re-measure (OPENAI_MATH_STANDING_RESULTS.md) replayed and frozen; hypothesis discharge counts added for every typed variant",
+   "version": 9
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 8
+ "version": 9
 }

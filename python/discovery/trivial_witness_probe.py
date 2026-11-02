@@ -326,11 +326,13 @@ theorem probe_degenerate_implies_target (h : ∀ n, sphereProbability n = 0) : E
   intro n hn β hβ
   refine ⟨1, 1, one_pos, ?_⟩
   intro G b hb x y
-  haveI : Nonempty G.vertices := ⟨x⟩
+  -- Rewrite the factors to the zero measure first: `Measure.pi_univ` needs `SigmaFinite` factors, which `0` has.
+  have hfun : (fun _ : G.vertices => sphereProbability n) = fun _ => (0 : Measure (Spin n)) :=
+    funext fun _ => h n
   have hz : referenceLaw n G = 0 := by
     apply Measure.measure_univ_eq_zero.mp
-    rw [referenceLaw, Measure.pi_univ]
-    exact Finset.prod_eq_zero (Finset.mem_univ x) (by simp [h])
+    rw [referenceLaw, hfun, Measure.pi_univ]
+    exact Finset.prod_eq_zero (Finset.mem_univ x) (by simp)
   simp only [correlation, partition, hz, integral_zero_measure, zero_div]
   exact ⟨le_rfl, by positivity⟩
 

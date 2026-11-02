@@ -186,6 +186,42 @@ def ingest(raw: Path) -> Path:
     return out
 
 
+TABLE_COLUMNS = ["Q1", "Q2", "Q2_items", "Q3", "Q3_items", "Q4"]
+
+
+def ingest_table(reply: Path) -> Path:
+    """A reply relayed as a Markdown table (task, field, Q1, Q2, Q2_items, Q3, Q3_items, Q4) -> answers.
+
+    Values keep their enum text; "(n)" confidences are dropped; "—" is an empty list for *_items and "not asked"
+    otherwise. Every cell is validated by the same parser as the JSON path, so a malformed value is INVALID.
+    """
+    import re
+
+    tasks = load_tasks(TASKS)
+    rows = {}
+    for line in reply.read_text(encoding="utf-8").splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if not cells or not re.fullmatch(r"AIR1-\d\d", cells[0]):
+            continue
+        rows[cells[0]] = dict(zip(TABLE_COLUMNS, cells[2:8]))
+    answers = {}
+    for tid, task in sorted(tasks.items()):
+        row, obj = rows.get(tid, {}), {}
+        for q in questions_for(task):
+            cell = re.sub(r"\s*\(\d\)\s*$", "", row.get(q, "")).strip()
+            if q.endswith("_items"):
+                items = [] if cell in ("—", "-", "") else [x.strip() for x in cell.split(",")]
+                obj[q] = {"value": [int(x) if x.isdigit() else x for x in items]}
+            else:
+                obj[q] = {"value": cell}
+        answers[tid] = parse_answers(json.dumps(obj), task)
+    out = ROUND / "claude_science_answers.json"
+    out.write_text(json.dumps({"arm": "claude_science", "pack_version": PACK_VERSION, "prompt_sha256": prompt_sha256(),
+                               "source": reply.name, "source_sha256": sha256(reply), "answers": answers},
+                              indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return out
+
+
 def _kappa(pairs: list) -> float | None:
     from concordance_score import cohen_kappa
 
@@ -222,6 +258,8 @@ def main(argv=None) -> int:
     sub.add_parser("seal")
     i = sub.add_parser("ingest")
     i.add_argument("--raw", required=True)
+    t = sub.add_parser("ingest-table")
+    t.add_argument("--reply", required=True)
     c = sub.add_parser("compare")
     c.add_argument("--llm-answers", help="Answers file from concordance_llm_arm.py run (second model family)")
     c.add_argument("--out", default=str(ROUND / "concordance_report.json"))
@@ -233,6 +271,9 @@ def main(argv=None) -> int:
         print(f"{out}\nsha256 {sha256(out)}")
     elif args.cmd == "seal":
         out = seal()
+        print(f"{out}\nsha256 {sha256(out)}")
+    elif args.cmd == "ingest-table":
+        out = ingest_table(Path(args.reply))
         print(f"{out}\nsha256 {sha256(out)}")
     elif args.cmd == "ingest":
         out = ingest(Path(args.raw))

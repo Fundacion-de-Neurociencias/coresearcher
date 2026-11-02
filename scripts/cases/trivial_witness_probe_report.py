@@ -110,6 +110,9 @@ def prepare(math_root: Path) -> None:
     print(f"wrote {len(probes)} probe files under {lean / PROBE_DIR}")
 
 
+_MISSING_IMPORT = re.compile(r"object file \S+ of module \S+ does not exist|unknown module prefix '[^']*'|unknown package '[^']*'")
+
+
 def _probe_target(probe_id: str) -> str:
     """A record target name: lower-case, `-` separated, prefixed like the other openai/math records."""
     return "openai-math-probe-" + re.sub(r"[^a-z0-9]+", "-", probe_id.lower()).strip("-")
@@ -136,6 +139,10 @@ def _check_one(entry: Dict[str, Any], lean: Path, out: Path, timeout: int, env: 
         output, code = (exc.stdout or b"").decode("utf-8", errors="replace"), None
     wall = time.monotonic() - started
     blocked = f"the kernel run did not finish within {timeout} s" if code is None else ""
+    if not blocked and _MISSING_IMPORT.search(output):
+        # The file imports modules that were never built here (e.g. ComparatorChallenges.* support files): the probe
+        # did not reach elaboration, so it is a non-verdict, not a FAIL.
+        blocked = "an imported module is not built in this environment: " + _MISSING_IMPORT.search(output).group(0)
     declaration = _qualified(entry)
     log = (
         f"# kernel-check lean_file {target}\n# file: {entry['module_path']} (generated probe, mode {entry['mode']})\n"

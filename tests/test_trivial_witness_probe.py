@@ -115,3 +115,72 @@ def test_committed_probe_output():
     assert "ClassicalON:main:trivial" in ids
     assert "215-classical-on-degenerate-measure:D1_degenerate_implies_target" in ids
     assert data["degenerate_cases"][0]["theorem"] == "OAI.ClassicalON.main"
+
+
+def test_kernel_results_map_to_probe_outcomes():
+    assert probe.outcome_from_kernel("PASS") == probe.LeanOutcome.PROVED
+    assert probe.outcome_from_kernel("FAIL") == probe.LeanOutcome.NOT_PROVED
+    assert probe.outcome_from_kernel("BLOCKED") == probe.LeanOutcome.BLOCKED
+    assert "vacuity finding" in probe.meaning("trivial") and "D2" in probe.meaning("D1_degenerate_implies_target")
+
+
+def _script():
+    import importlib.util
+
+    path = Path(__file__).resolve().parents[1] / "scripts" / "cases" / "trivial_witness_probe_report.py"
+    spec = importlib.util.spec_from_file_location("trivial_witness_probe_report", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_report_folds_verified_kernel_records(tmp_path, monkeypatch):
+    from python.discovery import kernel_records
+
+    script = _script()
+    assert script._probe_target("ClassicalON:main:trivial") == "openai-math-probe-classicalon-main-trivial"
+    assert script._qualified({"theorem": "OAI.ClassicalON.main", "declaration": "probe_x"}) == "OAI.ClassicalON.probe_x"
+    out = tmp_path / "vacuity_probe.json"
+    out.write_text(
+        json.dumps(
+            {
+                "lean_probes": {
+                    "probes": [
+                        {"probe_id": "T:main:trivial", "mode": "trivial", "outcome": "NOT_RUN"},
+                        {"probe_id": "T:main:inconsistent", "mode": "inconsistent", "outcome": "NOT_RUN"},
+                    ]
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(script, "OUT", out)
+    records = tmp_path / "records"
+    records.mkdir()
+    log = "error-free\n'OAI.T.main' depends on axioms: [sorryAx]\n# kernel-check: exit_code=0\n"
+    target = script._probe_target("T:main:trivial")
+    record = kernel_records.build(
+        target=target,
+        kind="lean_file",
+        source={"repository": "openai/math", "commit": "x", "path": "p"},
+        file_sha256="0" * 64,
+        toolchain="t",
+        lean_version="v",
+        mathlib_rev="m",
+        theorems=["OAI.T.main"],
+        log=log,
+        kernel_log=f"{target}.log",
+        wall_time_s=1.0,
+        checked_by="local:test",
+        date="2026-11-02T00:00:00Z",
+        extra={"probe": {"probe_id": "T:main:trivial", "mode": "trivial"}},
+    )
+    (records / f"{target}.log").write_bytes(log.encode("utf-8"))
+    (records / f"{target}.json").write_text(json.dumps(record), encoding="utf-8")
+    script.report(records)
+    data = json.loads(out.read_text(encoding="utf-8"))
+    rows = {r["probe_id"]: r for r in data["lean_probes"]["probes"]}
+    assert rows["T:main:trivial"]["kernel_result"] == "FAIL"  # sorryAx: the menu did not close the target.
+    assert rows["T:main:trivial"]["outcome"] == "NOT_PROVED"
+    assert rows["T:main:inconsistent"]["outcome"] == "NOT_RUN"
+    assert data["lean_probes"]["summary"] == {"NOT_PROVED": 1, "NOT_RUN": 1}

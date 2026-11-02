@@ -58,12 +58,15 @@ def citing_context(hypothesis: Dict[str, Any], item: Dict[str, Any]) -> Dict[str
     assumptions = list(hypothesis.get("assumptions") or [])
     if hypothesis.get("scope"):
         assumptions.append(hypothesis["scope"])
-    return {
+    out = {
         "variables": list(hypothesis.get("variables") or []),
         "assumptions": assumptions,
         "conventions": dict(item.get("conventions") or {}),
         "text": str(hypothesis.get("statement") or ""),
     }
+    if isinstance(item.get("standing"), dict):  # The citing manuscript's standing assumptions (ADR-091).
+        out["standing"] = dict(item["standing"])
+    return out
 
 
 def resolve_citations(items: List[Dict[str, Any]], registry) -> List[Dict[str, Any]]:

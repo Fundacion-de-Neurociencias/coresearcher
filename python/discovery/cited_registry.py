@@ -25,6 +25,7 @@ Rules:
 
 from __future__ import annotations
 
+import ast
 import json
 import os
 import re
@@ -244,8 +245,44 @@ def _mismatch(c: Dict[str, Any]) -> str:
     return f"convention '{c['tag']}' differs: " + "; ".join(parts)
 
 
+def _names(expression: str) -> set:
+    try:
+        return {n.id for n in ast.walk(ast.parse(expression, mode="eval")) if isinstance(n, ast.Name)}
+    except SyntaxError:
+        return {"<unparsable>"}
+
+
+def with_standing(context: Dict[str, Any]) -> Dict[str, Any]:
+    """The citing context with the manuscript's standing assumptions inherited (ADR-DISCOVERY-091).
+
+    `context["standing"]` holds what the citing manuscript fixes once for all its uses ("throughout, n = 2k with
+    k >= 2"): variables, assumptions and conventions. The passage wins where both speak: a variable or convention the
+    passage declares is kept as the passage declares it. A standing assumption is inherited only when every name in it
+    is a variable of the merged context, so a standing fact never introduces an undeclared name.
+    """
+    standing = context.get("standing")
+    if not isinstance(standing, dict) or not standing:
+        return context
+    variables = list(context.get("variables") or [])
+    declared = {v.get("name") for v in variables if isinstance(v, dict)}
+    for v in standing.get("variables") or []:
+        if isinstance(v, dict) and v.get("name") not in declared:
+            variables.append(dict(v))
+            declared.add(v.get("name"))
+    inherited = [a for a in standing.get("assumptions") or [] if isinstance(a, str) and _names(a) <= declared]
+    conventions = {**dict(standing.get("conventions") or {}), **dict(context.get("conventions") or {})}
+    out = {k: v for k, v in context.items() if k != "standing"}
+    out.update(variables=variables, assumptions=inherited + list(context.get("assumptions") or []),
+               conventions=conventions, standing_inherited={"assumptions": inherited,
+                                                            "variables": sorted(declared - {v.get("name") for v in (
+                                                                context.get("variables") or [])
+                                                                if isinstance(v, dict)})})
+    return out
+
+
 def cite_check(entry: RegistryEntry, context: Dict[str, Any]) -> Dict[str, Any]:
     """Checks one use of a registered result. The outcome is CLEAR, FINDINGS or INCOMPLETE, with provenance."""
+    context = with_standing(context)
     conventions = check_conventions(entry, context.get("conventions") or {})
     hypotheses = [check_hypothesis(h, context) for h in entry.hypotheses]
     findings: List[str] = []

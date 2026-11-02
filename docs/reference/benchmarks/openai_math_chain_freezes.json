@@ -335,6 +335,38 @@
       },
       "prev": "b31fa19f5ac00dbc00d1093355e1cdcdc9b8f426d844f26fade6a9a626780522",
       "seq": 21
+    },
+    {
+      "at": "2026-11-02T06:03:21Z",
+      "hash": "a8aab5628228f0127319aeda212361ea9443f61adef69a52e41cc883c27a1bc1",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-02T06:03:21Z",
+        "id": "FZ-940171b53b150f42",
+        "kind": "document",
+        "label": "OPENAI_MATH_STANDING_PROTOCOL.md",
+        "lifecycle": null,
+        "sha256": "940171b53b150f424896b613ca052ff9eb8b14ee5644f5b26ab8649be7ab1533"
+      },
+      "prev": "6b30bd268fd674a51a2013f60d6ef5d48439dd4e9cabbfca724380e126597269",
+      "seq": 22
+    },
+    {
+      "at": "2026-11-02T06:03:26Z",
+      "hash": "3a1fe371b789e5037d8a75d814cd406aedff00f6c6c4d4e5d4af6b79b9f3e7b7",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-02T06:03:26Z",
+        "id": "FZ-734380222d355abc",
+        "kind": "document",
+        "label": "STANDING_INSTRUCTIONS.md",
+        "lifecycle": null,
+        "sha256": "734380222d355abc7de5d1df2851371c26fa4640d225085ef290dfe98b91711f"
+      },
+      "prev": "a8aab5628228f0127319aeda212361ea9443f61adef69a52e41cc883c27a1bc1",
+      "seq": 23
     }
   ],
   "freezes": {
@@ -464,6 +496,20 @@
       "lifecycle": null,
       "sha256": "7143c53aad23905cb46bf081ec519de781a1b42671a9b725b958d1ffa1d1a8e1"
     },
+    "FZ-734380222d355abc": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 2260,
+        "name": "STANDING_INSTRUCTIONS.md",
+        "text": "# Standing-assumption extraction instructions (given verbatim to each extractor)\n\nYou will receive packets. Each packet comes from one mathematical manuscript and holds:\n\n- `standing_text`: the paragraphs of the manuscript that state conventions, notation or assumptions holding\n  throughout (or throughout a section);\n- `variables_of_interest`: quantity names, each with a one-line meaning, about which a checker needs to know what the\n  manuscript assumes.\n\nFor each packet, write the **standing context**: what the standing text fixes, once for the whole manuscript, about\nthe variables of interest.\n\n1. **`variables`.** Declare each variable of interest that the standing text constrains, and any auxiliary variable\n   you need to state the constraint (for example k in \"n = 2k\"). Use these forms:\n   - an integer: `{\"name\": ..., \"integer\": true, \"lower\": <int>, \"upper\": <int>}`, giving bounds only if the text\n     states them; an integer may be unbounded;\n   - a finite set: `{\"name\": ..., \"domain\": [values]}`;\n   - a real: `{\"name\": ..., \"continuous\": true, \"lower\": ..., \"upper\": ...}`.\n\n   A name in the standing text may differ from the variable of interest. Map it only when the text makes the\n   identification clear, and say so in `notes`.\n2. **`assumptions`.** The conditions the standing text states on those variables. Use comparisons, `and`, `or`,\n   `not`, `+ - *`, and `%` or `//` by a positive integer constant (`n == 2*k`, `k >= 2`, `lam > 0`).\n3. **What to leave out.**\n   - A variable of interest the standing text does not constrain is left out.\n   - An assumption that holds only in one section, when it is not clear that this section is the one where the\n     citations are, is left out and mentioned in `notes`.\n4. **`notes`.** One to three sentences on anything uncertain.\n\nEncode only what the standing text states. Do not infer from outside it and do not use what you know about the\nsubject. Do not open any file, web page or repository other than your packet file and these instructions. Write helper\nscripts only in the tools folder named in your task, and never run a script you did not write.\n\nReturn a JSON list, one object per packet:\n\n```json\n{\"id\": \"<packet id>\", \"variables\": [], \"assumptions\": [], \"notes\": \"...\"}\n```\n"
+      },
+      "frozen_at": "2026-11-02T06:03:26Z",
+      "id": "FZ-734380222d355abc",
+      "kind": "document",
+      "label": "STANDING_INSTRUCTIONS.md",
+      "lifecycle": null,
+      "sha256": "734380222d355abc7de5d1df2851371c26fa4640d225085ef290dfe98b91711f"
+    },
     "FZ-7b22bba9b0cda303": {
       "author": "openai-math-chain-benchmark",
       "content": {
@@ -491,6 +537,20 @@
       "label": "UNBOUNDED_ENCODER_INSTRUCTIONS.md",
       "lifecycle": null,
       "sha256": "8e45997c662b084de86629471ec36f0bf5b1887c332011030a81392f57d70461"
+    },
+    "FZ-940171b53b150f42": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 3284,
+        "name": "OPENAI_MATH_STANDING_PROTOCOL.md",
+        "text": "# openai/math time-travel benchmark: standing assumptions (ADR-091), pre-registered protocol\n\nStatus: frozen before any standing text was extracted or read. Its SHA-256 is stored in\n`OPENAI_MATH_STANDING_PROTOCOL.sha256` and in the ADR-085 freeze log. The runner\n(`openai_math_revision_bench.py typed --variant standing`) refuses to start if the file has changed.\n\n## 1. Question\n\nThe unbounded re-measure (`OPENAI_MATH_UNBOUNDED_RESULTS.md`) found that the remaining undischarged hypotheses have\ncounterexamples the citing passage allows. The passage window, 55 lines around the citation, does not state the\nbounds the cited results need, such as n ≥ 3. A manuscript usually fixes such bounds once, as standing assumptions.\n\nADR-091 lets a citing context inherit the standing variables and assumptions of its manuscript. The passage wins where\nboth speak, and a standing assumption is inherited only when every name in it is a variable of the merged context.\n\n**Questions.**\n\n1. With standing assumptions extracted blind for each manuscript version, which remaining \"not discharged\" findings\n   are discharged?\n2. Which remain, and why?\n3. Does any finding appear or disappear at a defect location?\n\nScope: formal soundness only.\n\n## 2. Inputs\n\n- **Unchanged.** The case-scoped registry and the unbounded citing contexts.\n- **The only new input.** A standing context (variables, assumptions) for each manuscript version that uses a\n  registered result whose hypotheses have formal predicates.\n\n## 3. Standing text (mechanical) and blind extraction\n\n- **Standing text.** For each such version, every paragraph of its `.tex` sources (comments removed, in file order)\n  that contains one of these markers:\n  - \"throughout\";\n  - \"we assume\";\n  - \"standing\";\n  - \"unless otherwise\";\n  - \"we fix\";\n  - \"we always assume\";\n  - \"conventions\";\n  - \"notation\".\n\n  The text is capped at 400 lines. It has no line numbers and no file names.\n- **Variables of interest.** The names used in the formal predicates of the registered results that the version\n  cites, with the registry writers' one-line meanings.\n- **The extractors.**\n  - Fresh agent sessions. Their instructions are recorded verbatim in\n    `openai_math_chain_procedure/STANDING_INSTRUCTIONS.md` before any extractor starts.\n  - Packets have opaque ids and are shuffled with seed 20261103. Every third packet goes to the same extractor.\n  - An extractor sees no citation passage and no defect location.\n- **What they return.** For each packet, standing `variables` and `assumptions` about the variables of interest (and\n  auxiliary variables such as k in n = 2k), only as the standing text states them, with unbounded integers where the\n  text gives no bound.\n- **Assembly.** `standing-contexts` attaches each record to every citing context of its version and writes\n  `openai_math_standing_contexts.json`. That file is frozen before the run. The coordinator may repair JSON syntax\n  only.\n\n## 4. Run and scoring\n\n- **The run.** `typed --variant standing` writes `openai_math_standing_results.json`.\n- **Scoring and adjudication.** As in the earlier protocols, next to the unbounded re-measure. Every hypothesis that\n  changes outcome is listed.\n- **Regression.** The regression expectations are updated in the same pull request.\n"
+      },
+      "frozen_at": "2026-11-02T06:03:21Z",
+      "id": "FZ-940171b53b150f42",
+      "kind": "document",
+      "label": "OPENAI_MATH_STANDING_PROTOCOL.md",
+      "lifecycle": null,
+      "sha256": "940171b53b150f424896b613ca052ff9eb8b14ee5644f5b26ab8649be7ab1533"
     },
     "FZ-951445266b480e30": {
       "author": "openai-math-chain-benchmark",

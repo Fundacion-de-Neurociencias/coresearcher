@@ -1658,7 +1658,7 @@ Assembles the FastAPI application from the routers: CORS, rate limiting, API-key
 
 **ADRs:** [ADR-009](../decisions/ADR-DISCOVERY-009_DISCOVERY_WORKBENCH.md)
 
-**Tests:** `conftest.py`, `test_api_endpoints.py`, `test_api_security.py`, `test_autopoietic_closure_auditor.py`, `test_biomacromolecular_auditor.py`, `test_cogentic_proof_orchestrator.py`, `test_era_empirical_engine.py`, `test_evidence_service.py`, `test_frontier_math_flywheel.py`, `test_hakken_dream_rsi_engine.py`, `test_hypothesis_tournament_arena.py`, `test_research_lifecycle.py`, `test_vega_decision_engine.py`
+**Tests:** `conftest.py`, `test_api_endpoints.py`, `test_api_security.py`, `test_autopoietic_closure_auditor.py`, `test_biomacromolecular_auditor.py`, `test_capability_map.py`, `test_cogentic_proof_orchestrator.py`, `test_era_empirical_engine.py`, `test_evidence_service.py`, `test_frontier_math_flywheel.py`, `test_hakken_dream_rsi_engine.py`, `test_hypothesis_tournament_arena.py`, `test_research_lifecycle.py`, `test_vega_decision_engine.py`
 
 <a id="cli-shell"></a>
 
@@ -1762,7 +1762,7 @@ Keeps documentation and contracts in step with the code: the OpenAPI contract an
 
 **ADRs:** [ADR-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md), [ADR-085](../decisions/ADR-DISCOVERY-085-FREEZE-LEDGER-CHAIN.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_capability_regression.py`, `test_english_policy.py`, `test_evidence_service.py`, `test_formal_capabilities.py`, `test_manuscript_audit.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_capability_map.py`, `test_capability_regression.py`, `test_english_policy.py`, `test_evidence_service.py`, `test_formal_capabilities.py`, `test_manuscript_audit.py`
 
 <a id="legacy-scaffolding"></a>
 

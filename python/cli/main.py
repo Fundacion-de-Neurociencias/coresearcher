@@ -94,7 +94,8 @@ def cmd_info(args: argparse.Namespace) -> int:
     return 0
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
+    """The full argument parser. scripts/generate_capability_map.py reads every subcommand from it."""
     parser = argparse.ArgumentParser(
         prog="coresearcher",
         description="CoResearcher CLI - Autonomous Scientific Discovery & Epistemic Audit",
@@ -147,7 +148,13 @@ def main() -> None:
     from python.cli import biomedical
 
     biomedical.add_parser(subparsers)
+    return parser
 
+
+def main() -> None:
+    from python.cli import biomedical, chain, formal, freeze, registry, regression
+
+    parser = build_parser()
     args = parser.parse_args()
     if not args.command:
         print(BANNER)

@@ -631,14 +631,13 @@ def doctor(args: argparse.Namespace) -> int:
     models = [m.strip() for m in os.getenv("FORMALIZER_GATE_MODELS", "").split(",") if m.strip()]
     if os.getenv("FORMALIZER_MODEL"):
         models = models or [os.environ["FORMALIZER_MODEL"]]
-    from python.discovery.formalizer import PROMPT_VERSION, prompt_sha256
+    from python.discovery.formalizer import prompt_fingerprint
 
     formalizer: Dict[str, Any] = {
         "status": "configured" if models else "unconfigured",
         "models": models,
         "base_url": (os.getenv("FORMALIZER_BASE_URL") or "http://localhost:11434/v1").rstrip("/"),
-        "prompt_version": PROMPT_VERSION,
-        "prompt_sha256": prompt_sha256(),
+        **prompt_fingerprint(),
     }
     if not models:
         formalizer["note"] = "Prose requests are BLOCKED; formal objects are still evaluated."

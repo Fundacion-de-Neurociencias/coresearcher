@@ -45,11 +45,14 @@ from python.discovery.formal_hypothesis import (  # noqa: E402
 from python.discovery.formalization_gate import SampleSpec, gate, sampling_schedule  # noqa: E402
 from python.discovery.formalizer import (  # noqa: E402
     PROMPT_VERSION,
+    PROMPT_VERSION_V2,
     ChatClient,
     FormalizationStatus,
     build_messages,
+    formalize_v2,
     parse_formalization,
     prompt_sha256,
+    prompt_sha256_v2,
 )
 
 DATASET = ROOT / "docs" / "reference" / "benchmarks" / "formalizer_dataset.json"
@@ -169,8 +172,9 @@ def cmd_run(args) -> None:
         "kind": "meta",
         "model": client.model,
         "base_url_host": client.base_url.split("//")[-1].split("/")[0],
-        "prompt_version": PROMPT_VERSION,
-        "prompt_sha256": prompt_sha256(),
+        "prompt_version": PROMPT_VERSION_V2 if args.pipeline == "v2" else PROMPT_VERSION,
+        "prompt_sha256": prompt_sha256_v2() if args.pipeline == "v2" else prompt_sha256(),
+        "pipeline": args.pipeline,
         "dataset_sha256": sha256_file(Path(args.dataset)),
         "with_schema": not args.no_schema,
         "started": time.strftime("%Y-%m-%dT%H:%M:%S"),
@@ -198,8 +202,17 @@ def cmd_run(args) -> None:
                     continue
                 temperature = 0.0 if k == 0 else args.temperature
                 t0 = time.time()
+                extra = {}
                 try:
-                    output, error = client.complete(messages, temperature=temperature, seed=k), ""
+                    if args.pipeline == "v2":
+                        result = formalize_v2(item["prose"], client, f"{item['id']}-model", schema,
+                                              temperature=temperature, seed=k)
+                        # The scored output is the text v2 hands to the validator (after its surface repair).
+                        output, error = result.final_text, ""
+                        extra = {"attempts": result.attempts, "repaired_fields": result.repaired_fields,
+                                 "raw_output": result.raw_output}
+                    else:
+                        output, error = client.complete(messages, temperature=temperature, seed=k), ""
                 except Exception as exc:  # A transport failure is recorded as an empty output, not retried silently.
                     output, error = "", f"{type(exc).__name__}: {exc}"
                 fh.write(
@@ -212,6 +225,7 @@ def cmd_run(args) -> None:
                             "output": output,
                             "transport_error": error,
                             "seconds": round(time.time() - t0, 2),
+                            **extra,
                         }
                     )
                     + "\n"
@@ -429,6 +443,7 @@ def main(argv=None) -> int:
     run.add_argument("--temperature", type=float, default=0.7, help="Decoding temperature for samples 1, 2, ...")
     run.add_argument("--timeout", type=float, default=300.0)
     run.add_argument("--resume", action="store_true", help="Redraw only samples lost to connection errors.")
+    run.add_argument("--pipeline", choices=["v1", "v2"], default="v1", help="v1: frozen round-0 prompt; v2: ADR-093")
     score = sub.add_parser("score")
     score.add_argument("--responses", required=True)
     score.add_argument("--out")

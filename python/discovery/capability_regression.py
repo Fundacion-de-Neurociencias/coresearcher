@@ -122,6 +122,10 @@ TT_UNBOUNDED = [  # Unbounded integer variables (OPENAI_MATH_UNBOUNDED_PROTOCOL.
     "docs/reference/benchmarks/openai_math_cases_registry.json",
     "docs/reference/benchmarks/openai_math_unbounded_contexts.json",
 ]
+TT_STANDING = [  # Standing assumptions per manuscript (OPENAI_MATH_STANDING_PROTOCOL.md, ADR-091).
+    "docs/reference/benchmarks/openai_math_cases_registry.json",
+    "docs/reference/benchmarks/openai_math_standing_contexts.json",
+]
 TT_CASES = [  # Case-scoped hypotheses (OPENAI_MATH_CASES_PROTOCOL.md, ADR-089), on the constrained contexts.
     "docs/reference/benchmarks/openai_math_cases_registry.json",
     "docs/reference/benchmarks/openai_math_constrained_contexts.json",
@@ -169,7 +173,7 @@ def _time_travel() -> Dict[str, Dict[str, Any]]:
         for bucket, row in sorted(buckets.items()):
             out[f"chain/alarms/{bucket}/flags/{check}"] = obs(row["flags"], LOWER)
     for prefix, files in (("typed", TT_TYPED), ("constrained", TT_CONSTRAINED), ("cases", TT_CASES),
-                          ("unbounded", TT_UNBOUNDED)):
+                          ("unbounded", TT_UNBOUNDED), ("standing", TT_STANDING)):
         typed = omc.replay(_read_json(TT_CHAIN[0]), *[_read_json(f) for f in files], _read_json(TT_CHAIN[3]), items,
                            omc.ENCODABLE)
         for item_id, rec in sorted(typed["defects"].items()):
@@ -180,6 +184,9 @@ def _time_travel() -> Dict[str, Dict[str, Any]]:
                       if any(f.startswith("convention") for f in (o.get("chain") or {}).get("findings", []))]
         out[f"{prefix}/convention_mismatches/at_location"] = obs(sum(o["at_location"] for o in mismatches), HIGHER)
         out[f"{prefix}/convention_mismatches/elsewhere"] = obs(sum(not o["at_location"] for o in mismatches), LOWER)
+        hyps = [h[1] for o in typed["occurrences"] for h in (o.get("chain") or {}).get("hypotheses", [])]
+        out[f"{prefix}/hypotheses/discharged"] = obs(hyps.count("DISCHARGED"), HIGHER)
+        out[f"{prefix}/hypotheses/not_discharged"] = obs(hyps.count("NOT_DISCHARGED"), LOWER)
     return out
 
 
@@ -485,7 +492,8 @@ CASES: Dict[str, Case] = {
     for c in (
         Case("openai_math_time_travel", "openai/math time-travel benchmark: real corrected defects and false alarms",
              "ADR-DISCOVERY-077",
-             [TT_DATASET, TT_FIXTURE] + TT_CHAIN + TT_TYPED + TT_CONSTRAINED + TT_CASES[:1] + TT_UNBOUNDED[1:],
+             [TT_DATASET, TT_FIXTURE] + TT_CHAIN + TT_TYPED + TT_CONSTRAINED + TT_CASES[:1] + TT_UNBOUNDED[1:]
+             + TT_STANDING[1:],
              _time_travel,
              "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain "
              "re-run from its blind registry entries and citing contexts."),

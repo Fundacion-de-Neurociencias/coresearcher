@@ -738,6 +738,8 @@ class CitingContextModel(BaseModel):
     assumptions: List[str] = Field(default_factory=list, max_length=100)
     conventions: Dict[str, Union[str, Dict[str, Any]]] = Field(default_factory=dict)  # ADR-087
     text: str = Field(default="", max_length=20000)
+    # ADR-DISCOVERY-091: the citing manuscript's standing variables, assumptions and conventions, inherited by this use.
+    standing: Optional[Dict[str, Any]] = None
 
 
 class FreezeReferenceModel(BaseModel):
@@ -760,6 +762,8 @@ class CitationUseModel(BaseModel):
     conventions: Dict[str, Union[str, Dict[str, Any]]] = Field(default_factory=dict)  # ADR-087
     context: Optional[CitingContextModel] = None
     source: Optional[str] = Field(default=None, max_length=500)
+    # ADR-DISCOVERY-091: standing assumptions of the citing manuscript, inherited by this use.
+    standing: Optional[Dict[str, Any]] = None
     # The hypothesis variable the cited result applies to: the use inherits its unit (ADR-DISCOVERY-086).
     variable: Optional[str] = Field(default=None, max_length=120)
 

@@ -21,6 +21,7 @@ Downloaded content is data: nothing from it is executed.
 """
 
 import argparse
+import ast
 import difflib
 import gzip
 import hashlib
@@ -869,6 +870,8 @@ VARIANTS = {
     "cases": ("OPENAI_MATH_CASES_PROTOCOL.md", "openai_math_cases"),
     # ADR-090: unbounded integers. The registry is the case-scoped one; only the contexts' variables change.
     "unbounded": ("OPENAI_MATH_UNBOUNDED_PROTOCOL.md", "openai_math_unbounded"),
+    # ADR-091: standing assumptions per manuscript version, inherited by every citing context of that version.
+    "standing": ("OPENAI_MATH_STANDING_PROTOCOL.md", "openai_math_standing"),
 }
 
 
@@ -876,7 +879,7 @@ def use_variant(name: str) -> None:
     global TYPED_PROTOCOL, TYPED_REGISTRY, TYPED_CONTEXTS, TYPED_RESULTS
     protocol, stem = VARIANTS[name]
     TYPED_PROTOCOL = OUT_DIR / protocol
-    TYPED_REGISTRY = OUT_DIR / f"{stem if name != 'unbounded' else 'openai_math_cases'}_registry.json"
+    TYPED_REGISTRY = OUT_DIR / f"{stem if name not in ('unbounded', 'standing') else 'openai_math_cases'}_registry.json"
     TYPED_CONTEXTS = OUT_DIR / f"{stem if name != 'cases' else 'openai_math_constrained'}_contexts.json"
     TYPED_RESULTS = OUT_DIR / f"{stem}_results.json"
 
@@ -932,6 +935,92 @@ def cases_packets() -> None:
                             "hypotheses": [h["text"] for h in w["entry"]["hypotheses"]]})
     (CHAIN_WORK / "cases_packets.json").write_text(json.dumps(packets, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"{len(packets)} entries declare cases")
+
+
+STANDING_MARKERS = ("throughout", "we assume", "standing", "unless otherwise", "we fix", "we always assume",
+                    "conventions", "notation")
+STANDING_MAX_LINES = 400
+
+
+def standing_text(files: dict) -> str:
+    """Section 3 of OPENAI_MATH_STANDING_PROTOCOL.md: every paragraph of the .tex sources (comments removed, in file
+    order) that contains a standing marker, up to STANDING_MAX_LINES lines. No line numbers, no file names."""
+    out, lines = [], 0
+    for name in sorted(n for n in files if n.endswith(".tex")):
+        body = manuscript_checks.strip_tex_comments(files[name])
+        for para in re.split(r"\n\s*\n", body):
+            if any(m in para.lower() for m in STANDING_MARKERS):
+                n = para.count("\n") + 1
+                if lines + n > STANDING_MAX_LINES:
+                    return "\n\n".join(out)
+                out.append(para.strip())
+                lines += n
+    return "\n\n".join(out)
+
+
+def standing_packets(clone: Path) -> None:
+    """One opaque packet per manuscript version that uses a registered result: its standing text and the variables
+    of interest (the names in the formal predicates of the registered results it uses, with their meanings)."""
+    data = json.loads(DATASET.read_text(encoding="utf-8"))
+    items = {i["id"]: i for i in data["items"]}
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    registry = json.loads((OUT_DIR / "openai_math_cases_registry.json").read_text(encoding="utf-8"))
+    written = {w["result"]: w for w in registry["written"] if w["status"] == "WRITTEN"}
+    wt_pre = materialize(clone, PRE, sorted({i["pre"]["dir"] for i in data["items"]}))
+    wt_post = materialize(clone, POST, sorted({i["post"]["dir"] for i in data["items"] if i["post"]}))
+    units: dict = {}
+    for o in selection["occurrences"]:
+        if o["result"] in written:
+            units.setdefault((o["item"], o["version"]), set()).add(o["result"])
+    packets = []
+    for (item_id, version), results in sorted(units.items()):
+        names: dict = {}
+        for r in sorted(results):
+            entry = written[r]["entry"]
+            for h in entry.get("hypotheses", []):
+                if h.get("formal"):
+                    for n in sorted({x.id for x in ast.walk(ast.parse(h["formal"], mode="eval"))
+                                     if isinstance(x, ast.Name)}):
+                        names.setdefault(n, (entry.get("variables") or {}).get(n, ""))
+        if not names:
+            continue
+        files = _version_sources(wt_pre, wt_post, items[item_id], version)
+        uid = "m" + hashlib.sha256(f"{DECOY_SEED}|{item_id}|{version}".encode()).hexdigest()[:10]
+        packets.append({"id": uid, "unit": [item_id, version], "variables_of_interest": names,
+                        "standing_text": standing_text(files)})
+    random.Random(DECOY_SEED + 2).shuffle(packets)
+    (CHAIN_WORK / "standing_units.json").write_text(json.dumps({p["id"]: p["unit"] for p in packets}, indent=1),
+                                                    encoding="utf-8")
+    blind = [{k: v for k, v in p.items() if k != "unit"} for p in packets]
+    (CHAIN_WORK / "standing_packets.json").write_text(json.dumps(blind, indent=1, ensure_ascii=False),
+                                                      encoding="utf-8")
+    print(f"{len(packets)} standing packets")
+
+
+def standing_merge(records_dir: Path) -> dict:
+    """The unbounded citing contexts, each with the blind standing context of its manuscript version (ADR-091)."""
+    base_path = OUT_DIR / "openai_math_unbounded_contexts.json"
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    selection = json.loads(CHAIN_SELECTION.read_text(encoding="utf-8"))
+    units = json.loads((CHAIN_WORK / "standing_units.json").read_text(encoding="utf-8"))
+    records = {}
+    for path in sorted(records_dir.glob("s*_standing.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["id"]] = rec
+    missing = sorted(set(units) - set(records))
+    if missing:
+        raise SystemExit(f"no standing record for {missing}")
+    by_unit = {tuple(units[uid]): records[uid] for uid in units}
+    unit_of = {o["occ"]: (o["item"], o["version"]) for o in selection["occurrences"]}
+    contexts = []
+    for c in base["contexts"]:
+        rec = by_unit.get(unit_of.get(c["id"]))
+        if rec and (rec.get("variables") or rec.get("assumptions")):
+            c = dict(c, standing={"variables": rec.get("variables") or [], "assumptions": rec.get("assumptions") or []})
+        contexts.append(c)
+    return dict(base, contexts=contexts, procedure="OPENAI_MATH_STANDING_PROTOCOL.md section 3",
+                base_sha256=hashlib.sha256(_lf(base_path)).hexdigest(),
+                standing_records=[records[uid] | {"unit": units[uid]} for uid in sorted(units)])
 
 
 def vars_merge(records_dir: Path) -> dict:
@@ -1005,7 +1094,7 @@ def main() -> None:
     ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
                                         "chain-registry", "chain-packets", "chain-contexts", "chain",
                                         "chain-fixture", "typed-packets", "typed-registry", "typed-contexts",
-                                        "cases-registry", "vars-contexts",
+                                        "cases-registry", "vars-contexts", "standing-packets", "standing-contexts",
                                         "typed"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     ap.add_argument("--variant", choices=sorted(VARIANTS), default="typed",
@@ -1029,6 +1118,12 @@ def main() -> None:
         return
     if args.command == "typed-packets":
         cases_packets() if args.variant == "cases" else typed_packets()
+        return
+    if args.command == "standing-contexts":
+        out = standing_merge(args.file)
+        TYPED_CONTEXTS.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                  newline="\n")
+        print(f"wrote {TYPED_CONTEXTS}")
         return
     if args.command == "vars-contexts":
         out = vars_merge(args.file)
@@ -1067,6 +1162,8 @@ def main() -> None:
     elif args.command == "chain-packets":
         chain_encoder_packets(clone, json.loads(CHAIN_SELECTION.read_text(encoding="utf-8")),
                               json.loads(CHAIN_REGISTRY.read_text(encoding="utf-8")))
+    elif args.command == "standing-packets":
+        standing_packets(clone)
     elif args.command == "typed":
         out = chain_run(clone, TYPED_PROTOCOL, TYPED_REGISTRY, TYPED_CONTEXTS)
         TYPED_RESULTS.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")

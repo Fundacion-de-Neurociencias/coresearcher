@@ -150,7 +150,8 @@ def chain_request(occ_context: Dict[str, Any], entry_id: str, citing_text: str) 
             "assumptions": list(occ_context.get("assumptions") or []),
         },
         "citations": [{"entry_id": entry_id, "conventions": dict(occ_context.get("conventions") or {}),
-                       "source": f"{occ_context.get('id', '')}"}],
+                       "source": f"{occ_context.get('id', '')}",
+                       **({"standing": occ_context["standing"]} if occ_context.get("standing") else {})}],
         "author": "openai-math-chain-benchmark",
         "label": f"citing context {occ_context.get('id', '')}",
     }

@@ -148,7 +148,7 @@ Represents a hypothesis as variables, constraints and claims over a declared sta
 
 **ADRs:** [ADR-006](../decisions/ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md), [ADR-059](../decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md), [ADR-060](../decisions/ADR-DISCOVERY-060-SMT-BACKEND-AND-CONSEQUENCES.md), [ADR-064](../decisions/ADR-DISCOVERY-064-FORMALIZER-SELF-CONSISTENCY-GATE.md), [ADR-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md), [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_formalizer_v2.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
 
 <a id="formalizer-gate"></a>
 
@@ -180,7 +180,7 @@ Turns a hypothesis written in prose into the formal object, using a local langua
 
 **ADRs:** [ADR-002](../decisions/ADR-DISCOVERY-002_GENERATOR_VERIFIER_SEPARATION.md), [ADR-059](../decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md), [ADR-061](../decisions/ADR-DISCOVERY-061-FORMALIZER-AND-FORMAL-WORKBENCH.md), [ADR-064](../decisions/ADR-DISCOVERY-064-FORMALIZER-SELF-CONSISTENCY-GATE.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_formal_audit.py`, `test_formal_hypothesis.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_formalizer.py`, `test_research_lifecycle.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_formal_audit.py`, `test_formal_hypothesis.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_formalizer.py`, `test_formalizer_v2.py`, `test_research_lifecycle.py`
 
 <a id="formal-pipeline"></a>
 

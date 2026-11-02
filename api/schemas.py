@@ -699,8 +699,10 @@ class FormalVariableModel(BaseModel):
     name: str
     domain: List[Any] = []
     continuous: bool = False
-    lower: Optional[float] = None
-    upper: Optional[float] = None
+    lower: Optional[Union[int, float]] = None
+    upper: Optional[Union[int, float]] = None
+    # ADR-DISCOVERY-090: an integer with optional bounds, decided by z3 over the integers.
+    integer: bool = False
 
 
 class NonWitnessModel(BaseModel):

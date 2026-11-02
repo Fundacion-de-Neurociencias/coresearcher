@@ -229,6 +229,18 @@ Each entry states *what* was done, *how*, *why* and *what for*. A PR link means 
     findings at defect locations.
   - Then the local orientation check in the citing construction.
 
+### 2.15 Addendum (2026-11-02): unbounded integer variables
+
+- **What.** A formal variable can be an integer with optional bounds, decided by z3 over the integers, with parity
+  (`n % 2 == 0`). ([ADR-090](../decisions/ADR-DISCOVERY-090-UNBOUNDED-INTEGERS.md),
+  [`OPENAI_MATH_UNBOUNDED_RESULTS.md`](benchmarks/OPENAI_MATH_UNBOUNDED_RESULTS.md))
+- **Result.**
+  - The representative-range artefacts are gone.
+  - The findings they hid remain, now with exact counterexamples that the citing passage allows. The passages, read
+    within their window, do not state the bounds the cited results need.
+  - Decided detections are still 1/17.
+- **Next.** Standing assumptions per manuscript, extracted blind and inherited by every citation of that manuscript.
+
 ## 3. Lessons for reasoning and verification
 
 1. **Check the question before the answer.** A proof assistant certifies that a conclusion follows from a statement.

@@ -192,17 +192,24 @@ class Predicate:
 
 @dataclass(frozen=True)
 class Variable:
-    """A finite variable (`domain`) or a continuous real one (`continuous=True`, optional closed bounds)."""
+    """A finite variable (`domain`), a continuous real one (`continuous=True`, optional closed bounds), or an integer
+    with optional bounds (`continuous=True, integer=True`, ADR-DISCOVERY-090), decided by z3 over the integers."""
 
     name: str
     domain: Tuple[Any, ...] = ()
     continuous: bool = False
     lower: Optional[float] = None
     upper: Optional[float] = None
+    integer: bool = False
 
     def __post_init__(self) -> None:
         if not self.name.isidentifier():
             raise FormalHypothesisError(f"Variable name {self.name!r} is not a valid identifier.")
+        if self.integer and not self.continuous:
+            raise FormalHypothesisError(f"Integer variable {self.name!r} needs continuous=True (an unbounded range).")
+        if self.integer and any(b is not None and (isinstance(b, bool) or not isinstance(b, int))
+                                for b in (self.lower, self.upper)):
+            raise FormalHypothesisError(f"Bounds of the integer variable {self.name!r} must be integers.")
         if self.continuous:
             if self.domain:
                 raise FormalHypothesisError(f"Continuous variable {self.name!r} cannot also have a finite domain.")
@@ -781,7 +788,7 @@ class HypothesisEvaluator:
     @staticmethod
     def _same_space(a: Hypothesis, b: Hypothesis) -> None:
         def spec(h: Hypothesis):
-            return [(v.name, tuple(v.domain), v.continuous, v.lower, v.upper) for v in h.variables]
+            return [(v.name, tuple(v.domain), v.continuous, v.lower, v.upper, v.integer) for v in h.variables]
 
         if spec(a) != spec(b):
             raise FormalHypothesisError("Hypotheses can only be compared over the same variables and domains.")
@@ -911,7 +918,9 @@ def hypothesis_to_dict(hypothesis: Hypothesis) -> Dict[str, Any]:
     variables: List[Dict[str, Any]] = []
     for v in hypothesis.variables:
         if v.continuous:
-            variables.append({"name": v.name, "continuous": True, "lower": v.lower, "upper": v.upper})
+            variables.append({"name": v.name, "continuous": True, "lower": v.lower, "upper": v.upper,
+                              # Only when set, so real variables keep their input digests.
+                              **({"integer": True} if v.integer else {})})
         else:
             variables.append({"name": v.name, "domain": list(v.domain)})
     return {
@@ -942,7 +951,8 @@ def hypothesis_from_dict(data: Dict[str, Any]) -> Hypothesis:
         if not isinstance(domain, list) or not all(isinstance(value, _SCALARS) for value in domain):
             raise FormalHypothesisError(f"Domain of {v['name']!r} must contain only strings, numbers or booleans.")
         variables.append(
-            Variable(v["name"], tuple(domain), bool(v.get("continuous", False)), v.get("lower"), v.get("upper"))
+            Variable(v["name"], tuple(domain), bool(v.get("continuous", False) or v.get("integer", False)),
+                     v.get("lower"), v.get("upper"), bool(v.get("integer", False)))
         )
     for key in ("claims", "assumptions", "alternatives"):
         value = data.get(key, [])

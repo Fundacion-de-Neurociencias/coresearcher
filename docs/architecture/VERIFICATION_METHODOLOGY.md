@@ -123,6 +123,10 @@ domain-neutral.
     remains open is the branch orientation the citing passages never state
     ([`OPENAI_MATH_CONSTRAINED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_CONSTRAINED_RESULTS.md)).
   - Cited hypotheses can be scoped to cases, and a field that hides a condition is a non-verdict (ADR-089).
+  - Integer variables are decided over the integers (ADR-090). Measured on the real errors, the remaining
+    undischarged hypotheses are decided relative to the passage window, so the next capability is a manuscript's
+    standing assumptions
+    ([`OPENAI_MATH_UNBOUNDED_RESULTS.md`](../reference/benchmarks/OPENAI_MATH_UNBOUNDED_RESULTS.md)).
 - **Beyond.** Biomedical hypotheses import "lemmas" all the time: a biomarker cutoff validated under one assay and
   population, a scale with its own direction convention, a unit system. A cutoff applied outside its validated
   conditions is the same seam error. The pTau217 cutoff case is the natural first target.

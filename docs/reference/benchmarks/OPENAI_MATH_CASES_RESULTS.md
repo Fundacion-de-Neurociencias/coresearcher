@@ -74,6 +74,10 @@ Ranked gaps:
    to the branch order and orientation that the citing passages leave unstated (constrained results, section 3).
 4. **A chain input kind for a citation inside a proof**, and **a premise-status feed** (unchanged).
 
+**Follow-up.** Gap 1 was built as [ADR-090](../../decisions/ADR-DISCOVERY-090-UNBOUNDED-INTEGERS.md) and measured in
+[`OPENAI_MATH_UNBOUNDED_RESULTS.md`](OPENAI_MATH_UNBOUNDED_RESULTS.md). The range artefacts are gone. The findings
+remain because the passages do not state the bounds.
+
 ## 4. Deviations
 
 - **The conditional-atom rule is post hoc** (section 2).

@@ -1565,7 +1565,8 @@
     "docs/reference/benchmarks/openai_math_constrained_registry.json": "0ac377e3c9811a50f2731f3fd5cecc06de40bb23af3989c5f04eaec181eb7be6",
     "docs/reference/benchmarks/openai_math_revision_dataset.json": "d644d27fe3222506608f2f1b15eeb4e0e16d3789791697fb658620320a0054e5",
     "docs/reference/benchmarks/openai_math_typed_contexts.json": "6a5a765af95997abea2d898c9a8adf0f13b8caddb079453698baeda6c93e645d",
-    "docs/reference/benchmarks/openai_math_typed_registry.json": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994"
+    "docs/reference/benchmarks/openai_math_typed_registry.json": "e21644c9f205ed7e317643d93091cc9cdce4d3a957e15f8169e36bd049a51994",
+    "docs/reference/benchmarks/openai_math_unbounded_contexts.json": "e024578e4b64ca23523d2946b49e62d48ad798251dff333d311c2652a7c90ef1"
    },
    "notes": "Excerpts of the pre-fix and corrected sources, verified to reproduce the full run's flags; the full-chain re-run from its blind registry entries and citing contexts.",
    "observations": {
@@ -2696,6 +2697,90 @@
     "typed/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
      "better": "verdict",
      "value": "NOT_ENCODABLE"
+    },
+    "unbounded/alarms/corrected/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "unbounded/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS": {
+     "better": "lower",
+     "value": 4
+    },
+    "unbounded/convention_mismatches/at_location": {
+     "better": "higher",
+     "value": 4
+    },
+    "unbounded/convention_mismatches/elsewhere": {
+     "better": "lower",
+     "value": 6
+    },
+    "unbounded/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "unbounded/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "unbounded/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "unbounded/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "unbounded/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "MISS"
+    },
+    "unbounded/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
+    },
+    "unbounded/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "HIT"
+    },
+    "unbounded/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS": {
+     "better": "verdict",
+     "value": "NOT_ENCODABLE"
     }
    },
    "title": "openai/math time-travel benchmark: real corrected defects and false alarms"
@@ -3806,8 +3891,105 @@
    "date": "2026-11-02",
    "reason": "ADR-089: case-scoped hypotheses (OPENAI_MATH_CASES_RESULTS.md) replayed and frozen; conditional field atoms are UNCOMPARED, so the constrained run's index_group mismatch at products of K3 is no longer a decided mismatch (an input artefact, not a detection)",
    "version": 7
+  },
+  {
+   "changes": {
+    "openai_math_time_travel": [
+     {
+      "class": "FIXTURE_CHANGED",
+      "key": "fixture:docs/reference/benchmarks/openai_math_unbounded_contexts.json"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/alarms/corrected/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/alarms/defect_manuscripts_off_location/flags/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/convention_mismatches/at_location"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/convention_mismatches/elsewhere"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Algebraicity-of-Kuga-Satake-Correspondences-for-K3-Surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Algebraicity-of-Weil-classes-on-split-abelian-eightfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Conditional-good-minimal-models-for-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Deforming-hypersymplectic-four-manifolds-to-hyperkahler-triples/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Exact-Birch-Swinnerton-Dyer-Formula-from-Low-Selmer-Corank/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Finite-ordinary-minimal-model-programs-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Gaussian-free-field-limits-of-weighted-integer-Lipschitz-heights/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Incompressible-Box-Transport-and-Finite-Computation/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Log-abundance-for-compact-Kahler-spaces-under-logarithmic-Iitaka-subadditivity/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Numerical-semiampleness-of-nef-adjoint-classes-on-compact-Kahler-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Taming-implies-compatibility-on-four-manifolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Termination-of-generalized-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Termination-of-generalized-log-canonical-flips-on-compact-Kahler-fourfolds/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/The-Gaussian-free-field-limit-of-integer-Lipschitz-heights-with-two-arc-boundary-data/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/The-joint-scaling-limit-of-critical-Ashkin-Teller-currents/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/The-rational-Hodge-conjecture-for-products-of-K3-surfaces/CHAIN_SEAMS"
+     },
+     {
+      "class": "CHANGED",
+      "key": "unbounded/defect/Uniform-real-Lipschitz-surfaces-on-the-triangular-lattice/CHAIN_SEAMS"
+     }
+    ]
+   },
+   "date": "2026-11-02",
+   "reason": "ADR-090: unbounded integer variables; the unbounded re-measure (OPENAI_MATH_UNBOUNDED_RESULTS.md) replayed and frozen",
+   "version": 8
   }
  ],
  "schema": "coresearcher.capability_regression/v1",
- "version": 7
+ "version": 8
 }

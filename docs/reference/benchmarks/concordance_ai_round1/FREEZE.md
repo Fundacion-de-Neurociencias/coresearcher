@@ -9,6 +9,7 @@ AI system, not human researchers. Results are reported as **AI-expert concordanc
 | Claude Science text (`claude_science_prompt.txt`, pack v1) | `8cb459ba1aa078215fd727aa39a089bfb595f344a633c574facd7cede4ac0090` |
 | CoResearcher's sealed answers (`coresearcher_answers.json`) | `c1b2b5b132631ccb2c961d72143aa1eeb13ea95073182d5ef98507ecf9987132` |
 | Judge instructions (LLM arm system prompt, `concordance-llm-arm-v1`) | `525db1a5926e51647d05ab269f98e66964faa729c0fb22e63c935a23f466864d` |
+| Second-family judge answers (qwen2.5:14b, `local_llm_answers_qwen14.json`), sealed before any comparison | `4ae41a37fafb8de9dd6c708b3abb537c398b79bf33990e6e721d15ac627b4f6d` |
 
 ## Design
 

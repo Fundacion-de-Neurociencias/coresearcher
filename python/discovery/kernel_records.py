@@ -50,6 +50,10 @@ KINDS = ("lean_file", "comparator")
 PERMITTED_AXIOMS = formal_trust.PERMITTED_AXIOMS
 COMPARATOR_OK = "Your solution is okay!"
 FOOTER = "# kernel-check: exit_code="
+# The runner's line before its own `#print axioms` probe of a Comparator solution. The solution's build output can
+# print anything, including lines that look like `#print axioms` output, so for Comparator only the text after the
+# last such line counts.
+AXIOMS_PROBE = "# command: lake env lean KernelAxioms_"
 # Evidence a KERNEL_CHECKED step carries, beyond the trust ladder's own fields.
 EVIDENCE_KEYS = ("kernel_record", "kernel_record_sha256", "kernel_record_path")
 # The fields of the record the trust ladder's KERNEL_CHECKED rung names (trust_ladder.REQUIRED_EVIDENCE).
@@ -96,7 +100,11 @@ def parse_exit_code(log: str) -> Optional[int]:
 
 def evaluate(kind: str, log: str, theorems: List[str], blocked_reason: str = "") -> Tuple[str, List[str], Dict]:
     """The result a log supports: (result, reasons, axioms by theorem). The same log always gives the same result."""
-    axioms = parse_axioms(log)
+    if kind == "comparator":
+        at = log.rfind("\n" + AXIOMS_PROBE)
+        axioms = parse_axioms(log[at:]) if at >= 0 else {}
+    else:
+        axioms = parse_axioms(log)
     if blocked_reason.strip():
         return BLOCKED, [blocked_reason.strip()], axioms
     reasons: List[str] = []

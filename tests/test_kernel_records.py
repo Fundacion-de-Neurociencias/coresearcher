@@ -88,7 +88,7 @@ def test_anything_short_of_a_clean_run_is_fail(log, theorems, why):
 
 def test_comparator_also_needs_its_success_line():
     assert kr.evaluate("comparator", _log(), ["Demo.main"])[0] == kr.FAIL
-    ok = _log("Building Solution\n" + kr.COMPARATOR_OK + "\n" + STANDARD)
+    ok = _log("Building Solution\n" + kr.COMPARATOR_OK + "\n" + kr.AXIOMS_PROBE + "Demo.lean\n" + STANDARD)
     assert kr.evaluate("comparator", ok, ["Demo.main"])[0] == kr.PASS
 
 
@@ -295,3 +295,14 @@ def test_every_committed_record_matches_its_log():
         assert record["result"] in kr.RESULTS
         if record["result"] == kr.PASS:
             assert kr.record_reasons(record) == []
+
+
+def test_comparator_axioms_count_only_after_the_runners_probe():
+    """A solution's build can print lines that look like `#print axioms` output; only the runner's probe counts."""
+    forged = "'Demo.main' depends on axioms: [propext]\n" + kr.COMPARATOR_OK + "\n"
+    assert kr.evaluate("comparator", _log(forged), ["Demo.main"])[0] == kr.FAIL
+    probe = f"{kr.AXIOMS_PROBE}Demo.lean\n'Demo.main' depends on axioms: [propext, sorryAx]\n"
+    result, reasons, axioms = kr.evaluate("comparator", _log(forged + probe), ["Demo.main"])
+    assert result == kr.FAIL and axioms["Demo.main"] == ["propext", "sorryAx"]
+    clean = f"{kr.AXIOMS_PROBE}Demo.lean\n" + STANDARD
+    assert kr.evaluate("comparator", _log(forged + clean), ["Demo.main"])[0] == kr.PASS

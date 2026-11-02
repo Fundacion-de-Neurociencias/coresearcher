@@ -33,7 +33,8 @@ def _checked_by() -> str:
     if os.getenv("GITHUB_ACTIONS") == "true":
         server = os.getenv("GITHUB_SERVER_URL", "https://github.com")
         return f"{server}/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}"
-    return f"local:{platform.node()}"
+    # Outside Actions, KERNEL_CHECKED_BY names the machine (for example "lenovo (WSL2)"); the host name otherwise.
+    return f"local:{os.getenv('KERNEL_CHECKED_BY') or platform.node()}"
 
 
 def _run(cmd: List[str], cwd: Path, timeout: float) -> Tuple[Optional[int], str, float]:

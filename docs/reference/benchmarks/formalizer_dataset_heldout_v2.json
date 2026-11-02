@@ -1,0 +1,100 @@
+{
+  "dataset_id": "formalizer-heldout-v2",
+  "status": "Written on 2026-11-02 before any formalizer-v2 output was produced, to measure v2 on items its rules and examples were not tuned on. Same author as the v2 prompt; see FORMALIZER_V2_PROTOCOL.md for that limitation.",
+  "items": [
+    {
+      "id": "H01", "domain": "nephrology",
+      "prose": "A patient is eligible for the drug only if eGFR is at least 30 mL/min.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "eligible", "domain": [true, false]},
+                             {"name": "egfr", "continuous": true, "lower": 0, "upper": 150}],
+               "scope": null, "assumptions": [], "claims": ["not eligible or egfr >= 30"]}
+    },
+    {
+      "id": "H02", "domain": "ecology",
+      "prose": "Whenever rainfall falls below 200 mm, the wetland dries out.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "rain", "continuous": true, "lower": 0, "upper": 1000},
+                             {"name": "dry", "domain": [true, false]}],
+               "scope": null, "assumptions": [], "claims": ["rain >= 200 or dry"]}
+    },
+    {
+      "id": "H03", "domain": "pharmacology",
+      "prose": "Drug clearance never increases with age: an older patient's clearance is at most that of a younger patient.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "cl_old", "continuous": true, "lower": 0, "upper": 10},
+                             {"name": "cl_young", "continuous": true, "lower": 0, "upper": 10}],
+               "scope": null, "assumptions": [], "claims": ["cl_old <= cl_young"]}
+    },
+    {
+      "id": "H04", "domain": "cardiology",
+      "prose": "In adults, resting heart rate stays strictly below 100 beats per minute.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "age", "continuous": true, "lower": 0, "upper": 110},
+                             {"name": "hr", "continuous": true, "lower": 20, "upper": 250}],
+               "scope": "age >= 18", "assumptions": [], "claims": ["hr < 100"]}
+    },
+    {
+      "id": "H05", "domain": "gerontology",
+      "prose": "In mice that are both younger than 2 months and older than 24 months, the treatment at least doubles lifespan (lifespan ratio of at least 2).",
+      "intended_verdict": "VACUOUS",
+      "gold": {"variables": [{"name": "age", "continuous": true, "lower": 0, "upper": 40},
+                             {"name": "ratio", "continuous": true, "lower": 0, "upper": 5}],
+               "scope": null, "assumptions": ["age < 2", "age > 24"], "claims": ["ratio >= 2"]}
+    },
+    {
+      "id": "H06", "domain": "oncology",
+      "prose": "Either the tumour responds to the drug or it does not respond.",
+      "intended_verdict": "UNFALSIFIABLE",
+      "gold": {"variables": [{"name": "responds", "domain": [true, false]}],
+               "scope": null, "assumptions": [], "claims": ["responds or not responds"]}
+    },
+    {
+      "id": "H07", "domain": "biochemistry",
+      "prose": "The protein is always phosphorylated, and it is never phosphorylated.",
+      "intended_verdict": "SELF_CONTRADICTORY",
+      "gold": {"variables": [{"name": "phosphorylated", "domain": [true, false]}],
+               "scope": null, "assumptions": [], "claims": ["phosphorylated", "not phosphorylated"]}
+    },
+    {
+      "id": "H08", "domain": "microbiology",
+      "prose": "Above 37 degrees Celsius the bacterium stops dividing, and below 15 degrees Celsius it also stops dividing.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "temp", "continuous": true, "lower": 0, "upper": 60},
+                             {"name": "dividing", "domain": [true, false]}],
+               "scope": null, "assumptions": [], "claims": ["temp <= 37 or not dividing", "temp >= 15 or not dividing"]}
+    },
+    {
+      "id": "H09", "domain": "fire ecology",
+      "prose": "A forest fire spreads only if wind speed exceeds 20 km/h.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "spreads", "domain": [true, false]},
+                             {"name": "wind", "continuous": true, "lower": 0, "upper": 150}],
+               "scope": null, "assumptions": [], "claims": ["not spreads or wind > 20"]}
+    },
+    {
+      "id": "H10", "domain": "soil science",
+      "prose": "In soils where pH is below 5, aluminium toxicity exceeds the safe limit of 1 unit.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "ph", "continuous": true, "lower": 0, "upper": 14},
+                             {"name": "tox", "continuous": true, "lower": 0, "upper": 10}],
+               "scope": "ph < 5", "assumptions": [], "claims": ["tox > 1"]}
+    },
+    {
+      "id": "H11", "domain": "infectious disease",
+      "prose": "In treated patients, the infection rate is at most half the untreated rate.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "treated_rate", "continuous": true, "lower": 0, "upper": 1},
+                             {"name": "untreated_rate", "continuous": true, "lower": 0, "upper": 1}],
+               "scope": null, "assumptions": [], "claims": ["treated_rate <= 0.5 * untreated_rate"]}
+    },
+    {
+      "id": "H12", "domain": "neurophysiology",
+      "prose": "A neuron fires if and only if its membrane potential exceeds -55 mV.",
+      "intended_verdict": "FALSIFIABLE",
+      "gold": {"variables": [{"name": "fires", "domain": [true, false]},
+                             {"name": "v", "continuous": true, "lower": -100, "upper": 50}],
+               "scope": null, "assumptions": [], "claims": ["v <= -55 or fires", "not fires or v > -55"]}
+    }
+  ]
+}

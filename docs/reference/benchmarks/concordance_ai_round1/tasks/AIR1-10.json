@@ -1,0 +1,88 @@
+{
+  "task_id": "AIR1-10",
+  "source_item": "H10",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "soil science",
+    "statement": "In soils where pH is below 5, aluminium toxicity exceeds the safe limit of 1 unit.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "ph": "real number in [0, 14]",
+        "tox": "real number in [0, 10]"
+      },
+      "rows": [
+        {
+          "ph": 0,
+          "tox": 2.5
+        },
+        {
+          "ph": 0,
+          "tox": 0
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "In soils where pH is below 5, aluminium toxicity is at most 1 unit."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "ph",
+          "continuous": true,
+          "lower": 0,
+          "upper": 14
+        },
+        {
+          "name": "tox",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        }
+      ],
+      "scope": "ph < 5",
+      "assumptions": [],
+      "claims": [
+        "tox > 1"
+      ],
+      "hypothesis_id": "AIR1-10-H"
+    },
+    "observations": [
+      {
+        "ph": 0,
+        "tox": 2.5
+      },
+      {
+        "ph": 0,
+        "tox": 0
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-10-R",
+      "variables": [
+        {
+          "name": "ph",
+          "continuous": true,
+          "lower": 0,
+          "upper": 14
+        },
+        {
+          "name": "tox",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        }
+      ],
+      "scope": "ph < 5",
+      "assumptions": [],
+      "claims": [
+        "tox <= 1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "task_id": "AIR1-15",
+  "source_item": "F04",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "neurology",
+    "statement": "Cortical tau level, in arbitrary units, is always above 5 and always below 3.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "tau": "real number in [0, 10]"
+      },
+      "rows": [
+        {
+          "tau": 0
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "tau",
+          "continuous": true,
+          "lower": 0,
+          "upper": 10
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "tau > 5",
+        "tau < 3"
+      ],
+      "hypothesis_id": "AIR1-15-H"
+    },
+    "observations": [
+      {
+        "tau": 0
+      }
+    ],
+    "assumption_labels": []
+  }
+}

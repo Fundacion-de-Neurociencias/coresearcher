@@ -111,6 +111,17 @@ step "Mathlib cache and pinned dependencies of openai/math (lake exe cache get)"
 df -h / | tail -1
 end_step
 
+step "swap"
+# The hosted runner has 16 GB of memory. Building the larger openai/math solutions (ETH-378, about 12 000 modules)
+# was killed without a message in the first runs; swap lets the build finish slowly instead.
+free -g
+if sudo fallocate -l 24G /kernel-check.swap && sudo chmod 600 /kernel-check.swap && sudo mkswap -q /kernel-check.swap     && sudo swapon /kernel-check.swap; then
+  free -g
+else
+  echo "swap could not be added; continuing without it"
+fi
+end_step
+
 step "systemd-run guard"
 if systemd-run --user --pipe --wait --collect --quiet --property=RestrictAddressFamilies=~AF_UNIX /usr/bin/true; then
   echo "systemd_run=true" >> "$GITHUB_OUTPUT"

@@ -51,6 +51,19 @@ def _run(cmd: List[str], cwd: Path, timeout: float) -> Tuple[Optional[int], str,
     return code, out.decode("utf-8", errors="replace"), time.monotonic() - start
 
 
+def _oom_lines() -> List[str]:
+    """Kernel log lines about processes killed for lack of memory (empty when there are none or dmesg is denied)."""
+    # The kernel's OOM killer logs to dmesg; systemd-oomd (which can kill a whole `systemd-run --user` unit under
+    # memory pressure) logs to its journal.
+    marks = ("out of memory", "oom-kill", "killed process", "killed /")
+    lines: List[str] = []
+    for cmd in (["sudo", "-n", "dmesg"], ["sudo", "-n", "journalctl", "-q", "--no-pager", "-u", "systemd-oomd"]):
+        code, out, _ = _run(cmd, ROOT, 60)
+        if code == 0:
+            lines += [line for line in out.splitlines() if any(m in line.lower() for m in marks)]
+    return lines[-20:]
+
+
 def _toolchain(project: Path) -> str:
     path = project / "lean-toolchain"
     return path.read_text(encoding="utf-8").strip() if path.is_file() else ""
@@ -152,6 +165,13 @@ def comparator(args) -> None:
     blocked = ""
     if code is None:
         blocked = f"comparator did not finish within {args.timeout:.0f} s on the runner (no verdict on the proof)"
+    elif code != 0 and kernel_records.COMPARATOR_OK not in output:
+        # A build killed by the kernel's OOM killer prints nothing itself; the kernel log says so. The lines go into
+        # the hashed log, and only then is the run recorded as BLOCKED rather than FAIL.
+        oom = _oom_lines()
+        if oom:
+            output += "# kernel messages (dmesg) about killed processes:\n" + "".join(f"{line}\n" for line in oom)
+            blocked = "the runner's kernel killed the build for lack of memory before Comparator reached a verdict"
     log = (
         f"# kernel-check comparator {args.target}\n# repository: {args.repository} @ {args.commit}\n"
         f"# config: {args.config} (sha256 {kernel_records.sha256_file(config_path)})\n"

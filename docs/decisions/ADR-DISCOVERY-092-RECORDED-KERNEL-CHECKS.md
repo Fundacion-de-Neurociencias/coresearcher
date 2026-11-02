@@ -105,5 +105,11 @@ registered at that rung with no evidence at all.
 - `LocalSmoothing.lean` in our examples is the challenge file: its theorems end in `sorry`. Its record is FAIL by
   design. The record shows that the statements elaborate, and that `sorryAx` keeps them off the KERNEL_CHECKED rung.
   The proofs are checked by the Comparator target for LocalSmoothing.
+- In the first full run (41400444322), the ETH-378 build stopped at module 11764 of 12014 with exit 1 and no
+  message. That is a runner limit, not a verdict on the proof. Two changes followed:
+  - The preflight adds 24 GB of swap.
+  - When Comparator fails without its success line, the runner copies into the hashed log the kernel's and
+    systemd-oomd's lines about killed processes. When there are such lines, the record is BLOCKED (the runner killed
+    the build), not FAIL.
 - INDEPENDENTLY_REPRODUCED still needs a second check by another party. A CI run of ours is not independent of us.
 - The `examples/*/lean_check.txt` notes stay as history. The records in `records/kernel/` are the evidence.

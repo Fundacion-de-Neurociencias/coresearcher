@@ -1,0 +1,3 @@
+.lake/
+KernelCheck_*.lean
+lake-manifest.json

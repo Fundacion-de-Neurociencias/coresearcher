@@ -11,6 +11,8 @@ Two methods of docs/architecture/VERIFICATION_METHODOLOGY.md meet here:
 - M11, when a premise falls, everything built on it must be re-examined. Dependency edges run from claims to the
   results and premises they use. Retracting or downgrading a premise flags every transitive dependent for
   re-evaluation and caps its trust-ladder rung (ADR-080) until it is re-checked.
+- An entry stands at KERNEL_CHECKED or above only with the evidence of a recorded, hash-verified PASS kernel run
+  (ADR-DISCOVERY-092, `kernel_records`). A FAIL or BLOCKED record, or one that does not match its log, is refused.
 
 Rules:
 - The source reference is provenance. It never decides validity (ADR-066).
@@ -41,6 +43,7 @@ from python.discovery import (
     formal_provenance,
     formal_status,
     hash_chain,
+    kernel_records,
     obligation_ledger,
     typed_conventions,
 )
@@ -115,6 +118,8 @@ class RegistryEntry:
     status: str = ACTIVE
     version: int = 1
     status_reason: str = ""
+    # ADR-092: the KERNEL_CHECKED step's evidence (`kernel_records.ladder_evidence`); required at that rung and above.
+    kernel_evidence: Optional[Dict[str, Any]] = None
 
     def __post_init__(self) -> None:
         if not re.fullmatch(r"[A-Za-z0-9_.:\-]{1,120}", self.id or ""):
@@ -405,6 +410,7 @@ class Registry:
                 data["status"] = existing[-1]["status"]
                 data["status_reason"] = existing[-1].get("status_reason", "")
             entry = RegistryEntry(**data)
+            self._check_kernel_rung(entry)
             if entry.formal_statement is not None:
                 hypothesis_from_dict(entry.formal_statement)  # validates the formal object early
             self.entries.setdefault(entry.id, []).append(asdict(entry))
@@ -412,6 +418,37 @@ class Registry:
                                      "sha256": formal_provenance.sha256_canonical(asdict(entry))})
             self._save()
             return entry
+
+    @staticmethod
+    def _check_kernel_rung(entry: RegistryEntry) -> None:
+        if RUNG_ORDER.index(entry.rung) < RUNG_ORDER.index("KERNEL_CHECKED"):
+            return
+        if not entry.kernel_evidence:
+            raise RegistryError(
+                f"{entry.rung} needs the evidence of a recorded kernel run (kernel_evidence); "
+                "attach one with record_kernel_check()."
+            )
+        problems = kernel_records.evidence_reasons(entry.kernel_evidence, verify_log=True)
+        if problems:
+            raise RegistryError("KERNEL_CHECKED needs a recorded, hash-verified PASS run: " + "; ".join(problems))
+
+    def record_kernel_check(self, entry_id: str, record_path: str) -> RegistryEntry:
+        """Climbs an entry from STATEMENT_AUDITED to KERNEL_CHECKED with the verified PASS record at `record_path`.
+
+        A new version is registered; the record is re-read and checked against its log. Rungs are not skipped, and a
+        FAIL or BLOCKED record is refused.
+        """
+        current = self.get(entry_id)
+        if current.rung != "STATEMENT_AUDITED":
+            raise RegistryError(f"{entry_id} is at {current.rung}; KERNEL_CHECKED is climbed from STATEMENT_AUDITED.")
+        try:
+            evidence = kernel_records.ladder_evidence(record_path)
+        except kernel_records.KernelRecordError as exc:
+            raise RegistryError(f"KERNEL_CHECKED needs a recorded, hash-verified PASS run: {exc}") from exc
+        data = asdict(current)
+        data.pop("version")
+        data.update({"rung": "KERNEL_CHECKED", "kernel_evidence": evidence})
+        return self.register(data)
 
     # --- dependencies ----------------------------------------------------------------------------------------
     def depend(self, node: str, on: str) -> Dict[str, Any]:

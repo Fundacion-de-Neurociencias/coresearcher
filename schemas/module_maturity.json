@@ -325,7 +325,7 @@
       "api": false,
       "level": "Tested",
       "module": "formal_provenance",
-      "scripts": false,
+      "scripts": true,
       "tests": true
     },
     {
@@ -438,6 +438,13 @@
       "level": "Tested",
       "module": "isaac_sim_grounding_adapter",
       "scripts": false,
+      "tests": true
+    },
+    {
+      "api": true,
+      "level": "Integrated",
+      "module": "kernel_records",
+      "scripts": true,
       "tests": true
     },
     {

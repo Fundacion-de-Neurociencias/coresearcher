@@ -1569,11 +1569,11 @@ Compares CoResearcher's formal verdicts with an expert arm and a local-model arm
 
 - The expert arm is Claude Science, so the result is AI-expert concordance, not agreement with researchers.
 
-**Scripts, examples and data:** [`scripts/benchmarks/concordance_llm_arm.py`](../../scripts/benchmarks/concordance_llm_arm.py), [`scripts/benchmarks/concordance_score.py`](../../scripts/benchmarks/concordance_score.py)
+**Scripts, examples and data:** [`scripts/benchmarks/concordance_ai_round.py`](../../scripts/benchmarks/concordance_ai_round.py), [`scripts/benchmarks/concordance_llm_arm.py`](../../scripts/benchmarks/concordance_llm_arm.py), [`scripts/benchmarks/concordance_score.py`](../../scripts/benchmarks/concordance_score.py)
 
 **ADRs:** none cited
 
-**Tests:** `test_concordance_score.py`
+**Tests:** `test_concordance_ai_round.py`, `test_concordance_score.py`
 
 <a id="unknown-mechanism-v2-v4"></a>
 

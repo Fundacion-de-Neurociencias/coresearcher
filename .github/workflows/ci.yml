@@ -54,6 +54,7 @@ jobs:
           python scripts/export_openapi.py --check
           python scripts/generate_api_reference.py --check
           python scripts/generate_module_maturity.py --check
+          python scripts/generate_capability_map.py --check
           python scripts/compute_confidence_intervals.py --check
 
   tests:

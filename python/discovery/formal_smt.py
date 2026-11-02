@@ -55,7 +55,14 @@ class SymbolTable:
         self.variables = {var.name: var for var in variables}
         for var in variables:
             name = var.name
-            if getattr(var, "is_continuous", False):
+            if getattr(var, "integer", False):  # ADR-090: an integer with optional bounds, possibly unbounded.
+                sym = z3.Int(name)
+                self.kinds[name] = "int"
+                if var.lower is not None:
+                    self.constraints.append(sym >= z3.IntVal(int(var.lower)))
+                if var.upper is not None:
+                    self.constraints.append(sym <= z3.IntVal(int(var.upper)))
+            elif getattr(var, "is_continuous", False):
                 sym = z3.Real(name)
                 self.kinds[name] = "real"
                 if var.lower is not None:
@@ -101,7 +108,9 @@ class SymbolTable:
                     raise FormalHypothesisError(f"Observed value {value!r} for {name!r} must be a number.")
                 if kind == "number" and value not in self.domains[name]:
                     raise FormalHypothesisError(f"Observed value {value!r} is outside the domain of {name!r}.")
-                if kind == "real":
+                if kind == "int" and (not isinstance(value, int) or isinstance(value, bool)):
+                    raise FormalHypothesisError(f"Observed value {value!r} for {name!r} must be an integer.")
+                if kind in ("real", "int"):
                     var = self.variables[name]
                     if (var.lower is not None and value < var.lower) or (var.upper is not None and value > var.upper):
                         raise FormalHypothesisError(f"Observed value {value!r} is outside the bounds of {name!r}.")
@@ -118,6 +127,8 @@ class SymbolTable:
                 state[name] = self.domains[name][value.as_long()]
             elif kind == "bool":
                 state[name] = z3.is_true(value)
+            elif kind == "int":
+                state[name] = value.as_long()
             else:
                 if z3.is_algebraic_value(value):  # Irrational root from nonlinear arithmetic.
                     value = value.approx(20)
@@ -184,6 +195,8 @@ class _Translator:
                 for _ in range(node.right.value):
                     result = result * base
                 return result
+            if isinstance(node.op, (ast.Mod, ast.FloorDiv)):
+                return self._integer_division(node, expression)
             if type(node.op) not in _ARITH:
                 raise FormalHypothesisError(f"Operator {type(node.op).__name__} is not supported by the SMT back end.")
             return _ARITH[type(node.op)](self.expr(node.left, expression), self.expr(node.right, expression))
@@ -195,6 +208,18 @@ class _Translator:
                 left = right
             return z3.And(parts) if len(parts) > 1 else parts[0]
         raise FormalHypothesisError(f"{type(node).__name__} is not supported by the SMT back end in {expression!r}.")
+
+    def _integer_division(self, node, expression):
+        """`%` and `//` on integer expressions by a positive integer constant (ADR-090), e.g. parity `n % 2 == 0`."""
+        left = self.expr(node.left, expression)
+        right = node.right
+        if not (z3.is_int(left) and isinstance(right, ast.Constant) and isinstance(right.value, int)
+                and not isinstance(right.value, bool) and right.value > 0):
+            raise FormalHypothesisError(
+                f"% and // need an integer expression and a positive integer constant in {expression!r}."
+            )
+        divisor = z3.IntVal(right.value)
+        return left % divisor if isinstance(node.op, ast.Mod) else left / divisor  # z3 Int division floors here
 
     def _string_side(self, node) -> Optional[str]:
         if isinstance(node, ast.Name) and self.table.kinds.get(node.id) == "string":

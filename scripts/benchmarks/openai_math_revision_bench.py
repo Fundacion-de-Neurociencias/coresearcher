@@ -867,6 +867,8 @@ VARIANTS = {
     "constrained": ("OPENAI_MATH_CONSTRAINED_PROTOCOL.md", "openai_math_constrained"),
     # ADR-089: case-scoped hypotheses. Only the registry changes; the citing contexts are the constrained ones.
     "cases": ("OPENAI_MATH_CASES_PROTOCOL.md", "openai_math_cases"),
+    # ADR-090: unbounded integers. The registry is the case-scoped one; only the contexts' variables change.
+    "unbounded": ("OPENAI_MATH_UNBOUNDED_PROTOCOL.md", "openai_math_unbounded"),
 }
 
 
@@ -874,7 +876,7 @@ def use_variant(name: str) -> None:
     global TYPED_PROTOCOL, TYPED_REGISTRY, TYPED_CONTEXTS, TYPED_RESULTS
     protocol, stem = VARIANTS[name]
     TYPED_PROTOCOL = OUT_DIR / protocol
-    TYPED_REGISTRY = OUT_DIR / f"{stem}_registry.json"
+    TYPED_REGISTRY = OUT_DIR / f"{stem if name != 'unbounded' else 'openai_math_cases'}_registry.json"
     TYPED_CONTEXTS = OUT_DIR / f"{stem if name != 'cases' else 'openai_math_constrained'}_contexts.json"
     TYPED_RESULTS = OUT_DIR / f"{stem}_results.json"
 
@@ -932,6 +934,25 @@ def cases_packets() -> None:
     print(f"{len(packets)} entries declare cases")
 
 
+def vars_merge(records_dir: Path) -> dict:
+    """The constrained citing contexts with the blind re-encoded variables and assumptions (ADR-090); their
+    conventions and cases are kept."""
+    base_path = OUT_DIR / "openai_math_constrained_contexts.json"
+    base = json.loads(base_path.read_text(encoding="utf-8"))
+    records = {}
+    for path in sorted(records_dir.glob("v*_vars.json")):
+        for rec in json.loads(path.read_text(encoding="utf-8")):
+            records[rec["id"]] = dict(rec, encoder=path.name.split("_")[0])
+    missing = [c["id"] for c in base["contexts"] if c["id"] not in records]
+    if missing:
+        raise SystemExit(f"no re-encoded variables for {missing}")
+    contexts = [dict(c, variables=records[c["id"]]["variables"], assumptions=records[c["id"]]["assumptions"],
+                     variables_notes=records[c["id"]].get("notes", ""), variables_encoder=records[c["id"]]["encoder"])
+                for c in base["contexts"]]
+    return dict(base, contexts=contexts, procedure="OPENAI_MATH_UNBOUNDED_PROTOCOL.md section 3",
+                base_sha256=hashlib.sha256(_lf(base_path)).hexdigest())
+
+
 def cases_merge(records_dir: Path) -> dict:
     """The constrained registry with each tagged hypothesis's `case` scope; nothing else changes."""
     base_path = OUT_DIR / "openai_math_constrained_registry.json"
@@ -984,7 +1005,7 @@ def main() -> None:
     ap.add_argument("command", choices=["dataset", "run", "posthoc", "fixture", "chain-select", "chain-freeze",
                                         "chain-registry", "chain-packets", "chain-contexts", "chain",
                                         "chain-fixture", "typed-packets", "typed-registry", "typed-contexts",
-                                        "cases-registry",
+                                        "cases-registry", "vars-contexts",
                                         "typed"])
     ap.add_argument("--clone", type=Path, default=CACHE / "clone")
     ap.add_argument("--variant", choices=sorted(VARIANTS), default="typed",
@@ -1008,6 +1029,12 @@ def main() -> None:
         return
     if args.command == "typed-packets":
         cases_packets() if args.variant == "cases" else typed_packets()
+        return
+    if args.command == "vars-contexts":
+        out = vars_merge(args.file)
+        TYPED_CONTEXTS.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n", encoding="utf-8",
+                                  newline="\n")
+        print(f"wrote {TYPED_CONTEXTS}")
         return
     if args.command == "cases-registry":
         out = cases_merge(args.file)

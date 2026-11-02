@@ -287,6 +287,38 @@
       },
       "prev": "5b5612bb033e827aae8fcd141f015f20c5edeb92fc9e6d17e5a67272ff6c2e74",
       "seq": 18
+    },
+    {
+      "at": "2026-11-02T05:04:42Z",
+      "hash": "44776006b9d444f1e164ea3f25ae7ba73a5b89984aa5ea5e3f65e9e4c9855ea6",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-02T05:04:42Z",
+        "id": "FZ-3481e27de066db2b",
+        "kind": "document",
+        "label": "OPENAI_MATH_UNBOUNDED_PROTOCOL.md",
+        "lifecycle": null,
+        "sha256": "3481e27de066db2bffb94fd24538dd7e5a8c4fac0bc4449c1dbb766586b350e6"
+      },
+      "prev": "0ef6f99604e9dee250f9a576f94a9411f56722317b95125ec6457748e9a5e01e",
+      "seq": 19
+    },
+    {
+      "at": "2026-11-02T05:04:46Z",
+      "hash": "b31fa19f5ac00dbc00d1093355e1cdcdc9b8f426d844f26fade6a9a626780522",
+      "kind": "freeze",
+      "payload": {
+        "author": "openai-math-chain-benchmark",
+        "frozen_at": "2026-11-02T05:04:46Z",
+        "id": "FZ-8e45997c662b084d",
+        "kind": "document",
+        "label": "UNBOUNDED_ENCODER_INSTRUCTIONS.md",
+        "lifecycle": null,
+        "sha256": "8e45997c662b084de86629471ec36f0bf5b1887c332011030a81392f57d70461"
+      },
+      "prev": "44776006b9d444f1e164ea3f25ae7ba73a5b89984aa5ea5e3f65e9e4c9855ea6",
+      "seq": 20
     }
   ],
   "freezes": {
@@ -345,6 +377,20 @@
       "label": "openai_math_cases_registry.json",
       "lifecycle": null,
       "sha256": "25b2c7c3e34e067d34df49705ab94a6f50d19d5f126b8cbbb166c04eb648037c"
+    },
+    "FZ-3481e27de066db2b": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 2424,
+        "name": "OPENAI_MATH_UNBOUNDED_PROTOCOL.md",
+        "text": "# openai/math time-travel benchmark: unbounded integer variables (ADR-090), pre-registered protocol\n\nStatus: frozen before any context was re-encoded. Its SHA-256 is stored in `OPENAI_MATH_UNBOUNDED_PROTOCOL.sha256` and\nin the ADR-085 freeze log. The runner (`openai_math_revision_bench.py typed --variant unbounded`) refuses to start if\nthe file has changed.\n\n## 1. Question\n\nThe case-scoped re-measure (`OPENAI_MATH_CASES_RESULTS.md`) showed where most of the remaining findings at defect\nlocations come from: the citing contexts gave unbounded integers (for example n = 2k) a representative range starting\nat 0. A cited hypothesis such as n ≥ 3 was then \"not discharged\" with a counterexample that the passage itself\nexcludes.\n\nADR-090 adds integer variables with optional bounds, possibly unbounded. z3 decides them over the integers, with\n`%` and `//` by a positive constant (parity).\n\n**Questions.**\n\n1. With every citing context's variables and assumptions re-encoded blind under the new instructions, do the\n   representative-range findings disappear?\n2. Does any finding appear or disappear at a defect location for another reason?\n\nScope: formal soundness only.\n\n## 2. Inputs\n\n- **Unchanged.** Everything frozen for the case-scoped re-measure: the registry `openai_math_cases_registry.json`,\n  and the constrained citing contexts' conventions and cases.\n- **The only new input.** The `variables` and `assumptions` of all 69 citing contexts, re-encoded from scratch.\n\n## 3. Blind encoding\n\n- **The encoders.** Fresh agent sessions. Their instructions are recorded verbatim in\n  `openai_math_chain_procedure/UNBOUNDED_ENCODER_INSTRUCTIONS.md` before any encoder starts.\n- **The packets.** The same 69 opaque, shuffled packets as the chain re-run, with no manuscript name, version or\n  role. Every third packet goes to the same encoder.\n- **Assembly.** `vars-contexts` puts the new variables and assumptions into the constrained contexts, keeping their\n  conventions, and writes `openai_math_unbounded_contexts.json`. That file is frozen before the run. The coordinator\n  may repair JSON syntax only.\n\n## 4. Run and scoring\n\n- **The run.** `typed --variant unbounded` writes `openai_math_unbounded_results.json`.\n- **Scoring and adjudication.** As in the earlier protocols. Results are reported next to the case-scoped re-measure.\n- **Regression.** The regression expectations are updated in the same pull request.\n"
+      },
+      "frozen_at": "2026-11-02T05:04:42Z",
+      "id": "FZ-3481e27de066db2b",
+      "kind": "document",
+      "label": "OPENAI_MATH_UNBOUNDED_PROTOCOL.md",
+      "lifecycle": null,
+      "sha256": "3481e27de066db2bffb94fd24538dd7e5a8c4fac0bc4449c1dbb766586b350e6"
     },
     "FZ-380893cb75253e04": {
       "author": "openai-math-chain-benchmark",
@@ -415,6 +461,20 @@
       "label": "CONSTRAINED_CONTEXT_INSTRUCTIONS.md",
       "lifecycle": null,
       "sha256": "7b22bba9b0cda303fedcd18968bba263322e80ad044961ba0bef3f6694dc2d5f"
+    },
+    "FZ-8e45997c662b084d": {
+      "author": "openai-math-chain-benchmark",
+      "content": {
+        "bytes": 2334,
+        "name": "UNBOUNDED_ENCODER_INSTRUCTIONS.md",
+        "text": "# Citing-context variable instructions, with unbounded integers (given verbatim to each encoder)\n\nYou will receive packets. Each packet is one place where a mathematical paper uses a cited result. It holds:\n\n- `cited_key`, `cited_locator`, `result_used`;\n- `passage`: the numbered lines of the citing file around the citation (`citation_line`);\n- `registry_entry`: the cited work's statement, hypotheses (some with a `formal` predicate over named variables) and\n  conventions.\n\nFor each packet, encode the **quantities and conditions** the passage states at the place where it uses the result.\nEncode only what the passage states, explicitly or by a definition visible in the passage. Do not infer from outside\nthe passage, do not use what you know about the subject, and do not judge whether the use is correct.\n\n1. **`variables`.** For each variable named in a `formal` predicate of the entry, if the passage (or the statement it\n   is proving, when visible) fixes, bounds or constrains that quantity, declare it with the same name:\n   - **An integer quantity the passage fixes to finitely many values:**\n     `{\"name\": ..., \"domain\": [the values, at most 40]}`.\n   - **Any other integer quantity:** `{\"name\": ..., \"integer\": true, \"lower\": <int>, \"upper\": <int>}`. Give `lower`\n     and `upper` only if the passage states them, and omit them otherwise. An integer may be unbounded. **Never\n     replace an unbounded range by a representative finite range.**\n   - **A real quantity:** `{\"name\": ..., \"continuous\": true, \"lower\": ..., \"upper\": ...}`, with bounds only as the\n     passage states them.\n\n   If the passage says nothing about a quantity, do not declare it. If no entry hypothesis has a `formal` predicate,\n   give `[]`.\n2. **`assumptions`.** The conditions the passage states on those variables, in Python-like syntax: comparisons,\n   `and`, `or`, `not`, `+ - *`, and `%` or `//` by a positive integer constant. Examples: `n % 2 == 0` for \"n = 2k\",\n   `n >= 3`, `hJ == bplus - 1`. Only conditions the passage states. `[]` if none.\n3. **`notes`.** One or two sentences on anything uncertain.\n\nDo not open any file, web page or repository other than your packet file and these instructions.\n\nReturn a JSON list, one object per packet:\n\n```json\n{\"id\": \"<packet id>\", \"variables\": [], \"assumptions\": [], \"notes\": \"...\"}\n```\n"
+      },
+      "frozen_at": "2026-11-02T05:04:46Z",
+      "id": "FZ-8e45997c662b084d",
+      "kind": "document",
+      "label": "UNBOUNDED_ENCODER_INSTRUCTIONS.md",
+      "lifecycle": null,
+      "sha256": "8e45997c662b084de86629471ec36f0bf5b1887c332011030a81392f57d70461"
     },
     "FZ-951445266b480e30": {
       "author": "openai-math-chain-benchmark",

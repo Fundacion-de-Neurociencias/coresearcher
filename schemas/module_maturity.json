@@ -134,6 +134,13 @@
     },
     {
       "api": false,
+      "level": "Tested",
+      "module": "cartan_dec_proteomics_auditor",
+      "scripts": false,
+      "tests": true
+    },
+    {
+      "api": false,
       "level": "Exercised",
       "module": "categorical_epistemic_engine",
       "scripts": true,
@@ -158,6 +165,13 @@
       "level": "Integrated",
       "module": "cited_registry",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "coe_integrity_auditor",
+      "scripts": false,
       "tests": true
     },
     {
@@ -665,10 +679,24 @@
       "tests": true
     },
     {
+      "api": false,
+      "level": "Tested",
+      "module": "phenix_molprobity_oracle",
+      "scripts": false,
+      "tests": true
+    },
+    {
       "api": true,
       "level": "Integrated",
       "module": "physical_theorem_court",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "preclinical_gates_engine",
+      "scripts": false,
       "tests": true
     },
     {
@@ -690,6 +718,13 @@
       "level": "Tested",
       "module": "proof_pipeline",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "provenance_sidecar_engine",
+      "scripts": false,
       "tests": true
     },
     {
@@ -844,6 +879,13 @@
       "level": "Tested",
       "module": "statement_fidelity",
       "scripts": true,
+      "tests": true
+    },
+    {
+      "api": false,
+      "level": "Tested",
+      "module": "structure_property_purpose_engine",
+      "scripts": false,
       "tests": true
     },
     {

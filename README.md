@@ -36,7 +36,7 @@ ground-truth conclusions. Every verdict is only as strong as the evidence and be
 | --- | --- | --- |
 | Test suite | 767 passing | [`tests/`](tests) |
 | Scientific benchmarks | All 16 scripts run; 1 benchmark withdrawn, 1 scripted demo, see caveats | [Claims register](docs/reference/CLAIMS_REGISTER.md), [confidence intervals](docs/reference/CONFIDENCE_INTERVALS.md) |
-| Module maturity | 32 integrated, 64 tested, 18 exercised, 20 prototypes (of 134) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
+| Module maturity | 32 integrated, 70 tested, 18 exercised, 20 prototypes (of 140) | [Module maturity](docs/reference/MODULE_MATURITY.md) |
 | Capability map | Every endpoint, CLI command, module and script, with maturity, ADRs, tests and caveats; checked in CI | [Capability map](docs/architecture/CAPABILITY_MAP.md) |
 | Lint, format, language policy | Enforced in CI | [`ci.yml`](.github/workflows/ci.yml) |
 

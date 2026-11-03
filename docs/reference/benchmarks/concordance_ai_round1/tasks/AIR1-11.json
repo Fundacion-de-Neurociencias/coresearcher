@@ -1,0 +1,88 @@
+{
+  "task_id": "AIR1-11",
+  "source_item": "H11",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "infectious disease",
+    "statement": "In treated patients, the infection rate is at most half the untreated rate.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "treated_rate": "real number in [0, 1]",
+        "untreated_rate": "real number in [0, 1]"
+      },
+      "rows": [
+        {
+          "treated_rate": 0.25,
+          "untreated_rate": 0
+        },
+        {
+          "treated_rate": 0,
+          "untreated_rate": 0
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "In treated patients, the infection rate is at most the untreated rate."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "treated_rate",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1
+        },
+        {
+          "name": "untreated_rate",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "treated_rate <= 0.5 * untreated_rate"
+      ],
+      "hypothesis_id": "AIR1-11-H"
+    },
+    "observations": [
+      {
+        "treated_rate": 0.25,
+        "untreated_rate": 0
+      },
+      {
+        "treated_rate": 0,
+        "untreated_rate": 0
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-11-R",
+      "variables": [
+        {
+          "name": "treated_rate",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1
+        },
+        {
+          "name": "untreated_rate",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "treated_rate <= untreated_rate"
+      ]
+    }
+  }
+}

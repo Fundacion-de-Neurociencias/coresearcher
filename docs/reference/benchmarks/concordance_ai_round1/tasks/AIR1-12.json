@@ -1,0 +1,91 @@
+{
+  "task_id": "AIR1-12",
+  "source_item": "H12",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "neurophysiology",
+    "statement": "A neuron fires if and only if its membrane potential exceeds -55 mV.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "fires": "one of [True, False]",
+        "v": "real number in [-100, 50]"
+      },
+      "rows": [
+        {
+          "fires": true,
+          "v": -25
+        },
+        {
+          "fires": true,
+          "v": -100
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "A neuron fires whenever its membrane potential exceeds -55 mV."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "fires",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "v",
+          "continuous": true,
+          "lower": -100,
+          "upper": 50
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "v <= -55 or fires",
+        "not fires or v > -55"
+      ],
+      "hypothesis_id": "AIR1-12-H"
+    },
+    "observations": [
+      {
+        "fires": true,
+        "v": -25
+      },
+      {
+        "fires": true,
+        "v": -100
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-12-R",
+      "variables": [
+        {
+          "name": "fires",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "v",
+          "continuous": true,
+          "lower": -100,
+          "upper": 50
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "v <= -55 or fires"
+      ]
+    }
+  }
+}

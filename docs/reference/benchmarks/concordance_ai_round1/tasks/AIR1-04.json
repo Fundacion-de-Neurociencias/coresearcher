@@ -1,0 +1,88 @@
+{
+  "task_id": "AIR1-04",
+  "source_item": "H04",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "cardiology",
+    "statement": "In adults, resting heart rate stays strictly below 100 beats per minute.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "age": "real number in [0, 110]",
+        "hr": "real number in [20, 250]"
+      },
+      "rows": [
+        {
+          "age": 27.5,
+          "hr": 20
+        },
+        {
+          "age": 27.5,
+          "hr": 135
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "In adults, resting heart rate stays at or below 100 beats per minute."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "age",
+          "continuous": true,
+          "lower": 0,
+          "upper": 110
+        },
+        {
+          "name": "hr",
+          "continuous": true,
+          "lower": 20,
+          "upper": 250
+        }
+      ],
+      "scope": "age >= 18",
+      "assumptions": [],
+      "claims": [
+        "hr < 100"
+      ],
+      "hypothesis_id": "AIR1-04-H"
+    },
+    "observations": [
+      {
+        "age": 27.5,
+        "hr": 20
+      },
+      {
+        "age": 27.5,
+        "hr": 135
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-04-R",
+      "variables": [
+        {
+          "name": "age",
+          "continuous": true,
+          "lower": 0,
+          "upper": 110
+        },
+        {
+          "name": "hr",
+          "continuous": true,
+          "lower": 20,
+          "upper": 250
+        }
+      ],
+      "scope": "age >= 18",
+      "assumptions": [],
+      "claims": [
+        "hr <= 100"
+      ]
+    }
+  }
+}

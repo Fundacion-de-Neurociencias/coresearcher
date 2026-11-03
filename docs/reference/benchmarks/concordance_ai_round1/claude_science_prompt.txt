@@ -1,0 +1,342 @@
+You are taking part in a blinded study of how well hypotheses are judged from their wording alone.
+Below are 20 independent tasks. Treat each one separately, judge only what is written, and do not use outside
+knowledge about whether a hypothesis is true.
+
+You are a careful scientist judging the logical form of a hypothesis. Judge only what is written. Do not use outside knowledge about whether the hypothesis is true.
+
+Definitions:
+- Q1: VACUOUS if no situation satisfies the hypothesis's conditions; SELF_CONTRADICTORY if every situation where it applies violates it; UNFALSIFIABLE if no possible observation could violate it; otherwise FALSIFIABLE.
+- Q2: are the premises compatible with each other (COMPATIBLE) or can they not all hold at once (CONFLICTING)? Q2_items: labels of the premises in a minimal conflicting set, empty list if none.
+- Q3: do the observations refute the hypothesis? REFUTED if some row is certainly incompatible with it, POSSIBLY_REFUTED if some row is incompatible under some value of what the row does not report, otherwise NOT_REFUTED. Q3_items: row numbers (from 1) that certainly refute it.
+- Q4: compare the hypothesis H with the rival R by the situations each one forbids. EQUIVALENT if they forbid the same; STRONGER if H forbids everything R forbids and more; WEAKER if the reverse; CONTRADICTORY if no situation is allowed by both; otherwise INCOMPARABLE.
+You may answer CANNOT_JUDGE.
+
+Answer with one JSON object only, with the keys you are asked for, each mapping to {"value": ..., "confidence": 1-5, "rationale": "one sentence"}.
+
+Return ONE JSON object and nothing else. Its keys are the task ids. Each value is an object with exactly the keys
+listed under "Answer these keys" for that task, each mapping to {"value": ..., "confidence": 1-5,
+"rationale": "one sentence"}. Premise labels are strings such as "P1"; row numbers are integers starting at 1.
+
+=== Task AIR1-01 ===
+Field: nephrology
+
+Hypothesis H: A patient is eligible for the drug only if eGFR is at least 30 mL/min.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  eligible: one of [True, False]
+  egfr: real number in [0, 150]
+Rows:
+  row 1: {"eligible": true, "egfr": 37.5}
+  row 2: {"eligible": true, "egfr": 0}
+
+Rival R: A patient is eligible for the drug only if eGFR is above 45 mL/min.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-02 ===
+Field: ecology
+
+Hypothesis H: Whenever rainfall falls below 200 mm, the wetland dries out.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  rain: real number in [0, 1000]
+  dry: one of [True, False]
+Rows:
+  row 1: {"rain": 0, "dry": true}
+
+Rival R: Whenever rainfall falls below 300 mm, the wetland dries out.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-03 ===
+Field: pharmacology
+
+Hypothesis H: Drug clearance never increases with age: an older patient's clearance is at most that of a younger patient.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  cl_old: real number in [0, 10]
+  cl_young: real number in [0, 10]
+Rows:
+  row 1: {"cl_old": 0, "cl_young": 0}
+
+Rival R: An older patient's drug clearance is strictly lower than a younger patient's.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-04 ===
+Field: cardiology
+
+Hypothesis H: In adults, resting heart rate stays strictly below 100 beats per minute.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  age: real number in [0, 110]
+  hr: real number in [20, 250]
+Rows:
+  row 1: {"age": 27.5, "hr": 20}
+  row 2: {"age": 27.5, "hr": 135}
+
+Rival R: In adults, resting heart rate stays at or below 100 beats per minute.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-05 ===
+Field: gerontology
+
+Hypothesis H: In mice that are both younger than 2 months and older than 24 months, the treatment at least doubles lifespan (lifespan ratio of at least 2).
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Premises:
+  P1: It is taken as given that age < 2.
+  P2: It is taken as given that age > 24.
+
+Answer these keys: Q1, Q2, Q2_items
+
+=== Task AIR1-06 ===
+Field: oncology
+
+Hypothesis H: Either the tumour responds to the drug or it does not respond.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  responds: one of [True, False]
+Rows:
+  row 1: {"responds": true}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-07 ===
+Field: biochemistry
+
+Hypothesis H: The protein is always phosphorylated, and it is never phosphorylated.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  phosphorylated: one of [True, False]
+Rows:
+  row 1: {"phosphorylated": true}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-08 ===
+Field: microbiology
+
+Hypothesis H: Above 37 degrees Celsius the bacterium stops dividing, and below 15 degrees Celsius it also stops dividing.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  temp: real number in [0, 60]
+  dividing: one of [True, False]
+Rows:
+  row 1: {"temp": 0, "dividing": false}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-09 ===
+Field: fire ecology
+
+Hypothesis H: A forest fire spreads only if wind speed exceeds 20 km/h.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  spreads: one of [True, False]
+  wind: real number in [0, 150]
+Rows:
+  row 1: {"spreads": true, "wind": 0}
+  row 2: {"spreads": true, "wind": 37.5}
+
+Rival R: Whenever wind speed exceeds 20 km/h, a forest fire spreads.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-10 ===
+Field: soil science
+
+Hypothesis H: In soils where pH is below 5, aluminium toxicity exceeds the safe limit of 1 unit.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  ph: real number in [0, 14]
+  tox: real number in [0, 10]
+Rows:
+  row 1: {"ph": 0, "tox": 2.5}
+  row 2: {"ph": 0, "tox": 0}
+
+Rival R: In soils where pH is below 5, aluminium toxicity is at most 1 unit.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-11 ===
+Field: infectious disease
+
+Hypothesis H: In treated patients, the infection rate is at most half the untreated rate.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  treated_rate: real number in [0, 1]
+  untreated_rate: real number in [0, 1]
+Rows:
+  row 1: {"treated_rate": 0.25, "untreated_rate": 0}
+  row 2: {"treated_rate": 0, "untreated_rate": 0}
+
+Rival R: In treated patients, the infection rate is at most the untreated rate.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-12 ===
+Field: neurophysiology
+
+Hypothesis H: A neuron fires if and only if its membrane potential exceeds -55 mV.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  fires: one of [True, False]
+  v: real number in [-100, 50]
+Rows:
+  row 1: {"fires": true, "v": -25}
+  row 2: {"fires": true, "v": -100}
+
+Rival R: A neuron fires whenever its membrane potential exceeds -55 mV.
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items, Q4
+
+=== Task AIR1-13 ===
+Field: neurology
+
+Hypothesis H: Among people with amyloid pathology, APOE4 carriers show fast cognitive decline.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  amyloid: one of ['positive', 'negative']
+  apoe4: one of ['carrier', 'non_carrier']
+  decline: one of ['fast', 'slow']
+Rows:
+  row 1: {"amyloid": "positive", "apoe4": "carrier", "decline": "slow"}
+  row 2: {"amyloid": "positive", "apoe4": "carrier", "decline": "fast"}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-14 ===
+Field: clinical
+
+Hypothesis H: After the treatment, the patient's symptoms either improve or do not improve.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  outcome: one of ['improved', 'not_improved']
+Rows:
+  row 1: {"outcome": "improved"}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-15 ===
+Field: neurology
+
+Hypothesis H: Cortical tau level, in arbitrary units, is always above 5 and always below 3.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  tau: real number in [0, 10]
+Rows:
+  row 1: {"tau": 0}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-16 ===
+Field: clinical
+
+Hypothesis H: In patients who are younger than 40 years and also older than 80 years, the drug at least halves the relapse rate (relapse ratio at most 0.5).
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Premises:
+  P1: It is taken as given that age < 40.
+  P2: It is taken as given that age > 80.
+
+Answer these keys: Q1, Q2, Q2_items
+
+=== Task AIR1-17 ===
+Field: epidemiology
+
+Hypothesis H: An outbreak grows only if the reproduction number R exceeds 1.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  R: real number in [0, 20]
+  growing: one of [True, False]
+Rows:
+  row 1: {"R": 0, "growing": false}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-18 ===
+Field: pharmacology
+
+Hypothesis H: Assuming normal renal function, drug clearance is at least 60 mL/min.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Premises:
+  P1: It is taken as given that renal == 'normal'.
+
+Observation table columns:
+  renal: one of ['normal', 'impaired']
+  clearance: real number in [0, 300]
+Rows:
+  row 1: {"renal": "normal", "clearance": 75}
+  row 2: {"renal": "normal", "clearance": 0}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-19 ===
+Field: neurology
+
+Hypothesis H: Between two consecutive visits, a patient's Braak stage never decreases.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Observation table columns:
+  stage_first: one of [0, 1, 2, 3, 4, 5, 6]
+  stage_second: one of [0, 1, 2, 3, 4, 5, 6]
+Rows:
+  row 1: {"stage_first": 1, "stage_second": 0}
+  row 2: {"stage_first": 0, "stage_second": 0}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items
+
+=== Task AIR1-20 ===
+Field: biochemistry
+
+Hypothesis H: In the distal small intestine, where pH is above 7, the enzyme is always active; and the enzyme is active only at pH below 6.
+
+Context: Variables and their ranges are listed with the observation table. Judge only what is written.
+
+Premises:
+  P1: It is taken as given that ph > 7.
+
+Observation table columns:
+  ph: real number in [0, 14]
+  active: one of [True, False]
+Rows:
+  row 1: {"ph": 10.5, "active": true}
+
+Answer these keys: Q1, Q2, Q2_items, Q3, Q3_items

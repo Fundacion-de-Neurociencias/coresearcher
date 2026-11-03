@@ -1,0 +1,183 @@
+{
+  "answers": {
+    "AIR1-01": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "WEAKER"
+    },
+    "AIR1-02": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": [],
+      "Q4": "WEAKER"
+    },
+    "AIR1-03": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": [],
+      "Q4": "WEAKER"
+    },
+    "AIR1-04": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-05": {
+      "Q1": "VACUOUS",
+      "Q2": "CONFLICTING",
+      "Q2_items": [
+        "P1",
+        "P2"
+      ]
+    },
+    "AIR1-06": {
+      "Q1": "UNFALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-07": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-08": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-09": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ],
+      "Q4": "INCOMPARABLE"
+    },
+    "AIR1-10": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "INCOMPARABLE"
+    },
+    "AIR1-11": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-12": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-13": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-14": {
+      "Q1": "UNFALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-15": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-16": {
+      "Q1": "VACUOUS",
+      "Q2": "CONFLICTING",
+      "Q2_items": [
+        "P1",
+        "P2"
+      ]
+    },
+    "AIR1-17": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-18": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        2
+      ]
+    },
+    "AIR1-19": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-20": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    }
+  },
+  "arm": "claude_science",
+  "pack_version": "claude-science-pack-v1",
+  "prompt_sha256": "525db1a5926e51647d05ab269f98e66964faa729c0fb22e63c935a23f466864d",
+  "source": "claude_science_reply.md",
+  "source_sha256": "ca40e1ea941199af57b4e183442f5846c659e5a880908168daeebc7a673a1a9f"
+}

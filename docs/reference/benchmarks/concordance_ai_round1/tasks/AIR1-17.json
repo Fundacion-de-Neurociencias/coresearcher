@@ -1,0 +1,58 @@
+{
+  "task_id": "AIR1-17",
+  "source_item": "F08",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "epidemiology",
+    "statement": "An outbreak grows only if the reproduction number R exceeds 1.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "R": "real number in [0, 20]",
+        "growing": "one of [True, False]"
+      },
+      "rows": [
+        {
+          "R": 0,
+          "growing": false
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "R",
+          "continuous": true,
+          "lower": 0,
+          "upper": 20
+        },
+        {
+          "name": "growing",
+          "domain": [
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "not growing or R > 1"
+      ],
+      "hypothesis_id": "AIR1-17-H"
+    },
+    "observations": [
+      {
+        "R": 0,
+        "growing": false
+      }
+    ],
+    "assumption_labels": []
+  }
+}

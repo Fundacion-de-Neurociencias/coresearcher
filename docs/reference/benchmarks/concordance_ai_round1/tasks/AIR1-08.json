@@ -1,0 +1,59 @@
+{
+  "task_id": "AIR1-08",
+  "source_item": "H08",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "microbiology",
+    "statement": "Above 37 degrees Celsius the bacterium stops dividing, and below 15 degrees Celsius it also stops dividing.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "temp": "real number in [0, 60]",
+        "dividing": "one of [True, False]"
+      },
+      "rows": [
+        {
+          "temp": 0,
+          "dividing": false
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "temp",
+          "continuous": true,
+          "lower": 0,
+          "upper": 60
+        },
+        {
+          "name": "dividing",
+          "domain": [
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "temp <= 37 or not dividing",
+        "temp >= 15 or not dividing"
+      ],
+      "hypothesis_id": "AIR1-08-H"
+    },
+    "observations": [
+      {
+        "temp": 0,
+        "dividing": false
+      }
+    ],
+    "assumption_labels": []
+  }
+}

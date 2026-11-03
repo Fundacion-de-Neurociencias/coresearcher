@@ -1,0 +1,228 @@
+{
+  "note": "AI-expert concordance; not human validation.",
+  "pairs": {
+    "claude_science": {
+      "per_question": {
+        "Q1": {
+          "n": 20,
+          "agree": 20,
+          "kappa": 1.0
+        },
+        "Q2": {
+          "n": 20,
+          "agree": 20,
+          "kappa": 1.0
+        },
+        "Q2_items": {
+          "n": 20,
+          "agree": 20,
+          "kappa": null
+        },
+        "Q3": {
+          "n": 18,
+          "agree": 18,
+          "kappa": 1.0
+        },
+        "Q3_items": {
+          "n": 18,
+          "agree": 18,
+          "kappa": null
+        },
+        "Q4": {
+          "n": 8,
+          "agree": 8,
+          "kappa": 1.0
+        }
+      },
+      "disagreements": []
+    },
+    "local_llm": {
+      "per_question": {
+        "Q1": {
+          "n": 20,
+          "agree": 16,
+          "kappa": 0.6208530805687205
+        },
+        "Q2": {
+          "n": 20,
+          "agree": 19,
+          "kappa": 0.7727272727272725
+        },
+        "Q2_items": {
+          "n": 20,
+          "agree": 19,
+          "kappa": null
+        },
+        "Q3": {
+          "n": 18,
+          "agree": 8,
+          "kappa": 0.25
+        },
+        "Q3_items": {
+          "n": 18,
+          "agree": 16,
+          "kappa": null
+        },
+        "Q4": {
+          "n": 8,
+          "agree": 2,
+          "kappa": 0.02040816326530612
+        }
+      },
+      "disagreements": [
+        {
+          "task": "AIR1-05",
+          "question": "Q1",
+          "coresearcher": "VACUOUS",
+          "local_llm": "SELF_CONTRADICTORY"
+        },
+        {
+          "task": "AIR1-06",
+          "question": "Q1",
+          "coresearcher": "UNFALSIFIABLE",
+          "local_llm": "FALSIFIABLE"
+        },
+        {
+          "task": "AIR1-09",
+          "question": "Q1",
+          "coresearcher": "FALSIFIABLE",
+          "local_llm": "SELF_CONTRADICTORY"
+        },
+        {
+          "task": "AIR1-16",
+          "question": "Q1",
+          "coresearcher": "VACUOUS",
+          "local_llm": "SELF_CONTRADICTORY"
+        },
+        {
+          "task": "AIR1-01",
+          "question": "Q2",
+          "coresearcher": "COMPATIBLE",
+          "local_llm": "CONFLICTING"
+        },
+        {
+          "task": "AIR1-01",
+          "question": "Q2_items",
+          "coresearcher": [],
+          "local_llm": [
+            "row 2"
+          ]
+        },
+        {
+          "task": "AIR1-01",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-02",
+          "question": "Q3",
+          "coresearcher": "NOT_REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-04",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-08",
+          "question": "Q3",
+          "coresearcher": "NOT_REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-10",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-11",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "NOT_REFUTED"
+        },
+        {
+          "task": "AIR1-12",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-13",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-17",
+          "question": "Q3",
+          "coresearcher": "NOT_REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-18",
+          "question": "Q3",
+          "coresearcher": "REFUTED",
+          "local_llm": "POSSIBLY_REFUTED"
+        },
+        {
+          "task": "AIR1-10",
+          "question": "Q3_items",
+          "coresearcher": [
+            2
+          ],
+          "local_llm": [
+            1
+          ]
+        },
+        {
+          "task": "AIR1-11",
+          "question": "Q3_items",
+          "coresearcher": [
+            1
+          ],
+          "local_llm": []
+        },
+        {
+          "task": "AIR1-01",
+          "question": "Q4",
+          "coresearcher": "WEAKER",
+          "local_llm": "STRONGER"
+        },
+        {
+          "task": "AIR1-02",
+          "question": "Q4",
+          "coresearcher": "WEAKER",
+          "local_llm": "STRONGER"
+        },
+        {
+          "task": "AIR1-03",
+          "question": "Q4",
+          "coresearcher": "WEAKER",
+          "local_llm": "STRONGER"
+        },
+        {
+          "task": "AIR1-09",
+          "question": "Q4",
+          "coresearcher": "INCOMPARABLE",
+          "local_llm": "CONTRADICTORY"
+        },
+        {
+          "task": "AIR1-10",
+          "question": "Q4",
+          "coresearcher": "INCOMPARABLE",
+          "local_llm": "CONTRADICTORY"
+        },
+        {
+          "task": "AIR1-11",
+          "question": "Q4",
+          "coresearcher": "STRONGER",
+          "local_llm": "EQUIVALENT"
+        }
+      ]
+    }
+  }
+}

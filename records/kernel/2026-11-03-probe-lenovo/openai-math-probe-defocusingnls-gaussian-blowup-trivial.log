@@ -1,0 +1,44 @@
+# kernel-check lean_file openai-math-probe-defocusingnls-gaussian-blowup-trivial
+# file: ComparatorChallenges/Probes/DefocusingNLS__gaussian_blowup__trivial.lean (generated probe, mode trivial)
+# file_sha256: 3152811b4a6d0d24f4aaf70325dd07bc5fe662ae5e7b9d5b62937b541a271dd5
+# command: lake env lean ComparatorChallenges/Probes/DefocusingNLS__gaussian_blowup__trivial.lean
+# probe of: OAI.DefocusingNLS.gaussian_blowup; checked declaration: OAI.DefocusingNLS.gaussian_blowup
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/DefocusingNLS__gaussian_blowup__trivial.lean:269:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/DefocusingNLS__gaussian_blowup__trivial.lean:290:41: error: unsolved goals
+p₀ : ℕ
+⊢ ∃ p,
+    p₀ ≤ p ∧
+      Odd p ∧
+        3 ≤ p ∧
+          ∃ x,
+            ∃ (h : 8 < x),
+              ∃ U,
+                U.Nonempty ∧
+                  IsOpen U ∧
+                    (∀ (a : PreLp fun x => ℂ) (b : a ∈ FourierL2),
+                        ⟨a, b⟩ ∈ U →
+                          IsClassicalDefocusingFlow ↑x ⋯ ((p - 1) / 2) ⟨a, b⟩ ∧
+                            HasFiniteTimeSelfSimilarBlowup ↑x ⋯ ((p - 1) / 2) (↑p - 1)⁻¹ ⟨a, b⟩) ∧
+                      ∀ (α : ℝ),
+                        ↑x + 6 < α →
+                          (∀ᵐ (g : ↥frequencyLattice → ℂ) ∂fourierGaussianLaw,
+                              Memℓp (weightedGaussianCoefficient (↑x) α g) 2) ∧
+                            (∀ᵐ (g : ↥frequencyLattice → ℂ) ∂fourierGaussianLaw,
+                                ∀ (a : EuclideanSpace ℝ (Fin 12)) (b : a ∈ frequencyLattice),
+                                  sobolevFourierCoefficient (↑x) (weightedGaussianVector (↑x) α g) ⟨a, b⟩ =
+                                    ↑((1 + ‖a‖ ^ 2) ^ (-α / 2)) * g ⟨a, b⟩) ∧
+                              0 < (weightedGaussianLaw (↑x) α) U
+'OAI.DefocusingNLS.gaussian_blowup' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+ComparatorChallenges/Probes/DefocusingNLS__gaussian_blowup__trivial.lean:310:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

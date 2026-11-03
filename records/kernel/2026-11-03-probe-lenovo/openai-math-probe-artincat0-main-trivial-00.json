@@ -1,0 +1,54 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-artincat0-main-trivial-00",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/ArtinCAT0__main__trivial_00.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "fcd0bc41d8ff891889af084ec2f1ab67013bcc8bb5ddcaae4ea20c1a54466ff1",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.ArtinCAT0.main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.ArtinCAT0.main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 25.5,
+  "exit_code": 1,
+  "result": "BLOCKED",
+  "reasons": [
+    "the tactic menu was aborted before every tactic ran: maximum recursion depth has been reached"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-artincat0-main-trivial-00.log",
+  "kernel_log_sha256": "36770909229f8db8c0db8b3260902856edfeee71894b21e8f400bd3adb28cf05",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:10:01Z",
+  "probe": {
+    "probe_id": "ArtinCAT0:main:trivial@00",
+    "mode": "trivial@trivial",
+    "target_theorem": "OAI.ArtinCAT0.main",
+    "meaning": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open."
+  }
+}

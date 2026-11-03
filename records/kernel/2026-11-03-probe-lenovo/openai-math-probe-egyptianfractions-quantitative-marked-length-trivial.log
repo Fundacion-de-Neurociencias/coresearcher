@@ -1,0 +1,33 @@
+# kernel-check lean_file openai-math-probe-egyptianfractions-quantitative-marked-length-trivial
+# file: ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean (generated probe, mode trivial)
+# file_sha256: 782c28fadcaeb0314aaf96d115a578e0fcb64f97b20d47acbef59e8a5838c38f
+# command: lake env lean ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean
+# probe of: OAI.Problem337.quantitative_marked_length; checked declaration: OAI.Problem337.quantitative_marked_length
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:48:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:57:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:64:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:71:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:78:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:85:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:95:72: error: unsolved goals
+⊢ ∀ (ε : ℝ),
+    0 < ε →
+      ∃ mε,
+        2 ≤ mε ∧
+          ∀ (m : ℕ),
+            mε ≤ m → ∃ k n, IsOneExpansion n ∧ (∃ i, n i = m) ∧ ↑k ≤ (257 / Real.log 2 + ε) * Real.log (Real.log ↑m)
+'OAI.Problem337.quantitative_marked_length' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:114:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EgyptianFractions__quantitative_marked_length__trivial.lean:123:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

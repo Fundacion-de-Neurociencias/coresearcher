@@ -1,0 +1,23 @@
+# kernel-check lean_file openai-math-probe-circulanthadamard-exists-iff-order-one-or-four-inconsistent
+# file: ComparatorChallenges/Probes/CirculantHadamard__exists_iff_order_one_or_four__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 8567ebff61f9be116821a712084dc37bd887301fdbca4313a1bad0cec6e56b18
+# command: lake env lean ComparatorChallenges/Probes/CirculantHadamard__exists_iff_order_one_or_four__inconsistent.lean
+# probe of: OAI.CirculantHadamard.exists_iff_order_one_or_four; checked declaration: OAI.CirculantHadamard.exists_iff_order_one_or_four_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CirculantHadamard__exists_iff_order_one_or_four__inconsistent.lean:24:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CirculantHadamard__exists_iff_order_one_or_four__inconsistent.lean:28:88: error: unsolved goals
+n : ℕ
+hn : 0 < n
+⊢ False
+'OAI.CirculantHadamard.exists_iff_order_one_or_four_probe_inconsistent' depends on axioms: [sorryAx]
+# kernel-check: exit_code=1

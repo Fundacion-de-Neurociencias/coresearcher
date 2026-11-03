@@ -197,3 +197,26 @@ def test_probe_generation_handles_term_mode_named_arguments_and_partial_imports(
     assert "(n : ℕ) (h : Foo (n := n)) : False := by" in inconsistent.text  # `(n := n)` is not the body's `:=`.
     assert probe.binders_and_type("theorem t (h : Foo (n := n)) : Bar := by sorry") == ("(h : Foo (n := n))", "Bar")
     assert probe.menu_for("import Mathlib\n") == probe.TACTIC_MENU
+
+
+PROBE_RECORDS = Path(__file__).resolve().parents[1] / "records" / "kernel" / "2026-11-03-probe-lenovo"
+
+
+@pytest.mark.skipif(not PROBE_RECORDS.is_dir(), reason="probe records not committed")
+def test_committed_probe_run():
+    from python.discovery import kernel_records
+
+    data = json.loads(DATA.read_text(encoding="utf-8"))
+    rows = data["lean_probes"]["probes"]
+    assert all(r["outcome"] != "NOT_RUN" for r in rows)
+    # No target closed by a cheap tactic and no contradictory binders: no vacuity finding.
+    assert not [r for r in rows if r["outcome"] == "PROVED" and not r["mode"].startswith("D")]
+    # ClassicalON: the junk branch would make the target trivial (D1), and it cannot fire for n >= 3 (D2).
+    for row in [r for r in rows if r["mode"].startswith("D")]:
+        record = kernel_records.load(kernel_records.resolve(row["kernel_record"]))
+        assert record["result"] == "PASS" and record["axioms"] == ["Classical.choice", "Quot.sound", "propext"]
+    # A BLOCKED probe is a non-verdict: each says why, and each combined menu that was aborted was split.
+    blocked = [r for r in rows if r["outcome"] == "BLOCKED"]
+    assert blocked and all(r["reasons"] for r in blocked)
+    split_parents = {r["split_of"] for r in rows if "split_of" in r}
+    assert {r["probe_id"] for r in blocked if r["mode"] == "trivial"} <= split_parents

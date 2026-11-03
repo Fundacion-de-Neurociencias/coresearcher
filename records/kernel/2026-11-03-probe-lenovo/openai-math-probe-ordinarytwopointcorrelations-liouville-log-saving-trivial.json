@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-ordinarytwopointcorrelations-liouville-log-saving-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__liouville_log_saving__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "6590aa5fd88df5ea5444c84e17f136dcbdb6e3bb09cde2d3bbc33e3c911e8229",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.OrdinaryTwoPointCorrelations.liouville_log_saving"
+  ],
+  "axioms_by_theorem": {
+    "OAI.OrdinaryTwoPointCorrelations.liouville_log_saving": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-ordinarytwopointcorrelations-liouville-log-saving-trivial.log",
+  "kernel_log_sha256": "6901095f57e4fa32ea5fcbac9275d3c2c673831c4206c8f0804445feb1397c21",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:36:30Z",
+  "probe": {
+    "probe_id": "OrdinaryTwoPointCorrelations:liouville_log_saving:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.OrdinaryTwoPointCorrelations.liouville_log_saving",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-cksbondipenrose-schwarzschild-equality-examples-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "7935542933c19aeaefcc793083cdeea0b1bbfd8f87bdf945bf5e44d5a59c41c6",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CKSMain.schwarzschild_equality_examples"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CKSMain.schwarzschild_equality_examples": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 34.9,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-cksbondipenrose-schwarzschild-equality-examples-trivial.log",
+  "kernel_log_sha256": "460fb01db6dcd896f3b597cee6d76cad09aade6286547f3ca852a16810a7f113",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:28:56Z",
+  "probe": {
+    "probe_id": "CKSBondiPenrose:schwarzschild_equality_examples:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.CKSMain.schwarzschild_equality_examples",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

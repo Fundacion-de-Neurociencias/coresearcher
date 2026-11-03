@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-rokhlin-mixing-all-finite-orders-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/Rokhlin__mixing_all_finite_orders__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "309e1866bb6f3c4211f21c730448b141ae6142d26e80bb76d73a3729ee0bbeca",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Rokhlin.mixing_all_finite_orders"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Rokhlin.mixing_all_finite_orders": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-rokhlin-mixing-all-finite-orders-trivial.log",
+  "kernel_log_sha256": "a2aaecc15783fdb46dd7e921f723578f8f81d80c7a38baaccff72329624a08b6",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:37:39Z",
+  "probe": {
+    "probe_id": "Rokhlin:mixing_all_finite_orders:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Rokhlin.mixing_all_finite_orders",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

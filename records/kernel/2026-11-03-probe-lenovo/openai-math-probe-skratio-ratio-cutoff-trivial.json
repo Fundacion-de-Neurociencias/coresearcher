@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-skratio-ratio-cutoff-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/SKRatio__ratio_cutoff__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "4a0992c6062f521df8b8f5d83fe8de2f531977602090f402eb6c4c517d3c46ee",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SKRatio.ratio_cutoff"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SKRatio.ratio_cutoff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-skratio-ratio-cutoff-trivial.log",
+  "kernel_log_sha256": "0b07252fad14ea72a70a3d42b2ea4d441515cc8446a4fb9500239ed321138ff1",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:37:55Z",
+  "probe": {
+    "probe_id": "SKRatio:ratio_cutoff:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.SKRatio.ratio_cutoff",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-commutingderivations-commuting-derivations-with-ordinary-extras-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/CommutingDerivations__commuting_derivations_with_ordinary_extras__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "476639c1eb1203f753e7014c1a04eb472f6d99ea899f18377f96332a150d1dc4",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.AbhyankarSathaye.CommutingDerivations.commuting_derivations_with_ordinary_extras"
+  ],
+  "axioms_by_theorem": {
+    "OAI.AbhyankarSathaye.CommutingDerivations.commuting_derivations_with_ordinary_extras": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 4.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-commutingderivations-commuting-derivations-with-ordinary-extras-trivial.log",
+  "kernel_log_sha256": "87900fc5055f879dec14195f9dcd3b69b4ace14ab2164512add184ecfb055f7e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:33Z",
+  "probe": {
+    "probe_id": "CommutingDerivations:commuting_derivations_with_ordinary_extras:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.AbhyankarSathaye.CommutingDerivations.commuting_derivations_with_ordinary_extras",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

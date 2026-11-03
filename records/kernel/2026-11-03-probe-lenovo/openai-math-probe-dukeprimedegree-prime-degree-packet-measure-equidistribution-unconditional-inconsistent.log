@@ -1,0 +1,36 @@
+# kernel-check lean_file openai-math-probe-dukeprimedegree-prime-degree-packet-measure-equidistribution-unconditional-inconsistent
+# file: ComparatorChallenges/Probes/DukePrimeDegree__prime_degree_packet_measure_equidistribution_unconditional__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: ac0fcfca842a0e2f1da8e196ada24dc60fb513486cee342be9ae480f8a67b711
+# command: lake env lean ComparatorChallenges/Probes/DukePrimeDegree__prime_degree_packet_measure_equidistribution_unconditional__inconsistent.lean
+# probe of: OAI.DukePrimeDegree.prime_degree_packet_measure_equidistribution_unconditional; checked declaration: OAI.DukePrimeDegree.prime_degree_packet_measure_equidistribution_unconditional_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/DukePrimeDegree__prime_degree_packet_measure_equidistribution_unconditional__inconsistent.lean:200:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/DukePrimeDegree__prime_degree_packet_measure_equidistribution_unconditional__inconsistent.lean:219:101: error: unsolved goals
+d : ℕ
+hprime : Nat.Prime (d + 1)
+K : ℕ → Type u
+inst✝² : (i : ℕ) → Field (K i)
+inst✝¹ : ∀ (i : ℕ), NumberField (K i)
+M : (i : ℕ) → FullLattice (d + 1) (K i)
+σ : (i : ℕ) → OrderedEmbeddings (d + 1) (K i)
+hfive : 4 ≤ d
+inst✝ : ∀ (i : ℕ), NumberField.IsTotallyReal (K i)
+hn : ∀ (i : ℕ), Module.finrank ℚ (K i) = d + 1
+hD : Tendsto (fun i => multiplierDiscriminant (M i)) atTop atTop
+⊢ False
+'OAI.DukePrimeDegree.prime_degree_packet_measure_equidistribution_unconditional_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/DukePrimeDegree__prime_degree_packet_measure_equidistribution_unconditional__inconsistent.lean:240:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

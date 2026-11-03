@@ -1,0 +1,45 @@
+# kernel-check lean_file openai-math-probe-traceidealtransportsupport-weight-idempotent-inconsistent
+# file: ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: a67549cf14c2b05cf0924d99dfbe8a1926e9d680090dfd5204c5c022fc233cb6
+# command: lake env lean ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean
+# probe of: OAI.TraceConeClassification.ClosedIdeal.weight_idempotent; checked declaration: OAI.TraceConeClassification.ClosedIdeal.weight_idempotent_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:61:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:71:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:72:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:74:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:76:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:79:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:91:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:92:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:94:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:134:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:157:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:159:76: error: unsolved goals
+A : Type u
+inst✝² : NonUnitalCStarAlgebra A
+inst✝¹ : PartialOrder A
+inst✝ : StarOrderedRing A
+I : ClosedIdeal A
+⊢ False
+'OAI.TraceConeClassification.ClosedIdeal.weight_idempotent_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ choice,
+ Quot.sound]
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:177:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:178:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:183:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:212:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:244:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__weight_idempotent__inconsistent.lean:248:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

@@ -1,0 +1,28 @@
+# kernel-check lean_file openai-math-probe-jointdickman-joint-law-trivial
+# file: ComparatorChallenges/Probes/JointDickman__joint_law__trivial.lean (generated probe, mode trivial)
+# file_sha256: 0f87cc9457fa80d2db164fb018281440d539ce5b91945fcc00fc5ffc1add8047
+# command: lake env lean ComparatorChallenges/Probes/JointDickman__joint_law__trivial.lean
+# probe of: OAI.JointDickmanPaper.joint_law; checked declaration: OAI.JointDickmanPaper.joint_law
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/JointDickman__joint_law__trivial.lean:48:59: error: unsolved goals
+a b : ℝ
+ha : 0 < a
+ha1 : a < 1
+hb : 0 < b
+hb1 : b < 1
+⊢ Tendsto (realDensity fun n => ↑n.maxPrimeFac ≤ ↑n ^ a ∧ ↑(n + 1).maxPrimeFac ≤ ↑n ^ b) atTop
+    (𝓝 (Erdos970.NumberTheoryLean.Dickman.rho a⁻¹ * Erdos970.NumberTheoryLean.Dickman.rho b⁻¹))
+'OAI.JointDickmanPaper.joint_law' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+ComparatorChallenges/Probes/JointDickman__joint_law__trivial.lean:68:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/JointDickman__joint_law__trivial.lean:74:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

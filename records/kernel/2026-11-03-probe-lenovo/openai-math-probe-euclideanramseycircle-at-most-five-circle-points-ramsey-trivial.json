@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-euclideanramseycircle-at-most-five-circle-points-ramsey-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EuclideanRamseyCircle__at_most_five_circle_points_ramsey__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "58c2e59c8d2b8e8ed4bd5bbeb00c63fc2a50e07d55ecd1ad3227a7b1188b5e51",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.EuclideanRamsey.CircleConsequence.at_most_five_circle_points_ramsey"
+  ],
+  "axioms_by_theorem": {
+    "OAI.EuclideanRamsey.CircleConsequence.at_most_five_circle_points_ramsey": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-euclideanramseycircle-at-most-five-circle-points-ramsey-trivial.log",
+  "kernel_log_sha256": "2ad586903385757cd90b696d2ec82228abcf7056e601d6ef4945f299630141f0",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:30Z",
+  "probe": {
+    "probe_id": "EuclideanRamseyCircle:at_most_five_circle_points_ramsey:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.EuclideanRamsey.CircleConsequence.at_most_five_circle_points_ramsey",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

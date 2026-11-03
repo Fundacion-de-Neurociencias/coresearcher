@@ -1,0 +1,50 @@
+# kernel-check lean_file openai-math-probe-subexponentialsat-exact-count-and-sat-trivial
+# file: ComparatorChallenges/Probes/SubexponentialSAT__exact_count_and_sat__trivial.lean (generated probe, mode trivial)
+# file_sha256: d19536202007b7467ef5d24ba56c4db184a55c1817cae1e396c5cd4515eb57ae
+# command: lake env lean ComparatorChallenges/Probes/SubexponentialSAT__exact_count_and_sat__trivial.lean
+# probe of: OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat; checked declaration: OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SubexponentialSAT__exact_count_and_sat__trivial.lean:217:65: error: unsolved goals
+k : ℕ
+hk : 2 ≤ k
+⊢ ∃ machine countTape answerTape C,
+    0 < C ∧
+      ∃ x,
+        0 < x ∧
+          ∃ x_1,
+            0 < x_1 ∧
+              ∃ x_2,
+                0 < x_2 ∧
+                  ∃ x_3,
+                    0 < x_3 ∧
+                      ∀ (n : ℕ) (F : SAT.CNF (Fin n)),
+                        SAT.WidthAtMost k F →
+                          ∃ time final,
+                            Trace (locatedStep machine) time (locatedInit machine (Encoding.encodeCNF F)) final ∧
+                              final.config.tapes countTape = Turing.Tape.mk₁ (List.map some (countWord (SAT.count F))) ∧
+                                final.config.tapes answerTape = Turing.Tape.mk₁ [some (decide (0 < SAT.count F))] ∧
+                                  final.config.state = Sum.inl (decide (0 < SAT.count F)) ∧
+                                    BinaryArithmetic.toNat (countWord (SAT.count F)) = SAT.count F ∧
+                                      (countWord (SAT.count F)).length ≤ n + 1 ∧
+                                        ↑time ≤ SqrtLog.Statement.runtimeBound C x x_2 (Encoding.formulaBitLength F) n ∧
+                                          ∀ (prefixSteps : ℕ) (intermediate : LocatedCfg machine),
+                                            prefixSteps ≤ time →
+                                              Trace (locatedStep machine) prefixSteps
+                                                  (locatedInit machine (Encoding.encodeCNF F)) intermediate →
+                                                ↑(visitedSpace intermediate) ≤
+                                                  x_1 * (↑(Encoding.formulaBitLength F) + 1) ^ x_3
+'OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

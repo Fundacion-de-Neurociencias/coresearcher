@@ -1,0 +1,31 @@
+# kernel-check lean_file openai-math-probe-artincat0-main-trivial-02
+# file: ComparatorChallenges/Probes/ArtinCAT0__main__trivial_02.lean (generated probe, mode trivial@rfl)
+# file_sha256: 0bb087d30253ce19e90468183eb0c8b215ba7101156d3fb70bf783dd8fe02875
+# command: lake env lean ComparatorChallenges/Probes/ArtinCAT0__main__trivial_02.lean
+# probe of: OAI.ArtinCAT0.main; checked declaration: OAI.ArtinCAT0.main
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/ArtinCAT0__main__trivial_02.lean:75:8: error: Tactic `rfl` failed: The left-hand side
+  ∀ (s t : Letters), explicitMatrix s t = explicitMatrix t s
+is not definitionally equal to the right-hand side
+  (∀ (s : Letters), explicitMatrix s s = 1) ∧
+    (∀ (s t : Letters), s ≠ t → explicitMatrix s t = 2 ∨ explicitMatrix s t = 3 ∨ explicitMatrix s t = ⊤) ∧
+      ∀ (X : Type u) [inst : MetricSpace X] [ProperSpace X] [Nonempty X]
+        [inst_3 : MulAction (ArtinGroup explicitMatrix) X], ¬GeometricAction (ArtinGroup explicitMatrix) X
+
+⊢ (∀ (s t : Letters), explicitMatrix s t = explicitMatrix t s) ∧
+    (∀ (s : Letters), explicitMatrix s s = 1) ∧
+      (∀ (s t : Letters), s ≠ t → explicitMatrix s t = 2 ∨ explicitMatrix s t = 3 ∨ explicitMatrix s t = ⊤) ∧
+        ∀ (X : Type u) [inst : MetricSpace X] [ProperSpace X] [Nonempty X]
+          [inst_3 : MulAction (ArtinGroup explicitMatrix) X], ¬GeometricAction (ArtinGroup explicitMatrix) X
+'OAI.ArtinCAT0.main' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

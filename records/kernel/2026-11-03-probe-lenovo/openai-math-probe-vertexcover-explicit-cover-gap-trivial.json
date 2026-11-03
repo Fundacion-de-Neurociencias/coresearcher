@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-vertexcover-explicit-cover-gap-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/VertexCover__explicit_cover_gap__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "0d645257f4113ec07b5236f70816083aa697b89a5cc55f7b4ef537b810f091f8",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.VertexCover.explicit_cover_gap"
+  ],
+  "axioms_by_theorem": {
+    "OAI.VertexCover.explicit_cover_gap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.0,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-vertexcover-explicit-cover-gap-trivial.log",
+  "kernel_log_sha256": "6125079a6d9940d21098aba39ed1b6788c3e111dd2778ed125737ed5c75b2632",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:40:44Z",
+  "probe": {
+    "probe_id": "VertexCover:explicit_cover_gap:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.VertexCover.explicit_cover_gap",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

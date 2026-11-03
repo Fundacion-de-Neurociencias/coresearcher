@@ -1,0 +1,40 @@
+# kernel-check lean_file openai-math-probe-localsmoothing-euclidean-local-smoothing-trivial
+# file: ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean (generated probe, mode trivial)
+# file_sha256: 2418a19448e5b7fbf27858bb5acf2b1aaaf1b44ca7afbbbab70581d0923406d3
+# command: lake env lean ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean
+# probe of: OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing; checked declaration: OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:95:41: error: unsolved goals
+⊢ ∀ (n : ℕ),
+    2 ≤ n →
+      ∀ (p ε : ℝ),
+        2 ≤ p →
+          0 < ε ∨ p = 2 ∧ ε = 0 →
+            ∃ C,
+              0 < C ∧
+                ∀ (f : SchwartzMap (Space n) ℂ),
+                  MemLp (besselPotential (max 0 ((↑n - 1) / 2 - ↑n / p) + ε) ⇑f) (ENNReal.ofReal p) volume ∧
+                    MemLp (fun z => halfWaveIntegral z.2 (⇑f) z.1) (ENNReal.ofReal p) (observationMeasure n) ∧
+                      eLpNorm (fun z => halfWaveIntegral z.2 (⇑f) z.1) (ENNReal.ofReal p) (observationMeasure n) ≤
+                        ENNReal.ofReal C *
+                          eLpNorm (besselPotential (max 0 ((↑n - 1) / 2 - ↑n / p) + ε) ⇑f) (ENNReal.ofReal p) volume
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:115:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:125:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:136:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:145:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/LocalSmoothing__euclidean_local_smoothing__trivial.lean:150:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

@@ -1,0 +1,29 @@
+# kernel-check lean_file openai-math-probe-tracereconstruction-superpolynomial-one-trace-inconsistent
+# file: ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: a77960784d2b209e3898442799a34f1fe8b935c2fb110c1e66c44e1cfffeca04
+# command: lake env lean ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean
+# probe of: OAI.TraceReconstruction.superpolynomial_one_trace; checked declaration: OAI.TraceReconstruction.superpolynomial_one_trace_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean:62:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean:74:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean:79:116: error: unsolved goals
+q C : ℝ
+hq : 0 < q ∧ q < 1
+hC : 0 < C
+⊢ False
+'OAI.TraceReconstruction.superpolynomial_one_trace_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/TraceReconstruction__superpolynomial_one_trace__inconsistent.lean:98:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

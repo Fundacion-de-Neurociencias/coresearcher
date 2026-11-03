@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-triangleremoval-sharp-terminal-leave-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/TriangleRemoval__sharp_terminal_leave__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "c0f74d9e5d83103a35ea90467c467c13844d2a2faa8c1d9e288cf147f70166c6",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SharpTerminalLeave.sharp_terminal_leave"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SharpTerminalLeave.sharp_terminal_leave": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-triangleremoval-sharp-terminal-leave-trivial.log",
+  "kernel_log_sha256": "ec90c8d6bc857f358bff1e5864d7fc779c2dc9262bfd2250db1488c5a0c6cce6",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:40:18Z",
+  "probe": {
+    "probe_id": "TriangleRemoval:sharp_terminal_leave:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.SharpTerminalLeave.sharp_terminal_leave",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

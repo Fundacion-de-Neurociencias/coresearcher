@@ -1,0 +1,33 @@
+# kernel-check lean_file openai-math-probe-polycyclicrecognition-group-recognition-inconsistent
+# file: ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 1dfde7e67fdb220e551cdbd117aa5afe270aa03a493dc08228e48ae61592f055
+# command: lake env lean ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean
+# probe of: OAI.PolycyclicRecognition.group_recognition; checked declaration: OAI.PolycyclicRecognition.group_recognition_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean:209:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean:219:79: error: unsolved goals
+P J : Type
+inst✝³ : Group P
+inst✝² : Group J
+inst✝¹ : Group.FG P
+inst✝ : Group.FG J
+e : GroupCoarseEquivalence P J
+hP : IsVirtuallyPolycyclic P
+⊢ False
+'OAI.PolycyclicRecognition.group_recognition_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean:239:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PolycyclicRecognition__group_recognition__inconsistent.lean:256:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

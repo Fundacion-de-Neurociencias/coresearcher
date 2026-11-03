@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-benjaminischramm-cayley-main-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "9adce869b293764f10cdecc6a1cbbf9f749c17f0613523010c4d4f02c7a445d5",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Percolation.BenjaminiSchramm.cayley_main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Percolation.BenjaminiSchramm.cayley_main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.0,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-benjaminischramm-cayley-main-trivial.log",
+  "kernel_log_sha256": "ba8ea21f1b532f18e2392af40a220e4846c9e382c5e3a43f77edf62e98bace4d",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:27:58Z",
+  "probe": {
+    "probe_id": "BenjaminiSchramm:cayley_main:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Percolation.BenjaminiSchramm.cayley_main",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

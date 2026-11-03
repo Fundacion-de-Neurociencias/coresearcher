@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-matrixmultiplication-complex-rectangular-omega-lt-523-div-250-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/MatrixMultiplication__complex_rectangular_omega_lt_523_div_250__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "f8f1820baaf346d852b4bd75c515f2e5b4dc3d1c2536520e84e570d01f4e4e32",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.MatrixMultiplication.complex_rectangular_omega_lt_523_div_250"
+  ],
+  "axioms_by_theorem": {
+    "OAI.MatrixMultiplication.complex_rectangular_omega_lt_523_div_250": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-matrixmultiplication-complex-rectangular-omega-lt-523-div-250-trivial.log",
+  "kernel_log_sha256": "ba36909f2862cb351755a8779e1fb68f175584a542731c78960de51b96ca69f6",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:35:52Z",
+  "probe": {
+    "probe_id": "MatrixMultiplication:complex_rectangular_omega_lt_523_div_250:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.MatrixMultiplication.complex_rectangular_omega_lt_523_div_250",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

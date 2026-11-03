@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-jacobsthalimproved-erdos-970-iterated-log-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/JacobsthalImproved__erdos_970_iterated_log__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "bae39b34548539056ed9ab61661f17ccbd9cfd7b25ef4f248e2737ec6b076ea7",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Erdos970.Erdos970Final.erdos_970_iterated_log"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Erdos970.Erdos970Final.erdos_970_iterated_log": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-jacobsthalimproved-erdos-970-iterated-log-trivial.log",
+  "kernel_log_sha256": "07c1043779a224b5e161f913fdf0da7de4321d8d41f66711fe246ae2ca2d8d42",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:34:45Z",
+  "probe": {
+    "probe_id": "JacobsthalImproved:erdos_970_iterated_log:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Erdos970.Erdos970Final.erdos_970_iterated_log",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

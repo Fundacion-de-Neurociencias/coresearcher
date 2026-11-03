@@ -1,0 +1,42 @@
+# kernel-check lean_file openai-math-probe-satsharpness-sharpness-trivial
+# file: ComparatorChallenges/Probes/SATSharpness__sharpness__trivial.lean (generated probe, mode trivial)
+# file_sha256: 24ee78c9b03ef6f07c4366956ab0d816a7bc5a3d7983360d6d844c2eb737796d
+# command: lake env lean ComparatorChallenges/Probes/SATSharpness__sharpness__trivial.lean
+# probe of: OAI.RandomKSAT.sharpness; checked declaration: OAI.RandomKSAT.sharpness
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SATSharpness__sharpness__trivial.lean:71:60: error: unsolved goals
+k : ℕ
+hk : 3 ≤ k
+⊢ (∀ (γ D A : ℝ),
+      γ < ↑k / ↑(k - 1) →
+        0 < D →
+          0 < A →
+            ∀ (N : ℕ),
+              ∃ u,
+                N ≤ u ∧
+                  k ≤ u ∧
+                    ∃ S,
+                      S.Nonempty ∧
+                        A * (↑u ^ (k - 1))⁻¹ ≤ blockKill u (k - 1) S 1 ∧
+                          D * blockKill u (k - 1) S 1 ^ (-γ) < lifetime u k S) ∧
+    (∃ u S,
+        (∀ (g : ℕ), 2 ≤ g → k ≤ u g ∧ (S g).Nonempty) ∧
+          Asymptotics.IsEquivalent Filter.atTop (fun g => blockKill (u g) (k - 1) (S g) 1 - blockKill (u g) k (S g) g)
+            fun g => (2 ^ k)⁻¹ * (↑g ^ (k - 1))⁻¹) ∧
+      ∀ (x : ℕ → ℝ),
+        (x =o[Filter.atTop] fun g => (↑g ^ (k - 1))⁻¹) →
+          ∃ x_1,
+            k ≤ x_1 ∧
+              ∃ x_2, x_2.Nonempty ∧ ∃ x_3, 2 ≤ x_3 ∧ blockKill x_1 k x_2 x_3 + x x_3 < blockKill x_1 (k - 1) x_2 1
+'OAI.RandomKSAT.sharpness' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

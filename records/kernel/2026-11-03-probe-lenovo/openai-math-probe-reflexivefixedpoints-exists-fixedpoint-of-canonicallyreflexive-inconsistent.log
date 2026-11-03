@@ -1,0 +1,36 @@
+# kernel-check lean_file openai-math-probe-reflexivefixedpoints-exists-fixedpoint-of-canonicallyreflexive-inconsistent
+# file: ComparatorChallenges/Probes/ReflexiveFixedPoints__exists_fixedPoint_of_canonicallyReflexive__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: a71de72ef56c1eba97942764351e57f5c3aa45c37824ec71e03aded09423eed4
+# command: lake env lean ComparatorChallenges/Probes/ReflexiveFixedPoints__exists_fixedPoint_of_canonicallyReflexive__inconsistent.lean
+# probe of: OAI.ReflexiveFixedPoints.exists_fixedPoint_of_canonicallyReflexive; checked declaration: OAI.ReflexiveFixedPoints.exists_fixedPoint_of_canonicallyReflexive_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/ReflexiveFixedPoints__exists_fixedPoint_of_canonicallyReflexive__inconsistent.lean:21:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/ReflexiveFixedPoints__exists_fixedPoint_of_canonicallyReflexive__inconsistent.lean:36:79: error: unsolved goals
+X : Type u
+inst✝² : NormedAddCommGroup X
+inst✝¹ : NormedSpace ℝ X
+inst✝ : CompleteSpace X
+hX : CanonicallyReflexive X
+C : Set X
+hne : C.Nonempty
+hclosed : IsClosed C
+hbounded : Bornology.IsBounded C
+hconvex : Convex ℝ C
+F : ↑C → ↑C
+hF : ∀ (a : X) (b : a ∈ C) (a_1 : X) (b_1 : a_1 ∈ C), ‖↑(F ⟨a, b⟩) - ↑(F ⟨a_1, b_1⟩)‖ ≤ ‖a - a_1‖
+⊢ False
+'OAI.ReflexiveFixedPoints.exists_fixedPoint_of_canonicallyReflexive_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

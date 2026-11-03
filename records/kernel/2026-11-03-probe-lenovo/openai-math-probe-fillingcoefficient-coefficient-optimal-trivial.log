@@ -1,0 +1,30 @@
+# kernel-check lean_file openai-math-probe-fillingcoefficient-coefficient-optimal-trivial
+# file: ComparatorChallenges/Probes/FillingCoefficient__coefficient_optimal__trivial.lean (generated probe, mode trivial)
+# file_sha256: 4f231f7182a50277ade240a84a9e6f527ca53c9e2393e0994459845832500ec5
+# command: lake env lean ComparatorChallenges/Probes/FillingCoefficient__coefficient_optimal__trivial.lean
+# probe of: OAI.SharpIntegralFillings.coefficient_optimal; checked declaration: OAI.SharpIntegralFillings.coefficient_optimal
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/FillingCoefficient__coefficient_optimal__trivial.lean:125:77: error: unsolved goals
+n : ℕ
+hn : 2 ≤ n
+⊢ ∃ a,
+    CompactlySupported a ∧
+      IsCycle a ∧
+        0 < mass a ∧
+          IsIntegral n a ∧
+            ∀ (a_1 : Functional (Euc (n + 1)) (n + 1)),
+              IsIntegral (n + 1) a_1 →
+                CompactlySupported a_1 →
+                  boundarySucc a_1 = a → fillingCoefficient n * mass a ^ fillingPower n ≤ mass a_1
+'OAI.SharpIntegralFillings.coefficient_optimal' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

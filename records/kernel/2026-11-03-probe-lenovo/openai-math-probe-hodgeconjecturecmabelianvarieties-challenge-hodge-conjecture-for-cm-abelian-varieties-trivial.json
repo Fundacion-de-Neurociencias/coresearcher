@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-hodgeconjecturecmabelianvarieties-challenge-hodge-conjecture-for-cm-abelian-varieties-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/HodgeConjectureCMAbelianVarieties__Challenge__hodge_conjecture_for_cm_abelian_varieties__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "33fa99c10472ae48e69cf64deaed6f0e9477a9c12185e8c097716d844070c35c",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "HodgeCM.hodge_conjecture_for_cm_abelian_varieties"
+  ],
+  "axioms_by_theorem": {
+    "HodgeCM.hodge_conjecture_for_cm_abelian_varieties": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 27.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-hodgeconjecturecmabelianvarieties-challenge-hodge-conjecture-for-cm-abelian-varieties-trivial.log",
+  "kernel_log_sha256": "fd2b6c88784b872041fd61cbf09efbdae992710ece88188e2780ea2a7c2f670e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:43:23Z",
+  "probe": {
+    "probe_id": "HodgeConjectureCMAbelianVarieties__Challenge:hodge_conjecture_for_cm_abelian_varieties:trivial",
+    "mode": "trivial",
+    "target_theorem": "HodgeCM.hodge_conjecture_for_cm_abelian_varieties",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

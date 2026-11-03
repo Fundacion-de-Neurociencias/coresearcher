@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-nagata-exists-positive-degree-equation-of-homogeneous-cycle-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "22a393d52006793ae0740d6ad1c8f480786d839834419b8de835668ecb479f38",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-nagata-exists-positive-degree-equation-of-homogeneous-cycle-inconsistent.log",
+  "kernel_log_sha256": "8d5a49af3167b85050e2654242f383849d8dc5f7678fe2f13e7d21660514436d",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:25:02Z",
+  "probe": {
+    "probe_id": "Nagata:exists_positive_degree_equation_of_homogeneous_cycle:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

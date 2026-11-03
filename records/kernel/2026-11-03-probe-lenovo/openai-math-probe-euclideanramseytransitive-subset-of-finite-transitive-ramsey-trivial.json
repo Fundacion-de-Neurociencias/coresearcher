@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-euclideanramseytransitive-subset-of-finite-transitive-ramsey-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EuclideanRamseyTransitive__subset_of_finite_transitive_ramsey__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "1895ba648cd25f937e1c402cb554cc466fb4a29d394cb169de3b4fd03ce47848",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey"
+  ],
+  "axioms_by_theorem": {
+    "OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-euclideanramseytransitive-subset-of-finite-transitive-ramsey-trivial.log",
+  "kernel_log_sha256": "3ecaea3e63e391d5cce532d5aabec98373f6aea0886779a618976e09793a5fc8",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:38Z",
+  "probe": {
+    "probe_id": "EuclideanRamseyTransitive:subset_of_finite_transitive_ramsey:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

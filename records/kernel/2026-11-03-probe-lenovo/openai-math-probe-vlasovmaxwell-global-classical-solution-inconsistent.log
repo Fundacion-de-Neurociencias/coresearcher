@@ -1,0 +1,26 @@
+# kernel-check lean_file openai-math-probe-vlasovmaxwell-global-classical-solution-inconsistent
+# file: ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 3eb59f8695ef0a32198317dc2dcf782b7c0bc29d566b80f56f8e30cd03151904
+# command: lake env lean ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__inconsistent.lean
+# probe of: OAI.RVM.global_classical_solution; checked declaration: OAI.RVM.global_classical_solution_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__inconsistent.lean:103:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__inconsistent.lean:108:96: error: unsolved goals
+d : Datum
+hd : Admissible d
+⊢ False
+'OAI.RVM.global_classical_solution_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

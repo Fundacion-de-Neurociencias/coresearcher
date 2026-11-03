@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-criticalsk-covariance-and-linear-tests-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/CriticalSK__covariance_and_linear_tests__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "7a55d822fa98a66b71109692c1ded967a14355bc69ea6c90b5ef8c69f9660155",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CriticalSK.covariance_and_linear_tests"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CriticalSK.covariance_and_linear_tests": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-criticalsk-covariance-and-linear-tests-trivial.log",
+  "kernel_log_sha256": "9d4f733d5470e0734699b6534f0295178c76957e200df2fff1015d466cc2c57d",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:29:45Z",
+  "probe": {
+    "probe_id": "CriticalSK:covariance_and_linear_tests:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.CriticalSK.covariance_and_linear_tests",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

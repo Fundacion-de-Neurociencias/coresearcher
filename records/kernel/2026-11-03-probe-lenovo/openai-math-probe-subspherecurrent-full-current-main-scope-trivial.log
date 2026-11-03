@@ -1,0 +1,20 @@
+# kernel-check lean_file openai-math-probe-subspherecurrent-full-current-main-scope-trivial
+# file: ComparatorChallenges/Probes/SubsphereCurrent__full_current_main_scope__trivial.lean (generated probe, mode trivial)
+# file_sha256: f839942ac39eafcd3a5bd40fe91fa065ef3ba08b443c183e9f20a64d8f8f73c9
+# command: lake env lean ComparatorChallenges/Probes/SubsphereCurrent__full_current_main_scope__trivial.lean
+# probe of: OAI.SubsphereCurrent.full_current_main_scope; checked declaration: OAI.SubsphereCurrent.full_current_main_scope
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SubsphereCurrent__full_current_main_scope__trivial.lean:442:62: error: unsolved goals
+⊢ CurrentMainScope
+'OAI.SubsphereCurrent.full_current_main_scope' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

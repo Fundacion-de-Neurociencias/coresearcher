@@ -1,0 +1,32 @@
+# kernel-check lean_file openai-math-probe-euclideanramseytransitive-subset-of-finite-transitive-ramsey-inconsistent
+# file: ComparatorChallenges/Probes/EuclideanRamseyTransitive__subset_of_finite_transitive_ramsey__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 5bcf3216e54cf4ea6107ae8ee1ae4449c14770fb12ec7efc51376f0d8093938e
+# command: lake env lean ComparatorChallenges/Probes/EuclideanRamseyTransitive__subset_of_finite_transitive_ramsey__inconsistent.lean
+# probe of: OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey; checked declaration: OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/EuclideanRamseyTransitive__subset_of_finite_transitive_ramsey__inconsistent.lean:19:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/EuclideanRamseyTransitive__subset_of_finite_transitive_ramsey__inconsistent.lean:32:50: error: unsolved goals
+s t D : ℕ
+a : Fin s → Space D
+y : Fin t → Space D
+hs : 0 < s
+ha : Function.Injective a
+_hy : Function.Injective y
+htrans : ∀ (i j : Fin t), ∃ σ, (∀ (k l : Fin t), dist (y (σ k)) (y (σ l)) = dist (y k) (y l)) ∧ σ i = j
+hsub : Set.range a ⊆ Set.range y
+⊢ False
+'OAI.EuclideanRamsey.TransitiveConsequence.subset_of_finite_transitive_ramsey_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-laughlin-maintarget-proved-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/Laughlin__mainTarget_proved__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "a4ad84bb27a90b0de2d3147f4ed2a2bfafd059453f3ef70ff4a3cb5fb14d5826",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Laughlin.mainTarget_proved"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Laughlin.mainTarget_proved": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-laughlin-maintarget-proved-trivial.log",
+  "kernel_log_sha256": "0c985b388cab17fc1025fa19e8e3f8d3e87835988c643a0e57f27343293eacc2",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:35:11Z",
+  "probe": {
+    "probe_id": "Laughlin:mainTarget_proved:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Laughlin.mainTarget_proved",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

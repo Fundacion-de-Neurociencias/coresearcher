@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-euclideanfivecolor-no-proper-five-coloring-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EuclideanFiveColor__no_proper_five_coloring__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "5fba3d87f62253929518aac4876bd62e8c1befdc6defa697d76d772d0740aa07",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.EuclideanFiveColor.no_proper_five_coloring"
+  ],
+  "axioms_by_theorem": {
+    "OAI.EuclideanFiveColor.no_proper_five_coloring": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.3,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-euclideanfivecolor-no-proper-five-coloring-trivial.log",
+  "kernel_log_sha256": "21f46f8cf8651fb5b6a25849f7d8d7ca054fd74eff25fb45b319bb351cf8ced4",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:24Z",
+  "probe": {
+    "probe_id": "EuclideanFiveColor:no_proper_five_coloring:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.EuclideanFiveColor.no_proper_five_coloring",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

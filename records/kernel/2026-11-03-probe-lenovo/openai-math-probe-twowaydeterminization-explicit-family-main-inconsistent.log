@@ -1,0 +1,23 @@
+# kernel-check lean_file openai-math-probe-twowaydeterminization-explicit-family-main-inconsistent
+# file: ComparatorChallenges/Probes/TwoWayDeterminization__explicit_family_main__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 9b1100b48becb1c94be123ace71bf3d76242bd1da267a0c8f5bcdc1ef1923f86
+# command: lake env lean ComparatorChallenges/Probes/TwoWayDeterminization__explicit_family_main__inconsistent.lean
+# probe of: OAI.TwoWayComplementation.explicit_family_main; checked declaration: OAI.TwoWayComplementation.explicit_family_main_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TwoWayDeterminization__explicit_family_main__inconsistent.lean:58:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TwoWayDeterminization__explicit_family_main__inconsistent.lean:71:80: error: unsolved goals
+n : ℕ
+hn : 4 ≤ n
+⊢ False
+'OAI.TwoWayComplementation.explicit_family_main_probe_inconsistent' depends on axioms: [sorryAx]
+# kernel-check: exit_code=1

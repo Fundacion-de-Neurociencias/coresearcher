@@ -1,0 +1,28 @@
+# kernel-check lean_file openai-math-probe-stronglyrayleighdpp-countable-positive-contraction-dpp-exists-unique-trivial
+# file: ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean (generated probe, mode trivial)
+# file_sha256: e7936508d97ac911387ab9f31791ce9efc24f86c7aff292d9a58877522d4fecd
+# command: lake env lean ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean
+# probe of: OAI.Problem336AdditiveD139.countable_positive_contraction_dpp_exists_unique; checked declaration: OAI.Problem336AdditiveD139.countable_positive_contraction_dpp_exists_unique
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:132:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:147:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:153:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:164:72: error: unsolved goals
+⊢ ∀ (I : Type u_4) [Countable I] (K : I → I → ℂ), PositiveContractionKernel K → ∃! μ, IsDeterminantalLaw μ K
+'OAI.Problem336AdditiveD139.countable_positive_contraction_dpp_exists_unique' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:183:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__countable_positive_contraction_dpp_exists_unique__trivial.lean:190:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

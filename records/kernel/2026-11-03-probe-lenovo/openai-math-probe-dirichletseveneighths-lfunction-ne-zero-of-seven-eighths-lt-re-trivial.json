@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-dirichletseveneighths-lfunction-ne-zero-of-seven-eighths-lt-re-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/DirichletSevenEighths__LFunction_ne_zero_of_seven_eighths_lt_re__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "0a46aca89ac3e9cb342b427d191002a7fc8904279442f2fcb5dc5ea02a714b1a",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.DirichletCharacter.LFunction_ne_zero_of_seven_eighths_lt_re"
+  ],
+  "axioms_by_theorem": {
+    "OAI.DirichletCharacter.LFunction_ne_zero_of_seven_eighths_lt_re": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.5,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-dirichletseveneighths-lfunction-ne-zero-of-seven-eighths-lt-re-trivial.log",
+  "kernel_log_sha256": "d2fc447bf0556568a1f504eb4f7921ea437a309916b513a9f14ced394535af53",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:30:34Z",
+  "probe": {
+    "probe_id": "DirichletSevenEighths:LFunction_ne_zero_of_seven_eighths_lt_re:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.DirichletCharacter.LFunction_ne_zero_of_seven_eighths_lt_re",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

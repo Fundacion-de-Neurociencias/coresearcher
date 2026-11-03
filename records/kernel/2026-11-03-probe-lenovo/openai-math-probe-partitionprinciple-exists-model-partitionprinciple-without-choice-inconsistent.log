@@ -1,0 +1,35 @@
+# kernel-check lean_file openai-math-probe-partitionprinciple-exists-model-partitionprinciple-without-choice-inconsistent
+# file: ComparatorChallenges/Probes/PartitionPrinciple__exists_model_partitionPrinciple_without_choice__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: befc0db2a183e66072e19abf086c5e1c240549eed997419abd5a017aaf051430
+# command: lake env lean ComparatorChallenges/Probes/PartitionPrinciple__exists_model_partitionPrinciple_without_choice__inconsistent.lean
+# probe of: OAI.PartitionPilot.Forcing.TransitiveGround.exists_model_partitionPrinciple_without_choice; checked declaration: OAI.PartitionPilot.Forcing.TransitiveGround.exists_model_partitionPrinciple_without_choice_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/PartitionPrinciple__exists_model_partitionPrinciple_without_choice__inconsistent.lean:262:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PartitionPrinciple__exists_model_partitionPrinciple_without_choice__inconsistent.lean:281:93: error: unsolved goals
+M : TransitiveGround
+pairing : Realize M.sets SetFormula.pairing Fin.elim0
+unions : Realize M.sets union Fin.elim0
+powers : Realize M.sets powerSet Fin.elim0
+separation : SeparationSchema M.sets
+collection : CollectionSchema M.sets
+infinite : Realize M.sets infinity Fin.elim0
+choice : Realize M.sets SetFormula.choice Fin.elim0
+small : M.sets.Countable
+K : ZFSet.{u}
+hK : K ∈ M.sets
+standard : GroundStandardInaccessible M K
+⊢ False
+'OAI.PartitionPilot.Forcing.TransitiveGround.exists_model_partitionPrinciple_without_choice_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Quot.sound]
+# kernel-check: exit_code=1

@@ -1,0 +1,34 @@
+# kernel-check lean_file openai-math-probe-benjaminischramm-cayley-main-trivial
+# file: ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean (generated probe, mode trivial)
+# file_sha256: 9adce869b293764f10cdecc6a1cbbf9f749c17f0613523010c4d4f02c7a445d5
+# command: lake env lean ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean
+# probe of: OAI.Percolation.BenjaminiSchramm.cayley_main; checked declaration: OAI.Percolation.BenjaminiSchramm.cayley_main
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean:217:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean:223:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/BenjaminiSchramm__cayley_main__trivial.lean:235:69: error: unsolved goals
+Λ : Type u
+inst✝ : Group Λ
+S : Finset Λ
+hsym : ∀ s ∈ S, s⁻¹ ∈ S
+_hone : 1 ∉ S
+hgen : Subgroup.closure ↑S = ⊤
+hna : ¬FolnerAmenable Λ
+⊢ OperatorBounded (cayleyBond S) (pc (cayleyBond S)) ∧
+    MainConclusion (cayleyBond S) ∧
+      ∀ (a : ℝ) (hp : 0 ≤ a) (hq : a ≤ 1),
+        pc (cayleyBond S) < ⟨a, ⋯⟩ →
+          ⟨a, ⋯⟩ < pu (cayleyBond S) →
+            ∀ᵐ (ω : Set ↑(CayleyEdge S)) ∂law ⟨a, ⋯⟩, (infiniteClusters (cayleyBond S) ω).Infinite
+'OAI.Percolation.BenjaminiSchramm.cayley_main' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

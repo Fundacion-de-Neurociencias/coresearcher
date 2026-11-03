@@ -1,0 +1,37 @@
+# kernel-check lean_file openai-math-probe-kahlersplitting-main-inconsistent
+# file: ComparatorChallenges/Probes/KahlerSplitting__main__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: fb2fdb1b2c316119f98bfdd43bbb8075703ac3bba9ae505b6162c04164a1d4ea
+# command: lake env lean ComparatorChallenges/Probes/KahlerSplitting__main__inconsistent.lean
+# probe of: OAI.UniversalCoverSplitting.main; checked declaration: OAI.UniversalCoverSplitting.main_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/KahlerSplitting__main__inconsistent.lean:124:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/KahlerSplitting__main__inconsistent.lean:139:76: error: unsolved goals
+n r₁ r₂ : ℕ
+X : ComplexManifold n
+inst✝¹ : CompactSpace X.Carrier
+inst✝ : ConnectedSpace X.Carrier
+hn : 2 ≤ n
+hr₁ : 0 < r₁
+hr₂ : 0 < r₂
+g : KahlerMetric X
+S : HolomorphicSplitting X r₁ r₂
+h₁ : Integrable S.projection
+h₂ : Integrable (complementaryProjection S)
+Z : ComplexManifold n
+π : OrdinaryUniversalCover X Z
+⊢ False
+'OAI.UniversalCoverSplitting.main_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

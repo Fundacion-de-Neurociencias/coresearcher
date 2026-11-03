@@ -1,0 +1,23 @@
+# kernel-check lean_file openai-math-probe-cksbondipenrose-schwarzschild-equality-examples-trivial
+# file: ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__trivial.lean (generated probe, mode trivial)
+# file_sha256: 7935542933c19aeaefcc793083cdeea0b1bbfd8f87bdf945bf5e44d5a59c41c6
+# command: lake env lean ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__trivial.lean
+# probe of: OAI.CKSMain.schwarzschild_equality_examples; checked declaration: OAI.CKSMain.schwarzschild_equality_examples
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__trivial.lean:3312:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__trivial.lean:3592:37: error: unsolved goals
+m : ℝ
+hm : 0 < m
+⊢ SchwarzschildExample m hm
+'OAI.CKSMain.schwarzschild_equality_examples' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

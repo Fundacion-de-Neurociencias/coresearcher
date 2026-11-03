@@ -1,0 +1,33 @@
+# kernel-check lean_file openai-math-probe-polycyclicrecognition-lattice-recognition-inconsistent
+# file: ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: c0bf8e521eb3464b64a853c1e1241cb9a9cd786c50033306bb26ae7c9b9ba30f
+# command: lake env lean ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean
+# probe of: OAI.PolycyclicRecognition.lattice_recognition; checked declaration: OAI.PolycyclicRecognition.lattice_recognition_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean:209:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean:219:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean:236:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PolycyclicRecognition__lattice_recognition__inconsistent.lean:247:82: error: unsolved goals
+S : SimplyConnectedSolvableLieModel
+Λ : Subgroup S.carrier
+hΛ : IsFiniteCovolumeLattice Λ
+J : Type
+inst✝¹ : Group J
+inst✝ : Group.FG J
+e : GroupCoarseEquivalence (↥Λ) J
+⊢ False
+'OAI.PolycyclicRecognition.lattice_recognition_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

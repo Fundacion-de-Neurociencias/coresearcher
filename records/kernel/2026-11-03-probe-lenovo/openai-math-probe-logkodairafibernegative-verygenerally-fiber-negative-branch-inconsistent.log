@@ -1,0 +1,28 @@
+# kernel-check lean_file openai-math-probe-logkodairafibernegative-verygenerally-fiber-negative-branch-inconsistent
+# file: ComparatorChallenges/Probes/LogKodairaFiberNegative__veryGenerally_fiber_negative_branch__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 815b6c1ed33d1a12abfa09280b4da7677ef22d4d622d86b275bb3253e42c78cd
+# command: lake env lean ComparatorChallenges/Probes/LogKodairaFiberNegative__veryGenerally_fiber_negative_branch__inconsistent.lean
+# probe of: OAI.ReverseLogKodaira.SmoothProjectiveVariety.veryGenerally_fiber_negative_branch; checked declaration: OAI.ReverseLogKodaira.SmoothProjectiveVariety.veryGenerally_fiber_negative_branch_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/LogKodairaFiberNegative__veryGenerally_fiber_negative_branch__inconsistent.lean:233:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/LogKodairaFiberNegative__veryGenerally_fiber_negative_branch__inconsistent.lean:242:52: error: unsolved goals
+X Y : SmoothProjectiveVariety
+E : X.ReducedSNCBoundary
+D : Y.ReducedSNCBoundary
+f : X.StratumSmoothFibration Y E D
+⊢ False
+'OAI.ReverseLogKodaira.SmoothProjectiveVariety.veryGenerally_fiber_negative_branch_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

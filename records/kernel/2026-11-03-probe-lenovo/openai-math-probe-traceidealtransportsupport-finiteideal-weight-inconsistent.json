@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-traceidealtransportsupport-finiteideal-weight-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/TraceIdealTransportSupport__finiteIdeal_weight__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "25bcd11e2c9c9c1bff650f4df5d2629caf38ea675390aa2d3bb9c6df0df20a54",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight_probe_inconsistent": [
+      "Quot.sound",
+      "choice",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Quot.sound",
+    "choice",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['choice', 'sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-traceidealtransportsupport-finiteideal-weight-inconsistent.log",
+  "kernel_log_sha256": "76c0ad156d7d4bc675938186fd5c2af79de58e3301fbc822c06d9a9c8af6cfd7",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:40:05Z",
+  "probe": {
+    "probe_id": "TraceIdealTransportSupport:finiteIdeal_weight:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-abhyankarsathaye-exists-noncoordinate-polynomial-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/AbhyankarSathaye__exists_noncoordinate_polynomial__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "f80e1a5d795eabbf17f681067c45ac35d8580e356ec8c9d536e5617d1e60813d",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial_probe_inconsistent": [
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 6.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-abhyankarsathaye-exists-noncoordinate-polynomial-inconsistent.log",
+  "kernel_log_sha256": "83b3ebfd0c6fa02b242252543ba2923bc94d76d3a7486efcd5685c020349b265",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:25Z",
+  "probe": {
+    "probe_id": "AbhyankarSathaye:exists_noncoordinate_polynomial:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.AbhyankarSathaye.exists_noncoordinate_polynomial",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

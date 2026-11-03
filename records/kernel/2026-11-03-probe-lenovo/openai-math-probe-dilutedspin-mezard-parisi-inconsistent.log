@@ -1,0 +1,27 @@
+# kernel-check lean_file openai-math-probe-dilutedspin-mezard-parisi-inconsistent
+# file: ComparatorChallenges/Probes/DilutedSpin__mezard_parisi__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: fcdb25cc4fa964a9831cd72ab1804126c8c373967f8ab939e845f88e5ca5234a
+# command: lake env lean ComparatorChallenges/Probes/DilutedSpin__mezard_parisi__inconsistent.lean
+# probe of: OAI.DilutedSpinGlass.mezard_parisi; checked declaration: OAI.DilutedSpinGlass.mezard_parisi_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/DilutedSpin__mezard_parisi__inconsistent.lean:148:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/DilutedSpin__mezard_parisi__inconsistent.lean:152:94: error: unsolved goals
+p : ℕ
+M : Model p
+hM : Admissible M
+⊢ False
+'OAI.DilutedSpinGlass.mezard_parisi_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

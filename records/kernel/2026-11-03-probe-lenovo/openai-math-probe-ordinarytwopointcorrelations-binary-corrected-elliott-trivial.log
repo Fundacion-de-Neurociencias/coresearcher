@@ -1,0 +1,31 @@
+# kernel-check lean_file openai-math-probe-ordinarytwopointcorrelations-binary-corrected-elliott-trivial
+# file: ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__binary_corrected_elliott__trivial.lean (generated probe, mode trivial)
+# file_sha256: 315753037b75b8ee3e3fda844403d8576d127b7c25ed458e237c19531e62eb11
+# command: lake env lean ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__binary_corrected_elliott__trivial.lean
+# probe of: OAI.OrdinaryTwoPointCorrelations.binary_corrected_elliott; checked declaration: OAI.OrdinaryTwoPointCorrelations.binary_corrected_elliott
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__binary_corrected_elliott__trivial.lean:43:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__binary_corrected_elliott__trivial.lean:56:88: error: unsolved goals
+⊢ ∀ (f₁ f₂ : ℕ → ℂ),
+    TwoPointCorrelations.Multiplicative f₁ →
+      TwoPointCorrelations.Multiplicative f₂ →
+        OneBounded f₁ →
+          OneBounded f₂ →
+            UniformlyNonpretentious f₁ ∨ UniformlyNonpretentious f₂ →
+              ∀ (h₁ h₂ : ℕ), ¬h₁ = h₂ → Tendsto (fun N => correlationSum f₁ f₂ h₁ h₂ N / ↑N) atTop (nhds 0)
+'OAI.OrdinaryTwoPointCorrelations.binary_corrected_elliott' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/OrdinaryTwoPointCorrelations__binary_corrected_elliott__trivial.lean:75:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

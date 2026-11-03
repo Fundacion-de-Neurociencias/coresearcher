@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-matchingaffinelift-affine-lift-lower-bound-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/MatchingAffineLift__affine_lift_lower_bound__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "b9fd279d0687d9c411a6734ae3958b424c3479e7fb31a5488a5d923c9bc92ccb",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.PerfectMatchingPSD.affine_lift_lower_bound"
+  ],
+  "axioms_by_theorem": {
+    "OAI.PerfectMatchingPSD.affine_lift_lower_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-matchingaffinelift-affine-lift-lower-bound-trivial.log",
+  "kernel_log_sha256": "99739c7324aa9b9ae27ca7591b0d9b6f5e30480a68f087d5606a3466eee5eff5",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:35:45Z",
+  "probe": {
+    "probe_id": "MatchingAffineLift:affine_lift_lower_bound:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.PerfectMatchingPSD.affine_lift_lower_bound",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

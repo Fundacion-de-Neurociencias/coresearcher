@@ -1,0 +1,24 @@
+# kernel-check lean_file openai-math-probe-fourierllogl-papermain-inconsistent
+# file: ComparatorChallenges/Probes/FourierLLogL__paperMain__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 9527d773bb71f41418a42c172f867f140f034f2a5e8e414ae1c036c8b2456ebd
+# command: lake env lean ComparatorChallenges/Probes/FourierLLogL__paperMain__inconsistent.lean
+# probe of: OAI.FourierLLogL.paperMain; checked declaration: OAI.FourierLLogL.paperMain_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/FourierLLogL__paperMain__inconsistent.lean:12:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/FourierLLogL__paperMain__inconsistent.lean:27:42: error: unsolved goals
+f : AddCircle (2 * Real.pi) → ℂ
+hfm : AEStronglyMeasurable f AddCircle.haarAddCircle
+hfi : Integrable (fun x => ‖f x‖ * Real.log (2 + ‖f x‖)) AddCircle.haarAddCircle
+⊢ False
+'OAI.FourierLLogL.paperMain_probe_inconsistent' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

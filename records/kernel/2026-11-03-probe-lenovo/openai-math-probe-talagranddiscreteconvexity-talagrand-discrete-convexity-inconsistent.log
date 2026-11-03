@@ -1,0 +1,31 @@
+# kernel-check lean_file openai-math-probe-talagranddiscreteconvexity-talagrand-discrete-convexity-inconsistent
+# file: ComparatorChallenges/Probes/TalagrandDiscreteConvexity__talagrand_discrete_convexity__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: a17112c1f68134ff565b0a7e0444aa7b75f4863dcc8bed3dfe43283ce4ca914c
+# command: lake env lean ComparatorChallenges/Probes/TalagrandDiscreteConvexity__talagrand_discrete_convexity__inconsistent.lean
+# probe of: OAI.TalagrandDiscreteConvexity.talagrand_discrete_convexity; checked declaration: OAI.TalagrandDiscreteConvexity.talagrand_discrete_convexity_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TalagrandDiscreteConvexity__talagrand_discrete_convexity__inconsistent.lean:47:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TalagrandDiscreteConvexity__talagrand_discrete_convexity__inconsistent.lean:55:63: error: unsolved goals
+N : ℕ
+_hN : 1 ≤ N
+p : ℝ
+hp0 : 0 < p
+hp1 : p < 1
+D : Family (Fin N)
+hD : 1 ≤ familyMeasure p D + (2 ^ 75)⁻¹
+⊢ False
+'OAI.TalagrandDiscreteConvexity.talagrand_discrete_convexity_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

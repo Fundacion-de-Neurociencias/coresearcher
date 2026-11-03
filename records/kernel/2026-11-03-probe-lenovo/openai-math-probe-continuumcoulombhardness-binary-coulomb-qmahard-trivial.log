@@ -1,0 +1,21 @@
+# kernel-check lean_file openai-math-probe-continuumcoulombhardness-binary-coulomb-qmahard-trivial
+# file: ComparatorChallenges/Probes/ContinuumCoulombHardness__binary_coulomb_qmaHard__trivial.lean (generated probe, mode trivial)
+# file_sha256: eb32a8d11c879f83e97f972b12e86b029c8f7b8e7a4ed60c6d1e729aa590f01d
+# command: lake env lean ComparatorChallenges/Probes/ContinuumCoulombHardness__binary_coulomb_qmaHard__trivial.lean
+# probe of: OAI.ContinuumCoulomb.binary_coulomb_qmaHard; checked declaration: OAI.ContinuumCoulomb.binary_coulomb_qmaHard
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/ContinuumCoulombHardness__binary_coulomb_qmaHard__trivial.lean:546:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/ContinuumCoulombHardness__binary_coulomb_qmaHard__trivial.lean:549:91: error: unsolved goals
+⊢ QMAHard binaryCoulombCodec.encode binaryCoulombPromise
+'OAI.ContinuumCoulomb.binary_coulomb_qmaHard' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

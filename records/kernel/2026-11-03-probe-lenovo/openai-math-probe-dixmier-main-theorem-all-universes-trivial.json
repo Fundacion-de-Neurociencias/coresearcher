@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-dixmier-main-theorem-all-universes-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/Dixmier__main_theorem_all_universes__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "71e52dbea87786e63ffef083b8e4003e07ee62de3ec8d87aee7d74351a598346",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Dixmier.main_theorem_all_universes"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Dixmier.main_theorem_all_universes": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 4.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-dixmier-main-theorem-all-universes-trivial.log",
+  "kernel_log_sha256": "20cb28de1f84d54d4b3a10a62ff9e5ae42350f2f53fd923aa19365fd9bca059e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:38Z",
+  "probe": {
+    "probe_id": "Dixmier:main_theorem_all_universes:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Dixmier.main_theorem_all_universes",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

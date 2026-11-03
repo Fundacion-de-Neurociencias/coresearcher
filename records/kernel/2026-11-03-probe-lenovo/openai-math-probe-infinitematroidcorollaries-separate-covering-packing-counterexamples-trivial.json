@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-infinitematroidcorollaries-separate-covering-packing-counterexamples-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/InfiniteMatroidCorollaries__separate_covering_packing_counterexamples__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "b8ec85832b33055f07d5c06448fd010f31d08936d8471d055eed8c8d833b82bb",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.InfiniteMatroidCounterexample.separate_covering_packing_counterexamples"
+  ],
+  "axioms_by_theorem": {
+    "OAI.InfiniteMatroidCounterexample.separate_covering_packing_counterexamples": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-infinitematroidcorollaries-separate-covering-packing-counterexamples-trivial.log",
+  "kernel_log_sha256": "e46cb54145fe0776c190765b6b567367697bddee9ca314ec2072a533f8d5fe80",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:34:08Z",
+  "probe": {
+    "probe_id": "InfiniteMatroidCorollaries:separate_covering_packing_counterexamples:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.InfiniteMatroidCounterexample.separate_covering_packing_counterexamples",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

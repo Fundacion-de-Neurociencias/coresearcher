@@ -1,0 +1,29 @@
+# kernel-check lean_file openai-math-probe-nodallength-main-trivial
+# file: ComparatorChallenges/Probes/NodalLength__Main__trivial.lean (generated probe, mode trivial)
+# file_sha256: 495ef1e16e3fd119815608b7724c3cca0af845b88b70ce191281a8c42b6dd410
+# command: lake env lean ComparatorChallenges/Probes/NodalLength__Main__trivial.lean
+# probe of: OAI.SharpNodal.Main; checked declaration: OAI.SharpNodal.Main
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/NodalLength__Main__trivial.lean:55:61: error: unsolved goals
+M : Type u_1
+inst✝⁷ : MetricSpace M
+inst✝⁶ : ChartedSpace Plane M
+inst✝⁵ : IsManifold 𝓘(ℝ, Plane) ∞ M
+inst✝⁴ : RiemannianBundle fun x => TangentSpace 𝓘(ℝ, Plane) x
+inst✝³ : CompactSpace M
+inst✝² : ConnectedSpace M
+inst✝¹ : IsContMDiffRiemannianBundle 𝓘(ℝ, Plane) ∞ Plane fun x => TangentSpace 𝓘(ℝ, Plane) x
+inst✝ : IsRiemannianManifold 𝓘(ℝ, Plane) M
+⊢ MainStatement M
+'OAI.SharpNodal.Main' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

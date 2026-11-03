@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-evenbarker-even-length-eq-two-or-four-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EvenBarker__even_length_eq_two_or_four__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "92b18211034de626e482dfbe87ce9ef3136ea6abf20f0df8f17885259443c396",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CirculantHadamard.Barker.even_length_eq_two_or_four"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CirculantHadamard.Barker.even_length_eq_two_or_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.2,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-evenbarker-even-length-eq-two-or-four-trivial.log",
+  "kernel_log_sha256": "1b50f956e461bd2bc907f2d27c17754708af6b1fe72709ad71a034803531137e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:39Z",
+  "probe": {
+    "probe_id": "EvenBarker:even_length_eq_two_or_four:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.CirculantHadamard.Barker.even_length_eq_two_or_four",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

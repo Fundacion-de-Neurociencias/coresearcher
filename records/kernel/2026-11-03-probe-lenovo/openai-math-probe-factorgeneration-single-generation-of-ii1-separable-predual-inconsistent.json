@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-factorgeneration-single-generation-of-ii1-separable-predual-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/FactorGeneration__single_generation_of_II1_separable_predual__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "5469a57334106a247c1cfaa32b3efb606bf36d64653273761e7a87919a58a5e2",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Generator.single_generation_of_II1_separable_predual_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Generator.single_generation_of_II1_separable_predual_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.5,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-factorgeneration-single-generation-of-ii1-separable-predual-inconsistent.log",
+  "kernel_log_sha256": "8451eb3d25c615605454a0428667a41e016fc69716aecc9922e2ebfea19da46c",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:43Z",
+  "probe": {
+    "probe_id": "FactorGeneration:single_generation_of_II1_separable_predual:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.Generator.single_generation_of_II1_separable_predual",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

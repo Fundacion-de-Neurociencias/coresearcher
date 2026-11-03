@@ -247,6 +247,18 @@ def report(records: Path) -> None:
         record = kernel_records.load(path)  # Raises when a record does not match its log.
         by_probe[record["probe"]["probe_id"]] = (path.resolve(), record)
     data = json.loads(OUT.read_text(encoding="utf-8"))
+    known = {row["probe_id"] for row in data["lean_probes"]["probes"]}
+    for probe_id, (_, record) in by_probe.items():
+        if probe_id not in known:  # Single-tactic probes made for an aborted menu (`prepare --out`).
+            data["lean_probes"]["probes"].append(
+                {
+                    "probe_id": probe_id,
+                    "theorem": record["probe"]["target_theorem"],
+                    "mode": record["probe"]["mode"],
+                    "module_path": record["source"]["path"].removeprefix("lean/"),
+                    "split_of": probe_id.split("@")[0],
+                }
+            )
     for row in data["lean_probes"]["probes"]:
         found = by_probe.get(row["probe_id"])
         if found is None:

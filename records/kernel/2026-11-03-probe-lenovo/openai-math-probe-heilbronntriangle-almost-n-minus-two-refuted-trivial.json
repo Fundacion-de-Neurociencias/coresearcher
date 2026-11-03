@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-heilbronntriangle-almost-n-minus-two-refuted-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/HeilbronnTriangle__almost_n_minus_two_refuted__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "e58af8574585958388cecf5b348d63f7599d90b8bf49e23e8ba848d45e2fa2a1",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Problem355.almost_n_minus_two_refuted"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Problem355.almost_n_minus_two_refuted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-heilbronntriangle-almost-n-minus-two-refuted-trivial.log",
+  "kernel_log_sha256": "7e418eb7bd594193cc30e2978cfd13be8efedcc6c8bdc5ef2f844df9e83dd866",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:33:22Z",
+  "probe": {
+    "probe_id": "HeilbronnTriangle:almost_n_minus_two_refuted:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Problem355.almost_n_minus_two_refuted",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

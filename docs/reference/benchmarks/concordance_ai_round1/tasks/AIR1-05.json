@@ -1,0 +1,56 @@
+{
+  "task_id": "AIR1-05",
+  "source_item": "H05",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "gerontology",
+    "statement": "In mice that are both younger than 2 months and older than 24 months, the treatment at least doubles lifespan (lifespan ratio of at least 2).",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {
+      "P1": "It is taken as given that age < 2.",
+      "P2": "It is taken as given that age > 24."
+    },
+    "observations_table": {
+      "columns": {
+        "age": "real number in [0, 40]",
+        "ratio": "real number in [0, 5]"
+      },
+      "rows": [],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "age",
+          "continuous": true,
+          "lower": 0,
+          "upper": 40
+        },
+        {
+          "name": "ratio",
+          "continuous": true,
+          "lower": 0,
+          "upper": 5
+        }
+      ],
+      "scope": null,
+      "assumptions": [
+        "age < 2",
+        "age > 24"
+      ],
+      "claims": [
+        "ratio >= 2"
+      ],
+      "hypothesis_id": "AIR1-05-H"
+    },
+    "observations": [],
+    "assumption_labels": [
+      "P1",
+      "P2"
+    ]
+  }
+}

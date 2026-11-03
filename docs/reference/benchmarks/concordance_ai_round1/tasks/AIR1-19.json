@@ -1,0 +1,77 @@
+{
+  "task_id": "AIR1-19",
+  "source_item": "F12",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "neurology",
+    "statement": "Between two consecutive visits, a patient's Braak stage never decreases.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "stage_first": "one of [0, 1, 2, 3, 4, 5, 6]",
+        "stage_second": "one of [0, 1, 2, 3, 4, 5, 6]"
+      },
+      "rows": [
+        {
+          "stage_first": 1,
+          "stage_second": 0
+        },
+        {
+          "stage_first": 0,
+          "stage_second": 0
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "stage_first",
+          "domain": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "name": "stage_second",
+          "domain": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "stage_second >= stage_first"
+      ],
+      "hypothesis_id": "AIR1-19-H"
+    },
+    "observations": [
+      {
+        "stage_first": 1,
+        "stage_second": 0
+      },
+      {
+        "stage_first": 0,
+        "stage_second": 0
+      }
+    ],
+    "assumption_labels": []
+  }
+}

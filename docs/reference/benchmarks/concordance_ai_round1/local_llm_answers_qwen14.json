@@ -1,0 +1,205 @@
+{
+  "arm": "llm",
+  "model": "qwen2.5:14b-instruct-q4_K_M",
+  "prompt_version": "concordance-llm-arm-v1",
+  "prompt_sha256": "525db1a5926e51647d05ab269f98e66964faa729c0fb22e63c935a23f466864d",
+  "llm_answers": {
+    "AIR1-01": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "CONFLICTING",
+      "Q2_items": [
+        "row 2"
+      ],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-02": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [],
+      "Q4": "STRONGER"
+    },
+    "AIR1-03": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": [],
+      "Q4": "STRONGER"
+    },
+    "AIR1-04": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-05": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "CONFLICTING",
+      "Q2_items": [
+        "P1",
+        "P2"
+      ]
+    },
+    "AIR1-06": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-07": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-08": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-09": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ],
+      "Q4": "CONTRADICTORY"
+    },
+    "AIR1-10": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        1
+      ],
+      "Q4": "CONTRADICTORY"
+    },
+    "AIR1-11": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": [],
+      "Q4": "EQUIVALENT"
+    },
+    "AIR1-12": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        2
+      ],
+      "Q4": "STRONGER"
+    },
+    "AIR1-13": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-14": {
+      "Q1": "UNFALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "NOT_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-15": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-16": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "CONFLICTING",
+      "Q2_items": [
+        "P1",
+        "P2"
+      ]
+    },
+    "AIR1-17": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": []
+    },
+    "AIR1-18": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "POSSIBLY_REFUTED",
+      "Q3_items": [
+        2
+      ]
+    },
+    "AIR1-19": {
+      "Q1": "FALSIFIABLE",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    },
+    "AIR1-20": {
+      "Q1": "SELF_CONTRADICTORY",
+      "Q2": "COMPATIBLE",
+      "Q2_items": [],
+      "Q3": "REFUTED",
+      "Q3_items": [
+        1
+      ]
+    }
+  },
+  "raw_outputs": {
+    "AIR1-01": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if a patient with eGFR below 30 is eligible or a patient with eGFR at least 30 is not eligible.\"},\n  \"Q2\": {\"value\": \"CONFLICTING\", \"confidence\": 5, \"rationale\": \"Row 2 shows a patient with eGFR of 0, which is impossible under the hypothesis since eligibility requires eGFR at least 30.\"},\n  \"Q2_items\": {\"value\": [\"row 2\"], \"confidence\": 5, \"rationale\": \"Row 2 presents a situation where eGFR is 0, which contradicts the hypothesis's requirement of eGFR at least 30 for eligibility.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 2 could refute the hypothesis if we assume that a patient with eGFR of 0 cannot be eligible, but the table shows eligibility as True.\"},\n  \"Q3_items\": {\"value\": [2], \"confidence\": 5, \"rationale\": \"Row 2 shows eligibility as True for a patient with eGFR of 0, which is impossible under the hypothesis.\"},\n  \"Q4\": {\"value\": \"STRONGER\", \"confidence\": 5, \"rationale\": \"Hypothesis H allows more eGFR values for eligibility (30-45 mL/min) than R, while both forbid eGFR below 30 for eligibility.\"}\n}",
+    "AIR1-02": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing a wetland with rainfall below 200 mm that does not dry out.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 shows rain at 0 mm, which is below 200 mm, but does not provide information about the wetland drying out, so it is not certain that the hypothesis is refuted.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No rows certainly refute the hypothesis based on the given information.\"},\n  \"Q4\": {\"value\": \"STRONGER\", \"confidence\": 5, \"rationale\": \"Hypothesis H states that the wetland dries out whenever rainfall is below 200 mm, while Rival R states it for rainfall below 300 mm. Therefore, H forbids more situations than R.\"}\n}",
+    "AIR1-03": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if an older patient's clearance is greater than a younger patient's clearance.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"NOT_REFUTED\", \"confidence\": 5, \"rationale\": \"The single observation does not refute the hypothesis as it states both clearances are 0, which does not violate the hypothesis.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No rows refute the hypothesis.\"},\n  \"Q4\": {\"value\": \"STRONGER\", \"confidence\": 5, \"rationale\": \"Hypothesis H allows for the clearances to be equal, while Rival R does not, making H stronger in terms of the situations it allows.\"}\n}",
+    "AIR1-04": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if an adult has a resting heart rate of 100 or more beats per minute.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis itself.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 2 shows an adult with a heart rate of 135, which is above 100 and thus possibly refutes the hypothesis.\"},\n  \"Q3_items\": {\"value\": [2], \"confidence\": 5, \"rationale\": \"Row 2 shows a heart rate of 135, which is above 100 and thus possibly refutes the hypothesis.\"},\n  \"Q4\": {\"value\": \"STRONGER\", \"confidence\": 5, \"rationale\": \"Hypothesis H forbids all situations that R forbids and additionally forbids situations where the heart rate is exactly 100 beats per minute.\"}\n}",
+    "AIR1-05": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The conditions in P1 and P2 cannot be true simultaneously.\"},\n  \"Q2\": {\"value\": \"CONFLICTING\", \"confidence\": 5, \"rationale\": \"P1 and P2 are mutually exclusive and cannot both be true at the same time.\"},\n  \"Q2_items\": {\"value\": [\"P1\", \"P2\"], \"confidence\": 5, \"rationale\": \"P1 and P2 form a minimal conflicting set as they cannot both be true simultaneously.\"}\n}",
+    "AIR1-06": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing whether a tumour responds to the drug or not.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting premises in the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists as the hypothesis is a tautology.\"},\n  \"Q3\": {\"value\": \"NOT_REFUTED\", \"confidence\": 5, \"rationale\": \"The observation table shows a tumour responding to the drug, which is consistent with the hypothesis.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No row in the observation table refutes the hypothesis as it only shows a positive response, which is covered by the hypothesis.\"}\n}",
+    "AIR1-07": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis states that the protein is always phosphorylated and never phosphorylated, which is a logical contradiction.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no premises in the hypothesis that conflict with each other, but the hypothesis itself is self-contradictory.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists as the contradiction is inherent in the hypothesis itself.\"},\n  \"Q3\": {\"value\": \"REFUTED\", \"confidence\": 5, \"rationale\": \"The hypothesis is self-contradictory and therefore cannot be true in any situation, including the observation where the protein is phosphorylated.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 shows the protein is phosphorylated, which is part of the self-contradictory statement in the hypothesis, making the hypothesis refuted by this observation.\"}\n}",
+    "AIR1-08": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing bacterial division at temperatures above 37 degrees and below 15 degrees.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"The observation at 0 degrees Celsius does not necessarily refute the hypothesis since it does not specify the dividing status for temperatures below 15 degrees.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No specific row refutes the hypothesis definitively as the dividing status at 0 degrees is not specified in the hypothesis for temperatures below 15 degrees.\"}\n}",
+    "AIR1-09": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis states that a fire spreads only if wind speed exceeds 20 km/h, but row 1 shows a fire spreading with wind speed of 0 km/h, which contradicts the hypothesis.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting premises within the hypothesis itself.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists.\"},\n  \"Q3\": {\"value\": \"REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 shows a fire spreading with wind speed of 0 km/h, which is certainly incompatible with the hypothesis.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 refutes the hypothesis.\"},\n  \"Q4\": {\"value\": \"CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis and the rival are contradictory because the hypothesis states that a fire spreads only if wind speed exceeds 20 km/h, while the rival states that a fire spreads whenever wind speed exceeds 20 km/h, which includes situations where the fire does not spread according to the hypothesis.\"}\n}",
+    "AIR1-10": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing soils with pH below 5 and aluminium toxicity exceeding 1 unit.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 has a pH of 0, which is below 5, but the aluminium toxicity is 2.5, which exceeds the safe limit of 1 unit, potentially refuting the hypothesis.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 has conditions that potentially refute the hypothesis.\"},\n  \"Q4\": {\"value\": \"CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"Hypothesis H and R are contradictory because H states that aluminium toxicity exceeds 1 unit while R states it is at most 1 unit in soils with pH below 5.\"}\n}",
+    "AIR1-11": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if there is a case where the treated rate is more than half the untreated rate.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There is no inherent conflict between the conditions described in the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists as the hypothesis does not contain conflicting conditions.\"},\n  \"Q3\": {\"value\": \"NOT_REFUTED\", \"confidence\": 5, \"rationale\": \"Neither row in the observation table provides a situation where the treated rate is more than half the untreated rate, thus they do not refute the hypothesis.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No row in the observation table refutes the hypothesis.\"},\n  \"Q4\": {\"value\": \"EQUIVALENT\", \"confidence\": 5, \"rationale\": \"The hypothesis and the rival both set an upper limit on the treated rate relative to the untreated rate, with the hypothesis being slightly more restrictive but not fundamentally different in nature.\"}\n}",
+    "AIR1-12": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing a neuron with a membrane potential below -55 mV that fires.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There is no inherent contradiction between the premises of the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 2 shows a neuron with a membrane potential of -100 mV that fires, which is possibly incompatible with the hypothesis if the neuron should not fire.\"},\n  \"Q3_items\": {\"value\": [2], \"confidence\": 5, \"rationale\": \"Row 2 presents a situation that is possibly incompatible with the hypothesis.\"},\n  \"Q4\": {\"value\": \"STRONGER\", \"confidence\": 5, \"rationale\": \"Hypothesis H is more restrictive than R, as it also states conditions under which a neuron does not fire, while R only specifies conditions under which a neuron fires.\"}\n}",
+    "AIR1-13": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing people with amyloid pathology who are APOE4 carriers and checking their cognitive decline rate.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis itself.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists as the hypothesis is internally consistent.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 shows a slow decline in an APOE4 carrier with amyloid pathology, which is possibly incompatible with the hypothesis if we assume the hypothesis means all APOE4 carriers with amyloid pathology show fast decline.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 presents a situation where an APOE4 carrier with amyloid pathology shows slow cognitive decline, which could refute the hypothesis if the hypothesis means all such individuals show fast decline.\"}\n}",
+    "AIR1-14": "{\n  \"Q1\": {\"value\": \"UNFALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis states that the outcome will either be improved or not improved, which covers all possible outcomes and cannot be falsified.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting premises within the hypothesis as it simply states that the outcome will be either improved or not improved.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"There are no conflicting premises to list.\"},\n  \"Q3\": {\"value\": \"NOT_REFUTED\", \"confidence\": 5, \"rationale\": \"The observation that the patient's symptoms improved is consistent with the hypothesis, which allows for both improvement and non-improvement as possible outcomes.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"The observation does not refute the hypothesis as it is consistent with one of the possible outcomes stated in the hypothesis.\"}\n}",
+    "AIR1-15": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis states that cortical tau level is both above 5 and below 3, which is impossible.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no premises to check for compatibility, as the hypothesis is a single statement.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises to list.\"},\n  \"Q3\": {\"value\": \"REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 shows a tau level of 0, which is below 3 and thus violates the hypothesis.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 shows a tau level of 0, which is below 3 and thus violates the hypothesis.\"}\n}",
+    "AIR1-16": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis sets impossible conditions because a person cannot be younger than 40 and older than 80 at the same time.\"},\n  \"Q2\": {\"value\": \"CONFLICTING\", \"confidence\": 5, \"rationale\": \"Premises P1 and P2 are mutually exclusive as they cannot both be true for any individual.\"},\n  \"Q2_items\": {\"value\": [\"P1\", \"P2\"], \"confidence\": 5, \"rationale\": \"Premises P1 and P2 form a minimal conflicting set because they cannot both be true simultaneously.\"}\n}",
+    "AIR1-17": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be tested by observing an outbreak that grows with an R number less than or equal to 1.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There is no inherent conflict between the conditions described in the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No minimal conflicting set of premises exists as the hypothesis does not present conflicting conditions.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"The observation shows R=0 and growing=False, which is consistent with the hypothesis but does not necessarily refute it as the hypothesis does not claim that R=0 is the only case where an outbreak does not grow.\"},\n  \"Q3_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No row in the observation table certainly refutes the hypothesis as the hypothesis allows for the possibility of an outbreak not growing when R=0.\"}\n}",
+    "AIR1-18": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if a drug clearance is less than 60 mL/min under normal renal function.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"The premise P1 does not conflict with itself or the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"There are no conflicting premises.\"},\n  \"Q3\": {\"value\": \"POSSIBLY_REFUTED\", \"confidence\": 5, \"rationale\": \"Row 2 has a clearance of 0 mL/min, which could refute the hypothesis if renal function is normal, but the hypothesis assumes normal renal function.\"},\n  \"Q3_items\": {\"value\": [2], \"confidence\": 5, \"rationale\": \"Row 2 has a clearance of 0 mL/min, which is less than 60 mL/min and could refute the hypothesis if renal function is normal.\"}\n}",
+    "AIR1-19": "{\n  \"Q1\": {\"value\": \"FALSIFIABLE\", \"confidence\": 5, \"rationale\": \"The hypothesis can be violated if a patient's Braak stage decreases between two visits.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"There are no conflicting conditions within the hypothesis.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"No conflicting premises exist.\"},\n  \"Q3\": {\"value\": \"REFUTED\", \"confidence\": 5, \"rationale\": \"Row 1 shows a decrease in Braak stage, which directly contradicts the hypothesis.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 shows a decrease in Braak stage from 1 to 0, which refutes the hypothesis.\"}\n}",
+    "AIR1-20": "{\n  \"Q1\": {\"value\": \"SELF_CONTRADICTORY\", \"confidence\": 5, \"rationale\": \"The hypothesis states the enzyme is active only at pH below 6, but also that it is always active where pH is above 7, which are mutually exclusive conditions.\"},\n  \"Q2\": {\"value\": \"COMPATIBLE\", \"confidence\": 5, \"rationale\": \"The premise P1 does not conflict with itself.\"},\n  \"Q2_items\": {\"value\": [], \"confidence\": 5, \"rationale\": \"There are no conflicting premises as P1 is a single statement.\"},\n  \"Q3\": {\"value\": \"REFUTED\", \"confidence\": 5, \"rationale\": \"The observation shows pH 10.5 and enzyme active, which contradicts the hypothesis that the enzyme is active only at pH below 6.\"},\n  \"Q3_items\": {\"value\": [1], \"confidence\": 5, \"rationale\": \"Row 1 shows pH 10.5 and enzyme active, which refutes the hypothesis.\"}\n}"
+  },
+  "sealed_at": "2026-11-02T21:42:56"
+}

@@ -1,0 +1,90 @@
+{
+  "task_id": "AIR1-01",
+  "source_item": "H01",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "nephrology",
+    "statement": "A patient is eligible for the drug only if eGFR is at least 30 mL/min.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "eligible": "one of [True, False]",
+        "egfr": "real number in [0, 150]"
+      },
+      "rows": [
+        {
+          "eligible": true,
+          "egfr": 37.5
+        },
+        {
+          "eligible": true,
+          "egfr": 0
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "A patient is eligible for the drug only if eGFR is above 45 mL/min."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "eligible",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "egfr",
+          "continuous": true,
+          "lower": 0,
+          "upper": 150
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "not eligible or egfr >= 30"
+      ],
+      "hypothesis_id": "AIR1-01-H"
+    },
+    "observations": [
+      {
+        "eligible": true,
+        "egfr": 37.5
+      },
+      {
+        "eligible": true,
+        "egfr": 0
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-01-R",
+      "variables": [
+        {
+          "name": "eligible",
+          "domain": [
+            true,
+            false
+          ]
+        },
+        {
+          "name": "egfr",
+          "continuous": true,
+          "lower": 0,
+          "upper": 150
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "not eligible or egfr > 45"
+      ]
+    }
+  }
+}

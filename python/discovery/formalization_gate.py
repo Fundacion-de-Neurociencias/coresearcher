@@ -31,7 +31,9 @@ from python.discovery.formalizer import (
     Formalization,
     FormalizationStatus,
     build_messages,
+    draw,
     parse_formalization,
+    prompt_fingerprint,
     prompt_sha256,
 )
 
@@ -285,8 +287,7 @@ def _seal(result: GateResult, request: Optional[Dict[str, Any]], backends: set) 
     backend = None if not backends else (next(iter(backends)) if len(backends) == 1 else "mixed")
     formalizer = {
         "models": sorted({spec["model"] for spec in specs}),
-        "prompt_version": PROMPT_VERSION,
-        "prompt_sha256": prompt_sha256(),
+        **prompt_fingerprint(),
         "seeds": [spec["seed"] for spec in specs],
         "temperatures": [spec["temperature"] for spec in specs],
     }
@@ -302,12 +303,9 @@ def draw_samples(
     variable_schema: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Formalization]:
     """Draws one formalization per spec. `clients` maps a model name to a client with `complete(messages, ...)`."""
-    messages = build_messages(prose, variable_schema)
-    out = []
-    for spec in specs:
-        text = clients[spec.model].complete(messages, temperature=spec.temperature, seed=spec.seed)
-        out.append(parse_formalization(text, hypothesis_id, variable_schema))
-    return out
+    return [
+        draw(prose, clients[spec.model], hypothesis_id, variable_schema, spec.temperature, spec.seed) for spec in specs
+    ]
 
 
 def formalize_gated(

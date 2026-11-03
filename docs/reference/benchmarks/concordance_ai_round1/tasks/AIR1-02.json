@@ -1,0 +1,82 @@
+{
+  "task_id": "AIR1-02",
+  "source_item": "H02",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "ecology",
+    "statement": "Whenever rainfall falls below 200 mm, the wetland dries out.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "rain": "real number in [0, 1000]",
+        "dry": "one of [True, False]"
+      },
+      "rows": [
+        {
+          "rain": 0,
+          "dry": true
+        }
+      ],
+      "provenance": "illustrative"
+    },
+    "rival_statement": "Whenever rainfall falls below 300 mm, the wetland dries out."
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "rain",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1000
+        },
+        {
+          "name": "dry",
+          "domain": [
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "rain >= 200 or dry"
+      ],
+      "hypothesis_id": "AIR1-02-H"
+    },
+    "observations": [
+      {
+        "rain": 0,
+        "dry": true
+      }
+    ],
+    "assumption_labels": [],
+    "rival": {
+      "hypothesis_id": "AIR1-02-R",
+      "variables": [
+        {
+          "name": "rain",
+          "continuous": true,
+          "lower": 0,
+          "upper": 1000
+        },
+        {
+          "name": "dry",
+          "domain": [
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "rain >= 300 or dry"
+      ]
+    }
+  }
+}

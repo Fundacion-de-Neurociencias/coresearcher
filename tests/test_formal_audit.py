@@ -34,7 +34,7 @@ from python.discovery.formal_hypothesis import (
 )
 from python.discovery.formal_status import FormalStatus
 from python.discovery.formalization_gate import GateStatus, gate, sampling_schedule
-from python.discovery.formalizer import FormalizationStatus, parse_formalization, prompt_sha256
+from python.discovery.formalizer import FormalizationStatus, parse_formalization, prompt_fingerprint
 
 FINITE = {
     "hypothesis_id": "H1",
@@ -154,7 +154,8 @@ def test_gate_provenance_names_the_formalizer_and_covers_raw_outputs():
     p = result.to_dict()["provenance"]
     assert p["operation"] == "formalize_gate"
     assert p["formalizer"]["models"] == ["m"]
-    assert p["formalizer"]["prompt_sha256"] == prompt_sha256()
+    assert p["formalizer"]["prompt_sha256"] == prompt_fingerprint()["prompt_sha256"]
+    assert p["formalizer"]["pipeline"] == "v2"
     assert p["formalizer"]["seeds"] == [0, 1, 2]
     assert p["formalizer"]["temperatures"] == [0.0, 0.7, 0.7]
     other = gate([parse_formalization(o, "H", SCHEMA) for o in reversed(outputs)], sampling_schedule(["m"], 3))
@@ -637,7 +638,8 @@ def test_doctor_reports_capabilities(capsys, monkeypatch):
     assert report["z3"] == {"status": "available", "version": z3.get_version_string()}
     assert report["lean"]["status"] in ("available", "unavailable")
     assert report["formalizer"]["status"] == "unconfigured"
-    assert report["formalizer"]["prompt_sha256"] == prompt_sha256()
+    assert report["formalizer"]["prompt_sha256"] == prompt_fingerprint()["prompt_sha256"]
+    assert report["formalizer"]["pipeline"] == "v2"
     assert report["thresholds"]["threshold_set"] == formal_thresholds.FORMAL_DEFAULTS.tag
     assert "FORMAL_NOT_EMPIRICAL" in report["relay_codes"]
 

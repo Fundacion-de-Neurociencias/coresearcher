@@ -1,0 +1,79 @@
+{
+  "task_id": "AIR1-13",
+  "source_item": "F01",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "neurology",
+    "statement": "Among people with amyloid pathology, APOE4 carriers show fast cognitive decline.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "amyloid": "one of ['positive', 'negative']",
+        "apoe4": "one of ['carrier', 'non_carrier']",
+        "decline": "one of ['fast', 'slow']"
+      },
+      "rows": [
+        {
+          "amyloid": "positive",
+          "apoe4": "carrier",
+          "decline": "slow"
+        },
+        {
+          "amyloid": "positive",
+          "apoe4": "carrier",
+          "decline": "fast"
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "amyloid",
+          "domain": [
+            "positive",
+            "negative"
+          ]
+        },
+        {
+          "name": "apoe4",
+          "domain": [
+            "carrier",
+            "non_carrier"
+          ]
+        },
+        {
+          "name": "decline",
+          "domain": [
+            "fast",
+            "slow"
+          ]
+        }
+      ],
+      "scope": "amyloid == 'positive'",
+      "assumptions": [],
+      "claims": [
+        "apoe4 != 'carrier' or decline == 'fast'"
+      ],
+      "hypothesis_id": "AIR1-13-H"
+    },
+    "observations": [
+      {
+        "amyloid": "positive",
+        "apoe4": "carrier",
+        "decline": "slow"
+      },
+      {
+        "amyloid": "positive",
+        "apoe4": "carrier",
+        "decline": "fast"
+      }
+    ],
+    "assumption_labels": []
+  }
+}

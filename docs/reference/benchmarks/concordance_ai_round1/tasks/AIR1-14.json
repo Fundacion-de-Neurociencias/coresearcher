@@ -1,0 +1,49 @@
+{
+  "task_id": "AIR1-14",
+  "source_item": "F03",
+  "proposer_orcid": "0000-0000-0000-0000",
+  "licence": "CC-BY-4.0",
+  "confidential": false,
+  "prose": {
+    "field": "clinical",
+    "statement": "After the treatment, the patient's symptoms either improve or do not improve.",
+    "context": "Variables and their ranges are listed with the observation table. Judge only what is written.",
+    "premises": {},
+    "observations_table": {
+      "columns": {
+        "outcome": "one of ['improved', 'not_improved']"
+      },
+      "rows": [
+        {
+          "outcome": "improved"
+        }
+      ],
+      "provenance": "illustrative"
+    }
+  },
+  "formal": {
+    "hypothesis": {
+      "variables": [
+        {
+          "name": "outcome",
+          "domain": [
+            "improved",
+            "not_improved"
+          ]
+        }
+      ],
+      "scope": null,
+      "assumptions": [],
+      "claims": [
+        "outcome == 'improved' or outcome == 'not_improved'"
+      ],
+      "hypothesis_id": "AIR1-14-H"
+    },
+    "observations": [
+      {
+        "outcome": "improved"
+      }
+    ],
+    "assumption_labels": []
+  }
+}

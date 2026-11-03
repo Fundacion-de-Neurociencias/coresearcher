@@ -487,6 +487,34 @@ def _biomedical_chain() -> Dict[str, Dict[str, Any]]:
     return out
 
 
+FZ_FIXTURE = "benchmarks/regression/fixtures/formalizer/formalizer_outputs.json"
+FZ_DATASETS = {
+    "main": "docs/reference/benchmarks/formalizer_dataset.json",
+    "heldout": "docs/reference/benchmarks/formalizer_dataset_heldout_v2.json",
+}
+
+
+def _formalizer() -> Dict[str, Dict[str, Any]]:
+    """Formalizer v1 vs v2 (ADR-093): stored raw outputs re-derived offline and compared with gold by the evaluator."""
+    from python.discovery.formal_hypothesis import HypothesisEvaluator, hypothesis_from_dict
+    from python.discovery.formalizer import FormalizationStatus, rederive
+
+    fixture = _read_json(FZ_FIXTURE)
+    items = {name: {i["id"]: i for i in _read_json(path)["items"]} for name, path in FZ_DATASETS.items()}
+    out: Dict[str, Dict[str, Any]] = {}
+    for run_id, run in sorted(fixture["runs"].items()):
+        equivalent = 0
+        for item_id, item in sorted(items[run["dataset"]].items()):
+            schema = item["gold"]["variables"]
+            result = rederive(run["outputs"].get(item_id) or "", f"{item_id}-model", schema, run["pipeline"])
+            if result.status == FormalizationStatus.PARSED and result.hypothesis is not None:
+                gold = hypothesis_from_dict({**item["gold"], "hypothesis_id": f"{item_id}-gold"})
+                if HypothesisEvaluator.compare(result.hypothesis, gold).relation.value == "EQUIVALENT":
+                    equivalent += 1
+        out[f"equivalent/{run_id}"] = obs(equivalent, HIGHER)
+    return out
+
+
 CASES: Dict[str, Case] = {
     c.id: c
     for c in (
@@ -528,6 +556,9 @@ CASES: Dict[str, Case] = {
              "mechanistic chain", "ADR-DISCOVERY-086", [BC_FIXTURE], _biomedical_chain,
              "Units, conventions, null-biomarker, untreated-arm and population probes, mechanism links and signs. "
              "Illustrative values only, not clinical values."),
+        Case("formalizer_v2", "Formalizer v1 vs v2 on the round-0 and held-out sets, four local models",
+             "ADR-DISCOVERY-093", [FZ_FIXTURE, *FZ_DATASETS.values()], _formalizer,
+             "Raw outputs of the 2026-11-02 sweep re-derived offline; equivalence to gold decided by the evaluator."),
     )
 }
 

@@ -236,7 +236,7 @@ A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux r
 | --- | --- | --- |
 | [`python/discovery/kernel_records.py`](../../python/discovery/kernel_records.py) | Integrated | 1 |
 
-**Scripts, examples and data:** [`scripts/lean/comparator_preflight.sh`](../../scripts/lean/comparator_preflight.sh), [`scripts/lean/kernel_check.py`](../../scripts/lean/kernel_check.py)
+**Scripts, examples and data:** [`scripts/lean/comparator_preflight.sh`](../../scripts/lean/comparator_preflight.sh), [`scripts/lean/kernel_check.py`](../../scripts/lean/kernel_check.py), [`scripts/lean/run_comparator_local.sh`](../../scripts/lean/run_comparator_local.sh)
 
 **ADRs:** [ADR-092](../decisions/ADR-DISCOVERY-092-RECORDED-KERNEL-CHECKS.md)
 

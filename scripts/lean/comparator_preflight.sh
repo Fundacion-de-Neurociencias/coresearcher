@@ -27,12 +27,13 @@ end_step() { echo "::endgroup::"; }
 
 step "kernel and Landlock"
 uname -a
-LSM=$(sudo cat /sys/kernel/security/lsm 2>/dev/null || true)
-echo "LSM: $LSM"
+LSM=$(sudo -n cat /sys/kernel/security/lsm 2>/dev/null || cat /sys/kernel/security/lsm 2>/dev/null || true)
+echo "LSM: ${LSM:-unreadable without root}"
 end_step
+# Without root (a workstation) the LSM list may be unreadable; the landrun probe below is then the deciding test.
 case ",$LSM," in
-  *,landlock,*) ;;
-  *) blocked "Landlock is not enabled in this runner's kernel (LSM list: '${LSM:-unreadable}'), so landrun cannot sandbox Comparator" ;;
+  *,landlock,*|,,) ;;
+  *) blocked "Landlock is not enabled in this machine's kernel (LSM list: '$LSM'), so landrun cannot sandbox Comparator" ;;
 esac
 
 step "landrun at $LANDRUN_COMMIT"
@@ -115,7 +116,7 @@ step "swap"
 # The hosted runner has 16 GB of memory. Building the larger openai/math solutions (ETH-378, about 12 000 modules)
 # was killed without a message in the first runs; swap lets the build finish slowly instead.
 free -g
-if sudo fallocate -l 24G /kernel-check.swap && sudo chmod 600 /kernel-check.swap && sudo mkswap -q /kernel-check.swap     && sudo swapon /kernel-check.swap; then
+if sudo -n fallocate -l 24G /kernel-check.swap && sudo -n chmod 600 /kernel-check.swap && sudo -n mkswap -q /kernel-check.swap     && sudo -n swapon /kernel-check.swap; then
   free -g
 else
   echo "swap could not be added; continuing without it"

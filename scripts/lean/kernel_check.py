@@ -25,6 +25,14 @@ from typing import List, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
+# The record modules need only the standard library. Registering the package without running its __init__ (which
+# imports the whole engine) lets this script run on a bare Linux machine with only python3.
+if "python.discovery" not in sys.modules:
+    import types
+
+    _pkg = types.ModuleType("python.discovery")
+    _pkg.__path__ = [str(ROOT / "python" / "discovery")]
+    sys.modules["python.discovery"] = _pkg
 
 from python.discovery import formal_provenance, kernel_records  # noqa: E402
 
@@ -33,7 +41,8 @@ def _checked_by() -> str:
     if os.getenv("GITHUB_ACTIONS") == "true":
         server = os.getenv("GITHUB_SERVER_URL", "https://github.com")
         return f"{server}/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}"
-    return f"local:{platform.node()}"
+    # Outside Actions, KERNEL_CHECKED_BY names the machine (for example "lenovo (WSL2)"); the host name otherwise.
+    return f"local:{os.getenv('KERNEL_CHECKED_BY') or platform.node()}"
 
 
 def _run(cmd: List[str], cwd: Path, timeout: float) -> Tuple[Optional[int], str, float]:

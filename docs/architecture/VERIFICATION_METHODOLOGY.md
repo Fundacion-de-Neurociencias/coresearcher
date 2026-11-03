@@ -201,7 +201,9 @@ domain-neutral.
   hypothesis and claim for re-evaluation, and lower its rung on the trust ladder until it is re-checked.
 - **Came from.** The ETH refutation (`openai/math` family 378, published 2026-10-25), found independently and on the
   same date by an OpenAI model and a Claude research model.
-- **Integration.** Not yet. It belongs with block B: the cited-results registry also carries the dependency edges.
+- **Integration.** Done (ADR-DISCOVERY-083). The cited-results registry carries the dependency edges. `retract`
+  flags every transitive dependent and caps its rung at CLAIMED until `reevaluated` clears it, and any later citation
+  of the retracted premise is a `cite-check` finding.
 - **Beyond.** In biomedicine, a retracted mechanism or a revised biomarker threshold is a fallen premise. Every
   hypothesis that assumed it must be flagged.
 

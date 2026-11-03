@@ -259,6 +259,39 @@ class ProbeFile:
     declaration: str  # Name to look for in Lean's output.
 
 
+def single_tactic_probes(source: str, challenge: str, theorem_name: str) -> List[ProbeFile]:
+    """One 'trivial' probe per tactic of the menu, for a target whose combined menu was aborted by one tactic.
+
+    A tactic that raises an error `first` cannot catch (maximum recursion depth) stops the whole menu, so the
+    other tactics never ran. Split, each tactic gets its own kernel run and its own record.
+    """
+    short = theorem_name.split(".")[-1]
+    span = _theorem_span(source, short)
+    if span is None:
+        return []
+    stem = challenge.replace("/", "__").removesuffix(".lean")
+    declaration = source[span[0] : span[1]]
+    body = declaration[_top_level_assign(declaration) + 2 :]
+    probes = []
+    for i, tactic in enumerate(menu_for(source)):
+        block = _menu([tactic]) if re.match(r"\s*by\b", body) else "by\n    " + _menu([tactic])
+        probes.append(
+            ProbeFile(
+                probe_id=f"{stem}:{short}:trivial@{i:02d}",
+                challenge=challenge,
+                theorem=theorem_name,
+                mode=f"trivial@{tactic}",
+                module_path=f"ComparatorChallenges/Probes/{stem}__{short}__trivial_{i:02d}.lean",
+                text=source[: span[0]]
+                + declaration.replace("sorry", block, 1)
+                + f"\n\n#print axioms {short}\n"
+                + source[span[1] :],
+                declaration=short,
+            )
+        )
+    return probes
+
+
 def cheap_tactic_probes(source: str, challenge: str, theorem_names: Sequence[str]) -> List[ProbeFile]:
     """Probe files for every target of one challenge file: one 'trivial' and, when it has binders, one 'inconsistent'."""
     probes = []

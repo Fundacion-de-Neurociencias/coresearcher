@@ -100,12 +100,28 @@ def static(corpus: Path) -> None:
     print(f"stage 1: {data['stage1_arithmetic']['summary']}; {len(probes)} Lean probes prepared (NOT_RUN)")
 
 
-def prepare(math_root: Path) -> None:
+def _aborted(records: Path | None) -> set:
+    """Probe ids whose record says a tactic aborted the combined menu (they get single-tactic probes)."""
+    if records is None or not Path(records).is_dir():
+        return set()
+    ids = set()
+    for path in Path(records).glob("openai-math-probe-*.json"):
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if record["result"] == kernel_records.BLOCKED and any("menu was aborted" in r for r in record["reasons"]):
+            ids.add(record["probe"]["probe_id"])
+    return ids
+
+
+def prepare(math_root: Path, records: Path | None = None) -> None:
     head = subprocess.run(["git", "-C", str(math_root), "rev-parse", "HEAD"], capture_output=True, text=True)
     if head.stdout.strip() != cov.SOURCE_COMMIT:
         raise SystemExit(f"{math_root} is at {head.stdout.strip() or '?'}, expected {cov.SOURCE_COMMIT}")
     lean = Path(math_root) / "lean"
     probes = _all_probes(math_root)
+    aborted = _aborted(records)
+    sources = {challenge: source for challenge, source, _ in _targets(math_root)}
+    for p in [p for p in probes if p.probe_id in aborted]:
+        probes += probe.single_tactic_probes(sources[p.challenge], p.challenge, p.theorem)
     for p in probes:
         target = lean / p.module_path
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -265,7 +281,7 @@ def main() -> None:
     if args.command == "static":
         static(args.corpus or args.math_root)
     elif args.command == "prepare":
-        prepare(args.math_root)
+        prepare(args.math_root, args.out)
     elif args.command == "run":
         run(args.math_root, args.out, args.only, args.timeout, args.jobs)
     else:

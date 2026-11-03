@@ -3,32 +3,28 @@ tests/test_phenix_molprobity_oracle.py - Unit Test Suite for Phenix MolProbity S
 """
 
 from __future__ import annotations
-import math
+
 import numpy as np
-import pytest
 
 from python.discovery.phenix_molprobity_oracle import (
-    RamachandranConformation,
-    StructuralQualityTier,
     AtomCoordinate,
-    ResidueBackboneAngles,
-    StericClashDetail,
     MolProbityReport,
     PhenixMolProbityOracle,
-    compute_dihedral_angle,
+    RamachandranConformation,
+    ResidueBackboneAngles,
+    StructuralQualityTier,
     classify_ramachandran_region,
     classify_rotamer_outlier,
+    compute_dihedral_angle,
 )
 from python.discovery.physical_theorem_court import (
-    PhysicalCoherenceCourt,
-    PhysicalConservationType,
     CourtVerdict,
+    PhysicalCoherenceCourt,
 )
 from python.discovery.preclinical_gates_engine import (
+    PassportVerdict,
     PreClinicalGatesValidator,
     PreClinicalGateType,
-    PassportVerdict,
-    GateThresholdsConfig,
 )
 
 
@@ -87,9 +83,7 @@ def test_rotamer_outlier_classification():
 def test_phenix_oracle_ideal_structure_passes():
     """Verify that an unconstrained, well-spaced macromolecular structure passes with EXCELLENT tier."""
     oracle = PhenixMolProbityOracle(
-        max_clashscore_tolerance=30.0,
-        max_rama_outliers_tolerance_pct=5.0,
-        max_molprobity_score_tolerance=3.5
+        max_clashscore_tolerance=30.0, max_rama_outliers_tolerance_pct=5.0, max_molprobity_score_tolerance=3.5
     )
 
     # Build well-spaced atoms (interatomic distance >= 3.8 Angstroms, well above van der Waals sum ~ 3.4 A)
@@ -110,11 +104,7 @@ def test_phenix_oracle_ideal_structure_passes():
         ResidueBackboneAngles(2, "VAL", phi_deg=-120.0, psi_deg=130.0, chi1_deg=180.0),
     ]
 
-    report = oracle.audit_structure_geometry(
-        structure_id="IDEAL_PDB_MOCK_01",
-        atoms=atoms,
-        backbone_angles=angles
-    )
+    report = oracle.audit_structure_geometry(structure_id="IDEAL_PDB_MOCK_01", atoms=atoms, backbone_angles=angles)
 
     assert report.is_crystallographically_sound is True
     assert report.num_clashes == 0
@@ -129,7 +119,7 @@ def test_phenix_oracle_severe_steric_clash_rejection():
     oracle = PhenixMolProbityOracle(
         max_clashscore_tolerance=15.0,  # Strict threshold to trigger clash rejection
         max_rama_outliers_tolerance_pct=5.0,
-        max_molprobity_score_tolerance=2.5
+        max_molprobity_score_tolerance=2.5,
     )
 
     # Intentionally place two carbon atoms from different residues at distance d = 1.8 A
@@ -139,11 +129,7 @@ def test_phenix_oracle_severe_steric_clash_rejection():
         AtomCoordinate("CB", "C", 0.0, 0.0, 1.8, 10, "LEU"),  # Distant residue seq 10, colliding
     ]
 
-    report = oracle.audit_structure_geometry(
-        structure_id="CLASHING_TARGET_01",
-        atoms=atoms,
-        backbone_angles=[]
-    )
+    report = oracle.audit_structure_geometry(structure_id="CLASHING_TARGET_01", atoms=atoms, backbone_angles=[])
 
     assert report.num_clashes == 1
     assert report.clashscore == 500.0  # 1 clash / 2 atoms * 1000 = 500
@@ -159,11 +145,11 @@ def test_phenix_oracle_ramachandran_outlier_rejection():
     oracle = PhenixMolProbityOracle(
         max_clashscore_tolerance=50.0,
         max_rama_outliers_tolerance_pct=5.0,  # 5% max tolerance
-        max_molprobity_score_tolerance=3.5
+        max_molprobity_score_tolerance=3.5,
     )
 
     atoms = [AtomCoordinate("CA", "C", 0.0, 0.0, float(i * 4.0), i, "ALA") for i in range(10)]
-    
+
     # 3 out of 10 residues with impossible Ramachandran angles -> 30% outliers > 5%
     angles = [
         ResidueBackboneAngles(1, "ALA", phi_deg=60.0, psi_deg=-120.0),  # Outlier
@@ -173,11 +159,7 @@ def test_phenix_oracle_ramachandran_outlier_rejection():
         ResidueBackboneAngles(i, "ALA", phi_deg=-60.0, psi_deg=-45.0) for i in range(4, 11)  # Favored
     ]
 
-    report = oracle.audit_structure_geometry(
-        structure_id="RAMA_OUTLIERS_01",
-        atoms=atoms,
-        backbone_angles=angles
-    )
+    report = oracle.audit_structure_geometry(structure_id="RAMA_OUTLIERS_01", atoms=atoms, backbone_angles=angles)
 
     assert report.num_rama_outliers == 3
     assert report.rama_outliers_pct == 30.0
@@ -188,7 +170,6 @@ def test_phenix_oracle_ramachandran_outlier_rejection():
 def test_court_arbitration_phenix_molprobity():
     """Verify PhysicalCoherenceCourt arbitrates MACROMOLECULAR_GEOMETRIC_VALIDITY invariant."""
     court = PhysicalCoherenceCourt()
-    oracle = PhenixMolProbityOracle()
 
     # 1. Arbitrate Sound Structure Report
     sound_report = MolProbityReport(
@@ -208,7 +189,7 @@ def test_court_arbitration_phenix_molprobity():
         rotamer_outliers_pct=1.25,
         molprobity_score=1.42,
         quality_tier=StructuralQualityTier.EXCELLENT,
-        is_crystallographically_sound=True
+        is_crystallographically_sound=True,
     )
 
     res_sound = court.audit_phenix_molprobity_report("CLAIM_STRUCT_SOUND", sound_report.to_dict())
@@ -235,7 +216,7 @@ def test_court_arbitration_phenix_molprobity():
         molprobity_score=4.12,
         quality_tier=StructuralQualityTier.REJECTED_SEVERE_CLASHES,
         is_crystallographically_sound=False,
-        rejection_reason="Clashscore 90.0 exceeds threshold 30.0."
+        rejection_reason="Clashscore 90.0 exceeds threshold 30.0.",
     )
 
     res_unsound = court.audit_phenix_molprobity_report("CLAIM_STRUCT_UNSOUND", unsound_report.to_dict())
@@ -250,17 +231,14 @@ def test_preclinical_gate_2_integration_with_molprobity():
 
     # Evidence payload with sound MolProbity geometry
     sound_payload = {
-        "genetic_evidence": {
-            "causality_score": 0.88,
-            "sidecar_id": "SIDECAR_GEN_001"
-        },
+        "genetic_evidence": {"causality_score": 0.88, "sidecar_id": "SIDECAR_GEN_001"},
         "structural_evidence": {
             "mean_plddt": 85.0,
             "pocket_druggability_score": 0.82,
             "clashscore": 8.5,
             "rama_outliers_pct": 0.5,
             "molprobity_score": 1.65,
-            "sidecar_id": "SIDECAR_STRUCT_001"
+            "sidecar_id": "SIDECAR_STRUCT_001",
         },
         "biophysical_mechanism": {
             "theta_target_stimulated": 0.75,
@@ -271,20 +249,23 @@ def test_preclinical_gate_2_integration_with_molprobity():
             "homolog_selectivity_ratio": 250.0,
             "acute_toxic_alerts_count": 0,
             "sidecar_id": "SIDECAR_SAFE_001",
-        }
+        },
     }
 
     passport = validator.evaluate_candidate(
         candidate_id="CAND_TROPONIN_C_MOLPROBITY_SOUND",
         target_name="Cardiac Troponin C",
         indication="Cardiomyopathy",
-        evidence_payload=sound_payload
+        evidence_payload=sound_payload,
     )
 
     assert passport.all_gates_passed is True
     assert passport.passport_verdict == PassportVerdict.CERTIFIED_PRECLINICAL_READY
     assert passport.gate_evaluations[PreClinicalGateType.STRUCTURAL_DRUGGABILITY_GATE.value].passed is True
-    assert "MolProbity: 1.65" in passport.gate_evaluations[PreClinicalGateType.STRUCTURAL_DRUGGABILITY_GATE.value].evidence_summary
+    assert (
+        "MolProbity: 1.65"
+        in passport.gate_evaluations[PreClinicalGateType.STRUCTURAL_DRUGGABILITY_GATE.value].evidence_summary
+    )
 
     # Evidence payload with severe steric clash violation (clashscore 42.0 > 30.0)
     clashing_payload = dict(sound_payload)
@@ -300,7 +281,7 @@ def test_preclinical_gate_2_integration_with_molprobity():
         candidate_id="CAND_TROPONIN_C_CLASHING",
         target_name="Cardiac Troponin C",
         indication="Cardiomyopathy",
-        evidence_payload=clashing_payload
+        evidence_payload=clashing_payload,
     )
 
     assert passport_fail.all_gates_passed is False

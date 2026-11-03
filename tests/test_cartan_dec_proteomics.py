@@ -3,37 +3,27 @@ tests/test_cartan_dec_proteomics.py - Unit Test Suite for Cartan-DEC Proteomics 
 """
 
 from __future__ import annotations
-import json
+
 import math
+from typing import Any, Dict, List
+
 import numpy as np
-import pytest
-from typing import Dict, Any, List
 
 from python.discovery.cartan_dec_proteomics_auditor import (
-    ResidueFrame,
-    ConnectionOneForm,
-    CurvatureTwoForm,
-    HolonomyDefectReport,
-    CartanDECStructureReport,
     CartanDECProteomicsAuditor,
 )
 from python.discovery.coe_integrity_auditor import (
-    IntegrityDimension,
-    EmpiricalRebuttalVerdict,
-    IntegrityAuditResult,
-    EmpiricalRebuttalDossier,
-    FullCoEIntegrityReport,
     CoEIntegrityAuditor,
+    EmpiricalRebuttalVerdict,
 )
 from python.discovery.physical_theorem_court import (
-    PhysicalCoherenceCourt,
-    PhysicalConservationType,
     CourtVerdict,
+    PhysicalCoherenceCourt,
 )
 from python.discovery.structure_property_purpose_engine import (
+    IonicSelectivityProfile,
     StructurePropertyPurposeEngine,
     StructurePropertyPurposeSpec,
-    IonicSelectivityProfile,
     TeleonomicPurposeClass,
 )
 
@@ -47,17 +37,21 @@ def _generate_synthetic_protein_backbone(num_residues: int = 8, hinge_index: int
         # Induce conformational twist kink at hinge_index
         twist_kink = 0.8 if i >= hinge_index else 0.0
 
-        ca = np.array([2.3 * math.cos(theta + twist_kink), 2.3 * math.sin(theta + twist_kink), i * 1.5], dtype=np.float64)
+        ca = np.array(
+            [2.3 * math.cos(theta + twist_kink), 2.3 * math.sin(theta + twist_kink), i * 1.5], dtype=np.float64
+        )
         # N is slightly behind, C is slightly ahead
         n_atom = ca + np.array([-0.8 * math.sin(theta), 0.8 * math.cos(theta), -0.6], dtype=np.float64)
         c_atom = ca + np.array([0.8 * math.sin(theta), -0.8 * math.cos(theta), 0.6], dtype=np.float64)
 
-        residues.append({
-            "name": f"GLY_{i+1}" if i != hinge_index else f"ASP_{i+1}_HINGE",
-            "CA": ca.tolist(),
-            "N": n_atom.tolist(),
-            "C": c_atom.tolist(),
-        })
+        residues.append(
+            {
+                "name": f"GLY_{i+1}" if i != hinge_index else f"ASP_{i+1}_HINGE",
+                "CA": ca.tolist(),
+                "N": n_atom.tolist(),
+                "C": c_atom.tolist(),
+            }
+        )
     return residues
 
 
@@ -159,14 +153,12 @@ def test_coe_integrity_auditor_four_dimensions():
     # 4. Reference verification (valid vs hallucinated)
     citations = [
         {"title": "Cartan Moving Frames and DEC", "doi": "10.1000/182", "year": "2025"},
-        {"title": "OpenFOAM Continuum Mechanics", "pmid": "34901678", "year": "2021"}
+        {"title": "OpenFOAM Continuum Mechanics", "pmid": "34901678", "year": "2021"},
     ]
     r_refs = auditor.verify_references(citations)
     assert r_refs.passed is True
 
-    bad_citations = [
-        {"title": "Generic Uncited Claim", "doi": "generic_placeholder", "year": "2025"}
-    ]
+    bad_citations = [{"title": "Generic Uncited Claim", "doi": "generic_placeholder", "year": "2025"}]
     r_bad_refs = auditor.verify_references(bad_citations)
     assert r_bad_refs.passed is False
 
@@ -185,7 +177,7 @@ def test_coe_integrity_auditor_four_dimensions():
         observed_metrics=observed,
         citations=citations,
         claimed_method_terms=claimed_terms,
-        available_code_symbols=code_symbols
+        available_code_symbols=code_symbols,
     )
     assert full_report.all_dimensions_passed is True
     assert full_report.verdict == "PASSED_PUBLICATION_BAR"
@@ -211,7 +203,7 @@ def test_active_empirical_rebuttal_execution():
         coordinating_residues=["Asp65", "Asp67", "Ser69", "Glu76"],
         allosteric_coupling_factor=1.0,
         tolerated_basal_leak=0.15,
-        required_stimulated_occupancy=0.60
+        required_stimulated_occupancy=0.60,
     )
     profile = IonicSelectivityProfile(
         target_ion="CA2",
@@ -220,7 +212,7 @@ def test_active_empirical_rebuttal_execution():
         kd_competing_molar=5.0e-3,
         target_conc_basal_molar=100.0e-9,
         target_conc_stimulated_molar=10.0e-6,
-        competing_conc_molar=1.0e-3
+        competing_conc_molar=1.0e-3,
     )
 
     # Reviewer critique
@@ -231,10 +223,12 @@ def test_active_empirical_rebuttal_execution():
         reviewer_critique=critique,
         experiment_name="Competitive Ionic Titration Audit",
         experiment_fn=spp_engine.audit_competitive_ionic_selectivity,
-        assertion_fn=lambda rep: (rep.is_purpose_fulfilled and rep.theta_target_stimulated >= 0.60,
-                                  f"theta_stim={rep.theta_target_stimulated:.3f} >= 0.60, selectivity={rep.selectivity_ratio_s:.1f}"),
+        assertion_fn=lambda rep: (
+            rep.is_purpose_fulfilled and rep.theta_target_stimulated >= 0.60,
+            f"theta_stim={rep.theta_target_stimulated:.3f} >= 0.60, selectivity={rep.selectivity_ratio_s:.1f}",
+        ),
         spec=spec,
-        selectivity=profile
+        selectivity=profile,
     )
 
     assert dossier.rebuttal_verdict == EmpiricalRebuttalVerdict.EMPIRICALLY_VERIFIED

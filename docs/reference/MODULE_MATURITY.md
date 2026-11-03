@@ -9,7 +9,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | Level | Meaning | Modules |
 | --- | --- | --- |
 | Integrated | Used by the API and covered by tests | 32 |
-| Tested | Covered by tests, not reachable from the API | 64 |
+| Tested | Covered by tests, not reachable from the API | 70 |
 | Exercised | Referenced only by benchmark or demo scripts | 18 |
 | Prototype | No test, route or script references it | 20 |
 
@@ -33,10 +33,12 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `biomedical_domain` | Integrated | yes | yes | - |
 | `biomedical_units` | Tested | - | yes | - |
 | `capability_regression` | Integrated | yes | yes | - |
+| `cartan_dec_proteomics_auditor` | Tested | - | yes | - |
 | `categorical_epistemic_engine` | Exercised | - | - | yes |
 | `cellular_automata_barrier_auditor` | Tested | - | yes | - |
 | `cited_import_ledger` | Tested | - | yes | yes |
 | `cited_registry` | Integrated | yes | yes | yes |
+| `coe_integrity_auditor` | Tested | - | yes | - |
 | `cogentic_proof_orchestrator` | Tested | - | yes | - |
 | `collatz_case` | Tested | - | yes | yes |
 | `constraint_box` | Prototype | - | - | - |
@@ -109,10 +111,13 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `openai_math_coverage` | Tested | - | yes | yes |
 | `openai_math_time_travel` | Tested | - | yes | yes |
 | `openfoam_continuum_oracle` | Tested | - | yes | - |
+| `phenix_molprobity_oracle` | Tested | - | yes | - |
 | `physical_theorem_court` | Integrated | yes | yes | yes |
+| `preclinical_gates_engine` | Tested | - | yes | - |
 | `preregistration` | Tested | - | yes | yes |
 | `proof_cases` | Exercised | yes | - | yes |
 | `proof_pipeline` | Tested | - | yes | yes |
+| `provenance_sidecar_engine` | Tested | - | yes | - |
 | `ptau217_cutoff_case` | Tested | - | yes | - |
 | `quasi_riemann_synergistic_auditor` | Tested | - | yes | - |
 | `real_cohort_campaign_runner` | Exercised | - | - | yes |
@@ -135,6 +140,7 @@ supports; see the [claims register](CLAIMS_REGISTER.md) for that.
 | `sovereign_evidence_engine` | Tested | - | yes | - |
 | `state_space` | Integrated | yes | yes | - |
 | `statement_fidelity` | Tested | - | yes | yes |
+| `structure_property_purpose_engine` | Tested | - | yes | - |
 | `test_manifold_detector` | Prototype | - | - | - |
 | `traces_epistemic_adapter` | Exercised | - | - | yes |
 | `trajectory_evolution` | Prototype | - | - | - |

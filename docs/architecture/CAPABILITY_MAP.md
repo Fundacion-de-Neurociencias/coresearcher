@@ -27,7 +27,7 @@ supplies. They are listed here with those caveats, so nobody mistakes them for w
 the product today are the formal core, the verification chain, the statement and manuscript audits, the registry
 and ledgers, the biomedical checks, the regression benchmarks and the research lifecycle.
 
-The map covers **58 capabilities** in 11 groups: 141 REST endpoints, 30 CLI commands and 151 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
+The map covers **59 capabilities** in 11 groups: 141 REST endpoints, 30 CLI commands and 157 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
 
 ## How to read an entry
 
@@ -72,6 +72,7 @@ Each capability lists:
 | [Alzheimer formal scenario](#alzheimer-scenario) | Biomedical domain | 1 | 0 | 1 integrated | - | 2 |
 | [Plasma p-tau217 two-cutoff case](#ptau217-case) | Biomedical domain | 0 | 0 | 1 tested | - | 2 |
 | [Biophysics auditors (membrane, complexes, closure)](#biophysics-auditors) | Biomedical domain | 5 | 0 | 2 tested, 1 exercised | - | 3 |
+| [Pre-clinical structural and mechanism checks](#preclinical-suite) | Biomedical domain | 0 | 0 | 6 tested | - | 3 |
 | [Mahler conjecture scalar input (obligation ledger pilot)](#case-mahler) | Case studies | 0 | 0 | 8 tested | - | - |
 | [Local smoothing for the wave equation (fidelity and proof anatomy)](#case-local-smoothing) | Case studies | 0 | 0 | 2 tested | - | - |
 | [Yang-Mills and O(3) existence audits](#case-existence) | Case studies | 0 | 0 | 2 tested | - | - |
@@ -681,6 +682,33 @@ Three older auditors: membrane simulation contracts and failure attribution, ter
 
 **Tests:** `test_autopoietic_closure_auditor.py`, `test_biomacromolecular_auditor.py`
 
+<a id="preclinical-suite"></a>
+
+### Pre-clinical structural and mechanism checks
+
+Six modules merged on 2026-11-03 (ADR-DISCOVERY-094 to 097): a structure-property-purpose engine with a competitive ion-binding check, a Cartan moving-frame and holonomy auditor for protein backbones, a four-dimension integrity audit, provenance sidecars, four versioned pre-clinical gates, and MolProbity-style geometry metrics.
+
+**Status:** Tested on synthetic inputs; no external validation.
+
+**Caveats:**
+
+- The geometry oracle reimplements MolProbity-style metrics in NumPy with simplified regions; it does not call PHENIX or MolProbity.
+- The gates compare caller-supplied evidence fields against versioned thresholds; they establish no regulatory or industrial compliance.
+- No API or CLI exposes these modules yet; the evidence portal of the original draft was not integrated because its results were hard-coded.
+
+| Module | Maturity | Endpoints using it |
+| --- | --- | --- |
+| [`python/discovery/cartan_dec_proteomics_auditor.py`](../../python/discovery/cartan_dec_proteomics_auditor.py) | Tested | - |
+| [`python/discovery/coe_integrity_auditor.py`](../../python/discovery/coe_integrity_auditor.py) | Tested | - |
+| [`python/discovery/phenix_molprobity_oracle.py`](../../python/discovery/phenix_molprobity_oracle.py) | Tested | - |
+| [`python/discovery/preclinical_gates_engine.py`](../../python/discovery/preclinical_gates_engine.py) | Tested | - |
+| [`python/discovery/provenance_sidecar_engine.py`](../../python/discovery/provenance_sidecar_engine.py) | Tested | - |
+| [`python/discovery/structure_property_purpose_engine.py`](../../python/discovery/structure_property_purpose_engine.py) | Tested | - |
+
+**ADRs:** [ADR-094](../decisions/ADR-DISCOVERY-094-STRUCTURE-PROPERTY-PURPOSE-ENGINE.md), [ADR-095](../decisions/ADR-DISCOVERY-095-CARTAN-DEC-PROTEOMICS-AND-COE-AUDIT.md), [ADR-096](../decisions/ADR-DISCOVERY-096-PROVENANCE-SIDECARS-AND-FOUR-PRECLINICAL-GATES.md), [ADR-097](../decisions/ADR-DISCOVERY-097-PHENIX-MOLPROBITY-STRUCTURAL-ORACLE.md)
+
+**Tests:** `test_cartan_dec_proteomics.py`, `test_phenix_molprobity_oracle.py`, `test_provenance_and_preclinical_gates.py`, `test_structure_property_purpose_engine.py`
+
 ## Case studies
 
 Worked, reproducible audits of real announced results (openai/math papers, the Yang-Mills announcement, the Sakana ED rubric, Collatz). Each case has a module, a report script and committed outputs under examples/. Their findings were turned into the capabilities above; the cases remain as evidence and as regression inputs.
@@ -1289,7 +1317,7 @@ A proof-graph audit for physical theorems (cycle check and inequality checks), a
 
 **ADRs:** [ADR-038](../decisions/ADR-DISCOVERY-038-LATENT-WORLD-MODEL-H-JEPA.md), [ADR-074](../decisions/ADR-DISCOVERY-074-OPENFOAM-CONTINUUM-ORACLE.md), [ADR-075](../decisions/ADR-DISCOVERY-075-ISAAC-SIM-GROUNDING-ADAPTER.md)
 
-**Tests:** `conftest.py`, `test_continuum_and_multibody_physics_adapters.py`, `test_heuristic_physical_and_formal_invariants.py`, `test_tao_invariant.py`, `test_world_model_adapter.py`
+**Tests:** `conftest.py`, `test_cartan_dec_proteomics.py`, `test_continuum_and_multibody_physics_adapters.py`, `test_heuristic_physical_and_formal_invariants.py`, `test_phenix_molprobity_oracle.py`, `test_provenance_and_preclinical_gates.py`, `test_structure_property_purpose_engine.py`, `test_tao_invariant.py`, `test_world_model_adapter.py`
 
 <a id="governance-auditors"></a>
 

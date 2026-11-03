@@ -2,19 +2,15 @@
 tests/test_structure_property_purpose_engine.py - Test Suite for Structure-Property-Purpose (SPP) Engine (ADR-DISCOVERY-094)
 """
 
-import pytest
-from python.discovery.structure_property_purpose_engine import (
-    TeleonomicPurposeClass,
-    IonicSelectivityProfile,
-    StructurePropertyPurposeSpec,
-    CompetitiveOccupancyReport,
-    MultiscaleSppTriadReport,
-    StructurePropertyPurposeEngine,
-)
 from python.discovery.physical_theorem_court import (
-    PhysicalCoherenceCourt,
     CourtVerdict,
-    PhysicalConservationType,
+    PhysicalCoherenceCourt,
+)
+from python.discovery.structure_property_purpose_engine import (
+    IonicSelectivityProfile,
+    StructurePropertyPurposeEngine,
+    StructurePropertyPurposeSpec,
+    TeleonomicPurposeClass,
 )
 
 
@@ -31,7 +27,7 @@ def test_troponin_c_site_ii_calcium_sensing_sound():
         coordination_geometry="OCTAHEDRAL",
         coordinating_residues=["Asp65", "Asp67", "Gly69", "Glu76"],
         tolerated_basal_leak=0.15,
-        required_stimulated_occupancy=0.60
+        required_stimulated_occupancy=0.60,
     )
 
     # Site II: Kd(Ca2+) = 1 uM, Kd(Mg2+) = 10 mM (Selectivity S = 10,000)
@@ -43,7 +39,7 @@ def test_troponin_c_site_ii_calcium_sensing_sound():
         kd_competing_molar=1e-2,
         target_conc_basal_molar=1e-7,
         target_conc_stimulated_molar=1e-5,
-        competing_conc_molar=1e-3
+        competing_conc_molar=1e-3,
     )
 
     report = StructurePropertyPurposeEngine.audit_competitive_ionic_selectivity(spec, selectivity)
@@ -66,7 +62,7 @@ def test_unselective_sensor_competitive_collapse():
         target_site="Site II (Affinity-Defective)",
         purpose_class=TeleonomicPurposeClass.SENSING,
         tolerated_basal_leak=0.15,
-        required_stimulated_occupancy=0.60
+        required_stimulated_occupancy=0.60,
     )
 
     # Mutant binds Mg2+ with high affinity (Kd = 0.1 mM instead of 10 mM)
@@ -78,7 +74,7 @@ def test_unselective_sensor_competitive_collapse():
         kd_competing_molar=1e-4,  # Defect: 100x tighter Mg2+ binding
         target_conc_basal_molar=1e-7,
         target_conc_stimulated_molar=1e-5,
-        competing_conc_molar=1e-3
+        competing_conc_molar=1e-3,
     )
 
     report = StructurePropertyPurposeEngine.audit_competitive_ionic_selectivity(spec, selectivity)
@@ -97,7 +93,7 @@ def test_structural_sites_iii_iv_scaffolding_behavior():
         mechanism_id="MECH-CTNC-SITES3-4-STRUCTURAL",
         biological_system="Human Cardiac Thin Filament",
         target_site="Sites III/IV (Structural)",
-        purpose_class=TeleonomicPurposeClass.HOMEOSTATIC_REGULATION
+        purpose_class=TeleonomicPurposeClass.HOMEOSTATIC_REGULATION,
     )
 
     # Structural sites: Kd(Ca2+) = 10 nM, Kd(Mg2+) = 20 uM
@@ -108,7 +104,7 @@ def test_structural_sites_iii_iv_scaffolding_behavior():
         kd_competing_molar=2e-5,
         target_conc_basal_molar=1e-7,
         target_conc_stimulated_molar=1e-5,
-        competing_conc_molar=1e-3
+        competing_conc_molar=1e-3,
     )
 
     report = StructurePropertyPurposeEngine.audit_competitive_ionic_selectivity(spec, selectivity)
@@ -131,7 +127,7 @@ def test_multiscale_spp_triad_coherence():
         mechanism_id="MECH-CARDIAC-EXCITATION-CONTRACTION",
         biological_system="Cardiac Myocyte",
         target_site="Sarcomeric Thin Filament",
-        purpose_class=TeleonomicPurposeClass.FORCE_TRANSDUCTION
+        purpose_class=TeleonomicPurposeClass.FORCE_TRANSDUCTION,
     )
 
     selectivity = IonicSelectivityProfile(
@@ -141,7 +137,7 @@ def test_multiscale_spp_triad_coherence():
         kd_competing_molar=1e-2,
         target_conc_basal_molar=1e-7,
         target_conc_stimulated_molar=1e-5,
-        competing_conc_molar=1e-3
+        competing_conc_molar=1e-3,
     )
 
     ionic_report = StructurePropertyPurposeEngine.audit_competitive_ionic_selectivity(spec, selectivity)
@@ -151,8 +147,8 @@ def test_multiscale_spp_triad_coherence():
         ionic_report=ionic_report,
         continuum_cfd_sound=True,
         mechanical_kinematics_sound=True,
-        continuum_flow_rate=0.45,   # Non-zero intracellular flux
-        mechanical_tension_n=75.0   # Active isometric twitch tension
+        continuum_flow_rate=0.45,  # Non-zero intracellular flux
+        mechanical_tension_n=75.0,  # Active isometric twitch tension
     )
 
     assert triad_report.is_triad_coherent is True
@@ -173,7 +169,7 @@ def test_physical_coherence_court_arbitration_spp():
         "theta_target_stimulated": 0.91,
         "theta_competing_stimulated": 0.08,
         "selectivity_ratio_s": 10000.0,
-        "diagnostics": "Troponin C Site II sensory discrimination sound"
+        "diagnostics": "Troponin C Site II sensory discrimination sound",
     }
 
     verdict_sound = court.audit_spp_teleonomic_report("CLAIM-SPP-001", sound_report_data)
@@ -187,7 +183,7 @@ def test_physical_coherence_court_arbitration_spp():
         "theta_target_stimulated": 0.35,
         "theta_competing_stimulated": 0.65,
         "selectivity_ratio_s": 50.0,
-        "diagnostics": "Competitive collapse: Mg2+ poisons regulatory pocket"
+        "diagnostics": "Competitive collapse: Mg2+ poisons regulatory pocket",
     }
 
     verdict_breach = court.audit_spp_teleonomic_report("CLAIM-SPP-002", breach_report_data)

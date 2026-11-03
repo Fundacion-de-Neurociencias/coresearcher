@@ -3,34 +3,30 @@ tests/test_provenance_and_preclinical_gates.py - Unit Test Suite for Provenance 
 """
 
 from __future__ import annotations
-import json
-import math
-import pytest
-from typing import Dict, Any
 
-from python.discovery.provenance_sidecar_engine import (
-    ToolExecutionStatus,
-    ProvenanceSidecar,
-    ProvenanceSidecarEngine,
+import math
+from typing import Dict
+
+from python.discovery.physical_theorem_court import (
+    CourtVerdict,
+    PhysicalCoherenceCourt,
 )
 from python.discovery.preclinical_gates_engine import (
-    PreClinicalGateType,
-    PassportVerdict,
     GateThresholdsConfig,
-    SingleGateEvaluation,
-    PreClinicalPassport,
+    PassportVerdict,
     PreClinicalGatesValidator,
+    PreClinicalGateType,
 )
-from python.discovery.physical_theorem_court import (
-    PhysicalCoherenceCourt,
-    PhysicalConservationType,
-    CourtVerdict,
+from python.discovery.provenance_sidecar_engine import (
+    ProvenanceSidecar,
+    ProvenanceSidecarEngine,
+    ToolExecutionStatus,
 )
 
 
 def _sample_calculation_tool(base: float, exponent: float) -> Dict[str, float]:
     """Sample deterministic scientific tool for sidecar testing."""
-    return {"power": float(base ** exponent), "root": float(math.sqrt(abs(base)))}
+    return {"power": float(base**exponent), "root": float(math.sqrt(abs(base)))}
 
 
 def test_provenance_sidecar_generation_and_serialization(tmp_path):
@@ -44,7 +40,7 @@ def test_provenance_sidecar_generation_and_serialization(tmp_path):
         tool_fn=_sample_calculation_tool,
         inputs=inputs,
         output_sidecar_path=sidecar_file,
-        reproducibility_cmd="python -m sample_calc --base 16.0 --exponent 0.5"
+        reproducibility_cmd="python -m sample_calc --base 16.0 --exponent 0.5",
     )
 
     assert result == {"power": 4.0, "root": 4.0}
@@ -76,7 +72,7 @@ def test_provenance_sidecar_blocked_missing_data(tmp_path):
         tool_name="AlphaGenome_Variant_Scanner",
         missing_resource="Private_Assay_Cohort_2026.parquet",
         inputs={"variant_id": "chr1:12345:A>G"},
-        output_sidecar_path=sidecar_file
+        output_sidecar_path=sidecar_file,
     )
 
     assert sidecar.status == ToolExecutionStatus.BLOCKED_MISSING_DATA
@@ -100,9 +96,7 @@ def test_provenance_sidecar_reproducibility_verification():
     inputs = {"base": 9.0, "exponent": 2.0}
 
     result, sidecar = engine.wrap_tool_execution(
-        tool_name="sample_calculation_tool",
-        tool_fn=_sample_calculation_tool,
-        inputs=inputs
+        tool_name="sample_calculation_tool", tool_fn=_sample_calculation_tool, inputs=inputs
     )
 
     reproduced, reason = engine.verify_sidecar(sidecar, _sample_calculation_tool)
@@ -120,7 +114,7 @@ def test_provenance_sidecar_reproducibility_verification():
         raw_output_digest=sidecar.raw_output_digest,
         execution_time_seconds=0.01,
         reproducibility_command="python tampered",
-        status=ToolExecutionStatus.SUCCESS
+        status=ToolExecutionStatus.SUCCESS,
     )
     tampered_repro, tampered_reason = engine.verify_sidecar(tampered_sidecar, _sample_calculation_tool)
     assert tampered_repro is False
@@ -135,31 +129,31 @@ def test_four_preclinical_gates_candidate_all_pass():
         "genetic_evidence": {
             "causality_score": 0.85,
             "summary": "Mendelian causal linkage with ClinVar pathogenic confirmation.",
-            "sidecar_id": "SIDECAR_GENETICS_001"
+            "sidecar_id": "SIDECAR_GENETICS_001",
         },
         "structural_evidence": {
             "mean_plddt": 88.5,
             "pocket_druggability_score": 0.78,
             "hinges_detected": 2,
-            "sidecar_id": "SIDECAR_ALPHA_FOLD_002"
+            "sidecar_id": "SIDECAR_ALPHA_FOLD_002",
         },
         "biophysical_mechanism": {
             "theta_target_stimulated": 0.76,
             "theta_target_basal": 0.04,
-            "sidecar_id": "SIDECAR_SPP_TITRATION_003"
+            "sidecar_id": "SIDECAR_SPP_TITRATION_003",
         },
         "safety_evidence": {
             "homolog_selectivity_ratio": 450.0,
             "acute_toxic_alerts_count": 0,
-            "sidecar_id": "SIDECAR_CHEMBL_SAFETY_004"
-        }
+            "sidecar_id": "SIDECAR_CHEMBL_SAFETY_004",
+        },
     }
 
     passport = validator.evaluate_candidate(
         candidate_id="CANDIDATE_TROPONIN_MIMETIC_01",
         target_name="Troponin C Site II",
         indication="Hypertrophic Cardiomyopathy",
-        evidence_payload=evidence_payload
+        evidence_payload=evidence_payload,
     )
 
     assert passport.all_gates_passed is True
@@ -190,15 +184,15 @@ def test_four_preclinical_gates_candidate_fails_safety_offtarget():
         "biophysical_mechanism": {"theta_target_stimulated": 0.75, "theta_target_basal": 0.05},
         "safety_evidence": {
             "homolog_selectivity_ratio": 25.0,  # Below threshold 100.0!
-            "acute_toxic_alerts_count": 1       # Severe hERG alert!
-        }
+            "acute_toxic_alerts_count": 1,  # Severe hERG alert!
+        },
     }
 
     passport = validator.evaluate_candidate(
         candidate_id="CANDIDATE_TOXIC_HOMOLOG_02",
         target_name="Kinase Target X",
         indication="Neuroinflammation",
-        evidence_payload=evidence_payload
+        evidence_payload=evidence_payload,
     )
 
     assert passport.all_gates_passed is False
@@ -220,14 +214,14 @@ def test_four_preclinical_gates_missing_evidence_triggers_blocked():
         "genetic_evidence": {"causality_score": 0.95},
         # "structural_evidence" is missing!
         "biophysical_mechanism": {"theta_target_stimulated": 0.80, "theta_target_basal": 0.02},
-        "safety_evidence": {"homolog_selectivity_ratio": 200.0, "acute_toxic_alerts_count": 0}
+        "safety_evidence": {"homolog_selectivity_ratio": 200.0, "acute_toxic_alerts_count": 0},
     }
 
     passport = validator.evaluate_candidate(
         candidate_id="CANDIDATE_UNSTRUCTURED_03",
         target_name="Novel Uncharacterized ORF",
         indication="Amyotrophic Lateral Sclerosis",
-        evidence_payload=evidence_payload
+        evidence_payload=evidence_payload,
     )
 
     assert passport.all_gates_passed is False
@@ -245,7 +239,7 @@ def test_preclinical_gates_versioned_threshold_override():
         "genetic_evidence": {"causality_score": 0.75},  # Passes canonical (>=0.70), fails strict (>=0.90)
         "structural_evidence": {"mean_plddt": 80.0, "pocket_druggability_score": 0.70},
         "biophysical_mechanism": {"theta_target_stimulated": 0.70, "theta_target_basal": 0.05},
-        "safety_evidence": {"homolog_selectivity_ratio": 150.0, "acute_toxic_alerts_count": 0}
+        "safety_evidence": {"homolog_selectivity_ratio": 150.0, "acute_toxic_alerts_count": 0},
     }
 
     # Canonical config: score 0.75 passes
@@ -254,7 +248,7 @@ def test_preclinical_gates_versioned_threshold_override():
         target_name="Tau Aggregation Inhibitor",
         indication="Alzheimer's Disease",
         evidence_payload=evidence_payload,
-        config=GateThresholdsConfig(config_version="v1.0.0-canonical", min_genetic_causality_score=0.70)
+        config=GateThresholdsConfig(config_version="v1.0.0-canonical", min_genetic_causality_score=0.70),
     )
     assert canonical_passport.all_gates_passed is True
 
@@ -264,7 +258,7 @@ def test_preclinical_gates_versioned_threshold_override():
         target_name="Tau Aggregation Inhibitor",
         indication="Alzheimer's Disease",
         evidence_payload=evidence_payload,
-        config=GateThresholdsConfig(config_version="v2.0.0-strict-fda", min_genetic_causality_score=0.90)
+        config=GateThresholdsConfig(config_version="v2.0.0-strict-fda", min_genetic_causality_score=0.90),
     )
     assert strict_passport.all_gates_passed is False
     assert strict_passport.gate_evaluations[PreClinicalGateType.GENETIC_CAUSALITY_GATE.value].passed is False

@@ -642,6 +642,37 @@
       ]
     },
     {
+      "id": "preclinical-suite",
+      "title": "Pre-clinical structural and mechanism checks",
+      "group": "biomedical",
+      "description": "Six modules merged on 2026-11-03 (ADR-DISCOVERY-094 to 097): a structure-property-purpose engine with a competitive ion-binding check, a Cartan moving-frame and holonomy auditor for protein backbones, a four-dimension integrity audit, provenance sidecars, four versioned pre-clinical gates, and MolProbity-style geometry metrics.",
+      "status": "Tested on synthetic inputs; no external validation.",
+      "verification_chain": "",
+      "caveats": [
+        "The geometry oracle reimplements MolProbity-style metrics in NumPy with simplified regions; it does not call PHENIX or MolProbity.",
+        "The gates compare caller-supplied evidence fields against versioned thresholds; they establish no regulatory or industrial compliance.",
+        "No API or CLI exposes these modules yet; the evidence portal of the original draft was not integrated because its results were hard-coded."
+      ],
+      "maturity": {
+        "python/discovery/cartan_dec_proteomics_auditor.py": "Tested",
+        "python/discovery/coe_integrity_auditor.py": "Tested",
+        "python/discovery/phenix_molprobity_oracle.py": "Tested",
+        "python/discovery/preclinical_gates_engine.py": "Tested",
+        "python/discovery/provenance_sidecar_engine.py": "Tested",
+        "python/discovery/structure_property_purpose_engine.py": "Tested"
+      },
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [],
+      "adrs": [
+        "ADR-DISCOVERY-094",
+        "ADR-DISCOVERY-095",
+        "ADR-DISCOVERY-096",
+        "ADR-DISCOVERY-097"
+      ]
+    },
+    {
       "id": "case-mahler",
       "title": "Mahler conjecture scalar input (obligation ledger pilot)",
       "group": "case-studies",

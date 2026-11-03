@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-matchingpsd-main-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/MatchingPSD__main__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "d2312f0709a99ee5c82e5190fb6549f6c4af975fe1b0e54712d4840982bd9ef5",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.PerfectMatchingPSD.main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.PerfectMatchingPSD.main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-matchingpsd-main-trivial.log",
+  "kernel_log_sha256": "925a2f4f93642a40ce6228f330fb8e38f5bd231b0a8a62e8d6a1bf52f76547ab",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:35:47Z",
+  "probe": {
+    "probe_id": "MatchingPSD:main:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.PerfectMatchingPSD.main",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

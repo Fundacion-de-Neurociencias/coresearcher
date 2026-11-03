@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-randomizedmeanpayoff-randomized-quasipolynomial-mean-payoff-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/RandomizedMeanPayoff__randomized_quasipolynomial_mean_payoff__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "6dd3a8a42b1937e21a92ec22039af1642e2639b659b94c8851ae2203cd447f03",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.randomized_quasipolynomial_mean_payoff"
+  ],
+  "axioms_by_theorem": {
+    "OAI.randomized_quasipolynomial_mean_payoff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-randomizedmeanpayoff-randomized-quasipolynomial-mean-payoff-trivial.log",
+  "kernel_log_sha256": "66f48b7917671a19e0582cc1765371e44d65fcd2448b9a0aa890c1792b33cd2e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:37:29Z",
+  "probe": {
+    "probe_id": "RandomizedMeanPayoff:randomized_quasipolynomial_mean_payoff:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.randomized_quasipolynomial_mean_payoff",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

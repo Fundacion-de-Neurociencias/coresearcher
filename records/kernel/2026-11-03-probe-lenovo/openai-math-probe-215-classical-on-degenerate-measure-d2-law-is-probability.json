@@ -1,0 +1,50 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-215-classical-on-degenerate-measure-d2-law-is-probability",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/215_classical_on_degenerate_measure__D2_law_is_probability.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "da3652c3d115bae4f86c4dbf83e904d1376c33c10bc50f7c1e7a4939c2ac96a0",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.ClassicalON.probe_law_is_probability"
+  ],
+  "axioms_by_theorem": {
+    "OAI.ClassicalON.probe_law_is_probability": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 25.1,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-215-classical-on-degenerate-measure-d2-law-is-probability.log",
+  "kernel_log_sha256": "eb1e0eb0aef3819d969380190fb9891af754b1e2750555491ee4c0155356fb0e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:18:25Z",
+  "probe": {
+    "probe_id": "215-classical-on-degenerate-measure:D2_law_is_probability",
+    "mode": "D2_law_is_probability",
+    "target_theorem": "OAI.ClassicalON.main",
+    "meaning": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open."
+  }
+}

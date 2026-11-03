@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-hilbertcrouzeix-exists-finite-compression-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/HilbertCrouzeix__exists_finite_compression__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "5e25991d64abc40eb490f58cab2ec1db4e2be5fceb0b491d94d84d559188802f",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.HilbertCrouzeix.exists_finite_compression_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.HilbertCrouzeix.exists_finite_compression_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 9.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-hilbertcrouzeix-exists-finite-compression-inconsistent.log",
+  "kernel_log_sha256": "d9011aa3979110856dc87d707909bf650f2f6cf74d619d234477b9f1adf7e88e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:33:32Z",
+  "probe": {
+    "probe_id": "HilbertCrouzeix:exists_finite_compression:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.HilbertCrouzeix.exists_finite_compression",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

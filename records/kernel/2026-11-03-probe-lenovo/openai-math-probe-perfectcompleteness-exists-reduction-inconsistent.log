@@ -1,0 +1,26 @@
+# kernel-check lean_file openai-math-probe-perfectcompleteness-exists-reduction-inconsistent
+# file: ComparatorChallenges/Probes/PerfectCompleteness__exists_reduction__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: cd1c99e8c61140ad7b98a5a1060a63884d777890dd68a9bd297942545c2a334e
+# command: lake env lean ComparatorChallenges/Probes/PerfectCompleteness__exists_reduction__inconsistent.lean
+# probe of: OAI.PerfectCompleteness.Theorem11.exists_reduction; checked declaration: OAI.PerfectCompleteness.Theorem11.exists_reduction_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/PerfectCompleteness__exists_reduction__inconsistent.lean:179:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/PerfectCompleteness__exists_reduction__inconsistent.lean:183:106: error: unsolved goals
+δ : ℚ
+positive : 0 < δ
+less_than_one : δ < 1
+⊢ False
+'OAI.PerfectCompleteness.Theorem11.exists_reduction_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Quot.sound]
+# kernel-check: exit_code=1

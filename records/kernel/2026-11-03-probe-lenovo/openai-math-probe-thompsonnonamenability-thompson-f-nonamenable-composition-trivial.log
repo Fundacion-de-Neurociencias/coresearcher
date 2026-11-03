@@ -1,0 +1,27 @@
+# kernel-check lean_file openai-math-probe-thompsonnonamenability-thompson-f-nonamenable-composition-trivial
+# file: ComparatorChallenges/Probes/ThompsonNonamenability__thompson_F_nonamenable_composition__trivial.lean (generated probe, mode trivial)
+# file_sha256: 062a520bebfcb52dde7cf333ed835b4c21b3836d74bac89399e9425518db6e42
+# command: lake env lean ComparatorChallenges/Probes/ThompsonNonamenability__thompson_F_nonamenable_composition__trivial.lean
+# probe of: OAI.ThompsonNonamenability.thompson_F_nonamenable_composition; checked declaration: OAI.ThompsonNonamenability.thompson_F_nonamenable_composition
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/ThompsonNonamenability__thompson_F_nonamenable_composition__trivial.lean:82:38: error: unsolved goals
+⊢ ∃ group,
+    (∀ (h g : F) (x : ↑UnitInterval), (↑(h * g)).toHomeomorph x = (↑h).toHomeomorph ((↑g).toHomeomorph x)) ∧
+      ¬Nonempty (InvariantMean F)
+ComparatorChallenges/Probes/ThompsonNonamenability__thompson_F_nonamenable_composition__trivial.lean:83:2: error: unexpected token 'by'; expected command
+ComparatorChallenges/Probes/ThompsonNonamenability__thompson_F_nonamenable_composition__trivial.lean:84:37: error: unexpected identifier; expected command
+'OAI.ThompsonNonamenability.thompson_F_nonamenable_composition' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

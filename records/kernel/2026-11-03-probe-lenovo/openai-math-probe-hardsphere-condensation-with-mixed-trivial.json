@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-hardsphere-condensation-with-mixed-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/HardSphere__condensation_with_mixed__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "08489a4ba730ec85c216db63d96fad8e352cb8608cda519782cb75e702101c4d",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.HardSphere.condensation_with_mixed"
+  ],
+  "axioms_by_theorem": {
+    "OAI.HardSphere.condensation_with_mixed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 12.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-hardsphere-condensation-with-mixed-trivial.log",
+  "kernel_log_sha256": "4879903944760928226d4a9aed351f83e94526e531e194cc84b600da5d1d7949",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:33:19Z",
+  "probe": {
+    "probe_id": "HardSphere:condensation_with_mixed:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.HardSphere.condensation_with_mixed",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

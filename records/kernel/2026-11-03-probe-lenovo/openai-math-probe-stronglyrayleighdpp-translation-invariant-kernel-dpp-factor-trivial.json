@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-stronglyrayleighdpp-translation-invariant-kernel-dpp-factor-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/StronglyRayleighDPP__translation_invariant_kernel_dpp_factor__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "43e0e8024e9fcc3467c821ae1dcd41a2eb1fd97df0ee01330672cf4bf866cd44",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Problem336AdditiveD139.translation_invariant_kernel_dpp_factor"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Problem336AdditiveD139.translation_invariant_kernel_dpp_factor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-stronglyrayleighdpp-translation-invariant-kernel-dpp-factor-trivial.log",
+  "kernel_log_sha256": "9d8f735144dba16397472f8112ac1be621f324da5d6d793895c6800625587a67",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:39:03Z",
+  "probe": {
+    "probe_id": "StronglyRayleighDPP:translation_invariant_kernel_dpp_factor:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Problem336AdditiveD139.translation_invariant_kernel_dpp_factor",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

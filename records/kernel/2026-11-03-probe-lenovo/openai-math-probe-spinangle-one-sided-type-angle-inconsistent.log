@@ -1,0 +1,39 @@
+# kernel-check lean_file openai-math-probe-spinangle-one-sided-type-angle-inconsistent
+# file: ComparatorChallenges/Probes/SpinAngle__one_sided_type_angle__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 3a275bca056d4083f6dfee29f1312dde662b2a0921b0fe738f21f1a2abeaaac8
+# command: lake env lean ComparatorChallenges/Probes/SpinAngle__one_sided_type_angle__inconsistent.lean
+# probe of: OAI.SpinAngle.TypeAngle.one_sided_type_angle; checked declaration: OAI.SpinAngle.TypeAngle.one_sided_type_angle_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SpinAngle__one_sided_type_angle__inconsistent.lean:521:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/SpinAngle__one_sided_type_angle__inconsistent.lean:542:82: error: unsolved goals
+q : ℕ
+inst✝⁴ : Nonempty (Fin q)
+R : Type u_1
+C : Type u_2
+inst✝³ : Fintype R
+inst✝² : DecidableEq R
+inst✝¹ : Fintype C
+inst✝ : DecidableEq C
+W : Finset (R × C)
+D : TypeLabel q
+H : C → TypeLabel q
+K : R → TypeLabel q
+hD : D.size = W.card
+hH : ∀ (j : C), (H j).size = Fintype.card (TypeBlocks.Fiber (column W) j)
+hK : ∀ (i : R), (K i).size = Fintype.card (TypeBlocks.Fiber (row W) i)
+⊢ False
+'OAI.SpinAngle.TypeAngle.one_sided_type_angle_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

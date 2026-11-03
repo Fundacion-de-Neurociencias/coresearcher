@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-cksbondipenrose-schwarzschild-equality-examples-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/CKSBondiPenrose__schwarzschild_equality_examples__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "8038b52a4639ce58e025017468f397f9ac2f9ee54f3d8781b5600d73ec7e4154",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CKSMain.schwarzschild_equality_examples_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CKSMain.schwarzschild_equality_examples_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 35.2,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-cksbondipenrose-schwarzschild-equality-examples-inconsistent.log",
+  "kernel_log_sha256": "7ebbd2f263bf0384679914071a2f07acc672c8f45421c25b15a8402bd79af3ff",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:28:57Z",
+  "probe": {
+    "probe_id": "CKSBondiPenrose:schwarzschild_equality_examples:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.CKSMain.schwarzschild_equality_examples",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

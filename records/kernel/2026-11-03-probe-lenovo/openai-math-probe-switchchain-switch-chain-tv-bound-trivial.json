@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-switchchain-switch-chain-tv-bound-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/SwitchChain__switch_chain_tv_bound__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "e88c1ad38051526c05c29553e518ca864894fc2d5a7e35c07fd71271008e1960",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Problem315.switch_chain_tv_bound"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Problem315.switch_chain_tv_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-switchchain-switch-chain-tv-bound-trivial.log",
+  "kernel_log_sha256": "c936d41443e6dba927e4d8b59f8d617b9e4c9bc8e2258a8a891043fcdafaba2c",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:39:15Z",
+  "probe": {
+    "probe_id": "SwitchChain:switch_chain_tv_bound:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Problem315.switch_chain_tv_bound",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

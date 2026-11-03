@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-rieszquantitative-quantitative-higher-codimension-riesz-rectifiability-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/RieszQuantitative__quantitative_higher_codimension_riesz_rectifiability__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "4781bccf93212c72654fa8961765b41e8eedd87afe9d87f30ff4a191a169d272",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.RieszRectifiability.quantitative_higher_codimension_riesz_rectifiability"
+  ],
+  "axioms_by_theorem": {
+    "OAI.RieszRectifiability.quantitative_higher_codimension_riesz_rectifiability": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-rieszquantitative-quantitative-higher-codimension-riesz-rectifiability-trivial.log",
+  "kernel_log_sha256": "8bde351f873a6c3b325c2bee2cf8274acff184594fa245f3f9dd0492898be4ac",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:37:37Z",
+  "probe": {
+    "probe_id": "RieszQuantitative:quantitative_higher_codimension_riesz_rectifiability:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.RieszRectifiability.quantitative_higher_codimension_riesz_rectifiability",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

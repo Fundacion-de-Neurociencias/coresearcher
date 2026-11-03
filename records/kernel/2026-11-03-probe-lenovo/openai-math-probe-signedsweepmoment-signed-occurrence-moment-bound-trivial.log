@@ -1,0 +1,41 @@
+# kernel-check lean_file openai-math-probe-signedsweepmoment-signed-occurrence-moment-bound-trivial
+# file: ComparatorChallenges/Probes/SignedSweepMoment__signed_occurrence_moment_bound__trivial.lean (generated probe, mode trivial)
+# file_sha256: bd1e33d3e1c9f6c8e0f4280efcb6cc6d4300662a25c77523467f846167b62a18
+# command: lake env lean ComparatorChallenges/Probes/SignedSweepMoment__signed_occurrence_moment_bound__trivial.lean
+# probe of: OAI.SignedSweeps.signed_occurrence_moment_bound; checked declaration: OAI.SignedSweeps.signed_occurrence_moment_bound
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SignedSweepMoment__signed_occurrence_moment_bound__trivial.lean:182:67: error: unsolved goals
+⊢ ∃ η₀,
+    0 < η₀ ∧
+      ∀ (η : ℝ),
+        0 < η →
+          η < η₀ →
+            ∃ κ₀,
+              0 < κ₀ ∧
+                κ₀ < η / 256 ∧
+                  ∀ (κ : ℝ),
+                    0 < κ →
+                      κ < κ₀ →
+                        ∃ r,
+                          1 ≤ r ∧
+                            ∀ (d : ℕ),
+                              1 ≤ d →
+                                ∀ (a : YoungDiagram) (b : a.card = 2 ^ d) (u v l : ℕ) (h : u + v + l = 2 ^ d)
+                                  (a_1 : YoungDiagram) (b_1 : a_1.card = u) (a_2 : YoungDiagram) (b_2 : a_2.card = v)
+                                  (a_3 : YoungDiagram) (b_3 : a_3.card = l),
+                                  SignedOccurrence h ⟨a_1, b_1⟩ ⟨a_2, b_2⟩ ⟨a_3, b_3⟩ ⟨a, b⟩ →
+                                    logMoment (weightedMoment ⟨a, b⟩ r) ≤
+                                      ↑(coefficient η d) * ↑(signedEntropy ⟨a_1, b_1⟩ ⟨a_2, b_2⟩) +
+                                        ↑(remainderBudget κ d l)
+'OAI.SignedSweeps.signed_occurrence_moment_bound' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

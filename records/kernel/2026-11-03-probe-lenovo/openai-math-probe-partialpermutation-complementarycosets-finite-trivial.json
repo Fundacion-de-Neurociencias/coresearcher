@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-partialpermutation-complementarycosets-finite-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/PartialPermutation__complementaryCosets_finite__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "e7daf500d82e859da639449f6588a86fe272d21ec6bf2c65323cde2d1000b3b5",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.PartialPermutation.complementaryCosets_finite"
+  ],
+  "axioms_by_theorem": {
+    "OAI.PartialPermutation.complementaryCosets_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-partialpermutation-complementarycosets-finite-trivial.log",
+  "kernel_log_sha256": "8b3b69a928c2a8e756744725dc3155ffff50d59860abd430169fea4ab536325f",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:36:39Z",
+  "probe": {
+    "probe_id": "PartialPermutation:complementaryCosets_finite:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.PartialPermutation.complementaryCosets_finite",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

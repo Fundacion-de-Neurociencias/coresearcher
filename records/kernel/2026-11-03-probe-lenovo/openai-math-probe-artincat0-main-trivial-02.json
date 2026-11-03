@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-artincat0-main-trivial-02",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/ArtinCAT0__main__trivial_02.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "0bb087d30253ce19e90468183eb0c8b215ba7101156d3fb70bf783dd8fe02875",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.ArtinCAT0.main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.ArtinCAT0.main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 25.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-artincat0-main-trivial-02.log",
+  "kernel_log_sha256": "7d8617a17b6a4f1db45de43108b25dda7666a2643eb7e0b01cd258be072b2321",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:10:01Z",
+  "probe": {
+    "probe_id": "ArtinCAT0:main:trivial@02",
+    "mode": "trivial@rfl",
+    "target_theorem": "OAI.ArtinCAT0.main",
+    "meaning": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open."
+  }
+}

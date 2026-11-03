@@ -8,3 +8,5 @@ adds a directory `<date>-run<id>/` with one `<target>.json` record and its `<tar
 - `tests/test_kernel_records.py` re-verifies every record here against its log. Do not edit records or logs by hand.
 
 Verify a run's records with `python scripts/lean/kernel_check.py verify records/kernel/<dir>`.
+
+`2026-11-03-probe-lenovo/` is different: it holds the trivial-witness probe records (docs/reference/cases/OPENAI_MATH_COVERAGE_MAP.md §5.1), written by `scripts/cases/trivial_witness_probe_report.py` on the Lenovo WSL machine (`checked_by: local:…`). Their theorems are probe declarations, not claims. A PASS on a `trivial` or `inconsistent` probe would be a vacuity finding. None occurred.

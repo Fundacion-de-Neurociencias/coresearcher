@@ -1,0 +1,43 @@
+# kernel-check lean_file openai-math-probe-cksbondipenrose-area-controlled-end-replacement-inconsistent
+# file: ComparatorChallenges/Probes/CKSBondiPenrose__area_controlled_end_replacement__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: bffe7d6e4cabf0249ebdbbcf6dfcc1e61de02dcdc2e39a6449bf8f5c31eab0ba
+# command: lake env lean ComparatorChallenges/Probes/CKSBondiPenrose__area_controlled_end_replacement__inconsistent.lean
+# probe of: OAI.CKSSourceExterior.area_controlled_end_replacement; checked declaration: OAI.CKSSourceExterior.area_controlled_end_replacement_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CKSBondiPenrose__area_controlled_end_replacement__inconsistent.lean:3312:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CKSBondiPenrose__area_controlled_end_replacement__inconsistent.lean:3363:114: error: unsolved goals
+N : Type u_1
+inst✝⁵ : TopologicalSpace N
+inst✝⁴ : ChartedSpace H3 N
+inst✝³ : IsManifold I3 ∞ N
+inst✝² : T2Space N
+inst✝¹ : SecondCountableTopology N
+inst✝ : ConnectedSpace N
+g : SmoothMetric I3
+K : InnerField I3
+hK : ContMDiff I3 (I3.prod 𝓘(ℝ, SpatialBilinear)) ∞ (innerSection I3 K)
+hKsym : ∀ (x : N) (v w : TangentSpace I3 x), ((K x) v) w = ((K x) w) v
+hOrient : Orientable
+hScompact : IsCompact (ModelWithCorners.boundary N)
+hSnonempty : (ModelWithCorners.boundary N).Nonempty
+hcomplete : CKSReplacementCompleteness.IsComplete I3 (ContMDiffRiemannianMetric.toContinuousRiemannianMetric g)
+hDEC : PhysicalDEC I3 g.inner K
+d : CKSData g K
+ht : ‖(bondiCharge d.massAspect).2‖ < (bondiCharge d.massAspect).1
+⊢ False
+'OAI.CKSSourceExterior.area_controlled_end_replacement_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/CKSBondiPenrose__area_controlled_end_replacement__inconsistent.lean:3618:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

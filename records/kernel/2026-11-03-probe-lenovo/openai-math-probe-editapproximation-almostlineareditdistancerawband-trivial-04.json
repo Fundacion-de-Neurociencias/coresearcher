@@ -1,0 +1,54 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-editapproximation-almostlineareditdistancerawband-trivial-04",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EditApproximation__almostLinearEditDistanceRawBand__trivial_04.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "cebc912ef0c38ca906644a21d1abcf16a20c2bebfcbfcf943c0c4879b66b3a28",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.EditApproximation.almostLinearEditDistanceRawBand"
+  ],
+  "axioms_by_theorem": {
+    "OAI.EditApproximation.almostLinearEditDistanceRawBand": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 124.4,
+  "exit_code": 1,
+  "result": "BLOCKED",
+  "reasons": [
+    "the tactic menu was aborted before every tactic ran: failed with a nested error"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-editapproximation-almostlineareditdistancerawband-trivial-04.log",
+  "kernel_log_sha256": "96d46e7bafb506f46187b607af7bdc3d9deb2d66a1336355c79ac0beb0f7b140",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:12:13Z",
+  "probe": {
+    "probe_id": "EditApproximation:almostLinearEditDistanceRawBand:trivial@04",
+    "mode": "trivial@simp_all",
+    "target_theorem": "OAI.EditApproximation.almostLinearEditDistanceRawBand",
+    "meaning": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open."
+  }
+}

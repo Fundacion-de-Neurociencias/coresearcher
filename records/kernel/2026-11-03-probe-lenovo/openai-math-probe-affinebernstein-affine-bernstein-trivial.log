@@ -1,0 +1,40 @@
+# kernel-check lean_file openai-math-probe-affinebernstein-affine-bernstein-trivial
+# file: ComparatorChallenges/Probes/AffineBernstein__affine_bernstein__trivial.lean (generated probe, mode trivial)
+# file_sha256: 99f5158d84ef80bdc0e18bf79c974922c30e9fe85837823e6680ab749580c84c
+# command: lake env lean ComparatorChallenges/Probes/AffineBernstein__affine_bernstein__trivial.lean
+# probe of: OAI.AffineBernstein.affine_bernstein; checked declaration: OAI.AffineBernstein.affine_bernstein
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/AffineBernstein__affine_bernstein__trivial.lean:87:50: error: unsolved goals
+n : ℕ
+hn₃ : 3 ≤ n
+hn₉ : n ≤ 9
+Ω : Set (Space n)
+hΩne : Ω.Nonempty
+hΩopen : IsOpen Ω
+hΩconvex : Convex ℝ Ω
+u : Space n → ℝ
+hu : ContDiffOn ℝ ∞ u Ω
+hpos : ∀ x ∈ Ω, (hessian u x).PosDef
+hmax : AffineMaximalOn Ω u
+hcomplete : EuclideanGraphComplete Ω u
+⊢ Ω = univ ∧
+    (∃ A,
+        A.IsSymm ∧
+          A.PosDef ∧
+            ∃ x x_1,
+              ∀ (x_2 : Space n),
+                u x_2 =
+                  2⁻¹ * ∑ x, ∑ x_3, x_2.ofLp x * A x x_3 * x_2.ofLp x_3 + ∑ x_3, x.ofLp x_3 * x_2.ofLp x_3 + x_1) ∧
+      ∃ e, ⇑e '' standardParaboloid n = graph Ω u
+'OAI.AffineBernstein.affine_bernstein' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

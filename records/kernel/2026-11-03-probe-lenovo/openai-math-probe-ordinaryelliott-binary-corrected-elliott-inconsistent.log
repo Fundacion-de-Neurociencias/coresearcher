@@ -1,0 +1,32 @@
+# kernel-check lean_file openai-math-probe-ordinaryelliott-binary-corrected-elliott-inconsistent
+# file: ComparatorChallenges/Probes/OrdinaryElliott__binary_corrected_elliott__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: efb99d05b6d3b7f52a51aef9154541649595823298f329c789d5623cc8cd2bc2
+# command: lake env lean ComparatorChallenges/Probes/OrdinaryElliott__binary_corrected_elliott__inconsistent.lean
+# probe of: OAI.OrdinaryCorrelations.binary_corrected_elliott; checked declaration: OAI.OrdinaryCorrelations.binary_corrected_elliott_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/OrdinaryElliott__binary_corrected_elliott__inconsistent.lean:33:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/OrdinaryElliott__binary_corrected_elliott__inconsistent.lean:44:43: error: unsolved goals
+f₁ f₂ : ℕ → ℂ
+hf₁ : OneBounded f₁
+hf₂ : OneBounded f₂
+hm₁ : Multiplicative f₁
+hm₂ : Multiplicative f₂
+hNP : UniformlyNonpretentious f₁ ∨ UniformlyNonpretentious f₂
+h₁ h₂ : ℕ
+hne : ¬h₁ = h₂
+⊢ False
+'OAI.OrdinaryCorrelations.binary_corrected_elliott_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

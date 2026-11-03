@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-gaussianreplacement-actualrowmain-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/GaussianReplacement__actualRowMain__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "202e610641b1392dca8d2d7e16519d5ed4d83b43994c356ecb893fcfe816863d",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CurrentProjection.actualRowMain_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CurrentProjection.actualRowMain_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 10.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-gaussianreplacement-actualrowmain-inconsistent.log",
+  "kernel_log_sha256": "cea130099b9766950efd9bc0b5d3b6000d27f31c91ecaa3c9b9fd80f715a796c",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:32:36Z",
+  "probe": {
+    "probe_id": "GaussianReplacement:actualRowMain:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.CurrentProjection.actualRowMain",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

@@ -1,0 +1,34 @@
+# kernel-check lean_file openai-math-probe-triangleface-triangle-expansion-face-inconsistent
+# file: ComparatorChallenges/Probes/TriangleFace__triangle_expansion_face__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: b43824ffb73009b103e0401ef5afa5cc5ef314030af4268e0e9117085b7cddf8
+# command: lake env lean ComparatorChallenges/Probes/TriangleFace__triangle_expansion_face__inconsistent.lean
+# probe of: OAI.TriangleFace198.triangle_expansion_face; checked declaration: OAI.TriangleFace198.triangle_expansion_face_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TriangleFace__triangle_expansion_face__inconsistent.lean:169:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TriangleFace__triangle_expansion_face__inconsistent.lean:190:50: error: unsolved goals
+V : Type uV
+E : Type uE
+inst✝³ : Fintype V
+inst✝² : Fintype E
+inst✝¹ : DecidableEq V
+inst✝ : DecidableEq E
+G : LooplessGraph V E
+v : V
+hdeg : Fintype.card { e // G.Incident v e } = 3
+_hmatching : ∃ a, G.IsPerfectMatching a
+⊢ False
+'OAI.TriangleFace198.triangle_expansion_face_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

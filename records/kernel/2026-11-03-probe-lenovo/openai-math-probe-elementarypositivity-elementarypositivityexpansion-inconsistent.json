@@ -1,0 +1,52 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-elementarypositivity-elementarypositivityexpansion-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/ElementaryPositivity__elementaryPositivityExpansion__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "1c66e16d104bda4e8af4b5a3e910c2282069b094bade19d4a5853bd06cf51891",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.elementaryPositivityExpansion_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.elementaryPositivityExpansion_probe_inconsistent": [
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-elementarypositivity-elementarypositivityexpansion-inconsistent.log",
+  "kernel_log_sha256": "25ba81b6f05a25fbc2e416e03bb191bf1ec72b7d4a2ce6304772c04ef486d7df",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:16Z",
+  "probe": {
+    "probe_id": "ElementaryPositivity:elementaryPositivityExpansion:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.elementaryPositivityExpansion",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

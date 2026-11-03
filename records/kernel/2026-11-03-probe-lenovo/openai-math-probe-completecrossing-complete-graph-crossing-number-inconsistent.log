@@ -1,0 +1,25 @@
+# kernel-check lean_file openai-math-probe-completecrossing-complete-graph-crossing-number-inconsistent
+# file: ComparatorChallenges/Probes/CompleteCrossing__complete_graph_crossing_number__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 72eb5a386e51a5b9908d29d72bc4a1887a431d6cead2d869ac1b7a4901c8bc4c
+# command: lake env lean ComparatorChallenges/Probes/CompleteCrossing__complete_graph_crossing_number__inconsistent.lean
+# probe of: OAI.Paper170.complete_graph_crossing_number; checked declaration: OAI.Paper170.complete_graph_crossing_number_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CompleteCrossing__complete_graph_crossing_number__inconsistent.lean:81:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CompleteCrossing__complete_graph_crossing_number__inconsistent.lean:95:9: error: Type mismatch
+  fun x => trivial
+has type
+  ∀ (x : ?m.6), True
+but is expected to have type
+  False
+'OAI.Paper170.complete_graph_crossing_number_probe_inconsistent' depends on axioms: [sorryAx]
+# kernel-check: exit_code=1

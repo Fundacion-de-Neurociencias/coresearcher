@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-traceidealtransportsupport-finiteideal-weight-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/TraceIdealTransportSupport__finiteIdeal_weight__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "57c9b4a1d5b02a021051e208b68852ed9ae6a25135711e88b761c71def1ec29c",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight"
+  ],
+  "axioms_by_theorem": {
+    "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight": [
+      "Quot.sound",
+      "choice",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Quot.sound",
+    "choice",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.5,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['choice', 'sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-traceidealtransportsupport-finiteideal-weight-trivial.log",
+  "kernel_log_sha256": "5f65dd977cdef798234361cf48f55351e732b596e45a6449ea72cd901a1b4098",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:40:03Z",
+  "probe": {
+    "probe_id": "TraceIdealTransportSupport:finiteIdeal_weight:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.TraceConeClassification.ClosedIdeal.finiteIdeal_weight",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

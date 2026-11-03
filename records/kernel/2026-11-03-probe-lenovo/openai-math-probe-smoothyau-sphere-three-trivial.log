@@ -1,0 +1,24 @@
+# kernel-check lean_file openai-math-probe-smoothyau-sphere-three-trivial
+# file: ComparatorChallenges/Probes/SmoothYau__sphere_three__trivial.lean (generated probe, mode trivial)
+# file_sha256: a0a3adc454c82829f0f635a1ac348624b2f24b7ca587505a5140b29f8545de10
+# command: lake env lean ComparatorChallenges/Probes/SmoothYau__sphere_three__trivial.lean
+# probe of: OAI.YauCounterexamples.sphere_three; checked declaration: OAI.YauCounterexamples.sphere_three
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SmoothYau__sphere_three__trivial.lean:136:45: error: unsolved goals
+gRound : SmoothMetric (Euclidean 3) ↑(Sphere 3)
+hRound : IsRound gRound
+⊢ ∀ (N : Set (SmoothMetric (Euclidean 3) ↑(Sphere 3))),
+    IsSmoothNeighborhood gRound N → ∃ g ∈ N, HasUnboundedNodalRatio g 3
+'OAI.YauCounterexamples.sphere_three' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+ComparatorChallenges/Probes/SmoothYau__sphere_three__trivial.lean:155:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

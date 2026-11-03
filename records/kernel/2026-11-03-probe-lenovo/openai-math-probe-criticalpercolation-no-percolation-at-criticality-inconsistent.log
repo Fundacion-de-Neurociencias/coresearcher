@@ -1,0 +1,32 @@
+# kernel-check lean_file openai-math-probe-criticalpercolation-no-percolation-at-criticality-inconsistent
+# file: ComparatorChallenges/Probes/CriticalPercolation__no_percolation_at_criticality__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: cec13dfc84f0f7a0ba73661977e67a63735b568d012bd4837f05f8b1a902c9f0
+# command: lake env lean ComparatorChallenges/Probes/CriticalPercolation__no_percolation_at_criticality__inconsistent.lean
+# probe of: OAI.CriticalPercolation.BondGraph.no_percolation_at_criticality; checked declaration: OAI.CriticalPercolation.BondGraph.no_percolation_at_criticality_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CriticalPercolation__no_percolation_at_criticality__inconsistent.lean:52:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CriticalPercolation__no_percolation_at_criticality__inconsistent.lean:64:49: error: unsolved goals
+V : Type u_1
+E : Type u_2
+G : BondGraph V E
+inst✝ : Infinite V
+hconnected : G.fullGraph.Connected
+hlocal : G.LocallyFinite
+hquasi : G.QuasiTransitive
+hpc : G.criticalProbability < 1
+⊢ False
+'OAI.CriticalPercolation.BondGraph.no_percolation_at_criticality_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

@@ -1,0 +1,32 @@
+# kernel-check lean_file openai-math-probe-artinparabolicintersections-unconditional-arbitrary-intersections-trivial
+# file: ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean (generated probe, mode trivial)
+# file_sha256: bdba8ea64cfa7353023adf28604ce0d91696fb563b6bf73ae08358df89583070
+# command: lake env lean ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean
+# probe of: OAI.HarmonicArtin.ParabolicIntersections.unconditional_arbitrary_intersections; checked declaration: OAI.HarmonicArtin.ParabolicIntersections.unconditional_arbitrary_intersections
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean:98:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean:110:84: error: unsolved goals
+S : Type
+inst✝¹ : Fintype S
+inst✝ : LinearOrder S
+M : CoxeterMatrix S
+F : Set (Subgroup (Artin M))
+hF : ∀ P ∈ F, IsParabolic M P
+⊢ (∃ F₀, ↑F₀ ⊆ F ∧ F₀.card ≤ Fintype.card S ∧ sInf F = sInf ↑F₀) ∧ IsParabolic M (sInf F)
+'OAI.HarmonicArtin.ParabolicIntersections.unconditional_arbitrary_intersections' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean:130:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/ArtinParabolicIntersections__unconditional_arbitrary_intersections__trivial.lean:137:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

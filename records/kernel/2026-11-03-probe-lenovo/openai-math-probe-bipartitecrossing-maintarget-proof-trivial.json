@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-bipartitecrossing-maintarget-proof-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/BipartiteCrossing__mainTarget_proof__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "4afcf26921f008520b91cf45579402f7ca8014ab9b5e1c4cd9d257b964761363",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Zarankiewicz.mainTarget_proof"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Zarankiewicz.mainTarget_proof": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 6.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-bipartitecrossing-maintarget-proof-trivial.log",
+  "kernel_log_sha256": "356b61d277220885df1c10622fd025e1dbc0ae7b4d2e8d05acb84d6567205d89",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:25Z",
+  "probe": {
+    "probe_id": "BipartiteCrossing:mainTarget_proof:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Zarankiewicz.mainTarget_proof",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

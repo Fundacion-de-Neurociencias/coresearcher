@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-boonehigman-main-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/BooneHigman__main__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "47f1c0c50fc8f5ac1489bb01c145e80ab7af99c3470a36775fdcccd7aaae3d7d",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.FiniteAlgebraicEnvelopes.main_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.FiniteAlgebraicEnvelopes.main_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.4,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-boonehigman-main-inconsistent.log",
+  "kernel_log_sha256": "80db387d8cf8fa40320e92bb83590d9ed0cfd199412c0e19a6fe32ad0eaec896",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:28:13Z",
+  "probe": {
+    "probe_id": "BooneHigman:main:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.FiniteAlgebraicEnvelopes.main",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

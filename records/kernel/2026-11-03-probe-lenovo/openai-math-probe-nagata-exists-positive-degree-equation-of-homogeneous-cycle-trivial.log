@@ -1,0 +1,34 @@
+# kernel-check lean_file openai-math-probe-nagata-exists-positive-degree-equation-of-homogeneous-cycle-trivial
+# file: ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__trivial.lean (generated probe, mode trivial)
+# file_sha256: 07271eee02a824fe7b8710a571449c8fccb6ecea055af47a947e19833db69aa6
+# command: lake env lean ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__trivial.lean
+# probe of: OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle; checked declaration: OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__trivial.lean:181:78: error: unsolved goals
+cycle : Ideal TernaryPolynomial →₀ ℕ
+nonzero : cycle ≠ 0
+homogeneous :
+  ∀ ideal ∈ cycle.support,
+    ideal.IsPrime ∧
+      ideal ≠ ⊥ ∧ Submodule.IsPrincipal ideal ∧ Ideal.IsHomogeneous (MvPolynomial.homogeneousSubmodule (Fin 3) ℂ) ideal
+⊢ ∃ polynomial,
+    ¬polynomial = 0 ∧
+      MvPolynomial.IsHomogeneous polynomial (MvPolynomial.totalDegree polynomial) ∧
+        0 < MvPolynomial.totalDegree polynomial ∧ equationIdealCycle polynomial = cycle
+'OAI.Nagata.Workers.W30.exists_positive_degree_equation_of_homogeneous_cycle' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__trivial.lean:364:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/Nagata__exists_positive_degree_equation_of_homogeneous_cycle__trivial.lean:377:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-nodallength-main-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/NodalLength__Main__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "8ffc8872900f10a0d4f6336a85113ac1a6533c930401ff79c46e211fc7973521",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SharpNodal.Main_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SharpNodal.Main_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.7,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-nodallength-main-inconsistent.log",
+  "kernel_log_sha256": "2aea78b1400545ba0735d5b3ed280db5a41f70f2dc4ec86bd319fe7e54a9b7f6",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:36:17Z",
+  "probe": {
+    "probe_id": "NodalLength:Main:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.SharpNodal.Main",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

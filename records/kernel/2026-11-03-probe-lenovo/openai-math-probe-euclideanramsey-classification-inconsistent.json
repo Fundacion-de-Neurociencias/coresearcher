@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-euclideanramsey-classification-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/EuclideanRamsey__classification__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "20001bf92c6294501813000a92f39bb65f55f2eed79db449268fec3c784303ae",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.EuclideanRamsey.classification_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.EuclideanRamsey.classification_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-euclideanramsey-classification-inconsistent.log",
+  "kernel_log_sha256": "681a9ff3063d38a9a5a8d3a384ae7039d0ec55a0ec34f30b3220ed1710811555",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:31:30Z",
+  "probe": {
+    "probe_id": "EuclideanRamsey:classification:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.EuclideanRamsey.classification",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

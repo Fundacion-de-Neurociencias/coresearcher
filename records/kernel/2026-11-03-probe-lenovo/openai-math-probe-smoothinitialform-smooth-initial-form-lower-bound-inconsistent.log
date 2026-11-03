@@ -1,0 +1,39 @@
+# kernel-check lean_file openai-math-probe-smoothinitialform-smooth-initial-form-lower-bound-inconsistent
+# file: ComparatorChallenges/Probes/SmoothInitialForm__smooth_initial_form_lower_bound__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 02784b74994e2ea0784dd7db66f36dc0139267838cfa044f91003654b48eccf9
+# command: lake env lean ComparatorChallenges/Probes/SmoothInitialForm__smooth_initial_form_lower_bound__inconsistent.lean
+# probe of: OAI.PermanentBorder.smooth_initial_form_lower_bound; checked declaration: OAI.PermanentBorder.smooth_initial_form_lower_bound_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SmoothInitialForm__smooth_initial_form_lower_bound__inconsistent.lean:35:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/SmoothInitialForm__smooth_initial_form_lower_bound__inconsistent.lean:65:24: error: unsolved goals
+d r : ℕ
+g : Poly (Fin d)
+a : Fin d → ℂ
+hd : 2 ≤ d
+hr : 2 ≤ r
+hG : ¬(homogeneousComponent r) ((affineSubstitution a fun i j => if i = j then 1 else 0) g) = 0
+hlow : ∀ j < r, (homogeneousComponent j) ((affineSubstitution a fun i j => if i = j then 1 else 0) g) = 0
+hs :
+  ∀ (y : Fin d → ℂ),
+    (eval y) ((homogeneousComponent r) ((affineSubstitution a fun i j => if i = j then 1 else 0) g)) = 0 →
+      (∀ (i : Fin d),
+          (eval y)
+              ((pderiv i) ((homogeneousComponent r) ((affineSubstitution a fun i j => if i = j then 1 else 0) g))) =
+            0) →
+        y = 0
+⊢ False
+'OAI.PermanentBorder.smooth_initial_form_lower_bound_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

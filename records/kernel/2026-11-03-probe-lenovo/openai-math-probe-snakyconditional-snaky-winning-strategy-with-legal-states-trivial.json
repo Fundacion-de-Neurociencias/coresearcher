@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-snakyconditional-snaky-winning-strategy-with-legal-states-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/SnakyConditional__snaky_winning_strategy_with_legal_states__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "94a1500c301f6b2a57408a7602989b816ef4c7e83180a3b3d330a0968d95dabb",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SnakyConditional.snaky_winning_strategy_with_legal_states"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SnakyConditional.snaky_winning_strategy_with_legal_states": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-snakyconditional-snaky-winning-strategy-with-legal-states-trivial.log",
+  "kernel_log_sha256": "906ab79e6d8475383412102dc88362fd6f7d12b3daff880d34b272c1f99c4748",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:38:34Z",
+  "probe": {
+    "probe_id": "SnakyConditional:snaky_winning_strategy_with_legal_states:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.SnakyConditional.snaky_winning_strategy_with_legal_states",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

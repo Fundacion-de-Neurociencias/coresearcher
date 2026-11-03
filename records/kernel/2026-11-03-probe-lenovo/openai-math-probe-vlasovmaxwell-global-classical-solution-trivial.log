@@ -1,0 +1,22 @@
+# kernel-check lean_file openai-math-probe-vlasovmaxwell-global-classical-solution-trivial
+# file: ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__trivial.lean (generated probe, mode trivial)
+# file_sha256: 50538c4c4c49c6a8bfaaec4236d310b147a2cbf8e0de9785127d436e9bcc46e0
+# command: lake env lean ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__trivial.lean
+# probe of: OAI.RVM.global_classical_solution; checked declaration: OAI.RVM.global_classical_solution
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/VlasovMaxwell__global_classical_solution__trivial.lean:105:68: error: unsolved goals
+d : Datum
+hd : Admissible d
+⊢ ∃ s, Classical d s ∧ SmoothOnFiniteHorizons s ∧ ∀ (s' : Solution), Classical d s' → SameNonnegativeTime s s'
+'OAI.RVM.global_classical_solution' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

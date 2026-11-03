@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-hodgeconjecturecmabelianvarieties-challenge-hodge-conjecture-for-cm-abelian-varieties-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/HodgeConjectureCMAbelianVarieties__Challenge__hodge_conjecture_for_cm_abelian_varieties__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "d95be567d2fa68b8b86cb040b542719f1a3f095d7e0b93f320b38cbe99bf7853",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "HodgeCM.hodge_conjecture_for_cm_abelian_varieties_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "HodgeCM.hodge_conjecture_for_cm_abelian_varieties_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 18.3,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-hodgeconjecturecmabelianvarieties-challenge-hodge-conjecture-for-cm-abelian-varieties-inconsistent.log",
+  "kernel_log_sha256": "55f165a9d69fbdb6288e5dbc512b54cf1efcf315157a6a0787cb537af746aa07",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:43:14Z",
+  "probe": {
+    "probe_id": "HodgeConjectureCMAbelianVarieties__Challenge:hodge_conjecture_for_cm_abelian_varieties:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "HodgeCM.hodge_conjecture_for_cm_abelian_varieties",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

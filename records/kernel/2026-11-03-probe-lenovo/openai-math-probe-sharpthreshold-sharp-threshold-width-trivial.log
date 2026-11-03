@@ -1,0 +1,26 @@
+# kernel-check lean_file openai-math-probe-sharpthreshold-sharp-threshold-width-trivial
+# file: ComparatorChallenges/Probes/SharpThreshold__sharp_threshold_width__trivial.lean (generated probe, mode trivial)
+# file_sha256: b21355525738513c56ffa5ca97fa151d5019550002ea9e8d7b6feabf53ffa17e
+# command: lake env lean ComparatorChallenges/Probes/SharpThreshold__sharp_threshold_width__trivial.lean
+# probe of: OAI.Problem313.sharp_threshold_width; checked declaration: OAI.Problem313.sharp_threshold_width
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SharpThreshold__sharp_threshold_width__trivial.lean:56:76: error: unsolved goals
+⊢ ∀ (n : ℕ) (f : GraphConfig n → Bool) (ε : ℝ),
+    2 ≤ n →
+      VertexInvariant f →
+        IncreasingGraphProperty f →
+          NontrivialGraphProperty f →
+            0 < ε →
+              ε < 2⁻¹ → graphQuantile (1 - ε) f ≤ 2 ^ 19 / Real.log ↑n ^ 2 * Real.log (ε⁻¹ * 2⁻¹) + graphQuantile ε f
+'OAI.Problem313.sharp_threshold_width' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

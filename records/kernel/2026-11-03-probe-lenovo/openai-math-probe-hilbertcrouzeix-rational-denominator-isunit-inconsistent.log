@@ -1,0 +1,37 @@
+# kernel-check lean_file openai-math-probe-hilbertcrouzeix-rational-denominator-isunit-inconsistent
+# file: ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: e96731e5605d999bb257373426b2b486220356c4252a82c2515f929d87467c46
+# command: lake env lean ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean
+# probe of: OAI.HilbertCrouzeix.rational_denominator_isUnit; checked declaration: OAI.HilbertCrouzeix.rational_denominator_isUnit_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean:115:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean:121:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean:131:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean:138:29: error: unsolved goals
+H : Type u
+inst✝³ : NormedAddCommGroup H
+inst✝² : InnerProductSpace ℂ H
+inst✝¹ : CompleteSpace H
+inst✝ : Nontrivial H
+A : H →L[ℂ] H
+m : ℕ
+R : RationalMatrix m
+hR : numericalClosure A ⊆ poleFreeSet R
+i j : Fin m
+⊢ False
+'OAI.HilbertCrouzeix.rational_denominator_isUnit_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/HilbertCrouzeix__rational_denominator_isUnit__inconsistent.lean:157:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

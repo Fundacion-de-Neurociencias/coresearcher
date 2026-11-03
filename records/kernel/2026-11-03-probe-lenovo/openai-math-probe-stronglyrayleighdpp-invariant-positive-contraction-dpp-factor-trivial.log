@@ -1,0 +1,30 @@
+# kernel-check lean_file openai-math-probe-stronglyrayleighdpp-invariant-positive-contraction-dpp-factor-trivial
+# file: ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean (generated probe, mode trivial)
+# file_sha256: 0421b60af1d3f87e2ad3c284f4cbd3286eb87d4a48b2cd1d7645c4a0c583c501
+# command: lake env lean ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean
+# probe of: OAI.Problem336AdditiveD139.invariant_positive_contraction_dpp_factor; checked declaration: OAI.Problem336AdditiveD139.invariant_positive_contraction_dpp_factor
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:132:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:147:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:153:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:161:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:171:60: error: unsolved goals
+⊢ ∀ (Γ : Type u_5) [inst : Group Γ] [Countable Γ] [inst_2 : MeasurableSpace Γ] (K : Γ → Γ → ℂ)
+    (μ : ProbabilityMeasure (Γ → Bool)),
+    PositiveContractionKernel K → IsDeterminantalLaw μ K → InvariantBinaryLaw μ → HasEquivariantIIDFactor μ
+'OAI.Problem336AdditiveD139.invariant_positive_contraction_dpp_factor' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+ComparatorChallenges/Probes/StronglyRayleighDPP__invariant_positive_contraction_dpp_factor__trivial.lean:190:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

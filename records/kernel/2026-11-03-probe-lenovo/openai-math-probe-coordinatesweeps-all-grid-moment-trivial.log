@@ -1,0 +1,29 @@
+# kernel-check lean_file openai-math-probe-coordinatesweeps-all-grid-moment-trivial
+# file: ComparatorChallenges/Probes/CoordinateSweeps__all_grid_moment__trivial.lean (generated probe, mode trivial)
+# file_sha256: 4e9930ece89447391d3c729184b132c16cd1fb1cd2927cb06b8e0093b165eb41
+# command: lake env lean ComparatorChallenges/Probes/CoordinateSweeps__all_grid_moment__trivial.lean
+# probe of: OAI.CoordinateSweeps.all_grid_moment; checked declaration: OAI.CoordinateSweeps.all_grid_moment
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CoordinateSweeps__all_grid_moment__trivial.lean:303:64: error: unsolved goals
+r : ℕ
+hr : ScaleLarge r
+hrS : SparseScalar.ScaleReady r
+hS : ∀ (G : Grid), G.Allowed r → ScalarInduction.MainSizeReady SparseScalar.q ↑G.size
+zStar : ℝ
+hζ : SparsePerturb r zStar
+z : ℝ
+hz : 0 ≤ z ∧ z ≤ zStar
+⊢ ∀ (G : Grid), G.Allowed r → MomentBound G SparseScalar.q z
+'OAI.CoordinateSweeps.all_grid_moment' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+ComparatorChallenges/Probes/CoordinateSweeps__all_grid_moment__trivial.lean:323:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

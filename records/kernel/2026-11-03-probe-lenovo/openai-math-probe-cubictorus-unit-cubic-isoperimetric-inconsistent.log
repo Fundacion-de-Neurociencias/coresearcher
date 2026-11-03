@@ -1,0 +1,26 @@
+# kernel-check lean_file openai-math-probe-cubictorus-unit-cubic-isoperimetric-inconsistent
+# file: ComparatorChallenges/Probes/CubicTorus__unit_cubic_isoperimetric__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 07d39310bea06de493905f113b8327355d7edf3d63977b26e9c746a6cc748b5e
+# command: lake env lean ComparatorChallenges/Probes/CubicTorus__unit_cubic_isoperimetric__inconsistent.lean
+# probe of: OAI.CubicTorus.unit_cubic_isoperimetric; checked declaration: OAI.CubicTorus.unit_cubic_isoperimetric_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/CubicTorus__unit_cubic_isoperimetric__inconsistent.lean:88:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/CubicTorus__unit_cubic_isoperimetric__inconsistent.lean:95:90: error: unsolved goals
+V : ℝ
+hV : 0 < V ∧ V < 1
+⊢ False
+'OAI.CubicTorus.unit_cubic_isoperimetric_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

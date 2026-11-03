@@ -1,0 +1,44 @@
+# kernel-check lean_file openai-math-probe-traceidealtransportsupport-closed-ideal-weight-exists-trivial
+# file: ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean (generated probe, mode trivial)
+# file_sha256: 0ad8c2e5a34be383889e14afaf5b04b33455396f9f00a301030acb23db8f0e35
+# command: lake env lean ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean
+# probe of: OAI.TraceConeClassification.closed_ideal_weight_exists; checked declaration: OAI.TraceConeClassification.closed_ideal_weight_exists
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:65:79: error: unsolved goals
+A : Type u_1
+inst✝² : NonUnitalCStarAlgebra A
+inst✝¹ : PartialOrder A
+inst✝ : StarOrderedRing A
+I : NonUnitalStarSubalgebra ℂ A
+hI : IsClosed[PseudoMetricSpace.toUniformSpace.toTopologicalSpace] ↑I
+hleft : ∀ (x y : A), y ∈ I → x * y ∈ I
+hright : ∀ (x y : A), x ∈ I → x * y ∈ I
+⊢ ∃ τ, ∀ (a : A) (b : 0 ≤ a), τ.toFun ⟨a, b⟩ = if a ∈ I then 0 else ∞
+'OAI.TraceConeClassification.closed_ideal_weight_exists' depends on axioms: [propext, sorryAx, choice, Quot.sound]
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:87:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:88:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:90:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:92:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:95:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:107:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:108:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:110:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:150:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:173:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:174:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:175:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:180:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:209:6: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:241:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/TraceIdealTransportSupport__closed_ideal_weight_exists__trivial.lean:245:8: warning: declaration uses `sorry`
+# kernel-check: exit_code=1

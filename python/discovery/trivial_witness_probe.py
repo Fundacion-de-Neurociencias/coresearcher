@@ -45,6 +45,28 @@ class LeanOutcome(str, Enum):
     PROVED = "PROVED"  # Elaborated without error and without sorryAx.
     NOT_PROVED = "NOT_PROVED"  # An error in the probe declaration: the menu did not close it (inconclusive).
     NOT_RUN = "NOT_RUN"
+    BLOCKED = "BLOCKED"  # The run did not finish (timeout, environment): a non-verdict, never read as either side.
+
+
+# What a PASS (kernel accepts the probe declaration with standard axioms only) means for each probe mode. A probe
+# record's PASS is about the probe, not the target: for `trivial` and `inconsistent` it is a vacuity finding.
+MEANING = {
+    "trivial": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says "
+    "(vacuity finding). FAIL: the menu did not close it, which is no evidence either way.",
+    "inconsistent": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no "
+    "contradiction found by the menu.",
+    "degenerate": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under "
+    "the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open.",
+}
+
+
+def meaning(mode: str) -> str:
+    return MEANING.get(mode, MEANING["degenerate"])
+
+
+def outcome_from_kernel(result: str) -> LeanOutcome:
+    """Kernel record result (ADR-092) to probe outcome: PASS proved, FAIL not proved, BLOCKED blocked."""
+    return {"PASS": LeanOutcome.PROVED, "FAIL": LeanOutcome.NOT_PROVED}.get(result, LeanOutcome.BLOCKED)
 
 
 TACTIC_MENU = [
@@ -132,8 +154,9 @@ def arithmetic_check(statement: str, timeout_ms: int = 10000) -> Dict[str, Any]:
     if not atoms:
         return {"verdict": ArithmeticVerdict.NO_ATOMS.value, "atoms": []}
     integers, naturals = integer_letters(statement), natural_letters(statement)
-    symbols = {v: (z3.Int(f"v{i}") if v in integers else z3.Real(f"v{i}"))
-               for i, v in enumerate(sorted({a[0] for a in atoms}))}
+    symbols = {
+        v: (z3.Int(f"v{i}") if v in integers else z3.Real(f"v{i}")) for i, v in enumerate(sorted({a[0] for a in atoms}))
+    }
     solver = z3.Solver()
     solver.set("timeout", timeout_ms)
     for v in naturals & set(symbols):
@@ -167,9 +190,34 @@ def arithmetic_check(statement: str, timeout_ms: int = 10000) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
-def _menu() -> str:
+# Tactics from Mathlib's tactic library. A challenge that imports only parts of Mathlib gets the menu without them:
+# an unknown tactic is a parse error that sinks the whole `first` block.
+MATHLIB_TACTICS = ("norm_num", "positivity", "aesop")
+
+
+def menu_for(source: str) -> List[str]:
+    """The tactic menu a challenge file can parse: the full menu when it imports all of Mathlib."""
+    if re.search(r"(?m)^import Mathlib\s*$", source):
+        return list(TACTIC_MENU)
+    return [t for t in TACTIC_MENU if not any(m in t for m in MATHLIB_TACTICS)]
+
+
+def _menu(tactics: Sequence[str] = TACTIC_MENU) -> str:
     """The tactic block that replaces `sorry`: heartbeat-bounded, first tactic that closes the goal wins."""
-    return f"set_option maxHeartbeats {HEARTBEATS} in\n    first\n      " + "\n      ".join(f"| {t}" for t in TACTIC_MENU)
+    return f"set_option maxHeartbeats {HEARTBEATS} in\n    first\n      " + "\n      ".join(f"| {t}" for t in tactics)
+
+
+def _top_level_assign(text: str) -> int:
+    """Index of the declaration's `:=`, outside brackets (a named argument `(n := n)` is skipped); -1 if none."""
+    depth = 0
+    for i, ch in enumerate(text):
+        if ch in "([{⦃⟨":
+            depth += 1
+        elif ch in ")]}⦄⟩":
+            depth -= 1
+        elif depth == 0 and text.startswith(":=", i):
+            return i
+    return -1
 
 
 def _theorem_span(source: str, short: str) -> Optional[Tuple[int, int]]:
@@ -185,9 +233,10 @@ def _theorem_span(source: str, short: str) -> Optional[Tuple[int, int]]:
 
 def binders_and_type(declaration: str) -> Tuple[str, str]:
     """Splits `theorem name binders : type := ...` at the first top-level `:` after the name."""
-    head = declaration.split(":=", 1)[0]
+    cut = _top_level_assign(declaration)
+    head = declaration if cut < 0 else declaration[:cut]
     name_end = re.match(r"theorem\s+[^\s:({\[.]+(?:\.[^\s:({\[.]+)*(?:\.\{[^}]*\})?", head)
-    rest = head[name_end.end():] if name_end else head
+    rest = head[name_end.end() :] if name_end else head
     depth = 0
     for i, ch in enumerate(rest):
         if ch in "([{⦃⟨":
@@ -195,7 +244,7 @@ def binders_and_type(declaration: str) -> Tuple[str, str]:
         elif ch in ")]}⦄⟩":
             depth -= 1
         elif ch == ":" and depth == 0 and not rest[i:].startswith(":="):
-            return rest[:i].strip(), rest[i + 1:].strip()
+            return rest[:i].strip(), rest[i + 1 :].strip()
     return rest.strip(), ""
 
 
@@ -210,6 +259,39 @@ class ProbeFile:
     declaration: str  # Name to look for in Lean's output.
 
 
+def single_tactic_probes(source: str, challenge: str, theorem_name: str) -> List[ProbeFile]:
+    """One 'trivial' probe per tactic of the menu, for a target whose combined menu was aborted by one tactic.
+
+    A tactic that raises an error `first` cannot catch (maximum recursion depth) stops the whole menu, so the
+    other tactics never ran. Split, each tactic gets its own kernel run and its own record.
+    """
+    short = theorem_name.split(".")[-1]
+    span = _theorem_span(source, short)
+    if span is None:
+        return []
+    stem = challenge.replace("/", "__").removesuffix(".lean")
+    declaration = source[span[0] : span[1]]
+    body = declaration[_top_level_assign(declaration) + 2 :]
+    probes = []
+    for i, tactic in enumerate(menu_for(source)):
+        block = _menu([tactic]) if re.match(r"\s*by\b", body) else "by\n    " + _menu([tactic])
+        probes.append(
+            ProbeFile(
+                probe_id=f"{stem}:{short}:trivial@{i:02d}",
+                challenge=challenge,
+                theorem=theorem_name,
+                mode=f"trivial@{tactic}",
+                module_path=f"ComparatorChallenges/Probes/{stem}__{short}__trivial_{i:02d}.lean",
+                text=source[: span[0]]
+                + declaration.replace("sorry", block, 1)
+                + f"\n\n#print axioms {short}\n"
+                + source[span[1] :],
+                declaration=short,
+            )
+        )
+    return probes
+
+
 def cheap_tactic_probes(source: str, challenge: str, theorem_names: Sequence[str]) -> List[ProbeFile]:
     """Probe files for every target of one challenge file: one 'trivial' and, when it has binders, one 'inconsistent'."""
     probes = []
@@ -219,8 +301,12 @@ def cheap_tactic_probes(source: str, challenge: str, theorem_names: Sequence[str
         span = _theorem_span(source, short)
         if span is None:
             continue
-        declaration = source[span[0]:span[1]]
-        trivial = declaration.replace("sorry", _menu(), 1)
+        declaration = source[span[0] : span[1]]
+        tactics = menu_for(source)
+        body = declaration[_top_level_assign(declaration) + 2 :]
+        # A term-mode `:= sorry` needs `by` before the tactic block.
+        block = _menu(tactics) if re.match(r"\s*by\b", body) else "by\n    " + _menu(tactics)
+        trivial = declaration.replace("sorry", block, 1)
         probes.append(
             ProbeFile(
                 probe_id=f"{stem}:{short}:trivial",
@@ -228,15 +314,17 @@ def cheap_tactic_probes(source: str, challenge: str, theorem_names: Sequence[str
                 theorem=name,
                 mode="trivial",
                 module_path=f"ComparatorChallenges/Probes/{stem}__{short}__trivial.lean",
-                text=source[: span[0]] + trivial + f"\n\n#print axioms {short}\n" + source[span[1]:],
+                text=source[: span[0]] + trivial + f"\n\n#print axioms {short}\n" + source[span[1] :],
                 declaration=short,
             )
         )
         binders, _ = binders_and_type(declaration)
         if binders:
             probe_name = f"{short}_probe_inconsistent"
-            example = f"\n\ntheorem {probe_name} {binders} : False := by\n  {_menu()}\n\n#print axioms {probe_name}\n"
-            text = source[: span[1]] + example + source[span[1]:]
+            example = (
+                f"\n\ntheorem {probe_name} {binders} : False := by\n  {_menu(tactics)}\n\n#print axioms {probe_name}\n"
+            )
+            text = source[: span[1]] + example + source[span[1] :]
             probes.append(
                 ProbeFile(
                     probe_id=f"{stem}:{short}:inconsistent",
@@ -258,8 +346,9 @@ def parse_lean_output(output: str, declaration: str) -> LeanOutcome:
     """
     if re.search(r":\d+:\d+: error", output):
         return LeanOutcome.NOT_PROVED
-    axioms = re.search(rf"'[^']*{re.escape(declaration)}' (depends on axioms: \[([^\]]*)\]|does not depend on any axioms)",
-                       output)
+    axioms = re.search(
+        rf"'[^']*{re.escape(declaration)}' (depends on axioms: \[([^\]]*)\]|does not depend on any axioms)", output
+    )
     if axioms is None:
         return LeanOutcome.NOT_PROVED
     return LeanOutcome.NOT_PROVED if "sorryAx" in (axioms.group(2) or "") else LeanOutcome.PROVED
@@ -304,11 +393,13 @@ theorem probe_degenerate_implies_target (h : ∀ n, sphereProbability n = 0) : E
   intro n hn β hβ
   refine ⟨1, 1, one_pos, ?_⟩
   intro G b hb x y
-  haveI : Nonempty G.vertices := ⟨x⟩
+  -- Rewrite the factors to the zero measure first: `Measure.pi_univ` needs `SigmaFinite` factors, which `0` has.
+  have hfun : (fun _ : G.vertices => sphereProbability n) = fun _ => (0 : Measure (Spin n)) :=
+    funext fun _ => h n
   have hz : referenceLaw n G = 0 := by
     apply Measure.measure_univ_eq_zero.mp
-    rw [referenceLaw, Measure.pi_univ]
-    exact Finset.prod_eq_zero (Finset.mem_univ x) (by simp [h])
+    rw [referenceLaw, hfun, Measure.pi_univ]
+    exact Finset.prod_eq_zero (Finset.mem_univ x) (by simp)
   simp only [correlation, partition, hz, integral_zero_measure, zero_div]
   exact ⟨le_rfl, by positivity⟩
 

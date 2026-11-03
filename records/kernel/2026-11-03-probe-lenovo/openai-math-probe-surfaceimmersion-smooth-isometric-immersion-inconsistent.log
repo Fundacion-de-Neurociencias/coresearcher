@@ -1,0 +1,32 @@
+# kernel-check lean_file openai-math-probe-surfaceimmersion-smooth-isometric-immersion-inconsistent
+# file: ComparatorChallenges/Probes/SurfaceImmersion__smooth_isometric_immersion__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: bffe8f586edcd25c60d142d76487b951e7275021328a2e2c28e02baef6301b28
+# command: lake env lean ComparatorChallenges/Probes/SurfaceImmersion__smooth_isometric_immersion__inconsistent.lean
+# probe of: OAI.ClosedSurfaceR4.FiniteOrderSmoothing.smooth_isometric_immersion; checked declaration: OAI.ClosedSurfaceR4.FiniteOrderSmoothing.smooth_isometric_immersion_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SurfaceImmersion__smooth_isometric_immersion__inconsistent.lean:40:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/SurfaceImmersion__smooth_isometric_immersion__inconsistent.lean:44:86: error: unsolved goals
+M : Type u_1
+inst✝⁵ : TopologicalSpace M
+inst✝⁴ : ChartedSpace Plane M
+inst✝³ : IsManifold planeModel ∞ M
+inst✝² : CompactSpace M
+inst✝¹ : T2Space M
+inst✝ : SecondCountableTopology M
+g : SmoothMetric M
+⊢ False
+'OAI.ClosedSurfaceR4.FiniteOrderSmoothing.smooth_isometric_immersion_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

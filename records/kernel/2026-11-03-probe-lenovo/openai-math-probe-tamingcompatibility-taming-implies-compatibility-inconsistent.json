@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-tamingcompatibility-taming-implies-compatibility-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/TamingCompatibility__taming_implies_compatibility__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "a66f91b0a981f985212f271b50ba5bec98a64e3529eeaf30461f184990213b59",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.TamingCompatibility.taming_implies_compatibility_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.TamingCompatibility.taming_implies_compatibility_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 8.1,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-tamingcompatibility-taming-implies-compatibility-inconsistent.log",
+  "kernel_log_sha256": "aeb498846770f00a86a7b5422c86939c99f1610fd30bf00584f31a018b780f69",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:39:27Z",
+  "probe": {
+    "probe_id": "TamingCompatibility:taming_implies_compatibility:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.TamingCompatibility.taming_implies_compatibility",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

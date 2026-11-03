@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-finitisticasymmetry-extreme-left-right-asymmetry-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/FinitisticAsymmetry__extreme_left_right_asymmetry__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "9b1f349fb2267ed5de6780930204b4264ef5cceebfaa3f2c8b3ac2b5f7db287d",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.LittleFinitistic.extreme_left_right_asymmetry"
+  ],
+  "axioms_by_theorem": {
+    "OAI.LittleFinitistic.extreme_left_right_asymmetry": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.6,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-finitisticasymmetry-extreme-left-right-asymmetry-trivial.log",
+  "kernel_log_sha256": "85e89f3a1101e9eda4ebf0bffd54fd21e3763c3abb984a0e9aae6d4d3ff4d2ed",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:32:06Z",
+  "probe": {
+    "probe_id": "FinitisticAsymmetry:extreme_left_right_asymmetry:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.LittleFinitistic.extreme_left_right_asymmetry",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

@@ -1,0 +1,40 @@
+# kernel-check lean_file openai-math-probe-bufferedising-finite-graph-comparison-inconsistent
+# file: ComparatorChallenges/Probes/BufferedIsing__finite_graph_comparison__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 6c70811facb30beb7deba23e5a2ae57352a5116d35d123f629b0a1daf2145f55
+# command: lake env lean ComparatorChallenges/Probes/BufferedIsing__finite_graph_comparison__inconsistent.lean
+# probe of: OAI.BufferedIsing.finite_graph_comparison; checked declaration: OAI.BufferedIsing.finite_graph_comparison_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/BufferedIsing__finite_graph_comparison__inconsistent.lean:98:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/BufferedIsing__finite_graph_comparison__inconsistent.lean:117:71: error: unsolved goals
+n m : ℕ
+G : FiniteGraph n m
+h : Fin n → ℝ
+I J F : Finset (Fin n)
+hIJ : Disjoint I J
+hIF : Disjoint I F
+hJF : Disjoint J F
+i j : KeptVertex F
+hi : ↑i ∈ I
+hj : ↑j ∈ J
+a τ : Spins n
+mix mix' : Spins n → ℝ
+hmix : ∀ (b : Spins n), 0 ≤ mix b
+hmix' : ∀ (b : Spins n), 0 ≤ mix' b
+hmixsum : ∑ b, mix b = 1
+hmix'sum : ∑ b, mix' b = 1
+⊢ False
+'OAI.BufferedIsing.finite_graph_comparison_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

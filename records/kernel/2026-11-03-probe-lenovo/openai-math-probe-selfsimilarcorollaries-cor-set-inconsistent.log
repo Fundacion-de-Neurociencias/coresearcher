@@ -1,0 +1,29 @@
+# kernel-check lean_file openai-math-probe-selfsimilarcorollaries-cor-set-inconsistent
+# file: ComparatorChallenges/Probes/SelfSimilarCorollaries__cor_set__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 29f2c4d90c2b2b82c45ba598b81859c971a4a32ad4e696f5ca904667e484c62e
+# command: lake env lean ComparatorChallenges/Probes/SelfSimilarCorollaries__cor_set__inconsistent.lean
+# probe of: OAI.CorSetReference.cor_set; checked declaration: OAI.CorSetReference.cor_set_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/SelfSimilarCorollaries__cor_set__inconsistent.lean:49:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/SelfSimilarCorollaries__cor_set__inconsistent.lean:78:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/SelfSimilarCorollaries__cor_set__inconsistent.lean:91:50: error: unsolved goals
+ι : Type uι
+inst✝¹ : Fintype ι
+inst✝ : Nonempty ι
+r t : ι → ℝ
+hr0 : ∀ (i : ι), ¬r i = 0
+hr1 : ∀ (i : ι), |r i| < 1
+hno : ∀ (u v : List ι), ¬u = [] → ¬v = [] → word r t u = word r t v → u = v
+⊢ False
+'OAI.CorSetReference.cor_set_probe_inconsistent' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

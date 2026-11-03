@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-snakycertificate-certificate-correct-trivial-09",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/SnakyCertificate__certificate_correct__trivial_09.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "226649f78321f4c87436a20d2d131895ad7d15eaa0d908843ff2a2bdee0579d7",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SnakyCertificate.certificate_correct"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SnakyCertificate.certificate_correct": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 9.2,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-snakycertificate-certificate-correct-trivial-09.log",
+  "kernel_log_sha256": "3fe110cbbe7e5a0bfd664105ddf322687d52b7d514605de6b31222e0797dd6e1",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T06:14:28Z",
+  "probe": {
+    "probe_id": "SnakyCertificate:certificate_correct:trivial@09",
+    "mode": "trivial@(intros; simp_all)",
+    "target_theorem": "OAI.SnakyCertificate.certificate_correct",
+    "meaning": "D1 PASS: on the junk branch the target holds trivially. D2 PASS: the junk branch cannot fire under the target's hypotheses. Both PASS close the finding; D1 PASS with D2 not PASS leaves it open."
+  }
+}

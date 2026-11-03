@@ -1,0 +1,36 @@
+# kernel-check lean_file openai-math-probe-weakmtwglobalsupport-current-main-convexity-inconsistent
+# file: ComparatorChallenges/Probes/WeakMTWGlobalSupport__current_main_convexity__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: db87ea36bbb480eafc2ce4139f492174246bcaa95f45beb5c6b067617e818921
+# command: lake env lean ComparatorChallenges/Probes/WeakMTWGlobalSupport__current_main_convexity__inconsistent.lean
+# probe of: OAI.WeakMTWGlobalSupport.current_main_convexity; checked declaration: OAI.WeakMTWGlobalSupport.current_main_convexity_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/WeakMTWGlobalSupport__current_main_convexity__inconsistent.lean:63:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/WeakMTWGlobalSupport__current_main_convexity__inconsistent.lean:85:61: error: unsolved goals
+n : ℕ
+hn : 2 ≤ n
+M : Type u_1
+inst✝⁷ : MetricSpace M
+inst✝⁶ : ChartedSpace (WeakMTW.Model n) M
+inst✝⁵ : IsManifold (WeakMTW.model n) ∞ M
+inst✝⁴ : CompactSpace M
+inst✝³ : ConnectedSpace M
+inst✝² : RiemannianBundle fun x => TangentSpace (WeakMTW.model n) x
+inst✝¹ : IsContMDiffRiemannianBundle (WeakMTW.model n) ∞ (WeakMTW.Model n) fun x => TangentSpace (WeakMTW.model n) x
+inst✝ : IsRiemannianManifold (WeakMTW.model n) M
+hmtw : WeakMTW.HasWeakMTW
+⊢ False
+'OAI.WeakMTWGlobalSupport.current_main_convexity_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

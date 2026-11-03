@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-weightedsweepmoments-weighted-sweep-moments-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/WeightedSweepMoments__weighted_sweep_moments__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "10ceeff53c3aab3925f3691a5897b422c4fa0b5e74e8bfc87de4f546e5a32a33",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.CubeShuffle.WeightedSweep.weighted_sweep_moments"
+  ],
+  "axioms_by_theorem": {
+    "OAI.CubeShuffle.WeightedSweep.weighted_sweep_moments": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 9.0,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-weightedsweepmoments-weighted-sweep-moments-trivial.log",
+  "kernel_log_sha256": "256da06c1072059ff6ac2873b00dce4f0176e915183519663c779948a84dbe7f",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:40:58Z",
+  "probe": {
+    "probe_id": "WeightedSweepMoments:weighted_sweep_moments:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.CubeShuffle.WeightedSweep.weighted_sweep_moments",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

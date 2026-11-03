@@ -1,0 +1,20 @@
+# kernel-check lean_file openai-math-probe-brennansharp-sharp-endpoints-trivial
+# file: ComparatorChallenges/Probes/BrennanSharp__sharp_endpoints__trivial.lean (generated probe, mode trivial)
+# file_sha256: df53ca189adaa9eba306f8e3922a829e0d8bff4701b5caa56fc2d64bc5450da6
+# command: lake env lean ComparatorChallenges/Probes/BrennanSharp__sharp_endpoints__trivial.lean
+# probe of: OAI.Brennan.Sharp.sharp_endpoints; checked declaration: OAI.Brennan.Sharp.sharp_endpoints
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/BrennanSharp__sharp_endpoints__trivial.lean:36:52: error: unsolved goals
+⊢ SharpEndpointStatement
+'OAI.Brennan.Sharp.sharp_endpoints' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

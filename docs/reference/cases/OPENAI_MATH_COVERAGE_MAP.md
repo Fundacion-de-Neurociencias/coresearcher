@@ -228,63 +228,99 @@ Two checks on the lint at corpus scale:
 
 The open rate is high because the discharge rules were written for one analysis file. Outside analysis, many divisors
 are bounded away from zero by facts the syntactic rules do not see, such as cardinalities and positive constants
-introduced by `∃`. Triaging the 2,738 findings needs better discharge rules and the Lean stages of the probe in §5.1.
+introduced by `∃`. The Lean stages of §5.1 found no vacuity among the targets. Triaging the 2,738 findings site by site still needs
+better discharge rules.
 
 ### 5.1 Trivial-witness probe
 
 [`trivial_witness_probe.py`](../../../python/discovery/trivial_witness_probe.py) asks a sharper question than the lint:
-is a target *easy for the wrong reason*? It has three stages. Only the first can run without Lean.
+is a target *easy for the wrong reason*? It has three stages, and all three have run. Every Lean probe left an
+ADR-DISCOVERY-092 kernel record and log, in
+[`records/kernel/2026-11-03-probe-lenovo/`](../../../records/kernel/2026-11-03-probe-lenovo/).
 
-| Stage | Question | Method | Status |
+| Stage | Question | Method | Result |
 |---|---|---|---|
-| 1. Arithmetic consistency | Are the explicit numeric hypotheses jointly satisfiable? A clash means the target is vacuously true. | z3 over binder hypotheses (`(hn : 3 ≤ n)`), antecedents (`2 ≤ p →`) and `∀ ε > 0`. For `theorem main : P`, the body of `P` is read too. ℕ letters are nonnegative Ints. | **Run**: 546 targets, 235 SATISFIABLE, 311 without numeric hypotheses, **0 clashes** |
-| 2. Cheap tactics | Does a target close without its solution module? Do its binders already prove `False`? | `sorry` is replaced by a heartbeat-bounded menu: `trivial`, `decide`, `rfl`, `simp`, `simp_all`, `norm_num`, `positivity`, `aesop` and `intros` variants. PROVED means no error and no `sorryAx` in `#print axioms`. | 720 probe files generated (519 targets; 201 also get the `False` probe); **not run** |
-| 3. Degenerate witnesses | For an OPEN lint site: (D1) if the junk branch fires, is the target trivial? (D2) Can it fire under the hypotheses? | Hand-written Lean lemmas per case | ClassicalON (family 215) written; **not run** |
+| 1. Arithmetic consistency | Are the explicit numeric hypotheses jointly satisfiable? A clash means the target is vacuously true. | z3 over binder hypotheses (`(hn : 3 ≤ n)`), antecedents (`2 ≤ p →`) and `∀ ε > 0`. For `theorem main : P`, the body of `P` is read too. ℕ letters are nonnegative Ints. | 546 targets: 235 SATISFIABLE, 311 without numeric hypotheses, **0 clashes** |
+| 2. Cheap tactics | Does a target close without its solution module? Do its binders already prove `False`? | `sorry` is replaced by a heartbeat-bounded menu: `trivial`, `decide`, `rfl`, `simp`, `simp_all`, `norm_num`, `positivity`, `aesop` and `intros` variants. A probe is PROVED when its record is PASS: exit 0, no error, and only `propext`, `Quot.sound` and `Classical.choice` in `#print axioms`. | 720 probes on 519 targets (201 also probe `False`): **0 PROVED**, 714 NOT_PROVED, 3 BLOCKED. The 3 BLOCKED were split into 36 single-tactic probes: 23 NOT_PROVED, 13 BLOCKED. |
+| 3. Degenerate witnesses | For an OPEN lint site: (D1) if the junk branch fires, is the target trivial? (D2) Can it fire under the hypotheses? | Hand-written Lean lemmas per case | ClassicalON (family 215): **D1 PASS, D2 PASS**. The finding is closed. |
 
-Stage 1 found one clash during development: Brennan, `t > 2` against `t < 2/3`. It was an extraction error, because
-the extractor had lost the sign of `-2 < t`. The fix has a regression test. No real clash remains. Twenty-seven
-targets have no stage 2 file, because the probe could not locate their `theorem … sorry` text. In most of them
-several targets share a short name such as `main` in different namespaces of one file. They are listed in
-`vacuity_probe.json`.
+**What the records say.** Stage 2 found no vacuity: no Comparator target closes with a cheap tactic, and no target's
+binders prove `False`. A NOT_PROVED record shows only that the menu failed. It does not show that a target is hard;
+that is a weak check, and it was run on every target. The 758 records were verified against their logs, by
+`scripts/lean/kernel_check.py verify` and by `tests/test_kernel_records.py`.
 
-**ClassicalON (family 215), the first stage 3 case.** Section 5 found that a zero single-spin law would make
-`correlation = 0 / 0 = 0` and the decay bound empty. The probe turns that reading into two Lean lemmas, inserted into
-the challenge namespace:
+- **NOT_PROVED: 740 records.**
+  - 717 are combined-menu probes. The error that stops each one is the menu's own failure, from its last
+    alternative: `unsolved goals` (687) or `Type mismatch` (30).
+  - 23 are single-tactic probes. Each stops on that tactic's own failure message (for example
+    `not a positivity goal`, or `simp made no progress`).
+- **BLOCKED: 16 records.** Each is a non-verdict, never a pass. In every one, a tactic raised an error that `first`
+  cannot catch (`maximum recursion depth has been reached` or `failed with a nested error`), so the menu stopped
+  early.
+  - Three combined menus were blocked this way: ArtinCAT0 `main`, SnakyCertificate `certificate_correct` and
+    EditApproximation `almostLinearEditDistanceRawBand`.
+  - Each was split into one probe per tactic. Every tactic then either failed (23) or itself overflowed (13); none
+    closed a target.
+  - **Decision: these 13 stay BLOCKED.** A tactic that overflows the recursion depth cannot close the goal within
+    these limits, and raising the limits would test another menu.
+- **Fixes during the run.** The first run had 13 probes that did not test what they meant to. Their errors came from
+  the generator, not from the targets:
+  - three term-mode `:= sorry` targets needed a `by`;
+  - three named arguments `(n := n)` were misread as the body's `:=`;
+  - files that import only parts of Mathlib cannot parse `aesop`, `positivity` or `norm_num`.
 
-- **D1, `probe_degenerate_implies_target`.** `(∀ n, sphereProbability n = 0) → ExponentialDecay` with `A = m = 1`. The
-  product measure is 0 because the vertex type is nonempty, so both integrals vanish and the bound reads
-  `0 ≤ 0 ≤ e^{-d}`.
-- **D2, `probe_law_is_probability`.** For `3 ≤ n`, `sphereProbability n univ = 1`, via
-  `Measure.toSphere_apply_univ` (surface = n · volume(ball)), which is finite and nonzero.
+  After these fixes (with tests), every changed probe file was rerun. The runner skips a probe only when an
+  existing record has the same file SHA-256. Three probes first came out BLOCKED because their imports were not
+  built: `ComparatorChallenges.HodgeConjectureCMAbelianVarieties.CM` and
+  `OAI.AlgebraicGeometry.CharacterVarieties.Seams.ProducedEquations`. Those modules were built (4,757 and 3,150 jobs),
+  and the three probes were rerun. All three are now NOT_PROVED.
 
-Expected outcome: both PROVED. D1 shows the target *would* be vacuous on the junk branch, and D2 shows the branch
-cannot fire, which closes the finding. If D2 failed to compile, that would be inconclusive (the proof script may
-need adjusting), not evidence of vacuity.
+**ClassicalON (family 215).** Section 5 found that a zero single-spin law would make `correlation = 0 / 0 = 0` and
+the decay bound empty. Two lemmas, inserted into the challenge namespace, settle it. Both pass the kernel with only
+the standard axioms:
 
-**Why stages 2 and 3 did not run.** Elaborating the probes needs the openai/math Lean project built at the pin
-(Mathlib cache, Lean `v4.34.1`). That environment is the WSL2 setup on the Lenovo Legion
-([LEAN_ORACLE_PROTOCOL.md](../benchmarks/LEAN_ORACLE_PROTOCOL.md) §4), and the Legion was offline on 2026-10-30. The
-Lean side is untested: the probe texts have not been compiled even once, so the first run may need syntax fixes.
-Runbook on the Legion:
+- **D1, `probe_degenerate_implies_target`: PASS.** `(∀ n, sphereProbability n = 0) → ExponentialDecay`, with
+  `A = m = 1`. The factors are rewritten to the zero measure, so the product measure of `univ` is 0. Both integrals
+  then vanish, and the bound reads `0 ≤ 0 ≤ e^{-d}`. So the junk branch would make the target vacuous. The first
+  version of this script failed on a missing `SigmaFinite` instance; the record kept is the fixed one.
+- **D2, `probe_law_is_probability`: PASS.** For `3 ≤ n`, `sphereProbability n univ = 1`, via
+  `Measure.toSphere_apply_univ`: the surface is n · volume(ball), which is finite and nonzero. So the junk branch
+  cannot fire.
+
+The vacuity question of §5 is therefore answered. ClassicalON's decay statement is not empty for `n ≥ 3`, and that is
+now kernel-checked, not just read.
+
+**Environment.**
+
+| | |
+|---|---|
+| Machine | Lenovo Legion, WSL2 (`checked_by: local:DESKTOP-O521CKA`) |
+| Lean | `v4.34.1` (commit `5045d005`) |
+| Mathlib | `d13f23b7` |
+| openai/math | `4eaee875`, sparse checkout of `lean/`, `lake exe cache get` |
+| Parallelism | 8 probes at a time, timeout 900 s each |
+| Wall time | 5–30 s per probe; the EditApproximation single-tactic probes took about 2 min each |
+
+These are local records, not GitHub Actions runs. ADR-092 accepts a named machine as `checked_by`. No probe record
+supports a claim: the theorems they check are probe declarations, and a probe PASS on a `trivial` or `inconsistent`
+probe would be a vacuity finding.
+
+Rerun on any Linux machine with the openai/math Lean project at the pin:
 
 ```bash
-cd ~/openai-math && git fetch && git checkout 4eaee87548250b2682affda7d05d947c05554bae && cd lean && lake exe cache get
+python scripts/cases/trivial_witness_probe_report.py prepare --math-root ~/openai-math --out records-dir
 ```
 
 ```bash
-python scripts/cases/trivial_witness_probe_report.py prepare --math-root ~/openai-math
+python scripts/cases/trivial_witness_probe_report.py run --math-root ~/openai-math --out records-dir --jobs 8
 ```
 
 ```bash
-python scripts/cases/trivial_witness_probe_report.py run --math-root ~/openai-math --only ClassicalON
+python scripts/cases/trivial_witness_probe_report.py report --out records-dir
 ```
 
-```bash
-python scripts/cases/trivial_witness_probe_report.py report --math-root ~/openai-math
-```
-
-`run` elaborates one probe at a time with `lake env lean`. Each probe has a timeout, and the run is resumable. Without
-`--only` it covers all 722 probes.
+`run` is resumable and can run probes in parallel. `prepare --out` adds single-tactic probes for every record whose
+menu was aborted.
 
 ## 6. Reproduce
 

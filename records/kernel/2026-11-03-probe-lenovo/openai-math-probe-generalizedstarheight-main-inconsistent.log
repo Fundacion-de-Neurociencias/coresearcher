@@ -1,0 +1,25 @@
+# kernel-check lean_file openai-math-probe-generalizedstarheight-main-inconsistent
+# file: ComparatorChallenges/Probes/GeneralizedStarHeight__main__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: 205a8e8b261c3728490f1b4a0d26d3d7dcd5d4b57e4e0fdcb3bc1d782e842952
+# command: lake env lean ComparatorChallenges/Probes/GeneralizedStarHeight__main__inconsistent.lean
+# probe of: OAI.GeneralizedStarHeight.main; checked declaration: OAI.GeneralizedStarHeight.main_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/GeneralizedStarHeight__main__inconsistent.lean:42:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/GeneralizedStarHeight__main__inconsistent.lean:46:124: error: unsolved goals
+Alphabet : Type u
+inst✝ : Finite Alphabet
+L : Language Alphabet
+hL : L.IsRegular
+⊢ False
+'OAI.GeneralizedStarHeight.main_probe_inconsistent' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

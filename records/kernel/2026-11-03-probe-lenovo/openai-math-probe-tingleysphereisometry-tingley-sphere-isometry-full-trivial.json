@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-tingleysphereisometry-tingley-sphere-isometry-full-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/TingleySphereIsometry__tingley_sphere_isometry_full__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "3a542923bd61eab4278b58d12f224896b257d7856855775b1d8c0450cdfafce4",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Tingley.tingley_sphere_isometry_full"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Tingley.tingley_sphere_isometry_full": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 4.9,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-tingleysphereisometry-tingley-sphere-isometry-full-trivial.log",
+  "kernel_log_sha256": "c3194b17fd8c93826e07d8be298126880b1c5c893d21d8934702a5f52ad3051e",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:25:16Z",
+  "probe": {
+    "probe_id": "TingleySphereIsometry:tingley_sphere_isometry_full:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Tingley.tingley_sphere_isometry_full",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

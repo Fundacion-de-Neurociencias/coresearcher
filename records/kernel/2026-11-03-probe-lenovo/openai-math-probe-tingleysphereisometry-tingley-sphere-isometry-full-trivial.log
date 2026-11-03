@@ -1,0 +1,36 @@
+# kernel-check lean_file openai-math-probe-tingleysphereisometry-tingley-sphere-isometry-full-trivial
+# file: ComparatorChallenges/Probes/TingleySphereIsometry__tingley_sphere_isometry_full__trivial.lean (generated probe, mode trivial)
+# file_sha256: 3a542923bd61eab4278b58d12f224896b257d7856855775b1d8c0450cdfafce4
+# command: lake env lean ComparatorChallenges/Probes/TingleySphereIsometry__tingley_sphere_isometry_full__trivial.lean
+# probe of: OAI.Tingley.tingley_sphere_isometry_full; checked declaration: OAI.Tingley.tingley_sphere_isometry_full
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/TingleySphereIsometry__tingley_sphere_isometry_full__trivial.lean:34:44: error: unsolved goals
+X : Type u
+Y : Type v
+inst✝⁷ : NormedAddCommGroup X
+inst✝⁶ : NormedSpace ℝ X
+inst✝⁵ : CompleteSpace X
+inst✝⁴ : NormedAddCommGroup Y
+inst✝³ : NormedSpace ℝ Y
+inst✝² : CompleteSpace Y
+inst✝¹ : Nontrivial X
+inst✝ : Nontrivial Y
+f : UnitSphere X → UnitSphere Y
+hf : Isometry f
+hs : Function.Surjective f
+⊢ ∃ T,
+    (∀ (a : X) (b : ‖a‖ = 1), T a = ↑(f ⟨a, b⟩)) ∧
+      (∀ (x : X) (hx : ¬x = 0), T x = ‖x‖ • ↑(f (normalize x hx))) ∧
+        Function.Surjective ⇑T ∧ ∀ (L : X →ₗ[ℝ] Y), (∀ (a : X) (b : ‖a‖ = 1), L a = ↑(f ⟨a, b⟩)) → L = ↑T.toLinearEquiv
+'OAI.Tingley.tingley_sphere_isometry_full' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

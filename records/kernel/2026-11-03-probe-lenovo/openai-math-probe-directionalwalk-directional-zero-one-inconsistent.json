@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-directionalwalk-directional-zero-one-inconsistent",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/DirectionalWalk__directional_zero_one__inconsistent.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "f5952aa17a92e5338016ca2cfa3034b709b9068ae5be5010c8b59315652989c3",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.DirectionalZeroOne.directional_zero_one_probe_inconsistent"
+  ],
+  "axioms_by_theorem": {
+    "OAI.DirectionalZeroOne.directional_zero_one_probe_inconsistent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 7.8,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-directionalwalk-directional-zero-one-inconsistent.log",
+  "kernel_log_sha256": "e2e387d615c489864036e00eb034fb4f29cdd26599212a657d0ee73069b0daa6",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:30:33Z",
+  "probe": {
+    "probe_id": "DirectionalWalk:directional_zero_one:inconsistent",
+    "mode": "inconsistent",
+    "target_theorem": "OAI.DirectionalZeroOne.directional_zero_one",
+    "meaning": "PASS: the target's binders prove False, so it is vacuously true (vacuity finding). FAIL: no contradiction found by the menu."
+  }
+}

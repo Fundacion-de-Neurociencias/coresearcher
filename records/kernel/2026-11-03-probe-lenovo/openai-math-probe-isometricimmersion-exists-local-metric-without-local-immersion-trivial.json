@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-isometricimmersion-exists-local-metric-without-local-immersion-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/IsometricImmersion__exists_local_metric_without_local_immersion__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "d8c986c892c82d34d2c3a94afecb493f6815a8c24ffcb520918bbc09e12e1a60",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.SmoothLocal.Geometry.exists_local_metric_without_local_immersion"
+  ],
+  "axioms_by_theorem": {
+    "OAI.SmoothLocal.Geometry.exists_local_metric_without_local_immersion": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.5,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-isometricimmersion-exists-local-metric-without-local-immersion-trivial.log",
+  "kernel_log_sha256": "d97685cbe64f8e93b8dab1ced1436b8df4af26cca5c855128ae4aa91f1118781",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:54Z",
+  "probe": {
+    "probe_id": "IsometricImmersion:exists_local_metric_without_local_immersion:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.SmoothLocal.Geometry.exists_local_metric_without_local_immersion",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

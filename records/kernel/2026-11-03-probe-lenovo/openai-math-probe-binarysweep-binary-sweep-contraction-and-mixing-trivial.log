@@ -1,0 +1,22 @@
+# kernel-check lean_file openai-math-probe-binarysweep-binary-sweep-contraction-and-mixing-trivial
+# file: ComparatorChallenges/Probes/BinarySweep__binary_sweep_contraction_and_mixing__trivial.lean (generated probe, mode trivial)
+# file_sha256: e1cc302bdcd37a1efef29060a40894615e3eee55e2d44e7b87ab6698b2e15c18
+# command: lake env lean ComparatorChallenges/Probes/BinarySweep__binary_sweep_contraction_and_mixing__trivial.lean
+# probe of: OAI.binary_sweep_contraction_and_mixing; checked declaration: OAI.binary_sweep_contraction_and_mixing
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/BinarySweep__binary_sweep_contraction_and_mixing__trivial.lean:99:55: error: unsolved goals
+⊢ BinaryCoordinateSweeps.BinaryContractionTarget ∧
+    (∀ (d : ℕ), 0 < d → ∑ g, BinaryCoordinateSweeps.binaryLaw d g * BinaryCoordinateSweeps.realSign g = 0) ∧
+      BinaryCoordinateSweeps.UniformSweepMixingTarget
+'OAI.binary_sweep_contraction_and_mixing' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

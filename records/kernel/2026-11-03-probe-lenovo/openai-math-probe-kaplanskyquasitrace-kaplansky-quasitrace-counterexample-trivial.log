@@ -1,0 +1,24 @@
+# kernel-check lean_file openai-math-probe-kaplanskyquasitrace-kaplansky-quasitrace-counterexample-trivial
+# file: ComparatorChallenges/Probes/KaplanskyQuasitrace__kaplansky_quasitrace_counterexample__trivial.lean (generated probe, mode trivial)
+# file_sha256: 653be9f3db89cdf52b80eef8d3fa40e7043c61bca62e2c83eeb75880c28eaa76
+# command: lake env lean ComparatorChallenges/Probes/KaplanskyQuasitrace__kaplansky_quasitrace_counterexample__trivial.lean
+# probe of: OAI.Kaplansky.kaplansky_quasitrace_counterexample; checked declaration: OAI.Kaplansky.kaplansky_quasitrace_counterexample
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/KaplanskyQuasitrace__kaplansky_quasitrace_counterexample__trivial.lean:58:9: error: Type mismatch
+  fun x => trivial
+has type
+  ∀ (x : ?m.2), True
+but is expected to have type
+  MainTarget
+'OAI.Kaplansky.kaplansky_quasitrace_counterexample' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+# kernel-check: exit_code=1

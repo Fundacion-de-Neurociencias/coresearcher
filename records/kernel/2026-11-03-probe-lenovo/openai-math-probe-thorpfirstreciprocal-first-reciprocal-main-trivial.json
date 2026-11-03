@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-thorpfirstreciprocal-first-reciprocal-main-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/ThorpFirstReciprocal__first_reciprocal_main__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "7401c1e10c661ed8761c7acfa4e9c0277adaee7e789b0a3a7410730157c553b8",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Thorp.Current.first_reciprocal_main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Thorp.Current.first_reciprocal_main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 12.0,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-thorpfirstreciprocal-first-reciprocal-main-trivial.log",
+  "kernel_log_sha256": "4e56090caefc46f32de2850f9360a5ab9c2c6189a244b92eb17f887976b6a0c4",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-02T21:39:31Z",
+  "probe": {
+    "probe_id": "ThorpFirstReciprocal:first_reciprocal_main:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Thorp.Current.first_reciprocal_main",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

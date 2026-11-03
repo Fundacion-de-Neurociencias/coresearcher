@@ -1,0 +1,56 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-probe-kaplanskyquasitrace-kaplansky-quasitrace-counterexample-trivial",
+  "kind": "lean_file",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Probes/KaplanskyQuasitrace__kaplansky_quasitrace_counterexample__trivial.lean",
+    "generated_by": "scripts/cases/trivial_witness_probe_report.py"
+  },
+  "file_sha256": "653be9f3db89cdf52b80eef8d3fa40e7043c61bca62e2c83eeb75880c28eaa76",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Kaplansky.kaplansky_quasitrace_counterexample"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Kaplansky.kaplansky_quasitrace_counterexample": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.2,
+  "exit_code": 1,
+  "result": "FAIL",
+  "reasons": [
+    "the kernel run exited with code 1",
+    "the log has a Lean error line",
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "openai-math-probe-kaplanskyquasitrace-kaplansky-quasitrace-counterexample-trivial.log",
+  "kernel_log_sha256": "6bc599d94f96f95774a7155badef72c3409bf3b1ddb29cb47e6ae75160f5582d",
+  "checked_by": "local:DESKTOP-O521CKA",
+  "date": "2026-11-03T03:24:56Z",
+  "probe": {
+    "probe_id": "KaplanskyQuasitrace:kaplansky_quasitrace_counterexample:trivial",
+    "mode": "trivial",
+    "target_theorem": "OAI.Kaplansky.kaplansky_quasitrace_counterexample",
+    "meaning": "PASS: the target closes with a cheap tactic and no solution, so it cannot say what the headline says (vacuity finding). FAIL: the menu did not close it, which is no evidence either way."
+  }
+}

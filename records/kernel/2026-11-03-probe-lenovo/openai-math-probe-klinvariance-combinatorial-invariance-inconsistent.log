@@ -1,0 +1,39 @@
+# kernel-check lean_file openai-math-probe-klinvariance-combinatorial-invariance-inconsistent
+# file: ComparatorChallenges/Probes/KLInvariance__combinatorial_invariance__inconsistent.lean (generated probe, mode inconsistent)
+# file_sha256: ea9c4ad5546632e72f7cc03ba5cc7378df2b445bb040afdf295be7da235e04b6
+# command: lake env lean ComparatorChallenges/Probes/KLInvariance__combinatorial_invariance__inconsistent.lean
+# probe of: OAI.KLInvariance.combinatorial_invariance; checked declaration: OAI.KLInvariance.combinatorial_invariance_probe_inconsistent
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/KLInvariance__combinatorial_invariance__inconsistent.lean:88:8: warning: declaration uses `sorry`
+ComparatorChallenges/Probes/KLInvariance__combinatorial_invariance__inconsistent.lean:101:59: error: unsolved goals
+B : Type u
+W : Type v
+inst✝¹ : Group W
+M : CoxeterMatrix B
+B' : Type u'
+W' : Type v'
+inst✝ : Group W'
+M' : CoxeterMatrix B'
+cs : CoxeterSystem M W
+cs' : CoxeterSystem M' W'
+u b : W
+u' b' : W'
+hub : BruhatLE cs u b
+hub' : BruhatLE cs' u' b'
+ι : Interval cs u b ≃o Interval cs' u' b'
+⊢ False
+'OAI.KLInvariance.combinatorial_invariance_probe_inconsistent' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

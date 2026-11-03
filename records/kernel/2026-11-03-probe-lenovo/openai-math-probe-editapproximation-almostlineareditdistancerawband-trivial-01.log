@@ -1,0 +1,57 @@
+# kernel-check lean_file openai-math-probe-editapproximation-almostlineareditdistancerawband-trivial-01
+# file: ComparatorChallenges/Probes/EditApproximation__almostLinearEditDistanceRawBand__trivial_01.lean (generated probe, mode trivial@decide)
+# file_sha256: 9711f90a46e78b3297f25fdaeea263402828d79a3f872ac9bc8e9aabe84d47eb
+# command: lake env lean ComparatorChallenges/Probes/EditApproximation__almostLinearEditDistanceRawBand__trivial_01.lean
+# probe of: OAI.EditApproximation.almostLinearEditDistanceRawBand; checked declaration: OAI.EditApproximation.almostLinearEditDistanceRawBand
+warning: belyi: repository '/home/manuel/probe-work/math/lean/.lake/packages/belyi' has local changes
+warning: formal-schemes: repository '/home/manuel/probe-work/math/lean/.lake/packages/formal-schemes' has local changes
+warning: elliptic-curves: repository '/home/manuel/probe-work/math/lean/.lake/packages/elliptic-curves' has local changes
+warning: tempered-fundamental-groups: repository '/home/manuel/probe-work/math/lean/.lake/packages/tempered-fundamental-groups' has local changes
+warning: oka: repository '/home/manuel/probe-work/math/lean/.lake/packages/oka' has local changes
+warning: orbicurve-cores: repository '/home/manuel/probe-work/math/lean/.lake/packages/orbicurve-cores' has local changes
+warning: pi1: repository '/home/manuel/probe-work/math/lean/.lake/packages/pi1' has local changes
+warning: heights: repository '/home/manuel/probe-work/math/lean/.lake/packages/heights' has local changes
+warning: genl: repository '/home/manuel/probe-work/math/lean/.lake/packages/genl' has local changes
+warning: tate-curves-theta: repository '/home/manuel/probe-work/math/lean/.lake/packages/tate-curves-theta' has local changes
+warning: iut: repository '/home/manuel/probe-work/math/lean/.lake/packages/iut' has local changes
+ComparatorChallenges/Probes/EditApproximation__almostLinearEditDistanceRawBand__trivial_01.lean:19168:8: error: Expected type must not contain free variables
+  (∀ (source target : List ℤ) (N : ℕ),
+      source.length + target.length ≤ N →
+        2 / 3 ≤
+          (computedFullLaw (List.map integerSymbolCode source) (List.map integerSymbolCode target) N epsilon).real
+            {outcome |
+              EditDistortion.edit source target ≤ integerBinaryAnswerRawBand source target N epsilon outcome ∧
+                ↑(integerBinaryAnswerRawBand source target N epsilon outcome) ≤
+                  (1 + ↑epsilon.value) * ↑(EditDistortion.edit source target)}) ∧
+    (∀ (source target : List ℤ) (N : ℕ),
+        source = target →
+          ∀ (outcome : ComputedFullOutcome (List.map integerSymbolCode source) (List.map integerSymbolCode target) N),
+            integerBinaryAnswerRawBand source target N epsilon outcome = 0) ∧
+      (∀ (C : ℕ) (eta : ℝ),
+          0 < eta →
+            ∀ᶠ (N : ℕ) in atTop,
+              ∀ (source target : List ℤ),
+                source.length + target.length ≤ N →
+                  (∀ z ∈ source ++ target, z.natAbs ≤ (N + 2) ^ C) →
+                    ∫ (outcome :
+                        ComputedFullOutcome (List.map integerSymbolCode source) (List.map integerSymbolCode target) N),
+                        integerBinaryWorkRawBand source target N epsilon
+                          outcome ∂computedFullLaw (List.map integerSymbolCode source)
+                          (List.map integerSymbolCode target) N epsilon ≤
+                      (↑N + 2) ^ (1 + eta)) ∧
+        ∀ (C : ℕ),
+          ∀ᶠ (N : ℕ) in atTop,
+            ∀ (source target : List ℤ),
+              source.length + target.length ≤ N →
+                (∀ z ∈ source ++ target, z.natAbs ≤ (N + 2) ^ C) →
+                  ∀
+                    (outcome :
+                      ComputedFullOutcome (List.map integerSymbolCode source) (List.map integerSymbolCode target) N),
+                    integerBinarySpaceFootprintRawBand source target N epsilon outcome ≤ (N + 2) ^ (C + 65564)
+
+Hint: Use the `+revert` option to automatically clean up and revert free variables
+'OAI.EditApproximation.almostLinearEditDistanceRawBand' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=1

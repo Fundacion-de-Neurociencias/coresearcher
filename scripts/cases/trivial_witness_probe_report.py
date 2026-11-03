@@ -82,8 +82,13 @@ def static(corpus: Path) -> None:
                 {r["theorem"] for r in rows} - {p.theorem for p in probes if p.mode == "trivial"}
             ),
             "probes": [
-                {"probe_id": p.probe_id, "theorem": p.theorem, "mode": p.mode, "module_path": p.module_path,
-                 "outcome": probe.LeanOutcome.NOT_RUN.value}
+                {
+                    "probe_id": p.probe_id,
+                    "theorem": p.theorem,
+                    "mode": p.mode,
+                    "module_path": p.module_path,
+                    "outcome": probe.LeanOutcome.NOT_RUN.value,
+                }
                 for p in probes
             ],
         },
@@ -110,7 +115,20 @@ def prepare(math_root: Path) -> None:
     print(f"wrote {len(probes)} probe files under {lean / PROBE_DIR}")
 
 
-_MISSING_IMPORT = re.compile(r"object file \S+ of module \S+ does not exist|unknown module prefix '[^']*'|unknown package '[^']*'")
+_MISSING_IMPORT = re.compile(
+    r"object file \S+ of module \S+ does not exist|unknown module prefix '[^']*'|unknown package '[^']*'"
+)
+
+_ABORTED = re.compile(r"maximum recursion depth has been reached|failed with a nested error")
+
+
+def _current(out: Path, entry: Dict[str, Any], lean: Path) -> bool:
+    """A record exists for this probe and was made from the probe file as it is now (same SHA-256)."""
+    path = out / f"{_probe_target(entry['probe_id'])}.json"
+    if not path.exists():
+        return False
+    recorded = json.loads(path.read_text(encoding="utf-8")).get("file_sha256")
+    return recorded == kernel_records.sha256_file(lean / entry["module_path"])
 
 
 def _probe_target(probe_id: str) -> str:
@@ -143,6 +161,9 @@ def _check_one(entry: Dict[str, Any], lean: Path, out: Path, timeout: int, env: 
         # The file imports modules that were never built here (e.g. ComparatorChallenges.* support files): the probe
         # did not reach elaboration, so it is a non-verdict, not a FAIL.
         blocked = "an imported module is not built in this environment: " + _MISSING_IMPORT.search(output).group(0)
+    if not blocked and _ABORTED.search(output):
+        # A tactic raised an error `first` cannot catch, so the remaining tactics of the menu never ran.
+        blocked = "the tactic menu was aborted before every tactic ran: " + _ABORTED.search(output).group(0)
     declaration = _qualified(entry)
     log = (
         f"# kernel-check lean_file {target}\n# file: {entry['module_path']} (generated probe, mode {entry['mode']})\n"
@@ -189,11 +210,7 @@ def run(math_root: Path, out: Path, only: str, timeout: int, jobs: int) -> None:
     lean = Path(math_root) / "lean"
     out.mkdir(parents=True, exist_ok=True)
     manifest = json.loads((lean / PROBE_DIR / "manifest.json").read_text(encoding="utf-8"))
-    todo = [
-        e
-        for e in manifest
-        if (not only or only in e["probe_id"]) and not (out / f"{_probe_target(e['probe_id'])}.json").exists()
-    ]
+    todo = [e for e in manifest if (not only or only in e["probe_id"]) and not _current(out, e, lean)]
     version = subprocess.run(["lake", "env", "lean", "--version"], cwd=lean, capture_output=True, text=True)
     packages = json.loads((lean / "lake-manifest.json").read_text(encoding="utf-8")).get("packages", [])
     env = {
@@ -228,7 +245,8 @@ def report(records: Path) -> None:
     probes = data["lean_probes"]["probes"]
     data["lean_probes"]["summary"] = dict(Counter(r["outcome"] for r in probes))
     data["lean_probes"]["by_mode"] = {
-        mode: dict(Counter(r["outcome"] for r in probes if r["mode"] == mode)) for mode in sorted({r["mode"] for r in probes})
+        mode: dict(Counter(r["outcome"] for r in probes if r["mode"] == mode))
+        for mode in sorted({r["mode"] for r in probes})
     }
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(data["lean_probes"]["summary"], data["lean_probes"]["by_mode"])

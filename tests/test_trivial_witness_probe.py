@@ -184,3 +184,16 @@ def test_report_folds_verified_kernel_records(tmp_path, monkeypatch):
     assert rows["T:main:trivial"]["outcome"] == "NOT_PROVED"
     assert rows["T:main:inconsistent"]["outcome"] == "NOT_RUN"
     assert data["lean_probes"]["summary"] == {"NOT_PROVED": 1, "NOT_RUN": 1}
+
+
+def test_probe_generation_handles_term_mode_named_arguments_and_partial_imports():
+    source = (
+        "import Mathlib.Data.Finset.Basic\n\nnamespace OAI\nnamespace T\n\n"
+        "theorem term_mode (n : ℕ) (h : Foo (n := n)) : Bar (n := n) :=\n  sorry\n\nend T\nend OAI\n"
+    )
+    trivial, inconsistent = probe.cheap_tactic_probes(source, "T.lean", ["OAI.T.term_mode"])
+    assert ":=\n  by\n    set_option maxHeartbeats" in trivial.text  # Term-mode `:= sorry` gets a `by`.
+    assert "aesop" not in trivial.text and "| simp_all" in trivial.text  # No Mathlib tactic library imported.
+    assert "(n : ℕ) (h : Foo (n := n)) : False := by" in inconsistent.text  # `(n := n)` is not the body's `:=`.
+    assert probe.binders_and_type("theorem t (h : Foo (n := n)) : Bar := by sorry") == ("(h : Foo (n := n))", "Bar")
+    assert probe.menu_for("import Mathlib\n") == probe.TACTIC_MENU

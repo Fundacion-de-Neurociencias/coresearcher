@@ -189,7 +189,8 @@
       "cli": [],
       "files": [
         "scripts/lean/comparator_preflight.sh",
-        "scripts/lean/kernel_check.py"
+        "scripts/lean/kernel_check.py",
+        "scripts/lean/run_comparator_local.sh"
       ],
       "adrs": [
         "ADR-DISCOVERY-092"

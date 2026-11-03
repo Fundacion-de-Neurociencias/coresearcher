@@ -379,6 +379,14 @@ from .isaac_sim_grounding_adapter import (
     IsaacSimVerificationReport,
     IsaacSimGroundingAdapter,
 )
+from .structure_property_purpose_engine import (
+    TeleonomicPurposeClass,
+    IonicSelectivityProfile,
+    StructurePropertyPurposeSpec,
+    CompetitiveOccupancyReport,
+    MultiscaleSppTriadReport,
+    StructurePropertyPurposeEngine,
+)
 from .algebraic_structure_compiler import (
     AlgebraicStructureClass,
     CompiledAlgebraicOperator,
@@ -518,6 +526,48 @@ from .epistemic_stigmergy import (
     MetaRecursiveInstrumentCompiler,
     RealityContactFirewallReport,
     RealityContactFirewall,
+)
+
+from .provenance_sidecar_engine import (
+    ToolExecutionStatus,
+    ProvenanceSidecar,
+    ProvenanceSidecarEngine,
+)
+from .preclinical_gates_engine import (
+    PreClinicalGateType,
+    PassportVerdict,
+    GateThresholdsConfig,
+    SingleGateEvaluation,
+    PreClinicalPassport,
+    PreClinicalGatesValidator,
+)
+from .cartan_dec_proteomics_auditor import (
+    ResidueFrame,
+    ConnectionOneForm,
+    CurvatureTwoForm,
+    HolonomyDefectReport,
+    CartanDECStructureReport,
+    CartanDECProteomicsAuditor,
+)
+from .coe_integrity_auditor import (
+    IntegrityDimension,
+    EmpiricalRebuttalVerdict,
+    IntegrityAuditResult,
+    EmpiricalRebuttalDossier,
+    FullCoEIntegrityReport,
+    CoEIntegrityAuditor,
+)
+from .phenix_molprobity_oracle import (
+    RamachandranConformation,
+    StructuralQualityTier,
+    AtomCoordinate,
+    ResidueBackboneAngles,
+    StericClashDetail,
+    MolProbityReport,
+    PhenixMolProbityOracle,
+    compute_dihedral_angle,
+    classify_ramachandran_region,
+    classify_rotamer_outlier,
 )
 
 __all__ = [
@@ -816,6 +866,12 @@ __all__ = [
     "RigidBodyDefinition",
     "IsaacSimVerificationReport",
     "IsaacSimGroundingAdapter",
+    "TeleonomicPurposeClass",
+    "IonicSelectivityProfile",
+    "StructurePropertyPurposeSpec",
+    "CompetitiveOccupancyReport",
+    "MultiscaleSppTriadReport",
+    "StructurePropertyPurposeEngine",
     "AlgebraicStructureClass",
     "CompiledAlgebraicOperator",
     "FlywheelCycleResult",
@@ -902,4 +958,35 @@ __all__ = [
     "TournamentReport",
     "PairwiseDebateEngine",
     "HypothesisEloTournamentOrchestrator",
+    "ResidueFrame",
+    "ConnectionOneForm",
+    "CurvatureTwoForm",
+    "HolonomyDefectReport",
+    "CartanDECStructureReport",
+    "CartanDECProteomicsAuditor",
+    "IntegrityDimension",
+    "EmpiricalRebuttalVerdict",
+    "IntegrityAuditResult",
+    "EmpiricalRebuttalDossier",
+    "FullCoEIntegrityReport",
+    "CoEIntegrityAuditor",
+    "ToolExecutionStatus",
+    "ProvenanceSidecar",
+    "ProvenanceSidecarEngine",
+    "PreClinicalGateType",
+    "PassportVerdict",
+    "GateThresholdsConfig",
+    "SingleGateEvaluation",
+    "PreClinicalPassport",
+    "PreClinicalGatesValidator",
+    "RamachandranConformation",
+    "StructuralQualityTier",
+    "AtomCoordinate",
+    "ResidueBackboneAngles",
+    "StericClashDetail",
+    "MolProbityReport",
+    "PhenixMolProbityOracle",
+    "compute_dihedral_angle",
+    "classify_ramachandran_region",
+    "classify_rotamer_outlier",
 ]

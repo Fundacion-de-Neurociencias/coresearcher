@@ -111,5 +111,13 @@ registered at that rung with no evidence at all.
   - When Comparator fails without its success line, the runner copies into the hashed log the kernel's and
     systemd-oomd's lines about killed processes. When there are such lines, the record is BLOCKED (the runner killed
     the build), not FAIL.
-- INDEPENDENTLY_REPRODUCED still needs a second check by another party. A CI run of ours is not independent of us.
+- ETH-378 then passed twice, both records hash-verified:
+  - on a hosted runner, with swap (run 41468595930, 13 609 s);
+  - on the Lenovo workstation (WSL2 kernel 6.6 with Landlock, 24 cores, 31 GB), with
+    `scripts/lean/run_comparator_local.sh` (2 392 s; `records/kernel/2026-11-03-lenovo-wsl2/`).
+
+  The workstation run uses the same pins, preflight and record writer as the workflow. Its `checked_by` is
+  `local:lenovo-wsl2`.
+- INDEPENDENTLY_REPRODUCED still needs a second check by another party. A CI run of ours is not independent of us,
+  and neither is a run on our own workstation.
 - The `examples/*/lean_check.txt` notes stay as history. The records in `records/kernel/` are the evidence.

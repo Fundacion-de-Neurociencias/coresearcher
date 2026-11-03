@@ -240,7 +240,7 @@ A GitHub Actions workflow (Lean kernel checks) runs the Lean kernel on a Linux r
 
 **ADRs:** [ADR-092](../decisions/ADR-DISCOVERY-092-RECORDED-KERNEL-CHECKS.md)
 
-**Tests:** `test_formal_capabilities.py`, `test_kernel_records.py`, `test_local_smoothing_case.py`, `test_preregistration.py`
+**Tests:** `test_formal_capabilities.py`, `test_kernel_records.py`, `test_local_smoothing_case.py`, `test_preregistration.py`, `test_trivial_witness_probe.py`
 
 ## Verification chain
 
@@ -1557,7 +1557,7 @@ Measurements on the openai/math corpus: the time-travel benchmark (would our che
 
 **ADRs:** [ADR-070](../decisions/ADR-DISCOVERY-070-CELLULAR-AUTOMATA-BARRIER-AUDITOR.md), [ADR-070](../decisions/ADR-DISCOVERY-070-STATEMENT-FIDELITY-AUDIT.md), [ADR-077](../decisions/ADR-DISCOVERY-077-IMPORT-OBLIGATIONS.md), [ADR-082](../decisions/ADR-DISCOVERY-082-MANUSCRIPT-AUDIT-SERVICE.md), [ADR-083](../decisions/ADR-DISCOVERY-083-CITED-RESULTS-REGISTRY.md), [ADR-084](../decisions/ADR-DISCOVERY-084-BENCHMARKS-AS-REGRESSION-TESTS.md), [ADR-085](../decisions/ADR-DISCOVERY-085-FREEZE-LEDGER-CHAIN.md)
 
-**Tests:** `test_capability_regression.py`, `test_manuscript_checks.py`, `test_openai_math_chain.py`, `test_openai_math_coverage.py`
+**Tests:** `test_capability_regression.py`, `test_manuscript_checks.py`, `test_openai_math_chain.py`, `test_openai_math_coverage.py`, `test_trivial_witness_probe.py`
 
 <a id="concordance-benchmark"></a>
 

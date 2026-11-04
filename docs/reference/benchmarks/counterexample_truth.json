@@ -1,0 +1,1305 @@
+{
+  "seed": 51000,
+  "items": [
+    {
+      "index": 0,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 1,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 2,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 3,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 4,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 5,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 6,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 7,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 8,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 9,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 10,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 11,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 12,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 13,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 14,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 15,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 16,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 17,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 18,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 19,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 20,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 21,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 22,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 23,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 24,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 25,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 26,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 27,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 28,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 29,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 30,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 31,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 32,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 33,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 34,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 35,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 36,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 37,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 38,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 39,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 40,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 41,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 42,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 43,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 44,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 45,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 46,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 47,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 48,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 49,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 50,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 51,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 52,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 53,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 54,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 55,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 56,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 57,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 58,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 59,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 60,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 61,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 62,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 63,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 64,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 65,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 66,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 67,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 68,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 69,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 70,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 71,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 72,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 73,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 74,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 75,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 76,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 77,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 78,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 79,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 80,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 81,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 82,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 83,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 84,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 85,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 86,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 87,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 88,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 89,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 90,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 91,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 92,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 93,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 94,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 95,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 96,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 97,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 98,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 99,
+      "planted": false,
+      "pattern": null
+    },
+    {
+      "index": 100,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v4": 1
+      }
+    },
+    {
+      "index": 101,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v4": 3
+      }
+    },
+    {
+      "index": 102,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v5": 3
+      }
+    },
+    {
+      "index": 103,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v5": 9
+      }
+    },
+    {
+      "index": 104,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v3": 4
+      }
+    },
+    {
+      "index": 105,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 3
+      }
+    },
+    {
+      "index": 106,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v5": 8
+      }
+    },
+    {
+      "index": 107,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 3
+      }
+    },
+    {
+      "index": 108,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v6": 1
+      }
+    },
+    {
+      "index": 109,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v6": 0
+      }
+    },
+    {
+      "index": 110,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v3": 2
+      }
+    },
+    {
+      "index": 111,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v2": 0
+      }
+    },
+    {
+      "index": 112,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 6
+      }
+    },
+    {
+      "index": 113,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v6": 0
+      }
+    },
+    {
+      "index": 114,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v1": 3
+      }
+    },
+    {
+      "index": 115,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v3": 9
+      }
+    },
+    {
+      "index": 116,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v5": 0
+      }
+    },
+    {
+      "index": 117,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v3": 1
+      }
+    },
+    {
+      "index": 118,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v5": 6
+      }
+    },
+    {
+      "index": 119,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v2": 0
+      }
+    },
+    {
+      "index": 120,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v6": 4
+      }
+    },
+    {
+      "index": 121,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 2
+      }
+    },
+    {
+      "index": 122,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v5": 2
+      }
+    },
+    {
+      "index": 123,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v6": 8
+      }
+    },
+    {
+      "index": 124,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v5": 7
+      }
+    },
+    {
+      "index": 125,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v5": 6
+      }
+    },
+    {
+      "index": 126,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v3": 9
+      }
+    },
+    {
+      "index": 127,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v3": 2
+      }
+    },
+    {
+      "index": 128,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v2": 5
+      }
+    },
+    {
+      "index": 129,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 0
+      }
+    },
+    {
+      "index": 130,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v5": 8
+      }
+    },
+    {
+      "index": 131,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v2": 4
+      }
+    },
+    {
+      "index": 132,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v1": 8
+      }
+    },
+    {
+      "index": 133,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v5": 9
+      }
+    },
+    {
+      "index": 134,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v2": 8
+      }
+    },
+    {
+      "index": 135,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v3": 7
+      }
+    },
+    {
+      "index": 136,
+      "planted": true,
+      "pattern": {
+        "v0": 0,
+        "v6": 3
+      }
+    },
+    {
+      "index": 137,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v6": 1
+      }
+    },
+    {
+      "index": 138,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v3": 8
+      }
+    },
+    {
+      "index": 139,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v4": 3
+      }
+    },
+    {
+      "index": 140,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v6": 8
+      }
+    },
+    {
+      "index": 141,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v5": 1
+      }
+    },
+    {
+      "index": 142,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v6": 5
+      }
+    },
+    {
+      "index": 143,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v1": 4
+      }
+    },
+    {
+      "index": 144,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v5": 5
+      }
+    },
+    {
+      "index": 145,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 2
+      }
+    },
+    {
+      "index": 146,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v6": 0
+      }
+    },
+    {
+      "index": 147,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v4": 9
+      }
+    },
+    {
+      "index": 148,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v1": 9
+      }
+    },
+    {
+      "index": 149,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v6": 6
+      }
+    },
+    {
+      "index": 150,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v3": 0
+      }
+    },
+    {
+      "index": 151,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v1": 6
+      }
+    },
+    {
+      "index": 152,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v6": 1
+      }
+    },
+    {
+      "index": 153,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 3
+      }
+    },
+    {
+      "index": 154,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v1": 5
+      }
+    },
+    {
+      "index": 155,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v2": 3
+      }
+    },
+    {
+      "index": 156,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v5": 5
+      }
+    },
+    {
+      "index": 157,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v3": 6
+      }
+    },
+    {
+      "index": 158,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v5": 4
+      }
+    },
+    {
+      "index": 159,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v5": 3
+      }
+    },
+    {
+      "index": 160,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v3": 2
+      }
+    },
+    {
+      "index": 161,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v5": 8
+      }
+    },
+    {
+      "index": 162,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v1": 8
+      }
+    },
+    {
+      "index": 163,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v4": 8
+      }
+    },
+    {
+      "index": 164,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v5": 4
+      }
+    },
+    {
+      "index": 165,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v4": 5
+      }
+    },
+    {
+      "index": 166,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 9
+      }
+    },
+    {
+      "index": 167,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v3": 0
+      }
+    },
+    {
+      "index": 168,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v1": 1
+      }
+    },
+    {
+      "index": 169,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v6": 5
+      }
+    },
+    {
+      "index": 170,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v4": 5
+      }
+    },
+    {
+      "index": 171,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v3": 6
+      }
+    },
+    {
+      "index": 172,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v6": 2
+      }
+    },
+    {
+      "index": 173,
+      "planted": true,
+      "pattern": {
+        "v0": 0,
+        "v2": 9
+      }
+    },
+    {
+      "index": 174,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v5": 4
+      }
+    },
+    {
+      "index": 175,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v6": 3
+      }
+    },
+    {
+      "index": 176,
+      "planted": true,
+      "pattern": {
+        "v0": 2,
+        "v4": 5
+      }
+    },
+    {
+      "index": 177,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v6": 1
+      }
+    },
+    {
+      "index": 178,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v2": 9
+      }
+    },
+    {
+      "index": 179,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v3": 1
+      }
+    },
+    {
+      "index": 180,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v1": 2
+      }
+    },
+    {
+      "index": 181,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v5": 0
+      }
+    },
+    {
+      "index": 182,
+      "planted": true,
+      "pattern": {
+        "v0": 9,
+        "v1": 1
+      }
+    },
+    {
+      "index": 183,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v1": 0
+      }
+    },
+    {
+      "index": 184,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 9
+      }
+    },
+    {
+      "index": 185,
+      "planted": true,
+      "pattern": {
+        "v0": 7,
+        "v1": 4
+      }
+    },
+    {
+      "index": 186,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 9
+      }
+    },
+    {
+      "index": 187,
+      "planted": true,
+      "pattern": {
+        "v0": 0,
+        "v2": 9
+      }
+    },
+    {
+      "index": 188,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v6": 6
+      }
+    },
+    {
+      "index": 189,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v2": 0
+      }
+    },
+    {
+      "index": 190,
+      "planted": true,
+      "pattern": {
+        "v0": 1,
+        "v2": 6
+      }
+    },
+    {
+      "index": 191,
+      "planted": true,
+      "pattern": {
+        "v0": 8,
+        "v5": 7
+      }
+    },
+    {
+      "index": 192,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v4": 4
+      }
+    },
+    {
+      "index": 193,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v5": 7
+      }
+    },
+    {
+      "index": 194,
+      "planted": true,
+      "pattern": {
+        "v0": 0,
+        "v3": 5
+      }
+    },
+    {
+      "index": 195,
+      "planted": true,
+      "pattern": {
+        "v0": 4,
+        "v5": 1
+      }
+    },
+    {
+      "index": 196,
+      "planted": true,
+      "pattern": {
+        "v0": 3,
+        "v2": 7
+      }
+    },
+    {
+      "index": 197,
+      "planted": true,
+      "pattern": {
+        "v0": 5,
+        "v4": 6
+      }
+    },
+    {
+      "index": 198,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v3": 4
+      }
+    },
+    {
+      "index": 199,
+      "planted": true,
+      "pattern": {
+        "v0": 6,
+        "v1": 6
+      }
+    }
+  ]
+}

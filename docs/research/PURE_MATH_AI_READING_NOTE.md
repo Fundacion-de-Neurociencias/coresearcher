@@ -24,7 +24,9 @@ with no data, so its claims are read as positions to weigh, not as results.
    a mutated statement is not provable with the paper's own proof, but it compares the challenge statement with the
    statement the solution proves, not with the prose. This is recorded in
    [section 5b of the oracle protocol](../reference/benchmarks/LEAN_ORACLE_PROTOCOL.md#5b-linux-runs). The Lean-based fidelity
-   auditor in section 6 of the same protocol is the proposed answer, and it is not built yet.
+   auditor in section 6 of the same protocol is the proposed answer. It was built and run in phase 2
+   ([plan](../reference/benchmarks/LEAN_FIDELITY_AUDITOR_PLAN.md)): its prover works on correct pairs, but local
+   formalizers made at most 1 of 13 headline originals faithful, so it is a no-go for now.
 2. **Only computed confirmations count.** The counterexample benchmark applies the essay's rule: a proposer (a language
    model) suggests states, and only the exact evaluator's confirmation counts. The proposer's own judgement never does
    ([protocol section 2](../reference/benchmarks/COUNTEREXAMPLE_SEARCH_PROTOCOL.md)).

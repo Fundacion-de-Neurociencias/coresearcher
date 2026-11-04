@@ -27,7 +27,7 @@ supplies. They are listed here with those caveats, so nobody mistakes them for w
 the product today are the formal core, the verification chain, the statement and manuscript audits, the registry
 and ledgers, the biomedical checks, the regression benchmarks and the research lifecycle.
 
-The map covers **59 capabilities** in 11 groups: 141 REST endpoints, 30 CLI commands and 157 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
+The map covers **61 capabilities** in 11 groups: 141 REST endpoints, 30 CLI commands and 157 Python modules, plus every script, example, benchmark file and integration in the repository (except `archive/`).
 
 ## How to read an entry
 
@@ -99,9 +99,11 @@ Each capability lists:
 | [Evidence contract for EdiTXT](#evidence-contract) | Ecosystem and integrations | 4 | 0 | 1 integrated | - | 1 |
 | [OASE formal adapter](#oase-adapter) | Ecosystem and integrations | 0 | 0 | no python module | - | 1 |
 | [Benchmarks as regression tests](#capability-regression) | Benchmarks and regression | 2 | 3 | 1 integrated, 1 outside register | yes | - |
-| [openai/math benchmarks (time travel, chain re-run, coverage, pilot)](#openai-math-benchmarks) | Benchmarks and regression | 0 | 0 | 3 tested | - | 2 |
+| [openai/math benchmarks (time travel, chain re-run, coverage, pilot)](#openai-math-benchmarks) | Benchmarks and regression | 0 | 0 | 3 tested | - | 3 |
 | [Hypothesis verification concordance benchmark](#concordance-benchmark) | Benchmarks and regression | 0 | 0 | no python module | - | 1 |
 | [Unknown-mechanism benchmarks v2 to v4 (pre-registered)](#unknown-mechanism-v2-v4) | Benchmarks and regression | 0 | 0 | no python module | - | - |
+| [Counterexample search benchmark (pre-registered)](#counterexample-search-benchmark) | Benchmarks and regression | 0 | 0 | no python module | - | 1 |
+| [Reference check for pre-registered protocols](#protocol-reference-check) | Benchmarks and regression | 0 | 0 | no python module | - | 1 |
 | [Legacy benchmark harnesses (withdrawn or scripted)](#legacy-benchmark-harnesses) | Benchmarks and regression | 5 | 0 | 4 exercised, 1 prototype | - | 4 |
 | [Benchmark confidence intervals](#benchmark-statistics) | Benchmarks and regression | 0 | 0 | no python module | - | - |
 | [Domain question seeds](#domain-seeds) | Benchmarks and regression | 0 | 0 | no python module | - | - |
@@ -149,7 +151,7 @@ Represents a hypothesis as variables, constraints and claims over a declared sta
 
 **ADRs:** [ADR-006](../decisions/ADR-DISCOVERY-006_CONSTRAINT_LEDGER_AND_FORMAL_LOGIC.md), [ADR-059](../decisions/ADR-DISCOVERY-059-FORMAL-HYPOTHESIS-OBJECT.md), [ADR-060](../decisions/ADR-DISCOVERY-060-SMT-BACKEND-AND-CONSEQUENCES.md), [ADR-064](../decisions/ADR-DISCOVERY-064-FORMALIZER-SELF-CONSISTENCY-GATE.md), [ADR-067](../decisions/ADR-DISCOVERY-067-EVIDENCE-CONTRACT-FOR-EDITXT.md), [ADR-068](../decisions/ADR-DISCOVERY-068-AUDITABLE-FORMAL-VERDICTS.md)
 
-**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_formalizer_v2.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
+**Tests:** `test_block_d_freeze_ledger_chain.py`, `test_block_e_biomedical.py`, `test_cited_registry.py`, `test_counterexample_search.py`, `test_ed_polarity_case.py`, `test_evidence_service.py`, `test_formal_audit.py`, `test_formal_capabilities.py`, `test_formal_hypothesis.py`, `test_formal_smt.py`, `test_formal_workbench.py`, `test_formalization_gate.py`, `test_formalizer_v2.py`, `test_integer_variables.py`, `test_kernel_records.py`, `test_manuscript_audit.py`, `test_oase_adapter.py`, `test_openai_math_chain.py`, `test_preregistration.py`, `test_statement_fidelity.py`
 
 <a id="formalizer-gate"></a>
 
@@ -1568,12 +1570,13 @@ Each October 2026 benchmark or calibration is a regression case: it re-runs offl
 
 ### openai/math benchmarks (time travel, chain re-run, coverage, pilot)
 
-Measurements on the openai/math corpus: the time-travel benchmark (would our checks have caught the defects later corrected in revised papers?), its re-runs with the full chain and with typed, constrained, case-scoped and unbounded conventions, a corpus-wide map of which paper claims have formal counterparts, a trivial-witness probe over every Comparator target, and the statement-fidelity pilot with its Lean label oracle.
+Measurements on the openai/math corpus: the time-travel benchmark (would our checks have caught the defects later corrected in revised papers?), its re-runs with the full chain and with typed, constrained, case-scoped and unbounded conventions, a corpus-wide map of which paper claims have formal counterparts, a trivial-witness probe over every Comparator target, the statement-fidelity pilot with its Lean label oracle, and the Lean-based statement-fidelity auditor (prose autoformalized to Lean, then proved equivalent or not to the reference statement).
 
 **Caveats:**
 
 - Decided detections stay at 1 of 17 corrected defects across the re-runs (the unresolved citation); the other candidates are coincidences or need premise-status information (OPENAI_MATH_CHAIN_RESULTS.md and the typed, constrained, case-scoped and unbounded result files).
 - The pilot measured the semantic bijectivity gate as NOT SUPPORTED (claims register row 19).
+- The Lean fidelity auditor is a no-go at phase 2: with local 7B and 32B formalizers at most 1 of 13 headline originals came out faithful, against a 30% threshold. Its prover works on correct pairs (phase 1); the formalizer is the bottleneck (LEAN_FIDELITY_AUDITOR_PLAN.md).
 
 | Module | Maturity | Endpoints using it |
 | --- | --- | --- |
@@ -1581,11 +1584,11 @@ Measurements on the openai/math corpus: the time-travel benchmark (would our che
 | [`python/discovery/openai_math_coverage.py`](../../python/discovery/openai_math_coverage.py) | Tested | - |
 | [`python/discovery/openai_math_time_travel.py`](../../python/discovery/openai_math_time_travel.py) | Tested | - |
 
-**Scripts, examples and data:** [`examples/openai-math-coverage`](../../examples/openai-math-coverage), [`scripts/benchmarks/openai_math_lean_oracle.py`](../../scripts/benchmarks/openai_math_lean_oracle.py), [`scripts/benchmarks/openai_math_oracle_sensitivity.py`](../../scripts/benchmarks/openai_math_oracle_sensitivity.py), [`scripts/benchmarks/openai_math_pilot.py`](../../scripts/benchmarks/openai_math_pilot.py), [`scripts/benchmarks/openai_math_revision_bench.py`](../../scripts/benchmarks/openai_math_revision_bench.py), [`scripts/cases/openai_math_coverage_report.py`](../../scripts/cases/openai_math_coverage_report.py), [`scripts/cases/trivial_witness_probe_report.py`](../../scripts/cases/trivial_witness_probe_report.py)
+**Scripts, examples and data:** [`examples/openai-math-coverage`](../../examples/openai-math-coverage), [`scripts/benchmarks/openai_math_lean_fidelity.py`](../../scripts/benchmarks/openai_math_lean_fidelity.py), [`scripts/benchmarks/openai_math_lean_oracle.py`](../../scripts/benchmarks/openai_math_lean_oracle.py), [`scripts/benchmarks/openai_math_oracle_sensitivity.py`](../../scripts/benchmarks/openai_math_oracle_sensitivity.py), [`scripts/benchmarks/openai_math_pilot.py`](../../scripts/benchmarks/openai_math_pilot.py), [`scripts/benchmarks/openai_math_revision_bench.py`](../../scripts/benchmarks/openai_math_revision_bench.py), [`scripts/cases/openai_math_coverage_report.py`](../../scripts/cases/openai_math_coverage_report.py), [`scripts/cases/trivial_witness_probe_report.py`](../../scripts/cases/trivial_witness_probe_report.py)
 
 **ADRs:** [ADR-070](../decisions/ADR-DISCOVERY-070-CELLULAR-AUTOMATA-BARRIER-AUDITOR.md), [ADR-070](../decisions/ADR-DISCOVERY-070-STATEMENT-FIDELITY-AUDIT.md), [ADR-077](../decisions/ADR-DISCOVERY-077-IMPORT-OBLIGATIONS.md), [ADR-082](../decisions/ADR-DISCOVERY-082-MANUSCRIPT-AUDIT-SERVICE.md), [ADR-083](../decisions/ADR-DISCOVERY-083-CITED-RESULTS-REGISTRY.md), [ADR-084](../decisions/ADR-DISCOVERY-084-BENCHMARKS-AS-REGRESSION-TESTS.md), [ADR-085](../decisions/ADR-DISCOVERY-085-FREEZE-LEDGER-CHAIN.md)
 
-**Tests:** `test_capability_regression.py`, `test_manuscript_checks.py`, `test_openai_math_chain.py`, `test_openai_math_coverage.py`, `test_trivial_witness_probe.py`
+**Tests:** `test_capability_regression.py`, `test_manuscript_checks.py`, `test_openai_math_chain.py`, `test_openai_math_coverage.py`, `test_openai_math_lean_fidelity.py`, `test_openai_math_pilot_mutate.py`, `test_trivial_witness_probe.py`
 
 <a id="concordance-benchmark"></a>
 
@@ -1616,6 +1619,40 @@ Pre-registered successors of the withdrawn v1: recovering a hidden law from data
 **ADRs:** none cited
 
 **Tests:** `test_unknown_mechanism_v3.py`, `test_unknown_mechanism_v4.py`
+
+<a id="counterexample-search-benchmark"></a>
+
+### Counterexample search benchmark (pre-registered)
+
+Measures whether a language-model proposer finds states that refute a claim when the space is too large for the exact evaluator. A proposed state counts only when the exact evaluator confirms it satisfies the assumptions and violates a claim; the proposer is compared with random search and with the exact evaluator alone.
+
+**Status:** Claims register row 32: PASS (validity, criteria A and S met).
+
+**Caveats:**
+
+- Synthetic corpus with one simple planted pattern per item, not real manuscripts (protocol section 7).
+
+**Scripts, examples and data:** [`scripts/benchmarks/run_counterexample_search.py`](../../scripts/benchmarks/run_counterexample_search.py)
+
+**ADRs:** none cited
+
+**Tests:** `test_counterexample_search.py`
+
+<a id="protocol-reference-check"></a>
+
+### Reference check for pre-registered protocols
+
+Maintainer tooling for the protocol template: checks that every DOI cited in a protocol document resolves to the cited work, so a protocol's attribution section is not left with a broken or mistyped reference.
+
+**Caveats:**
+
+- Checks our own protocol documents only. CoResearcher does not grade the sources a hypothesis cites.
+
+**Scripts, examples and data:** [`scripts/benchmarks/check_references.py`](../../scripts/benchmarks/check_references.py)
+
+**ADRs:** none cited
+
+**Tests:** `test_check_references.py`
 
 <a id="legacy-benchmark-harnesses"></a>
 

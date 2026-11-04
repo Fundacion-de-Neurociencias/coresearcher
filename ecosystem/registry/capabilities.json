@@ -1527,12 +1527,13 @@
       "id": "openai-math-benchmarks",
       "title": "openai/math benchmarks (time travel, chain re-run, coverage, pilot)",
       "group": "benchmarks",
-      "description": "Measurements on the openai/math corpus: the time-travel benchmark (would our checks have caught the defects later corrected in revised papers?), its re-runs with the full chain and with typed, constrained, case-scoped and unbounded conventions, a corpus-wide map of which paper claims have formal counterparts, a trivial-witness probe over every Comparator target, and the statement-fidelity pilot with its Lean label oracle.",
+      "description": "Measurements on the openai/math corpus: the time-travel benchmark (would our checks have caught the defects later corrected in revised papers?), its re-runs with the full chain and with typed, constrained, case-scoped and unbounded conventions, a corpus-wide map of which paper claims have formal counterparts, a trivial-witness probe over every Comparator target, the statement-fidelity pilot with its Lean label oracle, and the Lean-based statement-fidelity auditor (prose autoformalized to Lean, then proved equivalent or not to the reference statement).",
       "status": "",
       "verification_chain": "",
       "caveats": [
         "Decided detections stay at 1 of 17 corrected defects across the re-runs (the unresolved citation); the other candidates are coincidences or need premise-status information (OPENAI_MATH_CHAIN_RESULTS.md and the typed, constrained, case-scoped and unbounded result files).",
-        "The pilot measured the semantic bijectivity gate as NOT SUPPORTED (claims register row 19)."
+        "The pilot measured the semantic bijectivity gate as NOT SUPPORTED (claims register row 19).",
+        "The Lean fidelity auditor is a no-go at phase 2: with local 7B and 32B formalizers at most 1 of 13 headline originals came out faithful, against a 30% threshold. Its prover works on correct pairs (phase 1); the formalizer is the bottleneck (LEAN_FIDELITY_AUDITOR_PLAN.md)."
       ],
       "maturity": {
         "python/discovery/openai_math_chain.py": "Tested",
@@ -1544,6 +1545,7 @@
       "cli": [],
       "files": [
         "examples/openai-math-coverage",
+        "scripts/benchmarks/openai_math_lean_fidelity.py",
         "scripts/benchmarks/openai_math_lean_oracle.py",
         "scripts/benchmarks/openai_math_oracle_sensitivity.py",
         "scripts/benchmarks/openai_math_pilot.py",
@@ -1597,6 +1599,44 @@
         "scripts/benchmarks/run_unknown_mechanism_v2.py",
         "scripts/benchmarks/run_unknown_mechanism_v3.py",
         "scripts/benchmarks/run_unknown_mechanism_v4.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "counterexample-search-benchmark",
+      "title": "Counterexample search benchmark (pre-registered)",
+      "group": "benchmarks",
+      "description": "Measures whether a language-model proposer finds states that refute a claim when the space is too large for the exact evaluator. A proposed state counts only when the exact evaluator confirms it satisfies the assumptions and violates a claim; the proposer is compared with random search and with the exact evaluator alone.",
+      "status": "Claims register row 32: PASS (validity, criteria A and S met).",
+      "verification_chain": "",
+      "caveats": [
+        "Synthetic corpus with one simple planted pattern per item, not real manuscripts (protocol section 7)."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/run_counterexample_search.py"
+      ],
+      "adrs": []
+    },
+    {
+      "id": "protocol-reference-check",
+      "title": "Reference check for pre-registered protocols",
+      "group": "benchmarks",
+      "description": "Maintainer tooling for the protocol template: checks that every DOI cited in a protocol document resolves to the cited work, so a protocol's attribution section is not left with a broken or mistyped reference.",
+      "status": "",
+      "verification_chain": "",
+      "caveats": [
+        "Checks our own protocol documents only. CoResearcher does not grade the sources a hypothesis cites."
+      ],
+      "maturity": {},
+      "endpoints": [],
+      "hidden_endpoints": [],
+      "cli": [],
+      "files": [
+        "scripts/benchmarks/check_references.py"
       ],
       "adrs": []
     },

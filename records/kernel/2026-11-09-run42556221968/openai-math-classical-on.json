@@ -1,0 +1,50 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-classical-on",
+  "kind": "comparator",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/ClassicalON.lean",
+    "config": "lean/ComparatorChallenges/ClassicalON.json",
+    "config_sha256": "47cb3623915c8cfcc35099fabd0c44173afa72b706eb0526c4b8d3855e789252",
+    "solution_module": "OAI.Probability.ClassicalON.Main"
+  },
+  "file_sha256": "c2f5f88455b811eb6b56c1ae80ff91f4e398e18e7c7fbeee6daca8da4122d696",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.ClassicalON.main"
+  ],
+  "axioms_by_theorem": {
+    "OAI.ClassicalON.main": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 815.6,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "openai-math-classical-on.log",
+  "kernel_log_sha256": "2e44db5d849bb178734ffa369b61795fbb0c053292cf31d7fbb2253208ef852b",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/42556221968",
+  "date": "2026-11-09T03:44:03Z",
+  "sandbox": {
+    "landrun": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+    "systemd_run_guard": true
+  }
+}

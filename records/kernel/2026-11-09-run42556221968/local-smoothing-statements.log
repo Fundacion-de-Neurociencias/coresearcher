@@ -1,0 +1,36 @@
+# kernel-check lean_file local-smoothing-statements
+# file: examples/local-smoothing-fidelity/LocalSmoothing.lean
+# file_sha256: 58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd
+# command: lake env lean KernelCheck_local_smoothing_statements.lean
+# #print axioms appended for: OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing, OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz, OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction, OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal, OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya, OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square
+KernelCheck_local_smoothing_statements.lean:84:8: warning: declaration uses `sorry`
+KernelCheck_local_smoothing_statements.lean:99:8: warning: declaration uses `sorry`
+KernelCheck_local_smoothing_statements.lean:109:8: warning: declaration uses `sorry`
+KernelCheck_local_smoothing_statements.lean:120:8: warning: declaration uses `sorry`
+KernelCheck_local_smoothing_statements.lean:129:8: warning: declaration uses `sorry`
+KernelCheck_local_smoothing_statements.lean:134:8: warning: declaration uses `sorry`
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+# kernel-check: exit_code=0

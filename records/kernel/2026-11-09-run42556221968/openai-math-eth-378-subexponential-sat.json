@@ -1,0 +1,50 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "openai-math-eth-378-subexponential-sat",
+  "kind": "comparator",
+  "source": {
+    "repository": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/SubexponentialSAT.lean",
+    "config": "lean/ComparatorChallenges/SubexponentialSAT.json",
+    "config_sha256": "debbfdc9c01104d2369be80da5180978275106df8b685f693fba7ce7da7c5b19",
+    "solution_module": "OAI.Algorithms.SubexponentialSAT.Main"
+  },
+  "file_sha256": "4183b2057cff350d66848215ff7167196dfc20e1891b598fdddea59077a76685",
+  "toolchain": "leanprover/lean4:v4.34.1",
+  "lean_version": "Lean (version 4.34.1, x86_64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "mathlib_rev": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+  "theorems": [
+    "OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Algorithms.SubexponentialSAT.SqrtLogSpace.exact_count_and_sat": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 11504.2,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "openai-math-eth-378-subexponential-sat.log",
+  "kernel_log_sha256": "79e74e8aa05773b8bb1a349c74cdb3817480da91a38b19592b7bf834b0a2bc27",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/42556221968",
+  "date": "2026-11-09T06:42:41Z",
+  "sandbox": {
+    "landrun": "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4",
+    "systemd_run_guard": true
+  }
+}

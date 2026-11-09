@@ -1,0 +1,82 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "local-smoothing-statements",
+  "kind": "lean_file",
+  "source": {
+    "repository": "Fundacion-de-Neurociencias/coresearcher",
+    "commit": "4d7848c4d2bea98818a4e7896966b55a41c25e0c",
+    "path": "examples/local-smoothing-fidelity/LocalSmoothing.lean"
+  },
+  "file_sha256": "58dd1d878cd08f8d32850b1142e451a5efd4b0cdcf538ba80efbd01ea83cd9fd",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_rev": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "theorems": [
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya",
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square"
+  ],
+  "axioms_by_theorem": {
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.euclidean_local_smoothing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.bochner_riesz": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.spherical_restriction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya_maximal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.kakeya": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ],
+    "OAI.Analysis.Fourier.LocalSmoothing.Comparator.stein_square": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext",
+      "sorryAx"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext",
+    "sorryAx"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 4.9,
+  "exit_code": 0,
+  "result": "FAIL",
+  "reasons": [
+    "depends on axioms outside ['propext', 'Quot.sound', 'Classical.choice']: ['sorryAx']"
+  ],
+  "status": "NOT_KERNEL_CHECKED",
+  "kernel_log": "local-smoothing-statements.log",
+  "kernel_log_sha256": "3e6e8acbf18c015a2413333673605a70330a280cc04249de7376f0173b6364ca",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/42556221968",
+  "date": "2026-11-09T03:26:51Z"
+}

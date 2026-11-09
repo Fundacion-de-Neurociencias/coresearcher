@@ -1,0 +1,79 @@
+{
+  "schema": "coresearcher.kernel-record/v1",
+  "target": "sakana-ed-polarity",
+  "kind": "lean_file",
+  "source": {
+    "repository": "Fundacion-de-Neurociencias/coresearcher",
+    "commit": "4d7848c4d2bea98818a4e7896966b55a41c25e0c",
+    "path": "examples/sakana-ed-polarity/EdPolarity.lean"
+  },
+  "file_sha256": "986badf4e4ee35bda3179da4eca4253c3272ecfd38987fbec60ead0ea8606a1a",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "lean_version": "Lean (version 4.35.0, x86_64-unknown-linux-gnu, commit eb6cafb7290e8bd5f2937522d8d804f58f02bafc, Release)",
+  "mathlib_rev": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "theorems": [
+    "EdPolarity.outputTop_polarized",
+    "EdPolarity.back_polarized",
+    "EdPolarity.sens_polarized",
+    "EdPolarity.sign_mul_nonneg",
+    "EdPolarity.ed_descent_p",
+    "EdPolarity.ed_descent_n",
+    "EdPolarity.ed_sign_sufficiency"
+  ],
+  "axioms_by_theorem": {
+    "EdPolarity.outputTop_polarized": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.back_polarized": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.sens_polarized": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.sign_mul_nonneg": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.ed_descent_p": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.ed_descent_n": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "EdPolarity.ed_sign_sufficiency": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "wall_time_s": 5.3,
+  "exit_code": 0,
+  "result": "PASS",
+  "reasons": [],
+  "status": "KERNEL_CHECKED",
+  "kernel_log": "sakana-ed-polarity.log",
+  "kernel_log_sha256": "709f4bb0b82abc395ce4ab359f5a85e6eb9cb8a8d79a9eb1788721c586b63944",
+  "checked_by": "https://github.com/Fundacion-de-Neurociencias/coresearcher/actions/runs/42556221968",
+  "date": "2026-11-09T03:26:39Z"
+}
